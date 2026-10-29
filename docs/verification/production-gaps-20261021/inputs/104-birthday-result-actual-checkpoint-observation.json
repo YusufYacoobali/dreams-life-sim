@@ -1,0 +1,71 @@
+{
+  "scope": "Read-only actual captured current checkpoint observation; no command or future outcome executed.",
+  "sourceCommit": "a4be96ee1e60ab073fbbd2ae95d0ee2d0ee6f361",
+  "id": "life_mvhfkffn_1csbqc2_0",
+  "revision": 3,
+  "versions": [
+    36,
+    37,
+    12
+  ],
+  "date": {
+    "year": 2027,
+    "month": 10,
+    "day": 21
+  },
+  "birthAcknowledged": true,
+  "person": {
+    "id": "person_player",
+    "name": "Maya Singh",
+    "born": {
+      "year": 2026,
+      "month": 10,
+      "day": 21
+    },
+    "appearance": {
+      "face": 1,
+      "skin": 0,
+      "hair": 5,
+      "hairColor": 0
+    }
+  },
+  "pending": {
+    "kind": "result",
+    "id": "event_2027_first-bubble-catch_result",
+    "title": "A longer visit",
+    "body": "The next bubble drifts past your hand. Leaving it alone makes it last longer.",
+    "illustration": "birthday",
+    "effects": [
+      {
+        "id": "effect_0",
+        "label": "Smarts",
+        "value": "+3%",
+        "tone": "positive"
+      },
+      {
+        "id": "effect_1",
+        "label": "Discipline",
+        "value": "+1%",
+        "tone": "positive"
+      }
+    ]
+  },
+  "annual": {
+    "id": "year_1",
+    "startDate": {
+      "year": 2026,
+      "month": 10,
+      "day": 21
+    },
+    "targetDate": {
+      "year": 2027,
+      "month": 10,
+      "day": 21
+    },
+    "monthsProcessed": 12,
+    "stage": "complete",
+    "pausedForPlanning": false
+  },
+  "universityApplications": [],
+  "studyCourses": []
+}

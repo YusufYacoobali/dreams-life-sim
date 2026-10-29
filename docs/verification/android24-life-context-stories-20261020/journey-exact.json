@@ -1,0 +1,251 @@
+{
+  "scope": "Actual Android24 official ExpoGo57.0.9 software QEMU TCG/SwiftShader, no KVM. Existing naturally prepared Nia life resumes through normal UI; actual story choices, pet adoption, medical care, monthly work/care and veterinary treatment. Read-only SQLite copies, no native SQL/world/RNG edits. Not a new native birth-to-adult journey, standalone/iOS/physical timing or full visual acceptance.",
+  "versions": {
+    "world": 30,
+    "engine": 31,
+    "content": 8,
+    "database": 10,
+    "checkpoint": "v4"
+  },
+  "sourceGameHash": "809c034213bab2cb60a3ffc482ad26f106c68a86835913b6e5f02542c065d4ed",
+  "lifeId": "life_native_adult_friend_v30_s0",
+  "initialRevision": 94,
+  "phases": [
+    {
+      "phase": "adult-pending",
+      "revision": 95,
+      "age": 20,
+      "pending": "A wave with another destination",
+      "template": "adult-wave-behind",
+      "worldSha256": "313a3c1ba349c6eaead8f01f1262d93d51e1d09622f1f21871b12ebd44eeec25",
+      "lives": 7,
+      "moments": 56,
+      "receipts": 80,
+      "allSixInactiveLivesAndBackupsExact": true,
+      "all55OriginalMomentsMetadataAnd79OriginalReceiptsExact": true
+    },
+    {
+      "phase": "cold-adult-pending",
+      "revision": 95,
+      "age": 20,
+      "pending": "A wave with another destination",
+      "template": "adult-wave-behind",
+      "worldSha256": "313a3c1ba349c6eaead8f01f1262d93d51e1d09622f1f21871b12ebd44eeec25",
+      "lives": 7,
+      "moments": 56,
+      "receipts": 80,
+      "allSixInactiveLivesAndBackupsExact": true,
+      "all55OriginalMomentsMetadataAnd79OriginalReceiptsExact": true,
+      "allEightTablesExact": true
+    },
+    {
+      "phase": "adult-result",
+      "revision": 96,
+      "age": 20,
+      "pending": "A brief public misunderstanding",
+      "template": null,
+      "worldSha256": "456b662c5b0edbc87749265e8ab3721c2eb27d35c31658871b8b70a525d3229c",
+      "lives": 7,
+      "moments": 56,
+      "receipts": 81,
+      "allSixInactiveLivesAndBackupsExact": true,
+      "all55OriginalMomentsMetadataAnd79OriginalReceiptsExact": true
+    },
+    {
+      "phase": "cold-adult-result",
+      "revision": 96,
+      "age": 20,
+      "pending": "A brief public misunderstanding",
+      "template": null,
+      "worldSha256": "456b662c5b0edbc87749265e8ab3721c2eb27d35c31658871b8b70a525d3229c",
+      "lives": 7,
+      "moments": 56,
+      "receipts": 81,
+      "allSixInactiveLivesAndBackupsExact": true,
+      "all55OriginalMomentsMetadataAnd79OriginalReceiptsExact": true,
+      "allEightTablesExact": true
+    },
+    {
+      "phase": "year20",
+      "revision": 97,
+      "age": 20,
+      "pending": null,
+      "template": null,
+      "worldSha256": "188347bbac7de19e7c78e7759a00c0df3105103c32642ee0ce6e283f4d50c825",
+      "lives": 7,
+      "moments": 56,
+      "receipts": 82,
+      "allSixInactiveLivesAndBackupsExact": true,
+      "all55OriginalMomentsMetadataAnd79OriginalReceiptsExact": true
+    },
+    {
+      "phase": "adopted",
+      "revision": 98,
+      "age": 20,
+      "pending": "Welcome, Buddy",
+      "template": null,
+      "worldSha256": "aa518b371b399c5fb43d4c088f483ace0b36ba1da757d1a9af407069244faa99",
+      "lives": 7,
+      "moments": 56,
+      "receipts": 83,
+      "allSixInactiveLivesAndBackupsExact": true,
+      "all55OriginalMomentsMetadataAnd79OriginalReceiptsExact": true
+    },
+    {
+      "phase": "medical-result",
+      "revision": 101,
+      "age": 20,
+      "pending": "Medical care arranged",
+      "template": null,
+      "worldSha256": "5056a23541025b62ebff64696b889029ebfa1f07ac1c708c973ea7a77ff3d991",
+      "lives": 7,
+      "moments": 57,
+      "receipts": 86,
+      "allSixInactiveLivesAndBackupsExact": true,
+      "all55OriginalMomentsMetadataAnd79OriginalReceiptsExact": true
+    },
+    {
+      "phase": "year21",
+      "revision": 104,
+      "age": 21,
+      "pending": null,
+      "template": null,
+      "worldSha256": "697bb5cd352450228be923182c4cddab4121b8b77e5cc0074de6cdbdc6c439a7",
+      "lives": 7,
+      "moments": 57,
+      "receipts": 89,
+      "allSixInactiveLivesAndBackupsExact": true,
+      "all55OriginalMomentsMetadataAnd79OriginalReceiptsExact": true
+    },
+    {
+      "phase": "pet-illness",
+      "revision": 105,
+      "age": 21,
+      "pending": "Buddy became unwell",
+      "template": null,
+      "worldSha256": "46b8cf3f8d34227d12e33ab77f947d35119adc3a6e05f91ef3cb3e84db641620",
+      "lives": 7,
+      "moments": 58,
+      "receipts": 90,
+      "allSixInactiveLivesAndBackupsExact": true,
+      "all55OriginalMomentsMetadataAnd79OriginalReceiptsExact": true
+    },
+    {
+      "phase": "vet-result",
+      "revision": 107,
+      "age": 21,
+      "pending": "Veterinary Visit",
+      "template": null,
+      "worldSha256": "f903046bf7df031fe8226c02a4793cefd4876a97562caaa6501feb01bfe9348e",
+      "lives": 7,
+      "moments": 58,
+      "receipts": 92,
+      "allSixInactiveLivesAndBackupsExact": true,
+      "all55OriginalMomentsMetadataAnd79OriginalReceiptsExact": true
+    },
+    {
+      "phase": "pet-story",
+      "revision": 109,
+      "age": 22,
+      "pending": "A greeting with full commitment",
+      "template": "pet-dog-doorway-greeting",
+      "worldSha256": "c07d74d24de429034464bcdba4dd503f497558526ac07c0d04d624d9d5a6b09e",
+      "lives": 7,
+      "moments": 58,
+      "receipts": 94,
+      "allSixInactiveLivesAndBackupsExact": true,
+      "all55OriginalMomentsMetadataAnd79OriginalReceiptsExact": true
+    },
+    {
+      "phase": "pet-story-result",
+      "revision": 110,
+      "age": 22,
+      "pending": "The expedition is celebrated",
+      "template": null,
+      "worldSha256": "40aca2b286eb178dcb455fc289128de2bb178eb678fbaa12eb6f8211f6ee87ad",
+      "lives": 7,
+      "moments": 58,
+      "receipts": 95,
+      "allSixInactiveLivesAndBackupsExact": true,
+      "all55OriginalMomentsMetadataAnd79OriginalReceiptsExact": true
+    },
+    {
+      "phase": "cold-pet-story-result",
+      "revision": 110,
+      "age": 22,
+      "pending": "The expedition is celebrated",
+      "template": null,
+      "worldSha256": "40aca2b286eb178dcb455fc289128de2bb178eb678fbaa12eb6f8211f6ee87ad",
+      "lives": 7,
+      "moments": 58,
+      "receipts": 95,
+      "allSixInactiveLivesAndBackupsExact": true,
+      "all55OriginalMomentsMetadataAnd79OriginalReceiptsExact": true,
+      "allEightTablesExact": true
+    },
+    {
+      "phase": "final",
+      "revision": 111,
+      "age": 22,
+      "pending": null,
+      "template": null,
+      "worldSha256": "74805f00f0c55ebc0978402148bd97e3e390ab0d2be5e27c7021e82a281909e4",
+      "lives": 7,
+      "moments": 58,
+      "receipts": 96,
+      "allSixInactiveLivesAndBackupsExact": true,
+      "all55OriginalMomentsMetadataAnd79OriginalReceiptsExact": true
+    }
+  ],
+  "literalFixTiming": "Adult selection95/choice96 predate the literal-name correction. Final-source cold96/ack97 preserve that exact bound story/result. Pet selection109/choice110/ack111 use final source.",
+  "reader9To10AllEightTablesExact": true,
+  "firstRealPaidYear": {
+    "cash": "1316000",
+    "gross": "3200000",
+    "monthsWorked": 12,
+    "paidMonths": 12
+  },
+  "petResult": {
+    "petId": "pet_97_0",
+    "name": "Buddy",
+    "bond": 34,
+    "effects": [
+      {
+        "id": "effect_0",
+        "label": "Happiness",
+        "value": "+0%",
+        "tone": "neutral"
+      },
+      {
+        "id": "effect_1",
+        "label": "Stress",
+        "value": "+0%",
+        "tone": "neutral"
+      },
+      {
+        "id": "pet-bond",
+        "label": "Bond with Buddy",
+        "value": "+4%",
+        "tone": "positive"
+      }
+    ],
+    "adoptions": 1,
+    "vetVisits": 1
+  },
+  "originalNewBeforeAgeUpAnchors": {
+    "revisions": [
+      94,
+      99,
+      104
+    ],
+    "original94And104RawBytesExact": true,
+    "whole99WorldExact": true
+  },
+  "final": {
+    "revision": 111,
+    "age": 22,
+    "lives": 7,
+    "moments": 58,
+    "receipts": 96
+  }
+}

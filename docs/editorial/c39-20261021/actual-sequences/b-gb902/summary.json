@@ -1,0 +1,304 @@
+{
+  "format": "dreams-c39-recorded-sequence-review-v1",
+  "preselection": {
+    "policy": "Criminal Bv2",
+    "country": "GB",
+    "seed": 902,
+    "selectedBeforeRun": true,
+    "outcomeSearch": false
+  },
+  "sourceCommit": "33b6a5fcb0aae73dfc235a15394b34d8afda00cc",
+  "versions": {
+    "world": 38,
+    "engine": 39,
+    "content": 13,
+    "database": 18,
+    "checkpoint": "v4"
+  },
+  "reviewer": {
+    "agent": "/root/story_editorial",
+    "kind": "Codex recorded-artifact/source-correlated narrative review",
+    "externalHuman": false
+  },
+  "player": {
+    "id": "person_player",
+    "name": "Hina Takahashi",
+    "born": {
+      "year": 2000,
+      "month": 1,
+      "day": 1
+    },
+    "died": {
+      "year": 2068,
+      "month": 4,
+      "day": 1
+    },
+    "ageAtDeath": 68,
+    "country": "GB",
+    "city": "London"
+  },
+  "timing": {
+    "coordinatorCohortElapsedSeconds": 151.557,
+    "toolCohortElapsedMs": 151006,
+    "producerBritainElapsedMs": 13151
+  },
+  "actualCounts": {
+    "attemptedCommands": 282,
+    "committedCommands": 277,
+    "uncommittedAttempts": 5,
+    "advanceCommands": 69,
+    "completedChronologicalBirthdayYears": 68,
+    "fatalPartial69thAnnualAdvance": true,
+    "observations": 147,
+    "producerRecordedColdChecks": 37,
+    "totalChooseCommands": 72,
+    "catalogueOccurrences": 57,
+    "distinctCatalogueTemplates": 47,
+    "distinctCatalogueBranches": 47,
+    "catalogueChoiceOrdinalCounts": {
+      "first": 57,
+      "second": 0,
+      "third": 0
+    },
+    "actualCatalogueJournalsAndResultTitlesRead": 57,
+    "callbackThreads": 1,
+    "observedCallbackChoices": 2,
+    "actualRecordedBoundResultBodies": 0,
+    "actualRecordedEffectRowFrames": 0,
+    "persistedPlayerJournalFactsAvailable": 250
+  },
+  "periods": [
+    {
+      "period": "early-childhood",
+      "inclusiveAgeRange": [
+        1,
+        4
+      ],
+      "catalogueOccurrences": 4,
+      "distinctTemplates": 4,
+      "birthdayYearsWithoutCatalogueEvent": 0
+    },
+    {
+      "period": "primary-school-age",
+      "inclusiveAgeRange": [
+        5,
+        10
+      ],
+      "catalogueOccurrences": 5,
+      "distinctTemplates": 5,
+      "birthdayYearsWithoutCatalogueEvent": 1
+    },
+    {
+      "period": "secondary-before-withdrawal",
+      "inclusiveAgeRange": [
+        11,
+        16
+      ],
+      "catalogueOccurrences": 6,
+      "distinctTemplates": 6,
+      "birthdayYearsWithoutCatalogueEvent": 0
+    },
+    {
+      "period": "adult-working-and-legal-years",
+      "inclusiveAgeRange": [
+        17,
+        66
+      ],
+      "catalogueOccurrences": 40,
+      "distinctTemplates": 31,
+      "birthdayYearsWithoutCatalogueEvent": 10
+    },
+    {
+      "period": "retirement-and-final-years",
+      "inclusiveAgeRange": [
+        67,
+        68
+      ],
+      "catalogueOccurrences": 2,
+      "distinctTemplates": 2,
+      "birthdayYearsWithoutCatalogueEvent": 0
+    }
+  ],
+  "repeats": [
+    {
+      "templateId": "adult-free-sample-opinion",
+      "ages": [
+        35,
+        44
+      ],
+      "gapYears": [
+        9
+      ]
+    },
+    {
+      "templateId": "adult-perfect-introduction",
+      "ages": [
+        32,
+        53
+      ],
+      "gapYears": [
+        21
+      ]
+    },
+    {
+      "templateId": "friend-changed-opinion",
+      "ages": [
+        31,
+        67
+      ],
+      "gapYears": [
+        36
+      ]
+    },
+    {
+      "templateId": "friend-quiet-company",
+      "ages": [
+        23,
+        65
+      ],
+      "gapYears": [
+        42
+      ]
+    },
+    {
+      "templateId": "local-meeting",
+      "ages": [
+        26,
+        40
+      ],
+      "gapYears": [
+        14
+      ]
+    },
+    {
+      "templateId": "wellbeing-stretch-after-sitting",
+      "ages": [
+        39,
+        64
+      ],
+      "gapYears": [
+        25
+      ]
+    },
+    {
+      "templateId": "work-room-temperature",
+      "ages": [
+        28,
+        45
+      ],
+      "gapYears": [
+        17
+      ]
+    },
+    {
+      "templateId": "work-trivia-phone",
+      "ages": [
+        41,
+        49
+      ],
+      "gapYears": [
+        8
+      ]
+    },
+    {
+      "templateId": "work-unfamiliar-process",
+      "ages": [
+        17,
+        24,
+        66
+      ],
+      "gapYears": [
+        7,
+        42
+      ]
+    }
+  ],
+  "quietCatalogueAges": [
+    10,
+    18,
+    20,
+    22,
+    33,
+    34,
+    37,
+    50,
+    52,
+    59,
+    61
+  ],
+  "categoryOccurrenceCounts": {
+    "birth-early-childhood": 4,
+    "relationships-family": 8,
+    "school-teenage-life": 9,
+    "employment-special-careers": 12,
+    "university-early-independence": 9,
+    "travel-pets-hobbies-entertainment": 6,
+    "fame-social-media": 1,
+    "health-later-life": 8
+  },
+  "milestoneStatuses": {
+    "schoolAttendance": "reached",
+    "compulsoryLeaveGuard": "reached",
+    "schoolExit": "reached",
+    "paidJob": "reached",
+    "offence": "reached",
+    "arrest": "reached",
+    "delayedArrest": "reached",
+    "counsel": "reached",
+    "hearing": "reached",
+    "conviction": "reached",
+    "prisonRoutine": "reached",
+    "prisonTime": "reached",
+    "prisonStudy": "reached",
+    "prisonPay": "reached",
+    "prisonConnection": "reached",
+    "custodyGuard": "reached",
+    "release": "reached",
+    "recordWorkGate": "reached",
+    "foreignWorkApplication": "reached",
+    "holiday": "reached",
+    "holidayCompleted": "unreached-at-natural-death",
+    "recordExpired": "reached",
+    "rehired": "reached",
+    "retirement": "reached",
+    "death": "reached",
+    "estate": "reached"
+  },
+  "driverScenarioBComplete": false,
+  "callback": {
+    "threadId": "story_36_0",
+    "origin": {
+      "year": 2012,
+      "month": 1,
+      "day": 1
+    },
+    "completion": {
+      "year": 2012,
+      "month": 3,
+      "day": 1
+    },
+    "recall": {
+      "year": 2014,
+      "month": 3,
+      "day": 1
+    },
+    "samePeerId": "person_npc_13_5",
+    "calendarMonthsCompletionToRecall": 24,
+    "observedResolution": "complete -> remember-project"
+  },
+  "unreached": [
+    "Completed holiday: actual paid Paris trip was interrupted at delayed arrest; no refund/completion invented",
+    "Both actual foreign work applications declined; no relocation or foreign job observed",
+    "Other original project branches, arcade permission/payment/cancellation and alternative recall choices not observed",
+    "No second/third catalogue choices; no full bound body/effect-row snapshots",
+    "No native/UI/store whole-life or30-minute acceptance by this review"
+  ],
+  "findings": [],
+  "conclusion": "No concrete narrative contradiction identified in57 actual catalogue journals/result titles, source-correlated selected branches and the actual same-peer two-month/24-month project callback chain. Full-bound result/effect telemetry and remaining callback cases are explicitly outside this natural sequence.",
+  "limits": [
+    "No runtime, replay, rerun, RNG, outcome search, native/device, product-source mutation or codec validation.",
+    "Actual role/date and diagnosis/pay witnesses support recorded text; they do not reconstruct every historical availability or contract quote.",
+    "Producer37codec comparisons/final-world hash are pinned, not re-executed or independently fully recomputed.",
+    "Two analysis-only diagnostics were corrected: the actual sentence field is ended/state rather than released; and school closure on the same calendar date requires actual command order. The16-year homework scene occurs before the actual withdrawal command. Neither was a game/producer failure."
+  ]
+}

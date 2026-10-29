@@ -1,0 +1,39 @@
+name: Quality
+
+on:
+  push:
+    branches: [work, main]
+    paths-ignore:
+      - '**/*.md'
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - name: Install locked dependencies
+        run: npm ci
+      - name: Check app and test types
+        run: npm run typecheck
+      - name: Check local notification native configuration
+        run: node tools/tests/local-notifications-plugin.test.cjs
+      - name: Run regression tests
+        run: npm test -- --ci --testTimeout=30000

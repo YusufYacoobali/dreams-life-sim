@@ -1,0 +1,21 @@
+{
+  "initialCommit": "ace1e38e12ae2493501a30e6f003201e0fd6ab41",
+  "finalCommit": "dfd9a74046479672967868dc21ac6acfda734592",
+  "files": 665,
+  "added": [],
+  "removed": [],
+  "changed": [
+    "tests/game/story-lifecycle.test.ts",
+    "tests/game/story-name-collisions.test.ts",
+    "tests/ui/adult-relationship-story-flow.test.tsx",
+    "tests/ui/childhood-story-flow.test.tsx",
+    "tests/ui/ordinary-hobby-flow.test.tsx",
+    "tests/ui/story-consequence-labels-flow.test.tsx",
+    "tests/ui/student-loan-rate-flow.test.tsx",
+    "tests/ui/workplace-story-flow.test.tsx"
+  ],
+  "unchangedRuntimeAndVersions": true,
+  "initialSnapshotSha256": "0fd4cf109716d1c3013e2c3440942611f2aa3d1b727578d9271b385bd5b681ab",
+  "finalSnapshotSha256": "4c1c72cfea3d338984c5112523209c900950d53f76ccf4c6dd0a30615d92fcf7",
+  "scope": "Source-only comparison, not a test/build/native pass"
+}

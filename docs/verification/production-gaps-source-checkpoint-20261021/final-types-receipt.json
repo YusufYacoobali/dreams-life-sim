@@ -1,0 +1,32 @@
+{
+  "format": "dreams-coordinator-gate-execution-v1",
+  "sourceCommit": "85f6ff8637ba3de9d0f04421307419b1d9609864",
+  "sourceSnapshot": "/tmp/dreams-production-gaps-final-source.json",
+  "sourceSnapshotSha256": "5d786211e717e1f9ff049018ded4f3f4195c93f2528f6fa37cd6da8a95c1022d",
+  "root": "/workspace/dreams-worktrees/integration-production-gaps-final",
+  "argv": [
+    "npm",
+    "run",
+    "typecheck"
+  ],
+  "startedAt": "2026-10-21T01:42:57.976471+00:00",
+  "before": {
+    "files": 656,
+    "snapshotSha256": "5d786211e717e1f9ff049018ded4f3f4195c93f2528f6fa37cd6da8a95c1022d",
+    "status": "exact"
+  },
+  "complete": true,
+  "endedAt": "2026-10-21T01:43:18.870936+00:00",
+  "elapsedSeconds": 20.894,
+  "exitCode": 0,
+  "raw": {
+    "file": "/tmp/dreams-production-gaps-final-types.out",
+    "bytes": 90,
+    "sha256": "543932f7a867cac23b25fe5912a2a0b0ab563539fbb8a121f7fb83b608c95309"
+  },
+  "after": {
+    "files": 656,
+    "snapshotSha256": "5d786211e717e1f9ff049018ded4f3f4195c93f2528f6fa37cd6da8a95c1022d",
+    "status": "exact"
+  }
+}

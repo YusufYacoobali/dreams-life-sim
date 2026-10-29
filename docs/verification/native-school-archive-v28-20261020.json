@@ -1,0 +1,65 @@
+{
+  "scope": "New genuine world-28 regression archive exported with unmodified pushed 1d1e696 from an actual Android SQLite copy; no world/stat/RNG/tag/outcome edits; never regenerate this historical fixture with later source",
+  "producerCommit": "1d1e6960701242348127dddc032c65c96a26ab7e",
+  "sourceNativeDatabase": "Actual read-only viewer final Android SQLite copy, active Riley revision 53",
+  "fixture": "tests/fixtures/v28-native-school-archive.json",
+  "fileBytes": 385316,
+  "fileSha256": "e0f4847c19bb286728157f5121ba4bf2bf202980c1cb9016c128ab04fc27a084",
+  "currentWholeWorldSha256": "4b6958e4c994755f2c24518bbd9b9531ae6fdb50549e5a6bf9f1e0eafd95c708",
+  "currentCheckpointMatchesOriginalNativeBytes": true,
+  "versions": {
+    "world": 28,
+    "engine": 27,
+    "content": 4,
+    "database": 6
+  },
+  "revision": 53,
+  "originalNativeMoments": 10,
+  "originalEarlierReadingMomentsPreserved": 9,
+  "originalMomentPayloadsAndMetadataExact": true,
+  "formats": [
+    "dreams-checkpoint-v1",
+    "dreams-checkpoint-v1",
+    "dreams-checkpoint-v1",
+    "dreams-checkpoint-v1",
+    "dreams-checkpoint-v2",
+    "dreams-checkpoint-v2",
+    "dreams-checkpoint-v2",
+    "dreams-checkpoint-v2",
+    "dreams-checkpoint-v2",
+    "dreams-checkpoint-v2"
+  ],
+  "pending": null,
+  "schoolHelp": [
+    {
+      "month": 24441,
+      "term": 5,
+      "teacherId": "person_npc_12_3",
+      "chance": 81,
+      "roll": 22,
+      "accepted": true,
+      "gradeBefore": 89,
+      "gradeGain": 3
+    }
+  ],
+  "pet": [
+    {
+      "name": "Biscuit",
+      "status": "deceased",
+      "periods": 46
+    }
+  ],
+  "hobbies": [
+    {
+      "kind": "guitar",
+      "proficiency": 72,
+      "monthly": 36
+    },
+    {
+      "kind": "reading",
+      "proficiency": 49,
+      "monthly": 24
+    }
+  ],
+  "combinedSourceHash": "76d7c573d3061c31361c8a206c94c3049eb05ca93f6da19b78ac2475c7c0e620"
+}

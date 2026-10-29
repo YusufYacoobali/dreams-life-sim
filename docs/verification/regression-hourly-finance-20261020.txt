@@ -1,0 +1,133 @@
+
+> dreams-life-sim@1.0.0 test
+> jest --runInBand --testTimeout=30000
+
+PASS tests/game/hourly-work.test.ts (6.288 s)
+PASS tests/progression/financial-progress.test.ts
+PASS tests/game/story-editorial-context.test.ts
+PASS tests/game/engine.test.ts (479.65 s)
+PASS tests/persistence/tuple-checkpoints.test.ts (46.78 s)
+PASS tests/game/copy-world.test.ts (29.196 s)
+PASS tests/ui/saved-files-flow.test.tsx (22.059 s)
+PASS tests/ui/education-choice-save-flow.test.tsx (23.742 s)
+PASS tests/game/royalty.test.ts (24.405 s)
+PASS tests/progression/expanded-progress.test.ts (11.885 s)
+PASS tests/game/everyday-life-stories.test.ts (23.796 s)
+PASS tests/persistence/people-blocks.test.ts (20.333 s)
+PASS tests/persistence/native-people-block-archive.test.ts (14.947 s)
+PASS tests/persistence/native-workplace-story-archive.test.ts (14.963 s)
+PASS tests/game/early-home-stories.test.ts (11.785 s)
+PASS tests/persistence/native-raise-archive.test.ts (11.789 s)
+PASS tests/game/adult-relationship-stories.test.ts (10.873 s)
+PASS tests/game/teen-home-stories.test.ts (9.357 s)
+PASS tests/persistence/native-workplace-archive.test.ts (9.758 s)
+PASS tests/ui/workplace-story-flow.test.tsx (7.406 s)
+PASS tests/game/workplace-stories.test.ts (6.998 s)
+PASS tests/persistence/native-teen-archive.test.ts (7.897 s)
+PASS tests/ui/work-routine-save-flow.test.tsx (7.979 s)
+PASS tests/persistence/restored-action-cache.test.ts (8.21 s)
+PASS tests/persistence/ordinary-hobby-archive.test.ts (6.191 s)
+PASS tests/game/education-recovery.test.ts (7.105 s)
+PASS tests/ui/school-routine-save-flow.test.tsx (6.734 s)
+PASS tests/ui/scholarship-flow.test.tsx (5.669 s)
+PASS tests/ui/education-recovery-flow.test.tsx (5.43 s)
+PASS tests/persistence/action-checkpoints.test.ts (5.454 s)
+PASS tests/ui/royalty-flow.test.tsx
+PASS tests/game/childhood-stories.test.ts (5.428 s)
+PASS tests/persistence/life-preview.test.ts (5.427 s)
+PASS tests/game/services.test.ts (5.466 s)
+PASS tests/ui/hobby-event-flow.test.tsx
+PASS tests/state/save-summaries.test.ts
+PASS tests/ui/saved-life-preview.test.tsx
+PASS tests/persistence/native-school-archive.test.ts
+PASS tests/ui/health-flow.test.tsx
+PASS tests/progression/progress.test.ts
+PASS tests/ui/pets-flow.test.tsx
+PASS tests/ui/hourly-work-flow.test.tsx
+PASS tests/game/education-work-finance.test.ts
+PASS tests/game/estates.test.ts
+PASS tests/persistence/native-arcade-archive.test.ts
+PASS tests/game/businesses.test.ts
+PASS tests/ui/ordinary-hobby-flow.test.tsx
+PASS tests/game/music.test.ts
+PASS tests/ui/contacts-flow.test.tsx
+PASS tests/game/hobby-events.test.ts
+PASS tests/persistence/native-interview-checkpoints.test.ts
+PASS tests/game/politics.test.ts (5.447 s)
+PASS tests/game/creators.test.ts
+PASS tests/game/scholarships.test.ts
+PASS tests/game/social.test.ts
+PASS tests/ui/leisure-flow.test.tsx
+PASS tests/game/legal.test.ts
+PASS tests/ui/relocation-flow.test.tsx
+PASS tests/game/leisure.test.ts
+PASS tests/game/assets-markets.test.ts
+PASS tests/ui/extras-flow.test.tsx
+PASS tests/persistence/responsive-archive.test.ts
+PASS tests/game/foreign-earnings.test.ts
+PASS tests/game/story-callbacks.test.ts
+PASS tests/game/careers.test.ts
+PASS tests/game/ordinary-hobbies.test.ts
+PASS tests/game/relocation.test.ts
+PASS tests/game/pets.test.ts
+PASS tests/ui/service-flow.test.tsx
+PASS tests/game/story-lifecycle.test.ts
+PASS tests/persistence/leisure-archive.test.ts
+PASS tests/ui/business-flow.test.tsx
+PASS tests/ui/story-callback-flow.test.tsx
+PASS tests/ui/purchase-confirmation-save-flow.test.tsx
+PASS tests/ui/life-context-story-flow.test.tsx
+PASS tests/ui/travel-flow.test.tsx
+PASS tests/game/credit.test.ts
+PASS tests/game/work-raises.test.ts
+PASS tests/ui/workplace-flow.test.tsx
+PASS tests/ui/creator-studio-flow.test.tsx
+PASS tests/ui/adult-relationship-story-flow.test.tsx
+PASS tests/ui/credit-flow.test.tsx
+PASS tests/game/travel.test.ts
+PASS tests/game/content-refresh.test.ts
+PASS tests/ui/childhood-story-flow.test.tsx
+PASS tests/ui/onboarding-flow.test.tsx
+PASS tests/persistence/time-machine.test.ts
+PASS tests/ui/legal-flow.test.tsx
+PASS tests/persistence/compressed-lives.test.ts
+PASS tests/game/relationships.test.ts
+PASS tests/game/workplaces.test.ts
+PASS tests/ui/politics-flow.test.tsx
+PASS tests/persistence/pet-archive.test.ts
+PASS tests/ui/job-interview-flow.test.tsx
+PASS tests/ui/social-flow.test.tsx
+PASS tests/ui/school-flow.test.tsx
+PASS tests/ui/startup-flow.test.tsx
+PASS tests/ui/music-flow.test.tsx
+PASS tests/ui/onboarding-accessibility-flow.test.tsx
+PASS tests/ui/purchase-flow.test.tsx
+PASS tests/game/job-interviews.test.ts
+PASS tests/ui/career-flow.test.tsx
+PASS tests/ui/family-flow.test.tsx
+PASS tests/game/school.test.ts
+PASS tests/ui/pension-flow.test.tsx
+PASS tests/ui/time-machine-flow.test.tsx
+PASS tests/ui/school-plans.test.tsx
+PASS tests/ui/early-home-story-flow.test.tsx
+PASS tests/ui/relationship-flow.test.tsx
+PASS tests/game/family.test.ts
+PASS tests/game/health.test.ts
+PASS tests/ui/legacy-flow.test.tsx
+PASS tests/state/preferencesStore.test.ts
+PASS tests/game/save-json.test.ts
+PASS tests/persistence/repository.test.ts
+PASS tests/ui/will-flow.test.tsx
+PASS tests/ui/settings-flow.test.tsx
+PASS tests/persistence/base64.test.ts
+PASS tests/game/creation.test.ts
+PASS tests/ui/interactions.test.tsx
+PASS tests/state/gameStore.test.ts
+PASS tests/game/money-format.test.ts
+PASS tests/game/primitives.test.ts
+
+Test Suites: 123 passed, 123 total
+Tests:       1911 passed, 1911 total
+Snapshots:   0 total
+Time:        1021.72 s
+Ran all test suites.

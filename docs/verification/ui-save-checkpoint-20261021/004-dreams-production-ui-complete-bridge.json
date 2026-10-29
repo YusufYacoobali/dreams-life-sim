@@ -1,0 +1,279 @@
+{
+  "format": "dreams-ui-source-equivalence-bridge-v1",
+  "complete": true,
+  "status": "final-two-ui-fixes-source-proven-native-acceptance-pending",
+  "createdAt": "2026-10-21T08:55:08.106814+00:00",
+  "scope": "Comparison of complete tracked runtime/test/tool/assets/config inventories, not whole Git commit documentation equivalence. UI runtime changed only in two named layout files. Original gameplay gates retain original source attribution; no new full/native/visual acceptance is inferred.",
+  "old": {
+    "commit": "33b6a5fcb0aae73dfc235a15394b34d8afda00cc",
+    "root": "/workspace/dreams-worktrees/project-callback-pacing-test",
+    "sourceCount": 688,
+    "snapshot": {
+      "file": "/tmp/dreams-production-finish-accepted-source.json",
+      "bytes": 75993,
+      "sha256": "2e08fd925c673437ff7de7c76c0fd79d02832617d0014efc1c3e471782fe9b56"
+    },
+    "nativeCompleteManifest": {
+      "file": "/tmp/dreams-native-cohort-c39-accepted-source-complete.json",
+      "bytes": 76168,
+      "sha256": "0401a0d506c166f02acb09ce0c59d3d222bc2ece669510fda0eb09ec6d353ef0"
+    }
+  },
+  "new": {
+    "commit": "83adaea6f92523d04a27df2e77b11e0a8b14ef1d",
+    "root": "/workspace/dreams-worktrees/lifestyle-tabs",
+    "sourceCount": 703,
+    "snapshot": {
+      "file": "/tmp/dreams-production-ui-complete-source.json",
+      "bytes": 77733,
+      "sha256": "85b203f84cc1e4f06b931794adaabfebee400b142155b6ea7443bb4b8e066e7d"
+    },
+    "nativeCompleteManifest": {
+      "file": "/tmp/dreams-native-cohort-c39-ui-complete-source-complete.json",
+      "bytes": 77900,
+      "sha256": "6120129b91b7a8a199e4c9306ada0aeba3ec70309613dd32f3b4b411c90099a4"
+    },
+    "managedRuntimeConfigFilesVerified": 363,
+    "verificationReceipt": {
+      "file": "/tmp/dreams-native-cohort-c39-ui-complete-source-verification-receipt.json",
+      "bytes": 4035,
+      "sha256": "8f70b6801a483bb8632a1e2663dde1087b059e3631e9824fa2f9626e8dc6f769"
+    }
+  },
+  "interimPreserved": {
+    "commit": "e250c46a0740bd9eec62a9c064ee2bf5365fef2b",
+    "snapshot": {
+      "file": "/tmp/dreams-production-ui-final-source.json",
+      "bytes": 77731,
+      "sha256": "b7486fd747d4008145eeac4518d35bb539f4e884318d77775e6e195bee27b92e"
+    },
+    "bridge": {
+      "file": "/tmp/dreams-production-ui-final-bridge.json",
+      "bytes": 8535,
+      "sha256": "70ec8a9bf0f430f20c2ab0ba1bd0ab09898cb74c2bfe922f6e080eed197059d8"
+    },
+    "onlyFurtherChangedFile": "app/(game)/lifestyle.tsx"
+  },
+  "versionsUnchanged": {
+    "world": 38,
+    "engine": 39,
+    "content": 13,
+    "database": 18,
+    "checkpoint": "v4"
+  },
+  "changed": [
+    {
+      "file": "app/(game)/lifestyle.tsx",
+      "beforeSha256": "428d83430a177e0f0268cfe8c4b9c8e5c7fd052d16a234466d36fceac8a6b8ed",
+      "afterSha256": "954c00c3285ebc0a8ff7206d86e1af4d25a92eaa95a621b4dede527c65939a0c"
+    },
+    {
+      "file": "src/ui/components.tsx",
+      "beforeSha256": "947aafd656a74675b64fd0dadeb0735583e4ac1cdc0b30b73599b454bfa5df4b",
+      "afterSha256": "6fbcd3002eb9055dcf59bb4350bc9d9039d2d3fe5dd47167156f6fa2b5886834"
+    }
+  ],
+  "added": [
+    {
+      "file": "tools/native-cohort-c38-captures.pending.json",
+      "sha256": "9f2db2be3bf7f0486c2fa215cdde4f48710a8b9b5d0055cc11056a0d2e0b5d4f"
+    },
+    {
+      "file": "tools/native-cohort-c38-existing.pending.json",
+      "sha256": "11535760af2d074342bb6f30e45add34fc74c4423119e2bb36f13c5c2ac36891"
+    },
+    {
+      "file": "tools/native-cohort-c38-semantic.pending.json",
+      "sha256": "19de63b6c4e4942eb5a29bcd82a88ddf9a91f6ac6b80c83f37910550f92f328a"
+    },
+    {
+      "file": "tools/native-cohort-c38-source.pending.json",
+      "sha256": "5a872428c9fc0b286de1c9f8777e275ad0004a2389ba0e35b8192553f14ecaa6"
+    },
+    {
+      "file": "tools/native-cohort-c39-captures.pending.json",
+      "sha256": "10d4291fbbd99c61c16dd6e9f4f31147e2eb31ac4e0160f9c00239615aaa78bc"
+    },
+    {
+      "file": "tools/native-cohort-c39-existing.pending.json",
+      "sha256": "93ae8ab383da2cd48f2828133b32ef003e757dabd18e3a769c9498146d731795"
+    },
+    {
+      "file": "tools/native-cohort-c39-semantic.pending.json",
+      "sha256": "350299e3c9c899537e9ed95bdc0eb370903926ff2da799075518c6a8157fda94"
+    },
+    {
+      "file": "tools/native-cohort-c39-source.pending.json",
+      "sha256": "276bd51c04bc96610dc90158891f7e33eb44ba4fa10c2178443fae6bc91ee4fa"
+    },
+    {
+      "file": "tools/native-cohort-raw-support.cjs",
+      "sha256": "878716f2dbf2e0d820038e8a729a071f2c230e476e3a9c23dafc40034b2e3de0"
+    },
+    {
+      "file": "tools/native-cohort-semantic-support.cjs",
+      "sha256": "bab56e51e08fd502db5a581bfc0b42ebd7a4b85a49ed71d9dc8f02808c15a92e"
+    },
+    {
+      "file": "tools/tests/native-cohort-packed.test.cjs",
+      "sha256": "a78a1e811fbf1f28e9de42344e1318bb91c6ec791686ec5a8c09a640081637f4"
+    },
+    {
+      "file": "tools/tests/native-cohort-raw.test.cjs",
+      "sha256": "f2d79b29c30756f6079626b90870790b0b6a68b956f1e025f40bb78765261cdd"
+    },
+    {
+      "file": "tools/tests/native-cohort-semantic.test.cjs",
+      "sha256": "8004355ab246f82c61e22c4d32773c89c08010d94fce78875d64863cbe52a799"
+    },
+    {
+      "file": "tools/verify-native-cohort-raw.cjs",
+      "sha256": "3c4d37cc03ad4a2bbc537066279e23a3bc47cd8198ac670f0c7ca7774583533a"
+    },
+    {
+      "file": "tools/verify-native-cohort-semantic.cjs",
+      "sha256": "26993400619c37fd1fc7a4f85c48f212b1db82c4fb0f773b39287a1243339bcb"
+    }
+  ],
+  "removed": [],
+  "allOtherOldInventoryFilesEqual": 686,
+  "verifiedEqualScopes": {
+    "game": {
+      "filesCompared": 176,
+      "everyOldInventoryPinEqual": true
+    },
+    "persistence": {
+      "filesCompared": 5,
+      "everyOldInventoryPinEqual": true
+    },
+    "progression": {
+      "filesCompared": 6,
+      "everyOldInventoryPinEqual": true
+    },
+    "assets": {
+      "filesCompared": 23,
+      "everyOldInventoryPinEqual": true
+    },
+    "allExistingTestsIncludingOriginalFixturesAndSupport": {
+      "filesCompared": 284,
+      "everyOldInventoryPinEqual": true
+    },
+    "originalFixtures": {
+      "filesCompared": 49,
+      "everyOldInventoryPinEqual": true
+    },
+    "allExistingToolsIncludingPolicyProducers": {
+      "filesCompared": 39,
+      "everyOldInventoryPinEqual": true
+    },
+    "rootConfigAndQualityWorkflow": {
+      "filesCompared": 7,
+      "everyOldInventoryPinEqual": true
+    },
+    "allOtherAppRoutes": {
+      "filesCompared": 87,
+      "everyOldInventoryPinEqual": true
+    },
+    "allOtherUiSource": {
+      "filesCompared": 33,
+      "everyOldInventoryPinEqual": true
+    }
+  },
+  "identicalGameSourceHash": "7de215076995f7dbe7c76eceb080ba00b6de6f1783c12340d1e82677c996245b",
+  "identicalCombinedGamePersistenceSourceHash": "d72d52f3d6a6e312e490a525c0638638af6c5bb27449ffb8a0dd5833e10acbc0",
+  "identicalProgressionSourceHash": "f72553c4b71ff60609bf6e1938112c034d35f8826b320e768ce024b4f5e79d7f",
+  "engine": {
+    "file": "src/game/engine.ts",
+    "sha256": "36dfa895ecc6755c2445e9cd2c52f7020525d75c25fdd2c3b845695cf93746ee",
+    "newSha256": "36dfa895ecc6755c2445e9cd2c52f7020525d75c25fdd2c3b845695cf93746ee",
+    "byteEqual": true
+  },
+  "rawGitProofs": {
+    "head": {
+      "file": "/tmp/dreams-production-ui-complete-head.txt",
+      "bytes": 41,
+      "sha256": "7b434ac405c8ee4d621a1f917cc632c788063525e16b134b68e1f3eacbaf0fde"
+    },
+    "status": {
+      "file": "/tmp/dreams-production-ui-complete-status.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tree": {
+      "file": "/tmp/dreams-production-ui-complete-tree.bin",
+      "bytes": 281281,
+      "sha256": "b1ca930c9627f194b9a83989b9a760c78d035e6420de4b8e41804c7faec1e283"
+    },
+    "commit": {
+      "file": "/tmp/dreams-production-ui-complete-commit.bin",
+      "bytes": 252,
+      "sha256": "8ee104a4c41c1d3b625c688db3403f0c22f2a91c92dc831253c7b9eb4b36ed7c"
+    }
+  },
+  "directGitClosures": [
+    {
+      "file": "/tmp/dreams-production-ui-complete-direct-git-receipt.json",
+      "bytes": 1560,
+      "sha256": "b0493be1ba9a73c252bb369e5eb873280372bebdfb0ffd39b43319d36e167974"
+    },
+    {
+      "file": "/tmp/dreams-production-ui-complete-current-direct-git-receipt.json",
+      "bytes": 943,
+      "sha256": "7873ae1ca23951b7c7f6839af7d3c29de1e841731838fd65d73ab489affa4adf"
+    }
+  ],
+  "sourceCapture": {
+    "helper": {
+      "file": "/tmp/dreams-production-finish-source.cjs",
+      "bytes": 4528,
+      "sha256": "bd7a670c83b5bf57f2f2aff8e0b4e2a1d2c2e7a72776e814879f8bb0e50a1e9e"
+    },
+    "actualExitCode": 0,
+    "processClosed": true,
+    "toolChunkId": "0c7ff8",
+    "wallTimeSeconds": 0.156155563,
+    "stdout": {
+      "file": "/tmp/dreams-production-ui-complete-capture.out",
+      "bytes": 395,
+      "sha256": "bc27e724612424042045e30de579671d6bbe385f7afd0b433e9a466e37c2f6d3"
+    },
+    "stderr": {
+      "file": "/tmp/dreams-production-ui-complete-capture.err",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "nativeSourcePreparation": {
+    "helper": {
+      "file": "/tmp/dreams-native-cohort-prepare-c39-ui-complete-source.cjs",
+      "bytes": 5695,
+      "sha256": "3bff1735146a786da965ca252dd1d1e3c93b4dc841a88d476f0893856fc922da"
+    },
+    "actualExitCode": 0,
+    "processClosed": true,
+    "toolChunkId": "fd1210",
+    "wallTimeSeconds": 0.1292442,
+    "stdout": {
+      "file": "/tmp/dreams-native-cohort-c39-ui-complete-source-verification.out",
+      "bytes": 722,
+      "sha256": "3cea24c97c06af259634314940b6f84e8a1f24db2797bcd207857b161e020cce"
+    },
+    "stderr": {
+      "file": "/tmp/dreams-native-cohort-c39-ui-complete-source-verification.err",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "acceptance": {
+    "originalGameGatesRetainOriginalSourceAttribution": true,
+    "newGameGateRun": false,
+    "newUiTestOrTypeRunByThisPreparation": false,
+    "httpPreparedOrRead": false,
+    "nativeActionsPerformed": 0,
+    "checkpointWorldsDecoded": 0,
+    "captureDatabasesOpened": 0,
+    "visualAcceptance": false,
+    "nativeAcceptance": false
+  },
+  "pending": "Root must load and inspect an explicitly source-matched corrected C39 UI bundle; old33b/C38 native captures and all original gate evidence remain unchanged historical records."
+}

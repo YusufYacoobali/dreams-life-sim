@@ -1,0 +1,12 @@
+{
+  "complete": true,
+  "stopped": true,
+  "restarted": true,
+  "from": "acknowledged",
+  "to": "cold-acknowledged",
+  "evidence": {
+    "file": "/tmp/dreams-c38-native-captures/cold-acknowledged/capture-log.json",
+    "bytes": 3486,
+    "sha256": "c216d22a9c3b6bc0ea800ad1d12b29315c670ed0fe101a85125285fcb3807ba2"
+  }
+}

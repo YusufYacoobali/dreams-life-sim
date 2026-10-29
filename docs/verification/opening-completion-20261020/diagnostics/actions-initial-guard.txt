@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/tmp/dreams-opening-next-run-actions.py", line 13, in <module>
+    assert pathlib.Path('/proc/137273/cwd').resolve() == root
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 1240, in resolve
+    s = self._flavour.realpath(self, strict=strict)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen posixpath>", line 424, in realpath
+  File "<frozen posixpath>", line 491, in _joinrealpath
+PermissionError: [Errno 13] Permission denied: '/proc/137273/cwd'

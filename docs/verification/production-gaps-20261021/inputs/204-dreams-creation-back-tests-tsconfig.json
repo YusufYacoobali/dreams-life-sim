@@ -1,0 +1,14 @@
+{
+  "extends": "/workspace/dreams-worktrees/opening-design-audit/tests/tsconfig.json",
+  "compilerOptions": {
+    "typeRoots": [
+      "/workspace/dreams-worktrees/opening-design-audit/node_modules/@types"
+    ]
+  },
+  "include": [
+    "/workspace/dreams-worktrees/opening-design-audit/tests/ui/onboarding-accessibility-flow.test.tsx",
+    "/workspace/dreams-worktrees/opening-design-audit/tests/ui/new-life-review-flow.test.tsx",
+    "/workspace/dreams-worktrees/opening-design-audit/tests/ui/onboarding-flow.test.tsx"
+  ],
+  "exclude": []
+}

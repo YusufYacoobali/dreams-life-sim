@@ -1,0 +1,291 @@
+"""Read-only JSON/source/hash reconciliation; no game imports, codec or replay."""
+from pathlib import Path
+from collections import Counter, defaultdict
+from datetime import datetime, timezone
+import hashlib, json, re
+
+ROOT = Path('/tmp/dreams-c39-editorial-v2-review')
+RAW = Path('/workspace/.cache/dreams-current-c39-policies/editorial-v2')
+read = lambda p: json.loads(Path(p).read_text())
+sha = lambda b: hashlib.sha256(b).hexdigest()
+canonical = lambda j: json.dumps(j, sort_keys=True, ensure_ascii=False, separators=(',', ':')).encode()
+pin = lambda p: {'file': str(p), 'bytes': Path(p).stat().st_size, 'sha256': sha(Path(p).read_bytes())}
+ndjson = lambda p: [json.loads(line) for line in Path(p).read_text().splitlines()]
+def write(name, value):
+    (ROOT / name).write_text(json.dumps(value, indent=2, ensure_ascii=False) + '\n')
+def write_rows(name, rows):
+    (ROOT / name).write_text(''.join(json.dumps(row, ensure_ascii=False, sort_keys=True) + '\n' for row in rows))
+
+receipt_path = Path('/tmp/dreams-production-finish-accepted-editorial-v2-receipt.json')
+receipt = read(receipt_path)
+snapshot_path = Path(receipt['sourceSnapshot'])
+snapshot = read(snapshot_path)
+manifest, aggregate, catalogue = [read(RAW / name) for name in ['manifest.json', 'result.json', 'catalogue.json']]
+registration_path = Path(manifest['source']['registration']['file'])
+registration = read(registration_path)
+VERSIONS = {'world': 38, 'engine': 39, 'content': 13, 'database': 18, 'checkpoint': 'v4'}
+assert receipt['complete'] is True and receipt['exitCode'] == 0
+assert receipt['sourceCommit'] == snapshot['commit'] == '33b6a5fcb0aae73dfc235a15394b34d8afda00cc'
+assert receipt['sourceSnapshotSha256'] == pin(snapshot_path)['sha256'] == '2e08fd925c673437ff7de7c76c0fd79d02832617d0014efc1c3e471782fe9b56'
+assert receipt['raw'] == pin(receipt['raw']['file'])
+assert receipt['raw']['sha256'] == 'c1304730115d08b682454a0c6052c9151a67b8e9ebf198b0e469c1a473a8daf5'
+assert manifest['versions'] == aggregate['versions'] == registration['versions'] == snapshot['versions'] == VERSIONS
+assert manifest['source'] == aggregate['source'] == catalogue['source']
+assert manifest['source']['sourceSnapshot'] == pin(snapshot_path) and manifest['source']['registration'] == pin(registration_path)
+assert registration['complete'] is True and registration['cohortRunAuthorized'] is True
+assert manifest['source']['commit'] == registration['commit'] == snapshot['commit']
+assert len(snapshot['source']) == manifest['source']['sourceFiles'] == 688
+for phase in ['before', 'after']:
+    assert receipt[phase] == {'files': 688, 'snapshotSha256': receipt['sourceSnapshotSha256'], 'status': 'exact'}
+for path, digest in manifest['source']['originalProducerHashes'].items():
+    assert snapshot['source'][path] == digest
+for runtime in [manifest['runtime'], aggregate['runtime']]:
+    for path, digest in runtime['loadedSource'].items():
+        assert snapshot['source'][path] == digest
+
+COUNTRIES = ['US', 'CA', 'GB', 'AU', 'FR', 'DE', 'ES', 'IT', 'BR', 'IN', 'JP', 'ZA']
+assignments = [{'country': c, 'seed': 900 + i} for i, c in enumerate(COUNTRIES)]
+assert manifest['assignments'] == aggregate['assignments'] == assignments
+assert aggregate['completedLives'] == 12 and aggregate['adapterVersion'] == 2 and aggregate['decisionPolicyVersion'] == 1
+assert aggregate['additionalAnnualSeeds'] == manifest['additionalAnnualSeeds'] == 0
+assert aggregate['allCurrentCatalogueNaturalCoverageClaimed'] is False and aggregate['fullScenarioAcceptance'] is False
+catalog = {t['id']: t for t in catalogue['templates']}
+assert len(catalog) == 265 and sum(len(t['choices']) for t in catalog.values()) == 795
+assert aggregate['catalogue'] == manifest['catalogue'] == {'situations': 265, 'branches': 795}
+expected_names = {'birth.json', 'birth.checkpoint.json', 'commands.ndjson', 'decisions.ndjson', 'cold.ndjson', 'result.json', 'final.checkpoint.json'}
+assert {p.name for p in RAW.iterdir()} == set(COUNTRIES) | {'manifest.json', 'catalogue.json', 'result.json'}
+actual_stdout = Path(receipt['raw']['file']).read_bytes()
+aggregate_bytes = (RAW / 'result.json').read_bytes()
+assert actual_stdout.endswith(aggregate_bytes)
+progress = [json.loads(line) for line in actual_stdout[:-len(aggregate_bytes)].decode().splitlines()]
+assert len(progress) == 12
+
+important = {'medical-emergency', 'arrest', 'court-hearing', 'public-controversy', 'brand-offer', 'property-sale-offer', 'story-arcade-invitation', 'story-project-promise', 'story-project-recall'}
+simple_kinds = {'stat', 'skill', 'school-grade', 'relationship', 'schedule-story', 'transfer'}
+anomalies, countries, catalogue_rows, effect_rows, pacing_rows, callback_rows = [], [], [], [], [], []
+selected_kinds, system_types, ordinal_counts, eligible_positions = Counter(), Counter(), Counter(), Counter()
+branch_ids = defaultdict(set)
+cap_kinds, format_counts, pacing_outcomes, recurrence_gaps, boundary_omissions = Counter(), Counter(), Counter(), [], []
+disabled, results_count, cold_count, repeated, zero_capped = [], 0, 0, 0, 0
+
+for position, assignment in enumerate(assignments):
+    c, seed = assignment['country'], assignment['seed']
+    directory = RAW / c
+    assert {p.name for p in directory.iterdir()} == expected_names
+    birth, result = read(directory / 'birth.json'), read(directory / 'result.json')
+    commands, decisions, cold = [ndjson(directory / name) for name in ['commands.ndjson', 'decisions.ndjson', 'cold.ndjson']]
+    first, last = cold[0], cold[-1]
+    assert result['country'] == c and result['seed'] == seed and result['adapterVersion'] == 2 and result['policyVersion'] == 1
+    assert result['source'] == manifest['source'] and result['versions'] == {'world': 38, 'engine': 39, 'content': 13}
+    assert result['naturallyDied'] is True and result['causeOfDeath'] and result['maxYears'] == 150
+    assert result['fullScenarioAcceptance'] is False and result['all250NaturalCoverageClaimed'] is False
+    assert birth['seed'] == seed and birth['mode'] == 'SQLite store birth only' and birth['birthRevision'] == 1
+    assert birth['storeCommands'] == ['startLife', 'acknowledgeBirth'] and birth['worldId'] == f'life_editorial_{c}_{seed}'
+    assert birth['input']['country'] == c and birth['input']['background'] == 'ordinary'
+    assert birth['date'] == {'year': 2000, 'month': 1, 'day': 1}
+    assert birth['worldSha256'] == first['worldSha256'] and first['reason'] == 'acknowledged-birth' and first['revision'] == 1
+    assert first['checkpointSha256'] == pin(directory / 'birth.checkpoint.json')['sha256']
+    assert first['checkpointBytes'] == (directory / 'birth.checkpoint.json').stat().st_size
+    # The producer deduplicates cold checks by revision. A terminal annual
+    # closure can already have checked the same final world before this label.
+    assert last['reason'] in {'natural-death', 'annual-interrupted', 'year-end'} and last['revision'] == result['finalRevision']
+    assert last['worldSha256'] == result['finalWorldSha256']
+    assert last['checkpointSha256'] == pin(directory / 'final.checkpoint.json')['sha256']
+    assert last['checkpointBytes'] == (directory / 'final.checkpoint.json').stat().st_size
+    for name, proof in [('birth.checkpoint.json', first), ('final.checkpoint.json', last)]:
+        envelope = read(directory / name)
+        assert envelope['format'] == proof['format']
+        if envelope['format'] == 'dreams-checkpoint-v4':
+            assert envelope['bytes'] == envelope['main']['bytes'] + sum(p['bytes'] for p in envelope['people']) + sum(p['bytes'] for p in envelope['ledger'])
+            assert envelope['bytes'] + 32 <= 32_000_000 and proof['canonicalBytes'] <= 80_000_000
+    assert decisions == result['decisions'] and cold == result['coldChecks']
+    assert len(commands) == result['commandsCommitted'] == result['finalRevision'] - result['birthRevision']
+    assert sha((directory / 'commands.ndjson').read_bytes()) == result['traceSha256']
+    assert len(cold) == len({x['revision'] for x in cold}) and set(x['revision'] for x in cold) == set(range(1, result['finalRevision'] + 1))
+    assert result['traceEncoding'] == 'SHA256 of newline-terminated editorialJson(commandRecord), bigint tagged $dreamsBigInt, sorted object keys'
+    expected_summary = {**assignment, **{key: result[key] for key in ['ageAtEnd', 'naturallyDied', 'catalogueDecisions', 'systemOrCallbackDecisions', 'observedCatalogueIds', 'unseenCatalogueIds', 'unchosenCatalogueBranches', 'traceSha256', 'finalWorldSha256']}}
+    assert aggregate['records'][position] == expected_summary
+    assert progress[position] == {'event': 'current-editorial-life-complete', **expected_summary, 'unseenCatalogueIds': len(result['unseenCatalogueIds']), 'unchosenCatalogueBranches': len(result['unchosenCatalogueBranches'])}
+    by_before = {}
+    for i, command in enumerate(commands):
+        assert command['index'] == i and command['beforeRevision'] == i + 1 and command['revision'] == i + 2
+        assert command['command']['type'] in {'advance', 'resume', 'choose', 'acknowledge'}
+        by_before[command['beforeRevision']] = command
+
+    local_branches, prior_year, offered_year = defaultdict(set), {}, Counter()
+    for i, d in enumerate(decisions):
+        pointer = f'{c}/result.json#/decisions/{i}'
+        event, selected_meta = d['event'], d['selected']
+        selected_row = next(x for x in d['choices'] if x['choice']['id'] == selected_meta['id'])
+        selected = selected_row['choice']
+        assert d['ordinal'] == i and d['afterRevision'] == d['revision'] + 1
+        assert d['selected']['eligibleIndex'] == i % len(d['eligibleIds']) and d['eligibleIds'][d['selected']['eligibleIndex']] == selected['id']
+        assert d['selected']['sourceIndex'] == selected_row['sourceIndex'] and d['selected']['authoredBranch'] == selected_row['authoredBranch'] == selected_row['sourceIndex'] + 1
+        assert selected_row['unavailableReason'] is None and event['choices'][selected_row['sourceIndex']] == selected
+        assert d['eligibleIds'] == [row['choice']['id'] for row in d['choices'] if row['unavailableReason'] is None]
+        assert by_before[d['revision']]['command'] == {'type': 'choose', 'eventId': event['id'], 'choiceId': selected['id']}
+        assert by_before[d['revision']]['revision'] == d['afterRevision']
+        for j, row in enumerate(d['choices']):
+            assert row['choice'] == event['choices'][j] and row['sourceIndex'] == j and row['authoredBranch'] == j + 1
+            if row['unavailableReason'] is not None:
+                disabled.append({'pointer': pointer + '/choices/' + str(j), 'choiceId': row['choice']['id'], 'reason': row['unavailableReason']})
+        selected_kinds.update(e['kind'] for e in selected['effects'])
+        before = {x['id']: x for x in d['affectedBefore']['people']}
+        after = {x['id']: x for x in d['affectedAfter']['people']}
+        before_rel = {x['id']: x for x in d['affectedBefore']['relationships']}
+        after_rel = {x['id']: x for x in d['affectedAfter']['relationships']}
+        if all(e['kind'] in simple_kinds for e in selected['effects']):
+            for j, effect in enumerate(selected['effects']):
+                kind, pid = effect['kind'], effect.get('personId')
+                if kind == 'stat': a, b = before[pid]['stats'][effect['stat']], after[pid]['stats'][effect['stat']]
+                elif kind == 'skill': a, b = before[pid]['skills'][effect['skill']], after[pid]['skills'][effect['skill']]
+                elif kind == 'school-grade': a, b = before[pid]['education']['grades'], after[pid]['education']['grades']
+                elif kind == 'relationship': a, b = before_rel[effect['relationshipId']]['strength'], after_rel[effect['relationshipId']]['strength']
+                else: continue
+                expected = max(0, min(100, a + effect['delta']))
+                delta = b - a
+                actual_row = next((x for x in (d['actualResult'] or {}).get('effects', []) if x['id'] == 'effect_' + str(j)), None)
+                expected_value = ('+' if delta >= 0 else '') + str(delta) + '%'
+                good_delta = -delta if kind == 'stat' and effect['stat'] == 'stress' else delta
+                expected_tone = 'positive' if good_delta > 0 else 'negative' if good_delta < 0 else 'neutral'
+                if b != expected or actual_row and (actual_row['value'] != expected_value or actual_row['tone'] != expected_tone):
+                    anomalies.append({'type': 'capped-effect-state-or-display', 'pointer': pointer, 'effect': effect, 'before': a, 'after': b, 'actualRow': actual_row})
+                cap_kinds[kind] += 1
+                zero_capped += int(delta == 0 and effect['delta'] != 0)
+                effect_rows.append({'pointer': pointer, 'effectIndex': j, 'effect': effect, 'before': a, 'after': b, 'expectedAfter': expected, 'actualDisplay': actual_row})
+
+        if d['scope'] == 'annual-catalogue':
+            template = catalog[event['templateId']]
+            assert d['template'] == template and template['min'] <= d['age'] <= template['max']
+            assert template['choices'][selected_meta['sourceIndex']]['id'] == selected['id']
+            assert event['id'] == f"event_{d['date']['year']}_{template['id']}"
+            assert d['actualHistory'].count({'templateId': template['id'], 'year': d['date']['year']}) == 1
+            if template['id'] in prior_year:
+                gap = d['date']['year'] - prior_year[template['id']]
+                recurrence_gaps.append(gap)
+                assert gap >= 5
+            prior_year[template['id']] = d['date']['year']
+            offered_year[d['date']['year']] += 1
+            local_branches[template['id']].add(selected['id'])
+            branch_ids[template['id']].add(selected['id'])
+            ordinal_counts[selected_meta['authoredBranch']] += 1
+            eligible_positions[selected_meta['eligibleIndex'] + 1] += 1
+            catalogue_rows.append({'country': c, 'seed': seed, 'age': d['age'], 'date': d['date'], 'revision': d['revision'], 'eventId': event['id'], 'templateId': template['id'], 'choiceId': selected['id'], 'authoredBranch': selected_meta['authoredBranch'], 'eligiblePosition': selected_meta['eligibleIndex'] + 1, 'rarity': template.get('rarity', 'common'), 'pointer': pointer, 'templateCanonicalSha256': sha(canonical(template))})
+        else:
+            assert d['scope'] == 'system-or-callback' and d['template'] is None
+            system_types[event['templateId']] += 1
+        for effect in selected['effects']:
+            if effect['kind'] == 'resolve-story':
+                thread = next(x for x in d['actualStoryThreads'] if x['id'] == effect['threadId'])
+                phase = 'projectRecall' if event['templateId'] == 'story-project-recall' else 'origin'
+                resolved = thread['projectRecall'] if phase == 'projectRecall' else thread
+                assert resolved['status'] == 'resolved' and resolved['resolution'] == effect['resolution']
+                participants = [thread['personId'], thread['peerId']] if phase == 'projectRecall' else [thread['personId'], thread['peerId'], thread['teacherId'], thread['parentId']]
+                assert all(pid in event['personIds'] for pid in participants if pid)
+                if phase == 'projectRecall':
+                    origin = next(row['thread'] for row in callback_rows if row['country'] == c and row['thread']['id'] == thread['id'] and row['phase'] == 'origin')
+                    assert all(origin[key] == thread[key] for key in ['resolution', 'ended', 'paidTransactionId', 'status'])
+                    month = lambda date: date['year'] * 12 + date['month'] - 1
+                    assert month(resolved['ended']) - month(origin['ended']) == 24
+                    assert d['affectedBefore']['accounts'] == d['affectedAfter']['accounts']
+                    assert before[d['personId']]['education'] == after[d['personId']]['education']
+                callback_rows.append({'country': c, 'pointer': pointer, 'date': d['date'], 'selectedId': selected['id'], 'phase': phase, 'thread': thread, 'result': d['actualResult']})
+        texts = [event['title'], event['body'], selected['label'], selected['resultTitle'], selected['resultBody'], selected['journal']]
+        if any(re.search(r'\{(?:parent|peer|teacher|city|friend|partner|child|coworker|supervisor|pet|condition)\}', text) for text in texts):
+            anomalies.append({'type': 'unexpanded-binding-token', 'pointer': pointer})
+
+    assert all(count == 1 for count in offered_year.values())
+    observed = sorted(local_branches)
+    assert observed == result['observedCatalogueIds'] and sorted(set(catalog) - set(observed)) == result['unseenCatalogueIds']
+    unchosen = [{'templateId': t['id'], 'choiceId': choice['id'], 'authoredBranch': j + 1} for t in catalogue['templates'] for j, choice in enumerate(t['choices']) if choice['id'] not in local_branches.get(t['id'], set())]
+    assert unchosen == result['unchosenCatalogueBranches']
+    catalogue_count = sum(d['scope'] == 'annual-catalogue' for d in decisions)
+    assert catalogue_count == result['catalogueDecisions'] and len(decisions) - catalogue_count == result['systemOrCallbackDecisions']
+    assert sum(x['command']['type'] == 'choose' for x in commands) == len(decisions)
+    assert sum(x['command']['type'] == 'advance' for x in commands) == result['yearsStarted']
+    assert sum(x['completedToTarget'] for x in result['annual']) == result['yearsCompleted']
+    result_ids = {x['event']['id'] for x in result['results']}
+    assert len(result_ids) == len(result['results'])
+    quiet_results = {x for x in result_ids if re.fullmatch(r'year_\d+_summary', x)}
+    seen_frames = set()
+    for i, command in enumerate(commands):
+        frame = command['annual']
+        if not frame or frame['stage'] != 'complete' or frame['id'] in seen_frames: continue
+        seen_frames.add(frame['id'])
+        observations = frame.get('pacing', {}).get('decisions', [])
+        assert frame.get('pacing', {}).get('ruleVersion') == 1 and len(observations) <= 3
+        for observation in observations:
+            matching = [d for d in decisions if d['event']['id'] == observation['eventId']]
+            assert len(matching) == 1
+            d = matching[0]
+            assert d['event']['templateId'] == observation['templateId'] in important
+            assert d['date'] == observation['date'] and d['personId'] == observation['personId'] and d['afterRevision'] <= command['revision']
+            assert any(j['id'] == observation['eventId'] + '_choice' and j['personId'] == observation['personId'] and j['date'] == observation['date'] for j in d['actualJournal'])
+        pending = command['pendingId']
+        outcome = 'catalogue-offer' if pending and pending.startswith('event_') else 'quiet-summary' if pending in quiet_results else 'other'
+        assert outcome != 'other', (c, frame, pending)
+        pacing_outcomes[(len(observations), outcome)] += 1
+        introductory = command['age'] == 1
+        pacing_rows.append({'country': c, 'frame': frame, 'commandPointer': f'{c}/commands.ndjson#/{i}', 'revision': command['revision'], 'age': command['age'], 'pendingId': pending, 'outcome': outcome, 'actualResolvedImportantDecisions': len(observations), 'introductoryFirstBirthday': introductory, 'authoredChance': 100 if introductory else [78, 50, 25, 10][len(observations)]})
+    estate = result['estate']; money = lambda m: int(m['minor']['$dreamsBigInt'])
+    currency = estate['netWorthAtDeath']['currency']
+    parts = [estate[k] for k in ['tax', 'fees', 'charity', 'debtPaid', 'debtWrittenOff']] + [d[k] for d in estate['distributions'] for k in ['cash', 'assetValue']]
+    assert all(m['currency'] == currency for m in parts)
+    distributed = sum(money(d['cash']) + money(d['assetValue']) for d in estate['distributions']) + money(estate['tax']) + money(estate['fees']) + money(estate['charity'])
+    assert distributed == money(estate['netWorthAtDeath']) + money(estate['debtWrittenOff'])
+    local_counts = Counter(row['event']['templateId'] for row in decisions if row['scope'] == 'annual-catalogue')
+    repeated += sum(n - 1 for n in local_counts.values())
+    cold_count += len(cold); results_count += len(result['results']); format_counts.update(x['format'] for x in cold)
+    boundaries = {'country': c, 'started': result['yearsStarted'], 'completedToTarget': result['yearsCompleted'], 'recordedAnnualClosures': len(result['annual']), 'recordedInterruptedClosures': sum(not row['completedToTarget'] for row in result['annual']), 'visibleFinishYearFrames': len(seen_frames), 'startedWithoutRecordedClosure': result['yearsStarted'] - len(result['annual'])}
+    boundary_omissions.append(boundaries)
+    countries.append({**assignment, 'ageAtDeath': result['ageAtEnd'], 'causeOfDeath': result['causeOfDeath'], 'commands': len(commands), 'catalogueDecisions': catalogue_count, 'systemOrCallbackDecisions': len(decisions) - catalogue_count, 'uniqueObservedTemplates': len(observed), 'uniqueSelectedBranches': sum(len(v) for v in local_branches.values()), 'quietResults': len(quiet_results), 'coldChecks': len(cold), 'birthRevision': 1, 'finalRevision': result['finalRevision'], 'years': boundaries, 'retainedThreads': result['retainedStoryThreads'], 'traceSha256': result['traceSha256'], 'finalWorldSha256': result['finalWorldSha256'], 'lastColdReason': last['reason'], 'estateCurrency': currency, 'estateAmountsConserve': True, 'raw': {name: pin(directory / name) for name in sorted(expected_names)}})
+
+observed = set(branch_ids)
+unseen = sorted(set(catalog) - observed)
+unchosen = [{'templateId': t['id'], 'choiceId': c['id'], 'authoredBranch': i + 1} for t in catalogue['templates'] for i, c in enumerate(t['choices']) if c['id'] not in branch_ids.get(t['id'], set())]
+contexts = []
+for key in ['parent', 'parentContact', 'school', 'classmate', 'teacher', 'workplace', 'coworker', 'supervisor', 'friend', 'partner', 'local', 'child', 'home', 'pet', 'hobby', 'visited', 'chronicCondition', 'specialCareer', 'rarity']:
+    values = sorted({json.dumps(t[key], sort_keys=True) for t in catalog.values() if t.get(key)})
+    for value in values:
+        ids = {t['id'] for t in catalog.values() if key in t and json.dumps(t[key], sort_keys=True) == value}
+        contexts.append({'context': key, 'value': json.loads(value), 'templates': len(ids), 'observedTemplates': len(ids & observed), 'unseenTemplateIds': sorted(ids - observed)})
+omissions = {'unseenCatalogueIds': unseen, 'unchosenCatalogueBranches': unchosen, 'contexts': contexts, 'unavailableChoices': disabled, 'annualClosureObservations': boundary_omissions, 'note': 'These are actual unobserved/unselected contexts and unavailable-choice reasons, not invented failures or proof that each context is absent from the game. Legacy annual observation code records a closure only when the pre-command world already had an annual frame; new-and-ended terminal frames are not backfilled.'}
+source_artifacts = {str(p): pin(p) for p in [receipt_path, Path(receipt['raw']['file']), snapshot_path, registration_path]}
+for ref in registration['git'].values():
+    assert pin(ref['file']) == ref
+    source_artifacts[ref['file']] = ref
+for key in ['copyBridge', 'testOnlySourceBridge']:
+    ref = registration[key]; assert pin(ref['file']) == ref; source_artifacts[ref['file']] = ref
+for path in ['tools/current-policy/run-editorial-v2.cjs', 'tools/current-policy/source.cjs', 'tests/support/editorialPolicy.ts', 'tests/support/sqlite.ts', 'src/game/annualPacing.ts', 'src/game/systems/annualPacingSchemas.ts', 'src/game/content/eventRarity.ts', 'src/game/systems/stories.ts', 'src/game/systems/projectRecall.ts', 'src/game/engine.ts', 'src/persistence/checkpoints.ts']:
+    p = Path(snapshot['root']) / path
+    source_artifacts[str(p)] = pin(p)
+    assert source_artifacts[str(p)]['sha256'] == snapshot['source'][path]
+raw_files = [p for p in sorted(RAW.rglob('*')) if p.is_file()]
+assert len(raw_files) == 87
+story_refs = {name: pin(Path('/tmp/dreams-c39-sequence-review-us900-20261021') / name) for name in ['REPORT.md', 'summary.json']}
+assert story_refs['REPORT.md']['sha256'] == '8f9ce2716e4738bc3561524282ed728cf013f4ef1d34ac3bc616959897a177a7'
+assert story_refs['summary.json']['sha256'] == '198d2c52e5c0c6289574ab2f25284e6ab7dd74b1e66a69e6fff1f531a813e542'
+inputs = {'format': 'dreams-current-editorial-v2-artifact-pins-v1', 'sourceCommit': snapshot['commit'], 'rawFiles': [pin(p) for p in raw_files], 'sourceAndGateArtifacts': source_artifacts, 'separateUS900NarrativeReview': story_refs, 'originalProducerHashes': manifest['source']['originalProducerHashes'], 'manifestLoadedSourceHashes': manifest['runtime']['loadedSource'], 'finalLoadedSourceHashes': aggregate['runtime']['loadedSource'], 'completeSourceMapReference': pin(snapshot_path), 'scope': 'Original actual output bytes and source/provenance pins; no re-creation, replay, game decoding or old evidence rewriting.'}
+write('inputs.json', inputs)
+write('omissions.json', omissions)
+write_rows('observed-catalogue.ndjson', catalogue_rows)
+write_rows('effect-checks.ndjson', effect_rows)
+write_rows('pacing-frames.ndjson', pacing_rows)
+write('callbacks.json', callback_rows)
+summary = {
+    'format': 'dreams-current-editorial-v2-independent-review-v1', 'reviewer': '/root/hobby_review', 'kind': 'Codex read-only actual-artifact reconciliation', 'externalHuman': False,
+    'reviewedAt': datetime.now(timezone.utc).isoformat(), 'status': 'reviewed-no-reconciliation-anomaly' if not anomalies else 'reviewed-with-findings',
+    'sourceCommit': snapshot['commit'], 'versions': VERSIONS, 'sourceSnapshot': pin(snapshot_path), 'sourceFiles': 688, 'gameSourceHash': snapshot['gameSourceHash'], 'combinedGamePersistenceSourceHash': snapshot['combinedGamePersistenceSourceHash'],
+    'gate': {'session': '2002', 'receipt': pin(receipt_path), 'raw': receipt['raw'], 'complete': True, 'exitCode': 0, 'wrapperSeconds': receipt['elapsedSeconds'], 'adapterSeconds': aggregate['elapsedMs'] / 1000, 'beforeAfter': 'all 688 source files exact'},
+    'assignments': assignments, 'additionalAnnualSeeds': 0, 'scope': aggregate['scope'], 'countries': countries,
+    'totals': {'naturalDeaths': 12, 'commands': sum(c['commands'] for c in countries), 'catalogueChoices': len(catalogue_rows), 'systemOrCallbackChoices': sum(c['systemOrCallbackDecisions'] for c in countries), 'systemTypes': dict(system_types), 'resultEvents': results_count, 'quietSummaryResults': sum(c['quietResults'] for c in countries), 'producerColdComparisons': cold_count, 'checkpointFormats': dict(format_counts), 'catalogueTemplates': 265, 'catalogueBranches': 795, 'uniqueObservedTemplates': len(observed), 'unseenTemplates': len(unseen), 'uniqueSelectedBranches': 795 - len(unchosen), 'unchosenBranches': len(unchosen), 'authoredBranchOccurrences': dict(ordinal_counts), 'eligiblePositionOccurrences': dict(eligible_positions), 'withinLifeRepeatedTemplateOccurrences': repeated, 'minimumRepeatGapYears': min(recurrence_gaps) if recurrence_gaps else None, 'simpleCappedEffectsChecked': len(effect_rows), 'cappedEffectsByKind': dict(cap_kinds), 'nonzeroRequestedEffectsCappedToZero': zero_capped, 'selectedEffectKinds': dict(selected_kinds), 'unavailableChoiceRows': len(disabled), 'resolvedStoryCallbacks': len(callback_rows), 'retainedThreadStatuses': dict(Counter(t['status'] for c in countries for t in c['retainedThreads']))},
+    'pacing': {'visibleFinishedFrames': len(pacing_rows), 'guaranteedFirstBirthdayOffers': sum(row['introductoryFirstBirthday'] and row['outcome'] == 'catalogue-offer' for row in pacing_rows), 'observedOutcomes': [{'actualImportantDecisionLoad': load, 'authoredLaterYearChance': [78,50,25,10][load], 'catalogueOffersIncludingFirstBirthday': pacing_outcomes[(load, 'catalogue-offer')], 'laterYearCatalogueOffers': sum(not row['introductoryFirstBirthday'] and row['actualResolvedImportantDecisions'] == load and row['outcome'] == 'catalogue-offer' for row in pacing_rows), 'quietSummaries': pacing_outcomes[(load, 'quiet-summary')]} for load in range(4)], 'interpretation': 'Observed command snapshots expose actual saved V1 load and optional offer/quiet outcomes. Twelve first birthdays are guaranteed and are reported separately from the later-year 78/50/25/10 chances. These are not a controlled balance comparison or independent proof of each hidden offer roll. Original effects, mandatory decisions and callback resolutions are not suppressed by this optional-scene count.', 'annualObserverLimits': boundary_omissions},
+    'checks': {'all87RawFilesPinned': True, 'all12ProgressAndAggregateRecordsReconciled': True, 'all12RawCommandTraceHashesIndependentlyChecked': True, 'allBirthAndFinalCheckpointBytesMatchRecordedColdPins': True, 'allDecisionChoicesAndOrdinalAvailabilityReconciled': True, 'allRecordedPacingObservationsHaveActualResolvedChoiceJournalEvidence': True, 'allReportedEstateAmountsReconcilePerCurrency': True, 'anomalies': anomalies},
+    'rarity': {'catalogueTemplateCounts': dict(Counter(t.get('rarity', 'common') for t in catalog.values())), 'actualChoiceOccurrences': dict(Counter(row['rarity'] for row in catalogue_rows)), 'observedUniqueTemplates': dict(Counter(catalog[tid].get('rarity', 'common') for tid in observed)), 'note': 'Omitted rarity is common. Observed frequencies are not an independent relative-weight or controlled balance proof; rare and extremely-rare contexts remain unobserved.'},
+    'separateUS900NarrativeReview': {'reviewer': '/root/story_editorial', 'kind': 'Codex sequence review, not external-human review', 'pins': story_refs, 'scope': 'Preselected US900 bound sequence and condition chronology, independently authored by Story. This aggregate review does not repeat that narrative pass.'},
+    'evidence': {name: pin(ROOT / name) for name in ['inputs.json', 'omissions.json', 'observed-catalogue.ndjson', 'effect-checks.ndjson', 'pacing-frames.ndjson', 'callbacks.json']},
+    'analysisDiagnostics': {'preserved': ['analysis-first.out', 'analysis-second.out', 'analysis-third.out'], 'scope': 'Reviewer-only initial assumptions were corrected to account for the nested projectRecall resolution, its actual two-participant context, and revision-deduplicated terminal cold labels. No producer artifact, expected gameplay outcome or source was changed.'},
+    'limits': ['SQLite/store is used only for birth and birth acknowledgement; later immutable engine and production codec checks are not full-life SQLite or native evidence.', 'Reviewer only reads actual JSON/source and hashes: no game loader, policy, codec, SQL, replay, tests, seed search or device operation.', 'Production whole-world equality and canonical world hashes remain producer assertions; reviewer pins endpoint checkpoint bytes and declared compact bounds without decompressing or decoding worlds.', 'The 1260 simple effect checks reconcile actual before/after snapshots with displayed cap values and tones. They do not independently replay complex emergency-care, scheduling or callback effect implementations.', 'Pacing observation journal IDs/persons/dates are cross-checked against captured actual resolved-choice journals. Global journalIndex positions remain producer-validated; this review does not decompress the full world to recheck those positions.', 'The ordinal policy passively advances and chooses available saved choices. Different life lengths or unseen careers/family contexts do not establish overall game balance or absence of those systems.', 'Same reused seeds 900..911 add zero distinct annual seeds. Separate 1000-seed root coverage totals 0..999, not 1120.', 'All catalogue/branch/context omissions remain explicit. This review does not establish every situation/branch, all choices, complete Scenarios A/B/C/D, external-human review or release completion.', 'US900 narrative sequence review is separately preselected and owned by Story; it is not performed or claimed here.']
+}
+write('summary.json', summary)
+print(json.dumps({'summary': pin(ROOT / 'summary.json'), 'inputs': pin(ROOT / 'inputs.json'), 'totals': summary['totals'], 'pacing': summary['pacing']['observedOutcomes'], 'anomalies': anomalies}, indent=2))

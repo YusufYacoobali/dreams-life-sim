@@ -1,0 +1,11 @@
+{
+  "extends": "/workspace/dreams-worktrees/c37-story-test-adapters/tests/tsconfig.json",
+  "compilerOptions": {
+    "typeRoots": ["/workspace/dreams-worktrees/c37-story-test-adapters/node_modules/@types"]
+  },
+  "include": [
+    "/workspace/dreams-worktrees/c37-story-test-adapters/tests/game/story-lifecycle.test.ts",
+    "/workspace/dreams-worktrees/c37-story-test-adapters/tests/ui/workplace-story-flow.test.tsx"
+  ],
+  "exclude": []
+}

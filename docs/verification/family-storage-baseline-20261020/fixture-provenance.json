@@ -1,0 +1,26 @@
+{
+  "recordedOn": "2026-10-20",
+  "scope": "Actual last committed checkpoint after91calendar years/two generations of normal game-store work,health,adoption,natural death and existing-heir commands; before the next save exceeded the20MB limit",
+  "producerCommit": "555d112474513e44ea4398f7bc2ab1d598519378",
+  "producerCombinedGamePersistenceHash": "6a464e95da4e9845c2dd79ae70688df4fd9d6545da42bd9c7b56d5ce4060383d",
+  "driver": "tools/run-family-integration.cjs",
+  "driverSha256": "578487eb0279c34497ad15508318896ea6256e1338b903153f275415434cfa7c",
+  "id": "life_family_US_0",
+  "revision": 481,
+  "fixture": "tests/fixtures/v30-family-year91-checkpoint.json",
+  "bytes": 1208705,
+  "sha256": "00941dcb880910e2156e86280ea0e2b8b3198b623902ae2ad340c182830793cb",
+  "currentCheckpointByteExact": true,
+  "worldSha256": "61ec538d7e85244bd38051cda56c7b703e6a42329666efaef68a79ae9bf6d1db",
+  "canonicalWorldBytes": 19921889,
+  "ledgerRows": 63304,
+  "people": 36,
+  "versions": {
+    "world": 30,
+    "engine": 29,
+    "content": 7,
+    "database": 7,
+    "checkpoint": 3
+  },
+  "sourceRecord": "family-storage-baseline-20261020/failure.json"
+}

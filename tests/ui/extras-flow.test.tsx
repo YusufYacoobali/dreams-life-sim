@@ -1,0 +1,63 @@
+import React from 'react';
+import { fireEvent, render, screen } from '@testing-library/react-native';
+import { Modal } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { createGameStore } from '../../src/state/gameStore';
+import { encodeWorld } from '../../src/game/model';
+import { SaveRepository } from '../../src/persistence/repository';
+import { database } from '../support/sqlite';
+import { ThemeProvider } from '../../src/ui/theme';
+import archive from '../fixtures/v28-ordinary-hobby-archive.json';
+
+let mockStore: ReturnType<typeof createGameStore>, mockParams: Record<string, string> = {};
+jest.mock('expo-router', () => ({ router: { back: jest.fn(), push: jest.fn(), replace: jest.fn() }, useLocalSearchParams: () => mockParams, Redirect: () => null }));
+jest.mock('../../src/state/useGame', () => ({ useGame: (selector: unknown) => require('zustand').useStore(mockStore, selector) }));
+import { router } from 'expo-router';
+import Extras from '../../app/(game)/extras';
+import Achievements from '../../app/(game)/achievements';
+import Challenges from '../../app/(game)/challenges';
+import Challenge from '../../app/(game)/challenge/[id]';
+import Heirlooms from '../../app/(game)/heirlooms';
+import Help from '../../app/help';
+import LifeSummary from '../../app/life-summary';
+const frame = (children: React.ReactNode) => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider>{children}</ThemeProvider></SafeAreaProvider>;
+
+test('real child Extras, filters, milestone Back, goal routes, heirlooms, help and summary browse without a SQLite write', async () => {
+  const { sqlite, driver } = database(), repository = new SaveRepository(driver); await repository.initialise(); await repository.import(JSON.stringify(archive));
+  mockStore = createGameStore({ repository: async () => repository, date: () => ({ year: 2026, month: 10, day: 20 }), id: () => 'unused' }); await mockStore.getState().bootstrap();
+  await mockStore.getState().dispatch({ type: 'acknowledge', resultId: mockStore.getState().world!.pending!.id });
+  const tables = sqlite.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name").all() as { name: string }[];
+  const rows = () => tables.map(({ name }) => ({ name, rows: sqlite.prepare('SELECT * FROM "' + name + '" ORDER BY rowid').all() }));
+  const before = rows(), worldBefore = encodeWorld(mockStore.getState().world!);
+  const view = render(frame(<Extras />));
+  expect(screen.getByText('3 / 45 earned in this life')).toBeOnTheScreen();
+  fireEvent.press(screen.getByRole('button', { name: /^Achievements\./ })); expect(router.push).toHaveBeenLastCalledWith('/achievements');
+  view.rerender(frame(<Achievements />));
+  fireEvent.press(screen.getByRole('tab', { name: 'Wealth' })); expect(screen.getByRole('tab', { name: 'Wealth', selected: true })).toBeOnTheScreen();
+  expect(screen.queryByText('Report Day')).toBeNull(); expect(screen.getByText('Keeping Your Word')).toBeOnTheScreen();
+  fireEvent.press(screen.getByRole('button', { name: /^Open for Business\./ })); expect(screen.getByText('1 business founded')).toBeOnTheScreen();
+  fireEvent.press(screen.getByRole('button', { name: 'Close' }));
+  fireEvent.press(screen.getByRole('button', { name: /^Clear the Balance\./ })); expect(screen.getByText('1 repaid personal loan')).toBeOnTheScreen();
+  fireEvent.press(screen.getByRole('button', { name: 'Close' }));
+  fireEvent.press(screen.getByRole('tab', { name: 'Special' }));
+  fireEvent.press(screen.getByRole('button', { name: /^Finding Your Rhythm\./ })); expect(screen.getByText('48 proficiency points')).toBeOnTheScreen();
+  fireEvent(screen.UNSAFE_getByType(Modal), 'requestClose'); expect(screen.queryByRole('button', { name: 'Close' })).toBeNull();
+  fireEvent.press(screen.getByRole('tab', { name: 'Life' })); fireEvent.press(screen.getByRole('button', { name: /^A Year of Practice\./ }));
+  expect(screen.getByText('24 attended months')).toBeOnTheScreen(); fireEvent.press(screen.getByRole('button', { name: 'Close' }));
+  view.rerender(frame(<Challenges />)); fireEvent.press(screen.getByRole('tab', { name: 'Medium' }));
+  expect(screen.queryByText('School Confidence')).toBeNull(); fireEvent.press(screen.getByRole('button', { name: /^Care and Craft\./ }));
+  expect(router.push).toHaveBeenLastCalledWith({ pathname: '/challenge/[id]', params: { id: 'care-and-craft' } });
+  mockParams = { id: 'care-and-craft' }; view.rerender(frame(<Challenge />));
+  expect(screen.getByRole('progressbar', { name: 'Overall progress' })).toHaveAccessibilityValue({ min: 0, max: 100, now: 98 });
+  expect(screen.getByText('1 / 2 goals completed')).toBeOnTheScreen(); fireEvent.press(screen.getByRole('button', { name: 'View Hobbies' })); expect(router.push).toHaveBeenLastCalledWith('/hobbies');
+  for (const [id, label, route] of [['working-confidence', 'Coworkers', '/coworkers'], ['supported-study', 'Scholarships', '/scholarships'], ['small-business', 'Business', '/business'], ['creative-consistency', 'Special Careers', '/special-careers'], ['patient-investor', 'Investments', '/investments'], ['paid-for-property', 'Assets', '/assets']]) {
+    mockParams = { id }; view.rerender(frame(<Challenge />));
+    fireEvent.press(screen.getAllByRole('button', { name: 'View ' + label })[0]); expect(router.push).toHaveBeenLastCalledWith(route);
+  }
+  mockParams = { id: 'unknown' }; view.rerender(frame(<Challenge />)); expect(screen.getByText('This challenge is unavailable.')).toBeOnTheScreen();
+  view.rerender(frame(<Heirlooms />)); expect(screen.getByText('No inherited possessions in your care yet.')).toBeOnTheScreen();
+  view.rerender(frame(<Help />)); expect(screen.getByText('A year at a time')).toBeOnTheScreen(); fireEvent.press(screen.getByRole('button', { name: 'Back' })); expect(router.back).toHaveBeenCalled();
+  mockParams = {}; view.rerender(frame(<LifeSummary />)); expect(screen.getByText('Riley Kelly')).toBeOnTheScreen(); expect(screen.getByText('Recorded milestones')).toBeOnTheScreen(); expect(screen.getByText('A Year of Practice')).toBeOnTheScreen();
+  expect(screen.queryByLabelText('Saving')).toBeNull(); expect(encodeWorld(mockStore.getState().world!)).toBe(worldBefore); expect(rows()).toEqual(before);
+  view.unmount(); sqlite.close();
+});

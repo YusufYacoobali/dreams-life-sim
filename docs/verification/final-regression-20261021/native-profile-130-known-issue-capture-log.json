@@ -1,0 +1,29 @@
+{
+  "complete": true,
+  "name": "profile-130-ready",
+  "events": [
+    {
+      "argv": [
+        "python3",
+        "/tmp/dreams-native-ui.py",
+        "inspect",
+        "/tmp/dreams-c38-native-captures/profile-130-ready/ui"
+      ],
+      "returncode": 0,
+      "stdout": "[('', 'Back', '[16,24][60,85]'), ('', 'Education. Latest qualification \u00b7 general. Secondary qualification', '[32,341][358,610]'), ('', 'Occupation. Unemployed', '[32,610][358,676]'), ('', 'Net Worth. $12,234.51', '[32,676][358,735]'), ('', 'Life', '[0,740][98,796]'), ('', 'Assets', '[98,740][195,796]'), ('', 'Relationships', '[195,740][293,796]'), ('', 'Activities', '[293,740][390,796]')]\n",
+      "stderr": "",
+      "at": "2026-10-21T08:31:26.295366+00:00"
+    },
+    {
+      "argv": [
+        "python3",
+        "/tmp/dreams-copy-native-db.py",
+        "/tmp/dreams-c38-native-captures/profile-130-ready/database"
+      ],
+      "returncode": 0,
+      "stdout": "/tmp/dreams-c38-native-captures/profile-130-ready/database\n",
+      "stderr": "",
+      "at": "2026-10-21T08:31:27.500282+00:00"
+    }
+  ]
+}

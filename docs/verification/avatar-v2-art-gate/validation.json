@@ -1,0 +1,44 @@
+{
+  "scope": "Avatar V2 Phase 1 audit and Phase 2 finished artwork gate only",
+  "status": "awaiting visual approval before implementation",
+  "wholeAdultPortraits": 16,
+  "sheetRGBA": true,
+  "sheetAlphaRange": [
+    0,
+    255
+  ],
+  "sourceSheetUnmodified": true,
+  "losslessDetailCrops": 4,
+  "cropPixelsMatchSource": true,
+  "automaticColourMasking": false,
+  "sourceRecolouring": false,
+  "productionCodeChanged": false,
+  "existingRendererChanged": false,
+  "saveSchemaChanged": false,
+  "uiLayoutsChanged": false,
+  "checks": [
+    "PNG source and crop integrity",
+    "Browser image decode",
+    "Desktop and mobile review layout",
+    "No external image requests",
+    "Node syntax checks for both review tools"
+  ],
+  "visualObservations": [
+    "Compact dark eyes replace the previous large round eye template.",
+    "Adult jaw and facial-plane proportions follow the original reference more closely.",
+    "Eyebrows, eyelids, noses and mouth curves vary across the sixteen whole illustrations.",
+    "Glasses, freckles, hair textures, necklines and clothing distinguish the reference-ordered cast.",
+    "Soft colour and illustrated shading are retained directly from generated artwork.",
+    "Light/dark profile-size and checkerboard previews show complete busts and alpha silhouettes."
+  ],
+  "notClaimed": [
+    "User visual approval",
+    "Registered modular production layers",
+    "New identity/outfit save data or migrations",
+    "New eight-age artwork",
+    "Production rendering integration",
+    "Native Android/iOS screenshots or frame-rate testing",
+    "Regression testing of a new renderer"
+  ],
+  "nextStep": "User approval of this sixteen-character artwork, then implement Phases 3\u20137 of design/avatar-v2/brief.txt."
+}

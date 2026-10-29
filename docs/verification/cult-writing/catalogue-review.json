@@ -1,0 +1,1687 @@
+{
+  "baseline": "512d3ac",
+  "stories": 56,
+  "choices": 168,
+  "review": [
+    {
+      "id": "phone-in-the-bell",
+      "source": "original",
+      "status": "reviewed-and-revised",
+      "titleChanged": true,
+      "setupChanged": false,
+      "choices": [
+        {
+          "id": "punish",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "You are still live"
+        },
+        {
+          "id": "relax",
+          "labelChanged": false,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Please like and subscribe"
+        },
+        {
+          "id": "broadcast",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Your new head of bells"
+        }
+      ]
+    },
+    {
+      "id": "attendance-letter",
+      "source": "original",
+      "status": "reviewed-and-revised",
+      "titleChanged": true,
+      "setupChanged": true,
+      "choices": [
+        {
+          "id": "relax",
+          "labelChanged": false,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Catch your shift"
+        },
+        {
+          "id": "help",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "The late congregation"
+        },
+        {
+          "id": "enforce",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "You cannot eat devotion"
+        }
+      ]
+    },
+    {
+      "id": "wrong-blue",
+      "source": "original",
+      "status": "reviewed-and-revised",
+      "titleChanged": true,
+      "setupChanged": false,
+      "choices": [
+        {
+          "id": "allow",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "A pardon for turquoise"
+        },
+        {
+          "id": "committee",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "The trouser amendment"
+        },
+        {
+          "id": "purity",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "A smaller congregation"
+        }
+      ]
+    },
+    {
+      "id": "borrowed-dream-diary",
+      "source": "original",
+      "status": "reviewed-and-revised",
+      "titleChanged": true,
+      "setupChanged": false,
+      "choices": [
+        {
+          "id": "accept",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Same dream, same typo"
+        },
+        {
+          "id": "rest",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "A lie-in from above"
+        },
+        {
+          "id": "show",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "The room gets the joke"
+        }
+      ]
+    },
+    {
+      "id": "kettle-stuck",
+      "source": "original",
+      "status": "reviewed-and-revised",
+      "titleChanged": true,
+      "setupChanged": false,
+      "choices": [
+        {
+          "id": "repair",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "A revelation in the filter"
+        },
+        {
+          "id": "tickets",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "The prophet is boiling"
+        },
+        {
+          "id": "retire",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Retired with a full kettle"
+        }
+      ]
+    },
+    {
+      "id": "lunar-exam",
+      "source": "original",
+      "status": "reviewed-and-revised",
+      "titleChanged": true,
+      "setupChanged": false,
+      "choices": [
+        {
+          "id": "lesson",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Back to the roundabout"
+        },
+        {
+          "id": "defend",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Celestial dashcam evidence"
+        },
+        {
+          "id": "own",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "An earthly problem"
+        }
+      ]
+    },
+    {
+      "id": "aura-invoice",
+      "source": "original",
+      "status": "reviewed-and-revised",
+      "titleChanged": true,
+      "setupChanged": false,
+      "choices": [
+        {
+          "id": "refund",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Your glow costs money"
+        },
+        {
+          "id": "explain",
+          "labelChanged": false,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Unplugged enlightenment"
+        },
+        {
+          "id": "sell",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Deluxe spiritual lighting"
+        }
+      ]
+    },
+    {
+      "id": "open-books-transfer",
+      "source": "original",
+      "status": "reviewed-and-revised",
+      "titleChanged": true,
+      "setupChanged": false,
+      "choices": [
+        {
+          "id": "explain",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Your name, their money"
+        },
+        {
+          "id": "fund",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "A payment they can use"
+        },
+        {
+          "id": "silence",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "The number stays up"
+        }
+      ]
+    },
+    {
+      "id": "double-door-rule",
+      "source": "original",
+      "status": "reviewed-and-revised",
+      "titleChanged": true,
+      "setupChanged": false,
+      "choices": [
+        {
+          "id": "open",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "One way through"
+        },
+        {
+          "id": "closed",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Members only, at last"
+        },
+        {
+          "id": "mystery",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "The doorway of doubt"
+        }
+      ]
+    },
+    {
+      "id": "retreat-roof",
+      "source": "original",
+      "status": "reviewed-and-revised",
+      "titleChanged": true,
+      "setupChanged": false,
+      "choices": [
+        {
+          "id": "repair",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "The bucket loses its job"
+        },
+        {
+          "id": "move",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "A smaller revelation"
+        },
+        {
+          "id": "sign",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "The heavens are leaking"
+        }
+      ]
+    },
+    {
+      "id": "second-chair",
+      "source": "original",
+      "status": "reviewed-and-revised",
+      "titleChanged": true,
+      "setupChanged": false,
+      "choices": [
+        {
+          "id": "share",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "A limit on the throne"
+        },
+        {
+          "id": "confront",
+          "labelChanged": false,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Two chairs, one argument"
+        },
+        {
+          "id": "expel",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Take your chair with you"
+        }
+      ]
+    },
+    {
+      "id": "treasurer-envelope",
+      "source": "original",
+      "status": "reviewed-and-revised",
+      "titleChanged": true,
+      "setupChanged": false,
+      "choices": [
+        {
+          "id": "audit",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "A visible envelope"
+        },
+        {
+          "id": "reward",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "A bonus with a name"
+        },
+        {
+          "id": "divert",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Your account, their funds"
+        }
+      ]
+    },
+    {
+      "id": "invisible-seat",
+      "source": "original",
+      "status": "reviewed-and-revised",
+      "titleChanged": true,
+      "setupChanged": false,
+      "choices": [
+        {
+          "id": "share",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "The committee can stand"
+        },
+        {
+          "id": "respect",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Six very important absences"
+        },
+        {
+          "id": "chairs",
+          "labelChanged": false,
+          "payoffChanged": true,
+          "journalChanged": true,
+          "resultTitle": "Room for the unseen"
+        }
+      ]
+    },
+    {
+      "id": "silent-snoring",
+      "source": "original",
+      "status": "reviewed-and-revised",
+      "titleChanged": true,
+      "setupChanged": false,
+      "choices": [
+        {
+          "id": "rest",
+          "labelChanged": false,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "A powerful nose"
+        },
+        {
+          "id": "laugh",
+          "labelChanged": false,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "A snore worth sharing"
+        },
+        {
+          "id": "shame",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Wide awake now"
+        }
+      ]
+    },
+    {
+      "id": "family-at-the-gate",
+      "source": "original",
+      "status": "reviewed-and-revised",
+      "titleChanged": true,
+      "setupChanged": false,
+      "choices": [
+        {
+          "id": "welcome",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "A less sacred introduction"
+        },
+        {
+          "id": "private",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "No audience for this"
+        },
+        {
+          "id": "deny",
+          "labelChanged": false,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "They knew you before"
+        }
+      ]
+    },
+    {
+      "id": "rival-breakfast",
+      "source": "original",
+      "status": "reviewed-and-revised",
+      "titleChanged": true,
+      "setupChanged": false,
+      "choices": [
+        {
+          "id": "compete",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "The dinner offensive"
+        },
+        {
+          "id": "talk",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Peace over breakfast"
+        },
+        {
+          "id": "sneer",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "A sermon about toast"
+        }
+      ]
+    },
+    {
+      "id": "documentary-clipboard",
+      "source": "original",
+      "status": "reviewed-and-revised",
+      "titleChanged": true,
+      "setupChanged": false,
+      "choices": [
+        {
+          "id": "open",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Very little to censor"
+        },
+        {
+          "id": "stage",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Keep rolling"
+        },
+        {
+          "id": "decline",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Outside looking in"
+        }
+      ]
+    },
+    {
+      "id": "soup-number",
+      "source": "original",
+      "status": "reviewed-and-revised",
+      "titleChanged": true,
+      "setupChanged": false,
+      "choices": [
+        {
+          "id": "serve",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Eight bowls. No lightning."
+        },
+        {
+          "id": "wait",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Hungry for a different cult"
+        },
+        {
+          "id": "help",
+          "labelChanged": false,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Soup wins"
+        }
+      ]
+    },
+    {
+      "id": "outsider-child",
+      "source": "original",
+      "status": "reviewed-and-revised",
+      "titleChanged": true,
+      "setupChanged": false,
+      "choices": [
+        {
+          "id": "correct",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "A smaller miracle"
+        },
+        {
+          "id": "test",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Your typo goes public"
+        },
+        {
+          "id": "invite",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "The critic gets a pen"
+        }
+      ]
+    },
+    {
+      "id": "robes-receipt",
+      "source": "original",
+      "status": "reviewed-and-revised",
+      "titleChanged": true,
+      "setupChanged": false,
+      "choices": [
+        {
+          "id": "alter",
+          "labelChanged": false,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Room to believe"
+        },
+        {
+          "id": "optional",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Normal clothes return"
+        },
+        {
+          "id": "blame",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Tailored disappointment"
+        }
+      ]
+    },
+    {
+      "id": "help-fund",
+      "source": "original",
+      "status": "reviewed-and-revised",
+      "titleChanged": true,
+      "setupChanged": true,
+      "choices": [
+        {
+          "id": "pay",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "The money reaches them"
+        },
+        {
+          "id": "listen",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "No miracle promised"
+        },
+        {
+          "id": "deny",
+          "labelChanged": false,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "An expensive lesson"
+        }
+      ]
+    },
+    {
+      "id": "garden-names",
+      "source": "original",
+      "status": "reviewed-and-revised",
+      "titleChanged": true,
+      "setupChanged": false,
+      "choices": [
+        {
+          "id": "quiet",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Time to remember"
+        },
+        {
+          "id": "support",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Help without an audience"
+        },
+        {
+          "id": "public",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "They asked for privacy"
+        }
+      ]
+    },
+    {
+      "id": "early-alarm",
+      "source": "original",
+      "status": "reviewed-and-revised",
+      "titleChanged": true,
+      "setupChanged": false,
+      "choices": [
+        {
+          "id": "reset",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "A later awakening"
+        },
+        {
+          "id": "silent",
+          "labelChanged": false,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Enlightenment on mute"
+        },
+        {
+          "id": "louder",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Your name carries"
+        }
+      ]
+    },
+    {
+      "id": "future-message",
+      "source": "original",
+      "status": "reviewed-and-revised",
+      "titleChanged": true,
+      "setupChanged": false,
+      "choices": [
+        {
+          "id": "decline",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Tomorrow can wait"
+        },
+        {
+          "id": "buy",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "A vision in high definition"
+        },
+        {
+          "id": "shame",
+          "labelChanged": false,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "A prophecy at their expense"
+        }
+      ]
+    },
+    {
+      "id": "merchandise-star",
+      "source": "original",
+      "status": "reviewed-and-revised",
+      "titleChanged": true,
+      "setupChanged": false,
+      "choices": [
+        {
+          "id": "modest",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "A limited revelation"
+        },
+        {
+          "id": "credit",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "The face behind the mugs"
+        },
+        {
+          "id": "reject",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "The final edition"
+        }
+      ]
+    },
+    {
+      "id": "plain-living-photo",
+      "source": "original",
+      "status": "reviewed-and-revised",
+      "titleChanged": true,
+      "setupChanged": false,
+      "choices": [
+        {
+          "id": "share",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "A seat for the people"
+        },
+        {
+          "id": "relax",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Comfort is permitted"
+        },
+        {
+          "id": "rank",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "A well-cushioned argument"
+        }
+      ]
+    },
+    {
+      "id": "seven-second-silence",
+      "source": "original",
+      "status": "reviewed-and-revised",
+      "titleChanged": true,
+      "setupChanged": false,
+      "choices": [
+        {
+          "id": "honest",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Off the script"
+        },
+        {
+          "id": "credit",
+          "labelChanged": false,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "A different voice"
+        },
+        {
+          "id": "planned",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "A very convenient revelation"
+        }
+      ]
+    },
+    {
+      "id": "unexpected-crowd",
+      "source": "original",
+      "status": "reviewed-and-revised",
+      "titleChanged": true,
+      "setupChanged": false,
+      "choices": [
+        {
+          "id": "practical",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Room for the believers"
+        },
+        {
+          "id": "later",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Come back in smaller numbers"
+        },
+        {
+          "id": "miracle",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Blessed are the bursting"
+        }
+      ]
+    },
+    {
+      "id": "red-tagged-exit",
+      "source": "dramatic",
+      "status": "reviewed-and-revised",
+      "titleChanged": true,
+      "setupChanged": true,
+      "choices": [
+        {
+          "id": "make-safe",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "A less fatal throne"
+        },
+        {
+          "id": "cancel",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "No one takes a seat"
+        },
+        {
+          "id": "blame",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Your chair, their fault"
+        }
+      ]
+    },
+    {
+      "id": "payout-on-projector",
+      "source": "dramatic",
+      "status": "reviewed-and-revised",
+      "titleChanged": true,
+      "setupChanged": true,
+      "choices": [
+        {
+          "id": "answer",
+          "labelChanged": false,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Now show your working"
+        },
+        {
+          "id": "punish",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "They take the evidence"
+        },
+        {
+          "id": "envelope",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "One more transfer"
+        }
+      ]
+    },
+    {
+      "id": "second-microphone",
+      "source": "dramatic",
+      "status": "reviewed-and-revised",
+      "titleChanged": true,
+      "setupChanged": false,
+      "choices": [
+        {
+          "id": "listen",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Still your stage. For now."
+        },
+        {
+          "id": "expel",
+          "labelChanged": false,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "A following walks out"
+        },
+        {
+          "id": "ridicule",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "A laugh they will remember"
+        }
+      ]
+    },
+    {
+      "id": "last-bus-out",
+      "source": "dramatic",
+      "status": "reviewed-and-revised",
+      "titleChanged": true,
+      "setupChanged": true,
+      "choices": [
+        {
+          "id": "release",
+          "labelChanged": false,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "They can catch the bus"
+        },
+        {
+          "id": "transport",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "A lift without a pardon"
+        },
+        {
+          "id": "loyal",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "The bus wins"
+        }
+      ]
+    },
+    {
+      "id": "donor-wants-the-altar",
+      "source": "dramatic",
+      "status": "reviewed-and-revised",
+      "titleChanged": true,
+      "setupChanged": false,
+      "choices": [
+        {
+          "id": "accept",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Please thank your sponsor"
+        },
+        {
+          "id": "small",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": true,
+          "resultTitle": "A smaller cheque"
+        },
+        {
+          "id": "refuse",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "The donor keeps the money"
+        }
+      ]
+    },
+    {
+      "id": "rival-buys-the-breakfast",
+      "source": "dramatic",
+      "status": "reviewed-and-revised",
+      "titleChanged": true,
+      "setupChanged": false,
+      "choices": [
+        {
+          "id": "support",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Thanks with a payment"
+        },
+        {
+          "id": "reconcile",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "An opening over breakfast"
+        },
+        {
+          "id": "traitor",
+          "labelChanged": false,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "You finish the recruitment"
+        }
+      ]
+    },
+    {
+      "id": "parents-at-the-gates",
+      "source": "dramatic",
+      "status": "reviewed-and-revised",
+      "titleChanged": true,
+      "setupChanged": true,
+      "choices": [
+        {
+          "id": "open",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "The families come inside"
+        },
+        {
+          "id": "host",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Visitors on your terms"
+        },
+        {
+          "id": "guard",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Your follower takes the heat"
+        }
+      ]
+    },
+    {
+      "id": "kettle-ownership-war",
+      "source": "dramatic",
+      "status": "reviewed-and-revised",
+      "titleChanged": true,
+      "setupChanged": false,
+      "choices": [
+        {
+          "id": "settle",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "The kettles keep their counsel"
+        },
+        {
+          "id": "broadcast",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "A new voice in the dispute"
+        },
+        {
+          "id": "purge",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "The receipts leave with them"
+        }
+      ]
+    },
+    {
+      "id": "blackout-countdown",
+      "source": "dramatic",
+      "status": "reviewed-and-revised",
+      "titleChanged": true,
+      "setupChanged": false,
+      "choices": [
+        {
+          "id": "explain",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "An electrician ends the world"
+        },
+        {
+          "id": "cancel",
+          "labelChanged": false,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "The end is postponed"
+        },
+        {
+          "id": "miracle",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "A very public power cut"
+        }
+      ]
+    },
+    {
+      "id": "treasurer-last-warning",
+      "source": "dramatic",
+      "status": "reviewed-and-revised",
+      "titleChanged": true,
+      "setupChanged": false,
+      "choices": [
+        {
+          "id": "pay",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "They keep the keys"
+        },
+        {
+          "id": "change",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Poverty is not the job"
+        },
+        {
+          "id": "expel",
+          "labelChanged": false,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Find your own treasurer"
+        }
+      ]
+    },
+    {
+      "id": "list-of-doubters",
+      "source": "dramatic",
+      "status": "reviewed-and-revised",
+      "titleChanged": true,
+      "setupChanged": false,
+      "choices": [
+        {
+          "id": "destroy",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Questions without a blacklist"
+        },
+        {
+          "id": "challenge",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Read the names back"
+        },
+        {
+          "id": "back",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Your congregation splits"
+        }
+      ]
+    },
+    {
+      "id": "opening-deposit",
+      "source": "dramatic",
+      "status": "reviewed-and-revised",
+      "titleChanged": true,
+      "setupChanged": false,
+      "choices": [
+        {
+          "id": "fund",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "At least the food arrives"
+        },
+        {
+          "id": "scale",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "A smaller serving of destiny"
+        },
+        {
+          "id": "blame",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Your apology names someone else"
+        }
+      ]
+    },
+    {
+      "id": "activity-street-question",
+      "source": "activity",
+      "status": "reviewed-and-revised",
+      "titleChanged": true,
+      "setupChanged": false,
+      "choices": [
+        {
+          "id": "answer",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "No collection for this answer"
+        },
+        {
+          "id": "flyer",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "The price of enlightenment"
+        },
+        {
+          "id": "humiliate",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "They were handing out leaflets"
+        }
+      ]
+    },
+    {
+      "id": "activity-comments-escape",
+      "source": "activity",
+      "status": "reviewed-and-revised",
+      "titleChanged": true,
+      "setupChanged": false,
+      "choices": [
+        {
+          "id": "correct",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "No spin cycle promised"
+        },
+        {
+          "id": "reply",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "The repair questions continue"
+        },
+        {
+          "id": "boost",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Your new service department"
+        }
+      ]
+    },
+    {
+      "id": "activity-open-door",
+      "source": "activity",
+      "status": "reviewed-and-revised",
+      "titleChanged": true,
+      "setupChanged": false,
+      "choices": [
+        {
+          "id": "questions",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "They read the small print"
+        },
+        {
+          "id": "meeting",
+          "labelChanged": false,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "They can finish their questions"
+        },
+        {
+          "id": "door",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "A closing statement"
+        }
+      ]
+    },
+    {
+      "id": "activity-referral-table",
+      "source": "activity",
+      "status": "reviewed-and-revised",
+      "titleChanged": true,
+      "setupChanged": false,
+      "choices": [
+        {
+          "id": "welcome",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Pass the food, not the forms"
+        },
+        {
+          "id": "supper",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "A second helping"
+        },
+        {
+          "id": "close",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Friends leave before dessert"
+        }
+      ]
+    },
+    {
+      "id": "activity-stunt-sponsor",
+      "source": "activity",
+      "status": "reviewed-and-revised",
+      "titleChanged": true,
+      "setupChanged": false,
+      "choices": [
+        {
+          "id": "decline",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "No divine discount code"
+        },
+        {
+          "id": "honest",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "A sponsor in its place"
+        },
+        {
+          "id": "brand",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Sleep on the revelation"
+        }
+      ]
+    },
+    {
+      "id": "activity-sermon-question",
+      "source": "activity",
+      "status": "reviewed-and-revised",
+      "titleChanged": true,
+      "setupChanged": false,
+      "choices": [
+        {
+          "id": "doubt",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "A dangerous admission"
+        },
+        {
+          "id": "debate",
+          "labelChanged": false,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "You have a reply slot"
+        },
+        {
+          "id": "faith",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "No more questions from them"
+        }
+      ]
+    },
+    {
+      "id": "activity-sermon-crown",
+      "source": "activity",
+      "status": "reviewed-and-revised",
+      "titleChanged": true,
+      "setupChanged": false,
+      "choices": [
+        {
+          "id": "share",
+          "labelChanged": false,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "A second voice on air"
+        },
+        {
+          "id": "private",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Let me finish first"
+        },
+        {
+          "id": "cut",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Your microphone. Their silence."
+        }
+      ]
+    },
+    {
+      "id": "activity-sermon-audit",
+      "source": "activity",
+      "status": "reviewed-and-revised",
+      "titleChanged": true,
+      "setupChanged": false,
+      "choices": [
+        {
+          "id": "plain",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Rent is less mysterious"
+        },
+        {
+          "id": "publish",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Bring your questions"
+        },
+        {
+          "id": "secret",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "The notebooks stay open"
+        }
+      ]
+    },
+    {
+      "id": "activity-dream-copy",
+      "source": "activity",
+      "status": "reviewed-and-revised",
+      "titleChanged": true,
+      "setupChanged": false,
+      "choices": [
+        {
+          "id": "credit",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Joint celestial authorship"
+        },
+        {
+          "id": "record",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Compare the revelations"
+        },
+        {
+          "id": "leader",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "The leader dreamed it first"
+        }
+      ]
+    },
+    {
+      "id": "activity-quiet-alarm",
+      "source": "activity",
+      "status": "reviewed-and-revised",
+      "titleChanged": true,
+      "setupChanged": false,
+      "choices": [
+        {
+          "id": "laugh",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "A very clear message"
+        },
+        {
+          "id": "help",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "An answered shopping list"
+        },
+        {
+          "id": "sign",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "A revelation in multipacks"
+        }
+      ]
+    },
+    {
+      "id": "activity-supper-seats",
+      "source": "activity",
+      "status": "reviewed-and-revised",
+      "titleChanged": true,
+      "setupChanged": false,
+      "choices": [
+        {
+          "id": "more",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Dinner beats the apology"
+        },
+        {
+          "id": "share",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Rank comes with an apron"
+        },
+        {
+          "id": "rank",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Full leaders, hungry guests"
+        }
+      ]
+    },
+    {
+      "id": "activity-starlight-camera",
+      "source": "activity",
+      "status": "reviewed-and-revised",
+      "titleChanged": true,
+      "setupChanged": false,
+      "choices": [
+        {
+          "id": "correct",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "A scheduled miracle"
+        },
+        {
+          "id": "learn",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Learn your lights"
+        },
+        {
+          "id": "chosen",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "A divine baggage allowance"
+        }
+      ]
+    },
+    {
+      "id": "activity-open-house-visitor",
+      "source": "activity",
+      "status": "reviewed-and-revised",
+      "titleChanged": true,
+      "setupChanged": false,
+      "choices": [
+        {
+          "id": "stay",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "The notebook stays open"
+        },
+        {
+          "id": "host",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "They let guests finish"
+        },
+        {
+          "id": "ban",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "The notes go online"
+        }
+      ]
+    },
+    {
+      "id": "activity-grand-chair",
+      "source": "activity",
+      "status": "reviewed-and-revised",
+      "titleChanged": true,
+      "setupChanged": false,
+      "choices": [
+        {
+          "id": "discuss",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "This needs a smaller audience"
+        },
+        {
+          "id": "platform",
+          "labelChanged": false,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "A following with a microphone"
+        },
+        {
+          "id": "remove",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "A chair leaves the stage"
+        }
+      ]
+    },
+    {
+      "id": "activity-member-warning",
+      "source": "activity",
+      "status": "reviewed-and-revised",
+      "titleChanged": true,
+      "setupChanged": false,
+      "choices": [
+        {
+          "id": "listen",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "They finish the sentence"
+        },
+        {
+          "id": "support",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Help after the argument"
+        },
+        {
+          "id": "leave",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "You make the decision"
+        }
+      ]
+    },
+    {
+      "id": "activity-member-credit",
+      "source": "activity",
+      "status": "reviewed-and-revised",
+      "titleChanged": true,
+      "setupChanged": false,
+      "choices": [
+        {
+          "id": "credit",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Say their name"
+        },
+        {
+          "id": "shared",
+          "labelChanged": false,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Everyone gets a mention"
+        },
+        {
+          "id": "mine",
+          "labelChanged": true,
+          "payoffChanged": true,
+          "journalChanged": false,
+          "resultTitle": "Your name on their work"
+        }
+      ]
+    }
+  ]
+}

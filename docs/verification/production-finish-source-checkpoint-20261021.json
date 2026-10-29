@@ -1,0 +1,578 @@
+{
+  "format": "dreams-working-source-checkpoint-v1",
+  "complete": false,
+  "status": "working-current-final-acceptance-running",
+  "recordedAt": "2026-10-21T08:03:35.102457+00:00",
+  "gameplaySourceCommit": "33b6a5fcb0aae73dfc235a15394b34d8afda00cc",
+  "versions": {
+    "world": 38,
+    "engine": 39,
+    "content": 13,
+    "database": 18,
+    "checkpoint": "v4"
+  },
+  "source": "production-finish-source-checkpoint-20261021/074-dreams-production-finish-accepted-source.json",
+  "combinedGamePersistenceSourceHash": "d72d52f3d6a6e312e490a525c0638638af6c5bb27449ffb8a0dd5833e10acbc0",
+  "features": [
+    "Bounded NPC retirement moves",
+    "Descriptive appearance/Profile semantics",
+    "Actual relevant paid interview experience",
+    "Busy-year optional-story pacing",
+    "Fourteen new special-career scenes;265situations/795choices",
+    "Selected category returns nested pages to its root",
+    "Appearance-neutral camera result and explicit original-copy bridge"
+  ],
+  "retirementAccessibility": {
+    "source": "dfd9a74046479672967868dc21ac6acfda734592",
+    "regression": "2600/204passed1685.363s",
+    "focused": "113/14passed",
+    "types": "app/alltestspassed",
+    "hermes": "329runtimefiles/platform",
+    "annual": "same120seeds0..119passed877.428s",
+    "actions": "14cases70warm0fullunpack",
+    "native": "pending"
+  },
+  "productionFinish": {
+    "initialFull": {
+      "source": "66ec642e4c9a9332eac322bd8fb12e0a6a3d8e87",
+      "passed": 2683,
+      "failed": 3,
+      "suites": 211,
+      "reason": "Stale callback negative error-order assertions, corrected in one test-only file"
+    },
+    "focused": "18/3passed27.291s",
+    "types": "app/alltestspassed",
+    "copyCorrection": "87/4passed;334runtimefiles/platform; one literal change only",
+    "actions": "14cases70warm0fullunpack at runtime-equivalent3224; explicit final test-only bridge",
+    "full": {
+      "status": "running",
+      "sourceCommit": "33b6a5fcb0aae73dfc235a15394b34d8afda00cc",
+      "startedAt": "2026-10-21T07:49:23.445994+00:00"
+    },
+    "annual": {
+      "status": "running",
+      "sourceCommit": "33b6a5fcb0aae73dfc235a15394b34d8afda00cc",
+      "startedAt": "2026-10-21T07:51:46.890063+00:00"
+    },
+    "professional": {
+      "status": "running",
+      "sourceCommit": "33b6a5fcb0aae73dfc235a15394b34d8afda00cc",
+      "startedAt": "2026-10-21T07:55:51.609643+00:00"
+    },
+    "otherScenarios": "pending"
+  },
+  "editorial": "All265entries reviewed byCodex, ledger ../editorial/c39-20261021/REPORT.md; sparse/empty thematic cells explicit; not external-human/playtest acceptance",
+  "priorOpening": {
+    "record": "production-gaps-20261021.json",
+    "status": "complete for declared C37scope",
+    "reviewedPNGXMLPairs": 27,
+    "actualColdReopens": 9
+  },
+  "artifactDiagnostic": [
+    {
+      "expected": {
+        "file": "/tmp/dreams-npc-retirement-move-fixed-journey.json",
+        "bytes": 2562,
+        "sha256": "5af70cffbd0c2dc6ff300d2c143a3a16238161b0938cf436f05f9fa458da8b00"
+      },
+      "status": "historical-bytes-unavailable",
+      "reason": "npc-moves.test.ts159 unconditionally writes this fixed temporary report path in full runs; later tests overwrote its bytes. The old report origin cannot be proved from its hash alone. The old pin is unavailable and is not relabelled or reconstructed; other63manifest files are exact."
+    }
+  ],
+  "artifacts": {
+    "production-finish-source-checkpoint-20261021/001-dreams-appearance-semantic-app-types.out": {
+      "original": "/tmp/dreams-appearance-semantic-app-types.out",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "production-finish-source-checkpoint-20261021/002-dreams-appearance-semantic-focused.out": {
+      "original": "/tmp/dreams-appearance-semantic-focused.out",
+      "bytes": 480,
+      "sha256": "5554a6fb97c1071358dbc46ec67da549d186af5b0f0f108df1289eb608d02542"
+    },
+    "production-finish-source-checkpoint-20261021/003-dreams-appearance-semantic-test-types.json": {
+      "original": "/tmp/dreams-appearance-semantic-test-types.json",
+      "bytes": 664,
+      "sha256": "ea5769f2293099bfb02aa54219e38171dd2af91dda99f7125f8559a8ace8ded8"
+    },
+    "production-finish-source-checkpoint-20261021/004-dreams-appearance-semantic-test-types.out": {
+      "original": "/tmp/dreams-appearance-semantic-test-types.out",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "production-finish-source-checkpoint-20261021/005-dreams-c37-verify-export.py.txt": {
+      "original": "/tmp/dreams-c37-verify-export.py",
+      "bytes": 3350,
+      "sha256": "5e779ed0ac1f7d20df1293dee07a4deff67e76c859208f986c2beffc3b11ead8"
+    },
+    "production-finish-source-checkpoint-20261021/006-dreams-c38-action-gate-v2.py.txt": {
+      "original": "/tmp/dreams-c38-action-gate-v2.py",
+      "bytes": 18576,
+      "sha256": "bac1ee0b58fa870559702a6664c9c3973d0b66ce6259780bd2dc35caa336ce0d"
+    },
+    "production-finish-source-checkpoint-20261021/007-dreams-c38-actions-ready-template.json": {
+      "original": "/tmp/dreams-c38-actions-ready-template.json",
+      "bytes": 1094,
+      "sha256": "5b118a0fd5476bc60a2f14110f063d1633f18bd99ef1f6d299e4a89fa424e03b"
+    },
+    "production-finish-source-checkpoint-20261021/008-dreams-c38-c39-action-gate-readiness.md": {
+      "original": "/tmp/dreams-c38-c39-action-gate-readiness.md",
+      "bytes": 6150,
+      "sha256": "61ddd07f355d0b59083e25dab01abdebada86f44b995da2cbe633c8d56ce3e23"
+    },
+    "production-finish-source-checkpoint-20261021/009-dreams-c38-c39-action-preparation.json": {
+      "original": "/tmp/dreams-c38-c39-action-preparation.json",
+      "bytes": 4480,
+      "sha256": "c59d209d29bc4a3411d223efd45c277f40f0d6e3d26f62a5aaba7d9854e6d92d"
+    },
+    "production-finish-source-checkpoint-20261021/010-dreams-c38-final-merge-root-review.md": {
+      "original": "/tmp/dreams-c38-final-merge-root-review.md",
+      "bytes": 1074,
+      "sha256": "e874c9eef52b3db16bb267f9f41fdbdfe47daf16e79eacbade46fdd997f7df49"
+    },
+    "production-finish-source-checkpoint-20261021/011-dreams-c38-migration-prepare-syntax-final.out": {
+      "original": "/tmp/dreams-c38-migration-prepare-syntax-final.out",
+      "bytes": 215,
+      "sha256": "1ee5182126ee709a25b08c4837e6befaa2b17c56d35e3cbb16f648a91afe2e38"
+    },
+    "production-finish-source-checkpoint-20261021/012-dreams-c38-migration-prepare-syntax.out": {
+      "original": "/tmp/dreams-c38-migration-prepare-syntax.out",
+      "bytes": 215,
+      "sha256": "7577b481c0f4c3e6230039bf0a5b7424a3c4bc8f3a43a1a3f44b846ff7c31cc0"
+    },
+    "production-finish-source-checkpoint-20261021/013-dreams-c38-runtime-union-tsconfig.json": {
+      "original": "/tmp/dreams-c38-runtime-union-tsconfig.json",
+      "bytes": 617,
+      "sha256": "29a1a930aa5d983af351a301d409e8fe6d805357536d78f2c14d3aae6f604ee5"
+    },
+    "production-finish-source-checkpoint-20261021/014-dreams-c38-runtime-union-types-initial.out": {
+      "original": "/tmp/dreams-c38-runtime-union-types-initial.out",
+      "bytes": 165,
+      "sha256": "22d754e33e5e414d820e237c9e477c81ec8db495c45ab51f7665351a89a3c783"
+    },
+    "production-finish-source-checkpoint-20261021/015-dreams-c38-runtime-union-types.out": {
+      "original": "/tmp/dreams-c38-runtime-union-types.out",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "production-finish-source-checkpoint-20261021/016-dreams-c38-test-adapters-files.txt": {
+      "original": "/tmp/dreams-c38-test-adapters-files.txt",
+      "bytes": 1606,
+      "sha256": "becff265c84229db27aaf98c62cf20514521416d9e7f773d3ae9e1e05fb11dc8"
+    },
+    "production-finish-source-checkpoint-20261021/017-dreams-c38-test-adapters-syntax.out": {
+      "original": "/tmp/dreams-c38-test-adapters-syntax.out",
+      "bytes": 107,
+      "sha256": "b754124858ff52ed4076eb71962babac132ba48473b3c2720c06c61fcef70b4c"
+    },
+    "production-finish-source-checkpoint-20261021/018-dreams-c38-ui-release-finish-slice.md": {
+      "original": "/tmp/dreams-c38-ui-release-finish-slice.md",
+      "bytes": 7606,
+      "sha256": "a1a385f8736e60f06cee602a81d9c0314398c5fef9466a67da13b4f2c78ed555"
+    },
+    "production-finish-source-checkpoint-20261021/019-dreams-c38-verify-export.py.txt": {
+      "original": "/tmp/dreams-c38-verify-export.py",
+      "bytes": 3350,
+      "sha256": "5e779ed0ac1f7d20df1293dee07a4deff67e76c859208f986c2beffc3b11ead8"
+    },
+    "production-finish-source-checkpoint-20261021/020-dreams-npc-retirement-b041177-money-review.md": {
+      "original": "/tmp/dreams-npc-retirement-b041177-money-review.md",
+      "bytes": 5076,
+      "sha256": "a04bcc9b12b5478973b7b7e921d2537f25e9c7063e54df471e15537bf7f92c22"
+    },
+    "production-finish-source-checkpoint-20261021/021-dreams-npc-retirement-money-wip-review.md": {
+      "original": "/tmp/dreams-npc-retirement-money-wip-review.md",
+      "bytes": 2925,
+      "sha256": "86a66ca52a7dff766137625861da41c5ed34442de2b72af9722e5a3df63075b9"
+    },
+    "production-finish-source-checkpoint-20261021/022-dreams-npc-retirement-moves-tests-final.out": {
+      "original": "/tmp/dreams-npc-retirement-moves-tests-final.out",
+      "bytes": 461,
+      "sha256": "96a3c714e9804a2657aea709fc2792f01d6853efdd85b24c7bb0871d1e427ccd"
+    },
+    "production-finish-source-checkpoint-20261021/023-dreams-npc-retirement-moves-tests-initial.out": {
+      "original": "/tmp/dreams-npc-retirement-moves-tests-initial.out",
+      "bytes": 18471,
+      "sha256": "d567a14b467ab441e2e191822fc845c618beaa9b062a04d003884c6b0ff39039"
+    },
+    "production-finish-source-checkpoint-20261021/024-dreams-npc-retirement-moves-tests-raw-backup-final.out": {
+      "original": "/tmp/dreams-npc-retirement-moves-tests-raw-backup-final.out",
+      "bytes": 460,
+      "sha256": "270422bd24024734af5aaf107bb1f0e19223517e904dbf946a2489016b18938b"
+    },
+    "production-finish-source-checkpoint-20261021/025-dreams-npc-retirement-moves-tests-second.out": {
+      "original": "/tmp/dreams-npc-retirement-moves-tests-second.out",
+      "bytes": 447,
+      "sha256": "f512a473ee14943f3b7b87d0d0ada28d73b422eae4e05b32df059ce59793bd4d"
+    },
+    "production-finish-source-checkpoint-20261021/026-dreams-npc-retirement-moves-types-final.out": {
+      "original": "/tmp/dreams-npc-retirement-moves-types-final.out",
+      "bytes": 90,
+      "sha256": "543932f7a867cac23b25fe5912a2a0b0ab563539fbb8a121f7fb83b608c95309"
+    },
+    "production-finish-source-checkpoint-20261021/027-dreams-retirement-accessibility-final-commit.bin": {
+      "original": "/tmp/dreams-retirement-accessibility-final-commit.bin",
+      "bytes": 308,
+      "sha256": "a158c70e4de9ebca58374ca1f86a4cde574d441117d205b546617871cc26b8fc"
+    },
+    "production-finish-source-checkpoint-20261021/028-dreams-retirement-accessibility-final-comparison.json": {
+      "original": "/tmp/dreams-retirement-accessibility-final-comparison.json",
+      "bytes": 873,
+      "sha256": "bc0812078ae34b5a54976ec050aad82f079cd1b250197fc1f88a4c3cef66cac0"
+    },
+    "production-finish-source-checkpoint-20261021/029-dreams-retirement-accessibility-final-export-proof.json": {
+      "original": "/tmp/dreams-retirement-accessibility-final-export-proof.json",
+      "bytes": 73253,
+      "sha256": "df0cc4a21f2d50c285c58406da051aa2b2ca2daadf4fd8b409735a76967c5fe0"
+    },
+    "production-finish-source-checkpoint-20261021/030-dreams-retirement-accessibility-final-export-receipt.json": {
+      "original": "/tmp/dreams-retirement-accessibility-final-export-receipt.json",
+      "bytes": 1287,
+      "sha256": "5b9e6b4a6fef41f70ec2b3ea64b73ced8cf32b605b01465a30d0d0d46b8e1df2"
+    },
+    "production-finish-source-checkpoint-20261021/031-dreams-retirement-accessibility-final-export-verification.out": {
+      "original": "/tmp/dreams-retirement-accessibility-final-export-verification.out",
+      "bytes": 363,
+      "sha256": "5ece9c45614dce7ba4e1c979cfc13051f3b8f59b079220be1c64fd75311746cf"
+    },
+    "production-finish-source-checkpoint-20261021/032-dreams-retirement-accessibility-final-export.out": {
+      "original": "/tmp/dreams-retirement-accessibility-final-export.out",
+      "bytes": 2758,
+      "sha256": "a5e30f2f6f0651d8a721b527b4a2a2c08020e1b7a3964a8c3468288b1042aff0"
+    },
+    "production-finish-source-checkpoint-20261021/033-dreams-retirement-accessibility-final-focused-receipt.json": {
+      "original": "/tmp/dreams-retirement-accessibility-final-focused-receipt.json",
+      "bytes": 1827,
+      "sha256": "44052470f9a70f73fa50e8c33fda5fb13fe159e5e4d7c373e4c1f5cb8a3d3cd9"
+    },
+    "production-finish-source-checkpoint-20261021/034-dreams-retirement-accessibility-final-focused.out": {
+      "original": "/tmp/dreams-retirement-accessibility-final-focused.out",
+      "bytes": 1473,
+      "sha256": "4aa280f110c5bdde7e55c4a1add0d8ba837a57eed2f328195de500a4a19d35ea"
+    },
+    "production-finish-source-checkpoint-20261021/035-dreams-retirement-accessibility-final-head.txt": {
+      "original": "/tmp/dreams-retirement-accessibility-final-head.txt",
+      "bytes": 41,
+      "sha256": "945553e2ae5cb2fe5882fdfd5a24295ccbad0f2c50594c973c1a13e872c5ba42"
+    },
+    "production-finish-source-checkpoint-20261021/036-dreams-retirement-accessibility-final-readiness.md": {
+      "original": "/tmp/dreams-retirement-accessibility-final-readiness.md",
+      "bytes": 2750,
+      "sha256": "ecf3f38d4ae0e3c844e04d75bf2b82d9f585c78a8fe46bd5eaaaaa506315d2cc"
+    },
+    "production-finish-source-checkpoint-20261021/037-dreams-retirement-accessibility-final-regression-receipt.json": {
+      "original": "/tmp/dreams-retirement-accessibility-final-regression-receipt.json",
+      "bytes": 1115,
+      "sha256": "946c09825fd3a4134c87f4f6cbff8071d4cd3dc2e805c87683a8494ec9e98f74"
+    },
+    "production-finish-source-checkpoint-20261021/038-dreams-retirement-accessibility-final-regression.out": {
+      "original": "/tmp/dreams-retirement-accessibility-final-regression.out",
+      "bytes": 16680,
+      "sha256": "008be63b6ed0be36ce8c5ac41fe3cd711e2ed080fa5a6f40f3a907f603bc40a7"
+    },
+    "production-finish-source-checkpoint-20261021/039-dreams-retirement-accessibility-final-source-receipt.json": {
+      "original": "/tmp/dreams-retirement-accessibility-final-source-receipt.json",
+      "bytes": 403,
+      "sha256": "b89cab7fa4c63f009548183039e9d650652f852fb954292c74c7ed9bb5864c85"
+    },
+    "production-finish-source-checkpoint-20261021/040-dreams-retirement-accessibility-final-source.json": {
+      "original": "/tmp/dreams-retirement-accessibility-final-source.json",
+      "bytes": 73358,
+      "sha256": "4c1c72cfea3d338984c5112523209c900950d53f76ccf4c6dd0a30615d92fcf7"
+    },
+    "production-finish-source-checkpoint-20261021/041-dreams-retirement-accessibility-final-status.txt": {
+      "original": "/tmp/dreams-retirement-accessibility-final-status.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "production-finish-source-checkpoint-20261021/042-dreams-retirement-accessibility-final-tree.bin": {
+      "original": "/tmp/dreams-retirement-accessibility-final-tree.bin",
+      "bytes": 203015,
+      "sha256": "3d4eee45a3e665abfc7e7495b4354316cb21e6514db063ef22c74ecb970a4ed6"
+    },
+    "production-finish-source-checkpoint-20261021/043-dreams-retirement-accessibility-final-types-receipt.json": {
+      "original": "/tmp/dreams-retirement-accessibility-final-types-receipt.json",
+      "bytes": 1071,
+      "sha256": "0271e5ec47059497976e3bb7a9f6c0c28559b065fb16ec69f8781dad186264b7"
+    },
+    "production-finish-source-checkpoint-20261021/044-dreams-retirement-accessibility-final-types.out": {
+      "original": "/tmp/dreams-retirement-accessibility-final-types.out",
+      "bytes": 90,
+      "sha256": "543932f7a867cac23b25fe5912a2a0b0ab563539fbb8a121f7fb83b608c95309"
+    },
+    "production-finish-source-checkpoint-20261021/045-dreams-retirement-accessibility-initial-approved-commits.txt": {
+      "original": "/tmp/dreams-retirement-accessibility-initial-approved-commits.txt",
+      "bytes": 970,
+      "sha256": "4fb52885a179f9a82b674785fd99081148b9396ed78981c556e0b749a673dbb0"
+    },
+    "production-finish-source-checkpoint-20261021/046-dreams-retirement-accessibility-initial-changes.txt": {
+      "original": "/tmp/dreams-retirement-accessibility-initial-changes.txt",
+      "bytes": 2408,
+      "sha256": "02fffdc36c6a55c5ee06c6b122832f70962451c3cb0ab905104189c5636ae7c9"
+    },
+    "production-finish-source-checkpoint-20261021/047-dreams-retirement-accessibility-initial-commit.bin": {
+      "original": "/tmp/dreams-retirement-accessibility-initial-commit.bin",
+      "bytes": 257,
+      "sha256": "6defd924960fb09cec0cb1f20a65656dd733f0d46d5f28ace694a42958a19051"
+    },
+    "production-finish-source-checkpoint-20261021/048-dreams-retirement-accessibility-initial-comparison.json": {
+      "original": "/tmp/dreams-retirement-accessibility-initial-comparison.json",
+      "bytes": 16254,
+      "sha256": "22108bbf03835544ca6fc50ae6ba548dc863eb9426afff24f49bbe3af6efbc5e"
+    },
+    "production-finish-source-checkpoint-20261021/049-dreams-retirement-accessibility-initial-head.txt": {
+      "original": "/tmp/dreams-retirement-accessibility-initial-head.txt",
+      "bytes": 41,
+      "sha256": "c6c8d18d9043d6b70114ac92354846c5992a05e32c7e5d9aeb9361f87e0c74e3"
+    },
+    "production-finish-source-checkpoint-20261021/050-dreams-retirement-accessibility-initial-source.json": {
+      "original": "/tmp/dreams-retirement-accessibility-initial-source.json",
+      "bytes": 73358,
+      "sha256": "0fd4cf109716d1c3013e2c3440942611f2aa3d1b727578d9271b385bd5b681ab"
+    },
+    "production-finish-source-checkpoint-20261021/051-dreams-retirement-accessibility-initial-status.txt": {
+      "original": "/tmp/dreams-retirement-accessibility-initial-status.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "production-finish-source-checkpoint-20261021/052-dreams-retirement-accessibility-initial-tree.bin": {
+      "original": "/tmp/dreams-retirement-accessibility-initial-tree.bin",
+      "bytes": 200420,
+      "sha256": "407dedeec07f0e12005eaa551483a0a7384dbda6de7571286259ea0564540f4e"
+    },
+    "production-finish-source-checkpoint-20261021/053-dreams-retirement-accessibility-initial-types-receipt.json": {
+      "original": "/tmp/dreams-retirement-accessibility-initial-types-receipt.json",
+      "bytes": 1070,
+      "sha256": "2ea65d2fb03a33bec2b392f5c6537670ef816561217c56145dc6d13b67ad4c04"
+    },
+    "production-finish-source-checkpoint-20261021/054-dreams-retirement-accessibility-initial-types.out": {
+      "original": "/tmp/dreams-retirement-accessibility-initial-types.out",
+      "bytes": 90,
+      "sha256": "543932f7a867cac23b25fe5912a2a0b0ab563539fbb8a121f7fb83b608c95309"
+    },
+    "production-finish-source-checkpoint-20261021/055-dreams-retirement-accessibility-source.cjs.txt": {
+      "original": "/tmp/dreams-retirement-accessibility-source.cjs",
+      "bytes": 4528,
+      "sha256": "c294765fc0c988e865ace0c7b4b86d247d3469d44c2ad057efb3bccb9e527b34"
+    },
+    "production-finish-source-checkpoint-20261021/056-APPEARANCE_SEMANTIC_LABELS.md": {
+      "original": "/workspace/dreams-worktrees/integration-retirement-accessibility-final/docs/APPEARANCE_SEMANTIC_LABELS.md",
+      "bytes": 2593,
+      "sha256": "906edb246bd997210a64d2b30a2fa47e0c82d9fd93a49117263330a1af4efcb0"
+    },
+    "production-finish-source-checkpoint-20261021/057-C38_MIGRATION_ACCEPTANCE.md": {
+      "original": "/workspace/dreams-worktrees/integration-retirement-accessibility-final/docs/C38_MIGRATION_ACCEPTANCE.md",
+      "bytes": 3420,
+      "sha256": "81b89276cdc2dc2787607e8775a57ef1147d6ea4703967085d1b75de950a0161"
+    },
+    "production-finish-source-checkpoint-20261021/058-C38_TEST_ADAPTERS.md": {
+      "original": "/workspace/dreams-worktrees/integration-retirement-accessibility-final/docs/C38_TEST_ADAPTERS.md",
+      "bytes": 1709,
+      "sha256": "eea59afeeedef326816a86ce4d1cb540be9b84ab1b2c189e2f2274cddf40d5d4"
+    },
+    "production-finish-source-checkpoint-20261021/059-NPC_DOMESTIC_MOVE_PLAN.md": {
+      "original": "/workspace/dreams-worktrees/integration-retirement-accessibility-final/docs/NPC_DOMESTIC_MOVE_PLAN.md",
+      "bytes": 17323,
+      "sha256": "9982a72c69795821e4cef693680bd4bc69a331410e8a86250dd8d668e31f3a2c"
+    },
+    "production-finish-source-checkpoint-20261021/060-RETIREMENT_RUNTIME_UNION.md": {
+      "original": "/workspace/dreams-worktrees/integration-retirement-accessibility-final/docs/RETIREMENT_RUNTIME_UNION.md",
+      "bytes": 2202,
+      "sha256": "1373dbcce695feff5fb83330147f7c5e0a672495b9b64f67ffd6b4f6efcb31b6"
+    },
+    "production-finish-source-checkpoint-20261021/061-dreams-c38-work-prior-approval-index.json": {
+      "original": "/tmp/dreams-c38-work-prior-approval-index.json",
+      "bytes": 4905,
+      "sha256": "ee693b56f683287a7206f79c4adc64ad6f1aeeb5062b3ca47d9c619530789fe3"
+    },
+    "production-finish-source-checkpoint-20261021/062-dreams-retirement-accessibility-final-120-receipt.json": {
+      "original": "/tmp/dreams-retirement-accessibility-final-120-receipt.json",
+      "bytes": 1118,
+      "sha256": "ce87770e8be812c6413d8f7c5348b61e14b05f85d8b0875c49c91a85da709a76"
+    },
+    "production-finish-source-checkpoint-20261021/063-dreams-retirement-accessibility-final-120.out": {
+      "original": "/tmp/dreams-retirement-accessibility-final-120.out",
+      "bytes": 37795,
+      "sha256": "1040d28a0b6bdcbad54fb3b912e4647902caf640ff293e3716fd6d613dec304d"
+    },
+    "production-finish-source-checkpoint-20261021/064-dreams-c38-actions-receipt.json": {
+      "original": "/tmp/dreams-c38-actions-receipt.json",
+      "bytes": 5391,
+      "sha256": "2ed76d640c777d41e04f4c86ecf3e5517b7ae24df4b140985fef70fe4220380e"
+    },
+    "production-finish-source-checkpoint-20261021/065-dreams-c38-actions-summary.json": {
+      "original": "/tmp/dreams-c38-actions-summary.json",
+      "bytes": 17168,
+      "sha256": "ac2e56b54493542cdbf70da20a12ba853248711ffba5a9bd8a5d2cfcd32747df"
+    },
+    "production-finish-source-checkpoint-20261021/066-dreams-c38-actions.json": {
+      "original": "/tmp/dreams-c38-actions.json",
+      "bytes": 307313,
+      "sha256": "e49287ec44da7fda6ef26c9cba10577ada2fd8a8f198c06ff509cf61f4ef7919"
+    },
+    "production-finish-source-checkpoint-20261021/067-dreams-c38-actions.stderr.txt": {
+      "original": "/tmp/dreams-c38-actions.stderr.txt",
+      "bytes": 485,
+      "sha256": "1c38e5fde864e2820a518f8b3f68eca79a9aee0aff2ab67377ded073fea44ee9"
+    },
+    "production-finish-source-checkpoint-20261021/068-dreams-c38-actions-ready.json": {
+      "original": "/tmp/dreams-c38-actions-ready.json",
+      "bytes": 5526,
+      "sha256": "72c4d41b44c59ec2afcb54b25ea13b47a72db8cc0912700477843c9efbc2f135"
+    },
+    "production-finish-source-checkpoint-20261021/069-dreams-c39-actions-receipt.json": {
+      "original": "/tmp/dreams-c39-actions-receipt.json",
+      "bytes": 5546,
+      "sha256": "0084465b3d430ec8daacde3f55f6f2fd1a760ea172209340e1a33990d73ca301"
+    },
+    "production-finish-source-checkpoint-20261021/070-dreams-c39-actions-summary.json": {
+      "original": "/tmp/dreams-c39-actions-summary.json",
+      "bytes": 17365,
+      "sha256": "a7dc899c82b060529543989903f1fb4bf47b3a9e6bb64017612d1091b0e30b22"
+    },
+    "production-finish-source-checkpoint-20261021/071-dreams-c39-actions.json": {
+      "original": "/tmp/dreams-c39-actions.json",
+      "bytes": 307226,
+      "sha256": "4486f87ddc10d1abf76517b17c5e4c3bc9f69a4ee75a9c2176749a958a4e8bbc"
+    },
+    "production-finish-source-checkpoint-20261021/072-dreams-c39-actions.stderr.txt": {
+      "original": "/tmp/dreams-c39-actions.stderr.txt",
+      "bytes": 484,
+      "sha256": "e10a4ac8ee5de72b37ded9d186d1b874aab012cd42583348c45d4493b840d17f"
+    },
+    "production-finish-source-checkpoint-20261021/073-dreams-c39-actions-ready.json": {
+      "original": "/tmp/dreams-c39-actions-ready.json",
+      "bytes": 5506,
+      "sha256": "0ecbf29c6f5cccb9c6b40297362c548beb43c270e12b189f03153ea573bb0e54"
+    },
+    "production-finish-source-checkpoint-20261021/074-dreams-production-finish-accepted-source.json": {
+      "original": "/tmp/dreams-production-finish-accepted-source.json",
+      "bytes": 75993,
+      "sha256": "2e08fd925c673437ff7de7c76c0fd79d02832617d0014efc1c3e471782fe9b56"
+    },
+    "production-finish-source-checkpoint-20261021/075-dreams-production-finish-accepted-focused.out": {
+      "original": "/tmp/dreams-production-finish-accepted-focused.out",
+      "bytes": 414,
+      "sha256": "58a8a71c0a3903011570ee2eee5d7f2918850db4474683c99efd5b7462eda378"
+    },
+    "production-finish-source-checkpoint-20261021/076-dreams-production-finish-accepted-focused-receipt.json": {
+      "original": "/tmp/dreams-production-finish-accepted-focused-receipt.json",
+      "bytes": 1267,
+      "sha256": "2dc0ef29ed2ded543248f8531fdc7463f43e29c9dc09eb7b0858debc9a8f1669"
+    },
+    "production-finish-source-checkpoint-20261021/077-dreams-production-finish-accepted-types.out": {
+      "original": "/tmp/dreams-production-finish-accepted-types.out",
+      "bytes": 90,
+      "sha256": "543932f7a867cac23b25fe5912a2a0b0ab563539fbb8a121f7fb83b608c95309"
+    },
+    "production-finish-source-checkpoint-20261021/078-dreams-production-finish-accepted-types-receipt.json": {
+      "original": "/tmp/dreams-production-finish-accepted-types-receipt.json",
+      "bytes": 1050,
+      "sha256": "a9e743233a77096d2eec956fba348bbb32c96328f444564a92f001014e5fff80"
+    },
+    "production-finish-source-checkpoint-20261021/079-dreams-production-finish-final-source.json": {
+      "original": "/tmp/dreams-production-finish-final-source.json",
+      "bytes": 75985,
+      "sha256": "d8a7095285c2711f0dc14b8bca823d9f21436526fc29dcb079631b30cc9a8c8a"
+    },
+    "production-finish-source-checkpoint-20261021/080-dreams-production-finish-final-regression.out": {
+      "original": "/tmp/dreams-production-finish-final-regression.out",
+      "bytes": 29144,
+      "sha256": "416444b2a5dc73f2f51cf9d4e7faddeb2e90ba5323b961c55c36d46a2e369135"
+    },
+    "production-finish-source-checkpoint-20261021/081-dreams-production-finish-final-regression-receipt.json": {
+      "original": "/tmp/dreams-production-finish-final-regression-receipt.json",
+      "bytes": 1087,
+      "sha256": "f6681fab564ff21934b122ff3b7a0a3ee391897ef2dd552a7e711fd95483bcd5"
+    },
+    "production-finish-source-checkpoint-20261021/082-dreams-production-finish-final-120.out": {
+      "original": "/tmp/dreams-production-finish-final-120.out",
+      "bytes": 37787,
+      "sha256": "40573f07f7622dc08ca610d748db09343e042e58af08cf390cb051111d740c23"
+    },
+    "production-finish-source-checkpoint-20261021/083-dreams-production-finish-final-120-receipt.json": {
+      "original": "/tmp/dreams-production-finish-final-120-receipt.json",
+      "bytes": 1091,
+      "sha256": "0e16678605e997320b45fc53283766e9a2272b7d266ce433b614a5c5aa345794"
+    },
+    "production-finish-source-checkpoint-20261021/084-dreams-production-finish-corrected-ready-focused.out": {
+      "original": "/tmp/dreams-production-finish-corrected-ready-focused.out",
+      "bytes": 487,
+      "sha256": "259f9f7af111a44ba35b5e34e70cf510ea7d428fb1ba34ffd0440ef5b1e96f69"
+    },
+    "production-finish-source-checkpoint-20261021/085-dreams-production-finish-corrected-ready-focused-receipt.json": {
+      "original": "/tmp/dreams-production-finish-corrected-ready-focused-receipt.json",
+      "bytes": 1309,
+      "sha256": "1c061dab8883d365bc408419393d9d76a308fce1f4df152df97daaedda4f0efd"
+    },
+    "production-finish-source-checkpoint-20261021/086-dreams-production-finish-corrected-ready-types.out": {
+      "original": "/tmp/dreams-production-finish-corrected-ready-types.out",
+      "bytes": 90,
+      "sha256": "543932f7a867cac23b25fe5912a2a0b0ab563539fbb8a121f7fb83b608c95309"
+    },
+    "production-finish-source-checkpoint-20261021/087-dreams-production-finish-corrected-ready-types-receipt.json": {
+      "original": "/tmp/dreams-production-finish-corrected-ready-types-receipt.json",
+      "bytes": 1052,
+      "sha256": "a03c1ac6332c941db3daef8ad89af864c2a0c963a70c0b115ac25ba462206aad"
+    },
+    "production-finish-source-checkpoint-20261021/088-dreams-production-finish-corrected-ready-export.out": {
+      "original": "/tmp/dreams-production-finish-corrected-ready-export.out",
+      "bytes": 2761,
+      "sha256": "6d4c920ab34744aab8edbffae73b5dd3f9a05eabb627c8ae10727fa92d408e48"
+    },
+    "production-finish-source-checkpoint-20261021/089-dreams-production-finish-corrected-ready-export-receipt.json": {
+      "original": "/tmp/dreams-production-finish-corrected-ready-export-receipt.json",
+      "bytes": 1270,
+      "sha256": "dc3ecf8215d153a03e3a89eb2de35249b527553957a43a837e57c64a90a362bc"
+    },
+    "production-finish-source-checkpoint-20261021/090-dreams-production-finish-corrected-ready-export-proof.json": {
+      "original": "/tmp/dreams-production-finish-corrected-ready-export-proof.json",
+      "bytes": 74454,
+      "sha256": "bc6fb9d59d6d18b1c36424ec9cf71e799f3a1cefffb0eab085cb4b55060f7358"
+    },
+    "production-finish-source-checkpoint-20261021/091-dreams-production-finish-copy-bridge.json": {
+      "original": "/tmp/dreams-production-finish-copy-bridge.json",
+      "bytes": 1574,
+      "sha256": "8bf26a7f43b5be065807094cd2a4ecac967727c3b5935ba9f928252fc10617ee"
+    },
+    "production-finish-source-checkpoint-20261021/092-dreams-production-finish-corrected-accepted-bridge.json": {
+      "original": "/tmp/dreams-production-finish-corrected-accepted-bridge.json",
+      "bytes": 1268,
+      "sha256": "3cfa8821af8a0031996123a5d7f91c6248366c1e7aabe415c813cc5759500a8d"
+    },
+    "production-finish-source-checkpoint-20261021/093-dreams-c39-corrected-action-source-registration.json": {
+      "original": "/tmp/dreams-c39-corrected-action-source-registration.json",
+      "bytes": 1451,
+      "sha256": "329060d77c7e1b8c360258912466c48a8b4c47c756f8b2a68cab1a7b24f14966"
+    },
+    "production-finish-source-checkpoint-20261021/094-dreams-production-finish-accepted-policy-registration-readiness.json": {
+      "original": "/tmp/dreams-production-finish-accepted-policy-registration-readiness.json",
+      "bytes": 2249,
+      "sha256": "bb039c3b661141a641b59fee85193e5db6b9daa0a03d6481ab421718ef65a370"
+    },
+    "production-finish-source-checkpoint-20261021/095-dreams-production-finish-accepted-policy-readiness-receipt.json": {
+      "original": "/tmp/dreams-production-finish-accepted-policy-readiness-receipt.json",
+      "bytes": 8940,
+      "sha256": "bea20bb10142853c7a8bf3d0b7b3d11b37f208b85ca34fac9f1d299ada79a049"
+    },
+    "production-finish-source-checkpoint-20261021/096-dreams-production-finish-accepted-policy-registration-authorized.json": {
+      "original": "/tmp/dreams-production-finish-accepted-policy-registration-authorized.json",
+      "bytes": 2597,
+      "sha256": "5656dab6e031df8ff7ac291abed6188eaec2d87ad78b64181aff692c85788e57"
+    }
+  },
+  "limits": [
+    "Working checkpoint, not whole-game completion. Running outputs never copied or passed.",
+    "Full/annual66ec are pre-copy-correction source; final33b full/annual are running. Corrected3224 exports/performance are runtime-byte-exact to33b except one test file; source bridge explicit.",
+    "Main separately adds reviewed c49 nativeprotocol tools (86 syntheticchecks). All688 gameplay-source bytes equal33b.",
+    "Cloud benchmark diagnostics are not renderedUI/physicalp95. Same seeds are reused, not additional distinct seeds.",
+    "Further import/export/sharing/save-tool/TimeMachine/history breadth stays parked."
+  ],
+  "remaining": [
+    "Current final regression/annual and A/B/C/D scenarios",
+    "Native upgrades,normal/130% labels/navigation/experience/cold checks",
+    "Continuous30minuteUI and observed sequence/balance review",
+    "StandaloneAndroid/iOS/physical performance/accessibility/release acceptance"
+  ],
+  "overallEffortEstimatePercent": 75
+}

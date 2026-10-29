@@ -1,0 +1,100 @@
+export const petsLeisureAtlasSize = [1448, 1086] as const;
+export const petsLeisureRects = {
+  "dog": [
+    34,
+    4,
+    336,
+    334
+  ],
+  "cat": [
+    412,
+    12,
+    314,
+    327
+  ],
+  "rabbit": [
+    780,
+    12,
+    250,
+    328
+  ],
+  "parrot": [
+    1088,
+    12,
+    324,
+    327
+  ],
+  "paw": [
+    48,
+    344,
+    306,
+    230
+  ],
+  "food": [
+    382,
+    365,
+    354,
+    210
+  ],
+  "play": [
+    740,
+    353,
+    359,
+    236
+  ],
+  "vet": [
+    1112,
+    333,
+    316,
+    249
+  ],
+  "guitar": [
+    30,
+    569,
+    348,
+    249
+  ],
+  "painting": [
+    394,
+    577,
+    326,
+    249
+  ],
+  "photography": [
+    744,
+    595,
+    330,
+    218
+  ],
+  "chess": [
+    1095,
+    580,
+    328,
+    234
+  ],
+  "cinema": [
+    25,
+    822,
+    366,
+    253
+  ],
+  "concert": [
+    389,
+    834,
+    345,
+    219
+  ],
+  "museum": [
+    731,
+    811,
+    339,
+    255
+  ],
+  "nightclub": [
+    1137,
+    815,
+    259,
+    248
+  ]
+} as const;
+export type PetsLeisureArtId = keyof typeof petsLeisureRects;

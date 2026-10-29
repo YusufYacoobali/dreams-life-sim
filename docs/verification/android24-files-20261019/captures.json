@@ -1,0 +1,53 @@
+{
+  "scope": "Unmodified actual native Android 24 390x844 captures; Expo development overlays retained; no physical-device timing claim",
+  "captures": {
+    "folder-export-controls.png": {
+      "bytes": 50755,
+      "sha256": "4ed2334671b4dc6afdb100ac4e6f4dfa0d1d95de9afa695d2ff4f6089ac5fb70"
+    },
+    "folder-export-success.png": {
+      "bytes": 53553,
+      "sha256": "0e652939f38f0d1e621c1d8b0ccb51eb89ddc9961cea5ce00e78b14b6b82b3f9"
+    },
+    "folder-picker.png": {
+      "bytes": 15089,
+      "sha256": "3a577996727cd6e16a993b28aca577b62044f7cc1b630fd89c1c28904d56b4c2"
+    },
+    "import-permission-before.png": {
+      "bytes": 55469,
+      "sha256": "83762dc03e0e59b277bae9bd43ca6f797571e0c59be7f03c17cd2b09ffd95a2e"
+    },
+    "import-preview-after.png": {
+      "bytes": 50996,
+      "sha256": "ef3280145c478e21560e6a0d42144a4dba741906b02119b46e0d4417d9ec2e95"
+    },
+    "imported-reading-result.png": {
+      "bytes": 54992,
+      "sha256": "c37e22bbe8ec3b0b7f16674cd3bcf6d0aea3472d2cf725e5243e7155058de7f5"
+    },
+    "random-life.png": {
+      "bytes": 47094,
+      "sha256": "389d5a9a562ff91c9397c1c001f290820ae590aec12d076669e86d26ec40f7e9"
+    },
+    "random-year-choice.png": {
+      "bytes": 64113,
+      "sha256": "8b46bad128b2517212aa8f9285aee870b28896ed6473714427d32dd45b79bc69"
+    },
+    "random-year-result.png": {
+      "bytes": 59153,
+      "sha256": "3d9b636265036800346836cecf162cf8a421652f060ff6b82a9f52d09b9b6da5"
+    },
+    "saved-lives.png": {
+      "bytes": 45812,
+      "sha256": "601e827b0f35b53147d8e10d4279f5ad5706b25b92604c4498c59f4ea74afa10"
+    },
+    "share-without-handler.png": {
+      "bytes": 40117,
+      "sha256": "9c2ddadf132adc0348875e7a98cde5221c53dfb38c94e4c1f2958a02f441308e"
+    },
+    "switched-custom.png": {
+      "bytes": 49858,
+      "sha256": "1000691ec24a811265d74e0828ba970b4d4e03a2af511f6023c7517c93ee3e08"
+    }
+  }
+}

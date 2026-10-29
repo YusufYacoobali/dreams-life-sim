@@ -1,0 +1,391 @@
+{
+  "baselineCommit": "c9cfd286872716adc055ed9e433f430faca7dd82",
+  "plans": {
+    "0": [
+      {
+        "asset": "body-0-2",
+        "left": -160,
+        "top": -102,
+        "width": 640,
+        "height": 422,
+        "skinClip": {
+          "outfit": 0,
+          "scale": 1
+        }
+      },
+      {
+        "asset": "head-0-3-2",
+        "left": 51.2,
+        "top": 45.2,
+        "width": 217.60000000000002,
+        "height": 198.4,
+        "crop": {
+          "left": 0,
+          "top": 0,
+          "width": 870.4000000000001,
+          "height": 198.4
+        }
+      },
+      {
+        "asset": "clothing-0",
+        "opacity": 1,
+        "width": 320,
+        "height": 320,
+        "left": 0,
+        "top": 0
+      },
+      {
+        "asset": "hair-0-0-front",
+        "left": 34.4,
+        "top": 10,
+        "width": 256,
+        "height": 256,
+        "opacity": 1
+      }
+    ],
+    "2": [
+      {
+        "asset": "body-2-1",
+        "left": -160,
+        "top": -102,
+        "width": 640,
+        "height": 422,
+        "skinClip": {
+          "outfit": 2,
+          "scale": 1
+        }
+      },
+      {
+        "asset": "head-2-3-1",
+        "left": 51.2,
+        "top": 45.2,
+        "width": 217.60000000000002,
+        "height": 198.4,
+        "crop": {
+          "left": -652.8000000000001,
+          "top": 0,
+          "width": 870.4000000000001,
+          "height": 198.4
+        }
+      },
+      {
+        "asset": "clothing-2",
+        "opacity": 1,
+        "width": 320,
+        "height": 320,
+        "left": 0,
+        "top": 0
+      },
+      {
+        "asset": "hair-2-1-front",
+        "left": 33.2,
+        "top": 10,
+        "width": 256,
+        "height": 256,
+        "opacity": 1
+      }
+    ],
+    "3": [
+      {
+        "asset": "body-3-5",
+        "left": -160,
+        "top": -102,
+        "width": 640,
+        "height": 422,
+        "skinClip": {
+          "outfit": 3,
+          "scale": 1
+        }
+      },
+      {
+        "asset": "head-3-3-5",
+        "left": 51.2,
+        "top": 45.2,
+        "width": 217.60000000000002,
+        "height": 198.4,
+        "crop": {
+          "left": -652.8000000000001,
+          "top": 0,
+          "width": 870.4000000000001,
+          "height": 198.4
+        }
+      },
+      {
+        "asset": "clothing-3",
+        "opacity": 1,
+        "width": 320,
+        "height": 320,
+        "left": 0,
+        "top": 0
+      },
+      {
+        "asset": "hair-3-0-front",
+        "left": 32.8,
+        "top": 10,
+        "width": 256,
+        "height": 256,
+        "opacity": 1
+      }
+    ],
+    "5": [
+      {
+        "asset": "body-5-2",
+        "left": -160,
+        "top": -102,
+        "width": 640,
+        "height": 422,
+        "skinClip": {
+          "outfit": 5,
+          "scale": 1
+        }
+      },
+      {
+        "asset": "head-5-3-2",
+        "left": 51.2,
+        "top": 45.2,
+        "width": 217.60000000000002,
+        "height": 198.4,
+        "crop": {
+          "left": -435.20000000000005,
+          "top": 0,
+          "width": 870.4000000000001,
+          "height": 198.4
+        }
+      },
+      {
+        "asset": "clothing-5",
+        "opacity": 1,
+        "width": 320,
+        "height": 320,
+        "left": 0,
+        "top": 0
+      },
+      {
+        "asset": "hair-5-1-front",
+        "left": 33.6,
+        "top": 10,
+        "width": 256,
+        "height": 256,
+        "opacity": 1
+      }
+    ],
+    "7": [
+      {
+        "asset": "body-7-0",
+        "left": -160,
+        "top": -102,
+        "width": 640,
+        "height": 422,
+        "skinClip": {
+          "outfit": 7,
+          "scale": 1
+        }
+      },
+      {
+        "asset": "head-7-3-0",
+        "left": 51.2,
+        "top": 45.2,
+        "width": 217.60000000000002,
+        "height": 198.4,
+        "crop": {
+          "left": -652.8000000000001,
+          "top": 0,
+          "width": 870.4000000000001,
+          "height": 198.4
+        }
+      },
+      {
+        "asset": "clothing-7",
+        "opacity": 1,
+        "width": 320,
+        "height": 320,
+        "left": 0,
+        "top": 0
+      },
+      {
+        "asset": "hair-7-3-front",
+        "left": 33.6,
+        "top": 10,
+        "width": 256,
+        "height": 256,
+        "opacity": 1
+      }
+    ],
+    "9": [
+      {
+        "asset": "body-9-1",
+        "left": -160,
+        "top": -102,
+        "width": 640,
+        "height": 422,
+        "skinClip": {
+          "outfit": 9,
+          "scale": 1
+        }
+      },
+      {
+        "asset": "head-9-3-1",
+        "left": 51.2,
+        "top": 45.2,
+        "width": 217.60000000000002,
+        "height": 198.4,
+        "crop": {
+          "left": -435.20000000000005,
+          "top": 0,
+          "width": 870.4000000000001,
+          "height": 198.4
+        }
+      },
+      {
+        "asset": "clothing-9",
+        "opacity": 1,
+        "width": 320,
+        "height": 320,
+        "left": 0,
+        "top": 0
+      },
+      {
+        "asset": "hair-9-0-front",
+        "left": 33.2,
+        "top": 10,
+        "width": 256,
+        "height": 256,
+        "opacity": 1
+      }
+    ],
+    "12": [
+      {
+        "asset": "body-12-2",
+        "left": -160,
+        "top": -102,
+        "width": 640,
+        "height": 422,
+        "skinClip": {
+          "outfit": 12,
+          "scale": 1
+        }
+      },
+      {
+        "asset": "head-12-3-2",
+        "left": 51.2,
+        "top": 45.2,
+        "width": 217.60000000000002,
+        "height": 198.4,
+        "crop": {
+          "left": -652.8000000000001,
+          "top": 0,
+          "width": 870.4000000000001,
+          "height": 198.4
+        }
+      },
+      {
+        "asset": "clothing-12",
+        "opacity": 1,
+        "width": 320,
+        "height": 320,
+        "left": 0,
+        "top": 0
+      },
+      {
+        "asset": "hair-12-0-front",
+        "left": 32.8,
+        "top": 10,
+        "width": 256,
+        "height": 256,
+        "opacity": 1
+      }
+    ],
+    "14": [
+      {
+        "asset": "body-14-0",
+        "left": -160,
+        "top": -102,
+        "width": 640,
+        "height": 422,
+        "skinClip": {
+          "outfit": 14,
+          "scale": 1
+        }
+      },
+      {
+        "asset": "head-14-3-0",
+        "left": 51.2,
+        "top": 45.2,
+        "width": 217.60000000000002,
+        "height": 198.4,
+        "crop": {
+          "left": -435.20000000000005,
+          "top": 0,
+          "width": 870.4000000000001,
+          "height": 198.4
+        }
+      },
+      {
+        "asset": "clothing-14",
+        "opacity": 1,
+        "width": 320,
+        "height": 320,
+        "left": 0,
+        "top": 0
+      },
+      {
+        "asset": "hair-14-4-front",
+        "left": 33.6,
+        "top": 10,
+        "width": 256,
+        "height": 256,
+        "opacity": 1
+      }
+    ]
+  },
+  "hairHashes": {
+    "hair-0-0-front": "b1dffec9d11db8dd95c06759abb93272d82d56d5f15117307c5322aa25102dfd",
+    "hair-0-1-front": "a78be1b604bc29b3841c62fce9abfd7737ef056e9238f67c4762bd56716d348a",
+    "hair-0-2-front": "34755e518ffa7b178aa9be0b1b9d66724ceff90069ab2eb9c6913724f23c2e7f",
+    "hair-0-3-front": "6c11e84d51f2d6f195c1bc65d1f4e6d7c870617eabc08b699932cc21354d8876",
+    "hair-0-4-front": "9bcbfff43db560d404c78d9924b9ca63bd11db9a34db11cc8841f780cf46a4aa",
+    "hair-0-5-front": "5d6bf4150e4975be122d9db66f0e9673696c960fc77aff8321407ed70a0e00ed",
+    "hair-2-0-front": "ddf92f57a5b9c370020b5bdf6bccf6685e55326cc8657b3a508ef03affa718f3",
+    "hair-2-1-front": "53f3118890fd793a1db465c42b685cb8550a1b095ab8957714009cce651867cc",
+    "hair-2-2-front": "e1a80ca40a3cc267391121a5277f2b2c3bd10c2eeb970eb806d28660a28d01a0",
+    "hair-2-3-front": "1cb1b7cd2033b7bfb6b2aff1c84570f81317c16592b8962aa4da910eea5373c1",
+    "hair-2-4-front": "1357facc28b0266760cdf0535ccac551499f42ce6bbe37854dd8cede8a4efb0b",
+    "hair-2-5-front": "614d50b75009c0498d032252adf74b5e4af101318759e98e116fc64c608313d6",
+    "hair-3-0-front": "10d44dcb38c4c29dfc3e05b226e1886241d3f5594d3e835b0d004976d900b999",
+    "hair-3-1-front": "68cfb1e89cecc1bc16385ac898c5e72b81bf8af3eb2299e63d70d69c3cf1d086",
+    "hair-3-2-front": "15ec11a13334c66096f7f5f1af8bbd829d93d2cadd1682f6ce66b90febf6d501",
+    "hair-3-3-front": "773b42c962b356de2cf70876c1bb60813336b0d73a2f1e3570a65a9f1ec4d06d",
+    "hair-3-4-front": "bfa2fd3cfda225235165c64732199edf56d6aa4cfb284840497cf30da51f1114",
+    "hair-3-5-front": "376f16894b8617fa9268384c9f48e107a8f677856e54649991d0b07810e5b504",
+    "hair-5-0-front": "cd63e5784cde716aa80cf8156429814dd8caed94010811d6952cd84c3b2ebe20",
+    "hair-5-1-front": "2a336320fedc12102d14eb0407bde87d5daa6cdbbbf0055dfb5aa035990c358d",
+    "hair-5-2-front": "01eacf22437e8aa0217ce03cadf71cbe25c07f0f637a0bcac504e918edae7e9d",
+    "hair-5-3-front": "31a27287e09ea11bbaac1c35a33abdaf94ef34c3dc1ab860122ac0168788c227",
+    "hair-5-4-front": "f8771eaadcdbe5ebeb462c6c79fbb321b0201b87cff461ab32acab2ff245a3d3",
+    "hair-5-5-front": "7fe071558caa3e08059ea81f4ea4719e2f5af6285372030b77f2961a99a4632f",
+    "hair-7-0-front": "96c44d74dcb5789e4b7aea5a74f5b60a0899ed46563f040f05c939fe252f75a9",
+    "hair-7-1-front": "128a5bc57dcf9feb69f1573568a830b548cbb3b203b14e754837484a970d84e0",
+    "hair-7-2-front": "f697641fdd6e50c43b5e493d4ff8d762e893731b31e4260583d037424cc17ba4",
+    "hair-7-3-front": "f362f0a1a0a59bb8edeefd34d7b24df20a018b2613a7badeacba23d5f09a8e2a",
+    "hair-7-4-front": "3d90041c45c44ffea8849563b0f70eef3969b3c0953d47e357168d12f4103d81",
+    "hair-7-5-front": "55a7c2c275a20fc460a679fd74e9876fadfcbf9903da03888b03e019be6f8eb5",
+    "hair-9-0-front": "e0ad361c69cdf074f25b7185c726db50510c2d21046a2b13a79582b027b39dab",
+    "hair-9-1-front": "00ee9cdb2b452522ee25067098f919cdc3f15457e55964387d2df7381452677c",
+    "hair-9-2-front": "4567dc6b95e80ae76c5838d8878669f51e505e62ef80674aaf508b5768250985",
+    "hair-9-3-front": "9179288021f158259aabefe17d62406b00079c08655eac626b04e3354d3db498",
+    "hair-9-4-front": "8e55254d9f947a162b755f7eb890a0ddb953cbbb50fbdff1c4c7e05e076eb290",
+    "hair-9-5-front": "ad4a524118b0e32027d1090b29a096642f8734c801f81ea95f24f83534f7b3c2",
+    "hair-12-0-front": "420b7ab126cc2ea1cd65b1a623f07e87bbea4458a1089e2ce81f1336599ae800",
+    "hair-12-1-front": "55ca229920b4311d059a35f60342bb350dd0e86deccf32171c5328a2ab804236",
+    "hair-12-2-front": "8c015bdf9527f1b48ad9c1701c13987149dbe9c158c2f855e677aaee42c4905c",
+    "hair-12-3-front": "12a2268672d0262618cdda1cbd16775f0d6ecbb4695d04bb7a70c12535d3b222",
+    "hair-12-4-front": "8060b06fd873c485da55ebe55dfff3aeac8f0c1884e15d632541c188d8fccbd9",
+    "hair-12-5-front": "d862c8f73671477c5f25bc4c619743d375732cf8eaab97f0eaec6ff2d0470e72",
+    "hair-14-0-front": "f36331ba15b38442973d31397754777df6a987d21819e70d361cb1f8107b6df1",
+    "hair-14-1-front": "f898b25e6b0abb656b9553207313dee42bf90fba3bbae3796ab3116f2c6a8c02",
+    "hair-14-2-front": "09a551dd31094fc987224c07edd062eb85e1696bbfb8f42f6648edd17ee78fe3",
+    "hair-14-3-front": "039e7d9cd2c7c38278cc78a8031fea15823abea6acfd83406f4210777df5ebb3",
+    "hair-14-4-front": "6d253a138dd5df88bd445fc26066c8906652cc73068d92c8beace7f7062a1cd4",
+    "hair-14-5-front": "3a6158ee0b8909080320134cb21c36a0e928d45a86ab01f0fea2a9c867e5fc4f"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "recordedOn": "2026-10-19",
+  "recordedAtUTC": "19:49:35",
+  "scope": "read-only managed runtime status; not a build/download attempt",
+  "specRevision": "12",
+  "observedSpecRevision": "12",
+  "observationsCurrent": true,
+  "observedPhase": "running",
+  "networkMode": "restricted",
+  "networkState": "enforced",
+  "presets": [
+    "package_managers"
+  ],
+  "customAllowedHosts": [],
+  "requiredReactNativeHost": "repo.reactnative.dev",
+  "requiredHostAllowed": false,
+  "previousDeniedDownloadNotRetried": true,
+  "credentialValuesReadOrRecorded": false
+}

@@ -1,0 +1,36 @@
+PASS tests/game/editorial-context-acceptance.test.ts (32.878 s)
+  ● Console
+
+    console.info
+      C36_EDITORIAL_CONTEXT {"name":"family-trip","commands":11,"decisions":[{"id":"adult-name-pronunciation","branch":1,"contexts":[],"old":false},{"id":"wellbeing-stretch-after-sitting","branch":2,"contexts":[],"old":false},{"id":"family-helpful-spill","branch":3,"contexts":["child"],"old":false}],"observedContexts":["child"],"absentContexts":["workplace","friend","partner","home","pet","hobby","visited","specialCareer"],"finalCanonicalSha256":"36fe742395136e979af5b42a2102a94da413fa0ef68fd7de3ffafd8fccd589fe"}
+
+      at info (tests/game/editorial-context-acceptance.test.ts:122:11)
+
+    console.info
+      C36_EDITORIAL_CONTEXT {"name":"pet-hobbies","commands":10,"decisions":[{"id":"teen-unit-confusion","branch":1,"contexts":[],"old":false}],"observedContexts":[],"absentContexts":["workplace","friend","partner","child","home","pet","hobby","visited","specialCareer"],"finalCanonicalSha256":"2bdcd70c08621c4340d52cf2cead7198fa7ea5f3cadd16626f1e5bcb8e343f3d"}
+
+      at info (tests/game/editorial-context-acceptance.test.ts:122:11)
+
+    console.info
+      C36_EDITORIAL_CONTEXT {"name":"workplace-friend","commands":20,"decisions":[{"id":"work-photo-blink","branch":1,"contexts":["workplace"],"old":false},{"id":"medical-emergency","branch":2,"contexts":[],"old":false},{"id":"friend-long-voice-note","branch":3,"contexts":["friend"],"old":false},{"id":"medical-emergency","branch":2,"contexts":[],"old":false},{"id":"adult-shortcut-stairs","branch":2,"contexts":[],"old":false}],"observedContexts":["friend","workplace"],"absentContexts":["partner","child","home","pet","hobby","visited","specialCareer"],"finalCanonicalSha256":"4eb4ddffb8814185bd4459432e1cfa9231392025ddaf7725494e4db9635fc30a"}
+
+      at info (tests/game/editorial-context-acceptance.test.ts:122:11)
+
+    console.info
+      C36_EDITORIAL_CONTEXT {"name":"owned-home","commands":24,"decisions":[{"id":"property-sale-offer","branch":2,"contexts":[],"old":true},{"id":"property-sale-offer","branch":2,"contexts":[],"old":false},{"id":"property-sale-offer","branch":2,"contexts":[],"old":false},{"id":"property-sale-offer","branch":2,"contexts":[],"old":false},{"id":"property-sale-offer","branch":2,"contexts":[],"old":false},{"id":"property-sale-offer","branch":2,"contexts":[],"old":false},{"id":"adult-wrong-name-badge","branch":1,"contexts":[],"old":false},{"id":"adult-small-volunteer-task","branch":2,"contexts":[],"old":false},{"id":"home-window-cleaning-discovery","branch":3,"contexts":["home"],"old":false}],"observedContexts":["home"],"absentContexts":["workplace","friend","partner","child","pet","hobby","visited","specialCareer"],"finalCanonicalSha256":"ab0f3effc87a98af20dfe9aa4ba0772e4bf630bbf59a2f7f6ecf042ead91d25a"}
+
+      at info (tests/game/editorial-context-acceptance.test.ts:122:11)
+
+    console.info
+      C36_EDITORIAL_CONTEXT {"name":"creator-studio","commands":21,"decisions":[{"id":"public-controversy","branch":1,"contexts":[],"old":false},{"id":"brand-offer","branch":2,"contexts":[],"old":false},{"id":"wellbeing-unhurried-breath","branch":3,"contexts":[],"old":false},{"id":"adult-perfect-introduction","branch":1,"contexts":[],"old":false},{"id":"wellbeing-quiet-not-silent","branch":2,"contexts":[],"old":false}],"observedContexts":[],"absentContexts":["workplace","friend","partner","child","home","pet","hobby","visited","specialCareer"],"finalCanonicalSha256":"1cc9b569600f8630f547fd0f40efd34e4d2cf499021167ef4c77087b5fb121d4"}
+
+      at info (tests/game/editorial-context-acceptance.test.ts:122:11)
+
+PASS tests/game/health-emergency-context.test.ts
+PASS tests/game/story-name-collisions.test.ts (9.356 s)
+
+Test Suites: 3 passed, 3 total
+Tests:       19 passed, 19 total
+Snapshots:   0 total
+Time:        44.005 s
+Ran all test suites matching /tests\/game\/editorial-context-acceptance.test.ts|tests\/game\/health-emergency-context.test.ts|tests\/game\/story-name-collisions.test.ts/i.

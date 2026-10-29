@@ -1,0 +1,31 @@
+{
+  "recordedOn": "2026-10-20",
+  "scope": "Actual Android 24 normal previous-checkpoint recovery from branch38 to saved lunch result37, acknowledgement38, and immediate Saved Lives branch label without cold reload",
+  "branchId": "life_mvg00bcv_1sh3wmp_0",
+  "currentRevision": 38,
+  "backupRevision": 37,
+  "currentWorldSha256": "d32878fefb908e341c4edbfc1f41a9f6ca17b414e29506790945e72d5487a5d0",
+  "backupWorldSha256": "a28f323b487b1559cca97aeee95711b8c1a0dddd492a77e571f23e9323fa91ab",
+  "entireCurrentAndBackupExact": true,
+  "allOriginalRowsPreserved": {
+    "lives": 3,
+    "backups": 3,
+    "snapshots": 12,
+    "snapshot_metadata": 12,
+    "receipts": 17
+  },
+  "allBranchesRestoreReceiptsAndMomentsExact": true,
+  "counts": {
+    "backups": 4,
+    "branches": 1,
+    "lives": 4,
+    "preferences": 1,
+    "receipts": 18,
+    "restore_receipts": 1,
+    "snapshot_metadata": 16,
+    "snapshots": 16
+  },
+  "recoveryReceiptBehaviour": "Existing recovery clears branch receipts; acknowledging once creates one new branch receipt; source seventeen receipts stay exact",
+  "nativeScreenshot": "02-label-after-recovery.png",
+  "limitations": "Software emulator with Expo Go developer overlay; no physical-device latency or iOS claim"
+}

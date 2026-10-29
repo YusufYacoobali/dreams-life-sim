@@ -1,0 +1,60 @@
+import React, { useRef, useState } from 'react';
+import { TextInput, useWindowDimensions, View } from 'react-native';
+import { router } from 'expo-router';
+import { useGame } from '../../src/state/useGame';
+import { ageOn, fullName, type World } from '../../src/game/model';
+import { estateShares, legalShares } from '../../src/game/systems/estates';
+import { parseMoney } from '../../src/game/money';
+import { rules } from '../../src/game/rules';
+import { ActionRow, Body, Button, Card, Header, Heading, Page, Portrait } from '../../src/ui/components';
+import { EventModal, EventPresentation } from '../../src/ui/EventModal';
+import { FamilyArt } from '../../src/assets/FamilyArt';
+import { useColors } from '../../src/ui/theme';
+import { DisplayText as Text, displayText } from '../../src/ui/DisplayText';
+
+type WillTerms = Pick<World['wills'][number], 'executorId' | 'shares' | 'bequests'>;
+const willTerms = (will: WillTerms) => JSON.stringify({
+  executorId: will.executorId,
+  shares: will.shares.slice().sort((a, b) => a.personId.localeCompare(b.personId)).map(({ personId, bps }) => ({ personId, bps })),
+  bequests: (will.bequests ?? []).slice().sort((a, b) => a.assetId.localeCompare(b.assetId) || a.personId.localeCompare(b.personId)).map(({ assetId, personId }) => ({ assetId, personId })),
+});
+export default function Will() {
+  const identity = useGame(s => s.world ? JSON.stringify([s.world.id, s.world.activePersonId]) : 'none');
+  return <WillEditor key={identity} />;
+}
+function WillEditor() {
+  const world = useGame(s => s.world)!, dispatch = useGame(s => s.dispatch), busy = useGame(s => s.busy), error = useGame(s => s.error), c = useColors();
+  const { width, fontScale } = useWindowDimensions(), stacked = width < 360 || fontScale >= 1.2;
+  const player = world.people[world.activePersonId], saved = world.wills.find(item => item.personId === player.id);
+  const knownIds = new Set(world.relationships.filter(item => item.from === player.id || item.to === player.id).map(item => item.from === player.id ? item.to : item.from));
+  const known = [...knownIds].map(id => world.people[id]).filter(person => !person.died), adults = known.filter(person => ageOn(person, world.date) >= 18);
+  const [executorId, setExecutor] = useState(saved?.executorId ?? adults[0]?.id ?? '');
+  const [shares, setShares] = useState((saved?.shares ?? legalShares(world, player.id)).map(item => ({ personId: item.personId, percent: (item.bps / 100).toString() })));
+  const [bequests, setBequests] = useState(saved?.bequests ?? []), [field, setField] = useState<string | null>(null), [message, setMessage] = useState<string | null>(null);
+  const submitting = useRef(false);
+  let allocation: WillTerms['shares'] | null = null;
+  try {
+    const parsed = shares.map(item => ({ personId: item.personId, bps: Number(parseMoney(item.percent, 'USD').minor) }));
+    if (parsed.every(item => item.bps > 0 && item.bps <= 10000) && parsed.reduce((sum, item) => sum + item.bps, 0) === 10000) allocation = parsed;
+  } catch { /* Keep invalid drafts editable; report the existing validation on Save. */ }
+  const unchanged = !!saved && !!allocation && willTerms(saved) === willTerms({ executorId, shares: allocation, bequests });
+  const save = () => {
+    if (busy || submitting.current || unchanged) return;
+    if (!allocation) { setMessage('Allocate exactly 100%, using positive percentages with at most two decimal places.'); return; }
+    setMessage(null); submitting.current = true;
+    void dispatch({ type: 'save-will', executorId, shares: allocation, bequests }).finally(() => { submitting.current = false; });
+  };
+  const assets = [...world.assets.filter(item => item.ownerId === player.id), ...world.businesses.filter(item => item.ownerId === player.id && item.status === 'active')];
+  const choices = field === 'executor' ? adults.map(person => ({ id: person.id, label: fullName(person) })) : field === 'beneficiary' ? known.filter(person => !shares.some(item => item.personId === person.id)).map(person => ({ id: person.id, label: fullName(person) })) : [{ id: 'none', label: 'Sell and distribute with the estate' }, ...shares.map(item => ({ id: item.personId, label: fullName(world.people[item.personId]) }))];
+  const event: EventPresentation | null = field ? { id: 'will:' + field, kind: 'selection', title: field === 'executor' ? 'Choose an executor' : field === 'beneficiary' ? 'Add a beneficiary' : 'Specific bequest', body: field === 'executor' ? 'Choose another living adult you know.' : 'Protected family minima and estate obligations still apply.', choices, confirmLabel: 'Choose' } : null;
+  const executor = world.people[executorId], effectiveShares = estateShares(world, player.id);
+  return <Page><Header title="My Will" onBack={() => { if (!busy && !submitting.current) router.back(); }} />
+    <Card><View style={{ flexDirection: stacked ? 'column' : 'row', alignItems: stacked ? 'stretch' : 'center', gap: 16 }}><FamilyArt id="will" size={80} /><View style={{ flex: stacked ? undefined : 1, minWidth: 0, gap: 6 }}><Heading>Your wishes, recorded</Heading><Body muted>{saved ? 'Last recorded: ' + saved.updated.year + '-' + String(saved.updated.month).padStart(2, '0') + '-' + String(saved.updated.day).padStart(2, '0') : 'No will recorded yet'}</Body></View></View><View accessibilityLiveRegion="polite"><Body muted>{saved ? unchanged ? 'Your saved instructions are shown below.' : 'Draft changes. Your saved will still applies.' : 'Draft will. Default family succession applies until you save.'}</Body></View><View style={{ padding: 12, borderRadius: 12, backgroundColor: c.inset, gap: 6 }}><Heading size={18}>Protected Family Shares</Heading><Text style={{ color: c.ink, fontSize: 26, lineHeight: 34, fontWeight: '700' }}>{rules[player.country].protectedFamilyBps / 100}%</Text><Body muted>Local rules protect eligible family shares. Debts and estate tax come first; bequests must fit within each recipient’s remaining share.</Body></View></Card>
+    <Card><Heading size={20}>Executor</Heading><Body muted>Choose another living adult you know to manage the estate.</Body><ActionRow title="Executor" disabled={busy} icon={executor && <Portrait name={fullName(executor)} personId={executor.id} appearance={executor.appearance} age={ageOn(executor, world.date)} size={44} />} subtitle={saved?.executorId === executorId ? 'Current recorded executor' : 'Draft choice · save your will to record it'} value={executor ? fullName(executor) : 'Choose'} onPress={() => { if (!busy) setField('executor'); }} />{executor?.died && <Body muted>This person has died. Choose a living adult to update your instructions.</Body>}</Card>
+    <Card><Heading size={20}>Discretionary allocation</Heading><Body muted>Allocate exactly 100%. These weights divide the portion remaining after protected family shares.</Body><View accessibilityLiveRegion="polite" style={{ padding: 12, borderRadius: 12, backgroundColor: c.inset }}><Body>{allocation ? 'Allocation ready · 100%' : 'Check your percentages · exactly 100% required'}</Body></View>{shares.length === 0 && <Body muted>No beneficiaries in this draft. Add someone you know to assign a share.</Body>}{shares.map(share => <View key={share.personId} style={{ padding: 12, borderRadius: 12, borderWidth: 1, borderColor: c.line, gap: 12 }}><View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}><Portrait name={fullName(world.people[share.personId])} personId={world.people[share.personId].id} appearance={world.people[share.personId].appearance} age={ageOn(world.people[share.personId], world.date)} size={44} /><View style={{ flex: 1, minWidth: 0, gap: 4 }}><Heading size={17}>{fullName(world.people[share.personId])}</Heading><Body muted>{world.people[share.personId].died ? 'Deceased' : 'Beneficiary'}</Body></View></View><Body muted>Discretionary percentage</Body><View style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}><TextInput accessibilityLabel={displayText('Percentage for ' + fullName(world.people[share.personId]))} keyboardType="decimal-pad" editable={!busy} value={share.percent} onChangeText={percent => { if (!busy) { setMessage(null); setShares(shares.map(item => item.personId === share.personId ? { ...item, percent } : item)); } }} style={{ flex: 1, minWidth: 0, minHeight: 48, color: c.ink, backgroundColor: c.inset, padding: 12, borderRadius: 10, fontSize: 18 }} /><Text accessibilityElementsHidden importantForAccessibility="no" style={{ color: c.muted, fontSize: 20 }}>%</Text></View><Button label={'Remove ' + world.people[share.personId].firstName} tone="secondary" disabled={busy} onPress={() => { if (busy) return; setShares(shares.filter(item => item.personId !== share.personId)); setBequests(bequests.filter(item => item.personId !== share.personId)); }} /></View>)}<Button label="Add Beneficiary" tone="secondary" disabled={busy} onPress={() => { if (!busy) setField('beneficiary'); }} /></Card>
+    <Card><Heading size={20}>Specific bequests</Heading><Body muted>Save to update your will. Debts and estate obligations come first. A company needs an available manager to continue as a bequest; otherwise the estate sells it and shares the proceeds.</Body>{assets.length === 0 && <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}><FamilyArt id="gift" size={52} /><View style={{ flex: 1, minWidth: 0 }}><Body muted>No owned assets to assign.</Body></View></View>}{assets.map(asset => { const heir = bequests.find(item => item.assetId === asset.id), recorded = heir && (saved?.bequests ?? []).some(item => item.assetId === asset.id && item.personId === heir.personId); return <ActionRow key={asset.id} disabled={busy} title={asset.name} subtitle={heir ? (recorded ? 'Recorded request: ' : 'Draft request: ') + fullName(world.people[heir.personId]) : 'Sell and distribute'} onPress={() => { if (!busy) setField('asset:' + asset.id); }} />; })}</Card>
+    {(message || error) && <Text accessibilityRole="alert" accessibilityLiveRegion="polite" style={{ color: c.red, fontSize: 15, lineHeight: 22 }}>{message ?? error}</Text>}{unchanged && <Body muted>This is your current saved will.</Body>}<Button label="Save Will" busy={busy} disabled={unchanged || ageOn(player, world.date) < rules[player.country].adultAge} onPress={save} />{saved && <Button label="Revoke Will" tone="secondary" busy={busy} onPress={() => { if (busy || submitting.current) return; setMessage(null); submitting.current = true; void dispatch({ type: 'revoke-will' }).finally(() => { submitting.current = false; }); }} />}
+    <Card><Heading size={20}>Current effective shares</Heading><Body muted>{saved ? 'Based on the saved will and people alive today. Future family changes can change these shares.' : 'No will is recorded. These are the current default family shares.'}</Body><Body muted>Local draft edits above are excluded until you save.</Body>{effectiveShares.map(item => <View key={item.personId} style={{ flexDirection: stacked ? 'column' : 'row', alignItems: stacked ? 'stretch' : 'center', gap: 10, paddingVertical: 10, borderBottomWidth: 1, borderBottomColor: c.line }}><View style={{ flex: stacked ? undefined : 1, minWidth: 0 }}><Body>{fullName(world.people[item.personId])}</Body></View><Text style={{ color: c.ink, fontSize: 20, lineHeight: 27, fontWeight: '700' }}>{(item.bps / 100).toFixed(2)}%</Text></View>)}{effectiveShares.length === 0 && <Body muted>No eligible recipients are currently recorded. Future family changes can change who receives the estate.</Body>}</Card>
+    <EventModal event={event} busy={busy} onCancel={() => { if (!busy) setField(null); }} onChoose={id => { if (busy || !field) return; if (field === 'executor') setExecutor(id); else if (field === 'beneficiary') setShares([...shares, { personId: id, percent: '0' }]); else if (field?.startsWith('asset:')) { const assetId = field.slice(6); setBequests([...bequests.filter(item => item.assetId !== assetId), ...(id === 'none' ? [] : [{ assetId, personId: id }])]); } setField(null); }} />
+  </Page>;
+}

@@ -1,0 +1,57 @@
+{
+  "recordedAt": "2026-10-21T00:38:27.264185+00:00",
+  "scope": "Root stops obsolete C36 Metro and temporarily pauses its owned idle QEMU while agent/consolidated gates run. App PID verified empty. Resume QEMU before C37 native use; no gameplay input.",
+  "diagnostic": "Initial preflight found background Expo Go PID23169 despite launcher focus; no signals sent. Root force-stopped it again and verified font1.0 before this successful hold.",
+  "appStopped": true,
+  "qemuPaused": true,
+  "qemuResumed": false,
+  "targets": [
+    {
+      "role": "qemu",
+      "pid": 100274,
+      "uid": 1000,
+      "comm": "qemu-system-x86",
+      "startTicks": "10566888",
+      "argv": [
+        "/workspace/.cache/android-native-check/sdk/emulator/qemu/linux-x86_64/qemu-system-x86_64-headless",
+        "-avd",
+        "dreams_api24",
+        "-port",
+        "5560",
+        "-no-window",
+        "-no-audio",
+        "-no-boot-anim",
+        "-no-snapshot",
+        "-no-metrics",
+        "-accel",
+        "off",
+        "-gpu",
+        "swiftshader_indirect",
+        "-memory",
+        "1536",
+        "-cores",
+        "2",
+        "-prop",
+        "dalvik.vm.heapsize=384m"
+      ]
+    },
+    {
+      "role": "metro",
+      "pid": 152514,
+      "uid": 1000,
+      "comm": "MainThread",
+      "startTicks": "12018140",
+      "argv": [
+        "node",
+        "--dns-result-order=ipv4first",
+        "./node_modules/expo/bin/cli",
+        "start",
+        "--localhost",
+        "--port",
+        "8081",
+        "--max-workers",
+        "1"
+      ]
+    }
+  ]
+}

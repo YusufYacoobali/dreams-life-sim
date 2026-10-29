@@ -1,0 +1,43 @@
+{
+  "recordedOn": "2026-10-20",
+  "baseCommit": "1542133d223be743a697cffb477af10af5293fc8",
+  "scope": "Always-visible primary actions through creation/appearance/newborn; blank-name validation before confirmation; user parks further file/history work",
+  "source": {
+    "app/new-life.tsx": "4f4ec728cab337e194ef5ed0dfdb0d338a617d1c3cb8c875443caeafdbb5dc9b",
+    "app/appearance.tsx": "05fb1901bf8dc92d11bade791321938d3753a4f9bdb13b95714a9ed7e4325c78",
+    "app/birth.tsx": "69184edf4759dd155f96a7ff9f2cb541d24133ef98448088bdebe4860ed218ef",
+    "src/ui/components.tsx": "1933c266f3e63cad155c339017ed09afbc310f8ed0d1c3b193469e91918122a3",
+    "tests/ui/onboarding-flow.test.tsx": "661acdc31ed2291361f4ca3be4cd05840cb6dc6f537f863fc16422284247c359"
+  },
+  "unchangedGameSourceHash": "c0779428fd8b7b1757bae7e2c5e61915a84306a6037721b6840954ea422246ac",
+  "unchangedCombinedGamePersistenceSourceHash": "836252759ee9fa23f06605573cf8186ae5f60164cafa0104d587c8feee7ddeae",
+  "verification": {
+    "allUiAndStateTests": 99,
+    "suites": 44,
+    "seconds": 113.682,
+    "exitCode": 0,
+    "raw": "ui-state-opening-actions-20261020.txt",
+    "rawSha256": "f95766cef580d402a7c09f44aa3c213adf03430e07bbd30cdcd61b6f4b7d0c3b",
+    "rawStdoutThenStderr": true,
+    "strictApplicationAndTestTypes": true,
+    "strictTypesExitCode": 0,
+    "freshAndroidAndIosHermesExports": true,
+    "exportsExitCode": 0,
+    "unchangedFullRegressionBaseline": "compact-transactions-20261020.json",
+    "unchanged120SeedGate": "life-sweep-compact-transactions-120-20261020.json",
+    "noNewWholeRegressionOrSeedCountClaim": true,
+    "nativeRecord": "android24-opening-actions-20261020/journey-exact.json"
+  },
+  "exports": [
+    {
+      "file": "_expo/static/js/android/entry-1cc4cd7ccd6abe8d62fb7f4e15c3f016.hbc",
+      "bytes": 5445262,
+      "sha256": "e5440ab26ae8d5ce5ef5465f0433ae8fa7f3311a168576612826eadd0c130d4c"
+    },
+    {
+      "file": "_expo/static/js/ios/entry-c97e60b77e57ae28b92a6ca82889d41b.hbc",
+      "bytes": 5140612,
+      "sha256": "05fb14111228db409de9a131525664ead327d8944126001e1c040e4c74062710"
+    }
+  ]
+}

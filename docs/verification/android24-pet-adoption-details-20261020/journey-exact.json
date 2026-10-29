@@ -1,0 +1,42 @@
+{
+  "scope": "Actual Android24 official ExpoGo57.0.9 software VM, normal read-only adoption browsing, immediate details, keyboard review/cancel, hardware Back and130%text. No native SQL/world/RNG edits or new adoption. Not standalone/iOS/physical latency or full visual acceptance.",
+  "lifeId": "life_native_adult_friend_v30_s0",
+  "revision": 111,
+  "sourceBase": "77d1c6c0cf5fa0a5c7660ec02aebc465aeb7d50a",
+  "appSourceSha256": "12029c6c7e5ec4e3be8655ae3af9a1bfb215b028a49780d1631a24605520f3dc",
+  "gameAndPersistenceUnchanged": true,
+  "phases": [
+    {
+      "phase": "before",
+      "allEightTablesExact": true,
+      "lives": 7,
+      "moments": 58,
+      "receipts": 96
+    },
+    {
+      "phase": "cancelled",
+      "allEightTablesExact": true,
+      "lives": 7,
+      "moments": 58,
+      "receipts": 96
+    },
+    {
+      "phase": "large-text",
+      "allEightTablesExact": true,
+      "lives": 7,
+      "moments": 58,
+      "receipts": 96
+    },
+    {
+      "phase": "final",
+      "allEightTablesExact": true,
+      "lives": 7,
+      "moments": 58,
+      "receipts": 96
+    }
+  ],
+  "largeTextFontScale": "1.3",
+  "normalKeyboardShown": true,
+  "originalFontScale": "1.0",
+  "restoredFontScale": "1.0"
+}

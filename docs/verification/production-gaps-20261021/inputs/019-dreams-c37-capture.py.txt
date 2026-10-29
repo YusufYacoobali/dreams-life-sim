@@ -1,0 +1,26 @@
+import pathlib,subprocess,sys,json,datetime,hashlib
+name=sys.argv[1];args=sys.argv[2:];base=pathlib.Path('/tmp/dreams-c37-native-captures');base.mkdir(exist_ok=True);d=base/name
+assert not d.exists(),d
+d.mkdir();logs=[]
+adb=['/workspace/.cache/android-native-check/sdk/platform-tools/adb','-s','emulator-5560']
+def run(a,allow=(0,),timeout=35):
+ p=subprocess.run(a,stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=timeout);logs.append(dict(argv=a,returncode=p.returncode,stdout=p.stdout.decode(errors='replace'),stderr=p.stderr.decode(errors='replace'),at=datetime.datetime.now(datetime.timezone.utc).isoformat()));assert p.returncode in allow,logs[-1];return p.stdout
+try:
+ if args:
+  assert len(args) in (3,4) and args[0]=='--cold-from';previous,label=args[1:3]
+  run(adb+['shell','am','force-stop','host.exp.exponent'])
+  out=run(adb+['shell','pidof','host.exp.exponent'],(0,1));assert not out.strip(),'App still running'
+  run(adb+['shell','am','start','-a','android.intent.action.VIEW','-d','exp://127.0.0.1:8081'])
+  if len(args)==4:
+   run(['python3','/tmp/dreams-native-ui.py','wait-enabled',args[3]],timeout=320)
+   run(['python3','/tmp/dreams-native-ui.py','dismiss-expo-notice'],timeout=50)
+   run(['python3','/tmp/dreams-native-ui.py','tap',args[3]],timeout=50)
+  run(['python3','/tmp/dreams-native-ui.py','wait-enabled',label],timeout=320)
+ run(['python3','/tmp/dreams-native-ui.py','inspect',str(d/'ui')],timeout=50)
+ run(['python3','/tmp/dreams-copy-native-db.py',str(d/'database')],timeout=90)
+ p=d/'capture-log.json';p.write_text(json.dumps(dict(complete=True,name=name,events=logs),indent=2)+'\n')
+ if args:
+  b=p.read_bytes();(d/'cold-attestation.json').write_text(json.dumps(dict(complete=True,stopped=True,restarted=True,**{'from':previous,'to':name},evidence=dict(file=str(p),bytes=len(b),sha256=hashlib.sha256(b).hexdigest())),indent=2)+'\n')
+ print(str(d))
+except BaseException:
+ (d/'capture-diagnostic.json').write_text(json.dumps(dict(complete=False,name=name,events=logs),indent=2)+'\n');raise

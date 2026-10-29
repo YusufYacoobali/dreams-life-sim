@@ -1,0 +1,74 @@
+{
+  "recordedOn": "2026-10-19",
+  "basedOnCommit": "2d5eacf",
+  "sourceState": "world-26 implementation uncommitted at run start; exact corrected game hash retained",
+  "scope": "persistent household pets and early-life save/lifecycle integration; not native or complete production acceptance",
+  "versions": {
+    "world": 26,
+    "engine": 25,
+    "content": 4,
+    "database": 4
+  },
+  "distinctSituations": 90,
+  "gameSourceHash": "982885fa55a26d1426a23aee9d04e1e158a15648fb378311a3e51f0ed3490f81",
+  "fullRegression": {
+    "command": "npm test",
+    "tests": 1089,
+    "suites": 70,
+    "seconds": 786.211,
+    "exitCode": 0
+  },
+  "focusedDomain": {
+    "tests": 49,
+    "suites": 1,
+    "seconds": 2.852,
+    "exitCode": 0
+  },
+  "connectedSQLiteUI": {
+    "tests": 2,
+    "suites": 1,
+    "seconds": 19.577,
+    "exitCode": 0,
+    "journeys": [
+      "genuine content-four newborn archive to actual age-six adoption; reviewed parent/cost; adoption/vet/monthly rollback/retry/cold resume",
+      "actual Italian childhood to last-owner death; atomic shelter/lifecycle rollback/retry/cold resume; ended pets cannot charge again"
+    ]
+  },
+  "strictSourceAndTestTypes": true,
+  "hermesExports": [
+    "android",
+    "ios"
+  ],
+  "bundledAssets": 47,
+  "hermesBundleApproxMB": {
+    "android": 5.2,
+    "ios": 4.9
+  },
+  "metroCurrentManifestAndSourceHTTP200": [
+    "android",
+    "ios"
+  ],
+  "petSweepRecord": "pet-lives-v26-20261019.json",
+  "petSweep": {
+    "lives": 12,
+    "allLaunchCountries": true,
+    "seconds": 188.236,
+    "carePeriods": 1772,
+    "vetVisits": 40,
+    "exitCode": 0
+  },
+  "genuinePreChangeArchive": {
+    "path": "tests/fixtures/v25-content4-bubble-archive.json",
+    "sourceCommit": "39c8f7d",
+    "retainedAtCommit": "2d5eacf",
+    "currentAndBothPriorWorldsPreserved": true
+  },
+  "nativeVisualAcceptance": false,
+  "remaining": [
+    "actual responsive Android/iOS opening and device journeys; reduced-density software Android attempt reproduced pre-game System UI ANR and missing activity service",
+    "hobbies/entertainment, deeper education and autonomous lives, extras and achievements/challenges/heirlooms",
+    "at least 160 more distinct reviewed situations, wider callbacks, art and accessibility",
+    "country-source verification, balance, broader/all-choice/1000-seed sweeps",
+    "120-year/multi-generation storage, native performance and release gates"
+  ]
+}

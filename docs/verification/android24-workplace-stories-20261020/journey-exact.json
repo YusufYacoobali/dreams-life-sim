@@ -1,0 +1,227 @@
+{
+  "recordedOn": "2026-10-20",
+  "recordedAt": "2026-10-20T07:44:55.088Z",
+  "gameSourceHash": "cc39bdfa720bf3fb0f8432d203771950e55189e64557a87e08a1c9b2f0e9ee9b",
+  "combinedGamePersistenceSourceHash": "fd200a537f3be144528afd7d5a6beef3150f8f1932d6ed848c7de8b7e5ba785e",
+  "baseCommit": "3ceff8e",
+  "versions": {
+    "world": 30,
+    "engine": 29,
+    "content": 6,
+    "database": 6
+  },
+  "scope": "Actual existing native74, content-tag cold migration, part-time guidance and eligible job browsing, normal year with a naturally offered new named work scene75, choice76, cold result and acknowledgement77; not native birth-to-twenty",
+  "migrationOnlyContentTagChangesInMemory": true,
+  "coldAll8TablesExact": {
+    "backups": {
+      "rows": 5,
+      "sha256": "f5f8d86ebf44de2b54905c6e70fd7c3e5750ca41c828f01ac82db1cef7e49b44"
+    },
+    "branches": {
+      "rows": 1,
+      "sha256": "ed59ba6261127dbabd51cd7e4b7a6ec02231e14f2745239576c27a04a7accc87"
+    },
+    "lives": {
+      "rows": 5,
+      "sha256": "d3c9f3ae6ac8349ba2c3704959609f5196d549cf246bd114aec41b52fb48533e"
+    },
+    "preferences": {
+      "rows": 1,
+      "sha256": "c4129d2212432c3e9f35013de7517f0bdf2191073f4f05c11171717d3580834d"
+    },
+    "receipts": {
+      "rows": 62,
+      "sha256": "ca8982b83e9b922be89fce9b1986b615a7564304741ebc5b1074db13c0ef1c67"
+    },
+    "restore_receipts": {
+      "rows": 1,
+      "sha256": "5eb3e6db0bb239cdf5efa583d0098be417b79d46e1f74dfe62b13440219efdce"
+    },
+    "snapshot_metadata": {
+      "rows": 35,
+      "sha256": "03fb00fdecc3d13bd2e8bad628c0b7e5b24a2484171dff0238f277c8ea309ed3"
+    },
+    "snapshots": {
+      "rows": 35,
+      "sha256": "be6fa2f20b3788d1619f67d1bcdbb6c86ce1d38a446c886d65fe54ed787b5a9f"
+    }
+  },
+  "guidanceJobBrowsingAll8TablesExact": {
+    "backups": {
+      "rows": 5,
+      "sha256": "f5f8d86ebf44de2b54905c6e70fd7c3e5750ca41c828f01ac82db1cef7e49b44"
+    },
+    "branches": {
+      "rows": 1,
+      "sha256": "ed59ba6261127dbabd51cd7e4b7a6ec02231e14f2745239576c27a04a7accc87"
+    },
+    "lives": {
+      "rows": 5,
+      "sha256": "d3c9f3ae6ac8349ba2c3704959609f5196d549cf246bd114aec41b52fb48533e"
+    },
+    "preferences": {
+      "rows": 1,
+      "sha256": "c4129d2212432c3e9f35013de7517f0bdf2191073f4f05c11171717d3580834d"
+    },
+    "receipts": {
+      "rows": 62,
+      "sha256": "ca8982b83e9b922be89fce9b1986b615a7564304741ebc5b1074db13c0ef1c67"
+    },
+    "restore_receipts": {
+      "rows": 1,
+      "sha256": "5eb3e6db0bb239cdf5efa583d0098be417b79d46e1f74dfe62b13440219efdce"
+    },
+    "snapshot_metadata": {
+      "rows": 35,
+      "sha256": "03fb00fdecc3d13bd2e8bad628c0b7e5b24a2484171dff0238f277c8ea309ed3"
+    },
+    "snapshots": {
+      "rows": 35,
+      "sha256": "be6fa2f20b3788d1619f67d1bcdbb6c86ce1d38a446c886d65fe54ed787b5a9f"
+    }
+  },
+  "normalYear75AllSimulationFieldsExact": true,
+  "currencyJournalTextDifferences": [
+    {
+      "path": "world.journal.260.text",
+      "actual": "My income for the year was ZAR49,218.75; income tax was ZAR0.00.",
+      "expected": "My income for the year was ZAR 49,218.75; income tax was ZAR 0.00."
+    },
+    {
+      "path": "world.journal.261.text",
+      "actual": "My income for the year was ZAR187,500.00; income tax was ZAR16,650.00.",
+      "expected": "My income for the year was ZAR 187,500.00; income tax was ZAR 16,650.00."
+    },
+    {
+      "path": "world.journal.262.text",
+      "actual": "My income for the year was ZAR405,000.00; income tax was ZAR69,000.00.",
+      "expected": "My income for the year was ZAR 405,000.00; income tax was ZAR 69,000.00."
+    },
+    {
+      "path": "world.journal.263.text",
+      "actual": "My income for the year was ZAR196,875.00; income tax was ZAR18,337.50.",
+      "expected": "My income for the year was ZAR 196,875.00; income tax was ZAR 18,337.50."
+    },
+    {
+      "path": "world.journal.264.text",
+      "actual": "My income for the year was ZAR56,250.00; income tax was ZAR0.00.",
+      "expected": "My income for the year was ZAR 56,250.00; income tax was ZAR 0.00."
+    },
+    {
+      "path": "world.journal.265.text",
+      "actual": "My income for the year was ZAR65,625.00; income tax was ZAR0.00.",
+      "expected": "My income for the year was ZAR 65,625.00; income tax was ZAR 0.00."
+    },
+    {
+      "path": "world.journal.266.text",
+      "actual": "My income for the year was ZAR225,000.00; income tax was ZAR23,400.00.",
+      "expected": "My income for the year was ZAR 225,000.00; income tax was ZAR 23,400.00."
+    },
+    {
+      "path": "world.journal.267.text",
+      "actual": "My income for the year was ZAR328,125.00; income tax was ZAR49,012.50.",
+      "expected": "My income for the year was ZAR 328,125.00; income tax was ZAR 49,012.50."
+    },
+    {
+      "path": "world.journal.268.text",
+      "actual": "My income for the year was ZAR423,675.00; income tax was ZAR73,855.50.",
+      "expected": "My income for the year was ZAR 423,675.00; income tax was ZAR 73,855.50."
+    },
+    {
+      "path": "world.journal.269.text",
+      "actual": "My income for the year was ZAR53,125.00; income tax was ZAR0.00.",
+      "expected": "My income for the year was ZAR 53,125.00; income tax was ZAR 0.00."
+    },
+    {
+      "path": "world.journal.270.text",
+      "actual": "My income for the year was ZAR386,800.00; income tax was ZAR64,268.00.",
+      "expected": "My income for the year was ZAR 386,800.00; income tax was ZAR 64,268.00."
+    }
+  ],
+  "naturallyOfferedTemplate": "work-shared-credit",
+  "boundPersonIds": [
+    "person_player",
+    "person_npc_49_17",
+    "person_npc_49_16"
+  ],
+  "command": {
+    "type": "choose",
+    "eventId": "event_2046_work-shared-credit",
+    "choiceId": "name"
+  },
+  "choice76EntireWorldExact": true,
+  "noChoiceMoneyTenurePerformanceQualificationOrRngAward": true,
+  "actualRelationships": [
+    {
+      "personId": "person_npc_49_17",
+      "name": "Sipho Naidoo",
+      "relationshipId": "relation_person_player_person_npc_49_17",
+      "before": 41,
+      "after": 46
+    },
+    {
+      "personId": "person_npc_49_16",
+      "name": "Thando Naidoo",
+      "relationshipId": "relation_person_player_person_npc_49_16",
+      "before": 41,
+      "after": 43
+    }
+  ],
+  "result76ColdAll8TablesExact": {
+    "backups": {
+      "rows": 5,
+      "sha256": "8f691ccde3f755b25d0bd92753b6ec39e0ed0142be2d923de963a0bc8e08b5b2"
+    },
+    "branches": {
+      "rows": 1,
+      "sha256": "ed59ba6261127dbabd51cd7e4b7a6ec02231e14f2745239576c27a04a7accc87"
+    },
+    "lives": {
+      "rows": 5,
+      "sha256": "e4669f45c06b256e2ca63c61668c750037487c7922248220909d6a07a3a235d9"
+    },
+    "preferences": {
+      "rows": 1,
+      "sha256": "c4129d2212432c3e9f35013de7517f0bdf2191073f4f05c11171717d3580834d"
+    },
+    "receipts": {
+      "rows": 64,
+      "sha256": "4c7128d8cc42ca3bcdeceba0d681e069bd3c4d03cf8b2361d8e2c5203461b4b2"
+    },
+    "restore_receipts": {
+      "rows": 1,
+      "sha256": "5eb3e6db0bb239cdf5efa583d0098be417b79d46e1f74dfe62b13440219efdce"
+    },
+    "snapshot_metadata": {
+      "rows": 36,
+      "sha256": "f84c4003281b95e215ec364917322f37dbe7cdc20dcee19e9e5d61df9c731fc0"
+    },
+    "snapshots": {
+      "rows": 36,
+      "sha256": "ca8c8eacaf85d8e86aa153f5588cf1b31d381da9f1a4dceb9a6aae3e73e16846"
+    }
+  },
+  "ack77EntireWorldExact": true,
+  "old4LiveAndBackupWorlds35MomentsMetadata62ReceiptsExact": true,
+  "newBeforeAgeUp74PayloadExactOriginalContent5": true,
+  "counts": {
+    "backups": 5,
+    "branches": 1,
+    "lives": 5,
+    "preferences": 1,
+    "receipts": 65,
+    "restore_receipts": 1,
+    "snapshot_metadata": 36,
+    "snapshots": 36
+  },
+  "activeLifeId": "life_native_arcade_v28",
+  "finalRevision": 77,
+  "finalAge": 20,
+  "worldHashes": {
+    "74": "7ec1fab8920ddf2f2e172a94f7ccb939df0c09a0c88573045970366a85eb28b1",
+    "75": "95b6fb4ebb404941af911d0c30524ada7649016881307f395747047911de5ace",
+    "76": "bcd71c22a114b9a1d2605ddbb301aa8a8716a1b0c24739475abb7464d8c90283",
+    "77": "cc35b072908d232f3ccb0f62883ff3c4216d83f6afcbdd552a9619bfa2acd446"
+  },
+  "limits": "Software Android24/ExpoGo only; no native world/stat/RNG/outcome/SQL edits. Eleven year-end currency presentation differences are explicitly enumerated without modifying native data. Physical performance, standalone/iOS, full fidelity/accessibility and release gates remain open."
+}

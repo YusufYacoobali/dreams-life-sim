@@ -1,0 +1,265 @@
+"""Read/hash existing evidence only. Never loads game/verifier/native modules."""
+import copy
+import datetime
+import hashlib
+import json
+from pathlib import Path
+
+BASE = Path('/tmp/dreams-production-gaps-publication-inputs-v2.json')
+OUT = Path('/tmp/dreams-production-gaps-publication-inputs-v3.json')
+NOTE = Path('/tmp/dreams-production-gaps-publication-inputs-v3-readiness.md')
+assert not OUT.exists() and not NOTE.exists(), 'Refuse to overwrite a prior v3'
+
+def pin(path):
+    path = Path(path)
+    before = path.stat()
+    raw = path.read_bytes()
+    after = path.stat()
+    assert (before.st_size, before.st_mtime_ns) == (after.st_size, after.st_mtime_ns), f'Changing input: {path}'
+    return {'file': str(path), 'bytes': len(raw), 'sha256': hashlib.sha256(raw).hexdigest()}
+
+base = json.loads(BASE.read_text())
+d = copy.deepcopy(base)
+for key, expected in base['artifacts'].items():
+    measured = pin(expected['file'])
+    assert all(measured[field] == expected[field] for field in ['file', 'bytes', 'sha256']), f'Original input changed: {key}'
+assert len(base['artifacts']) == 138 and len(base['features']) == 11
+roles, missing = {}, []
+
+def add(path, role):
+    path = str(path)
+    if not Path(path).is_file():
+        missing.append({'file': path, 'role': role})
+        return None
+    measured = pin(path)
+    if path in d['artifacts']:
+        assert all(d['artifacts'][path][field] == measured[field] for field in ['file', 'bytes', 'sha256']), f'Conflicting pin: {path}'
+    else:
+        d['artifacts'][path] = measured
+    roles[path] = role
+    return measured
+
+def read(name):
+    return json.loads((Path('/tmp') / name).read_text())
+
+add(BASE, 'immutable previous input index')
+extra = [
+    'dreams-production-gaps-accepted-regression.out', 'dreams-production-gaps-accepted-regression-receipt.json',
+    'dreams-production-gaps-final-source.json', 'dreams-production-gaps-final-head.txt',
+    'dreams-production-gaps-final-status.txt', 'dreams-production-gaps-final-tree.bin',
+    'dreams-production-gaps-final-commit.bin', 'dreams-production-gaps-accepted-final-bridge.json',
+    'dreams-production-gaps-final-regression.out', 'dreams-production-gaps-final-regression-receipt.json',
+    'dreams-production-gaps-final-types.out', 'dreams-production-gaps-final-types-receipt.json',
+    'dreams-c37-final-test-adapters.patch', 'dreams-c37-final-test-adapter-commits.txt',
+    'dreams-c37-publish-source-checkpoint.py', 'dreams-c37-verify-export.py',
+    'dreams-c37-capture.py', 'dreams-c37-first-cold-complete.py', 'dreams-c37-make-custom-manifest.py',
+    'dreams-c37-native-confirm-cancel-preservation.json',
+    'dreams-c37-action-preparation-v2.json', 'dreams-c37-action-gate-v2.py',
+    'dreams-c37-action-gate-v2-review.md', 'dreams-c37-action-gate-readiness-v2.md',
+    'dreams-c37-action-preparation.json', 'dreams-c37-action-gate.py',
+    'dreams-c37-action-gate-readiness.md', 'dreams-c37-actions-ready-template.json',
+    'dreams-c37-semantic-replay-tests-first.out',
+]
+for name in extra:
+    add('/tmp/' + name, 'coordinator source/gate/diagnostic/helper or static-only performance preparation')
+
+adapter_specs = [
+    ('hobby-collision', 'work_dialogs', ['afaee617395923294926e125a1243319e988ac69'], ['244d658'],
+     '/workspace/dreams-worktrees/c37-hobby-collision-tests/docs/C37_HOBBY_COLLISION_EXPECTATIONS.md',
+     'dreams-c37-hobby-collision', ['tests-first.out', 'types-first.out', 'types-final.out', 'tsconfig.json'],
+     ['tests/ui/ordinary-hobby-flow.test.tsx', 'tests/game/story-name-collisions.test.ts'],
+     '10/2 PASS26.221s; affected strict0/empty after TS7006 annotation diagnostic. Actual original hobby payer refusal and fresh recall opt-in expectation; same-open in-memory connection/new repository+store, not physical cold.', 'root'),
+    ('story-lifecycle-workplace', 'school_dialogs', ['4dbe4bfc1f3b2721f0a2ed424ec9989ab481257c'], ['eff7fd7'],
+     '/workspace/dreams-worktrees/c37-story-test-adapters/docs/C37_STORY_TEST_ADAPTERS.md',
+     'dreams-c37-story-test-adapters', ['focused-first.out', 'types-first.out', 'types-final.out', 'tsconfig.json'],
+     ['tests/game/story-lifecycle.test.ts', 'tests/ui/workplace-story-flow.test.tsx'],
+     '28/2 PASS20.452s; affected strict0/empty after TS7006 annotation diagnostic. Resolved short callback exact; only new recall cancelled by death. Untouched arranged employee stream reaches wellbeing-good-day-pressure/pace with twelve paid months; no scene/seed search. Same-open in-memory connection/new repository+store.', 'work_dialogs'),
+    ('student-loan-offer-ui', 'purchase_dialog', ['9663f1e62a8f71b3fd4e26a496c878b6aa26e575'], ['01081a8'],
+     '/workspace/dreams-worktrees/c37-student-loan-test/docs/STUDENT_LOAN_RATE_QUOTES.md',
+     'dreams-c37-student-loan', ['focused-first.out', 'types-final.out', 'types-corrected.out', 'types-corrected.exit', 'tsconfig.json'],
+     ['tests/ui/student-loan-rate-flow.test.tsx'],
+     '9/1 PASS23.515s; corrected affected strict0/empty and durable exit0. Initial TS2688/lost-handle log receives no passing credit. One fixed seed3 Arts application and actual offer/ack, then real funding terms; EUR2% and GBP4%/repaid cases retain all8 rollback, warm0, raw backup and new-connection cold.', 'work_dialogs'),
+    ('weighted-story-ui', 'release_audit', ['60bbd648b6c509f011500fcddac522590aad342f', '198ff30b006e235c8aef2d061318035c279cb9e4'], ['b0e4b7b', '85f6ff8'],
+     '/workspace/dreams-worktrees/c37-weighted-ui-fixes/docs/C37_WEIGHTED_UI_ACCEPTANCE.md',
+     'dreams-c37-weighted-ui', ['focused.out', 'focused.exit', 'types.out', 'types.exit', 'tsconfig.json'],
+     ['tests/ui/adult-relationship-story-flow.test.tsx', 'tests/ui/childhood-story-flow.test.tsx', 'tests/ui/story-consequence-labels-flow.test.tsx'],
+     '4/3 PASS16.129s; affected strict0/empty with durable exits0. Explicit eligible weighted-ticket setup exercises actual Age Up and effects, not natural scene selection. Same-open memory SQLite; fresh stores, adult/consequence new repositories, childhood original repository/cache.', 'work_dialogs'),
+]
+adapters = []
+for ident, author, commits, integrations, document, prefix, suffixes, tests, evidence, reviewer in adapter_specs:
+    files = ['/tmp/' + prefix + '-' + suffix for suffix in suffixes]
+    add(document, 'final C37 stale-test adapter scope document')
+    for path in files:
+        add(path, 'final C37 stale-test adapter successful evidence or retained diagnostic')
+    adapters.append({'id': ident, 'author': author, 'originalCommits': commits, 'integrationCommits': integrations,
+                     'tests': tests, 'document': document, 'rawFiles': files, 'scope': evidence,
+                     'review': {'status': 'approved-chat-attested', 'reviewer': reviewer, 'rawReport': None,
+                                'scope': 'Exact approval communicated in team messages; no standalone report is invented.'}})
+for suffix in ['cjs', 'out']:
+    add('/tmp/dreams-c37-workplace-observe.' + suffix, 'single untouched employee observation; no search')
+
+final = '85f6ff8637ba3de9d0f04421307419b1d9609864'
+native_commit = 'a4be96ee1e60ab073fbbd2ae95d0ee2d0ee6f361'
+bridge = read('dreams-production-gaps-accepted-final-bridge.json')
+assert bridge['complete'] and bridge['fromCommit'] == native_commit and bridge['toCommit'] == final
+assert sorted(bridge['changed']) == sorted(path for adapter in adapters for path in adapter['tests'])
+for name, code in [('final-regression', 0), ('final-types', 0), ('accepted-regression', 1)]:
+    receipt = read('dreams-production-gaps-' + name + '-receipt.json')
+    assert receipt['complete'] and receipt['exitCode'] == code and receipt['before']['status'] == receipt['after']['status'] == 'exact'
+    assert pin(receipt['raw']['file']) == receipt['raw']
+
+custom_files = ['dreams-c37-custom-captures.json', 'dreams-c37-custom-raw-result.json',
+                'dreams-c37-custom-semantic-trace.json', 'dreams-c37-custom-semantic-result.json']
+custom = [read(name) for name in custom_files]
+assert all(item['complete'] for item in custom)
+assert len(custom[0]['phases']) == 10 and sum(p['kind'] == 'cold' for p in custom[0]['phases']) == 5
+assert all(p['coordinatorPersonallyViewed'] for p in custom[0]['phases'])
+external = {entry['file']: copy.deepcopy(entry) for entry in base['externalLargeArtifacts']}
+
+def collect_pins(value, origin):
+    if isinstance(value, dict):
+        if {'file', 'bytes', 'sha256'} <= value.keys():
+            path = Path(value['file'])
+            if path.suffix in ['.db', '.db-wal', '.hbc', '.map'] or path.name.endswith('.db-wal'):
+                assert path.is_file() and path.stat().st_size == value['bytes'], f'Missing external captured artifact: {path}'
+                record = {key: value[key] for key in ['file', 'bytes', 'sha256']}
+                record.update({'storage': 'external-only', 'pinBasis': origin + '; supplied immutable capture/proof pin, size checked only by this index'})
+                if str(path) in external:
+                    assert all(external[str(path)][key] == record[key] for key in ['file', 'bytes', 'sha256'])
+                else:
+                    external[str(path)] = record
+            else:
+                assert pin(path) == {key: value[key] for key in ['file', 'bytes', 'sha256']}, f'Captured pin mismatch: {path}'
+                add(path, 'completed custom native compact evidence or exact source/tool proof')
+        for child in value.values():
+            collect_pins(child, origin)
+    elif isinstance(value, list):
+        for child in value:
+            collect_pins(child, origin)
+
+for name, value in zip(custom_files, custom):
+    add('/tmp/' + name, 'completed custom native capture/raw/semantic evidence')
+    collect_pins(value, name)
+collect_pins(read('dreams-production-gaps-native-source.json'), 'native source manifest')
+
+# Preserve compact raw observer diagnostics and incomplete captures as such.
+# No directory's existence promotes Nia or an interrupted observer to acceptance.
+capture_root = Path('/tmp/dreams-c37-native-captures')
+provisional = []
+custom_dirs = {Path(p['png']['file']).parent for p in custom[0]['phases']}
+for path in sorted(capture_root.rglob('*')):
+    if path.is_file() and 'database' not in path.parts and path.suffix in ['.json', '.png', '.xml', '.txt']:
+        add(path, 'supplemental native raw; accepted only when explicitly covered by complete manifest/result')
+        if path.parent not in custom_dirs:
+            provisional.append(str(path))
+for path in sorted(Path('/tmp').glob('dreams-c37-native-*')):
+    if path.is_file() and path.suffix in ['.png', '.xml']:
+        add(path, 'supplemental creation/preparation/reconnect raw image or hierarchy; no inferred visual approval')
+
+d.update({'format': 'dreams-c37-publication-input-index-v3',
+          'status': 'DRAFT-C37-FINAL-SOURCE-AND-CUSTOM-PINNED-NIA-IN-PROGRESS-PERFORMANCE-UNRUN',
+          'complete': False, 'publicationAllowed': False,
+          'preparedAt': datetime.datetime.now(datetime.timezone.utc).isoformat(),
+          'scope': 'Read-only publication input inventory only. All v2 artifacts retained byte-exact, including failures. No publisher, verifier, runtime, command, device or performance check executed. Overlapping author subsets are never summed.',
+          'baseInputIndex': pin(BASE),
+          'previousInputVerification': {'baseArtifacts': 138, 'exact': 138, 'missing': 0, 'changed': 0,
+                                        'inheritedBaseInputIndex': base.get('baseInputIndex')},
+          'testAdapters': adapters,
+          'externalLargeArtifacts': list(external.values()),
+          'artifactRoles': roles,
+          'provisionalNativeArtifacts': provisional,
+          'missingInputFiles': missing})
+d['finalMainCommit'] = None
+d['sourceCheckpointMainCommit'] = {'commit': 'bc0cb5ccb560661c5d268a5c3bd550ba11f7fa4a',
+                                 'sourceCommit': final, 'status': 'coordinator-reported-pushed-source-checkpoint',
+                                 'scope': 'Not final native/performance portable publication or final push attestation.'}
+d['acceptedSource'] = {**base['acceptedSource'], 'commit': final, 'snapshot': '/tmp/dreams-production-gaps-final-source.json',
+                       'sourceSnapshotSha256': d['artifacts']['/tmp/dreams-production-gaps-final-source.json']['sha256'],
+                       'scope': 'Final corrected C37 regression/types source. Native/export source remains a4be; only eight reviewed tests differ.'}
+d['nativeSource'] = copy.deepcopy(base['acceptedSource'])
+d['nativeSource']['scope'] = 'Frozen a4be actual native/export runtime. Exact runtime/application/config/assets/fixture bridge to final85f changes eight tests only.'
+d['runtime']['finalSource'] = final
+d['runtime']['acceptedToFinalBridge'] = '/tmp/dreams-production-gaps-accepted-final-bridge.json'
+d['runtime']['sourceBridge']['waitlistTestRepair']['scope'] = 'Integrated reviewed current waitlist repair; actual2020waitlist→Feb rejection roll96/chance92, no offer planning pause, final2021/rev78. Historical isolated2022offer remains distinct; current waitlist-to-offer unobserved.'
+gates = d['coordinatorGates']
+gates['acceptedFullRegression'] = {'status': 'failed-diagnostic-retained', 'sourceCommit': native_commit,
+    'receipt': '/tmp/dreams-production-gaps-accepted-regression-receipt.json', 'raw': '/tmp/dreams-production-gaps-accepted-regression.out',
+    'passed': 2509, 'failed': 11, 'total': 2520, 'suites': 200, 'failedSuites': 8, 'jestSeconds': 1642.120,
+    'scope': 'Complete original failed run, not an interrupted/partial pass. Eight stale acceptance suites repaired by four reviewed adapter slices; no observed runtime defect from these failures.'}
+gates['finalFullRegression'] = {'status': 'passed', 'sourceCommit': final, 'sourcePins': 656,
+    'receipt': '/tmp/dreams-production-gaps-final-regression-receipt.json', 'raw': '/tmp/dreams-production-gaps-final-regression.out',
+    'tests': 2520, 'suites': 200, 'jestSeconds': 1634.281, 'wrapperSeconds': 1635.063, 'beforeAfterSource': 'exact',
+    'scope': 'One complete final corrected-source regression, not author counts added together. C37 runtime/application/config/assets/fixtures exact to frozen native/export a4be.'}
+gates['finalTypes'] = {'status': 'passed', 'sourceCommit': final, 'sourcePins': 656,
+    'receipt': '/tmp/dreams-production-gaps-final-types-receipt.json', 'raw': '/tmp/dreams-production-gaps-final-types.out',
+    'wrapperSeconds': 20.894, 'scope': 'Strict application and all-test types, actual complete exit0 with all656 source pins exact before/after.'}
+gates['annual120']['scope'] += ' Final85f core equivalence also pinned by accepted-to-final bridge; not a rerun or additional seeds.'
+gates['acceptedExport']['scope'] += ' Final85f application/runtime equivalence pinned by the eight-test-only bridge; original export source identity remains a4be.'
+gates['actualNative'].update({'status': 'CUSTOM-COMPLETE-EXISTING-UNIVERSITY-IN-PROGRESS',
+    'gameplayCompleted': False, 'coldCompleted': False,
+    'scope': 'Aggregate native publication remains incomplete. Custom journey has complete captures/raw/semantic evidence below; existing university journey is still provisional. No native actions or verifier execution by index preparer.',
+    'customJourney': {'status': 'complete-evidence-pinned', 'captures': '/tmp/' + custom_files[0],
+        'rawVerification': '/tmp/' + custom_files[1], 'semanticTrace': '/tmp/' + custom_files[2], 'semanticVerification': '/tmp/' + custom_files[3],
+        'actualPhases': 10, 'actualColdReopens': 5, 'engineCommandsReplayed': 3, 'birthAcknowledgementsReplayed': 1,
+        'review': 'All ten actual PNG/XML pairs personally viewed by coordinator as attested in complete capture manifest; index preparer did not independently view them.',
+        'scope': 'Actual custom Maya Singh Chicago/Avatar7 newborn, Begin Life, first birthday bubble-watch choice/result and acknowledgement, ending actualrevision4. Complete canonical replay and all8 integrity are separate results. Actual creation seed/input reconstruction and verifier visualAcceptance remain false; original seven lives/backups,66 moments and147 receipts preserved by actual raw proof. Interrupted initial cold observer retained, later completion separately attested.'},
+    'existingUniversityJourney': {'status': 'IN-PROGRESS-NOT-ACCEPTED', 'captureDirectory': str(capture_root),
+        'captureManifest': None, 'rawVerification': None, 'semanticVerification': None,
+        'actualObservedApplication': {'file': str(capture_root / 'action-saved/actual-checkpoint-observation.json'), 'revision': 143, 'status': 'accepted', 'field': 'computing'},
+        'interimEnrolmentObservation': {'file': str(capture_root / 'enrolment-saved/actual-checkpoint-observation.json'), 'revision': 145, 'status': 'enrolled', 'funding': 'cash'},
+        'scope': 'Interim existing Nia observations only. The first application action was unavailable; coordinator resigned the actual existing hourly Retail job and acknowledged before the actual free application. Saved enrolment145 observation exists, but ongoing cold/final review/ack path and complete all8+semantic manifests are not accepted or inferred.'}})
+gates['serial70Performance'] = {'status': 'UNRUN', 'registration': None, 'result': None,
+    'preparation': '/tmp/dreams-c37-action-preparation-v2.json', 'review': '/tmp/dreams-c37-action-gate-v2-review.md',
+    'scope': 'Static prepared wrapper/review only. No C37 serial measurement, sample count, zero-unpack result, quiescence, receipt or performance pass is inferred. Coordinator must run during its quiet window.'}
+d['features'][4]['finalEvidence'] += ' Reviewed current waitlist repair and eight final stale-test adapters are integrated; final corrected root2520/200 gate is separately pinned, not an extra author cohort.'
+d['pendingInputs'] = [
+    {'gate': 'existingUniversityNative', 'status': 'IN-PROGRESS', 'required': ['complete coordinator-selected actual journey capture manifest', 'final raw all8 and semantic result/trace', 'personally reviewed actual image list and cold attestations', 'actual final acknowledgement/outcome scope without inferred phases']},
+    {'gate': 'serial70Performance', 'status': 'UNRUN', 'required': ['actual preregistration and quiet-process proof', 'actual serial execution/result receipt and raw output', 'actual zero-warm-unpack observations and exact source before/after', 'coordinator review of actual measured scope']},
+    {'gate': 'publication', 'status': 'NOT-AUTHORIZED-BY-THIS-DRAFT', 'required': ['both above gates actually complete', 'coordinator final evidence/visual/source review', 'portable unchanged-byte copies and recursive hash/path validation', 'final publication commit and push attestation']},
+]
+d['missingInputs'] = copy.deepcopy(d['pendingInputs']) + missing
+d['limitations'] = [
+    'Draft only: complete=false/publicationAllowed=false until actual existing-life and serial-performance gates close and coordinator approves publication.',
+    'Final C37 source regression/types passed; original a4be failed full and all author failures remain raw, never relabelled as successful.',
+    'No counts from overlapping author subsets are added to the final2520 tests or same120 annual seeds.',
+    'Custom raw and semantic results are complete; neither verifier claims visual acceptance or reconstructs the creation seed. Coordinator capture-view attestations remain separate.',
+    'Existing university observations remain provisional, even when an individual saved result is visible. No final cold/ack or all8/semantic pass is inferred.',
+    'DB/WAL/HBC/source maps stay external with supplied source/capture size/hash pins. This index size-checks newly encountered large captures but does not independently rehash them or copy them into Git.',
+    'No physical-device, standalone Android, iOS, TalkBack speech, all251-natural or every-optional-context acceptance is implied.',
+    'Further import/export/sharing, Time Machine and history/storage breadth remain parked.',
+]
+d['portableRecordSuggestions']['status'] = 'v3-draft-inputs-only-publication-blocked'
+d['portableRecordSuggestions']['copyPolicy'] += ' Preserve all138 original index entries; new compact artifacts are separately pinned. Large DB/WAL/HBC/maps remain external-only. Provisional Nia raw files never imply accepted journey coverage.'
+d['portableRecordSuggestions']['priorStructure'] = {'record': '/workspace/dreams-life-sim/docs/verification/friends-editorial-20261020.json', 'inputs': '/workspace/dreams-life-sim/docs/verification/friends-editorial-20261020/publication-inputs.json', 'publisher': '/tmp/dreams-friends-editorial-publish.cjs', 'scope': 'Historical C36 portable139-artifact structure only; no C37 pass or publisher execution.'}
+add('/workspace/dreams-life-sim/docs/verification/production-gaps-source-checkpoint-20261021.json', 'already-pushed C37 source checkpoint; native/performance were pending at its own date')
+add('/workspace/dreams-life-sim/docs/verification/friends-editorial-20261020/publication-inputs.json', 'prior C36 portable structure only')
+add('/tmp/dreams-friends-editorial-publish.cjs', 'prior C36 publisher reference; not executed')
+add(__file__, 'v3 read/hash-only index preparation script; no verifier or runtime execution')
+d['artifacts'] = dict(sorted(d['artifacts'].items()))
+copies, references = [], []
+for number, (source, measured) in enumerate(d['artifacts'].items(), 1):
+    if '/tests/fixtures/' in source or '/tests/support/capture-legacy-incomplete-course.cjs' in source:
+        references.append({**measured, 'repositoryPath': source[source.index('/tests/') + 1:],
+                           'scope': 'Already tracked immutable fixture/producer reference; do not duplicate bytes in this publication.'})
+    else:
+        path = Path(source)
+        label = path.parent.name + '-' + path.name if path.name in ['ui.png', 'ui.xml', 'capture-log.json', 'cold-attestation.json', 'actual-checkpoint-observation.json'] else path.name
+        copies.append({'source': source, 'bytes': measured['bytes'], 'sha256': measured['sha256'],
+                       'target': 'production-gaps-20261021/inputs/' + str(number).zfill(3) + '-' + label,
+                       'scope': 'Suggested byte-exact portable copy only; an input path never implies its check passed.'})
+d['fixedCopies'] = copies
+d['historicalReferences'] = references
+d['portableRecordSuggestions']['fixedCopiesStatus'] = 'Suggestions only; coordinator publisher must refuse this draft until all pending gates close. No bytes copied by index preparer.'
+d['artifactCounts'] = {'inherited': 138, 'newCompact': len(d['artifacts']) - 138, 'totalCompact': len(d['artifacts']), 'externalLarge': len(external), 'featureSlices': 11, 'adapterSlices': 4}
+assert all(d['artifacts'][key] == value for key, value in base['artifacts'].items())
+assert not d['complete'] and not d['publicationAllowed']
+with OUT.open('x') as file:
+    json.dump(d, file, indent=2, ensure_ascii=False); file.write('\n')
+with NOTE.open('x') as file:
+    file.write('# C37 publication inputs v3 — draft only\n\n')
+    file.write('Index: `' + str(OUT) + '`. SHA256: `' + pin(OUT)['sha256'] + '`.\n\n')
+    file.write(f"All138 inherited inputs verified exact; {len(d['artifacts'])} total compact pins, {len(external)} external large-artifact pins,11 original feature slices and4 final test-adapter slices. No source edits, verifier/runtime/native execution or publication.\n\n")
+    file.write('Complete: final85f C37 regression2520/200 in1634.281s and strict; runtime-equivalent original a4be exports325mapped files/platform; same120annual seeds; actual custom Maya ten phases/five process-stop colds with separate complete raw and semantic proofs. Original failed full11/2509 and all diagnostics remain.\n\n')
+    file.write('Blocked: existing Nia university journey IN_PROGRESS (actual application143accepted and interim enrolled145 observed; final cold/ack/manifests pending), serial70performance UNRUN, coordinator final review and portable publication/commit/push. Missing file inputs: ' + str(len(missing)) + '.\n\n')
+    file.write('Large DB/WAL/HBC/maps are never copied here. Supplied large pins are source/capture records, not a new independent byte verification. PNG/XML are pinned as raw; only complete custom capture-manifest images carry coordinator-view attestation.\n')
+print(json.dumps({'output': pin(OUT), 'note': pin(NOTE), 'artifactCounts': d['artifactCounts'], 'missingFiles': missing, 'publicationAllowed': False}, indent=2))

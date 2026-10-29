@@ -1,0 +1,15 @@
+{
+  "extends": "/workspace/dreams-worktrees/appearance-semantic-labels/tests/tsconfig.json",
+  "compilerOptions": {
+    "typeRoots": [
+      "/workspace/dreams-worktrees/appearance-semantic-labels/node_modules/@types"
+    ]
+  },
+  "include": [
+    "/workspace/dreams-worktrees/appearance-semantic-labels/tests/ui/appearance-labels.test.tsx",
+    "/workspace/dreams-worktrees/appearance-semantic-labels/tests/ui/portrait-accessibility.test.tsx",
+    "/workspace/dreams-worktrees/appearance-semantic-labels/tests/ui/onboarding-flow.test.tsx",
+    "/workspace/dreams-worktrees/appearance-semantic-labels/tests/ui/new-life-review-flow.test.tsx"
+  ],
+  "exclude": []
+}

@@ -1,0 +1,102 @@
+{
+  "date": "2026-10-23",
+  "generator": "Image Gen",
+  "source": "exec-0986981b-c4a9-4617-b16a-3e6ace2d6e3c.png",
+  "sourceSha256": "27e716fa2a8709d94982476d980c4e940d19a9756927f10f7f2e2f4d14d70a53",
+  "runtimeBytes": 826836,
+  "files": [
+    {
+      "file": "cult.png",
+      "crop": "355x350+5+10",
+      "bytes": 70667,
+      "sha256": "b7ef6f719d5475969c6d9ac0e69fe5f65a909d7f53ef509bcffc008d8cc615c1"
+    },
+    {
+      "file": "philosophy.png",
+      "crop": "350x350+375+10",
+      "bytes": 74081,
+      "sha256": "dbd37dd788981ac617d316e816487d50db04ff598474a9e87c4068495e2ee60b"
+    },
+    {
+      "file": "doctrines.png",
+      "crop": "350x350+738+10",
+      "bytes": 68657,
+      "sha256": "0b71b488051eadb44e6b18195515041a680fd5d887fec7bbe489b9ed23151f4c"
+    },
+    {
+      "file": "rules.png",
+      "crop": "295x350+1130+10",
+      "bytes": 54546,
+      "sha256": "840ab8c4516dee8ae6017a8fbdd6129c1679d13b4e3249dbd1014786d9ef7394"
+    },
+    {
+      "file": "recruitment.png",
+      "crop": "352x315+5+365",
+      "bytes": 69296,
+      "sha256": "54cce98310230691102c825381d85522dd33b26f23b476a82404fe499960cfc4"
+    },
+    {
+      "file": "followers.png",
+      "crop": "370x308+360+397",
+      "bytes": 73531,
+      "sha256": "5e1f79882346f27f26bbd29f4b204363682ff422edf1fc770d4989955993032e"
+    },
+    {
+      "file": "ceremony.png",
+      "crop": "360x354+733+359",
+      "bytes": 50033,
+      "sha256": "6af6b526c8bbac6521d457b681ba8010cd26bd767bfef281375c08047206a18c",
+      "sourceSheet": "design/action-icons/symbols.png",
+      "sourceRect": [
+        340,
+        920,
+        612,
+        1226
+      ]
+    },
+    {
+      "file": "treasury.png",
+      "crop": "350x320+1092+378",
+      "bytes": 74666,
+      "sha256": "fcb6568b1b1dd5dce8c9d9fd501f81ecf9a77eed455396ba2c5719d8b2977fac"
+    },
+    {
+      "file": "headquarters.png",
+      "crop": "355x370+0+678",
+      "bytes": 74773,
+      "sha256": "f189d230fb2994077fa3876c734c58693e95562aa356421b536a704be6c02d99"
+    },
+    {
+      "file": "rivalry.png",
+      "crop": "365x325+364+718",
+      "bytes": 75560,
+      "sha256": "97dd2d1bbf94e29b669a1ea6ca707c27336df15ba66fd0433381bacbad9d9c16",
+      "sourceSheet": "design/action-icons/symbols.png",
+      "sourceRect": [
+        647,
+        921,
+        921,
+        1226
+      ]
+    },
+    {
+      "file": "scandal.png",
+      "crop": "365x340+729+715",
+      "bytes": 78212,
+      "sha256": "96a090e7fed9cc0fd7d7cf7458cddbf6475e508f324a2dbae9541e815ad151b1",
+      "sourceSheet": "design/action-icons/symbols.png",
+      "sourceRect": [
+        952,
+        951,
+        1244,
+        1219
+      ]
+    },
+    {
+      "file": "claim.png",
+      "crop": "350x350+1093+705",
+      "bytes": 62814,
+      "sha256": "ffdabe8b39b50c6d6be8af3ed742c77a59f1eeb6dd48d19ddec49b5be759e5b8"
+    }
+  ]
+}

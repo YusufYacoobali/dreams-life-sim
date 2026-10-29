@@ -1,0 +1,57 @@
+{
+  "recordedOn": "2026-10-20",
+  "baseCommit": "e3dada874032d5aa9895887096b01fbb36067390",
+  "scope": "Same120immutable pure-engine/cloud first-eligible lifetime seeds0\u2013119; decoder bound change only; not additional seeds, optional systems or native/storage acceptance",
+  "start": {
+    "event": "sweep-start",
+    "scope": "pure engine / cloud Node; first eligible choices; newborn acknowledgement flag set before engine progression; not native or SQLite",
+    "stateMode": "validated immutable",
+    "node": "v24.19.0",
+    "count": 120,
+    "startSeed": 0,
+    "gameSourceHash": "c0779428fd8b7b1757bae7e2c5e61915a84306a6037721b6840954ea422246ac",
+    "toolSourceHash": "b57b6bb3befdba4e776217b3ebf79c1fe4892f2cd7a260fa9b7e928bca75e20e",
+    "setupMs": 1931
+  },
+  "complete": {
+    "event": "sweep-complete",
+    "count": 120,
+    "startSeed": 0,
+    "completed": 120,
+    "stateMode": "validated immutable",
+    "versions": {
+      "world": 30,
+      "engine": 29,
+      "content": 7
+    },
+    "gameSourceHash": "c0779428fd8b7b1757bae7e2c5e61915a84306a6037721b6840954ea422246ac",
+    "toolSourceHash": "b57b6bb3befdba4e776217b3ebf79c1fe4892f2cd7a260fa9b7e928bca75e20e",
+    "countryCounts": {
+      "AU": 10,
+      "IT": 11,
+      "BR": 12,
+      "ZA": 10,
+      "ES": 12,
+      "US": 13,
+      "CA": 10,
+      "GB": 10,
+      "DE": 12,
+      "FR": 6,
+      "IN": 6,
+      "JP": 8
+    },
+    "ageRange": [
+      40,
+      98
+    ],
+    "maxPeople": 24,
+    "maxLedgerRows": 55199,
+    "elapsedMs": 695422
+  },
+  "exitCode": 0,
+  "stderrBytes": 0,
+  "raw": "life-sweep-compact-transactions-120-20261020.ndjson",
+  "rawSha256": "70d7f632f15caec3201d7b2a2e1b99b5cb3e9eb099768608a81a1ddac0f89859",
+  "same120TerminalWorldHashesAndMetricsExactComparedWith": "life-sweep-adult-relationships-120-20261020.ndjson",
+  "newDistinctSeeds": 0
+}

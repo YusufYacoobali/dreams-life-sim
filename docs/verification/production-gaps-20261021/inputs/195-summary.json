@@ -1,0 +1,350 @@
+{
+  "scope": "Read-only source audit; no engine commands, gameplay changes, tests, cohort, native or network research",
+  "coreSourceCommit": "c9a7f5b845694e5f8446c50115fb1fd6c3e69b03",
+  "admissionsSourceCommit": "97fc770d7d4191545f37357f4e4ac37e13d16b4d",
+  "countries": [
+    {
+      "country": "US",
+      "currency": "USD",
+      "minorDigits": 2,
+      "schoolStart": 6,
+      "secondaryStart": 12,
+      "minimumWithdrawalAge": 16,
+      "schoolEnd": 18,
+      "partTimeAge": 16,
+      "adultAge": 18,
+      "tuitionMinor": "1400000",
+      "admissionV1TuitionMinor": "1400000",
+      "studentInterestBps": 500,
+      "doctorVisitMinor": "18000"
+    },
+    {
+      "country": "CA",
+      "currency": "CAD",
+      "minorDigits": 2,
+      "schoolStart": 6,
+      "secondaryStart": 12,
+      "minimumWithdrawalAge": 16,
+      "schoolEnd": 18,
+      "partTimeAge": 16,
+      "adultAge": 18,
+      "tuitionMinor": "750000",
+      "admissionV1TuitionMinor": "750000",
+      "studentInterestBps": 250,
+      "doctorVisitMinor": "0"
+    },
+    {
+      "country": "GB",
+      "currency": "GBP",
+      "minorDigits": 2,
+      "schoolStart": 5,
+      "secondaryStart": 11,
+      "minimumWithdrawalAge": 16,
+      "schoolEnd": 18,
+      "partTimeAge": 16,
+      "adultAge": 18,
+      "tuitionMinor": "950000",
+      "admissionV1TuitionMinor": "950000",
+      "studentInterestBps": 400,
+      "doctorVisitMinor": "0"
+    },
+    {
+      "country": "AU",
+      "currency": "AUD",
+      "minorDigits": 2,
+      "schoolStart": 5,
+      "secondaryStart": 12,
+      "minimumWithdrawalAge": 17,
+      "schoolEnd": 18,
+      "partTimeAge": 16,
+      "adultAge": 18,
+      "tuitionMinor": "900000",
+      "admissionV1TuitionMinor": "900000",
+      "studentInterestBps": 250,
+      "doctorVisitMinor": "3500"
+    },
+    {
+      "country": "FR",
+      "currency": "EUR",
+      "minorDigits": 2,
+      "schoolStart": 6,
+      "secondaryStart": 11,
+      "minimumWithdrawalAge": 16,
+      "schoolEnd": 18,
+      "partTimeAge": 16,
+      "adultAge": 18,
+      "tuitionMinor": "60000",
+      "admissionV1TuitionMinor": "60000",
+      "studentInterestBps": 200,
+      "doctorVisitMinor": "1000"
+    },
+    {
+      "country": "DE",
+      "currency": "EUR",
+      "minorDigits": 2,
+      "schoolStart": 6,
+      "secondaryStart": 10,
+      "minimumWithdrawalAge": 16,
+      "schoolEnd": 18,
+      "partTimeAge": 16,
+      "adultAge": 18,
+      "tuitionMinor": "60000",
+      "admissionV1TuitionMinor": "60000",
+      "studentInterestBps": 150,
+      "doctorVisitMinor": "1000"
+    },
+    {
+      "country": "ES",
+      "currency": "EUR",
+      "minorDigits": 2,
+      "schoolStart": 6,
+      "secondaryStart": 12,
+      "minimumWithdrawalAge": 16,
+      "schoolEnd": 18,
+      "partTimeAge": 16,
+      "adultAge": 18,
+      "tuitionMinor": "150000",
+      "admissionV1TuitionMinor": "150000",
+      "studentInterestBps": 250,
+      "doctorVisitMinor": "0"
+    },
+    {
+      "country": "IT",
+      "currency": "EUR",
+      "minorDigits": 2,
+      "schoolStart": 6,
+      "secondaryStart": 11,
+      "minimumWithdrawalAge": 16,
+      "schoolEnd": 19,
+      "partTimeAge": 16,
+      "adultAge": 18,
+      "tuitionMinor": "200000",
+      "admissionV1TuitionMinor": "200000",
+      "studentInterestBps": 250,
+      "doctorVisitMinor": "1500"
+    },
+    {
+      "country": "BR",
+      "currency": "BRL",
+      "minorDigits": 2,
+      "schoolStart": 6,
+      "secondaryStart": 11,
+      "minimumWithdrawalAge": 17,
+      "schoolEnd": 18,
+      "partTimeAge": 16,
+      "adultAge": 18,
+      "tuitionMinor": "600000",
+      "admissionV1TuitionMinor": "600000",
+      "studentInterestBps": 450,
+      "doctorVisitMinor": "0"
+    },
+    {
+      "country": "IN",
+      "currency": "INR",
+      "minorDigits": 2,
+      "schoolStart": 6,
+      "secondaryStart": 11,
+      "minimumWithdrawalAge": 14,
+      "schoolEnd": 18,
+      "partTimeAge": 16,
+      "adultAge": 18,
+      "tuitionMinor": "7000000",
+      "admissionV1TuitionMinor": "7000000",
+      "studentInterestBps": 700,
+      "doctorVisitMinor": "60000"
+    },
+    {
+      "country": "JP",
+      "currency": "JPY",
+      "minorDigits": 0,
+      "schoolStart": 6,
+      "secondaryStart": 12,
+      "minimumWithdrawalAge": 15,
+      "schoolEnd": 18,
+      "partTimeAge": 16,
+      "adultAge": 18,
+      "tuitionMinor": "600000",
+      "admissionV1TuitionMinor": "600000",
+      "studentInterestBps": 150,
+      "doctorVisitMinor": "2000"
+    },
+    {
+      "country": "ZA",
+      "currency": "ZAR",
+      "minorDigits": 2,
+      "schoolStart": 7,
+      "secondaryStart": 13,
+      "minimumWithdrawalAge": 15,
+      "schoolEnd": 18,
+      "partTimeAge": 16,
+      "adultAge": 18,
+      "tuitionMinor": "4500000",
+      "admissionV1TuitionMinor": "4500000",
+      "studentInterestBps": 650,
+      "doctorVisitMinor": "45000"
+    }
+  ],
+  "staticReferenceChecks": {
+    "twelveTuitionQuotesMatchCurrentNativeMinorUnits": true,
+    "allMinimumLeavingAgesWithinSecondaryAndBelowAssessment": true,
+    "allCurrentAdultAges18AndPartTimeAges16": true
+  },
+  "findings": [
+    {
+      "id": "country-relocation-school-01",
+      "priority": "P1",
+      "status": "Source-path defect; command reproduction pending coordinator scope",
+      "summary": "Work relocation to Italy can create a full-time job that next-month school auto-enrolment makes invalid",
+      "trigger": "Age18, no secondary qualification, no explicit school withdrawal; accepted Italy cleaner/retail/barista/warehouse work offer",
+      "evidence": [
+        "src/game/rules.ts:36",
+        "src/game/content/jobs.ts:9",
+        "src/game/systems/relocation.ts:60",
+        "src/game/systems/relocation.ts:184",
+        "src/game/systems/education.ts:129",
+        "src/game/model.ts:198"
+      ],
+      "effect": "educationMonth enrols secondary before monthly work, then validateWorld throws Invalid current employment",
+      "recommendation": "Use a shared destination-school auto-enrol predicate to refuse work offers/moves that would leave the actor in destination compulsory school. Keep explicit withdrawal, qualification, current age rules and old offer history unchanged."
+    }
+  ],
+  "corePins": [
+    {
+      "path": "src/game/rules.ts",
+      "bytes": 7661,
+      "sha256": "38c1199f79cc266b5350064af3c35cd6fb87c2e8788edf7f73cefe4be3b4979a"
+    },
+    {
+      "path": "src/game/countries.ts",
+      "bytes": 3376,
+      "sha256": "45f5b6ef166c808164840761c92cc461df3e686152f73bc1f54f105961234ed2"
+    },
+    {
+      "path": "src/game/money.ts",
+      "bytes": 8748,
+      "sha256": "59c00d59faa873a6e8a99e0e3b2eefba4387b4286f3749e6cd392871dbabe964"
+    },
+    {
+      "path": "src/game/valuation.ts",
+      "bytes": 4043,
+      "sha256": "c73a25f9023dd3249d4f4caa5305157123b090dec2107f46ab2dc684c49f830b"
+    },
+    {
+      "path": "src/game/model.ts",
+      "bytes": 53963,
+      "sha256": "502e8a45330ad808948fbaec3b453bda245aa0af0d31b64634a6b41c6f46d6f4"
+    },
+    {
+      "path": "src/game/engine.ts",
+      "bytes": 29475,
+      "sha256": "be45f2853fff0c1b713fb519984067463ac76b5bca16aefc17a9172144e8a390"
+    },
+    {
+      "path": "src/game/systems/education.ts",
+      "bytes": 14290,
+      "sha256": "6d775900357840a7612354667ab7d0d78e2c40f1163cd049523a292350c8d05a"
+    },
+    {
+      "path": "src/game/systems/educationRecovery.ts",
+      "bytes": 11042,
+      "sha256": "ca8fe222a429c3bd086c389f30d7cfd71d6398159d3c732a705d40c16a54486e"
+    },
+    {
+      "path": "src/game/systems/school.ts",
+      "bytes": 14487,
+      "sha256": "15baf71fd1f000bd77fbab00e2112b21c7d5221e24092743f3cf065495a4a22c"
+    },
+    {
+      "path": "src/game/systems/hourlyWork.ts",
+      "bytes": 4120,
+      "sha256": "de7d4c2aaee8ee7cec000d4d07c1dc9fe09b67385f083f2b30af6d6bd61d12c0"
+    },
+    {
+      "path": "src/game/systems/work.ts",
+      "bytes": 18559,
+      "sha256": "5a132830df42bc06e8e8710e4e07283d9de8c9ac9e47f9eeb0c84cd6af727fce"
+    },
+    {
+      "path": "src/game/systems/common.ts",
+      "bytes": 5240,
+      "sha256": "d6270d31b80720ec45da783ee1d9c64e0475cda3a674a4f00bfdcfc4dc1d0a7c"
+    },
+    {
+      "path": "src/game/systems/finance.ts",
+      "bytes": 6503,
+      "sha256": "c843ebffdcbe558cc5ce40ba6960e3728667c3d64d6a8857fcc5741e62e23008"
+    },
+    {
+      "path": "src/game/systems/health.ts",
+      "bytes": 31829,
+      "sha256": "7ba437267ac929ca575c58f26ac4360536dedba6ead8afed1bfd68da745bf1fb"
+    },
+    {
+      "path": "src/game/systems/travel.ts",
+      "bytes": 17904,
+      "sha256": "2d0cad94c9db329a2d59cedd1f0c07d7b83f5087e0ce6c0b0ae398185d7054ba"
+    },
+    {
+      "path": "src/game/systems/travelSchemas.ts",
+      "bytes": 3054,
+      "sha256": "52f8d869db5080bbebc1b79131d31b8c956280d65063317f31d17286ed64436f"
+    },
+    {
+      "path": "src/game/systems/relocation.ts",
+      "bytes": 23698,
+      "sha256": "f437fb4f29ee6c435abe437c8f5299c83d96521e1fb9bc63b2c4e176dd036b29"
+    },
+    {
+      "path": "src/game/systems/relocationValidation.ts",
+      "bytes": 9157,
+      "sha256": "444537d0c44e0e1d562d217e1edb822bce51c5a87d3000b28429ef387a7689ea"
+    },
+    {
+      "path": "src/game/systems/teenRelationships.ts",
+      "bytes": 9476,
+      "sha256": "13a5a4e73c8dfb5ecf275a48b0815b36219a338f1ef2861e1aca22b21a21fa2b"
+    },
+    {
+      "path": "src/game/systems/teenRelationshipSchemas.ts",
+      "bytes": 3537,
+      "sha256": "9f8db277d83ec6c8e8903baebe3413406feed791cd8765a331594747c824fc3a"
+    },
+    {
+      "path": "src/game/systems/teenRelationshipValidation.ts",
+      "bytes": 5401,
+      "sha256": "4e56d5c9920187b7ca5d7d803249c8713d08fd7a02a876d79a4ec7ad0c25bb29"
+    },
+    {
+      "path": "src/game/systems/relationships.ts",
+      "bytes": 29214,
+      "sha256": "c0605114dd74b506f8ebd26ab8ce5106caf628ae3b516664b217f63c9d601831"
+    }
+  ],
+  "admissionsPins": [
+    {
+      "path": "src/game/systems/universityAdmissionSchemas.ts",
+      "bytes": 2997,
+      "sha256": "c4b19c9929a9a16232b0d71573f3ef7a68e7b4c327af36ab53ec5e336ac84fdc"
+    },
+    {
+      "path": "src/game/systems/universityAdmissions.ts",
+      "bytes": 10606,
+      "sha256": "e1e96edee8b9a04da7d3e4573ab649aa0f1a374797dbe110e57a9e905873b16e"
+    },
+    {
+      "path": "src/game/systems/universityAdmissionValidation.ts",
+      "bytes": 7313,
+      "sha256": "4aa2bab962eddea69836ed937132526035aa2fc856695d5470d3e87c474eafa9"
+    },
+    {
+      "path": "src/game/systems/education.ts",
+      "bytes": 15634,
+      "sha256": "723474cce1cbc43db85c0aecf12ecef1767a9267e83e2fe1dfb7a48f4c56d9be"
+    },
+    {
+      "path": "src/game/systems/scholarships.ts",
+      "bytes": 9517,
+      "sha256": "dc25ffdd74a88cc1a325b522fa99e4575bf9880b6443d155372d319144e86b3c"
+    }
+  ]
+}

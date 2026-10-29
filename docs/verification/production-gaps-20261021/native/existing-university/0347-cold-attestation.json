@@ -1,0 +1,12 @@
+{
+  "complete": true,
+  "stopped": true,
+  "restarted": true,
+  "from": "withdrawal-saved",
+  "to": "cold-withdrawal-saved",
+  "evidence": {
+    "file": "/tmp/dreams-c37-native-captures/cold-withdrawal-saved/capture-log.json",
+    "bytes": 3299,
+    "sha256": "701e85605e2f43d5fa10c526758f195cbc801a9a5133bde1a7f8c67c762da97c"
+  }
+}

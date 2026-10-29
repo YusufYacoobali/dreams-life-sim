@@ -1,0 +1,114 @@
+{
+  "sourceCommit": "33b6a5fcb0aae73dfc235a15394b34d8afda00cc",
+  "versions": {
+    "world": 38,
+    "engine": 39,
+    "content": 13,
+    "database": 18,
+    "checkpoint": "v4"
+  },
+  "cohortReceipt": {
+    "format": "dreams-coordinator-gate-execution-v1",
+    "sourceCommit": "33b6a5fcb0aae73dfc235a15394b34d8afda00cc",
+    "sourceSnapshot": "/tmp/dreams-production-finish-accepted-source.json",
+    "sourceSnapshotSha256": "2e08fd925c673437ff7de7c76c0fd79d02832617d0014efc1c3e471782fe9b56",
+    "root": "/workspace/dreams-worktrees/project-callback-pacing-test",
+    "argv": [
+      "node",
+      "tools/current-policy/run-professional-v3.cjs",
+      "--registration",
+      "/tmp/dreams-production-finish-accepted-policy-registration-authorized.json",
+      "--all",
+      "--output",
+      "/workspace/.cache/dreams-current-c39-policies/professional-v3"
+    ],
+    "startedAt": "2026-10-21T07:55:51.609643+00:00",
+    "before": {
+      "files": 688,
+      "snapshotSha256": "2e08fd925c673437ff7de7c76c0fd79d02832617d0014efc1c3e471782fe9b56",
+      "status": "exact"
+    },
+    "complete": true,
+    "endedAt": "2026-10-21T08:04:40.823106+00:00",
+    "elapsedSeconds": 529.213,
+    "exitCode": 0,
+    "raw": {
+      "file": "/tmp/dreams-production-finish-accepted-professional-v3.out",
+      "bytes": 8154923,
+      "sha256": "cb91675f8b610b3a0f3af4427b9a87a42c3c81c21b157232ef522e260cdca3a8"
+    },
+    "after": {
+      "files": 688,
+      "snapshotSha256": "2e08fd925c673437ff7de7c76c0fd79d02832617d0014efc1c3e471782fe9b56",
+      "status": "exact"
+    }
+  },
+  "rawPins": [
+    {
+      "file": "/workspace/.cache/dreams-current-c39-policies/professional-v3/manifest.json",
+      "bytes": 21467,
+      "sha256": "08eaa8f6fde499dc1907fd83ff04d95bc4d46d0ce78d0db10202781cf9dcaa65"
+    },
+    {
+      "file": "/workspace/.cache/dreams-current-c39-policies/professional-v3/result.json",
+      "bytes": 8148582,
+      "sha256": "280bc605309c55877383ed846ba7e874916174e83199ecfb2cf27a5cd9e82649"
+    },
+    {
+      "file": "/workspace/.cache/dreams-current-c39-policies/professional-v3/CA-result.json",
+      "bytes": 793324,
+      "sha256": "b68108ada1efb087a643dd8d9cceb1d90cb7f06ec8576e57c60e18b439c03950"
+    },
+    {
+      "file": "/workspace/.cache/dreams-current-c39-policies/professional-v3/CA-commands.json",
+      "bytes": 35945,
+      "sha256": "c3de1121b1eec1be7d68a10959084da7f94eab151aaaf476b606d54fe119341a"
+    },
+    {
+      "file": "/workspace/.cache/dreams-current-c39-policies/professional-v3/CA-final.checkpoint.json",
+      "bytes": 925334,
+      "sha256": "255cdf4da51302d4d896cf913ce9d07f1ede2c0a08d6620248b2b9dc8b36916c"
+    },
+    {
+      "file": "/tmp/dreams-production-finish-accepted-professional-v3-receipt.json",
+      "bytes": 1293,
+      "sha256": "63747fa9a3101e25a645d7de8539534a9dc32e397771506b314eddecbbcc66cb"
+    },
+    {
+      "file": "/tmp/dreams-production-finish-accepted-source.json",
+      "bytes": 75993,
+      "sha256": "2e08fd925c673437ff7de7c76c0fd79d02832617d0014efc1c3e471782fe9b56"
+    },
+    {
+      "file": "/tmp/dreams-production-finish-accepted-policy-registration-authorized.json",
+      "bytes": 2597,
+      "sha256": "5656dab6e031df8ff7ac291abed6188eaec2d87ad78b64181aff692c85788e57"
+    },
+    {
+      "file": "/tmp/dreams-production-finish-accepted-professional-v3.out",
+      "bytes": 8154923,
+      "sha256": "cb91675f8b610b3a0f3af4427b9a87a42c3c81c21b157232ef522e260cdca3a8"
+    },
+    {
+      "file": "/workspace/dreams-worktrees/camera-copy-correction/docs/editorial/c39-20261021/ledger.json",
+      "bytes": 425321,
+      "sha256": "d23aa90c1e6e75ac1db06e8a48edb68efb63c6309b34a33e115167d73ba6c611"
+    },
+    {
+      "file": "/workspace/dreams-worktrees/camera-copy-correction/docs/editorial/c39-20261021/current-source-pins.json",
+      "bytes": 55245,
+      "sha256": "f0092bf66b924dfbb1e399e2215a8c94b19ae7931feb484a2b4f4d305e8fee53"
+    },
+    {
+      "file": "/tmp/dreams-c39-editorial-review-input-20261021.json",
+      "bytes": 472370,
+      "sha256": "e85f195f894440d751a5468c76d633bda541251d9eeff166991966fa9d418f79"
+    }
+  ],
+  "sourceRelationship": "All335 app/src file hashes in the source-reviewed corrected ledger exactly match accepted33b source manifest. This analysis reads artifacts only; no source/runtime/world/checkpoint codec modules imported.",
+  "checkpointInspection": "Standard gzip/base64/JSON inspection of persisted main and people blocks only. Ledger blocks were not decoded; this is not an independent production-codec or full canonical-world validation.",
+  "producerRecordedTraceSha256": "83605814f02af9e5809108584b3a6bbdff11329fb8a68f58eaa62b632f9712ad",
+  "independentPureJsonTraceSha256": "83605814f02af9e5809108584b3a6bbdff11329fb8a68f58eaa62b632f9712ad",
+  "producerRecordedFinalWorldSha256": "1a741bccdc3af71fbad06b7c230de873ccb1c077ddc758e78f59ea119e30ab5b",
+  "independentFullWorldHashRecomputed": false
+}

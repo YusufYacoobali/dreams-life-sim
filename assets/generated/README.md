@@ -1,0 +1,200 @@
+# Original game artwork
+
+On 24 October 2026, selected cluttered action illustrations were replaced with single-subject variants. [The audit](../../docs/ICON_AUDIT.md) records retained and changed entries; [source sheets and registration](../../design/action-icons/README.md) preserve original generation metadata. Existing artwork IDs remain stable. Clear family/health/category symbols, portraits, product/destination previews and gameplay scenes retain their original art.
+
+Runtime PNGs received lossless encoding optimization on 23 October 2026. Decoded pixels, alpha, dimensions and colour profiles are preserved; current manifests describe the new encoding. The original generated-file hashes below describe provenance, with original encoded bytes retained in Git revision `9101307`. Obsolete V1 portraits and prototypes have been retired; the current V2 source inputs remain in `design/avatar-v2`. See [the size and archive policy](../../docs/PROJECT_SIZE.md).
+
+## Cult Leader career — 23 October 2026
+
+The twelve transparent illustrations in [cult/](cult/README.md) were generated
+with Image Gen, matching the existing blue/gold career family. The unchanged
+source is retained outside the runtime bundle; the local derivatives total
+less than 850 KB. The source rectangles and hashes are in
+[the manifest](cult/manifest.json). Krea was not used. Cult management and event
+popups use these bundled images; named followers retain real character
+portraits. See [the feature verification](../../docs/verification/cult-career/README.md)
+for browser review and export scope.
+
+school-atlas.png was generated on 19 October 2026 as an original six-subject
+school/evening-study family. The unmodified 1536×1024 RGBA original remains at
+/workspace/generated_images/exec-535e69eb-34ca-4425-b0a2-15d73d4b8cc9.png.
+SHA-256: `60800298fd36cb6eeb74a51f7044b619f460f430ea7df786f758ecbb1158671e`.
+
+The brief specifies rounded, softly dimensional cartoon objects, consistent
+lighting, jewel blues/warm gold/coral, transparent gaps and no text/logos. Its
+six subjects are a study book/pencil, shared class project, arcade birthday,
+school-trip minibus, report folder and evening book/lamp/work briefcase. Measured
+rectangles in src/assets/schoolLayout.ts clip the original pixels. The apparent
+coloured background in the raw RGB preview is fully transparent in the gaps;
+browser compositing confirms clean silhouettes on light/dark cards at 48/128px.
+No opaque subject reaches a crop boundary; measured edge alpha is at most 1/255.
+
+An image-tool edit attempt is retained outside the bundle at
+/workspace/generated_images/exec-2ea9702b-c358-4952-9442-4ae9510ab297.png.
+The original was selected for its better spacing after composited inspection.
+The optional tools/preview-school.cjs reproduces the gallery. Status: generated,
+source/browser reviewed, exported and integrated into study, reports, saved
+arcade/project plans and evening classes. The recorded browser gallery is in
+docs/verification/school-art-20261019.png. Native-device acceptance remains pending. The trip subject is reserved for later
+school-trip content and is not evidence of a new trip mechanic.
+
+activity-atlas.png was generated with the image-generation tool on 18 October
+2026 for Dreams: Life Simulator. The original output is retained separately at
+/workspace/generated_images/exec-3acd6307-af4d-4200-a67c-6aedfb64e8f3.png.
+
+The 1448×1086 RGBA atlas has twelve 362×362 cells: education, career,
+relationships, property; money, vehicle, travel, pets; wellbeing, crime,
+journal, birthday. The source PNG has transparent pixels and contains no UI text.
+The native Illustration component clips cells without editing the source.
+
+Generation direction: original friendly rounded cartoon objects, softly
+dimensional shading, consistent lighting, strong silhouettes, vivid colours,
+transparent background, no labels or logos. The reference style informed the
+brief; the reference images were not copied or sliced into production art.
+
+Status: generated and visually reviewed at source resolution. Integrated into
+the asset registry. Actual-size running-app review remains pending. This is a
+first sample family, not completion of the full artwork manifest.
+
+death-memorial.png was generated on 18 October 2026 for the dedicated death
+screen: a respectful rounded stone memorial with a floating pink heart, on
+transparent background. The unmodified original remains at
+/workspace/generated_images/exec-7f8fb977-0638-4606-b446-060824c47969.png.
+Source-resolution inspection is complete; native-device comparison remains
+pending. This illustration follows the dedicated death reference's subject and
+palette without copying its pixels.
+
+portrait-layers.png was generated on 18 October 2026 as an original grayscale
+layer sheet with eight age stages and seven removable hairstyles. The original
+1254×1254 RGBA output remains at
+/workspace/generated_images/exec-fe1a70af-e12a-425f-8f7d-700b94699dbe.png.
+
+The source grid is not perfectly aligned. Measured source rectangles in
+src/assets/portraitLayout.ts clip it without changing its pixels. The native
+CharacterPortrait renderer composes a tint mask with multiply shading, applies
+one of four face proportions, six skin tones, eight hair choices (including
+bald), five hair colours and age-based greying. Gender identity does not select
+or restrict appearance.
+
+Reviewed the original output and a browser rendering at 120 pixels covering
+eight ages of the same DNA plus 24 skin/hair/shape combinations. The inspection
+harness is tools/preview-portraits.cjs. It establishes clipping/composition
+feasibility, not Android/iOS blend-mode support, native performance or final
+reference acceptance. Native rendering still needs device validation.
+
+ownership-atlas.png was generated on 18 October 2026 as an original sheet of
+sixteen homes, vehicles, possessions and portfolio illustrations. The unmodified
+1376×1143 RGBA original remains at
+/workspace/generated_images/exec-56dc7fa2-20e1-4493-ac93-7f1302cb5aba.png.
+Measured source regions in src/assets/ownershipLayout.ts preserve aspect ratios;
+generic building/car categories are reused across related catalogue entries.
+All sixteen subjects were inspected in the browser at 128px using
+tools/preview-ownership.cjs. A neighbour-pixel artefact below the guitar was
+identified and excluded by its source rectangle. Native-device fidelity remains
+pending.
+
+health-legal-atlas.png was generated on 18 October 2026 as sixteen original
+time/health/legal objects. The unmodified 1254×1254 RGBA output remains at
+/workspace/generated_images/exec-1f4c10ed-d9b2-4e73-bacc-8098506a2ee9.png.
+Measured rectangles in src/assets/healthLegalLayout.ts preserve its nonuniform
+object spacing. Subjects include rewind, doctor/medicine/care, exercise,
+meditation, sleep, diet, court/police/prison/handcuffs, justice, prison meals,
+visits and release. Browser inspection at 128px found a meal-tray neighbour
+pixel beside the scales; the measured boundary excludes it without editing
+the source. The rewind icon is integrated into Time Machine; other subjects
+are registered for expanded systems. Native-device fidelity remains pending.
+
+family-atlas.png was generated on 18 October 2026 as twelve original family
+objects (rings, rose, hearts, gift, carriage, bottle, adoption teddy, blanket,
+will, breakup, family tree and conversation). The unmodified 1448×1086 RGBA
+original remains at
+/workspace/generated_images/exec-129eebd9-1e7e-4d11-b484-1d64bb8be799.png.
+Measured source regions in src/assets/familyLayout.ts avoid nominal-cell
+overlaps. All twelve subjects were browser-reviewed at 128px using
+tools/preview-family.cjs; carriage/bottle and teddy/tree neighbour pixels were
+found and excluded through clipping. Native-device fidelity remains pending.
+
+
+fame-business-atlas.png was generated on 18 October 2026 as sixteen original
+social/fame/business objects. The unmodified 1254×1254 RGBA original remains at
+/workspace/generated_images/exec-445679b4-df9e-4b03-8758-01665264bfc4.png.
+Source and 128px browser composition were inspected. Measured rectangles in
+src/assets/fameBusinessLayout.ts retain the full van/briefcase and exclude
+their pixels from the neighbouring laptop/growth subjects. The source PNG
+was not edited. Social/fame and business subjects are integrated into their
+respective overview, management and confirmation flows. Native-device fidelity remains pending.
+
+career-atlas.png contains sixteen original career/training illustrations generated
+on 18 October 2026. Initial output remains at
+/workspace/generated_images/exec-9718fa50-623d-41c0-9d8c-d07ca5580a77.png.
+An image-tool edit removed a shoe side emblem; its output was copied unchanged
+from /workspace/generated_images/exec-b7274d0d-fb80-45fd-b2ee-ab9c392ef28e.png.
+SHA-256: b4e3cb00a4741517b64aa46d4b3bf6641c1347a291287410b2f1226d30028327.
+Measured rectangles in src/assets/careerLayout.ts were inspected at source and
+in the 128px browser composition tools/preview-careers.cjs. Full objects and
+transparent gutters are retained. Acting/model/sport/music/politics/training subjects are
+integrated; remaining career subjects are registered for subsequent paths.
+Native-device fidelity remains unverified.
+
+
+Travel artwork (`travel-atlas.png`) was generated for this project and copied unchanged from `/workspace/generated_images/exec-efa1c534-0024-4e61-a981-d2d7f5d647b1.png`. SHA-256: `420a9f8cdaa7a399b924fc2bf626898441c95999e8a2897745c7aad940ab6574`. The twelve destination illustrations and four travel subjects have measured source rectangles in `src/assets/travelLayout.ts`. All sixteen were inspected at original resolution and in a 128px browser composition; no adjacent artwork is clipped into the regions. The postcards are illustrative compositions rather than geographical photographs. Source generation and browser crops do not establish native-device fidelity.
+
+
+## Retired welcome hero — historical opening experience
+
+The former `welcome-hero.png` was an original image generated for the reference 04 welcome composition. Its source was `/workspace/generated_images/exec-b34b0c5e-300b-46c5-a3ff-64a101522361.png`; SHA-256 `8973d44ad6d8a2c7c4e00e32f5e7b794e6efea1668e836e25b74c6bd304c5459`. It depicted a fictional coastal city at sunset with a backpacked figure. It was removed from the welcome screen and asset directory on 2026-10-23; this entry preserves its provenance only.
+
+The replacement in `src/ui/OpeningScene.tsx` uses native SVG paths and circles on a solid navy background. Image generation supplied a small branching-path concept (`/workspace/generated_images/exec-9c22b7af-2c31-4bfa-b3b8-4f46b8529649.png`), interpreted as a restrained vector motif with a heart, star and leaf. No generated bitmap or scenery is loaded by the redesigned screen. The existing root ink cinematic is retained unchanged.
+
+## Household pets and reserved leisure art
+
+`pets-leisure-atlas.png` is the unmodified 1448×1086 RGBA image-generation
+transparency edit of the original opaque pet/leisure draft. The generated source
+is `/workspace/generated_images/exec-5acc3ce8-463c-4fc8-9372-5b6f818c4856.png`;
+SHA-256 `a4c124c8bca59e84ad175e8eaa136bc15f54291745043bfce845655bbd44be26`.
+The older RGB source is preserved in the deferred-work archive. Measured regions
+in `src/assets/petsLeisureLayout.ts` exclude neighbouring objects, including a
+stethoscope fragment above the chess pieces. Sixteen subjects were inspected at
+48/128px on white and actual dark-card backgrounds; the browser gallery is
+`docs/verification/pets-art-candidate-20261019.png`. Eight subjects (four species,
+paw, food, play and vet) are integrated into world-26 pet flows. The remaining
+hobby/entertainment art is reserved and does not establish those mechanics.
+Species illustrations do not claim a separate portrait for every adoption
+archetype. Native-device fidelity remains unverified.
+
+World 27 registers the remaining eight leisure subjects for actual hobby and
+paid-outing flows. All sixteen pet/leisure subjects now have connected uses;
+this does not establish the remaining hobby/media reference catalogue or native
+visual acceptance. The PNG/rectangles are unchanged from the reviewed source.
+
+## Reference polish — event, pet and catalogue artwork
+
+The October22 polish adds24 original event/pet illustrations in `polish/` and
+forty independent home/vehicle subjects in `catalogue-homes.png` and
+`catalogue-vehicles.png`. These were generated with the built-in image generation
+workflow, matching the rounded, colourful established activity/ownership art.
+Krea was not used. Runtime images are bundled locally and need no generation
+service or network connection.
+
+`design/polish/event-icons.png` and `design/polish/pet-icons.png` preserve the
+generated RGBA source sheets. `tools/build-polish-art.py` registers their alpha
+components and fits each intact illustration into a256px transparent sprite;
+it does not repaint, tint or stretch the art. `polish/manifest.json` records
+source hashes, rectangles and runtime hashes. `PolishArt` uses predictable
+40px row or64px popup footprints. The new subjects cover childhood, friends,
+family, school, surprises, everyday life, health, archives, settings, banking,
+four pet species, care and memorials.
+
+The two catalogue atlases remain unchanged from their generated source files.
+`catalogue-art.json` and `src/assets/catalogueLayout.ts` register twenty distinct
+homes and twenty distinct vehicles; all prior catalogue IDs and prices remain
+valid. The original seven possessions retain their existing illustrations.
+The new event/pet sprites total1,833,142bytes, and the two catalogue atlases
+total4,270,037bytes. Their transparent bounds and source hashes were checked.
+
+See [the integrated review](../../docs/verification/product-polish/README.md)
+and [the catalogue gallery](../../docs/verification/catalogue-polish/README.md).
+The browser captures show actual application component trees in light/dark
+themes and small/large-text layouts. Android/iOS Hermes exports bundle all26
+new runtime PNG files unchanged. These checks do not establish native-device
+visual or GPU acceptance.

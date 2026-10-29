@@ -1,0 +1,61 @@
+{
+  "format": "dreams-c39-ui-native-http-context-v1",
+  "sourceCommit": "83adaea6f92523d04a27df2e77b11e0a8b14ef1d",
+  "sourceSnapshot": {
+    "file": "/tmp/dreams-production-ui-complete-source.json",
+    "bytes": 77733,
+    "sha256": "85b203f84cc1e4f06b931794adaabfebee400b142155b6ea7443bb4b8e066e7d"
+  },
+  "nativeSourceManifest": {
+    "file": "/tmp/dreams-native-cohort-c39-ui-complete-source-complete.json",
+    "bytes": 77900,
+    "sha256": "6120129b91b7a8a199e4c9306ada0aeba3ec70309613dd32f3b4b411c90099a4"
+  },
+  "producer": {
+    "file": "/tmp/dreams-c39-ui-complete-native-http-proof.py",
+    "bytes": 15507,
+    "sha256": "b073effd3855f3716515786f87dca84426ae1b36cbb2a0ed3bed635d8ee83e45"
+  },
+  "requestStartedAtUnixNs": 1792573716280769458,
+  "manifestRequest": {
+    "url": "http://127.0.0.1:8081/",
+    "headers": {
+      "expo-platform": "android",
+      "expo-protocol-version": "1",
+      "accept": "application/expo+json",
+      "cache-control": "no-cache"
+    }
+  },
+  "actualMetro": {
+    "pid": 217646,
+    "command": [
+      "node",
+      "--dns-result-order=ipv4first",
+      "./node_modules/expo/bin/cli",
+      "start",
+      "--localhost",
+      "--port",
+      "8081",
+      "--max-workers",
+      "1"
+    ],
+    "startTicks": "15490935"
+  },
+  "uniqueCache": "/tmp/dreams-production-ui-complete-native-cache",
+  "actualMetroLogAtPrepare": {
+    "file": "/tmp/dreams-production-ui-complete-native-metro.log",
+    "bytes": 551,
+    "sha256": "af74a8f6ee9a76c2cca26ad691717e30cba57dd90b37423c2a09b3b582081822"
+  },
+  "cacheFilesBefore": [
+    {
+      "path": "metro-file-map-expo-2008d1c58a1c06fb5b774dd445c5ddfe-975164cd98f5230ca7649682c40418d1",
+      "bytes": 76707,
+      "mtimeNs": 1792573675181616038
+    }
+  ],
+  "transformCacheExistedBefore": false,
+  "processStartLowerUnixNs": 1792573673350000000,
+  "cacheFreshnessScope": "Root-restarted Metro dedicated cache; the actual before inventory and process-start lower bound are retained. Exact source-map bytes are checked independently. transformCacheExistedBefore reports observed state; do not infer an empty cache or which client created transforms.",
+  "tmpdirAttribution": "Coordinator-declared exact startup TMPDIR plus actual before/after cache observation. /proc PID environ and cwd are unreadable here; no retry/bypass."
+}

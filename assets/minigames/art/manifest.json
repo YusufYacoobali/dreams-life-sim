@@ -1,0 +1,109 @@
+{
+  "created": "2026-10-22",
+  "sources": [
+    {
+      "kind": "backgrounds",
+      "generator": "Image Gen",
+      "originalFilename": "exec-fc99bf47-6082-4453-a72e-f4b8b949b850.png",
+      "sha256": "c0897940795d9ebf11d3b4b65ba207fd3a3dc0ac8becfcd5091ac746e9582210",
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "kind": "transparentSprites",
+      "generator": "Image Gen",
+      "originalFilename": "exec-cf639763-1abf-4aab-b6ec-4b5ea2853f83.png",
+      "sha256": "f4473a17a61140f5192175411ed1823b193e037bb7b3ad12b9d5ad7d0d95a3df",
+      "width": 1536,
+      "height": 1024
+    }
+  ],
+  "runtimeBytes": 2407013,
+  "maximumDecodedRGBABytes": 9779152,
+  "files": [
+    {
+      "file": "ball.png",
+      "bytes": 125688,
+      "sha256": "3c908318c5d7c705063ba00e3bcb17cd59b8729f6fa580c9bfd62c9ddf4b02ee",
+      "width": 256,
+      "height": 252
+    },
+    {
+      "file": "dial.png",
+      "bytes": 258013,
+      "sha256": "abcf30f735220d1b1b60adf0080268b3558af8b160c23fb780fffd867d11f3c0",
+      "width": 357,
+      "height": 351
+    },
+    {
+      "file": "earth.png",
+      "bytes": 526334,
+      "sha256": "4d965ffb1f370b26a25444a0f8eea496797b52fb3b60689badea3a75f34963f1",
+      "width": 710,
+      "height": 353
+    },
+    {
+      "file": "goal.png",
+      "bytes": 294356,
+      "sha256": "692955c0243825f71b8679d30207b717071a50e7e01cdee842b43fe8609a180e",
+      "width": 554,
+      "height": 251
+    },
+    {
+      "file": "keeper-dive.png",
+      "bytes": 155121,
+      "sha256": "f13a817f82db9baa6615a2ffd2470051ab1593ac9cd794ad1de4a7a31b569b0f",
+      "width": 518,
+      "height": 206
+    },
+    {
+      "file": "keeper.png",
+      "bytes": 160819,
+      "sha256": "343e1d6988b51bfdd365d5df7c0d56218d0d9f039550c156c1cff2bed7d64500",
+      "width": 320,
+      "height": 340
+    },
+    {
+      "file": "safe.webp",
+      "bytes": 91578,
+      "sha256": "ba93a779e9feed387858923561efeee8983bc5d8cc4738749ebfb91172423ac5",
+      "width": 512,
+      "height": 768
+    },
+    {
+      "file": "ship.png",
+      "bytes": 162156,
+      "sha256": "478b6f9dd0a04590a2e7aa17655383501361f42204f8d12710ff4368d87027fb",
+      "width": 305,
+      "height": 285
+    },
+    {
+      "file": "space.webp",
+      "bytes": 24148,
+      "sha256": "ed90640243341bb9f8bd336fa053d6bd239bcbfcc04218b19c118d583fe6c6e3",
+      "width": 512,
+      "height": 768
+    },
+    {
+      "file": "stadium.webp",
+      "bytes": 176526,
+      "sha256": "c67702531cd12f5a05c307867e92d7deb277b3008a9fc3c2015a173cba706211",
+      "width": 512,
+      "height": 1024
+    },
+    {
+      "file": "station.png",
+      "bytes": 392560,
+      "sha256": "b9995310ddd761afd352caede616dc5229bcf71c9406ec9372bdd5074e879424",
+      "width": 776,
+      "height": 277
+    },
+    {
+      "file": "thruster.png",
+      "bytes": 39714,
+      "sha256": "4bbe730882cd16ded0d78b78cb6e9bd49019d2f83035faae264b98a739e434cd",
+      "width": 110,
+      "height": 338
+    }
+  ]
+}

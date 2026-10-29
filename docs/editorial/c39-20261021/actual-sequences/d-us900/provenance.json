@@ -1,0 +1,107 @@
+{
+  "sourceCommit": "33b6a5fcb0aae73dfc235a15394b34d8afda00cc",
+  "versions": {
+    "content": 13,
+    "engine": 39,
+    "world": 38
+  },
+  "actualWholeCohortReceipt": {
+    "format": "dreams-coordinator-gate-execution-v1",
+    "sourceCommit": "33b6a5fcb0aae73dfc235a15394b34d8afda00cc",
+    "sourceSnapshot": "/tmp/dreams-production-finish-accepted-source.json",
+    "sourceSnapshotSha256": "2e08fd925c673437ff7de7c76c0fd79d02832617d0014efc1c3e471782fe9b56",
+    "root": "/workspace/dreams-worktrees/project-callback-pacing-test",
+    "argv": [
+      "node",
+      "tools/current-policy/run-editorial-v2.cjs",
+      "--registration",
+      "/tmp/dreams-production-finish-accepted-policy-registration-authorized.json",
+      "--all",
+      "--output",
+      "/workspace/.cache/dreams-current-c39-policies/editorial-v2"
+    ],
+    "startedAt": "2026-10-21T08:22:45.020904+00:00",
+    "before": {
+      "files": 688,
+      "snapshotSha256": "2e08fd925c673437ff7de7c76c0fd79d02832617d0014efc1c3e471782fe9b56",
+      "status": "exact"
+    },
+    "complete": true,
+    "endedAt": "2026-10-21T08:32:53.310251+00:00",
+    "elapsedSeconds": 608.289,
+    "exitCode": 0,
+    "raw": {
+      "file": "/tmp/dreams-production-finish-accepted-editorial-v2.out",
+      "bytes": 834714,
+      "sha256": "c1304730115d08b682454a0c6052c9151a67b8e9ebf198b0e469c1a473a8daf5"
+    },
+    "after": {
+      "files": 688,
+      "snapshotSha256": "2e08fd925c673437ff7de7c76c0fd79d02832617d0014efc1c3e471782fe9b56",
+      "status": "exact"
+    }
+  },
+  "pins": [
+    {
+      "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/US/birth.json",
+      "bytes": 482,
+      "sha256": "3d20cc93411e86afa96910ce8590aed44372ed505823f16c5399a4feec83ca8c"
+    },
+    {
+      "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/US/birth.checkpoint.json",
+      "bytes": 3763,
+      "sha256": "02eb1e615d86933bad10925e76fc035f8ca519582d4bbeb03bf1f18b0a55915f"
+    },
+    {
+      "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/US/result.json",
+      "bytes": 952791,
+      "sha256": "929897cdfedea109e99890e0fd44111d7207b2d65c541f01f9cc2470fad691e5"
+    },
+    {
+      "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/US/final.checkpoint.json",
+      "bytes": 300265,
+      "sha256": "1d73ee5dbb4a62056698325ebf50ad8c3a2faf095959f09a54570c7bfcc9b3f0"
+    },
+    {
+      "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/US/commands.ndjson",
+      "bytes": 97662,
+      "sha256": "c214680d6d124d6c8d0991b9c735ac47f59db057178fc806404ca9ac06194a63"
+    },
+    {
+      "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/US/decisions.ndjson",
+      "bytes": 557310,
+      "sha256": "c8f3e63a49abe2d1f5568f6bf7261cc641f4f44c2246f0a6afe38d5092831ad0"
+    },
+    {
+      "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/US/cold.ndjson",
+      "bytes": 68848,
+      "sha256": "33d2a355b67c157d0ac4e68a1b7276aa39c9227345cb4e4fb10e9a2f874278b1"
+    },
+    {
+      "file": "/tmp/dreams-production-finish-accepted-editorial-v2-receipt.json",
+      "bytes": 1283,
+      "sha256": "d7d718436e9bbc462743c47f0a66d3cbbadba74d4484579cc21b8544da726126"
+    },
+    {
+      "file": "/tmp/dreams-production-finish-accepted-source.json",
+      "bytes": 75993,
+      "sha256": "2e08fd925c673437ff7de7c76c0fd79d02832617d0014efc1c3e471782fe9b56"
+    },
+    {
+      "file": "/tmp/dreams-production-finish-accepted-policy-registration-authorized.json",
+      "bytes": 2597,
+      "sha256": "5656dab6e031df8ff7ac291abed6188eaec2d87ad78b64181aff692c85788e57"
+    },
+    {
+      "file": "/tmp/dreams-production-finish-accepted-editorial-v2.out",
+      "bytes": 834714,
+      "sha256": "c1304730115d08b682454a0c6052c9151a67b8e9ebf198b0e469c1a473a8daf5"
+    }
+  ],
+  "rawTraceHashIndependentlyVerified": true,
+  "decisionsAndColdNdjsonEqualPerLifeResultArrays": true,
+  "inspectionScope": "Read recorded JSON/NDJSON and plain gzip main/people only. No game/model/engine/codec imports, replay, mutation, native operation or independent full canonical-world reconstruction.",
+  "producerFinalWorldSha256": "738a2637ec427f6ccf72085533f21ccdc5d3cf02d0b8694b6c7bbefdb2735db3",
+  "producerColdComparisons": 184,
+  "individualLifeElapsedMsRetained": false
+}

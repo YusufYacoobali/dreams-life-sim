@@ -1,0 +1,15 @@
+{
+  "extends": "/workspace/dreams-worktrees/c37-weighted-ui-fixes/tests/tsconfig.json",
+  "compilerOptions": {
+    "typeRoots": [
+      "/workspace/dreams-worktrees/c37-weighted-ui-fixes/node_modules/@types"
+    ]
+  },
+  "files": [
+    "/workspace/dreams-worktrees/c37-weighted-ui-fixes/tests/ui/story-consequence-labels-flow.test.tsx",
+    "/workspace/dreams-worktrees/c37-weighted-ui-fixes/tests/ui/adult-relationship-story-flow.test.tsx",
+    "/workspace/dreams-worktrees/c37-weighted-ui-fixes/tests/ui/childhood-story-flow.test.tsx"
+  ],
+  "include": [],
+  "exclude": []
+}

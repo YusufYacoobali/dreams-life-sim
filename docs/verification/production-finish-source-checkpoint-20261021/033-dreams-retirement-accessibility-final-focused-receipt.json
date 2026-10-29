@@ -1,0 +1,48 @@
+{
+  "format": "dreams-coordinator-gate-execution-v1",
+  "sourceCommit": "dfd9a74046479672967868dc21ac6acfda734592",
+  "sourceSnapshot": "/tmp/dreams-retirement-accessibility-final-source.json",
+  "sourceSnapshotSha256": "4c1c72cfea3d338984c5112523209c900950d53f76ccf4c6dd0a30615d92fcf7",
+  "root": "/workspace/dreams-worktrees/integration-retirement-accessibility-final",
+  "argv": [
+    "node",
+    "node_modules/jest/bin/jest.js",
+    "--runInBand",
+    "--testTimeout=30000",
+    "--runTestsByPath",
+    "tests/game/npc-moves.test.ts",
+    "tests/state/npc-moves-save.test.ts",
+    "tests/persistence/npc-moves-migration.test.ts",
+    "tests/ui/appearance-labels.test.tsx",
+    "tests/ui/portrait-accessibility.test.tsx",
+    "tests/ui/new-life-review-flow.test.tsx",
+    "tests/ui/onboarding-flow.test.tsx",
+    "tests/ui/onboarding-accessibility-flow.test.tsx",
+    "tests/ui/startup-flow.test.tsx",
+    "tests/state/gameStore.test.ts",
+    "tests/persistence/production-gaps-migration.test.ts",
+    "tests/persistence/best-friends-migration.test.ts",
+    "tests/persistence/opening-migration.test.ts",
+    "tests/persistence/teen-relationship-compatibility.test.ts"
+  ],
+  "startedAt": "2026-10-21T06:16:05.909979+00:00",
+  "before": {
+    "files": 665,
+    "snapshotSha256": "4c1c72cfea3d338984c5112523209c900950d53f76ccf4c6dd0a30615d92fcf7",
+    "status": "exact"
+  },
+  "complete": true,
+  "endedAt": "2026-10-21T06:18:00.236502+00:00",
+  "elapsedSeconds": 114.327,
+  "exitCode": 0,
+  "raw": {
+    "file": "/tmp/dreams-retirement-accessibility-final-focused.out",
+    "bytes": 1473,
+    "sha256": "4aa280f110c5bdde7e55c4a1add0d8ba837a57eed2f328195de500a4a19d35ea"
+  },
+  "after": {
+    "files": 665,
+    "snapshotSha256": "4c1c72cfea3d338984c5112523209c900950d53f76ccf4c6dd0a30615d92fcf7",
+    "status": "exact"
+  }
+}

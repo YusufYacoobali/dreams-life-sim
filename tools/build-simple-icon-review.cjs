@@ -1,0 +1,48 @@
+// Small live review of current bundled art; no embedded copies or screenshot pack.
+const fs = require('node:fs'), path = require('node:path'), vm = require('node:vm');
+const ts = require('typescript');
+const root = path.resolve(__dirname, '..'), out = path.join(root, 'docs/verification/action-icons');
+const manifest = JSON.parse(fs.readFileSync(path.join(root, 'assets/generated/action-symbols/manifest.json'), 'utf8'));
+const source = ts.transpileModule(fs.readFileSync(path.join(root, 'src/assets/platformMarks.ts'), 'utf8'), {
+  compilerOptions: { module: ts.ModuleKind.CommonJS },
+}).outputText;
+const context = { exports: {} }; vm.runInNewContext(source, context);
+const paletteContext = { exports: {} };
+vm.runInNewContext(ts.transpileModule(fs.readFileSync(path.join(root, 'src/assets/platformMarkPresentation.ts'), 'utf8'), { compilerOptions: { module: ts.ModuleKind.CommonJS } }).outputText, paletteContext);
+const { platformMarkPresentation, instagramMarkGradient: gradient } = paletteContext.exports;
+const names = { photogram: 'Instagram', videowave: 'YouTube', streamline: 'Twitch', lifelink: 'X' };
+const escape = value => String(value).replace(/[&<>"']/g, letter => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[letter]));
+const brands = Object.entries(context.exports.platformMarks).map(([id, mark]) => `<article data-kind="brands"><h3>${names[id]}</h3><div class="samples">${['light','dark'].map(theme => {
+  const gradientId = `instagram-${theme}`, palette = platformMarkPresentation[id];
+  const defs = id === 'photogram' ? `<defs><linearGradient id="${gradientId}" x1="${gradient.x1}" y1="${gradient.y1}" x2="${gradient.x2}" y2="${gradient.y2}">${gradient.stops.map(stop => `<stop offset="${stop.offset}" stop-color="${stop.color}"/>`).join('')}</linearGradient></defs>` : '';
+  return `<div class="${theme}"><div class="brand" style="background:${palette.background}"><svg viewBox="${mark.viewBox}" preserveAspectRatio="xMidYMid meet" aria-label="${names[id]}">${defs}<path d="${mark.path}" fill="${id === 'photogram' ? `url(#${gradientId})` : palette.fill}"/></svg></div></div>`;
+}).join('')}</div><code>platform:${id}</code></article>`).join('');
+function readArtModule(relative) {
+  const file = path.resolve(root, relative), exports = {};
+  const require = name => {
+    if (!name.startsWith('.')) return {}; // React components are not executed.
+    if (name.endsWith('.png')) return name;
+    return readArtModule(path.relative(root, path.resolve(path.dirname(file), name + '.ts')));
+  };
+  vm.runInNewContext(ts.transpileModule(fs.readFileSync(file, 'utf8'), { compilerOptions: { module: ts.ModuleKind.CommonJS, jsx: ts.JsxEmit.React } }).outputText, { exports, require });
+  return exports;
+}
+const cult = readArtModule('src/assets/CultArt.tsx');
+const cultMaps = Object.entries(cult).filter(([name, value]) => name !== 'cultArtCatalog' && name.startsWith('cult') && name.endsWith('Art') && typeof value === 'object');
+const cultIcons = Object.entries(cult.cultArtCatalog).map(([id, icon]) => {
+  const uses = cultMaps.flatMap(([name, map]) => Object.entries(map).filter(([, art]) => art === id).map(([key]) => `${name.replace(/^cult|Art$/g, '')}: ${key}`));
+  const group = Object.values(cult.cultHeadquartersArt).includes(id) ? 'cult-headquarters' : Object.values(cult.cultUpgradeArt).includes(id) ? 'cult-upgrades' : 'cult-actions';
+  let sprite = `<img src="../../../${escape(icon.file)}" alt="${escape(icon.subject)}"/>`;
+  if (icon.rect) {
+    const [x, y, width, height] = icon.rect, [atlasWidth, atlasHeight] = icon.atlasSize, max = Math.max(width, height);
+    sprite = `<span style="width:var(--size,36px);height:var(--size,36px);display:grid;place-items:center"><span style="position:relative;overflow:hidden;width:calc(var(--size,36px) * ${width / max});height:calc(var(--size,36px) * ${height / max})"><img src="../../../${escape(icon.file)}" alt="${escape(icon.subject)}" style="position:absolute;width:calc(var(--size,36px) * ${atlasWidth / max});height:calc(var(--size,36px) * ${atlasHeight / max});left:calc(var(--size,36px) * ${-x / max});top:calc(var(--size,36px) * ${-y / max})"/></span></span>`;
+  }
+  return `<article data-kind="${group}"><h3>${escape(icon.subject)}</h3><div class="samples">${['light','dark'].map(theme => `<div class="${theme}">${sprite}</div>`).join('')}</div><code>cult:${escape(id)}${uses.length ? '<br>' + uses.map(escape).join('<br>') : '<br>Retained category / saved event artwork'}</code></article>`;
+}).join('');
+const icons = manifest.icons.map(icon => `<article data-kind="${icon.kind}"><h3>${escape(icon.id.replaceAll('-', ' '))}</h3><div class="samples">${['light','dark'].map(theme => `<div class="${theme}"><img src="../../../${escape(icon.file)}" alt="${escape(icon.subject)}"/></div>`).join('')}</div><code>${escape(icon.kind + ':' + icon.id)}</code></article>`).join('');
+const html = `<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Dreams · clear action icons and platform marks</title>
+<style>*{box-sizing:border-box}body{margin:0;background:#edf0f5;color:#0B1545;font:15px/1.5 system-ui,sans-serif}header{padding:20px 24px;background:white;border-bottom:1px solid #dce2eb;position:sticky;top:0;z-index:1}h1{font-size:23px;margin:0 0 8px}header p{margin:6px 0;max-width:100ch}select{font:inherit;margin-right:18px;padding:6px}main{padding:20px;display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px}article{background:white;padding:16px;border-radius:14px;min-width:0}h3{font-size:14px;min-height:40px;margin:0 0 12px}.samples{display:flex;gap:12px}.samples>div{height:112px;flex:1;display:grid;place-items:center;border-radius:12px}.light{background:#F8F7F5;color:#0B1545}.dark{background:#253247;color:#F6F8FF}.brand{width:var(--size,36px);height:var(--size,36px);display:grid;place-items:center;border-radius:24%}.light .brand{background:#F0F1F3}.dark .brand{background:#303D52}.brand svg{width:70%;height:70%}img{width:var(--size,36px);height:var(--size,36px);object-fit:contain}code{display:block;font:11px ui-monospace,monospace;margin-top:12px;overflow-wrap:anywhere}article[hidden]{display:none}</style>
+<header><h1>Clear action icons and coloured platform marks</h1><p>Current bundled PNGs, atlas crops and the same SVG paths, brand colours and framing used in the app. Cult headquarters, upgrades and related actions use distinct focal subjects. This browser art review is not a native-device capture.</p><p><a href="../../ICON_AUDIT.md">339-entry keep / simplify / replace audit</a> · Platform SVGs: Font Awesome Free 6.7.2 / Fonticons, CC BY 4.0.</p><label>Size <select id="size"><option>24</option><option>32</option><option selected>36</option><option>48</option><option>88</option></select></label><label>Group <select id="group"><option value="all">All</option><option value="brands">Platform marks</option><option value="cult-headquarters">Cult headquarters</option><option value="cult-upgrades">Cult upgrades</option><option value="cult-actions">Cult actions</option><option value="actions">Relationship actions</option><option value="jobs">Jobs</option><option value="symbols">Shared action symbols</option></select></label></header><main>${brands}${cultIcons}${icons}</main>
+<script>document.getElementById('size').onchange=e=>document.documentElement.style.setProperty('--size',e.target.value+'px');document.getElementById('group').onchange=e=>document.querySelectorAll('article').forEach(card=>card.hidden=e.target.value!=='all'&&card.dataset.kind!==e.target.value);window.iconReviewReady=Promise.all([...document.images].map(image=>image.decode()));</script></html>`;
+fs.mkdirSync(out, { recursive: true }); fs.writeFileSync(path.join(out, 'index.html'), html);
+console.log(JSON.stringify({ file: path.relative(root, path.join(out, 'index.html')), pngs: manifest.icons.length, cultArt: Object.keys(cult.cultArtCatalog).length, platformMarks: 4 }));

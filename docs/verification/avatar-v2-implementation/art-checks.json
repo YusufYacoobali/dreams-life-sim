@@ -1,0 +1,35 @@
+{
+  "assetCount": 1018,
+  "independentlyIllustratedIdentityAgeHeads": 128,
+  "skinGradeHeadAtlases": 768,
+  "faceContoursPerAtlas": 4,
+  "fullColourShoulderLayers": 96,
+  "independentClothingLayers": 16,
+  "pngBytes": 109999619,
+  "sourceHeadDefaultsVerified": 128,
+  "sourcePixelsPreservedBeforeConcealedNeckFade": true,
+  "centralEyeAndNosePixelsIdenticalAcrossFaceShapeChoices": true,
+  "allFourContoursVisiblyDistinct": true,
+  "noHeadPixelsTouchTileSideBorders": true,
+  "allHashesMatch": true,
+  "allSixSkinTonesOrderedForEveryIdentityAndAge": true,
+  "transparentPixelsHaveZeroRGB": true,
+  "headAtlasDecodedBytes": 1079296,
+  "runtimeNetworkRequired": false,
+  "runtimeTintOrColourFilters": false,
+  "nativeDeviceRenderingTested": false,
+  "continuousForegroundHairstyles": 23,
+  "hairColourLayers": 138,
+  "rearHairTextures": 0,
+  "frontOnlyCollarNecklinesVerified": [
+    2,
+    7,
+    9
+  ],
+  "frontOnlyCrewneckNecklinesVerified": [
+    3,
+    5,
+    14
+  ],
+  "approvedMaleHairLayersUnchanged": 48
+}

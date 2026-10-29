@@ -1,0 +1,78 @@
+{
+  "recordedOn": "2026-10-20",
+  "scope": "Genuine actual native accepted raise62 exported with clean unmodified pushed 134c461 before workplace-story content work; no stat, world, RNG, outcome, version or history edits",
+  "producerCommit": "134c4611f7e695ee488203e4e3ceef7334e9029b",
+  "producerCombinedGamePersistenceHash": "ec05ba7ad9a1c3701990c362188c379716ad7052b5944269ff069f84a4bee637",
+  "sourceDatabase": "Actual Android revision62 accepted-raise result copy before cold restart",
+  "fixture": "tests/fixtures/v30-native-raise-archive.json",
+  "bytes": 780515,
+  "sha256": "7a3988e9b7675e11ebf58d821a61192e97c759961b59d0a83df0e9c6b682964c",
+  "wholeWorldSha256": "5b1f9b5aea6e8895e398654f14f0c5284848f11384322f0d153f69dc3bc5ad3d",
+  "currentCheckpointByteExact": true,
+  "originalEighteenMomentPayloadsAndMetadataExact": true,
+  "originalSeventeenWorkplaceMomentsRetainedExactly": true,
+  "versions": {
+    "world": 30,
+    "engine": 29,
+    "content": 5
+  },
+  "revision": 62,
+  "moments": 18,
+  "result": {
+    "kind": "result",
+    "id": "action_61",
+    "title": "Worth the awkward conversation",
+    "body": "Thando agrees to a 5% raise. Your higher rate starts with your next paid period.",
+    "illustration": "career",
+    "effects": [
+      {
+        "id": "salary",
+        "label": "Annual gross pay",
+        "value": "ZAR39,375.00",
+        "tone": "positive"
+      },
+      {
+        "id": "energy",
+        "label": "Energy",
+        "value": "\u22126%",
+        "tone": "negative"
+      }
+    ]
+  },
+  "raise": {
+    "id": "raise_person_player_61",
+    "workplaceId": "workplace_person_player_49_0",
+    "personId": "person_player",
+    "employmentId": "employment_47",
+    "date": {
+      "year": 2044,
+      "month": 10,
+      "day": 20
+    },
+    "supervisorId": "person_npc_49_16",
+    "supervisorEmploymentId": "employment_background_person_npc_49_16",
+    "currency": "ZAR",
+    "paidMonths": 24,
+    "performance": 75,
+    "trust": 35,
+    "chance": 65,
+    "roll": 3,
+    "accepted": true,
+    "annualPayBefore": "3750000",
+    "annualPayAfter": "3937500"
+  },
+  "teamIds": [
+    "person_npc_49_16",
+    "person_npc_49_17",
+    "person_npc_49_18"
+  ],
+  "verification": {
+    "preservationAndSQLiteRetryColdPayrollChecks": 2,
+    "suites": 1,
+    "seconds": 13.72,
+    "exitCode": 0,
+    "strictApplicationAndTestTypes": true,
+    "runtimeSourceUnchanged": true,
+    "notANewCompleteRegressionTotal": true
+  }
+}

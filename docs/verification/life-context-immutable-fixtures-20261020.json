@@ -1,0 +1,37 @@
+{
+  "recordedOn": "2026-10-20",
+  "immutable": true,
+  "neverRegenerate": true,
+  "records": [
+    {
+      "path": "tests/fixtures/v30-native-interview-checkpoints.json",
+      "bytes": 190494,
+      "sha256": "2014c9e936f325bce82aef47633f1c7697d22cc421c1a8edebaae09db477a6d3",
+      "producerCommit": "2f8ad13c65abd072cb8c614e3aa99714b698adda",
+      "scope": "Original raw native SQLite interview92/hiring93 payloads from pushed2f8ad13; not current regeneration.",
+      "versions": {
+        "world": 30,
+        "engine": 30,
+        "content": 7,
+        "database": 9,
+        "checkpoint": "v4"
+      }
+    },
+    {
+      "path": "tests/fixtures/v30-pet-owner-loss.json",
+      "bytes": 37124,
+      "sha256": "8a20bb94a0cfd128b8ecf10fa3fcdf2427638218ce0dca9a53a4504489c8a55b",
+      "producerCommit": "2f8ad13c65abd072cb8c614e3aa99714b698adda",
+      "scope": "Pure-engine natural seed707 Italy birth-to-age11, real adoption and veterinary care; first eligible choices. Captured immediately before the original owner-loss Age Up. Not native or a current-content birth-to-age11 journey.",
+      "versions": {
+        "world": 30,
+        "engine": 30,
+        "content": 7
+      },
+      "canonicalSha256": "956202957c085d1e4af8efa97d37d9c5c6076b94e4ca32fbf4aa09c3815dd07c",
+      "nextCommand": {
+        "type": "advance"
+      }
+    }
+  ]
+}

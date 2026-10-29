@@ -1,0 +1,310 @@
+{
+  "format": "dreams-c39-recorded-full-telemetry-sequence-review-v1",
+  "sourceCommit": "33b6a5fcb0aae73dfc235a15394b34d8afda00cc",
+  "versions": {
+    "content": 13,
+    "engine": 39,
+    "world": 38
+  },
+  "preselection": {
+    "country": "US",
+    "seed": 900,
+    "policy": "Editorial varied-choice V2 current adapter; original choice policyVersion1",
+    "selectedBeforeRun": true,
+    "outcomeSearch": false
+  },
+  "reviewer": {
+    "agent": "/root/story_editorial",
+    "kind": "Codex actual retained sequence review",
+    "externalHuman": false
+  },
+  "player": {
+    "id": "person_player",
+    "name": "Yui Takahashi",
+    "born": {
+      "year": 2000,
+      "month": 1,
+      "day": 1
+    },
+    "died": {
+      "year": 2039,
+      "month": 5,
+      "day": 1
+    },
+    "ageAtDeath": 39,
+    "cause": "declining health"
+  },
+  "actualCounts": {
+    "commandsCommitted": 183,
+    "decisions": 62,
+    "catalogueDecisions": 21,
+    "systemOrCallbackDecisions": 41,
+    "medicalEmergencyDecisions": 40,
+    "catalogueTemplatesEncountered": 19,
+    "distinctExecutedCatalogueBranches": 20,
+    "catalogueFirstChoice": 8,
+    "catalogueSecondChoice": 6,
+    "catalogueThirdChoice": 7,
+    "allOfferedCatalogueSlots": 63,
+    "distinctOfferedCatalogueBranchDefinitions": 57,
+    "resolvedCatalogueRowsArithmeticChecked": 59,
+    "actuallyClippedCatalogueRows": 5,
+    "coldFramesProducerRecorded": 184,
+    "completedYears": 39,
+    "yearsStarted": 40,
+    "fatalPartial40thYear": true,
+    "resultFramesRetained": 81,
+    "totalSourceCatalogue": 265,
+    "unseenTemplates": 246,
+    "unexecutedCatalogueBranches": 775
+  },
+  "timing": {
+    "actualWholeCohortCoordinatorSeconds": 608.289,
+    "individualUSLifeElapsedMs": null
+  },
+  "catalogueRepeats": [
+    {
+      "templateId": "comparison-scroll",
+      "ages": [
+        17,
+        23
+      ]
+    },
+    {
+      "templateId": "school-arcade-invitation",
+      "ages": [
+        6,
+        11
+      ]
+    }
+  ],
+  "quietCatalogueBirthdayAges": [
+    3,
+    4,
+    19,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39
+  ],
+  "callback": {
+    "actualAcceptedPaidThread": {
+      "id": "story_15_0",
+      "kind": "arcade-invitation",
+      "personId": "person_player",
+      "originEventId": "event_2006_school-arcade-invitation",
+      "originTemplateId": "school-arcade-invitation",
+      "originChoiceId": "ask",
+      "created": {
+        "year": 2006,
+        "month": 1,
+        "day": 1
+      },
+      "dueMonth": 24073,
+      "expiresMonth": 24073,
+      "country": "US",
+      "city": "New York",
+      "communityId": "school_person_player_14_0",
+      "peerId": "person_npc_14_8",
+      "teacherId": null,
+      "parentId": "person_parent1",
+      "status": "resolved",
+      "permission": {
+        "personId": "person_parent1",
+        "trustAtRequest": 70,
+        "chance": 85,
+        "roll": 32,
+        "accepted": true
+      },
+      "quote": {
+        "amount": {
+          "$dreamsBigInt": "2000"
+        },
+        "currency": "USD",
+        "payerId": "person_parent1"
+      },
+      "offeredEventId": "story_15_0_due",
+      "resolution": "attend",
+      "ended": {
+        "year": 2006,
+        "month": 2,
+        "day": 1
+      },
+      "cancellationReason": null,
+      "paidTransactionId": "txn_18_720"
+    },
+    "actualRefusedUnpaidThread": {
+      "id": "story_32_1",
+      "kind": "arcade-invitation",
+      "personId": "person_player",
+      "originEventId": "event_2011_school-arcade-invitation",
+      "originTemplateId": "school-arcade-invitation",
+      "originChoiceId": "ask",
+      "created": {
+        "year": 2011,
+        "month": 1,
+        "day": 1
+      },
+      "dueMonth": 24133,
+      "expiresMonth": 24133,
+      "country": "US",
+      "city": "New York",
+      "communityId": "school_person_player_14_0",
+      "peerId": "person_npc_14_8",
+      "teacherId": null,
+      "parentId": "person_parent1",
+      "status": "cancelled",
+      "permission": {
+        "personId": "person_parent1",
+        "trustAtRequest": 70,
+        "chance": 85,
+        "roll": 87,
+        "accepted": false
+      },
+      "quote": {
+        "amount": {
+          "$dreamsBigInt": "2000"
+        },
+        "currency": "USD",
+        "payerId": "person_parent1"
+      },
+      "offeredEventId": null,
+      "resolution": null,
+      "ended": {
+        "year": 2011,
+        "month": 1,
+        "day": 1
+      },
+      "cancellationReason": "Permission was declined",
+      "paidTransactionId": null
+    },
+    "actualPartyResult": {
+      "body": "You and Jordan take turns at the machines. Avery pays the quoted outing cost. Nobody wins enough tickets to retire.",
+      "effects": [
+        {
+          "id": "payment",
+          "label": "Avery paid",
+          "tone": "neutral",
+          "value": "$20.00"
+        },
+        {
+          "id": "story_1",
+          "label": "Happiness",
+          "tone": "positive",
+          "value": "+5%"
+        },
+        {
+          "id": "story_2",
+          "label": "Energy",
+          "tone": "negative",
+          "value": "-4%"
+        },
+        {
+          "id": "story_3",
+          "label": "Jordan · relationship",
+          "tone": "positive",
+          "value": "+5%"
+        },
+        {
+          "id": "story_4",
+          "label": "Avery · relationship",
+          "tone": "positive",
+          "value": "+2%"
+        }
+      ],
+      "id": "story_15_0_due_result",
+      "illustration": "birthday",
+      "kind": "result",
+      "title": "High score, low dignity"
+    },
+    "actualParentCashDeltaMinor": -2000,
+    "playerAndHostCashUnchanged": true,
+    "permissionRequestAccountsUnchangedBothTimes": true,
+    "projectOrYearsLaterRecallObserved": false
+  },
+  "medical": {
+    "careSelections": 21,
+    "declines": 19,
+    "uniqueSetups": 6,
+    "actualUnknownPromptsWithoutNameLeak": 10,
+    "actualKnownDiagnosisPrompts": 30,
+    "firstDiagnoses": [
+      {
+        "conditionId": "condition_person_player_61_0",
+        "conditionType": "asthma",
+        "actualCareSelections": 12,
+        "earliestCareDate": {
+          "day": 1,
+          "month": 1,
+          "year": 2022
+        },
+        "persistedFirstDiagnosisDate": {
+          "year": 2022,
+          "month": 1,
+          "day": 1
+        },
+        "firstDateRetainedDespiteRepeatedCare": true
+      },
+      {
+        "conditionId": "condition_person_player_76_1",
+        "conditionType": "anxiety",
+        "actualCareSelections": 3,
+        "earliestCareDate": {
+          "day": 1,
+          "month": 2,
+          "year": 2031
+        },
+        "persistedFirstDiagnosisDate": {
+          "year": 2031,
+          "month": 2,
+          "day": 1
+        },
+        "firstDateRetainedDespiteRepeatedCare": true
+      },
+      {
+        "conditionId": "condition_person_player_103_2",
+        "conditionType": "diabetes",
+        "actualCareSelections": 6,
+        "earliestCareDate": {
+          "day": 1,
+          "month": 5,
+          "year": 2030
+        },
+        "persistedFirstDiagnosisDate": {
+          "year": 2030,
+          "month": 5,
+          "day": 1
+        },
+        "firstDateRetainedDespiteRepeatedCare": true
+      }
+    ],
+    "capOrTreatmentEfficacyModelCertification": false
+  },
+  "findings": [],
+  "observedPacingLimit": "Forty actual urgent decisions dominate ages21–39; no optional catalogue event after24. Three chronic conditions, mixed accept/decline choices and later funding pauses accompany early death. This passive advance/choose/ack policy is not a calibrated ordinary-player balance sample. No automatic new content/health rebalance proposed.",
+  "unreached": [
+    "Later life/retirement; naturally died39",
+    "Player university/employment/partner/children/home/investment/business/special-career paths; policy has no proactive setup actions",
+    "School project and24-month recall, other arcade alternatives/cancellations",
+    "Actual native/UI30-minute session, whole-lifeSQLite, physical/standalone/iOS acceptance",
+    "All265templates/all795executedbranches; only19templates/20distinctselectedbranches"
+  ],
+  "conclusion": "No concrete contradiction in this fixed life’s actual retained bound copy,21 catalogue selected results/journals/59numeric rows, paid/refused outing facts or40 medical disclosure/first-date chronology frames. This is US900-only recorded sequence evidence; aggregate12-country review remains separate.",
+  "limits": [
+    "No rerun/replay/RNG/seed search or source/native operation.",
+    "Unselected bound alternatives were read as offered bound branches, not credited as executed outcomes.",
+    "Cold/world hashes are producer evidence pinned here, not independently rerun codec/canonical proof.",
+    "Cohort closure is credited only after the actual608.289s exit0 receipt; individualUS files were already closed before that receipt."
+  ]
+}

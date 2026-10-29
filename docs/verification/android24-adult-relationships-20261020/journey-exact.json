@@ -1,0 +1,156 @@
+{
+  "recordedOn": "2026-10-20",
+  "gameSourceHash": "f1db47a32ea4877c494394b73ea3b9b3670e964e4af955f0c17e3961cb499f14",
+  "combinedGamePersistenceSourceHash": "6a464e95da4e9845c2dd79ae70688df4fd9d6545da42bd9c7b56d5ce4060383d",
+  "versions": {
+    "world": 30,
+    "engine": 29,
+    "content": 7,
+    "database": 7,
+    "checkpoint": 3
+  },
+  "scope": "Separate naturally prepared nineteen-year school/friendship input imported through the existing Android file picker, then actual named choice88, cold saved result and acknowledgement89; not native birth-to-adult evidence or new file-feature breadth",
+  "preparation": "preparation-and-expected.json",
+  "openingAll8TablesExact": {
+    "backups": {
+      "rows": 5,
+      "sha256": "bc3421124f0910356fb01bb04cdc2151fc8ce3fb847641c3630f3352dd4cc934"
+    },
+    "branches": {
+      "rows": 1,
+      "sha256": "ed59ba6261127dbabd51cd7e4b7a6ec02231e14f2745239576c27a04a7accc87"
+    },
+    "lives": {
+      "rows": 5,
+      "sha256": "a75ee63ea66908ac7db0be172cb028983ef8c0fe938415c53b82236fc52127ae"
+    },
+    "preferences": {
+      "rows": 1,
+      "sha256": "c4129d2212432c3e9f35013de7517f0bdf2191073f4f05c11171717d3580834d"
+    },
+    "receipts": {
+      "rows": 71,
+      "sha256": "dea3e604cf4a4c8afea33783fa7596fd9d629325d1ccf83360d941e8f29de00c"
+    },
+    "restore_receipts": {
+      "rows": 1,
+      "sha256": "5eb3e6db0bb239cdf5efa583d0098be417b79d46e1f74dfe62b13440219efdce"
+    },
+    "snapshot_metadata": {
+      "rows": 36,
+      "sha256": "f84c4003281b95e215ec364917322f37dbe7cdc20dcee19e9e5d61df9c731fc0"
+    },
+    "snapshots": {
+      "rows": 36,
+      "sha256": "ca8c8eacaf85d8e86aa153f5588cf1b31d381da9f1a4dceb9a6aae3e73e16846"
+    }
+  },
+  "allFileBrowsingAndCancelledOtherPreviewAll8TablesExact": {
+    "backups": {
+      "rows": 5,
+      "sha256": "bc3421124f0910356fb01bb04cdc2151fc8ce3fb847641c3630f3352dd4cc934"
+    },
+    "branches": {
+      "rows": 1,
+      "sha256": "ed59ba6261127dbabd51cd7e4b7a6ec02231e14f2745239576c27a04a7accc87"
+    },
+    "lives": {
+      "rows": 5,
+      "sha256": "a75ee63ea66908ac7db0be172cb028983ef8c0fe938415c53b82236fc52127ae"
+    },
+    "preferences": {
+      "rows": 1,
+      "sha256": "c4129d2212432c3e9f35013de7517f0bdf2191073f4f05c11171717d3580834d"
+    },
+    "receipts": {
+      "rows": 71,
+      "sha256": "dea3e604cf4a4c8afea33783fa7596fd9d629325d1ccf83360d941e8f29de00c"
+    },
+    "restore_receipts": {
+      "rows": 1,
+      "sha256": "5eb3e6db0bb239cdf5efa583d0098be417b79d46e1f74dfe62b13440219efdce"
+    },
+    "snapshot_metadata": {
+      "rows": 36,
+      "sha256": "f84c4003281b95e215ec364917322f37dbe7cdc20dcee19e9e5d61df9c731fc0"
+    },
+    "snapshots": {
+      "rows": 36,
+      "sha256": "ca8c8eacaf85d8e86aa153f5588cf1b31d381da9f1a4dceb9a6aae3e73e16846"
+    }
+  },
+  "initialNative87EntireWorldAndPayloadExact": true,
+  "choice88EntireWorldExact": true,
+  "cold88All8TablesExact": {
+    "backups": {
+      "rows": 6,
+      "sha256": "38bcf1f53d59db14dfca3b859fe17242e6c889169ee2f444da508bf6461636df"
+    },
+    "branches": {
+      "rows": 1,
+      "sha256": "ed59ba6261127dbabd51cd7e4b7a6ec02231e14f2745239576c27a04a7accc87"
+    },
+    "lives": {
+      "rows": 6,
+      "sha256": "79df4d08a8d6e176dcefca08aaf714e4073d034b5c13e06760e5720f7ea8bf31"
+    },
+    "preferences": {
+      "rows": 1,
+      "sha256": "a5994ec0c80f4a77e5eb8558c0219f532da11169f23080d918c5296d9ee87e0c"
+    },
+    "receipts": {
+      "rows": 72,
+      "sha256": "9ea6924aabe0523d016c82a1a034f9b73bbe2837b9e7d67151454c4b7caacdaa"
+    },
+    "restore_receipts": {
+      "rows": 1,
+      "sha256": "5eb3e6db0bb239cdf5efa583d0098be417b79d46e1f74dfe62b13440219efdce"
+    },
+    "snapshot_metadata": {
+      "rows": 55,
+      "sha256": "eb3cb69ad85ca381bd0e29e5ca7afb78ebb44da8c58a197a728e5de50d15cc13"
+    },
+    "snapshots": {
+      "rows": 55,
+      "sha256": "50cd9e639be4829c35fee2d94760660d8c8f776ff3d9f4f76de38a15f79d6f5f"
+    }
+  },
+  "ack89EntireWorldExact": true,
+  "originalBackup87And88PayloadsByteExact": true,
+  "all5PreviousLivesBackups36MomentsMetadata71ReceiptsExact": true,
+  "all19PreparedMomentsAndMetadataByteExact": true,
+  "activeLifeId": "life_native_adult_friend_v30_s0",
+  "finalRevision": 89,
+  "finalAge": 19,
+  "counts": {
+    "backups": 6,
+    "branches": 1,
+    "lives": 6,
+    "preferences": 1,
+    "receipts": 73,
+    "restore_receipts": 1,
+    "snapshot_metadata": 55,
+    "snapshots": 55
+  },
+  "friendId": "person_npc_15_5",
+  "friendName": "Morgan Bennett",
+  "friendBond": {
+    "before": 98,
+    "after": 100
+  },
+  "choice": {
+    "type": "choose",
+    "eventId": "event_2045_friend-unwanted-nickname",
+    "choiceId": "plain"
+  },
+  "ack": {
+    "type": "acknowledge",
+    "resultId": "event_2045_friend-unwanted-nickname_result"
+  },
+  "worldHashes": {
+    "offered": "609ef706352ed9cd33965aeab7ae2ee489ce7ec2c388d3e6e5fe7b7690f4f11a",
+    "result": "45fead67b9e6b9dc9f19d3d408382b551022d0e192fd02bf3a6b8eeea5e7e375",
+    "finished": "b729699808403af2bdbaa1a779a89d273415710c3cc580520e9ea32f1a863896"
+  },
+  "limits": "Software Android24/ExpoGo compatibility/durability, not physical p95 or standalone/iOS/complete fidelity/accessibility. Existing Amahle remains83, Riley53/branch38 untouched. The pure-engine preparation and its88steps are separate from subsequent native interactions. No native SQL/world/RNG edits."
+}

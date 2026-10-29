@@ -1,0 +1,4604 @@
+{
+  "seed": 29,
+  "country": "GB",
+  "gender": "male",
+  "ageAtDeath": 72,
+  "causeOfDeath": "natural causes",
+  "completed": true,
+  "ledgerRows": 19494,
+  "decisions": [
+    {
+      "date": {
+        "year": 2025,
+        "month": 2,
+        "day": 28
+      },
+      "age": 1,
+      "eventId": "event_2025_first-cake",
+      "templateId": "first-cake",
+      "title": "A very small food critic",
+      "situation": "Oliver puts a birthday cake in front of you. Everyone waits for a photograph. You have a different artistic vision.",
+      "choices": [
+        {
+          "id": "smash",
+          "label": "Apply cake directly to face"
+        },
+        {
+          "id": "share",
+          "label": "Offer Oliver a sticky handful"
+        },
+        {
+          "id": "observe",
+          "label": "Inspect this suspicious new object"
+        }
+      ],
+      "selected": "smash",
+      "result": {
+        "title": "The photograph survives",
+        "body": "The cake does not. Oliver laughs so hard the first photo is mostly ceiling.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Happiness",
+            "value": "+5%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Oliver Taylor · relationship",
+            "value": "+3%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2025_first-cake_choice",
+          "date": {
+            "year": 2025,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I wore my birthday cake. Oliver kept the photograph.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2027,
+        "month": 2,
+        "day": 28
+      },
+      "age": 3,
+      "eventId": "event_2027_toddler-biscuit-halves",
+      "templateId": "toddler-biscuit-halves",
+      "title": "Two is more than one",
+      "situation": "Your biscuit breaks in half. There are now two biscuits, although something about the total feels suspicious.",
+      "choices": [
+        {
+          "id": "compare",
+          "label": "Fit the halves back together"
+        },
+        {
+          "id": "celebrate",
+          "label": "Celebrate the extra biscuit"
+        },
+        {
+          "id": "crumbs",
+          "label": "Count all the little crumbs"
+        }
+      ],
+      "selected": "compare",
+      "result": {
+        "title": "The original arrangement",
+        "body": "The edges match. You test them twice before accepting that both pieces were one biscuit.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Smarts",
+            "value": "+3%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Discipline",
+            "value": "+1%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2027_toddler-biscuit-halves_choice",
+          "date": {
+            "year": 2027,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I fitted two broken biscuit halves back together.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2029,
+        "month": 2,
+        "day": 28
+      },
+      "age": 5,
+      "eventId": "event_2029_toddler-why-machine",
+      "templateId": "toddler-why-machine",
+      "title": "The watermelon investigation",
+      "situation": "Oliver jokes that swallowing a seed could grow a watermelon in your tummy. You have questions. Several concern the size of your tummy.",
+      "choices": [
+        {
+          "id": "follow",
+          "label": "Demand to know where the leaves go"
+        },
+        {
+          "id": "draw",
+          "label": "Draw a plan for your indoor garden"
+        },
+        {
+          "id": "invent",
+          "label": "Announce you are growing a fruit salad"
+        }
+      ],
+      "selected": "follow",
+      "result": {
+        "title": "The witness changes their story",
+        "body": "Oliver admits it was a joke and explains what seeds actually need. You ask why they left out the soil problem.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Smarts",
+            "value": "+4%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Energy",
+            "value": "-2%",
+            "tone": "negative"
+          },
+          {
+            "id": "effect_2",
+            "label": "Oliver Taylor · relationship",
+            "value": "+2%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2029_toddler-why-machine_choice",
+          "date": {
+            "year": 2029,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I questioned Oliver until they explained a joke about swallowing seeds.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2030,
+        "month": 2,
+        "day": 28
+      },
+      "age": 6,
+      "eventId": "event_2030_blanket-dragon",
+      "templateId": "blanket-dragon",
+      "title": "Something under the blanket",
+      "situation": "You tell Oliver there is a dragon under your blanket. Oliver asks whether it would like a bedtime story.",
+      "choices": [
+        {
+          "id": "invite",
+          "label": "Make room for one more listener"
+        },
+        {
+          "id": "write",
+          "label": "Invent the dragon’s entire biography"
+        },
+        {
+          "id": "check",
+          "label": "Ask Oliver to check properly"
+        }
+      ],
+      "selected": "invite",
+      "result": {
+        "title": "A civilised dragon",
+        "body": "The dragon listens very quietly. Oliver does all the voices.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Happiness",
+            "value": "+4%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Smarts",
+            "value": "+2%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_2",
+            "label": "Oliver Taylor · relationship",
+            "value": "+4%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2030_blanket-dragon_choice",
+          "date": {
+            "year": 2030,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "My imaginary dragon joined bedtime stories.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2031,
+        "month": 2,
+        "day": 28
+      },
+      "age": 7,
+      "eventId": "event_2031_school-show-tell-prop",
+      "templateId": "school-show-tell-prop",
+      "title": "The invisible exhibit",
+      "situation": "You forgot your show-and-tell. Harry has already announced that yours is “the best one”. Everyone turns towards your empty hands.",
+      "choices": [
+        {
+          "id": "describe",
+          "label": "Admit you left it at home"
+        },
+        {
+          "id": "mime",
+          "label": "Act out an escaped dinosaur"
+        },
+        {
+          "id": "invent",
+          "label": "Claim it is invisible and dangerous"
+        }
+      ],
+      "selected": "describe",
+      "result": {
+        "title": "A disappointing lack of magic",
+        "body": "Grace lets you describe it. Harry whispers that the publicity may have been a mistake.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Respect",
+            "value": "+3%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Smarts",
+            "value": "+1%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_2",
+            "label": "Harry Clarke · relationship",
+            "value": "+1%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_3",
+            "label": "Grace Clarke · relationship",
+            "value": "+2%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2031_school-show-tell-prop_choice",
+          "date": {
+            "year": 2031,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I admitted forgetting my show-and-tell object.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2032,
+        "month": 2,
+        "day": 29
+      },
+      "age": 8,
+      "eventId": "event_2032_school-arcade-invitation",
+      "templateId": "school-arcade-invitation",
+      "title": "Birthday invitation",
+      "situation": "Harry invites you to a birthday party at an arcade. The invitation has more glitter than useful information.",
+      "choices": [
+        {
+          "id": "ask",
+          "label": "Ask Oliver for permission"
+        },
+        {
+          "id": "details",
+          "label": "Ask Harry for more details"
+        },
+        {
+          "id": "decline",
+          "label": "Politely decline"
+        }
+      ],
+      "selected": "ask",
+      "result": {
+        "title": "Adults need an address",
+        "body": "Oliver checks the time and supervision. Their answer and any plan are recorded below. Nothing is paid just for asking.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Discipline",
+            "value": "+2%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Oliver Taylor · relationship",
+            "value": "+2%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_2",
+            "label": "Harry Clarke · relationship",
+            "value": "+3%",
+            "tone": "positive"
+          },
+          {
+            "id": "permission",
+            "label": "Permission",
+            "value": "Oliver declined",
+            "tone": "neutral"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2032_school-arcade-invitation_choice",
+          "date": {
+            "year": 2032,
+            "month": 2,
+            "day": 29
+          },
+          "personId": "person_player",
+          "text": "I asked Oliver for permission to go to Harry’s arcade birthday.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2035,
+        "month": 2,
+        "day": 28
+      },
+      "age": 11,
+      "eventId": "event_2035_rainy-fort",
+      "templateId": "rainy-fort",
+      "title": "Indoor architecture",
+      "situation": "Rain cancels your afternoon plans. Two chairs and a blanket suggest a career in questionable structural engineering.",
+      "choices": [
+        {
+          "id": "build",
+          "label": "Build an elaborate fort"
+        },
+        {
+          "id": "read",
+          "label": "Read by the window"
+        },
+        {
+          "id": "sulk",
+          "label": "Declare the whole day ruined"
+        }
+      ],
+      "selected": "build",
+      "result": {
+        "title": "Approved for immediate occupancy",
+        "body": "It collapses twice. The third version has a reading corner.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Happiness",
+            "value": "+5%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Smarts",
+            "value": "+2%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_2",
+            "label": "Energy",
+            "value": "-3%",
+            "tone": "negative"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2035_rainy-fort_choice",
+          "date": {
+            "year": 2035,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I built a blanket fort that almost met building regulations.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2036,
+        "month": 2,
+        "day": 29
+      },
+      "age": 12,
+      "eventId": "event_2036_teen-old-interest-box",
+      "templateId": "teen-old-interest-box",
+      "title": "A complaint from past you",
+      "situation": "You find a childhood letter addressed to yourself. It says, “If you are not a dinosaur by thirteen, you have ruined everything.” There is a drawing of the expected dinosaur.",
+      "choices": [
+        {
+          "id": "try",
+          "label": "Make a tail out of socks and deliver a roar"
+        },
+        {
+          "id": "keep",
+          "label": "Write a formal rejection on the back"
+        },
+        {
+          "id": "judge",
+          "label": "Destroy the evidence"
+        }
+      ],
+      "selected": "try",
+      "result": {
+        "title": "Partial compliance",
+        "body": "The tail falls off during your first turn. You add “technical difficulties” beneath the original demand and draw yourself with better knees.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Happiness",
+            "value": "+4%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Energy",
+            "value": "-2%",
+            "tone": "negative"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2036_teen-old-interest-box_choice",
+          "date": {
+            "year": 2036,
+            "month": 2,
+            "day": 29
+          },
+          "personId": "person_player",
+          "text": "I answered a childhood demand to become a dinosaur by making a sock tail.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2039,
+        "month": 2,
+        "day": 28
+      },
+      "age": 15,
+      "eventId": "event_2039_parent-old-music",
+      "templateId": "parent-old-music",
+      "title": "Apparently this was cool",
+      "situation": "Oliver plays a song they loved at your age. There is a lengthy explanation of how nobody makes music properly anymore.",
+      "choices": [
+        {
+          "id": "listen",
+          "label": "Ask what it reminds them of"
+        },
+        {
+          "id": "swap",
+          "label": "Trade one song each"
+        },
+        {
+          "id": "roast",
+          "label": "Give a brutally concise review"
+        }
+      ],
+      "selected": "listen",
+      "result": {
+        "title": "Before they were your parent",
+        "body": "The story is better than expected. You learn something new about Oliver.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Happiness",
+            "value": "+3%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Respect",
+            "value": "+2%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_2",
+            "label": "Oliver Taylor · relationship",
+            "value": "+0%",
+            "tone": "neutral"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2039_parent-old-music_choice",
+          "date": {
+            "year": 2039,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I listened to Oliver’s old music and the story behind it.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2040,
+        "month": 2,
+        "day": 29
+      },
+      "age": 16,
+      "eventId": "event_2040_teen-mic-still-live",
+      "templateId": "teen-mic-still-live",
+      "title": "The microphone is still on",
+      "situation": "After a class announcement, Harry Clarke (classmate) whispers that the school jingle sounds like a microwave. The microphone is still on.",
+      "choices": [
+        {
+          "id": "switch",
+          "label": "Switch it off and warn them"
+        },
+        {
+          "id": "apologise",
+          "label": "Help make a short apology"
+        },
+        {
+          "id": "beep",
+          "label": "Add microwave sound effects"
+        }
+      ],
+      "selected": "switch",
+      "result": {
+        "title": "Broadcast ends",
+        "body": "Most people heard the first comment. You prevent a second one.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Respect",
+            "value": "+2%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Discipline",
+            "value": "+2%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_2",
+            "label": "Harry Clarke · relationship",
+            "value": "+3%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2040_teen-mic-still-live_choice",
+          "date": {
+            "year": 2040,
+            "month": 2,
+            "day": 29
+          },
+          "personId": "person_player",
+          "text": "I switched off a live microphone before Harry Clarke (classmate) said anything worse.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2042,
+        "month": 2,
+        "day": 28
+      },
+      "age": 18,
+      "eventId": "event_2042_adult-neighbourhood-song",
+      "templateId": "adult-neighbourhood-song",
+      "title": "The song of extra garlic",
+      "situation": "At a community singalong, the lyric projector fails. It starts displaying a takeaway receipt instead. The backing track continues. Everyone looks to you for the first line.",
+      "choices": [
+        {
+          "id": "laugh",
+          "label": "Sing the receipt with feeling"
+        },
+        {
+          "id": "listen",
+          "label": "Pass the microphone down the row"
+        },
+        {
+          "id": "correct",
+          "label": "Demand that they restore the proper words"
+        }
+      ],
+      "selected": "laugh",
+      "result": {
+        "title": "Hold the onions",
+        "body": "You hit the high note on “extra garlic”. The room joins in for “delivery instructions”. The organiser finally switches off the projector during the sauce options.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Happiness",
+            "value": "+7%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Energy",
+            "value": "-3%",
+            "tone": "negative"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2042_adult-neighbourhood-song_choice",
+          "date": {
+            "year": 2042,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I led a singalong using a takeaway receipt as the lyrics.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2044,
+        "month": 2,
+        "day": 29
+      },
+      "age": 20,
+      "eventId": "event_2044_adult-queue-merge",
+      "templateId": "adult-queue-merge",
+      "title": "The accidental millionaire",
+      "situation": "At a charity auction, someone mistakes you for a wealthy donor. The auctioneer hands you the microphone beside a photograph of an elderly donkey. “How much will you give?” The room goes quiet.",
+      "choices": [
+        {
+          "id": "alternate",
+          "label": "Admit your wealth has been exaggerated"
+        },
+        {
+          "id": "wait",
+          "label": "Donate £191.75 to the donkey charity"
+        },
+        {
+          "id": "push",
+          "label": "Claim you are the donkey’s lawyer"
+        }
+      ],
+      "selected": "alternate",
+      "result": {
+        "title": "A donkey-sized misunderstanding",
+        "body": "You explain that you were looking for the toilets. The auctioneer takes back the microphone and points down the corridor. Several people applaud your honesty. One applauds the donkey.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Respect",
+            "value": "+4%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Stress",
+            "value": "+0%",
+            "tone": "neutral"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2044_adult-queue-merge_choice",
+          "date": {
+            "year": 2044,
+            "month": 2,
+            "day": 29
+          },
+          "personId": "person_player",
+          "text": "I admitted I was not the wealthy donor a charity auction expected.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2046,
+        "month": 2,
+        "day": 28
+      },
+      "age": 22,
+      "eventId": "event_2046_wellbeing-waiting-without-feed",
+      "templateId": "wellbeing-waiting-without-feed",
+      "title": "A minute without filling it",
+      "situation": "You have a short wait with nothing to do. Before reaching for a distraction, you notice you have already checked the same screen three times.",
+      "choices": [
+        {
+          "id": "observe",
+          "label": "Look around for a minute"
+        },
+        {
+          "id": "rest",
+          "label": "Let your attention rest"
+        },
+        {
+          "id": "refresh",
+          "label": "Check the same screen again"
+        }
+      ],
+      "selected": "observe",
+      "result": {
+        "title": "The world supplies a few details",
+        "body": "You notice a small sign and an interesting pattern of light. The wait becomes a moment rather than a gap to erase.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Stress",
+            "value": "+0%",
+            "tone": "neutral"
+          },
+          {
+            "id": "effect_1",
+            "label": "Smarts",
+            "value": "+2%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2046_wellbeing-waiting-without-feed_choice",
+          "date": {
+            "year": 2046,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I spent a short wait noticing what was around me.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2047,
+        "month": 2,
+        "day": 28
+      },
+      "age": 23,
+      "eventId": "event_2047_adult-unwanted-speech",
+      "templateId": "adult-unwanted-speech",
+      "title": "A few words from our guest",
+      "situation": "At a free local event, the host hands you a microphone and thanks you for “everything you did”. You have no idea what you allegedly did.",
+      "choices": [
+        {
+          "id": "brief",
+          "label": "Ask what you are being thanked for"
+        },
+        {
+          "id": "pass",
+          "label": "Return the microphone immediately"
+        },
+        {
+          "id": "ramble",
+          "label": "Thank everyone who made this possible"
+        }
+      ],
+      "selected": "brief",
+      "result": {
+        "title": "The right person is found",
+        "body": "You were mistaken for the person who fixed a blocked toilet. Their arrival receives the applause they earned.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Respect",
+            "value": "+4%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Discipline",
+            "value": "+2%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2047_adult-unwanted-speech_choice",
+          "date": {
+            "year": 2047,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I corrected a mistaken public thank-you before giving a speech.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2048,
+        "month": 2,
+        "day": 29
+      },
+      "age": 24,
+      "eventId": "event_2048_adult-jackpot-handler",
+      "templateId": "adult-jackpot-handler",
+      "title": "Congratulations, almost",
+      "situation": "A caller says you have won a fortune in a lottery you never entered. To release the prize, they need a “small verification payment”. They sound personally hurt that you have questions.",
+      "choices": [
+        {
+          "id": "end",
+          "label": "End the call before sharing anything"
+        },
+        {
+          "id": "interview",
+          "label": "Ask how they feel about their life choices"
+        },
+        {
+          "id": "play",
+          "label": "Dictate a completely invented forty-letter name"
+        }
+      ],
+      "selected": "end",
+      "result": {
+        "title": "Your fortune remains imaginary",
+        "body": "You hang up. The only thing you lose is the chance to hear which payment methods the imaginary lottery prefers.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Discipline",
+            "value": "+4%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Stress",
+            "value": "-2%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2048_adult-jackpot-handler_choice",
+          "date": {
+            "year": 2048,
+            "month": 2,
+            "day": 29
+          },
+          "personId": "person_player",
+          "text": "I ended a suspicious lottery call without sending money.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2048,
+        "month": 8,
+        "day": 29
+      },
+      "age": 24,
+      "eventId": "emergency_condition_person_player_58_0_2048",
+      "templateId": "medical-emergency",
+      "title": "You need medical attention",
+      "situation": "Your symptoms have become serious: persistent worry and disrupted sleep. A hospital assessment can begin treatment and may require a short stay. The quoted care costs £0.00; an unpaid emergency bill remains a real obligation.",
+      "choices": [
+        {
+          "id": "care",
+          "label": "Accept hospital assessment"
+        },
+        {
+          "id": "decline",
+          "label": "Decline assessment"
+        }
+      ],
+      "selected": "care",
+      "result": {
+        "title": "Medical care arranged",
+        "body": "The assessment, treatment outcome and bill are recorded. A hospital stay affects study and paid work as time passes.",
+        "effects": [
+          {
+            "id": "care",
+            "label": "Medical care",
+            "value": "Admitted to hospital",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "emergency_condition_person_player_58_0_2048_choice",
+          "date": {
+            "year": 2048,
+            "month": 8,
+            "day": 29
+          },
+          "personId": "person_player",
+          "text": "I accepted urgent medical care.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2050,
+        "month": 2,
+        "day": 28
+      },
+      "age": 26,
+      "eventId": "event_2050_community-garden",
+      "templateId": "community-garden",
+      "title": "The naked gardener",
+      "situation": "The community garden in Manchester needs volunteers. Its organiser is wearing a novelty apron printed with a naked torso and refuses to explain it.",
+      "choices": [
+        {
+          "id": "join",
+          "label": "Weed beside the alarming apron"
+        },
+        {
+          "id": "learn",
+          "label": "Ask about the plants, very specifically"
+        },
+        {
+          "id": "pass",
+          "label": "Decide you have seen enough nature"
+        }
+      ],
+      "selected": "join",
+      "result": {
+        "title": "A productive misunderstanding",
+        "body": "You clear a whole bed. Three passers-by stop to stare before realising the torso has pockets.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Happiness",
+            "value": "+4%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Fitness",
+            "value": "+3%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_2",
+            "label": "Energy",
+            "value": "-4%",
+            "tone": "negative"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2050_community-garden_choice",
+          "date": {
+            "year": 2050,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I volunteered beside a gardener in an alarming novelty apron in Manchester.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2052,
+        "month": 2,
+        "day": 29
+      },
+      "age": 28,
+      "eventId": "event_2052_wellbeing-rehearsed-argument",
+      "templateId": "wellbeing-rehearsed-argument",
+      "title": "You said that part out loud",
+      "situation": "You rehearse a devastating comeback while walking. A stranger turns around just as you announce, “That is why nobody trusts your ferret.”",
+      "choices": [
+        {
+          "id": "ground",
+          "label": "Explain that you were arguing in your head"
+        },
+        {
+          "id": "prepare",
+          "label": "Write the useful point down privately"
+        },
+        {
+          "id": "continue",
+          "label": "Pretend to be on an important phone call"
+        }
+      ],
+      "selected": "ground",
+      "result": {
+        "title": "No actual ferret dispute",
+        "body": "The stranger accepts the explanation and walks on a little faster. You retire the argument before it recruits anyone else.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Stress",
+            "value": "+0%",
+            "tone": "neutral"
+          },
+          {
+            "id": "effect_1",
+            "label": "Discipline",
+            "value": "+2%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2052_wellbeing-rehearsed-argument_choice",
+          "date": {
+            "year": 2052,
+            "month": 2,
+            "day": 29
+          },
+          "personId": "person_player",
+          "text": "I stopped an imaginary argument after saying part of it aloud.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2053,
+        "month": 2,
+        "day": 28
+      },
+      "age": 29,
+      "eventId": "event_2053_wellbeing-one-more-episode",
+      "templateId": "wellbeing-one-more-episode",
+      "title": "The sofa is judging you",
+      "situation": "Autoplay follows your programme with a competitive fitness class. A man who appears to have been assembled entirely from elbows challenges you to beat your personal best.",
+      "choices": [
+        {
+          "id": "stop",
+          "label": "Switch to the beginner version and try it"
+        },
+        {
+          "id": "choose",
+          "label": "Invent a chair-based version"
+        },
+        {
+          "id": "drift",
+          "label": "Keep up with him at full speed"
+        }
+      ],
+      "selected": "stop",
+      "result": {
+        "title": "An achievable number of elbows",
+        "body": "You complete the gentler routine. The instructor says anyone can do it, then folds himself into a shape you decline to investigate.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Health",
+            "value": "+0%",
+            "tone": "neutral"
+          },
+          {
+            "id": "effect_1",
+            "label": "Fitness",
+            "value": "+4%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_2",
+            "label": "Energy",
+            "value": "-8%",
+            "tone": "negative"
+          },
+          {
+            "id": "effect_3",
+            "label": "Discipline",
+            "value": "+3%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2053_wellbeing-one-more-episode_choice",
+          "date": {
+            "year": 2053,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I followed a beginner workout after a fitness video appeared on autoplay.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2054,
+        "month": 2,
+        "day": 28
+      },
+      "age": 30,
+      "eventId": "event_2054_comparison-scroll",
+      "templateId": "comparison-scroll",
+      "title": "Everyone else appears to be thriving",
+      "situation": "Your feed contains a promotion, a beach, and a suspiciously tidy kitchen. Your own evening contains laundry.",
+      "choices": [
+        {
+          "id": "close",
+          "label": "Close the app and finish one thing"
+        },
+        {
+          "id": "message",
+          "label": "Send someone a proper message"
+        },
+        {
+          "id": "scroll",
+          "label": "Investigate another hour of success"
+        }
+      ],
+      "selected": "close",
+      "result": {
+        "title": "One less pile",
+        "body": "The laundry is still laundry. At least it is now folded.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Discipline",
+            "value": "+4%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Stress",
+            "value": "+0%",
+            "tone": "neutral"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2054_comparison-scroll_choice",
+          "date": {
+            "year": 2054,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I stopped comparing my evening to everyone else’s highlights.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2055,
+        "month": 2,
+        "day": 28
+      },
+      "age": 31,
+      "eventId": "event_2055_wellbeing-ordinary-water",
+      "templateId": "wellbeing-ordinary-water",
+      "title": "Water with a personal brand",
+      "situation": "At a free tasting, a presenter claims their water has been “emotionally filtered”. The jug beside it is labelled TAP. You are just thirsty.",
+      "choices": [
+        {
+          "id": "simple",
+          "label": "Drink the tap water"
+        },
+        {
+          "id": "pause",
+          "label": "Ask which emotions the filter removes"
+        },
+        {
+          "id": "research",
+          "label": "Debate the emotional lives of liquids"
+        }
+      ],
+      "selected": "simple",
+      "result": {
+        "title": "No emotional processing required",
+        "body": "It tastes like water. The presenter watches you finish a glass with the expression of someone witnessing sabotage.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Energy",
+            "value": "+0%",
+            "tone": "neutral"
+          },
+          {
+            "id": "effect_1",
+            "label": "Discipline",
+            "value": "+2%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2055_wellbeing-ordinary-water_choice",
+          "date": {
+            "year": 2055,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I chose tap water at a premium-water demonstration.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2056,
+        "month": 2,
+        "day": 29
+      },
+      "age": 32,
+      "eventId": "event_2056_adult-lost-glove",
+      "templateId": "adult-lost-glove",
+      "title": "The lost hand",
+      "situation": "You pick up a glove from a bench. A rubber hand slides out of its sleeve. It has painted fingernails, a wristwatch and no obvious owner.",
+      "choices": [
+        {
+          "id": "desk",
+          "label": "Carry it to reception"
+        },
+        {
+          "id": "visible",
+          "label": "Leave it upright on the bench"
+        },
+        {
+          "id": "detective",
+          "label": "Ask around for anyone missing a hand"
+        }
+      ],
+      "selected": "desk",
+      "result": {
+        "title": "Please wave if this is yours",
+        "body": "The receptionist holds the hand above the counter. A magician hurries over, thanks you and immediately removes its thumb. You stop watching.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Respect",
+            "value": "+3%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Stress",
+            "value": "+0%",
+            "tone": "neutral"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2056_adult-lost-glove_choice",
+          "date": {
+            "year": 2056,
+            "month": 2,
+            "day": 29
+          },
+          "personId": "person_player",
+          "text": "I returned a magician’s rubber hand to reception.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2057,
+        "month": 2,
+        "day": 28
+      },
+      "age": 33,
+      "eventId": "event_2057_adult-shortcut-stairs",
+      "templateId": "adult-shortcut-stairs",
+      "title": "A shortcut through the execution",
+      "situation": "A museum shortcut in Manchester takes you through a medieval punishment exhibit. A mechanical executioner swings a foam axe across the marked path. The long route has no executioner.",
+      "choices": [
+        {
+          "id": "return",
+          "label": "Take the long route"
+        },
+        {
+          "id": "explore",
+          "label": "Time the swing and walk through slowly"
+        },
+        {
+          "id": "race",
+          "label": "Sprint straight through the swinging axe"
+        }
+      ],
+      "selected": "return",
+      "result": {
+        "title": "A head start",
+        "body": "You turn back. A speaker announces, “The coward flees!” Three visitors turn to look. You continue with your head and your dignity approximately intact.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Discipline",
+            "value": "+3%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Stress",
+            "value": "+0%",
+            "tone": "neutral"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2057_adult-shortcut-stairs_choice",
+          "date": {
+            "year": 2057,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I took the long route around a museum’s mechanical executioner.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2058,
+        "month": 2,
+        "day": 28
+      },
+      "age": 34,
+      "eventId": "event_2058_wellbeing-meal-comparison",
+      "templateId": "wellbeing-meal-comparison",
+      "title": "Serving suggestion: a camera",
+      "situation": "An online meal looks so perfect that your ordinary food feels embarrassing. Then the creator posts a behind-the-scenes clip: the garnish is held up with glue.",
+      "choices": [
+        {
+          "id": "context",
+          "label": "Appreciate that your food is edible"
+        },
+        {
+          "id": "idea",
+          "label": "Borrow the arrangement, skip the glue"
+        },
+        {
+          "id": "judge",
+          "label": "Decide your food still looks inadequate"
+        }
+      ],
+      "selected": "context",
+      "result": {
+        "title": "Dinner wins on a technicality",
+        "body": "Your meal lacks dramatic lighting. It also lacks craft adhesive, which feels like a reasonable compromise.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Stress",
+            "value": "+0%",
+            "tone": "neutral"
+          },
+          {
+            "id": "effect_1",
+            "label": "Happiness",
+            "value": "+2%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2058_wellbeing-meal-comparison_choice",
+          "date": {
+            "year": 2058,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I stopped comparing ordinary food with a staged meal photograph.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2059,
+        "month": 2,
+        "day": 28
+      },
+      "age": 35,
+      "eventId": "event_2059_adult-free-lecture-question",
+      "templateId": "adult-free-lecture-question",
+      "title": "Any difficult questions?",
+      "situation": "At a free talk, a speaker claims nobody has ever disproved their theory. The theory is that pigeons remember your face and discuss you at night.",
+      "choices": [
+        {
+          "id": "ask",
+          "label": "Ask how they interviewed the pigeons"
+        },
+        {
+          "id": "listen",
+          "label": "Let another questioner take this one"
+        },
+        {
+          "id": "announce",
+          "label": "Announce that the pigeons work for you"
+        }
+      ],
+      "selected": "ask",
+      "result": {
+        "title": "The method needs work",
+        "body": "They admit they inferred the conversations. You learn the difference between a suspicious bird and actual evidence.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Smarts",
+            "value": "+3%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Respect",
+            "value": "+2%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2059_adult-free-lecture-question_choice",
+          "date": {
+            "year": 2059,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I questioned the evidence behind a speaker’s theory about pigeons.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2061,
+        "month": 2,
+        "day": 28
+      },
+      "age": 37,
+      "eventId": "event_2061_adult-unwanted-speech",
+      "templateId": "adult-unwanted-speech",
+      "title": "A few words from our guest",
+      "situation": "At a free local event, the host hands you a microphone and thanks you for “everything you did”. You have no idea what you allegedly did.",
+      "choices": [
+        {
+          "id": "brief",
+          "label": "Ask what you are being thanked for"
+        },
+        {
+          "id": "pass",
+          "label": "Return the microphone immediately"
+        },
+        {
+          "id": "ramble",
+          "label": "Thank everyone who made this possible"
+        }
+      ],
+      "selected": "brief",
+      "result": {
+        "title": "The right person is found",
+        "body": "You were mistaken for the person who fixed a blocked toilet. Their arrival receives the applause they earned.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Respect",
+            "value": "+4%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Discipline",
+            "value": "+2%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2061_adult-unwanted-speech_choice",
+          "date": {
+            "year": 2061,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I corrected a mistaken public thank-you before giving a speech.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2062,
+        "month": 2,
+        "day": 28
+      },
+      "age": 38,
+      "eventId": "event_2062_adult-perfect-introduction",
+      "templateId": "adult-perfect-introduction",
+      "title": "Everyone here is a winner",
+      "situation": "At a motivational taster session, you are asked to name your greatest achievement. The person before you says they survived eight workplace investigations. The facilitator applauds and turns to you.",
+      "choices": [
+        {
+          "id": "brief",
+          "label": "Say you got out of bed today"
+        },
+        {
+          "id": "question",
+          "label": "Ask what the investigations were about"
+        },
+        {
+          "id": "compete",
+          "label": "Claim you invented motivational seminars"
+        }
+      ],
+      "selected": "brief",
+      "result": {
+        "title": "A standing achievement",
+        "body": "The facilitator calls this a triumph over horizontal thinking. Everyone stands to applaud. You sit down before they can invent a course about it.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Happiness",
+            "value": "+4%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Energy",
+            "value": "+0%",
+            "tone": "neutral"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2062_adult-perfect-introduction_choice",
+          "date": {
+            "year": 2062,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I told a motivational group that getting out of bed was my achievement.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2064,
+        "month": 2,
+        "day": 29
+      },
+      "age": 40,
+      "eventId": "event_2064_wellbeing-unhurried-breath",
+      "templateId": "wellbeing-unhurried-breath",
+      "title": "Before answering immediately",
+      "situation": "A mildly irritating question arrives while you are already tired. You notice the sharp reply forming before the other person has finished speaking.",
+      "choices": [
+        {
+          "id": "pause",
+          "label": "Take a moment before answering"
+        },
+        {
+          "id": "name",
+          "label": "Say you need a short break"
+        },
+        {
+          "id": "snap",
+          "label": "Deliver the sharp reply"
+        }
+      ],
+      "selected": "pause",
+      "result": {
+        "title": "A reply with less edge",
+        "body": "The pause gives you time to separate the question from your tiredness. You answer the thing that was actually asked.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Discipline",
+            "value": "+3%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Stress",
+            "value": "+0%",
+            "tone": "neutral"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2064_wellbeing-unhurried-breath_choice",
+          "date": {
+            "year": 2064,
+            "month": 2,
+            "day": 29
+          },
+          "personId": "person_player",
+          "text": "I paused before answering sharply when I was tired.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2065,
+        "month": 2,
+        "day": 28
+      },
+      "age": 41,
+      "eventId": "event_2065_adult-lost-glove",
+      "templateId": "adult-lost-glove",
+      "title": "The lost hand",
+      "situation": "You pick up a glove from a bench. A rubber hand slides out of its sleeve. It has painted fingernails, a wristwatch and no obvious owner.",
+      "choices": [
+        {
+          "id": "desk",
+          "label": "Carry it to reception"
+        },
+        {
+          "id": "visible",
+          "label": "Leave it upright on the bench"
+        },
+        {
+          "id": "detective",
+          "label": "Ask around for anyone missing a hand"
+        }
+      ],
+      "selected": "desk",
+      "result": {
+        "title": "Please wave if this is yours",
+        "body": "The receptionist holds the hand above the counter. A magician hurries over, thanks you and immediately removes its thumb. You stop watching.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Respect",
+            "value": "+3%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Stress",
+            "value": "+0%",
+            "tone": "neutral"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2065_adult-lost-glove_choice",
+          "date": {
+            "year": 2065,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I returned a magician’s rubber hand to reception.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2066,
+        "month": 2,
+        "day": 28
+      },
+      "age": 42,
+      "eventId": "event_2066_wellbeing-habit-one-miss",
+      "templateId": "wellbeing-habit-one-miss",
+      "title": "One missed intention",
+      "situation": "You miss a small personal intention and catch yourself declaring the whole effort ruined. The declaration is much larger than the missed step.",
+      "choices": [
+        {
+          "id": "resume",
+          "label": "Take the next manageable step"
+        },
+        {
+          "id": "adjust",
+          "label": "Ask whether the intention needs adjusting"
+        },
+        {
+          "id": "condemn",
+          "label": "Declare yourself hopeless at consistency"
+        }
+      ],
+      "selected": "resume",
+      "result": {
+        "title": "A smaller conclusion",
+        "body": "You treat the missed moment as one moment and carry on with what you can manage now.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Discipline",
+            "value": "+4%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Stress",
+            "value": "+0%",
+            "tone": "neutral"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2066_wellbeing-habit-one-miss_choice",
+          "date": {
+            "year": 2066,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I avoided turning a small missed intention into a verdict on everything.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2067,
+        "month": 2,
+        "day": 28
+      },
+      "age": 43,
+      "eventId": "event_2067_familiar-street",
+      "templateId": "familiar-street",
+      "title": "A very local tragedy",
+      "situation": "On a free history walk in Manchester, the guide points at a laundrette: “A forbidden romance began here.” The owner leans out and asks whether this is about the washing-machine warranty.",
+      "choices": [
+        {
+          "id": "walk",
+          "label": "Stay for both versions"
+        },
+        {
+          "id": "write",
+          "label": "Ask the owner for the real story"
+        },
+        {
+          "id": "rush",
+          "label": "Leave before the historical reenactment"
+        }
+      ],
+      "selected": "walk",
+      "result": {
+        "title": "Star-crossed and spin-dried",
+        "body": "The guide describes a doomed affair. The owner describes a parts supplier. You finish the walk unsure which relationship suffered more.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Happiness",
+            "value": "+4%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Fitness",
+            "value": "+2%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2067_familiar-street_choice",
+          "date": {
+            "year": 2067,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I heard two competing tragedies outside a laundrette in Manchester.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2068,
+        "month": 2,
+        "day": 29
+      },
+      "age": 44,
+      "eventId": "event_2068_adult-free-lecture-question",
+      "templateId": "adult-free-lecture-question",
+      "title": "Any difficult questions?",
+      "situation": "At a free talk, a speaker claims nobody has ever disproved their theory. The theory is that pigeons remember your face and discuss you at night.",
+      "choices": [
+        {
+          "id": "ask",
+          "label": "Ask how they interviewed the pigeons"
+        },
+        {
+          "id": "listen",
+          "label": "Let another questioner take this one"
+        },
+        {
+          "id": "announce",
+          "label": "Announce that the pigeons work for you"
+        }
+      ],
+      "selected": "ask",
+      "result": {
+        "title": "The method needs work",
+        "body": "They admit they inferred the conversations. You learn the difference between a suspicious bird and actual evidence.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Smarts",
+            "value": "+3%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Respect",
+            "value": "+2%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2068_adult-free-lecture-question_choice",
+          "date": {
+            "year": 2068,
+            "month": 2,
+            "day": 29
+          },
+          "personId": "person_player",
+          "text": "I questioned the evidence behind a speaker’s theory about pigeons.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2069,
+        "month": 2,
+        "day": 28
+      },
+      "age": 45,
+      "eventId": "event_2069_wellbeing-ordinary-water",
+      "templateId": "wellbeing-ordinary-water",
+      "title": "Water with a personal brand",
+      "situation": "At a free tasting, a presenter claims their water has been “emotionally filtered”. The jug beside it is labelled TAP. You are just thirsty.",
+      "choices": [
+        {
+          "id": "simple",
+          "label": "Drink the tap water"
+        },
+        {
+          "id": "pause",
+          "label": "Ask which emotions the filter removes"
+        },
+        {
+          "id": "research",
+          "label": "Debate the emotional lives of liquids"
+        }
+      ],
+      "selected": "simple",
+      "result": {
+        "title": "No emotional processing required",
+        "body": "It tastes like water. The presenter watches you finish a glass with the expression of someone witnessing sabotage.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Energy",
+            "value": "+0%",
+            "tone": "neutral"
+          },
+          {
+            "id": "effect_1",
+            "label": "Discipline",
+            "value": "+2%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2069_wellbeing-ordinary-water_choice",
+          "date": {
+            "year": 2069,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I chose tap water at a premium-water demonstration.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2070,
+        "month": 2,
+        "day": 28
+      },
+      "age": 46,
+      "eventId": "event_2070_adult-neighbourhood-song",
+      "templateId": "adult-neighbourhood-song",
+      "title": "The song of extra garlic",
+      "situation": "At a community singalong, the lyric projector fails. It starts displaying a takeaway receipt instead. The backing track continues. Everyone looks to you for the first line.",
+      "choices": [
+        {
+          "id": "laugh",
+          "label": "Sing the receipt with feeling"
+        },
+        {
+          "id": "listen",
+          "label": "Pass the microphone down the row"
+        },
+        {
+          "id": "correct",
+          "label": "Demand that they restore the proper words"
+        }
+      ],
+      "selected": "laugh",
+      "result": {
+        "title": "Hold the onions",
+        "body": "You hit the high note on “extra garlic”. The room joins in for “delivery instructions”. The organiser finally switches off the projector during the sauce options.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Happiness",
+            "value": "+7%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Energy",
+            "value": "-3%",
+            "tone": "negative"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2070_adult-neighbourhood-song_choice",
+          "date": {
+            "year": 2070,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I led a singalong using a takeaway receipt as the lyrics.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2072,
+        "month": 2,
+        "day": 29
+      },
+      "age": 48,
+      "eventId": "event_2072_adult-seat-with-a-view",
+      "templateId": "adult-seat-with-a-view",
+      "title": "The important businessman",
+      "situation": "You sit in the last free café chair. A child wearing an enormous tie tells you it is reserved for an important businessman. The businessman, they explain, is them.",
+      "choices": [
+        {
+          "id": "move",
+          "label": "Ask what business they are in"
+        },
+        {
+          "id": "decline",
+          "label": "Offer them the chair after your drink"
+        },
+        {
+          "id": "lecture",
+          "label": "Explain that reserving chairs is bad business"
+        }
+      ],
+      "selected": "move",
+      "result": {
+        "title": "A volatile juice market",
+        "body": "They explain that juice has gone up and crayons are a bad investment. You move to the counter while they hold a meeting with a biscuit.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Happiness",
+            "value": "+5%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Stress",
+            "value": "+0%",
+            "tone": "neutral"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2072_adult-seat-with-a-view_choice",
+          "date": {
+            "year": 2072,
+            "month": 2,
+            "day": 29
+          },
+          "personId": "person_player",
+          "text": "I gave up a café chair after hearing a child’s business plan.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2073,
+        "month": 2,
+        "day": 28
+      },
+      "age": 49,
+      "eventId": "event_2073_adult-invisible-yacht",
+      "templateId": "adult-invisible-yacht",
+      "title": "Wealth you cannot see",
+      "situation": "A free gallery in Manchester displays an empty plinth titled “My Invisible Yacht”. A visitor says only rich people can understand it. You can see the same amount of yacht as everyone else.",
+      "choices": [
+        {
+          "id": "ask",
+          "label": "Ask the guide what the work means"
+        },
+        {
+          "id": "enjoy",
+          "label": "Admire its excellent fuel economy"
+        },
+        {
+          "id": "perform",
+          "label": "Pretend to fall overboard"
+        }
+      ],
+      "selected": "ask",
+      "result": {
+        "title": "A surprisingly useful explanation",
+        "body": "The guide says it is about status and imaginary ownership. The visitor looks relieved that somebody has supplied an answer.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Smarts",
+            "value": "+4%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Respect",
+            "value": "+2%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2073_adult-invisible-yacht_choice",
+          "date": {
+            "year": 2073,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I asked about an invisible-yacht artwork in Manchester.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2074,
+        "month": 2,
+        "day": 28
+      },
+      "age": 50,
+      "eventId": "event_2074_adult-repair-table",
+      "templateId": "adult-repair-table",
+      "title": "Nothing to worry about",
+      "situation": "At a free repair demonstration, a wind-up toy starts smoking. The volunteer explains that it is supposed to do that. The label “DO NOT WIND” drops off its base.",
+      "choices": [
+        {
+          "id": "ask",
+          "label": "Ask what the label means"
+        },
+        {
+          "id": "observe",
+          "label": "Step back and let them stop it"
+        },
+        {
+          "id": "heckle",
+          "label": "Ask whether smoke costs extra"
+        }
+      ],
+      "selected": "ask",
+      "result": {
+        "title": "A useful admission",
+        "body": "The volunteer stops and explains the failed mechanism. You learn more from the mistake than from the planned demonstration.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Smarts",
+            "value": "+2%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Respect",
+            "value": "+1%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2074_adult-repair-table_choice",
+          "date": {
+            "year": 2074,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I asked about a warning label during a failed toy-repair demonstration.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2075,
+        "month": 2,
+        "day": 28
+      },
+      "age": 51,
+      "eventId": "event_2075_adult-unwanted-speech",
+      "templateId": "adult-unwanted-speech",
+      "title": "A few words from our guest",
+      "situation": "At a free local event, the host hands you a microphone and thanks you for “everything you did”. You have no idea what you allegedly did.",
+      "choices": [
+        {
+          "id": "brief",
+          "label": "Ask what you are being thanked for"
+        },
+        {
+          "id": "pass",
+          "label": "Return the microphone immediately"
+        },
+        {
+          "id": "ramble",
+          "label": "Thank everyone who made this possible"
+        }
+      ],
+      "selected": "brief",
+      "result": {
+        "title": "The right person is found",
+        "body": "You were mistaken for the person who fixed a blocked toilet. Their arrival receives the applause they earned.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Respect",
+            "value": "+4%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Discipline",
+            "value": "+2%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2075_adult-unwanted-speech_choice",
+          "date": {
+            "year": 2075,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I corrected a mistaken public thank-you before giving a speech.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2076,
+        "month": 2,
+        "day": 29
+      },
+      "age": 52,
+      "eventId": "event_2076_new-skill-late",
+      "templateId": "new-skill-late",
+      "title": "Beginners’ self-defence",
+      "situation": "At a free beginner lesson, the instructor asks you to demonstrate a firm “No!” You give one so convincing that a passer-by apologises and leaves.",
+      "choices": [
+        {
+          "id": "try",
+          "label": "Practise the rest of the lesson"
+        },
+        {
+          "id": "watch",
+          "label": "Watch the demonstrations first"
+        },
+        {
+          "id": "leave",
+          "label": "Use your new “No!” on the whole lesson"
+        }
+      ],
+      "selected": "try",
+      "result": {
+        "title": "A useful loud afternoon",
+        "body": "You learn the basics and repeat the shout. The corridor remains unusually clear for the rest of the lesson.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Smarts",
+            "value": "+0%",
+            "tone": "neutral"
+          },
+          {
+            "id": "effect_1",
+            "label": "Happiness",
+            "value": "+3%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_2",
+            "label": "Energy",
+            "value": "-3%",
+            "tone": "negative"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2076_new-skill-late_choice",
+          "date": {
+            "year": 2076,
+            "month": 2,
+            "day": 29
+          },
+          "personId": "person_player",
+          "text": "I practised the basics at a free self-defence lesson.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2077,
+        "month": 2,
+        "day": 28
+      },
+      "age": 53,
+      "eventId": "event_2077_adult-free-sample-opinion",
+      "templateId": "adult-free-sample-opinion",
+      "title": "Honest feedback, preferably positive",
+      "situation": "At a free tasting, you try a cracker that tastes strongly of cupboard. The demonstrator asks for a glowing testimonial while holding a camera.",
+      "choices": [
+        {
+          "id": "specific",
+          "label": "Suggest improving the flavour first"
+        },
+        {
+          "id": "kind",
+          "label": "Praise how neatly it broke"
+        },
+        {
+          "id": "essay",
+          "label": "Deliver a dramatic account of the cupboard"
+        }
+      ],
+      "selected": "specific",
+      "result": {
+        "title": "A review they can use",
+        "body": "You mention the texture and the cupboard problem. The camera lowers. They admit this batch has been “challenging”.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Respect",
+            "value": "+3%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Smarts",
+            "value": "+0%",
+            "tone": "neutral"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2077_adult-free-sample-opinion_choice",
+          "date": {
+            "year": 2077,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I gave specific criticism of a free food sample.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2078,
+        "month": 2,
+        "day": 28
+      },
+      "age": 54,
+      "eventId": "event_2078_adult-perfect-introduction",
+      "templateId": "adult-perfect-introduction",
+      "title": "Everyone here is a winner",
+      "situation": "At a motivational taster session, you are asked to name your greatest achievement. The person before you says they survived eight workplace investigations. The facilitator applauds and turns to you.",
+      "choices": [
+        {
+          "id": "brief",
+          "label": "Say you got out of bed today"
+        },
+        {
+          "id": "question",
+          "label": "Ask what the investigations were about"
+        },
+        {
+          "id": "compete",
+          "label": "Claim you invented motivational seminars"
+        }
+      ],
+      "selected": "brief",
+      "result": {
+        "title": "A standing achievement",
+        "body": "The facilitator calls this a triumph over horizontal thinking. Everyone stands to applaud. You sit down before they can invent a course about it.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Happiness",
+            "value": "+4%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Energy",
+            "value": "+0%",
+            "tone": "neutral"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2078_adult-perfect-introduction_choice",
+          "date": {
+            "year": 2078,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I told a motivational group that getting out of bed was my achievement.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2079,
+        "month": 2,
+        "day": 28
+      },
+      "age": 55,
+      "eventId": "event_2079_wellbeing-stretch-after-sitting",
+      "templateId": "wellbeing-stretch-after-sitting",
+      "title": "Your shoulders have a complaint",
+      "situation": "After sitting in the same position for a while, you notice that your shoulders appear to have crept up towards your ears.",
+      "choices": [
+        {
+          "id": "move",
+          "label": "Take a gentle movement break"
+        },
+        {
+          "id": "adjust",
+          "label": "Change your position and relax your shoulders"
+        },
+        {
+          "id": "ignore",
+          "label": "Stay exactly as you are"
+        }
+      ],
+      "selected": "move",
+      "result": {
+        "title": "A different position helps",
+        "body": "You loosen up at a comfortable pace and return to what you were doing. You had not noticed how stiff you were.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Energy",
+            "value": "+0%",
+            "tone": "neutral"
+          },
+          {
+            "id": "effect_1",
+            "label": "Stress",
+            "value": "+0%",
+            "tone": "neutral"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2079_wellbeing-stretch-after-sitting_choice",
+          "date": {
+            "year": 2079,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I took a gentle movement break after sitting still.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2080,
+        "month": 2,
+        "day": 29
+      },
+      "age": 56,
+      "eventId": "event_2080_later-recording-labelled-retro",
+      "templateId": "later-recording-labelled-retro",
+      "title": "The programme is now retro",
+      "situation": "A recording you remember as ordinary entertainment is introduced as a fascinating example of a past era. The past era appears to have included your evenings.",
+      "choices": [
+        {
+          "id": "enjoy",
+          "label": "Enjoy noticing what has changed"
+        },
+        {
+          "id": "share",
+          "label": "Describe one detail you remember clearly"
+        },
+        {
+          "id": "protest",
+          "label": "Object to the entire concept of retro"
+        }
+      ],
+      "selected": "enjoy",
+      "result": {
+        "title": "An accidental historical perspective",
+        "body": "You spot details that once passed unnoticed. Familiarity gives you another way to watch it.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Happiness",
+            "value": "+4%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Smarts",
+            "value": "+0%",
+            "tone": "neutral"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2080_later-recording-labelled-retro_choice",
+          "date": {
+            "year": 2080,
+            "month": 2,
+            "day": 29
+          },
+          "personId": "person_player",
+          "text": "I enjoyed seeing an old programme presented as a period piece.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2081,
+        "month": 2,
+        "day": 28
+      },
+      "age": 57,
+      "eventId": "event_2081_wellbeing-ordinary-water",
+      "templateId": "wellbeing-ordinary-water",
+      "title": "Water with a personal brand",
+      "situation": "At a free tasting, a presenter claims their water has been “emotionally filtered”. The jug beside it is labelled TAP. You are just thirsty.",
+      "choices": [
+        {
+          "id": "simple",
+          "label": "Drink the tap water"
+        },
+        {
+          "id": "pause",
+          "label": "Ask which emotions the filter removes"
+        },
+        {
+          "id": "research",
+          "label": "Debate the emotional lives of liquids"
+        }
+      ],
+      "selected": "simple",
+      "result": {
+        "title": "No emotional processing required",
+        "body": "It tastes like water. The presenter watches you finish a glass with the expression of someone witnessing sabotage.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Energy",
+            "value": "+0%",
+            "tone": "neutral"
+          },
+          {
+            "id": "effect_1",
+            "label": "Discipline",
+            "value": "+2%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2081_wellbeing-ordinary-water_choice",
+          "date": {
+            "year": 2081,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I chose tap water at a premium-water demonstration.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2082,
+        "month": 2,
+        "day": 28
+      },
+      "age": 58,
+      "eventId": "event_2082_later-retirement-assumption",
+      "templateId": "later-retirement-assumption",
+      "title": "What do you do all day?",
+      "situation": "A stranger assumes you are retired and asks whether you have taken up “something gentle, like birdwatching”. You have not told them anything about your life.",
+      "choices": [
+        {
+          "id": "accurate",
+          "label": "Tell them what your days actually involve"
+        },
+        {
+          "id": "humour",
+          "label": "Say the birds are frightened of you"
+        },
+        {
+          "id": "lecture",
+          "label": "Describe every activity they failed to imagine"
+        }
+      ],
+      "selected": "accurate",
+      "result": {
+        "title": "An overdue factual check",
+        "body": "You give a short answer. They apologise for inventing your schedule before learning your name.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Respect",
+            "value": "+3%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Stress",
+            "value": "+0%",
+            "tone": "neutral"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2082_later-retirement-assumption_choice",
+          "date": {
+            "year": 2082,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I corrected a stranger’s assumption about my daily life.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2083,
+        "month": 2,
+        "day": 28
+      },
+      "age": 59,
+      "eventId": "event_2083_adult-password-on-paper",
+      "templateId": "adult-password-on-paper",
+      "title": "A reminder that needs reminding",
+      "situation": "You find a note you wrote to help remember something important. It says only, “The usual one, but different.”",
+      "choices": [
+        {
+          "id": "rewrite",
+          "label": "Write a clearer private reminder"
+        },
+        {
+          "id": "reconstruct",
+          "label": "Work backwards from the context"
+        },
+        {
+          "id": "trust",
+          "label": "Assume it will make sense later"
+        }
+      ],
+      "selected": "rewrite",
+      "result": {
+        "title": "Future you gets better information",
+        "body": "You replace the riddle with a useful explanation and keep it somewhere appropriate.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Discipline",
+            "value": "+4%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Stress",
+            "value": "+0%",
+            "tone": "neutral"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2083_adult-password-on-paper_choice",
+          "date": {
+            "year": 2083,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I replaced an unhelpful private reminder with a clear one.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2086,
+        "month": 2,
+        "day": 28
+      },
+      "age": 62,
+      "eventId": "event_2086_adult-queue-merge",
+      "templateId": "adult-queue-merge",
+      "title": "The accidental millionaire",
+      "situation": "At a charity auction, someone mistakes you for a wealthy donor. The auctioneer hands you the microphone beside a photograph of an elderly donkey. “How much will you give?” The room goes quiet.",
+      "choices": [
+        {
+          "id": "alternate",
+          "label": "Admit your wealth has been exaggerated"
+        },
+        {
+          "id": "wait",
+          "label": "Donate £196.62 to the donkey charity"
+        },
+        {
+          "id": "push",
+          "label": "Claim you are the donkey’s lawyer"
+        }
+      ],
+      "selected": "alternate",
+      "result": {
+        "title": "A donkey-sized misunderstanding",
+        "body": "You explain that you were looking for the toilets. The auctioneer takes back the microphone and points down the corridor. Several people applaud your honesty. One applauds the donkey.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Respect",
+            "value": "+4%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Stress",
+            "value": "+0%",
+            "tone": "neutral"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2086_adult-queue-merge_choice",
+          "date": {
+            "year": 2086,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I admitted I was not the wealthy donor a charity auction expected.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2087,
+        "month": 2,
+        "day": 28
+      },
+      "age": 63,
+      "eventId": "event_2087_community-garden",
+      "templateId": "community-garden",
+      "title": "The naked gardener",
+      "situation": "The community garden in Manchester needs volunteers. Its organiser is wearing a novelty apron printed with a naked torso and refuses to explain it.",
+      "choices": [
+        {
+          "id": "join",
+          "label": "Weed beside the alarming apron"
+        },
+        {
+          "id": "learn",
+          "label": "Ask about the plants, very specifically"
+        },
+        {
+          "id": "pass",
+          "label": "Decide you have seen enough nature"
+        }
+      ],
+      "selected": "join",
+      "result": {
+        "title": "A productive misunderstanding",
+        "body": "You clear a whole bed. Three passers-by stop to stare before realising the torso has pockets.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Happiness",
+            "value": "+4%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Fitness",
+            "value": "+3%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_2",
+            "label": "Energy",
+            "value": "-4%",
+            "tone": "negative"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2087_community-garden_choice",
+          "date": {
+            "year": 2087,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I volunteered beside a gardener in an alarming novelty apron in Manchester.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2088,
+        "month": 2,
+        "day": 29
+      },
+      "age": 64,
+      "eventId": "event_2088_later-another-year-question",
+      "templateId": "later-another-year-question",
+      "title": "Older than bread",
+      "situation": "A birthday cake for you arrives with an extra zero among the candles. Someone asks whether you knew the person who invented bread.",
+      "choices": [
+        {
+          "id": "honest",
+          "label": "Ask for the extra candles to be removed"
+        },
+        {
+          "id": "ordinary",
+          "label": "Keep the cake and accept your ancient status"
+        },
+        {
+          "id": "perform",
+          "label": "Deliver a speech about surviving the last ice age"
+        }
+      ],
+      "selected": "honest",
+      "result": {
+        "title": "A breakthrough in reverse ageing",
+        "body": "They remove the extra candles, then stand back as though they have made you younger. You thank the bakery for its medical breakthrough.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Respect",
+            "value": "+3%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Happiness",
+            "value": "+4%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2088_later-another-year-question_choice",
+          "date": {
+            "year": 2088,
+            "month": 2,
+            "day": 29
+          },
+          "personId": "person_player",
+          "text": "I corrected an extra zero on my birthday cake.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2090,
+        "month": 2,
+        "day": 28
+      },
+      "age": 66,
+      "eventId": "event_2090_small-mistake",
+      "templateId": "small-mistake",
+      "title": "Reply all",
+      "situation": "You meant to send “Is that wig on backwards?” to one person. It lands in the whole public-meeting chat. The wig’s owner is typing.",
+      "choices": [
+        {
+          "id": "own",
+          "label": "Apologise before the typing stops"
+        },
+        {
+          "id": "laugh",
+          "label": "Claim you meant your own wig"
+        },
+        {
+          "id": "reread",
+          "label": "Keep reopening the chat in horror"
+        }
+      ],
+      "selected": "own",
+      "result": {
+        "title": "An honest public disaster",
+        "body": "You admit it was rude. The owner replies, “It is on correctly.” Nobody asks which part you meant to apologise for.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Respect",
+            "value": "+3%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Stress",
+            "value": "+0%",
+            "tone": "neutral"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2090_small-mistake_choice",
+          "date": {
+            "year": 2090,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I apologised after sending a rude wig comment to a group chat.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2093,
+        "month": 2,
+        "day": 28
+      },
+      "age": 69,
+      "eventId": "event_2093_familiar-street",
+      "templateId": "familiar-street",
+      "title": "A very local tragedy",
+      "situation": "On a free history walk in Manchester, the guide points at a laundrette: “A forbidden romance began here.” The owner leans out and asks whether this is about the washing-machine warranty.",
+      "choices": [
+        {
+          "id": "walk",
+          "label": "Stay for both versions"
+        },
+        {
+          "id": "write",
+          "label": "Ask the owner for the real story"
+        },
+        {
+          "id": "rush",
+          "label": "Leave before the historical reenactment"
+        }
+      ],
+      "selected": "walk",
+      "result": {
+        "title": "Star-crossed and spin-dried",
+        "body": "The guide describes a doomed affair. The owner describes a parts supplier. You finish the walk unsure which relationship suffered more.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Happiness",
+            "value": "+3%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Fitness",
+            "value": "+2%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2093_familiar-street_choice",
+          "date": {
+            "year": 2093,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I heard two competing tragedies outside a laundrette in Manchester.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2094,
+        "month": 2,
+        "day": 28
+      },
+      "age": 70,
+      "eventId": "event_2094_wellbeing-quiet-not-silent",
+      "templateId": "wellbeing-quiet-not-silent",
+      "title": "The quiet place has noises",
+      "situation": "You sit somewhere quiet and immediately notice a clock, a distant door and somebody clearing their throat. Apparently quiet did not mean perfectly silent.",
+      "choices": [
+        {
+          "id": "allow",
+          "label": "Let the ordinary sounds be there"
+        },
+        {
+          "id": "focus",
+          "label": "Choose one steady sound to notice"
+        },
+        {
+          "id": "inspect",
+          "label": "Identify every interruption"
+        }
+      ],
+      "selected": "allow",
+      "result": {
+        "title": "Quiet enough is available",
+        "body": "You stop checking each sound for a reason to be irritated. The place becomes restful without becoming silent.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Stress",
+            "value": "+0%",
+            "tone": "neutral"
+          },
+          {
+            "id": "effect_1",
+            "label": "Energy",
+            "value": "+0%",
+            "tone": "neutral"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2094_wellbeing-quiet-not-silent_choice",
+          "date": {
+            "year": 2094,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I accepted ordinary background sounds in a quiet moment.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2095,
+        "month": 2,
+        "day": 28
+      },
+      "age": 71,
+      "eventId": "event_2095_wellbeing-waiting-without-feed",
+      "templateId": "wellbeing-waiting-without-feed",
+      "title": "A minute without filling it",
+      "situation": "You have a short wait with nothing to do. Before reaching for a distraction, you notice you have already checked the same screen three times.",
+      "choices": [
+        {
+          "id": "observe",
+          "label": "Look around for a minute"
+        },
+        {
+          "id": "rest",
+          "label": "Let your attention rest"
+        },
+        {
+          "id": "refresh",
+          "label": "Check the same screen again"
+        }
+      ],
+      "selected": "observe",
+      "result": {
+        "title": "The world supplies a few details",
+        "body": "You notice a small sign and an interesting pattern of light. The wait becomes a moment rather than a gap to erase.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Stress",
+            "value": "+0%",
+            "tone": "neutral"
+          },
+          {
+            "id": "effect_1",
+            "label": "Smarts",
+            "value": "+0%",
+            "tone": "neutral"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2095_wellbeing-waiting-without-feed_choice",
+          "date": {
+            "year": 2095,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I spent a short wait noticing what was around me.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2096,
+        "month": 2,
+        "day": 29
+      },
+      "age": 72,
+      "eventId": "event_2096_later-photo-at-edge",
+      "templateId": "later-photo-at-edge",
+      "title": "You are almost in the picture",
+      "situation": "An old photograph catches you at the edge of the frame, apparently concentrating on something outside it. You can no longer remember what seemed so important.",
+      "choices": [
+        {
+          "id": "accept",
+          "label": "Enjoy the unfinished little mystery"
+        },
+        {
+          "id": "recall",
+          "label": "Write down what you do remember"
+        },
+        {
+          "id": "invent",
+          "label": "Build a grand explanation around the pose"
+        }
+      ],
+      "selected": "accept",
+      "result": {
+        "title": "A life outside the frame",
+        "body": "You let the unknown detail remain unknown. The photograph still holds an ordinary moment worth keeping.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Happiness",
+            "value": "+0%",
+            "tone": "neutral"
+          },
+          {
+            "id": "effect_1",
+            "label": "Stress",
+            "value": "+0%",
+            "tone": "neutral"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2096_later-photo-at-edge_choice",
+          "date": {
+            "year": 2096,
+            "month": 2,
+            "day": 29
+          },
+          "personId": "person_player",
+          "text": "I enjoyed an old photograph without solving every detail.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    }
+  ],
+  "journal": [
+    {
+      "id": "journal_birth",
+      "date": {
+        "year": 2024,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I was born on 29 February 2024 in Manchester, United Kingdom.",
+      "category": "birth"
+    },
+    {
+      "id": "journal_birth_identity",
+      "date": {
+        "year": 2024,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "My name is Oliver Taylor. I’m a boy.",
+      "category": "birth"
+    },
+    {
+      "id": "journal_birth_parent_person_parent1",
+      "date": {
+        "year": 2024,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "My mother is Oliver Taylor, 38. She works as an accountant.",
+      "category": "birth"
+    },
+    {
+      "id": "journal_birth_parent_person_parent2",
+      "date": {
+        "year": 2024,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "My father is Grace Taylor, 39. He works as a plumber.",
+      "category": "birth"
+    },
+    {
+      "id": "journal_birth_family",
+      "date": {
+        "year": 2024,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "My parents are married, and we all live together.",
+      "category": "birth"
+    },
+    {
+      "id": "event_2025_first-cake_choice",
+      "date": {
+        "year": 2025,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I wore my birthday cake. Oliver kept the photograph.",
+      "category": "event"
+    },
+    {
+      "id": "year_3_quiet",
+      "date": {
+        "year": 2026,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I grew a little more confident in a world full of things to investigate.",
+      "category": "year"
+    },
+    {
+      "id": "event_2027_toddler-biscuit-halves_choice",
+      "date": {
+        "year": 2027,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I fitted two broken biscuit halves back together.",
+      "category": "event"
+    },
+    {
+      "id": "year_8_quiet",
+      "date": {
+        "year": 2028,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "Another birthday arrived. Some days felt much bigger than others.",
+      "category": "year"
+    },
+    {
+      "id": "fact_10_27",
+      "date": {
+        "year": 2029,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I started at Manchester Primary School.",
+      "category": "education"
+    },
+    {
+      "id": "fact_10_28",
+      "date": {
+        "year": 2029,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Grace Clarke became my class teacher at Manchester Primary School.",
+      "category": "school-contact"
+    },
+    {
+      "id": "fact_10_29",
+      "date": {
+        "year": 2029,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I got to know Harry, Theo, Amelia in my class at Manchester Primary School.",
+      "category": "school-contact"
+    },
+    {
+      "id": "event_2029_toddler-why-machine_choice",
+      "date": {
+        "year": 2029,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I questioned Oliver until they explained a joke about swallowing seeds.",
+      "category": "event"
+    },
+    {
+      "id": "fact_14_43",
+      "date": {
+        "year": 2030,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "My primary school-year report recorded grades of 62%. I completed twelve attended months at Manchester Primary School.",
+      "category": "school-report"
+    },
+    {
+      "id": "event_2030_blanket-dragon_choice",
+      "date": {
+        "year": 2030,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "My imaginary dragon joined bedtime stories.",
+      "category": "event"
+    },
+    {
+      "id": "fact_17_52",
+      "date": {
+        "year": 2031,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "My primary school-year report recorded grades of 60%. I completed twelve attended months at Manchester Primary School.",
+      "category": "school-report"
+    },
+    {
+      "id": "event_2031_school-show-tell-prop_choice",
+      "date": {
+        "year": 2031,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I admitted forgetting my show-and-tell object.",
+      "category": "event"
+    },
+    {
+      "id": "fact_20_65",
+      "date": {
+        "year": 2032,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "My primary school-year report recorded grades of 58%. I completed twelve attended months at Manchester Primary School.",
+      "category": "school-report"
+    },
+    {
+      "id": "fact_21_72",
+      "date": {
+        "year": 2032,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "Oliver did not agree to the arcade party. No visit or payment was booked.",
+      "category": "school"
+    },
+    {
+      "id": "event_2032_school-arcade-invitation_choice",
+      "date": {
+        "year": 2032,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I asked Oliver for permission to go to Harry’s arcade birthday.",
+      "category": "event"
+    },
+    {
+      "id": "fact_23_76",
+      "date": {
+        "year": 2033,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "My primary school-year report recorded grades of 59%. I completed twelve attended months at Manchester Primary School.",
+      "category": "school-report"
+    },
+    {
+      "id": "year_23_quiet",
+      "date": {
+        "year": 2033,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Another birthday arrived. Some days felt much bigger than others.",
+      "category": "year"
+    },
+    {
+      "id": "fact_25_86",
+      "date": {
+        "year": 2034,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "My primary school-year report recorded grades of 59%. I completed twelve attended months at Manchester Primary School.",
+      "category": "school-report"
+    },
+    {
+      "id": "year_25_quiet",
+      "date": {
+        "year": 2034,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Another birthday arrived. Some days felt much bigger than others.",
+      "category": "year"
+    },
+    {
+      "id": "fact_27_97",
+      "date": {
+        "year": 2035,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "My primary school-year report recorded grades of 59%. I completed twelve attended months at Manchester Primary School.",
+      "category": "school-report"
+    },
+    {
+      "id": "fact_27_98",
+      "date": {
+        "year": 2035,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I moved on to Manchester Secondary School.",
+      "category": "education"
+    },
+    {
+      "id": "fact_27_99",
+      "date": {
+        "year": 2035,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Harry Ahmed became my class teacher at Manchester Secondary School.",
+      "category": "school-contact"
+    },
+    {
+      "id": "fact_27_100",
+      "date": {
+        "year": 2035,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I got to know Harry, Theo Ahmed (classmate 2), Amelia, Theo Ahmed (classmate 4) in my class at Manchester Secondary School.",
+      "category": "school-contact"
+    },
+    {
+      "id": "event_2035_rainy-fort_choice",
+      "date": {
+        "year": 2035,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I built a blanket fort that almost met building regulations.",
+      "category": "event"
+    },
+    {
+      "id": "fact_32_111",
+      "date": {
+        "year": 2036,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "My secondary school-year report recorded grades of 61%. I completed twelve attended months at Manchester Secondary School.",
+      "category": "school-report"
+    },
+    {
+      "id": "event_2036_teen-old-interest-box_choice",
+      "date": {
+        "year": 2036,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I answered a childhood demand to become a dinosaur by making a sock tail.",
+      "category": "event"
+    },
+    {
+      "id": "fact_35_123",
+      "date": {
+        "year": 2037,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "My secondary school-year report recorded grades of 61%. I completed twelve attended months at Manchester Secondary School.",
+      "category": "school-report"
+    },
+    {
+      "id": "year_35_quiet",
+      "date": {
+        "year": 2037,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Another birthday arrived. Some days felt much bigger than others.",
+      "category": "year"
+    },
+    {
+      "id": "fact_37_137",
+      "date": {
+        "year": 2038,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "My secondary school-year report recorded grades of 60%. I completed twelve attended months at Manchester Secondary School.",
+      "category": "school-report"
+    },
+    {
+      "id": "year_37_quiet",
+      "date": {
+        "year": 2038,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Another birthday arrived. Some days felt much bigger than others.",
+      "category": "year"
+    },
+    {
+      "id": "fact_39_149",
+      "date": {
+        "year": 2039,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "My secondary school-year report recorded grades of 62%. I completed twelve attended months at Manchester Secondary School.",
+      "category": "school-report"
+    },
+    {
+      "id": "event_2039_parent-old-music_choice",
+      "date": {
+        "year": 2039,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I listened to Oliver’s old music and the story behind it.",
+      "category": "event"
+    },
+    {
+      "id": "fact_42_161",
+      "date": {
+        "year": 2040,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "My secondary school-year report recorded grades of 64%. I completed twelve attended months at Manchester Secondary School.",
+      "category": "school-report"
+    },
+    {
+      "id": "event_2040_teen-mic-still-live_choice",
+      "date": {
+        "year": 2040,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I switched off a live microphone before Harry Clarke (classmate) said anything worse.",
+      "category": "event"
+    },
+    {
+      "id": "fact_45_174",
+      "date": {
+        "year": 2041,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "My secondary school-year report recorded grades of 64%. I completed twelve attended months at Manchester Secondary School.",
+      "category": "school-report"
+    },
+    {
+      "id": "year_45_quiet",
+      "date": {
+        "year": 2041,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Another birthday arrived. Some days felt much bigger than others.",
+      "category": "year"
+    },
+    {
+      "id": "fact_47_196",
+      "date": {
+        "year": 2042,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "My secondary school-year report recorded grades of 63%. I completed twelve attended months at Manchester Secondary School.",
+      "category": "school-report"
+    },
+    {
+      "id": "fact_47_198",
+      "date": {
+        "year": 2042,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I completed secondary education with grades of 63%.",
+      "category": "education"
+    },
+    {
+      "id": "fact_47_199",
+      "date": {
+        "year": 2042,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I began covering the costs of an independent household.",
+      "category": "family"
+    },
+    {
+      "id": "fact_48_208",
+      "date": {
+        "year": 2042,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Harry Clarke and Amelia Hughes started dating.",
+      "category": "relationships"
+    },
+    {
+      "id": "event_2042_adult-neighbourhood-song_choice",
+      "date": {
+        "year": 2042,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I led a singalong using a takeaway receipt as the lyrics.",
+      "category": "event"
+    },
+    {
+      "id": "year_51_quiet",
+      "date": {
+        "year": 2043,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Another year passed. The ordinary days were part of my life too.",
+      "category": "year"
+    },
+    {
+      "id": "event_2044_adult-queue-merge_choice",
+      "date": {
+        "year": 2044,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I admitted I was not the wealthy donor a charity auction expected.",
+      "category": "event"
+    },
+    {
+      "id": "fact_56_239",
+      "date": {
+        "year": 2045,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Harry Clarke and Amelia Hughes married after paying for their ceremony together.",
+      "category": "relationships"
+    },
+    {
+      "id": "year_56_quiet",
+      "date": {
+        "year": 2045,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Another year passed. The ordinary days were part of my life too.",
+      "category": "year"
+    },
+    {
+      "id": "fact_58_249",
+      "date": {
+        "year": 2046,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I developed symptoms: persistent worry and disrupted sleep.",
+      "category": "health"
+    },
+    {
+      "id": "event_2046_wellbeing-waiting-without-feed_choice",
+      "date": {
+        "year": 2046,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I spent a short wait noticing what was around me.",
+      "category": "event"
+    },
+    {
+      "id": "event_2047_adult-unwanted-speech_choice",
+      "date": {
+        "year": 2047,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I corrected a mistaken public thank-you before giving a speech.",
+      "category": "event"
+    },
+    {
+      "id": "event_2048_adult-jackpot-handler_choice",
+      "date": {
+        "year": 2048,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I ended a suspicious lottery call without sending money.",
+      "category": "event"
+    },
+    {
+      "id": "fact_68_289",
+      "date": {
+        "year": 2048,
+        "month": 8,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I began therapy care for Anxiety disorder.",
+      "category": "health"
+    },
+    {
+      "id": "emergency_condition_person_player_58_0_2048_choice",
+      "date": {
+        "year": 2048,
+        "month": 8,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I accepted urgent medical care.",
+      "category": "event"
+    },
+    {
+      "id": "fact_69_292",
+      "date": {
+        "year": 2048,
+        "month": 10,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I left hospital and continued my recovery.",
+      "category": "health"
+    },
+    {
+      "id": "fact_69_302",
+      "date": {
+        "year": 2049,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Theo Ahmed and Theo Ahmed started dating.",
+      "category": "relationships"
+    },
+    {
+      "id": "year_67_quiet",
+      "date": {
+        "year": 2049,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Another year passed. The ordinary days were part of my life too.",
+      "category": "year"
+    },
+    {
+      "id": "fact_71_305",
+      "date": {
+        "year": 2049,
+        "month": 5,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "Anxiety disorder went into remission.",
+      "category": "health"
+    },
+    {
+      "id": "death_person_parent2",
+      "date": {
+        "year": 2049,
+        "month": 11,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "Grace Taylor died at age 65.",
+      "category": "family"
+    },
+    {
+      "id": "fact_71_313",
+      "date": {
+        "year": 2049,
+        "month": 11,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I inherited £200,105.41 in cash and property from Grace Taylor.",
+      "category": "family"
+    },
+    {
+      "id": "event_2050_community-garden_choice",
+      "date": {
+        "year": 2050,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I volunteered beside a gardener in an alarming novelty apron in Manchester.",
+      "category": "event"
+    },
+    {
+      "id": "year_74_quiet",
+      "date": {
+        "year": 2051,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Another year passed. The ordinary days were part of my life too.",
+      "category": "year"
+    },
+    {
+      "id": "event_2052_wellbeing-rehearsed-argument_choice",
+      "date": {
+        "year": 2052,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I stopped an imaginary argument after saying part of it aloud.",
+      "category": "event"
+    },
+    {
+      "id": "death_person_parent1",
+      "date": {
+        "year": 2052,
+        "month": 3,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "Oliver Taylor died at age 67.",
+      "category": "family"
+    },
+    {
+      "id": "fact_79_344",
+      "date": {
+        "year": 2052,
+        "month": 3,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I inherited £855,669.72 in cash and property from Oliver Taylor.",
+      "category": "family"
+    },
+    {
+      "id": "event_2053_wellbeing-one-more-episode_choice",
+      "date": {
+        "year": 2053,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I followed a beginner workout after a fitness video appeared on autoplay.",
+      "category": "event"
+    },
+    {
+      "id": "event_2054_comparison-scroll_choice",
+      "date": {
+        "year": 2054,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I stopped comparing my evening to everyone else’s highlights.",
+      "category": "event"
+    },
+    {
+      "id": "event_2055_wellbeing-ordinary-water_choice",
+      "date": {
+        "year": 2055,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I chose tap water at a premium-water demonstration.",
+      "category": "event"
+    },
+    {
+      "id": "fact_88_396",
+      "date": {
+        "year": 2056,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "Theo Ahmed and Theo Ahmed stopped dating.",
+      "category": "relationships"
+    },
+    {
+      "id": "event_2056_adult-lost-glove_choice",
+      "date": {
+        "year": 2056,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I returned a magician’s rubber hand to reception.",
+      "category": "event"
+    },
+    {
+      "id": "event_2057_adult-shortcut-stairs_choice",
+      "date": {
+        "year": 2057,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I took the long route around a museum’s mechanical executioner.",
+      "category": "event"
+    },
+    {
+      "id": "event_2058_wellbeing-meal-comparison_choice",
+      "date": {
+        "year": 2058,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I stopped comparing ordinary food with a staged meal photograph.",
+      "category": "event"
+    },
+    {
+      "id": "event_2059_adult-free-lecture-question_choice",
+      "date": {
+        "year": 2059,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I questioned the evidence behind a speaker’s theory about pigeons.",
+      "category": "event"
+    },
+    {
+      "id": "year_100_quiet",
+      "date": {
+        "year": 2060,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "Another year passed. The ordinary days were part of my life too.",
+      "category": "year"
+    },
+    {
+      "id": "event_2061_adult-unwanted-speech_choice",
+      "date": {
+        "year": 2061,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I corrected a mistaken public thank-you before giving a speech.",
+      "category": "event"
+    },
+    {
+      "id": "event_2062_adult-perfect-introduction_choice",
+      "date": {
+        "year": 2062,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I told a motivational group that getting out of bed was my achievement.",
+      "category": "event"
+    },
+    {
+      "id": "year_108_quiet",
+      "date": {
+        "year": 2063,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Another year passed. The ordinary days were part of my life too.",
+      "category": "year"
+    },
+    {
+      "id": "event_2064_wellbeing-unhurried-breath_choice",
+      "date": {
+        "year": 2064,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I paused before answering sharply when I was tired.",
+      "category": "event"
+    },
+    {
+      "id": "event_2065_adult-lost-glove_choice",
+      "date": {
+        "year": 2065,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I returned a magician’s rubber hand to reception.",
+      "category": "event"
+    },
+    {
+      "id": "death_person_npc_10_4",
+      "date": {
+        "year": 2065,
+        "month": 11,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "Grace Clarke died at age 88.",
+      "category": "family"
+    },
+    {
+      "id": "event_2066_wellbeing-habit-one-miss_choice",
+      "date": {
+        "year": 2066,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I avoided turning a small missed intention into a verdict on everything.",
+      "category": "event"
+    },
+    {
+      "id": "event_2067_familiar-street_choice",
+      "date": {
+        "year": 2067,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I heard two competing tragedies outside a laundrette in Manchester.",
+      "category": "event"
+    },
+    {
+      "id": "event_2068_adult-free-lecture-question_choice",
+      "date": {
+        "year": 2068,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I questioned the evidence behind a speaker’s theory about pigeons.",
+      "category": "event"
+    },
+    {
+      "id": "fact_125_513",
+      "date": {
+        "year": 2068,
+        "month": 12,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I developed symptoms: an itchy rash and tiredness.",
+      "category": "health"
+    },
+    {
+      "id": "fact_125_514",
+      "date": {
+        "year": 2069,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "My symptoms resolved.",
+      "category": "health"
+    },
+    {
+      "id": "event_2069_wellbeing-ordinary-water_choice",
+      "date": {
+        "year": 2069,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I chose tap water at a premium-water demonstration.",
+      "category": "event"
+    },
+    {
+      "id": "event_2070_adult-neighbourhood-song_choice",
+      "date": {
+        "year": 2070,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I led a singalong using a takeaway receipt as the lyrics.",
+      "category": "event"
+    },
+    {
+      "id": "death_person_npc_27_12",
+      "date": {
+        "year": 2070,
+        "month": 12,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "Harry Ahmed died at age 75.",
+      "category": "family"
+    },
+    {
+      "id": "year_131_quiet",
+      "date": {
+        "year": 2071,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Another year passed. The ordinary days were part of my life too.",
+      "category": "year"
+    },
+    {
+      "id": "event_2072_adult-seat-with-a-view_choice",
+      "date": {
+        "year": 2072,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I gave up a café chair after hearing a child’s business plan.",
+      "category": "event"
+    },
+    {
+      "id": "event_2073_adult-invisible-yacht_choice",
+      "date": {
+        "year": 2073,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I asked about an invisible-yacht artwork in Manchester.",
+      "category": "event"
+    },
+    {
+      "id": "event_2074_adult-repair-table_choice",
+      "date": {
+        "year": 2074,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I asked about a warning label during a failed toy-repair demonstration.",
+      "category": "event"
+    },
+    {
+      "id": "event_2075_adult-unwanted-speech_choice",
+      "date": {
+        "year": 2075,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I corrected a mistaken public thank-you before giving a speech.",
+      "category": "event"
+    },
+    {
+      "id": "event_2076_new-skill-late_choice",
+      "date": {
+        "year": 2076,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I practised the basics at a free self-defence lesson.",
+      "category": "event"
+    },
+    {
+      "id": "event_2077_adult-free-sample-opinion_choice",
+      "date": {
+        "year": 2077,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I gave specific criticism of a free food sample.",
+      "category": "event"
+    },
+    {
+      "id": "event_2078_adult-perfect-introduction_choice",
+      "date": {
+        "year": 2078,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I told a motivational group that getting out of bed was my achievement.",
+      "category": "event"
+    },
+    {
+      "id": "event_2079_wellbeing-stretch-after-sitting_choice",
+      "date": {
+        "year": 2079,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I took a gentle movement break after sitting still.",
+      "category": "event"
+    },
+    {
+      "id": "death_person_npc_10_6",
+      "date": {
+        "year": 2079,
+        "month": 9,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "Harry Clarke died at age 56.",
+      "category": "family"
+    },
+    {
+      "id": "event_2080_later-recording-labelled-retro_choice",
+      "date": {
+        "year": 2080,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I enjoyed seeing an old programme presented as a period piece.",
+      "category": "event"
+    },
+    {
+      "id": "event_2081_wellbeing-ordinary-water_choice",
+      "date": {
+        "year": 2081,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I chose tap water at a premium-water demonstration.",
+      "category": "event"
+    },
+    {
+      "id": "event_2082_later-retirement-assumption_choice",
+      "date": {
+        "year": 2082,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I corrected a stranger’s assumption about my daily life.",
+      "category": "event"
+    },
+    {
+      "id": "fact_166_636",
+      "date": {
+        "year": 2083,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Theo Ahmed and Amelia Hughes started dating.",
+      "category": "relationships"
+    },
+    {
+      "id": "event_2083_adult-password-on-paper_choice",
+      "date": {
+        "year": 2083,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I replaced an unhelpful private reminder with a clear one.",
+      "category": "event"
+    },
+    {
+      "id": "year_169_quiet",
+      "date": {
+        "year": 2084,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "Another year passed. The ordinary days were part of my life too.",
+      "category": "year"
+    },
+    {
+      "id": "year_171_quiet",
+      "date": {
+        "year": 2085,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Another year passed. The ordinary days were part of my life too.",
+      "category": "year"
+    },
+    {
+      "id": "fact_173_652",
+      "date": {
+        "year": 2086,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Theo Ahmed and Amelia Hughes married after paying for their ceremony together.",
+      "category": "relationships"
+    },
+    {
+      "id": "event_2086_adult-queue-merge_choice",
+      "date": {
+        "year": 2086,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I admitted I was not the wealthy donor a charity auction expected.",
+      "category": "event"
+    },
+    {
+      "id": "event_2087_community-garden_choice",
+      "date": {
+        "year": 2087,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I volunteered beside a gardener in an alarming novelty apron in Manchester.",
+      "category": "event"
+    },
+    {
+      "id": "death_person_npc_27_14",
+      "date": {
+        "year": 2087,
+        "month": 12,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "Theo Ahmed died at age 64.",
+      "category": "family"
+    },
+    {
+      "id": "event_2088_later-another-year-question_choice",
+      "date": {
+        "year": 2088,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I corrected an extra zero on my birthday cake.",
+      "category": "event"
+    },
+    {
+      "id": "year_182_quiet",
+      "date": {
+        "year": 2089,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Another year passed. The ordinary days were part of my life too.",
+      "category": "year"
+    },
+    {
+      "id": "event_2090_small-mistake_choice",
+      "date": {
+        "year": 2090,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I apologised after sending a rude wig comment to a group chat.",
+      "category": "event"
+    },
+    {
+      "id": "year_187_quiet",
+      "date": {
+        "year": 2091,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Another year passed. The ordinary days were part of my life too.",
+      "category": "year"
+    },
+    {
+      "id": "year_189_quiet",
+      "date": {
+        "year": 2092,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "Another year passed. The ordinary days were part of my life too.",
+      "category": "year"
+    },
+    {
+      "id": "event_2093_familiar-street_choice",
+      "date": {
+        "year": 2093,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I heard two competing tragedies outside a laundrette in Manchester.",
+      "category": "event"
+    },
+    {
+      "id": "event_2094_wellbeing-quiet-not-silent_choice",
+      "date": {
+        "year": 2094,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I accepted ordinary background sounds in a quiet moment.",
+      "category": "event"
+    },
+    {
+      "id": "event_2095_wellbeing-waiting-without-feed_choice",
+      "date": {
+        "year": 2095,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I spent a short wait noticing what was around me.",
+      "category": "event"
+    },
+    {
+      "id": "event_2096_later-photo-at-edge_choice",
+      "date": {
+        "year": 2096,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I enjoyed an old photograph without solving every detail.",
+      "category": "event"
+    },
+    {
+      "id": "death_person_player",
+      "date": {
+        "year": 2096,
+        "month": 9,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I died at age 72. Cause: natural causes.",
+      "category": "death"
+    }
+  ]
+}

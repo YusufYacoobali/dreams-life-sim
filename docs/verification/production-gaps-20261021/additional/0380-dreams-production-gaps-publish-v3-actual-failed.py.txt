@@ -1,0 +1,376 @@
+"""Root-only C37 portable evidence publisher. Never executes game/Git/device tools.
+
+Copy the pending completion template to a NEW file and fill only actual closures.
+Then, after independent review, root may use --publish-after-review. All evidence
+is checked before any repository write. A partial copy failure leaves no accepted
+top record and is never silently overwritten or cleaned up.
+"""
+import argparse
+import datetime as dt
+import hashlib
+import json
+import math
+from pathlib import Path
+import re
+
+INDEX = Path('/tmp/dreams-production-gaps-publication-inputs-v3.json')
+INDEX_SHA = '2a4398bb79d2544db8326e582b2c7363da0a0fd5aba146078f4d81608e33c802'
+PENDING = Path('/tmp/dreams-production-gaps-publication-completion-PENDING.json')
+FINAL = '85f6ff8637ba3de9d0f04421307419b1d9609864'
+NATIVE = 'a4be96ee1e60ab073fbbd2ae95d0ee2d0ee6f361'
+GAME = '16ab454678ced7a223f1d6c3b6079ea6ac338dfaa11824b13fdb8edcc8ad0b3d'
+COMBINED = 'c98f5ccef419042d820b377f36201ce1f4f63a479525ca943e865d77007ca9a5'
+DRIVER = '19da212c32feb53a2f264b4c6062cd0b7a68146a762f82841890ea410408bbe9'
+VERSIONS = {'world': 36, 'engine': 37, 'content': 12, 'database': 16, 'checkpoint': 'v4'}
+NATIVE_VERSIONS = {'world': 36, 'engine': 37, 'content': 12, 'reader': 16}
+BASE = 'production-gaps-20261021/'
+TABLES = ['backups', 'branches', 'lives', 'preferences', 'receipts', 'restore_receipts', 'snapshot_metadata', 'snapshots']
+CODE = {'.cjs', '.js', '.ts', '.tsx', '.mjs', '.jsx', '.cts', '.mts', '.py'}
+LARGE = {'.db', '.db-wal', '.db-shm', '.hbc', '.map'}
+
+def require(ok, message):
+    if not ok:
+        raise ValueError(message)
+
+def sha(raw):
+    return hashlib.sha256(raw).hexdigest()
+
+def measured(file):
+    path = Path(file)
+    require(path.is_absolute() and path.is_file() and not path.is_symlink(), 'Missing/non-regular input: ' + str(path))
+    before = path.stat()
+    raw = path.read_bytes()
+    after = path.stat()
+    require((before.st_size, before.st_mtime_ns) == (after.st_size, after.st_mtime_ns), 'Input changed while reading: ' + str(path))
+    return {'file': str(path), 'bytes': len(raw), 'sha256': sha(raw)}
+
+def checked(pin):
+    require(isinstance(pin, dict) and isinstance(pin.get('file'), str), 'Missing actual file pin')
+    require(type(pin.get('bytes')) is int and pin['bytes'] >= 0 and re.fullmatch('[0-9a-f]{64}', pin.get('sha256', '')), 'Incomplete file pin')
+    actual = measured(pin['file'])
+    require(all(actual[key] == pin[key] for key in ['file', 'bytes', 'sha256']), 'Evidence bytes changed: ' + pin['file'])
+    return actual
+
+def load(pin):
+    checked(pin)
+    return json.loads(Path(pin['file']).read_text())
+
+def date(value):
+    parsed = dt.datetime.fromisoformat(value.replace('Z', '+00:00'))
+    require(parsed.tzinfo is not None, 'Evidence time needs a timezone')
+    return parsed
+
+def closure(value, label):
+    require(isinstance(value, dict) and value.get('complete') is True and value.get('processClosed') is True and type(value.get('exitCode')) is int and value['exitCode'] == 0, 'Actual closed successful process required: ' + label)
+    require(isinstance(value.get('executionReference'), str) and value['executionReference'].strip(), 'Missing actual execution reference: ' + label)
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--completion', required=True)
+    parser.add_argument('--repo', required=True)
+    parser.add_argument('--publish-after-review', action='store_true', required=True)
+    args = parser.parse_args()
+    completion_path = Path(args.completion).resolve(strict=True)
+    require(completion_path != PENDING, 'Keep the pending template intact; fill a NEW completion file')
+    completion_pin = measured(completion_path)
+    completion = load(completion_pin)
+    require(completion.get('format') == 'dreams-c37-publication-completion-v1' and completion.get('complete') is True and completion.get('publicationApproved') is True and completion.get('approvedBy') == 'root', 'Root completion/approval is still pending')
+    require(date(completion['reviewedAt']) <= dt.datetime.now(dt.timezone.utc), 'Invalid/future review attestation')
+    require(completion.get('sourceCommit') == FINAL, 'This publishes frozen C37, never the current/future main runtime')
+    checked(completion['publisher'])
+    require(completion['publisher'] == measured(__file__), 'Reviewed publisher pin differs')
+    require(completion['inputIndex']['file'] == str(INDEX) and completion['inputIndex']['sha256'] == INDEX_SHA, 'Use immutable reviewed v3')
+    inputs = load(completion['inputIndex'])
+    require(inputs['format'] == 'dreams-c37-publication-input-index-v3' and inputs['complete'] is False and inputs['publicationAllowed'] is False, 'Preserve the historical draft false flags; do not rewrite v3')
+    require(len(inputs['features']) == 11 and len(inputs['testAdapters']) == 4 and not inputs['missingInputFiles'], 'Incomplete original feature/adapter inventory')
+    repo = Path(args.repo).resolve(strict=True)
+    require(repo.is_dir(), 'Output repository must exist')
+    verification = repo / 'docs/verification'
+    for path in [repo / 'docs', verification]:
+        require(path.is_dir() and not path.is_symlink(), 'Output parent must be an existing real directory')
+    directory, record_path = verification / BASE.rstrip('/'), verification / (BASE.rstrip('/') + '.json')
+    require(not directory.exists() and not record_path.exists(), 'Never overwrite a previous/partial publication')
+
+    copies, targets, external = {}, set(), {}
+
+    def add(pin, target):
+        actual = checked(pin)
+        if actual['file'] in copies:
+            require(copies[actual['file']]['pin'] == actual, 'Conflicting existing input pin')
+            return
+        path = Path(target)
+        require(not path.is_absolute() and '..' not in path.parts and target.startswith(BASE), 'Unsafe publication target')
+        require(path.suffix.lower() not in LARGE and not path.name.endswith(('.db-wal', '.db-shm')), 'DB/WAL/HBC/maps must remain external')
+        if path.suffix.lower() in CODE:
+            target += '.txt'
+        require(target not in targets, 'Portable target collision after script renaming')
+        targets.add(target)
+        copies[actual['file']] = {'pin': actual, 'target': target}
+
+    def dynamic(pin, section):
+        name = Path(pin['file']).name
+        add(pin, BASE + section + '/' + str(len(copies) + 1).zfill(4) + '-' + name)
+
+    def ref(file):
+        require(file in copies, 'No portable reference: ' + str(file))
+        row = copies[file]
+        return {'file': row['target'], 'bytes': row['pin']['bytes'], 'sha256': row['pin']['sha256']}
+
+    def external_pin(pin):
+        require(type(pin.get('bytes')) is int and pin['bytes'] >= 0 and re.fullmatch('[0-9a-f]{64}', pin.get('sha256', '')), 'Invalid supplied large-artifact pin')
+        file = Path(pin['file'])
+        require(file.is_absolute() and file.is_file() and not file.is_symlink() and file.stat().st_size == pin['bytes'], 'External captured artifact missing/size changed: ' + str(file))
+        row = {key: pin[key] for key in ['file', 'bytes', 'sha256']}
+        if str(file) in external:
+            require(external[str(file)] == row, 'Conflicting external artifact pin')
+        external[str(file)] = row
+
+    def collect(value, section):
+        if isinstance(value, dict):
+            if {'file', 'bytes', 'sha256'} <= value.keys():
+                path = Path(value['file'])
+                pin = value
+                if not path.is_absolute():
+                    require('..' not in path.parts and (value['file'].startswith('tests/') or value['file'].startswith('docs/verification/')), 'Unsafe relative evidence input')
+                    pin = {**value, 'file': str(frozen_root / path)}
+                    path = Path(pin['file'])
+                if path.suffix.lower() in LARGE or path.name.endswith(('.db-wal', '.db-shm')):
+                    external_pin(pin)
+                else:
+                    dynamic(pin, section)
+            for child in value.values():
+                collect(child, section)
+        elif isinstance(value, list):
+            for child in value:
+                collect(child, section)
+
+    for pin in inputs['artifacts'].values():
+        checked(pin)
+    for row in inputs['fixedCopies']:
+        add({'file': row['source'], 'bytes': row['bytes'], 'sha256': row['sha256']}, row['target'])
+    for row in inputs['historicalReferences']:
+        checked(row)
+    require(set(copies) | {row['file'] for row in inputs['historicalReferences']} == set(inputs['artifacts']), 'Portable map omits original compact inputs')
+    for pin in inputs['externalLargeArtifacts']:
+        external_pin(pin)
+    dynamic(completion_pin, 'publication')
+    dynamic(completion['publisher'], 'publication')
+    dynamic(completion['inputIndex'], 'publication')
+    dynamic(measured(PENDING), 'publication')
+
+    def original(file):
+        require(file in inputs['artifacts'], 'Not in immutable v3: ' + file)
+        return inputs['artifacts'][file]
+
+    final_pin = original('/tmp/dreams-production-gaps-final-source.json')
+    frozen = load(final_pin)
+    require(frozen['commit'] == FINAL and frozen['versions'] == VERSIONS and len(frozen['source']) == 656 and frozen['gameSourceHash'] == GAME and frozen['combinedGamePersistenceSourceHash'] == COMBINED, 'Wrong frozen C37 source')
+    frozen_root = Path(frozen['root']).resolve(strict=True)
+    for file, digest in frozen['source'].items():
+        relative = Path(file)
+        require(not relative.is_absolute() and '..' not in relative.parts and measured(frozen_root / relative)['sha256'] == digest, 'Frozen source changed: ' + file)
+    accepted = load(original('/tmp/dreams-production-gaps-accepted-source.json'))
+    require(accepted['commit'] == NATIVE and set(accepted['source']) == set(frozen['source']), 'Wrong original native source inventory')
+    bridge = load(original('/tmp/dreams-production-gaps-accepted-final-bridge.json'))
+    changed = sorted(file for file in frozen['source'] if frozen['source'][file] != accepted['source'][file])
+    require(bridge['complete'] is True and bridge['fromCommit'] == NATIVE and bridge['toCommit'] == FINAL and sorted(bridge['changed']) == changed and len(changed) == 8 and all(file.startswith('tests/') for file in changed), 'Final/native eight-test-only bridge differs')
+    for proof in frozen['coordinatorProofs'].values():
+        collect(proof, 'source')
+    require(Path(frozen['coordinatorProofs']['head']['file']).read_text().strip() == FINAL and Path(frozen['coordinatorProofs']['status']['file']).read_text() == '', 'Frozen source head/status proof differs')
+
+    def gate(prefix, commit, snapshot, expected_exit):
+        receipt = load(original('/tmp/dreams-production-gaps-' + prefix + '-receipt.json'))
+        require(receipt['format'] == 'dreams-coordinator-gate-execution-v1' and receipt['complete'] is True and receipt['exitCode'] == expected_exit and receipt['sourceCommit'] == commit and receipt['sourceSnapshotSha256'] == snapshot['sha256'], 'Gate incomplete/wrong source: ' + prefix)
+        for stage in ['before', 'after']:
+            require(receipt[stage] == {'files': 656, 'snapshotSha256': snapshot['sha256'], 'status': 'exact'}, 'Gate source not exact: ' + prefix)
+        checked(receipt['raw'])
+        require(date(receipt['endedAt']) >= date(receipt['startedAt']) and math.isfinite(receipt['elapsedSeconds']) and receipt['elapsedSeconds'] > 0, 'Invalid gate closure time')
+        return receipt
+
+    regression = gate('final-regression', FINAL, final_pin, 0)
+    strict = gate('final-types', FINAL, final_pin, 0)
+    failed = gate('accepted-regression', NATIVE, original('/tmp/dreams-production-gaps-accepted-source.json'), 1)
+    log = Path(regression['raw']['file']).read_text()
+    require(re.search(r'Test Suites:\s+200 passed, 200 total', log) and re.search(r'Tests:\s+2520 passed, 2520 total', log) and 'Time:        1634.281 s' in log and not re.search('^FAIL ', log, re.M), 'Missing exact final all-pass footer')
+    require('tsc --noEmit && tsc --noEmit -p tests/tsconfig.json' in Path(strict['raw']['file']).read_text(), 'Missing actual app/all-test strict command')
+    failed_log = Path(failed['raw']['file']).read_text()
+    require(re.search(r'Test Suites:\s+8 failed, 192 passed, 200 total', failed_log) and re.search(r'Tests:\s+11 failed, 2509 passed, 2520 total', failed_log), 'Original failure evidence lost')
+    export_receipt = gate('accepted-export', NATIVE, original('/tmp/dreams-production-gaps-accepted-source.json'), 0)
+    exports = load(original('/tmp/dreams-production-gaps-accepted-export-provenance.json'))
+    require(exports['status'] == 'passed' and exports['sourceCommit'] == NATIVE, 'Wrong export provenance')
+    for platform in ['android', 'ios']:
+        require(len(exports['platforms'][platform]['mappedAppSourceFiles']) == 325, 'Export source map count differs')
+        for file, digest in exports['platforms'][platform]['mappedAppSourceFiles'].items():
+            require(frozen['source'].get(file) == digest, 'Export runtime source differs: ' + file)
+    annual = load(original('/tmp/dreams-production-gaps-120-receipt.json'))
+    require(annual['complete'] is True and annual['exitCode'] == 0, 'Annual gate incomplete')
+    require(annual['before']['status'] == annual['after']['status'] == 'exact' and annual['before']['files'] == annual['after']['files'] == 169, 'Annual original core/driver guard incomplete')
+    checked(annual['raw']); checked(annual['stderr'])
+    rows = [json.loads(line) for line in Path(annual['raw']['file']).read_text().splitlines() if line]
+    lives = [row for row in rows if row.get('event') == 'life-complete']
+    require([row['seed'] for row in lives] == list(range(120)) and rows[-1]['event'] == 'sweep-complete' and rows[-1]['completed'] == 120 and rows[-1]['elapsedMs'] == 771874 and rows[-1]['gameSourceHash'] == GAME and rows[-1]['versions'] == {'world': 36, 'engine': 37, 'content': 12} and rows[-1]['toolSourceHash'] == frozen['source']['tools/run-life-sweep.cjs'], 'Same120 annual evidence differs')
+
+    native_source_pin = original('/tmp/dreams-production-gaps-native-source.json')
+    native_source = load(native_source_pin)
+    require(native_source['complete'] is True and native_source['commit'] == NATIVE and native_source['versions'] == NATIVE_VERSIONS, 'Native source is not frozen C37')
+    map_proof = load(original('/tmp/dreams-production-gaps-native-accepted-map-proof.json'))
+    require(map_proof['status'] == 'passed' and map_proof['sourceCommit'] == NATIVE and map_proof['mappedAppSourceCount'] == 325 and len(map_proof['mappedAppSourceFiles']) == 325, 'Missing actual fresh native map proof')
+    for file, digest in map_proof['mappedAppSourceFiles'].items():
+        require(native_source['source'].get(file) == frozen['source'].get(file) == digest, 'Native mapped source differs')
+
+    def native_journey(spec, mode, label):
+        closure(spec, label)
+        require(spec['visualReview']['complete'] is True and spec['visualReview']['coordinatorPersonallyViewedAll'] is True and isinstance(spec['visualReview']['statement'], str) and spec['visualReview']['statement'].strip(), 'Coordinator image review missing: ' + label)
+        captures, raw, trace, semantic = [load(spec[key]) for key in ['captures', 'rawResult', 'semanticTrace', 'semanticResult']]
+        require(captures['format'] == 'dreams-onboarding-native-captures-v1' and captures['complete'] is True and captures['mode'] == mode, 'Capture manifest incomplete/wrong mode')
+        require(raw['format'] == 'dreams-onboarding-native-raw-verification-v1' and raw['complete'] is True and raw['status'] == 'raw-integrity-passed-not-gameplay-or-visual-acceptance' and raw['mode'] == mode, 'Raw verification incomplete')
+        require(semantic['format'] == 'dreams-c37-semantic-replay-result-v1' and semantic['complete'] is True and semantic['status'] == 'supplied-command-replay-passed-not-creation-or-visual-acceptance', 'Semantic replay incomplete')
+        require(trace['format'] == 'dreams-c37-semantic-replay-v1' and trace['complete'] is True, 'Semantic trace incomplete')
+        for result in [raw, semantic]:
+            require(result['source']['commit'] == NATIVE and result['source']['versions'] == NATIVE_VERSIONS and result['source']['manifest'] == native_source_pin and result['captures'] == spec['captures'], 'Native source/capture binding differs')
+            require(result['visualAcceptance'] is False, 'Helpers do not establish visual acceptance')
+        require(semantic['trace'] == spec['semanticTrace'] and semantic['rawVerification'] == trace['rawVerification'] == spec['rawResult'] and trace['capturesManifest'] == spec['captures'] and trace['rawSupport'] == semantic['rawSupport'], 'Raw/trace/semantic pin association differs')
+        require(captures['sourceManifest'] == native_source_pin and semantic['creationSeedReconstructed'] is False and type(semantic['actualNativeActionsPerformed']) is int and semantic['actualNativeActionsPerformed'] == 0 and raw['gameRuntimeLoaded'] is False and raw['nativeActionsPerformed'] is False, 'Unexpected runtime/native/creation claim')
+        expected = spec['expected']
+        require(all(type(expected.get(key)) is int and expected[key] >= 0 for key in ['phaseCount', 'coldReopens', 'finalRevision']), 'Fill only actual final counts/revision: ' + label)
+        phases = captures['phases']; ids = [phase['id'] for phase in phases]
+        require(len(phases) == expected['phaseCount'] and len(ids) == len(set(ids)) and all(re.fullmatch('[a-z0-9][a-z0-9-]{0,99}', key) for key in ids), 'Wrong/duplicate actual native phases')
+        require([p['id'] for p in raw['phases']] == [p['id'] for p in semantic['phases']] == ids, 'Native phase associations differ')
+        require(sum(p['kind'] == 'cold' for p in phases) == expected['coldReopens'], 'Wrong actual cold count')
+        require(semantic['engineCommandsReplayed'] == sum(p['kind'] == 'command' for p in phases) and semantic['birthAcknowledgementsReplayed'] == sum(p['kind'] == 'begin-life' for p in phases), 'Actual chosen command/birth counts differ')
+        require(raw['target']['previouslyExisted'] is (mode == 'existing'), 'Wrong baseline/target mode')
+        seen, views = {}, []
+        for capture, raw_phase, sem_phase in zip(phases, raw['phases'], semantic['phases']):
+            require(capture['coordinatorPersonallyViewed'] is True and capture['kind'] == raw_phase['kind'] == sem_phase['kind'], 'Unreviewed/mismatched native phase')
+            require(raw_phase['reader'] == 16 and raw_phase['revision'] == sem_phase['revision'] and raw_phase['lifeId'] == sem_phase['lifeId'] == raw['target']['lifeId'] and raw_phase['payloadSha256'] == sem_phase['currentPayloadSha256'], 'Phase identity/actual bytes differ')
+            require(all(raw_phase.get(key) is True for key in ['allProtectedBaselineRowsExact', 'onlyActualTargetLifeRowsChanged', 'activeLifePreferenceOnly']) and sorted(raw_phase['tables']) == TABLES, 'Raw protection proof absent')
+            if capture['kind'] == 'cold':
+                same = capture['sameAs']; require(same in seen and raw_phase['allEightTablesExactTo'] == same and raw_phase['tables'] == seen[same][0]['tables'], 'Cold all-eight equality absent')
+                for key in ['worldSha256', 'randomSha256', 'pendingSha256', 'annualSha256', 'backupWorldSha256', 'revision', 'targetReceipts']:
+                    require(sem_phase[key] == seen[same][1][key], 'Cold whole-world evidence differs')
+                attestation = load(capture['coldAttestation'])
+                require(attestation['complete'] is True and attestation['stopped'] is True and attestation['restarted'] is True and attestation['from'] == same and attestation['to'] == capture['id'], 'Actual process-stop cold attestation incomplete')
+            if capture['kind'] == 'command':
+                require(capture['command'] == sem_phase['command'], 'Replay command differs from actual chosen action')
+            seen[capture['id']] = (raw_phase, sem_phase)
+            views.append({'id': capture['id'], 'kind': capture['kind'], 'revision': raw_phase['revision'], 'png': capture['png'], 'xml': capture['xml'], 'coldAttestation': capture.get('coldAttestation'), 'sameAs': capture.get('sameAs')})
+        require(raw['final']['revision'] == semantic['phases'][-1]['revision'] == expected['finalRevision'] and raw['final']['tables'] == raw['phases'][-1]['tables'], 'Final native result differs')
+        if mode == 'custom':
+            require(expected == {'phaseCount': 10, 'coldReopens': 5, 'finalRevision': 4}, 'Original completed custom journey changed')
+        for key in ['captures', 'rawResult', 'semanticTrace', 'semanticResult']:
+            dynamic(spec[key], 'native/' + label)
+        for value in [captures, raw, trace, semantic]:
+            collect(value, 'native/' + label)
+        for pin in spec.get('extraCompactEvidence', []):
+            dynamic(pin, 'native/' + label)
+        return {'status': 'passed-with-coordinator-visual-attestation', 'mode': mode, 'sourceCommit': NATIVE,
+                'captures': spec['captures'], 'rawVerification': spec['rawResult'], 'semanticTrace': spec['semanticTrace'], 'semanticVerification': spec['semanticResult'],
+                'actualCounts': expected, 'actualFinalLifeId': raw['target']['lifeId'], 'engineCommandsReplayed': semantic['engineCommandsReplayed'],
+                'birthAcknowledgementsReplayed': semantic['birthAcknowledgementsReplayed'], 'images': views,
+                'baselineRowCounts': {table: proof['rows'] for table, proof in raw['baseline']['tables'].items()},
+                'finalRowCounts': {table: proof['rows'] for table, proof in raw['final']['tables'].items()},
+                'visualReview': spec['visualReview'], 'helperVisualAcceptance': False, 'creationSeedReconstructed': False,
+                'scope': captures['scope'], 'birthPersistenceScope': semantic['birthPersistenceScope']}
+
+    custom = native_journey(completion['native']['custom'], 'custom', 'custom')
+    existing = native_journey(completion['native']['existingUniversity'], 'existing', 'existing-university')
+    perf = completion['performance']; closure(perf, 'serial performance')
+    receipt, summary, quiet = [load(perf[key]) for key in ['receipt', 'summary', 'quiescence']]
+    require(receipt['format'] == 'dreams-c37-action-gate-receipt-v1' and receipt['complete'] is True and receipt['status'] == 'passed' and receipt['benchmarkExecuted'] is True and receipt['processClosed'] is True and receipt['exitCode'] == 0 and receipt['sourceCommit'] == FINAL and receipt['sourceSnapshot'] == final_pin, 'Performance process/source not complete')
+    require(receipt['root'] == str(frozen_root) and receipt['argv'] == ['node', 'tools/benchmark-actions.cjs', '--source', str(frozen_root), '--profile', '--population', '--workplaces', '--raises'], 'Wrong actual performance root/driver arguments')
+    require(receipt['wrapper'] == original('/tmp/dreams-c37-action-gate-v2.py'), 'Unreviewed performance wrapper')
+    require(receipt['summary'] == perf['summary'] and receipt['raw'] == perf['raw'] and receipt['stderr'] == perf['stderr'] and receipt['quiescence']['attestation'] == perf['quiescence'], 'Performance artifact binding differs')
+    for stage in ['before', 'after']:
+        proof = receipt[stage]
+        require(proof['status'] == 'exact' and proof['sourceFiles'] == 656 and proof['sourceSnapshot'] == final_pin and proof['combinedGamePersistenceSourceHash'] == COMBINED and proof['driverHash'] == DRIVER and proof['inventory']['allExtensionsChecked'] is True and proof['inventory']['symlinksRejected'] is True, 'Performance source guard incomplete')
+    require(quiet['format'] == 'dreams-c37-action-quiescence-attestation-v1' and quiet['complete'] is True and quiet['sourceCommit'] == FINAL and quiet['sourceSnapshotSha256'] == final_pin['sha256'] and quiet['root'] == str(frozen_root), 'Wrong quiet-window source')
+    require(all(quiet.get(key) is True for key in ['nativeAppStopped', 'allHeavyGatesClosed', 'noReplacementEmulatorOrMetroRunning']) and quiet['statement'].strip(), 'Incomplete actual quiet window')
+    require([row['role'] for row in quiet['closedProcesses']] == ['qemu', 'metro'] and all(row['processClosed'] is True and type(row['pid']) is int and str(row['startTicks']).isdigit() and row['argv'] and date(row['closedAt']) <= date(quiet['recordedAt']) for row in quiet['closedProcesses']), 'Missing actual QEMU/Metro closure identities')
+    require(date(quiet['recordedAt']) <= date(receipt['benchmarkStartedAt']) <= date(receipt['benchmarkFinishedAt']) <= date(receipt['finishedAt']), 'Quiet/measurement times do not agree')
+    require(quiet['closedGateEvidence'], 'No actual other-gate closure evidence')
+    require([(row['role'], row['pid']) for row in receipt['quiescence']['closedProcessObservations']] == [(row['role'], row['pid']) for row in quiet['closedProcesses']] and all(row['originalIdentityGoneOrZombie'] is True for row in receipt['quiescence']['closedProcessObservations']), 'Measured quiet-process identities do not agree')
+    for row in quiet['closedGateEvidence']:
+        require(row['processClosed'] is True and type(row['exitCode']) is int and row['session'], 'Unclosed heavy gate in quiet evidence')
+        collect(row['raw'], 'performance/quiescence')
+    require(summary['format'] == 'dreams-c37-action-summary-v1' and summary['complete'] is True and summary['status'] == 'passed' and summary['sourceCommit'] == FINAL and summary['versions'] == VERSIONS and summary['sourceSnapshot'] == final_pin and summary['combinedGamePersistenceSourceHash'] == COMBINED and summary['driverHash'] == DRIVER, 'Wrong performance summary')
+    require(summary['raw'] == perf['raw'] and summary['stderr'] == perf['stderr'], 'Summary raw/stderr pins differ')
+    require(summary['totals'] == {'cases': 14, 'measuredWarmSamples': 70, 'fullMeasuredWarmUnpackCalls': 0, 'excludedWarmups': 14, 'successfulDriverExecutions': 84, 'wholeColdCurrentAssertions': 84, 'wholeColdBackupAssertions': 84, 'originalBeforeAgeUpPayloadAssertions': 12}, 'Wrong actual sample/cold assertion totals')
+    raw = load(perf['raw']); checked(perf['stderr'])
+    require(raw['sourceHash'] == COMBINED and raw['driverHash'] == DRIVER and len(raw['results']) == len(summary['results']) == 14, 'Wrong raw performance source/cases')
+    for actual, reduced in zip(raw['results'], summary['results']):
+        require(actual['label'] == reduced['label'] and actual['inputSha256'] == reduced['inputSha256'] and actual['medianMs'] == reduced['medianMs'] and len(actual['trials']) == 5, 'Performance summary differs from raw trials')
+        for trial in actual['trials']:
+            require(trial['phases'].get('unpackCheckpoint', {}).get('calls', 0) == 0 and trial['phases'].get('packCheckpoint', {}).get('calls', 0) > 0, 'Warm checkpoint counters differ')
+            for key in ['totalMs', 'resolveMs', 'commitMs', 'coldOpenMs']:
+                require(type(trial[key]) in [int, float] and math.isfinite(trial[key]) and trial[key] >= 0, 'Invalid actual timing')
+        for key in ['totalMs', 'resolveMs', 'commitMs', 'coldOpenMs']:
+            require(actual['medianMs'][key] == sorted(trial[key] for trial in actual['trials'])[2], 'Raw five-trial median differs')
+    for key in ['receipt', 'summary', 'quiescence', 'raw', 'stderr']:
+        dynamic(perf[key], 'performance')
+    collect(receipt, 'performance'); collect(summary, 'performance'); collect(quiet, 'performance/quiescence')
+    for pin in completion.get('additionalCompactEvidence', []):
+        dynamic(pin, 'additional')
+
+    def portable(value):
+        if isinstance(value, dict):
+            if {'file', 'bytes', 'sha256'} <= value.keys() and value['file'] in copies:
+                return {**value, **ref(value['file'])}
+            return {key: portable(child) for key, child in value.items()}
+        if isinstance(value, list):
+            return [portable(child) for child in value]
+        if isinstance(value, str) and value in copies:
+            return ref(value)
+        return value
+
+    gates = {key: value for key, value in inputs['coordinatorGates'].items() if key not in ['actualNative', 'serial70Performance']}
+    features = json.loads(json.dumps(inputs['features']))
+    for feature in features:
+        document = feature.get('document')
+        if isinstance(document, str) and not Path(document).is_absolute():
+            source_document = str(Path(accepted['root']) / document)
+            require(source_document in copies, 'No immutable feature document copy')
+            feature['document'] = source_document
+    historical = []
+    for row in inputs['historicalReferences']:
+        repository_file = row['repositoryPath']
+        require(not Path(repository_file).is_absolute() and '..' not in Path(repository_file).parts, 'Unsafe historical repository reference')
+        require(measured(repo / repository_file)['sha256'] == row['sha256'], 'Original tracked fixture/producer missing from output repository')
+        historical.append({'repositoryFile': repository_file, 'bytes': row['bytes'], 'sha256': row['sha256'], 'originalSource': row['file'], 'scope': row['scope']})
+    record = {'format': 'dreams-production-gaps-verification-v1', 'complete': True,
+              'status': 'C37-source-native-and-serial-diagnostics-published', 'recordedAt': dt.datetime.now(dt.timezone.utc).isoformat(),
+              'sourceCommit': FINAL, 'versions': VERSIONS, 'source': ref(final_pin['file']),
+              'sourceScope': 'Frozen C37 source; output repository may already contain later gameplay. No claim that this is current-main runtime.',
+              'nativeExportCommit': NATIVE, 'sourceBridge': ref('/tmp/dreams-production-gaps-accepted-final-bridge.json'),
+              'historicalDraft': ref(str(INDEX)), 'completion': ref(str(completion_path)), 'publisher': ref(str(Path(__file__))),
+              'features': portable(features), 'testAdapters': portable(inputs['testAdapters']),
+              'gates': portable(gates), 'native': portable({'custom': custom, 'existingUniversity': existing}),
+              'performance': {'status': 'passed', 'receipt': ref(perf['receipt']['file']), 'summary': ref(perf['summary']['file']), 'quiescence': ref(perf['quiescence']['file']), 'raw': ref(perf['raw']['file']), 'stderr': ref(perf['stderr']['file']), 'totals': summary['totals'], 'scope': summary['scope'], 'assertionScope': summary['assertionScope']},
+              'historicalReferences': historical,
+              'externalLargeArtifacts': [{**pin, 'storage': 'external-only-not-copied', 'pinBasis': 'Original source/capture/closed-verifier record; publication checks size, not an independent full rehash.'} for pin in external.values()],
+              'originalToPortable': {source: row['target'] for source, row in copies.items()},
+              'artifacts': {row['target']: {key: row['pin'][key] for key in ['bytes', 'sha256']} for row in copies.values()},
+              'publication': {'coordinatorApproved': True, 'commitAndPush': 'pending coordinator after copy/guide review; publisher runs no Git'},
+              'limits': ['Overlapping author subset counts are not summed; final2520/200 is one complete source regression and annual uses the same120 seeds.', 'Original failed full11/2509 and all retained author diagnostics remain raw with their historical sources.', 'Helper raw/semantic passes do not establish visuals or reconstruct a creation seed. Visual acceptance is the separate coordinator attestation.', 'Serial fixed-world cloud Node/SQLite measurements are not rendered UI, physical p95 or a speedup guarantee; generated population stress inputs retain that scope.', 'No physical-device, standalone Android/iOS, TalkBack speech or every-optional-context completion is inferred.', 'Import/export/sharing, Time Machine and additional history/storage breadth remain parked.']}
+    # Recheck every compact source immediately before creating any repository path.
+    for row in copies.values():
+        checked(row['pin'])
+    checked(completion_pin); checked(completion['publisher']); checked(completion['inputIndex'])
+    require(not directory.exists() and not record_path.exists(), 'Output appeared during preflight')
+    directory.mkdir()
+    for row in copies.values():
+        destination = verification / row['target']
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        raw = Path(row['pin']['file']).read_bytes()
+        require(len(raw) == row['pin']['bytes'] and sha(raw) == row['pin']['sha256'], 'Input changed before copy')
+        with destination.open('xb') as output:
+            output.write(raw)
+        require(measured(destination)['sha256'] == row['pin']['sha256'], 'Copied bytes differ')
+    for target, expected in record['artifacts'].items():
+        actual = measured(verification / target)
+        require(actual['bytes'] == expected['bytes'] and actual['sha256'] == expected['sha256'], 'Final portable copy hash differs')
+    with record_path.open('x') as output:
+        output.write(json.dumps(record, indent=2, ensure_ascii=False) + '\n')
+    print(json.dumps({'status': 'published-after-coordinator-review', 'record': measured(record_path), 'copiedArtifacts': len(copies), 'sourceCommit': FINAL, 'nativeSourceCommit': NATIVE, 'gitCommandsExecuted': 0, 'nativeActionsPerformed': 0, 'gameRuntimeLoaded': False, 'externalLargeArtifactsCopied': 0}))
+
+if __name__ == '__main__':
+    main()

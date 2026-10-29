@@ -1,0 +1,1208 @@
+{
+  "icons": 100,
+  "unique_sha256": 100,
+  "runtime_bytes": 8367172,
+  "transparent": {
+    "actions:talk": {
+      "alpha_bounds": [
+        6,
+        48,
+        249,
+        207
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "actions:compliment": {
+      "alpha_bounds": [
+        8,
+        17,
+        248,
+        238
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "actions:spend-time": {
+      "alpha_bounds": [
+        7,
+        21,
+        249,
+        235
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "actions:argue": {
+      "alpha_bounds": [
+        8,
+        33,
+        249,
+        224
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "actions:apologise": {
+      "alpha_bounds": [
+        11,
+        7,
+        243,
+        249
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "actions:insult": {
+      "alpha_bounds": [
+        7,
+        21,
+        249,
+        234
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "actions:distance": {
+      "alpha_bounds": [
+        7,
+        15,
+        249,
+        240
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "actions:ask-advice": {
+      "alpha_bounds": [
+        25,
+        7,
+        231,
+        249
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "actions:ask-permission": {
+      "alpha_bounds": [
+        17,
+        7,
+        238,
+        249
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "actions:ask-activity": {
+      "alpha_bounds": [
+        17,
+        7,
+        240,
+        249
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "actions:request-gift": {
+      "alpha_bounds": [
+        7,
+        9,
+        249,
+        248
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "actions:praise": {
+      "alpha_bounds": [
+        12,
+        7,
+        245,
+        249
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "actions:scold": {
+      "alpha_bounds": [
+        8,
+        10,
+        249,
+        247
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "actions:ask-help": {
+      "alpha_bounds": [
+        9,
+        8,
+        247,
+        249
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "actions:give-money": {
+      "alpha_bounds": [
+        7,
+        27,
+        249,
+        239
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "actions:ask-money": {
+      "alpha_bounds": [
+        15,
+        8,
+        240,
+        249
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "actions:ask-loan": {
+      "alpha_bounds": [
+        7,
+        17,
+        247,
+        239
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "actions:accept-loan": {
+      "alpha_bounds": [
+        8,
+        24,
+        248,
+        232
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "actions:decline-loan": {
+      "alpha_bounds": [
+        7,
+        21,
+        249,
+        235
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "actions:repay-loan": {
+      "alpha_bounds": [
+        10,
+        8,
+        246,
+        248
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "actions:academic-help": {
+      "alpha_bounds": [
+        6,
+        23,
+        249,
+        233
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "actions:work-feedback": {
+      "alpha_bounds": [
+        9,
+        7,
+        248,
+        249
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "actions:request-raise": {
+      "alpha_bounds": [
+        21,
+        7,
+        235,
+        249
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "actions:review-custody": {
+      "alpha_bounds": [
+        7,
+        16,
+        250,
+        240
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "actions:move-in": {
+      "alpha_bounds": [
+        6,
+        21,
+        249,
+        234
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "actions:ask-date": {
+      "alpha_bounds": [
+        7,
+        30,
+        249,
+        225
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "actions:propose": {
+      "alpha_bounds": [
+        8,
+        17,
+        248,
+        238
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "actions:plan-wedding": {
+      "alpha_bounds": [
+        8,
+        7,
+        249,
+        249
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "actions:family-planning": {
+      "alpha_bounds": [
+        7,
+        16,
+        248,
+        240
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "actions:divorce": {
+      "alpha_bounds": [
+        10,
+        8,
+        247,
+        250
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "actions:breakup": {
+      "alpha_bounds": [
+        8,
+        21,
+        248,
+        234
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "actions:social-profile": {
+      "alpha_bounds": [
+        10,
+        8,
+        246,
+        248
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "actions:become-best-friends": {
+      "alpha_bounds": [
+        7,
+        9,
+        249,
+        247
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "actions:end-best-friendship": {
+      "alpha_bounds": [
+        7,
+        40,
+        249,
+        215
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "actions:ask-teen-date": {
+      "alpha_bounds": [
+        8,
+        11,
+        249,
+        244
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "actions:end-teen-relationship": {
+      "alpha_bounds": [
+        7,
+        20,
+        249,
+        236
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "finance:net-worth": {
+      "alpha_bounds": [
+        6,
+        21,
+        249,
+        235
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "finance:finances": {
+      "alpha_bounds": [
+        7,
+        48,
+        249,
+        208
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "jobs:shop-assistant-part": {
+      "alpha_bounds": [
+        7,
+        35,
+        249,
+        220
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "jobs:cafe-part": {
+      "alpha_bounds": [
+        7,
+        43,
+        250,
+        212
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "jobs:cleaner": {
+      "alpha_bounds": [
+        7,
+        20,
+        249,
+        235
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "jobs:retail": {
+      "alpha_bounds": [
+        7,
+        35,
+        248,
+        220
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "jobs:barista": {
+      "alpha_bounds": [
+        7,
+        9,
+        249,
+        248
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "jobs:warehouse": {
+      "alpha_bounds": [
+        8,
+        19,
+        248,
+        237
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "jobs:administrator": {
+      "alpha_bounds": [
+        6,
+        28,
+        249,
+        228
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "jobs:support": {
+      "alpha_bounds": [
+        7,
+        43,
+        249,
+        212
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "jobs:plumber": {
+      "alpha_bounds": [
+        8,
+        29,
+        249,
+        227
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "jobs:technician": {
+      "alpha_bounds": [
+        7,
+        25,
+        249,
+        230
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "jobs:designer": {
+      "alpha_bounds": [
+        6,
+        35,
+        249,
+        220
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "jobs:teacher": {
+      "alpha_bounds": [
+        7,
+        23,
+        249,
+        232
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "jobs:developer": {
+      "alpha_bounds": [
+        8,
+        25,
+        249,
+        231
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "jobs:accountant": {
+      "alpha_bounds": [
+        7,
+        20,
+        250,
+        235
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "jobs:researcher": {
+      "alpha_bounds": [
+        8,
+        7,
+        248,
+        249
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "jobs:journalist": {
+      "alpha_bounds": [
+        7,
+        34,
+        249,
+        221
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "jobs:lawyer": {
+      "alpha_bounds": [
+        7,
+        21,
+        249,
+        234
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "jobs:doctor": {
+      "alpha_bounds": [
+        7,
+        22,
+        249,
+        233
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "jobs:receptionist": {
+      "alpha_bounds": [
+        7,
+        30,
+        249,
+        227
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "jobs:postal-worker": {
+      "alpha_bounds": [
+        8,
+        20,
+        249,
+        237
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "jobs:delivery-driver": {
+      "alpha_bounds": [
+        7,
+        38,
+        249,
+        216
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "jobs:bus-driver": {
+      "alpha_bounds": [
+        7,
+        33,
+        249,
+        222
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "jobs:gardener": {
+      "alpha_bounds": [
+        6,
+        24,
+        249,
+        233
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "jobs:kitchen-assistant": {
+      "alpha_bounds": [
+        7,
+        41,
+        249,
+        216
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "jobs:cook": {
+      "alpha_bounds": [
+        7,
+        33,
+        249,
+        223
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "jobs:baker": {
+      "alpha_bounds": [
+        7,
+        26,
+        249,
+        229
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "jobs:chef": {
+      "alpha_bounds": [
+        6,
+        25,
+        249,
+        230
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "jobs:electrician": {
+      "alpha_bounds": [
+        7,
+        22,
+        248,
+        234
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "jobs:carpenter": {
+      "alpha_bounds": [
+        8,
+        17,
+        249,
+        239
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "jobs:mechanic": {
+      "alpha_bounds": [
+        8,
+        21,
+        249,
+        235
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "jobs:welder": {
+      "alpha_bounds": [
+        13,
+        8,
+        243,
+        249
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "jobs:care-worker": {
+      "alpha_bounds": [
+        7,
+        21,
+        249,
+        234
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "jobs:nurse": {
+      "alpha_bounds": [
+        7,
+        22,
+        249,
+        232
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "jobs:physiotherapist": {
+      "alpha_bounds": [
+        8,
+        16,
+        249,
+        239
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "jobs:engineer": {
+      "alpha_bounds": [
+        8,
+        22,
+        249,
+        233
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "jobs:architect": {
+      "alpha_bounds": [
+        8,
+        22,
+        249,
+        234
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "jobs:data-analyst": {
+      "alpha_bounds": [
+        7,
+        26,
+        249,
+        230
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "jobs:it-technician": {
+      "alpha_bounds": [
+        8,
+        14,
+        249,
+        243
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "jobs:librarian": {
+      "alpha_bounds": [
+        6,
+        12,
+        249,
+        244
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "jobs:social-worker": {
+      "alpha_bounds": [
+        8,
+        8,
+        248,
+        247
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "jobs:marketing-executive": {
+      "alpha_bounds": [
+        7,
+        14,
+        249,
+        242
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "jobs:human-resources": {
+      "alpha_bounds": [
+        8,
+        18,
+        249,
+        238
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "jobs:project-manager": {
+      "alpha_bounds": [
+        6,
+        23,
+        248,
+        232
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "jobs:operations-manager": {
+      "alpha_bounds": [
+        8,
+        22,
+        249,
+        232
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "jobs:sales-representative": {
+      "alpha_bounds": [
+        7,
+        35,
+        249,
+        219
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "jobs:estate-agent": {
+      "alpha_bounds": [
+        8,
+        40,
+        248,
+        216
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "jobs:insurance-adviser": {
+      "alpha_bounds": [
+        6,
+        23,
+        248,
+        233
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "jobs:bank-clerk": {
+      "alpha_bounds": [
+        7,
+        16,
+        249,
+        239
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "jobs:procurement-officer": {
+      "alpha_bounds": [
+        7,
+        14,
+        249,
+        242
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "jobs:logistics-coordinator": {
+      "alpha_bounds": [
+        8,
+        12,
+        249,
+        245
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "jobs:software-tester": {
+      "alpha_bounds": [
+        11,
+        7,
+        244,
+        249
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "jobs:cybersecurity-analyst": {
+      "alpha_bounds": [
+        8,
+        16,
+        248,
+        240
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "jobs:library-part": {
+      "alpha_bounds": [
+        8,
+        9,
+        249,
+        247
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "jobs:cinema-part": {
+      "alpha_bounds": [
+        8,
+        20,
+        249,
+        235
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "jobs:grocery-part": {
+      "alpha_bounds": [
+        7,
+        19,
+        249,
+        237
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "jobs:pet-care-part": {
+      "alpha_bounds": [
+        8,
+        38,
+        249,
+        217
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "jobs:tutor-part": {
+      "alpha_bounds": [
+        8,
+        20,
+        249,
+        235
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "jobs:market-stall-part": {
+      "alpha_bounds": [
+        8,
+        11,
+        249,
+        245
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "jobs:firefighter": {
+      "alpha_bounds": [
+        15,
+        23,
+        250,
+        236
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "jobs:paramedic": {
+      "alpha_bounds": [
+        7,
+        17,
+        250,
+        232
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "jobs:police-officer": {
+      "alpha_bounds": [
+        6,
+        25,
+        250,
+        231
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    "jobs:construction-worker": {
+      "alpha_bounds": [
+        6,
+        20,
+        250,
+        238
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    }
+  },
+  "generator": "Built-in image_gen.imagegen only; Krea not used"
+}

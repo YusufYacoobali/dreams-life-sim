@@ -1,0 +1,80 @@
+{
+  "recordedOn": "2026-10-19",
+  "basedOnCommit": "538264a",
+  "sourceState": "world-27 leisure implementation uncommitted at run start; corrected exact game hash retained",
+  "scope": "four persistent hobbies, four paid outings and actual parent/attendance/lifecycle integration; partial wider reference catalogue; not complete production acceptance",
+  "versions": {
+    "world": 27,
+    "engine": 26,
+    "content": 4,
+    "database": 4
+  },
+  "distinctSituations": 90,
+  "gameSourceHash": "3add8417fde5c5b43c5414e29cd51698fe13d20a94cde4196f0d9147c2dc8f96",
+  "fullRegression": {
+    "command": "npm test",
+    "tests": 1143,
+    "suites": 73,
+    "seconds": 788.232,
+    "exitCode": 0
+  },
+  "focusedRegression": {
+    "tests": 54,
+    "suites": 3,
+    "seconds": 10.996,
+    "exitCode": 0,
+    "scope": "52 leisure domain, one connected real-SQLite leisure UI, one genuine pet-archive continuity check"
+  },
+  "strictSourceAndTestTypes": true,
+  "connectedSQLiteJourney": "genuine pet-owning child reviews named-parent guitar plan and cinema; plan/tickets/monthly failures rollback and retry; exact cold hobby/outing/pet/annual state",
+  "hermesExports": [
+    "android",
+    "ios"
+  ],
+  "hermesBundleApproxMB": {
+    "android": 5.3,
+    "ios": 5.0
+  },
+  "bundledAssets": 47,
+  "metroCurrentManifestAndSourceHTTP200": [
+    "android",
+    "ios"
+  ],
+  "ordinaryLifeRecord": "leisure-lives-v27-20261019.json",
+  "ordinaryLives": {
+    "lives": 12,
+    "allLaunchCountries": true,
+    "seconds": 366.162,
+    "hobbyAttendedMonths": 10683,
+    "hobbyPausedMonths": 60,
+    "acceptedOutings": 891,
+    "refusedOutings": 5,
+    "exitCode": 0
+  },
+  "preChangeArchive": {
+    "path": "tests/fixtures/v26-household-pet-archive.json",
+    "sourceCommit": "cfcab49",
+    "preservedAtCommit": "538264a",
+    "currentAndThreePriorWorldsPreserved": true
+  },
+  "preparedUnintegratedArt": {
+    "subjects": [
+      "reading",
+      "gaming",
+      "cooking",
+      "gardening"
+    ],
+    "sourceSha256": "a1f23261204633eb61dc2b991f5c26d8db2b9c3182d7f6cdf1bd97b9091dcf1a",
+    "gallery": "ordinary-hobby-art-candidate-20261019.png",
+    "notBundledOrClaimedAsMechanics": true
+  },
+  "nativeVisualAcceptance": false,
+  "remaining": [
+    "additional hobby/reference theatre/media/podcast breadth",
+    "achievements/challenges/heirlooms and other extras",
+    "at least 160 more distinct situational stories and wider callback/NPC depth",
+    "education stage/country-source verification, editorial/balance/accessibility",
+    "responsive native Android/iOS, custom build policy and native performance/release",
+    "120-year/multi-generation storage and broader/all-choice/1000-seed acceptance"
+  ]
+}

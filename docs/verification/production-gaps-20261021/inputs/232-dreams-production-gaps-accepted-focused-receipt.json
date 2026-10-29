@@ -1,0 +1,41 @@
+{
+  "format": "dreams-coordinator-gate-execution-v1",
+  "sourceCommit": "a4be96ee1e60ab073fbbd2ae95d0ee2d0ee6f361",
+  "sourceSnapshot": "/tmp/dreams-production-gaps-accepted-source.json",
+  "sourceSnapshotSha256": "29871b35ebbcb371c1b44036a8c338955e5020f6d7a1fbb783f81e7cdf4c2652",
+  "root": "/workspace/dreams-worktrees/integration-production-gaps",
+  "argv": [
+    "node",
+    "./node_modules/jest/bin/jest.js",
+    "--runInBand",
+    "--testTimeout=30000",
+    "tests/ui/university-admissions-save-flow.test.tsx",
+    "tests/ui/scholarship-durable-save-flow.test.tsx",
+    "tests/ui/scholarship-flow.test.tsx",
+    "tests/ui/onboarding-accessibility-flow.test.tsx",
+    "tests/ui/onboarding-flow.test.tsx",
+    "tests/ui/new-life-review-flow.test.tsx",
+    "tests/ui/startup-flow.test.tsx",
+    "tests/game/adult-work-school-entry.test.ts"
+  ],
+  "startedAt": "2026-10-21T01:05:13.664519+00:00",
+  "before": {
+    "files": 656,
+    "snapshotSha256": "29871b35ebbcb371c1b44036a8c338955e5020f6d7a1fbb783f81e7cdf4c2652",
+    "status": "exact"
+  },
+  "complete": true,
+  "endedAt": "2026-10-21T01:06:28.743937+00:00",
+  "elapsedSeconds": 75.079,
+  "exitCode": 0,
+  "raw": {
+    "file": "/tmp/dreams-production-gaps-accepted-focused.out",
+    "bytes": 1514,
+    "sha256": "2971c932c6252b5fec0978f433c06ecf14e296c7c90407afc83acc6965f12a19"
+  },
+  "after": {
+    "files": 656,
+    "snapshotSha256": "29871b35ebbcb371c1b44036a8c338955e5020f6d7a1fbb783f81e7cdf4c2652",
+    "status": "exact"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "scope": "Actual Android 24 Expo Go custom-life cold result resume; all SQLite logical table rows exact",
+  "unchangedTables": {
+    "backups": 1,
+    "branches": 0,
+    "lives": 1,
+    "preferences": 1,
+    "receipts": 3,
+    "restore_receipts": 0,
+    "snapshot_metadata": 1,
+    "snapshots": 1
+  },
+  "revision": 3,
+  "date": {
+    "year": 2027,
+    "month": 10,
+    "day": 19
+  },
+  "pendingId": "event_2027_first-cake_result",
+  "payloadSha256": "e846df57b6b0a2a9ce57b678008b9a42cf11708773b647f73690e3311f6259ce"
+}

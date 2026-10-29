@@ -1,0 +1,29 @@
+{
+  "complete": true,
+  "name": "upgrade-welcome",
+  "events": [
+    {
+      "argv": [
+        "python3",
+        "/tmp/dreams-native-ui.py",
+        "inspect",
+        "/tmp/dreams-c39-ui-native-captures/upgrade-welcome/ui"
+      ],
+      "returncode": 0,
+      "stdout": "[('', 'Continue as Nia Carter', '[24,479][366,539]'), ('', 'Start Your Life', '[24,551][366,615]'), ('', 'Random Life', '[24,627][366,689]'), ('', 'Saved Lives, Import and Export', '[24,701][189,749]'), ('', 'Help', '[201,701][366,749]')]\n",
+      "stderr": "",
+      "at": "2026-10-21T09:16:47.038743+00:00"
+    },
+    {
+      "argv": [
+        "python3",
+        "/tmp/dreams-copy-native-db.py",
+        "/tmp/dreams-c39-ui-native-captures/upgrade-welcome/database"
+      ],
+      "returncode": 0,
+      "stdout": "/tmp/dreams-c39-ui-native-captures/upgrade-welcome/database\n",
+      "stderr": "",
+      "at": "2026-10-21T09:16:48.440071+00:00"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "extends": "/workspace/dreams-worktrees/c37-student-loan-test/tests/tsconfig.json",
+  "compilerOptions": { "typeRoots": ["/workspace/dreams-worktrees/c37-student-loan-test/node_modules/@types"] },
+  "files": ["/workspace/dreams-worktrees/c37-student-loan-test/tests/ui/student-loan-rate-flow.test.tsx"],
+  "include": [],
+  "exclude": []
+}

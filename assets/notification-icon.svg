@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 96 96">
+  <!-- Original single-focus heart, matching the central subject of the app icon.
+       Android status-bar icons use white pixels and transparency only. -->
+  <path fill="#fff" d="M48 82C39 74 12 56 12 35C12 14 37 9 48 27C59 9 84 14 84 35C84 56 57 74 48 82Z"/>
+</svg>

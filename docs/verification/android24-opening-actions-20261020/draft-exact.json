@@ -1,0 +1,43 @@
+{
+  "scope": "Actual Android130% text keyboard/name-validation/appearance draft, before starting a life",
+  "all8TablesExact": true,
+  "firstName": "Alex",
+  "lastName": "Mart\u00edn",
+  "country": "ES",
+  "city": "Barcelona",
+  "avatar": 7,
+  "tables": {
+    "backups": {
+      "rows": 6,
+      "sha256": "5dc287546a068263763205d544408f1759f5718ec7f1dec720030c89c9433268"
+    },
+    "branches": {
+      "rows": 1,
+      "sha256": "193a2049a13915adf75e3c161b3dbbd029967c862b1a49459f41e18dca08bafb"
+    },
+    "lives": {
+      "rows": 6,
+      "sha256": "6572fb039a34ef91bc292a5f127493a8f141ca757c8dd30716692304a71799ee"
+    },
+    "preferences": {
+      "rows": 1,
+      "sha256": "31fea740104a3fb36f1930016d9d99bac3cdfca809a6505defee18ebd01ae94c"
+    },
+    "receipts": {
+      "rows": 75,
+      "sha256": "dbc24e6876166e5831c27f644111d261b1028dbb3d0320044aa04225f65ed3ce"
+    },
+    "restore_receipts": {
+      "rows": 1,
+      "sha256": "11bb834d48cf3c90bd423ae7d1de3877104b180076dd73e2fdd97f6c90884f7a"
+    },
+    "snapshot_metadata": {
+      "rows": 55,
+      "sha256": "5da8fbca363493fc74bd7ab77872b61b200f1098691e5fd2c41c2aa0aee6e1e8"
+    },
+    "snapshots": {
+      "rows": 55,
+      "sha256": "ae257283070c60d558245a893a3b6b6c758ad1a551f5fe6b2bf31305d895518f"
+    }
+  }
+}

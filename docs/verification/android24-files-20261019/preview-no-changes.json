@@ -1,0 +1,13 @@
+{
+  "scope": "Actual direct File System picker preview before confirmation; every game database table unchanged",
+  "tables": {
+    "backups": 2,
+    "branches": 0,
+    "lives": 2,
+    "preferences": 1,
+    "receipts": 8,
+    "restore_receipts": 0,
+    "snapshot_metadata": 2,
+    "snapshots": 2
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "format": "dreams-coordinator-gate-observation-v1",
+  "observedAt": "2026-10-20T22:43:30.217462+00:00",
+  "executionReference": "root unified exec session28548; actual process observed closed exit0",
+  "complete": true,
+  "exitCode": 0,
+  "tests": 2282,
+  "suites": 169,
+  "seconds": 1315.195,
+  "sourceCommit": "73cedc7643fa3cbcd0ad32dfa27abfb59dac8aaa",
+  "finalSourceSnapshotSha256": "521383d65749b98c4dab8396a3604857dbeff6b69020927b7d99cfee96e296cc",
+  "raw": {
+    "file": "/tmp/dreams-opening-next-regression-final.out",
+    "bytes": 7897,
+    "sha256": "62c79d62c0a42cc3ad079d8484ed8a338bbfb35fffe469488213d43433ed3c53"
+  },
+  "scope": "One complete fresh final C35 Jest regression. Initial5a known-two-failure run was intentionally interrupted and remains separately exit143; no passing suites from it are added. Final source583pin verification passes separately. No native/performance/platform acceptance inferred."
+}

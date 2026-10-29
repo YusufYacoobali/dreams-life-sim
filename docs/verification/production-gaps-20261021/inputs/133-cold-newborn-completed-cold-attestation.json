@@ -1,0 +1,12 @@
+{
+  "complete": true,
+  "stopped": true,
+  "restarted": true,
+  "from": "newborn",
+  "to": "cold-newborn",
+  "evidence": {
+    "file": "/tmp/dreams-c37-native-captures/cold-newborn-completed/complete-cold-evidence.json",
+    "bytes": 1564,
+    "sha256": "b61eec8f3a3b1850c5e7cab7cb1c50e82f640874e5db214b36283a0b2de9aecc"
+  }
+}

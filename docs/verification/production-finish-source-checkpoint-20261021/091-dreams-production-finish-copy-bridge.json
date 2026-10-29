@@ -1,0 +1,38 @@
+{
+  "format": "dreams-c39-one-copy-literal-source-bridge-v1",
+  "complete": true,
+  "fromCommit": "66ec642e4c9a9332eac322bd8fb12e0a6a3d8e87",
+  "toCommit": "3224c9ce5b9175075760a789c1402dd92345cd30",
+  "beforeSource": {
+    "file": "/tmp/dreams-production-finish-final-source.json",
+    "bytes": 75985,
+    "sha256": "d8a7095285c2711f0dc14b8bca823d9f21436526fc29dcb079631b30cc9a8c8a"
+  },
+  "afterSource": {
+    "file": "/tmp/dreams-production-finish-corrected-source.json",
+    "bytes": 75990,
+    "sha256": "c10e79e2c1798315e5267069f8389d6a5f475cd04719d1894a987903b45e7545"
+  },
+  "versions": {
+    "world": 38,
+    "engine": 39,
+    "content": 13,
+    "database": 18,
+    "checkpoint": "v4"
+  },
+  "sourceFiles": 688,
+  "changedSourceFiles": [
+    "src/game/content/earlyHomeStories.ts",
+    "tests/game/event-rarity.test.ts",
+    "tests/game/rare-adult-story.test.ts",
+    "tests/game/special-career-depth.test.ts"
+  ],
+  "allOther684SourceFilesExact": true,
+  "runtimeDifference": {
+    "file": "src/game/content/earlyHomeStories.ts",
+    "old": "photograph of your hair",
+    "new": "photograph of the back of your head",
+    "exactByteReplacementOnly": true
+  },
+  "scope": "Full regression and120annual remain actual66ec pre-copy-correction evidence, never relabelled as corrected bytes. All other runtime/application/persistence/config/assets/fixtures/drivers exact. Corrected source has separate affected tests/types/Hermes exports/native/performance/policy observations. No whitespace/currency/world comparison normalization or historical bound-scene rewrite."
+}

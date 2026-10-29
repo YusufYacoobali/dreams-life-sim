@@ -1,0 +1,257 @@
+{
+  "format": "dreams-c36-native-extra-browse-v1",
+  "status": "passed",
+  "observedAt": "2026-10-21T00:11:22.266608+00:00",
+  "scope": "Read-only comparisons of actual root-copied databases: extra130%reviewcancel and font-change cold return preserve all8 original138 tables; normal/130%Profile/SavedLives/same-lifeContinue/Extras/Statistics browsing after actual140 preserves all8 final140 tables. No gamecommand, newreceipt, SQLwrite or simulatedcapture in this verifier. Source-image/runtime/cold provenance is recorded separately. Failed ambiguous Fame observer scroll was reset to real route, then one measured native swipe showed all10 stats; it committed no action.",
+  "assertions": {
+    "extraLargeReview138AllEightExact": true,
+    "bothBrowse140AllEightExact": true,
+    "receiptsRemain147": true,
+    "bothStatisticsScrollAreaBounds": {
+      "normal": "[0,24][390,735]",
+      "large": "[0,24][390,735]"
+    },
+    "sourceInputDatabaseAndWalBytesStable": true,
+    "finalFontScaleRestored": 1.0,
+    "finalExpoGoForceStoppedByCoordinator": true
+  },
+  "preAction": {
+    "baseline138": {
+      "reader": 14,
+      "files": {
+        "/tmp/dreams-opening-next-native-final138-db/dreams.db": {
+          "bytes": 3805184,
+          "sha256": "d89355bf9c69e4c8e413080dc6478ef39a230ea2287977abeaaecaae0da1da81"
+        },
+        "/tmp/dreams-opening-next-native-final138-db/dreams.db-wal": {
+          "bytes": 4733912,
+          "sha256": "ccd6c71ee84fab77c3bf0915d4e7c140be373c8519b9b8730ac37486f38f8bf7"
+        }
+      },
+      "tables": {
+        "backups": {
+          "rows": 7,
+          "sha256": "5f13ad33f9093ef944e5779fe5d14e1cf98214a53ec8d9c84c86237d9624c566"
+        },
+        "branches": {
+          "rows": 1,
+          "sha256": "fbca8816f9bd06ea8d170416427ea734d77405d1c61fc324d0f91306b745f370"
+        },
+        "lives": {
+          "rows": 7,
+          "sha256": "a75c9221f4a4d49851db30d8e939d409361f202854bb836ca4c9a246a895bace"
+        },
+        "preferences": {
+          "rows": 2,
+          "sha256": "439c7df07be842e2d88a5c4e3901fef292b80bc8317269fc0b356d8c055d0413"
+        },
+        "receipts": {
+          "rows": 145,
+          "sha256": "7e52ee88501ec76f35db61835040e8a5a92f5f71bf59bdccc7c4a156c1d7ffe8"
+        },
+        "restore_receipts": {
+          "rows": 1,
+          "sha256": "8f3438adaa30734181d11412661add7dbbb965ca51b1c34185bffb1cc68cb21f"
+        },
+        "snapshot_metadata": {
+          "rows": 66,
+          "sha256": "655370281918d85d738449450959abfed8f323daac600b261dd161f2dc79b8da"
+        },
+        "snapshots": {
+          "rows": 66,
+          "sha256": "dc82847be2784ac8c6be37ba2fc3d769ae86c6eafde1a615cc53db8cab6c9298"
+        }
+      }
+    },
+    "largeReview138": {
+      "reader": 15,
+      "files": {
+        "/tmp/dreams-friends-editorial-native-review130138-db/dreams.db": {
+          "bytes": 3805184,
+          "sha256": "f144f28d9701ff2e4ea3cfe710e8acbc57c27ffee351caa4313f34314d3d7dae"
+        },
+        "/tmp/dreams-friends-editorial-native-review130138-db/dreams.db-wal": {
+          "bytes": 4733912,
+          "sha256": "1d3d7974a5bdbcd0349fc99d23f49cf6270608f34ca594e12b9b3a105a52e1a8"
+        }
+      },
+      "tables": {
+        "backups": {
+          "rows": 7,
+          "sha256": "5f13ad33f9093ef944e5779fe5d14e1cf98214a53ec8d9c84c86237d9624c566"
+        },
+        "branches": {
+          "rows": 1,
+          "sha256": "fbca8816f9bd06ea8d170416427ea734d77405d1c61fc324d0f91306b745f370"
+        },
+        "lives": {
+          "rows": 7,
+          "sha256": "a75c9221f4a4d49851db30d8e939d409361f202854bb836ca4c9a246a895bace"
+        },
+        "preferences": {
+          "rows": 2,
+          "sha256": "439c7df07be842e2d88a5c4e3901fef292b80bc8317269fc0b356d8c055d0413"
+        },
+        "receipts": {
+          "rows": 145,
+          "sha256": "7e52ee88501ec76f35db61835040e8a5a92f5f71bf59bdccc7c4a156c1d7ffe8"
+        },
+        "restore_receipts": {
+          "rows": 1,
+          "sha256": "8f3438adaa30734181d11412661add7dbbb965ca51b1c34185bffb1cc68cb21f"
+        },
+        "snapshot_metadata": {
+          "rows": 66,
+          "sha256": "655370281918d85d738449450959abfed8f323daac600b261dd161f2dc79b8da"
+        },
+        "snapshots": {
+          "rows": 66,
+          "sha256": "dc82847be2784ac8c6be37ba2fc3d769ae86c6eafde1a615cc53db8cab6c9298"
+        }
+      }
+    }
+  },
+  "postAction": {
+    "final140": {
+      "reader": 15,
+      "files": {
+        "/tmp/dreams-friends-editorial-native-cold-final140-db/dreams.db": {
+          "bytes": 3805184,
+          "sha256": "f144f28d9701ff2e4ea3cfe710e8acbc57c27ffee351caa4313f34314d3d7dae"
+        },
+        "/tmp/dreams-friends-editorial-native-cold-final140-db/dreams.db-wal": {
+          "bytes": 4733912,
+          "sha256": "144a5a5bd29bb2b9242b26c039a275f46a0d0a5f898076e813424da495ee661c"
+        }
+      },
+      "tables": {
+        "backups": {
+          "rows": 7,
+          "sha256": "4cc5661c5306ab26c3581bac60d512ee56ba0943e6afbb0bda0cc3834747e0c3"
+        },
+        "branches": {
+          "rows": 1,
+          "sha256": "fbca8816f9bd06ea8d170416427ea734d77405d1c61fc324d0f91306b745f370"
+        },
+        "lives": {
+          "rows": 7,
+          "sha256": "705b33de2131e884a4aa14c7dfed93122a23090047279dbcb47e45d440bfb422"
+        },
+        "preferences": {
+          "rows": 2,
+          "sha256": "439c7df07be842e2d88a5c4e3901fef292b80bc8317269fc0b356d8c055d0413"
+        },
+        "receipts": {
+          "rows": 147,
+          "sha256": "e2fb829b3ff88d279827f50453412aa83a57b269652d8aef6626bc8f758c7e55"
+        },
+        "restore_receipts": {
+          "rows": 1,
+          "sha256": "8f3438adaa30734181d11412661add7dbbb965ca51b1c34185bffb1cc68cb21f"
+        },
+        "snapshot_metadata": {
+          "rows": 66,
+          "sha256": "655370281918d85d738449450959abfed8f323daac600b261dd161f2dc79b8da"
+        },
+        "snapshots": {
+          "rows": 66,
+          "sha256": "dc82847be2784ac8c6be37ba2fc3d769ae86c6eafde1a615cc53db8cab6c9298"
+        }
+      }
+    },
+    "browseNormal140": {
+      "reader": 15,
+      "files": {
+        "/tmp/dreams-friends-editorial-native-browsed140-db/dreams.db": {
+          "bytes": 3805184,
+          "sha256": "f144f28d9701ff2e4ea3cfe710e8acbc57c27ffee351caa4313f34314d3d7dae"
+        },
+        "/tmp/dreams-friends-editorial-native-browsed140-db/dreams.db-wal": {
+          "bytes": 4733912,
+          "sha256": "144a5a5bd29bb2b9242b26c039a275f46a0d0a5f898076e813424da495ee661c"
+        }
+      },
+      "tables": {
+        "backups": {
+          "rows": 7,
+          "sha256": "4cc5661c5306ab26c3581bac60d512ee56ba0943e6afbb0bda0cc3834747e0c3"
+        },
+        "branches": {
+          "rows": 1,
+          "sha256": "fbca8816f9bd06ea8d170416427ea734d77405d1c61fc324d0f91306b745f370"
+        },
+        "lives": {
+          "rows": 7,
+          "sha256": "705b33de2131e884a4aa14c7dfed93122a23090047279dbcb47e45d440bfb422"
+        },
+        "preferences": {
+          "rows": 2,
+          "sha256": "439c7df07be842e2d88a5c4e3901fef292b80bc8317269fc0b356d8c055d0413"
+        },
+        "receipts": {
+          "rows": 147,
+          "sha256": "e2fb829b3ff88d279827f50453412aa83a57b269652d8aef6626bc8f758c7e55"
+        },
+        "restore_receipts": {
+          "rows": 1,
+          "sha256": "8f3438adaa30734181d11412661add7dbbb965ca51b1c34185bffb1cc68cb21f"
+        },
+        "snapshot_metadata": {
+          "rows": 66,
+          "sha256": "655370281918d85d738449450959abfed8f323daac600b261dd161f2dc79b8da"
+        },
+        "snapshots": {
+          "rows": 66,
+          "sha256": "dc82847be2784ac8c6be37ba2fc3d769ae86c6eafde1a615cc53db8cab6c9298"
+        }
+      }
+    },
+    "browseLarge140": {
+      "reader": 15,
+      "files": {
+        "/tmp/dreams-friends-editorial-native-browsed130140-db/dreams.db": {
+          "bytes": 3805184,
+          "sha256": "f144f28d9701ff2e4ea3cfe710e8acbc57c27ffee351caa4313f34314d3d7dae"
+        },
+        "/tmp/dreams-friends-editorial-native-browsed130140-db/dreams.db-wal": {
+          "bytes": 4733912,
+          "sha256": "144a5a5bd29bb2b9242b26c039a275f46a0d0a5f898076e813424da495ee661c"
+        }
+      },
+      "tables": {
+        "backups": {
+          "rows": 7,
+          "sha256": "4cc5661c5306ab26c3581bac60d512ee56ba0943e6afbb0bda0cc3834747e0c3"
+        },
+        "branches": {
+          "rows": 1,
+          "sha256": "fbca8816f9bd06ea8d170416427ea734d77405d1c61fc324d0f91306b745f370"
+        },
+        "lives": {
+          "rows": 7,
+          "sha256": "705b33de2131e884a4aa14c7dfed93122a23090047279dbcb47e45d440bfb422"
+        },
+        "preferences": {
+          "rows": 2,
+          "sha256": "439c7df07be842e2d88a5c4e3901fef292b80bc8317269fc0b356d8c055d0413"
+        },
+        "receipts": {
+          "rows": 147,
+          "sha256": "e2fb829b3ff88d279827f50453412aa83a57b269652d8aef6626bc8f758c7e55"
+        },
+        "restore_receipts": {
+          "rows": 1,
+          "sha256": "8f3438adaa30734181d11412661add7dbbb965ca51b1c34185bffb1cc68cb21f"
+        },
+        "snapshot_metadata": {
+          "rows": 66,
+          "sha256": "655370281918d85d738449450959abfed8f323daac600b261dd161f2dc79b8da"
+        },
+        "snapshots": {
+          "rows": 66,
+          "sha256": "dc82847be2784ac8c6be37ba2fc3d769ae86c6eafde1a615cc53db8cab6c9298"
+        }
+      }
+    }
+  }
+}

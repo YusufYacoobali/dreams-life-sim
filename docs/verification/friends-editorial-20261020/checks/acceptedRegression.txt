@@ -1,0 +1,243 @@
+
+> dreams-life-sim@1.0.0 test
+> jest --runInBand --ci --testTimeout=30000
+
+PASS tests/game/engine.test.ts (498.263 s)
+PASS tests/persistence/tuple-checkpoints.test.ts (34.349 s)
+PASS tests/ui/education-choice-save-flow.test.tsx (28.503 s)
+PASS tests/game/editorial-context-acceptance.test.ts (25.999 s)
+  ● Console
+
+    console.info
+      C36_EDITORIAL_CONTEXT {"name":"family-trip","commands":11,"decisions":[{"id":"adult-name-pronunciation","branch":1,"contexts":[],"old":false},{"id":"wellbeing-stretch-after-sitting","branch":2,"contexts":[],"old":false},{"id":"family-helpful-spill","branch":3,"contexts":["child"],"old":false}],"observedContexts":["child"],"absentContexts":["workplace","friend","partner","home","pet","hobby","visited","specialCareer"],"finalCanonicalSha256":"36fe742395136e979af5b42a2102a94da413fa0ef68fd7de3ffafd8fccd589fe"}
+
+      at info (tests/game/editorial-context-acceptance.test.ts:122:11)
+
+    console.info
+      C36_EDITORIAL_CONTEXT {"name":"pet-hobbies","commands":10,"decisions":[{"id":"teen-unit-confusion","branch":1,"contexts":[],"old":false}],"observedContexts":[],"absentContexts":["workplace","friend","partner","child","home","pet","hobby","visited","specialCareer"],"finalCanonicalSha256":"2bdcd70c08621c4340d52cf2cead7198fa7ea5f3cadd16626f1e5bcb8e343f3d"}
+
+      at info (tests/game/editorial-context-acceptance.test.ts:122:11)
+
+    console.info
+      C36_EDITORIAL_CONTEXT {"name":"workplace-friend","commands":20,"decisions":[{"id":"work-photo-blink","branch":1,"contexts":["workplace"],"old":false},{"id":"medical-emergency","branch":2,"contexts":[],"old":false},{"id":"friend-long-voice-note","branch":3,"contexts":["friend"],"old":false},{"id":"medical-emergency","branch":2,"contexts":[],"old":false},{"id":"adult-shortcut-stairs","branch":2,"contexts":[],"old":false}],"observedContexts":["friend","workplace"],"absentContexts":["partner","child","home","pet","hobby","visited","specialCareer"],"finalCanonicalSha256":"4eb4ddffb8814185bd4459432e1cfa9231392025ddaf7725494e4db9635fc30a"}
+
+      at info (tests/game/editorial-context-acceptance.test.ts:122:11)
+
+    console.info
+      C36_EDITORIAL_CONTEXT {"name":"owned-home","commands":24,"decisions":[{"id":"property-sale-offer","branch":2,"contexts":[],"old":true},{"id":"property-sale-offer","branch":2,"contexts":[],"old":false},{"id":"property-sale-offer","branch":2,"contexts":[],"old":false},{"id":"property-sale-offer","branch":2,"contexts":[],"old":false},{"id":"property-sale-offer","branch":2,"contexts":[],"old":false},{"id":"property-sale-offer","branch":2,"contexts":[],"old":false},{"id":"adult-wrong-name-badge","branch":1,"contexts":[],"old":false},{"id":"adult-small-volunteer-task","branch":2,"contexts":[],"old":false},{"id":"home-window-cleaning-discovery","branch":3,"contexts":["home"],"old":false}],"observedContexts":["home"],"absentContexts":["workplace","friend","partner","child","pet","hobby","visited","specialCareer"],"finalCanonicalSha256":"ab0f3effc87a98af20dfe9aa4ba0772e4bf630bbf59a2f7f6ecf042ead91d25a"}
+
+      at info (tests/game/editorial-context-acceptance.test.ts:122:11)
+
+    console.info
+      C36_EDITORIAL_CONTEXT {"name":"creator-studio","commands":21,"decisions":[{"id":"public-controversy","branch":1,"contexts":[],"old":false},{"id":"brand-offer","branch":2,"contexts":[],"old":false},{"id":"wellbeing-unhurried-breath","branch":3,"contexts":[],"old":false},{"id":"adult-perfect-introduction","branch":1,"contexts":[],"old":false},{"id":"wellbeing-quiet-not-silent","branch":2,"contexts":[],"old":false}],"observedContexts":[],"absentContexts":["workplace","friend","partner","child","home","pet","hobby","visited","specialCareer"],"finalCanonicalSha256":"1cc9b569600f8630f547fd0f40efd34e4d2cf499021167ef4c77087b5fb121d4"}
+
+      at info (tests/game/editorial-context-acceptance.test.ts:122:11)
+
+PASS tests/ui/health-review-save-flow.test.tsx (27.889 s)
+PASS tests/ui/recovery-routine-save-flow.test.tsx (22.248 s)
+PASS tests/ui/special-career-exits-flow.test.tsx (22.46 s)
+PASS tests/game/royalty.test.ts (20.657 s)
+PASS tests/game/copy-world.test.ts (19.932 s)
+PASS tests/game/criminal-policy.test.ts (20.221 s)
+PASS tests/game/everyday-life-stories.test.ts (19.841 s)
+PASS tests/persistence/people-blocks.test.ts (18.757 s)
+PASS tests/ui/saved-files-flow.test.tsx (19.784 s)
+PASS tests/persistence/opening-migration.test.ts (17.631 s)
+PASS tests/ui/exercise-review-save-flow.test.tsx (16.326 s)
+PASS tests/persistence/native-workplace-story-archive.test.ts (16.718 s)
+PASS tests/ui/lifetime-statistics-flow.test.tsx (17.282 s)
+PASS tests/game/hobby-introductions.test.ts (17.526 s)
+PASS tests/persistence/native-people-block-archive.test.ts (14.689 s)
+PASS tests/persistence/native-raise-archive.test.ts (11.866 s)
+PASS tests/progression/expanded-progress.test.ts (11.332 s)
+PASS tests/game/early-home-stories.test.ts (12.551 s)
+PASS tests/game/adult-relationship-stories.test.ts (11.56 s)
+PASS tests/ui/student-loan-rate-flow.test.tsx (11.928 s)
+PASS tests/persistence/best-friends-migration.test.ts (11.219 s)
+PASS tests/persistence/native-workplace-archive.test.ts (9.773 s)
+PASS tests/game/teen-home-stories.test.ts (9.511 s)
+PASS tests/game/professional-policy.test.ts (10.411 s)
+PASS tests/persistence/native-teen-archive.test.ts (9.255 s)
+PASS tests/game/story-name-collisions.test.ts (7.865 s)
+PASS tests/persistence/native-hourly-checkpoints.test.ts (7.591 s)
+PASS tests/ui/astronaut-career-acceptance-flow.test.tsx (6.872 s)
+  ● Console
+
+    console.info
+      Astronaut archive continuation {"sourceRevision":67,"sourceDate":{"year":2023,"month":1,"day":1},"preparedDate":{"year":2026,"month":1,"day":1},"coachedMonths":36,"coachingFees":"144000","preparedScience":72,"selectionAttempts":2,"traineeAnnualPay":"4800000","trainingMonths":24,"trainingResult":"passed","qualifiedDate":{"year":2028,"month":1,"day":1},"qualifiedAnnualPay":"7200000","mission":{"status":"completed","periods":6,"units":108,"distinction":"Meridian Research Distinction"},"leaveContractMonths":30,"serviceGross":"13200000","finalDate":{"year":2030,"month":1,"day":1},"finalRevision":109,"ordinaryPreparationAndContinuationCommands":31,"originalFixtureSha256":"de0ab866bf648b0be9c0303734d849d22c21d94b450b5066482f71e0e4822fef"}
+
+      at Object.info (tests/ui/astronaut-career-acceptance-flow.test.tsx:127:13)
+
+PASS tests/persistence/restored-action-cache.test.ts (8.126 s)
+PASS tests/ui/hobby-introduction-save-flow.test.tsx (8.089 s)
+PASS tests/game/story-consequence-labels.test.ts (8.517 s)
+PASS tests/ui/athlete-career-acceptance.test.tsx (6.152 s)
+  ● Console
+
+    console.info
+      ATHLETE_OBSERVATION {"trainingMonths":34,"tuitionMinor":"136000","trainedSport":68,"selectionOutcomes":["Your contract is signed"],"attended":12,"wins":11,"seasonStatus":"completed","seasonGrossMinor":"7344000","award":null,"finalRevision":99}
+
+      at Object.info (tests/ui/athlete-career-acceptance.test.tsx:135:13)
+
+PASS tests/ui/work-routine-save-flow.test.tsx (8.295 s)
+PASS tests/ui/workplace-story-flow.test.tsx (7.889 s)
+PASS tests/ui/progression-continuation-flow.test.tsx (7.763 s)
+PASS tests/persistence/ordinary-hobby-archive.test.ts (6.841 s)
+PASS tests/game/workplace-stories.test.ts (7.394 s)
+PASS tests/game/education-recovery.test.ts (7.893 s)
+PASS tests/ui/school-routine-save-flow.test.tsx (7.085 s)
+PASS tests/state/npc-relationships-save.test.ts (5.965 s)
+PASS tests/ui/lifetime-statistics-data.test.ts (6.131 s)
+PASS tests/ui/social-criticism-persistence-flow.test.tsx (6.297 s)
+PASS tests/ui/scholarship-flow.test.tsx (5.941 s)
+PASS tests/ui/asset-bank-save-flow.test.tsx
+PASS tests/ui/hobby-event-flow.test.tsx
+PASS tests/ui/education-recovery-flow.test.tsx (6.262 s)
+PASS tests/state/npc-courtships-save.test.ts (5.211 s)
+PASS tests/persistence/action-checkpoints.test.ts (6.375 s)
+PASS tests/game/childhood-stories.test.ts (5.499 s)
+PASS tests/ui/model-career-acceptance-flow.test.tsx (5.992 s)
+  ● Console
+
+    console.info
+      Model archive continuation {"sourceRevision":70,"sourceDate":{"year":2023,"month":7,"day":1},"preparedDate":{"year":2026,"month":1,"day":1},"trainedMonths":30,"trainingFees":"120000","skill":60,"selectionAttempts":1,"annualPay":"4896000","projectPeriods":3,"modelGross":"1224000","currency":"USD","finalDate":{"year":2028,"month":1,"day":1},"finalRevision":96,"ordinaryPreparationAndContinuationCommands":22,"originalFixtureSha256":"665a7b3736518e9e9f4d7c4a2d12eb08e746ddc528baaa868eb02d5e903f8e34"}
+
+      at Object.info (tests/ui/model-career-acceptance-flow.test.tsx:132:13)
+
+PASS tests/persistence/life-preview.test.ts (5.84 s)
+PASS tests/game/services.test.ts (6.017 s)
+PASS tests/ui/royalty-review-save-flow.test.tsx (5.247 s)
+PASS tests/persistence/native-school-archive.test.ts
+PASS tests/ui/royalty-flow.test.tsx (5.261 s)
+PASS tests/ui/career-plan-context-flow.test.tsx
+PASS tests/ui/music-career-exit-flow.test.tsx (5.05 s)
+PASS tests/state/save-summaries.test.ts
+PASS tests/persistence/native-arcade-archive.test.ts
+PASS tests/persistence/native-interview-checkpoints.test.ts
+PASS tests/game/estates.test.ts
+PASS tests/game/education-work-finance.test.ts
+PASS tests/ui/saved-life-preview.test.tsx
+PASS tests/game/businesses.test.ts
+PASS tests/ui/pets-flow.test.tsx
+PASS tests/ui/profile-will-save-flow.test.tsx
+PASS tests/game/hobby-events.test.ts
+PASS tests/game/editorial-policy.test.ts
+PASS tests/ui/family-dialog-save-flow.test.tsx
+PASS tests/ui/profile-overview-save-flow.test.tsx
+PASS tests/ui/health-flow.test.tsx
+PASS tests/game/music.test.ts
+PASS tests/game/pets.test.ts
+PASS tests/game/npc-courtships.test.ts
+PASS tests/game/creators.test.ts
+PASS tests/progression/progress.test.ts
+PASS tests/ui/travel-review-save-flow.test.tsx
+PASS tests/game/politics.test.ts
+PASS tests/ui/contacts-flow.test.tsx
+PASS tests/ui/business-review-save-flow.test.tsx
+PASS tests/game/scholarships.test.ts
+PASS tests/ui/social-review-save-flow.test.tsx
+PASS tests/game/legal.test.ts
+PASS tests/game/social-criticism-copy.test.ts
+PASS tests/game/social.test.ts
+PASS tests/ui/ordinary-hobby-flow.test.tsx
+PASS tests/game/leisure.test.ts
+PASS tests/ui/relocation-flow.test.tsx
+PASS tests/ui/legal-review-save-flow.test.tsx
+PASS tests/ui/terminal-biography-flow.test.tsx
+PASS tests/persistence/responsive-archive.test.ts
+PASS tests/ui/leisure-flow.test.tsx
+PASS tests/game/careers.test.ts
+PASS tests/progression/connections.test.ts
+PASS tests/game/assets-markets.test.ts
+PASS tests/ui/service-context-flow.test.tsx
+PASS tests/persistence/leisure-archive.test.ts
+PASS tests/ui/service-flow.test.tsx
+PASS tests/ui/extras-flow.test.tsx
+PASS tests/game/best-friends.test.ts
+PASS tests/ui/feedback-settings-flow.test.tsx
+PASS tests/ui/hourly-work-flow.test.tsx
+PASS tests/game/foreign-earnings.test.ts
+PASS tests/ui/career-review-save-flow.test.tsx
+PASS tests/game/story-callbacks.test.ts
+PASS tests/game/ordinary-hobbies.test.ts
+PASS tests/game/story-lifecycle.test.ts
+PASS tests/ui/annual-finances-flow.test.tsx
+PASS tests/ui/school-withdrawal-flow.test.tsx
+PASS tests/ui/best-friends-flow.test.tsx
+PASS tests/ui/business-flow.test.tsx
+PASS tests/game/relocation.test.ts
+PASS tests/game/hourly-work.test.ts
+PASS tests/ui/creator-studio-flow.test.tsx
+PASS tests/ui/story-callback-flow.test.tsx
+PASS tests/game/content-refresh.test.ts
+PASS tests/ui/emigration-country-default.test.tsx
+PASS tests/ui/travel-flow.test.tsx
+PASS tests/ui/story-name-collision-flow.test.tsx
+PASS tests/game/credit.test.ts
+PASS tests/ui/workplace-flow.test.tsx
+PASS tests/game/health-legal-availability.test.ts
+PASS tests/ui/life-context-story-flow.test.tsx
+PASS tests/ui/adult-relationship-story-flow.test.tsx
+PASS tests/ui/credit-flow.test.tsx
+PASS tests/game/travel.test.ts
+PASS tests/game/school-withdrawal.test.ts
+PASS tests/ui/terminal-biography-data.test.ts
+PASS tests/ui/onboarding-flow.test.tsx
+PASS tests/ui/career-flow.test.tsx
+PASS tests/game/work-raises.test.ts
+PASS tests/ui/purchase-confirmation-save-flow.test.tsx
+PASS tests/ui/social-flow.test.tsx
+PASS tests/ui/childhood-story-flow.test.tsx
+PASS tests/game/entrepreneur-policy.test.ts
+PASS tests/persistence/pet-archive.test.ts
+PASS tests/game/workplaces.test.ts
+PASS tests/game/health-emergency-context.test.ts
+PASS tests/persistence/compressed-lives.test.ts
+PASS tests/persistence/time-machine.test.ts
+PASS tests/ui/politics-flow.test.tsx
+PASS tests/ui/story-consequence-labels-flow.test.tsx
+PASS tests/ui/legal-flow.test.tsx
+PASS tests/ui/new-life-review-flow.test.tsx
+PASS tests/game/npc-relationships.test.ts
+PASS tests/ui/startup-flow.test.tsx
+PASS tests/ui/family-tree-late-spouse.test.tsx
+PASS tests/ui/job-interview-flow.test.tsx
+PASS tests/ui/time-machine-flow.test.tsx
+PASS tests/ui/school-flow.test.tsx
+PASS tests/game/school.test.ts
+PASS tests/ui/family-flow.test.tsx
+PASS tests/game/relationships.test.ts
+PASS tests/ui/music-flow.test.tsx
+PASS tests/game/job-interviews.test.ts
+PASS tests/ui/early-home-story-flow.test.tsx
+PASS tests/ui/purchase-flow.test.tsx
+PASS tests/progression/financial-progress.test.ts
+PASS tests/game/family.test.ts
+PASS tests/game/story-editorial-context.test.ts
+PASS tests/game/health.test.ts
+PASS tests/ui/annual-finances-projection.test.ts
+PASS tests/ui/pension-flow.test.tsx
+PASS tests/ui/relationship-flow.test.tsx
+PASS tests/ui/school-plans.test.tsx
+PASS tests/ui/legacy-flow.test.tsx
+PASS tests/ui/onboarding-accessibility-flow.test.tsx
+PASS tests/state/preferencesStore.test.ts
+PASS tests/persistence/repository.test.ts
+PASS tests/ui/will-flow.test.tsx
+PASS tests/game/save-json.test.ts
+PASS tests/ui/settings-flow.test.tsx
+PASS tests/persistence/base64.test.ts
+PASS tests/game/creation.test.ts
+PASS tests/ui/modal-window-layout.test.tsx
+PASS tests/ui/interactions.test.tsx
+PASS tests/state/gameStore.test.ts
+PASS tests/ui/theme-contrast.test.tsx
+PASS tests/ui/portrait-accessibility.test.tsx
+PASS tests/game/money-format.test.ts
+PASS tests/game/primitives.test.ts
+
+Test Suites: 185 passed, 185 total
+Tests:       2355 passed, 2355 total
+Snapshots:   0 total
+Time:        1386.145 s, estimated 1407 s
+Ran all test suites.

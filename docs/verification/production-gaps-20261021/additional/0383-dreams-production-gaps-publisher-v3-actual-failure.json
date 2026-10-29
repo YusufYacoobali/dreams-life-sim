@@ -1,0 +1,33 @@
+{
+  "format": "dreams-c37-publisher-actual-failure-diagnostic-v1",
+  "source": "Coordinator root supplied actual tool closure and exception excerpt in team message; full stdout/stderr was not supplied and is not reconstructed.",
+  "executionReference": "Root tool f79a52 actually CLOSED1",
+  "exitCode": 1,
+  "processClosed": true,
+  "repoOutputsCreated": false,
+  "repoOutputsScope": "Coordinator attests failure occurred before any repository output; no publication folder or top record existed.",
+  "suppliedFailure": {
+    "scriptLine": 233,
+    "exceptionType": "ValueError",
+    "message": "Unexpected runtime/native/creation claim"
+  },
+  "preservedInputs": [
+    {
+      "file": "/tmp/dreams-production-gaps-publish-v3-actual-failed.py.txt",
+      "bytes": 33599,
+      "sha256": "ea713fe13d29c97b740fc8f8f997b5324d08c3bbabb131967244b3a1ef8ce3fd"
+    },
+    {
+      "file": "/tmp/dreams-production-gaps-publication-completion-v3-pending-before-actual-failure.json",
+      "bytes": 27659,
+      "sha256": "764e2541af2efe8aae8d42578b53251ec7e8b2d723be3fffa5074d16938d3739"
+    },
+    {
+      "file": "/tmp/dreams-production-gaps-publication-completion-v3-ACTUAL-failed.json",
+      "bytes": 29585,
+      "sha256": "11cdc0754e3dab548d276d875ccc5ec4f1b161263216d2f3b936215ab161b5c6"
+    }
+  ],
+  "cause": "Approved raw verifier emits nativeActionsPerformed numeric integer0; failedv3 used Boolean identity is False.",
+  "publisherReexecutedByAuthor": false
+}

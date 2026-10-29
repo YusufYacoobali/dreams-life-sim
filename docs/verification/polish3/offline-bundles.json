@@ -1,0 +1,29 @@
+{
+  "runtimeRevision": "4698d79",
+  "baseline": "25a8faa34728fc0ee38769318a8124d038038bec",
+  "offline": true,
+  "deviceBuild": false,
+  "runtimeSourceFiles": 67,
+  "newArtworkFiles": 100,
+  "newArtworkBytes": 8367172,
+  "platforms": {
+    "android": {
+      "hermesMagic": "c61fbc03c103191f",
+      "bundle": "_expo/static/js/android/entry-e4ed74e3436e222bd7066d64ccf5d637.hbc",
+      "bundleBytes": 7062780,
+      "bundleSha256": "bb56821563bb198b6ef4afd1806211724a3e130f82447b251bfc72e24348b904",
+      "matchingRuntimeSources": 67,
+      "matchingNewArtworkFiles": 100,
+      "exportedAssetFiles": 1202
+    },
+    "ios": {
+      "hermesMagic": "c61fbc03c103191f",
+      "bundle": "_expo/static/js/ios/entry-6ee9ef3fed8516ded53ff92fc06e87ba.hbc",
+      "bundleBytes": 6880368,
+      "bundleSha256": "f3cf169330ee77c7e2f26f14f5563856aa600b213745fa85f45c6b4728fc2ac8",
+      "matchingRuntimeSources": 67,
+      "matchingNewArtworkFiles": 100,
+      "exportedAssetFiles": 1198
+    }
+  }
+}

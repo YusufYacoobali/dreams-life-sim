@@ -1,0 +1,349 @@
+{
+  "date": "2026-10-24",
+  "purpose": "Replace only cluttered action illustrations with one large focal subject; retain the existing soft dimensional Dreams style and all asset IDs.",
+  "style": "Original soft dimensional cartoon objects, confident dark blue contours, gentle bevels and soft shading, Dreams jewel blue and warm gold with small coral/green accents. Transparent background. No scenery, lettering, logos, decorative props, borders or labels. One large central subject per cell. Paired hands, rings or cups are a single unified action symbol.",
+  "columns": 4,
+  "rows": 3,
+  "reusedSources": [
+    {
+      "id": "plane",
+      "file": "assets/generated/activity-atlas.png",
+      "rect": [
+        724,
+        362,
+        1086,
+        724
+      ]
+    }
+  ],
+  "sheets": [
+    {
+      "file": "actions-1.png",
+      "entries": [
+        {
+          "kind": "actions",
+          "id": "compliment",
+          "subject": "A blue speech bubble with one pink heart inset in it."
+        },
+        {
+          "kind": "actions",
+          "id": "spend-time",
+          "subject": "A friendly handshake, two hands with simple blue and teal cuffs, no other objects."
+        },
+        {
+          "kind": "actions",
+          "id": "argue",
+          "subject": "One red angular speech bubble with a simple angry expression, no person or second bubble."
+        },
+        {
+          "kind": "actions",
+          "id": "apologise",
+          "subject": "One soft white surrender flag on a short blue pole, cloth large and clearly readable."
+        },
+        {
+          "kind": "actions",
+          "id": "distance",
+          "subject": "One short blue chain link broken cleanly in the centre, its two halves forming one unified symbol."
+        },
+        {
+          "kind": "actions",
+          "id": "ask-advice",
+          "subject": "One warm gold lightbulb, a clean simple silhouette without extra rays or props."
+        },
+        {
+          "kind": "actions",
+          "id": "ask-permission",
+          "subject": "One teal speech bubble with a large simple white check inset in it."
+        },
+        {
+          "kind": "actions",
+          "id": "ask-activity",
+          "subject": "One cheerful blue and gold diamond kite with a short curved tail."
+        },
+        {
+          "kind": "actions",
+          "id": "praise",
+          "subject": "One dimensional gold five-pointed star, no secondary sparkles."
+        },
+        {
+          "kind": "actions",
+          "id": "scold",
+          "subject": "One gold speech bubble with a large dark exclamation mark inset in it."
+        },
+        {
+          "kind": "actions",
+          "id": "ask-help",
+          "subject": "One blue and white lifebuoy, without scenery or extra items."
+        },
+        {
+          "kind": "actions",
+          "id": "family-planning",
+          "subject": "One blue and gold baby rattle, large rounded handle and simple form."
+        }
+      ],
+      "generated_path": "/workspace/generated_images/exec-54bc737f-81a7-456e-860d-523082012601.png",
+      "sha256": "1553b935e396827a1cb931d9109a5617ee77ad357155ee01610c77ec174d1798"
+    },
+    {
+      "file": "actions-2.png",
+      "entries": [
+        {
+          "kind": "actions",
+          "id": "review-custody",
+          "subject": "One protective blue shield with a pink heart inset in its centre."
+        },
+        {
+          "kind": "actions",
+          "id": "move-in",
+          "subject": "One substantial gold house key, no house or luggage."
+        },
+        {
+          "kind": "actions",
+          "id": "plan-wedding",
+          "subject": "One unified pair of gently overlapping gold wedding rings, no people or flowers."
+        },
+        {
+          "kind": "actions",
+          "id": "academic-help",
+          "subject": "One open blue book with cream pages, no text, bulb or pencil."
+        },
+        {
+          "kind": "actions",
+          "id": "work-feedback",
+          "subject": "One blue clipboard with a simple green check on its page, no magnifier or briefcase."
+        },
+        {
+          "kind": "actions",
+          "id": "ask-loan",
+          "subject": "One folded blue financial agreement page with a gold coin emblem printed on it, no text or loose coins."
+        },
+        {
+          "kind": "actions",
+          "id": "request-raise",
+          "subject": "One neatly stacked group of large gold coins, a single unified coin stack without hands or briefcase."
+        },
+        {
+          "kind": "actions",
+          "id": "ask-date",
+          "subject": "One unified pair of clinking blue mugs with a small heart inset in each mug, no flowers or other items."
+        },
+        {
+          "kind": "actions",
+          "id": "divorce",
+          "subject": "One cream certificate page neatly torn down the middle, its halves still close together, without rings, pen or writing."
+        },
+        {
+          "kind": "actions",
+          "id": "ask-teen-date",
+          "subject": "One warm coral envelope with a simple heart seal, no people or scenery."
+        },
+        {
+          "kind": "actions",
+          "id": "end-teen-relationship",
+          "subject": "One pink heart-shaped paper note with a clean central tear, without words, scenery or other items."
+        },
+        {
+          "kind": "actions",
+          "id": "insult",
+          "subject": "One purple jagged speech bubble with a small storm cloud inset, no person or separate objects."
+        }
+      ],
+      "generated_path": "/workspace/generated_images/exec-d9d2099e-a053-478d-96de-5ea1c98d7638.png",
+      "sha256": "8223dccc0b46eb9d4e260622ef76272f1a3244aeee78497449b3b31e37f6bcc9"
+    },
+    {
+      "file": "jobs.png",
+      "entries": [
+        {
+          "kind": "jobs",
+          "id": "plumber",
+          "subject": "One large red pipe wrench, no pipes or toolbox."
+        },
+        {
+          "kind": "jobs",
+          "id": "researcher",
+          "subject": "One rounded laboratory flask filled with blue liquid, no notebook, molecule or tools."
+        },
+        {
+          "kind": "jobs",
+          "id": "electrician",
+          "subject": "One yellow handheld electrical multimeter with its leads neatly stowed against the case."
+        },
+        {
+          "kind": "jobs",
+          "id": "mechanic",
+          "subject": "One simple silver engine block, no tools or oil can, broad uncluttered shapes."
+        },
+        {
+          "kind": "jobs",
+          "id": "marketing-executive",
+          "subject": "One blue megaphone with a gold rim, without boards or lightbulbs."
+        },
+        {
+          "kind": "jobs",
+          "id": "insurance-adviser",
+          "subject": "One substantial blue and gold shield with a white check inset, no car, house or paperwork."
+        },
+        {
+          "kind": "jobs",
+          "id": "construction-worker",
+          "subject": "One yellow construction hard hat, no vest, bricks or trowel."
+        },
+        {
+          "kind": "jobs",
+          "id": "pet-care-part",
+          "subject": "One purple pet leash neatly coiled, no bowl, brush, ball or animal."
+        },
+        {
+          "kind": "jobs",
+          "id": "lawyer",
+          "subject": "One unified gold balance scale of justice, no books, case or paperwork."
+        },
+        {
+          "kind": "jobs",
+          "id": "paramedic",
+          "subject": "One closed green medical bag with a large white cross, no exposed tools or other supplies."
+        },
+        {
+          "kind": "jobs",
+          "id": "engineer",
+          "subject": "One blue engineering hard hat with a small gold gear emblem inset, no plans or tools."
+        },
+        {
+          "kind": "jobs",
+          "id": "retail",
+          "subject": "One simple blue shop cash register with a gold drawer, no clothing rack or stock."
+        }
+      ],
+      "generated_path": "/workspace/generated_images/exec-96765238-fed1-4c2f-a1bc-0e6defc09214.png",
+      "sha256": "12267c50aa0b42201ff47a5a93928e60babab7c3cbe81162830ec4d65f878629"
+    },
+    {
+      "file": "symbols.png",
+      "rows": 4,
+      "entries": [
+        {
+          "kind": "symbols",
+          "id": "mug",
+          "subject": "One rounded blue ceramic mug, no saucer, calendar or pencil."
+        },
+        {
+          "kind": "symbols",
+          "id": "whistle",
+          "subject": "One gold pet-training whistle, no paw, ribbon or animal."
+        },
+        {
+          "kind": "symbols",
+          "id": "teddy",
+          "subject": "One friendly soft brown teddy bear toy, no blocks or other toys."
+        },
+        {
+          "kind": "symbols",
+          "id": "ball",
+          "subject": "One blue and gold sports ball, large simple panels, no medal, rope or shoes."
+        },
+        {
+          "kind": "symbols",
+          "id": "popcorn",
+          "subject": "One blue and cream carton of popcorn, no tickets, drink or film reel."
+        },
+        {
+          "kind": "symbols",
+          "id": "podium",
+          "subject": "One dignified blue lectern with a gold front panel, no people, flags or extra microphones."
+        },
+        {
+          "kind": "symbols",
+          "id": "telescope",
+          "subject": "One simple blue telescope on its compact tripod, no planets, stars or other equipment."
+        },
+        {
+          "kind": "symbols",
+          "id": "microphone",
+          "subject": "One classic blue handheld microphone with a gold band, no notes or other equipment."
+        },
+        {
+          "kind": "symbols",
+          "id": "dumbbell",
+          "subject": "One rounded blue dumbbell with a short gold grip, no other exercise equipment."
+        },
+        {
+          "kind": "symbols",
+          "id": "film-camera",
+          "subject": "One simple blue movie camera with two integrated reels, no clapperboard, film strips or screen."
+        },
+        {
+          "kind": "symbols",
+          "id": "passport",
+          "subject": "One deep blue closed passport with a simple gold globe emblem inset, no text, tickets or extra items."
+        },
+        {
+          "kind": "symbols",
+          "id": "suitcase",
+          "subject": "One cheerful blue upright travel suitcase with a gold handle and simple wheels, no plane, map or luggage pile."
+        },
+        {
+          "kind": "symbols",
+          "id": "beach-umbrella",
+          "subject": "One blue and gold beach umbrella on a short pole, no sand, sea, chair or landscape."
+        },
+        {
+          "kind": "symbols",
+          "id": "bell",
+          "subject": "One polished gold handbell with a short blue handle, no candles or other objects."
+        },
+        {
+          "kind": "symbols",
+          "id": "throne",
+          "subject": "One simple purple ceremonial throne chair with a gold frame, no second throne, crown or lightning."
+        },
+        {
+          "kind": "symbols",
+          "id": "newspaper",
+          "subject": "One folded cream newspaper with a simple blue front panel and one small coral warning emblem, no legible text, camera or loose symbols."
+        }
+      ],
+      "generated_path": "/workspace/generated_images/exec-e94b5fb4-96a3-4124-87b4-b77ed0405301.png",
+      "sha256": "fffe3bc4bc23761505264d801895aab22c74c7914001b63d66c4deb7844b30db"
+    },
+    {
+      "file": "jobs-extra.png",
+      "columns": 3,
+      "rows": 2,
+      "entries": [
+        {
+          "kind": "jobs",
+          "id": "operations-manager",
+          "subject": "One substantial blue gear with a gold central hub; no clipboard, truck or separate symbols."
+        },
+        {
+          "kind": "jobs",
+          "id": "procurement-officer",
+          "subject": "One closed golden cardboard parcel with a broad blue tape band; no bags, checklist or extra boxes."
+        },
+        {
+          "kind": "jobs",
+          "id": "logistics-coordinator",
+          "subject": "One bold blue location pin with a gold inset, no map, scanner or parcel."
+        },
+        {
+          "kind": "jobs",
+          "id": "postal-worker",
+          "subject": "One cheerful red rounded roadside mailbox with its little flag integrated; no mailbag, loose envelopes or scene."
+        },
+        {
+          "kind": "jobs",
+          "id": "gardener",
+          "subject": "One green watering can with a short gold spout, no plant, trowel, flower or landscape."
+        },
+        {
+          "kind": "jobs",
+          "id": "kitchen-assistant",
+          "subject": "One clean white dinner plate with a blue rim, gentle dimensional shading; no gloves, rack or utensils."
+        }
+      ],
+      "generated_path": "/workspace/generated_images/exec-9b94ac5d-3c2f-453e-a35f-c67fa3b40369.png",
+      "sha256": "cb8b2dd79776184d018c8683e7282f365d0575c9cacd987ce3c0353ca7ea6023"
+    }
+  ]
+}

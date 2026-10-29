@@ -1,0 +1,287 @@
+[
+  {
+    "country": "US",
+    "pointer": "US/result.json#/decisions/4",
+    "date": {
+      "day": 1,
+      "month": 2,
+      "year": 2006
+    },
+    "selectedId": "attend",
+    "phase": "origin",
+    "thread": {
+      "cancellationReason": null,
+      "city": "New York",
+      "communityId": "school_person_player_14_0",
+      "country": "US",
+      "created": {
+        "day": 1,
+        "month": 1,
+        "year": 2006
+      },
+      "dueMonth": 24073,
+      "ended": {
+        "day": 1,
+        "month": 2,
+        "year": 2006
+      },
+      "expiresMonth": 24073,
+      "id": "story_15_0",
+      "kind": "arcade-invitation",
+      "offeredEventId": "story_15_0_due",
+      "originChoiceId": "ask",
+      "originEventId": "event_2006_school-arcade-invitation",
+      "originTemplateId": "school-arcade-invitation",
+      "paidTransactionId": "txn_18_720",
+      "parentId": "person_parent1",
+      "peerId": "person_npc_14_8",
+      "permission": {
+        "accepted": true,
+        "chance": 85,
+        "personId": "person_parent1",
+        "roll": 32,
+        "trustAtRequest": 70
+      },
+      "personId": "person_player",
+      "quote": {
+        "amount": {
+          "$dreamsBigInt": "2000"
+        },
+        "currency": "USD",
+        "payerId": "person_parent1"
+      },
+      "resolution": "attend",
+      "status": "resolved",
+      "teacherId": null
+    },
+    "result": {
+      "body": "You and Jordan take turns at the machines. Avery pays the quoted outing cost. Nobody wins enough tickets to retire.",
+      "effects": [
+        {
+          "id": "payment",
+          "label": "Avery paid",
+          "tone": "neutral",
+          "value": "$20.00"
+        },
+        {
+          "id": "story_1",
+          "label": "Happiness",
+          "tone": "positive",
+          "value": "+5%"
+        },
+        {
+          "id": "story_2",
+          "label": "Energy",
+          "tone": "negative",
+          "value": "-4%"
+        },
+        {
+          "id": "story_3",
+          "label": "Jordan · relationship",
+          "tone": "positive",
+          "value": "+5%"
+        },
+        {
+          "id": "story_4",
+          "label": "Avery · relationship",
+          "tone": "positive",
+          "value": "+2%"
+        }
+      ],
+      "id": "story_15_0_due_result",
+      "illustration": "birthday",
+      "kind": "result",
+      "title": "High score, low dignity"
+    }
+  },
+  {
+    "country": "FR",
+    "pointer": "FR/result.json#/decisions/13",
+    "date": {
+      "day": 1,
+      "month": 3,
+      "year": 2014
+    },
+    "selectedId": "ask-help",
+    "phase": "origin",
+    "thread": {
+      "cancellationReason": null,
+      "city": "Paris",
+      "communityId": "school_person_player_30_1",
+      "country": "FR",
+      "created": {
+        "day": 1,
+        "month": 1,
+        "year": 2014
+      },
+      "dueMonth": 24170,
+      "ended": {
+        "day": 1,
+        "month": 3,
+        "year": 2014
+      },
+      "expiresMonth": 24170,
+      "id": "story_40_0",
+      "kind": "project-promise",
+      "offeredEventId": "story_40_0_due",
+      "originChoiceId": "promise",
+      "originEventId": "event_2014_school-project-promise",
+      "originTemplateId": "school-project-promise",
+      "paidTransactionId": null,
+      "parentId": null,
+      "peerId": "person_npc_16_5",
+      "permission": null,
+      "personId": "person_player",
+      "projectRecall": {
+        "cancellationReason": null,
+        "dueMonth": 24194,
+        "ended": null,
+        "expiresMonth": 24196,
+        "offered": null,
+        "offeredEventId": null,
+        "resolution": null,
+        "status": "scheduled"
+      },
+      "quote": {
+        "amount": {
+          "$dreamsBigInt": "0"
+        },
+        "currency": "EUR",
+        "payerId": null
+      },
+      "rememberProject": true,
+      "resolution": "ask-help",
+      "status": "resolved",
+      "teacherId": "person_npc_30_11"
+    },
+    "result": {
+      "body": "Camille helps you break the work into smaller steps. You complete a shorter section yourself.",
+      "effects": [
+        {
+          "id": "story_0",
+          "label": "Grades",
+          "tone": "positive",
+          "value": "+1%"
+        },
+        {
+          "id": "story_1",
+          "label": "Energy",
+          "tone": "negative",
+          "value": "-3%"
+        },
+        {
+          "id": "story_2",
+          "label": "Gabriel · relationship",
+          "tone": "positive",
+          "value": "+2%"
+        },
+        {
+          "id": "story_3",
+          "label": "Camille · relationship",
+          "tone": "positive",
+          "value": "+2%"
+        },
+        {
+          "id": "story_4",
+          "label": "Camille · trust",
+          "tone": "positive",
+          "value": "+2%"
+        }
+      ],
+      "id": "story_40_0_due_result",
+      "illustration": "education",
+      "kind": "result",
+      "title": "Less staring, more writing"
+    }
+  },
+  {
+    "country": "FR",
+    "pointer": "FR/result.json#/decisions/15",
+    "date": {
+      "day": 1,
+      "month": 3,
+      "year": 2016
+    },
+    "selectedId": "remember-project",
+    "phase": "projectRecall",
+    "thread": {
+      "cancellationReason": null,
+      "city": "Paris",
+      "communityId": "school_person_player_30_1",
+      "country": "FR",
+      "created": {
+        "day": 1,
+        "month": 1,
+        "year": 2014
+      },
+      "dueMonth": 24170,
+      "ended": {
+        "day": 1,
+        "month": 3,
+        "year": 2014
+      },
+      "expiresMonth": 24170,
+      "id": "story_40_0",
+      "kind": "project-promise",
+      "offeredEventId": "story_40_0_due",
+      "originChoiceId": "promise",
+      "originEventId": "event_2014_school-project-promise",
+      "originTemplateId": "school-project-promise",
+      "paidTransactionId": null,
+      "parentId": null,
+      "peerId": "person_npc_16_5",
+      "permission": null,
+      "personId": "person_player",
+      "projectRecall": {
+        "cancellationReason": null,
+        "dueMonth": 24194,
+        "ended": {
+          "day": 1,
+          "month": 3,
+          "year": 2016
+        },
+        "expiresMonth": 24196,
+        "offered": {
+          "day": 1,
+          "month": 3,
+          "year": 2016
+        },
+        "offeredEventId": "story_40_0_project_recall",
+        "resolution": "remember-project",
+        "status": "resolved"
+      },
+      "quote": {
+        "amount": {
+          "$dreamsBigInt": "0"
+        },
+        "currency": "EUR",
+        "payerId": null
+      },
+      "rememberProject": true,
+      "resolution": "ask-help",
+      "status": "resolved",
+      "teacherId": "person_npc_30_11"
+    },
+    "result": {
+      "body": "You acknowledge that you asked for help and completed a shorter section. Gabriel hears you out. A conversation now cannot change the work recorded then.",
+      "effects": [
+        {
+          "id": "project_recall_strength",
+          "label": "Gabriel · relationship",
+          "tone": "positive",
+          "value": "+3%"
+        },
+        {
+          "id": "project_recall_trust",
+          "label": "Gabriel · trust",
+          "tone": "positive",
+          "value": "+2%"
+        }
+      ],
+      "id": "story_40_0_project_recall_result",
+      "illustration": "education",
+      "kind": "result",
+      "title": "An old project, an honest conversation"
+    }
+  }
+]

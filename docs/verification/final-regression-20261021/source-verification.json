@@ -1,0 +1,15 @@
+{
+  "format": "dreams-documentation-source-byte-check-v1",
+  "complete": true,
+  "sourceCommit": "33b6a5fcb0aae73dfc235a15394b34d8afda00cc",
+  "documentationBranchBase": "9ad6330b005e26ed0760c6f29343c5d686680b05",
+  "sourceSnapshot": {
+    "file": "production-finish-source-checkpoint-20261021/074-dreams-production-finish-accepted-source.json",
+    "bytes": 75993,
+    "sha256": "2e08fd925c673437ff7de7c76c0fd79d02832617d0014efc1c3e471782fe9b56"
+  },
+  "expectedSourceFiles": 688,
+  "matchedSourceFiles": 688,
+  "missingOrChanged": [],
+  "scope": "Direct SHA256 comparison of every named688source file against the frozen snapshot in this separate9ad-based documentation worktree. Extra reviewed c49protocol tools and all documentation are outside this named-file equality; this is not a new runtime, source inventory, test or native gate."
+}

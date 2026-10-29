@@ -1,0 +1,36 @@
+{
+  "scope": "Android 24 opening polish; UI source only; no complete-game or device-performance acceptance",
+  "baseCommit": "005219a",
+  "changes": [
+    "Android API 24\u201328 colour-preserving portrait detail fallback",
+    "legible icons on the legacy dark Android status bar",
+    "Viewport-sized welcome hero instead of intrinsic-size cropping",
+    "Compact newborn top spacing so the two-parent Begin Life control fits the checked viewport"
+  ],
+  "source": {
+    "app/index.tsx": "c95eebf7ba92b71c8b626be374f3ee7820f3b996dc319e71b64cae536c92e1d5",
+    "app/birth.tsx": "3686ce0b7638b3bd9643e3e0cc43a7b1964aba97875a93285ace096fd795837e",
+    "src/assets/CharacterPortrait.tsx": "ac18726e567388b0afb4dacb07b18cfd2f8ca65bc1550efaa5f85b261b69c7d6",
+    "src/ui/theme.tsx": "2d9bfee030aee2f57920de8f23605c26a54aa218767cfe0b253bc5bd8e6b53a8"
+  },
+  "verification": {
+    "strictApplicationAndTestTypes": true,
+    "connectedUITests": 14,
+    "suites": 4,
+    "seconds": 3.605,
+    "completeRegression": "The unchanged game source retains the e5a4aaf 1,226-test/80-suite checkpoint; no new whole-suite total is inferred."
+  },
+  "exports": [
+    {
+      "file": "_expo/static/js/android/entry-846738835e8635522fa3ff2ded58601a.hbc",
+      "bytes": 5309816,
+      "sha256": "bc131c1973877e05fcd2586f8ff8d77fdd855f4da2810ce6fb55daf9aad524a6"
+    },
+    {
+      "file": "_expo/static/js/ios/entry-1a7a893cd92f291b66bb235f02a01892.hbc",
+      "bytes": 5004625,
+      "sha256": "7b86b7329cd9760a2df8419689c577faf6d9f796cbbe9bc79bec524d90156754"
+    }
+  ],
+  "unchangedGameAndPersistenceSourceHash": "cca2039afee12cf05ff902cb6fc1ef3228777d90fd498fffdf91c63a381e8d30"
+}

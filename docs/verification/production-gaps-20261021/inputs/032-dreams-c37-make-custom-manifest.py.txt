@@ -1,0 +1,16 @@
+import pathlib,json,hashlib
+base=pathlib.Path('/tmp/dreams-c37-native-captures')
+def pin(p):
+ p=pathlib.Path(p);b=p.read_bytes();return dict(file=str(p),bytes=len(b),sha256=hashlib.sha256(b).hexdigest())
+def db(p):
+ p=pathlib.Path(p)/'dreams.db';w=pathlib.Path(str(p)+'-wal');return dict(main=pin(p),wal=pin(w)if w.exists()else None)
+plan=[('newborn','created',None),('cold-newborn','cold',None),('begun','begin-life',None),('cold-begun','cold',None),('birthday-decision','command',dict(type='advance')),('cold-birthday-decision','cold',None),('birthday-result','command',dict(type='choose',eventId='event_2027_first-bubble-catch',choiceId='watch')),('cold-birthday-result','cold',None),('acknowledged','command',dict(type='acknowledge',resultId='event_2027_first-bubble-catch_result')),('cold-acknowledged','cold',None)]
+phases=[]
+for name,kind,command in plan:
+ d=base/('cold-newborn-completed'if name=='cold-newborn'else name);assert json.loads((d/'capture-log.json').read_bytes())['complete']is True
+ p=dict(id=name,kind=kind,database=db(d/'database'),png=pin(d/'ui.png'),xml=pin(d/'ui.xml'),coordinatorPersonallyViewed=True)
+ if command:p['command']=command
+ if kind=='cold':p.update(sameAs=phases[-1]['id'],coldAttestation=pin(d/'cold-attestation.json'))
+ phases.append(p)
+o=dict(format='dreams-onboarding-native-captures-v1',complete=True,mode='custom',device='Android24 x86_64 software emulator,390x844, Expo Go57; no physical/standalone/iOS claim',scope='Actual single custom Maya Singh creation inChicago withAvatar7, realBeginLife, firstbirthdaybubblewatch choice and separateacknowledgement. Five actualprocess-stop cold reopens. Root personally reviewed all10actualPNG/XML pairs; firstcold observer interrupted duringservice/environmentreconnect and sameactualcold resumed withoutgameplay, as linked in its completeattestation. Original7lives/backups/history mustremainexact. No seed or outcome search; initialcreation seed was not reconstructed.',sourceManifest=pin('/tmp/dreams-production-gaps-native-source.json'),baseline=db('/tmp/dreams-c37-native-precreation-db'),birthCheckpoint=pin(base/'newborn/birth-checkpoint.txt'),phases=phases)
+p=pathlib.Path('/tmp/dreams-c37-custom-captures.json');assert not p.exists();p.write_text(json.dumps(o,indent=2)+'\n');print(p)

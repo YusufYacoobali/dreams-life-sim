@@ -1,0 +1,1219 @@
+{
+  "renderer": "Browser CSS/SVG layout of production RN trees; NOT native screenshots, native routing or device-performance evidence",
+  "normalization": "Only props.source/testUri or SVG src/testUri paths are made relative. Every original node, style, text and value remains identical to its raw React test capture.",
+  "trees": [
+    {
+      "version": "before",
+      "file": "astronaut-requirement-dark-large.json",
+      "renderer": "Production React Native test tree, rendered later with a browser CSS/SVG adapter; not a native screenshot.",
+      "sourceCommit": "3c797e2",
+      "treeSha256": "81f5f464a378672d429b008532ba7cc70e589861fc5aa2113e06d197fa7153cd",
+      "worldSha256": "25ba1a3a3729f253e003766a66a1a90ea9b4fe35f20efddefc5797b317e98baa",
+      "tuple": [
+        48,
+        50,
+        27
+      ],
+      "note": "Existing archived life with explicit fixture preparation for visual coverage, not a natural playthrough or native routing proof.",
+      "portableTreeSha256": "ef333d020a7e686fe4f8c1a8bf125b40e0abfb181ece459cfbbdbf4f934c483b"
+    },
+    {
+      "version": "before",
+      "file": "astronaut-requirement-light.json",
+      "renderer": "Production React Native test tree, rendered later with a browser CSS/SVG adapter; not a native screenshot.",
+      "sourceCommit": "3c797e2",
+      "treeSha256": "d5b04065576b26b77a817298501e54a77880f1da5996cb0bc1dcf5d17652acd6",
+      "worldSha256": "25ba1a3a3729f253e003766a66a1a90ea9b4fe35f20efddefc5797b317e98baa",
+      "tuple": [
+        48,
+        50,
+        27
+      ],
+      "note": "Existing archived life with explicit fixture preparation for visual coverage, not a natural playthrough or native routing proof.",
+      "portableTreeSha256": "4e229c362b9cc6b302e2c781c42220189da9afa7405b60a25e3fc0e119f9bd1c"
+    },
+    {
+      "version": "before",
+      "file": "condition-undiagnosed-dark-large.json",
+      "renderer": "Production React Native test tree, rendered later with a browser CSS/SVG adapter; not a native screenshot.",
+      "sourceCommit": "3c797e2",
+      "treeSha256": "d35404cd320e0cfc3f7031d9e56b94f7a0a47ccd45d716d7ba26a75e200f5209",
+      "worldSha256": "2b58a0ac6f706202f3878f2499b8dedfaae47881cd4aaed34e193c34e50f4719",
+      "tuple": [
+        48,
+        50,
+        27
+      ],
+      "note": "Existing archived life with explicit fixture preparation for visual coverage, not a natural playthrough or native routing proof.",
+      "portableTreeSha256": "859e831f73b117bbefd968aced90eb5b61807e17920f579a82e9cc637ccd31d2"
+    },
+    {
+      "version": "before",
+      "file": "condition-undiagnosed-light.json",
+      "renderer": "Production React Native test tree, rendered later with a browser CSS/SVG adapter; not a native screenshot.",
+      "sourceCommit": "3c797e2",
+      "treeSha256": "668ad33c5b7569ea559e1d1ab2211dfffbc19a201f87875364e6aeb3f1754857",
+      "worldSha256": "2b58a0ac6f706202f3878f2499b8dedfaae47881cd4aaed34e193c34e50f4719",
+      "tuple": [
+        48,
+        50,
+        27
+      ],
+      "note": "Existing archived life with explicit fixture preparation for visual coverage, not a natural playthrough or native routing proof.",
+      "portableTreeSha256": "2dbd40fec1f44149e0279abb15fc18e8f0279b27bc8a505edfe77cde1b95595d"
+    },
+    {
+      "version": "before",
+      "file": "doctor-dark-large.json",
+      "renderer": "Production React Native test tree, rendered later with a browser CSS/SVG adapter; not a native screenshot.",
+      "sourceCommit": "3c797e2",
+      "treeSha256": "1021a74935af5ad16897383675b81fecd4573cbde3c6ea91483ba0eee444e4d9",
+      "worldSha256": "25ba1a3a3729f253e003766a66a1a90ea9b4fe35f20efddefc5797b317e98baa",
+      "tuple": [
+        48,
+        50,
+        27
+      ],
+      "note": "Existing archived life with explicit fixture preparation for visual coverage, not a natural playthrough or native routing proof.",
+      "portableTreeSha256": "d4efeaf4e43a396a3d614db2b885e4cf802afd9fc346a122b872f49cb0b35580"
+    },
+    {
+      "version": "before",
+      "file": "doctor-light.json",
+      "renderer": "Production React Native test tree, rendered later with a browser CSS/SVG adapter; not a native screenshot.",
+      "sourceCommit": "3c797e2",
+      "treeSha256": "ccc0d0c72a3ba43facd7a882e6138d349eda00ca9081c0b622bffd6d3ac02a81",
+      "worldSha256": "25ba1a3a3729f253e003766a66a1a90ea9b4fe35f20efddefc5797b317e98baa",
+      "tuple": [
+        48,
+        50,
+        27
+      ],
+      "note": "Existing archived life with explicit fixture preparation for visual coverage, not a natural playthrough or native routing proof.",
+      "portableTreeSha256": "3509cc1cb800ca911f2a7902d991cefdcdb05e0fe844c18b5a343db189ad377a"
+    },
+    {
+      "version": "before",
+      "file": "family-dark-large.json",
+      "renderer": "Production React Native test tree, rendered later with a browser CSS/SVG adapter; not a native screenshot.",
+      "sourceCommit": "3c797e2",
+      "treeSha256": "1fed29a179dd7eb94c4e1a013e46fc0653dc1d0cecc9f072d1197dd96782131b",
+      "worldSha256": "be7313de47d987a1a5e1332112da27fa5e8e28cfac8d1e266a8e6d8a28ce1dc1",
+      "tuple": [
+        48,
+        50,
+        27
+      ],
+      "note": "Existing archived life with explicit fixture preparation for visual coverage, not a natural playthrough or native routing proof.",
+      "portableTreeSha256": "31f6e3d156f7f47eb5f5b18bf16fdd35f0f9e16f8f4be34fb249293033b6249f"
+    },
+    {
+      "version": "before",
+      "file": "family-light.json",
+      "renderer": "Production React Native test tree, rendered later with a browser CSS/SVG adapter; not a native screenshot.",
+      "sourceCommit": "3c797e2",
+      "treeSha256": "72a56983de92648a1f1d89f0d1c870eb9a347fef44e61696af2e7de2fe6bc41c",
+      "worldSha256": "be7313de47d987a1a5e1332112da27fa5e8e28cfac8d1e266a8e6d8a28ce1dc1",
+      "tuple": [
+        48,
+        50,
+        27
+      ],
+      "note": "Existing archived life with explicit fixture preparation for visual coverage, not a natural playthrough or native routing proof.",
+      "portableTreeSha256": "0980192a416a30d0f9e6242818bedb3e6d29d176cd36dfb63af14d5c8d83497c"
+    },
+    {
+      "version": "before",
+      "file": "family-unavailable-dark-large.json",
+      "renderer": "Production React Native test tree, rendered later with a browser CSS/SVG adapter; not a native screenshot.",
+      "sourceCommit": "3c797e2",
+      "treeSha256": "7b7b49fe7e278f2163956df8b2fd8d2fd403bc934b30abef069ac97ee4614ca3",
+      "worldSha256": "25ba1a3a3729f253e003766a66a1a90ea9b4fe35f20efddefc5797b317e98baa",
+      "tuple": [
+        48,
+        50,
+        27
+      ],
+      "note": "Existing archived life with explicit fixture preparation for visual coverage, not a natural playthrough or native routing proof.",
+      "portableTreeSha256": "b9169ff102cffbce7bc7062254ff4c27ae5e04109f29d955233e0059c7fe3782"
+    },
+    {
+      "version": "before",
+      "file": "family-unavailable-light.json",
+      "renderer": "Production React Native test tree, rendered later with a browser CSS/SVG adapter; not a native screenshot.",
+      "sourceCommit": "3c797e2",
+      "treeSha256": "70dd0e9defb83896ff28a1cd3d8d54cf5a1ab3340d49bfb24eb12bf3d6fe62cb",
+      "worldSha256": "25ba1a3a3729f253e003766a66a1a90ea9b4fe35f20efddefc5797b317e98baa",
+      "tuple": [
+        48,
+        50,
+        27
+      ],
+      "note": "Existing archived life with explicit fixture preparation for visual coverage, not a natural playthrough or native routing proof.",
+      "portableTreeSha256": "69a1ea45f83dc29d06bf7bafff878ddaadbf6136b0d19f06c38ca0a12baba1f7"
+    },
+    {
+      "version": "before",
+      "file": "medical-legacy-dark-large.json",
+      "renderer": "Production React Native test tree, rendered later with a browser CSS/SVG adapter; not a native screenshot.",
+      "sourceCommit": "3c797e2",
+      "treeSha256": "b9b514e9d5aef00f57cabe869a58b8cefbb00917254f7e7d987ad48ba8cab90c",
+      "worldSha256": "3f1bf05c139c2089d11577f6fff6e83be3319c03e2e4232b81d42131232d3217",
+      "tuple": [
+        48,
+        50,
+        27
+      ],
+      "note": "Existing archived life with explicit fixture preparation for visual coverage, not a natural playthrough or native routing proof.",
+      "portableTreeSha256": "9111ac7be1a9bbc56da62efb99ba93620a838eb331e66f950832738d6e2a4f23"
+    },
+    {
+      "version": "before",
+      "file": "medical-legacy-light.json",
+      "renderer": "Production React Native test tree, rendered later with a browser CSS/SVG adapter; not a native screenshot.",
+      "sourceCommit": "3c797e2",
+      "treeSha256": "ee54d01c1467ebcb3b5f4d55ed90e1939d9e36c98e2f4524ce4b31461bf3f63e",
+      "worldSha256": "3f1bf05c139c2089d11577f6fff6e83be3319c03e2e4232b81d42131232d3217",
+      "tuple": [
+        48,
+        50,
+        27
+      ],
+      "note": "Existing archived life with explicit fixture preparation for visual coverage, not a natural playthrough or native routing proof.",
+      "portableTreeSha256": "ea040ca893b57f7782bd48c0b64a913696c06a858e26af1e0ec1fdb2631d7e17"
+    },
+    {
+      "version": "before",
+      "file": "medical-urgent-dark-large.json",
+      "renderer": "Production React Native test tree, rendered later with a browser CSS/SVG adapter; not a native screenshot.",
+      "sourceCommit": "3c797e2",
+      "treeSha256": "2cc91a60983419a818e980e26dae274a64a03f4a8ce132871a0612ab01bcb63f",
+      "worldSha256": "307974ac35ae85ed2a86f7c71e350fe0b9b14d8a48e6628416abdda84da18405",
+      "tuple": [
+        48,
+        50,
+        27
+      ],
+      "note": "Existing archived life with explicit fixture preparation for visual coverage, not a natural playthrough or native routing proof.",
+      "portableTreeSha256": "8aa75325aba4bc8cda3115586ad4fdb816be3d9ff3e1900a4280d411fd4402da"
+    },
+    {
+      "version": "before",
+      "file": "medical-urgent-light.json",
+      "renderer": "Production React Native test tree, rendered later with a browser CSS/SVG adapter; not a native screenshot.",
+      "sourceCommit": "3c797e2",
+      "treeSha256": "bff2640b11df8739432d80e4adfaebd7f57690270e233f20089abde177a9cf60",
+      "worldSha256": "307974ac35ae85ed2a86f7c71e350fe0b9b14d8a48e6628416abdda84da18405",
+      "tuple": [
+        48,
+        50,
+        27
+      ],
+      "note": "Existing archived life with explicit fixture preparation for visual coverage, not a natural playthrough or native routing proof.",
+      "portableTreeSha256": "a91432c701cd7bd6db38a582f76307d0cb60deb3dd2b69bbaab7842420cb098f"
+    },
+    {
+      "version": "before",
+      "file": "partner-discuss-dark-large.json",
+      "renderer": "Production React Native test tree, rendered later with a browser CSS/SVG adapter; not a native screenshot.",
+      "sourceCommit": "3c797e2",
+      "treeSha256": "3f5b61fc4a4fb88c17081e610a9d006fdda30c7b796326cc00e9769a0ec7de43",
+      "worldSha256": "6dd0ba43432eaa75d1be1170388e6f505c9c3baef93df0f87a87273eda771143",
+      "tuple": [
+        48,
+        50,
+        27
+      ],
+      "note": "Existing archived life with explicit fixture preparation for visual coverage, not a natural playthrough or native routing proof.",
+      "portableTreeSha256": "6ca692533139e057b406e9633dccb8e82726dd82975489dfc54c7c9198496603"
+    },
+    {
+      "version": "before",
+      "file": "partner-discuss-light.json",
+      "renderer": "Production React Native test tree, rendered later with a browser CSS/SVG adapter; not a native screenshot.",
+      "sourceCommit": "3c797e2",
+      "treeSha256": "c7acc8fe7003fa10cb5d7b855432ff21ba6ac4979bfa42d1ff8fb599945184c3",
+      "worldSha256": "6dd0ba43432eaa75d1be1170388e6f505c9c3baef93df0f87a87273eda771143",
+      "tuple": [
+        48,
+        50,
+        27
+      ],
+      "note": "Existing archived life with explicit fixture preparation for visual coverage, not a natural playthrough or native routing proof.",
+      "portableTreeSha256": "66dd0e6ccc8de7a013ea04eadd6b494649d0b54e10f9ddddc6a8c8cd083f8b47"
+    },
+    {
+      "version": "before",
+      "file": "partner-ready-dark-large.json",
+      "renderer": "Production React Native test tree, rendered later with a browser CSS/SVG adapter; not a native screenshot.",
+      "sourceCommit": "3c797e2",
+      "treeSha256": "a9aaddbadd600d2f742d57b7528bfc4a532f9bc13bf7577f772e0557c68c2d5d",
+      "worldSha256": "be7313de47d987a1a5e1332112da27fa5e8e28cfac8d1e266a8e6d8a28ce1dc1",
+      "tuple": [
+        48,
+        50,
+        27
+      ],
+      "note": "Existing archived life with explicit fixture preparation for visual coverage, not a natural playthrough or native routing proof.",
+      "portableTreeSha256": "245b47776b01537dc4a4ba00a0c940762f09a3725b375db492eb8a1cc9a1e9fe"
+    },
+    {
+      "version": "before",
+      "file": "partner-ready-light.json",
+      "renderer": "Production React Native test tree, rendered later with a browser CSS/SVG adapter; not a native screenshot.",
+      "sourceCommit": "3c797e2",
+      "treeSha256": "0263c9c7a6dd3db5faf74ec25bcbd51fb777d019f05de18d8b67eca46caebbe2",
+      "worldSha256": "be7313de47d987a1a5e1332112da27fa5e8e28cfac8d1e266a8e6d8a28ce1dc1",
+      "tuple": [
+        48,
+        50,
+        27
+      ],
+      "note": "Existing archived life with explicit fixture preparation for visual coverage, not a natural playthrough or native routing proof.",
+      "portableTreeSha256": "22b630ddc118686416266da95aa069445de0098fe56dd898b19ab7e280d312a6"
+    },
+    {
+      "version": "before",
+      "file": "purchase-confirm-dark-large.json",
+      "renderer": "Production React Native test tree, rendered later with a browser CSS/SVG adapter; not a native screenshot.",
+      "sourceCommit": "3c797e2",
+      "treeSha256": "d38540a6779f74e785a3aebe6caa832ee017e28fcd9c281378229e041c2bbeb3",
+      "worldSha256": "25ba1a3a3729f253e003766a66a1a90ea9b4fe35f20efddefc5797b317e98baa",
+      "tuple": [
+        48,
+        50,
+        27
+      ],
+      "note": "Existing archived life with explicit fixture preparation for visual coverage, not a natural playthrough or native routing proof.",
+      "portableTreeSha256": "cbeac276b2c61d6d04c5ad544bad475af00e15a2fc43c4cbf80c5f6a87d75280"
+    },
+    {
+      "version": "before",
+      "file": "purchase-confirm-light.json",
+      "renderer": "Production React Native test tree, rendered later with a browser CSS/SVG adapter; not a native screenshot.",
+      "sourceCommit": "3c797e2",
+      "treeSha256": "41642c0bf6cc26288f6138a698bca73ed1062f005029f29ec5275a8afcda23d4",
+      "worldSha256": "25ba1a3a3729f253e003766a66a1a90ea9b4fe35f20efddefc5797b317e98baa",
+      "tuple": [
+        48,
+        50,
+        27
+      ],
+      "note": "Existing archived life with explicit fixture preparation for visual coverage, not a natural playthrough or native routing proof.",
+      "portableTreeSha256": "9f633abab2ddb9ff92f3fc387333931d4859a439e6c2e972079f0007f32025d6"
+    },
+    {
+      "version": "before",
+      "file": "purchase-saved-context-dark-large.json",
+      "renderer": "Production React Native test tree, rendered later with a browser CSS/SVG adapter; not a native screenshot.",
+      "sourceCommit": "3c797e2",
+      "treeSha256": "a655c7038fdbfd8ccdef250837c47ebe0cfa09050a818dfc8980289b2d5f9737",
+      "worldSha256": "3ae55eab92919d46e11db20e46e539bb833e65f2f195d1bed2d5427614f7642a",
+      "tuple": [
+        48,
+        50,
+        27
+      ],
+      "note": "Existing archived life with explicit fixture preparation for visual coverage, not a natural playthrough or native routing proof.",
+      "portableTreeSha256": "bb0df0abf43a92052428b046b6d1f0853a03bd110c3080464115e821531e7b84"
+    },
+    {
+      "version": "before",
+      "file": "purchase-saved-context-light.json",
+      "renderer": "Production React Native test tree, rendered later with a browser CSS/SVG adapter; not a native screenshot.",
+      "sourceCommit": "3c797e2",
+      "treeSha256": "a07e1623a6a0a61bd318772d83620ba7a81c7a9702ead39a63548e346f8c4a4c",
+      "worldSha256": "3ae55eab92919d46e11db20e46e539bb833e65f2f195d1bed2d5427614f7642a",
+      "tuple": [
+        48,
+        50,
+        27
+      ],
+      "note": "Existing archived life with explicit fixture preparation for visual coverage, not a natural playthrough or native routing proof.",
+      "portableTreeSha256": "7576dcae004373c1a316cf590455f212e03919f22bc119ba9fb97be58ffc10c8"
+    },
+    {
+      "version": "after",
+      "file": "astronaut-requirement-dark-large.json",
+      "renderer": "Production React Native test tree, rendered later with a browser CSS/SVG adapter; not a native screenshot.",
+      "sourceCommit": "2f872bf",
+      "treeSha256": "e7ee9256eb9e87bac6101647f6cf6962d04055638f2630fceafe6f4dacb5aa4e",
+      "worldSha256": "bbfd93c7c27a55ce43f0b7d84941706daf5cc66d08800097b36f36727c523c75",
+      "tuple": [
+        49,
+        51,
+        28
+      ],
+      "note": "Existing archived life with explicit fixture preparation for visual coverage, not a natural playthrough or native routing proof.",
+      "portableTreeSha256": "8c09e208230a119ff847016da0c68205a08810284fb7341d71dbcd08d8cfdc93"
+    },
+    {
+      "version": "after",
+      "file": "astronaut-requirement-light.json",
+      "renderer": "Production React Native test tree, rendered later with a browser CSS/SVG adapter; not a native screenshot.",
+      "sourceCommit": "2f872bf",
+      "treeSha256": "213e5599be570015e4b07ea12baa8c06c83a4dc58f07a151590f15410684fe43",
+      "worldSha256": "bbfd93c7c27a55ce43f0b7d84941706daf5cc66d08800097b36f36727c523c75",
+      "tuple": [
+        49,
+        51,
+        28
+      ],
+      "note": "Existing archived life with explicit fixture preparation for visual coverage, not a natural playthrough or native routing proof.",
+      "portableTreeSha256": "aeea9f729d22bbb7d7a8b397d4290b8ccb1e6ffe2ad53719b907c421c6c926fa"
+    },
+    {
+      "version": "after",
+      "file": "condition-undiagnosed-dark-large.json",
+      "renderer": "Production React Native test tree, rendered later with a browser CSS/SVG adapter; not a native screenshot.",
+      "sourceCommit": "2f872bf",
+      "treeSha256": "d35404cd320e0cfc3f7031d9e56b94f7a0a47ccd45d716d7ba26a75e200f5209",
+      "worldSha256": "d5c484f3f6b7b69dd25fc052181b3becdf837dc3e4473a7e5eecc1ccc1c5f4ac",
+      "tuple": [
+        49,
+        51,
+        28
+      ],
+      "note": "Existing archived life with explicit fixture preparation for visual coverage, not a natural playthrough or native routing proof.",
+      "portableTreeSha256": "859e831f73b117bbefd968aced90eb5b61807e17920f579a82e9cc637ccd31d2"
+    },
+    {
+      "version": "after",
+      "file": "condition-undiagnosed-light.json",
+      "renderer": "Production React Native test tree, rendered later with a browser CSS/SVG adapter; not a native screenshot.",
+      "sourceCommit": "2f872bf",
+      "treeSha256": "668ad33c5b7569ea559e1d1ab2211dfffbc19a201f87875364e6aeb3f1754857",
+      "worldSha256": "d5c484f3f6b7b69dd25fc052181b3becdf837dc3e4473a7e5eecc1ccc1c5f4ac",
+      "tuple": [
+        49,
+        51,
+        28
+      ],
+      "note": "Existing archived life with explicit fixture preparation for visual coverage, not a natural playthrough or native routing proof.",
+      "portableTreeSha256": "2dbd40fec1f44149e0279abb15fc18e8f0279b27bc8a505edfe77cde1b95595d"
+    },
+    {
+      "version": "after",
+      "file": "doctor-dark-large.json",
+      "renderer": "Production React Native test tree, rendered later with a browser CSS/SVG adapter; not a native screenshot.",
+      "sourceCommit": "2f872bf",
+      "treeSha256": "1021a74935af5ad16897383675b81fecd4573cbde3c6ea91483ba0eee444e4d9",
+      "worldSha256": "bbfd93c7c27a55ce43f0b7d84941706daf5cc66d08800097b36f36727c523c75",
+      "tuple": [
+        49,
+        51,
+        28
+      ],
+      "note": "Existing archived life with explicit fixture preparation for visual coverage, not a natural playthrough or native routing proof.",
+      "portableTreeSha256": "d4efeaf4e43a396a3d614db2b885e4cf802afd9fc346a122b872f49cb0b35580"
+    },
+    {
+      "version": "after",
+      "file": "doctor-light.json",
+      "renderer": "Production React Native test tree, rendered later with a browser CSS/SVG adapter; not a native screenshot.",
+      "sourceCommit": "2f872bf",
+      "treeSha256": "ccc0d0c72a3ba43facd7a882e6138d349eda00ca9081c0b622bffd6d3ac02a81",
+      "worldSha256": "bbfd93c7c27a55ce43f0b7d84941706daf5cc66d08800097b36f36727c523c75",
+      "tuple": [
+        49,
+        51,
+        28
+      ],
+      "note": "Existing archived life with explicit fixture preparation for visual coverage, not a natural playthrough or native routing proof.",
+      "portableTreeSha256": "3509cc1cb800ca911f2a7902d991cefdcdb05e0fe844c18b5a343db189ad377a"
+    },
+    {
+      "version": "after",
+      "file": "family-dark-large.json",
+      "renderer": "Production React Native test tree, rendered later with a browser CSS/SVG adapter; not a native screenshot.",
+      "sourceCommit": "2f872bf",
+      "treeSha256": "4f4da6d0351afc59ee4a24f2aefd99bcf30f93d03921b58cb8ec34cc3d466c0d",
+      "worldSha256": "526524dd35a90ffb3fc6f0c38aedd772549f5091c3d31dd140a3a2ccb3d941b8",
+      "tuple": [
+        49,
+        51,
+        28
+      ],
+      "note": "Existing archived life with explicit fixture preparation for visual coverage, not a natural playthrough or native routing proof.",
+      "portableTreeSha256": "929b2ee89b052b4ff80a2f6f4754302431257ade9994648b434b6970643977ca"
+    },
+    {
+      "version": "after",
+      "file": "family-light.json",
+      "renderer": "Production React Native test tree, rendered later with a browser CSS/SVG adapter; not a native screenshot.",
+      "sourceCommit": "2f872bf",
+      "treeSha256": "8222c6ff6e4551ae52d3547252c08d5a8626902462bcd8bc4378bf06de15e760",
+      "worldSha256": "526524dd35a90ffb3fc6f0c38aedd772549f5091c3d31dd140a3a2ccb3d941b8",
+      "tuple": [
+        49,
+        51,
+        28
+      ],
+      "note": "Existing archived life with explicit fixture preparation for visual coverage, not a natural playthrough or native routing proof.",
+      "portableTreeSha256": "420cfb2f87d89322566fad7e68dc9290976072707efd056ba45082add889b88c"
+    },
+    {
+      "version": "after",
+      "file": "family-unavailable-dark-large.json",
+      "renderer": "Production React Native test tree, rendered later with a browser CSS/SVG adapter; not a native screenshot.",
+      "sourceCommit": "2f872bf",
+      "treeSha256": "8b1dafa4cdf5fe669d9f7c0f613bdff5b2e27ef023c8af3324c4e4c96f23e440",
+      "worldSha256": "bbfd93c7c27a55ce43f0b7d84941706daf5cc66d08800097b36f36727c523c75",
+      "tuple": [
+        49,
+        51,
+        28
+      ],
+      "note": "Existing archived life with explicit fixture preparation for visual coverage, not a natural playthrough or native routing proof.",
+      "portableTreeSha256": "65e5ca28a8476c1ce12072e3a8cf30c261b984dca5239903407744d34c0bf256"
+    },
+    {
+      "version": "after",
+      "file": "family-unavailable-light.json",
+      "renderer": "Production React Native test tree, rendered later with a browser CSS/SVG adapter; not a native screenshot.",
+      "sourceCommit": "2f872bf",
+      "treeSha256": "df52ac064b8cc7406a419f4e333dd42d8016bdd895376e79efc98d672831c962",
+      "worldSha256": "bbfd93c7c27a55ce43f0b7d84941706daf5cc66d08800097b36f36727c523c75",
+      "tuple": [
+        49,
+        51,
+        28
+      ],
+      "note": "Existing archived life with explicit fixture preparation for visual coverage, not a natural playthrough or native routing proof.",
+      "portableTreeSha256": "fc1f3caca022141cbdb8f501e685f0b011b180b8bc4b3f951de95afd0884d944"
+    },
+    {
+      "version": "after",
+      "file": "medical-diagnosis-dark-large.json",
+      "renderer": "Production React Native test tree, rendered later with a browser CSS/SVG adapter; not a native screenshot.",
+      "sourceCommit": "2f872bf",
+      "treeSha256": "60b286b6f34f1b0781d68ff26ba169b9c7b9af3510b5f7a0e5862d5fd6cb3f85",
+      "worldSha256": "8bf945c78f58990886670eabfa37de0b372b94f2785e501677bfecf8ea36df38",
+      "tuple": [
+        49,
+        51,
+        28
+      ],
+      "note": "Existing archived life with explicit fixture preparation for visual coverage, not a natural playthrough or native routing proof.",
+      "portableTreeSha256": "a339e89e23cb37cf7c55f037a5232363be300c923a47696d7a0b6acc6f5b6276"
+    },
+    {
+      "version": "after",
+      "file": "medical-diagnosis-light.json",
+      "renderer": "Production React Native test tree, rendered later with a browser CSS/SVG adapter; not a native screenshot.",
+      "sourceCommit": "2f872bf",
+      "treeSha256": "a8da011b6419d0e678b34250ab039e58e43549bed1c6243450c589fe1b489f94",
+      "worldSha256": "8bf945c78f58990886670eabfa37de0b372b94f2785e501677bfecf8ea36df38",
+      "tuple": [
+        49,
+        51,
+        28
+      ],
+      "note": "Existing archived life with explicit fixture preparation for visual coverage, not a natural playthrough or native routing proof.",
+      "portableTreeSha256": "f04ebeee8fd220884779ec4645faf6360748e898da96852d79060424657fe4a6"
+    },
+    {
+      "version": "after",
+      "file": "medical-legacy-dark-large.json",
+      "renderer": "Production React Native test tree, rendered later with a browser CSS/SVG adapter; not a native screenshot.",
+      "sourceCommit": "2f872bf",
+      "treeSha256": "ef745e37b61f29b43cdfb5e065e5457eb4b637b573e06619369d599c78c422df",
+      "worldSha256": "85c83fa18bd8dc81b820fca5fe7794227370b96a3641738595f8c7c30c4e9110",
+      "tuple": [
+        49,
+        51,
+        28
+      ],
+      "note": "Existing archived life with explicit fixture preparation for visual coverage, not a natural playthrough or native routing proof.",
+      "portableTreeSha256": "04cc1c67acf3741512b3314c212d20992398726a5b796b3c6e88a11e570ecb47"
+    },
+    {
+      "version": "after",
+      "file": "medical-legacy-light.json",
+      "renderer": "Production React Native test tree, rendered later with a browser CSS/SVG adapter; not a native screenshot.",
+      "sourceCommit": "2f872bf",
+      "treeSha256": "682ddbd6883cbcca0e7059f54110e0e3ceaeeac74091da8ed9f64a7b11fbbea7",
+      "worldSha256": "85c83fa18bd8dc81b820fca5fe7794227370b96a3641738595f8c7c30c4e9110",
+      "tuple": [
+        49,
+        51,
+        28
+      ],
+      "note": "Existing archived life with explicit fixture preparation for visual coverage, not a natural playthrough or native routing proof.",
+      "portableTreeSha256": "2c15bad5ec42c79bca89998125e8375a54b622a276c2ef44889effa10be3efc8"
+    },
+    {
+      "version": "after",
+      "file": "medical-symptoms-dark-large.json",
+      "renderer": "Production React Native test tree, rendered later with a browser CSS/SVG adapter; not a native screenshot.",
+      "sourceCommit": "2f872bf",
+      "treeSha256": "dff3e38ebd4aae1759d404a7c0d3a200b7f71ff005c4e445e216d6d500410da4",
+      "worldSha256": "967206b32407a05412ddf0091988c1d56fe4e2efdf6ae9657968ce14f5b4b093",
+      "tuple": [
+        49,
+        51,
+        28
+      ],
+      "note": "Existing archived life with explicit fixture preparation for visual coverage, not a natural playthrough or native routing proof.",
+      "portableTreeSha256": "a0067de781b1db0656f9b990b7c315d99321383ba2e8bf6d43f41a8885212ef8"
+    },
+    {
+      "version": "after",
+      "file": "medical-symptoms-light.json",
+      "renderer": "Production React Native test tree, rendered later with a browser CSS/SVG adapter; not a native screenshot.",
+      "sourceCommit": "2f872bf",
+      "treeSha256": "bcdc2aa544e0750e18786300b945f91cb7eacc7aa70cf76c467d9bc6094776e3",
+      "worldSha256": "967206b32407a05412ddf0091988c1d56fe4e2efdf6ae9657968ce14f5b4b093",
+      "tuple": [
+        49,
+        51,
+        28
+      ],
+      "note": "Existing archived life with explicit fixture preparation for visual coverage, not a natural playthrough or native routing proof.",
+      "portableTreeSha256": "acbe437430fd629c8f9a958827936cc9329c3cec1fc1256daaa51bc10aaec85b"
+    },
+    {
+      "version": "after",
+      "file": "medical-treatment-dark-large.json",
+      "renderer": "Production React Native test tree, rendered later with a browser CSS/SVG adapter; not a native screenshot.",
+      "sourceCommit": "2f872bf",
+      "treeSha256": "93d8beaffae09188846ce5b77581ab43daf115d131381ffc0bf87c6691ae04fd",
+      "worldSha256": "86504ad72f9973e50e8cd5f3679f9345f1b447ed7cea8826fd9f2c5606c9878e",
+      "tuple": [
+        49,
+        51,
+        28
+      ],
+      "note": "Existing archived life with explicit fixture preparation for visual coverage, not a natural playthrough or native routing proof.",
+      "portableTreeSha256": "595b4c3bc38928db54678c5117a1574ad8afbcbcd919ad75229bed2d18862e3f"
+    },
+    {
+      "version": "after",
+      "file": "medical-treatment-light.json",
+      "renderer": "Production React Native test tree, rendered later with a browser CSS/SVG adapter; not a native screenshot.",
+      "sourceCommit": "2f872bf",
+      "treeSha256": "53dc88e430874b8db88d5aeff4ab5b7a1cc92e51daf036596e86fea7143f802c",
+      "worldSha256": "86504ad72f9973e50e8cd5f3679f9345f1b447ed7cea8826fd9f2c5606c9878e",
+      "tuple": [
+        49,
+        51,
+        28
+      ],
+      "note": "Existing archived life with explicit fixture preparation for visual coverage, not a natural playthrough or native routing proof.",
+      "portableTreeSha256": "884e33e1fae57dd7ba5279d0e98542262f5015eb31b9361b1ebd20468d7b764b"
+    },
+    {
+      "version": "after",
+      "file": "medical-urgent-dark-large.json",
+      "renderer": "Production React Native test tree, rendered later with a browser CSS/SVG adapter; not a native screenshot.",
+      "sourceCommit": "2f872bf",
+      "treeSha256": "688a9fd6b1847e12d66bd669de378d28cd6d9c889444671e893a6a4bc1e197bc",
+      "worldSha256": "d8f13711c1bc2d9c583d043cb490d241f763c7caaa6cef86bf518ce6675354ef",
+      "tuple": [
+        49,
+        51,
+        28
+      ],
+      "note": "Existing archived life with explicit fixture preparation for visual coverage, not a natural playthrough or native routing proof.",
+      "portableTreeSha256": "46df4b4612ef116029a4ef47b8628a72ad30d6abd08b22380997e45ae1588746"
+    },
+    {
+      "version": "after",
+      "file": "medical-urgent-light.json",
+      "renderer": "Production React Native test tree, rendered later with a browser CSS/SVG adapter; not a native screenshot.",
+      "sourceCommit": "2f872bf",
+      "treeSha256": "7983cd3c6a3aefc070d0a7efdc606877ea7ac85cf4a6297e0837c1ba5a32d1e6",
+      "worldSha256": "d8f13711c1bc2d9c583d043cb490d241f763c7caaa6cef86bf518ce6675354ef",
+      "tuple": [
+        49,
+        51,
+        28
+      ],
+      "note": "Existing archived life with explicit fixture preparation for visual coverage, not a natural playthrough or native routing proof.",
+      "portableTreeSha256": "dcfd3c6ffb447289afe94776112f1d361a3a30071b4163472777aa45b2551fe4"
+    },
+    {
+      "version": "after",
+      "file": "partner-discuss-dark-large.json",
+      "renderer": "Production React Native test tree, rendered later with a browser CSS/SVG adapter; not a native screenshot.",
+      "sourceCommit": "2f872bf",
+      "treeSha256": "cd854a98985b6c6e892ecfd43da3c7adccd65ba424d2a65ec3d3684012811d8c",
+      "worldSha256": "992a77ec32a0be2790292d890c6f6b1e2d3cd6be67531bb262ca5eb73fd6e35c",
+      "tuple": [
+        49,
+        51,
+        28
+      ],
+      "note": "Existing archived life with explicit fixture preparation for visual coverage, not a natural playthrough or native routing proof.",
+      "portableTreeSha256": "94d5273075247b28151daf91e5d769ba87f76b45db869b4443a21466e47c0f58"
+    },
+    {
+      "version": "after",
+      "file": "partner-discuss-light.json",
+      "renderer": "Production React Native test tree, rendered later with a browser CSS/SVG adapter; not a native screenshot.",
+      "sourceCommit": "2f872bf",
+      "treeSha256": "78a7e0400dd52ec7adbe3be98e9897b3fd29e5ba4af3362f668741c4fec99e58",
+      "worldSha256": "992a77ec32a0be2790292d890c6f6b1e2d3cd6be67531bb262ca5eb73fd6e35c",
+      "tuple": [
+        49,
+        51,
+        28
+      ],
+      "note": "Existing archived life with explicit fixture preparation for visual coverage, not a natural playthrough or native routing proof.",
+      "portableTreeSha256": "ea7fb0b2144010b5d2b635d3d3a33d2db5e780a002e84c097fa537e76a193cd7"
+    },
+    {
+      "version": "after",
+      "file": "partner-ready-dark-large.json",
+      "renderer": "Production React Native test tree, rendered later with a browser CSS/SVG adapter; not a native screenshot.",
+      "sourceCommit": "2f872bf",
+      "treeSha256": "3c39102de1fc6fa871b1fc91b3b05adfd26c5ad26245a9e8b696f6308a63d2ee",
+      "worldSha256": "526524dd35a90ffb3fc6f0c38aedd772549f5091c3d31dd140a3a2ccb3d941b8",
+      "tuple": [
+        49,
+        51,
+        28
+      ],
+      "note": "Existing archived life with explicit fixture preparation for visual coverage, not a natural playthrough or native routing proof.",
+      "portableTreeSha256": "9365153278c41c1d73affac25589cfcf94c141279e3c35f5828c479bf0f1d866"
+    },
+    {
+      "version": "after",
+      "file": "partner-ready-light.json",
+      "renderer": "Production React Native test tree, rendered later with a browser CSS/SVG adapter; not a native screenshot.",
+      "sourceCommit": "2f872bf",
+      "treeSha256": "1092a077cc3ee3ffa3054a11b481b1f88fba4cc2516ac60305a94c679ac8bc4b",
+      "worldSha256": "526524dd35a90ffb3fc6f0c38aedd772549f5091c3d31dd140a3a2ccb3d941b8",
+      "tuple": [
+        49,
+        51,
+        28
+      ],
+      "note": "Existing archived life with explicit fixture preparation for visual coverage, not a natural playthrough or native routing proof.",
+      "portableTreeSha256": "122bbfd66d86619eabc7c14ab347864773ea60c0e93b2c321a37671a2d3c6953"
+    },
+    {
+      "version": "after",
+      "file": "purchase-confirm-dark-large.json",
+      "renderer": "Production React Native test tree, rendered later with a browser CSS/SVG adapter; not a native screenshot.",
+      "sourceCommit": "2f872bf",
+      "treeSha256": "d38540a6779f74e785a3aebe6caa832ee017e28fcd9c281378229e041c2bbeb3",
+      "worldSha256": "bbfd93c7c27a55ce43f0b7d84941706daf5cc66d08800097b36f36727c523c75",
+      "tuple": [
+        49,
+        51,
+        28
+      ],
+      "note": "Existing archived life with explicit fixture preparation for visual coverage, not a natural playthrough or native routing proof.",
+      "portableTreeSha256": "cbeac276b2c61d6d04c5ad544bad475af00e15a2fc43c4cbf80c5f6a87d75280"
+    },
+    {
+      "version": "after",
+      "file": "purchase-confirm-light.json",
+      "renderer": "Production React Native test tree, rendered later with a browser CSS/SVG adapter; not a native screenshot.",
+      "sourceCommit": "2f872bf",
+      "treeSha256": "41642c0bf6cc26288f6138a698bca73ed1062f005029f29ec5275a8afcda23d4",
+      "worldSha256": "bbfd93c7c27a55ce43f0b7d84941706daf5cc66d08800097b36f36727c523c75",
+      "tuple": [
+        49,
+        51,
+        28
+      ],
+      "note": "Existing archived life with explicit fixture preparation for visual coverage, not a natural playthrough or native routing proof.",
+      "portableTreeSha256": "9f633abab2ddb9ff92f3fc387333931d4859a439e6c2e972079f0007f32025d6"
+    },
+    {
+      "version": "after",
+      "file": "purchase-saved-context-dark-large.json",
+      "renderer": "Production React Native test tree, rendered later with a browser CSS/SVG adapter; not a native screenshot.",
+      "sourceCommit": "2f872bf",
+      "treeSha256": "1e1d1040150b665835099cff83394592073e03f756de24ff13fe109d073b2d5d",
+      "worldSha256": "fd2226ff49d6a0b3a340cce7821f3d8204f64fec12fe242d6784a621b1484bb5",
+      "tuple": [
+        49,
+        51,
+        28
+      ],
+      "note": "Existing archived life with explicit fixture preparation for visual coverage, not a natural playthrough or native routing proof.",
+      "portableTreeSha256": "6e1675cb9bcaae4812ee650d09be56ca0095e29d9121521d2e2a9fcb2bb19fbd"
+    },
+    {
+      "version": "after",
+      "file": "purchase-saved-context-light.json",
+      "renderer": "Production React Native test tree, rendered later with a browser CSS/SVG adapter; not a native screenshot.",
+      "sourceCommit": "2f872bf",
+      "treeSha256": "e3ccf55bf265f4cc08fc04049877a8a0d86ce9103233ac21b8297674612cfee0",
+      "worldSha256": "fd2226ff49d6a0b3a340cce7821f3d8204f64fec12fe242d6784a621b1484bb5",
+      "tuple": [
+        49,
+        51,
+        28
+      ],
+      "note": "Existing archived life with explicit fixture preparation for visual coverage, not a natural playthrough or native routing proof.",
+      "portableTreeSha256": "a21e16193b6c8adf9cfb873b5ba48fca356b22380743249ba0eb285f8ed7fc82"
+    }
+  ],
+  "images": [
+    {
+      "file": "astronaut-requirement-dark-large.png",
+      "bytes": 191769,
+      "sha256": "8e198db9317b753e9f825715cbe54957ad5c20d40d0b6d146b829aa193f7e988",
+      "width": 1704,
+      "height": 1926
+    },
+    {
+      "file": "astronaut-requirement-dark-large-bottom.png",
+      "bytes": 278773,
+      "sha256": "79593a2186a47792cd1802f9dd2f71ad9c82e24ca805be4aff73f45e3f9c6ff1",
+      "width": 1704,
+      "height": 1926
+    },
+    {
+      "file": "astronaut-requirement-light.png",
+      "bytes": 223372,
+      "sha256": "bc798161f2a562aec042a1720a43dfc711dfb1c1179d21662ae4be6234416623",
+      "width": 1704,
+      "height": 1926
+    },
+    {
+      "file": "astronaut-requirement-light-bottom.png",
+      "bytes": 308814,
+      "sha256": "55693446eb2ca7655a31416689b3148600f9857cbce015623e21f342f64a77d0",
+      "width": 1704,
+      "height": 1926
+    },
+    {
+      "file": "condition-undiagnosed-dark-large.png",
+      "bytes": 173624,
+      "sha256": "35e34240ef5d97de688942430f54b6a4e6a8e9db0033a5bd6665d03b3046a65b",
+      "width": 1704,
+      "height": 1926
+    },
+    {
+      "file": "condition-undiagnosed-dark-large-bottom.png",
+      "bytes": 161667,
+      "sha256": "96a8ef13d0c77dbf173a5152b7146fc0882cb539fbc9132a2abb965d03221b55",
+      "width": 1704,
+      "height": 1926
+    },
+    {
+      "file": "condition-undiagnosed-light.png",
+      "bytes": 161361,
+      "sha256": "8377e7a923fc07f3c6e79a89fa73dea11d9190584565fed7b35f79416ed63ece",
+      "width": 1704,
+      "height": 1926
+    },
+    {
+      "file": "condition-undiagnosed-light-bottom.png",
+      "bytes": 161361,
+      "sha256": "8377e7a923fc07f3c6e79a89fa73dea11d9190584565fed7b35f79416ed63ece",
+      "width": 1704,
+      "height": 1926
+    },
+    {
+      "file": "doctor-dark-large.png",
+      "bytes": 176304,
+      "sha256": "185708f5e926cbd50b28a272433c40b5c1233f640d6aba94a50756bb6b149456",
+      "width": 1704,
+      "height": 1926
+    },
+    {
+      "file": "doctor-dark-large-bottom.png",
+      "bytes": 159357,
+      "sha256": "dc8e37c3312806e708f5db4d63d394ed3a8d3726fa98bb49873d39bcadb94a3d",
+      "width": 1704,
+      "height": 1926
+    },
+    {
+      "file": "doctor-light.png",
+      "bytes": 230741,
+      "sha256": "c584c1638b3e66e1ae69ac0f0fd967bd1f0b9bf26a0a4d3c103af49b11c02892",
+      "width": 1704,
+      "height": 1926
+    },
+    {
+      "file": "doctor-light-bottom.png",
+      "bytes": 196326,
+      "sha256": "190ec7eb5216518066a3862409fc34cad54c0c0ef9f25c659975f1999636eb1b",
+      "width": 1704,
+      "height": 1926
+    },
+    {
+      "file": "family-dark-large.png",
+      "bytes": 225156,
+      "sha256": "9bf56d3c5faaf88c01e81fc7c41088d72ae8ab345cbb528029224ea4c82eda87",
+      "width": 1704,
+      "height": 1926
+    },
+    {
+      "file": "family-dark-large-bottom.png",
+      "bytes": 133429,
+      "sha256": "60bea8f341e87dda639b78b65692af1a4ba3d3d7a12acfa78dd29c0f17e3ed25",
+      "width": 1704,
+      "height": 1926
+    },
+    {
+      "file": "family-light.png",
+      "bytes": 332569,
+      "sha256": "36710fa7edddcf773c4907d7a03302583e0370542e9433fcecd2d4409c5fef8b",
+      "width": 1704,
+      "height": 1926
+    },
+    {
+      "file": "family-light-bottom.png",
+      "bytes": 246817,
+      "sha256": "67d5a6cc6c75460d2d64ae29e23280b6c03ae0975e64a914e7196f90e1cf5ba2",
+      "width": 1704,
+      "height": 1926
+    },
+    {
+      "file": "family-unavailable-dark-large.png",
+      "bytes": 177291,
+      "sha256": "e4dfe5176c9ae1a7093881dcd5014f4e00824a34cbf691a7ee19bdfc2da7e04f",
+      "width": 1704,
+      "height": 1926
+    },
+    {
+      "file": "family-unavailable-dark-large-bottom.png",
+      "bytes": 137638,
+      "sha256": "1bd402e9ef1a37b599ca23281a0986b255cdb89c2d583ad535e8940aec19e1eb",
+      "width": 1704,
+      "height": 1926
+    },
+    {
+      "file": "family-unavailable-light.png",
+      "bytes": 291088,
+      "sha256": "76662d03b8b5fc97f94d484d1fde4b46cfd6995b63936e8b69bb0cfff1e3f38c",
+      "width": 1704,
+      "height": 1926
+    },
+    {
+      "file": "family-unavailable-light-bottom.png",
+      "bytes": 241088,
+      "sha256": "eed620d95bfcdc883fd7b1ee71437d77c03eacc78515f861c77f498c236380e0",
+      "width": 1704,
+      "height": 1926
+    },
+    {
+      "file": "medical-diagnosis-dark-large.png",
+      "bytes": 171363,
+      "sha256": "d29780fa7ea534b922dd17619ac84a3e44d424544ecb8aafd414c34361aeca55",
+      "width": 1704,
+      "height": 1926
+    },
+    {
+      "file": "medical-diagnosis-dark-large-bottom.png",
+      "bytes": 142332,
+      "sha256": "9292f5f06bb4062835edcc63c146f803cc78f65487cdd3ccf33693a10e145eca",
+      "width": 1704,
+      "height": 1926
+    },
+    {
+      "file": "medical-diagnosis-light.png",
+      "bytes": 187095,
+      "sha256": "edcef71cadd0f6b4ecc1e64cba08bcd3c0e4c977e564702b107caa7439a93f8d",
+      "width": 1704,
+      "height": 1926
+    },
+    {
+      "file": "medical-diagnosis-light-bottom.png",
+      "bytes": 144691,
+      "sha256": "942dbe2daa0cb60587cbcff06a94630e5829fb2c1f9ab4a4aeb6b0d7242aecde",
+      "width": 1704,
+      "height": 1926
+    },
+    {
+      "file": "medical-legacy-dark-large.png",
+      "bytes": 158017,
+      "sha256": "092feacd98f1b33c9aa38d6fc8ff4f8a9f0cf03c27c1c3b92a0fe5304a267f12",
+      "width": 1704,
+      "height": 1926
+    },
+    {
+      "file": "medical-legacy-dark-large-bottom.png",
+      "bytes": 142551,
+      "sha256": "cbba733611f6e0f901e4d56a39a6925decbcd262591929a90b9cad9530e3cf65",
+      "width": 1704,
+      "height": 1926
+    },
+    {
+      "file": "medical-legacy-light.png",
+      "bytes": 220413,
+      "sha256": "287cd6e7afe350c7c0de0fa28fc3d5241b4d665fcf75586a8c7379f0109fb420",
+      "width": 1704,
+      "height": 1926
+    },
+    {
+      "file": "medical-legacy-light-bottom.png",
+      "bytes": 181979,
+      "sha256": "70ada5b8bac5a8f86e6e938e4c2b1f697dfe824256d59a1f71c73946cd837d49",
+      "width": 1704,
+      "height": 1926
+    },
+    {
+      "file": "medical-symptoms-dark-large.png",
+      "bytes": 161176,
+      "sha256": "41fabbf5429a00e7932b512004a5e8cc7e30a9744b5ec2c8b9779b92f3350c16",
+      "width": 1704,
+      "height": 1926
+    },
+    {
+      "file": "medical-symptoms-dark-large-bottom.png",
+      "bytes": 144481,
+      "sha256": "87076b463d11e5324e523f7d24fe881cfa4c78e52ca5065a838a5833ea72ab84",
+      "width": 1704,
+      "height": 1926
+    },
+    {
+      "file": "medical-symptoms-light.png",
+      "bytes": 194570,
+      "sha256": "0e978baad8a6e65641252bf3d53eb57e349ccf7a982f373569a6fc80d1f17a3f",
+      "width": 1704,
+      "height": 1926
+    },
+    {
+      "file": "medical-symptoms-light-bottom.png",
+      "bytes": 155441,
+      "sha256": "48bf21b493eb7269724657dc089fb845ea9e2a1f26e01567c03d568f1d5370c2",
+      "width": 1704,
+      "height": 1926
+    },
+    {
+      "file": "medical-treatment-dark-large.png",
+      "bytes": 161273,
+      "sha256": "096e5ee7b3bb52aa9fb1b75f849dfbfb3664dc2bc0e178efad0404b02fd0a1e3",
+      "width": 1704,
+      "height": 1926
+    },
+    {
+      "file": "medical-treatment-dark-large-bottom.png",
+      "bytes": 127008,
+      "sha256": "afb3049d1ebe56e9469a4aad404c7cb84522c89a425550585e2ba495e714693b",
+      "width": 1704,
+      "height": 1926
+    },
+    {
+      "file": "medical-treatment-light.png",
+      "bytes": 191288,
+      "sha256": "809cc26853c19409af6c487fb402ee942e5b04c20a676092aa3fbb39b5f92bb7",
+      "width": 1704,
+      "height": 1926
+    },
+    {
+      "file": "medical-treatment-light-bottom.png",
+      "bytes": 144886,
+      "sha256": "6fa3a32f6b889cd0a896a290ac8c8756011453cd702291b4d2c51990b05b2f1f",
+      "width": 1704,
+      "height": 1926
+    },
+    {
+      "file": "medical-urgent-dark-large.png",
+      "bytes": 246324,
+      "sha256": "a499d061f95aa17b39650ac14284a440f360e0c3e4c0c57d900f99df7cc33c63",
+      "width": 1704,
+      "height": 1926
+    },
+    {
+      "file": "medical-urgent-dark-large-bottom.png",
+      "bytes": 201608,
+      "sha256": "a7f90ff9f4b86eb354a10a9161e10e342f52aea272a1dafb62edb0127279e6c5",
+      "width": 1704,
+      "height": 1926
+    },
+    {
+      "file": "medical-urgent-light.png",
+      "bytes": 366955,
+      "sha256": "ca5868b3d8c282b4872d158325c52f7bd76d97baa4231461b9a4e252e5a06a2d",
+      "width": 1704,
+      "height": 1926
+    },
+    {
+      "file": "medical-urgent-light-bottom.png",
+      "bytes": 265483,
+      "sha256": "754a4d074abc9905cbd863ac9b0204a3c89b990204ab32acf6c90fd447d4e720",
+      "width": 1704,
+      "height": 1926
+    },
+    {
+      "file": "partner-discuss-dark-large.png",
+      "bytes": 172773,
+      "sha256": "fb95e009a7c6de282e7ad8a178755c1a2feb51283ac67afed5c1956111451aba",
+      "width": 1704,
+      "height": 1926
+    },
+    {
+      "file": "partner-discuss-dark-large-baby-actions.png",
+      "bytes": 294155,
+      "sha256": "4824f67606352454aa08d7e9d8e94dfdb05abc0b6beec4a4245286092e7cc645",
+      "width": 1704,
+      "height": 1926
+    },
+    {
+      "file": "partner-discuss-dark-large-bottom.png",
+      "bytes": 285303,
+      "sha256": "22b2f48d7e21825e91159749331cc8f40bfe7a13be17b1bbd5a6f8aa4e4fc9ce",
+      "width": 1704,
+      "height": 1926
+    },
+    {
+      "file": "partner-discuss-light.png",
+      "bytes": 236968,
+      "sha256": "73759789e3aeddcc83e52e18eecee2038e61cc286f1a9d721cee4f447da7ac5b",
+      "width": 1704,
+      "height": 1926
+    },
+    {
+      "file": "partner-discuss-light-baby-actions.png",
+      "bytes": 282617,
+      "sha256": "1a3727d69dda59511f7233b73a2f6a016322563acf26afb1f46e1f88e162bb09",
+      "width": 1704,
+      "height": 1926
+    },
+    {
+      "file": "partner-discuss-light-bottom.png",
+      "bytes": 290417,
+      "sha256": "00b4d4b2de05f44b3aabc690ece5e6ed7c1b419225bfd7af295fdac81cdb1416",
+      "width": 1704,
+      "height": 1926
+    },
+    {
+      "file": "partner-ready-dark-large.png",
+      "bytes": 172094,
+      "sha256": "c19b0b10dfcb02e62752175c0e0eeb21bcbb040d6f7766b08fbad08e43b9f9de",
+      "width": 1704,
+      "height": 1926
+    },
+    {
+      "file": "partner-ready-dark-large-baby-actions.png",
+      "bytes": 299597,
+      "sha256": "d0dfaa3d95830562bb8fd96c0326f47ee3a01a14d8ce0ba4daae544ca88bc1a7",
+      "width": 1704,
+      "height": 1926
+    },
+    {
+      "file": "partner-ready-dark-large-bottom.png",
+      "bytes": 284723,
+      "sha256": "8cc3637248a59bb4942d0117d6207997167e19fb0a2665ca0d505c19b8611262",
+      "width": 1704,
+      "height": 1926
+    },
+    {
+      "file": "partner-ready-light.png",
+      "bytes": 236250,
+      "sha256": "8a95781cfd1a08afc8e39c4e0ba7594e342bd23d8fe1d8e6422d0cb4ed1f18d7",
+      "width": 1704,
+      "height": 1926
+    },
+    {
+      "file": "partner-ready-light-baby-actions.png",
+      "bytes": 292004,
+      "sha256": "a3998d1cee47b28ac367bc23cdef9fd1f0cb03bd0dcd98c6b0464384b829395d",
+      "width": 1704,
+      "height": 1926
+    },
+    {
+      "file": "partner-ready-light-bottom.png",
+      "bytes": 289583,
+      "sha256": "d89ad1e841e0e394bc71c5587b970ef3e3ee521baf7b2416713c10ba0f4cf8f1",
+      "width": 1704,
+      "height": 1926
+    },
+    {
+      "file": "purchase-confirm-dark-large.png",
+      "bytes": 276067,
+      "sha256": "345adeccdb4e31de91b356fe3c3157e26ba49c8377d6cf2abcb8069a035e3387",
+      "width": 1704,
+      "height": 1926
+    },
+    {
+      "file": "purchase-confirm-dark-large-bottom.png",
+      "bytes": 133674,
+      "sha256": "5f6e29898e1aeac842dcf78fdbb19596e1b3cc906f8258baf2a679e112d8799c",
+      "width": 1704,
+      "height": 1926
+    },
+    {
+      "file": "purchase-confirm-light.png",
+      "bytes": 287256,
+      "sha256": "882964f1f577cc039013335adc65d4142592b05f42944742064878fd44f4acdf",
+      "width": 1704,
+      "height": 1926
+    },
+    {
+      "file": "purchase-confirm-light-bottom.png",
+      "bytes": 125233,
+      "sha256": "01dc583f6996a91844002e13f11ca2b1f45d1d2540a21e3d4aca83b2d4f747f4",
+      "width": 1704,
+      "height": 1926
+    },
+    {
+      "file": "purchase-saved-context-dark-large.png",
+      "bytes": 355673,
+      "sha256": "fdf907b4a5986f871255c4d55c3089560a2c136335416a32318600f3f168146e",
+      "width": 1704,
+      "height": 1926
+    },
+    {
+      "file": "purchase-saved-context-dark-large-bottom.png",
+      "bytes": 212619,
+      "sha256": "9cefe3740c4193a97ba0cf0a374ae63c8e60b5ee6f7a00bc3da3c2689a04dad5",
+      "width": 1704,
+      "height": 1926
+    },
+    {
+      "file": "purchase-saved-context-light.png",
+      "bytes": 388564,
+      "sha256": "91e9954830b3f455ab31b013808a7f18fd9715b1fa798c74b74482df8662d32f",
+      "width": 1704,
+      "height": 1926
+    },
+    {
+      "file": "purchase-saved-context-light-bottom.png",
+      "bytes": 211410,
+      "sha256": "2fb4f2774bc24bbd0814a31cb4bc9f6f7778132c79f1c136fac03442246b9633",
+      "width": 1704,
+      "height": 1926
+    }
+  ],
+  "assets": {
+    "assets/generated/career-atlas.png": "179e2989024371e85aafd5311cc261f915b167289db7fef7d92e91d2bc5c5294",
+    "assets/generated/health-legal-atlas.png": "5b18b1ba4e13ea99c945c003c5ae93daafbc35c7bca154a75ee1161d2a74cc15",
+    "assets/generated/family-atlas.png": "cc64ec5ed64f409ef0b4a244ceab55a02fcde6fa45c8629e62b27cbdc45dc8a3",
+    "assets/generated/avatars-v2/body-4-0.png": "296fcf3d8163ecb63bbb19379d473e7bfb0dd036739f8aeb00f26ff130544cf8",
+    "assets/generated/avatars-v2/head-4-3-0.png": "694e830b0ef2417fff89633ebf514a569ece74d2c517b9a3a0915c88d91dab21",
+    "assets/generated/avatars-v2/clothing-6.png": "2d92d9f6ffc45187da943de28f9a1769e70419aefedd0368abea774f08230f5b",
+    "assets/generated/avatars-v2/hair-4-4-front.png": "a5434406c185ff6a3feccba303e92190d5f20466f5c9a40f80fae9150df5cbd2",
+    "assets/generated/activity-atlas.png": "938a1b45494d8d92cc278ccb93d7e7915f4e0b281be2dc4327d1d735fadbc74a",
+    "assets/generated/polish/health-check.png": "89aa48904d4b55ea8f957dc336cd8ac4277065011d56926f3ea3d79fc88d6668",
+    "assets/generated/polish/life-star.png": "68e2c38b10fc990b60fb98bb77034579317be4324210584a780f625a9a5ce402",
+    "assets/generated/polish3/actions/talk.png": "a3e0b3b5fac3fe7fbdf890c1d56baf72ca9b60d1da6ef056ff043843eaf919c4",
+    "assets/generated/polish3/actions/compliment.png": "dca6d626096b1beaac22a643c9ddf690090291c723d92371db628e4edfcadbf6",
+    "assets/generated/polish3/actions/spend-time.png": "6deddd242136257a407e19a141c57ad82fe044562d92efa25589bbf41cfb7110",
+    "assets/generated/polish3/actions/give-money.png": "99028a56246fd73ac262d7cddde9f536c4bb20080a866f3104abb91d5be0de54",
+    "assets/generated/polish3/actions/request-gift.png": "add1618e589afe618e92a7a82f704fb2001d3022f8ac3c57eb05213a700dd0b0",
+    "assets/generated/polish3/actions/ask-money.png": "a7d37627f1997c15171bc25d8227c6912df94134b9e28b09991b66fcefb6b7f4",
+    "assets/generated/polish3/actions/ask-loan.png": "87dc098f3e3f41218def795974177333324fd19a022a3dd75eca1c660f045373",
+    "assets/generated/polish3/actions/argue.png": "894d420c1fa8cfbf226f7735065972177039ba6e91d1dd599bf0d97eb0e0c367",
+    "assets/generated/polish3/actions/insult.png": "9e135dc5fbf8e8c7708f7b8d398bd46dbe81f1ef46fa45bb1a4e29621f9847ea",
+    "assets/generated/polish3/actions/distance.png": "1bd3e078dc3995b2575acf16a52714fd62202bd31c5f36f1b06d34836bcea19a",
+    "assets/generated/polish3/actions/apologise.png": "26e5bb818e16f195ae72559241e03ed34a446f144f88e5a34f819af0499ced74",
+    "assets/generated/polish3/actions/ask-date.png": "1373915d4988b84a488ff96659e5dcf8ab3471c5e9ff4d10849a2727dc43f1d5",
+    "assets/generated/polish3/actions/family-planning.png": "b0958e2c9155b0d08cd51e97183df9a1d3e43a15d1f54d7ea46057ec93ba2e8f",
+    "assets/generated/polish3/actions/divorce.png": "9f90bf6c768927a08b03af67e62be28498cce0d65a1f89f3919474d6e2396405",
+    "assets/generated/catalogue-homes.png": "02dba508cdd2f8be2676c2f1beb0078a71082e15a83ef5be0dcbfbdbae67a790",
+    "assets/generated/avatars-v2/body-5-1.png": "c0ae6596026544f5f71d3e9716ff9f653d0c67dfec9f8401ae42babbf2a57169",
+    "assets/generated/avatars-v2/head-5-4-1.png": "53c01988286435578a22c4c64fff025edfa50a4e771298f32e10587fad698d96",
+    "assets/generated/avatars-v2/clothing-12.png": "a65a148fe8297a67ca8795401a2a18ce90b4ccc8b5178fc1402cf0f45d65559d",
+    "assets/generated/avatars-v2/hair-16-3-front.png": "9bfb32c82ad3b10b730f5fe5805f9d1220175af971c29de5925385babc883463",
+    "assets/generated/avatars-v2/hair-16-5-front.png": "d1b765fbac43525cf876bb026be70db7e0bdc45d050be48acd7d6273aad77984",
+    "assets/generated/avatars-v2/body-1-5.png": "b17f2a883179dce223772d5d8faad93bd82dd2132c377fbaafbc764cdd857bac",
+    "assets/generated/avatars-v2/head-1-4-5.png": "f8047fcc3d554cfecfa0c0bd70b2621258e7a4cd255f831b14f7c2236f0ddeb0",
+    "assets/generated/avatars-v2/hair-1-4-front.png": "ceb6b840e14c5319a24c72a19a098bc21febba566629c8e1387ff0bfbef07dcd",
+    "assets/generated/polish3/finance/net-worth.png": "eabd22eac3d6abf28f949e19352962ae14dec15b4b2e67602d51bf969623ef60",
+    "assets/generated/polish3/finance/finances.png": "d5caa50ef299dd37796ce94d190f429d12fc5799cf88112e7c47760eea6da652",
+    "assets/generated/polish/loan.png": "2b5974f029a2250b2a41f2f4c1d77ec461e54c38dcbf0706601fe32ac7685e83",
+    "assets/generated/ownership-atlas.png": "4498c70812bb684a85bc98eec17cc4cc07641f54db9d2f0ea69639790c3d154a",
+    "assets/generated/fame-business-atlas.png": "2ce91a9e69526bc3a7ffac959fb4192c52bc8a04e7e244eabd1206f25dea2ac3"
+  },
+  "limits": "The worlds use explicitly prepared archive contexts. Purchases use the real SQLite/store path with a mocked router handoff. The partner-ready fixture wants children but has incompatible reproductive roles; its grey disabled reason is intentional. Other eligible partner commands and UI are exercised by the connected tests."
+}

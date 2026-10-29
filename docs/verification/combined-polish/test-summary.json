@@ -1,0 +1,35 @@
+{
+  "runtimeRevision": "047ce13278c59a36b6c603eb998e57675d8d1db2",
+  "versions": {
+    "world": 44,
+    "engine": 46,
+    "content": 23,
+    "reader": 24,
+    "database": 4
+  },
+  "command": "node node_modules/jest/bin/jest.js --maxWorkers=3 --json --outputFile=/tmp/dreams-combined-full-results.json",
+  "startedAtUTC": "2026-10-22T22:21:20.036000+00:00",
+  "exitCode": 0,
+  "success": true,
+  "suites": {
+    "total": 275,
+    "passed": 275,
+    "failed": 0,
+    "pending": 0
+  },
+  "tests": {
+    "total": 3527,
+    "passed": 3527,
+    "failed": 0,
+    "pending": 0
+  },
+  "jestReportedSeconds": 740.158,
+  "followupRuns": [],
+  "notes": [
+    "All changes and merge conflict resolutions were complete before the full invocation began.",
+    "This complete invocation passed without any follow-up fixes or reruns.",
+    "Original historical archive fixtures, digests and source policy registrations were preserved.",
+    "App/test TypeScript, runtime import graph and current-input notice inventory checks passed.",
+    "Offline Android/iOS Hermes exports passed; this is not native device execution."
+  ]
+}

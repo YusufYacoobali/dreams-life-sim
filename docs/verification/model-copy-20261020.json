@@ -1,0 +1,68 @@
+{
+  "recordedOn": "2026-10-20",
+  "recordedAt": "2026-10-20T08:19:27.896Z",
+  "gameSourceHash": "287e381ef0d2b4dde9d684f600e47acdc2dd232c1a05f000e43f6a59e0565a2d",
+  "combinedGamePersistenceSourceHash": "0947b821b9783f68e204e16256ab06004475fe1f95153d48c212fed2ec71379c",
+  "baseCommit": "74be9e4",
+  "versions": {
+    "world": 30,
+    "engine": 29,
+    "content": 6,
+    "database": 6
+  },
+  "scope": "Direct isolated clone for certified immutable worlds, single per-person employment validation index and repeatable large-known-contact diagnostics; no game-data/schema/content/codec change",
+  "source": {
+    "src/game/model.ts": "ee6e6f3af83009b4ee096de7955aac64f98c2e74ac0f3d3952edf4498d9c783b",
+    "tools/benchmark-actions.cjs": "34ea10b9a45f31631b2e9a4fb9db95da7f34bb384e41312f62c6ebd7a4bcf9d6",
+    "tests/game/copy-world.test.ts": "0912a2b7b562d4774e3a6f6d328ead12df96774416cff6610f31c99cd091b322"
+  },
+  "verification": {
+    "completeRegression": {
+      "tests": 1385,
+      "suites": 100,
+      "seconds": 884.642,
+      "processSeconds": 886.031,
+      "exitCode": 0,
+      "raw": "regression-model-copy-20261020.txt",
+      "rawSha256": "5bdb04849d85704386d07f5b2de48b97891b0f6da69f08a8d9844855dc52ea68",
+      "rawStdoutThenStderr": true
+    },
+    "strictApplicationAndTestTypes": true,
+    "strictTypesExitCode": 0,
+    "currentSourceLifetimeSeeds": 120,
+    "currentSourceLifetimeRecord": "life-sweep-model-copy-120-20261020.json",
+    "all120EntireTerminalWorldsExactTo74be9e4": true,
+    "allMutableFieldsIsolatedExceptCertifiedLedgerRows": true,
+    "untrustedFrozenOrShallowCopiedWorldsStillFullyValidated": true,
+    "completeResultValidationAndAtomicSavePreserved": true,
+    "nativeRecord": "android24-model-copy-20261020/journey-exact.json",
+    "nativeColdBrowsingDraftAll8TablesExact": true,
+    "native78And79EntireWorldsExact": true,
+    "nativeColdComparisonScope": "First local capture immediately after tapping Save Routine still contained77 and was discarded. The confirmed78 capture was taken after force-stop/relaunch and before Continue. Its entire world equals the expected saved result; all8tables then match after cold Continue.",
+    "nativeFinalRevision": 79,
+    "nativeFinalCounts": {
+      "lives": 5,
+      "moments": 36,
+      "receipts": 67
+    }
+  },
+  "exports": [
+    {
+      "file": "_expo/static/js/android/entry-79633d5703ff683235df6aeeb2767c65.hbc",
+      "bytes": 5415186,
+      "sha256": "d05a53a74eeed3c23cad546ca781325ea7ad356d7f6711bc50ccc77816e82e3a"
+    },
+    {
+      "file": "_expo/static/js/ios/entry-392f40d5903e1010a2ec9641f8e3f3a4.hbc",
+      "bytes": 5110302,
+      "sha256": "f4f784ef4b8ae557c72a88ff98339cdbb1dfc4e3d2307983871c63af191c075e"
+    }
+  ],
+  "populationComparison": "population-model-copy-comparison-20261020.json",
+  "catalogue": {
+    "distinctSituations": 110,
+    "minimum": 250,
+    "additionalNeeded": 140
+  },
+  "limits": "Cloud diagnostics only;1000known-contact setup has the existing financially relevant cohort rather than full monthly accounting for every person. Save packing remains significant. Physical p95, complete native/standalone/iOS,120-year/multigeneration/50MB history and broader production gates stay open. Further player file breadth is parked; full production remains about50%."
+}

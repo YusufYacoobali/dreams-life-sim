@@ -1,0 +1,115 @@
+{
+  "baseline": "94c5020",
+  "beforeYouAdmit": 17,
+  "afterYouAdmit": 0,
+  "claims": [
+    {
+      "id": "green-moon",
+      "title": "A Green Moon",
+      "before": "You admit the moon was never going to turn green. A follower slowly puts away the paint chart and asks what else you guessed.",
+      "after": "You own up to inventing the green moon. A follower holds the paint chart beside your face and asks if shame comes in this shade."
+    },
+    {
+      "id": "future-letter",
+      "title": "A Letter from Tomorrow",
+      "before": "You admit there is no letter from the future. A follower suggests asking someone from the present to answer them.",
+      "after": "There is no letter from tomorrow. You confess, and someone suggests checking yesterday in case your genius is running late."
+    },
+    {
+      "id": "world-reboot",
+      "title": "The Great Reboot",
+      "before": "You admit reality will not reboot on your instructions. Followers ask what they should do with the emergency backups.",
+      "after": "Reality is staying. You admit you made up the reboot; a follower demands to speak to the universe’s manager."
+    },
+    {
+      "id": "cosmic-refund",
+      "title": "A Cosmic Refund",
+      "before": "You admit the promised fee relief never arrived. A follower asks when they will see their money again.",
+      "after": "The fee relief never happened. You own the broken promise while a follower holds out a hand for the money."
+    },
+    {
+      "id": "rain-receipt",
+      "title": "The Sky Will Acknowledge Us",
+      "before": "You admit you could not make it rain. A follower points out that the forecast did not require a membership fee.",
+      "after": "Under a spotless sky, you concede that weather forecasting was not your gift. Someone offers to stand behind you with a watering can next time."
+    },
+    {
+      "id": "last-picnic",
+      "title": "The Picnic Before Everything",
+      "before": "You admit you missed the picnic deadline. A follower holds out an empty plate for the apology.",
+      "after": "You face the picnic crowd without the picnic you promised. An empty plate is passed forward for your apology."
+    },
+    {
+      "id": "final-monday",
+      "title": "The Final Monday",
+      "before": "You admit there will be more Mondays. The follower who booked Tuesday off would like you to stop predicting their working week.",
+      "after": "“There will be more Mondays,” you confess. A follower boos as if you personally invented them."
+    },
+    {
+      "id": "hidden-answer",
+      "title": "An Answer Worth Waiting For",
+      "before": "You admit there is no hidden answer. The inner circle looks relieved to stop pretending they are about to find it.",
+      "after": "Your hidden answer turns out to be “I don’t know.” The inner circle looks relieved to stop pretending you are about to reveal it."
+    },
+    {
+      "id": "quiet-answer",
+      "title": "A Season of Listening",
+      "before": "You admit you never held the promised discussions. A follower starts answering you. You let them finish.",
+      "after": "For once, you stop talking and acknowledge the discussions never happened. A follower starts answering you. You let them finish."
+    },
+    {
+      "id": "animal-review",
+      "title": "The Animals Will Judge Us",
+      "before": "You admit the animals have not endorsed you. A follower points to the mess the pigeon left on your chair. “We did get one review.”",
+      "after": "“The animals haven’t endorsed me.” You point out that a pigeon relieving itself on your chair was not an official statement. A follower calls it your clearest feedback yet."
+    },
+    {
+      "id": "kettle-oracle",
+      "title": "The Kettle Will Speak",
+      "before": "You admit the kettle only makes tea. Someone asks how long you have suspected this.",
+      "after": "Your oracle is a kettle. You come clean; someone nominates a toaster as your replacement."
+    },
+    {
+      "id": "sleeping-talent",
+      "title": "Wake a Hidden Talent",
+      "before": "You admit you failed to provide the workshop. Followers still need somewhere to work. They ask you for an opening date you can keep.",
+      "after": "“The workshop isn’t ready.” You offer an apology. Followers want an opening date you can keep."
+    },
+    {
+      "id": "memory-garden",
+      "title": "A Place to Remember",
+      "before": "You apologise for failing to provide the memorial garden. Members ask what you intend to do for the people still waiting to use it.",
+      "after": "You apologise for failing to provide the memorial garden. Members ask what you intend to do for the people still waiting to use it."
+    },
+    {
+      "id": "full-table",
+      "title": "A Seat for Everyone",
+      "before": "You admit you failed to provide the promised meal and help. A member asks what they should tell the people waiting for dinner.",
+      "after": "You apologise for failing to deliver the promised meal and help. A member asks what to tell the people waiting for dinner."
+    },
+    {
+      "id": "dream-visitor",
+      "title": "The Visitor You Dreamed About",
+      "before": "You admit nobody new has stayed. A follower suggests you watch the exit more closely in your next dream.",
+      "after": "Nobody new stayed. You concede your dream got that part wrong. A follower suggests dreaming about someone with fewer escape plans."
+    },
+    {
+      "id": "good-neighbour",
+      "title": "Win Over the Street",
+      "before": "You admit you never held the gathering. The neighbours would still like an invitation and an answer about the parking.",
+      "after": "The neighbours never got the gathering you promised. You apologise. One would still like to know whether enlightenment comes with parking."
+    },
+    {
+      "id": "seven-signs",
+      "title": "Seven Signs",
+      "before": "You admit the seventh sign was a duplicate. A follower counts the remaining six out loud for you.",
+      "after": "Counting the same sign twice was your idea. You acknowledge it while a follower holds up six fingers, then offers to go through it more slowly."
+    },
+    {
+      "id": "perfect-weather",
+      "title": "Perfect Weather",
+      "before": "You admit the weather ignored your promise. The organiser holds the umbrella over themselves while you explain.",
+      "after": "You abandon the perfect-weather claim under an umbrella held firmly over the organiser. They let you finish apologising before suggesting you move out of the rain."
+    }
+  ]
+}

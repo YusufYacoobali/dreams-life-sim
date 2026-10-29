@@ -1,0 +1,196 @@
+{
+  "date": "2026-10-22",
+  "baseCommit": "afbe145",
+  "crashReproduced": "Native Babel serialization captured curl and roundedContour as undefined before module initialization completed",
+  "fix": "Declare leaf worklets before inkRibbon captures them",
+  "nativeWorkletTests": {
+    "platforms": [
+      "ios",
+      "android"
+    ],
+    "modes": [
+      "development",
+      "production"
+    ],
+    "tests": 4,
+    "result": "passed"
+  },
+  "runtimeImportGraph": {
+    "modules": 386,
+    "cycles": [],
+    "test": "passed"
+  },
+  "affectedRegression": {
+    "suites": 20,
+    "checks": 377,
+    "result": "passed across completed suites and architecture-test recheck"
+  },
+  "typecheck": "passed",
+  "sdkAlignment": {
+    "sdk": "57.0.31",
+    "checked": [
+      {
+        "name": "@expo/vector-icons",
+        "version": "15.1.1",
+        "expected": "^15.0.2",
+        "compatible": true
+      },
+      {
+        "name": "expo-asset",
+        "version": "57.0.20",
+        "expected": "~57.0.20",
+        "compatible": true
+      },
+      {
+        "name": "expo-audio",
+        "version": "57.0.5",
+        "expected": "~57.0.5",
+        "compatible": true
+      },
+      {
+        "name": "expo-document-picker",
+        "version": "57.0.3",
+        "expected": "~57.0.3",
+        "compatible": true
+      },
+      {
+        "name": "expo-file-system",
+        "version": "57.0.7",
+        "expected": "~57.0.7",
+        "compatible": true
+      },
+      {
+        "name": "expo-font",
+        "version": "57.0.4",
+        "expected": "~57.0.4",
+        "compatible": true
+      },
+      {
+        "name": "expo-haptics",
+        "version": "57.0.3",
+        "expected": "~57.0.3",
+        "compatible": true
+      },
+      {
+        "name": "expo-linear-gradient",
+        "version": "57.0.2",
+        "expected": "~57.0.2",
+        "compatible": true
+      },
+      {
+        "name": "expo-linking",
+        "version": "57.0.13",
+        "expected": "~57.0.13",
+        "compatible": true
+      },
+      {
+        "name": "expo-notifications",
+        "version": "57.0.23",
+        "expected": "~57.0.23",
+        "compatible": true
+      },
+      {
+        "name": "expo-router",
+        "version": "57.0.29",
+        "expected": "~57.0.29",
+        "compatible": true
+      },
+      {
+        "name": "expo-sharing",
+        "version": "57.0.24",
+        "expected": "~57.0.24",
+        "compatible": true
+      },
+      {
+        "name": "expo-splash-screen",
+        "version": "57.0.10",
+        "expected": "~57.0.10",
+        "compatible": true
+      },
+      {
+        "name": "expo-sqlite",
+        "version": "57.0.4",
+        "expected": "~57.0.4",
+        "compatible": true
+      },
+      {
+        "name": "expo-status-bar",
+        "version": "57.0.1",
+        "expected": "~57.0.1",
+        "compatible": true
+      },
+      {
+        "name": "expo-system-ui",
+        "version": "57.0.4",
+        "expected": "~57.0.4",
+        "compatible": true
+      },
+      {
+        "name": "react",
+        "version": "19.2.3",
+        "expected": "19.2.3",
+        "compatible": true
+      },
+      {
+        "name": "react-dom",
+        "version": "19.2.3",
+        "expected": "19.2.3",
+        "compatible": true
+      },
+      {
+        "name": "react-native",
+        "version": "0.86.3",
+        "expected": "0.86.3",
+        "compatible": true
+      },
+      {
+        "name": "react-native-reanimated",
+        "version": "4.5.1",
+        "expected": "4.5.1",
+        "compatible": true
+      },
+      {
+        "name": "react-native-safe-area-context",
+        "version": "5.7.0",
+        "expected": "~5.7.0",
+        "compatible": true
+      },
+      {
+        "name": "react-native-screens",
+        "version": "4.26.2",
+        "expected": "~4.26.0",
+        "compatible": true
+      },
+      {
+        "name": "react-native-svg",
+        "version": "15.15.4",
+        "expected": "15.15.4",
+        "compatible": true
+      },
+      {
+        "name": "react-native-worklets",
+        "version": "0.10.1",
+        "expected": "0.10.1",
+        "compatible": true
+      }
+    ],
+    "mismatches": []
+  },
+  "onlineExpoMetadata": "blocked by environment destination policy; latest official SDK package metadata and npm registry patches used",
+  "nativeExports": [
+    {
+      "platform": "ios",
+      "file": "entry-46bd1d5c42ec936fbbbc3d59e96bf915.hbc",
+      "bytes": 7501756,
+      "sha256": "3ab6dcdcfa5320daf96835f2b919e518f3d25d3f554a563d0cba7dc9cf841b6a"
+    },
+    {
+      "platform": "android",
+      "file": "entry-b3e3f9146f9cbe42b84f660b1685042e.hbc",
+      "bytes": 7706251,
+      "sha256": "cab5e87437f883037ca34a72795b4820bb0932b0a52c36a4d6aef3e0d351494c"
+    }
+  ],
+  "physicalDevicePlayback": "not verified in this Linux session",
+  "gameplayRulesRngAndSaveSchemaChanges": false
+}

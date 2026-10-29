@@ -1,0 +1,90 @@
+{
+  "output": "/tmp/dreams-opening-next-native-verifier-results.json",
+  "status": "passed",
+  "complete": true,
+  "sourceRuntimeCommit": "5a2565458fa5de90c1acaf0e110fc980f6476b64",
+  "frozenRuntimeFilesVerified": 302,
+  "phases": [
+    {
+      "phase": "boot",
+      "revision": 134,
+      "receipts": 141,
+      "worldSha256": "5f9793078108796cfa4ac958bf357449b2c82101a01b7f18dab4762024bf6537"
+    },
+    {
+      "phase": "browsed",
+      "revision": 134,
+      "receipts": 141,
+      "worldSha256": "5f9793078108796cfa4ac958bf357449b2c82101a01b7f18dab4762024bf6537"
+    },
+    {
+      "phase": "settings",
+      "revision": 134,
+      "receipts": 141,
+      "worldSha256": "5f9793078108796cfa4ac958bf357449b2c82101a01b7f18dab4762024bf6537"
+    },
+    {
+      "phase": "selected",
+      "revision": 134,
+      "receipts": 141,
+      "worldSha256": "5f9793078108796cfa4ac958bf357449b2c82101a01b7f18dab4762024bf6537"
+    },
+    {
+      "phase": "intro135",
+      "revision": 135,
+      "receipts": 142,
+      "worldSha256": "8fffa66ebf6b2ab5d7511081e464c9956d7b36372788f885310076e79c69e195"
+    },
+    {
+      "phase": "cold-intro135",
+      "revision": 135,
+      "receipts": 142,
+      "worldSha256": "8fffa66ebf6b2ab5d7511081e464c9956d7b36372788f885310076e79c69e195"
+    },
+    {
+      "phase": "ack136",
+      "revision": 136,
+      "receipts": 143,
+      "worldSha256": "0eb0dd3174a0309446b923d5de06f2f3f37323a0151138de069976a2efb0f228"
+    },
+    {
+      "phase": "vaccine137",
+      "revision": 137,
+      "receipts": 144,
+      "worldSha256": "9fe3c0363856183ec3cbe355be97752a99ed60eb2e5b9ee25d152b7bf3d04748"
+    },
+    {
+      "phase": "cold-vaccine137",
+      "revision": 137,
+      "receipts": 144,
+      "worldSha256": "9fe3c0363856183ec3cbe355be97752a99ed60eb2e5b9ee25d152b7bf3d04748"
+    },
+    {
+      "phase": "final138",
+      "revision": 138,
+      "receipts": 145,
+      "worldSha256": "35b9b53a927e833eee7aa87d99cb0008fc2190914bac66828cc7de0b0920ecb7"
+    }
+  ],
+  "final": {
+    "lifeId": "life_native_adult_friend_v30_s0",
+    "personId": "person_player",
+    "name": "Nia Carter",
+    "age": 24,
+    "revision": 138,
+    "worldSha256": "35b9b53a927e833eee7aa87d99cb0008fc2190914bac66828cc7de0b0920ecb7",
+    "pending": null,
+    "annual": null,
+    "lives": 7,
+    "moments": 66,
+    "receipts": 145,
+    "settings": {
+      "version": 1,
+      "appearance": "light",
+      "reducedMotion": true,
+      "haptics": true,
+      "soundEffects": true
+    }
+  },
+  "scope": "Read-only verification of coordinator-provided native SQLite captures against the actual C34 School-final database and frozen C35 production-command projection. No commands, SQL writes, source edits, native operations, simulations or missing phases are performed. UI/screenshot review, capture provenance and process-stop observation belong to the coordinator; database equality alone does not prove them."
+}

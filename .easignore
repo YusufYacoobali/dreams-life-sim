@@ -1,0 +1,39 @@
+# EAS uses this file instead of .gitignore. Keep both sets of local exclusions.
+node_modules/
+.npm-cache/
+.expo/
+dist/
+web-build/
+expo-env.d.ts
+.kotlin/
+*.orig.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+.metro-health-check*
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+*.log
+__pycache__/
+*.py[cod]
+.DS_Store
+*.pem
+.env*.local
+*.tsbuildinfo
+/ios
+/android
+
+# These are developer/review inputs, never runtime or native config inputs.
+/docs/
+/design/
+/tests/
+/tools/
+/assets/prototypes/
+/.github/
+# EAS checks the bare ".git" path when removing its shallow clone's Git data.
+# Keep this rule without a trailing slash; "/.git/" misses that check.
+/.git
+coverage/

@@ -1,0 +1,45 @@
+from pathlib import Path
+import json,hashlib,datetime,xml.etree.ElementTree as ET, re,shutil
+from PIL import Image
+ROOT=Path('/workspace/dreams-worktrees/native-prebuild-current'); EVIDENCE=Path('/tmp/dreams-native-prebuild-current-evidence')
+DOCS=Path('/workspace/dreams-worktrees/release-prep-current/docs/verification/native-prebuild-current-20261021')
+DOCS.mkdir(exist_ok=False)
+def pin(name):
+ p=Path(name);b=p.read_bytes();return {'file':str(p),'bytes':len(b),'sha256':hashlib.sha256(b).hexdigest()}
+assert (EVIDENCE/'prebuild.exit').read_text().strip()=='0'
+assert (EVIDENCE/'status-before.txt').read_bytes()==b'' and (EVIDENCE/'status-after.txt').read_bytes()==b''
+assert (EVIDENCE/'ignored-native-path.txt').read_text().strip()=='android'
+source=json.loads(Path('/tmp/dreams-production-ui-complete-source.json').read_text())
+for name,digest in source['source'].items():assert pin(ROOT/name)['sha256']==digest,name
+android=ROOT/'android'; namespace='{http://schemas.android.com/apk/res/android}'
+manifest=ET.parse(android/'app/src/main/AndroidManifest.xml').getroot();application=manifest.find('application')
+permissions=[{k.removeprefix(namespace):v for k,v in node.attrib.items() if k.startswith(namespace)} for node in manifest.findall('uses-permission')]
+inventory=[];images=[];excluded=[]
+for path in sorted(android.rglob('*')):
+ if not path.is_file():continue
+ relative=str(path.relative_to(ROOT))
+ if path.suffix.lower() in ['.keystore','.jks','.key','.p8','.p12']:
+  excluded.append({'path':relative,'reason':'Template development signing material excluded from reads, copying and artifact inventory hashes.'});continue
+ item={'path':relative,**{k:v for k,v in pin(path).items() if k!='file'}};inventory.append(item)
+ if path.suffix.lower() in ['.png','.webp']:
+  with Image.open(path) as image:
+   images.append({'path':relative,'width':image.width,'height':image.height,'mode':image.mode,**{k:v for k,v in item.items() if k!='path'}})
+# Explicit copied source texts contain no signing material. The full app Gradle
+# source remains in the ignored local candidate, with its hash and source-derived
+# debug-signing fact recorded; no key file or account credential is copied.
+selected=['android/app/src/main/AndroidManifest.xml','android/app/src/debug/AndroidManifest.xml','android/app/src/debugOptimized/AndroidManifest.xml','android/build.gradle','android/settings.gradle','android/gradle.properties','android/gradle/wrapper/gradle-wrapper.properties','android/app/src/main/res/values/strings.xml','android/app/src/main/res/values/colors.xml','android/app/src/main/res/values/styles.xml','android/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml']
+portable=[]
+for relative in selected:
+ target=DOCS/(relative.replace('/','__')+'.txt');shutil.copyfile(ROOT/relative,target);assert target.read_bytes()==(ROOT/relative).read_bytes();portable.append({'source':relative,'artifact':target.name,**{k:v for k,v in pin(target).items() if k!='file'}})
+for name in ['inputs.json','environment-status-safe.json','prebuild.out','prebuild.exit','started-at.txt','closed-at.txt','head-before.txt','status-before.txt','status-after.txt','ignored-native-path.txt','package-before.json','package-after-prebuild.json']:
+ shutil.copyfile(EVIDENCE/name,DOCS/name)
+settings=(android/'gradle.properties').read_text();appgradle=(android/'app/build.gradle').read_text()
+assert "namespace 'com.yusufyacoobali.dreamslifesim'" in appgradle and "applicationId 'com.yusufyacoobali.dreamslifesim'" in appgradle
+assert 'versionCode 1' in appgradle and 'versionName "1.0.0"' in appgradle
+assert 'newArchEnabled=true' in settings and 'hermesEnabled=true' in settings
+assert application.attrib[namespace+'allowBackup']=='true'
+assert not any(p.get('name')=='android.permission.RECORD_AUDIO' for p in permissions)
+assert "release {\n            // Caution!" in appgradle and appgradle.count('signingConfig signingConfigs.debug')==2
+r={'format':'dreams-current-offline-android-prebuild-inspection-v1','recordedAt':datetime.datetime.now(datetime.timezone.utc).isoformat(),'status':'passed-generated-source-only-unbuilt','root':str(ROOT),'sourceCommit':'83adaea6f92523d04a27df2e77b11e0a8b14ef1d','sourceSnapshot':pin('/tmp/dreams-production-ui-complete-source.json'),'all703SourceFilesExactBeforeAndAfter':True,'actualPrebuildExit':0,'startedAt':(EVIDENCE/'started-at.txt').read_text().strip(),'closedAt':(EVIDENCE/'closed-at.txt').read_text().strip(),'commandInputs':pin(EVIDENCE/'inputs.json'),'trackedWorktreeCleanAfterScriptRestoration':True,'generatedAndroidDirectoryIgnored':True,'prebuildTrackedChanges':{'onlyFile':'package.json','onlyFields':['scripts.android','scripts.ios'],'preservedAfterPrebuild':'package-after-prebuild.json','restoredExactOriginalBytes':True},'identity':{'name':'Dreams Life Simulator','androidPackage':'com.yusufyacoobali.dreamslifesim','namespace':'com.yusufyacoobali.dreamslifesim','versionName':'1.0.0','versionCode':1,'scheme':'dreams-life','portrait':True,'launcherExported':True},'buildSource':{'expo':'57.0.30','reactNative':'0.86.3','gradleWrapper':'9.3.1','androidGradlePluginFromReactNativeCatalog':'8.12.0','minSdk':24,'compileSdk':36,'targetSdk':36,'buildTools':'36.0.0','ndkVersion':'27.1.12297006','cmake':'RNplugin supplies default CMakeLists path; generated app does not pin CMake version; actual Gradle resolution unrun.','hermes':True,'hermesV1Default':True,'requiredReactAndroidCoordinate':'com.facebook.react:react-android:0.86.3','requiredHermesCoordinate':'com.facebook.hermes:hermes-android:250829098.0.17','fabricNewArchitecture':True,'edgeToEdge':True,'architectures':['armeabi-v7a','arm64-v8a','x86','x86_64'],'releaseUsesTemplateDebugSigning':True,'distributionSigningConfigured':False,'releaseMinifyDefault':False,'mergedManifestAvailable':False,'gradleInvoked':False},'manifestSource':{'permissions':permissions,'allowBackup':True,'backupRulesPresent':False,'debugOnlyCleartextTraffic':True,'productionManifestCleartextAttributePresent':namespace+'usesCleartextTraffic' in application.attrib,'audioRecordingPermissionPresent':False,'updatesEnabled':False},'generatedResources':{'images':images,'fontFilesGenerated':[],'fontScope':'Ionicons is a locally installed Metro asset dependency; no final bundle/TTF/APK resource merge was generated or accepted by prebuild.','visualSourceReview':'Generated192px launcher WebP was viewed; gold life-path/sun/cloud mark on navy. Generated-source inspection only, not an installed launcher mask/readability pass.','installedLauncherMaskAccepted':False},'generatedFiles':inventory,'excludedSigningFiles':excluded,'portableRawSourceCopies':portable,'noNetworkOrInstallRequested':True,'noAdbOrNativeInput':True,'noIosBuild':True,'noApkAabOrMergedReleaseArtifact':True,'noNewGameplayGateCredit':True,'limits':'Offline native source generation only; dependency resolution/build/signing/merged permissions/OS backup/font packaging/airplane mode/physical/TalkBack/audio/iOS remain separate. Root controls ongoing native/scenario/session acceptance.'}
+(EVIDENCE/'inspection.json').write_text(json.dumps(r,indent=2)+'\n');shutil.copyfile(EVIDENCE/'inspection.json',DOCS/'inspection.json')
+print(json.dumps({'inspection':pin(EVIDENCE/'inspection.json'),'portableDirectory':str(DOCS),'nativeFilesInventoried':len(inventory),'images':len(images),'excludedSigningFiles':len(excluded),'sourceCountVerified':703}))

@@ -1,0 +1,202 @@
+
+> dreams-life-sim@1.0.0 test
+> jest --runInBand --testTimeout=30000
+
+PASS tests/ui/asset-bank-save-flow.test.tsx (16.676 s)
+PASS tests/ui/family-dialog-save-flow.test.tsx
+PASS tests/game/npc-courtships.test.ts
+PASS tests/game/health-legal-availability.test.ts
+PASS tests/ui/student-loan-rate-flow.test.tsx (14.74 s)
+PASS tests/ui/business-review-save-flow.test.tsx
+PASS tests/ui/legal-review-save-flow.test.tsx
+PASS tests/ui/social-review-save-flow.test.tsx
+PASS tests/ui/travel-review-save-flow.test.tsx
+PASS tests/ui/new-life-review-flow.test.tsx
+PASS tests/game/npc-relationships.test.ts
+PASS tests/ui/career-review-save-flow.test.tsx
+PASS tests/ui/recovery-routine-save-flow.test.tsx (25.73 s)
+PASS tests/ui/service-context-flow.test.tsx
+PASS tests/ui/story-consequence-labels-flow.test.tsx
+PASS tests/persistence/native-hourly-checkpoints.test.ts (8.811 s)
+PASS tests/game/story-consequence-labels.test.ts (8.071 s)
+PASS tests/ui/theme-contrast.test.tsx
+PASS tests/game/professional-policy.test.ts
+PASS tests/state/npc-relationships-save.test.ts (7.835 s)
+PASS tests/state/npc-courtships-save.test.ts (5.223 s)
+PASS tests/ui/portrait-accessibility.test.tsx
+PASS tests/game/engine.test.ts (512.573 s)
+PASS tests/persistence/tuple-checkpoints.test.ts (35.852 s)
+PASS tests/game/copy-world.test.ts (19.942 s)
+PASS tests/game/royalty.test.ts (22.115 s)
+PASS tests/game/everyday-life-stories.test.ts (25.027 s)
+PASS tests/ui/education-choice-save-flow.test.tsx (25.095 s)
+PASS tests/ui/saved-files-flow.test.tsx (20.374 s)
+PASS tests/persistence/people-blocks.test.ts (19.095 s)
+PASS tests/persistence/native-workplace-story-archive.test.ts (15.205 s)
+PASS tests/persistence/native-people-block-archive.test.ts (14.491 s)
+PASS tests/progression/expanded-progress.test.ts (12.659 s)
+PASS tests/persistence/native-raise-archive.test.ts (13 s)
+PASS tests/game/early-home-stories.test.ts (12.353 s)
+PASS tests/game/adult-relationship-stories.test.ts (11.226 s)
+PASS tests/persistence/native-workplace-archive.test.ts (9.841 s)
+PASS tests/game/teen-home-stories.test.ts (10.232 s)
+PASS tests/persistence/restored-action-cache.test.ts (10.256 s)
+PASS tests/ui/work-routine-save-flow.test.tsx (9.238 s)
+PASS tests/persistence/native-teen-archive.test.ts (10.499 s)
+PASS tests/ui/workplace-story-flow.test.tsx (8.015 s)
+PASS tests/game/education-recovery.test.ts (8.209 s)
+PASS tests/game/workplace-stories.test.ts (10.476 s)
+PASS tests/ui/school-routine-save-flow.test.tsx (8.476 s)
+PASS tests/game/hourly-work.test.ts
+PASS tests/persistence/ordinary-hobby-archive.test.ts (7.309 s)
+PASS tests/ui/scholarship-flow.test.tsx (6.395 s)
+PASS tests/game/services.test.ts (5.977 s)
+PASS tests/persistence/action-checkpoints.test.ts (5.778 s)
+PASS tests/game/politics.test.ts
+PASS tests/ui/education-recovery-flow.test.tsx (5.584 s)
+PASS tests/game/childhood-stories.test.ts (6.394 s)
+PASS tests/persistence/life-preview.test.ts (6.315 s)
+PASS tests/persistence/native-interview-checkpoints.test.ts
+PASS tests/persistence/native-school-archive.test.ts
+PASS tests/ui/royalty-flow.test.tsx (5.6 s)
+PASS tests/game/hobby-events.test.ts
+PASS tests/game/creators.test.ts
+PASS tests/ui/hobby-event-flow.test.tsx (5.402 s)
+PASS tests/persistence/native-arcade-archive.test.ts
+PASS tests/ui/saved-life-preview.test.tsx
+PASS tests/game/music.test.ts
+PASS tests/state/save-summaries.test.ts
+PASS tests/game/education-work-finance.test.ts
+PASS tests/game/businesses.test.ts
+PASS tests/game/estates.test.ts
+PASS tests/ui/health-flow.test.tsx
+PASS tests/ui/pets-flow.test.tsx
+PASS tests/game/legal.test.ts
+PASS tests/game/scholarships.test.ts
+PASS tests/game/social.test.ts
+PASS tests/ui/contacts-flow.test.tsx
+PASS tests/ui/ordinary-hobby-flow.test.tsx
+PASS tests/progression/progress.test.ts
+PASS tests/game/leisure.test.ts
+PASS tests/persistence/responsive-archive.test.ts
+PASS tests/ui/extras-flow.test.tsx
+PASS tests/ui/leisure-flow.test.tsx
+PASS tests/game/assets-markets.test.ts
+PASS tests/game/careers.test.ts
+PASS tests/ui/relocation-flow.test.tsx
+PASS tests/game/foreign-earnings.test.ts
+PASS tests/ui/hourly-work-flow.test.tsx
+PASS tests/game/story-callbacks.test.ts
+PASS tests/game/pets.test.ts
+PASS tests/persistence/leisure-archive.test.ts
+PASS tests/game/ordinary-hobbies.test.ts
+PASS tests/game/relocation.test.ts
+PASS tests/game/story-lifecycle.test.ts
+PASS tests/ui/service-flow.test.tsx
+PASS tests/progression/financial-progress.test.ts
+PASS tests/game/credit.test.ts
+PASS tests/ui/story-callback-flow.test.tsx
+PASS tests/ui/adult-relationship-story-flow.test.tsx
+PASS tests/ui/travel-flow.test.tsx
+PASS tests/ui/life-context-story-flow.test.tsx
+PASS tests/game/content-refresh.test.ts
+PASS tests/ui/creator-studio-flow.test.tsx
+PASS tests/game/story-editorial-context.test.ts
+PASS tests/ui/business-flow.test.tsx
+PASS tests/ui/school-flow.test.tsx
+PASS tests/game/travel.test.ts
+PASS tests/ui/credit-flow.test.tsx
+PASS tests/ui/music-flow.test.tsx
+PASS tests/game/work-raises.test.ts
+PASS tests/ui/startup-flow.test.tsx
+PASS tests/ui/workplace-flow.test.tsx
+PASS tests/ui/onboarding-flow.test.tsx
+PASS tests/ui/purchase-confirmation-save-flow.test.tsx
+PASS tests/ui/childhood-story-flow.test.tsx
+PASS tests/ui/job-interview-flow.test.tsx
+PASS tests/persistence/pet-archive.test.ts
+PASS tests/persistence/time-machine.test.ts
+PASS tests/ui/politics-flow.test.tsx
+PASS tests/game/workplaces.test.ts
+PASS tests/persistence/compressed-lives.test.ts
+PASS tests/game/relationships.test.ts
+PASS tests/game/job-interviews.test.ts
+PASS tests/ui/social-flow.test.tsx
+PASS tests/game/school.test.ts
+PASS tests/ui/legal-flow.test.tsx
+PASS tests/game/family.test.ts
+PASS tests/ui/pension-flow.test.tsx
+PASS tests/ui/purchase-flow.test.tsx
+PASS tests/ui/time-machine-flow.test.tsx
+PASS tests/ui/career-flow.test.tsx
+PASS tests/game/health.test.ts
+PASS tests/ui/relationship-flow.test.tsx
+PASS tests/ui/family-flow.test.tsx
+PASS tests/ui/early-home-story-flow.test.tsx
+PASS tests/ui/legacy-flow.test.tsx
+FAIL tests/persistence/repository.test.ts
+  ● newer database versions are refused without resetting their version marker
+
+    expect(received).rejects.toThrow()
+
+    Received promise resolved instead of rejected
+    Resolved to value: undefined
+
+      69 |   sqlite.exec('PRAGMA user_version=13');
+      70 |   const repository = new SaveRepository(driver);
+    > 71 |   await expect(repository.initialise()).rejects.toThrow('newer version');
+         |         ^
+      72 |   expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(13);
+      73 |   sqlite.close();
+      74 | });
+
+      at expect (node_modules/expect/build/index.js:113:15)
+      at Object.expect (tests/persistence/repository.test.ts:71:9)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+      at node_modules/@babel/runtime/helpers/asyncToGenerator.js:22:7
+      at Object.<anonymous> (node_modules/@babel/runtime/helpers/asyncToGenerator.js:14:12)
+
+PASS tests/ui/school-plans.test.tsx
+PASS tests/state/preferencesStore.test.ts
+PASS tests/ui/onboarding-accessibility-flow.test.tsx
+PASS tests/ui/will-flow.test.tsx
+PASS tests/ui/settings-flow.test.tsx
+PASS tests/game/save-json.test.ts
+PASS tests/persistence/base64.test.ts
+PASS tests/game/creation.test.ts
+PASS tests/ui/interactions.test.tsx
+PASS tests/state/gameStore.test.ts
+PASS tests/game/money-format.test.ts
+PASS tests/game/primitives.test.ts
+
+Summary of all failing tests
+FAIL tests/persistence/repository.test.ts
+  ● newer database versions are refused without resetting their version marker
+
+    expect(received).rejects.toThrow()
+
+    Received promise resolved instead of rejected
+    Resolved to value: undefined
+
+      69 |   sqlite.exec('PRAGMA user_version=13');
+      70 |   const repository = new SaveRepository(driver);
+    > 71 |   await expect(repository.initialise()).rejects.toThrow('newer version');
+         |         ^
+      72 |   expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(13);
+      73 |   sqlite.close();
+      74 | });
+
+      at expect (node_modules/expect/build/index.js:113:15)
+      at Object.expect (tests/persistence/repository.test.ts:71:9)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+      at node_modules/@babel/runtime/helpers/asyncToGenerator.js:22:7
+      at Object.<anonymous> (node_modules/@babel/runtime/helpers/asyncToGenerator.js:14:12)
+
+
+Test Suites: 1 failed, 144 passed, 145 total
+Tests:       1 failed, 2078 passed, 2079 total
+Snapshots:   0 total
+Time:        1172.283 s
+Ran all test suites.

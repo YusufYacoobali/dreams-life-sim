@@ -1,0 +1,193 @@
+{
+  "schemaVersion": 2,
+  "engineVersion": 1,
+  "contentVersion": 1,
+  "id": "life_v2_fixture",
+  "revision": 2,
+  "date": {
+    "year": 2027,
+    "month": 10,
+    "day": 18
+  },
+  "activePersonId": "person_player",
+  "random": {
+    "events": 2809644527,
+    "npcs": 2987325038,
+    "economy": 4125467398,
+    "outcomes": 3728087251
+  },
+  "people": {
+    "person_player": {
+      "id": "person_player",
+      "firstName": "Lorenzo",
+      "lastName": "Romano",
+      "gender": "nonbinary",
+      "nationality": "IT",
+      "country": "IT",
+      "city": "Rome",
+      "born": {
+        "year": 2026,
+        "month": 10,
+        "day": 18
+      },
+      "died": null,
+      "causeOfDeath": null,
+      "stats": {
+        "happiness": 79,
+        "health": 93,
+        "smarts": 65,
+        "looks": 45,
+        "respect": 63,
+        "energy": 100,
+        "fitness": 57,
+        "stress": 0,
+        "discipline": 66,
+        "fame": 0
+      },
+      "appearance": {
+        "face": 2,
+        "skin": 1,
+        "hair": 4,
+        "hairColor": 4
+      },
+      "traits": [
+        "practical"
+      ]
+    },
+    "person_parent1": {
+      "id": "person_parent1",
+      "firstName": "Giulia",
+      "lastName": "Romano",
+      "gender": "female",
+      "nationality": "IT",
+      "country": "IT",
+      "city": "Rome",
+      "born": {
+        "year": 1987,
+        "month": 10,
+        "day": 18
+      },
+      "died": null,
+      "causeOfDeath": null,
+      "stats": {
+        "happiness": 69,
+        "health": 95,
+        "smarts": 65,
+        "looks": 53,
+        "respect": 39,
+        "energy": 100,
+        "fitness": 51,
+        "stress": 26,
+        "discipline": 77,
+        "fame": 0
+      },
+      "appearance": {
+        "face": 1,
+        "skin": 0,
+        "hair": 7,
+        "hairColor": 2
+      },
+      "traits": [
+        "reserved"
+      ]
+    }
+  },
+  "relationships": [
+    {
+      "id": "relation_parent_0",
+      "from": "person_parent1",
+      "to": "person_player",
+      "kind": "parent",
+      "strength": 83,
+      "trust": 82,
+      "memories": [
+        "birth"
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "id": "account_person_player",
+      "ownerId": "person_player",
+      "currency": "EUR",
+      "cash": {
+        "$dreamsBigInt": "0"
+      }
+    },
+    {
+      "id": "account_person_parent1",
+      "ownerId": "person_parent1",
+      "currency": "EUR",
+      "cash": {
+        "$dreamsBigInt": "3161400"
+      }
+    }
+  ],
+  "journal": [
+    {
+      "id": "journal_birth",
+      "date": {
+        "year": 2026,
+        "month": 10,
+        "day": 18
+      },
+      "personId": "person_player",
+      "text": "I was born in Rome, Italy.",
+      "category": "birth"
+    },
+    {
+      "id": "event_2027_first-cake_choice",
+      "date": {
+        "year": 2027,
+        "month": 10,
+        "day": 18
+      },
+      "personId": "person_player",
+      "text": "I wore my birthday cake. Giulia kept the photograph.",
+      "category": "event"
+    }
+  ],
+  "birthAcknowledged": true,
+  "calendarAnchorDay": 18,
+  "annual": {
+    "id": "year_0",
+    "startDate": {
+      "year": 2026,
+      "month": 10,
+      "day": 18
+    },
+    "targetDate": {
+      "year": 2027,
+      "month": 10,
+      "day": 18
+    },
+    "monthsProcessed": 12
+  },
+  "pending": {
+    "kind": "result",
+    "id": "event_2027_first-cake_result",
+    "title": "The photograph survives",
+    "body": "The cake does not. Giulia laughs so hard the first photo is mostly ceiling.",
+    "illustration": "birthday",
+    "effects": [
+      {
+        "id": "effect_0",
+        "label": "Happiness",
+        "value": "+5%",
+        "tone": "positive"
+      },
+      {
+        "id": "effect_1",
+        "label": "Relationship",
+        "value": "+3%",
+        "tone": "positive"
+      }
+    ]
+  },
+  "eventHistory": [
+    {
+      "templateId": "first-cake",
+      "year": 2027
+    }
+  ]
+}

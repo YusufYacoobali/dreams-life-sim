@@ -1,0 +1,149 @@
+{
+  "recordedOn": "2026-10-20",
+  "baseCommit": "e41a2db59149f4b6e6388f84044a339eca6d2467",
+  "scope": "Integrated independent Work/School/purchase/education durable dialogs and opening accessibility. Prevent unchanged selections and keep failed real-save drafts. Education categories check all actual offered fields. UI-only; automatic resume/gameplay/history untouched. Isolated worktrees and primary integration/testing/commits.",
+  "versions": {
+    "world": 31,
+    "engine": 32,
+    "content": 8,
+    "database": 11,
+    "checkpoint": "v4"
+  },
+  "gameSourceHash": "9a4a70c51fcab5737a9b22f84a9a83ff37cfa7c5fd3affcdac7427677eb2fd7e",
+  "combinedGamePersistenceSourceHash": "361f7acb1601a6ceabdc4fe13aaa2320f14743add90e380c924f564f8ef5226e",
+  "source": {
+    "app.json": "cf66bfbf1f8f97a9eccd4a7a2eb792a65b44f927a59cb03504a66e62612731b3",
+    "assets/generated/dreams-app-icon.png": "260eecc71e31a4d05ba65deaff4dddabf32d4c5b9576e3faa448150983245cb9",
+    "app/index.tsx": "69083c5dcbd84230905f0b0aac8e6a10e4ef24f1b47f6b82459a074b954ddacf",
+    "app/new-life.tsx": "e63d6da35f06292c92cddaa8642f6eb987904addec4d2379925c9206f9204cb1",
+    "app/birth.tsx": "f3fa5adeb0128c330b89bd6734204e8035905d2a1ab23836cf674cdfbf430c7e",
+    "app/(game)/work.tsx": "f641d83faf3776bc5ee96b7551912877acb88fca3372d6f7317b34d75ba843ab",
+    "app/(game)/school.tsx": "797f184504eca6cf24ca755b5e91edf3eb5346b3c3805c2bd31a72fe0d89462f",
+    "app/(game)/education.tsx": "ff2f8393c625fe5a8fbad9003f70382056b58d654fdcb9d3556e70e2749428d3",
+    "app/(game)/offer/[id].tsx": "5977423fd37fae19f0dc4e5bc354cc3117ddb55df52e54fef54e4054542f7e90",
+    "src/ui/EventModal.tsx": "2a2e088cfda9d3f0deeca23ec9a7e78809c3bd2b21cc5740af426f6265a17c9d",
+    "tests/ui/work-routine-save-flow.test.tsx": "8fffde8b054e2c5a590f26c7ce4f93209fa6bcd7d6f07f840bd38448a9bb0381",
+    "tests/ui/school-routine-save-flow.test.tsx": "715e64271f7aab2844ee374a16272659d8ee47376bab1ead1864f5244d4a1b9b",
+    "tests/ui/education-choice-save-flow.test.tsx": "621834f10840d5a12c2ca2d129b11fc00200e28dc7a536cda4709b63f768ffd9",
+    "tests/ui/purchase-confirmation-save-flow.test.tsx": "412e33802b181f0aa9b3363049c102784d1a5a73011af2151b5a64d60302323f",
+    "tests/ui/onboarding-accessibility-flow.test.tsx": "39314f7837f3dabd37d61bb018c2382f11ecec9ffe69c6205bb8772011a84220"
+  },
+  "checks": {
+    "uiStateProgression": {
+      "exitCode": 0,
+      "suites": 54,
+      "tests": 165,
+      "elapsedSeconds": 191.348,
+      "testTimeoutMs": 30000,
+      "scope": "All UI/state/progression; concurrent host work means elapsed total is not action latency.",
+      "file": "regression-ui-reliability-20261020.txt",
+      "bytes": 2555,
+      "sha256": "51bbf3ea8b22a233e5cad9a675fd99c62101a158c14696672c2092902718aad0"
+    },
+    "strictTypes": {
+      "exitCode": 0,
+      "scope": "App and tests",
+      "file": "types-ui-reliability-20261020.txt",
+      "bytes": 89,
+      "sha256": "c9f2edf8d8877831dd7161eceb1f1ccf3ad923f51bcf25baf424c7c3e1a25934",
+      "logNormalization": "Trailing blank lines removed; other output exact."
+    },
+    "native": {
+      "scope": "Actual Android24 software emulator / ExpoGo57.0.9. Existing Nia23 native126, unchanged/cancelled work routine review, actual edited work routine, process-stop cold saved result and acknowledgement. No native data/version/date/funds/RNG edits or imports. Not native birth-to-work, physical latency, standalone or iOS acceptance.",
+      "baseCommit": "e41a2db59149f4b6e6388f84044a339eca6d2467",
+      "lifeId": "life_native_adult_friend_v30_s0",
+      "initialRevision": 126,
+      "phases": [
+        {
+          "phase": "before",
+          "revision": 126,
+          "worldSha256": "88247f0799070f77ceed1d036e97c3f196e83fefbd284dda4409db7c82697c2d",
+          "routine": "balanced",
+          "pending": null,
+          "annual": null,
+          "allSixInactiveLivesBackupsAnd59Moments111OriginalReceiptsExact": true,
+          "allEightTablesExact": true,
+          "lives": 7,
+          "moments": 59,
+          "receipts": 111
+        },
+        {
+          "phase": "unchanged",
+          "revision": 126,
+          "worldSha256": "88247f0799070f77ceed1d036e97c3f196e83fefbd284dda4409db7c82697c2d",
+          "routine": "balanced",
+          "pending": null,
+          "annual": null,
+          "allSixInactiveLivesBackupsAnd59Moments111OriginalReceiptsExact": true,
+          "allEightTablesExact": true,
+          "lives": 7,
+          "moments": 59,
+          "receipts": 111
+        },
+        {
+          "phase": "result",
+          "revision": 127,
+          "worldSha256": "e9acb40e0f599d1fc777302a3179b2e6c358755de39d22122398ca8c7b926632",
+          "routine": "hard",
+          "pending": "Work routine updated",
+          "annual": null,
+          "allSixInactiveLivesBackupsAnd59Moments111OriginalReceiptsExact": true,
+          "lives": 7,
+          "moments": 59,
+          "receipts": 112
+        },
+        {
+          "phase": "cold-result",
+          "revision": 127,
+          "worldSha256": "e9acb40e0f599d1fc777302a3179b2e6c358755de39d22122398ca8c7b926632",
+          "routine": "hard",
+          "pending": "Work routine updated",
+          "annual": null,
+          "allSixInactiveLivesBackupsAnd59Moments111OriginalReceiptsExact": true,
+          "allEightTablesExact": true,
+          "lives": 7,
+          "moments": 59,
+          "receipts": 112
+        },
+        {
+          "phase": "final",
+          "revision": 128,
+          "worldSha256": "9929bb7e9f97f00eb3d04abe726fdba762cd21c328978d8a2664c5201a121ae3",
+          "routine": "hard",
+          "pending": null,
+          "annual": null,
+          "allSixInactiveLivesBackupsAnd59Moments111OriginalReceiptsExact": true,
+          "lives": 7,
+          "moments": 59,
+          "receipts": 113
+        }
+      ],
+      "record": "android24-work-routine-20261020/journey-exact.json"
+    },
+    "exports": {
+      "exitCode": 0,
+      "scope": "Fresh Android/iOS Hermes exports; not standalone/device acceptance",
+      "bundles": {
+        "android": {
+          "file": "_expo/static/js/android/entry-a5b42a84d919bcee5b9c10e585c39fef.hbc",
+          "bytes": 5663109,
+          "sha256": "8a105b0afc05b102ed9fe66c88975cb0002047ca603d5d8a70cad773058d9a3a"
+        },
+        "ios": {
+          "file": "_expo/static/js/ios/entry-ba74331c4f0bca73bf41ce275791a03c.hbc",
+          "bytes": 5359082,
+          "sha256": "ed0ccf3bdd139cfe5737112366bcf0324463c824db68f7ec8d2fd7c968ac0c84"
+        }
+      },
+      "file": "exports-ui-reliability-20261020.txt",
+      "bytes": 2166,
+      "sha256": "85465f93c9047484d6842bd585e083d6ce0f2eb47dcaddda0b3593d91669eb58"
+    }
+  },
+  "limits": [
+    "No unchanged full game/120 annual gate rerun; game+persistence hash exactly matches pushed hobby milestone. Its 1793/114 regression and annual/natural evidence retain their original source scope.",
+    "Warm zero-unpack, rollback and retry/cold checks are connected tests, not physical p95 or native storage failure.",
+    "Actual native covers only existing Nia work unchanged/cancel/edit/cold/ack. School, education, purchase retries and opening live-region speech need broader physical/iOS acceptance; component/store cases pass.",
+    "CI configuration and app identity/branding are separate release-preparation changes; hosted CI/installable build/physical/iOS release acceptance remain unrun."
+  ]
+}

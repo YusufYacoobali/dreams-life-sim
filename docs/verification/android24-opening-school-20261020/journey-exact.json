@@ -1,0 +1,330 @@
+{
+  "status": "passed",
+  "complete": true,
+  "sourceRuntimeCommit": "5245fbb88f1dff6e92b5726bf730512bd2aa60ed",
+  "gameSourceHash": "ed3148b53360a79b7ee7237c7a1916d6e878f00662609bf0b3a2a7c027a39f6f",
+  "readerMigration": {
+    "from": 12,
+    "to": 13,
+    "allEightTablesExact": true
+  },
+  "opening": {
+    "status": "passed",
+    "complete": true,
+    "reviewed": true,
+    "summary": "Actual Android24 software emulator/ExpoGo57.0.9,390x844. Normal and130% Welcome, creation,16-avatar Appearance and visible-keyboard footer reviewed. Correct fresh130%draft MiaFischer/HamburgGermany/Avatar7; concrete review cancelled with Nevermind, no life created. All8table rows equal on reader12to13/startup, read-only previews/cancel and restored1.0font host-restart observation. Seven original lives/backups,60moments/metadata and119receipts exact; Nia134 unchanged. No unsaved creation-draft-across-host-recreation or on-screen IME Next/Done claim.",
+    "normalTextReviewed": true,
+    "largeTextReviewed": true,
+    "allReadOnlyTablesExact": true,
+    "originalLivesBackupsExact": true,
+    "originalMomentsExact": true,
+    "originalReceiptsExact": true,
+    "phases": [
+      {
+        "phase": "boot",
+        "revision": 134,
+        "worldSha256": "22c88d6a879b54d3d1c9c89441999204f763bb640c3ebcfd563ca377bde612e6",
+        "allEightTablesExact": true
+      },
+      {
+        "phase": "opening-browsed",
+        "revision": 134,
+        "worldSha256": "22c88d6a879b54d3d1c9c89441999204f763bb640c3ebcfd563ca377bde612e6",
+        "allEightTablesExact": true
+      },
+      {
+        "phase": "opening-cold",
+        "revision": 134,
+        "worldSha256": "22c88d6a879b54d3d1c9c89441999204f763bb640c3ebcfd563ca377bde612e6",
+        "allEightTablesExact": true
+      }
+    ]
+  },
+  "school": {
+    "status": "passed",
+    "complete": true,
+    "reviewed": true,
+    "summary": "Actual existing AlexMartin1 selected normally; native childhood advances/choices/acknowledgements reach BarcelonaSchool6/revision17. Disabled current club/conduct/study and unselectedconfirm controls were touched and cancelled; all8tables exact17. Actual science18/cold18/ack19,helpful20/cold20/ack21,focused22/cold22/ack23 match complete normal-command projected worlds. Each process-stop cold result retains all8tables. Six OTHER original lives/backups includingNia134,60originalmoments/metadata and119originalreceipts remainexact. Six new BeforeAgeUp complete worlds match originalpreyear projections; first keeps storedAlex1byte-for-byte. Final7lives66moments141receipts,Alex6/science/helpful/focused,no pending/year,font1.0,ExpoGo stopped.",
+    "fullProjectedWorldsExact": true,
+    "coldAllEightTablesExact": true,
+    "acknowledgedOnce": true,
+    "originalLivesBackupsExact": true,
+    "originalLivesBackupsScope": "All six other lives/current/backups; Alex is deliberately played and the original Alex1 payload remains exact in its first new BeforeAgeUp.",
+    "originalMomentsExact": true,
+    "originalReceiptsExact": true,
+    "phases": [
+      {
+        "phase": "school-selected",
+        "revision": 1,
+        "worldSha256": "d5329f9d08164c2f8f81a7d9e819b82bbd8e39e99adc0fddd2ea051b424b340c",
+        "pending": null,
+        "annual": null,
+        "allSixOtherLivesBackupsExact": true,
+        "all60OriginalMomentsMetadataExact": true,
+        "all119OriginalReceiptsExact": true,
+        "lives": 7,
+        "moments": 60,
+        "receipts": 119
+      },
+      {
+        "phase": "school-first-decision",
+        "revision": 2,
+        "worldSha256": "ab75234909f6d111f6d0a7e324cbac4347e3ab02ddb0ec851796ed066493c703",
+        "pending": "Ready for your close-up",
+        "annual": {
+          "id": "year_1",
+          "startDate": {
+            "year": 2026,
+            "month": 10,
+            "day": 20
+          },
+          "targetDate": {
+            "year": 2027,
+            "month": 10,
+            "day": 20
+          },
+          "monthsProcessed": 12,
+          "stage": "complete",
+          "pausedForPlanning": false
+        },
+        "allSixOtherLivesBackupsExact": true,
+        "all60OriginalMomentsMetadataExact": true,
+        "all119OriginalReceiptsExact": true,
+        "lives": 7,
+        "moments": 61,
+        "receipts": 120
+      },
+      {
+        "phase": "school-first-result",
+        "revision": 3,
+        "worldSha256": "2652ef2aed0911b06fec6ee3e9758249e5410b58b43e8b1743a18415a39a77d7",
+        "pending": "Mostly nostril",
+        "annual": {
+          "id": "year_1",
+          "startDate": {
+            "year": 2026,
+            "month": 10,
+            "day": 20
+          },
+          "targetDate": {
+            "year": 2027,
+            "month": 10,
+            "day": 20
+          },
+          "monthsProcessed": 12,
+          "stage": "complete",
+          "pausedForPlanning": false
+        },
+        "allSixOtherLivesBackupsExact": true,
+        "all60OriginalMomentsMetadataExact": true,
+        "all119OriginalReceiptsExact": true,
+        "lives": 7,
+        "moments": 61,
+        "receipts": 121
+      },
+      {
+        "phase": "school-entry",
+        "revision": 17,
+        "worldSha256": "61d1815e9dd47d83ac2570fcd4a319bad49cfcaac95bb6937b6c07c32a39f230",
+        "pending": null,
+        "annual": null,
+        "allSixOtherLivesBackupsExact": true,
+        "all60OriginalMomentsMetadataExact": true,
+        "all119OriginalReceiptsExact": true,
+        "lives": 7,
+        "moments": 66,
+        "receipts": 135
+      },
+      {
+        "phase": "school-browsed",
+        "revision": 17,
+        "worldSha256": "61d1815e9dd47d83ac2570fcd4a319bad49cfcaac95bb6937b6c07c32a39f230",
+        "pending": null,
+        "annual": null,
+        "allSixOtherLivesBackupsExact": true,
+        "all60OriginalMomentsMetadataExact": true,
+        "all119OriginalReceiptsExact": true,
+        "allEightTablesExact": true,
+        "lives": 7,
+        "moments": 66,
+        "receipts": 135
+      },
+      {
+        "phase": "school-club",
+        "revision": 18,
+        "worldSha256": "eae46b7bada76237e004c3bd30f129d85dc70eed260784ae59c2ca4efe529f7a",
+        "pending": "After-school plans updated",
+        "annual": null,
+        "allSixOtherLivesBackupsExact": true,
+        "all60OriginalMomentsMetadataExact": true,
+        "all119OriginalReceiptsExact": true,
+        "lives": 7,
+        "moments": 66,
+        "receipts": 136
+      },
+      {
+        "phase": "school-cold-club",
+        "revision": 18,
+        "worldSha256": "eae46b7bada76237e004c3bd30f129d85dc70eed260784ae59c2ca4efe529f7a",
+        "pending": "After-school plans updated",
+        "annual": null,
+        "allSixOtherLivesBackupsExact": true,
+        "all60OriginalMomentsMetadataExact": true,
+        "all119OriginalReceiptsExact": true,
+        "allEightTablesExact": true,
+        "lives": 7,
+        "moments": 66,
+        "receipts": 136
+      },
+      {
+        "phase": "school-ready-conduct",
+        "revision": 19,
+        "worldSha256": "de1cce9dda96e53fb13faca7dd26d1ef078db609409eaa1cdefa02e710ea2238",
+        "pending": null,
+        "annual": null,
+        "allSixOtherLivesBackupsExact": true,
+        "all60OriginalMomentsMetadataExact": true,
+        "all119OriginalReceiptsExact": true,
+        "lives": 7,
+        "moments": 66,
+        "receipts": 137
+      },
+      {
+        "phase": "school-conduct",
+        "revision": 20,
+        "worldSha256": "8ee6c71eb32d10f3f184e5a67aad9a18e167a1003a47b9fe7110ee7dc3d79f4f",
+        "pending": "Classroom routine updated",
+        "annual": null,
+        "allSixOtherLivesBackupsExact": true,
+        "all60OriginalMomentsMetadataExact": true,
+        "all119OriginalReceiptsExact": true,
+        "lives": 7,
+        "moments": 66,
+        "receipts": 138
+      },
+      {
+        "phase": "school-cold-conduct",
+        "revision": 20,
+        "worldSha256": "8ee6c71eb32d10f3f184e5a67aad9a18e167a1003a47b9fe7110ee7dc3d79f4f",
+        "pending": "Classroom routine updated",
+        "annual": null,
+        "allSixOtherLivesBackupsExact": true,
+        "all60OriginalMomentsMetadataExact": true,
+        "all119OriginalReceiptsExact": true,
+        "allEightTablesExact": true,
+        "lives": 7,
+        "moments": 66,
+        "receipts": 138
+      },
+      {
+        "phase": "school-ready-study",
+        "revision": 21,
+        "worldSha256": "35dbd9cf558501c1ab64f37172c45e0ee2d492f9f48e801985753f7b9bbfe1bb",
+        "pending": null,
+        "annual": null,
+        "allSixOtherLivesBackupsExact": true,
+        "all60OriginalMomentsMetadataExact": true,
+        "all119OriginalReceiptsExact": true,
+        "lives": 7,
+        "moments": 66,
+        "receipts": 139
+      },
+      {
+        "phase": "school-study",
+        "revision": 22,
+        "worldSha256": "69c9265fd79250f90d06d2598306b8c361a7b2fba036360eefb96dec45601cac",
+        "pending": "Study routine updated",
+        "annual": null,
+        "allSixOtherLivesBackupsExact": true,
+        "all60OriginalMomentsMetadataExact": true,
+        "all119OriginalReceiptsExact": true,
+        "lives": 7,
+        "moments": 66,
+        "receipts": 140
+      },
+      {
+        "phase": "school-cold-study",
+        "revision": 22,
+        "worldSha256": "69c9265fd79250f90d06d2598306b8c361a7b2fba036360eefb96dec45601cac",
+        "pending": "Study routine updated",
+        "annual": null,
+        "allSixOtherLivesBackupsExact": true,
+        "all60OriginalMomentsMetadataExact": true,
+        "all119OriginalReceiptsExact": true,
+        "allEightTablesExact": true,
+        "lives": 7,
+        "moments": 66,
+        "receipts": 140
+      },
+      {
+        "phase": "school-final",
+        "revision": 23,
+        "worldSha256": "ee66b4c689feef21cf0f5de27733e6319534c35f91a3df29901a921d31d52986",
+        "pending": null,
+        "annual": null,
+        "allSixOtherLivesBackupsExact": true,
+        "all60OriginalMomentsMetadataExact": true,
+        "all119OriginalReceiptsExact": true,
+        "lives": 7,
+        "moments": 66,
+        "receipts": 141
+      }
+    ],
+    "newBeforeAgeUpWorlds": [
+      {
+        "snapshotId": "snapshot_r_1",
+        "revision": 1,
+        "worldSha256": "d5329f9d08164c2f8f81a7d9e819b82bbd8e39e99adc0fddd2ea051b424b340c",
+        "originalCurrentBytesExact": true
+      },
+      {
+        "snapshotId": "snapshot_r_4",
+        "revision": 4,
+        "worldSha256": "9bdc68e0c40282d5f74fd5c9f2b6849e36726ffee49a5a0fde9fd2e0caaf5527"
+      },
+      {
+        "snapshotId": "snapshot_r_7",
+        "revision": 7,
+        "worldSha256": "0eb610b50d043ad04be505637618afb6d85ba4eaaae7d5aae48e6884eec2d25f"
+      },
+      {
+        "snapshotId": "snapshot_r_9",
+        "revision": 9,
+        "worldSha256": "f536ea37da64e3505bb6acff2e9e642befd379ab14148c60701988d7fd12cbc0"
+      },
+      {
+        "snapshotId": "snapshot_r_12",
+        "revision": 12,
+        "worldSha256": "1545681c987aed1093e9b366b55e2e962c5632b685f466d53c78dbadaaa3ebb6"
+      },
+      {
+        "snapshotId": "snapshot_r_14",
+        "revision": 14,
+        "worldSha256": "e8fe8f6bad6e5f1cf3af4d46753ccb2ccd294c5f863094ab175f87fe1a066d83"
+      }
+    ],
+    "final": {
+      "lifeId": "life_mvgprdj2_16qsril_0",
+      "personId": "person_player",
+      "name": "Alex Martín",
+      "age": 6,
+      "revision": 23,
+      "club": "science",
+      "conduct": "helpful",
+      "studyEffort": "focused",
+      "lives": 7,
+      "moments": 66,
+      "receipts": 141,
+      "pending": null,
+      "annual": null
+    }
+  },
+  "finalFontScale": 1,
+  "appForceStopped": true,
+  "limitations": [
+    "SoftwareQEMU/SwiftShader with noKVM/ExpoGo; no physical latency,TalkBack/VoiceOver,standalone Android or actualiOS pass.",
+    "Current-source modal leaves undimmed app strips; queued next-batch sizing candidate has not yet had native post-fix review.",
+    "HardwareEnter probes created no life; actual on-screen IME Next/Done acceptance is not claimed here.",
+    "Native game commands are this observed early-life path only; no native birth-to-death,NPCwedding or full-policy lifetime."
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "scope": "Read-only lossless fragment sizing estimate, not migrated database or achieved budget",
+  "snapshots": 173,
+  "originalPayloadBytes": 149837207,
+  "fragmentReferences": 37237,
+  "uniqueFragments": 1478,
+  "reusedFragments": 380,
+  "uniqueUtf8Bytes": 20474197,
+  "conservativeTwoCopiesPlusShaReferencesBytes": 43443446,
+  "descriptorBytes": 2495052
+}

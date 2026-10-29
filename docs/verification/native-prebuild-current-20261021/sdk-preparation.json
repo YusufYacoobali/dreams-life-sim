@@ -1,0 +1,76 @@
+{
+  "format": "dreams-current-android-sdk-preparation-v1",
+  "recordedAt": "2026-10-21T09:40:51.961497+00:00",
+  "status": "prepared-no-download-or-install",
+  "actualLocalSdkRoot": "/workspace/.cache/android-native-check/sdk",
+  "actualSdkmanager": "/workspace/.cache/android-native-check/sdk/cmdline-tools/latest/bin/sdkmanager",
+  "cachedRepositoryIndex": {
+    "file": "/workspace/.cache/android-native-check/repository.xml",
+    "bytes": 377036,
+    "sha256": "9c6014fd13f460b2eff2a241f1fa4f8881a8a2c4ed8c2a6a2886697c660b4af8",
+    "mtime": "2026-10-19T17:08:36.799909+00:00"
+  },
+  "source": "Existing official repository index downloaded19October; not a fresh request/current availability claim. Exact current RNcatalog requirements inspected separately.",
+  "networkPolicy": "Current observed/enforced spec54 package_managers restricted policy permits dl.google.com, but does not permit repo.reactnative.dev. No request to any artifact/SDK host was made in this preparation.",
+  "packages": [
+    {
+      "packageId": "platforms;android-36",
+      "displayName": "Android SDK Platform 36",
+      "revision": "2",
+      "linuxOrUniversalArchive": {
+        "url": "https://dl.google.com/android/repository/platform-36_r02.zip",
+        "bytes": 65878410,
+        "sha1": "2c1a80dd4d9f7d0e6dd336ec603d9b5c55a6f576"
+      },
+      "installedAtObservedSdk": false,
+      "requirement": "Current compile/target36"
+    },
+    {
+      "packageId": "ndk;27.1.12297006",
+      "displayName": "NDK (Side by side) 27.1.12297006",
+      "revision": "27.1.12297006",
+      "linuxOrUniversalArchive": {
+        "url": "https://dl.google.com/android/repository/android-ndk-r27b-linux.zip",
+        "bytes": 663976775,
+        "sha1": "6fc476b2e57d7c01ac0c95817746b927035b9749"
+      },
+      "installedAtObservedSdk": false,
+      "requirement": "RNcatalog default"
+    },
+    {
+      "packageId": "build-tools;36.0.0",
+      "displayName": "Android SDK Build-Tools 36",
+      "revision": "36.0.0",
+      "linuxOrUniversalArchive": {
+        "url": "https://dl.google.com/android/repository/build-tools_r36_linux.zip",
+        "bytes": 63737259,
+        "sha1": "b0b6376977657e8ad9b969bacf4093601da2c6fb"
+      },
+      "installedAtObservedSdk": true,
+      "requirement": "RNcatalog default"
+    },
+    {
+      "packageId": "cmake;3.22.1",
+      "displayName": "CMake 3.22.1",
+      "revision": "3.22.1",
+      "linuxOrUniversalArchive": {
+        "url": "https://dl.google.com/android/repository/cmake-3.22.1-linux.zip",
+        "bytes": 22308647,
+        "sha1": "fd0a48b4a758310df8c7aa51f59840ed48fe7ed8"
+      },
+      "installedAtObservedSdk": false,
+      "requirement": "Candidate only; generated app/RNplugin does not pin CMake; actual AGP choice unrun."
+    }
+  ],
+  "spaceScope": {
+    "platform": "Archive62.8MiB; platform unpacked/temp size unmeasured, reserve roughly200\u2013300MiB as a planning allowance only. Root disk audit must approve before install.",
+    "ndk": "Archive633.2MiB; extracted/temp footprint not measured. Hold large install pending root space plan; no size fits-current-disk claim.",
+    "cmake": "Archive21.3MiB; exact version is only a candidate until actual AGP resolution. Hold with NDK/build plan.",
+    "protected": "Active API24image/emulator/AVDuserdata and all game DB captures/rawlogs/frozen source/published artifacts must remain unchanged."
+  },
+  "nextAction": "Root-authorized space approval, then normal sdkmanager install of platforms;android-36 under actual SDK root using existing supported networking/CA and a dedicated writable Android-user directory. Do not run Gradle or request denied RN artifacts. NDK/CMake remain deferred until adequate space is independently verified.",
+  "sdkmanagerExecuted": false,
+  "archiveDownloaded": false,
+  "largeInstallAuthorizedByThisRecord": false,
+  "noAdbOrProcessControl": true
+}

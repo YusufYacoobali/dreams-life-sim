@@ -1,0 +1,9 @@
+# C39 camera-result copy correction
+
+The Codex source ledger found that `first-camera-closeup` can be offered to a child with valid bald appearance (`hair: 0`), but its `away` result described a photograph of “your hair”. The result now says “the back of your head”, which fits every stored hair preset. The only runtime change is that single result literal in `earlyHomeStories.ts:29`. IDs, labels, ages, eligibility, effects, journals, RNG, bound choices and persisted data are unchanged.
+
+This is a correction to the unreleased C39/content13 candidate. No engine, world, content or reader version is changed. The initial full regression at `66ec642e4c9a9332eac322bd8fb12e0a6a3d8e87` remains evidence for that exact pre-correction source. It must not be labelled byte-identical to the corrected runtime. The coordinator owns final targeted catalogue checks, types, export and the exact one-literal source bridge; this commit does not claim those gates have run.
+
+The three existing catalogue checks in `special-career-depth.test.ts`, `rare-adult-story.test.ts` and `event-rarity.test.ts` first assert the exact current neutral result on their copied original250 projection. They then restore only that copied result to the exact historical hair literal before checking the unchanged C12 narrative SHA256 `3bcaeee8d5d03b0710cf9a96d0dff6cb53b182f452bc8f52c9a85e5c26be6d01`. Their projections create new objects; neither source choices nor old bound data are rewritten. No broad normalisation or replacement golden is used.
+
+Historical source inventories and the original250/251 narrative hashes remain historical controls. Existing saved decision/result text stays exact because the correction changes a template for future binding only. No original fixture, producer hash, archive, pending payload, old journal or moment is modified. This is a source/copy regression correction, not a new natural encounter, native rendering or screen-reader claim.

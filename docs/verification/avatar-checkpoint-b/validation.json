@@ -1,0 +1,101 @@
+{
+  "status": "implemented; native hardware acceptance remains unverified",
+  "styleReference": "design/01-character-appearance.png",
+  "styleApproval": "User approved Checkpoint A on 2026-10-22",
+  "productionChanges": [
+    "src/assets/CharacterPortrait.tsx",
+    "src/assets/portraitLayout.ts",
+    "src/assets/portraitPlan.ts",
+    "src/assets/portraitImages.ts",
+    "src/assets/portraitGeometry.ts",
+    "assets/generated/avatars/"
+  ],
+  "publicInterfaceCompatible": true,
+  "saveSchemaUnchanged": true,
+  "presetTuplesUnchanged": true,
+  "navigationLayoutsGameplayUnchanged": true,
+  "coverage": {
+    "presets": 16,
+    "skinTones": 6,
+    "hairstylesIncludingBald": 8,
+    "hairColours": 5,
+    "faceFamilies": 4,
+    "ageStages": 8,
+    "sharedTextureLayers": 88,
+    "fullPortraitCombinationsGenerated": 0,
+    "traitAgeCombinationsChecked": 7680,
+    "maxLayersPerPortrait": 7
+  },
+  "typecheck": {
+    "command": "npm run typecheck",
+    "exitCode": 0,
+    "scope": "strict application and all test TypeScript"
+  },
+  "focusedTests": {
+    "suites": 10,
+    "tests": 36,
+    "exitCode": 0,
+    "scope": [
+      "portrait rendering/accessibility/memoization",
+      "all saved trait and age combinations",
+      "appearance labels",
+      "creation and accessible onboarding",
+      "profile durable save/cold resume",
+      "relationships",
+      "contacts",
+      "saved life preview",
+      "legacy"
+    ]
+  },
+  "exports": [
+    {
+      "platform": "android",
+      "exportExitCode": 0,
+      "localPortraitTextures": 88,
+      "allFinalPngBytesMatch": true,
+      "oldGrayscaleAtlasBundled": false
+    },
+    {
+      "platform": "ios",
+      "exportExitCode": 0,
+      "localPortraitTextures": 88,
+      "allFinalPngBytesMatch": true,
+      "oldGrayscaleAtlasBundled": false
+    }
+  ],
+  "visualReview": {
+    "captures": 10,
+    "comparedToReference": true,
+    "sizes": [
+      52,
+      88,
+      140
+    ],
+    "backgrounds": [
+      "light",
+      "dark",
+      "checkerboard"
+    ],
+    "coverage": [
+      "16 presets",
+      "all skin and hair palette pairs",
+      "all face and hair pairs",
+      "all head age stages",
+      "child adult elderly hairstyle alignment"
+    ],
+    "fixesDuringReview": [
+      "Bun fringe regenerated to expose both eyes",
+      "Front/back hair masks separated to prevent doubled shading"
+    ]
+  },
+  "checks": [
+    "art-checks.json",
+    "browser-checks.json",
+    "plan-performance.json"
+  ],
+  "notVerified": [
+    "Native Android or iOS device screenshots",
+    "Native device frame rate and memory profiling",
+    "TalkBack and VoiceOver speech on hardware"
+  ]
+}

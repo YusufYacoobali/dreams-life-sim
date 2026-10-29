@@ -1,0 +1,184 @@
+"""Actual JSON/source/hash reconciliation only; no game/codec/SQL/replay."""
+from pathlib import Path
+from collections import Counter
+from datetime import datetime, timezone
+import json, hashlib, re
+
+BASE = Path('/workspace/.cache/dreams-current-c39-policies/entrepreneur-v3')
+OUT = Path(__file__).parent
+read = lambda p: json.loads(Path(p).read_text())
+sha = lambda b: hashlib.sha256(b).hexdigest()
+pin = lambda p: {'file': str(p), 'bytes': Path(p).stat().st_size, 'sha256': sha(Path(p).read_bytes())}
+canonical = lambda j: json.dumps(j, sort_keys=True, ensure_ascii=False, separators=(',', ':')).encode()
+def write(name, obj):
+    (OUT / name).write_text(json.dumps(obj, indent=2, ensure_ascii=False) + '\n')
+
+receipt_path = Path('/tmp/dreams-production-finish-accepted-entrepreneur-v3-receipt.json')
+receipt = read(receipt_path)
+snapshot_path = Path(receipt['sourceSnapshot'])
+snapshot = read(snapshot_path)
+manifest = read(BASE / 'manifest.json')
+aggregate = read(BASE / 'result.json')
+registration_path = Path(manifest['source']['registration']['file'])
+registration = read(registration_path)
+assert receipt['complete'] is True and receipt['exitCode'] == 0
+assert receipt['sourceCommit'] == snapshot['commit'] == '33b6a5fcb0aae73dfc235a15394b34d8afda00cc'
+assert pin(snapshot_path)['sha256'] == receipt['sourceSnapshotSha256'] == '2e08fd925c673437ff7de7c76c0fd79d02832617d0014efc1c3e471782fe9b56'
+assert receipt['raw'] == pin(receipt['raw']['file']) and receipt['raw']['sha256'] == 'bdfc74af3966310680db2a1458e35695fb32f8d1da201fccb71b86c4ab3e71ef'
+assert manifest['source'] == aggregate['registration']
+assert manifest['source']['sourceSnapshot'] == pin(snapshot_path) and manifest['source']['registration'] == pin(registration_path)
+assert registration['complete'] is True and registration['cohortRunAuthorized'] is True
+assert manifest['source']['commit'] == registration['commit'] == snapshot['commit']
+assert len(snapshot['source']) == manifest['source']['sourceFiles'] == 688
+versions = {'world': 38, 'engine': 39, 'content': 13}
+assert aggregate['versions'] == versions and manifest['versions'] == snapshot['versions'] == registration['versions'] == {**versions, 'database': 18, 'checkpoint': 'v4'}
+for phase in ['before', 'after']:
+    assert receipt[phase] == {'files': 688, 'snapshotSha256': receipt['sourceSnapshotSha256'], 'status': 'exact'}
+for path, digest in manifest['source']['originalProducerHashes'].items():
+    assert snapshot['source'][path] == digest
+for runtime in [manifest['runtime'], aggregate['runtime']]:
+    for path, digest in runtime['loadedSource'].items():
+        assert snapshot['source'][path] == digest
+expected_sources = {'game': snapshot['gameSourceHash'], 'gameAndPersistence': snapshot['combinedGamePersistenceSourceHash'], 'store': snapshot['source']['src/state/gameStore.ts'], 'tool': snapshot['source']['tools/current-policy/run-entrepreneur-v3.cjs']}
+assert aggregate['sourceBefore'] == aggregate['sourceAfter'] == expected_sources
+assert aggregate['adapterVersion'] == manifest['adapterVersion'] == 3 and aggregate['policyVersion'] == manifest['decisionPolicyVersion'] == 2
+assert aggregate['status'] == 'integrity-passed' and aggregate['orderedScenarioCComplete'] == 12
+COUNTRIES = ['US', 'CA', 'GB', 'AU', 'FR', 'DE', 'ES', 'IT', 'BR', 'IN', 'JP', 'ZA']
+assignments = [{'country': c, 'seed': 900 + i} for i, c in enumerate(COUNTRIES)]
+assert manifest['assignments'] == assignments and manifest['additionalAnnualSeeds'] == 0
+assert aggregate['cohort'] == {'seeds': list(range(900, 912)), 'count': 12, 'additionalAnnualPolicySeeds': 0}
+assert {p.name for p in BASE.iterdir()} == set(COUNTRIES) | {'manifest.json', 'result.json'}
+raw_bytes = Path(receipt['raw']['file']).read_bytes()
+result_bytes = (BASE / 'result.json').read_bytes()
+assert raw_bytes.endswith(result_bytes)
+progress = [json.loads(line) for line in raw_bytes[:-len(result_bytes)].decode().splitlines()]
+assert len(progress) == 12
+PHASES = ['birth', 'school', 'social', 'fame50', 'business', 'brandEarned', 'investment', 'family', 'death']
+currencies = {'US': 'USD', 'CA': 'CAD', 'GB': 'GBP', 'AU': 'AUD', 'FR': 'EUR', 'DE': 'EUR', 'ES': 'EUR', 'IT': 'EUR', 'BR': 'BRL', 'IN': 'INR', 'JP': 'JPY', 'ZA': 'ZAR'}
+country_rows, gap_rows = [], []
+command_counts, deal_statuses, cold_labels = Counter(), Counter(), Counter()
+paid_deliveries = unpaid_deliveries = proof_rows = 0
+
+for i, assignment in enumerate(assignments):
+    c, seed = assignment['country'], assignment['seed']
+    directory = BASE / c
+    assert {p.name for p in directory.iterdir()} == {'birth.db', 'commands.ndjson', 'final.checkpoint.json', 'result.json'}
+    r = read(directory / 'result.json')
+    commands = [json.loads(line) for line in (directory / 'commands.ndjson').read_text().splitlines()]
+    assert r == aggregate['records'][i] and r['country'] == c and r['seed'] == seed and r['versions'] == versions
+    assert len(commands) == r['commands'] and sha((directory / 'commands.ndjson').read_bytes()) == r['traceSha256']
+    assert all(row['commandIndex'] == j for j, row in enumerate(commands))
+    assert commands[0]['mode'] == commands[1]['mode'] == 'sqlite' and commands[0]['revision'] == 0 and commands[1]['revision'] == 1
+    start = commands[0]['command']
+    assert start['type'] == 'StartLife' and start['seed'] == seed and start['input']['country'] == c and start['input']['background'] == 'ordinary'
+    assert start['birthDate'] == {'year': 2000, 'month': 1, 'day': 1}
+    assert commands[1]['command'] == {'type': 'acknowledgeBirth'}
+    for j, row in enumerate(commands[2:], start=2):
+        assert row['mode'] == 'pure-engine' and row['beforeRevision'] == j - 1 and row['revision'] == j
+        assert row['date']['year'] >= 2000
+    assert commands[-1]['revision'] == r['commands'] - 1
+    assert r['birthProof']['closedConnectionReopenedExact'] is True and r['birthProof']['revision'] == 1
+    assert r['birthProof']['databaseFile'] == str(directory / 'birth.db')
+    assert all(re.fullmatch('[0-9a-f]{64}', r['birthProof'][key]) for key in ['worldSha256', 'allEightTablesSha256'])
+    assert r['traceFile'] == str(directory / 'commands.ndjson') and r['finalCheckpointFile'] == str(directory / 'final.checkpoint.json')
+    final_ref = pin(directory / 'final.checkpoint.json')
+    final = r['finalCheckpointProof']
+    assert final['checkpointSha256'] == final_ref['sha256'] and final['checkpointBytes'] == final_ref['bytes'] and final['worldSha256'] == r['finalWorldSha256']
+    frame = read(directory / 'final.checkpoint.json')
+    assert frame['format'] == final['format'] == 'dreams-checkpoint-v4'
+    assert frame['bytes'] == final['compactBytes'] == frame['main']['bytes'] + sum(part['bytes'] for part in frame['people']) + sum(part['bytes'] for part in frame['ledger'])
+    assert frame['bytes'] + 32 <= 32_000_000 and final['canonicalBytes'] <= 80_000_000
+    assert final['canonicalBytes'] <= r['maximumCanonicalBytes'] and final['checkpointBytes'] <= r['maximumCheckpointBytes']
+    cold_labels.update(r['productionCheckpointChecks']); proof_rows += len(r['coldProof'])
+    assert all(proof['revision'] <= commands[-1]['revision'] and proof['canonicalBytes'] <= r['maximumCanonicalBytes'] and proof['checkpointBytes'] <= r['maximumCheckpointBytes'] for proof in r['coldProof'])
+    for label, count in r['productionCheckpointChecks'].items():
+        assert type(count) is int and count > 0
+        assert sum(proof['label'] == label for proof in r['coldProof']) == (count if label in ['annual', 'death'] else 1)
+    assert r['coldProof'][-1]['label'] == 'death' and {k: v for k, v in r['coldProof'][-1].items() if k not in ['label', 'revision']} == final
+
+    assert [row['phase'] for row in r['timeline']] == PHASES
+    assert all(r['timeline'][j]['commandIndex'] < r['timeline'][j + 1]['commandIndex'] for j in range(len(PHASES) - 1))
+    assert r['coverage'] == {'allPhasesReached': True, 'orderedScenarioCComplete': True, 'reached': PHASES, 'unreached': []} and r['unmet'] == []
+    for row in r['timeline']:
+        command = commands[row['commandIndex']]
+        assert command['revision'] == row['revision']
+        if row['phase'] != 'birth': assert command['date'] == row['date'] and command['age'] == row['age']
+    first = {row['phase']: row for row in r['timeline']}
+    assert first['social']['baselineFollowers'] == r['social']['baselineFollowers'] == 0 and first['fame50']['fame'] >= 50
+    assert commands[first['social']['commandIndex']]['command']['type'] == 'create-social'
+    assert commands[first['business']['commandIndex']]['command']['type'] == 'start-business'
+    assert commands[first['investment']['commandIndex']]['command']['type'] == 'buy-investment'
+    assert commands[first['family']['commandIndex']]['command']['type'] == 'adopt'
+    assert first['family']['childIds'] == r['childIds'] and len(r['childIds']) == 1
+    assert first['death']['cause'] == r['causeOfDeath'] and first['death']['age'] == r['ageAtDeath']
+    assert 0 <= r['maxFame'] <= 100 and r['social']['status'] == 'memorial'
+
+    selected_commands = [row for row in commands[2:]]
+    counts = Counter(row['command']['type'] for row in selected_commands)
+    command_counts.update(counts)
+    posts = [row for row in selected_commands if row['command']['type'] == 'publish-post']
+    assert len(posts) == r['manualPosts'] and max(Counter(row['date']['year'] for row in posts).values(), default=0) <= 6
+    assert all(row['command']['sponsored'] is False and row['command']['kind'] == 'photo' for row in posts)
+    reputation_commands = [row for row in selected_commands if row['command']['type'] == 'public-action']
+    assert len(reputation_commands) == len(r['reputation']) and len({row['date']['year'] for row in reputation_commands}) == len(reputation_commands)
+    assert all(row['command']['action'] == 'reputation' and row['age'] >= 18 for row in reputation_commands)
+    assert all(rep['cost']['currency'] == currencies[c] and int(rep['cost']['minor']) > 0 and rep['imageBefore'] <= rep['imageAfter'] <= 100 for rep in r['reputation'])
+    assert [rep['date'] for rep in r['reputation']] == [row['date'] for row in reputation_commands]
+    funding = [row for row in selected_commands if row['command']['type'] == 'fund-business']
+    assert sum(int(row['command']['amount']) for row in funding) == int(r['companyFunding'])
+    assert len({(row['date']['year'], row['date']['month']) for row in funding}) == len(funding)
+    assert len(r['companies']) == 1
+    company = r['companies'][0]
+    assert company['id'] == first['business']['businessId'] and company['founderId'] == 'person_player' and company['kind'] == 'cafe'
+    assert company['currency'] == currencies[c] and company['country'] == c
+    books = company['months'] + company['archives']
+    assert sum(int(row['profit']) for row in books) == int(company['cumulativeProfit'])
+    assert all(int(row['revenue']) - int(row['expenses']) == int(row['profit']) for row in books)
+    assert all(deal['ownerId'] == 'person_player' and deal['monthlyPay']['currency'] == currencies[c] for deal in r['sponsorships'])
+    deal_statuses.update(deal['status'] for deal in r['sponsorships'])
+    earned = 0
+    for deal in r['sponsorships']:
+        assert int(deal['earned']) == sum(int(delivery['paid']) for delivery in deal['deliveries'])
+        assert len({d['month'] for d in deal['deliveries']}) == len(deal['deliveries'])
+        for delivery in deal['deliveries']:
+            if int(delivery['paid']) == 0: unpaid_deliveries += 1
+            else:
+                assert delivery['posts'] >= deal['requiredPosts'] and int(delivery['paid']) == int(deal['monthlyPay']['minor'])
+                paid_deliveries += 1
+        if deal['status'] == 'declined': assert int(deal['earned']) == 0 and not deal['deliveries']
+        earned += int(deal['earned'])
+    assert earned > 0 and all(holding['instrumentId'] == 'GROVE' and holding['currency'] == currencies[c] for holding in r['holdings'])
+    assert len(r['holdings']) == 1
+    estate = r['estate']; amount = lambda money: int(money['minor']); unit = estate['netWorthAtDeath']['currency']
+    values = [estate[key] for key in ['tax', 'fees', 'charity', 'debtPaid', 'debtWrittenOff']] + [dist[key] for dist in estate['distributions'] for key in ['cash', 'assetValue']]
+    assert unit == currencies[c] and all(m['currency'] == unit for m in values)
+    distributed = sum(amount(dist['cash']) + amount(dist['assetValue']) for dist in estate['distributions'])
+    left = amount(estate['netWorthAtDeath']) + amount(estate['debtWrittenOff'])
+    right = distributed + amount(estate['tax']) + amount(estate['fees']) + amount(estate['charity'])
+    assert left == right == int(r['estateProof']['left']) == int(r['estateProof']['right']) and r['estateProof']['conserved'] is True
+    assert distributed == int(r['estateProof']['distributed']) and r['estateProof']['currency'] == unit
+    receipts = r['estateReceipts']; assert receipts['conserved'] is True
+    for key in ['charity', 'tax', 'debtPaid']: assert int(receipts[key]) == amount(estate[key])
+    for dist in estate['distributions']:
+        assert sum(int(pair['amount']) for pair in receipts['actualReceiptPairs'] if pair['heirId'] == dist['personId']) == amount(dist['cash'])
+    receipt_ids = [pair[key] for pair in receipts['actualReceiptPairs'] for key in ['debitId', 'creditId']]
+    assert len(set(receipt_ids)) == len(receipt_ids)
+    assert progress[i] == {'event': 'entrepreneur-life-complete', 'country': c, 'seed': seed, 'ageAtDeath': r['ageAtDeath'], 'coverage': r['coverage'], 'maxFame': r['maxFame'], 'commands': r['commands'], 'elapsedMs': r['elapsedMs']}
+    reasons = Counter(row['brandReason'] for row in r['annual'] if row['brandReason'])
+    gap_rows.append({'country': c, 'unmet': r['unmet'], 'unmetRawPointer': f'{c}/result.json#/unmet', 'annualBrandAvailabilityReasons': dict(reasons), 'annualArraySha256': sha(canonical(r['annual'])), 'interviews': r['interviews'], 'declinedBrandOffers': [deal['id'] for deal in r['sponsorships'] if deal['status'] == 'declined'], 'zeroPaidDeliveryCount': sum(int(delivery['paid']) == 0 for deal in r['sponsorships'] for delivery in deal['deliveries']), 'limits': ['No failed-business closure was required; final sold status is estate disposal, not operating failure.', 'Family phase is actual paid adoption, not marriage or biological pregnancy.', 'Detailed current contract/creator-income/company-ledger/estate currency reconciliation is asserted by the producer; this reviewer does not decode final ledger rows.']})
+    country_rows.append({**assignment, 'ageAtDeath': r['ageAtDeath'], 'causeOfDeath': r['causeOfDeath'], 'timeline': r['timeline'], 'coverage': r['coverage'], 'commandsIncludingTwoBirthStoreSteps': r['commands'], 'pureEngineCommands': r['commands'] - 2, 'manualPosts': r['manualPosts'], 'viralPosts': r['social']['viralPosts'], 'peakFollowers': r['social']['peakFollowers'], 'socialIncomeMinor': r['social']['income'], 'currency': unit, 'reputationActions': len(r['reputation']), 'companyFundingMinor': r['companyFunding'], 'companyProfitMinor': company['cumulativeProfit'], 'companyDividendsMinor': company['dividends'], 'finalCompanyStatus': company['status'], 'lastAnnualCompanyStatus': r['annual'][-1]['company']['status'] if r['annual'][-1]['company'] else None, 'brandStatuses': dict(Counter(d['status'] for d in r['sponsorships'])), 'brandEarnedMinor': str(earned), 'children': r['childIds'], 'investmentFinalQuantity': r['holdings'][0]['quantity'], 'estateReceiptPairs': receipts['actualReceiptPairs'], 'producerColdComparisons': sum(r['productionCheckpointChecks'].values()), 'materializedColdProofRows': len(r['coldProof']), 'additionalFinalCheckpointRoundTrip': 1, 'maximumCanonicalBytes': r['maximumCanonicalBytes'], 'maximumCheckpointBytes': r['maximumCheckpointBytes'], 'traceSha256': r['traceSha256'], 'finalWorldSha256': r['finalWorldSha256'], 'raw': {name: pin(directory / name) for name in sorted(p.name for p in directory.iterdir())}})
+
+source_pins = {str(p): pin(p) for p in [receipt_path, Path(receipt['raw']['file']), snapshot_path, registration_path]}
+for key, proof in snapshot['coordinatorProofs'].items():
+    ref = pin(proof['file']); assert ref['sha256'] == proof['sha256']; source_pins[proof['file']] = ref
+for key in ['copyBridge', 'testOnlySourceBridge']:
+    ref = registration[key]; assert pin(ref['file']) == ref; source_pins[ref['file']] = ref
+for path in ['tools/current-policy/run-entrepreneur-v3.cjs', 'tools/current-policy/source.cjs', 'tools/run-entrepreneur-sweep.cjs', 'src/state/gameStore.ts', 'src/persistence/checkpoints.ts']:
+    file = Path(snapshot['root']) / path; ref = pin(file); assert ref['sha256'] == snapshot['source'][path]; source_pins[str(file)] = ref
+raw_files = [file for file in sorted(BASE.rglob('*')) if file.is_file()]
+assert len(raw_files) == 50
+write('inputs.json', {'format': 'dreams-current-entrepreneur-v3-actual-pins-v1', 'rawFiles': [pin(file) for file in raw_files], 'sourceAndGateArtifacts': source_pins, 'originalProducerHashes': manifest['source']['originalProducerHashes'], 'loadedSourceHashes': aggregate['runtime']['loadedSource'], 'complete688SourceMap': pin(snapshot_path)})
+write('gaps-and-reasons.json', gap_rows)
+summary = {'format': 'dreams-current-entrepreneur-v3-output-review-v1', 'reviewer': '/root/hobby_review', 'kind': 'Codex actual-artifact reconciliation', 'externalHuman': False, 'reviewedAt': datetime.now(timezone.utc).isoformat(), 'status': 'reviewed-no-reconciliation-defect', 'sourceCommit': snapshot['commit'], 'versions': {**versions, 'database': 18, 'checkpoint': 'v4'}, 'gameSourceHash': snapshot['gameSourceHash'], 'combinedGamePersistenceSourceHash': snapshot['combinedGamePersistenceSourceHash'], 'rootGate': {'session': '97308', 'receipt': pin(receipt_path), 'raw': receipt['raw'], 'complete': True, 'exitCode': 0, 'wrapperSeconds': receipt['elapsedSeconds'], 'adapterSeconds': aggregate['elapsedMs'] / 1000, 'all688SourceBeforeAfterExact': True}, 'assignments': assignments, 'adapterVersion': 3, 'decisionPolicyVersion': 2, 'scope': aggregate['scope'], 'additionalAnnualSeeds': 0, 'countries': country_rows, 'totals': {'completedLives': 12, 'orderedNineMilestonePaths': 12, 'unmetDeclaredMilestones': 0, 'commandsIncludingBirthStoreSteps': sum(r['commandsIncludingTwoBirthStoreSteps'] for r in country_rows), 'actualBirthStoreSteps': 24, 'pureEngineCommands': sum(r['pureEngineCommands'] for r in country_rows), 'manualPosts': sum(r['manualPosts'] for r in country_rows), 'reputationActions': sum(r['reputationActions'] for r in country_rows), 'commandsByType': dict(command_counts), 'brandStatuses': dict(deal_statuses), 'positiveBrandDeliveryRows': paid_deliveries, 'zeroPaidBrandDeliveryRows': unpaid_deliveries, 'companies': 12, 'paidAdoptedFamilies': 12, 'producerColdChecksCounted': sum(cold_labels.values()), 'producerColdLabels': dict(cold_labels), 'materializedColdProofRows': proof_rows, 'additionalFinalRoundTripsOutsideColdCounters': 12}, 'evidence': {'inputs': pin(OUT / 'inputs.json'), 'gapsAndReasons': pin(OUT / 'gaps-and-reasons.json')}, 'findings': [], 'limits': ['All12 reach the preregistered nine ordered milestone names, not every original Scenario C validation path or every career.', 'Only birth/acknowledgement and initial closed-connection recovery use actual on-disk SQLite. Subsequent commands use immutable engine state; birth database rows are asserted unchanged by the producer.', 'Reviewer reads JSON/source/hashes only; no SQLite query, world unpack/decode, engine, policy, replay, test, outcome search or native action.', 'Raw traces and final checkpoint bytes are independently pinned. Full world equality, personal/company/creator ledger reconciliation, paid startup/adoption/fee-inclusive purchase cash deltas and actual receipt linkage remain closed producer assertions where no detailed raw ledger rows are emitted.', 'The cold counters include overlapping command/result/annual/death states; only the first proof per label plus annual/death proofs is materialized, and each final checkpoint is an additional full producer round trip outside those counters.', 'All cafes were active in the last recorded annual observation and sold during estate disposal. Sustained losses and real owner funding are recorded, but bankruptcy/failed-business closure is not covered.', 'Family means actual paid adoption here; no marriage/biological pregnancy/multigeneration acceptance.', 'Money totals remain per currency; no cross-currency wealth or income sum is implied.', 'Same reused country seeds900..911 add zero distinct annual seeds. No native, physical latency, full-life SQLite, all-choices or release-completion claim.']}
+write('summary.json', summary)
+print(json.dumps({'summary': pin(OUT / 'summary.json'), 'inputs': pin(OUT / 'inputs.json'), 'totals': summary['totals']}, indent=2))

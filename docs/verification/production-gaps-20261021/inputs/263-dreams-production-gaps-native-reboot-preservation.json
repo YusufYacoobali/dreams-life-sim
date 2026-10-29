@@ -1,0 +1,43 @@
+{
+  "complete": true,
+  "observedAt": "2026-10-21T01:06:01.323160+00:00",
+  "scope": "After emulator infrastructure restart/root-adbd recovery, before any C37 gameplay. All8 raw tables exactly equal actual C36 final140, including all7 lives/backups,66moments and147receipts.",
+  "baseline": "/tmp/dreams-friends-editorial-native-cold-final140-db",
+  "actual": "/tmp/dreams-production-gaps-native-rooted-before-boot-db",
+  "readers": [
+    15,
+    15
+  ],
+  "tableCounts": {
+    "backups": 7,
+    "branches": 1,
+    "lives": 7,
+    "preferences": 2,
+    "receipts": 147,
+    "restore_receipts": 1,
+    "snapshot_metadata": 66,
+    "snapshots": 66
+  },
+  "files": [
+    {
+      "file": "/tmp/dreams-friends-editorial-native-cold-final140-db/dreams.db",
+      "bytes": 3805184,
+      "sha256": "f144f28d9701ff2e4ea3cfe710e8acbc57c27ffee351caa4313f34314d3d7dae"
+    },
+    {
+      "file": "/tmp/dreams-friends-editorial-native-cold-final140-db/dreams.db-wal",
+      "bytes": 4733912,
+      "sha256": "144a5a5bd29bb2b9242b26c039a275f46a0d0a5f898076e813424da495ee661c"
+    },
+    {
+      "file": "/tmp/dreams-production-gaps-native-rooted-before-boot-db/dreams.db",
+      "bytes": 3805184,
+      "sha256": "f144f28d9701ff2e4ea3cfe710e8acbc57c27ffee351caa4313f34314d3d7dae"
+    },
+    {
+      "file": "/tmp/dreams-production-gaps-native-rooted-before-boot-db/dreams.db-wal",
+      "bytes": 4733912,
+      "sha256": "144a5a5bd29bb2b9242b26c039a275f46a0d0a5f898076e813424da495ee661c"
+    }
+  ]
+}

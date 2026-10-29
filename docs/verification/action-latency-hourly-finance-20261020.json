@@ -1,0 +1,1847 @@
+{
+  "scope": "five warm cloud Node/on-disk SQLite samples per fixed world; optional population inputs are generated stress setups; every cold world and backup exact; not native",
+  "startingRows": "current format, compression blocks primed by cold open",
+  "node": "v24.19.0",
+  "sourceHash": "080aa1144edd461d9df7898168e2c8f96ae6b8bf6ffcf0c043675aa75d487dc1",
+  "driverHash": "19da212c32feb53a2f264b4c6062cd0b7a68146a762f82841890ea410408bbe9",
+  "results": [
+    {
+      "label": "Begin Life",
+      "command": null,
+      "inputSha256": "7dacc99c650748a6b2aa8f19fa112b9ecfe8920483576f6e552ba77bb2e7e4f6",
+      "inputBytes": 11351,
+      "checkpointBytes": {
+        "input": 3639,
+        "current": 3639,
+        "backup": 3639,
+        "beforeAgeUp": 0,
+        "inputFormat": "dreams-checkpoint-v1",
+        "currentFormat": "dreams-checkpoint-v1"
+      },
+      "ledgerRows": 0,
+      "medianMs": {
+        "totalMs": 1.3335609999999178,
+        "resolveMs": 0.002613999999994121,
+        "commitMs": 1.331126999999924,
+        "coldOpenMs": 0.6629789999997229
+      },
+      "trials": [
+        {
+          "totalMs": 1.753353000000061,
+          "resolveMs": 0.002624000000196247,
+          "commitMs": 1.7507289999998648,
+          "coldOpenMs": 0.9470980000000964,
+          "phases": {
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 1.1742000000003827
+            }
+          }
+        },
+        {
+          "totalMs": 1.1377049999996416,
+          "resolveMs": 0.002613999999994121,
+          "commitMs": 1.1350909999996475,
+          "coldOpenMs": 0.8461560000000645,
+          "phases": {
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 0.7070459999999912
+            }
+          }
+        },
+        {
+          "totalMs": 5.929308000000219,
+          "resolveMs": 0.0022140000000945292,
+          "commitMs": 5.927094000000125,
+          "coldOpenMs": 0.6062040000001616,
+          "phases": {
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 0.5897890000001098
+            }
+          }
+        },
+        {
+          "totalMs": 1.3335609999999178,
+          "resolveMs": 0.00243399999999383,
+          "commitMs": 1.331126999999924,
+          "coldOpenMs": 0.6629789999997229,
+          "phases": {
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 0.8031200000000354
+            }
+          }
+        },
+        {
+          "totalMs": 0.8631310000000667,
+          "resolveMs": 0.0031850000000304135,
+          "commitMs": 0.8599460000000363,
+          "coldOpenMs": 0.6481870000002345,
+          "phases": {
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 0.4527330000000802
+            }
+          }
+        }
+      ]
+    },
+    {
+      "label": "First-year choice",
+      "command": {
+        "type": "choose",
+        "eventId": "event_2027_first-bubble-catch",
+        "choiceId": "chase"
+      },
+      "inputSha256": "309a03e4e24689f79e520d0634a7f693ee56a32ed062dd00339b586a94b37c16",
+      "inputBytes": 44063,
+      "checkpointBytes": {
+        "input": 7243,
+        "current": 6807,
+        "backup": 7243,
+        "beforeAgeUp": 0,
+        "inputFormat": "dreams-checkpoint-v1",
+        "currentFormat": "dreams-checkpoint-v1"
+      },
+      "ledgerRows": 96,
+      "medianMs": {
+        "totalMs": 1.9431989999998223,
+        "resolveMs": 0.639252999999826,
+        "commitMs": 1.3196100000000115,
+        "coldOpenMs": 1.378476999999748
+      },
+      "trials": [
+        {
+          "totalMs": 1.838612000000012,
+          "resolveMs": 0.5190020000000004,
+          "commitMs": 1.3196100000000115,
+          "coldOpenMs": 1.378476999999748,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.06949499999973341
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.3880349999999453
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 1.1854370000000927
+            }
+          }
+        },
+        {
+          "totalMs": 2.097932000000128,
+          "resolveMs": 0.669448999999986,
+          "commitMs": 1.428483000000142,
+          "coldOpenMs": 4.422406000000137,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.11536299999988842
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.4672049999999217
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 1.2123870000000352
+            }
+          }
+        },
+        {
+          "totalMs": 1.9431989999998223,
+          "resolveMs": 0.639252999999826,
+          "commitMs": 1.3039459999999963,
+          "coldOpenMs": 1.297005999999783,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.06553899999971691
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.4473649999999907
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 1.137163999999757
+            }
+          }
+        },
+        {
+          "totalMs": 1.808165999999801,
+          "resolveMs": 0.524120000000039,
+          "commitMs": 1.284045999999762,
+          "coldOpenMs": 1.3319480000000112,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.0686439999999493
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.3914999999997235
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 1.122331000000031
+            }
+          }
+        },
+        {
+          "totalMs": 3.5382330000002185,
+          "resolveMs": 0.7239309999999932,
+          "commitMs": 2.8143020000002252,
+          "coldOpenMs": 1.7868840000001,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.10523800000009942
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.5338449999999284
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 2.5926980000003823
+            }
+          }
+        }
+      ]
+    },
+    {
+      "label": "First-year choice Continue",
+      "command": {
+        "type": "acknowledge",
+        "resultId": "event_2027_first-bubble-catch_result"
+      },
+      "inputSha256": "d3e5a97e3b0834af22e2b9b3365363729690e80619b108701d6b2dbfe164c8a7",
+      "inputBytes": 43097,
+      "checkpointBytes": {
+        "input": 6807,
+        "current": 6475,
+        "backup": 6807,
+        "beforeAgeUp": 0,
+        "inputFormat": "dreams-checkpoint-v1",
+        "currentFormat": "dreams-checkpoint-v1"
+      },
+      "ledgerRows": 96,
+      "medianMs": {
+        "totalMs": 2.0006759999996575,
+        "resolveMs": 0.5443410000002586,
+        "commitMs": 1.4064199999997982,
+        "coldOpenMs": 1.3175460000002204
+      },
+      "trials": [
+        {
+          "totalMs": 2.0006759999996575,
+          "resolveMs": 0.5942559999998593,
+          "commitMs": 1.4064199999997982,
+          "coldOpenMs": 1.2468189999999595,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.08530800000016825
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.4656719999998131
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 1.2334089999999378
+            }
+          }
+        },
+        {
+          "totalMs": 1.9022180000001754,
+          "resolveMs": 0.5443410000002586,
+          "commitMs": 1.3578769999999167,
+          "coldOpenMs": 1.441222999999809,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.06542899999976726
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.4432879999999386
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 1.2099739999998746
+            }
+          }
+        },
+        {
+          "totalMs": 2.3068080000002738,
+          "resolveMs": 0.6286580000000868,
+          "commitMs": 1.678150000000187,
+          "coldOpenMs": 1.3175460000002204,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.06773199999997814
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.5228780000002189
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 1.505959999999959
+            }
+          }
+        },
+        {
+          "totalMs": 1.6261410000001888,
+          "resolveMs": 0.4701090000003205,
+          "commitMs": 1.1560319999998683,
+          "coldOpenMs": 1.355101999999988,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.06448700000009921
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.37337299999990137
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 1.036181999999826
+            }
+          }
+        },
+        {
+          "totalMs": 3.118390999999974,
+          "resolveMs": 0.45778999999993175,
+          "commitMs": 2.6606010000000424,
+          "coldOpenMs": 1.1833540000002358,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.06410700000014913
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.36113399999976536
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 2.509211999999934
+            }
+          }
+        }
+      ]
+    },
+    {
+      "label": "Age-seven callback",
+      "command": {
+        "type": "choose",
+        "eventId": "story_25_0_due",
+        "choiceId": "complete"
+      },
+      "inputSha256": "32eb33f639bba6109c5e3c0734dfb209c885a669c62c92ed4d3f8268fb9b8de4",
+      "inputBytes": 391017,
+      "checkpointBytes": {
+        "input": 28518,
+        "current": 28186,
+        "backup": 28518,
+        "beforeAgeUp": 0,
+        "inputFormat": "dreams-checkpoint-v4",
+        "currentFormat": "dreams-checkpoint-v4"
+      },
+      "ledgerRows": 1143,
+      "medianMs": {
+        "totalMs": 5.40168199999971,
+        "resolveMs": 2.7774570000001404,
+        "commitMs": 2.6242249999995693,
+        "coldOpenMs": 12.576696999999967
+      },
+      "trials": [
+        {
+          "totalMs": 4.69570799999974,
+          "resolveMs": 2.041776999999911,
+          "commitMs": 2.6539309999998295,
+          "coldOpenMs": 11.348625999999967,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.20461800000020958
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 1.738158999999996
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 2.328559999999925
+            }
+          }
+        },
+        {
+          "totalMs": 5.40168199999971,
+          "resolveMs": 2.7774570000001404,
+          "commitMs": 2.6242249999995693,
+          "coldOpenMs": 15.300893999999971,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.2100470000000314
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 2.426226999999926
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 2.350872999999865
+            }
+          }
+        },
+        {
+          "totalMs": 4.821458000000348,
+          "resolveMs": 2.5135589999999866,
+          "commitMs": 2.3078990000003614,
+          "coldOpenMs": 12.576696999999967,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.26419799999985116
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 2.1172810000002755
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 2.023450000000139
+            }
+          }
+        },
+        {
+          "totalMs": 5.499840999999833,
+          "resolveMs": 3.0052709999999934,
+          "commitMs": 2.4945699999998396,
+          "coldOpenMs": 10.858558000000357,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.20706199999995079
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 2.6652979999998934
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 2.248179000000164
+            }
+          }
+        },
+        {
+          "totalMs": 6.740780000000086,
+          "resolveMs": 3.7814290000001165,
+          "commitMs": 2.9593509999999696,
+          "coldOpenMs": 15.262114999999994,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.217417999999725
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 3.433845999999903
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 2.6560739999999896
+            }
+          }
+        }
+      ]
+    },
+    {
+      "label": "Age-seven callback Continue",
+      "command": {
+        "type": "acknowledge",
+        "resultId": "story_25_0_due_result"
+      },
+      "inputSha256": "2bdf2543d34f4c0c092dfe2300ce8a378106030a4c4c01553594df18435daea9",
+      "inputBytes": 390394,
+      "checkpointBytes": {
+        "input": 28186,
+        "current": 33158,
+        "backup": 28186,
+        "beforeAgeUp": 0,
+        "inputFormat": "dreams-checkpoint-v4",
+        "currentFormat": "dreams-checkpoint-v4"
+      },
+      "ledgerRows": 1143,
+      "medianMs": {
+        "totalMs": 9.745078999999805,
+        "resolveMs": 5.567262000000028,
+        "commitMs": 4.336786999999731,
+        "coldOpenMs": 11.056786000000102
+      },
+      "trials": [
+        {
+          "totalMs": 10.994542999999794,
+          "resolveMs": 6.609482999999727,
+          "commitMs": 4.385060000000067,
+          "coldOpenMs": 10.856684999999743,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.25640599999996994
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 3.3427990000000136
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 4.09091699999999
+            }
+          }
+        },
+        {
+          "totalMs": 9.305296999999882,
+          "resolveMs": 5.567262000000028,
+          "commitMs": 3.7380349999998543,
+          "coldOpenMs": 11.345181000000139,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.2152139999998326
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 3.171611000000212
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 3.4350180000001274
+            }
+          }
+        },
+        {
+          "totalMs": 8.977772000000186,
+          "resolveMs": 5.215240999999878,
+          "commitMs": 3.7625310000003083,
+          "coldOpenMs": 11.056786000000102,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.20701199999984965
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 2.846740999999838
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 3.468018000000029
+            }
+          }
+        },
+        {
+          "totalMs": 9.745078999999805,
+          "resolveMs": 5.408292000000074,
+          "commitMs": 4.336786999999731,
+          "coldOpenMs": 10.813920000000053,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.19041699999979755
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 3.030597999999827
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 3.9890730000001895
+            }
+          }
+        },
+        {
+          "totalMs": 20.142241000000013,
+          "resolveMs": 15.301445000000058,
+          "commitMs": 4.840795999999955,
+          "coldOpenMs": 11.530945999999858,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.21629599999960192
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 3.8761930000000575
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 4.429095999999845
+            }
+          }
+        }
+      ]
+    },
+    {
+      "label": "Age-30 routine",
+      "command": {
+        "type": "health-routine",
+        "routine": {
+          "exercise": "none",
+          "diet": "balanced",
+          "sleep": "regular",
+          "mindfulness": true,
+          "smoking": false,
+          "drinking": "none"
+        }
+      },
+      "inputSha256": "3064c5efb38098d80edb7556f661b8331fbb4abb840fea56f1949580a1e54a66",
+      "inputBytes": 3522307,
+      "checkpointBytes": {
+        "input": 183387,
+        "current": 183603,
+        "backup": 183387,
+        "beforeAgeUp": 0,
+        "inputFormat": "dreams-checkpoint-v4",
+        "currentFormat": "dreams-checkpoint-v4"
+      },
+      "ledgerRows": 11793,
+      "medianMs": {
+        "totalMs": 16.663346999999703,
+        "resolveMs": 9.663856000000123,
+        "commitMs": 6.948765000000094,
+        "coldOpenMs": 85.84275400000024
+      },
+      "trials": [
+        {
+          "totalMs": 13.8648290000001,
+          "resolveMs": 7.59772299999986,
+          "commitMs": 6.26710600000024,
+          "coldOpenMs": 88.14171000000078,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.6227180000005319
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 6.814320999999836
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 5.496855999999752
+            }
+          }
+        },
+        {
+          "totalMs": 39.56380700000045,
+          "resolveMs": 32.61504200000036,
+          "commitMs": 6.948765000000094,
+          "coldOpenMs": 165.81632199999967,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 20.547241999999642
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 11.823302000000695
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 6.342881000000489
+            }
+          }
+        },
+        {
+          "totalMs": 20.152447000000393,
+          "resolveMs": 12.15612400000009,
+          "commitMs": 7.996323000000302,
+          "coldOpenMs": 85.84275400000024,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.7393640000000232
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 11.259101999999984
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 5.996968999999808
+            }
+          }
+        },
+        {
+          "totalMs": 13.289240999999492,
+          "resolveMs": 7.409308999999666,
+          "commitMs": 5.879931999999826,
+          "coldOpenMs": 85.12423099999978,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.4687869999997929
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 6.796244000000115
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 5.201951000000008
+            }
+          }
+        },
+        {
+          "totalMs": 16.663346999999703,
+          "resolveMs": 9.663856000000123,
+          "commitMs": 6.99949099999958,
+          "coldOpenMs": 81.2378430000008,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.5930539999999382
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 8.890591000000313
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 6.255428999999822
+            }
+          }
+        }
+      ]
+    },
+    {
+      "label": "Age-60 routine",
+      "command": {
+        "type": "health-routine",
+        "routine": {
+          "exercise": "none",
+          "diet": "balanced",
+          "sleep": "regular",
+          "mindfulness": true,
+          "smoking": false,
+          "drinking": "none"
+        }
+      },
+      "inputSha256": "f525fe2677b541459d8c419f9a03e27b7987bf7b54f709207579378d37322899",
+      "inputBytes": 11326541,
+      "checkpointBytes": {
+        "input": 589445,
+        "current": 589649,
+        "backup": 589445,
+        "beforeAgeUp": 0,
+        "inputFormat": "dreams-checkpoint-v4",
+        "currentFormat": "dreams-checkpoint-v4"
+      },
+      "ledgerRows": 36154,
+      "medianMs": {
+        "totalMs": 51.67008100000021,
+        "resolveMs": 33.42079300000114,
+        "commitMs": 16.78568499999892,
+        "coldOpenMs": 280.75547799999913
+      },
+      "trials": [
+        {
+          "totalMs": 56.53855000000112,
+          "resolveMs": 37.55542400000013,
+          "commitMs": 18.983126000000993,
+          "coldOpenMs": 260.9739609999997,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 2.261512999999468
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 35.11514200000056
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 17.67033099999935
+            }
+          }
+        },
+        {
+          "totalMs": 65.61738399999922,
+          "resolveMs": 33.30188399999861,
+          "commitMs": 32.31550000000061,
+          "coldOpenMs": 422.45533199999954,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 3.5370619999994233
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 29.47153099999923
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 30.933421000001545
+            }
+          }
+        },
+        {
+          "totalMs": 51.67008100000021,
+          "resolveMs": 34.88439600000129,
+          "commitMs": 16.78568499999892,
+          "coldOpenMs": 285.21170899999925,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 2.2344220000013593
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 32.430914000000485
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 15.468412000000171
+            }
+          }
+        },
+        {
+          "totalMs": 49.81180200000017,
+          "resolveMs": 33.42079300000114,
+          "commitMs": 16.39100899999903,
+          "coldOpenMs": 280.75547799999913,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 2.177947000000131
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 31.08740299999954
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 15.08746500000052
+            }
+          }
+        },
+        {
+          "totalMs": 48.94776499999898,
+          "resolveMs": 32.77783999999883,
+          "commitMs": 16.16992500000015,
+          "coldOpenMs": 265.8928479999995,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 2.0272150000000693
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 30.604333999999653
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 14.922364000000016
+            }
+          }
+        }
+      ]
+    },
+    {
+      "label": "100-known-contact routine",
+      "command": {
+        "type": "health-routine",
+        "routine": {
+          "exercise": "none",
+          "diet": "balanced",
+          "sleep": "regular",
+          "mindfulness": true,
+          "smoking": false,
+          "drinking": "none"
+        }
+      },
+      "setup": {
+        "scope": "generated-at-once known-contact stress case from the genuine age-30 checkpoint; not natural/native progression",
+        "initialPeople": 15,
+        "addedContacts": 92,
+        "knownContacts": 100,
+        "totalPeople": 107,
+        "monthlyFinancialActors": 8
+      },
+      "outcome": {
+        "worldSha256": "f11fb8d3eeb3c08e48c48b9fe3387aeb22b042018bb653cd48e6d3c1d7b02fa7",
+        "date": {
+          "year": 2056,
+          "month": 10,
+          "day": 18
+        },
+        "people": 107,
+        "ledgerRows": 11793,
+        "monthsProcessed": null,
+        "annualStage": null,
+        "pendingKind": "result",
+        "beforeAgeUpSnapshotRetained": false
+      },
+      "inputSha256": "63922a8cd330bb01db0e69a650f981f8119219a36b9063c0049f14ea93c91fef",
+      "inputBytes": 3798611,
+      "checkpointBytes": {
+        "input": 214296,
+        "current": 214488,
+        "backup": 214296,
+        "beforeAgeUp": 0,
+        "inputFormat": "dreams-checkpoint-v4",
+        "currentFormat": "dreams-checkpoint-v4"
+      },
+      "ledgerRows": 11793,
+      "medianMs": {
+        "totalMs": 23.911731000000145,
+        "resolveMs": 14.191704000000755,
+        "commitMs": 9.332789000000048,
+        "coldOpenMs": 97.31776799999898
+      },
+      "trials": [
+        {
+          "totalMs": 20.864918999999645,
+          "resolveMs": 12.11757899999975,
+          "commitMs": 8.747339999999895,
+          "coldOpenMs": 96.99241900000015,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 1.621592999999848
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 10.375113000000056
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 8.061165999999503
+            }
+          }
+        },
+        {
+          "totalMs": 23.911731000000145,
+          "resolveMs": 14.191704000000755,
+          "commitMs": 9.72002699999939,
+          "coldOpenMs": 97.31776799999898,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 1.371726999999737
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 12.652714999998352
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 8.968794000000344
+            }
+          }
+        },
+        {
+          "totalMs": 24.038571999999476,
+          "resolveMs": 14.705782999999428,
+          "commitMs": 9.332789000000048,
+          "coldOpenMs": 94.19377500000155,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 1.5071009999992384
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 13.067494999999326
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 8.499003000000812
+            }
+          }
+        },
+        {
+          "totalMs": 28.72663400000056,
+          "resolveMs": 18.00055600000087,
+          "commitMs": 10.726077999999688,
+          "coldOpenMs": 101.86000500000046,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 1.4389279999995779
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 16.36805699999968
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 9.99637900000016
+            }
+          }
+        },
+        {
+          "totalMs": 21.72411600000123,
+          "resolveMs": 12.402152999999089,
+          "commitMs": 9.321963000002143,
+          "coldOpenMs": 112.02132200000051,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 1.4410510000016075
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 10.815583000003244
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 8.626103999999032
+            }
+          }
+        }
+      ]
+    },
+    {
+      "label": "100-known-contact first Age Up step",
+      "command": {
+        "type": "advance"
+      },
+      "setup": {
+        "scope": "generated-at-once known-contact stress case from the genuine age-30 checkpoint; not natural/native progression",
+        "initialPeople": 15,
+        "addedContacts": 92,
+        "knownContacts": 100,
+        "totalPeople": 107,
+        "monthlyFinancialActors": 8
+      },
+      "outcome": {
+        "worldSha256": "456c4d40f6894ec1341fb487f139686b1ca7f3cfd1c44e2d47c00c6aa4775436",
+        "date": {
+          "year": 2057,
+          "month": 10,
+          "day": 18
+        },
+        "people": 109,
+        "ledgerRows": 12662,
+        "monthsProcessed": 12,
+        "annualStage": "complete",
+        "pendingKind": "decision",
+        "beforeAgeUpSnapshotRetained": true
+      },
+      "inputSha256": "63922a8cd330bb01db0e69a650f981f8119219a36b9063c0049f14ea93c91fef",
+      "inputBytes": 3798611,
+      "checkpointBytes": {
+        "input": 214296,
+        "current": 231957,
+        "backup": 214296,
+        "beforeAgeUp": 214296,
+        "inputFormat": "dreams-checkpoint-v4",
+        "currentFormat": "dreams-checkpoint-v4"
+      },
+      "ledgerRows": 11793,
+      "medianMs": {
+        "totalMs": 61.61419699999897,
+        "resolveMs": 46.88751300000149,
+        "commitMs": 15.175541000000521,
+        "coldOpenMs": 112.39979099999982
+      },
+      "trials": [
+        {
+          "totalMs": 64.9016300000003,
+          "resolveMs": 50.005480000003445,
+          "commitMs": 14.896149999996851,
+          "coldOpenMs": 112.39979099999982,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 1.741662999997061
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 15.350013999999646
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 13.869544000001042
+            }
+          }
+        },
+        {
+          "totalMs": 50.84296099999847,
+          "resolveMs": 33.867858999998134,
+          "commitMs": 16.975102000000334,
+          "coldOpenMs": 103.32784600000014,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 1.1396569999997155
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 18.03016100000241
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 15.619079000000056
+            }
+          }
+        },
+        {
+          "totalMs": 69.16790200000105,
+          "resolveMs": 50.946232000002055,
+          "commitMs": 18.221669999998994,
+          "coldOpenMs": 119.6530989999992,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 2.592054000000644
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 27.603016999997635
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 16.861540999998397
+            }
+          }
+        },
+        {
+          "totalMs": 61.61419699999897,
+          "resolveMs": 46.88751300000149,
+          "commitMs": 14.726683999997476,
+          "coldOpenMs": 92.19565599999987,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 2.724633999998332
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 31.065739000001486
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 13.408828999999969
+            }
+          }
+        },
+        {
+          "totalMs": 49.483634000000166,
+          "resolveMs": 34.308092999999644,
+          "commitMs": 15.175541000000521,
+          "coldOpenMs": 118.97483699999793,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.9172619999990275
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 20.457377999999153
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 13.945588000002317
+            }
+          }
+        }
+      ]
+    },
+    {
+      "label": "1000-known-contact routine",
+      "command": {
+        "type": "health-routine",
+        "routine": {
+          "exercise": "none",
+          "diet": "balanced",
+          "sleep": "regular",
+          "mindfulness": true,
+          "smoking": false,
+          "drinking": "none"
+        }
+      },
+      "setup": {
+        "scope": "generated-at-once known-contact stress case from the genuine age-30 checkpoint; not natural/native progression",
+        "initialPeople": 15,
+        "addedContacts": 992,
+        "knownContacts": 1000,
+        "totalPeople": 1007,
+        "monthlyFinancialActors": 8
+      },
+      "outcome": {
+        "worldSha256": "06aa33710e93f49cac55015cedbde0a3825e86d465771b24f7dd4e4f9b109407",
+        "date": {
+          "year": 2056,
+          "month": 10,
+          "day": 18
+        },
+        "people": 1007,
+        "ledgerRows": 11793,
+        "monthsProcessed": null,
+        "annualStage": null,
+        "pendingKind": "result",
+        "beforeAgeUpSnapshotRetained": false
+      },
+      "inputSha256": "59eee41cf0436f3430ea85e707a8faad270452e6ec892ecd82869c4346246b5e",
+      "inputBytes": 6514071,
+      "checkpointBytes": {
+        "input": 493621,
+        "current": 493833,
+        "backup": 493621,
+        "beforeAgeUp": 0,
+        "inputFormat": "dreams-checkpoint-v4",
+        "currentFormat": "dreams-checkpoint-v4"
+      },
+      "ledgerRows": 11793,
+      "medianMs": {
+        "totalMs": 104.97598899999866,
+        "resolveMs": 62.17150799999945,
+        "commitMs": 45.64862599999833,
+        "coldOpenMs": 182.61447000000044
+      },
+      "trials": [
+        {
+          "totalMs": 122.55231500000082,
+          "resolveMs": 67.39658699999927,
+          "commitMs": 55.155728000001545,
+          "coldOpenMs": 182.61447000000044,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 8.350930000000517
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 58.91828600000008
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 53.750630999998975
+            }
+          }
+        },
+        {
+          "totalMs": 104.97598899999866,
+          "resolveMs": 59.32736300000033,
+          "commitMs": 45.64862599999833,
+          "coldOpenMs": 174.73863100000017,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 8.187503999997716
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 51.00792899999942
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 44.36557300000277
+            }
+          }
+        },
+        {
+          "totalMs": 104.18606799999907,
+          "resolveMs": 62.17150799999945,
+          "commitMs": 42.01455999999962,
+          "coldOpenMs": 182.8846569999987,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 7.924599999998463
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 54.11769400000048
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 40.70074000000022
+            }
+          }
+        },
+        {
+          "totalMs": 103.28000299999985,
+          "resolveMs": 59.30882500000007,
+          "commitMs": 43.97117799999978,
+          "coldOpenMs": 168.7400149999994,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 8.27574900000036
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 50.908229000000574
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 42.80416999999943
+            }
+          }
+        },
+        {
+          "totalMs": 121.0536460000003,
+          "resolveMs": 72.61120200000005,
+          "commitMs": 48.44244400000025,
+          "coldOpenMs": 208.85668199999782,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 12.10653000000093
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 60.36778599999889
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 46.98803300000145
+            }
+          }
+        }
+      ]
+    },
+    {
+      "label": "1000-known-contact first Age Up step",
+      "command": {
+        "type": "advance"
+      },
+      "setup": {
+        "scope": "generated-at-once known-contact stress case from the genuine age-30 checkpoint; not natural/native progression",
+        "initialPeople": 15,
+        "addedContacts": 992,
+        "knownContacts": 1000,
+        "totalPeople": 1007,
+        "monthlyFinancialActors": 8
+      },
+      "outcome": {
+        "worldSha256": "42727415830f15b383cd9939c7468e2b0fac6e30a22a2585fe78b88b64a9602b",
+        "date": {
+          "year": 2057,
+          "month": 10,
+          "day": 18
+        },
+        "people": 1018,
+        "ledgerRows": 15234,
+        "monthsProcessed": 12,
+        "annualStage": "complete",
+        "pendingKind": "decision",
+        "beforeAgeUpSnapshotRetained": true
+      },
+      "inputSha256": "59eee41cf0436f3430ea85e707a8faad270452e6ec892ecd82869c4346246b5e",
+      "inputBytes": 6514071,
+      "checkpointBytes": {
+        "input": 493621,
+        "current": 585682,
+        "backup": 493621,
+        "beforeAgeUp": 493621,
+        "inputFormat": "dreams-checkpoint-v4",
+        "currentFormat": "dreams-checkpoint-v4"
+      },
+      "ledgerRows": 11793,
+      "medianMs": {
+        "totalMs": 423.47482300000047,
+        "resolveMs": 322.4550249999993,
+        "commitMs": 109.84974599999987,
+        "coldOpenMs": 179.01490799999738
+      },
+      "trials": [
+        {
+          "totalMs": 446.0372360000001,
+          "resolveMs": 324.1071950000005,
+          "commitMs": 121.93004099999962,
+          "coldOpenMs": 180.32765400000062,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 7.592368999998143
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 68.91367600000012
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 119.9152350000004
+            }
+          }
+        },
+        {
+          "totalMs": 423.47482300000047,
+          "resolveMs": 322.4550249999993,
+          "commitMs": 101.01979800000117,
+          "coldOpenMs": 178.88697300000058,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 7.496533999998064
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 63.78406800000084
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 99.00436199999967
+            }
+          }
+        },
+        {
+          "totalMs": 401.423146000001,
+          "resolveMs": 302.0411690000001,
+          "commitMs": 99.38197700000092,
+          "coldOpenMs": 178.35609399999885,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 8.581409000002168
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 60.769657000000734
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 97.51902999999947
+            }
+          }
+        },
+        {
+          "totalMs": 468.24051800000234,
+          "resolveMs": 343.8108749999992,
+          "commitMs": 124.42964300000313,
+          "coldOpenMs": 229.30912999999782,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 9.993846999997913
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 67.9067059999943
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 122.44546299999638
+            }
+          }
+        },
+        {
+          "totalMs": 412.62023300000146,
+          "resolveMs": 302.7704870000016,
+          "commitMs": 109.84974599999987,
+          "coldOpenMs": 179.01490799999738,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 7.55200799999875
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 62.899091999999655
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 108.06976399999985
+            }
+          }
+        }
+      ]
+    },
+    {
+      "label": "Prepared teen coworker introduction",
+      "command": {
+        "type": "meet-coworkers"
+      },
+      "inputSha256": "22f9fcb9e1560daef0893759245b2960be4c761cd1d662ebb0bb3501c53128c8",
+      "inputBytes": 1351088,
+      "checkpointBytes": {
+        "input": 73962,
+        "current": 75222,
+        "backup": 73962,
+        "beforeAgeUp": 0,
+        "inputFormat": "dreams-checkpoint-v4",
+        "currentFormat": "dreams-checkpoint-v4"
+      },
+      "ledgerRows": 4355,
+      "medianMs": {
+        "totalMs": 7.710416000001715,
+        "resolveMs": 4.049710999999661,
+        "commitMs": 3.782308000001649,
+        "coldOpenMs": 30.315762999998697
+      },
+      "trials": [
+        {
+          "totalMs": 8.43097200000193,
+          "resolveMs": 4.549063999998907,
+          "commitMs": 3.8819080000030226,
+          "coldOpenMs": 33.22510499999771,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.3079839999991236
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 3.8806169999952544
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 3.5519710000007763
+            }
+          }
+        },
+        {
+          "totalMs": 7.436832999999751,
+          "resolveMs": 3.71166099999391,
+          "commitMs": 3.7251720000058413,
+          "coldOpenMs": 29.838072999998985,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.372231000001193
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 3.016094000005978
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 3.3735820000001695
+            }
+          }
+        },
+        {
+          "totalMs": 7.599769000000379,
+          "resolveMs": 3.764381000000867,
+          "commitMs": 3.8353879999995115,
+          "coldOpenMs": 29.773465999998734,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.32243600000219885
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 3.1025030000018887
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 3.4223759999949834
+            }
+          }
+        },
+        {
+          "totalMs": 16.277953999997408,
+          "resolveMs": 12.495645999995759,
+          "commitMs": 3.782308000001649,
+          "coldOpenMs": 30.315762999998697,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.36816499999986263
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 11.846748000003572
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 3.370478999997431
+            }
+          }
+        },
+        {
+          "totalMs": 7.710416000001715,
+          "resolveMs": 4.049710999999661,
+          "commitMs": 3.6607050000020536,
+          "coldOpenMs": 39.4079120000024,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.3934330000047339
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 3.3235270000004675
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 3.3560960000031628
+            }
+          }
+        }
+      ]
+    },
+    {
+      "label": "Prepared supervisor feedback",
+      "command": {
+        "type": "work-feedback",
+        "workplaceId": "workplace_person_player_50_0",
+        "supervisorId": "person_npc_50_16"
+      },
+      "inputSha256": "f6a5b23bb86d17a08d797f714745b0681a8602838ee8976d406412ca4abb07dc",
+      "inputBytes": 1585452,
+      "checkpointBytes": {
+        "input": 86654,
+        "current": 87038,
+        "backup": 86654,
+        "beforeAgeUp": 0,
+        "inputFormat": "dreams-checkpoint-v4",
+        "currentFormat": "dreams-checkpoint-v4"
+      },
+      "ledgerRows": 5086,
+      "medianMs": {
+        "totalMs": 8.336840999996639,
+        "resolveMs": 4.116601000001538,
+        "commitMs": 4.114118999998027,
+        "coldOpenMs": 35.11776699999609
+      },
+      "trials": [
+        {
+          "totalMs": 8.336840999996639,
+          "resolveMs": 4.222721999998612,
+          "commitMs": 4.114118999998027,
+          "coldOpenMs": 35.11776699999609,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.3801129999992554
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 3.663509999998496
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 3.7531749999980093
+            }
+          }
+        },
+        {
+          "totalMs": 8.106262000001152,
+          "resolveMs": 4.116601000001538,
+          "commitMs": 3.9896609999996144,
+          "coldOpenMs": 42.894475000000966,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.37780900000507245
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 3.5396719999989728
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 3.6446600000053877
+            }
+          }
+        },
+        {
+          "totalMs": 7.997308999998495,
+          "resolveMs": 3.997984000001452,
+          "commitMs": 3.999324999997043,
+          "coldOpenMs": 33.9373889999988,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.3711089999997057
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 3.436498000002757
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 3.6406149999966146
+            }
+          }
+        },
+        {
+          "totalMs": 16.407349000000977,
+          "resolveMs": 4.046857000001182,
+          "commitMs": 12.360491999999795,
+          "coldOpenMs": 34.99009600000136,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.4028669999970589
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 3.476427000001422
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 11.955522000003839
+            }
+          }
+        },
+        {
+          "totalMs": 8.431273000001966,
+          "resolveMs": 4.270072999999684,
+          "commitMs": 4.161200000002282,
+          "coldOpenMs": 40.89058500000101,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.35768900000402937
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 3.7262439999976777
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 3.786854999998468
+            }
+          }
+        }
+      ]
+    },
+    {
+      "label": "Prepared raise request",
+      "command": {
+        "type": "request-raise",
+        "workplaceId": "workplace_person_player_50_0",
+        "supervisorId": "person_npc_50_16"
+      },
+      "inputSha256": "bcc0db1e7a05beda2ba7e9198881030a1d49df56a42b5a986c93781ab8ae4efe",
+      "inputBytes": 1804924,
+      "checkpointBytes": {
+        "input": 98667,
+        "current": 99179,
+        "backup": 98667,
+        "beforeAgeUp": 0,
+        "inputFormat": "dreams-checkpoint-v4",
+        "currentFormat": "dreams-checkpoint-v4"
+      },
+      "ledgerRows": 5801,
+      "medianMs": {
+        "totalMs": 9.61127999999735,
+        "resolveMs": 4.95846999999776,
+        "commitMs": 4.559779999995953,
+        "coldOpenMs": 42.5833599999969
+      },
+      "trials": [
+        {
+          "totalMs": 10.341820000001462,
+          "resolveMs": 5.875261000001046,
+          "commitMs": 4.466559000000416,
+          "coldOpenMs": 46.22317900000053,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.42967700000008335
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 5.193434000000707
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 4.070211000005656
+            }
+          }
+        },
+        {
+          "totalMs": 9.61127999999735,
+          "resolveMs": 4.95846999999776,
+          "commitMs": 4.65280999999959,
+          "coldOpenMs": 38.33445300000312,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.4659419999952661
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 4.221229000002495
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 4.207169000001159
+            }
+          }
+        },
+        {
+          "totalMs": 9.116053999998257,
+          "resolveMs": 4.661763999996765,
+          "commitMs": 4.4542900000014924,
+          "coldOpenMs": 46.992057000003115,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.43264100000669714
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 4.009731000005559
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 4.08515400000033
+            }
+          }
+        },
+        {
+          "totalMs": 20.300263999997696,
+          "resolveMs": 15.739152000001923,
+          "commitMs": 4.561111999995774,
+          "coldOpenMs": 39.157663999998476,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.4428269999989425
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 15.086558000002697
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 4.147518999998283
+            }
+          }
+        },
+        {
+          "totalMs": 9.443085999999312,
+          "resolveMs": 4.883306000003358,
+          "commitMs": 4.559779999995953,
+          "coldOpenMs": 42.5833599999969,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.47609799999918323
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 4.176102000004903
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 4.140868000002229
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

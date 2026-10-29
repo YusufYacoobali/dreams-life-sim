@@ -1,0 +1,95 @@
+{
+  "format": "dreams-owned-native-process-closure-v1",
+  "complete": true,
+  "nativeAppStopped": true,
+  "startedAt": "2026-10-21T07:29:56.523821+00:00",
+  "processes": [
+    {
+      "role": "qemu",
+      "pid": 171418,
+      "uid": 1000,
+      "startTicks": "12564243",
+      "argv": [
+        "/workspace/.cache/android-native-check/sdk/emulator/qemu/linux-x86_64/qemu-system-x86_64-headless",
+        "-avd",
+        "dreams_api24",
+        "-port",
+        "5560",
+        "-no-window",
+        "-no-audio",
+        "-no-boot-anim",
+        "-no-snapshot",
+        "-no-metrics",
+        "-accel",
+        "off",
+        "-gpu",
+        "swiftshader_indirect",
+        "-memory",
+        "1536",
+        "-cores",
+        "2",
+        "-prop",
+        "dalvik.vm.heapsize=384m"
+      ],
+      "closedAt": "2026-10-21T07:29:56.925173+00:00",
+      "processClosed": true,
+      "signal": "SIGTERM",
+      "originalIdentityGoneOrZombie": true
+    },
+    {
+      "role": "metro",
+      "pid": 172965,
+      "uid": 1000,
+      "startTicks": "12644810",
+      "argv": [
+        "node",
+        "--dns-result-order=ipv4first",
+        "./node_modules/expo/bin/cli",
+        "start",
+        "--localhost",
+        "--port",
+        "8081",
+        "--max-workers",
+        "1"
+      ],
+      "closedAt": "2026-10-21T07:29:56.724484+00:00",
+      "processClosed": true,
+      "signal": "SIGTERM",
+      "originalIdentityGoneOrZombie": true
+    }
+  ],
+  "events": [
+    {
+      "argv": [
+        "/workspace/.cache/android-native-check/sdk/platform-tools/adb",
+        "-s",
+        "emulator-5560",
+        "shell",
+        "am",
+        "force-stop",
+        "host.exp.exponent"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "",
+      "at": "2026-10-21T07:29:56.284082+00:00"
+    },
+    {
+      "argv": [
+        "/workspace/.cache/android-native-check/sdk/platform-tools/adb",
+        "-s",
+        "emulator-5560",
+        "shell",
+        "pidof",
+        "host.exp.exponent"
+      ],
+      "exitCode": 1,
+      "stdout": "",
+      "stderr": "",
+      "at": "2026-10-21T07:29:56.523797+00:00"
+    }
+  ],
+  "diagnostic": "Earlier read-only identity attempt refused /proc/PID/cwd before any app command/signal/output. This attempt verifies actual UID/start ticks/exact role argv without inaccessible cwd.",
+  "endedAt": "2026-10-21T07:29:56.925613+00:00",
+  "scope": "Actual root-owned QEMU/Metro closure after complete C37 native journeys; no other process signalled. Later C38/C39 native acceptance remains unclaimed."
+}

@@ -1,0 +1,633 @@
+{
+  "baseline": "94c5020",
+  "scope": "One actual command context per routine branch. All 57 before/after non-prose whole worlds match. The separate tests cover all 358 original routine command contexts.",
+  "routines": [
+    {
+      "key": "recruit:street:strong",
+      "item": {
+        "kind": "recruit",
+        "method": "street",
+        "seed": 1
+      },
+      "before": "You get people to stop and listen. One wants to know about dental care. You steer the conversation back to your beliefs.\n\n6 new followers joined; $240.00 in joining fees reached the treasury.",
+      "after": "Your pavement sermon draws 6 new followers and $240.00 in joining fees. Taylor Reed has to explain that eternal life does not include dental cover.",
+      "mechanicsAndRandomMatch": true
+    },
+    {
+      "key": "recruit:street:modest",
+      "item": {
+        "kind": "recruit",
+        "method": "street",
+        "seed": 2
+      },
+      "before": "You squeeze a pitch between people dodging your leaflets. One passer-by changes direction twice to avoid your explanation.\n\n1 new follower joined; $40.00 in joining fees reached the treasury.",
+      "after": "You leave with 1 new follower and $40.00 in joining fees. Taylor Reed asks why you can reveal the universe’s secrets but cannot get anyone to take a leaflet.",
+      "mechanicsAndRandomMatch": true
+    },
+    {
+      "key": "recruit:street:empty",
+      "item": {
+        "kind": "recruit",
+        "method": "street",
+        "seed": 6
+      },
+      "before": "You finish your pitch to a bus queue just as the bus arrives. Everyone finds somewhere else to be.\n\n0 new followers joined; $0.00 in joining fees reached the treasury.",
+      "after": "The bus arrives halfway through your revelation. Everyone boards. Taylor Reed keeps preaching to the timetable.",
+      "mechanicsAndRandomMatch": true
+    },
+    {
+      "key": "recruit:social:strong",
+      "item": {
+        "kind": "recruit",
+        "method": "social",
+        "seed": 1
+      },
+      "before": "Your clip brings in recruits. The comments demand a longer explanation of your beliefs and a shorter explanation of your hair.\n\n12 new followers joined; $480.00 in joining fees reached the treasury.",
+      "after": "Your clip brings in 12 new followers and $480.00 in joining fees. Taylor Reed wants to know why the comments have declared your hair the real miracle.",
+      "mechanicsAndRandomMatch": true
+    },
+    {
+      "key": "recruit:social:modest",
+      "item": {
+        "kind": "recruit",
+        "method": "social",
+        "seed": 2
+      },
+      "before": "Your clip finds an interested audience. Most commenters still prefer arguing with one another under your invitation.\n\n3 new followers joined; $120.00 in joining fees reached the treasury.",
+      "after": "Your invitation lands 3 new followers and $120.00 in joining fees. Taylor Reed is still arguing with an account called ProphetEater.",
+      "mechanicsAndRandomMatch": true
+    },
+    {
+      "key": "recruit:social:empty",
+      "item": {
+        "kind": "recruit",
+        "method": "social",
+        "seed": 6
+      },
+      "before": "Your clip gets comments, arguments and an unsolicited haircut suggestion. It gets no recruits.\n\n0 new followers joined; $0.00 in joining fees reached the treasury.",
+      "after": "Nobody signs up. Taylor Reed reads you the top comment: “Is this a cult or a hostage video?”",
+      "mechanicsAndRandomMatch": true
+    },
+    {
+      "key": "recruit:open-evening:strong",
+      "item": {
+        "kind": "recruit",
+        "method": "open-evening",
+        "seed": 1
+      },
+      "before": "Visitors sign up after your talk. One tries to finish the refreshments before their enlightenment begins.\n\n16 new followers joined; $640.00 in joining fees reached the treasury.",
+      "after": "You finish the evening with 16 new followers and $640.00 in joining fees. Taylor Reed explains that taking the entire snack tray home is not an initiation rite.",
+      "mechanicsAndRandomMatch": true
+    },
+    {
+      "key": "recruit:open-evening:modest",
+      "item": {
+        "kind": "recruit",
+        "method": "open-evening",
+        "seed": 2
+      },
+      "before": "You get a signed form. Other visitors thank you for the refreshments with the firm politeness of people refusing a second date.\n\n4 new followers joined; $160.00 in joining fees reached the treasury.",
+      "after": "Your talk and refreshments bring in 4 new followers and $160.00 in joining fees. Taylor Reed suggests testing which part works by letting you give the next talk without biscuits.",
+      "mechanicsAndRandomMatch": true
+    },
+    {
+      "key": "recruit:open-evening:empty",
+      "item": {
+        "kind": "recruit",
+        "method": "open-evening",
+        "seed": 6
+      },
+      "before": "Visitors eat the refreshments and leave. You have persuaded them to accept snacks.\n\n0 new followers joined; $0.00 in joining fees reached the treasury.",
+      "after": "The guests eat and leave without signing. Taylor Reed lifts the empty snack tray. “They were very committed to this bit.”",
+      "mechanicsAndRandomMatch": true
+    },
+    {
+      "key": "recruit:referral:strong",
+      "item": {
+        "kind": "recruit",
+        "method": "referral",
+        "seed": 1
+      },
+      "before": "Your followers’ friends join. You deliver the welcome while the people who invited them look relieved that you are behaving yourself.\n\n5 new followers joined; $200.00 in joining fees reached the treasury.",
+      "after": "The introductions bring you 5 new followers and $200.00 in joining fees. Taylor Reed interrupts your welcome to promise everyone you are less intense once you have eaten.",
+      "mechanicsAndRandomMatch": true
+    },
+    {
+      "key": "recruit:referral:modest",
+      "item": {
+        "kind": "recruit",
+        "method": "referral",
+        "seed": 2
+      },
+      "before": "A guest fills in a form. Conversations at the table become much more careful once the membership pitch starts.\n\n1 new follower joined; $40.00 in joining fees reached the treasury.",
+      "after": "The invitations bring in 1 new follower and $40.00 in joining fees. Taylor Reed has to explain that your followers were real people before they met you.",
+      "mechanicsAndRandomMatch": true
+    },
+    {
+      "key": "recruit:referral:empty",
+      "item": {
+        "kind": "recruit",
+        "method": "referral",
+        "seed": 6
+      },
+      "before": "Your followers bring friends. The friends enjoy seeing them and decline to turn the friendship into a membership.\n\n0 new followers joined; $0.00 in joining fees reached the treasury.",
+      "after": "Nobody joins. Taylor Reed gets a hug from a guest and a firm request to keep your pitch out of their friendship.",
+      "mechanicsAndRandomMatch": true
+    },
+    {
+      "key": "recruit:publicity:strong",
+      "item": {
+        "kind": "recruit",
+        "method": "publicity",
+        "seed": 1
+      },
+      "before": "Your stunt turns spectators into recruits. A bystander declines to stand any closer while taking a form.\n\n24 new followers joined; $960.00 in joining fees reached the treasury.",
+      "after": "Your stunt attracts 24 new followers and $960.00 in joining fees. Taylor Reed asks which part of the crowd cheering was meant to happen before you lost your dignity.",
+      "mechanicsAndRandomMatch": true
+    },
+    {
+      "key": "recruit:publicity:modest",
+      "item": {
+        "kind": "recruit",
+        "method": "publicity",
+        "seed": 2
+      },
+      "before": "Your stunt interests would-be recruits. Most spectators leave with a photograph and a story they intend to tell at your expense.\n\n7 new followers joined; $280.00 in joining fees reached the treasury.",
+      "after": "The spectacle wins you 7 new followers and $280.00 in joining fees. Taylor Reed suggests making the next revelation somewhere with fewer witnesses.",
+      "mechanicsAndRandomMatch": true
+    },
+    {
+      "key": "recruit:publicity:empty",
+      "item": {
+        "kind": "recruit",
+        "method": "publicity",
+        "seed": 6
+      },
+      "before": "You attract cameras, spectators and no recruits. People enjoy watching you without wanting to become your responsibility.\n\n0 new followers joined; $0.00 in joining fees reached the treasury.",
+      "after": "The crowd films everything and nobody joins. Taylor Reed quietly takes your name off the next sign.",
+      "mechanicsAndRandomMatch": true
+    },
+    {
+      "key": "preach:dream-archive:ordinary",
+      "item": {
+        "kind": "preach",
+        "philosophy": "dream-archive",
+        "seed": 1
+      },
+      "before": "You explain dream messages. A follower shuts their eyes and calls it research.",
+      "after": "You explain dream messages. Taylor Reed asks why the universe needed them naked at a job interview.",
+      "mechanicsAndRandomMatch": true
+    },
+    {
+      "key": "preach:dream-archive:pushback",
+      "item": {
+        "kind": "preach",
+        "philosophy": "dream-archive",
+        "seed": 2
+      },
+      "before": "You interpret a follower’s dream. They correct you in front of everyone, then correct your interpretation of the correction.",
+      "after": "You interpret a dream. Taylor Reed corrects you in front of everyone, then corrects your interpretation of the correction.",
+      "mechanicsAndRandomMatch": true
+    },
+    {
+      "key": "preach:dream-archive:engaged",
+      "item": {
+        "kind": "preach",
+        "philosophy": "dream-archive",
+        "seed": 7
+      },
+      "before": "You describe a life hidden in a dream. Followers start comparing their own, talking over you to explain which alternate self had the worst marriage.",
+      "after": "You describe the lives hidden in dreams. Taylor Reed starts a furious debate about whether an imaginary spouse can demand an imaginary divorce.",
+      "mechanicsAndRandomMatch": true
+    },
+    {
+      "key": "preach:final-update:ordinary",
+      "item": {
+        "kind": "preach",
+        "philosophy": "final-update",
+        "seed": 1
+      },
+      "before": "You describe the next version of reality. A follower makes you promise it will accept their existing membership.",
+      "after": "You describe the next version of reality. Taylor Reed wants to know whether they will still have to know their password.",
+      "mechanicsAndRandomMatch": true
+    },
+    {
+      "key": "preach:final-update:pushback",
+      "item": {
+        "kind": "preach",
+        "philosophy": "final-update",
+        "seed": 2
+      },
+      "before": "You explain how reality will improve. Someone asks why your microphone still sounds like that. The room wants that answered first.",
+      "after": "You announce an upgrade to existence. Taylor Reed asks if replacing you would be the free trial. The room laughs before you can answer.",
+      "mechanicsAndRandomMatch": true
+    },
+    {
+      "key": "preach:final-update:engaged",
+      "item": {
+        "kind": "preach",
+        "philosophy": "final-update",
+        "seed": 7
+      },
+      "before": "You promise that reality can improve. Followers shout suggestions until someone demands a version without your longer speeches.",
+      "after": "You promise a better version of reality. Taylor Reed demands the removal of back pain, mosquitoes and the need to wear trousers. The room gives you an impossible list.",
+      "mechanicsAndRandomMatch": true
+    },
+    {
+      "key": "preach:cosmic-accounting:ordinary",
+      "item": {
+        "kind": "preach",
+        "philosophy": "cosmic-accounting",
+        "seed": 1
+      },
+      "before": "You explain the universe’s accounts. Your treasurer reminds the room that the rent still requires money from this universe.",
+      "after": "You explain what the universe owes you. Sam Reed reminds the room that the landlord still wants money from this universe.",
+      "mechanicsAndRandomMatch": true
+    },
+    {
+      "key": "preach:cosmic-accounting:pushback",
+      "item": {
+        "kind": "preach",
+        "philosophy": "cosmic-accounting",
+        "seed": 2
+      },
+      "before": "You discuss what the cosmos owes you. Followers ask what you owe them for sitting through this.",
+      "after": "You discuss what the cosmos owes you. Sam Reed asks what you owe the room for sitting through this.",
+      "mechanicsAndRandomMatch": true
+    },
+    {
+      "key": "preach:cosmic-accounting:engaged",
+      "item": {
+        "kind": "preach",
+        "philosophy": "cosmic-accounting",
+        "seed": 7
+      },
+      "before": "You declare that the universe owes everyone. Followers cheer and begin listing what they intend to collect. You struggle to regain the floor.",
+      "after": "You declare that the universe owes everyone. Sam Reed demands compensation for puberty. The room cheers while you search for a less expensive revelation.",
+      "mechanicsAndRandomMatch": true
+    },
+    {
+      "key": "preach:last-picnic:ordinary",
+      "item": {
+        "kind": "preach",
+        "philosophy": "last-picnic",
+        "seed": 1
+      },
+      "before": "You discuss preparing for the end. A follower moves the discussion firmly towards lunch.",
+      "after": "You discuss preparing for the end. Taylor Reed asks if they should defrost anything.",
+      "mechanicsAndRandomMatch": true
+    },
+    {
+      "key": "preach:last-picnic:pushback",
+      "item": {
+        "kind": "preach",
+        "philosophy": "last-picnic",
+        "seed": 2
+      },
+      "before": "You say there is no time to waste. Someone points out how long you have been saying it.",
+      "after": "You say there is no time to waste. Taylor Reed points out how long you have been saying it.",
+      "mechanicsAndRandomMatch": true
+    },
+    {
+      "key": "preach:last-picnic:engaged",
+      "item": {
+        "kind": "preach",
+        "philosophy": "last-picnic",
+        "seed": 7
+      },
+      "before": "You speak about the time everyone has left. Followers draw closer and start discussing whom they want at the next meal.",
+      "after": "You speak about the time everyone has left. Taylor Reed names someone they want at the next meal. Others start adding names.",
+      "mechanicsAndRandomMatch": true
+    },
+    {
+      "key": "preach:chosen-lost:ordinary",
+      "item": {
+        "kind": "preach",
+        "philosophy": "chosen-lost",
+        "seed": 1
+      },
+      "before": "You hint at a hidden truth. Followers wait through the break for you to reveal it.",
+      "after": "You hint at a hidden truth. Taylor Reed stays through the break, determined to catch you eventually saying it.",
+      "mechanicsAndRandomMatch": true
+    },
+    {
+      "key": "preach:chosen-lost:pushback",
+      "item": {
+        "kind": "preach",
+        "philosophy": "chosen-lost",
+        "seed": 2
+      },
+      "before": "You promise hidden knowledge. A follower demands one example. The pause grows long enough for others to repeat the question.",
+      "after": "You promise hidden knowledge. Taylor Reed demands one example. The pause grows long enough for the room to start chanting the question.",
+      "mechanicsAndRandomMatch": true
+    },
+    {
+      "key": "preach:chosen-lost:engaged",
+      "item": {
+        "kind": "preach",
+        "philosophy": "chosen-lost",
+        "seed": 7
+      },
+      "before": "You tell the room it holds knowledge the world lacks. Followers sit straighter and begin offering to explain things to one another.",
+      "after": "You declare the room chosen. Taylor Reed starts coaching everyone on how to walk past the unenlightened without looking smug. Nobody manages it.",
+      "mechanicsAndRandomMatch": true
+    },
+    {
+      "key": "preach:eternal-self:ordinary",
+      "item": {
+        "kind": "preach",
+        "philosophy": "eternal-self",
+        "seed": 1
+      },
+      "before": "You ask everyone to look deep inside themselves. A follower announces that they have found hunger.",
+      "after": "You ask everyone to look deep inside themselves. Taylor Reed asks whether their perfect self can take over their share of the chores.",
+      "mechanicsAndRandomMatch": true
+    },
+    {
+      "key": "preach:eternal-self:pushback",
+      "item": {
+        "kind": "preach",
+        "philosophy": "eternal-self",
+        "seed": 2
+      },
+      "before": "You describe your own journey towards perfection. A follower asks how far you still have to go.",
+      "after": "You describe your own journey towards perfection. Taylor Reed asks how far you still have to go.",
+      "mechanicsAndRandomMatch": true
+    },
+    {
+      "key": "preach:eternal-self:engaged",
+      "item": {
+        "kind": "preach",
+        "philosophy": "eternal-self",
+        "seed": 7
+      },
+      "before": "You describe the person each follower could become. People start confiding in one another until you have to ask for their attention back.",
+      "after": "You describe everyone’s perfect inner self. Taylor Reed wants theirs to chair the next meeting. People start requesting introductions to their own.",
+      "mechanicsAndRandomMatch": true
+    },
+    {
+      "key": "preach:quiet-orbit:ordinary",
+      "item": {
+        "kind": "preach",
+        "philosophy": "quiet-orbit",
+        "seed": 1
+      },
+      "before": "You keep the sermon short and leave room for silence. Several followers look pleased by this particular teaching.",
+      "after": "You leave room for silence. Taylor Reed closes their eyes, and you resist filling it with another explanation.",
+      "mechanicsAndRandomMatch": true
+    },
+    {
+      "key": "preach:quiet-orbit:pushback",
+      "item": {
+        "kind": "preach",
+        "philosophy": "quiet-orbit",
+        "seed": 2
+      },
+      "before": "You explain silence for so long that followers begin practising it while looking pointedly at you.",
+      "after": "You explain silence for so long that Taylor Reed raises a finger to their lips. The room joins in.",
+      "mechanicsAndRandomMatch": true
+    },
+    {
+      "key": "preach:quiet-orbit:engaged",
+      "item": {
+        "kind": "preach",
+        "philosophy": "quiet-orbit",
+        "seed": 7
+      },
+      "before": "You stop speaking and let the room listen. A hesitant follower starts talking. This time nobody interrupts them.",
+      "after": "You stop speaking and let the room listen. Taylor Reed starts talking about something difficult. This time nobody interrupts.",
+      "mechanicsAndRandomMatch": true
+    },
+    {
+      "key": "preach:ordinary-miracles:ordinary",
+      "item": {
+        "kind": "preach",
+        "philosophy": "ordinary-miracles",
+        "seed": 1
+      },
+      "before": "You ask for a small miracle. A follower describes finding a parking space in enough detail to use up the sermon.",
+      "after": "You ask for a small miracle. Taylor Reed nominates the fact that this meeting might finish on time.",
+      "mechanicsAndRandomMatch": true
+    },
+    {
+      "key": "preach:ordinary-miracles:pushback",
+      "item": {
+        "kind": "preach",
+        "philosophy": "ordinary-miracles",
+        "seed": 2
+      },
+      "before": "You call everyday struggles blessings in disguise. Someone asks which blessing is meant to cover their bills.",
+      "after": "You call everyday struggles blessings in disguise. Taylor Reed asks which blessing is meant to cover their bills.",
+      "mechanicsAndRandomMatch": true
+    },
+    {
+      "key": "preach:ordinary-miracles:engaged",
+      "item": {
+        "kind": "preach",
+        "philosophy": "ordinary-miracles",
+        "seed": 7
+      },
+      "before": "You ask for stories of small miracles. Followers compete to tell theirs until you have a queue of people insisting theirs sounds least believable.",
+      "after": "You ask for small miracles. Taylor Reed describes a public toilet with paper, soap and a working lock. The room reacts as if the sea has parted.",
+      "mechanicsAndRandomMatch": true
+    },
+    {
+      "key": "ceremony:dream-circle:ordinary",
+      "item": {
+        "kind": "ceremony",
+        "ceremony": "dream-circle",
+        "seed": 1
+      },
+      "before": "You hear everyone’s dream. One is an elaborate account of making a sandwich. You wait for the revelation; it is the sandwich.\n\nThe event cost $80.00; voluntary contributions were $6.40.",
+      "after": "You spend $80.00 hearing everyone’s dreams. Jordan Ellis describes making a sandwich. You wait for the revelation; it is the sandwich. The collection brings in $6.40.",
+      "mechanicsAndRandomMatch": true
+    },
+    {
+      "key": "ceremony:dream-circle:failure",
+      "item": {
+        "kind": "ceremony",
+        "ceremony": "dream-circle",
+        "seed": 2
+      },
+      "before": "You keep explaining what followers’ dreams meant. They start explaining why you are wrong. The circle breaks up before you can settle it.\n\nThe event cost $80.00; voluntary contributions were $0.00.",
+      "after": "Your $80.00 dream circle turns on you when Jordan Ellis rejects your interpretation. You are still defending it as people leave.",
+      "mechanicsAndRandomMatch": true
+    },
+    {
+      "key": "ceremony:dream-circle:outstanding",
+      "item": {
+        "kind": "ceremony",
+        "ceremony": "dream-circle",
+        "seed": 7
+      },
+      "before": "You get the room comparing dreams until a usually silent follower has everyone listening. They start another account before you can close the circle.\n\nThe event cost $80.00; voluntary contributions were $8.00.",
+      "after": "At the $80.00 dream circle, Jordan Ellis reenacts a dream in which you were their pet hamster. Everyone wants the hamster’s side of the story. The collection brings in $8.00.",
+      "mechanicsAndRandomMatch": true
+    },
+    {
+      "key": "ceremony:quiet-table:ordinary",
+      "item": {
+        "kind": "ceremony",
+        "ceremony": "quiet-table",
+        "seed": 1
+      },
+      "before": "You sit through a peaceful silence, broken mainly by the chairs. Followers leave looking less exhausted.\n\nThe event cost $60.00; voluntary contributions were $6.40.",
+      "after": "Your $60.00 quiet gathering settles down. Jordan Ellis loses a battle with a squeaky chair and has to sit very still. Members leave voluntary contributions of $6.40.",
+      "mechanicsAndRandomMatch": true
+    },
+    {
+      "key": "ceremony:quiet-table:failure",
+      "item": {
+        "kind": "ceremony",
+        "ceremony": "quiet-table",
+        "seed": 2
+      },
+      "before": "You give so many instructions about silence that the gathering ends with followers rubbing their temples.\n\nThe event cost $60.00; voluntary contributions were $0.00.",
+      "after": "Your $60.00 silent gathering is mostly instructions about silence. Jordan Ellis puts their head in their hands. You explain that too.",
+      "mechanicsAndRandomMatch": true
+    },
+    {
+      "key": "ceremony:quiet-table:outstanding",
+      "item": {
+        "kind": "ceremony",
+        "ceremony": "quiet-table",
+        "seed": 7
+      },
+      "before": "You let the silence hold. Shoulders drop around the table. Someone starts to thank you, then thinks better of it.\n\nThe event cost $60.00; voluntary contributions were $8.00.",
+      "after": "You spend $60.00 bringing everyone together and let the silence hold. Jordan Ellis takes a long breath. For once, you leave the moment alone. Members leave voluntary contributions of $8.00.",
+      "mechanicsAndRandomMatch": true
+    },
+    {
+      "key": "ceremony:community-supper:ordinary",
+      "item": {
+        "kind": "ceremony",
+        "ceremony": "community-supper",
+        "seed": 1
+      },
+      "before": "You serve the supper. Everyone eats, and the loudest dispute concerns who gets the last helping.\n\nThe event cost $180.00; voluntary contributions were $6.40.",
+      "after": "You serve a $180.00 supper. Jordan Ellis gives up their seat to someone arriving late and keeps the conversation going from the doorway. The supper collection brings in $6.40.",
+      "mechanicsAndRandomMatch": true
+    },
+    {
+      "key": "ceremony:community-supper:failure",
+      "item": {
+        "kind": "ceremony",
+        "ceremony": "community-supper",
+        "seed": 2
+      },
+      "before": "You run late and short of food. Guests ask for a second helping and receive your increasingly careful apology.\n\nThe event cost $180.00; voluntary contributions were $0.00.",
+      "after": "The $180.00 supper runs late and short. Jordan Ellis has to tell the queue that your apology is the only thing available for seconds.",
+      "mechanicsAndRandomMatch": true
+    },
+    {
+      "key": "ceremony:community-supper:outstanding",
+      "item": {
+        "kind": "ceremony",
+        "ceremony": "community-supper",
+        "seed": 7
+      },
+      "before": "You get members and neighbours eating together. People linger over empty plates and ask when you are doing this again.\n\nThe event cost $180.00; voluntary contributions were $8.00.",
+      "after": "You spend $180.00 feeding members and neighbours. Jordan Ellis tries to clear the plates, but people keep pulling out chairs for one more conversation. The supper collection brings in $8.00.",
+      "mechanicsAndRandomMatch": true
+    },
+    {
+      "key": "ceremony:starlight:ordinary",
+      "item": {
+        "kind": "ceremony",
+        "ceremony": "starlight",
+        "seed": 1
+      },
+      "before": "You watch the sky with the group. A follower proposes a warm coat as the evening’s most convincing source of protection.\n\nThe event cost $120.00; voluntary contributions were $6.40.",
+      "after": "You spend $120.00 watching the sky together. Jordan Ellis proposes a warm coat as the evening’s most convincing source of protection. Followers contribute $6.40.",
+      "mechanicsAndRandomMatch": true
+    },
+    {
+      "key": "ceremony:starlight:failure",
+      "item": {
+        "kind": "ceremony",
+        "ceremony": "starlight",
+        "seed": 2
+      },
+      "before": "You point confidently in the wrong direction. Cold followers turn back and forth until someone asks when you intend to identify the car park.\n\nThe event cost $120.00; voluntary contributions were $0.00.",
+      "after": "You point confidently in the wrong direction during the $120.00 vigil. Jordan Ellis asks whether the car park is also beyond your understanding.",
+      "mechanicsAndRandomMatch": true
+    },
+    {
+      "key": "ceremony:starlight:outstanding",
+      "item": {
+        "kind": "ceremony",
+        "ceremony": "starlight",
+        "seed": 7
+      },
+      "before": "You guide followers through a clear sky. People keep pointing things out after the vigil ends and forget to ask you to explain their significance.\n\nThe event cost $120.00; voluntary contributions were $8.00.",
+      "after": "You bring everyone out for a $120.00 vigil. Jordan Ellis spots something and the group crowds closer, forgetting to ask you what it means. Followers contribute $8.00.",
+      "mechanicsAndRandomMatch": true
+    },
+    {
+      "key": "ceremony:open-house:ordinary",
+      "item": {
+        "kind": "ceremony",
+        "ceremony": "open-house",
+        "seed": 1
+      },
+      "before": "You show visitors the meetings and expenses. They stay curious after the refreshments run out.\n\nThe event cost $220.00; voluntary contributions were $6.40.",
+      "after": "You host a $220.00 open house. Jordan Ellis answers a visitor asking what happens if enlightenment does not suit them. Members contribute $6.40.",
+      "mechanicsAndRandomMatch": true
+    },
+    {
+      "key": "ceremony:open-house:failure",
+      "item": {
+        "kind": "ceremony",
+        "ceremony": "open-house",
+        "seed": 2
+      },
+      "before": "You welcome visitors and dodge their questions. They stop asking you and start exchanging looks with one another.\n\nThe event cost $220.00; voluntary contributions were $0.00.",
+      "after": "You spend $220.00 welcoming visitors, then dodge their questions. Jordan Ellis is left facing a guest who wants to know if you are always like this.",
+      "mechanicsAndRandomMatch": true
+    },
+    {
+      "key": "ceremony:open-house:outstanding",
+      "item": {
+        "kind": "ceremony",
+        "ceremony": "open-house",
+        "seed": 7
+      },
+      "before": "You let visitors look around and answer their questions. Members join in, eager to show off the place even when you are trying to finish the tour.\n\nThe event cost $220.00; voluntary contributions were $8.00.",
+      "after": "Visitors fill your $220.00 open house with questions. Jordan Ellis takes over the tour and starts showing off corners you had hoped to skip. Members contribute $8.00.",
+      "mechanicsAndRandomMatch": true
+    },
+    {
+      "key": "ceremony:grand-promise:ordinary",
+      "item": {
+        "kind": "ceremony",
+        "ceremony": "grand-promise",
+        "seed": 1
+      },
+      "before": "You get the gathering through its untidy moments. Followers help you finish instead of asking when they can leave.\n\nThe event cost $480.00; voluntary contributions were $6.40.",
+      "after": "Your $480.00 gathering survives its untidy moments. Jordan Ellis ushers you towards the microphone before you can attempt another grand entrance. The collection reaches $6.40.",
+      "mechanicsAndRandomMatch": true
+    },
+    {
+      "key": "ceremony:grand-promise:failure",
+      "item": {
+        "kind": "ceremony",
+        "ceremony": "grand-promise",
+        "seed": 2
+      },
+      "before": "You lose control of the arrangements. Followers queue for the gathering while being asked to help organise it. Nobody looks grateful for the opportunity.\n\nThe event cost $480.00; voluntary contributions were $0.00.",
+      "after": "A queue forms at the $480.00 gathering while you stand without a plan. Jordan Ellis has to ask the people waiting to come inside and help set it up.",
+      "mechanicsAndRandomMatch": true
+    },
+    {
+      "key": "ceremony:grand-promise:outstanding",
+      "item": {
+        "kind": "ceremony",
+        "ceremony": "grand-promise",
+        "seed": 7
+      },
+      "before": "You deliver the big gathering you advertised. Guests find seats, the programme holds together and followers cheer without waiting for your cue.\n\nThe event cost $480.00; voluntary contributions were $8.00.",
+      "after": "Your $480.00 gathering ends with Jordan Ellis leading a conga line chanting your title. You join at the back and lose all control of your own procession. The collection reaches $8.00.",
+      "mechanicsAndRandomMatch": true
+    }
+  ]
+}

@@ -1,0 +1,1184 @@
+{
+  "sourceCommit": "66ec642e4c9a9332eac322bd8fb12e0a6a3d8e87",
+  "runtimeSourceIdenticalTo": "ca7c72c743b98eda7c73054960bea90256b0b76f",
+  "inventorySha256": "a4fe4e6c5ab33d2a3507ce54db77198b2ab180fb59070db099036e916d10dcd7",
+  "reviewInputSha256": "e85f195f894440d751a5468c76d633bda541251d9eeff166991966fa9d418f79",
+  "range": {
+    "start": 177,
+    "end": 264
+  },
+  "reviewer": {
+    "agent": "/root/purchase_dialog",
+    "kind": "Codex source review",
+    "externalHuman": false
+  },
+  "scope": "Read all 88 complete authored title/setup records, 264 choice labels/result titles/result bodies/first-person journals and every declared stat/bond effect, plus relevant static eligibility/binding and capped-effect source. No source modifications, game/runtime execution, natural-encounter coverage, native/visual acceptance, external-human review, or release-build certification.",
+  "sourceEvidence": {
+    "path": "/tmp/dreams-c39-editorial-purchase-source-evidence-20261021.json",
+    "sha256": "d3b8fe9916b0efbb9670e38e49d36feff02fec46e36853133a0939a8aa955e2f"
+  },
+  "categoryPolicy": "Exactly one primary category per template based on its actual text/context. Professional Creator/YouTuber/Streamer preparation stays employment-special-careers; owner complaint/contact scenes are businesses. Per-path eligibility is a separate coverage axis, not a second primary count. An extremely rare standalone absurd encounter belongs to rare-cross-life-callbacks without claiming a cross-life callback.",
+  "reviewLimits": [
+    "Stat and bond changes were compared with text and static clamping/display code, not executed against boundary-state worlds. No exact numeric gain is promised in these narrative results; runtime effect rows use the effective capped difference.",
+    "Anonymous incidental speakers, props and small recollections are authored scene details; named pets, colleagues, friends, destinations, hobbies and diagnosed conditions use the existing saved context shown in source. No assertion of a natural encountered instance was made.",
+    "This assigned slice is thematically concentrated. Zero primary rows in other planned categories is reported as zero, not reclassified to satisfy target counts. Whole-catalogue target reconciliation belongs to the combined ledger."
+  ],
+  "summary": {
+    "reviewedTemplates": 88,
+    "reviewedChoices": 264,
+    "concreteFindings": 0,
+    "primaryCategoryCounts": {
+      "businesses": 2,
+      "employment-special-careers": 31,
+      "health-later-life": 24,
+      "rare-cross-life-callbacks": 1,
+      "travel-pets-hobbies-entertainment": 30
+    }
+  },
+  "rows": [
+    {
+      "index": 177,
+      "id": "wellbeing-miracle-recommendation",
+      "category": "health-later-life",
+      "rationale": "A diagnosed chronic-condition context grounds the acquaintance's cure claim. Declining reduces stress, asking for evidence develops understanding, and prolonged debate costs energy; neither result nor first-person journal cures the condition or endorses the unsupported treatment.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/wellbeingStories.ts",
+        "line": 9,
+        "sha256": "1ec30a2da1e4706f559043ee5d743ec48ce4aa2f2fce9dd49c6307a760214443"
+      }
+    },
+    {
+      "index": 178,
+      "id": "wellbeing-variable-day",
+      "category": "health-later-life",
+      "rationale": "The chronic-condition task is explicitly optional. Scaling it down, resting and forcing the old plan have distinct discipline/energy/stress effects, with matching results and journals; rest is not described as recovery or as a change in disease status.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/wellbeingStories.ts",
+        "line": 14,
+        "sha256": "1ec30a2da1e4706f559043ee5d743ec48ce4aa2f2fce9dd49c6307a760214443"
+      }
+    },
+    {
+      "index": 179,
+      "id": "wellbeing-private-information",
+      "category": "health-later-life",
+      "rationale": "An existing chronic condition supplies the private subject. Setting a boundary, giving a practical summary and choosing a fuller conversation each retain agency; their respect/stress or happiness/energy effects do not disclose information through another game system.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/wellbeingStories.ts",
+        "line": 19,
+        "sha256": "1ec30a2da1e4706f559043ee5d743ec48ce4aa2f2fce9dd49c6307a760214443"
+      }
+    },
+    {
+      "index": 180,
+      "id": "wellbeing-other-peoples-progress",
+      "category": "health-later-life",
+      "rationale": "The chronic-condition comparison is another person's edited account, not a treatment instruction. Stepping back reduces stress, keeping questions improves understanding/discipline, and continued comparison harms mood; all three journals accurately describe those choices without changing clinical care.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/wellbeingStories.ts",
+        "line": 24,
+        "sha256": "1ec30a2da1e4706f559043ee5d743ec48ce4aa2f2fce9dd49c6307a760214443"
+      }
+    },
+    {
+      "index": 181,
+      "id": "wellbeing-one-more-episode",
+      "category": "health-later-life",
+      "rationale": "The next-episode setup distinguishes stopping, deliberately choosing one more and drifting through several. The corresponding discipline/rest, enjoyment/energy and fatigue/stress tradeoffs fit their results and journals; no subscription, cash charge or recorded media project is implied.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/wellbeingStories.ts",
+        "line": 29,
+        "sha256": "1ec30a2da1e4706f559043ee5d743ec48ce4aa2f2fce9dd49c6307a760214443"
+      }
+    },
+    {
+      "index": 182,
+      "id": "wellbeing-stretch-after-sitting",
+      "category": "health-later-life",
+      "rationale": "A local adult scene concerns temporary shoulder tension after sitting. Movement, a positional adjustment and ignoring it have matching energy/stress or discipline effects and journals; the copy neither diagnoses a condition nor promises a health-stat cure.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/wellbeingStories.ts",
+        "line": 34,
+        "sha256": "1ec30a2da1e4706f559043ee5d743ec48ce4aa2f2fce9dd49c6307a760214443"
+      }
+    },
+    {
+      "index": 183,
+      "id": "wellbeing-ordinary-water",
+      "category": "health-later-life",
+      "rationale": "Choosing water, clarifying the desire and over-researching drinks resolve the thirst/distraction joke in different ways. Modest energy/discipline, understanding/stress and wasted-energy/stress changes fit the results; no purchasable drink or monetary transaction is invented.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/wellbeingStories.ts",
+        "line": 39,
+        "sha256": "1ec30a2da1e4706f559043ee5d743ec48ce4aa2f2fce9dd49c6307a760214443"
+      }
+    },
+    {
+      "index": 184,
+      "id": "wellbeing-rehearsed-argument",
+      "category": "health-later-life",
+      "rationale": "The disagreement is explicitly imaginary. Returning attention to the present, preparing one calm point and polishing a comeback respectively reduce stress, develop discipline at a small energy cost, or increase stress/fatigue; journals do not claim an actual argument occurred with a bound person.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/wellbeingStories.ts",
+        "line": 44,
+        "sha256": "1ec30a2da1e4706f559043ee5d743ec48ce4aa2f2fce9dd49c6307a760214443"
+      }
+    },
+    {
+      "index": 185,
+      "id": "wellbeing-quiet-not-silent",
+      "category": "health-later-life",
+      "rationale": "Ordinary background sounds interrupt a quiet pause. Accepting them, choosing one sound and cataloguing every interruption lead to coherent rest/focus versus stress effects; result and journal wording stay experiential and confer no medical or audio-setting outcome.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/wellbeingStories.ts",
+        "line": 49,
+        "sha256": "1ec30a2da1e4706f559043ee5d743ec48ce4aa2f2fce9dd49c6307a760214443"
+      }
+    },
+    {
+      "index": 186,
+      "id": "wellbeing-meal-comparison",
+      "category": "health-later-life",
+      "rationale": "A staged online meal supplies the comparison without requiring a player's social account or a paid meal. Contextualising the picture, taking one idea and self-criticism have consistent mood/stress or understanding/discipline effects and factual first-person journals.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/wellbeingStories.ts",
+        "line": 54,
+        "sha256": "1ec30a2da1e4706f559043ee5d743ec48ce4aa2f2fce9dd49c6307a760214443"
+      }
+    },
+    {
+      "index": 187,
+      "id": "wellbeing-waiting-without-feed",
+      "category": "health-later-life",
+      "rationale": "An unfilled wait offers observation, rest or another refresh of the same screen. The small understanding/stress, energy/stress and fatigue/stress changes match what each result describes; the journals do not claim a social post, message or newly discovered game object.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/wellbeingStories.ts",
+        "line": 59,
+        "sha256": "1ec30a2da1e4706f559043ee5d743ec48ce4aa2f2fce9dd49c6307a760214443"
+      }
+    },
+    {
+      "index": 188,
+      "id": "wellbeing-good-day-pressure",
+      "category": "health-later-life",
+      "rationale": "Feeling better rested is a transient setup rather than a disease recovery claim. Pacing priorities, enjoying the moment and filling the day produce the stated discipline/energy or mood/stress tradeoffs; the exhausted ending and journal agree with the costly third choice.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/wellbeingStories.ts",
+        "line": 64,
+        "sha256": "1ec30a2da1e4706f559043ee5d743ec48ce4aa2f2fce9dd49c6307a760214443"
+      }
+    },
+    {
+      "index": 189,
+      "id": "wellbeing-habit-one-miss",
+      "category": "health-later-life",
+      "rationale": "The missed intention remains a small personal event. Resuming, reviewing the obstacle and a broad self-condemnation give distinct discipline/stress, understanding/discipline and mood/stress effects; no tracked habit streak, prior completion or reward is falsely recorded.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/wellbeingStories.ts",
+        "line": 69,
+        "sha256": "1ec30a2da1e4706f559043ee5d743ec48ce4aa2f2fce9dd49c6307a760214443"
+      }
+    },
+    {
+      "index": 190,
+      "id": "wellbeing-unhurried-breath",
+      "category": "health-later-life",
+      "rationale": "The tired reply is still a choice. Pausing, requesting a break and snapping yield the corresponding discipline/stress, respect/energy and respect/stress effects; the third result adds a tone argument, while its journal admits snapping rather than inventing a successful resolution.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/wellbeingStories.ts",
+        "line": 74,
+        "sha256": "1ec30a2da1e4706f559043ee5d743ec48ce4aa2f2fce9dd49c6307a760214443"
+      }
+    },
+    {
+      "index": 191,
+      "id": "career-actor-written-pause",
+      "category": "employment-special-careers",
+      "rationale": "The active Actor context supports script review without requiring an unearned role completion. Simple delivery, exploratory readings and reading the direction aloud give plausible discipline/stress, understanding/energy and humour/respect effects; no contract, fee or performance award is granted.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/specialCareerStories.ts",
+        "line": 4,
+        "sha256": "1411989c3e3dce9ae7825df24d1dea51d4babf721da9f4c88d2ba76ac582ffd2"
+      }
+    },
+    {
+      "index": 192,
+      "id": "career-model-expression-board",
+      "category": "employment-special-careers",
+      "rationale": "An active Model reviews contradictory expression instructions. Clarification, restrained trials and attempting every expression at once resolve the brief differently; respect/discipline, understanding/energy and humour/stress changes match the results and journals without promising a booked shoot.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/specialCareerStories.ts",
+        "line": 9,
+        "sha256": "1411989c3e3dce9ae7825df24d1dea51d4babf721da9f4c88d2ba76ac582ffd2"
+      }
+    },
+    {
+      "index": 193,
+      "id": "career-athlete-ritual-discussion",
+      "category": "employment-special-careers",
+      "rationale": "The active Athlete's team joke credits a sock, not an engine luck modifier. Enjoying the joke, crediting preparation and demanding evidence from the sock have coherent mood/stress, respect/discipline and energy/respect changes; no match result or team payment is fabricated.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/specialCareerStories.ts",
+        "line": 14,
+        "sha256": "1411989c3e3dce9ae7825df24d1dea51d4babf721da9f4c88d2ba76ac582ffd2"
+      }
+    },
+    {
+      "index": 194,
+      "id": "career-musician-setlist-handwriting",
+      "category": "employment-special-careers",
+      "rationale": "The active Musician reads an ambiguous set list. Rewriting, checking and guessing respectively provide discipline/stress, respect/understanding and humour/stress effects; the results and journals do not publish a release, pay royalties or claim a completed live engagement.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/specialCareerStories.ts",
+        "line": 19,
+        "sha256": "1411989c3e3dce9ae7825df24d1dea51d4babf721da9f4c88d2ba76ac582ffd2"
+      }
+    },
+    {
+      "index": 195,
+      "id": "career-politician-sentence-length",
+      "category": "employment-special-careers",
+      "rationale": "An active political career grounds the public-work draft. Plain language, reading aloud and adding jargon lead to consistent respect/discipline, understanding/energy and respect/stress effects; the journals concern editing only, with no office, policy, election or popularity outcome invented.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/specialCareerStories.ts",
+        "line": 24,
+        "sha256": "1411989c3e3dce9ae7825df24d1dea51d4babf721da9f4c88d2ba76ac582ffd2"
+      }
+    },
+    {
+      "index": 196,
+      "id": "career-creator-fourth-introduction",
+      "category": "employment-special-careers",
+      "rationale": "An actual active Creator studio grounds repeated openings in a creator project. Cutting, outlining and adding an explanation have distinct discipline/energy, understanding/discipline and stress/energy consequences. This is professional preparation, so primary employment allocation is appropriate; no public post, views or income is granted.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/specialCareerStories.ts",
+        "line": 29,
+        "sha256": "1411989c3e3dce9ae7825df24d1dea51d4babf721da9f4c88d2ba76ac582ffd2"
+      }
+    },
+    {
+      "index": 197,
+      "id": "career-military-checklist-language",
+      "category": "employment-special-careers",
+      "rationale": "The active Military context supplies service preparation. Asking about an abbreviation, checking references and hiding uncertainty match the discipline/respect, understanding/energy and stress/respect effects. The results do not complete an assignment, alter safety status or assert a combat event.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/specialCareerStories.ts",
+        "line": 34,
+        "sha256": "1411989c3e3dce9ae7825df24d1dea51d4babf721da9f4c88d2ba76ac582ffd2"
+      }
+    },
+    {
+      "index": 198,
+      "id": "career-astronaut-plain-explanation",
+      "category": "employment-special-careers",
+      "rationale": "An actual active Astronaut service career supports a programme discussion without requiring flight. Purpose-first explanation, a qualified analogy and merely expanding acronyms have matching understanding/respect, mood/understanding and fatigue/stress effects; the journal does not fabricate a launch or qualification.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/specialCareerStories.ts",
+        "line": 39,
+        "sha256": "1411989c3e3dce9ae7825df24d1dea51d4babf721da9f4c88d2ba76ac582ffd2"
+      }
+    },
+    {
+      "index": 199,
+      "id": "career-royalty-ribbon-end",
+      "category": "employment-special-careers",
+      "rationale": "Public royal-duty eligibility grounds ceremonial preparation. Patient waiting, a gentle joke and assigning blame affect discipline/respect, mood/respect and respect/stress consistently; no title, constitutional power, allowance, or paid ceremonial completion is created by the ribbon anecdote.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/specialCareerStories.ts",
+        "line": 44,
+        "sha256": "1411989c3e3dce9ae7825df24d1dea51d4babf721da9f4c88d2ba76ac582ffd2"
+      }
+    },
+    {
+      "index": 200,
+      "id": "pet-dog-important-smell",
+      "category": "travel-pets-hobbies-entertainment",
+      "rationale": "The actual available household Dog is named through the pet binding, including for age-six-plus family members. Patient waiting, a gentle invitation and impatient calls have matching +4/+2/-3 pet-bond changes and mood/discipline/stress tradeoffs; result and journal keep that same pet.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/petLifeStories.ts",
+        "line": 4,
+        "sha256": "b9209d82dc45b4f3301b7a446cf937b1d44baadc30ef5408bce2b556568a261b"
+      }
+    },
+    {
+      "index": 201,
+      "id": "pet-dog-invisible-throw",
+      "category": "travel-pets-hobbies-entertainment",
+      "rationale": "The Dog context supports the empty-handed throw joke. A real gentle game and quiet attention improve the bound pet's bond, while repeating the trick lowers it despite brief amusement; results and journals do not invent an owned ball, paid toy or training completion.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/petLifeStories.ts",
+        "line": 9,
+        "sha256": "b9209d82dc45b4f3301b7a446cf937b1d44baadc30ef5408bce2b556568a261b"
+      }
+    },
+    {
+      "index": 202,
+      "id": "pet-dog-doorway-greeting",
+      "category": "travel-pets-hobbies-entertainment",
+      "rationale": "The local household Dog greets a brief room absence, not a completed trip. Warm attention, helping it settle and brushing past give +4/+3/-3 bond changes with fitting mood, stress or discipline effects; the journal records the greeting rather than an expedition.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/petLifeStories.ts",
+        "line": 14,
+        "sha256": "b9209d82dc45b4f3301b7a446cf937b1d44baadc30ef5408bce2b556568a261b"
+      }
+    },
+    {
+      "index": 203,
+      "id": "pet-cat-chosen-paper",
+      "category": "travel-pets-hobbies-entertainment",
+      "rationale": "An available household Cat occupies paper. Offering another spot, taking a break and complaining affect that pet's bond by +4/+3/-1 and match the respective calm enjoyment or stress costs; no property tenancy, financial paperwork or ownership transaction follows from the joke.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/petLifeStories.ts",
+        "line": 19,
+        "sha256": "b9209d82dc45b4f3301b7a446cf937b1d44baadc30ef5408bce2b556568a261b"
+      }
+    },
+    {
+      "index": 204,
+      "id": "pet-cat-unexpected-box",
+      "category": "travel-pets-hobbies-entertainment",
+      "rationale": "The Cat's box preference is an incidental safe household scene. Accepting it, observing the appeal and rearranging around it have consistent bond/mood/understanding versus stress/energy effects; the disturbance result and journal agree that the third choice sends the cat elsewhere.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/petLifeStories.ts",
+        "line": 24,
+        "sha256": "b9209d82dc45b4f3301b7a446cf937b1d44baadc30ef5408bce2b556568a261b"
+      }
+    },
+    {
+      "index": 205,
+      "id": "pet-cat-slow-blink",
+      "category": "travel-pets-hobbies-entertainment",
+      "rationale": "The Cat scene leaves approach and distance voluntary. Quiet company and optional attention increase the actual pet's bond, whereas repeated calling lowers it and raises stress; the result descriptions and first-person journals do not guarantee an approach or conflate animal response with consent to handling.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/petLifeStories.ts",
+        "line": 29,
+        "sha256": "b9209d82dc45b4f3301b7a446cf937b1d44baadc30ef5408bce2b556568a261b"
+      }
+    },
+    {
+      "index": 206,
+      "id": "pet-rabbit-floor-level",
+      "category": "travel-pets-hobbies-entertainment",
+      "rationale": "The available household Rabbit is initially cautious. Sitting at a distance, observing without crowding and repeatedly reaching have +5/+3/-4 bond changes and appropriate mood/understanding versus stress/respect effects; the results and journals preserve the animal's opportunity to move away.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/petLifeStories.ts",
+        "line": 34,
+        "sha256": "b9209d82dc45b4f3301b7a446cf937b1d44baadc30ef5408bce2b556568a261b"
+      }
+    },
+    {
+      "index": 207,
+      "id": "pet-parrot-perfect-timing",
+      "category": "travel-pets-hobbies-entertainment",
+      "rationale": "The uncommon Parrot scene treats the sound as amusing timing, not proven speech comprehension. A gentle reply, calm listening and shouting have corresponding +4/+3/-3 bond changes and humour/discipline versus stress/energy effects, without changing species or inventing a learned-word milestone.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/petLifeStories.ts",
+        "line": 39,
+        "sha256": "b9209d82dc45b4f3301b7a446cf937b1d44baadc30ef5408bce2b556568a261b"
+      }
+    },
+    {
+      "index": 208,
+      "id": "pet-familiar-presence",
+      "category": "travel-pets-hobbies-entertainment",
+      "rationale": "Any supported available household pet can provide ordinary company. Spending a quiet moment, observing behaviour and remaining distracted have +4/+3/-1 bond changes with fitting mood/respect/energy effects; the generic copy does not assume a species-specific action or new ownership.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/petLifeStories.ts",
+        "line": 44,
+        "sha256": "b9209d82dc45b4f3301b7a446cf937b1d44baadc30ef5408bce2b556568a261b"
+      }
+    },
+    {
+      "index": 209,
+      "id": "pet-care-name-voice",
+      "category": "travel-pets-hobbies-entertainment",
+      "rationale": "The supported Dog/Cat/Rabbit/Parrot household binding supplies the same named pet throughout. Warm attention, patient waiting and repeated testing respectively improve or reduce its bond with appropriate mood/discipline or stress/energy effects; no training success or guaranteed recall is claimed.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/petLifeStories.ts",
+        "line": 49,
+        "sha256": "b9209d82dc45b4f3301b7a446cf937b1d44baadc30ef5408bce2b556568a261b"
+      }
+    },
+    {
+      "index": 210,
+      "id": "hobby-guitar-familiar-chord",
+      "category": "travel-pets-hobbies-entertainment",
+      "rationale": "Actual local Guitar practice within the recorded practice window supports the chord memory. Comparing songs, enjoying recognition and overgeneralising produce coherent understanding/mood, enjoyment/stress and mood/stress effects; journals do not award guitar skill or claim a paid recording.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/hobbyLifeStories.ts",
+        "line": 4,
+        "sha256": "453a4fb9c796dde78c33997dd3b8b700b01a3af1079d71eaeff60b0171d9c760"
+      }
+    },
+    {
+      "index": 211,
+      "id": "hobby-painting-rotation",
+      "category": "travel-pets-hobbies-entertainment",
+      "rationale": "An active Painting plan with attended practice grounds the sideways practice piece. Exploring, keeping the happy accident and enforcing the original orientation have matching understanding/mood, mood/discipline and stress/energy effects; no sale, gallery display or inventory artwork is created.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/hobbyLifeStories.ts",
+        "line": 9,
+        "sha256": "453a4fb9c796dde78c33997dd3b8b700b01a3af1079d71eaeff60b0171d9c760"
+      }
+    },
+    {
+      "index": 212,
+      "id": "hobby-photo-background",
+      "category": "travel-pets-hobbies-entertainment",
+      "rationale": "Actual Photography practice supports reviewing a frame whose bin dominates the background. Studying it, laughing and blaming the camera respectively affect understanding/discipline, mood/stress and stress/discipline; the results and journals claim neither a publication nor a photographic award.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/hobbyLifeStories.ts",
+        "line": 14,
+        "sha256": "453a4fb9c796dde78c33997dd3b8b700b01a3af1079d71eaeff60b0171d9c760"
+      }
+    },
+    {
+      "index": 213,
+      "id": "hobby-chess-perfect-plan",
+      "category": "travel-pets-hobbies-entertainment",
+      "rationale": "A recorded Chess practice context supports reflecting on an overlooked reply. Reviewing it, appreciating the opponent and calling a legal move unfair have coherent understanding/discipline, mood/respect and respect/stress effects; the scene creates no official match record or prize.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/hobbyLifeStories.ts",
+        "line": 19,
+        "sha256": "453a4fb9c796dde78c33997dd3b8b700b01a3af1079d71eaeff60b0171d9c760"
+      }
+    },
+    {
+      "index": 214,
+      "id": "hobby-reading-ending-opinion",
+      "category": "travel-pets-hobbies-entertainment",
+      "rationale": "The actual Reading practice context grounds an unexpected ending. Re-reading, understanding the reaction and dismissing the whole book have distinct understanding/mood, understanding/discipline and mood/stress effects; the result and journal distinguish an opinion from a new qualification or tracked completion reward.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/hobbyLifeStories.ts",
+        "line": 24,
+        "sha256": "453a4fb9c796dde78c33997dd3b8b700b01a3af1079d71eaeff60b0171d9c760"
+      }
+    },
+    {
+      "index": 215,
+      "id": "hobby-gaming-helpful-tip",
+      "category": "travel-pets-hobbies-entertainment",
+      "rationale": "Attended Gaming practice supplies the loading-tip memory. Learning from it, enjoying the timing and denying the explanation produce fitting understanding/discipline, mood/stress and stress/respect changes; no victory, purchased game item or public achievement is silently awarded.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/hobbyLifeStories.ts",
+        "line": 29,
+        "sha256": "453a4fb9c796dde78c33997dd3b8b700b01a3af1079d71eaeff60b0171d9c760"
+      }
+    },
+    {
+      "index": 216,
+      "id": "hobby-cooking-last-instruction",
+      "category": "travel-pets-hobbies-entertainment",
+      "rationale": "The Cooking practice memory uses a cooling instruction and a supervised session, with age-six-plus local practice eligibility. Learning patience, laughing about impatience and dismissing the wait affect discipline/understanding, mood/stress or discipline/stress consistently; no burn, injury or unearned meal sale is claimed.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/hobbyLifeStories.ts",
+        "line": 34,
+        "sha256": "453a4fb9c796dde78c33997dd3b8b700b01a3af1079d71eaeff60b0171d9c760"
+      }
+    },
+    {
+      "index": 217,
+      "id": "hobby-gardening-labels",
+      "category": "travel-pets-hobbies-entertainment",
+      "rationale": "Recorded Gardening practice grounds the labelled-plant recollection. Writing notes, noticing one distinction and trusting vague memory have matching discipline/understanding, understanding/stress and discipline/stress effects; the results and journals do not create crop ownership, harvest proceeds or guaranteed plant identification.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/hobbyLifeStories.ts",
+        "line": 39,
+        "sha256": "453a4fb9c796dde78c33997dd3b8b700b01a3af1079d71eaeff60b0171d9c760"
+      }
+    },
+    {
+      "index": 218,
+      "id": "hobby-small-improvement",
+      "category": "travel-pets-hobbies-entertainment",
+      "rationale": "An active local hobby plan with actual attended practice supplies the named hobby. Noticing progress, describing it and dismissing it beside highlights affect mood/discipline, understanding/discipline and mood/stress; the subjective easier moment is not represented as an unearned skill level or competitive result.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/hobbyLifeStories.ts",
+        "line": 44,
+        "sha256": "453a4fb9c796dde78c33997dd3b8b700b01a3af1079d71eaeff60b0171d9c760"
+      }
+    },
+    {
+      "index": 219,
+      "id": "hobby-explain-without-selling",
+      "category": "travel-pets-hobbies-entertainment",
+      "rationale": "The named hobby comes from real practice. Sharing personal enjoyment, making the conversation mutual and insisting on recruitment have fitting respect/mood, respect/understanding and respect/stress effects; the generic listener is incidental and no new friendship, paid enrolment or hobby adoption is created.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/hobbyLifeStories.ts",
+        "line": 49,
+        "sha256": "453a4fb9c796dde78c33997dd3b8b700b01a3af1079d71eaeff60b0171d9c760"
+      }
+    },
+    {
+      "index": 220,
+      "id": "travel-memory-old-ticket",
+      "category": "travel-pets-hobbies-entertainment",
+      "rationale": "A completed trip involving this person supplies the destination. Remembering an old ticket, writing a detail and continuing to sort have matching mood/stress, discipline/understanding and energy/mood effects; the scene is retrospective, with no new journey, ticket purchase or travel payment.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/travelMemoryStories.ts",
+        "line": 4,
+        "sha256": "2161ff11bcef9d348e4f26f584cf471cff04fda3c35f785ad7b379141548a6fc"
+      }
+    },
+    {
+      "index": 221,
+      "id": "travel-memory-forgotten-phrase",
+      "category": "travel-pets-hobbies-entertainment",
+      "rationale": "A completed visit grounds the half-remembered phrase without asserting a different national language. Checking meaning, admitting uncertainty and teaching it confidently affect understanding/discipline, respect/stress and respect/stress coherently; no language skill, translation credential or new destination is granted.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/travelMemoryStories.ts",
+        "line": 9,
+        "sha256": "2161ff11bcef9d348e4f26f584cf471cff04fda3c35f785ad7b379141548a6fc"
+      }
+    },
+    {
+      "index": 222,
+      "id": "travel-memory-folded-map",
+      "category": "travel-pets-hobbies-entertainment",
+      "rationale": "The actual completed-trip destination anchors an incidental paper-map memory. Patient refolding, a practical new fold and forcing it have fitting discipline/stress, understanding/mood and stress/energy changes; all journals remain personal observations rather than another navigation, fee or travel outcome.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/travelMemoryStories.ts",
+        "line": 14,
+        "sha256": "2161ff11bcef9d348e4f26f584cf471cff04fda3c35f785ad7b379141548a6fc"
+      }
+    },
+    {
+      "index": 223,
+      "id": "travel-memory-food-photos",
+      "category": "travel-pets-hobbies-entertainment",
+      "rationale": "The completed trip grounds food photographs without assuming a particular local cuisine. Enjoying the memory, recalling its setting and criticising the record have consistent mood/stress, understanding/mood and stress/mood effects; no food expense, restaurant ownership or public social post is invented.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/travelMemoryStories.ts",
+        "line": 19,
+        "sha256": "2161ff11bcef9d348e4f26f584cf471cff04fda3c35f785ad7b379141548a6fc"
+      }
+    },
+    {
+      "index": 224,
+      "id": "travel-memory-one-good-habit",
+      "category": "travel-pets-hobbies-entertainment",
+      "rationale": "The destination is from an actual completed visit. Trying a smaller slower moment, reflecting on expectations and demanding a holiday-like day give consistent mood/stress, understanding/discipline and stress/mood effects; no repeat holiday, changed work schedule or new habit-plan record is claimed.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/travelMemoryStories.ts",
+        "line": 24,
+        "sha256": "2161ff11bcef9d348e4f26f584cf471cff04fda3c35f785ad7b379141548a6fc"
+      }
+    },
+    {
+      "index": 225,
+      "id": "travel-memory-worth-the-visit",
+      "category": "travel-pets-hobbies-entertainment",
+      "rationale": "An actual available local adult friend and completed trip jointly ground the question. A balanced account, personal recommendation and universal demand affect the same friend's bond by +3/+4/-2 alongside coherent respect/understanding or mood/stress changes; no rating, travel booking or new friend is created.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/travelMemoryStories.ts",
+        "line": 29,
+        "sha256": "2161ff11bcef9d348e4f26f584cf471cff04fda3c35f785ad7b379141548a6fc"
+      }
+    },
+    {
+      "index": 226,
+      "id": "travel-memory-unsent-card",
+      "category": "travel-pets-hobbies-entertainment",
+      "rationale": "A completed visit supplies the postcard's destination; the unfinished card is incidental scene detail. Finishing the thought, retaining the fragment and self-reproach give fitting mood/discipline, mood/stress and stress/mood effects; no sent communication, postage charge or invented recipient is recorded.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/travelMemoryStories.ts",
+        "line": 34,
+        "sha256": "2161ff11bcef9d348e4f26f584cf471cff04fda3c35f785ad7b379141548a6fc"
+      }
+    },
+    {
+      "index": 227,
+      "id": "travel-memory-directions",
+      "category": "travel-pets-hobbies-entertainment",
+      "rationale": "The completed visit grounds limited directions. Labelling the memory's limits, telling the detour story and overstating expertise have consistent respect/discipline, mood/stress and respect/stress effects; no false certification, current trip or real route calculation is imposed on the world.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/travelMemoryStories.ts",
+        "line": 39,
+        "sha256": "2161ff11bcef9d348e4f26f584cf471cff04fda3c35f785ad7b379141548a6fc"
+      }
+    },
+    {
+      "index": 228,
+      "id": "travel-memory-imperfect-weather",
+      "category": "travel-pets-hobbies-entertainment",
+      "rationale": "A completed-trip memory contains both weather disruption and adaptation. Recalling the alternative, retaining mixed feelings and exaggerating total disaster have coherent mood/understanding, discipline/stress and mood/stress effects; the first-person journals do not alter actual trip dates, costs or completion status.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/travelMemoryStories.ts",
+        "line": 44,
+        "sha256": "2161ff11bcef9d348e4f26f584cf471cff04fda3c35f785ad7b379141548a6fc"
+      }
+    },
+    {
+      "index": 229,
+      "id": "travel-memory-short-version",
+      "category": "travel-pets-hobbies-entertainment",
+      "rationale": "Both a completed trip and an existing available local adult friend are required. One short story, asking the listener's interest and a long chronology have matching +4/+3/-3 friend-bond changes and respect/mood, respect/understanding or energy/respect effects; the same bound friend persists in all text.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/travelMemoryStories.ts",
+        "line": 49,
+        "sha256": "2161ff11bcef9d348e4f26f584cf471cff04fda3c35f785ad7b379141548a6fc"
+      }
+    },
+    {
+      "index": 230,
+      "id": "later-retirement-assumption",
+      "category": "health-later-life",
+      "rationale": "Age 55-plus eligibility does not declare the player retired: retirement is explicitly a stranger's unverified assumption. Accurate explanation, gentle humour and a lengthy lecture have matching respect/stress, mood/respect and stress/energy effects; no employment termination, pension or retirement record is created.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/laterLifeStories.ts",
+        "line": 4,
+        "sha256": "1eb43d62d45fe8219b0df96ecf232fa4b66b96ae8bf462768f357ae4a8fa0c50"
+      }
+    },
+    {
+      "index": 231,
+      "id": "later-old-handwriting",
+      "category": "health-later-life",
+      "rationale": "The age-55-plus old-note scene contrasts past and present perspective without claiming a prior journal entry exists. Kind reading, adding a present thought and harsh hindsight have consistent mood/stress, understanding/discipline and stress/mood effects, with journals limited to the current reflection.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/laterLifeStories.ts",
+        "line": 9,
+        "sha256": "1eb43d62d45fe8219b0df96ecf232fa4b66b96ae8bf462768f357ae4a8fa0c50"
+      }
+    },
+    {
+      "index": 232,
+      "id": "later-forgotten-telephone-number",
+      "category": "health-later-life",
+      "rationale": "The age-55-plus scene contrasts an old telephone number with a small task distraction. Laughing, calmly retracing and panicking have coherent mood/stress, discipline/stress and stress/energy effects; neither results nor journals diagnose memory disease or change health status.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/laterLifeStories.ts",
+        "line": 14,
+        "sha256": "1eb43d62d45fe8219b0df96ecf232fa4b66b96ae8bf462768f357ae4a8fa0c50"
+      }
+    },
+    {
+      "index": 233,
+      "id": "later-unfamiliar-word",
+      "category": "health-later-life",
+      "rationale": "A younger person's changed word use is incidental, not a substituted family member. Asking, using context and condemning language change affect understanding/respect, discipline/understanding and respect/stress consistently; all journals remain about comprehension rather than a qualification or changed relationship record.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/laterLifeStories.ts",
+        "line": 19,
+        "sha256": "1eb43d62d45fe8219b0df96ecf232fa4b66b96ae8bf462768f357ae4a8fa0c50"
+      }
+    },
+    {
+      "index": 234,
+      "id": "later-old-competition",
+      "category": "health-later-life",
+      "rationale": "The uncommon later-life game dispute is a humorous retrospective scene, not a reopened legal case. Funny retelling, perspective and continued prosecution give fitting mood/stress, understanding/discipline and stress/energy effects; legal metaphors do not create court, fine or conviction records.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/laterLifeStories.ts",
+        "line": 24,
+        "sha256": "1eb43d62d45fe8219b0df96ecf232fa4b66b96ae8bf462768f357ae4a8fa0c50"
+      }
+    },
+    {
+      "index": 235,
+      "id": "later-photo-at-edge",
+      "category": "health-later-life",
+      "rationale": "The age-55-plus old photograph leaves the unknown detail explicitly unknown. Accepting the mystery, recording remembered facts and inventing a dramatic caption have distinct mood/stress, understanding/discipline and humour/stress effects; the third result labels the story a guess rather than a factual life milestone.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/laterLifeStories.ts",
+        "line": 29,
+        "sha256": "1eb43d62d45fe8219b0df96ecf232fa4b66b96ae8bf462768f357ae4a8fa0c50"
+      }
+    },
+    {
+      "index": 236,
+      "id": "later-offered-a-hand",
+      "category": "health-later-life",
+      "rationale": "The age-55-plus offer is considered without assuming incapacity. Accepting useful help, declining politely and treating it as an insult produce fitting respect/energy, discipline/respect and respect/stress effects; journals preserve the chosen interaction without diagnosing disability or changing dependency status.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/laterLifeStories.ts",
+        "line": 34,
+        "sha256": "1eb43d62d45fe8219b0df96ecf232fa4b66b96ae8bf462768f357ae4a8fa0c50"
+      }
+    },
+    {
+      "index": 237,
+      "id": "later-changed-favourite",
+      "category": "health-later-life",
+      "rationale": "A changed preference is an ordinary later-life reflection rather than a tracked taste mutation. Updating it, exploring the change and choosing from habit have matching mood/stress, understanding/discipline and mood/stress effects; no owned item, past purchase or deleted historical choice is asserted.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/laterLifeStories.ts",
+        "line": 39,
+        "sha256": "1eb43d62d45fe8219b0df96ecf232fa4b66b96ae8bf462768f357ae4a8fa0c50"
+      }
+    },
+    {
+      "index": 238,
+      "id": "later-recording-labelled-retro",
+      "category": "health-later-life",
+      "rationale": "An older entertainment recording is labelled retro, with age-55-plus eligibility. Noticing change, sharing one clear memory and protesting the label have consistent mood/understanding, respect/mood and stress/respect effects; no historical date, entertainment licence income or public appearance is invented.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/laterLifeStories.ts",
+        "line": 44,
+        "sha256": "1eb43d62d45fe8219b0df96ecf232fa4b66b96ae8bf462768f357ae4a8fa0c50"
+      }
+    },
+    {
+      "index": 239,
+      "id": "later-another-year-question",
+      "category": "health-later-life",
+      "rationale": "The age-55-plus birthday question permits mixed feelings without demanding a scripted decline. An honest answer, an ordinary pleasure and performing the expected complaint have fitting respect/mood, mood/stress and mood/stress effects; the scene adds no age increment or second birthday milestone.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/laterLifeStories.ts",
+        "line": 49,
+        "sha256": "1eb43d62d45fe8219b0df96ecf232fa4b66b96ae8bf462768f357ae4a8fa0c50"
+      }
+    },
+    {
+      "index": 240,
+      "id": "work-salary-privacy",
+      "category": "employment-special-careers",
+      "rationale": "The current introduced local coworker and actual annualPay/currency supply the salary question and formatted annual gross quote. Sharing, keeping it private and exaggerating affect coworker bond by +4/+1/-2 with coherent respect/mood, discipline/stress or stress/respect changes; pay itself is unchanged.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/workingLifeStories.ts",
+        "line": 4,
+        "sha256": "dbf95caa80cc818202aed45f6464601cb7ca816daa1b159530f4184d613317d2"
+      }
+    },
+    {
+      "index": 241,
+      "id": "work-shared-note-riddle",
+      "category": "employment-special-careers",
+      "rationale": "An available coworker at the actual local workplace supplies the handover. Clarifying the task, proposing a format and guessing have coherent discipline/respect, understanding/energy and stress/discipline effects, plus bond improvements only where declared; no task-completion, promotion or wage event is fabricated.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/workingLifeStories.ts",
+        "line": 9,
+        "sha256": "dbf95caa80cc818202aed45f6464601cb7ca816daa1b159530f4184d613317d2"
+      }
+    },
+    {
+      "index": 242,
+      "id": "work-final-file",
+      "category": "employment-special-careers",
+      "rationale": "The actual available local supervisor grounds the conflicting FINAL files. Confirming, improving labels and choosing the longest name give fitting discipline/respect, understanding/energy and stress/discipline effects, with +3/+2 supervisor bond only for the first two; no employment terms change.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/workingLifeStories.ts",
+        "line": 14,
+        "sha256": "dbf95caa80cc818202aed45f6464601cb7ca816daa1b159530f4184d613317d2"
+      }
+    },
+    {
+      "index": 243,
+      "id": "work-forgotten-lunch",
+      "category": "employment-special-careers",
+      "rationale": "A real available coworker's forgotten lunch supports an incidental sharing scene without a purchase. Offering some food, sympathy and boastful tasting commentary have +5/+2/-4 bond changes and consistent mood/energy or respect effects; results and journals avoid debt, reimbursement or invented salary changes.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/workingLifeStories.ts",
+        "line": 19,
+        "sha256": "dbf95caa80cc818202aed45f6464601cb7ca816daa1b159530f4184d613317d2"
+      }
+    },
+    {
+      "index": 244,
+      "id": "work-room-temperature",
+      "category": "employment-special-careers",
+      "rationale": "The shared area belongs to the actual local workplace and bound coworker. Comparing practical options, adjusting personally and claiming objective superiority affect that coworker's bond by +4/+1/-4 with fitting respect/discipline or stress effects; no paid facility alteration or relocation occurs.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/workingLifeStories.ts",
+        "line": 24,
+        "sha256": "dbf95caa80cc818202aed45f6464601cb7ca816daa1b159530f4184d613317d2"
+      }
+    },
+    {
+      "index": 245,
+      "id": "work-training-slogan",
+      "category": "employment-special-careers",
+      "rationale": "The actual coworker shares a vague training slide. A practical example, asking openly and emphatic comic repetition have coherent understanding/respect, discipline/respect and humour/stress effects, with coworker bonds only where declared; no course, certification or job-performance award is claimed.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/workingLifeStories.ts",
+        "line": 29,
+        "sha256": "dbf95caa80cc818202aed45f6464601cb7ca816daa1b159530f4184d613317d2"
+      }
+    },
+    {
+      "index": 246,
+      "id": "work-honest-view-invited",
+      "category": "employment-special-careers",
+      "rationale": "The real available supervisor's preferred procedural change motivates the question. Specific feedback, asking the goal and thoughtless praise have +3/+2/+4 supervisor bond but different respect/discipline/understanding/stress effects; the flattering choice deliberately separates personal favour from respect rather than granting a promotion.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/workingLifeStories.ts",
+        "line": 34,
+        "sha256": "dbf95caa80cc818202aed45f6464601cb7ca816daa1b159530f4184d613317d2"
+      }
+    },
+    {
+      "index": 247,
+      "id": "work-invitation-outside",
+      "category": "employment-special-careers",
+      "rationale": "An existing local coworker offers an explicitly free walk. Accepting costs energy and improves mood/bond, resting restores energy with a small bond benefit, and a firmer boundary trades a small bond loss for discipline/stress; no charge, date or automatic friendship conversion is promised.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/workingLifeStories.ts",
+        "line": 39,
+        "sha256": "dbf95caa80cc818202aed45f6464601cb7ca816daa1b159530f4184d613317d2"
+      }
+    },
+    {
+      "index": 248,
+      "id": "work-misnamed-complaint",
+      "category": "employment-special-careers",
+      "rationale": "A real coworker remains correctly bound while an incidental visitor misnames them. Clarifying facts, correcting the name calmly and joining gossip affect that coworker's bond by +2/+1/-5 with coherent respect/discipline or stress changes; the copy does not display a fabricated wrong identity or create a legal complaint.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/workingLifeStories.ts",
+        "line": 44,
+        "sha256": "dbf95caa80cc818202aed45f6464601cb7ca816daa1b159530f4184d613317d2"
+      }
+    },
+    {
+      "index": 249,
+      "id": "work-trivia-phone",
+      "category": "employment-special-careers",
+      "rationale": "The introduced local coworker's informal trivia question has no prize. Applying the rule, a ridiculous answer and excessive disqualification yield +3/+4/-3 bond changes and fitting mood/respect/stress effects; no contest reward, external phone action or disciplinary employment record is created.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/workingLifeStories.ts",
+        "line": 49,
+        "sha256": "dbf95caa80cc818202aed45f6464601cb7ca816daa1b159530f4184d613317d2"
+      }
+    },
+    {
+      "index": 250,
+      "id": "adult-accidental-living-exhibit",
+      "category": "rare-cross-life-callbacks",
+      "rationale": "The extremely rare free community display provides a self-contained mistaken-exhibit absurdity. Explaining, briefly playing along and inventing an artistic lecture have coherent respect/stress, mood/respect/energy and respect/stress/energy effects; the journal records the misunderstanding without fame, income or a career change.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/rareAdultStories.ts",
+        "line": 5,
+        "sha256": "c6211908be4b9482f40d27c0e76381d13e0b761cda33fca3de377a44d797c924"
+      }
+    },
+    {
+      "index": 251,
+      "id": "career-actor-rehearsal-door",
+      "category": "employment-special-careers",
+      "rationale": "An active Actor's private rehearsal is interrupted by a squeaking door. Allowing a beat, a laughing reset and competing for volume affect discipline/stress, mood/energy and stress/energy coherently; journals remain rehearsal observations, with no paid role, completed shoot or award invented.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/specialCareerDepthStories.ts",
+        "line": 5,
+        "sha256": "8b51ece89cf22baaa36fec60685ed1ffdce8dc62def2566f8ee04ec248a80353"
+      }
+    },
+    {
+      "index": 252,
+      "id": "career-model-backdrop-fan",
+      "category": "employment-special-careers",
+      "rationale": "The active Model's practice shoot has a fan-driven backdrop problem. Turning it down, simplifying the pose and increasing it have distinct discipline/stress, understanding/energy and humour/stress effects; no booked campaign, published photograph, fee or purchased equipment is created.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/specialCareerDepthStories.ts",
+        "line": 10,
+        "sha256": "8b51ece89cf22baaa36fec60685ed1ffdce8dc62def2566f8ee04ec248a80353"
+      }
+    },
+    {
+      "index": 253,
+      "id": "career-athlete-timer-reminder",
+      "category": "employment-special-careers",
+      "rationale": "An active Athlete's warm-up timer announces an unrelated old reminder. Silencing it, resetting the pace and rushing have fitting discipline/stress, discipline/energy and stress/energy effects; results and journals do not mark a match won, training session rewarded or food purchase completed.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/specialCareerDepthStories.ts",
+        "line": 15,
+        "sha256": "8b51ece89cf22baaa36fec60685ed1ffdce8dc62def2566f8ee04ec248a80353"
+      }
+    },
+    {
+      "index": 254,
+      "id": "career-musician-count-in",
+      "category": "employment-special-careers",
+      "rationale": "The active Musician's private count-in loops over rehearsal. Fixing it, practising unaided and singing the numbers back have coherent discipline/energy, understanding/discipline and humour/energy effects; no recorded release, public performance, production payment or royalty receipt is claimed.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/specialCareerDepthStories.ts",
+        "line": 20,
+        "sha256": "8b51ece89cf22baaa36fec60685ed1ffdce8dc62def2566f8ee04ec248a80353"
+      }
+    },
+    {
+      "index": 255,
+      "id": "career-politician-moving-lectern",
+      "category": "employment-special-careers",
+      "rationale": "An active political career grounds speech rehearsal, not an earned election victory. Securing the lectern, speaking beside it and following it produce fitting discipline/stress, understanding/respect and energy/stress effects; results and journals do not alter policy, campaign spending, office status or popularity.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/specialCareerDepthStories.ts",
+        "line": 25,
+        "sha256": "8b51ece89cf22baaa36fec60685ed1ffdce8dc62def2566f8ee04ec248a80353"
+      }
+    },
+    {
+      "index": 256,
+      "id": "career-military-boot-reflection",
+      "category": "employment-special-careers",
+      "rationale": "Active Military preparation grounds polished boots and an overhead cobweb. Finishing the checklist, flagging proper cleaning and abandoning the boots give coherent discipline/stress, respect/discipline and fatigue/stress effects; no dangerous climb, assignment completion, combat outcome or service pay is asserted.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/specialCareerDepthStories.ts",
+        "line": 30,
+        "sha256": "8b51ece89cf22baaa36fec60685ed1ffdce8dc62def2566f8ee04ec248a80353"
+      }
+    },
+    {
+      "index": 257,
+      "id": "career-astronaut-loose-snack",
+      "category": "employment-special-careers",
+      "rationale": "The actual active Astronaut career is explicitly at a ground simulator. Stowing the snack, checking procedure with it and giving it a serious title affect discipline/stress, understanding/discipline and humour/discipline consistently; the scene neither launches a mission nor awards a qualification.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/specialCareerDepthStories.ts",
+        "line": 35,
+        "sha256": "8b51ece89cf22baaa36fec60685ed1ffdce8dc62def2566f8ee04ec248a80353"
+      }
+    },
+    {
+      "index": 258,
+      "id": "career-royalty-temporary-badge",
+      "category": "employment-special-careers",
+      "rationale": "Public royal-duty eligibility supports a local ceremonial badge. Quiet correction, good-humoured acceptance and demands for repeated introductions have fitting respect/discipline, mood/stress and respect/stress effects; the joke creates no temporary constitutional status, new title or allowance.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/specialCareerDepthStories.ts",
+        "line": 40,
+        "sha256": "8b51ece89cf22baaa36fec60685ed1ffdce8dc62def2566f8ee04ec248a80353"
+      }
+    },
+    {
+      "index": 259,
+      "id": "career-youtuber-thumbnail-face",
+      "category": "employment-special-careers",
+      "rationale": "An actual local active YouTuber studio with its matching live account supports thumbnail practice. Natural expression, returning to the topic and exaggeration have coherent stress/discipline, understanding/discipline and humour/energy effects. Primary employment reflects professional preparation; no thumbnail publication, views, followers or revenue is awarded.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/specialCareerDepthStories.ts",
+        "line": 45,
+        "sha256": "8b51ece89cf22baaa36fec60685ed1ffdce8dc62def2566f8ee04ec248a80353"
+      }
+    },
+    {
+      "index": 260,
+      "id": "career-youtuber-drill-interview",
+      "category": "employment-special-careers",
+      "rationale": "The actual local YouTuber studio/account context grounds a private voice-over rehearsal. Waiting, using quieter sections and arguing with the drill have matching discipline/stress, understanding/energy and stress/energy effects. This professional-preparation scene does not post a video or invent audience, payment or neighbour relationship changes.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/specialCareerDepthStories.ts",
+        "line": 50,
+        "sha256": "8b51ece89cf22baaa36fec60685ed1ffdce8dc62def2566f8ee04ec248a80353"
+      }
+    },
+    {
+      "index": 261,
+      "id": "career-streamer-chair-soundcheck",
+      "category": "employment-special-careers",
+      "rationale": "The actual local Streamer studio and matching active account support a private sound check. Checking input, listening to a short test and outshouting the chair have coherent discipline/stress, understanding/energy and energy/stress effects. Primary employment fits preparation; no broadcast, live minutes, crew invoice or audience growth occurs.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/specialCareerDepthStories.ts",
+        "line": 55,
+        "sha256": "8b51ece89cf22baaa36fec60685ed1ffdce8dc62def2566f8ee04ec248a80353"
+      }
+    },
+    {
+      "index": 262,
+      "id": "career-streamer-greeting-loop",
+      "category": "employment-special-careers",
+      "rationale": "The matching actual local Streamer studio/account grounds a private automatic-greeting test. Disabling, simplifying and repeatedly greeting it have fitting discipline/stress, understanding/respect and humour/energy effects. This professional-preparation event creates neither public chat, a completed broadcast, subscriber growth nor cadence payment.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/specialCareerDepthStories.ts",
+        "line": 60,
+        "sha256": "8b51ece89cf22baaa36fec60685ed1ffdce8dc62def2566f8ee04ec248a80353"
+      }
+    },
+    {
+      "index": 263,
+      "id": "career-business-automatic-application",
+      "category": "businesses",
+      "rationale": "The actual active locally owned business grounds a complaint misread by an automatic hiring reply. Correcting/apologising, replying manually and complaining to the automation have coherent respect/discipline, understanding/energy and stress/energy effects; business communication is primary, with no employee hire, customer sale or company transfer created.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/specialCareerDepthStories.ts",
+        "line": 65,
+        "sha256": "8b51ece89cf22baaa36fec60685ed1ffdce8dc62def2566f8ee04ec248a80353"
+      }
+    },
+    {
+      "index": 264,
+      "id": "career-business-breakfast-cards",
+      "category": "businesses",
+      "rationale": "An active locally owned business supports an incidental local breakfast/contact scene without an admission fee. Salvaging a card, giving details verbally and offering the buttery stack have fitting discipline/stress, respect/understanding and respect/stress effects; no new client, contract, sale or card-purchase expense is recorded.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "source": {
+        "file": "src/game/content/specialCareerDepthStories.ts",
+        "line": 70,
+        "sha256": "8b51ece89cf22baaa36fec60685ed1ffdce8dc62def2566f8ee04ec248a80353"
+      }
+    }
+  ]
+}

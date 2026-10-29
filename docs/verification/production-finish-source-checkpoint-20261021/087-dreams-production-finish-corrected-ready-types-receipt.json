@@ -1,0 +1,32 @@
+{
+  "format": "dreams-coordinator-gate-execution-v1",
+  "sourceCommit": "3224c9ce5b9175075760a789c1402dd92345cd30",
+  "sourceSnapshot": "/tmp/dreams-production-finish-corrected-source.json",
+  "sourceSnapshotSha256": "c10e79e2c1798315e5267069f8389d6a5f475cd04719d1894a987903b45e7545",
+  "root": "/workspace/dreams-worktrees/camera-copy-correction",
+  "argv": [
+    "npm",
+    "run",
+    "typecheck"
+  ],
+  "startedAt": "2026-10-21T07:36:00.077760+00:00",
+  "before": {
+    "files": 688,
+    "snapshotSha256": "c10e79e2c1798315e5267069f8389d6a5f475cd04719d1894a987903b45e7545",
+    "status": "exact"
+  },
+  "complete": true,
+  "endedAt": "2026-10-21T07:36:33.496716+00:00",
+  "elapsedSeconds": 33.419,
+  "exitCode": 0,
+  "raw": {
+    "file": "/tmp/dreams-production-finish-corrected-ready-types.out",
+    "bytes": 90,
+    "sha256": "543932f7a867cac23b25fe5912a2a0b0ab563539fbb8a121f7fb83b608c95309"
+  },
+  "after": {
+    "files": 688,
+    "snapshotSha256": "c10e79e2c1798315e5267069f8389d6a5f475cd04719d1894a987903b45e7545",
+    "status": "exact"
+  }
+}

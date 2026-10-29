@@ -1,0 +1,69 @@
+{
+  "scope": "Original unchanged shared npcFamilyCircle: declared qualified-adult setup and actual two introductions, then only fixed ordinary commands until first actual separation or bounded120. No healthy50/50 setup, seed alternatives, post-setup overrides or roll peeks. Not a natural birth/lifetime acceptance run.",
+  "commands": 7,
+  "versions": {
+    "world": 35,
+    "engine": 36,
+    "content": 11
+  },
+  "date": {
+    "year": 2025,
+    "month": 1,
+    "day": 1
+  },
+  "naturallyDied": false,
+  "attempts": [
+    {
+      "id": "npc_separation_15_0",
+      "ruleVersion": 1,
+      "courtshipId": "courtship_12_0",
+      "relationshipId": "relation_person_npc_3_3_person_npc_6_6",
+      "a": "person_npc_3_3",
+      "b": "person_npc_6_6",
+      "observerId": "person_player",
+      "observerPartnerId": null,
+      "date": {
+        "year": 2025,
+        "month": 1,
+        "day": 1
+      },
+      "countryA": "US",
+      "countryB": "US",
+      "city": "New York",
+      "strength": 35,
+      "trust": 35,
+      "chance": 16,
+      "roll": 14,
+      "outcome": "separated"
+    }
+  ],
+  "courtships": [
+    {
+      "id": "courtship_12_0",
+      "relationshipId": "relation_person_npc_3_3_person_npc_6_6",
+      "a": "person_npc_3_3",
+      "b": "person_npc_6_6",
+      "observedSince": {
+        "year": 2024,
+        "month": 1,
+        "day": 1
+      },
+      "lastChecked": {
+        "year": 2025,
+        "month": 1,
+        "day": 1
+      },
+      "observedCountryA": "US",
+      "observedCountryB": "US",
+      "ended": {
+        "year": 2025,
+        "month": 1,
+        "day": 1
+      },
+      "endReason": "separated",
+      "marriageId": null,
+      "proposals": []
+    }
+  ],
+  "worldSha256": "69e1eff0ea0a4075adc47426acaaca5e7bbe53a6f9f53a2064f339716cf260bb"
+}

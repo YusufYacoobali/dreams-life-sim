@@ -1,0 +1,47 @@
+Starting Metro Bundler
+
+iOS Bundled 29889ms ../settings-accessibility/node_modules/expo-router/entry.js (1603 modules)
+Android Bundled 45731ms ../settings-accessibility/node_modules/expo-router/entry.js (1728 modules)
+
+› Assets (49):
+../integration-opening-next/assets/audio/action-tap.wav (2KB)
+../integration-opening-next/assets/generated/activity-atlas.png (1.3MB)
+../integration-opening-next/assets/generated/career-atlas.png (1.8MB)
+../integration-opening-next/assets/generated/death-memorial.png (1.1MB)
+../integration-opening-next/assets/generated/fame-business-atlas.png (1.5MB)
+../integration-opening-next/assets/generated/family-atlas.png (1.6MB)
+../integration-opening-next/assets/generated/health-legal-atlas.png (1.7MB)
+../integration-opening-next/assets/generated/ordinary-hobby-atlas.png (1.3MB)
+../integration-opening-next/assets/generated/ownership-atlas.png (1.9MB)
+../integration-opening-next/assets/generated/pets-leisure-atlas.png (2MB)
+../integration-opening-next/assets/generated/portrait-layers.png (1.7MB)
+../integration-opening-next/assets/generated/school-atlas.png (2MB)
+../integration-opening-next/assets/generated/travel-atlas.png (3MB)
+../integration-opening-next/assets/generated/welcome-hero.png (2MB)
+../settings-accessibility/node_modules/@expo-google-fonts/material-symbols/400Regular/MaterialSymbols_400Regular.ttf (971KB)
+../settings-accessibility/node_modules/@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/Ionicons.ttf (390KB)
+../settings-accessibility/node_modules/expo-router/assets/arrow_down.png (9.5KB)
+../settings-accessibility/node_modules/expo-router/assets/arrow_right.xml (307B)
+../settings-accessibility/node_modules/expo-router/assets/checkmark.xml (312B)
+../settings-accessibility/node_modules/expo-router/assets/error.png (469B)
+../settings-accessibility/node_modules/expo-router/assets/file.png (138B)
+../settings-accessibility/node_modules/expo-router/assets/forward.png (188B)
+../settings-accessibility/node_modules/expo-router/assets/pkg.png (364B)
+../settings-accessibility/node_modules/expo-router/assets/react-navigation/elements/back-icon-mask.png (653B)
+../settings-accessibility/node_modules/expo-router/assets/react-navigation/elements/back-icon.png (8 variations | 359B)
+../settings-accessibility/node_modules/expo-router/assets/react-navigation/elements/clear-icon.png (4 variations | 425B)
+../settings-accessibility/node_modules/expo-router/assets/react-navigation/elements/close-icon.png (4 variations | 235B)
+../settings-accessibility/node_modules/expo-router/assets/react-navigation/elements/search-icon.png (7 variations | 592B)
+../settings-accessibility/node_modules/expo-router/assets/sitemap.png (465B)
+../settings-accessibility/node_modules/expo-router/assets/unmatched.png (4.8KB)
+
+› ios bundles (1):
+_expo/static/js/ios/entry-eb9abf55cf073940c61406c7cba7c729.hbc (5.5MB)
+
+› android bundles (1):
+_expo/static/js/android/entry-9f96cd389e5b04d24e12792a0434a7b1.hbc (5.8MB)
+
+› Files (1):
+metadata.json (5.3KB)
+
+Exported: /tmp/dreams-portrait-fallback-export

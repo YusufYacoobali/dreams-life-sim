@@ -1,0 +1,56 @@
+{
+  "format": "dreams-current-offline-native-prebuild-inputs-v1",
+  "recordedAt": "2026-10-21T09:30:54.776716+00:00",
+  "sourceCommit": "83adaea6f92523d04a27df2e77b11e0a8b14ef1d",
+  "root": "/workspace/dreams-worktrees/native-prebuild-current",
+  "upstreamFrozenSnapshot": {
+    "file": "/tmp/dreams-production-ui-complete-source.json",
+    "bytes": 77733,
+    "sha256": "85b203f84cc1e4f06b931794adaabfebee400b142155b6ea7443bb4b8e066e7d"
+  },
+  "all703SourceFilesExactBefore": true,
+  "dependencySymlink": "/workspace/dreams-life-sim/node_modules",
+  "installedLockPackages": 757,
+  "packageLock": {
+    "file": "/workspace/dreams-worktrees/native-prebuild-current/package-lock.json",
+    "bytes": 389072,
+    "sha256": "0079491a8e148250f4d4fda7c9fab44d0e1bcb126dea893d06f269489e6a4e1b"
+  },
+  "samePackageLockAsSharedInstall": true,
+  "installedVersions": {
+    "expo": "57.0.30",
+    "react-native": "0.86.3",
+    "expo-audio": "57.0.5",
+    "expo-asset": "57.0.20"
+  },
+  "localTemplate": {
+    "file": "/workspace/dreams-life-sim/node_modules/expo/template.tgz",
+    "bytes": 297906,
+    "sha256": "534d25a51bd6a09e68b7111bfd8e5f0e68b5f571a22e7f46556173211e4e2fd6"
+  },
+  "nativeOutputExpectedIgnored": "/workspace/dreams-worktrees/native-prebuild-current/android",
+  "networkRequested": false,
+  "noInstall": true,
+  "noGradleBuild": true,
+  "command": [
+    "node",
+    "./node_modules/expo/bin/cli",
+    "prebuild",
+    "--platform",
+    "android",
+    "--no-install",
+    "--template",
+    "/workspace/dreams-life-sim/node_modules/expo/template.tgz",
+    "--skip-dependency-update",
+    "react,react-native"
+  ],
+  "environment": {
+    "CI": "1",
+    "EXPO_OFFLINE": "1",
+    "EXPO_NO_GIT_STATUS": "1",
+    "EXPO_NO_TELEMETRY": "1",
+    "__UNSAFE_EXPO_HOME_DIRECTORY": "/workspace/.cache/dreams-expo-prebuild-current",
+    "TMPDIR": "/tmp/dreams-native-prebuild-current-cache"
+  },
+  "limits": "Isolated generated-source preparation only. No signing, release artifact, Gradle/dependency fetch, ADB/device, iOS or merged-manifest acceptance."
+}

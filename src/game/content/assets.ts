@@ -1,0 +1,60 @@
+export type AssetType = 'property' | 'vehicle' | 'possession';
+/** Specifications describe the listing, not a live mileage/driving simulation. */
+export type AssetOffer = {
+  id: string; kind: AssetType; name: string; description: string;
+  priceBps: number; condition: number; upkeepBps: number;
+  bedrooms?: number; bathrooms?: number; squareFeet?: number;
+  /** US gallons, so the same figure has an explicit meaning in every country. */
+  fuelEconomyMpg?: number;
+  rangeMiles?: number; topSpeedMph?: number; listingMileage?: number;
+};
+/** Local base wages scale prices. No USD table is relabelled with another symbol. */
+export const assetCatalog: readonly AssetOffer[] = [
+  { id: 'studio', kind: 'property', name: 'City Studio', description: 'A compact place with an ambitious floor plan.', priceBps: 40000, condition: 80, upkeepBps: 100, bedrooms: 1, bathrooms: 1, squareFeet: 420 },
+  { id: 'apartment', kind: 'property', name: 'Two-Bedroom Apartment', description: 'Room for a desk that does not fold away.', priceBps: 70000, condition: 85, upkeepBps: 110, bedrooms: 2, bathrooms: 2, squareFeet: 1100 },
+  { id: 'terrace', kind: 'property', name: 'Terraced Home', description: 'A front door of your own, and neighbours within earshot.', priceBps: 90000, condition: 75, upkeepBps: 130, bedrooms: 3, bathrooms: 1.5, squareFeet: 1350 },
+  { id: 'family-house', kind: 'property', name: 'Family House', description: 'More rooms, more gutters to clean.', priceBps: 120000, condition: 90, upkeepBps: 150, bedrooms: 4, bathrooms: 2.5, squareFeet: 2250 },
+  { id: 'country-home', kind: 'property', name: 'Country Home', description: 'Quiet mornings. Substantial maintenance.', priceBps: 180000, condition: 80, upkeepBps: 200, bedrooms: 4, bathrooms: 2.5, squareFeet: 2600 },
+  { id: 'penthouse', kind: 'property', name: 'Skyline Penthouse', description: 'An excellent view of your ongoing costs.', priceBps: 450000, condition: 100, upkeepBps: 250, bedrooms: 5, bathrooms: 4, squareFeet: 4200 },
+  { id: 'used-compact', kind: 'vehicle', name: 'Used Compact', description: 'A modest car with a few stories in the upholstery.', priceBps: 1800, condition: 65, upkeepBps: 1200, fuelEconomyMpg: 34, topSpeedMph: 102, listingMileage: 68000 },
+  { id: 'city-car', kind: 'vehicle', name: 'City Hatchback', description: 'Small enough to make parking less personal.', priceBps: 4500, condition: 100, upkeepBps: 900, fuelEconomyMpg: 41, topSpeedMph: 112, listingMileage: 0 },
+  { id: 'family-car', kind: 'vehicle', name: 'Family Estate', description: 'Space for passengers and their unreasonable luggage.', priceBps: 7500, condition: 100, upkeepBps: 1100, fuelEconomyMpg: 31, topSpeedMph: 128, listingMileage: 0 },
+  { id: 'electric-car', kind: 'vehicle', name: 'Electric Sedan', description: 'Quiet departures and a new charging routine.', priceBps: 11000, condition: 100, upkeepBps: 700, rangeMiles: 310, topSpeedMph: 145, listingMileage: 0 },
+  { id: 'sports-car', kind: 'vehicle', name: 'Sports Coupé', description: 'A very expensive way to arrive at traffic.', priceBps: 22000, condition: 100, upkeepBps: 1600, fuelEconomyMpg: 25, topSpeedMph: 165, listingMileage: 0 },
+  { id: 'motorbike', kind: 'vehicle', name: 'Touring Motorbike', description: 'Two wheels and fewer places to put your shopping.', priceBps: 5500, condition: 100, upkeepBps: 1100, fuelEconomyMpg: 49, topSpeedMph: 132, listingMileage: 0 },
+  { id: 'watch', kind: 'possession', name: 'Mechanical Watch', description: 'It tells the time with considerable confidence.', priceBps: 350, condition: 100, upkeepBps: 100 },
+  { id: 'painting', kind: 'possession', name: 'Original Landscape', description: 'A small painting by an independent artist.', priceBps: 500, condition: 100, upkeepBps: 0 },
+  { id: 'guitar', kind: 'possession', name: 'Acoustic Guitar', description: 'The neighbours await your musical direction.', priceBps: 150, condition: 100, upkeepBps: 150 },
+  { id: 'laptop', kind: 'possession', name: 'Creative Laptop', description: 'For projects that may eventually leave the drafts folder.', priceBps: 300, condition: 100, upkeepBps: 100 },
+  { id: 'camera', kind: 'possession', name: 'Mirrorless Camera', description: 'A good reason to take the longer walk home.', priceBps: 400, condition: 100, upkeepBps: 100 },
+  { id: 'rare-book', kind: 'possession', name: 'First-Edition Novel', description: 'A well-kept book with its own history.', priceBps: 700, condition: 95, upkeepBps: 0 },
+  { id: 'engagement-ring', kind: 'possession', name: 'Engagement Ring', description: 'A small circle with a large question attached.', priceBps: 500, condition: 100, upkeepBps: 0 },
+  { id: 'mobile-home', kind: 'property', name: 'Mobile Home', description: 'Your own front door, without the terrifying postcode.', priceBps: 14000, condition: 70, upkeepBps: 110, bedrooms: 1, bathrooms: 1, squareFeet: 580 },
+  { id: 'woodland-cabin', kind: 'property', name: 'Woodland Cabin', description: 'Cosy logs, quiet evenings and very confident squirrels.', priceBps: 26000, condition: 75, upkeepBps: 170, bedrooms: 1, bathrooms: 1, squareFeet: 640 },
+  { id: 'village-flat', kind: 'property', name: 'Village Flat', description: 'Shutters, a small balcony and everything within walking distance.', priceBps: 32000, condition: 80, upkeepBps: 90, bedrooms: 2, bathrooms: 1, squareFeet: 780 },
+  { id: 'garden-flat', kind: 'property', name: 'Garden Flat', description: 'A little patio for plants you promise to water.', priceBps: 52000, condition: 90, upkeepBps: 100, bedrooms: 2, bathrooms: 1, squareFeet: 920 },
+  { id: 'brick-bungalow', kind: 'property', name: 'Brick Bungalow', description: 'All the rooms, none of the stairs.', priceBps: 62000, condition: 85, upkeepBps: 120, bedrooms: 2, bathrooms: 1.5, squareFeet: 1080 },
+  { id: 'duplex', kind: 'property', name: 'Duplex Home', description: 'A practical family home with one shared wall.', priceBps: 80000, condition: 85, upkeepBps: 130, bedrooms: 3, bathrooms: 2, squareFeet: 1520 },
+  { id: 'warehouse-loft', kind: 'property', name: 'Warehouse Loft', description: 'Huge windows and an echo with excellent acoustics.', priceBps: 100000, condition: 95, upkeepBps: 135, bedrooms: 2, bathrooms: 2, squareFeet: 1800 },
+  { id: 'canal-townhouse', kind: 'property', name: 'Canal Townhouse', description: 'Tall rooms, a stepped gable and a waterside address.', priceBps: 145000, condition: 90, upkeepBps: 155, bedrooms: 3, bathrooms: 2.5, squareFeet: 2050 },
+  { id: 'lake-house', kind: 'property', name: 'Lake House', description: 'A deck over the water. Your inbox can wait.', priceBps: 165000, condition: 85, upkeepBps: 180, bedrooms: 3, bathrooms: 2, squareFeet: 1860 },
+  { id: 'mountain-chalet', kind: 'property', name: 'Mountain Chalet', description: 'Timber balconies and a very good excuse to light the fire.', priceBps: 210000, condition: 90, upkeepBps: 210, bedrooms: 4, bathrooms: 3, squareFeet: 2900 },
+  { id: 'victorian-villa', kind: 'property', name: 'Victorian Villa', description: 'Turrets, bay windows and absolutely no shortage of character.', priceBps: 260000, condition: 85, upkeepBps: 240, bedrooms: 5, bathrooms: 3.5, squareFeet: 3600 },
+  { id: 'beach-house', kind: 'property', name: 'Beach House', description: 'Sea air, a wraparound verandah and sand in every drawer.', priceBps: 320000, condition: 95, upkeepBps: 220, bedrooms: 4, bathrooms: 3, squareFeet: 3100 },
+  { id: 'modern-villa', kind: 'property', name: 'Modern Pool Villa', description: 'Glass walls, clean lines and your own swimming pool.', priceBps: 600000, condition: 100, upkeepBps: 270, bedrooms: 6, bathrooms: 5, squareFeet: 5800 },
+  { id: 'country-estate', kind: 'property', name: 'Country Estate', description: 'Formal gardens, a fountain and rooms you may never find.', priceBps: 900000, condition: 95, upkeepBps: 350, bedrooms: 8, bathrooms: 6.5, squareFeet: 9200 },
+  { id: 'used-scooter', kind: 'vehicle', name: 'Used Scooter', description: 'A basket, two wheels and a respectable top speed. Eventually.', priceBps: 700, condition: 60, upkeepBps: 700, fuelEconomyMpg: 86, topSpeedMph: 43, listingMileage: 12500 },
+  { id: 'city-scooter', kind: 'vehicle', name: 'City Scooter', description: 'A cheerful little shortcut through the daily commute.', priceBps: 1600, condition: 100, upkeepBps: 550, fuelEconomyMpg: 103, topSpeedMph: 58, listingMileage: 0 },
+  { id: 'used-saloon', kind: 'vehicle', name: 'Used Saloon', description: 'Four doors and enough history to keep a mechanic busy.', priceBps: 2600, condition: 70, upkeepBps: 1300, fuelEconomyMpg: 28, topSpeedMph: 124, listingMileage: 92000 },
+  { id: 'compact-suv', kind: 'vehicle', name: 'Compact SUV', description: 'A higher driving seat without taking over the entire street.', priceBps: 8500, condition: 100, upkeepBps: 1100, fuelEconomyMpg: 32, topSpeedMph: 124, listingMileage: 0 },
+  { id: 'family-minivan', kind: 'vehicle', name: 'Family Minivan', description: 'Sliding doors, plenty of seats and crumbs already expected.', priceBps: 10000, condition: 100, upkeepBps: 1300, fuelEconomyMpg: 26, topSpeedMph: 118, listingMileage: 0 },
+  { id: 'pickup', kind: 'vehicle', name: 'Double-Cab Pickup', description: 'Room for the family and whatever project follows you home.', priceBps: 12500, condition: 100, upkeepBps: 1450, fuelEconomyMpg: 22, topSpeedMph: 112, listingMileage: 0 },
+  { id: 'delivery-van', kind: 'vehicle', name: 'Delivery Van', description: 'A dependable box on wheels with space for a fresh start.', priceBps: 6500, condition: 85, upkeepBps: 1500, fuelEconomyMpg: 29, topSpeedMph: 99, listingMileage: 18500 },
+  { id: 'vintage-roadster', kind: 'vehicle', name: 'Vintage Roadster', description: 'Open-air motoring, polished chrome and occasional persuasion.', priceBps: 16000, condition: 90, upkeepBps: 2200, fuelEconomyMpg: 24, topSpeedMph: 112, listingMileage: 48000 },
+  { id: 'convertible', kind: 'vehicle', name: 'Convertible', description: 'Drop the roof and let the weather make the decisions.', priceBps: 18000, condition: 100, upkeepBps: 1400, fuelEconomyMpg: 30, topSpeedMph: 155, listingMileage: 0 },
+  { id: 'executive-saloon', kind: 'vehicle', name: 'Executive Saloon', description: 'Quiet comfort for arriving as though you have everything sorted.', priceBps: 20000, condition: 100, upkeepBps: 1250, fuelEconomyMpg: 34, topSpeedMph: 155, listingMileage: 0 },
+  { id: 'luxury-suv', kind: 'vehicle', name: 'Luxury SUV', description: 'A very comfortable answer to a question nobody asked.', priceBps: 28000, condition: 100, upkeepBps: 1700, fuelEconomyMpg: 23, topSpeedMph: 155, listingMileage: 0 },
+  { id: 'campervan', kind: 'vehicle', name: 'Camper Van', description: 'A little kitchen, a raised roof and a much longer route home.', priceBps: 32000, condition: 95, upkeepBps: 1900, fuelEconomyMpg: 21, topSpeedMph: 98, listingMileage: 7200 },
+  { id: 'supercar', kind: 'vehicle', name: 'Supercar', description: 'Spectacular engineering. Less spectacular speed bumps.', priceBps: 65000, condition: 100, upkeepBps: 2600, fuelEconomyMpg: 15, topSpeedMph: 211, listingMileage: 0 },
+  { id: 'grand-tourer', kind: 'vehicle', name: 'Grand Tourer', description: 'A long bonnet and a persuasive argument for the scenic route.', priceBps: 42000, condition: 100, upkeepBps: 2100, fuelEconomyMpg: 20, topSpeedMph: 190, listingMileage: 0 },
+];

@@ -1,0 +1,20 @@
+{
+  "scope": "Genuine native paid arcade result exported with isolated unmodified e29e634 source, reconstructed with git archive and checked against its exact combined source hash; no newer game source used",
+  "producerAppCommit": "e29e634",
+  "producerCombinedGamePersistenceHash": "c7514395530d78c69341fff805b084308a8c5da600b4f3ef348d1564a495cf75",
+  "sourceDatabase": "Actual Android paid-result revision34 copy before cold restart",
+  "fixture": "tests/fixtures/v28-native-arcade-archive.json",
+  "bytes": 294166,
+  "sha256": "012a5fd72c64c612e0877c496ff743742d4e8869e0c1673e60ab6d41a7059e50",
+  "currentCheckpointByteExact": true,
+  "originalTwelveMomentPayloadsAndMetadataExact": true,
+  "versions": {
+    "world": 28,
+    "engine": 27,
+    "content": 4
+  },
+  "revision": 34,
+  "moments": 12,
+  "paymentCount": 1,
+  "paymentId": "txn_33_2182"
+}

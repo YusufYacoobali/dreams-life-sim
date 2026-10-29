@@ -1,0 +1,14 @@
+{
+  "format": "dreams-ui-docs-named-source-byte-verification-v1",
+  "complete": true,
+  "sourceCommit": "83adaea6f92523d04a27df2e77b11e0a8b14ef1d",
+  "sourceFilesVerified": 703,
+  "missingOrChanged": [],
+  "documentationBase": "1c9e4eaf160a9c9a38befdbf4f34fbe79d4865f9",
+  "sourceSnapshot": {
+    "file": "ui-save-checkpoint-20261021/001-dreams-production-ui-complete-source.json",
+    "bytes": 77733,
+    "sha256": "85b203f84cc1e4f06b931794adaabfebee400b142155b6ea7443bb4b8e066e7d"
+  },
+  "scope": "NamedfileSHA256comparisononly; no runtime/import/sourceprotocol/native/gate execution."
+}

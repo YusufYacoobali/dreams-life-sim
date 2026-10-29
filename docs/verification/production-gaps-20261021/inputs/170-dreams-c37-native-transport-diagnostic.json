@@ -1,0 +1,42 @@
+{
+  "recordedAt": "2026-10-21T00:59:48.162223+00:00",
+  "scope": "Emulator infrastructure recovery, before any C37 native gameplay action/capture. No userdata wipe or native acceptance.",
+  "observations": [
+    "Old tool session69793 force-stop hung; reconnect closed it1 before the DB copy started.",
+    "Bounded shell getprop37105 timed out124; reconnect exited0 then device offline.",
+    "Console connections close because original emulator cannot access console auth token; old84229 tool handle no longer exists after environment reconnect."
+  ],
+  "ownedProcess": {
+    "role": "qemu",
+    "pid": 100274,
+    "uid": 1000,
+    "comm": "qemu-system-x86",
+    "startTicks": "10566888",
+    "argv": [
+      "/workspace/.cache/android-native-check/sdk/emulator/qemu/linux-x86_64/qemu-system-x86_64-headless",
+      "-avd",
+      "dreams_api24",
+      "-port",
+      "5560",
+      "-no-window",
+      "-no-audio",
+      "-no-boot-anim",
+      "-no-snapshot",
+      "-no-metrics",
+      "-accel",
+      "off",
+      "-gpu",
+      "swiftshader_indirect",
+      "-memory",
+      "1536",
+      "-cores",
+      "2",
+      "-prop",
+      "dalvik.vm.heapsize=384m"
+    ]
+  },
+  "recovery": "SIGTERM exact root-owned emulator; restart same persistent AVD and compare old rows before gameplay.",
+  "signalSentAt": "2026-10-21T00:59:48.162233+00:00",
+  "observedFinalState": "absent",
+  "processClosed": true
+}

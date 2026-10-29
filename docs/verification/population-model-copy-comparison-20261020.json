@@ -1,0 +1,287 @@
+{
+  "scope": "Same fixed worlds and frozen driver; serial cloud Node/on-disk SQLite. At-once generated100/1000known contacts, not natural/native journeys. Five samples/case; medians are sensitive to host load/GC and do not establish physical p95.",
+  "beforeSourceCommit": "74be9e4f32f0b89000675b5f16773ede134f9bcf",
+  "beforeSourceHash": "fd200a537f3be144528afd7d5a6beef3150f8f1932d6ed848c7de8b7e5ba785e",
+  "afterSourceHash": "0947b821b9783f68e204e16256ab06004475fe1f95153d48c212fed2ec71379c",
+  "driverHash": "34ea10b9a45f31631b2e9a4fb9db95da7f34bb384e41312f62c6ebd7a4bcf9d6",
+  "matchedInputs": 11,
+  "wholeStressOutcomesExact": true,
+  "samplesPerSource": 55,
+  "allWarmAvoidFullCheckpointDecode": true,
+  "allColdCurrentAndBackupWorldsExact": true,
+  "beforeAgeUpSnapshotsRetainOriginalPayloads": true,
+  "rawBefore": {
+    "file": "population-model-copy-before-20261020.json",
+    "sha256": "bd08fe92d2d33a191414928bca749c9eb9be9ae07bd42c10e93b61ddef83bd0a"
+  },
+  "rawAfter": {
+    "file": "population-model-copy-after-20261020.json",
+    "sha256": "769b064d79c82eadec44822dd40089793f9f64b9566b39ec07df1624e3c99b33"
+  },
+  "cases": [
+    {
+      "label": "Begin Life",
+      "inputSha256": "2b2c2cd701990db23a0ce9b9164c9a1a9e9bbbf689730fbae4f29a3746ca3ba1",
+      "beforeMedianMs": {
+        "totalMs": 2.376731000000291,
+        "resolveMs": 0.002763999999842781,
+        "commitMs": 2.374528000000282,
+        "coldOpenMs": 0.7227170000001024
+      },
+      "afterMedianMs": {
+        "totalMs": 2.8305759999998372,
+        "resolveMs": 0.004035999999814521,
+        "commitMs": 2.705547999999908,
+        "coldOpenMs": 1.7207579999999325
+      }
+    },
+    {
+      "label": "First-year choice",
+      "inputSha256": "05cef71ad3ba451312a2c45bc873af1427d619b764be6a3c82476ea2bfdf19f5",
+      "beforeMedianMs": {
+        "totalMs": 2.170451999999841,
+        "resolveMs": 0.8068929999999455,
+        "commitMs": 1.3604449999997996,
+        "coldOpenMs": 1.404711000000134
+      },
+      "afterMedianMs": {
+        "totalMs": 4.276299999999992,
+        "resolveMs": 1.655399000000216,
+        "commitMs": 2.256793000000016,
+        "coldOpenMs": 3.157447999999931
+      }
+    },
+    {
+      "label": "First-year choice Continue",
+      "inputSha256": "645d18f4a4693b492db234697eddf1ea078996f689643ece7e21728de7365f21",
+      "beforeMedianMs": {
+        "totalMs": 3.184555999999702,
+        "resolveMs": 1.301495999999588,
+        "commitMs": 1.9045630000000529,
+        "coldOpenMs": 2.0634719999998197
+      },
+      "afterMedianMs": {
+        "totalMs": 2.9029350000000704,
+        "resolveMs": 1.021385999999893,
+        "commitMs": 1.8815490000001773,
+        "coldOpenMs": 2.447120000000268
+      }
+    },
+    {
+      "label": "Age-seven callback",
+      "inputSha256": "a8346423d4cb4a3b271e468b457a76e9a9cde57f1af00a683a20cc3eb4a35903",
+      "beforeMedianMs": {
+        "totalMs": 8.56420100000014,
+        "resolveMs": 4.255835999999817,
+        "commitMs": 3.9645080000000235,
+        "coldOpenMs": 15.084578999999849
+      },
+      "afterMedianMs": {
+        "totalMs": 8.683006000000205,
+        "resolveMs": 4.484052000000247,
+        "commitMs": 4.198953999999958,
+        "coldOpenMs": 14.947395000000142
+      }
+    },
+    {
+      "label": "Age-seven callback Continue",
+      "inputSha256": "a7afb973fae7d828fc26fd88172427ad66d4f88995a2af8062afec0699dae7c6",
+      "beforeMedianMs": {
+        "totalMs": 14.528945000000022,
+        "resolveMs": 8.233943000000181,
+        "commitMs": 6.110282999999981,
+        "coldOpenMs": 12.860787000000073
+      },
+      "afterMedianMs": {
+        "totalMs": 17.716038000000026,
+        "resolveMs": 11.496936999999889,
+        "commitMs": 6.729599000000235,
+        "coldOpenMs": 15.515528999999788
+      }
+    },
+    {
+      "label": "Age-30 routine",
+      "inputSha256": "5e521b93b9519904083a879692c47e68e2d68201278a6e1eb50282900f5c1563",
+      "beforeMedianMs": {
+        "totalMs": 19.316447000000153,
+        "resolveMs": 11.68272799999977,
+        "commitMs": 7.731455999999525,
+        "coldOpenMs": 93.62641000000076
+      },
+      "afterMedianMs": {
+        "totalMs": 17.10466699999961,
+        "resolveMs": 8.976502000000437,
+        "commitMs": 8.128164999999171,
+        "coldOpenMs": 88.90519899999981
+      }
+    },
+    {
+      "label": "Age-60 routine",
+      "inputSha256": "0b682577b0f64c3744582f0ecf949f84ec98503abf013d5a384759134fd3c608",
+      "beforeMedianMs": {
+        "totalMs": 86.75120500000048,
+        "resolveMs": 54.98047800000131,
+        "commitMs": 32.14149699999871,
+        "coldOpenMs": 347.02096300000085
+      },
+      "afterMedianMs": {
+        "totalMs": 75.89640099999997,
+        "resolveMs": 43.51525899999979,
+        "commitMs": 36.72677900000053,
+        "coldOpenMs": 334.2488239999984
+      }
+    },
+    {
+      "label": "100-known-contact routine",
+      "inputSha256": "faf49300020bd205f54a723c695a150cf12299276032c680ddee4f7c5a24f4d8",
+      "setup": {
+        "scope": "generated-at-once known-contact stress case from the genuine age-30 checkpoint; not natural/native progression",
+        "initialPeople": 15,
+        "addedContacts": 92,
+        "knownContacts": 100,
+        "totalPeople": 107,
+        "monthlyFinancialActors": 8
+      },
+      "outcome": {
+        "worldSha256": "7c07f0f9575e50d35c252c634e9551bfa49c438a761aa81014de15c9c35f4129",
+        "date": {
+          "year": 2056,
+          "month": 10,
+          "day": 18
+        },
+        "people": 107,
+        "ledgerRows": 11793,
+        "monthsProcessed": null,
+        "annualStage": null,
+        "pendingKind": "result",
+        "beforeAgeUpSnapshotRetained": false
+      },
+      "beforeMedianMs": {
+        "totalMs": 52.90434300000197,
+        "resolveMs": 31.041235000000597,
+        "commitMs": 20.937159000000975,
+        "coldOpenMs": 106.50106799999776
+      },
+      "afterMedianMs": {
+        "totalMs": 26.113894000001892,
+        "resolveMs": 11.603721999999834,
+        "commitMs": 14.965155999998387,
+        "coldOpenMs": 93.36756000000241
+      }
+    },
+    {
+      "label": "100-known-contact first Age Up step",
+      "inputSha256": "faf49300020bd205f54a723c695a150cf12299276032c680ddee4f7c5a24f4d8",
+      "setup": {
+        "scope": "generated-at-once known-contact stress case from the genuine age-30 checkpoint; not natural/native progression",
+        "initialPeople": 15,
+        "addedContacts": 92,
+        "knownContacts": 100,
+        "totalPeople": 107,
+        "monthlyFinancialActors": 8
+      },
+      "outcome": {
+        "worldSha256": "37e6ce405e0d2e030f6d95981f647bf7242aa7c10db70f888ec4ef97b3aca3f8",
+        "date": {
+          "year": 2057,
+          "month": 10,
+          "day": 18
+        },
+        "people": 109,
+        "ledgerRows": 12662,
+        "monthsProcessed": 12,
+        "annualStage": "complete",
+        "pendingKind": "decision",
+        "beforeAgeUpSnapshotRetained": true
+      },
+      "beforeMedianMs": {
+        "totalMs": 88.96379700000034,
+        "resolveMs": 57.993813000000955,
+        "commitMs": 29.803374999999505,
+        "coldOpenMs": 110.6969620000018
+      },
+      "afterMedianMs": {
+        "totalMs": 58.019307999999,
+        "resolveMs": 34.3306620000003,
+        "commitMs": 21.972525000001042,
+        "coldOpenMs": 96.10624800000005
+      }
+    },
+    {
+      "label": "1000-known-contact routine",
+      "inputSha256": "b531bbe5cb28d5d813212c632e63b4f0ed2d9ebe7dfe96707e0546d62d432829",
+      "setup": {
+        "scope": "generated-at-once known-contact stress case from the genuine age-30 checkpoint; not natural/native progression",
+        "initialPeople": 15,
+        "addedContacts": 992,
+        "knownContacts": 1000,
+        "totalPeople": 1007,
+        "monthlyFinancialActors": 8
+      },
+      "outcome": {
+        "worldSha256": "be15d8ad350a2cc4f7c7e1aef538e66eceaf951cf364307f362474fc877a541f",
+        "date": {
+          "year": 2056,
+          "month": 10,
+          "day": 18
+        },
+        "people": 1007,
+        "ledgerRows": 11793,
+        "monthsProcessed": null,
+        "annualStage": null,
+        "pendingKind": "result",
+        "beforeAgeUpSnapshotRetained": false
+      },
+      "beforeMedianMs": {
+        "totalMs": 261.0450720000008,
+        "resolveMs": 154.12050300000192,
+        "commitMs": 105.57409199999893,
+        "coldOpenMs": 305.29391399999804
+      },
+      "afterMedianMs": {
+        "totalMs": 165.64765799999805,
+        "resolveMs": 76.27009799999723,
+        "commitMs": 91.93130999999994,
+        "coldOpenMs": 210.28844799999933
+      }
+    },
+    {
+      "label": "1000-known-contact first Age Up step",
+      "inputSha256": "b531bbe5cb28d5d813212c632e63b4f0ed2d9ebe7dfe96707e0546d62d432829",
+      "setup": {
+        "scope": "generated-at-once known-contact stress case from the genuine age-30 checkpoint; not natural/native progression",
+        "initialPeople": 15,
+        "addedContacts": 992,
+        "knownContacts": 1000,
+        "totalPeople": 1007,
+        "monthlyFinancialActors": 8
+      },
+      "outcome": {
+        "worldSha256": "24ce54025fc51f41845ee13c0549415abcf0c6b2912e563162294c59fd3a0f4a",
+        "date": {
+          "year": 2057,
+          "month": 10,
+          "day": 18
+        },
+        "people": 1018,
+        "ledgerRows": 15234,
+        "monthsProcessed": 12,
+        "annualStage": "complete",
+        "pendingKind": "decision",
+        "beforeAgeUpSnapshotRetained": true
+      },
+      "beforeMedianMs": {
+        "totalMs": 601.7535220000063,
+        "resolveMs": 466.9154009999984,
+        "commitMs": 127.9985050000032,
+        "coldOpenMs": 234.70413499999995
+      },
+      "afterMedianMs": {
+        "totalMs": 489.68835599999875,
+        "resolveMs": 376.13850499999535,
+        "commitMs": 120.55625500000315,
+        "coldOpenMs": 188.41711199999554
+      }
+    }
+  ]
+}

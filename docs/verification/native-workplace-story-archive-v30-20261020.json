@@ -1,0 +1,66 @@
+{
+  "recordedOn": "2026-10-20",
+  "scope": "Actual native named workplace choice76 exported with isolated unmodified pushed74be9e4 source before a future checkpoint-codec change; every original saved moment retained",
+  "producerCommit": "74be9e4f32f0b89000675b5f16773ede134f9bcf",
+  "producerSource": "Selected tracked files from git archive of74be9e4, verified against its recorded combined source hash; installed dependencies shared without source changes",
+  "producerCombinedGamePersistenceHash": "fd200a537f3be144528afd7d5a6beef3150f8f1932d6ed848c7de8b7e5ba785e",
+  "fixture": "tests/fixtures/v30-native-workplace-story-archive.json",
+  "bytes": 1024130,
+  "sha256": "3774db894776ba92c4c6ef6b4c10678a4125c53a0ea5ec4044189701fe75e1f1",
+  "wholeWorldSha256": "bcd71c22a114b9a1d2605ddbb301aa8a8716a1b0c24739475abb7464d8c90283",
+  "currentCheckpointByteExact": true,
+  "allOriginalMomentPayloadsAndMetadataExact": true,
+  "all18EarlierRaiseMomentsRetainedExactly": true,
+  "versions": {
+    "world": 30,
+    "engine": 29,
+    "content": 6
+  },
+  "revision": 76,
+  "moments": 20,
+  "result": {
+    "kind": "result",
+    "id": "event_2046_work-shared-credit_result",
+    "title": "The complete version",
+    "body": "Thando Naidoo thanks you both. Sipho Naidoo does not have to interrupt to become visible.",
+    "illustration": "career",
+    "effects": [
+      {
+        "id": "effect_0",
+        "label": "Respect",
+        "value": "+4%",
+        "tone": "positive"
+      },
+      {
+        "id": "effect_1",
+        "label": "Happiness",
+        "value": "+0%",
+        "tone": "neutral"
+      },
+      {
+        "id": "effect_2",
+        "label": "Relationship",
+        "value": "+5%",
+        "tone": "positive"
+      },
+      {
+        "id": "effect_3",
+        "label": "Relationship",
+        "value": "+2%",
+        "tone": "positive"
+      }
+    ]
+  },
+  "boundSourceRecord": "android24-workplace-stories-20261020/journey-exact.json",
+  "verification": {
+    "preservationAndSQLiteFailureRetryColdTests": 2,
+    "suites": 1,
+    "seconds": 16.612,
+    "exitCode": 0,
+    "strictApplicationAndTestTypesExitCode": 0,
+    "runtimeSourceUnchangedFrom": "e8a9097",
+    "completeRegressionBaselineTests": 1385,
+    "completeRegressionBaselineSuites": 100,
+    "notANewComposedFullRegressionTotal": true
+  }
+}

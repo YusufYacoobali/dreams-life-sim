@@ -1,0 +1,33 @@
+{
+  "format": "dreams-action-source-registration-v1",
+  "milestone": "C39",
+  "complete": true,
+  "versions": {
+    "world": 38,
+    "engine": 39,
+    "content": 13,
+    "database": 18,
+    "checkpoint": "v4"
+  },
+  "root": "/workspace/dreams-worktrees/camera-copy-correction",
+  "sourceCommit": "3224c9ce5b9175075760a789c1402dd92345cd30",
+  "sourceSnapshot": {
+    "file": "/tmp/dreams-production-finish-corrected-source.json",
+    "bytes": 75990,
+    "sha256": "c10e79e2c1798315e5267069f8389d6a5f475cd04719d1894a987903b45e7545"
+  },
+  "sourceFiles": 688,
+  "combinedGamePersistenceSourceHash": "d72d52f3d6a6e312e490a525c0638638af6c5bb27449ffb8a0dd5833e10acbc0",
+  "driverHash": "19da212c32feb53a2f264b4c6062cd0b7a68146a762f82841890ea410408bbe9",
+  "copyBridge": {
+    "file": "/tmp/dreams-production-finish-copy-bridge.json",
+    "bytes": 1574,
+    "sha256": "8bf26a7f43b5be065807094cd2a4ecac967727c3b5935ba9f928252fc10617ee"
+  },
+  "supersedesForFutureRunsOnly": {
+    "file": "/tmp/dreams-c39-action-source-registration.json",
+    "bytes": 915,
+    "sha256": "85809d3784db1edbf78b2e8f3dd83ab05f674b816128e4d7e20e15acb4c09a94"
+  },
+  "preparationNote": "Complete corrected frozen C39 source registration metadata ONLY. No wrapper/driver import, action benchmark, quiescence attestation or performance acceptance. Original66ec source/registration remain byte exact. Source copy bridge does not relabel original full/annual evidence as corrected."
+}

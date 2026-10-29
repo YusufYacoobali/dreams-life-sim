@@ -1,0 +1,4237 @@
+{
+  "sourceCommit": "ca7c72c743b98eda7c73054960bea90256b0b76f",
+  "method": "Static literal/helper-shape expansion only. No game/world/policy module evaluated; no eligibility, outcomes, codec, SQLite, runtime approval or playthrough claim.",
+  "situations": 265,
+  "choices": 795,
+  "distinct": {
+    "id": 265,
+    "title": 265,
+    "body": 265
+  },
+  "original250NarrativeProjectionSha256": "3bcaeee8d5d03b0710cf9a96d0dff6cb53b182f452bc8f52c9a85e5c26be6d01",
+  "original251NarrativeProjectionSha256": "bc07ab4021af523d792f2202fe223759ab89b1c169be64c64e201063b6e6069b",
+  "current265NarrativeProjectionSha256": "43975d2d8c2acf049d576582870cdd18385080e16d1d93b74d435cfcdeb41ae5",
+  "rarity": {
+    "common": 245,
+    "extremely-rare": 1,
+    "rare": 1,
+    "uncommon": 18
+  },
+  "sourceFileCounts": {
+    "src/game/content/adultRelationshipStories.ts": 15,
+    "src/game/content/childhood.ts": 28,
+    "src/game/content/earlyHomeStories.ts": 20,
+    "src/game/content/events.ts": 22,
+    "src/game/content/hobbyLifeStories.ts": 10,
+    "src/game/content/homeLifeStories.ts": 6,
+    "src/game/content/laterLifeStories.ts": 10,
+    "src/game/content/ordinaryAdultStories.ts": 25,
+    "src/game/content/parentingStories.ts": 20,
+    "src/game/content/petLifeStories.ts": 10,
+    "src/game/content/rareAdultStories.ts": 1,
+    "src/game/content/schoolDayStories.ts": 20,
+    "src/game/content/specialCareerDepthStories.ts": 14,
+    "src/game/content/specialCareerStories.ts": 9,
+    "src/game/content/teenHomeStories.ts": 10,
+    "src/game/content/travelMemoryStories.ts": 10,
+    "src/game/content/wellbeingStories.ts": 15,
+    "src/game/content/workingLifeStories.ts": 10,
+    "src/game/content/workplaceStories.ts": 10
+  },
+  "primarySourceGroupings": {
+    "Actual children": 20,
+    "Adult friendship": 8,
+    "Attended hobbies": 10,
+    "Childhood outside school": 6,
+    "Completed trips": 10,
+    "Current partner": 7,
+    "Early teen/teenage family": 14,
+    "General adult/later life/home/wellbeing": 69,
+    "Household pets": 10,
+    "Introductory infant": 8,
+    "Ordinary workplace": 20,
+    "Preschool/early family": 19,
+    "Primary school": 27,
+    "Secondary school": 13,
+    "Shared school project": 1,
+    "Special careers": 23
+  },
+  "primarySourceGroupingMethod": "Reconciles historical CONTENT_COVERAGE age/context groupings using explicit precedence: special career, child, pet, hobby, visited, workplace, school, friend, partner, infancy, early family, childhood, teen family, general. This is not an editorial assignment to the different twelve planned thematic allocations.",
+  "dedicatedPaths": {
+    "actor": [
+      "career-actor-written-pause",
+      "career-actor-rehearsal-door"
+    ],
+    "model": [
+      "career-model-expression-board",
+      "career-model-backdrop-fan"
+    ],
+    "athlete": [
+      "career-athlete-ritual-discussion",
+      "career-athlete-timer-reminder"
+    ],
+    "musician": [
+      "career-musician-setlist-handwriting",
+      "career-musician-count-in"
+    ],
+    "politician": [
+      "career-politician-sentence-length",
+      "career-politician-moving-lectern"
+    ],
+    "youtuber": [
+      "career-youtuber-thumbnail-face",
+      "career-youtuber-drill-interview"
+    ],
+    "streamer": [
+      "career-streamer-chair-soundcheck",
+      "career-streamer-greeting-loop"
+    ],
+    "business": [
+      "career-business-automatic-application",
+      "career-business-breakfast-cards"
+    ],
+    "royalty": [
+      "career-royalty-ribbon-end",
+      "career-royalty-temporary-badge"
+    ],
+    "astronaut": [
+      "career-astronaut-plain-explanation",
+      "career-astronaut-loose-snack"
+    ],
+    "military": [
+      "career-military-checklist-language",
+      "career-military-boot-reflection"
+    ]
+  },
+  "sharedCreator": [
+    "career-creator-fourth-introduction"
+  ],
+  "overlappingContextCounts": {
+    "parent": 29,
+    "parentContact": 4,
+    "school": 41,
+    "classmate": 28,
+    "teacher": 28,
+    "workplace": 20,
+    "coworker": 14,
+    "supervisor": 7,
+    "friend": 10,
+    "partner": 7,
+    "local": 146,
+    "child": 20,
+    "home": 6,
+    "pet": 10,
+    "hobby": 10,
+    "visited": 10,
+    "chronicCondition": 5,
+    "specialCareer": 23
+  },
+  "rows": [
+    {
+      "index": 0,
+      "id": "first-cake",
+      "title": "A very small food critic",
+      "min": 1,
+      "max": 2,
+      "sourceFile": "src/game/content/events.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "parent": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Introductory infant"
+    },
+    {
+      "index": 1,
+      "id": "shoe-principle",
+      "title": "A principled disagreement",
+      "min": 2,
+      "max": 4,
+      "sourceFile": "src/game/content/events.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "parent": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Preschool/early family"
+    },
+    {
+      "index": 2,
+      "id": "blanket-dragon",
+      "title": "Something under the blanket",
+      "min": 3,
+      "max": 6,
+      "sourceFile": "src/game/content/events.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "parent": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Preschool/early family"
+    },
+    {
+      "index": 3,
+      "id": "library-card",
+      "title": "Unlimited dragons, limited shelf space",
+      "min": 5,
+      "max": 10,
+      "sourceFile": "src/game/content/events.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Childhood outside school"
+    },
+    {
+      "index": 4,
+      "id": "broken-mug",
+      "title": "The handle is no longer involved",
+      "min": 6,
+      "max": 11,
+      "sourceFile": "src/game/content/events.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "parent": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Childhood outside school"
+    },
+    {
+      "index": 5,
+      "id": "rainy-fort",
+      "title": "Indoor architecture",
+      "min": 6,
+      "max": 12,
+      "sourceFile": "src/game/content/events.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {},
+      "followUps": [],
+      "primarySourceGrouping": "Childhood outside school"
+    },
+    {
+      "index": 6,
+      "id": "parent-old-music",
+      "title": "Apparently this was cool",
+      "min": 10,
+      "max": 17,
+      "sourceFile": "src/game/content/events.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "parent": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Early teen/teenage family"
+    },
+    {
+      "index": 7,
+      "id": "group-chat-rumour",
+      "title": "Forwarded with absolutely no evidence",
+      "min": 12,
+      "max": 18,
+      "sourceFile": "src/game/content/events.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {},
+      "followUps": [],
+      "primarySourceGrouping": "Early teen/teenage family"
+    },
+    {
+      "index": 8,
+      "id": "first-presentation",
+      "title": "Thirty seconds feels quite long",
+      "min": 12,
+      "max": 19,
+      "sourceFile": "src/game/content/events.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {},
+      "followUps": [],
+      "primarySourceGrouping": "Early teen/teenage family"
+    },
+    {
+      "index": 9,
+      "id": "parent-boundary",
+      "title": "Read at 10:42",
+      "min": 14,
+      "max": 20,
+      "sourceFile": "src/game/content/events.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "parent": true,
+        "parentContact": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Early teen/teenage family"
+    },
+    {
+      "index": 10,
+      "id": "comparison-scroll",
+      "title": "Everyone else appears to be thriving",
+      "min": 16,
+      "max": 45,
+      "sourceFile": "src/game/content/events.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {},
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 11,
+      "id": "community-garden",
+      "title": "The carrots have a committee",
+      "min": 18,
+      "max": 85,
+      "sourceFile": "src/game/content/events.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 12,
+      "id": "bad-review",
+      "title": "A masterpiece in the comments",
+      "min": 18,
+      "max": 85,
+      "sourceFile": "src/game/content/events.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {},
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 13,
+      "id": "rest-guilt",
+      "title": "An aggressively empty afternoon",
+      "min": 20,
+      "max": 75,
+      "sourceFile": "src/game/content/events.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 14,
+      "id": "old-photo",
+      "title": "Evidence from a previous haircut",
+      "min": 22,
+      "max": 70,
+      "sourceFile": "src/game/content/events.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "parent": true,
+        "parentContact": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 15,
+      "id": "local-meeting",
+      "title": "Public consultation, private impatience",
+      "min": 25,
+      "max": 90,
+      "sourceFile": "src/game/content/events.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 16,
+      "id": "small-mistake",
+      "title": "Reply all",
+      "min": 25,
+      "max": 90,
+      "sourceFile": "src/game/content/events.ts",
+      "choices": 3,
+      "rarity": "uncommon",
+      "context": {},
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 17,
+      "id": "birthday-number",
+      "title": "Another year, another timetable",
+      "min": 30,
+      "max": 90,
+      "sourceFile": "src/game/content/events.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {},
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 18,
+      "id": "familiar-street",
+      "title": "A place that remembers differently",
+      "min": 40,
+      "max": 100,
+      "sourceFile": "src/game/content/events.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 19,
+      "id": "new-skill-late",
+      "title": "Beginner is still an available setting",
+      "min": 50,
+      "max": 100,
+      "sourceFile": "src/game/content/events.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {},
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 20,
+      "id": "useful-advice",
+      "title": "“What would you do?”",
+      "min": 60,
+      "max": 115,
+      "sourceFile": "src/game/content/events.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {},
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 21,
+      "id": "quiet-morning",
+      "title": "An ordinary morning",
+      "min": 65,
+      "max": 120,
+      "sourceFile": "src/game/content/events.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {},
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 22,
+      "id": "toddler-stairwell-echo",
+      "title": "Who said that?",
+      "min": 2,
+      "max": 4,
+      "sourceFile": "src/game/content/schoolDayStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {},
+      "followUps": [],
+      "primarySourceGrouping": "Preschool/early family"
+    },
+    {
+      "index": 23,
+      "id": "toddler-zipper-puzzle",
+      "title": "A one-way machine",
+      "min": 2,
+      "max": 5,
+      "sourceFile": "src/game/content/schoolDayStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {},
+      "followUps": [],
+      "primarySourceGrouping": "Preschool/early family"
+    },
+    {
+      "index": 24,
+      "id": "toddler-shadow-race",
+      "title": "A very close race",
+      "min": 3,
+      "max": 5,
+      "sourceFile": "src/game/content/schoolDayStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {},
+      "followUps": [],
+      "primarySourceGrouping": "Preschool/early family"
+    },
+    {
+      "index": 25,
+      "id": "toddler-cardboard-postbox",
+      "title": "Urgent correspondence",
+      "min": 3,
+      "max": 5,
+      "sourceFile": "src/game/content/schoolDayStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {},
+      "followUps": [],
+      "primarySourceGrouping": "Preschool/early family"
+    },
+    {
+      "index": 26,
+      "id": "toddler-biscuit-halves",
+      "title": "Two is more than one",
+      "min": 3,
+      "max": 5,
+      "sourceFile": "src/game/content/schoolDayStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {},
+      "followUps": [],
+      "primarySourceGrouping": "Preschool/early family"
+    },
+    {
+      "index": 27,
+      "id": "school-inverted-map",
+      "title": "North has moved",
+      "min": 6,
+      "max": 11,
+      "sourceFile": "src/game/content/schoolDayStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "school": "primary",
+        "teacher": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Primary school"
+    },
+    {
+      "index": 28,
+      "id": "school-library-whisper",
+      "title": "Quiet, please",
+      "min": 6,
+      "max": 11,
+      "sourceFile": "src/game/content/schoolDayStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "school": "primary",
+        "classmate": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Primary school"
+    },
+    {
+      "index": 29,
+      "id": "school-relay-handover",
+      "title": "Passing the problem",
+      "min": 7,
+      "max": 11,
+      "sourceFile": "src/game/content/schoolDayStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "school": "primary",
+        "classmate": true,
+        "teacher": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Primary school"
+    },
+    {
+      "index": 30,
+      "id": "school-bean-monitor",
+      "title": "Management of one bean",
+      "min": 6,
+      "max": 11,
+      "sourceFile": "src/game/content/schoolDayStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "school": "primary",
+        "teacher": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Primary school"
+    },
+    {
+      "index": 31,
+      "id": "school-secret-language",
+      "title": "A private language",
+      "min": 7,
+      "max": 11,
+      "sourceFile": "src/game/content/schoolDayStories.ts",
+      "choices": 3,
+      "rarity": "uncommon",
+      "context": {
+        "school": "primary",
+        "classmate": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Primary school"
+    },
+    {
+      "index": 32,
+      "id": "school-microphone-rehearsal",
+      "title": "Is this thing on?",
+      "min": 7,
+      "max": 11,
+      "sourceFile": "src/game/content/schoolDayStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "school": "primary",
+        "teacher": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Primary school"
+    },
+    {
+      "index": 33,
+      "id": "school-rainy-break",
+      "title": "Indoor championship",
+      "min": 6,
+      "max": 11,
+      "sourceFile": "src/game/content/schoolDayStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "school": "primary",
+        "classmate": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Primary school"
+    },
+    {
+      "index": 34,
+      "id": "school-label-swap",
+      "title": "The wrong caption",
+      "min": 8,
+      "max": 11,
+      "sourceFile": "src/game/content/schoolDayStories.ts",
+      "choices": 3,
+      "rarity": "uncommon",
+      "context": {
+        "school": "primary",
+        "classmate": true,
+        "teacher": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Primary school"
+    },
+    {
+      "index": 35,
+      "id": "teen-unit-confusion",
+      "title": "A remarkably large answer",
+      "min": 12,
+      "max": 17,
+      "sourceFile": "src/game/content/schoolDayStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "school": "secondary",
+        "teacher": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Secondary school"
+    },
+    {
+      "index": 36,
+      "id": "teen-debate-draw",
+      "title": "The other side",
+      "min": 13,
+      "max": 17,
+      "sourceFile": "src/game/content/schoolDayStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "school": "secondary",
+        "classmate": true,
+        "teacher": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Secondary school"
+    },
+    {
+      "index": 37,
+      "id": "teen-yearbook-proof",
+      "title": "Words to remember",
+      "min": 13,
+      "max": 17,
+      "sourceFile": "src/game/content/schoolDayStories.ts",
+      "choices": 3,
+      "rarity": "uncommon",
+      "context": {
+        "school": "secondary",
+        "classmate": true,
+        "teacher": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Secondary school"
+    },
+    {
+      "index": 38,
+      "id": "teen-study-soundtrack",
+      "title": "Background noise",
+      "min": 12,
+      "max": 17,
+      "sourceFile": "src/game/content/schoolDayStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "school": "secondary",
+        "classmate": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Secondary school"
+    },
+    {
+      "index": 39,
+      "id": "teen-family-interview",
+      "title": "The long version",
+      "min": 14,
+      "max": 17,
+      "sourceFile": "src/game/content/schoolDayStories.ts",
+      "choices": 3,
+      "rarity": "uncommon",
+      "context": {
+        "parent": true,
+        "parentContact": true,
+        "school": "secondary",
+        "teacher": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Secondary school"
+    },
+    {
+      "index": 40,
+      "id": "teen-volunteer-roster",
+      "title": "Two names, one job",
+      "min": 14,
+      "max": 17,
+      "sourceFile": "src/game/content/schoolDayStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "school": "secondary",
+        "classmate": true,
+        "teacher": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Secondary school"
+    },
+    {
+      "index": 41,
+      "id": "teen-marking-correction",
+      "title": "An honest correction",
+      "min": 14,
+      "max": 17,
+      "sourceFile": "src/game/content/schoolDayStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "school": "secondary",
+        "teacher": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Secondary school"
+    },
+    {
+      "index": 42,
+      "id": "first-bubble-catch",
+      "title": "A very brief possession",
+      "min": 1,
+      "max": 2,
+      "sourceFile": "src/game/content/earlyHomeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {},
+      "followUps": [],
+      "primarySourceGrouping": "Introductory infant"
+    },
+    {
+      "index": 43,
+      "id": "first-tower-demolition",
+      "title": "Building regulations",
+      "min": 1,
+      "max": 2,
+      "sourceFile": "src/game/content/earlyHomeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {},
+      "followUps": [],
+      "primarySourceGrouping": "Introductory infant"
+    },
+    {
+      "index": 44,
+      "id": "first-camera-closeup",
+      "title": "Ready for your close-up",
+      "min": 1,
+      "max": 3,
+      "sourceFile": "src/game/content/earlyHomeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "parent": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Introductory infant"
+    },
+    {
+      "index": 45,
+      "id": "first-nap-negotiation",
+      "title": "Too busy to be tired",
+      "min": 1,
+      "max": 3,
+      "sourceFile": "src/game/content/earlyHomeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "parent": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Introductory infant"
+    },
+    {
+      "index": 46,
+      "id": "toddler-parent-name",
+      "title": "Management has a name",
+      "min": 2,
+      "max": 4,
+      "sourceFile": "src/game/content/earlyHomeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "parent": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Preschool/early family"
+    },
+    {
+      "index": 47,
+      "id": "toddler-ice-cube",
+      "title": "The evidence is melting",
+      "min": 2,
+      "max": 4,
+      "sourceFile": "src/game/content/earlyHomeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "parent": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Preschool/early family"
+    },
+    {
+      "index": 48,
+      "id": "toddler-lift-button",
+      "title": "An important appointment",
+      "min": 3,
+      "max": 5,
+      "sourceFile": "src/game/content/earlyHomeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "parent": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Preschool/early family"
+    },
+    {
+      "index": 49,
+      "id": "toddler-caterpillar-crossing",
+      "title": "Heavy traffic",
+      "min": 3,
+      "max": 5,
+      "sourceFile": "src/game/content/earlyHomeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Preschool/early family"
+    },
+    {
+      "index": 50,
+      "id": "toddler-why-machine",
+      "title": "One more question",
+      "min": 3,
+      "max": 5,
+      "sourceFile": "src/game/content/earlyHomeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "parent": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Preschool/early family"
+    },
+    {
+      "index": 51,
+      "id": "child-first-loose-tooth",
+      "title": "An unreliable tooth",
+      "min": 5,
+      "max": 7,
+      "sourceFile": "src/game/content/earlyHomeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {},
+      "followUps": [],
+      "primarySourceGrouping": "Childhood outside school"
+    },
+    {
+      "index": 52,
+      "id": "child-pocket-museum",
+      "title": "Admission is free",
+      "min": 4,
+      "max": 7,
+      "sourceFile": "src/game/content/earlyHomeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {},
+      "followUps": [],
+      "primarySourceGrouping": "Preschool/early family"
+    },
+    {
+      "index": 53,
+      "id": "school-wrong-jacket",
+      "title": "Unexpected extra sleeves",
+      "min": 6,
+      "max": 9,
+      "sourceFile": "src/game/content/earlyHomeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "school": "primary",
+        "classmate": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Primary school"
+    },
+    {
+      "index": 54,
+      "id": "school-empty-lunchbox",
+      "title": "A disappointing lunch",
+      "min": 6,
+      "max": 11,
+      "sourceFile": "src/game/content/earlyHomeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "school": "primary",
+        "classmate": true,
+        "teacher": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Primary school"
+    },
+    {
+      "index": 55,
+      "id": "school-answer-blurt",
+      "title": "You know this one",
+      "min": 6,
+      "max": 10,
+      "sourceFile": "src/game/content/earlyHomeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "school": "primary",
+        "teacher": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Primary school"
+    },
+    {
+      "index": 56,
+      "id": "school-slide-queue",
+      "title": "Express lane",
+      "min": 6,
+      "max": 10,
+      "sourceFile": "src/game/content/earlyHomeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "school": "primary",
+        "classmate": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Primary school"
+    },
+    {
+      "index": 57,
+      "id": "school-show-tell-prop",
+      "title": "Please imagine the object",
+      "min": 6,
+      "max": 9,
+      "sourceFile": "src/game/content/earlyHomeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "school": "primary",
+        "classmate": true,
+        "teacher": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Primary school"
+    },
+    {
+      "index": 58,
+      "id": "child-boardgame-rules",
+      "title": "The rules have been updated",
+      "min": 5,
+      "max": 9,
+      "sourceFile": "src/game/content/earlyHomeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "parent": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Childhood outside school"
+    },
+    {
+      "index": 59,
+      "id": "child-shop-separation",
+      "title": "The aisle looks different",
+      "min": 5,
+      "max": 9,
+      "sourceFile": "src/game/content/earlyHomeStories.ts",
+      "choices": 3,
+      "rarity": "rare",
+      "context": {
+        "parent": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Childhood outside school"
+    },
+    {
+      "index": 60,
+      "id": "school-practice-alarm",
+      "title": "A very loud rehearsal",
+      "min": 6,
+      "max": 11,
+      "sourceFile": "src/game/content/earlyHomeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "school": "primary",
+        "teacher": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Primary school"
+    },
+    {
+      "index": 61,
+      "id": "school-mysterious-noise",
+      "title": "An unclaimed contribution",
+      "min": 6,
+      "max": 11,
+      "sourceFile": "src/game/content/earlyHomeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "school": "primary",
+        "classmate": true,
+        "teacher": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Primary school"
+    },
+    {
+      "index": 62,
+      "id": "teen-old-recording",
+      "title": "A previous version of you",
+      "min": 11,
+      "max": 16,
+      "sourceFile": "src/game/content/teenHomeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "parent": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Early teen/teenage family"
+    },
+    {
+      "index": 63,
+      "id": "teen-shrinking-sleeves",
+      "title": "The sleeves have retreated",
+      "min": 11,
+      "max": 16,
+      "sourceFile": "src/game/content/teenHomeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {},
+      "followUps": [],
+      "primarySourceGrouping": "Early teen/teenage family"
+    },
+    {
+      "index": 64,
+      "id": "teen-family-game-timer",
+      "title": "After this round",
+      "min": 11,
+      "max": 17,
+      "sourceFile": "src/game/content/teenHomeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "parent": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Early teen/teenage family"
+    },
+    {
+      "index": 65,
+      "id": "teen-phone-at-dinner",
+      "title": "A conversation with a screen in it",
+      "min": 12,
+      "max": 17,
+      "sourceFile": "src/game/content/teenHomeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "parent": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Early teen/teenage family"
+    },
+    {
+      "index": 66,
+      "id": "teen-notification-loop",
+      "title": "Nothing has happened again",
+      "min": 12,
+      "max": 17,
+      "sourceFile": "src/game/content/teenHomeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {},
+      "followUps": [],
+      "primarySourceGrouping": "Early teen/teenage family"
+    },
+    {
+      "index": 67,
+      "id": "teen-borrowed-charger",
+      "title": "Temporary ownership",
+      "min": 12,
+      "max": 17,
+      "sourceFile": "src/game/content/teenHomeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "parent": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Early teen/teenage family"
+    },
+    {
+      "index": 68,
+      "id": "teen-old-interest-box",
+      "title": "Your former favourite thing",
+      "min": 12,
+      "max": 17,
+      "sourceFile": "src/game/content/teenHomeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {},
+      "followUps": [],
+      "primarySourceGrouping": "Early teen/teenage family"
+    },
+    {
+      "index": 69,
+      "id": "teen-household-small-meal",
+      "title": "The recipe says “simply”",
+      "min": 13,
+      "max": 17,
+      "sourceFile": "src/game/content/teenHomeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "parent": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Early teen/teenage family"
+    },
+    {
+      "index": 70,
+      "id": "teen-parent-voice-note",
+      "title": "Sent from a windy place",
+      "min": 13,
+      "max": 17,
+      "sourceFile": "src/game/content/teenHomeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "parent": true,
+        "parentContact": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Early teen/teenage family"
+    },
+    {
+      "index": 71,
+      "id": "teen-sunday-list",
+      "title": "A very ambitious evening",
+      "min": 13,
+      "max": 17,
+      "sourceFile": "src/game/content/teenHomeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {},
+      "followUps": [],
+      "primarySourceGrouping": "Early teen/teenage family"
+    },
+    {
+      "index": 72,
+      "id": "first-echo",
+      "title": "Encore! Encore!",
+      "min": 1,
+      "max": 2,
+      "sourceFile": "src/game/content/childhood.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {},
+      "followUps": [],
+      "primarySourceGrouping": "Introductory infant"
+    },
+    {
+      "index": 73,
+      "id": "first-sock-escape",
+      "title": "Feet at last",
+      "min": 1,
+      "max": 2,
+      "sourceFile": "src/game/content/childhood.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {},
+      "followUps": [],
+      "primarySourceGrouping": "Introductory infant"
+    },
+    {
+      "index": 74,
+      "id": "first-mirror-guest",
+      "title": "Who invited that baby?",
+      "min": 1,
+      "max": 2,
+      "sourceFile": "src/game/content/childhood.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {},
+      "followUps": [],
+      "primarySourceGrouping": "Introductory infant"
+    },
+    {
+      "index": 75,
+      "id": "toddler-wall-gallery",
+      "title": "Permanent exhibition",
+      "min": 2,
+      "max": 4,
+      "sourceFile": "src/game/content/childhood.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "parent": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Preschool/early family"
+    },
+    {
+      "index": 76,
+      "id": "toddler-grocery-microphone",
+      "title": "Price check on your dignity",
+      "min": 2,
+      "max": 5,
+      "sourceFile": "src/game/content/childhood.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "parent": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Preschool/early family"
+    },
+    {
+      "index": 77,
+      "id": "toddler-cardboard-rocket",
+      "title": "Launch delayed",
+      "min": 3,
+      "max": 5,
+      "sourceFile": "src/game/content/childhood.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "parent": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Preschool/early family"
+    },
+    {
+      "index": 78,
+      "id": "toddler-suspicious-haircut",
+      "title": "Customer complaint",
+      "min": 3,
+      "max": 5,
+      "sourceFile": "src/game/content/childhood.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "parent": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Preschool/early family"
+    },
+    {
+      "index": 79,
+      "id": "child-lost-button",
+      "title": "Missing person: teddy’s eye",
+      "min": 4,
+      "max": 7,
+      "sourceFile": "src/game/content/childhood.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "parent": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Preschool/early family"
+    },
+    {
+      "index": 80,
+      "id": "child-first-sleepover-plan",
+      "title": "Hotel living room",
+      "min": 4,
+      "max": 8,
+      "sourceFile": "src/game/content/childhood.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "parent": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Preschool/early family"
+    },
+    {
+      "index": 81,
+      "id": "school-arcade-invitation",
+      "title": "Birthday invitation",
+      "min": 6,
+      "max": 11,
+      "sourceFile": "src/game/content/childhood.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "parent": true,
+        "school": "primary",
+        "classmate": true
+      },
+      "followUps": [
+        "arcade-invitation"
+      ],
+      "primarySourceGrouping": "Primary school"
+    },
+    {
+      "index": 82,
+      "id": "school-project-promise",
+      "title": "Your name on the cover",
+      "min": 7,
+      "max": 16,
+      "sourceFile": "src/game/content/childhood.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "school": "any",
+        "classmate": true,
+        "teacher": true
+      },
+      "followUps": [
+        "project-promise"
+      ],
+      "primarySourceGrouping": "Shared school project"
+    },
+    {
+      "index": 83,
+      "id": "school-volcano-breach",
+      "title": "The volcano has escaped",
+      "min": 6,
+      "max": 11,
+      "sourceFile": "src/game/content/childhood.ts",
+      "choices": 3,
+      "rarity": "uncommon",
+      "context": {
+        "school": "primary",
+        "classmate": true,
+        "teacher": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Primary school"
+    },
+    {
+      "index": 84,
+      "id": "school-tree-audition",
+      "title": "A demanding role",
+      "min": 6,
+      "max": 11,
+      "sourceFile": "src/game/content/childhood.ts",
+      "choices": 3,
+      "rarity": "uncommon",
+      "context": {
+        "school": "primary",
+        "teacher": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Primary school"
+    },
+    {
+      "index": 85,
+      "id": "school-mascot-petition",
+      "title": "Vote for the damp sock",
+      "min": 7,
+      "max": 11,
+      "sourceFile": "src/game/content/childhood.ts",
+      "choices": 3,
+      "rarity": "uncommon",
+      "context": {
+        "school": "primary",
+        "classmate": true,
+        "teacher": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Primary school"
+    },
+    {
+      "index": 86,
+      "id": "school-recorder-solo",
+      "title": "Volume is not a musical note",
+      "min": 6,
+      "max": 11,
+      "sourceFile": "src/game/content/childhood.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "school": "primary",
+        "classmate": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Primary school"
+    },
+    {
+      "index": 87,
+      "id": "school-lunch-trade",
+      "title": "Snack negotiations",
+      "min": 6,
+      "max": 11,
+      "sourceFile": "src/game/content/childhood.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "school": "primary",
+        "classmate": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Primary school"
+    },
+    {
+      "index": 88,
+      "id": "school-name-joke",
+      "title": "They do not find it funny",
+      "min": 6,
+      "max": 11,
+      "sourceFile": "src/game/content/childhood.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "school": "primary",
+        "classmate": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Primary school"
+    },
+    {
+      "index": 89,
+      "id": "school-homework-soap",
+      "title": "The homework needs rinsing",
+      "min": 7,
+      "max": 11,
+      "sourceFile": "src/game/content/childhood.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "school": "primary",
+        "teacher": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Primary school"
+    },
+    {
+      "index": 90,
+      "id": "school-bench-reserve",
+      "title": "Reserved for nobody",
+      "min": 6,
+      "max": 11,
+      "sourceFile": "src/game/content/childhood.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "school": "primary",
+        "classmate": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Primary school"
+    },
+    {
+      "index": 91,
+      "id": "school-race-false-start",
+      "title": "An impressive illegal start",
+      "min": 7,
+      "max": 11,
+      "sourceFile": "src/game/content/childhood.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "school": "primary",
+        "teacher": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Primary school"
+    },
+    {
+      "index": 92,
+      "id": "school-tiny-editor",
+      "title": "Breaking news: lunch",
+      "min": 8,
+      "max": 11,
+      "sourceFile": "src/game/content/childhood.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "school": "primary",
+        "classmate": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Primary school"
+    },
+    {
+      "index": 93,
+      "id": "school-glitter-border",
+      "title": "Glitter lockdown",
+      "min": 7,
+      "max": 11,
+      "sourceFile": "src/game/content/childhood.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "school": "primary",
+        "teacher": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Primary school"
+    },
+    {
+      "index": 94,
+      "id": "teen-homework-leak",
+      "title": "Answers attached",
+      "min": 12,
+      "max": 17,
+      "sourceFile": "src/game/content/childhood.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "school": "secondary",
+        "classmate": true,
+        "teacher": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Secondary school"
+    },
+    {
+      "index": 95,
+      "id": "teen-group-project-credit",
+      "title": "Featuring everyone except you",
+      "min": 12,
+      "max": 17,
+      "sourceFile": "src/game/content/childhood.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "school": "secondary",
+        "classmate": true,
+        "teacher": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Secondary school"
+    },
+    {
+      "index": 96,
+      "id": "teen-mic-still-live",
+      "title": "The microphone is still on",
+      "min": 12,
+      "max": 17,
+      "sourceFile": "src/game/content/childhood.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "school": "secondary",
+        "classmate": true,
+        "teacher": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Secondary school"
+    },
+    {
+      "index": 97,
+      "id": "teen-solo-rehearsal",
+      "title": "They are watching the door",
+      "min": 12,
+      "max": 17,
+      "sourceFile": "src/game/content/childhood.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "school": "secondary",
+        "classmate": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Secondary school"
+    },
+    {
+      "index": 98,
+      "id": "teen-exam-freeze",
+      "title": "Question one has left the building",
+      "min": 13,
+      "max": 17,
+      "sourceFile": "src/game/content/childhood.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "school": "secondary",
+        "teacher": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Secondary school"
+    },
+    {
+      "index": 99,
+      "id": "teen-canteen-review",
+      "title": "One star. Still hungry.",
+      "min": 12,
+      "max": 17,
+      "sourceFile": "src/game/content/childhood.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "school": "secondary",
+        "classmate": true,
+        "teacher": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Secondary school"
+    },
+    {
+      "index": 100,
+      "id": "work-three-priorities",
+      "title": "Three first priorities",
+      "min": 16,
+      "max": 85,
+      "sourceFile": "src/game/content/workplaceStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "workplace": true,
+        "supervisor": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Ordinary workplace"
+    },
+    {
+      "index": 101,
+      "id": "work-unfamiliar-process",
+      "title": "The part nobody explained",
+      "min": 16,
+      "max": 85,
+      "sourceFile": "src/game/content/workplaceStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "workplace": true,
+        "coworker": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Ordinary workplace"
+    },
+    {
+      "index": 102,
+      "id": "work-breakroom-sign",
+      "title": "Polite capitals",
+      "min": 16,
+      "max": 85,
+      "sourceFile": "src/game/content/workplaceStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "workplace": true,
+        "coworker": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Ordinary workplace"
+    },
+    {
+      "index": 103,
+      "id": "work-break-playlist",
+      "title": "One song, several opinions",
+      "min": 16,
+      "max": 85,
+      "sourceFile": "src/game/content/workplaceStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "workplace": true,
+        "coworker": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Ordinary workplace"
+    },
+    {
+      "index": 104,
+      "id": "work-message-love",
+      "title": "An unexpected sign-off",
+      "min": 16,
+      "max": 85,
+      "sourceFile": "src/game/content/workplaceStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "workplace": true,
+        "supervisor": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Ordinary workplace"
+    },
+    {
+      "index": 105,
+      "id": "work-photo-blink",
+      "title": "Everybody blinked separately",
+      "min": 16,
+      "max": 85,
+      "sourceFile": "src/game/content/workplaceStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "workplace": true,
+        "coworker": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Ordinary workplace"
+    },
+    {
+      "index": 106,
+      "id": "work-safety-arrow",
+      "title": "This way to the wall",
+      "min": 16,
+      "max": 85,
+      "sourceFile": "src/game/content/workplaceStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "workplace": true,
+        "supervisor": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Ordinary workplace"
+    },
+    {
+      "index": 107,
+      "id": "work-shared-credit",
+      "title": "There were two of us",
+      "min": 16,
+      "max": 85,
+      "sourceFile": "src/game/content/workplaceStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "workplace": true,
+        "coworker": true,
+        "supervisor": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Ordinary workplace"
+    },
+    {
+      "index": 108,
+      "id": "work-question-at-door",
+      "title": "One quick question",
+      "min": 16,
+      "max": 85,
+      "sourceFile": "src/game/content/workplaceStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "workplace": true,
+        "supervisor": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Ordinary workplace"
+    },
+    {
+      "index": 109,
+      "id": "work-quiet-kindness",
+      "title": "A small favour, correctly remembered",
+      "min": 16,
+      "max": 85,
+      "sourceFile": "src/game/content/workplaceStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "workplace": true,
+        "coworker": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Ordinary workplace"
+    },
+    {
+      "index": 110,
+      "id": "friend-long-voice-note",
+      "title": "A message with chapters",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/adultRelationshipStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "friend": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Adult friendship"
+    },
+    {
+      "index": 111,
+      "id": "friend-different-budget",
+      "title": "The inexpensive version",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/adultRelationshipStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "friend": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Adult friendship"
+    },
+    {
+      "index": 112,
+      "id": "friend-advice-or-listening",
+      "title": "No solution requested",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/adultRelationshipStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "friend": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Adult friendship"
+    },
+    {
+      "index": 113,
+      "id": "friend-creative-feedback",
+      "title": "Be honest, but also be my friend",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/adultRelationshipStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "friend": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Adult friendship"
+    },
+    {
+      "index": 114,
+      "id": "friend-interrupted-thought",
+      "title": "The rest of your sentence",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/adultRelationshipStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "friend": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Adult friendship"
+    },
+    {
+      "index": 115,
+      "id": "friend-unwanted-nickname",
+      "title": "Please do not let that catch on",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/adultRelationshipStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "friend": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Adult friendship"
+    },
+    {
+      "index": 116,
+      "id": "friend-quiet-company",
+      "title": "Nothing needs saying",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/adultRelationshipStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "friend": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Adult friendship"
+    },
+    {
+      "index": 117,
+      "id": "friend-changed-opinion",
+      "title": "I used to think that too",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/adultRelationshipStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "friend": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Adult friendship"
+    },
+    {
+      "index": 118,
+      "id": "partner-phone-attention",
+      "title": "One more notification",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/adultRelationshipStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "partner": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Current partner"
+    },
+    {
+      "index": 119,
+      "id": "partner-alone-time",
+      "title": "An afternoon with nobody",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/adultRelationshipStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "partner": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Current partner"
+    },
+    {
+      "index": 120,
+      "id": "partner-money-conversation",
+      "title": "Before choosing the expensive option",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/adultRelationshipStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "partner": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Current partner"
+    },
+    {
+      "index": 121,
+      "id": "partner-other-couples",
+      "title": "Everybody else, apparently",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/adultRelationshipStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "partner": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Current partner"
+    },
+    {
+      "index": 122,
+      "id": "partner-disagreement-loop",
+      "title": "The same point, slightly louder",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/adultRelationshipStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "partner": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Current partner"
+    },
+    {
+      "index": 123,
+      "id": "partner-public-affection",
+      "title": "Comfort has a location",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/adultRelationshipStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "partner": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Current partner"
+    },
+    {
+      "index": 124,
+      "id": "partner-arrives-late",
+      "title": "You have had time to rehearse",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/adultRelationshipStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "partner": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Current partner"
+    },
+    {
+      "index": 125,
+      "id": "adult-wrong-name-badge",
+      "title": "Apparently you are the expert",
+      "min": 18,
+      "max": 65,
+      "sourceFile": "src/game/content/ordinaryAdultStories.ts",
+      "choices": 3,
+      "rarity": "uncommon",
+      "context": {
+        "local": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 126,
+      "id": "adult-wave-behind",
+      "title": "A wave with another destination",
+      "min": 18,
+      "max": 65,
+      "sourceFile": "src/game/content/ordinaryAdultStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 127,
+      "id": "adult-free-lecture-question",
+      "title": "Any final questions?",
+      "min": 18,
+      "max": 65,
+      "sourceFile": "src/game/content/ordinaryAdultStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 128,
+      "id": "adult-queue-merge",
+      "title": "Two queues, one doorway",
+      "min": 18,
+      "max": 65,
+      "sourceFile": "src/game/content/ordinaryAdultStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 129,
+      "id": "adult-community-map",
+      "title": "You are here, allegedly",
+      "min": 18,
+      "max": 65,
+      "sourceFile": "src/game/content/ordinaryAdultStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 130,
+      "id": "adult-open-mic-list",
+      "title": "Your name is on the list",
+      "min": 18,
+      "max": 65,
+      "sourceFile": "src/game/content/ordinaryAdultStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 131,
+      "id": "adult-borrowed-pen",
+      "title": "The ceremonial pen",
+      "min": 18,
+      "max": 65,
+      "sourceFile": "src/game/content/ordinaryAdultStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 132,
+      "id": "adult-weather-expert",
+      "title": "The local weather department",
+      "min": 18,
+      "max": 65,
+      "sourceFile": "src/game/content/ordinaryAdultStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 133,
+      "id": "adult-instruction-last-page",
+      "title": "The important page is last",
+      "min": 18,
+      "max": 65,
+      "sourceFile": "src/game/content/ordinaryAdultStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 134,
+      "id": "adult-empty-calendar",
+      "title": "The appointment with yourself",
+      "min": 18,
+      "max": 65,
+      "sourceFile": "src/game/content/ordinaryAdultStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 135,
+      "id": "adult-unwanted-speech",
+      "title": "A few words from you",
+      "min": 18,
+      "max": 65,
+      "sourceFile": "src/game/content/ordinaryAdultStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 136,
+      "id": "adult-compliment-practice",
+      "title": "A compliment without an invoice",
+      "min": 18,
+      "max": 65,
+      "sourceFile": "src/game/content/ordinaryAdultStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 137,
+      "id": "adult-repair-table",
+      "title": "The expert is also guessing",
+      "min": 18,
+      "max": 65,
+      "sourceFile": "src/game/content/ordinaryAdultStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 138,
+      "id": "adult-community-poster",
+      "title": "Three dates for one event",
+      "min": 18,
+      "max": 65,
+      "sourceFile": "src/game/content/ordinaryAdultStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 139,
+      "id": "adult-name-pronunciation",
+      "title": "One more attempt at your name",
+      "min": 18,
+      "max": 65,
+      "sourceFile": "src/game/content/ordinaryAdultStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 140,
+      "id": "adult-shortcut-stairs",
+      "title": "The shortcut has several stairs",
+      "min": 18,
+      "max": 65,
+      "sourceFile": "src/game/content/ordinaryAdultStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 141,
+      "id": "adult-small-volunteer-task",
+      "title": "A very small responsibility",
+      "min": 18,
+      "max": 65,
+      "sourceFile": "src/game/content/ordinaryAdultStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 142,
+      "id": "adult-uncertain-memory",
+      "title": "Did that actually happen?",
+      "min": 18,
+      "max": 65,
+      "sourceFile": "src/game/content/ordinaryAdultStories.ts",
+      "choices": 3,
+      "rarity": "uncommon",
+      "context": {
+        "local": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 143,
+      "id": "adult-free-sample-opinion",
+      "title": "The very honest feedback form",
+      "min": 18,
+      "max": 65,
+      "sourceFile": "src/game/content/ordinaryAdultStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 144,
+      "id": "adult-seat-with-a-view",
+      "title": "The best seat in the room",
+      "min": 18,
+      "max": 65,
+      "sourceFile": "src/game/content/ordinaryAdultStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 145,
+      "id": "adult-password-on-paper",
+      "title": "A reminder that needs reminding",
+      "min": 18,
+      "max": 65,
+      "sourceFile": "src/game/content/ordinaryAdultStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 146,
+      "id": "adult-lost-glove",
+      "title": "One glove, several possibilities",
+      "min": 18,
+      "max": 65,
+      "sourceFile": "src/game/content/ordinaryAdultStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 147,
+      "id": "adult-perfect-introduction",
+      "title": "A biography of thirty seconds",
+      "min": 18,
+      "max": 65,
+      "sourceFile": "src/game/content/ordinaryAdultStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 148,
+      "id": "adult-silent-notification",
+      "title": "The message before the message",
+      "min": 18,
+      "max": 65,
+      "sourceFile": "src/game/content/ordinaryAdultStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 149,
+      "id": "adult-neighbourhood-song",
+      "title": "A chorus everyone almost knows",
+      "min": 18,
+      "max": 65,
+      "sourceFile": "src/game/content/ordinaryAdultStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 150,
+      "id": "family-baby-serious-face",
+      "title": "A very serious conversation",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/parentingStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "child": "baby"
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Actual children"
+    },
+    {
+      "index": 151,
+      "id": "family-baby-ordinary-song",
+      "title": "The song with no proper words",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/parentingStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "child": "baby"
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Actual children"
+    },
+    {
+      "index": 152,
+      "id": "family-baby-outfit-debate",
+      "title": "Dressed for a different event",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/parentingStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "child": "baby"
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Actual children"
+    },
+    {
+      "index": 153,
+      "id": "family-drawing-label",
+      "title": "A picture with a difficult label",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/parentingStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "child": "young"
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Actual children"
+    },
+    {
+      "index": 154,
+      "id": "family-helpful-spill",
+      "title": "A very helpful puddle",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/parentingStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "child": "young"
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Actual children"
+    },
+    {
+      "index": 155,
+      "id": "family-bedtime-detour",
+      "title": "The story has a side road",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/parentingStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "child": "young"
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Actual children"
+    },
+    {
+      "index": 156,
+      "id": "family-private-drawer",
+      "title": "The drawer marked private",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/parentingStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "child": "young"
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Actual children"
+    },
+    {
+      "index": 157,
+      "id": "family-game-rules-change",
+      "title": "The rules have just changed",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/parentingStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "child": "young"
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Actual children"
+    },
+    {
+      "index": 158,
+      "id": "family-impossible-question",
+      "title": "Why is the sky not green?",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/parentingStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "child": "young"
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Actual children"
+    },
+    {
+      "index": 159,
+      "id": "family-collection-tour",
+      "title": "Every stone has a title",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/parentingStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "child": "young"
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Actual children"
+    },
+    {
+      "index": 160,
+      "id": "family-teen-new-opinion",
+      "title": "A surprisingly complete opinion",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/parentingStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "child": "teen"
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Actual children"
+    },
+    {
+      "index": 161,
+      "id": "family-teen-closed-door",
+      "title": "A knock would have helped",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/parentingStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "child": "teen"
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Actual children"
+    },
+    {
+      "index": 162,
+      "id": "family-teen-music-volume",
+      "title": "You can hear the bass",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/parentingStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "child": "teen"
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Actual children"
+    },
+    {
+      "index": 163,
+      "id": "family-teen-future-pressure",
+      "title": "Everybody needs an answer",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/parentingStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "child": "teen"
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Actual children"
+    },
+    {
+      "index": 164,
+      "id": "family-teen-reliable-apology",
+      "title": "You were wrong this time",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/parentingStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "child": "teen"
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Actual children"
+    },
+    {
+      "index": 165,
+      "id": "family-adult-advice-permission",
+      "title": "Advice is available on request",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/parentingStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "child": "adult"
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Actual children"
+    },
+    {
+      "index": 166,
+      "id": "family-adult-inherited-phrase",
+      "title": "That sounded exactly like you",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/parentingStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "child": "adult"
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Actual children"
+    },
+    {
+      "index": 167,
+      "id": "family-adult-family-story",
+      "title": "They remember a different version",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/parentingStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "child": "adult"
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Actual children"
+    },
+    {
+      "index": 168,
+      "id": "family-adult-new-tradition",
+      "title": "A tradition with a new clause",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/parentingStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "child": "adult"
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Actual children"
+    },
+    {
+      "index": 169,
+      "id": "family-adult-parent-question",
+      "title": "A question about your own life",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/parentingStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "child": "adult"
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Actual children"
+    },
+    {
+      "index": 170,
+      "id": "home-key-bowl",
+      "title": "The key bowl is empty",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/homeLifeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "home": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 171,
+      "id": "home-squeak-investigation",
+      "title": "The house has one note",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/homeLifeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "home": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 172,
+      "id": "home-box-worth-keeping",
+      "title": "A box of exceptional quality",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/homeLifeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "home": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 173,
+      "id": "home-window-cleaning-discovery",
+      "title": "The view has a smudge",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/homeLifeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "home": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 174,
+      "id": "home-found-old-list",
+      "title": "Urgent, according to an old list",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/homeLifeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "home": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 175,
+      "id": "home-unexpected-echo",
+      "title": "Testing the room’s acoustics",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/homeLifeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "home": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 176,
+      "id": "wellbeing-search-results",
+      "title": "Every result uses a louder font",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/wellbeingStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "chronicCondition": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 177,
+      "id": "wellbeing-miracle-recommendation",
+      "title": "Someone knows a miracle",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/wellbeingStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "chronicCondition": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 178,
+      "id": "wellbeing-variable-day",
+      "title": "The plan met a different day",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/wellbeingStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "chronicCondition": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 179,
+      "id": "wellbeing-private-information",
+      "title": "How much do you want to explain?",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/wellbeingStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "chronicCondition": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 180,
+      "id": "wellbeing-other-peoples-progress",
+      "title": "Their timeline is not yours",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/wellbeingStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "chronicCondition": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 181,
+      "id": "wellbeing-one-more-episode",
+      "title": "The next episode has already started",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/wellbeingStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 182,
+      "id": "wellbeing-stretch-after-sitting",
+      "title": "Your shoulders have a complaint",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/wellbeingStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 183,
+      "id": "wellbeing-ordinary-water",
+      "title": "An unnecessarily complicated refreshment",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/wellbeingStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 184,
+      "id": "wellbeing-rehearsed-argument",
+      "title": "An argument without the other person",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/wellbeingStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 185,
+      "id": "wellbeing-quiet-not-silent",
+      "title": "The quiet place has noises",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/wellbeingStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 186,
+      "id": "wellbeing-meal-comparison",
+      "title": "A picture is not a meal plan",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/wellbeingStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 187,
+      "id": "wellbeing-waiting-without-feed",
+      "title": "A minute without filling it",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/wellbeingStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 188,
+      "id": "wellbeing-good-day-pressure",
+      "title": "You must make the most of it",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/wellbeingStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 189,
+      "id": "wellbeing-habit-one-miss",
+      "title": "One missed intention",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/wellbeingStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 190,
+      "id": "wellbeing-unhurried-breath",
+      "title": "Before answering immediately",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/wellbeingStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 191,
+      "id": "career-actor-written-pause",
+      "title": "A pause with stage directions",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/specialCareerStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "specialCareer": "actor"
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Special careers"
+    },
+    {
+      "index": 192,
+      "id": "career-model-expression-board",
+      "title": "Relaxed, but very specifically",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/specialCareerStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "specialCareer": "model"
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Special careers"
+    },
+    {
+      "index": 193,
+      "id": "career-athlete-ritual-discussion",
+      "title": "The lucky sock theory",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/specialCareerStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "specialCareer": "athlete"
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Special careers"
+    },
+    {
+      "index": 194,
+      "id": "career-musician-setlist-handwriting",
+      "title": "The set list has become art",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/specialCareerStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "specialCareer": "musician"
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Special careers"
+    },
+    {
+      "index": 195,
+      "id": "career-politician-sentence-length",
+      "title": "A sentence with several exits",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/specialCareerStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "specialCareer": "politician"
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Special careers"
+    },
+    {
+      "index": 196,
+      "id": "career-creator-fourth-introduction",
+      "title": "Welcome back, again",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/specialCareerStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "specialCareer": "creator"
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Special careers"
+    },
+    {
+      "index": 197,
+      "id": "career-military-checklist-language",
+      "title": "The checklist assumes you know",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/specialCareerStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "specialCareer": "military"
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Special careers"
+    },
+    {
+      "index": 198,
+      "id": "career-astronaut-plain-explanation",
+      "title": "No acronyms this time",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/specialCareerStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "specialCareer": "astronaut"
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Special careers"
+    },
+    {
+      "index": 199,
+      "id": "career-royalty-ribbon-end",
+      "title": "The ribbon has two beginnings",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/specialCareerStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "specialCareer": "royalty"
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Special careers"
+    },
+    {
+      "index": 200,
+      "id": "pet-dog-important-smell",
+      "title": "An extremely important smell",
+      "min": 6,
+      "max": 120,
+      "sourceFile": "src/game/content/petLifeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "pet": "dog"
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Household pets"
+    },
+    {
+      "index": 201,
+      "id": "pet-dog-invisible-throw",
+      "title": "The ball has not left",
+      "min": 6,
+      "max": 120,
+      "sourceFile": "src/game/content/petLifeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "pet": "dog"
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Household pets"
+    },
+    {
+      "index": 202,
+      "id": "pet-dog-doorway-greeting",
+      "title": "A greeting with full commitment",
+      "min": 6,
+      "max": 120,
+      "sourceFile": "src/game/content/petLifeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "pet": "dog"
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Household pets"
+    },
+    {
+      "index": 203,
+      "id": "pet-cat-chosen-paper",
+      "title": "The paper is now occupied",
+      "min": 6,
+      "max": 120,
+      "sourceFile": "src/game/content/petLifeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "pet": "cat"
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Household pets"
+    },
+    {
+      "index": 204,
+      "id": "pet-cat-unexpected-box",
+      "title": "The packaging is the attraction",
+      "min": 6,
+      "max": 120,
+      "sourceFile": "src/game/content/petLifeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "pet": "cat"
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Household pets"
+    },
+    {
+      "index": 205,
+      "id": "pet-cat-slow-blink",
+      "title": "A very small conversation",
+      "min": 6,
+      "max": 120,
+      "sourceFile": "src/game/content/petLifeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "pet": "cat"
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Household pets"
+    },
+    {
+      "index": 206,
+      "id": "pet-rabbit-floor-level",
+      "title": "A different height of conversation",
+      "min": 6,
+      "max": 120,
+      "sourceFile": "src/game/content/petLifeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "pet": "rabbit"
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Household pets"
+    },
+    {
+      "index": 207,
+      "id": "pet-parrot-perfect-timing",
+      "title": "The comment arrives on cue",
+      "min": 6,
+      "max": 120,
+      "sourceFile": "src/game/content/petLifeStories.ts",
+      "choices": 3,
+      "rarity": "uncommon",
+      "context": {
+        "local": true,
+        "pet": "parrot"
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Household pets"
+    },
+    {
+      "index": 208,
+      "id": "pet-familiar-presence",
+      "title": "Someone else is in the room",
+      "min": 6,
+      "max": 120,
+      "sourceFile": "src/game/content/petLifeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "pet": "any"
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Household pets"
+    },
+    {
+      "index": 209,
+      "id": "pet-care-name-voice",
+      "title": "The important sound is your voice",
+      "min": 6,
+      "max": 120,
+      "sourceFile": "src/game/content/petLifeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "pet": "any"
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Household pets"
+    },
+    {
+      "index": 210,
+      "id": "hobby-guitar-familiar-chord",
+      "title": "The chord knows another song",
+      "min": 6,
+      "max": 120,
+      "sourceFile": "src/game/content/hobbyLifeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "hobby": "guitar"
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Attended hobbies"
+    },
+    {
+      "index": 211,
+      "id": "hobby-painting-rotation",
+      "title": "The picture works sideways",
+      "min": 6,
+      "max": 120,
+      "sourceFile": "src/game/content/hobbyLifeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "hobby": "painting"
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Attended hobbies"
+    },
+    {
+      "index": 212,
+      "id": "hobby-photo-background",
+      "title": "The background has a leading role",
+      "min": 6,
+      "max": 120,
+      "sourceFile": "src/game/content/hobbyLifeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "hobby": "photography"
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Attended hobbies"
+    },
+    {
+      "index": 213,
+      "id": "hobby-chess-perfect-plan",
+      "title": "The opponent gets a turn",
+      "min": 6,
+      "max": 120,
+      "sourceFile": "src/game/content/hobbyLifeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "hobby": "chess"
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Attended hobbies"
+    },
+    {
+      "index": 214,
+      "id": "hobby-reading-ending-opinion",
+      "title": "The ending wants a discussion",
+      "min": 6,
+      "max": 120,
+      "sourceFile": "src/game/content/hobbyLifeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "hobby": "reading"
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Attended hobbies"
+    },
+    {
+      "index": 215,
+      "id": "hobby-gaming-helpful-tip",
+      "title": "The tip arrives after the mistake",
+      "min": 6,
+      "max": 120,
+      "sourceFile": "src/game/content/hobbyLifeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "hobby": "gaming"
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Attended hobbies"
+    },
+    {
+      "index": 216,
+      "id": "hobby-cooking-last-instruction",
+      "title": "Allow to cool before touching",
+      "min": 6,
+      "max": 120,
+      "sourceFile": "src/game/content/hobbyLifeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "hobby": "cooking"
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Attended hobbies"
+    },
+    {
+      "index": 217,
+      "id": "hobby-gardening-labels",
+      "title": "One label is doing all the work",
+      "min": 6,
+      "max": 120,
+      "sourceFile": "src/game/content/hobbyLifeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "hobby": "gardening"
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Attended hobbies"
+    },
+    {
+      "index": 218,
+      "id": "hobby-small-improvement",
+      "title": "The change is almost invisible",
+      "min": 6,
+      "max": 120,
+      "sourceFile": "src/game/content/hobbyLifeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "hobby": "any"
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Attended hobbies"
+    },
+    {
+      "index": 219,
+      "id": "hobby-explain-without-selling",
+      "title": "They only asked what you enjoy",
+      "min": 6,
+      "max": 120,
+      "sourceFile": "src/game/content/hobbyLifeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "hobby": "any"
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Attended hobbies"
+    },
+    {
+      "index": 220,
+      "id": "travel-memory-old-ticket",
+      "title": "A date on a folded ticket",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/travelMemoryStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "visited": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Completed trips"
+    },
+    {
+      "index": 221,
+      "id": "travel-memory-forgotten-phrase",
+      "title": "The phrase with a missing meaning",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/travelMemoryStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "visited": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Completed trips"
+    },
+    {
+      "index": 222,
+      "id": "travel-memory-folded-map",
+      "title": "The map no longer folds that way",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/travelMemoryStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "visited": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Completed trips"
+    },
+    {
+      "index": 223,
+      "id": "travel-memory-food-photos",
+      "title": "A remarkably well-documented lunch",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/travelMemoryStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "visited": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Completed trips"
+    },
+    {
+      "index": 224,
+      "id": "travel-memory-one-good-habit",
+      "title": "Something you did differently there",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/travelMemoryStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "visited": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Completed trips"
+    },
+    {
+      "index": 225,
+      "id": "travel-memory-worth-the-visit",
+      "title": "“Was it worth going?”",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/travelMemoryStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "friend": true,
+        "local": true,
+        "visited": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Completed trips"
+    },
+    {
+      "index": 226,
+      "id": "travel-memory-unsent-card",
+      "title": "The postcard stayed with you",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/travelMemoryStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "visited": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Completed trips"
+    },
+    {
+      "index": 227,
+      "id": "travel-memory-directions",
+      "title": "You remember the long way",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/travelMemoryStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "visited": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Completed trips"
+    },
+    {
+      "index": 228,
+      "id": "travel-memory-imperfect-weather",
+      "title": "The weather declined the brochure",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/travelMemoryStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "visited": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Completed trips"
+    },
+    {
+      "index": 229,
+      "id": "travel-memory-short-version",
+      "title": "The short version of the trip",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/travelMemoryStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "friend": true,
+        "local": true,
+        "visited": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Completed trips"
+    },
+    {
+      "index": 230,
+      "id": "later-retirement-assumption",
+      "title": "Apparently your days are free",
+      "min": 55,
+      "max": 120,
+      "sourceFile": "src/game/content/laterLifeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 231,
+      "id": "later-old-handwriting",
+      "title": "You recognise the handwriting",
+      "min": 55,
+      "max": 120,
+      "sourceFile": "src/game/content/laterLifeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 232,
+      "id": "later-forgotten-telephone-number",
+      "title": "A number with nowhere to go",
+      "min": 55,
+      "max": 120,
+      "sourceFile": "src/game/content/laterLifeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 233,
+      "id": "later-unfamiliar-word",
+      "title": "A word has changed jobs",
+      "min": 55,
+      "max": 120,
+      "sourceFile": "src/game/content/laterLifeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 234,
+      "id": "later-old-competition",
+      "title": "You can still explain the rules",
+      "min": 55,
+      "max": 120,
+      "sourceFile": "src/game/content/laterLifeStories.ts",
+      "choices": 3,
+      "rarity": "uncommon",
+      "context": {
+        "local": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 235,
+      "id": "later-photo-at-edge",
+      "title": "You are almost in the picture",
+      "min": 55,
+      "max": 120,
+      "sourceFile": "src/game/content/laterLifeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 236,
+      "id": "later-offered-a-hand",
+      "title": "Help has been offered",
+      "min": 55,
+      "max": 120,
+      "sourceFile": "src/game/content/laterLifeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 237,
+      "id": "later-changed-favourite",
+      "title": "You are allowed another favourite",
+      "min": 55,
+      "max": 120,
+      "sourceFile": "src/game/content/laterLifeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 238,
+      "id": "later-recording-labelled-retro",
+      "title": "The programme is now retro",
+      "min": 55,
+      "max": 120,
+      "sourceFile": "src/game/content/laterLifeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 239,
+      "id": "later-another-year-question",
+      "title": "Another year, by the calendar",
+      "min": 55,
+      "max": 120,
+      "sourceFile": "src/game/content/laterLifeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 240,
+      "id": "work-salary-privacy",
+      "title": "“What do they pay you?”",
+      "min": 16,
+      "max": 85,
+      "sourceFile": "src/game/content/workingLifeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "workplace": true,
+        "coworker": true,
+        "local": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Ordinary workplace"
+    },
+    {
+      "index": 241,
+      "id": "work-shared-note-riddle",
+      "title": "Done, according to the note",
+      "min": 16,
+      "max": 85,
+      "sourceFile": "src/game/content/workingLifeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "workplace": true,
+        "coworker": true,
+        "local": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Ordinary workplace"
+    },
+    {
+      "index": 242,
+      "id": "work-final-file",
+      "title": "FINAL, followed by several qualifications",
+      "min": 16,
+      "max": 85,
+      "sourceFile": "src/game/content/workingLifeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "workplace": true,
+        "supervisor": true,
+        "local": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Ordinary workplace"
+    },
+    {
+      "index": 243,
+      "id": "work-forgotten-lunch",
+      "title": "Lunch is in another location",
+      "min": 16,
+      "max": 85,
+      "sourceFile": "src/game/content/workingLifeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "workplace": true,
+        "coworker": true,
+        "local": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Ordinary workplace"
+    },
+    {
+      "index": 244,
+      "id": "work-room-temperature",
+      "title": "Two people, two climates",
+      "min": 16,
+      "max": 85,
+      "sourceFile": "src/game/content/workingLifeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "workplace": true,
+        "coworker": true,
+        "local": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Ordinary workplace"
+    },
+    {
+      "index": 245,
+      "id": "work-training-slogan",
+      "title": "The slide says to be excellent",
+      "min": 16,
+      "max": 85,
+      "sourceFile": "src/game/content/workingLifeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "workplace": true,
+        "coworker": true,
+        "local": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Ordinary workplace"
+    },
+    {
+      "index": 246,
+      "id": "work-honest-view-invited",
+      "title": "The honest answer is invited",
+      "min": 16,
+      "max": 85,
+      "sourceFile": "src/game/content/workingLifeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "workplace": true,
+        "supervisor": true,
+        "local": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Ordinary workplace"
+    },
+    {
+      "index": 247,
+      "id": "work-invitation-outside",
+      "title": "An invitation past the workday",
+      "min": 16,
+      "max": 85,
+      "sourceFile": "src/game/content/workingLifeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "workplace": true,
+        "coworker": true,
+        "local": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Ordinary workplace"
+    },
+    {
+      "index": 248,
+      "id": "work-misnamed-complaint",
+      "title": "That is not quite their name",
+      "min": 16,
+      "max": 85,
+      "sourceFile": "src/game/content/workingLifeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "workplace": true,
+        "coworker": true,
+        "local": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Ordinary workplace"
+    },
+    {
+      "index": 249,
+      "id": "work-trivia-phone",
+      "title": "No looking it up, apparently",
+      "min": 16,
+      "max": 85,
+      "sourceFile": "src/game/content/workingLifeStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "workplace": true,
+        "coworker": true,
+        "local": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Ordinary workplace"
+    },
+    {
+      "index": 250,
+      "id": "adult-accidental-living-exhibit",
+      "title": "The exhibit is waiting for directions",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/rareAdultStories.ts",
+      "choices": 3,
+      "rarity": "extremely-rare",
+      "context": {
+        "local": true
+      },
+      "followUps": [],
+      "primarySourceGrouping": "General adult/later life/home/wellbeing"
+    },
+    {
+      "index": 251,
+      "id": "career-actor-rehearsal-door",
+      "title": "The door gets a laugh",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/specialCareerDepthStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "specialCareer": "actor"
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Special careers"
+    },
+    {
+      "index": 252,
+      "id": "career-model-backdrop-fan",
+      "title": "The backdrop takes the lead",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/specialCareerDepthStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "specialCareer": "model"
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Special careers"
+    },
+    {
+      "index": 253,
+      "id": "career-athlete-timer-reminder",
+      "title": "Remember to defrost something",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/specialCareerDepthStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "specialCareer": "athlete"
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Special careers"
+    },
+    {
+      "index": 254,
+      "id": "career-musician-count-in",
+      "title": "Five, six, seven, eight",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/specialCareerDepthStories.ts",
+      "choices": 3,
+      "rarity": "uncommon",
+      "context": {
+        "local": true,
+        "specialCareer": "musician"
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Special careers"
+    },
+    {
+      "index": 255,
+      "id": "career-politician-moving-lectern",
+      "title": "A moving statement",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/specialCareerDepthStories.ts",
+      "choices": 3,
+      "rarity": "uncommon",
+      "context": {
+        "local": true,
+        "specialCareer": "politician"
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Special careers"
+    },
+    {
+      "index": 256,
+      "id": "career-military-boot-reflection",
+      "title": "Inspection from another angle",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/specialCareerDepthStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "specialCareer": "military"
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Special careers"
+    },
+    {
+      "index": 257,
+      "id": "career-astronaut-loose-snack",
+      "title": "An unsecured payload",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/specialCareerDepthStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "specialCareer": "astronaut"
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Special careers"
+    },
+    {
+      "index": 258,
+      "id": "career-royalty-temporary-badge",
+      "title": "Temporary royal guest",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/specialCareerDepthStories.ts",
+      "choices": 3,
+      "rarity": "uncommon",
+      "context": {
+        "local": true,
+        "specialCareer": "royalty"
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Special careers"
+    },
+    {
+      "index": 259,
+      "id": "career-youtuber-thumbnail-face",
+      "title": "Surprised by what, exactly?",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/specialCareerDepthStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "specialCareer": "youtuber"
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Special careers"
+    },
+    {
+      "index": 260,
+      "id": "career-youtuber-drill-interview",
+      "title": "The wall has an answer",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/specialCareerDepthStories.ts",
+      "choices": 3,
+      "rarity": "uncommon",
+      "context": {
+        "local": true,
+        "specialCareer": "youtuber"
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Special careers"
+    },
+    {
+      "index": 261,
+      "id": "career-streamer-chair-soundcheck",
+      "title": "The chair has the floor",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/specialCareerDepthStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "specialCareer": "streamer"
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Special careers"
+    },
+    {
+      "index": 262,
+      "id": "career-streamer-greeting-loop",
+      "title": "Please let the host finish",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/specialCareerDepthStories.ts",
+      "choices": 3,
+      "rarity": "uncommon",
+      "context": {
+        "local": true,
+        "specialCareer": "streamer"
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Special careers"
+    },
+    {
+      "index": 263,
+      "id": "career-business-automatic-application",
+      "title": "Thank you for applying",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/specialCareerDepthStories.ts",
+      "choices": 3,
+      "rarity": "common",
+      "context": {
+        "local": true,
+        "specialCareer": "business"
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Special careers"
+    },
+    {
+      "index": 264,
+      "id": "career-business-breakfast-cards",
+      "title": "Butter-side introduction",
+      "min": 18,
+      "max": 120,
+      "sourceFile": "src/game/content/specialCareerDepthStories.ts",
+      "choices": 3,
+      "rarity": "uncommon",
+      "context": {
+        "local": true,
+        "specialCareer": "business"
+      },
+      "followUps": [],
+      "primarySourceGrouping": "Special careers"
+    }
+  ]
+}

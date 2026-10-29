@@ -1,0 +1,30 @@
+{
+  "renderer": "Chromium browser comparison; not native app screenshots",
+  "browser": "154.0.8037.57",
+  "captures": [
+    "01-four-prototypes.png",
+    "02-reference-current-new.png",
+    "03-sizes-light-dark.png",
+    "04-transparency.png",
+    "05-existing-16-grid.png",
+    "06-existing-age-baseline.png"
+  ],
+  "cssSizes": [
+    52,
+    88,
+    140
+  ],
+  "deviceScaleFactor": 1,
+  "desktopViewport": [
+    1200,
+    1000
+  ],
+  "mobileViewport": [
+    390,
+    844
+  ],
+  "desktopOverflow": false,
+  "mobileOverflow": false,
+  "errors": [],
+  "externalRequests": []
+}

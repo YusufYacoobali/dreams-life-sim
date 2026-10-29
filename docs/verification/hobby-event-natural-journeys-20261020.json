@@ -1,0 +1,1890 @@
+{
+  "scope": "Separate twelve-country optional-event policy, seeds900..911: natural birth-to-death pure-engine journeys, first available story/interview choices, healthy routine, real work/retirement, one dog, two paid hobby routines rotating all eight kinds, at most three actual yearly entry requests per kind using familiar/stretch/relaxed in order, exact cold event results and annual venue cycle. No funds/stats/date/RNG overrides; not native, all-choice, extra annual-policy seeds, physical timing, 120-year or multigeneration acceptance",
+  "sourceHash": "470d74e0e2cc13003bf1ac48cef71daf48700b6b36286a19f4147e295260c7af",
+  "ordinaryHobbies": true,
+  "stateMode": "validated immutable",
+  "versions": {
+    "world": 31,
+    "engine": 32,
+    "content": 8
+  },
+  "node": "v24.19.0",
+  "elapsedMs": 176729,
+  "records": [
+    {
+      "seed": 900,
+      "country": "US",
+      "hobbyEvents": [
+        {
+          "kind": "guitar",
+          "approach": "familiar",
+          "age": 7,
+          "year": 2007,
+          "payerId": "person_parent1",
+          "permission": true,
+          "proficiency": 24,
+          "chance": 67,
+          "roll": 70,
+          "recognized": false,
+          "paid": "2000",
+          "currency": "USD",
+          "paymentId": "txn_29_1100"
+        },
+        {
+          "kind": "painting",
+          "approach": "familiar",
+          "age": 7,
+          "year": 2007,
+          "payerId": "person_parent1",
+          "permission": true,
+          "proficiency": 24,
+          "chance": 67,
+          "roll": 34,
+          "recognized": true,
+          "paid": "2400",
+          "currency": "USD",
+          "paymentId": "txn_31_1101"
+        },
+        {
+          "kind": "guitar",
+          "approach": "stretch",
+          "age": 8,
+          "year": 2008,
+          "payerId": "person_parent1",
+          "permission": false,
+          "proficiency": 48,
+          "chance": 59,
+          "roll": null,
+          "recognized": false,
+          "paid": "0",
+          "currency": "USD",
+          "paymentId": null
+        },
+        {
+          "kind": "painting",
+          "approach": "stretch",
+          "age": 8,
+          "year": 2008,
+          "payerId": "person_parent1",
+          "permission": true,
+          "proficiency": 48,
+          "chance": 59,
+          "roll": 92,
+          "recognized": false,
+          "paid": "2400",
+          "currency": "USD",
+          "paymentId": "txn_44_1499"
+        },
+        {
+          "kind": "guitar",
+          "approach": "relaxed",
+          "age": 9,
+          "year": 2009,
+          "payerId": "person_parent1",
+          "permission": false,
+          "proficiency": 72,
+          "chance": 80,
+          "roll": null,
+          "recognized": false,
+          "paid": "0",
+          "currency": "USD",
+          "paymentId": null
+        },
+        {
+          "kind": "painting",
+          "approach": "relaxed",
+          "age": 9,
+          "year": 2009,
+          "payerId": "person_parent1",
+          "permission": false,
+          "proficiency": 72,
+          "chance": 80,
+          "roll": null,
+          "recognized": false,
+          "paid": "0",
+          "currency": "USD",
+          "paymentId": null
+        }
+      ],
+      "ageAtDeath": 70,
+      "commands": 375,
+      "workMonths": 588,
+      "hobbies": [
+        {
+          "kind": "guitar",
+          "proficiency": 100,
+          "plans": [
+            {
+              "status": "adult-review",
+              "mode": "community",
+              "payerId": "person_parent1"
+            },
+            {
+              "status": "died",
+              "mode": "community",
+              "payerId": "person_player"
+            }
+          ],
+          "attendedMonths": 763,
+          "pausedMonths": 0,
+          "smartsGains": 0,
+          "musicGains": 98
+        },
+        {
+          "kind": "painting",
+          "proficiency": 100,
+          "plans": [
+            {
+              "status": "adult-review",
+              "mode": "community",
+              "payerId": "person_parent1"
+            },
+            {
+              "status": "died",
+              "mode": "community",
+              "payerId": "person_player"
+            }
+          ],
+          "attendedMonths": 763,
+          "pausedMonths": 0,
+          "smartsGains": 0,
+          "musicGains": 0
+        }
+      ],
+      "acceptedOutings": 63,
+      "refusedOutings": 1,
+      "pets": [
+        {
+          "status": "deceased",
+          "ending": "age",
+          "periods": 134,
+          "visits": 4
+        }
+      ],
+      "ledgerRows": 42729,
+      "coldRoundTripExact": true,
+      "worldSha256": "a8907490e84239c0cd558ce75e1808a02bcc5f2cf1e30465b8952007b179ae73",
+      "elapsedMs": 23170
+    },
+    {
+      "seed": 901,
+      "country": "CA",
+      "hobbyEvents": [
+        {
+          "kind": "guitar",
+          "approach": "familiar",
+          "age": 7,
+          "year": 2007,
+          "payerId": "person_parent1",
+          "permission": true,
+          "proficiency": 24,
+          "chance": 71,
+          "roll": 55,
+          "recognized": true,
+          "paid": "2400",
+          "currency": "CAD",
+          "paymentId": "txn_31_562"
+        },
+        {
+          "kind": "guitar",
+          "approach": "stretch",
+          "age": 8,
+          "year": 2008,
+          "payerId": "person_parent1",
+          "permission": true,
+          "proficiency": 48,
+          "chance": 63,
+          "roll": 59,
+          "recognized": true,
+          "paid": "2400",
+          "currency": "CAD",
+          "paymentId": "txn_44_829"
+        },
+        {
+          "kind": "guitar",
+          "approach": "relaxed",
+          "age": 9,
+          "year": 2009,
+          "payerId": "person_parent1",
+          "permission": true,
+          "proficiency": 72,
+          "chance": 83,
+          "roll": 99,
+          "recognized": false,
+          "paid": "2400",
+          "currency": "CAD",
+          "paymentId": "txn_51_1107"
+        },
+        {
+          "kind": "photography",
+          "approach": "familiar",
+          "age": 9,
+          "year": 2009,
+          "payerId": "person_parent1",
+          "permission": true,
+          "proficiency": 24,
+          "chance": 71,
+          "roll": 22,
+          "recognized": true,
+          "paid": "2400",
+          "currency": "CAD",
+          "paymentId": "txn_53_1108"
+        },
+        {
+          "kind": "photography",
+          "approach": "stretch",
+          "age": 10,
+          "year": 2010,
+          "payerId": "person_parent1",
+          "permission": true,
+          "proficiency": 48,
+          "chance": 63,
+          "roll": 69,
+          "recognized": false,
+          "paid": "2400",
+          "currency": "CAD",
+          "paymentId": "txn_60_1386"
+        },
+        {
+          "kind": "photography",
+          "approach": "relaxed",
+          "age": 11,
+          "year": 2011,
+          "payerId": "person_parent1",
+          "permission": true,
+          "proficiency": 72,
+          "chance": 83,
+          "roll": 68,
+          "recognized": true,
+          "paid": "2400",
+          "currency": "CAD",
+          "paymentId": "txn_67_1664"
+        }
+      ],
+      "ageAtDeath": 99,
+      "commands": 499,
+      "workMonths": 564,
+      "hobbies": [
+        {
+          "kind": "guitar",
+          "proficiency": 100,
+          "plans": [
+            {
+              "status": "adult-review",
+              "mode": "community",
+              "payerId": "person_parent1"
+            },
+            {
+              "status": "died",
+              "mode": "community",
+              "payerId": "person_player"
+            }
+          ],
+          "attendedMonths": 1068,
+          "pausedMonths": 35,
+          "smartsGains": 0,
+          "musicGains": 100
+        },
+        {
+          "kind": "photography",
+          "proficiency": 100,
+          "plans": [
+            {
+              "status": "adult-review",
+              "mode": "community",
+              "payerId": "person_parent1"
+            },
+            {
+              "status": "died",
+              "mode": "community",
+              "payerId": "person_player"
+            }
+          ],
+          "attendedMonths": 1044,
+          "pausedMonths": 35,
+          "smartsGains": 0,
+          "musicGains": 0
+        }
+      ],
+      "acceptedOutings": 90,
+      "refusedOutings": 0,
+      "pets": [
+        {
+          "status": "deceased",
+          "ending": "age",
+          "periods": 157,
+          "visits": 4
+        }
+      ],
+      "ledgerRows": 21910,
+      "coldRoundTripExact": true,
+      "worldSha256": "82f86bda678240a18566865cb26dd8382bb12eb73533ac9ec8cd57a126a9788a",
+      "elapsedMs": 18177
+    },
+    {
+      "seed": 902,
+      "country": "GB",
+      "hobbyEvents": [
+        {
+          "kind": "guitar",
+          "approach": "familiar",
+          "age": 7,
+          "year": 2007,
+          "payerId": "person_parent1",
+          "permission": true,
+          "proficiency": 24,
+          "chance": 68,
+          "roll": 98,
+          "recognized": false,
+          "paid": "1450",
+          "currency": "GBP",
+          "paymentId": "txn_33_1105"
+        },
+        {
+          "kind": "chess",
+          "approach": "familiar",
+          "age": 7,
+          "year": 2007,
+          "payerId": "person_parent1",
+          "permission": true,
+          "proficiency": 24,
+          "chance": 68,
+          "roll": 98,
+          "recognized": false,
+          "paid": "580",
+          "currency": "GBP",
+          "paymentId": "txn_35_1106"
+        },
+        {
+          "kind": "guitar",
+          "approach": "stretch",
+          "age": 8,
+          "year": 2008,
+          "payerId": "person_parent1",
+          "permission": false,
+          "proficiency": 48,
+          "chance": 60,
+          "roll": null,
+          "recognized": false,
+          "paid": "0",
+          "currency": "GBP",
+          "paymentId": null
+        },
+        {
+          "kind": "chess",
+          "approach": "stretch",
+          "age": 8,
+          "year": 2008,
+          "payerId": "person_parent1",
+          "permission": false,
+          "proficiency": 48,
+          "chance": 60,
+          "roll": null,
+          "recognized": false,
+          "paid": "0",
+          "currency": "GBP",
+          "paymentId": null
+        },
+        {
+          "kind": "guitar",
+          "approach": "relaxed",
+          "age": 9,
+          "year": 2009,
+          "payerId": "person_parent1",
+          "permission": true,
+          "proficiency": 72,
+          "chance": 80,
+          "roll": 11,
+          "recognized": true,
+          "paid": "1450",
+          "currency": "GBP",
+          "paymentId": "txn_55_1759"
+        },
+        {
+          "kind": "chess",
+          "approach": "relaxed",
+          "age": 9,
+          "year": 2009,
+          "payerId": "person_parent1",
+          "permission": true,
+          "proficiency": 72,
+          "chance": 80,
+          "roll": 54,
+          "recognized": true,
+          "paid": "580",
+          "currency": "GBP",
+          "paymentId": "txn_57_1760"
+        }
+      ],
+      "ageAtDeath": 65,
+      "commands": 364,
+      "workMonths": 575,
+      "hobbies": [
+        {
+          "kind": "guitar",
+          "proficiency": 100,
+          "plans": [
+            {
+              "status": "payer-lost",
+              "mode": "community",
+              "payerId": "person_parent1"
+            },
+            {
+              "status": "adult-review",
+              "mode": "community",
+              "payerId": "person_parent2"
+            },
+            {
+              "status": "died",
+              "mode": "community",
+              "payerId": "person_player"
+            }
+          ],
+          "attendedMonths": 711,
+          "pausedMonths": 1,
+          "smartsGains": 0,
+          "musicGains": 98
+        },
+        {
+          "kind": "chess",
+          "proficiency": 100,
+          "plans": [
+            {
+              "status": "payer-lost",
+              "mode": "community",
+              "payerId": "person_parent1"
+            },
+            {
+              "status": "adult-review",
+              "mode": "community",
+              "payerId": "person_parent2"
+            },
+            {
+              "status": "died",
+              "mode": "community",
+              "payerId": "person_player"
+            }
+          ],
+          "attendedMonths": 711,
+          "pausedMonths": 1,
+          "smartsGains": 6,
+          "musicGains": 0
+        }
+      ],
+      "acceptedOutings": 57,
+      "refusedOutings": 2,
+      "pets": [
+        {
+          "status": "deceased",
+          "ending": "age",
+          "periods": 127,
+          "visits": 4
+        }
+      ],
+      "ledgerRows": 22538,
+      "coldRoundTripExact": true,
+      "worldSha256": "a78a85327f74845606cb5e1b282f21686e73dae49d789e8f2636a9789382483e",
+      "elapsedMs": 10641
+    },
+    {
+      "seed": 903,
+      "country": "AU",
+      "hobbyEvents": [
+        {
+          "kind": "guitar",
+          "approach": "familiar",
+          "age": 7,
+          "year": 2007,
+          "payerId": "person_parent1",
+          "permission": false,
+          "proficiency": 24,
+          "chance": 67,
+          "roll": null,
+          "recognized": false,
+          "paid": "0",
+          "currency": "AUD",
+          "paymentId": null
+        },
+        {
+          "kind": "reading",
+          "approach": "familiar",
+          "age": 7,
+          "year": 2007,
+          "payerId": "person_parent1",
+          "permission": true,
+          "proficiency": 24,
+          "chance": 67,
+          "roll": 70,
+          "recognized": false,
+          "paid": "580",
+          "currency": "AUD",
+          "paymentId": "txn_32_1114"
+        },
+        {
+          "kind": "guitar",
+          "approach": "stretch",
+          "age": 8,
+          "year": 2008,
+          "payerId": "person_parent1",
+          "permission": true,
+          "proficiency": 48,
+          "chance": 59,
+          "roll": 27,
+          "recognized": true,
+          "paid": "2900",
+          "currency": "AUD",
+          "paymentId": "txn_39_1449"
+        },
+        {
+          "kind": "reading",
+          "approach": "stretch",
+          "age": 8,
+          "year": 2008,
+          "payerId": "person_parent1",
+          "permission": true,
+          "proficiency": 48,
+          "chance": 59,
+          "roll": 86,
+          "recognized": false,
+          "paid": "580",
+          "currency": "AUD",
+          "paymentId": "txn_41_1450"
+        },
+        {
+          "kind": "guitar",
+          "approach": "relaxed",
+          "age": 9,
+          "year": 2009,
+          "payerId": "person_parent1",
+          "permission": true,
+          "proficiency": 72,
+          "chance": 79,
+          "roll": 11,
+          "recognized": true,
+          "paid": "2900",
+          "currency": "AUD",
+          "paymentId": "txn_48_1776"
+        },
+        {
+          "kind": "reading",
+          "approach": "relaxed",
+          "age": 9,
+          "year": 2009,
+          "payerId": "person_parent1",
+          "permission": true,
+          "proficiency": 72,
+          "chance": 79,
+          "roll": 60,
+          "recognized": true,
+          "paid": "580",
+          "currency": "AUD",
+          "paymentId": "txn_50_1777"
+        }
+      ],
+      "ageAtDeath": 97,
+      "commands": 495,
+      "workMonths": 588,
+      "hobbies": [
+        {
+          "kind": "guitar",
+          "proficiency": 100,
+          "plans": [
+            {
+              "status": "adult-review",
+              "mode": "community",
+              "payerId": "person_parent1"
+            },
+            {
+              "status": "died",
+              "mode": "community",
+              "payerId": "person_player"
+            }
+          ],
+          "attendedMonths": 1071,
+          "pausedMonths": 16,
+          "smartsGains": 0,
+          "musicGains": 98
+        },
+        {
+          "kind": "reading",
+          "proficiency": 100,
+          "plans": [
+            {
+              "status": "adult-review",
+              "mode": "community",
+              "payerId": "person_parent1"
+            },
+            {
+              "status": "died",
+              "mode": "community",
+              "payerId": "person_player"
+            }
+          ],
+          "attendedMonths": 1071,
+          "pausedMonths": 16,
+          "smartsGains": 21,
+          "musicGains": 0
+        }
+      ],
+      "acceptedOutings": 88,
+      "refusedOutings": 1,
+      "pets": [
+        {
+          "status": "deceased",
+          "ending": "age",
+          "periods": 132,
+          "visits": 2
+        }
+      ],
+      "ledgerRows": 58877,
+      "coldRoundTripExact": true,
+      "worldSha256": "042bb4b0d0ea13588173d116878a63a62282cb53c242ff46a28aa1cc575d9255",
+      "elapsedMs": 23593
+    },
+    {
+      "seed": 904,
+      "country": "FR",
+      "hobbyEvents": [
+        {
+          "kind": "guitar",
+          "approach": "familiar",
+          "age": 7,
+          "year": 2007,
+          "payerId": "person_parent1",
+          "permission": true,
+          "proficiency": 24,
+          "chance": 69,
+          "roll": 28,
+          "recognized": true,
+          "paid": "1500",
+          "currency": "EUR",
+          "paymentId": "txn_35_922"
+        },
+        {
+          "kind": "gaming",
+          "approach": "familiar",
+          "age": 7,
+          "year": 2007,
+          "payerId": "person_parent1",
+          "permission": true,
+          "proficiency": 24,
+          "chance": 69,
+          "roll": 7,
+          "recognized": true,
+          "paid": "1200",
+          "currency": "EUR",
+          "paymentId": "txn_37_923"
+        },
+        {
+          "kind": "guitar",
+          "approach": "stretch",
+          "age": 8,
+          "year": 2008,
+          "payerId": "person_parent1",
+          "permission": false,
+          "proficiency": 48,
+          "chance": 61,
+          "roll": null,
+          "recognized": false,
+          "paid": "0",
+          "currency": "EUR",
+          "paymentId": null
+        },
+        {
+          "kind": "gaming",
+          "approach": "stretch",
+          "age": 8,
+          "year": 2008,
+          "payerId": "person_parent1",
+          "permission": true,
+          "proficiency": 48,
+          "chance": 61,
+          "roll": 32,
+          "recognized": true,
+          "paid": "1200",
+          "currency": "EUR",
+          "paymentId": "txn_46_1249"
+        },
+        {
+          "kind": "guitar",
+          "approach": "relaxed",
+          "age": 9,
+          "year": 2009,
+          "payerId": "person_parent1",
+          "permission": true,
+          "proficiency": 72,
+          "chance": 81,
+          "roll": 43,
+          "recognized": true,
+          "paid": "1500",
+          "currency": "EUR",
+          "paymentId": "txn_52_1575"
+        },
+        {
+          "kind": "gaming",
+          "approach": "relaxed",
+          "age": 9,
+          "year": 2009,
+          "payerId": "person_parent1",
+          "permission": true,
+          "proficiency": 72,
+          "chance": 81,
+          "roll": 5,
+          "recognized": true,
+          "paid": "1200",
+          "currency": "EUR",
+          "paymentId": "txn_54_1576"
+        }
+      ],
+      "ageAtDeath": 49,
+      "commands": 269,
+      "workMonths": 379,
+      "hobbies": [
+        {
+          "kind": "guitar",
+          "proficiency": 100,
+          "plans": [
+            {
+              "status": "adult-review",
+              "mode": "community",
+              "payerId": "person_parent1"
+            },
+            {
+              "status": "died",
+              "mode": "community",
+              "payerId": "person_player"
+            }
+          ],
+          "attendedMonths": 509,
+          "pausedMonths": 1,
+          "smartsGains": 0,
+          "musicGains": 100
+        },
+        {
+          "kind": "gaming",
+          "proficiency": 100,
+          "plans": [
+            {
+              "status": "adult-review",
+              "mode": "community",
+              "payerId": "person_parent1"
+            },
+            {
+              "status": "died",
+              "mode": "community",
+              "payerId": "person_player"
+            }
+          ],
+          "attendedMonths": 509,
+          "pausedMonths": 1,
+          "smartsGains": 0,
+          "musicGains": 0
+        }
+      ],
+      "acceptedOutings": 42,
+      "refusedOutings": 1,
+      "pets": [
+        {
+          "status": "deceased",
+          "ending": "age",
+          "periods": 173,
+          "visits": 3
+        }
+      ],
+      "ledgerRows": 28870,
+      "coldRoundTripExact": true,
+      "worldSha256": "1be208b4cc65ae035a103e61f6435397d220a07ed3d7649220719ed41e39ee14",
+      "elapsedMs": 5213
+    },
+    {
+      "seed": 905,
+      "country": "DE",
+      "hobbyEvents": [
+        {
+          "kind": "guitar",
+          "approach": "familiar",
+          "age": 7,
+          "year": 2007,
+          "payerId": "person_parent1",
+          "permission": true,
+          "proficiency": 24,
+          "chance": 71,
+          "roll": 36,
+          "recognized": true,
+          "paid": "1800",
+          "currency": "EUR",
+          "paymentId": "txn_29_937"
+        },
+        {
+          "kind": "guitar",
+          "approach": "stretch",
+          "age": 8,
+          "year": 2008,
+          "payerId": "person_parent1",
+          "permission": true,
+          "proficiency": 48,
+          "chance": 63,
+          "roll": 53,
+          "recognized": true,
+          "paid": "1800",
+          "currency": "EUR",
+          "paymentId": "txn_37_1331"
+        },
+        {
+          "kind": "guitar",
+          "approach": "relaxed",
+          "age": 9,
+          "year": 2009,
+          "payerId": "person_parent1",
+          "permission": true,
+          "proficiency": 72,
+          "chance": 83,
+          "roll": 63,
+          "recognized": true,
+          "paid": "1800",
+          "currency": "EUR",
+          "paymentId": "txn_44_1728"
+        },
+        {
+          "kind": "cooking",
+          "approach": "familiar",
+          "age": 9,
+          "year": 2009,
+          "payerId": "person_parent1",
+          "permission": true,
+          "proficiency": 24,
+          "chance": 71,
+          "roll": 26,
+          "recognized": true,
+          "paid": "2520",
+          "currency": "EUR",
+          "paymentId": "txn_46_1729"
+        },
+        {
+          "kind": "cooking",
+          "approach": "stretch",
+          "age": 10,
+          "year": 2010,
+          "payerId": "person_parent1",
+          "permission": true,
+          "proficiency": 48,
+          "chance": 63,
+          "roll": 71,
+          "recognized": false,
+          "paid": "2520",
+          "currency": "EUR",
+          "paymentId": "txn_57_2137"
+        },
+        {
+          "kind": "cooking",
+          "approach": "relaxed",
+          "age": 11,
+          "year": 2011,
+          "payerId": "person_parent1",
+          "permission": true,
+          "proficiency": 72,
+          "chance": 83,
+          "roll": 84,
+          "recognized": false,
+          "paid": "2520",
+          "currency": "EUR",
+          "paymentId": "txn_64_2582"
+        }
+      ],
+      "ageAtDeath": 83,
+      "commands": 436,
+      "workMonths": 588,
+      "hobbies": [
+        {
+          "kind": "guitar",
+          "proficiency": 100,
+          "plans": [
+            {
+              "status": "adult-review",
+              "mode": "community",
+              "payerId": "person_parent1"
+            },
+            {
+              "status": "died",
+              "mode": "community",
+              "payerId": "person_player"
+            }
+          ],
+          "attendedMonths": 913,
+          "pausedMonths": 3,
+          "smartsGains": 0,
+          "musicGains": 100
+        },
+        {
+          "kind": "cooking",
+          "proficiency": 100,
+          "plans": [
+            {
+              "status": "adult-review",
+              "mode": "community",
+              "payerId": "person_parent1"
+            },
+            {
+              "status": "died",
+              "mode": "community",
+              "payerId": "person_player"
+            }
+          ],
+          "attendedMonths": 889,
+          "pausedMonths": 3,
+          "smartsGains": 0,
+          "musicGains": 0
+        }
+      ],
+      "acceptedOutings": 75,
+      "refusedOutings": 2,
+      "pets": [
+        {
+          "status": "deceased",
+          "ending": "health",
+          "periods": 172,
+          "visits": 2
+        }
+      ],
+      "ledgerRows": 52190,
+      "coldRoundTripExact": true,
+      "worldSha256": "f4f3a20418caf57204387a1f720df4f28a41006bf9f67360d37612b93ed39625",
+      "elapsedMs": 19158
+    },
+    {
+      "seed": 906,
+      "country": "ES",
+      "hobbyEvents": [
+        {
+          "kind": "guitar",
+          "approach": "familiar",
+          "age": 7,
+          "year": 2007,
+          "payerId": "person_parent1",
+          "permission": true,
+          "proficiency": 24,
+          "chance": 69,
+          "roll": 69,
+          "recognized": true,
+          "paid": "1250",
+          "currency": "EUR",
+          "paymentId": "txn_31_922"
+        },
+        {
+          "kind": "gardening",
+          "approach": "familiar",
+          "age": 7,
+          "year": 2007,
+          "payerId": "person_parent1",
+          "permission": true,
+          "proficiency": 24,
+          "chance": 69,
+          "roll": 17,
+          "recognized": true,
+          "paid": "1000",
+          "currency": "EUR",
+          "paymentId": "txn_33_923"
+        },
+        {
+          "kind": "guitar",
+          "approach": "stretch",
+          "age": 8,
+          "year": 2008,
+          "payerId": "person_parent1",
+          "permission": true,
+          "proficiency": 48,
+          "chance": 61,
+          "roll": 53,
+          "recognized": true,
+          "paid": "1250",
+          "currency": "EUR",
+          "paymentId": "txn_40_1249"
+        },
+        {
+          "kind": "gardening",
+          "approach": "stretch",
+          "age": 8,
+          "year": 2008,
+          "payerId": "person_parent1",
+          "permission": true,
+          "proficiency": 48,
+          "chance": 61,
+          "roll": 8,
+          "recognized": true,
+          "paid": "1000",
+          "currency": "EUR",
+          "paymentId": "txn_42_1250"
+        },
+        {
+          "kind": "guitar",
+          "approach": "relaxed",
+          "age": 9,
+          "year": 2009,
+          "payerId": "person_parent1",
+          "permission": true,
+          "proficiency": 72,
+          "chance": 81,
+          "roll": 98,
+          "recognized": false,
+          "paid": "1250",
+          "currency": "EUR",
+          "paymentId": "txn_49_1575"
+        },
+        {
+          "kind": "gardening",
+          "approach": "relaxed",
+          "age": 9,
+          "year": 2009,
+          "payerId": "person_parent1",
+          "permission": true,
+          "proficiency": 72,
+          "chance": 81,
+          "roll": 84,
+          "recognized": false,
+          "paid": "1000",
+          "currency": "EUR",
+          "paymentId": "txn_51_1576"
+        }
+      ],
+      "ageAtDeath": 90,
+      "commands": 467,
+      "workMonths": 588,
+      "hobbies": [
+        {
+          "kind": "guitar",
+          "proficiency": 100,
+          "plans": [
+            {
+              "status": "adult-review",
+              "mode": "community",
+              "payerId": "person_parent1"
+            },
+            {
+              "status": "died",
+              "mode": "community",
+              "payerId": "person_player"
+            }
+          ],
+          "attendedMonths": 1001,
+          "pausedMonths": 3,
+          "smartsGains": 0,
+          "musicGains": 100
+        },
+        {
+          "kind": "gardening",
+          "proficiency": 100,
+          "plans": [
+            {
+              "status": "adult-review",
+              "mode": "community",
+              "payerId": "person_parent1"
+            },
+            {
+              "status": "died",
+              "mode": "community",
+              "payerId": "person_player"
+            }
+          ],
+          "attendedMonths": 1001,
+          "pausedMonths": 3,
+          "smartsGains": 0,
+          "musicGains": 0
+        }
+      ],
+      "acceptedOutings": 83,
+      "refusedOutings": 1,
+      "pets": [
+        {
+          "status": "deceased",
+          "ending": "age",
+          "periods": 137,
+          "visits": 2
+        }
+      ],
+      "ledgerRows": 23862,
+      "coldRoundTripExact": true,
+      "worldSha256": "aa34e7576af0a816b1d64febf01fec1610edb137f51961ad9ddaba753dee71de",
+      "elapsedMs": 12458
+    },
+    {
+      "seed": 907,
+      "country": "IT",
+      "hobbyEvents": [
+        {
+          "kind": "guitar",
+          "approach": "familiar",
+          "age": 7,
+          "year": 2007,
+          "payerId": "person_parent1",
+          "permission": true,
+          "proficiency": 24,
+          "chance": 67,
+          "roll": 22,
+          "recognized": true,
+          "paid": "1300",
+          "currency": "EUR",
+          "paymentId": "txn_30_977"
+        },
+        {
+          "kind": "painting",
+          "approach": "familiar",
+          "age": 7,
+          "year": 2007,
+          "payerId": "person_parent1",
+          "permission": true,
+          "proficiency": 24,
+          "chance": 67,
+          "roll": 36,
+          "recognized": true,
+          "paid": "1560",
+          "currency": "EUR",
+          "paymentId": "txn_32_978"
+        },
+        {
+          "kind": "guitar",
+          "approach": "stretch",
+          "age": 8,
+          "year": 2008,
+          "payerId": "person_parent1",
+          "permission": true,
+          "proficiency": 48,
+          "chance": 59,
+          "roll": 39,
+          "recognized": true,
+          "paid": "1300",
+          "currency": "EUR",
+          "paymentId": "txn_42_1424"
+        },
+        {
+          "kind": "painting",
+          "approach": "stretch",
+          "age": 8,
+          "year": 2008,
+          "payerId": "person_parent1",
+          "permission": true,
+          "proficiency": 48,
+          "chance": 59,
+          "roll": 6,
+          "recognized": true,
+          "paid": "1560",
+          "currency": "EUR",
+          "paymentId": "txn_44_1425"
+        },
+        {
+          "kind": "guitar",
+          "approach": "relaxed",
+          "age": 9,
+          "year": 2009,
+          "payerId": "person_parent1",
+          "permission": true,
+          "proficiency": 72,
+          "chance": 79,
+          "roll": 55,
+          "recognized": true,
+          "paid": "1300",
+          "currency": "EUR",
+          "paymentId": "txn_51_1873"
+        },
+        {
+          "kind": "painting",
+          "approach": "relaxed",
+          "age": 9,
+          "year": 2009,
+          "payerId": "person_parent1",
+          "permission": true,
+          "proficiency": 72,
+          "chance": 79,
+          "roll": 2,
+          "recognized": true,
+          "paid": "1560",
+          "currency": "EUR",
+          "paymentId": "txn_53_1874"
+        }
+      ],
+      "ageAtDeath": 81,
+      "commands": 409,
+      "workMonths": 576,
+      "hobbies": [
+        {
+          "kind": "guitar",
+          "proficiency": 100,
+          "plans": [
+            {
+              "status": "adult-review",
+              "mode": "community",
+              "payerId": "person_parent1"
+            },
+            {
+              "status": "died",
+              "mode": "community",
+              "payerId": "person_player"
+            }
+          ],
+          "attendedMonths": 835,
+          "pausedMonths": 51,
+          "smartsGains": 0,
+          "musicGains": 100
+        },
+        {
+          "kind": "painting",
+          "proficiency": 100,
+          "plans": [
+            {
+              "status": "adult-review",
+              "mode": "community",
+              "payerId": "person_parent1"
+            },
+            {
+              "status": "died",
+              "mode": "community",
+              "payerId": "person_player"
+            }
+          ],
+          "attendedMonths": 835,
+          "pausedMonths": 51,
+          "smartsGains": 0,
+          "musicGains": 0
+        }
+      ],
+      "acceptedOutings": 67,
+      "refusedOutings": 2,
+      "pets": [
+        {
+          "status": "deceased",
+          "ending": "age",
+          "periods": 117,
+          "visits": 1
+        }
+      ],
+      "ledgerRows": 52041,
+      "coldRoundTripExact": true,
+      "worldSha256": "6a998f4c39fde78484bd03d9324191c8819ad21f7927c2623956d85b33e2ece1",
+      "elapsedMs": 16391
+    },
+    {
+      "seed": 908,
+      "country": "BR",
+      "hobbyEvents": [
+        {
+          "kind": "guitar",
+          "approach": "familiar",
+          "age": 7,
+          "year": 2007,
+          "payerId": "person_parent1",
+          "permission": true,
+          "proficiency": 24,
+          "chance": 69,
+          "roll": 60,
+          "recognized": true,
+          "paid": "1500",
+          "currency": "BRL",
+          "paymentId": "txn_25_910"
+        },
+        {
+          "kind": "guitar",
+          "approach": "stretch",
+          "age": 8,
+          "year": 2008,
+          "payerId": "person_parent1",
+          "permission": true,
+          "proficiency": 48,
+          "chance": 61,
+          "roll": 4,
+          "recognized": true,
+          "paid": "1500",
+          "currency": "BRL",
+          "paymentId": "txn_34_1223"
+        },
+        {
+          "kind": "guitar",
+          "approach": "relaxed",
+          "age": 9,
+          "year": 2009,
+          "payerId": "person_parent1",
+          "permission": true,
+          "proficiency": 72,
+          "chance": 81,
+          "roll": 6,
+          "recognized": true,
+          "paid": "1500",
+          "currency": "BRL",
+          "paymentId": "txn_41_1538"
+        },
+        {
+          "kind": "photography",
+          "approach": "familiar",
+          "age": 9,
+          "year": 2009,
+          "payerId": "person_parent1",
+          "permission": true,
+          "proficiency": 24,
+          "chance": 69,
+          "roll": 40,
+          "recognized": true,
+          "paid": "1500",
+          "currency": "BRL",
+          "paymentId": "txn_43_1539"
+        },
+        {
+          "kind": "photography",
+          "approach": "stretch",
+          "age": 10,
+          "year": 2010,
+          "payerId": "person_parent1",
+          "permission": true,
+          "proficiency": 48,
+          "chance": 61,
+          "roll": 56,
+          "recognized": true,
+          "paid": "1500",
+          "currency": "BRL",
+          "paymentId": "txn_49_1853"
+        },
+        {
+          "kind": "photography",
+          "approach": "relaxed",
+          "age": 11,
+          "year": 2011,
+          "payerId": "person_parent1",
+          "permission": true,
+          "proficiency": 72,
+          "chance": 81,
+          "roll": 5,
+          "recognized": true,
+          "paid": "1500",
+          "currency": "BRL",
+          "paymentId": "txn_60_2218"
+        }
+      ],
+      "ageAtDeath": 72,
+      "commands": 387,
+      "workMonths": 564,
+      "hobbies": [
+        {
+          "kind": "guitar",
+          "proficiency": 100,
+          "plans": [
+            {
+              "status": "adult-review",
+              "mode": "community",
+              "payerId": "person_parent1"
+            },
+            {
+              "status": "died",
+              "mode": "community",
+              "payerId": "person_player"
+            }
+          ],
+          "attendedMonths": 781,
+          "pausedMonths": 4,
+          "smartsGains": 0,
+          "musicGains": 100
+        },
+        {
+          "kind": "photography",
+          "proficiency": 100,
+          "plans": [
+            {
+              "status": "adult-review",
+              "mode": "community",
+              "payerId": "person_parent1"
+            },
+            {
+              "status": "died",
+              "mode": "community",
+              "payerId": "person_player"
+            }
+          ],
+          "attendedMonths": 757,
+          "pausedMonths": 4,
+          "smartsGains": 0,
+          "musicGains": 0
+        }
+      ],
+      "acceptedOutings": 63,
+      "refusedOutings": 2,
+      "pets": [
+        {
+          "status": "deceased",
+          "ending": "age",
+          "periods": 144,
+          "visits": 6
+        }
+      ],
+      "ledgerRows": 23970,
+      "coldRoundTripExact": true,
+      "worldSha256": "fa983b9e789c9a469a7ec4f169293a6d44fa40a2aa24cab1433e6bd0488da750",
+      "elapsedMs": 9612
+    },
+    {
+      "seed": 909,
+      "country": "IN",
+      "hobbyEvents": [
+        {
+          "kind": "guitar",
+          "approach": "familiar",
+          "age": 7,
+          "year": 2007,
+          "payerId": "person_parent1",
+          "permission": true,
+          "proficiency": 24,
+          "chance": 70,
+          "roll": 83,
+          "recognized": false,
+          "paid": "18000",
+          "currency": "INR",
+          "paymentId": "txn_30_955"
+        },
+        {
+          "kind": "chess",
+          "approach": "familiar",
+          "age": 7,
+          "year": 2007,
+          "payerId": "person_parent1",
+          "permission": true,
+          "proficiency": 24,
+          "chance": 70,
+          "roll": 25,
+          "recognized": true,
+          "paid": "7200",
+          "currency": "INR",
+          "paymentId": "txn_32_956"
+        },
+        {
+          "kind": "guitar",
+          "approach": "stretch",
+          "age": 8,
+          "year": 2008,
+          "payerId": "person_parent1",
+          "permission": true,
+          "proficiency": 48,
+          "chance": 62,
+          "roll": 100,
+          "recognized": false,
+          "paid": "18000",
+          "currency": "INR",
+          "paymentId": "txn_39_1376"
+        },
+        {
+          "kind": "chess",
+          "approach": "stretch",
+          "age": 8,
+          "year": 2008,
+          "payerId": "person_parent1",
+          "permission": true,
+          "proficiency": 48,
+          "chance": 62,
+          "roll": 78,
+          "recognized": false,
+          "paid": "7200",
+          "currency": "INR",
+          "paymentId": "txn_41_1377"
+        },
+        {
+          "kind": "guitar",
+          "approach": "relaxed",
+          "age": 9,
+          "year": 2009,
+          "payerId": "person_parent1",
+          "permission": true,
+          "proficiency": 72,
+          "chance": 82,
+          "roll": 51,
+          "recognized": true,
+          "paid": "18000",
+          "currency": "INR",
+          "paymentId": "txn_52_1811"
+        },
+        {
+          "kind": "chess",
+          "approach": "relaxed",
+          "age": 9,
+          "year": 2009,
+          "payerId": "person_parent1",
+          "permission": true,
+          "proficiency": 72,
+          "chance": 82,
+          "roll": 37,
+          "recognized": true,
+          "paid": "7200",
+          "currency": "INR",
+          "paymentId": "txn_54_1812"
+        }
+      ],
+      "ageAtDeath": 65,
+      "commands": 356,
+      "workMonths": 504,
+      "hobbies": [
+        {
+          "kind": "guitar",
+          "proficiency": 100,
+          "plans": [
+            {
+              "status": "adult-review",
+              "mode": "community",
+              "payerId": "person_parent1"
+            },
+            {
+              "status": "died",
+              "mode": "community",
+              "payerId": "person_player"
+            }
+          ],
+          "attendedMonths": 699,
+          "pausedMonths": 2,
+          "smartsGains": 0,
+          "musicGains": 100
+        },
+        {
+          "kind": "chess",
+          "proficiency": 100,
+          "plans": [
+            {
+              "status": "adult-review",
+              "mode": "community",
+              "payerId": "person_parent1"
+            },
+            {
+              "status": "died",
+              "mode": "community",
+              "payerId": "person_player"
+            }
+          ],
+          "attendedMonths": 699,
+          "pausedMonths": 2,
+          "smartsGains": 47,
+          "musicGains": 0
+        }
+      ],
+      "acceptedOutings": 58,
+      "refusedOutings": 1,
+      "pets": [
+        {
+          "status": "deceased",
+          "ending": "health",
+          "periods": 165,
+          "visits": 4
+        }
+      ],
+      "ledgerRows": 36597,
+      "coldRoundTripExact": true,
+      "worldSha256": "a420d22a2a20767110b1e66a67a144c9db58a29c93854cab90edfe73c395a4ca",
+      "elapsedMs": 13036
+    },
+    {
+      "seed": 910,
+      "country": "JP",
+      "hobbyEvents": [
+        {
+          "kind": "reading",
+          "approach": "familiar",
+          "age": 7,
+          "year": 2007,
+          "payerId": "person_parent1",
+          "permission": true,
+          "proficiency": 24,
+          "chance": 68,
+          "roll": 5,
+          "recognized": true,
+          "paid": "320",
+          "currency": "JPY",
+          "paymentId": "txn_36_849"
+        },
+        {
+          "kind": "guitar",
+          "approach": "familiar",
+          "age": 8,
+          "year": 2008,
+          "payerId": "person_parent1",
+          "permission": false,
+          "proficiency": 24,
+          "chance": 68,
+          "roll": null,
+          "recognized": false,
+          "paid": "0",
+          "currency": "JPY",
+          "paymentId": null
+        },
+        {
+          "kind": "reading",
+          "approach": "stretch",
+          "age": 8,
+          "year": 2008,
+          "payerId": "person_parent1",
+          "permission": true,
+          "proficiency": 48,
+          "chance": 60,
+          "roll": 32,
+          "recognized": true,
+          "paid": "320",
+          "currency": "JPY",
+          "paymentId": "txn_45_1199"
+        },
+        {
+          "kind": "guitar",
+          "approach": "stretch",
+          "age": 9,
+          "year": 2009,
+          "payerId": "person_parent1",
+          "permission": true,
+          "proficiency": 48,
+          "chance": 60,
+          "roll": 57,
+          "recognized": true,
+          "paid": "1600",
+          "currency": "JPY",
+          "paymentId": "txn_52_1550"
+        },
+        {
+          "kind": "reading",
+          "approach": "relaxed",
+          "age": 9,
+          "year": 2009,
+          "payerId": "person_parent1",
+          "permission": true,
+          "proficiency": 72,
+          "chance": 80,
+          "roll": 56,
+          "recognized": true,
+          "paid": "320",
+          "currency": "JPY",
+          "paymentId": "txn_54_1551"
+        },
+        {
+          "kind": "guitar",
+          "approach": "relaxed",
+          "age": 10,
+          "year": 2010,
+          "payerId": "person_parent1",
+          "permission": true,
+          "proficiency": 72,
+          "chance": 80,
+          "roll": 85,
+          "recognized": false,
+          "paid": "1600",
+          "currency": "JPY",
+          "paymentId": "txn_64_1900"
+        }
+      ],
+      "ageAtDeath": 73,
+      "commands": 395,
+      "workMonths": 564,
+      "hobbies": [
+        {
+          "kind": "guitar",
+          "proficiency": 100,
+          "plans": [
+            {
+              "status": "declined",
+              "mode": "community",
+              "payerId": "person_parent1"
+            },
+            {
+              "status": "adult-review",
+              "mode": "community",
+              "payerId": "person_parent1"
+            },
+            {
+              "status": "died",
+              "mode": "community",
+              "payerId": "person_player"
+            }
+          ],
+          "attendedMonths": 778,
+          "pausedMonths": 2,
+          "smartsGains": 0,
+          "musicGains": 100
+        },
+        {
+          "kind": "reading",
+          "proficiency": 100,
+          "plans": [
+            {
+              "status": "adult-review",
+              "mode": "community",
+              "payerId": "person_parent1"
+            },
+            {
+              "status": "died",
+              "mode": "community",
+              "payerId": "person_player"
+            }
+          ],
+          "attendedMonths": 790,
+          "pausedMonths": 2,
+          "smartsGains": 5,
+          "musicGains": 0
+        }
+      ],
+      "acceptedOutings": 65,
+      "refusedOutings": 2,
+      "pets": [
+        {
+          "status": "deceased",
+          "ending": "health",
+          "periods": 180,
+          "visits": 4
+        }
+      ],
+      "ledgerRows": 32418,
+      "coldRoundTripExact": true,
+      "worldSha256": "32d3df2f560fe7a49028e065710d025c71213519f070460d4c29d573a2b5534a",
+      "elapsedMs": 12785
+    },
+    {
+      "seed": 911,
+      "country": "ZA",
+      "hobbyEvents": [
+        {
+          "kind": "guitar",
+          "approach": "familiar",
+          "age": 7,
+          "year": 2007,
+          "payerId": "person_parent1",
+          "permission": true,
+          "proficiency": 24,
+          "chance": 69,
+          "roll": 62,
+          "recognized": true,
+          "paid": "7500",
+          "currency": "ZAR",
+          "paymentId": "txn_29_730"
+        },
+        {
+          "kind": "gaming",
+          "approach": "familiar",
+          "age": 7,
+          "year": 2007,
+          "payerId": "person_parent1",
+          "permission": true,
+          "proficiency": 24,
+          "chance": 69,
+          "roll": 26,
+          "recognized": true,
+          "paid": "6000",
+          "currency": "ZAR",
+          "paymentId": "txn_31_731"
+        },
+        {
+          "kind": "guitar",
+          "approach": "stretch",
+          "age": 8,
+          "year": 2008,
+          "payerId": "person_parent1",
+          "permission": true,
+          "proficiency": 48,
+          "chance": 61,
+          "roll": 13,
+          "recognized": true,
+          "paid": "7500",
+          "currency": "ZAR",
+          "paymentId": "txn_38_1058"
+        },
+        {
+          "kind": "gaming",
+          "approach": "stretch",
+          "age": 8,
+          "year": 2008,
+          "payerId": "person_parent1",
+          "permission": true,
+          "proficiency": 48,
+          "chance": 61,
+          "roll": 93,
+          "recognized": false,
+          "paid": "6000",
+          "currency": "ZAR",
+          "paymentId": "txn_40_1059"
+        },
+        {
+          "kind": "guitar",
+          "approach": "relaxed",
+          "age": 9,
+          "year": 2009,
+          "payerId": "person_parent1",
+          "permission": true,
+          "proficiency": 72,
+          "chance": 81,
+          "roll": 4,
+          "recognized": true,
+          "paid": "7500",
+          "currency": "ZAR",
+          "paymentId": "txn_47_1443"
+        },
+        {
+          "kind": "gaming",
+          "approach": "relaxed",
+          "age": 9,
+          "year": 2009,
+          "payerId": "person_parent1",
+          "permission": true,
+          "proficiency": 72,
+          "chance": 81,
+          "roll": 69,
+          "recognized": true,
+          "paid": "6000",
+          "currency": "ZAR",
+          "paymentId": "txn_49_1444"
+        }
+      ],
+      "ageAtDeath": 80,
+      "commands": 427,
+      "workMonths": 564,
+      "hobbies": [
+        {
+          "kind": "guitar",
+          "proficiency": 100,
+          "plans": [
+            {
+              "status": "adult-review",
+              "mode": "community",
+              "payerId": "person_parent1"
+            },
+            {
+              "status": "died",
+              "mode": "community",
+              "payerId": "person_player"
+            }
+          ],
+          "attendedMonths": 880,
+          "pausedMonths": 3,
+          "smartsGains": 0,
+          "musicGains": 100
+        },
+        {
+          "kind": "gaming",
+          "proficiency": 100,
+          "plans": [
+            {
+              "status": "adult-review",
+              "mode": "community",
+              "payerId": "person_parent1"
+            },
+            {
+              "status": "died",
+              "mode": "community",
+              "payerId": "person_player"
+            }
+          ],
+          "attendedMonths": 880,
+          "pausedMonths": 3,
+          "smartsGains": 0,
+          "musicGains": 0
+        }
+      ],
+      "acceptedOutings": 72,
+      "refusedOutings": 1,
+      "pets": [
+        {
+          "status": "deceased",
+          "ending": "age",
+          "periods": 128,
+          "visits": 3
+        }
+      ],
+      "ledgerRows": 41122,
+      "coldRoundTripExact": true,
+      "worldSha256": "953977706fcafd553ddeb574bc2aa2984a16282afbf7219cc4a35f096ab77358",
+      "elapsedMs": 12488
+    }
+  ]
+}

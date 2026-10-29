@@ -1,0 +1,29 @@
+{
+  "complete": true,
+  "name": "birthday-result",
+  "events": [
+    {
+      "argv": [
+        "python3",
+        "/tmp/dreams-native-ui.py",
+        "inspect",
+        "/tmp/dreams-c37-native-captures/birthday-result/ui"
+      ],
+      "returncode": 0,
+      "stdout": "[('', 'Continue', '[42,478][348,528]')]\n",
+      "stderr": "",
+      "at": "2026-10-21T01:41:53.944593+00:00"
+    },
+    {
+      "argv": [
+        "python3",
+        "/tmp/dreams-copy-native-db.py",
+        "/tmp/dreams-c37-native-captures/birthday-result/database"
+      ],
+      "returncode": 0,
+      "stdout": "/tmp/dreams-c37-native-captures/birthday-result/database\n",
+      "stderr": "",
+      "at": "2026-10-21T01:41:54.820254+00:00"
+    }
+  ]
+}

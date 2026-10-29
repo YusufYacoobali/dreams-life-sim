@@ -1,0 +1,386 @@
+{
+  "renderer": "Chromium/react-native-web; real gameplay components, practice state only",
+  "nativeDevice": false,
+  "viewport": "320x844",
+  "appearance": "dark",
+  "fontScale": 1.4,
+  "fontScaleModel": "Native Text size/line-height and useWindowDimensions modeled for browser review; not a native-device accessibility claim",
+  "scenarios": [
+    {
+      "kind": "sports",
+      "played": true,
+      "result": "\nPerfect!\n98 / 100\nTop corner. Unstoppable.\nPractice round. Your saved life stays unchanged.\nContinue\nPlay again",
+      "session": {
+        "id": "practice_1",
+        "lifeId": "practice",
+        "personId": "practice",
+        "kind": "sports",
+        "ownerId": "practice",
+        "contextId": "practice",
+        "started": {
+          "year": 2026,
+          "month": 1,
+          "day": 1
+        },
+        "startedRevision": 0,
+        "difficulty": 3,
+        "seed": 3470896676,
+        "assisted": false,
+        "status": "completed",
+        "paused": false,
+        "elapsedMs": 1442,
+        "inputs": [
+          {
+            "at": 1442,
+            "action": {
+              "type": "shot",
+              "x": 0.8571428571428571,
+              "y": 0.14563419117647058
+            }
+          }
+        ],
+        "score": 98,
+        "rating": "perfect",
+        "settled": {
+          "year": 2026,
+          "month": 1,
+          "day": 1
+        },
+        "appliedMonth": null
+      }
+    },
+    {
+      "kind": "crime",
+      "played": true,
+      "result": "\nCracked it!\n94 / 100\nAll three bolts released\nPractice round. Your saved life stays unchanged.\nContinue\nPlay again",
+      "session": {
+        "id": "practice_1",
+        "lifeId": "practice",
+        "personId": "practice",
+        "kind": "crime",
+        "ownerId": "practice",
+        "contextId": "practice",
+        "started": {
+          "year": 2026,
+          "month": 1,
+          "day": 1
+        },
+        "startedRevision": 0,
+        "difficulty": 3,
+        "seed": 3470896676,
+        "assisted": false,
+        "status": "completed",
+        "paused": false,
+        "elapsedMs": 2128,
+        "inputs": [
+          {
+            "at": 745,
+            "action": {
+              "type": "lock"
+            }
+          },
+          {
+            "at": 1445,
+            "action": {
+              "type": "lock"
+            }
+          },
+          {
+            "at": 2128,
+            "action": {
+              "type": "lock"
+            }
+          }
+        ],
+        "score": 94,
+        "rating": "perfect",
+        "settled": {
+          "year": 2026,
+          "month": 1,
+          "day": 1
+        },
+        "appliedMonth": null
+      }
+    },
+    {
+      "kind": "astronaut",
+      "played": true,
+      "result": "\nDocked!\n97 / 100\nA perfect, soft capture\nPractice round. Your saved life stays unchanged.\nContinue\nPlay again",
+      "session": {
+        "id": "practice_1",
+        "lifeId": "practice",
+        "personId": "practice",
+        "kind": "astronaut",
+        "ownerId": "practice",
+        "contextId": "practice",
+        "started": {
+          "year": 2026,
+          "month": 1,
+          "day": 1
+        },
+        "startedRevision": 0,
+        "difficulty": 3,
+        "seed": 3470896676,
+        "assisted": false,
+        "status": "completed",
+        "paused": false,
+        "elapsedMs": 10010,
+        "inputs": [
+          {
+            "at": 176,
+            "action": {
+              "type": "thrust",
+              "direction": "coast"
+            }
+          },
+          {
+            "at": 243,
+            "action": {
+              "type": "thrust",
+              "direction": "left"
+            }
+          },
+          {
+            "at": 510,
+            "action": {
+              "type": "thrust",
+              "direction": "left"
+            }
+          },
+          {
+            "at": 5176,
+            "action": {
+              "type": "thrust",
+              "direction": "left"
+            }
+          },
+          {
+            "at": 5876,
+            "action": {
+              "type": "thrust",
+              "direction": "right"
+            }
+          },
+          {
+            "at": 6576,
+            "action": {
+              "type": "thrust",
+              "direction": "left"
+            }
+          },
+          {
+            "at": 7276,
+            "action": {
+              "type": "thrust",
+              "direction": "right"
+            }
+          },
+          {
+            "at": 7976,
+            "action": {
+              "type": "thrust",
+              "direction": "left"
+            }
+          },
+          {
+            "at": 8659,
+            "action": {
+              "type": "thrust",
+              "direction": "right"
+            }
+          },
+          {
+            "at": 9343,
+            "action": {
+              "type": "thrust",
+              "direction": "left"
+            }
+          }
+        ],
+        "score": 97,
+        "rating": "perfect",
+        "settled": {
+          "year": 2026,
+          "month": 1,
+          "day": 1
+        },
+        "appliedMonth": null
+      },
+      "dockingGeometry": {
+        "disc": {
+          "x": 40,
+          "y": 533.40625,
+          "width": 240,
+          "height": 240
+        },
+        "buttons": [
+          {
+            "label": "Thrust left",
+            "x": 48,
+            "y": 621.40625,
+            "width": 64,
+            "height": 64,
+            "radius": "32px"
+          },
+          {
+            "label": "Thrust up",
+            "x": 128,
+            "y": 541.40625,
+            "width": 64,
+            "height": 64,
+            "radius": "32px"
+          },
+          {
+            "label": "Thrust down to brake",
+            "x": 128,
+            "y": 701.40625,
+            "width": 64,
+            "height": 64,
+            "radius": "32px"
+          },
+          {
+            "label": "Thrust right",
+            "x": 208,
+            "y": 621.40625,
+            "width": 64,
+            "height": 64,
+            "radius": "32px"
+          },
+          {
+            "label": "Coast",
+            "x": 116,
+            "y": 609.40625,
+            "width": 88,
+            "height": 88,
+            "radius": "44px"
+          }
+        ]
+      }
+    }
+  ],
+  "failureAndReplay": {
+    "failed": {
+      "id": "practice_1",
+      "lifeId": "practice",
+      "personId": "practice",
+      "kind": "crime",
+      "ownerId": "practice",
+      "contextId": "practice",
+      "started": {
+        "year": 2026,
+        "month": 1,
+        "day": 1
+      },
+      "startedRevision": 0,
+      "difficulty": 3,
+      "seed": 3470896676,
+      "assisted": true,
+      "status": "completed",
+      "paused": false,
+      "elapsedMs": 0,
+      "inputs": [
+        {
+          "at": 0,
+          "action": {
+            "type": "lock",
+            "angle": 300
+          }
+        },
+        {
+          "at": 0,
+          "action": {
+            "type": "lock",
+            "angle": 300
+          }
+        },
+        {
+          "at": 0,
+          "action": {
+            "type": "lock",
+            "angle": 300
+          }
+        }
+      ],
+      "score": 0,
+      "rating": "failed",
+      "settled": {
+        "year": 2026,
+        "month": 1,
+        "day": 1
+      },
+      "appliedMonth": null
+    },
+    "replay": {
+      "id": "practice_2",
+      "lifeId": "practice",
+      "personId": "practice",
+      "kind": "crime",
+      "ownerId": "practice",
+      "contextId": "practice",
+      "started": {
+        "year": 2026,
+        "month": 1,
+        "day": 1
+      },
+      "startedRevision": 0,
+      "difficulty": 3,
+      "seed": 3521229533,
+      "assisted": true,
+      "status": "active",
+      "paused": false,
+      "elapsedMs": 0,
+      "inputs": [],
+      "score": null,
+      "rating": null,
+      "settled": null,
+      "appliedMonth": null
+    },
+    "forfeited": {
+      "id": "practice_2",
+      "lifeId": "practice",
+      "personId": "practice",
+      "kind": "crime",
+      "ownerId": "practice",
+      "contextId": "practice",
+      "started": {
+        "year": 2026,
+        "month": 1,
+        "day": 1
+      },
+      "startedRevision": 0,
+      "difficulty": 3,
+      "seed": 3521229533,
+      "assisted": true,
+      "status": "forfeited",
+      "paused": false,
+      "elapsedMs": 0,
+      "inputs": [
+        {
+          "at": 0,
+          "action": {
+            "type": "lock",
+            "angle": 0
+          }
+        }
+      ],
+      "score": 0,
+      "rating": "failed",
+      "settled": {
+        "year": 2026,
+        "month": 1,
+        "day": 1
+      },
+      "appliedMonth": null
+    },
+    "pausedAndResumed": true,
+    "scope": "Actual isolated practice state. Durable save/retry behavior is covered separately by SQLite/UI regression suites."
+  },
+  "reducedMotion": {
+    "assistedDefault": true
+  },
+  "artwork": {
+    "loaded": true,
+    "localOnly": true
+  },
+  "errors": []
+}

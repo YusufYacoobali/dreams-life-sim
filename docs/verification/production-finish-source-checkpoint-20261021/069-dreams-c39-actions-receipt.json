@@ -1,0 +1,154 @@
+{
+  "format": "dreams-c39-action-gate-receipt-v1",
+  "status": "passed",
+  "complete": true,
+  "benchmarkExecuted": true,
+  "processClosed": true,
+  "sourceCommit": "3224c9ce5b9175075760a789c1402dd92345cd30",
+  "sourceSnapshot": {
+    "file": "/tmp/dreams-production-finish-corrected-source.json",
+    "bytes": 75990,
+    "sha256": "c10e79e2c1798315e5267069f8389d6a5f475cd04719d1894a987903b45e7545"
+  },
+  "sourceRegistration": {
+    "file": "/tmp/dreams-c39-corrected-action-source-registration.json",
+    "bytes": 1451,
+    "sha256": "329060d77c7e1b8c360258912466c48a8b4c47c756f8b2a68cab1a7b24f14966"
+  },
+  "root": "/workspace/dreams-worktrees/camera-copy-correction",
+  "argv": [
+    "node",
+    "tools/benchmark-actions.cjs",
+    "--source",
+    "/workspace/dreams-worktrees/camera-copy-correction",
+    "--profile",
+    "--population",
+    "--workplaces",
+    "--raises"
+  ],
+  "wrapper": {
+    "file": "/tmp/dreams-c39-action-gate-v2.py",
+    "bytes": 20211,
+    "sha256": "763db35d4e82e4fe878ee3a6aa0deeeeb25d1ce10a754c77451f4e47a3cce8b8"
+  },
+  "scope": "Unpaired cloud Node/on-disk SQLite fixed-world diagnostics: excluded warm-up then five measured trials per case; no rendered UI/native/physical p95 or guaranteed speedup. Four generated-at-once 100/1000-contact stress inputs and ordinary-command prepared workplace inputs retain the unchanged driver scope. Begin Life uses the driver save kernel, not the store/UI birth path.",
+  "startedAt": "2026-10-21T07:45:55.781656+00:00",
+  "before": {
+    "status": "exact",
+    "sourceFiles": 688,
+    "inventory": {
+      "managedFiles": 688,
+      "allExtensionsChecked": true,
+      "symlinksRejected": true
+    },
+    "sourceSnapshot": {
+      "file": "/tmp/dreams-production-finish-corrected-source.json",
+      "bytes": 75990,
+      "sha256": "c10e79e2c1798315e5267069f8389d6a5f475cd04719d1894a987903b45e7545"
+    },
+    "combinedGamePersistenceSourceHash": "d72d52f3d6a6e312e490a525c0638638af6c5bb27449ffb8a0dd5833e10acbc0",
+    "driverHash": "19da212c32feb53a2f264b4c6062cd0b7a68146a762f82841890ea410408bbe9",
+    "fixedInputs": [
+      {
+        "file": "tests/fixtures/v25-content4-bubble-archive.json",
+        "bytes": 18099,
+        "sha256": "62eb00b7031c2d7f866e784ccb59462069cfc58be0e0a8fa8cac34fe5b9ddcc4"
+      },
+      {
+        "file": "tests/fixtures/v27-leisure-archive.json",
+        "bytes": 140456,
+        "sha256": "5027d51240dfcae2b5b17b0040282cf627943f4c4323d130e8667c2fc870335a"
+      },
+      {
+        "file": "tests/fixtures/v28-native-teen-archive.json",
+        "bytes": 575472,
+        "sha256": "396a5c3526b4e6d845e917e4b27caa4048e295b47f4952c05268c65013948d82"
+      },
+      {
+        "file": "docs/verification/action-latency-inputs-v25-20261019.json",
+        "bytes": 794714,
+        "sha256": "8a2d5c4cb1782fa27b495e80dc34b409a636956aba35de3850762403aea2a6a9"
+      }
+    ]
+  },
+  "quiescence": {
+    "attestation": {
+      "file": "/tmp/dreams-c39-actions-ready.json",
+      "bytes": 5506,
+      "sha256": "0ecbf29c6f5cccb9c6b40297362c548beb43c270e12b189f03153ea573bb0e54"
+    },
+    "closedProcessObservations": [
+      {
+        "role": "qemu",
+        "pid": 171418,
+        "originalIdentityGoneOrZombie": true
+      },
+      {
+        "role": "metro",
+        "pid": 172965,
+        "originalIdentityGoneOrZombie": true
+      }
+    ],
+    "processSignalsSent": false,
+    "nativeCommandsExecuted": false
+  },
+  "benchmarkStartedAt": "2026-10-21T07:45:55.874269+00:00",
+  "benchmarkPid": 202177,
+  "exitCode": 0,
+  "benchmarkFinishedAt": "2026-10-21T07:46:37.952240+00:00",
+  "after": {
+    "status": "exact",
+    "sourceFiles": 688,
+    "inventory": {
+      "managedFiles": 688,
+      "allExtensionsChecked": true,
+      "symlinksRejected": true
+    },
+    "sourceSnapshot": {
+      "file": "/tmp/dreams-production-finish-corrected-source.json",
+      "bytes": 75990,
+      "sha256": "c10e79e2c1798315e5267069f8389d6a5f475cd04719d1894a987903b45e7545"
+    },
+    "combinedGamePersistenceSourceHash": "d72d52f3d6a6e312e490a525c0638638af6c5bb27449ffb8a0dd5833e10acbc0",
+    "driverHash": "19da212c32feb53a2f264b4c6062cd0b7a68146a762f82841890ea410408bbe9",
+    "fixedInputs": [
+      {
+        "file": "tests/fixtures/v25-content4-bubble-archive.json",
+        "bytes": 18099,
+        "sha256": "62eb00b7031c2d7f866e784ccb59462069cfc58be0e0a8fa8cac34fe5b9ddcc4"
+      },
+      {
+        "file": "tests/fixtures/v27-leisure-archive.json",
+        "bytes": 140456,
+        "sha256": "5027d51240dfcae2b5b17b0040282cf627943f4c4323d130e8667c2fc870335a"
+      },
+      {
+        "file": "tests/fixtures/v28-native-teen-archive.json",
+        "bytes": 575472,
+        "sha256": "396a5c3526b4e6d845e917e4b27caa4048e295b47f4952c05268c65013948d82"
+      },
+      {
+        "file": "docs/verification/action-latency-inputs-v25-20261019.json",
+        "bytes": 794714,
+        "sha256": "8a2d5c4cb1782fa27b495e80dc34b409a636956aba35de3850762403aea2a6a9"
+      }
+    ]
+  },
+  "summary": {
+    "file": "/tmp/dreams-c39-actions-summary.json",
+    "bytes": 17365,
+    "sha256": "a7dc899c82b060529543989903f1fb4bf47b3a9e6bb64017612d1091b0e30b22"
+  },
+  "finishedAt": "2026-10-21T07:46:38.038965+00:00",
+  "elapsedSeconds": 42.257,
+  "raw": {
+    "file": "/tmp/dreams-c39-actions.json",
+    "bytes": 307226,
+    "sha256": "4486f87ddc10d1abf76517b17c5e4c3bc9f69a4ee75a9c2176749a958a4e8bbc"
+  },
+  "stderr": {
+    "file": "/tmp/dreams-c39-actions.stderr.txt",
+    "bytes": 484,
+    "sha256": "e10a4ac8ee5de72b37ded9d186d1b874aab012cd42583348c45d4493b840d17f"
+  }
+}

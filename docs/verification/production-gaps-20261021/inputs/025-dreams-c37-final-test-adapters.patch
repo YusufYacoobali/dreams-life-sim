@@ -1,0 +1,443 @@
+diff --git a/tests/game/story-lifecycle.test.ts b/tests/game/story-lifecycle.test.ts
+index eba55fb..65d43fa 100644
+--- a/tests/game/story-lifecycle.test.ts
++++ b/tests/game/story-lifecycle.test.ts
+@@ -186,17 +186,21 @@ test('an actual existing-child legacy preserves school callback history and the
+   let world = drain(resolveCommand(planned('project', 16), { type: 'advance' }));
+   world = drain(resolveCommand(world, { type: 'advance' })); // The former student is now eighteen.
+   const student = world.people[world.activePersonId], child = addChild(world, [student], 'biological'), thread = structuredClone(world.storyThreads[0]);
++  expect(thread.status).toBe('resolved'); expect(thread.projectRecall?.status).toBe('scheduled');
+   const startDate = { ...world.date }; world.date = monthFrom(startDate, 4);
+   world.annual = { id: 'year_legacy_callback_history', startDate, targetDate: monthFrom(startDate, 12), monthsProcessed: 4, stage: 'months', pausedForPlanning: false };
+   const cursor = structuredClone(world.annual); recordDeath(world, student.id, 'test illness');
+-  expect(world.storyThreads[0]).toEqual(thread);
++  // The resolved school project stays exact; only its new, still-unoffered
++  // two-year continuation ends when its actual participant dies.
++  const endedThread = structuredClone(world.storyThreads[0]);
++  expect(endedThread).toEqual({ ...thread, projectRecall: { ...thread.projectRecall, status: 'cancelled', ended: world.date, cancellationReason: 'This part of the family story has ended' } });
+   const atDeath = { ...world.date }, existing = structuredClone(world.people[child.id]), people = Object.keys(world.people), random = { ...world.random };
+   world = resolveCommand(decodeWorld(encodeWorld(world)), { type: 'continue-child', personId: child.id });
+   expect(world.activePersonId).toBe(child.id); expect(world.people[child.id]).toEqual(existing); expect(Object.keys(world.people)).toEqual(people);
+   expect(world.random).toEqual(random); expect(world.date).toEqual(atDeath); expect(world.annual?.monthsProcessed).toBe(cursor!.monthsProcessed);
+   expect(world.annual?.pausedForPlanning).toBe(true); expect(world.storyThreads[0].personId).toBe(thread.personId);
+   world = ack(world); world = drain(resolveCommand(world, { type: 'resume' }));
+-  expect(world.date).toEqual(cursor!.targetDate); expect(world.annual).toBeNull(); expect(world.storyThreads[0]).toEqual(thread);
++  expect(world.date).toEqual(cursor!.targetDate); expect(world.annual).toBeNull(); expect(world.storyThreads[0]).toEqual(endedThread);
+   expect(world.ledger.some(item => item.category === 'story-outing')).toBe(false);
+ });
+ 
+diff --git a/tests/game/story-name-collisions.test.ts b/tests/game/story-name-collisions.test.ts
+index 36b7d69..1e6b848 100644
+--- a/tests/game/story-name-collisions.test.ts
++++ b/tests/game/story-name-collisions.test.ts
+@@ -51,8 +51,17 @@ test.each([
+   expect(encodeWorld(world)).toBe(original); expect(unpackCheckpoint(packCheckpoint(world)).pending).toEqual(pending);
+ });
+ 
+-test.each([['IN', 7], ['GB', 10]] as const)('%s decision%i remains byte-equivalent when names are unambiguous or the matching teacher is not bound', (country, index) => {
+-  const { pending, next } = bound(record(country, index)); expect(next).toEqual(pending);
++test.each([['IN', 7], ['GB', 10]] as const)('%s decision%i retains every original byte apart from the explicit fresh project-recall opt-in', (country, index) => {
++  const { pending, next } = bound(record(country, index)), comparable = structuredClone(next);
++  const projects = comparable.choices.flatMap(choice => choice.effects.filter(effect => effect.kind === 'schedule-story' && effect.storyKind === 'project-promise'));
++  expect(projects).toHaveLength(country === 'GB' ? 1 : 0);
++  for (const effect of projects) {
++    if (effect.kind !== 'schedule-story') throw Error('Expected the actual project scheduling effect');
++    expect(effect.rememberProject).toBe(true);
++    expect(pending.choices.flatMap(choice => choice.effects).filter(item => item.kind === 'schedule-story').every(item => !Object.hasOwn(item, 'rememberProject'))).toBe(true);
++    delete effect.rememberProject;
++  }
++  expect(comparable).toEqual(pending);
+   expect(next.choices.every(choice => !Object.hasOwn(choice, 'relationshipLabels'))).toBe(true);
+ });
+ 
+diff --git a/tests/ui/adult-relationship-story-flow.test.tsx b/tests/ui/adult-relationship-story-flow.test.tsx
+index 3f2722d..29fec6b 100644
+--- a/tests/ui/adult-relationship-story-flow.test.tsx
++++ b/tests/ui/adult-relationship-story-flow.test.tsx
+@@ -5,7 +5,7 @@ import { createGameStore } from '../../src/state/gameStore';
+ import { encodeWorld, fullName } from '../../src/game/model';
+ import { resolveCommand } from '../../src/game/engine';
+ import { randomInteger } from '../../src/game/random';
+-import { eligibleTemplates } from '../../src/game/content/events';
++import * as eventRarity from '../../src/game/content/eventRarity';
+ import { relationFor } from '../../src/game/systems/relationships';
+ import { SaveRepository } from '../../src/persistence/repository';
+ import * as checkpoints from '../../src/persistence/checkpoints';
+@@ -20,16 +20,30 @@ import { PendingEvent } from '../../src/ui/PendingEvent';
+ const frame = () => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider><Life /><PendingEvent /></ThemeProvider></SafeAreaProvider>;
+ const press = async (name: string) => { await act(async () => fireEvent.press(screen.getByRole('button', { name }))); };
+ 
+-test.each([['friend-different-budget', 'walk', 'friend'], ['partner-money-conversation', 'honest', 'partner']] as const)('Age Up binds %s; failed choice %s rolls back, retries warm and cold-acknowledges the named %s once', async (templateId, choiceId, type) => {
+-  const { world: initial, friendId, partnerId } = adultSocial(), otherId = type === 'friend' ? friendId : partnerId, preview = resolveCommand(initial, { type: 'advance' });
+-  expect(preview.annual?.stage).toBe('complete'); const eligible = eligibleTemplates({ ...preview, eventHistory: initial.eventHistory }), index = eligible.findIndex(item => item.id === templateId); expect(index).toBeGreaterThanOrEqual(0);
+-  // A deterministic domain input; Age Up performs actual monthly progression
+-  // and binds its own story. No manual pending event or replacement people.
+-  for (let seed = 1; seed < 10000; seed++) { const chance = randomInteger(seed, 1, 100), pick = randomInteger(chance.state, 0, eligible.length - 1); if (chance.value <= 78 && pick.value === index) { initial.random.events = seed; break; } }
++// A declared UI-unit selector arrangement: the real annual engine still checks
++// eligibility, advances months and binds its own people/effects. Preserve its
++// one selection draw; only the eligible ticket is arranged, without seed search.
++function arrangeEligibleTicket(templateId: string) {
++  const select = eventRarity.weightedEvent; let arranged = false;
++  return jest.spyOn(eventRarity, 'weightedEvent').mockImplementation((pool, draw) => {
++    const index = pool.findIndex(template => template.id === templateId);
++    if (arranged || index < 0) return select(pool, draw);
++    arranged = true;
++    const ticket = pool.slice(0, index).reduce((sum, template) => sum + eventRarity.eventWeight(template), 0);
++    return select(pool, total => { draw(total); return ticket; });
++  });
++}
++afterEach(() => { jest.restoreAllMocks(); });
++
++test.each([['friend-different-budget', 'walk', 'friend'], ['partner-money-conversation', 'honest', 'partner']] as const)('Age Up with an arranged eligible ticket binds %s; failed choice %s rolls back, retries warm and cold-acknowledges the named %s once', async (templateId, choiceId, type) => {
++  const { world: initial, friendId, partnerId } = adultSocial(), otherId = type === 'friend' ? friendId : partnerId;
++  initial.random.events = 1; expect(randomInteger(1, 1, 100).value).toBe(63);
++  arrangeEligibleTicket(templateId);
+   const { sqlite, driver } = database(), repository = new SaveRepository(driver); await repository.initialise(); await repository.create(initial);
+   const boot = async (repo = repository) => { mockStore = createGameStore({ repository: async () => repo, date: () => initial.date, id: () => 'unused' }); await mockStore.getState().bootstrap(); };
+   await boot(); let view = render(frame()); await press('Age Up'); await waitFor(() => expect(mockStore.getState().world!.pending).toMatchObject({ kind: 'decision', templateId }));
+   const offered = mockStore.getState().world!; if (offered.pending?.kind !== 'decision') throw new Error('Missing adult social scene'); const event = offered.pending, choice = event.choices.find(item => item.id === choiceId)!;
++  expect(offered.annual?.stage).toBe('complete');
+   expect(event.personIds).toEqual([offered.activePersonId, otherId]); expect(screen.getByText(event.body)).toBeOnTheScreen(); expect(event.body).toContain(fullName(offered.people[otherId]));
+   const before = encodeWorld(offered), rows = () => Object.fromEntries(sqlite.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name").all().map(row => [row.name, sqlite.prepare('SELECT * FROM ' + row.name + ' ORDER BY 1,2').all()])), originalRows = rows();
+   const unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'); sqlite.exec("CREATE TRIGGER fail_adult_story BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
+diff --git a/tests/ui/childhood-story-flow.test.tsx b/tests/ui/childhood-story-flow.test.tsx
+index d6f3904..eee87dd 100644
+--- a/tests/ui/childhood-story-flow.test.tsx
++++ b/tests/ui/childhood-story-flow.test.tsx
+@@ -4,7 +4,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
+ import { createGameStore } from '../../src/state/gameStore';
+ import { encodeWorld } from '../../src/game/model';
+ import { resolveCommand } from '../../src/game/engine';
+-import { eligibleTemplates } from '../../src/game/content/events';
++import * as eventRarity from '../../src/game/content/eventRarity';
+ import { currentSchool } from '../../src/game/systems/schoolSchemas';
+ import { relationFor } from '../../src/game/systems/relationships';
+ import { randomInteger } from '../../src/game/random';
+@@ -18,17 +18,31 @@ jest.mock('../../src/state/useGame', () => ({ useGame: (selector: unknown) => re
+ import Life from '../../app/(game)/(tabs)/life';
+ import { PendingEvent } from '../../src/ui/PendingEvent';
+ const frame = () => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider><Life /><PendingEvent /></ThemeProvider></SafeAreaProvider>;
+-test('actual Age Up offers a named school story; a failed choice saves no grades or teacher bond, retry applies once and cold resume preserves the result', async () => {
+-  const initial = pupil('US', 7), preview = resolveCommand(initial, { type: 'advance' });
+-  expect(preview.annual?.stage).toBe('complete');
+-  const eligible = eligibleTemplates({ ...preview, eventHistory: initial.eventHistory }), targetIndex = eligible.findIndex(item => item.id === 'school-homework-soap'); expect(targetIndex).toBeGreaterThanOrEqual(0);
+-  // Select a persisted RNG state for this real Age Up; the engine still offers and binds the scene itself.
+-  for (let seed = 1; seed < 10000; seed++) { const offer = randomInteger(seed, 1, 100), pick = randomInteger(offer.state, 0, eligible.length - 1); if (offer.value <= 78 && pick.value === targetIndex) { initial.random.events = seed; break; } }
++// A declared UI-unit selector arrangement: the real annual engine still checks
++// eligibility, advances months and binds its own people/effects. Preserve its
++// one selection draw; only the eligible ticket is arranged, without seed search.
++function arrangeEligibleTicket(templateId: string) {
++  const select = eventRarity.weightedEvent; let arranged = false;
++  return jest.spyOn(eventRarity, 'weightedEvent').mockImplementation((pool, draw) => {
++    const index = pool.findIndex(template => template.id === templateId);
++    if (arranged || index < 0) return select(pool, draw);
++    arranged = true;
++    const ticket = pool.slice(0, index).reduce((sum, template) => sum + eventRarity.eventWeight(template), 0);
++    return select(pool, total => { draw(total); return ticket; });
++  });
++}
++afterEach(() => { jest.restoreAllMocks(); });
++
++test('Age Up with an arranged eligible ticket offers a named school story; a failed choice saves no grades or teacher bond, retry applies once and cold resume preserves the result', async () => {
++  const initial = pupil('US', 7); initial.random.events = 1;
++  expect(randomInteger(1, 1, 100).value).toBe(63);
++  arrangeEligibleTicket('school-homework-soap');
+   const { sqlite, driver } = database(), repository = new SaveRepository(driver); await repository.initialise(); await repository.create(initial);
+   mockStore = createGameStore({ repository: async () => repository, date: () => initial.date, id: () => 'life_unused' }); await mockStore.getState().bootstrap(); const view = render(frame());
+   await act(async () => fireEvent.press(screen.getByRole('button', { name: 'Age Up' })));
+   await waitFor(() => expect(screen.getByText('The homework needs rinsing')).toBeOnTheScreen());
+   const offered = mockStore.getState().world!, expected = encodeWorld(offered), teacherId = currentSchool(offered)!.currentTeacherId, beforeGrade = offered.people[offered.activePersonId].education.grades, beforeBond = relationFor(offered, offered.activePersonId, teacherId)!.strength;
++  expect(offered.annual?.stage).toBe('complete');
+   expect(offered.pending?.kind === 'decision' && offered.pending.personIds).toContain(teacherId);
+   sqlite.exec("CREATE TRIGGER fail_child_story BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END"); await act(async () => fireEvent.press(screen.getByRole('button', { name: 'Offer to do it again' })));
+   await waitFor(() => screen.getAllByRole('alert').forEach(message => expect(message).toHaveTextContent(/couldn't be saved/))); expect(encodeWorld(mockStore.getState().world!)).toBe(expected); expect(await repository.load(offered.id)).toEqual(offered);
+diff --git a/tests/ui/ordinary-hobby-flow.test.tsx b/tests/ui/ordinary-hobby-flow.test.tsx
+index 4425383..ed35352 100644
+--- a/tests/ui/ordinary-hobby-flow.test.tsx
++++ b/tests/ui/ordinary-hobby-flow.test.tsx
+@@ -6,6 +6,7 @@ import { encodeWorld } from '../../src/game/model';
+ import { resolveCommand } from '../../src/game/engine';
+ import { choiceUnavailable } from '../../src/game/choiceAvailability';
+ import { SaveRepository } from '../../src/persistence/repository';
++import * as checkpoints from '../../src/persistence/checkpoints';
+ import { database } from '../support/sqlite';
+ import { ThemeProvider } from '../../src/ui/theme';
+ import archive from '../fixtures/v27-responsive-archive.json';
+@@ -23,8 +24,17 @@ const press = async (name: string | RegExp) => { await act(async () => { fireEve
+ 
+ test('the genuine child keeps original history, browses all new hobbies, and retries/cold-resumes actual reading consent, monthly bills and optional practice', async () => {
+   const { sqlite, driver } = database(), repository = new SaveRepository(driver); await repository.initialise(); await repository.import(JSON.stringify(archive));
+-  const cold = async () => { mockStore = createGameStore({ repository: async () => repository, date: () => ({ year: 2026, month: 10, day: 19 }), id: () => 'unused' }); await mockStore.getState().bootstrap(); };
++  // Reset both repository and store caches on the same open in-memory connection.
++  // This is a decoded reload, not a closed-connection/native cold-start claim.
++  const cold = async () => { const reopened = new SaveRepository(driver); mockStore = createGameStore({ repository: async () => reopened, date: () => ({ year: 2026, month: 10, day: 19 }), id: () => 'unused' }); expect(await mockStore.getState().bootstrap()).toBe(true); };
+   await cold(); const world = () => mockStore.getState().world!, reading = () => world().hobbies.find(item => item.kind === 'reading')!;
++  const rows = () => Object.fromEntries(sqlite.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name").all().map(row => [row.name, sqlite.prepare('SELECT * FROM ' + row.name + ' ORDER BY 1,2').all()]));
++  const expectOneSave = (before: ReturnType<typeof rows>) => {
++    const previous = before.lives.find((row: Record<string, unknown>) => row.id === world().id)!;
++    expect(world().revision).toBe(Number(previous.revision) + 1);
++    expect(rows().receipts).toHaveLength(before.receipts.length + 1);
++    expect(sqlite.prepare('SELECT payload FROM backups WHERE life_id=?').get(world().id)?.payload).toBe(previous.payload);
++  };
+   const view = render(frame(<Life />));
+   const finish = async () => {
+     let guard = 0;
+@@ -51,21 +61,30 @@ test('the genuine child keeps original history, browses all new hobbies, and ret
+   expect(screen.queryByRole('button', { name: 'Review Hobby Routine' })).toBeNull();
+   view.rerender(frame(<Hobbies />)); await press(/^Reading\./); mockHobbyKind = 'reading'; view.rerender(frame(<Hobby />));
+   expect(encodeWorld(world())).toBe(beforeBrowse);
+-  const accounts = structuredClone(world().accounts), assets = structuredClone(world().assets);
++  const accounts = structuredClone(world().accounts), assets = structuredClone(world().assets), beforePlanRows = rows();
++  const parent = world().relationships.find(edge => [edge.from, edge.to].includes(world().activePersonId) && [edge.from, edge.to].includes('person_parent1'))!;
++  const parentStrength = parent.strength, consentChance = Math.min(95, 45 + Math.floor(parentStrength / 2));
++  // The unchanged archive now reaches a different ordinary-story relationship;
++  // the payer formula and saved47 roll have not changed.
++  expect(consentChance).toBe(87); expect(Object.keys(beforePlanRows)).toHaveLength(8);
+   await press('Review Hobby Routine'); expect(screen.getByText('Responsible payer')).toBeOnTheScreen();
+   sqlite.exec("CREATE TRIGGER fail_reading_plan BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
+   await press('Ask For This Routine'); await waitFor(() => expect(mockStore.getState().error).toMatch(/couldn't be saved/));
+-  expect(encodeWorld(world())).toBe(beforeBrowse); expect(encodeWorld(await repository.load(world().id))).toBe(beforeBrowse);
++  expect(encodeWorld(world())).toBe(beforeBrowse); expect(encodeWorld(await repository.load(world().id))).toBe(beforeBrowse); expect(rows()).toEqual(beforePlanRows);
++  const planUnpack = jest.spyOn(checkpoints, 'unpackCheckpoint');
+   sqlite.exec('DROP TRIGGER fail_reading_plan'); await press('Ask For This Routine');
+-  expect(reading()).toMatchObject({ proficiency: 0, practices: [], plans: [{ payerId: 'person_parent1', monthlyFee: 1160n, consent: { accepted: true, roll: 47, chance: 89 } }] });
++  expect(planUnpack).not.toHaveBeenCalled(); planUnpack.mockRestore(); expectOneSave(beforePlanRows);
++  expect(reading()).toMatchObject({ proficiency: 0, practices: [], plans: [{ payerId: 'person_parent1', monthlyFee: 1160n, consent: { accepted: true, strength: parentStrength, roll: 47, chance: consentChance } }] });
+   expect(world().accounts).toEqual(accounts); expect(world().assets).toEqual(assets);
+   const planned = encodeWorld(world()); await act(async () => { await cold(); }); view.rerender(frame(<Hobby />));
+   expect(encodeWorld(world())).toBe(planned); await press('Continue');
+-  view.rerender(frame(<Life />)); const beforeYear = encodeWorld(world()), predicted = resolveCommand(world(), { type: 'advance' }, true);
++  view.rerender(frame(<Life />)); const beforeYear = encodeWorld(world()), beforeYearRows = rows(), predicted = resolveCommand(world(), { type: 'advance' }, true);
+   sqlite.exec("CREATE TRIGGER fail_reading_months BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
+   await press('Age Up'); await waitFor(() => expect(mockStore.getState().error).toMatch(/couldn't be saved/));
+-  expect(encodeWorld(world())).toBe(beforeYear); expect(encodeWorld(await repository.load(world().id))).toBe(beforeYear);
++  expect(encodeWorld(world())).toBe(beforeYear); expect(encodeWorld(await repository.load(world().id))).toBe(beforeYear); expect(rows()).toEqual(beforeYearRows);
++  const yearUnpack = jest.spyOn(checkpoints, 'unpackCheckpoint');
+   sqlite.exec('DROP TRIGGER fail_reading_months'); await press('Age Up'); expect(world()).toEqual(predicted);
++  expect(yearUnpack).not.toHaveBeenCalled(); yearUnpack.mockRestore(); expectOneSave(beforeYearRows);
+   const interrupted = encodeWorld(world()); await act(async () => { await cold(); }); view.rerender(frame(<Life />));
+   expect(encodeWorld(world())).toBe(interrupted); await finish();
+   expect(reading().practices.filter(row => row.source === 'monthly')).toHaveLength(12);
+@@ -75,10 +94,12 @@ test('the genuine child keeps original history, browses all new hobbies, and ret
+   expect(world().hobbies[0].practices.slice(0, originalGuitarMonths.length)).toEqual(originalGuitarMonths);
+   expect(world().pets[0].periods).toHaveLength(36);
+   view.rerender(frame(<Hobbies />)); await press(/^Reading\./); view.rerender(frame(<Hobby />));
+-  const beforePractice = encodeWorld(world()), money = structuredClone(world().accounts), ledger = structuredClone(world().ledger), smarts = world().people[world().activePersonId].stats.smarts;
++  const beforePractice = encodeWorld(world()), beforePracticeRows = rows(), money = structuredClone(world().accounts), ledger = structuredClone(world().ledger), smarts = world().people[world().activePersonId].stats.smarts;
+   sqlite.exec("CREATE TRIGGER fail_reading_extra BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
+-  await press('Extra Practice'); await waitFor(() => expect(mockStore.getState().error).toMatch(/couldn't be saved/)); expect(encodeWorld(world())).toBe(beforePractice);
++  await press('Extra Practice'); await waitFor(() => expect(mockStore.getState().error).toMatch(/couldn't be saved/)); expect(encodeWorld(world())).toBe(beforePractice); expect(rows()).toEqual(beforePracticeRows);
++  const practiceUnpack = jest.spyOn(checkpoints, 'unpackCheckpoint');
+   sqlite.exec('DROP TRIGGER fail_reading_extra'); await press('Extra Practice');
++  expect(practiceUnpack).not.toHaveBeenCalled(); practiceUnpack.mockRestore(); expectOneSave(beforePracticeRows);
+   expect(reading().practices.at(-1)).toMatchObject({ source: 'manual', gain: 1, paid: 0n, paymentId: null });
+   expect(world().accounts).toEqual(money); expect(world().ledger).toEqual(ledger); expect(world().people[world().activePersonId].stats.smarts).toBe(smarts);
+   expect(world().pending).toMatchObject({ kind: 'result', effects: [{ id: 'proficiency', value: '+1%', tone: 'positive' }, expect.anything(), expect.anything(), expect.anything()] });
+diff --git a/tests/ui/story-consequence-labels-flow.test.tsx b/tests/ui/story-consequence-labels-flow.test.tsx
+index 36a3835..a78fbe3 100644
+--- a/tests/ui/story-consequence-labels-flow.test.tsx
++++ b/tests/ui/story-consequence-labels-flow.test.tsx
+@@ -2,7 +2,7 @@ import React from 'react';
+ import { act, fireEvent, render, screen, waitFor } from '@testing-library/react-native';
+ import { SafeAreaProvider } from 'react-native-safe-area-context';
+ import { createGameStore } from '../../src/state/gameStore';
+-import { eligibleTemplates } from '../../src/game/content/events';
++import * as eventRarity from '../../src/game/content/eventRarity';
+ import { resolveCommand } from '../../src/game/engine';
+ import { encodeWorld, fullName } from '../../src/game/model';
+ import { randomInteger } from '../../src/game/random';
+@@ -21,18 +21,25 @@ import { PendingEvent } from '../../src/ui/PendingEvent';
+ const frame = () => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider><Life /><PendingEvent /></ThemeProvider></SafeAreaProvider>;
+ const press = async (label: string) => { await act(async () => fireEvent.press(screen.getByRole('button', { name: label }))); };
+ 
+-test('a real Age Up shows both named school consequences after durable retry, retains them cold and applies neither bond twice', async () => {
+-  const initial = pupil('US', 7), preview = resolveCommand(initial, { type: 'advance' });
+-  expect(preview.annual?.stage).toBe('complete');
+-  const eligible = eligibleTemplates({ ...preview, eventHistory: initial.eventHistory }), target = eligible.findIndex(template => template.id === 'school-volcano-breach');
+-  expect(target).toBeGreaterThanOrEqual(0);
+-  // Controlled event-stream setup; normal Age Up still selects and binds all people/effects.
+-  let found = false;
+-  for (let seed = 1; seed < 10000; seed++) {
+-    const offer = randomInteger(seed, 1, 100), pick = randomInteger(offer.state, 0, eligible.length - 1);
+-    if (offer.value <= 78 && pick.value === target) { initial.random.events = seed; found = true; break; }
+-  }
+-  expect(found).toBe(true);
++// A declared UI-unit selector arrangement: the real annual engine still checks
++// eligibility, advances months and binds its own people/effects. Preserve its
++// one selection draw; only the eligible ticket is arranged, without seed search.
++function arrangeEligibleTicket(templateId: string) {
++  const select = eventRarity.weightedEvent; let arranged = false;
++  return jest.spyOn(eventRarity, 'weightedEvent').mockImplementation((pool, draw) => {
++    const index = pool.findIndex(template => template.id === templateId);
++    if (arranged || index < 0) return select(pool, draw);
++    arranged = true;
++    const ticket = pool.slice(0, index).reduce((sum, template) => sum + eventRarity.eventWeight(template), 0);
++    return select(pool, total => { draw(total); return ticket; });
++  });
++}
++afterEach(() => { jest.restoreAllMocks(); });
++
++test('Age Up with an arranged eligible ticket shows both named school consequences after durable retry, retains them cold and applies neither bond twice', async () => {
++  const initial = pupil('US', 7); initial.random.events = 1;
++  expect(randomInteger(1, 1, 100).value).toBe(63);
++  arrangeEligibleTicket('school-volcano-breach');
+   const { sqlite, driver } = database(), repository = new SaveRepository(driver); await repository.initialise(); await repository.create(initial);
+   const cold = async () => { const repo = new SaveRepository(driver); mockStore = createGameStore({ repository: async () => repo, date: () => initial.date, id: () => 'unused' }); await mockStore.getState().bootstrap(); };
+   const rows = () => Object.fromEntries(sqlite.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name").all().map(row => [row.name, sqlite.prepare('SELECT * FROM ' + row.name + ' ORDER BY 1,2').all()]));
+@@ -41,6 +48,7 @@ test('a real Age Up shows both named school consequences after durable retry, re
+     await cold(); view = render(frame()); await press('Age Up');
+     await waitFor(() => expect(screen.getByText('The volcano has escaped')).toBeOnTheScreen());
+     const offered = mockStore.getState().world!, school = currentSchool(offered)!, peer = offered.people[school.classmateIds[0]], teacher = offered.people[school.currentTeacherId];
++    expect(offered.annual?.stage).toBe('complete');
+     if (offered.pending?.kind !== 'decision') throw new Error('Expected the actual annual school decision');
+     expect(offered.pending.personIds).toEqual([offered.activePersonId, peer.id, teacher.id]);
+     const command = { type: 'choose' as const, eventId: offered.pending.id, choiceId: 'clean' }, before = rows(), original = encodeWorld(offered);
+diff --git a/tests/ui/student-loan-rate-flow.test.tsx b/tests/ui/student-loan-rate-flow.test.tsx
+index b46228e..c9831db 100644
+--- a/tests/ui/student-loan-rate-flow.test.tsx
++++ b/tests/ui/student-loan-rate-flow.test.tsx
+@@ -103,22 +103,37 @@ async function setup(initial: World) {
+ }
+ type Context = Awaited<ReturnType<typeof setup>>;
+ 
++async function requestUniversityPlace(context: Context, field: string) {
++  const initial = world(), beforeRows = context.rows();
++  await press(/^University\./); await choose(field); await press('Review Free Application');
++  expect(screen.getByText('No fee or loan')).toBeOnTheScreen(); expect(world()).toEqual(initial); expect(context.rows()).toEqual(beforeRows);
++  await press('Submit University Application');
++  const item = world().universityApplications.at(-1)!;
++  // One actual application of the already fixed Arts subject/seed/context.
++  // Never search another subject/seed or reroll a rejected/waitlisted outcome.
++  expect(item).toMatchObject({ status: 'accepted', field: field.toLowerCase(), enrolment: null });
++  expect(world().people).toEqual(initial.people); expect(world().accounts).toEqual(initial.accounts); expect(world().liabilities).toEqual(initial.liabilities); expect(world().ledger).toEqual(initial.ledger);
++  await press('Continue'); return item.id;
++}
++
+ async function admission(program: 'university' | 'trade' | 'graduate', field: string, rate: number, existing = true) {
+-  await press(program === 'graduate' ? /^Professional Study\./ : program === 'trade' ? /^Trade School\./ : /^University\./);
+-  await choose(field); await press('Next');
++  if (program === 'university') await press('Review Offered Place');
++  else { await press(program === 'graduate' ? /^Professional Study\./ : /^Trade School\./); await choose(field); await press('Next'); }
+   expect(screen.getByRole('radio', { name: 'Student loan · ' + rate + '% annual interest' })).toBeOnTheScreen();
+-  if (existing) expect(screen.getByText(/added to your existing EUR student loan at 2%/)).toBeOnTheScreen();
+-  else expect(screen.queryByText(/added to your existing/)).toBeNull();
+-  await choose(/Student loan/); await press('Review Application');
++  if (existing) expect(screen.getByText(program === 'university' ? /joins your existing EUR student loan/ : /added to your existing EUR student loan at 2%/)).toBeOnTheScreen();
++  else expect(screen.queryByText(/(?:added to|joins) your existing/)).toBeNull();
++  await choose(/Student loan/); await press(program === 'university' ? 'Review Enrolment' : 'Review Application');
+   expect(screen.getByText('Student loan annual interest')).toBeOnTheScreen(); expect(screen.getByText(rate + '%')).toBeOnTheScreen();
+ }
+ 
+ async function retryEducation(context: Context, command: GameCommand, confirm: string, checkDraft: () => void) {
+   const initial = world(), beforeRows = context.rows(), predicted = resolveCommand(initial, command, true), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint');
++  const previousPayload = context.sqlite.prepare('SELECT payload FROM lives WHERE id=?').get(initial.id)!.payload;
+   context.sqlite.exec("CREATE TRIGGER fail_loan_rate BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
+   await press(confirm); await waitFor(() => expect(screen.getByRole('alert')).toHaveTextContent(/couldn't be saved/)); checkDraft();
+   expect(world()).toEqual(initial); expect(context.rows()).toEqual(beforeRows);
+   context.sqlite.exec('DROP TRIGGER fail_loan_rate'); await press(confirm); expect(world()).toEqual(predicted); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore();
++  expect(context.sqlite.prepare('SELECT payload FROM backups WHERE life_id=?').get(initial.id)?.payload).toBe(previousPayload);
+   const borrowed = world().ledger.slice(initial.ledger.length).filter(item => item.category === 'borrowing'), tuition = world().ledger.slice(initial.ledger.length).filter(item => item.category === 'tuition');
+   expect(borrowed).toHaveLength(1); expect(tuition).toHaveLength(1); expect(borrowed[0].cashDelta).toBe(-tuition[0].cashDelta);
+   expect(debt(world(), 'student').principal).toBe((debt(initial, 'student')?.principal ?? 0n) + borrowed[0].cashDelta);
+@@ -135,11 +150,12 @@ async function coldAndAcknowledge(context: Context, predicted: World, savedRows:
+ test.each([['university', 'Arts'], ['trade', 'Arts'], ['graduate', 'Medicine'], ['graduate', 'Law']] as const)('%s %s quotes the reused French EUR rate through local review, rollback, retry and cold acknowledgement', async (program, field) => {
+   const initial = perform(germanBorrower(), { type: 'quit-job' }), context = await setup(initial);
+   try {
+-    expect(rules.DE.studentInterestBps).toBe(150); const before = encodeWorld(world()), beforeRows = context.rows(), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint');
+-    const view = render(frame()); await admission(program, field, 2); await press('Never mind'); expect(encodeWorld(world())).toBe(before); expect(context.rows()).toEqual(beforeRows); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore();
++    expect(rules.DE.studentInterestBps).toBe(150); const view = render(frame()), applicationId = program === 'university' ? await requestUniversityPlace(context, field) : null;
++    const before = encodeWorld(world()), beforeRows = context.rows(), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint');
++    await admission(program, field, 2); await press('Never mind'); expect(encodeWorld(world())).toBe(before); expect(context.rows()).toEqual(beforeRows); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore();
+     await admission(program, field, 2);
+-    const command = { type: 'enroll', program, field: field.toLowerCase(), funding: 'loan' } as GameCommand;
+-    const { predicted, savedRows } = await retryEducation(context, command, 'Apply', () => { expect(screen.getByText('Apply to study ' + field.toLowerCase() + '?')).toBeOnTheScreen(); expect(screen.getByText('2%')).toBeOnTheScreen(); });
++    const command = applicationId ? { type: 'accept-university-place', applicationId, funding: 'loan' } as const : { type: 'enroll', program, field: field.toLowerCase(), funding: 'loan' } as GameCommand;
++    const { predicted, savedRows } = await retryEducation(context, command, applicationId ? 'Accept Place And Enrol' : 'Apply', () => { expect(screen.getByText(applicationId ? 'Accept your university place?' : 'Apply to study ' + field.toLowerCase() + '?')).toBeOnTheScreen(); expect(screen.getByText('2%')).toBeOnTheScreen(); });
+     expect(debt(world(), 'student')).toMatchObject({ interestBps: 200, principal: 60000n + tuitionFor(initial.people[initial.activePersonId], program) });
+     view.unmount(); await coldAndAcknowledge(context, predicted, savedRows);
+   } finally { jest.restoreAllMocks(); context.close(); }
+@@ -161,8 +177,8 @@ test('a fully repaid canonical EUR student line still quotes and reuses its orig
+   let initial = perform(germanBorrower(), { type: 'quit-job' }); initial = perform(initial, { type: 'repay', liabilityId: debt(initial, 'student').id, amount: debt(initial, 'student').principal }); expect(debt(initial, 'student').principal).toBe(0n);
+   const context = await setup(initial);
+   try {
+-    const view = render(frame()); await admission('university', 'Arts', 2);
+-    const { predicted, savedRows } = await retryEducation(context, { type: 'enroll', program: 'university', field: 'arts', funding: 'loan' }, 'Apply', () => expect(screen.getByText('2%')).toBeOnTheScreen());
++    const view = render(frame()), applicationId = await requestUniversityPlace(context, 'Arts'); await admission('university', 'Arts', 2);
++    const { predicted, savedRows } = await retryEducation(context, { type: 'accept-university-place', applicationId, funding: 'loan' }, 'Accept Place And Enrol', () => expect(screen.getByText('2%')).toBeOnTheScreen());
+     expect(debt(world(), 'student')).toMatchObject({ principal: 60000n, interestBps: 200 }); expect(world().liabilities.filter(item => item.kind === 'student' && item.ownerId === initial.activePersonId)).toHaveLength(1);
+     view.unmount(); await coldAndAcknowledge(context, predicted, savedRows);
+   } finally { jest.restoreAllMocks(); context.close(); }
+@@ -172,8 +188,8 @@ test('after an actual move to London an existing EUR student loan does not repla
+   const initial = perform(move(germanBorrower(), 'london'), { type: 'quit-job' }), oldEUR = debt(initial, 'student', 'EUR'), context = await setup(initial);
+   try {
+     expect(initial.people[initial.activePersonId].country).toBe('GB'); expect(accountFor(initial).currency).toBe('GBP'); expect(debt(initial, 'student')).toBeUndefined();
+-    const view = render(frame()); await admission('university', 'Arts', 4, false);
+-    const { predicted, savedRows } = await retryEducation(context, { type: 'enroll', program: 'university', field: 'arts', funding: 'loan' }, 'Apply', () => expect(screen.getByText('4%')).toBeOnTheScreen());
++    const view = render(frame()), applicationId = await requestUniversityPlace(context, 'Arts'); await admission('university', 'Arts', 4, false);
++    const { predicted, savedRows } = await retryEducation(context, { type: 'accept-university-place', applicationId, funding: 'loan' }, 'Accept Place And Enrol', () => expect(screen.getByText('4%')).toBeOnTheScreen());
+     expect(debt(world(), 'student')).toMatchObject({ interestBps: 400, principal: rules.GB.universityTuition }); expect(debt(world(), 'student', 'EUR')).toEqual(oldEUR);
+     view.unmount(); await coldAndAcknowledge(context, predicted, savedRows);
+   } finally { jest.restoreAllMocks(); context.close(); }
+diff --git a/tests/ui/workplace-story-flow.test.tsx b/tests/ui/workplace-story-flow.test.tsx
+index 0ee251b..43b84fd 100644
+--- a/tests/ui/workplace-story-flow.test.tsx
++++ b/tests/ui/workplace-story-flow.test.tsx
+@@ -2,11 +2,8 @@ import React from 'react';
+ import { act, fireEvent, render, screen, waitFor } from '@testing-library/react-native';
+ import { SafeAreaProvider } from 'react-native-safe-area-context';
+ import { createGameStore } from '../../src/state/gameStore';
+-import { encodeWorld, fullName } from '../../src/game/model';
++import { encodeWorld } from '../../src/game/model';
+ import { resolveCommand } from '../../src/game/engine';
+-import { randomInteger } from '../../src/game/random';
+-import { eligibleTemplates } from '../../src/game/content/events';
+-import { relationFor } from '../../src/game/systems/relationships';
+ import { decodeSave } from '../../src/persistence/archive';
+ import { SaveRepository } from '../../src/persistence/repository';
+ import * as checkpoints from '../../src/persistence/checkpoints';
+@@ -25,27 +22,30 @@ import { PendingEvent } from '../../src/ui/PendingEvent';
+ const frame = (child: React.ReactNode) => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider>{child}<PendingEvent /></ThemeProvider></SafeAreaProvider>;
+ const press = async (name: string) => { await act(async () => fireEvent.press(screen.getByRole('button', { name }))); };
+ 
+-test('Age Up binds actual work contacts; a failed shared-credit choice rolls back all tables, retries warm and cold-resumes once', async () => {
++test('a paid employee year offers its actual weighted story; its choice rolls back all tables, retries warm and reopens once', async () => {
+   const initial = employee(), preview = resolveCommand(initial, { type: 'advance' }); expect(preview.annual?.stage).toBe('complete');
+-  const eligible = eligibleTemplates({ ...preview, eventHistory: initial.eventHistory }), index = eligible.findIndex(item => item.id === 'work-shared-credit'); expect(index).toBeGreaterThanOrEqual(0);
+-  // Deterministic domain input; Age Up itself selects/binds the scene and pays the year.
+-  for (let seed = 1; seed < 10000; seed++) { const chance = randomInteger(seed, 1, 100), pick = randomInteger(chance.state, 0, eligible.length - 1); if (chance.value <= 78 && pick.value === index) { initial.random.events = seed; break; } }
++  // Keep the arranged employee helper's original event stream. Its one actual
++  // weighted Age Up offers this wellbeing scene, without searching for work credit.
++  // Specific shared-credit binding/effects and the genuine archived result retain
++  // their separate workplace domain and immutable-archive checks.
+   const { sqlite, driver } = database(), repository = new SaveRepository(driver); await repository.initialise(); await repository.create(initial);
+-  const cold = async (repo = repository) => { mockStore = createGameStore({ repository: async () => repo, date: () => initial.date, id: () => 'unused' }); await mockStore.getState().bootstrap(); };
+-  await cold(); let view = render(frame(<Life />)); await press('Age Up'); await waitFor(() => expect(screen.getByText('There were two of us')).toBeOnTheScreen());
+-  const offered = mockStore.getState().world!; if (offered.pending?.kind !== 'decision') throw new Error('Missing workplace decision'); const event = offered.pending, coworkerId = event.personIds[1], supervisorId = event.personIds[2];
+-  expect(event.body).toContain(fullName(offered.people[coworkerId])); expect(event.body).toContain(fullName(offered.people[supervisorId]));
+-  const choice = event.choices.find(item => item.id === 'name')!, before = encodeWorld(offered), rows = () => Object.fromEntries(sqlite.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name").all().map(row => [row.name, sqlite.prepare('SELECT * FROM ' + row.name + ' ORDER BY 1,2').all()])), originalRows = rows();
++  // New repository/store over the same in-memory connection: cache reopen,
++  // not a process stop or closed-connection cold-resume claim.
++  const reload = async (repo = repository) => { mockStore = createGameStore({ repository: async () => repo, date: () => initial.date, id: () => 'unused' }); await mockStore.getState().bootstrap(); };
++  await reload(); let view = render(frame(<Life />)); await press('Age Up'); await waitFor(() => expect(screen.getByText('You must make the most of it')).toBeOnTheScreen());
++  const offered = mockStore.getState().world!; if (offered.pending?.kind !== 'decision') throw new Error('Missing actual weighted decision'); const event = offered.pending;
++  expect(offered).toEqual(preview); expect(event.templateId).toBe('wellbeing-good-day-pressure'); expect(event.personIds).toEqual([offered.activePersonId]); expect(offered.people[offered.activePersonId].employment!.paidMonths).toBe(initial.people[initial.activePersonId].employment!.paidMonths + 12);
++  const choice = event.choices.find(item => item.id === 'pace')!, before = encodeWorld(offered), rows = () => Object.fromEntries(sqlite.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name").all().map(row => [row.name, sqlite.prepare('SELECT * FROM ' + row.name + ' ORDER BY 1,2').all()])), originalRows = rows(); expect(Object.keys(originalRows)).toHaveLength(8);
+   const unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'); sqlite.exec("CREATE TRIGGER fail_work_story BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
+   await press(choice.label); await waitFor(() => expect(mockStore.getState().error).toMatch(/couldn't be saved/)); expect(encodeWorld(mockStore.getState().world!)).toBe(before); expect(rows()).toEqual(originalRows);
+-  sqlite.exec('DROP TRIGGER fail_work_story'); await press(choice.label); await waitFor(() => expect(screen.getByText('The complete version')).toBeOnTheScreen());
+-  const result = mockStore.getState().world!; expect(result).toEqual(resolveCommand(offered, { type: 'choose', eventId: event.id, choiceId: 'name' }, true)); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore();
++  sqlite.exec('DROP TRIGGER fail_work_story'); await press(choice.label); await waitFor(() => expect(screen.getByText('A useful day with an ending')).toBeOnTheScreen());
++  const result = mockStore.getState().world!; expect(result).toEqual(resolveCommand(offered, { type: 'choose', eventId: event.id, choiceId: 'pace' }, true)); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore();
+   expect(result.accounts).toEqual(offered.accounts); expect(result.ledger).toEqual(offered.ledger); expect(result.workHistory).toEqual(offered.workHistory); expect(result.workplaces).toEqual(offered.workplaces);
+-  expect(relationFor(result, offered.activePersonId, coworkerId)!.strength).toBe(Math.min(100, relationFor(offered, offered.activePersonId, coworkerId)!.strength + 5));
+-  expect(relationFor(result, offered.activePersonId, supervisorId)!.strength).toBe(Math.min(100, relationFor(offered, offered.activePersonId, supervisorId)!.strength + 2));
+-  view.unmount(); await cold(new SaveRepository(driver)); view = render(frame(<Life />)); expect(mockStore.getState().world).toEqual(result); expect(screen.getByText('The complete version')).toBeOnTheScreen(); await press('Continue');
++  const person = offered.people[offered.activePersonId]; expect(result.relationships).toEqual(offered.relationships); expect(result.people).toEqual({ ...offered.people, [person.id]: { ...person, stats: { ...person.stats, discipline: Math.min(100, person.stats.discipline + 3), stress: Math.max(0, person.stats.stress - 2), energy: Math.max(0, person.stats.energy - 1) } } });
++  expect(result.revision).toBe(offered.revision + 1); expect(rows().receipts).toHaveLength(originalRows.receipts.length + 1); expect(sqlite.prepare('SELECT payload FROM backups WHERE life_id=?').get(offered.id)?.payload).toBe(originalRows.lives.find((row: Record<string, unknown>) => row.id === offered.id)!.payload);
++  const resultRows = rows(); view.unmount(); await reload(new SaveRepository(driver)); view = render(frame(<Life />)); expect(mockStore.getState().world).toEqual(result); expect(rows()).toEqual(resultRows); expect(screen.getByText('A useful day with an ending')).toBeOnTheScreen(); await press('Continue');
+   const completed = mockStore.getState().world!; expect(completed.pending).toBeNull(); expect(completed.annual).toBeNull(); expect(completed.people).toEqual(result.people); expect(completed.relationships).toEqual(result.relationships); expect(completed.random).toEqual(result.random);
+-  expect(await repository.load(completed.id)).toEqual(completed); expect(completed.journal.filter(item => item.text === choice.journal)).toHaveLength(1); view.unmount(); sqlite.close();
++  expect(await repository.load(completed.id)).toEqual(completed); expect(completed.journal.filter(item => item.text === choice.journal)).toHaveLength(1); const completedRows = rows(); await act(async () => { expect(await mockStore.getState().dispatch({ type: 'acknowledge', resultId: result.pending!.id })).toBe(false); }); expect(rows()).toEqual(completedRows); expect(mockStore.getState().world).toBe(completed); view.unmount(); sqlite.close();
+ });
+ 
+ test.each([['adult', nativeRaise, true], ['pupil', nativeTeen, false]] as const)('existing %s part-time native life gives school-leaver guidance only when appropriate', async (_label, archive, shown) => {

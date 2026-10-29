@@ -1,0 +1,179 @@
+{
+  "date": "2026-10-23",
+  "scope": "Android feedback playback and new preference defaults",
+  "baseCommit": "2bb7ce9b3c301de9a286d2cb90d88fe6a1670c4b",
+  "sourceHashes": {
+    "src/state/preferencesStore.ts": "02ef739a494b16777ce1ac357a20a88a20ce8f441ea15ec8ab7ba1e05606b6eb",
+    "src/ui/audioController.ts": "04e10130a698ad65de533469dd09e066a26828503a08b8143aeee1814f5c142a",
+    "src/ui/AppReminders.tsx": "738785ac79c4bdd5ae2949fc82872a31f7c43b7f1baca1e1a8b619510f3966f7",
+    "src/ui/DailyReminderSettings.tsx": "0fadc4dbefeb9bf94c4734c4be723584ed2125ea7f5ea1731d157d2bd16c9bb4",
+    "tests/state/preferencesStore.test.ts": "ad1aee665747a07420c4294c7a47380bf4459f0d8f8d8e7e45c3ebce25b23b5f",
+    "tests/ui/audio-controller.test.ts": "fa4fa92e242ce3874c53e231381e0cfdf685d0ad69a8796d04a302905629a04e",
+    "tests/ui/feedback-settings-flow.test.tsx": "d18c95f774be20515cdb03b5d04d9fd673b474a1d2c117c63beb0850f31c717d",
+    "tests/ui/onboarding-haptics-flow.test.tsx": "ff6b5309069fddcd97b5e25b518d1ebf1a319a5c3d2c364a055ae6af0e2f72f2",
+    "tests/ui/daily-reminder-settings.test.tsx": "19c60304637dda0d0dd51f24032b472f22a16c328f405975faed4ad4af035169"
+  },
+  "checks": {
+    "typecheck": {
+      "passed": true,
+      "logTail": [
+        "> dreams-life-sim@1.0.0 typecheck",
+        "> tsc --noEmit && tsc --noEmit -p tests/tsconfig.json"
+      ]
+    },
+    "imports": {
+      "passed": true,
+      "logTail": [
+        "  \"modules\": 503,",
+        "  \"cycles\": []",
+        "}"
+      ]
+    }
+  },
+  "tests": {
+    "regression": {
+      "suites": 30,
+      "passed": 344,
+      "failed": 0,
+      "files": [
+        "tests/notifications/daily-reminders.test.ts",
+        "tests/architecture/runtime-imports.test.ts",
+        "tests/ui/onboarding-haptics-flow.test.tsx",
+        "tests/ui/event-modal-host.test.tsx",
+        "tests/ui/onboarding-flow.test.tsx",
+        "tests/ui/collapse-age-up-flow.test.tsx",
+        "tests/ui/business-review-save-flow.test.tsx",
+        "tests/ui/asset-bank-save-flow.test.tsx",
+        "tests/ui/modal-window-layout.test.tsx",
+        "tests/ui/life-milestone-motion.test.tsx",
+        "tests/ui/family-dialog-save-flow.test.tsx",
+        "tests/ui/feedback-settings-flow.test.tsx",
+        "tests/ui/cult-flow.test.tsx",
+        "tests/ui/life-context.test.tsx",
+        "tests/ui/minigame-flow.test.tsx",
+        "tests/ui/daily-reminder-settings.test.tsx",
+        "tests/ui/review-prompt.test.tsx",
+        "tests/game/education-work-finance.test.ts",
+        "tests/ui/welcome-screen.test.tsx",
+        "tests/ui/settings-flow.test.tsx",
+        "tests/ui/onboarding-accessibility-flow.test.tsx",
+        "tests/game/minigames.test.ts",
+        "tests/game/cults.test.ts",
+        "tests/state/minigame-save.test.ts",
+        "tests/state/preferencesStore.test.ts",
+        "tests/ui/audio-controller.test.ts",
+        "tests/state/gameplay-feedback.test.ts",
+        "tests/state/education-milestone-save.test.ts",
+        "tests/state/gameStore.test.ts",
+        "tests/game/family.test.ts"
+      ]
+    },
+    "finalControllerReminder": {
+      "suites": 2,
+      "passed": 22,
+      "failed": 0
+    },
+    "distinctPassingCases": 346,
+    "caseCounting": "Maximum passing case multiplicity per file/fullName across runs, preserving parameterized cases that share a title."
+  },
+  "bundles": {
+    "android": {
+      "passed": true,
+      "bundle": "_expo/static/js/android/entry-408c99b5589344858901a703f3623928.hbc",
+      "bundleSha256": "9acc109f87c275ca9d9e3305a827721786665ea5c4a3a51a79f10da667a74a85",
+      "audioAssets": [
+        {
+          "file": "assets/audio/action-tap.wav",
+          "bytes": 2028,
+          "sha256": "8294c5847aa546852faa89108656fd74091210dfafbb921615fb4f382070bf6e"
+        },
+        {
+          "file": "assets/audio/age-up.mp3",
+          "bytes": 4608,
+          "sha256": "dbf0297a3ddf61bceec7f6f035168446d016bb4a340ac7d81c958b3538d5276e"
+        },
+        {
+          "file": "assets/audio/big-success.mp3",
+          "bytes": 105325,
+          "sha256": "dbc791784f00695bafa7e1c73eb76f5794144f4ae2bdf40c4309f76c678b212d"
+        },
+        {
+          "file": "assets/audio/freesound_gamestudio-purchase-success-384963.mp3",
+          "bytes": 45139,
+          "sha256": "560d75f6eff0fe2f9b9837edf472332dbc14a9e02c8b4048248caf862f8404f5"
+        },
+        {
+          "file": "assets/audio/universfield-error-notification-08-206492.mp3",
+          "bytes": 32600,
+          "sha256": "3ec21ad945f8496b48d287eb8a4b5291e9f76f08061f3096c178f932eca37195"
+        },
+        {
+          "file": "assets/minigames/sports.wav",
+          "bytes": 8864,
+          "sha256": "c6e5786cca0c5c7c7a93cdaf2fea11f40176116218fd51c7d5fda518a3c552df"
+        },
+        {
+          "file": "assets/minigames/crime.wav",
+          "bytes": 8864,
+          "sha256": "20dc7f00352566e88ca18735258f69539992210294a53fee6c491a6b20a7f50f"
+        },
+        {
+          "file": "assets/minigames/astronaut.wav",
+          "bytes": 11510,
+          "sha256": "cfbb6f3d72b95de92d93cda4a5a65966b7f61eca162d2f6930b974eca16fed43"
+        }
+      ]
+    },
+    "ios": {
+      "passed": true,
+      "bundle": "_expo/static/js/ios/entry-6d0f3b4f5f59e8bbc844c6119aed7c23.hbc",
+      "bundleSha256": "7acf6c22047081b7482c6667e8680bbe06ade3f22747d47f04a1e35b412153a0",
+      "audioAssets": [
+        {
+          "file": "assets/audio/action-tap.wav",
+          "bytes": 2028,
+          "sha256": "8294c5847aa546852faa89108656fd74091210dfafbb921615fb4f382070bf6e"
+        },
+        {
+          "file": "assets/audio/age-up.mp3",
+          "bytes": 4608,
+          "sha256": "dbf0297a3ddf61bceec7f6f035168446d016bb4a340ac7d81c958b3538d5276e"
+        },
+        {
+          "file": "assets/audio/big-success.mp3",
+          "bytes": 105325,
+          "sha256": "dbc791784f00695bafa7e1c73eb76f5794144f4ae2bdf40c4309f76c678b212d"
+        },
+        {
+          "file": "assets/audio/freesound_gamestudio-purchase-success-384963.mp3",
+          "bytes": 45139,
+          "sha256": "560d75f6eff0fe2f9b9837edf472332dbc14a9e02c8b4048248caf862f8404f5"
+        },
+        {
+          "file": "assets/audio/universfield-error-notification-08-206492.mp3",
+          "bytes": 32600,
+          "sha256": "3ec21ad945f8496b48d287eb8a4b5291e9f76f08061f3096c178f932eca37195"
+        },
+        {
+          "file": "assets/minigames/sports.wav",
+          "bytes": 8864,
+          "sha256": "c6e5786cca0c5c7c7a93cdaf2fea11f40176116218fd51c7d5fda518a3c552df"
+        },
+        {
+          "file": "assets/minigames/crime.wav",
+          "bytes": 8864,
+          "sha256": "20dc7f00352566e88ca18735258f69539992210294a53fee6c491a6b20a7f50f"
+        },
+        {
+          "file": "assets/minigames/astronaut.wav",
+          "bytes": 11510,
+          "sha256": "cfbb6f3d72b95de92d93cda4a5a65966b7f61eca162d2f6930b974eca16fed43"
+        }
+      ]
+    }
+  },
+  "nativeListening": {
+    "verified": false,
+    "reason": "No attached device or native emulator/runtime; release APK needs rebuilding and on-device listening."
+  }
+}

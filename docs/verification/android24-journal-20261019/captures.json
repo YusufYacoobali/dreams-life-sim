@@ -1,0 +1,25 @@
+{
+  "scope": "Actual unmodified Android 24 captures; Expo overlays retained; software emulator is not physical-device performance evidence",
+  "captures": {
+    "before.png": {
+      "bytes": 61949,
+      "sha256": "81f5dbe77b1a3a23ef50512a821b1690e598fe43b597040c66f41e71efbfdcaf"
+    },
+    "cold-resume.png": {
+      "bytes": 74479,
+      "sha256": "2b1ef3e6e16d863d75bc20e247f322e1a7463fc39606c460d7406fa09811d716"
+    },
+    "history-after-tab-return.png": {
+      "bytes": 76582,
+      "sha256": "22977c83867246f5a865b383a9f2ce910a7a5a0b44e2c2d896bb5914833feb07"
+    },
+    "latest-after.png": {
+      "bytes": 74479,
+      "sha256": "2b1ef3e6e16d863d75bc20e247f322e1a7463fc39606c460d7406fa09811d716"
+    },
+    "manual-history.png": {
+      "bytes": 76560,
+      "sha256": "d0f0e426c9575af4235677f6470e73a878654dc36f1765bcb9bb96188fe6a07b"
+    }
+  }
+}

@@ -1,0 +1,148 @@
+{
+  "actualThread": {
+    "id": "story_36_0",
+    "kind": "project-promise",
+    "personId": "person_player",
+    "originEventId": "event_2012_school-project-promise",
+    "originTemplateId": "school-project-promise",
+    "originChoiceId": "promise",
+    "created": {
+      "year": 2012,
+      "month": 1,
+      "day": 1
+    },
+    "dueMonth": 24146,
+    "expiresMonth": 24146,
+    "country": "GB",
+    "city": "London",
+    "communityId": "school_person_player_32_1",
+    "peerId": "person_npc_13_5",
+    "teacherId": "person_npc_32_12",
+    "parentId": null,
+    "status": "resolved",
+    "permission": null,
+    "quote": {
+      "amount": {
+        "$dreamsBigInt": "0"
+      },
+      "currency": "GBP",
+      "payerId": null
+    },
+    "offeredEventId": "story_36_0_due",
+    "resolution": "complete",
+    "ended": {
+      "year": 2012,
+      "month": 3,
+      "day": 1
+    },
+    "cancellationReason": null,
+    "paidTransactionId": null,
+    "rememberProject": true,
+    "projectRecall": {
+      "dueMonth": 24170,
+      "expiresMonth": 24172,
+      "status": "resolved",
+      "offeredEventId": "story_36_0_project_recall",
+      "offered": {
+        "year": 2014,
+        "month": 3,
+        "day": 1
+      },
+      "resolution": "remember-project",
+      "ended": {
+        "year": 2014,
+        "month": 3,
+        "day": 1
+      },
+      "cancellationReason": null
+    }
+  },
+  "peer": {
+    "id": "person_npc_13_5",
+    "name": "Grace Ahmed",
+    "born": {
+      "year": 1999,
+      "month": 9,
+      "day": 12
+    },
+    "died": null
+  },
+  "teacher": {
+    "id": "person_npc_32_12",
+    "name": "Amelia Morgan"
+  },
+  "actualJournals": [
+    {
+      "id": "story_36_0_due_choice",
+      "date": {
+        "year": 2012,
+        "month": 3,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I finished my section of the class project with Grace.",
+      "category": "event"
+    },
+    {
+      "id": "story_36_0_project_recall_choice",
+      "date": {
+        "year": 2014,
+        "month": 3,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I talked honestly with Grace about our old project, when I finished my section.",
+      "category": "event"
+    }
+  ],
+  "actualCommands": [
+    {
+      "choiceId": "promise",
+      "eventId": "event_2012_school-project-promise",
+      "type": "choose"
+    },
+    {
+      "choiceId": "complete",
+      "eventId": "story_36_0_due",
+      "type": "choose"
+    },
+    {
+      "choiceId": "remember-project",
+      "eventId": "story_36_0_project_recall",
+      "type": "choose"
+    }
+  ],
+  "actualResultTitles": [
+    {
+      "stage": "story-project-promise",
+      "outcome": "complete",
+      "age": 12,
+      "date": {
+        "year": 2012,
+        "month": 3,
+        "day": 1
+      },
+      "detail": {
+        "eventId": "story_36_0_due",
+        "result": "Your name belongs on it"
+      }
+    },
+    {
+      "stage": "story-project-recall",
+      "outcome": "remember-project",
+      "age": 14,
+      "date": {
+        "year": 2014,
+        "month": 3,
+        "day": 1
+      },
+      "detail": {
+        "eventId": "story_36_0_project_recall",
+        "result": "An old project, an honest conversation"
+      }
+    }
+  ],
+  "calendarMonthsResolutionToRecall": 24,
+  "rawBoundBodiesAndEffectRowsCaptured": false,
+  "scope": "Actual natural origin, two-month completion and same-peer24-month recall; complete/remember-project branch only. No native, failure/rollback or old-bound compatibility claim."
+}

@@ -1,0 +1,53 @@
+{
+  "scope": "Unmodified actual Android 24 390x844 captures; Expo overlays retained; no physical-device timing or complete-release claim",
+  "captures": {
+    "cold-resume.png": {
+      "bytes": 75576,
+      "sha256": "ef96e8fb1ce299878b46cb7c8cd81e6da6f8957587c6e6722be2c9ce915edd28"
+    },
+    "journal-estimate-before.png": {
+      "bytes": 71840,
+      "sha256": "487bf4faa910a8eb0c931ea40d8ad8f1e342ff48123f0c101816bab8119d3198"
+    },
+    "journal-native-end-after.png": {
+      "bytes": 75994,
+      "sha256": "8f6bddbaa5a228fb982df7961c375e401c3038fd25dc0c2e6a6e95b286e878ea"
+    },
+    "manual-history-after-tab-return.png": {
+      "bytes": 72657,
+      "sha256": "c6974a3c95700eae01cc6d1c3177e1cb980ba23c069c67bc9ff5fce273c5d120"
+    },
+    "pet-loss.png": {
+      "bytes": 69460,
+      "sha256": "c7869ad2829243d31d1c759912de83f2b6878c2e146fb97061659f34753adba6"
+    },
+    "primary-school-after.png": {
+      "bytes": 72629,
+      "sha256": "eb2a13363e36747234d34c4281ce93810c3047e333f7e5378245846512949383"
+    },
+    "primary-school-before.png": {
+      "bytes": 77105,
+      "sha256": "1568bb7e56d3807b0e173830d99c88c0fdd9cdbfaff8443d7ff1d9fb926cf60e"
+    },
+    "studied-school.png": {
+      "bytes": 72197,
+      "sha256": "826de48d7e3299b7a1e7c95d4f091d57d5c9ea040c4519fc7d56fde777d95eab"
+    },
+    "study-journal.png": {
+      "bytes": 75383,
+      "sha256": "b8778048722a3669c0e78635036ad991273220d4e161ca0478bf8d7dce73fb14"
+    },
+    "study-result.png": {
+      "bytes": 66856,
+      "sha256": "b83d0aa04d89c4cb44d1c058200c598c6f8274ba435d51627df3a57922960ca8"
+    },
+    "year-before.png": {
+      "bytes": 74306,
+      "sha256": "f5f0e3b29c4af7c97b634c670f6ffc8a381b1f96d42b250c85b0102a06e43e4b"
+    },
+    "year-summary.png": {
+      "bytes": 64470,
+      "sha256": "f187e82ad8aff638c3855aabee96cff6e44fa3a615eb181e27138eec25921c7b"
+    }
+  }
+}

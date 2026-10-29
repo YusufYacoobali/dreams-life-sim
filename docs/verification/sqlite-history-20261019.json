@@ -1,0 +1,114 @@
+{
+  "recordedOn": "2026-10-19",
+  "scope": "one complete life through the real repository in two fresh cloud SQLite databases; not native or multi-generation acceptance",
+  "command": "node tools/benchmark-sqlite-history.cjs",
+  "baselineSourceCommit": "ac2d761",
+  "candidateIdentity": "game/persistence sourceHash in candidate; database representation 4",
+  "baseline": {
+    "scope": "one complete life / real repository / cloud Node SQLite; not native or multi-generation",
+    "node": "v24.19.0",
+    "sourceHash": "1de7438ba449367a4c6f0c601b4c1a2e155437d54e8f298a2ceb2904ab1ad309",
+    "seed": 42,
+    "born": "2026-10-18",
+    "years": 79,
+    "ageAtDeath": 78,
+    "people": 18,
+    "ledgerRows": 47202,
+    "commands": 235,
+    "snapshots": 79,
+    "payloads": {
+      "lives": {
+        "rows": 1,
+        "bytes": 14980913
+      },
+      "backups": {
+        "rows": 1,
+        "bytes": 14905010
+      },
+      "snapshots": {
+        "rows": 79,
+        "bytes": 27334703
+      }
+    },
+    "beforeClose": {
+      "databaseBytes": 72376320,
+      "walBytes": 30949472,
+      "sharedMemoryBytes": 65536,
+      "totalBytes": 103391328
+    },
+    "afterClose": {
+      "databaseBytes": 72376320,
+      "walBytes": 0,
+      "sharedMemoryBytes": 0,
+      "totalBytes": 72376320
+    },
+    "peakDiskBytes": 103391328,
+    "commandP95Ms": 1629.4392559999978,
+    "commitP95Ms": 1449.6047560000152,
+    "coldLoadMs": 683.176615000004,
+    "coldLoadExactMatch": true,
+    "elapsedMs": 149355
+  },
+  "candidate": {
+    "scope": "one complete life / real repository / cloud Node SQLite; not native or multi-generation",
+    "node": "v24.19.0",
+    "sourceHash": "229a1849ece5a48802cc03f52213a45414ccf0f22556d00559c61ddb72ab7f8e",
+    "seed": 42,
+    "born": "2026-10-18",
+    "years": 79,
+    "ageAtDeath": 78,
+    "people": 18,
+    "ledgerRows": 47202,
+    "commands": 235,
+    "snapshots": 79,
+    "payloads": {
+      "lives": {
+        "rows": 1,
+        "bytes": 801666
+      },
+      "backups": {
+        "rows": 1,
+        "bytes": 797358
+      },
+      "snapshots": {
+        "rows": 79,
+        "bytes": 27334703
+      }
+    },
+    "beforeClose": {
+      "databaseBytes": 29933568,
+      "walBytes": 6361312,
+      "sharedMemoryBytes": 32768,
+      "totalBytes": 36327648
+    },
+    "afterClose": {
+      "databaseBytes": 29933568,
+      "walBytes": 0,
+      "sharedMemoryBytes": 0,
+      "totalBytes": 29933568
+    },
+    "peakDiskBytes": 36327648,
+    "commandP95Ms": 1969.9238760000007,
+    "commitP95Ms": 1793.4158430000098,
+    "coldLoadMs": 1037.4653749999998,
+    "coldLoadExactMatch": true,
+    "elapsedMs": 190200
+  },
+  "postRunComparison": {
+    "sameEntireLiveWorld": true,
+    "sameEntireBackupWorld": true,
+    "sameSnapshotPayloadsAndMetadata": true,
+    "sameReceiptsAndPreferences": true,
+    "worldHashes": {
+      "lives": "9cd88ed1616178f46fa0de156c39c07d814e4597bb4f319b17ec7ce4c83c5bc4",
+      "backups": "82040e166f019153a0acbdde35d30581dfe585a069ed35f2821971f316b68133"
+    },
+    "comparison": "two fresh databases completing the same 235 actual commands; not a shrink-in-place migration measurement"
+  },
+  "limitations": [
+    "79 Age Ups in one birth-to-death life, not 120 years or three generations",
+    "Both fresh databases retain every real command, receipt and prior Age Up snapshot",
+    "Existing databases may retain free allocated pages; upgrade does not run VACUUM or rewrite all lives",
+    "Cloud timings overlap other work and do not establish native responsiveness or a controlled timing comparison"
+  ]
+}

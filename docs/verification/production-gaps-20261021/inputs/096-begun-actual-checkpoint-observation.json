@@ -1,0 +1,36 @@
+{
+  "scope": "Read-only actual captured current checkpoint observation; no command or future outcome executed.",
+  "sourceCommit": "a4be96ee1e60ab073fbbd2ae95d0ee2d0ee6f361",
+  "id": "life_mvhfkffn_1csbqc2_0",
+  "revision": 1,
+  "versions": [
+    36,
+    37,
+    12
+  ],
+  "date": {
+    "year": 2026,
+    "month": 10,
+    "day": 21
+  },
+  "birthAcknowledged": true,
+  "person": {
+    "id": "person_player",
+    "name": "Maya Singh",
+    "born": {
+      "year": 2026,
+      "month": 10,
+      "day": 21
+    },
+    "appearance": {
+      "face": 1,
+      "skin": 0,
+      "hair": 5,
+      "hairColor": 0
+    }
+  },
+  "pending": null,
+  "annual": null,
+  "universityApplications": [],
+  "studyCourses": []
+}

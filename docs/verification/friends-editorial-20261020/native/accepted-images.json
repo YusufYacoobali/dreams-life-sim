@@ -1,0 +1,332 @@
+{
+  "format": "dreams-c36-reviewed-images-v1",
+  "complete": true,
+  "runtimeSourceCommit": "6f4b34c40005f5fba8eeee540bada9e0787ccbb0",
+  "acceptedSourceCommit": "ed296f91082a96b2fabe8973864bf6dba28344b3",
+  "scope": "17 actual PNG/XML pairs personally viewed by root on390x844 Android24 ExpoGo software emulator at normal/130%text. Clear original portraits/masks, normal/large durable best-friend review and result, exact cold results, named saved-life controls and711px Statistics viewport/all10 real stats accepted. Separateportraitcandidate2pairs retain their own older C35runtime scope. No iOS/modernAndroid/physical performance/screenreader/allpalette/newborncreation or standalone acceptance inferred.",
+  "captures": [
+    {
+      "id": "launcher",
+      "note": "Actual root UI capture: launcher-normal. Personally reviewed; correct current context and visible controls.",
+      "fontScale": 1.0,
+      "coordinatorPersonallyViewed": true,
+      "accepted": true,
+      "files": [
+        {
+          "source": "/tmp/dreams-friends-editorial-native-launcher-normal.png",
+          "bytes": 376165,
+          "sha256": "d0854262d4e47f64e73d00ed2fddb89ab863d7d778912a527adff0b78ab50c3a"
+        },
+        {
+          "source": "/tmp/dreams-friends-editorial-native-launcher-normal.xml",
+          "bytes": 16563,
+          "sha256": "4b4d82e74aa765418ad0988cf5910cabe447d11a0702732fdb8bbd1417dad0c3"
+        }
+      ]
+    },
+    {
+      "id": "friends",
+      "note": "Actual root UI capture: friends. Personally reviewed; correct current context and visible controls.",
+      "fontScale": 1.0,
+      "coordinatorPersonallyViewed": true,
+      "accepted": true,
+      "files": [
+        {
+          "source": "/tmp/dreams-friends-editorial-native-friends.png",
+          "bytes": 39846,
+          "sha256": "55f90e3ea3cf3b0f28e9c908955e014092a91622652befd75912cc12cf07bd44"
+        },
+        {
+          "source": "/tmp/dreams-friends-editorial-native-friends.xml",
+          "bytes": 31794,
+          "sha256": "d4f1e27065a8a873494606265a6ae6b5afbf0917535d4cc72a55281220bf98ec"
+        }
+      ]
+    },
+    {
+      "id": "morgan-profile",
+      "note": "Actual root UI capture: morgan-normal. Personally reviewed; correct current context and visible controls.",
+      "fontScale": 1.0,
+      "coordinatorPersonallyViewed": true,
+      "accepted": true,
+      "files": [
+        {
+          "source": "/tmp/dreams-friends-editorial-native-morgan-normal.png",
+          "bytes": 55703,
+          "sha256": "856916eee302c4ad34ee9bb81c1b4bd67006bb7aba15b45abd0a2f92fcac2fc6"
+        },
+        {
+          "source": "/tmp/dreams-friends-editorial-native-morgan-normal.xml",
+          "bytes": 29865,
+          "sha256": "c0b6b6971e67e1073929558c9165d530cd405d9dcd4293f2a0404954127ac606"
+        }
+      ]
+    },
+    {
+      "id": "best-friend-review-normal",
+      "note": "Actual root UI capture: review-normal. Personally reviewed; correct current context and visible controls.",
+      "fontScale": 1.0,
+      "coordinatorPersonallyViewed": true,
+      "accepted": true,
+      "files": [
+        {
+          "source": "/tmp/dreams-friends-editorial-native-review-normal.png",
+          "bytes": 57265,
+          "sha256": "a9c0b9654017c39ba991b28e96c440a75c23a9891360cc34a841771c3a91ef6f"
+        },
+        {
+          "source": "/tmp/dreams-friends-editorial-native-review-normal.xml",
+          "bytes": 6392,
+          "sha256": "5d55e48870e0fc6c6894459af77052e6acc92ce1c775bfce52526ae0898e60c5"
+        }
+      ]
+    },
+    {
+      "id": "best-friend-review-large",
+      "note": "Actual root UI capture: review-130. Personally reviewed; correct current context and visible controls.",
+      "fontScale": 1.3,
+      "coordinatorPersonallyViewed": true,
+      "accepted": true,
+      "files": [
+        {
+          "source": "/tmp/dreams-friends-editorial-native-review-130.png",
+          "bytes": 55653,
+          "sha256": "1805f95125fbf2a679f8e7186dd0886b2b9e559fc67870c7933557857517fd47"
+        },
+        {
+          "source": "/tmp/dreams-friends-editorial-native-review-130.xml",
+          "bytes": 6391,
+          "sha256": "3a7fc366596c9f799c2b249315d026b0f993e819c2e35e18a129b76093a638ee"
+        }
+      ]
+    },
+    {
+      "id": "best-friend-result-large",
+      "note": "Actual root UI capture: proposal139-130. Personally reviewed; correct current context and visible controls.",
+      "fontScale": 1.3,
+      "coordinatorPersonallyViewed": true,
+      "accepted": true,
+      "files": [
+        {
+          "source": "/tmp/dreams-friends-editorial-native-proposal139-130.png",
+          "bytes": 57993,
+          "sha256": "a15bac226e51563e68ef9a37ab8685b3c501b47779eab78c75993c7cdbaa3bce"
+        },
+        {
+          "source": "/tmp/dreams-friends-editorial-native-proposal139-130.xml",
+          "bytes": 7933,
+          "sha256": "04c1cd2c71e9e11388a186b10cf71bd3c8447cb5f2685d7a9a670017df364c28"
+        }
+      ]
+    },
+    {
+      "id": "best-friend-cold-result-normal",
+      "note": "Actual root UI capture: cold-proposal139. Personally reviewed; correct current context and visible controls.",
+      "fontScale": 1.0,
+      "coordinatorPersonallyViewed": true,
+      "accepted": true,
+      "files": [
+        {
+          "source": "/tmp/dreams-friends-editorial-native-cold-proposal139.png",
+          "bytes": 68025,
+          "sha256": "085d84f50dfa659726f9b8408da150543769ebca7978694bd99885885268f2c4"
+        },
+        {
+          "source": "/tmp/dreams-friends-editorial-native-cold-proposal139.xml",
+          "bytes": 7934,
+          "sha256": "66ef898ba3f27bc86a4677169d96c682da0efbbc68fed690b5d56d9485cb52bd"
+        }
+      ]
+    },
+    {
+      "id": "best-friend-ack",
+      "note": "Actual root UI capture: ack140. Personally reviewed; correct current context and visible controls.",
+      "fontScale": 1.0,
+      "coordinatorPersonallyViewed": true,
+      "accepted": true,
+      "files": [
+        {
+          "source": "/tmp/dreams-friends-editorial-native-ack140.png",
+          "bytes": 77051,
+          "sha256": "3f9769cda644161934eebaa1dc49f66c1d2ad9af47bbc7f3f36760deaf408094"
+        },
+        {
+          "source": "/tmp/dreams-friends-editorial-native-ack140.xml",
+          "bytes": 40471,
+          "sha256": "2ea7b01c84b96e7bd837adc3f827029712243d22da98c76e4cb8bf50e54c9915"
+        }
+      ]
+    },
+    {
+      "id": "best-friend-cold-final",
+      "note": "Actual root UI capture: cold-final140. Personally reviewed; correct current context and visible controls.",
+      "fontScale": 1.0,
+      "coordinatorPersonallyViewed": true,
+      "accepted": true,
+      "files": [
+        {
+          "source": "/tmp/dreams-friends-editorial-native-cold-final140.png",
+          "bytes": 77057,
+          "sha256": "2e2081623b0e5a3eefbf00cbf695776556e0bd85109c38e2ce9b46316218d74a"
+        },
+        {
+          "source": "/tmp/dreams-friends-editorial-native-cold-final140.xml",
+          "bytes": 40471,
+          "sha256": "2ea7b01c84b96e7bd837adc3f827029712243d22da98c76e4cb8bf50e54c9915"
+        }
+      ]
+    },
+    {
+      "id": "profile",
+      "note": "Actual root UI capture: profile-final140. Personally reviewed; correct current context and visible controls.",
+      "fontScale": 1.0,
+      "coordinatorPersonallyViewed": true,
+      "accepted": true,
+      "files": [
+        {
+          "source": "/tmp/dreams-friends-editorial-native-profile-final140.png",
+          "bytes": 80464,
+          "sha256": "4b0c15fbecc3bd4b23d63483e055ca589c17faa0e84e9426ba575f13ef7265dd"
+        },
+        {
+          "source": "/tmp/dreams-friends-editorial-native-profile-final140.xml",
+          "bytes": 35911,
+          "sha256": "ea17b3e685dd1ea75276460da06a104140094641f6b154093a175c512cbbafef"
+        }
+      ]
+    },
+    {
+      "id": "life-menu",
+      "note": "Actual root UI capture: more-life. Personally reviewed; correct current context and visible controls.",
+      "fontScale": 1.0,
+      "coordinatorPersonallyViewed": true,
+      "accepted": true,
+      "files": [
+        {
+          "source": "/tmp/dreams-friends-editorial-native-more-life.png",
+          "bytes": 48586,
+          "sha256": "414a301259c8dd8bcc31aa22d3df417373c36bca1da0666a8b7a169750d2a981"
+        },
+        {
+          "source": "/tmp/dreams-friends-editorial-native-more-life.xml",
+          "bytes": 9580,
+          "sha256": "f209b29c4be92b9f4cfeb9b8cc55d5d56db6e9ca76837b1c0a1c8b47fd6fd61d"
+        }
+      ]
+    },
+    {
+      "id": "named-continue-normal",
+      "note": "Actual root UI capture: saved-lives-normal. Personally reviewed; correct current context and visible controls.",
+      "fontScale": 1.0,
+      "coordinatorPersonallyViewed": true,
+      "accepted": true,
+      "files": [
+        {
+          "source": "/tmp/dreams-friends-editorial-native-saved-lives-normal.png",
+          "bytes": 50007,
+          "sha256": "d836468c0d5e3cd1f7569f7f25c48fd68114f9f79c9106d8a6a71173a6ee27e3"
+        },
+        {
+          "source": "/tmp/dreams-friends-editorial-native-saved-lives-normal.xml",
+          "bytes": 21424,
+          "sha256": "bffe13a0553020c4f61a7ba7413c8ae74c22c3639be781db0e73c3c5f3d91e9e"
+        }
+      ]
+    },
+    {
+      "id": "statistics-normal",
+      "note": "Actual root UI capture: statistics-normal. Personally reviewed; correct current context and visible controls.",
+      "fontScale": 1.0,
+      "coordinatorPersonallyViewed": true,
+      "accepted": true,
+      "files": [
+        {
+          "source": "/tmp/dreams-friends-editorial-native-statistics-normal.png",
+          "bytes": 56809,
+          "sha256": "d1dd3c40a35258a0021ecd3620d941de9d173347f9538a88f083af13d43ecc90"
+        },
+        {
+          "source": "/tmp/dreams-friends-editorial-native-statistics-normal.xml",
+          "bytes": 35447,
+          "sha256": "67295be5b3544d9db1831195f44d4551759200b7459f5f321b5021f0ea6cf6b3"
+        }
+      ]
+    },
+    {
+      "id": "statistics-normal-full-stats",
+      "note": "Actual root UI capture: statistics-normal-fame. Personally reviewed; correct current context and visible controls.",
+      "fontScale": 1.0,
+      "coordinatorPersonallyViewed": true,
+      "accepted": true,
+      "files": [
+        {
+          "source": "/tmp/dreams-friends-editorial-native-statistics-normal-fame.png",
+          "bytes": 54411,
+          "sha256": "d5fef1c8d9ddf6a025b6fcf5a6acba9b5fbc2f8af51beba350679fd049496bac"
+        },
+        {
+          "source": "/tmp/dreams-friends-editorial-native-statistics-normal-fame.xml",
+          "bytes": 36852,
+          "sha256": "e14e613ffd5b22bdc354ea19a1aba8096c6b6e57c29d13cd5109cdcd370b41bc"
+        }
+      ]
+    },
+    {
+      "id": "named-continue-large",
+      "note": "Actual root UI capture: saved-lives-130. Personally reviewed; correct current context and visible controls.",
+      "fontScale": 1.3,
+      "coordinatorPersonallyViewed": true,
+      "accepted": true,
+      "files": [
+        {
+          "source": "/tmp/dreams-friends-editorial-native-saved-lives-130.png",
+          "bytes": 59235,
+          "sha256": "53cc78b70e1b0855d561fa0e17635caa5ef5b93ffefcd2d49985a5b37b2d4aad"
+        },
+        {
+          "source": "/tmp/dreams-friends-editorial-native-saved-lives-130.xml",
+          "bytes": 19716,
+          "sha256": "341f472ea974791862b0e228d927ca5f66bc50bb67abf23403b94aa2baf179d2"
+        }
+      ]
+    },
+    {
+      "id": "statistics-large",
+      "note": "Actual root UI capture: statistics-130. Personally reviewed; correct current context and visible controls.",
+      "fontScale": 1.3,
+      "coordinatorPersonallyViewed": true,
+      "accepted": true,
+      "files": [
+        {
+          "source": "/tmp/dreams-friends-editorial-native-statistics-130.png",
+          "bytes": 68988,
+          "sha256": "a7db7392188e54d79f63d2f479e264eb24070bb49d0d3f7da7200590d9593f5a"
+        },
+        {
+          "source": "/tmp/dreams-friends-editorial-native-statistics-130.xml",
+          "bytes": 32200,
+          "sha256": "6d25120ac0666297c6cd90a16560fcf93c49bafa20812706e62e8edb26185c7f"
+        }
+      ]
+    },
+    {
+      "id": "statistics-large-full-stats",
+      "note": "Actual root UI capture: statistics-130-fame. Personally reviewed; correct current context and visible controls.",
+      "fontScale": 1.3,
+      "coordinatorPersonallyViewed": true,
+      "accepted": true,
+      "files": [
+        {
+          "source": "/tmp/dreams-friends-editorial-native-statistics-130-fame.png",
+          "bytes": 68146,
+          "sha256": "e98f01332e77c9425067108411875c3ead4dece6f97bd2e10fd63f72d85c0a46"
+        },
+        {
+          "source": "/tmp/dreams-friends-editorial-native-statistics-130-fame.xml",
+          "bytes": 34435,
+          "sha256": "00ae9bec9db385d8e6fe98d1ae718982f2b726396bf76f183f2b2f1348c3c14d"
+        }
+      ]
+    }
+  ]
+}

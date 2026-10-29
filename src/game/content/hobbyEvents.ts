@@ -1,0 +1,25 @@
+import type { HobbyKind } from './leisure';
+/** Local club events, with shared equipment/materials; no certification or prize money. */
+export const hobbyEventContent: Record<HobbyKind, { name: string; feeBps: number; prompt: string; recognized: string; attended: string }> = {
+  guitar: { name: 'Open Mic Afternoon', feeBps: 5, prompt: 'The club has a small stage and a patient audience. Choose what you want to play.', recognized: 'Your playing earns an enthusiastic round of applause. Someone asks which song you will bring next time.', attended: 'A few notes escape the arrangement. You finish your set, and the next player gives you an encouraging nod.' },
+  painting: { name: 'Community Art Display', feeBps: 6, prompt: 'The workshop is opening its doors. Choose how to present your work.', recognized: 'Visitors stop to look closely and ask about your choices. Your work receives a club commendation.', attended: 'Your piece finds a place on the wall. Talking about it gives you ideas for your next painting.' },
+  photography: { name: 'Local Photo Exhibition', feeBps: 5, prompt: 'The camera club is hanging a small exhibition. Choose the story you want your photographs to tell.', recognized: 'Your photographs receive a club commendation. A visitor recognises a familiar street from an unfamiliar angle.', attended: 'Your photographs join the exhibition. Seeing them beside other work gives you something to try on your next walk.' },
+  chess: { name: 'Club Chess Meet', feeBps: 2, prompt: 'The club has paired players for a friendly afternoon. Choose your approach to the board.', recognized: 'Your games earn a club commendation. Afterwards, another player stays to discuss a turning point.', attended: 'The games give you plenty to think about. You leave with a position you want to study again.' },
+  reading: { name: 'Book Club Gathering', feeBps: 1, prompt: 'There is room on the reading circle’s programme. Choose how you want to contribute.', recognized: 'Your contribution earns a warm mention from the organiser. The discussion carries on after the chairs start moving.', attended: 'You share your reading and listen to the others. Someone recommends a book you have not tried.' },
+  gaming: { name: 'Friendly Gaming Meet', feeBps: 4, prompt: 'The club has set up shared equipment for a friendly meet. Choose how you want to play.', recognized: 'Your play earns a club commendation. Between rounds, you exchange a few useful tips.', attended: 'Some rounds go better than others. You enjoy the shared session and leave with something to practise.' },
+  cooking: { name: 'Community Tasting', feeBps: 7, prompt: 'The cooking group is preparing a supervised tasting with shared ingredients. Choose your approach to the dish.', recognized: 'Your dish receives a club commendation. A taster comes back to ask how you balanced the flavours.', attended: 'You serve your dish and try what the others made. The tasting gives you ideas for another attempt.' },
+  gardening: { name: 'Garden Club Display', feeBps: 4, prompt: 'The garden club is arranging a shared display. Choose how you want to contribute.', recognized: 'Your contribution receives a club commendation. Another gardener asks how you cared for it.', attended: 'Your contribution joins the display. You spend time comparing notes with the other gardeners.' },
+};
+export const hobbyEventApproaches = ['familiar', 'stretch', 'relaxed'] as const;
+export type HobbyEventApproach = typeof hobbyEventApproaches[number];
+export const hobbyEventApproachContent = {
+  familiar: { name: 'Use familiar skills', description: 'A steady contribution from what you already know.', chance: 12, energy: 4 },
+  stretch: { name: 'Try something ambitious', description: 'More demanding, with greater respect if it comes together.', chance: -8, energy: 8 },
+  relaxed: { name: 'Enjoy taking part', description: 'Focus on enjoyment and easing stress.', chance: 0, energy: 4 },
+};
+export function hobbyEventChance(proficiency: number, discipline: number, approach: HobbyEventApproach) {
+  return Math.max(15, Math.min(95, 40 + Math.floor(proficiency / 2) + Math.floor(discipline / 10) + hobbyEventApproachContent[approach].chance));
+}
+export function hobbyEventDeltas(approach: HobbyEventApproach, recognized: boolean) {
+  return { energy: -hobbyEventApproachContent[approach].energy, happiness: approach === 'relaxed' ? 5 : recognized ? 4 : 1, stress: approach === 'relaxed' ? -5 : approach === 'stretch' ? recognized ? 1 : 3 : -1, respect: recognized ? approach === 'stretch' ? 4 : approach === 'familiar' ? 2 : 1 : 0 };
+}

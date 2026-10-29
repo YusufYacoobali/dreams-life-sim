@@ -1,0 +1,66 @@
+{
+  "recordedOn": "2026-10-20",
+  "baseCommit": "73a8027dd6b1e5919abc95d58e79ef5f618132ce",
+  "scope": "Current content7 validated immutable pure-engine/cloud first-eligible lifetimes; not every optional action, native/SQLite,120-year/1000people/multigeneration acceptance",
+  "start": {
+    "event": "sweep-start",
+    "scope": "pure engine / cloud Node; first eligible choices; newborn acknowledgement flag set before engine progression; not native or SQLite",
+    "stateMode": "validated immutable",
+    "node": "v24.19.0",
+    "count": 120,
+    "startSeed": 0,
+    "gameSourceHash": "f1db47a32ea4877c494394b73ea3b9b3670e964e4af955f0c17e3961cb499f14",
+    "toolSourceHash": "b57b6bb3befdba4e776217b3ebf79c1fe4892f2cd7a260fa9b7e928bca75e20e",
+    "setupMs": 1524
+  },
+  "completion": {
+    "event": "sweep-complete",
+    "count": 120,
+    "startSeed": 0,
+    "completed": 120,
+    "stateMode": "validated immutable",
+    "versions": {
+      "world": 30,
+      "engine": 29,
+      "content": 7
+    },
+    "gameSourceHash": "f1db47a32ea4877c494394b73ea3b9b3670e964e4af955f0c17e3961cb499f14",
+    "toolSourceHash": "b57b6bb3befdba4e776217b3ebf79c1fe4892f2cd7a260fa9b7e928bca75e20e",
+    "countryCounts": {
+      "AU": 10,
+      "IT": 11,
+      "BR": 12,
+      "ZA": 10,
+      "ES": 12,
+      "US": 13,
+      "CA": 10,
+      "GB": 10,
+      "DE": 12,
+      "FR": 6,
+      "IN": 6,
+      "JP": 8
+    },
+    "ageRange": [
+      40,
+      98
+    ],
+    "maxPeople": 24,
+    "maxLedgerRows": 55199,
+    "elapsedMs": 595782
+  },
+  "distinctSeeds": 120,
+  "seeds": [
+    0,
+    119
+  ],
+  "exitCode": 0,
+  "stderrBytes": 0,
+  "processSeconds": 597.414,
+  "raw": {
+    "file": "life-sweep-adult-relationships-120-20261020.ndjson",
+    "sha256": "9bc3c804f6842e03a5d8c75bf123fa0bfffcee08d9e5e75ae47f20ee27f0d2c0"
+  },
+  "sameSeedOrdinaryMetricsEqualToContent6": true,
+  "noWholeTerminalWorldEqualityClaimAcrossContentTags": true,
+  "overlappingRunsNotAdditionalDistinctSeeds": true
+}

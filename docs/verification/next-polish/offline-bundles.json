@@ -1,0 +1,32 @@
+[
+  {
+    "platform": "android",
+    "runtimeRevision": "c31410d",
+    "bundle": "_expo/static/js/android/entry-63c69e05041331018f590147dab66761.hbc",
+    "bundleBytes": 6115532,
+    "bundleSHA256": "362196df2cc3165d469cf35d7bcd24cb60b58aeb56cbd0ac632c3ff70acb875f",
+    "hermesMagicHex": "c61fbc03c103191f",
+    "runtimeSourcesMatched": 36,
+    "missingSources": [],
+    "modifiedSources": [],
+    "assetRecords": 1087,
+    "checkedArtFiles": 26,
+    "sourceArtBytes": 6103179,
+    "missingArt": []
+  },
+  {
+    "platform": "ios",
+    "runtimeRevision": "c31410d",
+    "bundle": "_expo/static/js/ios/entry-d54902747b78858db84d0292f93c2b26.hbc",
+    "bundleBytes": 5849996,
+    "bundleSHA256": "603120a41b75a306c50e38a2a7211078013605407233654471c0dca91c369c04",
+    "hermesMagicHex": "c61fbc03c103191f",
+    "runtimeSourcesMatched": 36,
+    "missingSources": [],
+    "modifiedSources": [],
+    "assetRecords": 1083,
+    "checkedArtFiles": 26,
+    "sourceArtBytes": 6103179,
+    "missingArt": []
+  }
+]

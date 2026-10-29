@@ -1,0 +1,28 @@
+PASS tests/ui/education-choice-save-flow.test.tsx (59.49 s)
+  ✓ university remains open after a business degree and keeps exact individual subject reasons (10899 ms)
+  ✓ university remains open after a declined business application and keeps exact individual subject reasons (1762 ms)
+  ✓ trade remains open after a business trade qualification and keeps exact individual subject reasons (1433 ms)
+  ✓ trade remains open after a declined business application and keeps exact individual subject reasons (1528 ms)
+  ✓ graduate remains open after a medicine qualification and keeps exact individual subject reasons (1712 ms)
+  ✓ graduate remains open after a declined medicine application and keeps exact individual subject reasons (1759 ms)
+  ✓ a category with no eligible offered subjects stays disabled with its shared exact reason (1922 ms)
+  ✓ the current relaxed study routine and cancelled changed draft do not save or decode (2991 ms)
+  ✓ the current balanced study routine and cancelled changed draft do not save or decode (2688 ms)
+  ✓ the current focused study routine and cancelled changed draft do not save or decode (2404 ms)
+  ✓ a real relaxed study routine rolls back every table, retains draft/alert, retries warm and cold-resumes exactly once (3868 ms)
+  ✓ a real balanced study routine rolls back every table, retains draft/alert, retries warm and cold-resumes exactly once (2902 ms)
+  ✓ an actual admission accepted=true keeps field/funding confirmation after rollback and retries without rerolling or duplicate tuition (1618 ms)
+  ✓ an actual admission accepted=false keeps field/funding confirmation after rollback and retries without rerolling or duplicate tuition (1953 ms)
+  ✓ leave-school keeps its confirmation/draft through SQLite failure, retries warm and cold-resumes without duplicate money or credit (2139 ms)
+  ✓ fund-studies keeps its confirmation/draft through SQLite failure, retries warm and cold-resumes without duplicate money or credit (1144 ms)
+  ✓ real remand exposes the same existing education refusal for paused=false and blocked controls never save (2090 ms)
+  ✓ real remand exposes the same existing education refusal for paused=true and blocked controls never save (1184 ms)
+  ✓ the once-yearly study refusal is shared by direct commands and Education without another receipt or RNG change (1488 ms)
+  ✓ US school and education explain the actual game assessment age without granting withdrawal or qualifications (1156 ms)
+  ✓ IT school and education explain the actual game assessment age without granting withdrawal or qualifications (1131 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       21 passed, 21 total
+Snapshots:   0 total
+Time:        60.07 s
+Ran all test suites within paths "tests/ui/education-choice-save-flow.test.tsx".

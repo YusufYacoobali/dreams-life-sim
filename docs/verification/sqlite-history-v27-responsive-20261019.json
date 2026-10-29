@@ -1,0 +1,593 @@
+{
+  "recordedOn": "2026-10-19",
+  "baselineCommit": "8886f16",
+  "scope": "Same seed42/date/choices, real on-disk SQLite, all 236 commands/79 moments; exact complete-world comparison. Timing samples overlap other checks and are not a controlled/native speed comparison.",
+  "baseline": {
+    "scope": "one complete life / real repository / cloud Node SQLite; not native or multi-generation",
+    "node": "v24.19.0",
+    "sourceHash": "ef8084e0133e07f54665b5377028ca37742b3217e79e4d765a2d656b67e838b4",
+    "seed": 42,
+    "born": "2026-10-18",
+    "years": 79,
+    "ageAtDeath": 78,
+    "people": 18,
+    "ledgerRows": 47202,
+    "commands": 236,
+    "snapshots": 79,
+    "payloads": {
+      "lives": {
+        "rows": 1,
+        "bytes": 802798
+      },
+      "backups": {
+        "rows": 1,
+        "bytes": 798494
+      },
+      "snapshots": {
+        "rows": 79,
+        "bytes": 27385551
+      }
+    },
+    "beforeClose": {
+      "databaseBytes": 29995008,
+      "walBytes": 6377792,
+      "sharedMemoryBytes": 32768,
+      "totalBytes": 36405568
+    },
+    "afterClose": {
+      "databaseBytes": 29995008,
+      "walBytes": 0,
+      "sharedMemoryBytes": 0,
+      "totalBytes": 29995008
+    },
+    "peakDiskBytes": 36405568,
+    "commandP95Ms": 1723.5148880000052,
+    "commitP95Ms": 1455.9875750000065,
+    "coldLoadMs": 782.809127000015,
+    "coldLoadExactMatch": true,
+    "elapsedMs": 160842
+  },
+  "current": {
+    "scope": "one complete life / real repository / cloud Node SQLite; not native or multi-generation",
+    "node": "v24.19.0",
+    "sourceHash": "57dcf75ae5e75310792c86a5130dea0f6b75f1c35bf1d3338d02d67647e2a631",
+    "seed": 42,
+    "born": "2026-10-18",
+    "years": 79,
+    "ageAtDeath": 78,
+    "people": 18,
+    "ledgerRows": 47202,
+    "commands": 236,
+    "snapshots": 79,
+    "payloads": {
+      "lives": {
+        "rows": 1,
+        "bytes": 887154
+      },
+      "backups": {
+        "rows": 1,
+        "bytes": 881978
+      },
+      "snapshots": {
+        "rows": 79,
+        "bytes": 30237205
+      }
+    },
+    "beforeClose": {
+      "databaseBytes": 33091584,
+      "walBytes": 6303632,
+      "sharedMemoryBytes": 32768,
+      "totalBytes": 39427984
+    },
+    "afterClose": {
+      "databaseBytes": 33091584,
+      "walBytes": 0,
+      "sharedMemoryBytes": 0,
+      "totalBytes": 33091584
+    },
+    "peakDiskBytes": 39427984,
+    "commandP95Ms": 122.2178530000001,
+    "commitP95Ms": 56.395910999999614,
+    "coldLoadMs": 492.2041480000007,
+    "coldLoadExactMatch": true,
+    "elapsedMs": 12294
+  },
+  "comparison": {
+    "scope": "Same complete seed42/date/choices at unmodified 8886f16 versus candidate: every current, backup and 79 prior worlds; metadata exact except verified encoded sizes; receipts/preferences/branches/restore receipts exact. Twelve immutable leisure journeys also match all recorded semantic fields from 117c4d1; earlier record has no terminal whole-world hash.",
+    "current": {
+      "lives": {
+        "revision": 236,
+        "worldSha256": "6cae65ac876c3d294ca79918103dcf4e38c7392938d0581ef3d0aeed29d63a45",
+        "entireWorldExact": true
+      },
+      "backups": {
+        "revision": 235,
+        "worldSha256": "9fcd3442be84b8d9d384c8d5d505a8ba4c851a21156fc24022def2c0452ae7df",
+        "entireWorldExact": true
+      }
+    },
+    "moments": [
+      {
+        "id": "snapshot_r_0",
+        "revision": 0,
+        "worldSha256": "ca47da03fee6c7da066065e029788d0535d5f2915d8e4bcb67dbadcc118722f0",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_3",
+        "revision": 3,
+        "worldSha256": "a6d2cf47de5f763fac6edf02a9f99f2cc3f0aa6e15af6a443f721247d63c74e1",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_6",
+        "revision": 6,
+        "worldSha256": "f7587aac9a4e395a1051050cc0d4db85b1235ce71556d7d66f3d2e238c8d73d1",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_8",
+        "revision": 8,
+        "worldSha256": "caee75423bad58205f464e32656847b811186ddf39f153878e9a665958fe9457",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_10",
+        "revision": 10,
+        "worldSha256": "cd3cb88453b5f3ee10cf8fa30e3016dcf603ade6de1203cd273705d78dc5fbe7",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_13",
+        "revision": 13,
+        "worldSha256": "f45238996b89be79525e6bcd2c390e424616ace04f1a1c4daeebea691c83c043",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_16",
+        "revision": 16,
+        "worldSha256": "6c3ded12c6e4e961042a9ff1592d7d3edd7ae5bb62dc2b07dd20275b056f1af8",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_19",
+        "revision": 19,
+        "worldSha256": "31ac6a5f8044e48736c90724f3deba804ed1b2badf206eb6e75c9d678a409c92",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_22",
+        "revision": 22,
+        "worldSha256": "f62500029223b2a4b8a72bfbaca92a464aa5ee8f1c42555e7d32c9bddb1480df",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_25",
+        "revision": 25,
+        "worldSha256": "5b0f0866159e5390c8c000923646f26c27c62a8f24544e43645d75e8418316d2",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_28",
+        "revision": 28,
+        "worldSha256": "6cd79df1a9980ac8d9d1edbb67e0f08ab41d05c6f43e05a00e1b76d5b2b18a80",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_30",
+        "revision": 30,
+        "worldSha256": "ce7f90b78eb3eedc99c1135c173acd861d01556e0a332312a6819e7afb7c0bad",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_33",
+        "revision": 33,
+        "worldSha256": "7abfe90830634f1d70dc2aac325cd47ce247cfbf1b317cbad05675180a572b1e",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_36",
+        "revision": 36,
+        "worldSha256": "f69ad020949a7abbefab31eaa0f8dc4f44a9983c49ee4c1249d1ed950dcd4af2",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_38",
+        "revision": 38,
+        "worldSha256": "2b5ff2fdf7b9512544ffca414dcaff26ec616386feee27b7f92b6372aae53875",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_41",
+        "revision": 41,
+        "worldSha256": "e81a3935863c9c770bfabde30db4323dd9677ad93b6c6dd88307febc3ab34ff8",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_44",
+        "revision": 44,
+        "worldSha256": "fc1a8a79db5ec84b431a6e2ec77a46b73b663ffe6e3bd8c84284a2a4171f582a",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_47",
+        "revision": 47,
+        "worldSha256": "3fc354305c01f24622d9d4f58801783bcdfda10d38817ce5a1c73b60894fc87b",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_50",
+        "revision": 50,
+        "worldSha256": "f42a9ac42b5341c52e1709812b276c34170eba61bef2d1b3143f7ab3a900afdc",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_54",
+        "revision": 54,
+        "worldSha256": "2c402bc02f7bd9137d3d7dc3f7fc13c4af497f8fa7bb95e5dd4b3e285769072b",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_57",
+        "revision": 57,
+        "worldSha256": "462f6feb00624abe7f3ff8101bbfa5c7972cc53477edf3aec3cf7e4155445617",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_60",
+        "revision": 60,
+        "worldSha256": "35b981a29d18e578cac4d7649e3bae8119e63f324bf5ce652366804bcd91c445",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_62",
+        "revision": 62,
+        "worldSha256": "a45b0e76f02dd1eb352c120f0a14d551e811d4a47f932b0b44c65d0e4a42404c",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_64",
+        "revision": 64,
+        "worldSha256": "e60be664b4af7128f4d45dfba6de5d6232883cb1c225e0c6d3b033a3edd3bf8d",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_66",
+        "revision": 66,
+        "worldSha256": "291f95039641093b6beacc30bfd53db36dd2bb431f9531bec2e8e1b2fdc8e86b",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_69",
+        "revision": 69,
+        "worldSha256": "c5df90c127ee49f1d1e0e44d7e568947269f4210e55af187adc76a2e8728c473",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_72",
+        "revision": 72,
+        "worldSha256": "391bc0865e93ae5ba00cb744e57d7f8807f2960431be23400254505c7e564e19",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_75",
+        "revision": 75,
+        "worldSha256": "43ab078de63118debe88f0e42d1439789c0acdbbc73a818f80415de6ae521279",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_78",
+        "revision": 78,
+        "worldSha256": "11f92b7c60bc8b4f92ce040697ba5edc4977d18b3a06201e076adf513c4266d4",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_81",
+        "revision": 81,
+        "worldSha256": "982dba4614a0926c709696c30f9973e4c722648847d2b79afad7ec76651190e4",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_84",
+        "revision": 84,
+        "worldSha256": "dfc9554bfc81ca0df743584c7222981745e990ee2ecf78b3d2322bfb0e082565",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_87",
+        "revision": 87,
+        "worldSha256": "8c4ff2a4ab10abcff99bf17d7476a29f2c2d09e90c66ca398a0166984dfa869d",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_90",
+        "revision": 90,
+        "worldSha256": "6b418d9594b6e034ceff239ad7c7f303b4aa2a9db0ff2e1f4a20cae63f4ceb59",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_92",
+        "revision": 92,
+        "worldSha256": "3c07ff26c01444de163e1b688dc83f58d41c67dd13837d613fca784b432b691a",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_97",
+        "revision": 97,
+        "worldSha256": "308b4b6a925ac80a82793602c1c61502faa2f000351182640baadffbf1a09c7a",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_101",
+        "revision": 101,
+        "worldSha256": "8cb6e2fbc0d5bc04e10ad2b501c28350fe7103195688ccaea17d71caf938b9a0",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_106",
+        "revision": 106,
+        "worldSha256": "2b2da73eecb68b7868aede8546729561d749a0a0fb3934b592c446d8594c3777",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_111",
+        "revision": 111,
+        "worldSha256": "53ce1c4acea7add793a77f8b0d25ad183bc93f690d6d18931462ec9501cb8b95",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_116",
+        "revision": 116,
+        "worldSha256": "54f05add2e6f9499fbe7c30d2015c1354c648a5eea116022f1618c1f3b4cdfe5",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_121",
+        "revision": 121,
+        "worldSha256": "3440e185fc6b091d4504385076d3099904b9518b794b62672d32e1fb292aaf4a",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_126",
+        "revision": 126,
+        "worldSha256": "3908b9390f37daba5d05cbee785a52b458d49671c9fb2ded76bec50d57b4d83e",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_130",
+        "revision": 130,
+        "worldSha256": "5ad062a7e331751703ab12157bc9b8b6e2fb0fa19a653520be3a2a903193af7d",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_135",
+        "revision": 135,
+        "worldSha256": "9a350896773240d5189103ed134a2a6d18830550f8d5fcd1c50c929e944499d1",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_139",
+        "revision": 139,
+        "worldSha256": "c76a4863c8e4c7e7007dc65ed266668e1832ac96d1ed38aec7105dfd3279ef07",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_142",
+        "revision": 142,
+        "worldSha256": "bcfbcab5558fb30514a3c7ba85b84a1522584ba1899533f99221eefaef88d5a0",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_144",
+        "revision": 144,
+        "worldSha256": "515610076d16e0bf6b1bb8cc22dbce23fdd4dd212060abce7a9ac2beb3adf5bc",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_146",
+        "revision": 146,
+        "worldSha256": "78f4fd67970bccb9893ed06d6ed745d4890102b06f61194e72129daa325f7202",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_148",
+        "revision": 148,
+        "worldSha256": "57be730cb8fa8810dd18d9d8b8c0bcb5d9ca6c2bd13c8b1f51ea797268619dc4",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_151",
+        "revision": 151,
+        "worldSha256": "f27f469ac97fea125be2900686130422836e1509f02c0377607869b786e84d73",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_154",
+        "revision": 154,
+        "worldSha256": "a77f1c2c0c999018d86805e49368680c6f4d0f9c3883bbca0b81d89b31294eb9",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_157",
+        "revision": 157,
+        "worldSha256": "aa54bd958a0aa593736d277a05445a853009fa7b2a199c44aa5c2c7a804be932",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_159",
+        "revision": 159,
+        "worldSha256": "618e244b7aa65904baa7bec69702356ce926aaf395d61726c9e611e49062afdd",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_162",
+        "revision": 162,
+        "worldSha256": "ca5ca20256721f73c378022bc456aebd0c89db002428f1e633d9a0853df89e5e",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_165",
+        "revision": 165,
+        "worldSha256": "dbc52fb4e6d90ddb924c0b42f112c818d86dea75d82216eeec1d654f22a51d25",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_168",
+        "revision": 168,
+        "worldSha256": "411e31f7520309f1667aad1e7eeb8ea6266f9c1ae57e9825277499107561e6ab",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_171",
+        "revision": 171,
+        "worldSha256": "e1889c8d43c42fcfc4710fbe13001b323293064fb183a08023a23d26eeed68dd",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_174",
+        "revision": 174,
+        "worldSha256": "941e21051826ce886a48687b1e96afa88d88a9db78f9c27d7e5c050bd2912094",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_177",
+        "revision": 177,
+        "worldSha256": "3282642f4c77bfd0786d210bb75c02a9670e287e754642e562e57668c98129ba",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_180",
+        "revision": 180,
+        "worldSha256": "b1b8479aaac5e4aa3b845d28622a6c3a8c6b57c39eb8f7d56596c58df330219b",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_182",
+        "revision": 182,
+        "worldSha256": "097045b0cba405e0ebac04c6b199fe0d2de5ac07dc7fdd15e2883f278cd47cc4",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_185",
+        "revision": 185,
+        "worldSha256": "5a8f06ef3057fd6fe96cd80726cdf5d4637585a98de809f035ae0f8fbd243be4",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_188",
+        "revision": 188,
+        "worldSha256": "a858e8522b655e04c6c58841f460d3b0445582620736476e16178eb07059f52e",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_191",
+        "revision": 191,
+        "worldSha256": "7ad1629c1261bc283a0704160b3e368481265b5afbb32ddf26d28926144cbf0e",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_194",
+        "revision": 194,
+        "worldSha256": "b5a4f8d4da096b84c0e3831fa8cf2d5c76382d73b731d1a01278fe9dcbb2b1d7",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_196",
+        "revision": 196,
+        "worldSha256": "b36bd54800d11c51c7b3ea7ce0d15cbbccc57b98f631f3082e0f5ca6fb3d5a95",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_199",
+        "revision": 199,
+        "worldSha256": "07baf244bf88d46af2649949287fcc2cbc9b91790a966e5032a357f6afddd664",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_202",
+        "revision": 202,
+        "worldSha256": "9b32cfd372880c277e03cd853a4d544810568f7ccfe0d7a1a1a1b5afc2bb6b7c",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_204",
+        "revision": 204,
+        "worldSha256": "0476fb4f7c04d213eac1b240270cda061dcf2180d1fd9b04573698f91d027b9b",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_207",
+        "revision": 207,
+        "worldSha256": "6155f883af226b011ee9341031d80c14ea72729d37557797303fecfbab0e302c",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_210",
+        "revision": 210,
+        "worldSha256": "b7f0253c189a5cecee4f1b66b4afff7a4c0830655110efa6ffdb0132516f75da",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_213",
+        "revision": 213,
+        "worldSha256": "3a9847ef7f4b44ac4370b3d04c42eea418967044ef3858869f6a568aef5436fb",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_216",
+        "revision": 216,
+        "worldSha256": "7597da0bef48f781755ae029b3764c3427a91633387305868d2f47e5e082ad72",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_219",
+        "revision": 219,
+        "worldSha256": "65fdfe997b3af26ade4af7a6211bf09234e14c9854db806980bb7eea916bf90c",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_222",
+        "revision": 222,
+        "worldSha256": "31b30446d351a349bd416d9bdffd5b839b19eb9d96e76ec9af64192d22539323",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_225",
+        "revision": 225,
+        "worldSha256": "386b0e3951f4635d639bff417553279934b4001b443533fb3aecea025c583696",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_227",
+        "revision": 227,
+        "worldSha256": "c3d55d617f9e1db3a331226f46753df8a5b8dedb1ba0113ab74a52c57cc3bb22",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_229",
+        "revision": 229,
+        "worldSha256": "f08dbebd3e4e12f6621b08a1333b6db4c476fea246d7114135767cbc735d3b0e",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_232",
+        "revision": 232,
+        "worldSha256": "33c6bbc75a6a7255c8649280bc261602fa2984b6e145887965a3683d62c3f591",
+        "entireWorldExact": true
+      },
+      {
+        "id": "snapshot_r_235",
+        "revision": 235,
+        "worldSha256": "9fcd3442be84b8d9d384c8d5d505a8ba4c851a21156fc24022def2c0452ae7df",
+        "entireWorldExact": true
+      }
+    ],
+    "otherTablesExact": true,
+    "leisureSemanticRecordsExact": true,
+    "elapsedMs": 31567
+  },
+  "storageDifferenceBytes": {
+    "closed": 3096576,
+    "peak": 3022416
+  }
+}

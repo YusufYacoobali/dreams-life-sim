@@ -1,0 +1,29 @@
+{
+  "complete": true,
+  "name": "education-nested-130",
+  "events": [
+    {
+      "argv": [
+        "python3",
+        "/tmp/dreams-native-ui.py",
+        "inspect",
+        "/tmp/dreams-c39-ui-native-captures/education-nested-130/ui"
+      ],
+      "returncode": 0,
+      "stdout": "[('', 'Back', '[16,24][60,85]'), ('', 'School Years. Reports, plans and completion', '[32,320][358,397]'), ('', 'Scholarships. Apply for tuition waivers before enrolling', '[16,730][374,735]'), ('', 'Life', '[0,740][98,796]'), ('', 'Assets', '[98,740][195,796]'), ('', 'Relationships', '[195,740][293,796]'), ('', 'Activities', '[293,740][390,796]')]\n",
+      "stderr": "",
+      "at": "2026-10-21T09:20:09.870827+00:00"
+    },
+    {
+      "argv": [
+        "python3",
+        "/tmp/dreams-copy-native-db.py",
+        "/tmp/dreams-c39-ui-native-captures/education-nested-130/database"
+      ],
+      "returncode": 0,
+      "stdout": "/tmp/dreams-c39-ui-native-captures/education-nested-130/database\n",
+      "stderr": "",
+      "at": "2026-10-21T09:20:11.311218+00:00"
+    }
+  ]
+}

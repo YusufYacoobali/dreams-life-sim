@@ -1,0 +1,196 @@
+{
+  "recordedOn": "2026-10-20",
+  "scope": "Two identical complete pure-engine lives through ordinary and production immutable APIs; same inputs and entire terminal-world hashes; no native or controlled timing claim; these two seeds overlap the planned larger gate",
+  "baseCommit": "98371e5",
+  "wholeTerminalWorldsExact": true,
+  "compared": [
+    {
+      "seed": 0,
+      "country": "AU",
+      "versions": {
+        "world": 28,
+        "engine": 27,
+        "content": 4
+      },
+      "commands": 216,
+      "ageAtDeath": 63,
+      "people": 19,
+      "ledgerRows": 24895,
+      "worldSha256": "d0eb739575e644cf7edcd2dc9f56f4135d9053dcd8e544607179d0667d43ea9a"
+    },
+    {
+      "seed": 1,
+      "country": "IT",
+      "versions": {
+        "world": 28,
+        "engine": 27,
+        "content": 4
+      },
+      "commands": 280,
+      "ageAtDeath": 77,
+      "people": 20,
+      "ledgerRows": 33759,
+      "worldSha256": "5b90fde3b8ed439ef15aecbd9178da7838246a230e52efa7569bb379a151355e"
+    }
+  ],
+  "runs": {
+    "mutable": {
+      "start": {
+        "event": "sweep-start",
+        "scope": "pure engine / cloud Node; first eligible choices; newborn acknowledgement flag set before engine progression; not native or SQLite",
+        "stateMode": "mutable domain API",
+        "node": "v24.19.0",
+        "count": 2,
+        "startSeed": 0,
+        "gameSourceHash": "f58496a063413f6805d159d775abcd9f743feff3f5cddb24dd0672b487baec5f",
+        "toolSourceHash": "b57b6bb3befdba4e776217b3ebf79c1fe4892f2cd7a260fa9b7e928bca75e20e",
+        "setupMs": 1572
+      },
+      "lives": [
+        {
+          "event": "life-complete",
+          "seed": 0,
+          "completed": 1,
+          "requested": 2,
+          "country": "AU",
+          "versions": {
+            "world": 28,
+            "engine": 27,
+            "content": 4
+          },
+          "commands": 216,
+          "ageAtDeath": 63,
+          "people": 19,
+          "ledgerRows": 24895,
+          "worldSha256": "d0eb739575e644cf7edcd2dc9f56f4135d9053dcd8e544607179d0667d43ea9a",
+          "lifeMs": 6254,
+          "elapsedMs": 6255
+        },
+        {
+          "event": "life-complete",
+          "seed": 1,
+          "completed": 2,
+          "requested": 2,
+          "country": "IT",
+          "versions": {
+            "world": 28,
+            "engine": 27,
+            "content": 4
+          },
+          "commands": 280,
+          "ageAtDeath": 77,
+          "people": 20,
+          "ledgerRows": 33759,
+          "worldSha256": "5b90fde3b8ed439ef15aecbd9178da7838246a230e52efa7569bb379a151355e",
+          "lifeMs": 10776,
+          "elapsedMs": 17032
+        }
+      ],
+      "complete": {
+        "event": "sweep-complete",
+        "count": 2,
+        "startSeed": 0,
+        "completed": 2,
+        "stateMode": "mutable domain API",
+        "versions": {
+          "world": 28,
+          "engine": 27,
+          "content": 4
+        },
+        "gameSourceHash": "f58496a063413f6805d159d775abcd9f743feff3f5cddb24dd0672b487baec5f",
+        "toolSourceHash": "b57b6bb3befdba4e776217b3ebf79c1fe4892f2cd7a260fa9b7e928bca75e20e",
+        "countryCounts": {
+          "AU": 1,
+          "IT": 1
+        },
+        "ageRange": [
+          63,
+          77
+        ],
+        "maxPeople": 20,
+        "maxLedgerRows": 33759,
+        "elapsedMs": 17035
+      }
+    },
+    "immutable": {
+      "start": {
+        "event": "sweep-start",
+        "scope": "pure engine / cloud Node; first eligible choices; newborn acknowledgement flag set before engine progression; not native or SQLite",
+        "stateMode": "validated immutable",
+        "node": "v24.19.0",
+        "count": 2,
+        "startSeed": 0,
+        "gameSourceHash": "f58496a063413f6805d159d775abcd9f743feff3f5cddb24dd0672b487baec5f",
+        "toolSourceHash": "b57b6bb3befdba4e776217b3ebf79c1fe4892f2cd7a260fa9b7e928bca75e20e",
+        "setupMs": 1542
+      },
+      "lives": [
+        {
+          "event": "life-complete",
+          "seed": 0,
+          "completed": 1,
+          "requested": 2,
+          "country": "AU",
+          "versions": {
+            "world": 28,
+            "engine": 27,
+            "content": 4
+          },
+          "commands": 216,
+          "ageAtDeath": 63,
+          "people": 19,
+          "ledgerRows": 24895,
+          "worldSha256": "d0eb739575e644cf7edcd2dc9f56f4135d9053dcd8e544607179d0667d43ea9a",
+          "lifeMs": 2390,
+          "elapsedMs": 2391
+        },
+        {
+          "event": "life-complete",
+          "seed": 1,
+          "completed": 2,
+          "requested": 2,
+          "country": "IT",
+          "versions": {
+            "world": 28,
+            "engine": 27,
+            "content": 4
+          },
+          "commands": 280,
+          "ageAtDeath": 77,
+          "people": 20,
+          "ledgerRows": 33759,
+          "worldSha256": "5b90fde3b8ed439ef15aecbd9178da7838246a230e52efa7569bb379a151355e",
+          "lifeMs": 4922,
+          "elapsedMs": 7313
+        }
+      ],
+      "complete": {
+        "event": "sweep-complete",
+        "count": 2,
+        "startSeed": 0,
+        "completed": 2,
+        "stateMode": "validated immutable",
+        "versions": {
+          "world": 28,
+          "engine": 27,
+          "content": 4
+        },
+        "gameSourceHash": "f58496a063413f6805d159d775abcd9f743feff3f5cddb24dd0672b487baec5f",
+        "toolSourceHash": "b57b6bb3befdba4e776217b3ebf79c1fe4892f2cd7a260fa9b7e928bca75e20e",
+        "countryCounts": {
+          "AU": 1,
+          "IT": 1
+        },
+        "ageRange": [
+          63,
+          77
+        ],
+        "maxPeople": 20,
+        "maxLedgerRows": 33759,
+        "elapsedMs": 7317
+      }
+    }
+  },
+  "invalidCliCasesRejected": 5,
+  "full1000SeedGate": "Not established by this two-seed comparison"
+}

@@ -1,0 +1,30 @@
+{
+  "command": "npx expo export --platform all --max-workers 1 --source-maps",
+  "exit": 0,
+  "platforms": [
+    {
+      "platform": "android",
+      "bundle": "_expo/static/js/android/entry-f05667d2e1fd8993b2a2c61f2f513f17.hbc",
+      "bytes": 7474652,
+      "sha256": "822ac717f5ef6b759b730050bf59cb3be26dabb7c7507e3e0bb8291ff87cb223",
+      "hermesMagic": "c61fbc03c103191f",
+      "changedSourceFiles": 10,
+      "missing": [],
+      "mismatches": [],
+      "changedSinceManifest": [],
+      "bundledCultImages": 12
+    },
+    {
+      "platform": "ios",
+      "bundle": "_expo/static/js/ios/entry-981e964851b0c737f005271d48acfc2d.hbc",
+      "bytes": 7294636,
+      "sha256": "8cc952e1b24298a5ca1838a42b60af46262cc3cd05f95cc18e60a44ae3f4aa9d",
+      "hermesMagic": "c61fbc03c103191f",
+      "changedSourceFiles": 10,
+      "missing": [],
+      "mismatches": [],
+      "changedSinceManifest": [],
+      "bundledCultImages": 12
+    }
+  ]
+}

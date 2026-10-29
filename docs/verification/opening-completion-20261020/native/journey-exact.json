@@ -1,0 +1,757 @@
+{
+  "status": "passed",
+  "complete": true,
+  "sourceRuntimeCommit": "5a2565458fa5de90c1acaf0e110fc980f6476b64",
+  "runtimeSourceSha256": "373e285304922ec79f55b9931f06b9896beb722374e5eef654a2f50d9ac052b4",
+  "source": {
+    "root": "/workspace/dreams-worktrees/integration-opening-next",
+    "frozenRuntimeFilesVerified": 302,
+    "coordinatorProofs": [
+      {
+        "file": "/tmp/dreams-opening-next-source-tree.bin",
+        "sha256": "756b24a3b543a371009907fad3e1140ccc7e13fb1244a345b989a5596d55e9d6"
+      },
+      {
+        "file": "/tmp/dreams-opening-next-source-head.txt",
+        "sha256": "ce21d75d587fb0bee2a0b348b1ed1509425d1561f8456ff5ecacb74de59fa88f"
+      },
+      {
+        "file": "/tmp/dreams-opening-next-source-status.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ]
+  },
+  "projection": {
+    "path": "/tmp/dreams-opening-next-native-command-plan.json",
+    "sha256": "f0833c07dbd93877211b03c267701f7e24ff50cfc3c25b955c3617e3dd2d74df"
+  },
+  "expectedSettings": {
+    "file": "/tmp/dreams-opening-next-native-expected-settings.json",
+    "sha256": "42d74e12e99c1dfe73012e00ec23296f2dd99d790c8c353b210ad1eadcc7b6e8",
+    "value": {
+      "version": 1,
+      "appearance": "light",
+      "reducedMotion": true,
+      "haptics": true,
+      "soundEffects": true
+    }
+  },
+  "scope": "Read-only verification of coordinator-provided native SQLite captures against the actual C34 School-final database and frozen C35 production-command projection. No commands, SQL writes, source edits, native operations, simulations or missing phases are performed. UI/screenshot review, capture provenance and process-stop observation belong to the coordinator; database equality alone does not prove them.",
+  "readerMigration": {
+    "from": 13,
+    "to": 14,
+    "allEightTablesExact": true,
+    "noEagerOriginalPayloadRewrite": true
+  },
+  "baseline": {
+    "path": "/tmp/dreams-autonomy-native-school-final-db/dreams.db",
+    "tables": {
+      "lives": {
+        "rows": 7,
+        "sha256": "e1f32ca9023a7fa18372d45e832d4daf06284318f0092dc81e934963fbd0feef"
+      },
+      "preferences": {
+        "rows": 1,
+        "sha256": "9347b1e059921517e409be15aefbb52db2a2bc50690df6ec8a1deb0a2fe0777c"
+      },
+      "receipts": {
+        "rows": 141,
+        "sha256": "2c7ed331568da605dd8e2321361fc3259173118ac14697a5f599b9d22e12f483"
+      },
+      "snapshots": {
+        "rows": 66,
+        "sha256": "9037634b6d1cf5b133816f83ba1e75855a40dd73b863f8428f724d152d4208b5"
+      },
+      "backups": {
+        "rows": 7,
+        "sha256": "1829a67d205a9cd06317f37c8790562f9c3142600936147c2d6cf16fe8f3a479"
+      },
+      "snapshot_metadata": {
+        "rows": 66,
+        "sha256": "3847a02861aa0ffe07c81bede180502b2638f767292377e8b5c2e20a7a48c5b9"
+      },
+      "branches": {
+        "rows": 1,
+        "sha256": "fbca8816f9bd06ea8d170416427ea734d77405d1c61fc324d0f91306b745f370"
+      },
+      "restore_receipts": {
+        "rows": 1,
+        "sha256": "010397ecad34ae345dbefdd296eb4734aa3a81fe3c786f3ded62009733687ce7"
+      }
+    },
+    "activeLife": "life_mvgprdj2_16qsril_0",
+    "revisionAlex": 23,
+    "revisionNia": 134
+  },
+  "phases": [
+    {
+      "phase": "boot",
+      "path": "/tmp/dreams-opening-next-native-boot-db/dreams.db",
+      "reader": 14,
+      "activeLife": "life_mvgprdj2_16qsril_0",
+      "activeRevision": 23,
+      "activeWorldSha256": "bbc0b07028aaeb4f8cda808fc2e0b3f426a96cf154712077a4ea20c36aea46b3",
+      "lifeId": "life_native_adult_friend_v30_s0",
+      "personId": "person_player",
+      "revision": 134,
+      "worldSha256": "5f9793078108796cfa4ac958bf357449b2c82101a01b7f18dab4762024bf6537",
+      "pending": null,
+      "annual": null,
+      "allSixOtherOriginalLivesAndBackupsExact": true,
+      "all66OriginalMomentsAndMetadataExact": true,
+      "all141OriginalReceiptsExact": true,
+      "branchesAndRestoreReceiptsExact": true,
+      "noNewSnapshots": true,
+      "lives": 7,
+      "moments": 66,
+      "receipts": 141,
+      "tables": {
+        "lives": {
+          "rows": 7,
+          "sha256": "e1f32ca9023a7fa18372d45e832d4daf06284318f0092dc81e934963fbd0feef"
+        },
+        "preferences": {
+          "rows": 1,
+          "sha256": "9347b1e059921517e409be15aefbb52db2a2bc50690df6ec8a1deb0a2fe0777c"
+        },
+        "receipts": {
+          "rows": 141,
+          "sha256": "2c7ed331568da605dd8e2321361fc3259173118ac14697a5f599b9d22e12f483"
+        },
+        "snapshots": {
+          "rows": 66,
+          "sha256": "9037634b6d1cf5b133816f83ba1e75855a40dd73b863f8428f724d152d4208b5"
+        },
+        "backups": {
+          "rows": 7,
+          "sha256": "1829a67d205a9cd06317f37c8790562f9c3142600936147c2d6cf16fe8f3a479"
+        },
+        "snapshot_metadata": {
+          "rows": 66,
+          "sha256": "3847a02861aa0ffe07c81bede180502b2638f767292377e8b5c2e20a7a48c5b9"
+        },
+        "branches": {
+          "rows": 1,
+          "sha256": "fbca8816f9bd06ea8d170416427ea734d77405d1c61fc324d0f91306b745f370"
+        },
+        "restore_receipts": {
+          "rows": 1,
+          "sha256": "010397ecad34ae345dbefdd296eb4734aa3a81fe3c786f3ded62009733687ce7"
+        }
+      },
+      "noEagerOriginalPayloadRewrite": true,
+      "allEightTablesExactToC34Baseline": true,
+      "newPeopleSinceNia134": []
+    },
+    {
+      "phase": "browsed",
+      "path": "/tmp/dreams-opening-next-native-browsed-db/dreams.db",
+      "reader": 14,
+      "activeLife": "life_mvgprdj2_16qsril_0",
+      "activeRevision": 23,
+      "activeWorldSha256": "bbc0b07028aaeb4f8cda808fc2e0b3f426a96cf154712077a4ea20c36aea46b3",
+      "lifeId": "life_native_adult_friend_v30_s0",
+      "personId": "person_player",
+      "revision": 134,
+      "worldSha256": "5f9793078108796cfa4ac958bf357449b2c82101a01b7f18dab4762024bf6537",
+      "pending": null,
+      "annual": null,
+      "allSixOtherOriginalLivesAndBackupsExact": true,
+      "all66OriginalMomentsAndMetadataExact": true,
+      "all141OriginalReceiptsExact": true,
+      "branchesAndRestoreReceiptsExact": true,
+      "noNewSnapshots": true,
+      "lives": 7,
+      "moments": 66,
+      "receipts": 141,
+      "tables": {
+        "lives": {
+          "rows": 7,
+          "sha256": "e1f32ca9023a7fa18372d45e832d4daf06284318f0092dc81e934963fbd0feef"
+        },
+        "preferences": {
+          "rows": 1,
+          "sha256": "9347b1e059921517e409be15aefbb52db2a2bc50690df6ec8a1deb0a2fe0777c"
+        },
+        "receipts": {
+          "rows": 141,
+          "sha256": "2c7ed331568da605dd8e2321361fc3259173118ac14697a5f599b9d22e12f483"
+        },
+        "snapshots": {
+          "rows": 66,
+          "sha256": "9037634b6d1cf5b133816f83ba1e75855a40dd73b863f8428f724d152d4208b5"
+        },
+        "backups": {
+          "rows": 7,
+          "sha256": "1829a67d205a9cd06317f37c8790562f9c3142600936147c2d6cf16fe8f3a479"
+        },
+        "snapshot_metadata": {
+          "rows": 66,
+          "sha256": "3847a02861aa0ffe07c81bede180502b2638f767292377e8b5c2e20a7a48c5b9"
+        },
+        "branches": {
+          "rows": 1,
+          "sha256": "fbca8816f9bd06ea8d170416427ea734d77405d1c61fc324d0f91306b745f370"
+        },
+        "restore_receipts": {
+          "rows": 1,
+          "sha256": "010397ecad34ae345dbefdd296eb4734aa3a81fe3c786f3ded62009733687ce7"
+        }
+      },
+      "noEagerOriginalPayloadRewrite": true,
+      "allEightTablesExactToPhase": "boot",
+      "allEightTablesExactToC34Baseline": true,
+      "newPeopleSinceNia134": []
+    },
+    {
+      "phase": "settings",
+      "path": "/tmp/dreams-opening-next-native-settings-db/dreams.db",
+      "reader": 14,
+      "activeLife": "life_mvgprdj2_16qsril_0",
+      "activeRevision": 23,
+      "activeWorldSha256": "bbc0b07028aaeb4f8cda808fc2e0b3f426a96cf154712077a4ea20c36aea46b3",
+      "lifeId": "life_native_adult_friend_v30_s0",
+      "personId": "person_player",
+      "revision": 134,
+      "worldSha256": "5f9793078108796cfa4ac958bf357449b2c82101a01b7f18dab4762024bf6537",
+      "pending": null,
+      "annual": null,
+      "allSixOtherOriginalLivesAndBackupsExact": true,
+      "all66OriginalMomentsAndMetadataExact": true,
+      "all141OriginalReceiptsExact": true,
+      "branchesAndRestoreReceiptsExact": true,
+      "noNewSnapshots": true,
+      "lives": 7,
+      "moments": 66,
+      "receipts": 141,
+      "tables": {
+        "lives": {
+          "rows": 7,
+          "sha256": "e1f32ca9023a7fa18372d45e832d4daf06284318f0092dc81e934963fbd0feef"
+        },
+        "preferences": {
+          "rows": 2,
+          "sha256": "ce78b6d0c7c532c7a34094e18f0e25ae1d72c9b120aca04a0e53a60eb4d8f3c5"
+        },
+        "receipts": {
+          "rows": 141,
+          "sha256": "2c7ed331568da605dd8e2321361fc3259173118ac14697a5f599b9d22e12f483"
+        },
+        "snapshots": {
+          "rows": 66,
+          "sha256": "9037634b6d1cf5b133816f83ba1e75855a40dd73b863f8428f724d152d4208b5"
+        },
+        "backups": {
+          "rows": 7,
+          "sha256": "1829a67d205a9cd06317f37c8790562f9c3142600936147c2d6cf16fe8f3a479"
+        },
+        "snapshot_metadata": {
+          "rows": 66,
+          "sha256": "3847a02861aa0ffe07c81bede180502b2638f767292377e8b5c2e20a7a48c5b9"
+        },
+        "branches": {
+          "rows": 1,
+          "sha256": "fbca8816f9bd06ea8d170416427ea734d77405d1c61fc324d0f91306b745f370"
+        },
+        "restore_receipts": {
+          "rows": 1,
+          "sha256": "010397ecad34ae345dbefdd296eb4734aa3a81fe3c786f3ded62009733687ce7"
+        }
+      },
+      "noEagerOriginalPayloadRewrite": true,
+      "onlyIntendedSettingsPersist": true,
+      "newPeopleSinceNia134": []
+    },
+    {
+      "phase": "selected",
+      "path": "/tmp/dreams-opening-next-native-selected-db/dreams.db",
+      "reader": 14,
+      "activeLife": "life_native_adult_friend_v30_s0",
+      "activeRevision": 134,
+      "activeWorldSha256": "5f9793078108796cfa4ac958bf357449b2c82101a01b7f18dab4762024bf6537",
+      "lifeId": "life_native_adult_friend_v30_s0",
+      "personId": "person_player",
+      "revision": 134,
+      "worldSha256": "5f9793078108796cfa4ac958bf357449b2c82101a01b7f18dab4762024bf6537",
+      "pending": null,
+      "annual": null,
+      "allSixOtherOriginalLivesAndBackupsExact": true,
+      "all66OriginalMomentsAndMetadataExact": true,
+      "all141OriginalReceiptsExact": true,
+      "branchesAndRestoreReceiptsExact": true,
+      "noNewSnapshots": true,
+      "lives": 7,
+      "moments": 66,
+      "receipts": 141,
+      "tables": {
+        "lives": {
+          "rows": 7,
+          "sha256": "e1f32ca9023a7fa18372d45e832d4daf06284318f0092dc81e934963fbd0feef"
+        },
+        "preferences": {
+          "rows": 2,
+          "sha256": "439c7df07be842e2d88a5c4e3901fef292b80bc8317269fc0b356d8c055d0413"
+        },
+        "receipts": {
+          "rows": 141,
+          "sha256": "2c7ed331568da605dd8e2321361fc3259173118ac14697a5f599b9d22e12f483"
+        },
+        "snapshots": {
+          "rows": 66,
+          "sha256": "9037634b6d1cf5b133816f83ba1e75855a40dd73b863f8428f724d152d4208b5"
+        },
+        "backups": {
+          "rows": 7,
+          "sha256": "1829a67d205a9cd06317f37c8790562f9c3142600936147c2d6cf16fe8f3a479"
+        },
+        "snapshot_metadata": {
+          "rows": 66,
+          "sha256": "3847a02861aa0ffe07c81bede180502b2638f767292377e8b5c2e20a7a48c5b9"
+        },
+        "branches": {
+          "rows": 1,
+          "sha256": "fbca8816f9bd06ea8d170416427ea734d77405d1c61fc324d0f91306b745f370"
+        },
+        "restore_receipts": {
+          "rows": 1,
+          "sha256": "010397ecad34ae345dbefdd296eb4734aa3a81fe3c786f3ded62009733687ce7"
+        }
+      },
+      "noEagerOriginalPayloadRewrite": true,
+      "onlyIntendedSettingsPersist": true,
+      "newPeopleSinceNia134": []
+    },
+    {
+      "phase": "intro135",
+      "path": "/tmp/dreams-opening-next-native-intro135-db/dreams.db",
+      "reader": 14,
+      "activeLife": "life_native_adult_friend_v30_s0",
+      "activeRevision": 135,
+      "activeWorldSha256": "8fffa66ebf6b2ab5d7511081e464c9956d7b36372788f885310076e79c69e195",
+      "lifeId": "life_native_adult_friend_v30_s0",
+      "personId": "person_player",
+      "revision": 135,
+      "worldSha256": "8fffa66ebf6b2ab5d7511081e464c9956d7b36372788f885310076e79c69e195",
+      "pending": {
+        "id": "action_134",
+        "title": "An introduction at practice"
+      },
+      "annual": null,
+      "allSixOtherOriginalLivesAndBackupsExact": true,
+      "all66OriginalMomentsAndMetadataExact": true,
+      "all141OriginalReceiptsExact": true,
+      "branchesAndRestoreReceiptsExact": true,
+      "noNewSnapshots": true,
+      "lives": 7,
+      "moments": 66,
+      "receipts": 142,
+      "tables": {
+        "lives": {
+          "rows": 7,
+          "sha256": "57b38c3e1899c1f4b0209adce6cc8e2acbb83953494d0404829c4f1e858cbb75"
+        },
+        "preferences": {
+          "rows": 2,
+          "sha256": "439c7df07be842e2d88a5c4e3901fef292b80bc8317269fc0b356d8c055d0413"
+        },
+        "receipts": {
+          "rows": 142,
+          "sha256": "7a557c86a41fef9c0bd6f4dd64978d23a38f66e4aef066f885ef352da425f72f"
+        },
+        "snapshots": {
+          "rows": 66,
+          "sha256": "9037634b6d1cf5b133816f83ba1e75855a40dd73b863f8428f724d152d4208b5"
+        },
+        "backups": {
+          "rows": 7,
+          "sha256": "5fffc9ef38ac22a3bf71b0dc7b215767c0f2cff28d62d9f4b764aa6120648085"
+        },
+        "snapshot_metadata": {
+          "rows": 66,
+          "sha256": "3847a02861aa0ffe07c81bede180502b2638f767292377e8b5c2e20a7a48c5b9"
+        },
+        "branches": {
+          "rows": 1,
+          "sha256": "fbca8816f9bd06ea8d170416427ea734d77405d1c61fc324d0f91306b745f370"
+        },
+        "restore_receipts": {
+          "rows": 1,
+          "sha256": "010397ecad34ae345dbefdd296eb4734aa3a81fe3c786f3ded62009733687ce7"
+        }
+      },
+      "exactOrdinaryCommandReceipts": 1,
+      "onlyIntendedSettingsPersist": true,
+      "newPeopleSinceNia134": [
+        {
+          "id": "person_npc_134_19",
+          "name": "Morgan Brooks",
+          "age": 28
+        }
+      ]
+    },
+    {
+      "phase": "cold-intro135",
+      "path": "/tmp/dreams-opening-next-native-cold-intro135-db/dreams.db",
+      "reader": 14,
+      "activeLife": "life_native_adult_friend_v30_s0",
+      "activeRevision": 135,
+      "activeWorldSha256": "8fffa66ebf6b2ab5d7511081e464c9956d7b36372788f885310076e79c69e195",
+      "lifeId": "life_native_adult_friend_v30_s0",
+      "personId": "person_player",
+      "revision": 135,
+      "worldSha256": "8fffa66ebf6b2ab5d7511081e464c9956d7b36372788f885310076e79c69e195",
+      "pending": {
+        "id": "action_134",
+        "title": "An introduction at practice"
+      },
+      "annual": null,
+      "allSixOtherOriginalLivesAndBackupsExact": true,
+      "all66OriginalMomentsAndMetadataExact": true,
+      "all141OriginalReceiptsExact": true,
+      "branchesAndRestoreReceiptsExact": true,
+      "noNewSnapshots": true,
+      "lives": 7,
+      "moments": 66,
+      "receipts": 142,
+      "tables": {
+        "lives": {
+          "rows": 7,
+          "sha256": "57b38c3e1899c1f4b0209adce6cc8e2acbb83953494d0404829c4f1e858cbb75"
+        },
+        "preferences": {
+          "rows": 2,
+          "sha256": "439c7df07be842e2d88a5c4e3901fef292b80bc8317269fc0b356d8c055d0413"
+        },
+        "receipts": {
+          "rows": 142,
+          "sha256": "7a557c86a41fef9c0bd6f4dd64978d23a38f66e4aef066f885ef352da425f72f"
+        },
+        "snapshots": {
+          "rows": 66,
+          "sha256": "9037634b6d1cf5b133816f83ba1e75855a40dd73b863f8428f724d152d4208b5"
+        },
+        "backups": {
+          "rows": 7,
+          "sha256": "5fffc9ef38ac22a3bf71b0dc7b215767c0f2cff28d62d9f4b764aa6120648085"
+        },
+        "snapshot_metadata": {
+          "rows": 66,
+          "sha256": "3847a02861aa0ffe07c81bede180502b2638f767292377e8b5c2e20a7a48c5b9"
+        },
+        "branches": {
+          "rows": 1,
+          "sha256": "fbca8816f9bd06ea8d170416427ea734d77405d1c61fc324d0f91306b745f370"
+        },
+        "restore_receipts": {
+          "rows": 1,
+          "sha256": "010397ecad34ae345dbefdd296eb4734aa3a81fe3c786f3ded62009733687ce7"
+        }
+      },
+      "exactOrdinaryCommandReceipts": 1,
+      "allEightTablesExactToPhase": "intro135",
+      "onlyIntendedSettingsPersist": true,
+      "newPeopleSinceNia134": [
+        {
+          "id": "person_npc_134_19",
+          "name": "Morgan Brooks",
+          "age": 28
+        }
+      ]
+    },
+    {
+      "phase": "ack136",
+      "path": "/tmp/dreams-opening-next-native-ack136-db/dreams.db",
+      "reader": 14,
+      "activeLife": "life_native_adult_friend_v30_s0",
+      "activeRevision": 136,
+      "activeWorldSha256": "0eb0dd3174a0309446b923d5de06f2f3f37323a0151138de069976a2efb0f228",
+      "lifeId": "life_native_adult_friend_v30_s0",
+      "personId": "person_player",
+      "revision": 136,
+      "worldSha256": "0eb0dd3174a0309446b923d5de06f2f3f37323a0151138de069976a2efb0f228",
+      "pending": null,
+      "annual": null,
+      "allSixOtherOriginalLivesAndBackupsExact": true,
+      "all66OriginalMomentsAndMetadataExact": true,
+      "all141OriginalReceiptsExact": true,
+      "branchesAndRestoreReceiptsExact": true,
+      "noNewSnapshots": true,
+      "lives": 7,
+      "moments": 66,
+      "receipts": 143,
+      "tables": {
+        "lives": {
+          "rows": 7,
+          "sha256": "fb21d164c7d6e5924585997ddca9874ecf0f27bcf885db9c91248ae67b314295"
+        },
+        "preferences": {
+          "rows": 2,
+          "sha256": "439c7df07be842e2d88a5c4e3901fef292b80bc8317269fc0b356d8c055d0413"
+        },
+        "receipts": {
+          "rows": 143,
+          "sha256": "6788ad743e48460cdbd8d767784d583edbf4fdf2978405de7b3f5e923e18d310"
+        },
+        "snapshots": {
+          "rows": 66,
+          "sha256": "9037634b6d1cf5b133816f83ba1e75855a40dd73b863f8428f724d152d4208b5"
+        },
+        "backups": {
+          "rows": 7,
+          "sha256": "bb7c67f6720dc27a887cccfef08424ccc7fdf117d7a17674b344b9adf69700a7"
+        },
+        "snapshot_metadata": {
+          "rows": 66,
+          "sha256": "3847a02861aa0ffe07c81bede180502b2638f767292377e8b5c2e20a7a48c5b9"
+        },
+        "branches": {
+          "rows": 1,
+          "sha256": "fbca8816f9bd06ea8d170416427ea734d77405d1c61fc324d0f91306b745f370"
+        },
+        "restore_receipts": {
+          "rows": 1,
+          "sha256": "010397ecad34ae345dbefdd296eb4734aa3a81fe3c786f3ded62009733687ce7"
+        }
+      },
+      "exactOrdinaryCommandReceipts": 2,
+      "onlyIntendedSettingsPersist": true,
+      "newPeopleSinceNia134": [
+        {
+          "id": "person_npc_134_19",
+          "name": "Morgan Brooks",
+          "age": 28
+        }
+      ]
+    },
+    {
+      "phase": "vaccine137",
+      "path": "/tmp/dreams-opening-next-native-vaccine137-db/dreams.db",
+      "reader": 14,
+      "activeLife": "life_native_adult_friend_v30_s0",
+      "activeRevision": 137,
+      "activeWorldSha256": "9fe3c0363856183ec3cbe355be97752a99ed60eb2e5b9ee25d152b7bf3d04748",
+      "lifeId": "life_native_adult_friend_v30_s0",
+      "personId": "person_player",
+      "revision": 137,
+      "worldSha256": "9fe3c0363856183ec3cbe355be97752a99ed60eb2e5b9ee25d152b7bf3d04748",
+      "pending": {
+        "id": "action_136",
+        "title": "Protection recorded"
+      },
+      "annual": null,
+      "allSixOtherOriginalLivesAndBackupsExact": true,
+      "all66OriginalMomentsAndMetadataExact": true,
+      "all141OriginalReceiptsExact": true,
+      "branchesAndRestoreReceiptsExact": true,
+      "noNewSnapshots": true,
+      "lives": 7,
+      "moments": 66,
+      "receipts": 144,
+      "tables": {
+        "lives": {
+          "rows": 7,
+          "sha256": "ca0af2e5b4c816119bf3f65a38cfbe99ba7342aeb55884218465d75feaa872d2"
+        },
+        "preferences": {
+          "rows": 2,
+          "sha256": "439c7df07be842e2d88a5c4e3901fef292b80bc8317269fc0b356d8c055d0413"
+        },
+        "receipts": {
+          "rows": 144,
+          "sha256": "0ad908c0804f390ccce65dbd1485fd292f790119a18d4d939a8124a9a22cd06b"
+        },
+        "snapshots": {
+          "rows": 66,
+          "sha256": "9037634b6d1cf5b133816f83ba1e75855a40dd73b863f8428f724d152d4208b5"
+        },
+        "backups": {
+          "rows": 7,
+          "sha256": "d30d79e59c8104c9dac8bd3412d927cf4b3bc35e518552cf966017012a248f87"
+        },
+        "snapshot_metadata": {
+          "rows": 66,
+          "sha256": "3847a02861aa0ffe07c81bede180502b2638f767292377e8b5c2e20a7a48c5b9"
+        },
+        "branches": {
+          "rows": 1,
+          "sha256": "fbca8816f9bd06ea8d170416427ea734d77405d1c61fc324d0f91306b745f370"
+        },
+        "restore_receipts": {
+          "rows": 1,
+          "sha256": "010397ecad34ae345dbefdd296eb4734aa3a81fe3c786f3ded62009733687ce7"
+        }
+      },
+      "exactOrdinaryCommandReceipts": 3,
+      "onlyIntendedSettingsPersist": true,
+      "newPeopleSinceNia134": [
+        {
+          "id": "person_npc_134_19",
+          "name": "Morgan Brooks",
+          "age": 28
+        }
+      ]
+    },
+    {
+      "phase": "cold-vaccine137",
+      "path": "/tmp/dreams-opening-next-native-cold-vaccine137-db/dreams.db",
+      "reader": 14,
+      "activeLife": "life_native_adult_friend_v30_s0",
+      "activeRevision": 137,
+      "activeWorldSha256": "9fe3c0363856183ec3cbe355be97752a99ed60eb2e5b9ee25d152b7bf3d04748",
+      "lifeId": "life_native_adult_friend_v30_s0",
+      "personId": "person_player",
+      "revision": 137,
+      "worldSha256": "9fe3c0363856183ec3cbe355be97752a99ed60eb2e5b9ee25d152b7bf3d04748",
+      "pending": {
+        "id": "action_136",
+        "title": "Protection recorded"
+      },
+      "annual": null,
+      "allSixOtherOriginalLivesAndBackupsExact": true,
+      "all66OriginalMomentsAndMetadataExact": true,
+      "all141OriginalReceiptsExact": true,
+      "branchesAndRestoreReceiptsExact": true,
+      "noNewSnapshots": true,
+      "lives": 7,
+      "moments": 66,
+      "receipts": 144,
+      "tables": {
+        "lives": {
+          "rows": 7,
+          "sha256": "ca0af2e5b4c816119bf3f65a38cfbe99ba7342aeb55884218465d75feaa872d2"
+        },
+        "preferences": {
+          "rows": 2,
+          "sha256": "439c7df07be842e2d88a5c4e3901fef292b80bc8317269fc0b356d8c055d0413"
+        },
+        "receipts": {
+          "rows": 144,
+          "sha256": "0ad908c0804f390ccce65dbd1485fd292f790119a18d4d939a8124a9a22cd06b"
+        },
+        "snapshots": {
+          "rows": 66,
+          "sha256": "9037634b6d1cf5b133816f83ba1e75855a40dd73b863f8428f724d152d4208b5"
+        },
+        "backups": {
+          "rows": 7,
+          "sha256": "d30d79e59c8104c9dac8bd3412d927cf4b3bc35e518552cf966017012a248f87"
+        },
+        "snapshot_metadata": {
+          "rows": 66,
+          "sha256": "3847a02861aa0ffe07c81bede180502b2638f767292377e8b5c2e20a7a48c5b9"
+        },
+        "branches": {
+          "rows": 1,
+          "sha256": "fbca8816f9bd06ea8d170416427ea734d77405d1c61fc324d0f91306b745f370"
+        },
+        "restore_receipts": {
+          "rows": 1,
+          "sha256": "010397ecad34ae345dbefdd296eb4734aa3a81fe3c786f3ded62009733687ce7"
+        }
+      },
+      "exactOrdinaryCommandReceipts": 3,
+      "allEightTablesExactToPhase": "vaccine137",
+      "onlyIntendedSettingsPersist": true,
+      "newPeopleSinceNia134": [
+        {
+          "id": "person_npc_134_19",
+          "name": "Morgan Brooks",
+          "age": 28
+        }
+      ]
+    },
+    {
+      "phase": "final138",
+      "path": "/tmp/dreams-opening-next-native-final138-db/dreams.db",
+      "reader": 14,
+      "activeLife": "life_native_adult_friend_v30_s0",
+      "activeRevision": 138,
+      "activeWorldSha256": "35b9b53a927e833eee7aa87d99cb0008fc2190914bac66828cc7de0b0920ecb7",
+      "lifeId": "life_native_adult_friend_v30_s0",
+      "personId": "person_player",
+      "revision": 138,
+      "worldSha256": "35b9b53a927e833eee7aa87d99cb0008fc2190914bac66828cc7de0b0920ecb7",
+      "pending": null,
+      "annual": null,
+      "allSixOtherOriginalLivesAndBackupsExact": true,
+      "all66OriginalMomentsAndMetadataExact": true,
+      "all141OriginalReceiptsExact": true,
+      "branchesAndRestoreReceiptsExact": true,
+      "noNewSnapshots": true,
+      "lives": 7,
+      "moments": 66,
+      "receipts": 145,
+      "tables": {
+        "lives": {
+          "rows": 7,
+          "sha256": "70d23515f07bdd76c615172410e4fad9880b09965c7161d0c6bf0d97530442c5"
+        },
+        "preferences": {
+          "rows": 2,
+          "sha256": "439c7df07be842e2d88a5c4e3901fef292b80bc8317269fc0b356d8c055d0413"
+        },
+        "receipts": {
+          "rows": 145,
+          "sha256": "f3fa9f04eb9452e4a6b8c8d6f0c513dde98f168a824c78b4c1ae36f306e26b6b"
+        },
+        "snapshots": {
+          "rows": 66,
+          "sha256": "9037634b6d1cf5b133816f83ba1e75855a40dd73b863f8428f724d152d4208b5"
+        },
+        "backups": {
+          "rows": 7,
+          "sha256": "8e52dd39fc6c26f365919d18304c059d1baa46b3604e00470bc08e91a567a584"
+        },
+        "snapshot_metadata": {
+          "rows": 66,
+          "sha256": "3847a02861aa0ffe07c81bede180502b2638f767292377e8b5c2e20a7a48c5b9"
+        },
+        "branches": {
+          "rows": 1,
+          "sha256": "fbca8816f9bd06ea8d170416427ea734d77405d1c61fc324d0f91306b745f370"
+        },
+        "restore_receipts": {
+          "rows": 1,
+          "sha256": "010397ecad34ae345dbefdd296eb4734aa3a81fe3c786f3ded62009733687ce7"
+        }
+      },
+      "exactOrdinaryCommandReceipts": 4,
+      "onlyIntendedSettingsPersist": true,
+      "newPeopleSinceNia134": [
+        {
+          "id": "person_npc_134_19",
+          "name": "Morgan Brooks",
+          "age": 28
+        }
+      ]
+    }
+  ],
+  "final": {
+    "lifeId": "life_native_adult_friend_v30_s0",
+    "personId": "person_player",
+    "name": "Nia Carter",
+    "age": 24,
+    "revision": 138,
+    "worldSha256": "35b9b53a927e833eee7aa87d99cb0008fc2190914bac66828cc7de0b0920ecb7",
+    "pending": null,
+    "annual": null,
+    "lives": 7,
+    "moments": 66,
+    "receipts": 145,
+    "settings": {
+      "version": 1,
+      "appearance": "light",
+      "reducedMotion": true,
+      "haptics": true,
+      "soundEffects": true
+    }
+  },
+  "acknowledgements": {
+    "count": 2,
+    "exactlyOncePerActualResult": true,
+    "resultIds": [
+      "action_134",
+      "action_136"
+    ]
+  }
+}

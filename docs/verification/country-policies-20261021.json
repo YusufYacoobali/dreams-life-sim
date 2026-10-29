@@ -1,0 +1,1366 @@
+{
+  "format": "dreams-current-country-policy-portable-acceptance-v1",
+  "complete": true,
+  "overallGameAcceptanceComplete": false,
+  "status": "four-actual-closed-zero-policy-cohorts-and-independent-outcome-reviews-published",
+  "recordedAt": "2026-10-21T10:41:07.414688+00:00",
+  "documentationBase": "7bed8dac365e5e901d29b8f0ad0e8fe7c0993893",
+  "source": {
+    "commit": "33b6a5fcb0aae73dfc235a15394b34d8afda00cc",
+    "files": 688,
+    "versions": {
+      "world": 38,
+      "engine": 39,
+      "content": 13,
+      "database": 18,
+      "checkpoint": "v4"
+    },
+    "snapshot": {
+      "file": "country-policies-20261021/source/accepted-source.json",
+      "bytes": 75993,
+      "sha256": "2e08fd925c673437ff7de7c76c0fd79d02832617d0014efc1c3e471782fe9b56"
+    },
+    "gameSourceHash": "7de215076995f7dbe7c76eceb080ba00b6de6f1783c12340d1e82677c996245b",
+    "combinedGamePersistenceSourceHash": "d72d52f3d6a6e312e490a525c0638638af6c5bb27449ffb8a0dd5833e10acbc0",
+    "coordinatorGitProofs": {
+      "head": {
+        "file": "final-regression-20261021/001-source-head.txt",
+        "bytes": 41,
+        "sha256": "b9a599d126c0e48bba9068d643cdd829d293c7440013d5bed168fa3343b17554"
+      },
+      "status": {
+        "file": "final-regression-20261021/002-source-status.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "tree": {
+        "file": "final-regression-20261021/003-source-tree.bin",
+        "bytes": 207286,
+        "sha256": "e7f52b1e3ff5f493af48873f9b294ac569d7ed288ca33b35a673ee52e6594284"
+      },
+      "commit": {
+        "file": "final-regression-20261021/004-source-commit.bin",
+        "bytes": 258,
+        "sha256": "26498430e369b214199f030aee7f5a8fa6c9d87e5998d1342f4101ecc033824f"
+      }
+    }
+  },
+  "currentUISourceBridge": {
+    "commit": "83adaea6f92523d04a27df2e77b11e0a8b14ef1d",
+    "files": 703,
+    "source": {
+      "file": "ui-save-checkpoint-20261021/001-dreams-production-ui-complete-source.json",
+      "bytes": 77733,
+      "sha256": "85b203f84cc1e4f06b931794adaabfebee400b142155b6ea7443bb4b8e066e7d"
+    },
+    "bridge": {
+      "file": "ui-save-checkpoint-20261021/004-dreams-production-ui-complete-bridge.json",
+      "bytes": 10332,
+      "sha256": "80acaa6abbf5baa015d7f451c358312f37756d7f28737b781315c33107c5a73d"
+    },
+    "gameAndPersistenceExactTo33b": true,
+    "scope": "Policies retain33b/688 producer identity; the83ad/703 bridge does not turn them into native/UI acceptance."
+  },
+  "seedAccounting": {
+    "policyExecutions": 48,
+    "countrySeedPairsPerPolicy": 12,
+    "uniqueCountrySeedPairsAcrossPolicies": 12,
+    "fixedSeeds": [
+      900,
+      901,
+      902,
+      903,
+      904,
+      905,
+      906,
+      907,
+      908,
+      909,
+      910,
+      911
+    ],
+    "additionalDistinctAnnualSeedIds": 0,
+    "allSeedIdsAlreadyWithinAnnual1000": true,
+    "limits": "Four different policy runs reuse the same12 country/seed assignments. Do not count48 new unique seeds or add these IDs to the annual1000."
+  },
+  "policies": {
+    "A": {
+      "adapter": "professional-v3",
+      "actualExitCode": 0,
+      "startedAt": "2026-10-21T07:55:51.609643+00:00",
+      "endedAt": "2026-10-21T08:04:40.823106+00:00",
+      "wrapperSeconds": 529.213,
+      "receipt": {
+        "file": "country-policies-20261021/A/root-receipt.json",
+        "bytes": 1293,
+        "sha256": "63747fa9a3101e25a645d7de8539534a9dc32e397771506b314eddecbbcc66cb"
+      },
+      "rawOutputLosslessCopy": {
+        "file": "country-policies-20261021/A/raw.out.gz",
+        "bytes": 375320,
+        "sha256": "17022e8cab2fb958cddd5b297714be041a65eda1b34991a8fc95544c2e9e6b18",
+        "encoding": "gzip; decompression restores exact original bytes"
+      },
+      "rawUncompressed": {
+        "file": "/tmp/dreams-production-finish-accepted-professional-v3.out",
+        "bytes": 8154923,
+        "sha256": "cb91675f8b610b3a0f3af4427b9a87a42c3c81c21b157232ef522e260cdca3a8"
+      },
+      "inputManifest": {
+        "file": "country-policies-20261021/A/manifest.json",
+        "bytes": 21467,
+        "sha256": "08eaa8f6fde499dc1907fd83ff04d95bc4d46d0ce78d0db10202781cf9dcaa65"
+      },
+      "actualResultJSONExternalPin": {
+        "file": "/workspace/.cache/dreams-current-c39-policies/professional-v3/result.json",
+        "bytes": 8148582,
+        "sha256": "280bc605309c55877383ed846ba7e874916174e83199ecfb2cf27a5cd9e82649"
+      },
+      "rawOutputEndsWithExactActualResultJSON": true,
+      "progressRowsBeforeResult": 12,
+      "actualExecutionScope": "Current professional policyv3: original v2 decision rules/order preserved except actual free saved university application, ordinary waitlist review and separate real offered-place funding. Fixed reused country seeds900..911. Actual in-memory SQLite/store StartLife+birth acknowledgement only, then immutable pure-engine commands and exact full production-codec comparisons. Outcomes/omissions may differ; no hidden roll, date/stat/cash/world preparation or success search. Not full-life SQLite/native/physical/all-choice/multigeneration acceptance.",
+      "inputCohortRunFlagPreserved": false,
+      "review": {
+        "report": {
+          "file": "country-policies-20261021/reviews/A/REPORT.md",
+          "bytes": 13492,
+          "sha256": "6732df24f87687f753968ee1f6ebdbbecd02a28b2a30ea82ae558a2ba2910d11"
+        },
+        "details": {
+          "file": "country-policies-20261021/reviews/A/report.json",
+          "bytes": 160548,
+          "sha256": "45ce111f0ca8e75c796aeff568998ce77ec7d608d8f80abb27902848701e055e"
+        }
+      },
+      "producer": {
+        "file": "country-policies-20261021/producers/run-professional-v3.cjs.txt",
+        "bytes": 282,
+        "sha256": "197777392bfd4a1943fbc7400deb84f80157ac3fb52ca1d877381c1b22225747"
+      },
+      "observedSummary": {
+        "countries": 12,
+        "fixedReusedSeeds": [
+          900,
+          901,
+          902,
+          903,
+          904,
+          905,
+          906,
+          907,
+          908,
+          909,
+          910,
+          911
+        ],
+        "additionalAnnualSeeds": 0,
+        "naturallyDied": 12,
+        "all20GoalsReachedCountries": [
+          "FR",
+          "ES",
+          "BR",
+          "JP",
+          "ZA"
+        ],
+        "goalCounts": {
+          "primarySchool": 12,
+          "secondarySchool": 12,
+          "secondaryQualification": 12,
+          "universityAdmission": 12,
+          "degree": 12,
+          "qualifiedJob": 12,
+          "paidQualifiedJob": 12,
+          "feedback": 12,
+          "raise": 12,
+          "promotion": 12,
+          "partner": 12,
+          "marriage": 12,
+          "child": 7,
+          "mortgageHome": 12,
+          "investment": 12,
+          "dividend": 12,
+          "death": 12,
+          "estate": 12,
+          "retirement": 10,
+          "pensionPayment": 10
+        },
+        "commandsAttempted": 6593,
+        "commandsCommitted": 6593,
+        "fullCodecColdChecks": 939,
+        "annualAdvanceIterations": 984,
+        "commandTypeCounts": {
+          "accept-university-place": 12,
+          "acknowledge": 2912,
+          "adopt": 2,
+          "advance": 984,
+          "apply-job": 27,
+          "apply-scholarship": 12,
+          "apply-university": 12,
+          "ask-date": 43,
+          "buy-asset": 12,
+          "buy-investment": 12,
+          "choose": 810,
+          "fund-studies": 3,
+          "health-routine": 12,
+          "hobby-plan": 4,
+          "interact": 149,
+          "marry": 12,
+          "meet-coworkers": 24,
+          "meet-people": 12,
+          "propose": 16,
+          "repay": 4,
+          "request-raise": 553,
+          "resume": 4,
+          "retire": 10,
+          "school-conduct": 24,
+          "school-help": 145,
+          "study": 185,
+          "study-effort": 12,
+          "try-child": 9,
+          "work-effort": 24,
+          "work-feedback": 553
+        },
+        "declinedOutcomeCounts": {
+          "date": 9,
+          "interview": 3,
+          "parenthood": 4,
+          "proposal": 4,
+          "scholarship": 1
+        },
+        "ineligibleObservationCounts": [
+          {
+            "stage": "qualifiedJob:cafe-part",
+            "reason": "Available from age 16",
+            "count": 192
+          },
+          {
+            "stage": "qualifiedJob:shop-assistant-part",
+            "reason": "Available from age 16",
+            "count": 192
+          },
+          {
+            "stage": "child",
+            "reason": "Your reproductive capacities do not allow conception together; adoption is available",
+            "count": 3
+          },
+          {
+            "stage": "mortgageHome",
+            "reason": "Your balance cannot cover the upfront payment",
+            "count": 6
+          },
+          {
+            "stage": "investment",
+            "reason": "Policy requires the live purchase price, fee and three months of local living costs",
+            "count": 1
+          },
+          {
+            "stage": "child",
+            "reason": "Both partners need to want a child",
+            "count": 295
+          },
+          {
+            "stage": "mortgageHome",
+            "reason": "Policy keeps three months of local living costs after the deposit and fee",
+            "count": 2
+          }
+        ],
+        "immediateAcceptedThenEnrolledApplications": 12,
+        "waitlisted": 0,
+        "rejected": 0,
+        "withdrawn": 0,
+        "expired": 0,
+        "fundedCompletedBusinessDegrees": 12,
+        "meritScholarshipOffersUsed": 11,
+        "meritScholarshipDeclines": 1,
+        "subsequentLoanFundedCourseCountries": [
+          "US",
+          "GB",
+          "BR"
+        ],
+        "interviewExperienceQuoteObservations": null,
+        "annualPacingLoadChanceObservations": null,
+        "featureObservationLimit": "Actual 183-module source provenance includes interviewExperience and annualPacing, but exported per-step observations/commands do not retain their quotes/load/chance frames. No natural bonus or damping count is inferred, and no runtime is loaded to reconstruct them."
+      },
+      "scopeConclusion": "Five of12 reached every20 named goal; no universal ScenarioA completion. All12 actual saved applications were immediately accepted; no waitlist journey is credited.",
+      "persistenceBoundary": "Actual in-memory SQLite/store StartLife and birth acknowledgement only; later immutable pure-engine commands and production-codec comparisons. No full-life SQLite/native claim."
+    },
+    "B": {
+      "adapter": "criminal-v2",
+      "actualExitCode": 0,
+      "startedAt": "2026-10-21T08:08:13.084070+00:00",
+      "endedAt": "2026-10-21T08:10:44.640808+00:00",
+      "wrapperSeconds": 151.557,
+      "receipt": {
+        "file": "country-policies-20261021/B/root-receipt.json",
+        "bytes": 1280,
+        "sha256": "bb07e686678b4f3737e4149b91eb97f7707a5dbdb88b6b187c784f770350948b"
+      },
+      "rawOutputLosslessCopy": {
+        "file": "country-policies-20261021/B/raw.out.gz",
+        "bytes": 106223,
+        "sha256": "40f6ac97a7e6811f2d91519dff46a82d7efe493e150b32cf6b04ed3345114a83",
+        "encoding": "gzip; decompression restores exact original bytes"
+      },
+      "rawUncompressed": {
+        "file": "/tmp/dreams-production-finish-accepted-criminal-v2.out",
+        "bytes": 657841,
+        "sha256": "7b5c3e4e65339175ddde47a730f9ef4b3aa89c2be32d98a5220bc82aad512c1a"
+      },
+      "inputManifest": {
+        "file": "country-policies-20261021/B/manifest.json",
+        "bytes": 21360,
+        "sha256": "b15d931728a2a9ae6577bf119dd908eab132f5b618a8ed2c9eb1867656fe72cf"
+      },
+      "actualResultJSONExternalPin": {
+        "file": "/workspace/.cache/dreams-current-c39-policies/criminal-v2/result.json",
+        "bytes": 650431,
+        "sha256": "99dc8f787635845bb0bfc99dde919796a24500a54bcf793092e35e25e75ca0b9"
+      },
+      "rawOutputEndsWithExactActualResultJSON": true,
+      "progressRowsBeforeResult": 12,
+      "actualExecutionScope": "Current-source registration wrapper around unchanged criminal policyv2. Same fixed reused country seeds900..911; original withdrawal/offence/not-guilty/custody/release decisions and all refused/unreached outcomes retained. Actual in-memory SQLite/store birth only, then immutable pure-engine commands/full production checkpoints. Not full-life SQLite/native/physical/seizure/multigeneration or universally completed Scenario B.",
+      "inputCohortRunFlagPreserved": false,
+      "review": {
+        "report": {
+          "file": "country-policies-20261021/reviews/B/REPORT.md",
+          "bytes": 6797,
+          "sha256": "e4258744df58fe60317355e3e452acac596079ea37473cc3690834f6a69db81a"
+        },
+        "details": {
+          "file": "country-policies-20261021/reviews/B/report.json",
+          "bytes": 310504,
+          "sha256": "bfb176c05f5903c8bf7dc96abe0c8f88600fcc67ac18182b3ab7e3f6b7cfc51f"
+        }
+      },
+      "producer": {
+        "file": "country-policies-20261021/producers/run-criminal-v2.cjs.txt",
+        "bytes": 282,
+        "sha256": "108cba37a0d0512b44a85baa6ae5e1db25bc20f5fd88f6e0c13ece54f21599a6"
+      },
+      "observedSummary": {
+        "lives": 12,
+        "naturallyDied": 12,
+        "milestones": {
+          "schoolAttendance": 12,
+          "compulsoryLeaveGuard": 12,
+          "schoolExit": 12,
+          "paidJob": 12,
+          "offence": 12,
+          "arrest": 12,
+          "counsel": 12,
+          "hearing": 12,
+          "conviction": 11,
+          "prisonRoutine": 11,
+          "prisonTime": 11,
+          "prisonStudy": 11,
+          "prisonPay": 11,
+          "prisonConnection": 11,
+          "custodyGuard": 11,
+          "release": 11,
+          "recordWorkGate": 11,
+          "foreignWorkApplication": 11,
+          "holiday": 11,
+          "holidayCompleted": 10,
+          "recordExpired": 11,
+          "rehired": 11,
+          "retirement": 9,
+          "death": 12,
+          "estate": 12,
+          "delayedArrest": 9
+        },
+        "all26ReportedMilestonesReachedCountries": [
+          "CA",
+          "FR",
+          "DE",
+          "ES",
+          "IN",
+          "ZA"
+        ],
+        "scenarioBCompleteClaimed": false,
+        "attempted": 3174,
+        "committed": 3117,
+        "explicitRejectedCommands": 57,
+        "availabilityIneligibleObservations": 596,
+        "reportedColdRoundTrips": 413,
+        "custodyWindows": 37,
+        "ordinaryWageReceiptsInReportedCustodyWindows": 0,
+        "recordedPrisonPayRows": 183,
+        "incidents": 36,
+        "cases": {
+          "convicted": 17,
+          "acquitted": 9
+        },
+        "sentences": 17,
+        "remandRows": 12,
+        "foreignApplicationStatuses": {
+          "approved": 14,
+          "declined": 8
+        },
+        "tripStatuses": {
+          "completed": 10,
+          "interrupted": 1
+        },
+        "commandTypes": {
+          "advance": 854,
+          "choose": 754,
+          "acknowledge": 1191,
+          "health-routine": 12,
+          "leave-school": 12,
+          "school-withdraw": 24,
+          "apply-job": 54,
+          "meet-coworkers": 32,
+          "crime": 36,
+          "retain-counsel": 26,
+          "prison-routine": 17,
+          "study": 11,
+          "book-trip": 22,
+          "prison-interact": 17,
+          "interact": 17,
+          "resume": 64,
+          "apply-relocation": 22,
+          "retire": 9
+        }
+      },
+      "scopeConclusion": "Six of12 reached all26 named milestones, but every original scenarioBComplete remains false; Italy has no conviction/prison/release and all country omissions/declines remain intact.",
+      "persistenceBoundary": "Actual in-memory SQLite/store birth and acknowledgement only; later pure engine and production checkpoints. No full-life SQLite/native claim."
+    },
+    "C": {
+      "adapter": "entrepreneur-v3",
+      "actualExitCode": 0,
+      "startedAt": "2026-10-21T08:14:32.357757+00:00",
+      "endedAt": "2026-10-21T09:46:54.810923+00:00",
+      "wrapperSeconds": 5542.453,
+      "receipt": {
+        "file": "country-policies-20261021/C/root-receipt.json",
+        "bytes": 1294,
+        "sha256": "a1361d2a86a1dfb4fc5e5a3a5eb4d676918208fe38af2bbaf2c0cffe0f394cd8"
+      },
+      "rawOutputLosslessCopy": {
+        "file": "country-policies-20261021/C/raw.out.gz",
+        "bytes": 252712,
+        "sha256": "73b21723eb0ab2b2a2b5a3a07697e15689fadf872c8e72243eb78dc7e5ef2384",
+        "encoding": "gzip; decompression restores exact original bytes"
+      },
+      "rawUncompressed": {
+        "file": "/tmp/dreams-production-finish-accepted-entrepreneur-v3.out",
+        "bytes": 1540428,
+        "sha256": "bdfc74af3966310680db2a1458e35695fb32f8d1da201fccb71b86c4ab3e71ef"
+      },
+      "inputManifest": {
+        "file": "country-policies-20261021/C/manifest.json",
+        "bytes": 21618,
+        "sha256": "3981ab95981f7eaa414ed3fb0755604b7770029cc3626382c4edf352b4f275a7"
+      },
+      "actualResultJSONExternalPin": {
+        "file": "/workspace/.cache/dreams-current-c39-policies/entrepreneur-v3/result.json",
+        "bytes": 1536638,
+        "sha256": "9e585c743c4aa7ea65a519d8c585bfa4477df02859a6238be910ce717241b74b"
+      },
+      "rawOutputEndsWithExactActualResultJSON": true,
+      "progressRowsBeforeResult": 12,
+      "actualExecutionScope": "Scenario C optional natural entrepreneur policy v2; same seeds900..911 as other optional country policies, not additional120-seed coverage. Real on-disk SQLite StartLife/acknowledgement and closed-connection initial recovery ONLY; all subsequent play uses validated immutable pure-engine commands and exact production checkpoint pack/unpack plus complete canonical equality, NOT SQLite/native gameplay persistence. Ordinary newborns, actual school/work/audience/fame/company/brand/investment/family/death outcomes; at most one affordable eligible public-reputation action/year with six-month personal living reserve retained; no funds/stats/date/RNG/outcome overrides or future-outcome inspection. Reached and unmet goals are separate from integrity; no guaranteed famous entrepreneur, viral post, earnings, family or survival.",
+      "inputCohortRunFlagPreserved": false,
+      "review": {
+        "report": {
+          "file": "country-policies-20261021/reviews/C/REPORT.md",
+          "bytes": 7106,
+          "sha256": "fa4b96b53f8854c6f49bac9c07146efd84b04b07aa58676411ba767d02ce7164"
+        },
+        "details": {
+          "file": "country-policies-20261021/reviews/C/summary.json",
+          "bytes": 69561,
+          "sha256": "7116b393e49c0dd681b701bb92f16efc2493fef2213f946965fd30e73dab4c6e"
+        }
+      },
+      "producer": {
+        "file": "country-policies-20261021/producers/run-entrepreneur-v3.cjs.txt",
+        "bytes": 35545,
+        "sha256": "1f7083fa000cb623ad292dab69ce11da9d34b3278eb48281284f1d226d1910ba"
+      },
+      "observedSummary": {
+        "completedLives": 12,
+        "orderedNineMilestonePaths": 12,
+        "unmetDeclaredMilestones": 0,
+        "commandsIncludingBirthStoreSteps": 19989,
+        "actualBirthStoreSteps": 24,
+        "pureEngineCommands": 19965,
+        "manualPosts": 3898,
+        "reputationActions": 727,
+        "commandsByType": {
+          "advance": 950,
+          "choose": 1611,
+          "acknowledge": 9682,
+          "health-routine": 12,
+          "study-effort": 12,
+          "study": 146,
+          "create-social": 12,
+          "social-routine": 12,
+          "publish-post": 3898,
+          "apply-job": 28,
+          "monetise-social": 12,
+          "public-action": 727,
+          "start-business": 12,
+          "fund-business": 1188,
+          "seek-sponsor": 590,
+          "buy-investment": 12,
+          "adopt": 12,
+          "resume": 1039,
+          "retire": 10
+        },
+        "brandStatuses": {
+          "declined": 24,
+          "completed": 587,
+          "terminated": 48,
+          "ended-death": 1
+        },
+        "positiveBrandDeliveryRows": 3526,
+        "zeroPaidBrandDeliveryRows": 143,
+        "companies": 12,
+        "paidAdoptedFamilies": 12,
+        "producerColdChecksCounted": 9296,
+        "producerColdLabels": {
+          "adoptResult": 12,
+          "annual": 950,
+          "apply-jobResult": 28,
+          "buy-investmentResult": 12,
+          "create-socialResult": 12,
+          "death": 12,
+          "decisionResult": 1611,
+          "fund-businessResult": 1188,
+          "fundedCompany": 12,
+          "health-routineResult": 12,
+          "monetise-socialResult": 12,
+          "public-actionResult": 727,
+          "publish-postResult": 3898,
+          "retireResult": 10,
+          "seek-sponsorResult": 590,
+          "social-routineResult": 12,
+          "start-businessResult": 12,
+          "study-effortResult": 12,
+          "studyResult": 146,
+          "unansweredInterview": 28
+        },
+        "materializedColdProofRows": 1176,
+        "additionalFinalRoundTripsOutsideColdCounters": 12
+      },
+      "scopeConclusion": "All12 reached nine declared ordered milestones. This is the registered path, not every original ScenarioC branch. Family is paid adoption; eleven cafes have negative operating profit sustained by real owner funding, not bankruptcy/closure success.",
+      "persistenceBoundary": "Actual on-disk SQLite StartLife, acknowledgement and initial closed-connection recovery only. Initial all8 rows are producer-checked unchanged during later pure-engine play. No full-life SQLite/native claim."
+    },
+    "D": {
+      "adapter": "editorial-v2",
+      "actualExitCode": 0,
+      "startedAt": "2026-10-21T08:22:45.020904+00:00",
+      "endedAt": "2026-10-21T08:32:53.310251+00:00",
+      "wrapperSeconds": 608.289,
+      "receipt": {
+        "file": "country-policies-20261021/D/root-receipt.json",
+        "bytes": 1283,
+        "sha256": "d7d718436e9bbc462743c47f0a66d3cbbadba74d4484579cc21b8544da726126"
+      },
+      "rawOutputLosslessCopy": {
+        "file": "country-policies-20261021/D/raw.out.gz",
+        "bytes": 108034,
+        "sha256": "0ca7598d40961374a8ea3a23c5875ce91e20d40e9d3a6a5719730653d9d08632",
+        "encoding": "gzip; decompression restores exact original bytes"
+      },
+      "rawUncompressed": {
+        "file": "/tmp/dreams-production-finish-accepted-editorial-v2.out",
+        "bytes": 834714,
+        "sha256": "c1304730115d08b682454a0c6052c9151a67b8e9ebf198b0e469c1a473a8daf5"
+      },
+      "inputManifest": {
+        "file": "country-policies-20261021/D/manifest.json",
+        "bytes": 21667,
+        "sha256": "6fb6893d65b377043fbe32d206f95e3b34c03e91b7caa7c038d3fceba86b9d12"
+      },
+      "actualResultJSONExternalPin": {
+        "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/result.json",
+        "bytes": 819121,
+        "sha256": "6731fa37352d4316761e1ac8e80e60363bc3d6ec700c9abf70b4f7930c85d0d1"
+      },
+      "rawOutputEndsWithExactActualResultJSON": true,
+      "progressRowsBeforeResult": 12,
+      "actualExecutionScope": "Current C39 editorial adapterv2 with unchanged ordinal decision-policyv1. Same twelve reused country seeds900..911. Real in-memory SQLite/store StartLife+birth acknowledgement ONLY; all subsequent play uses immutable pure-engine advance/resume/choose/acknowledge commands and exact whole production-codec comparisons. Select eligible choices[committedDecisionOrdinal % eligible.length] in actual saved order. No future-roll inspection, manual context/state preparation, outcome search or all-catalogue/all-branch/native/full-life SQLite claim. Current source/catalogue/observed/unreached contexts retain their own hashes; old C35 evidence remains unchanged.",
+      "inputCohortRunFlagPreserved": false,
+      "review": {
+        "report": {
+          "file": "country-policies-20261021/reviews/D/REPORT.md",
+          "bytes": 8955,
+          "sha256": "6b6cf79d9cf7728bf82227f4013577ed4d8570b0646d270a62347e5e1b9302c4"
+        },
+        "details": {
+          "file": "country-policies-20261021/reviews/D/summary.json",
+          "bytes": 51664,
+          "sha256": "1030c715100cc7c4c132b91cfe7a57486f2b3e01d68c678220686885899fcb2b"
+        }
+      },
+      "producer": {
+        "file": "country-policies-20261021/producers/run-editorial-v2.cjs.txt",
+        "bytes": 7139,
+        "sha256": "b11b1e771c49baaa06e7d78df84bda9555c0fd83a3636cc7f39f64d58b9ff60d"
+      },
+      "observedSummary": {
+        "naturalDeaths": 12,
+        "commands": 2436,
+        "catalogueChoices": 567,
+        "systemOrCallbackChoices": 138,
+        "systemTypes": {
+          "story-arcade-invitation": 1,
+          "medical-emergency": 135,
+          "story-project-promise": 1,
+          "story-project-recall": 1
+        },
+        "resultEvents": 934,
+        "quietSummaryResults": 218,
+        "producerColdComparisons": 2448,
+        "checkpointFormats": {
+          "dreams-checkpoint-v1": 187,
+          "dreams-checkpoint-v4": 2261
+        },
+        "catalogueTemplates": 265,
+        "catalogueBranches": 795,
+        "uniqueObservedTemplates": 127,
+        "unseenTemplates": 138,
+        "uniqueSelectedBranches": 263,
+        "unchosenBranches": 532,
+        "authoredBranchOccurrences": {
+          "1": 186,
+          "2": 194,
+          "3": 187
+        },
+        "eligiblePositionOccurrences": {
+          "1": 186,
+          "2": 194,
+          "3": 187
+        },
+        "withinLifeRepeatedTemplateOccurrences": 115,
+        "minimumRepeatGapYears": 5,
+        "simpleCappedEffectsChecked": 1260,
+        "cappedEffectsByKind": {
+          "stat": 1134,
+          "relationship": 108,
+          "school-grade": 11,
+          "skill": 7
+        },
+        "nonzeroRequestedEffectsCappedToZero": 192,
+        "selectedEffectKinds": {
+          "stat": 1134,
+          "relationship": 108,
+          "schedule-story": 3,
+          "resolve-story": 3,
+          "school-grade": 11,
+          "skill": 7,
+          "emergency-care": 135
+        },
+        "unavailableChoiceRows": 0,
+        "resolvedStoryCallbacks": 3,
+        "retainedThreadStatuses": {
+          "resolved": 2,
+          "cancelled": 1
+        }
+      },
+      "pacing": {
+        "visibleFinishedFrames": 785,
+        "guaranteedFirstBirthdayOffers": 12,
+        "observedOutcomes": [
+          {
+            "actualImportantDecisionLoad": 0,
+            "authoredLaterYearChance": 78,
+            "catalogueOffersIncludingFirstBirthday": 534,
+            "laterYearCatalogueOffers": 522,
+            "quietSummaries": 158
+          },
+          {
+            "actualImportantDecisionLoad": 1,
+            "authoredLaterYearChance": 50,
+            "catalogueOffersIncludingFirstBirthday": 27,
+            "laterYearCatalogueOffers": 27,
+            "quietSummaries": 30
+          },
+          {
+            "actualImportantDecisionLoad": 2,
+            "authoredLaterYearChance": 25,
+            "catalogueOffersIncludingFirstBirthday": 6,
+            "laterYearCatalogueOffers": 6,
+            "quietSummaries": 23
+          },
+          {
+            "actualImportantDecisionLoad": 3,
+            "authoredLaterYearChance": 10,
+            "catalogueOffersIncludingFirstBirthday": 0,
+            "laterYearCatalogueOffers": 0,
+            "quietSummaries": 7
+          }
+        ],
+        "interpretation": "Observed command snapshots expose actual saved V1 load and optional offer/quiet outcomes. Twelve first birthdays are guaranteed and are reported separately from the later-year 78/50/25/10 chances. These are not a controlled balance comparison or independent proof of each hidden offer roll. Original effects, mandatory decisions and callback resolutions are not suppressed by this optional-scene count.",
+        "annualObserverLimits": [
+          {
+            "country": "US",
+            "started": 40,
+            "completedToTarget": 39,
+            "recordedAnnualClosures": 39,
+            "recordedInterruptedClosures": 0,
+            "visibleFinishYearFrames": 39,
+            "startedWithoutRecordedClosure": 1
+          },
+          {
+            "country": "CA",
+            "started": 87,
+            "completedToTarget": 86,
+            "recordedAnnualClosures": 86,
+            "recordedInterruptedClosures": 0,
+            "visibleFinishYearFrames": 86,
+            "startedWithoutRecordedClosure": 1
+          },
+          {
+            "country": "GB",
+            "started": 86,
+            "completedToTarget": 85,
+            "recordedAnnualClosures": 85,
+            "recordedInterruptedClosures": 0,
+            "visibleFinishYearFrames": 85,
+            "startedWithoutRecordedClosure": 1
+          },
+          {
+            "country": "AU",
+            "started": 84,
+            "completedToTarget": 83,
+            "recordedAnnualClosures": 83,
+            "recordedInterruptedClosures": 0,
+            "visibleFinishYearFrames": 83,
+            "startedWithoutRecordedClosure": 1
+          },
+          {
+            "country": "FR",
+            "started": 77,
+            "completedToTarget": 76,
+            "recordedAnnualClosures": 76,
+            "recordedInterruptedClosures": 0,
+            "visibleFinishYearFrames": 76,
+            "startedWithoutRecordedClosure": 1
+          },
+          {
+            "country": "DE",
+            "started": 43,
+            "completedToTarget": 42,
+            "recordedAnnualClosures": 42,
+            "recordedInterruptedClosures": 0,
+            "visibleFinishYearFrames": 42,
+            "startedWithoutRecordedClosure": 1
+          },
+          {
+            "country": "ES",
+            "started": 70,
+            "completedToTarget": 69,
+            "recordedAnnualClosures": 69,
+            "recordedInterruptedClosures": 0,
+            "visibleFinishYearFrames": 69,
+            "startedWithoutRecordedClosure": 1
+          },
+          {
+            "country": "IT",
+            "started": 71,
+            "completedToTarget": 70,
+            "recordedAnnualClosures": 70,
+            "recordedInterruptedClosures": 0,
+            "visibleFinishYearFrames": 70,
+            "startedWithoutRecordedClosure": 1
+          },
+          {
+            "country": "BR",
+            "started": 77,
+            "completedToTarget": 76,
+            "recordedAnnualClosures": 76,
+            "recordedInterruptedClosures": 0,
+            "visibleFinishYearFrames": 76,
+            "startedWithoutRecordedClosure": 1
+          },
+          {
+            "country": "IN",
+            "started": 45,
+            "completedToTarget": 44,
+            "recordedAnnualClosures": 45,
+            "recordedInterruptedClosures": 1,
+            "visibleFinishYearFrames": 44,
+            "startedWithoutRecordedClosure": 0
+          },
+          {
+            "country": "JP",
+            "started": 70,
+            "completedToTarget": 70,
+            "recordedAnnualClosures": 70,
+            "recordedInterruptedClosures": 0,
+            "visibleFinishYearFrames": 69,
+            "startedWithoutRecordedClosure": 0
+          },
+          {
+            "country": "ZA",
+            "started": 47,
+            "completedToTarget": 46,
+            "recordedAnnualClosures": 46,
+            "recordedInterruptedClosures": 0,
+            "visibleFinishYearFrames": 46,
+            "startedWithoutRecordedClosure": 1
+          }
+        ]
+      },
+      "scopeConclusion": "127/265 templates and263/795 branches observed;138 templates/532 branches unobserved. Rare/extreme and passive-policy workplace/partner/children/home/pets/special-career contexts unobserved; no complete ScenarioD/allchoices or controlled balance claim.",
+      "persistenceBoundary": "Actual in-memory SQLite/store StartLife and birth acknowledgement only, then saved-order ordinal pure-engine commands and production checkpoints. No full-life SQLite/native claim."
+    }
+  },
+  "registration": {
+    "dreams-production-finish-accepted-policy-registration-readiness.json": {
+      "file": "country-policies-20261021/registration/dreams-production-finish-accepted-policy-registration-readiness.json",
+      "bytes": 2249,
+      "sha256": "bb039c3b661141a641b59fee85193e5db6b9daa0a03d6481ab421718ef65a370"
+    },
+    "dreams-production-finish-accepted-policy-registration-authorized.json": {
+      "file": "country-policies-20261021/registration/dreams-production-finish-accepted-policy-registration-authorized.json",
+      "bytes": 2597,
+      "sha256": "5656dab6e031df8ff7ac291abed6188eaec2d87ad78b64181aff692c85788e57"
+    },
+    "dreams-production-finish-accepted-policy-readiness-receipt.json": {
+      "file": "country-policies-20261021/registration/dreams-production-finish-accepted-policy-readiness-receipt.json",
+      "bytes": 8940,
+      "sha256": "bea20bb10142853c7a8bf3d0b7b3d11b37f208b85ca34fac9f1d299ada79a049"
+    },
+    "dreams-production-finish-accepted-policy-preflight-guard.cjs": {
+      "file": "country-policies-20261021/registration/dreams-production-finish-accepted-policy-preflight-guard.cjs.txt",
+      "bytes": 2431,
+      "sha256": "cf4f0f39cc8cb6341fa1e55e1f3457de6af2b327e82863e8592ba47280433807"
+    }
+  },
+  "registrationScope": "The original manifest-only readiness and falsecohortRun fields remain unchanged. Separate actual root authorization explicitly authorizes current cohorts; closed receipts and raw outputs establish their execution. Inherited manifest-only descriptive text in that authorization is preserved, not silently rewritten.",
+  "historicalReferences": {
+    "annual1000": "annual-1000-20261021.json",
+    "coreGates": "final-regression-20261021.json",
+    "currentUISaveCells": "ui-save-checkpoint-20261021.json",
+    "recordedSequences": "../editorial/c39-20261021/actual-sequences/REPORT.md",
+    "completedC37": "production-gaps-20261021.json"
+  },
+  "documentationChecks": {
+    "allCopiedArtifactsAndOriginalGzipIdentitiesVerified": true,
+    "allFourRawOutputsEndWithExactOriginalResultJSON": true,
+    "eachRawOutputHas12ActualProgressRowsBeforeResult": true,
+    "all688ProducerSourceBytesChecked": true,
+    "all703CurrentUISourceBytesChecked": true,
+    "reviewerRuntimeGameCodecReplaySQLNativeOrGateExecutions": 0
+  },
+  "artifacts": [
+    {
+      "file": "country-policies-20261021/source/accepted-source.json",
+      "bytes": 75993,
+      "sha256": "2e08fd925c673437ff7de7c76c0fd79d02832617d0014efc1c3e471782fe9b56",
+      "original": {
+        "file": "/tmp/dreams-production-finish-accepted-source.json",
+        "bytes": 75993,
+        "sha256": "2e08fd925c673437ff7de7c76c0fd79d02832617d0014efc1c3e471782fe9b56"
+      }
+    },
+    {
+      "file": "country-policies-20261021/reviews/A/REPORT.md",
+      "bytes": 13492,
+      "sha256": "6732df24f87687f753968ee1f6ebdbbecd02a28b2a30ea82ae558a2ba2910d11",
+      "original": {
+        "file": "/tmp/dreams-c39-professional-v3-country-outcomes-20261021.md",
+        "bytes": 13492,
+        "sha256": "6732df24f87687f753968ee1f6ebdbbecd02a28b2a30ea82ae558a2ba2910d11"
+      }
+    },
+    {
+      "file": "country-policies-20261021/reviews/A/report.json",
+      "bytes": 160548,
+      "sha256": "45ce111f0ca8e75c796aeff568998ce77ec7d608d8f80abb27902848701e055e",
+      "original": {
+        "file": "/tmp/dreams-c39-professional-v3-country-outcomes-20261021.json",
+        "bytes": 160548,
+        "sha256": "45ce111f0ca8e75c796aeff568998ce77ec7d608d8f80abb27902848701e055e"
+      }
+    },
+    {
+      "file": "country-policies-20261021/reviews/B/REPORT.md",
+      "bytes": 6797,
+      "sha256": "e4258744df58fe60317355e3e452acac596079ea37473cc3690834f6a69db81a",
+      "original": {
+        "file": "/tmp/dreams-c39-criminal-v2-review/REPORT.md",
+        "bytes": 6797,
+        "sha256": "e4258744df58fe60317355e3e452acac596079ea37473cc3690834f6a69db81a"
+      }
+    },
+    {
+      "file": "country-policies-20261021/reviews/B/SHA256SUMS",
+      "bytes": 399,
+      "sha256": "8e6b04f7b163b69251bae754cf8a5b7f369e33625c3210f72ee460edacc6497e",
+      "original": {
+        "file": "/tmp/dreams-c39-criminal-v2-review/SHA256SUMS",
+        "bytes": 399,
+        "sha256": "8e6b04f7b163b69251bae754cf8a5b7f369e33625c3210f72ee460edacc6497e"
+      }
+    },
+    {
+      "file": "country-policies-20261021/reviews/B/analyse.py.txt",
+      "bytes": 16344,
+      "sha256": "ff01bb585ce9bfdb32a1d755c9218185fbbee6cfd79047318c2c663aa7e9f599",
+      "original": {
+        "file": "/tmp/dreams-c39-criminal-v2-review/analyse.py",
+        "bytes": 16344,
+        "sha256": "ff01bb585ce9bfdb32a1d755c9218185fbbee6cfd79047318c2c663aa7e9f599"
+      }
+    },
+    {
+      "file": "country-policies-20261021/reviews/B/analysis.out",
+      "bytes": 1203,
+      "sha256": "eb6bb3e9b7fba25ccd51cdf4bb2d18983148200f3b34f5cff5c529b515627c26",
+      "original": {
+        "file": "/tmp/dreams-c39-criminal-v2-review/analysis.out",
+        "bytes": 1203,
+        "sha256": "eb6bb3e9b7fba25ccd51cdf4bb2d18983148200f3b34f5cff5c529b515627c26"
+      }
+    },
+    {
+      "file": "country-policies-20261021/reviews/B/artifact-manifest.json",
+      "bytes": 36585,
+      "sha256": "a12b50097c9c900c1b751109d57d970621147c0ab40d9f540d1e32e24e71939f",
+      "original": {
+        "file": "/tmp/dreams-c39-criminal-v2-review/artifact-manifest.json",
+        "bytes": 36585,
+        "sha256": "a12b50097c9c900c1b751109d57d970621147c0ab40d9f540d1e32e24e71939f"
+      }
+    },
+    {
+      "file": "country-policies-20261021/reviews/B/report.json",
+      "bytes": 310504,
+      "sha256": "bfb176c05f5903c8bf7dc96abe0c8f88600fcc67ac18182b3ab7e3f6b7cfc51f",
+      "original": {
+        "file": "/tmp/dreams-c39-criminal-v2-review/report.json",
+        "bytes": 310504,
+        "sha256": "bfb176c05f5903c8bf7dc96abe0c8f88600fcc67ac18182b3ab7e3f6b7cfc51f"
+      }
+    },
+    {
+      "file": "country-policies-20261021/reviews/C/REPORT.md",
+      "bytes": 7106,
+      "sha256": "fa4b96b53f8854c6f49bac9c07146efd84b04b07aa58676411ba767d02ce7164",
+      "original": {
+        "file": "/tmp/dreams-c39-entrepreneur-v3-review/REPORT.md",
+        "bytes": 7106,
+        "sha256": "fa4b96b53f8854c6f49bac9c07146efd84b04b07aa58676411ba767d02ce7164"
+      }
+    },
+    {
+      "file": "country-policies-20261021/reviews/C/SHA256SUMS",
+      "bytes": 483,
+      "sha256": "773298286f2c7b383c093f39abaa4a75fdd14c72f443d60e0c4edc2be29a74c5",
+      "original": {
+        "file": "/tmp/dreams-c39-entrepreneur-v3-review/SHA256SUMS",
+        "bytes": 483,
+        "sha256": "773298286f2c7b383c093f39abaa4a75fdd14c72f443d60e0c4edc2be29a74c5"
+      }
+    },
+    {
+      "file": "country-policies-20261021/reviews/C/analyse.py.txt",
+      "bytes": 20894,
+      "sha256": "978f15184c5ea0c3c679bffeaee6a803877d2a30e7968770446bf187b815847d",
+      "original": {
+        "file": "/tmp/dreams-c39-entrepreneur-v3-review/analyse.py",
+        "bytes": 20894,
+        "sha256": "978f15184c5ea0c3c679bffeaee6a803877d2a30e7968770446bf187b815847d"
+      }
+    },
+    {
+      "file": "country-policies-20261021/reviews/C/analysis-first.out",
+      "bytes": 2199,
+      "sha256": "8e16626a1fb38b4a0b4274ece41387a74b834505a702f36dbfad5d842bc8e4db",
+      "original": {
+        "file": "/tmp/dreams-c39-entrepreneur-v3-review/analysis-first.out",
+        "bytes": 2199,
+        "sha256": "8e16626a1fb38b4a0b4274ece41387a74b834505a702f36dbfad5d842bc8e4db"
+      }
+    },
+    {
+      "file": "country-policies-20261021/reviews/C/gaps-and-reasons.json",
+      "bytes": 17188,
+      "sha256": "1fd25c3d635b809e7d69f62f625e3a29db542d124f715c69285faa6a8d1ec862",
+      "original": {
+        "file": "/tmp/dreams-c39-entrepreneur-v3-review/gaps-and-reasons.json",
+        "bytes": 17188,
+        "sha256": "1fd25c3d635b809e7d69f62f625e3a29db542d124f715c69285faa6a8d1ec862"
+      }
+    },
+    {
+      "file": "country-policies-20261021/reviews/C/inputs.json",
+      "bytes": 35489,
+      "sha256": "75000564063d2387c52a5205bab0315ea6e67e25f737fad07e3e4f12fa336743",
+      "original": {
+        "file": "/tmp/dreams-c39-entrepreneur-v3-review/inputs.json",
+        "bytes": 35489,
+        "sha256": "75000564063d2387c52a5205bab0315ea6e67e25f737fad07e3e4f12fa336743"
+      }
+    },
+    {
+      "file": "country-policies-20261021/reviews/C/summary.json",
+      "bytes": 69561,
+      "sha256": "7116b393e49c0dd681b701bb92f16efc2493fef2213f946965fd30e73dab4c6e",
+      "original": {
+        "file": "/tmp/dreams-c39-entrepreneur-v3-review/summary.json",
+        "bytes": 69561,
+        "sha256": "7116b393e49c0dd681b701bb92f16efc2493fef2213f946965fd30e73dab4c6e"
+      }
+    },
+    {
+      "file": "country-policies-20261021/reviews/D/REPORT.md",
+      "bytes": 8955,
+      "sha256": "6b6cf79d9cf7728bf82227f4013577ed4d8570b0646d270a62347e5e1b9302c4",
+      "original": {
+        "file": "/tmp/dreams-c39-editorial-v2-review/REPORT.md",
+        "bytes": 8955,
+        "sha256": "6b6cf79d9cf7728bf82227f4013577ed4d8570b0646d270a62347e5e1b9302c4"
+      }
+    },
+    {
+      "file": "country-policies-20261021/reviews/D/SHA256SUMS",
+      "bytes": 1079,
+      "sha256": "b6264f4fc042de04b7f1521d1955dc646a2467f3f1ffdbce0787d8f431f2ecfb",
+      "original": {
+        "file": "/tmp/dreams-c39-editorial-v2-review/SHA256SUMS",
+        "bytes": 1079,
+        "sha256": "b6264f4fc042de04b7f1521d1955dc646a2467f3f1ffdbce0787d8f431f2ecfb"
+      }
+    },
+    {
+      "file": "country-policies-20261021/reviews/D/analyse.py.txt",
+      "bytes": 32184,
+      "sha256": "d3d0d1e8f43202a58bc8a0f35acd509b3a9b744686b2ff24dfddc6a089329ca1",
+      "original": {
+        "file": "/tmp/dreams-c39-editorial-v2-review/analyse.py",
+        "bytes": 32184,
+        "sha256": "d3d0d1e8f43202a58bc8a0f35acd509b3a9b744686b2ff24dfddc6a089329ca1"
+      }
+    },
+    {
+      "file": "country-policies-20261021/reviews/D/analysis-final.out",
+      "bytes": 2739,
+      "sha256": "5b466513c70a73b36e7fce73a2b3816e4ce8eafc2b05698dfc4c22624f0e310c",
+      "original": {
+        "file": "/tmp/dreams-c39-editorial-v2-review/analysis-final.out",
+        "bytes": 2739,
+        "sha256": "5b466513c70a73b36e7fce73a2b3816e4ce8eafc2b05698dfc4c22624f0e310c"
+      }
+    },
+    {
+      "file": "country-policies-20261021/reviews/D/analysis-first.out",
+      "bytes": 311,
+      "sha256": "0527e5834d02372de4146ec6175ec6624b973e388285e57079da315271696cde",
+      "original": {
+        "file": "/tmp/dreams-c39-editorial-v2-review/analysis-first.out",
+        "bytes": 311,
+        "sha256": "0527e5834d02372de4146ec6175ec6624b973e388285e57079da315271696cde"
+      }
+    },
+    {
+      "file": "country-policies-20261021/reviews/D/analysis-second.out",
+      "bytes": 409,
+      "sha256": "20f0ef0dbe8af92fb859dfe22b9e1d918371a895b4ba9b83a79cfd62c5382aae",
+      "original": {
+        "file": "/tmp/dreams-c39-editorial-v2-review/analysis-second.out",
+        "bytes": 409,
+        "sha256": "20f0ef0dbe8af92fb859dfe22b9e1d918371a895b4ba9b83a79cfd62c5382aae"
+      }
+    },
+    {
+      "file": "country-policies-20261021/reviews/D/analysis-third.out",
+      "bytes": 314,
+      "sha256": "17c16d2b6c0e53e732c6e300ea6a3f93371851e72496553a133712a3d99b64bf",
+      "original": {
+        "file": "/tmp/dreams-c39-editorial-v2-review/analysis-third.out",
+        "bytes": 314,
+        "sha256": "17c16d2b6c0e53e732c6e300ea6a3f93371851e72496553a133712a3d99b64bf"
+      }
+    },
+    {
+      "file": "country-policies-20261021/reviews/D/callbacks.json",
+      "bytes": 7340,
+      "sha256": "79d8f8a5befe83fd3a5009ca72dd4342871690f0b1dae703e112b41d4695b655",
+      "original": {
+        "file": "/tmp/dreams-c39-editorial-v2-review/callbacks.json",
+        "bytes": 7340,
+        "sha256": "79d8f8a5befe83fd3a5009ca72dd4342871690f0b1dae703e112b41d4695b655"
+      }
+    },
+    {
+      "file": "country-policies-20261021/reviews/D/effect-checks.ndjson",
+      "bytes": 370822,
+      "sha256": "35fc6712a97ac152db1533d12beb0df2f5581e61ac3e3451ebe34599ca8b7110",
+      "original": {
+        "file": "/tmp/dreams-c39-editorial-v2-review/effect-checks.ndjson",
+        "bytes": 370822,
+        "sha256": "35fc6712a97ac152db1533d12beb0df2f5581e61ac3e3451ebe34599ca8b7110"
+      }
+    },
+    {
+      "file": "country-policies-20261021/reviews/D/inputs.json",
+      "bytes": 65990,
+      "sha256": "8a7bc8137862bb88c9a9a2ba3665c79ba73751b21dd2ed809c518cf4fc1ac5e1",
+      "original": {
+        "file": "/tmp/dreams-c39-editorial-v2-review/inputs.json",
+        "bytes": 65990,
+        "sha256": "8a7bc8137862bb88c9a9a2ba3665c79ba73751b21dd2ed809c518cf4fc1ac5e1"
+      }
+    },
+    {
+      "file": "country-policies-20261021/reviews/D/observed-catalogue.ndjson",
+      "bytes": 234171,
+      "sha256": "8b77b6a60eff80cbee5d7632f15cb6ca6e394b3fe881510c8567ce4b722e22d0",
+      "original": {
+        "file": "/tmp/dreams-c39-editorial-v2-review/observed-catalogue.ndjson",
+        "bytes": 234171,
+        "sha256": "8b77b6a60eff80cbee5d7632f15cb6ca6e394b3fe881510c8567ce4b722e22d0"
+      }
+    },
+    {
+      "file": "country-policies-20261021/reviews/D/omissions.json",
+      "bytes": 86451,
+      "sha256": "b52d21a315adb8bb3915a7433a78f32d4c25000bbe9e9128d33a6a409ff3e82c",
+      "original": {
+        "file": "/tmp/dreams-c39-editorial-v2-review/omissions.json",
+        "bytes": 86451,
+        "sha256": "b52d21a315adb8bb3915a7433a78f32d4c25000bbe9e9128d33a6a409ff3e82c"
+      }
+    },
+    {
+      "file": "country-policies-20261021/reviews/D/pacing-frames.ndjson",
+      "bytes": 426799,
+      "sha256": "a02468dde6136a8207fbd5275c3ea2904d6ff3b0c3bbd84037c2612f962686f7",
+      "original": {
+        "file": "/tmp/dreams-c39-editorial-v2-review/pacing-frames.ndjson",
+        "bytes": 426799,
+        "sha256": "a02468dde6136a8207fbd5275c3ea2904d6ff3b0c3bbd84037c2612f962686f7"
+      }
+    },
+    {
+      "file": "country-policies-20261021/reviews/D/summary.json",
+      "bytes": 51664,
+      "sha256": "1030c715100cc7c4c132b91cfe7a57486f2b3e01d68c678220686885899fcb2b",
+      "original": {
+        "file": "/tmp/dreams-c39-editorial-v2-review/summary.json",
+        "bytes": 51664,
+        "sha256": "1030c715100cc7c4c132b91cfe7a57486f2b3e01d68c678220686885899fcb2b"
+      }
+    },
+    {
+      "file": "country-policies-20261021/registration/dreams-production-finish-accepted-policy-registration-readiness.json",
+      "bytes": 2249,
+      "sha256": "bb039c3b661141a641b59fee85193e5db6b9daa0a03d6481ab421718ef65a370",
+      "original": {
+        "file": "/tmp/dreams-production-finish-accepted-policy-registration-readiness.json",
+        "bytes": 2249,
+        "sha256": "bb039c3b661141a641b59fee85193e5db6b9daa0a03d6481ab421718ef65a370"
+      }
+    },
+    {
+      "file": "country-policies-20261021/registration/dreams-production-finish-accepted-policy-registration-authorized.json",
+      "bytes": 2597,
+      "sha256": "5656dab6e031df8ff7ac291abed6188eaec2d87ad78b64181aff692c85788e57",
+      "original": {
+        "file": "/tmp/dreams-production-finish-accepted-policy-registration-authorized.json",
+        "bytes": 2597,
+        "sha256": "5656dab6e031df8ff7ac291abed6188eaec2d87ad78b64181aff692c85788e57"
+      }
+    },
+    {
+      "file": "country-policies-20261021/registration/dreams-production-finish-accepted-policy-readiness-receipt.json",
+      "bytes": 8940,
+      "sha256": "bea20bb10142853c7a8bf3d0b7b3d11b37f208b85ca34fac9f1d299ada79a049",
+      "original": {
+        "file": "/tmp/dreams-production-finish-accepted-policy-readiness-receipt.json",
+        "bytes": 8940,
+        "sha256": "bea20bb10142853c7a8bf3d0b7b3d11b37f208b85ca34fac9f1d299ada79a049"
+      }
+    },
+    {
+      "file": "country-policies-20261021/registration/dreams-production-finish-accepted-policy-preflight-guard.cjs.txt",
+      "bytes": 2431,
+      "sha256": "cf4f0f39cc8cb6341fa1e55e1f3457de6af2b327e82863e8592ba47280433807",
+      "original": {
+        "file": "/tmp/dreams-production-finish-accepted-policy-preflight-guard.cjs",
+        "bytes": 2431,
+        "sha256": "cf4f0f39cc8cb6341fa1e55e1f3457de6af2b327e82863e8592ba47280433807"
+      }
+    },
+    {
+      "file": "country-policies-20261021/A/root-receipt.json",
+      "bytes": 1293,
+      "sha256": "63747fa9a3101e25a645d7de8539534a9dc32e397771506b314eddecbbcc66cb",
+      "original": {
+        "file": "/tmp/dreams-production-finish-accepted-professional-v3-receipt.json",
+        "bytes": 1293,
+        "sha256": "63747fa9a3101e25a645d7de8539534a9dc32e397771506b314eddecbbcc66cb"
+      }
+    },
+    {
+      "file": "country-policies-20261021/A/raw.out.gz",
+      "bytes": 375320,
+      "sha256": "17022e8cab2fb958cddd5b297714be041a65eda1b34991a8fc95544c2e9e6b18",
+      "original": {
+        "file": "/tmp/dreams-production-finish-accepted-professional-v3.out",
+        "bytes": 8154923,
+        "sha256": "cb91675f8b610b3a0f3af4427b9a87a42c3c81c21b157232ef522e260cdca3a8"
+      },
+      "encoding": "gzip; decompression restores exact original bytes"
+    },
+    {
+      "file": "country-policies-20261021/A/manifest.json",
+      "bytes": 21467,
+      "sha256": "08eaa8f6fde499dc1907fd83ff04d95bc4d46d0ce78d0db10202781cf9dcaa65",
+      "original": {
+        "file": "/workspace/.cache/dreams-current-c39-policies/professional-v3/manifest.json",
+        "bytes": 21467,
+        "sha256": "08eaa8f6fde499dc1907fd83ff04d95bc4d46d0ce78d0db10202781cf9dcaa65"
+      }
+    },
+    {
+      "file": "country-policies-20261021/producers/run-professional-v3.cjs.txt",
+      "bytes": 282,
+      "sha256": "197777392bfd4a1943fbc7400deb84f80157ac3fb52ca1d877381c1b22225747",
+      "original": {
+        "file": "/workspace/dreams-worktrees/project-callback-pacing-test/tools/current-policy/run-professional-v3.cjs",
+        "bytes": 282,
+        "sha256": "197777392bfd4a1943fbc7400deb84f80157ac3fb52ca1d877381c1b22225747"
+      }
+    },
+    {
+      "file": "country-policies-20261021/B/root-receipt.json",
+      "bytes": 1280,
+      "sha256": "bb07e686678b4f3737e4149b91eb97f7707a5dbdb88b6b187c784f770350948b",
+      "original": {
+        "file": "/tmp/dreams-production-finish-accepted-criminal-v2-receipt.json",
+        "bytes": 1280,
+        "sha256": "bb07e686678b4f3737e4149b91eb97f7707a5dbdb88b6b187c784f770350948b"
+      }
+    },
+    {
+      "file": "country-policies-20261021/B/raw.out.gz",
+      "bytes": 106223,
+      "sha256": "40f6ac97a7e6811f2d91519dff46a82d7efe493e150b32cf6b04ed3345114a83",
+      "original": {
+        "file": "/tmp/dreams-production-finish-accepted-criminal-v2.out",
+        "bytes": 657841,
+        "sha256": "7b5c3e4e65339175ddde47a730f9ef4b3aa89c2be32d98a5220bc82aad512c1a"
+      },
+      "encoding": "gzip; decompression restores exact original bytes"
+    },
+    {
+      "file": "country-policies-20261021/B/manifest.json",
+      "bytes": 21360,
+      "sha256": "b15d931728a2a9ae6577bf119dd908eab132f5b618a8ed2c9eb1867656fe72cf",
+      "original": {
+        "file": "/workspace/.cache/dreams-current-c39-policies/criminal-v2/manifest.json",
+        "bytes": 21360,
+        "sha256": "b15d931728a2a9ae6577bf119dd908eab132f5b618a8ed2c9eb1867656fe72cf"
+      }
+    },
+    {
+      "file": "country-policies-20261021/producers/run-criminal-v2.cjs.txt",
+      "bytes": 282,
+      "sha256": "108cba37a0d0512b44a85baa6ae5e1db25bc20f5fd88f6e0c13ece54f21599a6",
+      "original": {
+        "file": "/workspace/dreams-worktrees/project-callback-pacing-test/tools/current-policy/run-criminal-v2.cjs",
+        "bytes": 282,
+        "sha256": "108cba37a0d0512b44a85baa6ae5e1db25bc20f5fd88f6e0c13ece54f21599a6"
+      }
+    },
+    {
+      "file": "country-policies-20261021/C/root-receipt.json",
+      "bytes": 1294,
+      "sha256": "a1361d2a86a1dfb4fc5e5a3a5eb4d676918208fe38af2bbaf2c0cffe0f394cd8",
+      "original": {
+        "file": "/tmp/dreams-production-finish-accepted-entrepreneur-v3-receipt.json",
+        "bytes": 1294,
+        "sha256": "a1361d2a86a1dfb4fc5e5a3a5eb4d676918208fe38af2bbaf2c0cffe0f394cd8"
+      }
+    },
+    {
+      "file": "country-policies-20261021/C/raw.out.gz",
+      "bytes": 252712,
+      "sha256": "73b21723eb0ab2b2a2b5a3a07697e15689fadf872c8e72243eb78dc7e5ef2384",
+      "original": {
+        "file": "/tmp/dreams-production-finish-accepted-entrepreneur-v3.out",
+        "bytes": 1540428,
+        "sha256": "bdfc74af3966310680db2a1458e35695fb32f8d1da201fccb71b86c4ab3e71ef"
+      },
+      "encoding": "gzip; decompression restores exact original bytes"
+    },
+    {
+      "file": "country-policies-20261021/C/manifest.json",
+      "bytes": 21618,
+      "sha256": "3981ab95981f7eaa414ed3fb0755604b7770029cc3626382c4edf352b4f275a7",
+      "original": {
+        "file": "/workspace/.cache/dreams-current-c39-policies/entrepreneur-v3/manifest.json",
+        "bytes": 21618,
+        "sha256": "3981ab95981f7eaa414ed3fb0755604b7770029cc3626382c4edf352b4f275a7"
+      }
+    },
+    {
+      "file": "country-policies-20261021/producers/run-entrepreneur-v3.cjs.txt",
+      "bytes": 35545,
+      "sha256": "1f7083fa000cb623ad292dab69ce11da9d34b3278eb48281284f1d226d1910ba",
+      "original": {
+        "file": "/workspace/dreams-worktrees/project-callback-pacing-test/tools/current-policy/run-entrepreneur-v3.cjs",
+        "bytes": 35545,
+        "sha256": "1f7083fa000cb623ad292dab69ce11da9d34b3278eb48281284f1d226d1910ba"
+      }
+    },
+    {
+      "file": "country-policies-20261021/D/root-receipt.json",
+      "bytes": 1283,
+      "sha256": "d7d718436e9bbc462743c47f0a66d3cbbadba74d4484579cc21b8544da726126",
+      "original": {
+        "file": "/tmp/dreams-production-finish-accepted-editorial-v2-receipt.json",
+        "bytes": 1283,
+        "sha256": "d7d718436e9bbc462743c47f0a66d3cbbadba74d4484579cc21b8544da726126"
+      }
+    },
+    {
+      "file": "country-policies-20261021/D/raw.out.gz",
+      "bytes": 108034,
+      "sha256": "0ca7598d40961374a8ea3a23c5875ce91e20d40e9d3a6a5719730653d9d08632",
+      "original": {
+        "file": "/tmp/dreams-production-finish-accepted-editorial-v2.out",
+        "bytes": 834714,
+        "sha256": "c1304730115d08b682454a0c6052c9151a67b8e9ebf198b0e469c1a473a8daf5"
+      },
+      "encoding": "gzip; decompression restores exact original bytes"
+    },
+    {
+      "file": "country-policies-20261021/D/manifest.json",
+      "bytes": 21667,
+      "sha256": "6fb6893d65b377043fbe32d206f95e3b34c03e91b7caa7c038d3fceba86b9d12",
+      "original": {
+        "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/manifest.json",
+        "bytes": 21667,
+        "sha256": "6fb6893d65b377043fbe32d206f95e3b34c03e91b7caa7c038d3fceba86b9d12"
+      }
+    },
+    {
+      "file": "country-policies-20261021/producers/run-editorial-v2.cjs.txt",
+      "bytes": 7139,
+      "sha256": "b11b1e771c49baaa06e7d78df84bda9555c0fd83a3636cc7f39f64d58b9ff60d",
+      "original": {
+        "file": "/workspace/dreams-worktrees/project-callback-pacing-test/tools/current-policy/run-editorial-v2.cjs",
+        "bytes": 7139,
+        "sha256": "b11b1e771c49baaa06e7d78df84bda9555c0fd83a3636cc7f39f64d58b9ff60d"
+      }
+    }
+  ],
+  "limits": [
+    "Complete applies only to this bounded technical/outcome evidence publication, not whole-game/release completion.",
+    "Review reports are immutable Codex artifact/source reconciliations, not external-human editorial or legal approval. Their historical still-running/pending statements retain their actual report time; newer annual/native records are separate.",
+    "Fullworld equality/RNG/estate/cold claims retain actual producer assertion scope; the publication author checks JSON/hash correspondence without decoding or replaying worlds.",
+    "Current public-money values remain in their actual currencies; no cross-currency aggregate is inferred.",
+    "48policy runs are not48additional annual seeds,1000newpeople,multigeneration,allbranches,native,physical performance or continuous30-minuteUI acceptance.",
+    "Full DB/world checkpoint files and large raw command/checkpoint archives remain external pins in the copied review inventories. No database, packed world or development map is copied here.",
+    "Raw reports retain original working paths/relative links; original-to-portable artifact mappings govern access. Analysis script copies use.txt and are not executed.",
+    "Historical failed runs, pending preparation copies, producer hashes and unavailable C38oldreport remain untouched."
+  ],
+  "overallEffortEstimatePercent": 75
+}

@@ -1,0 +1,41 @@
+{
+  "format": "dreams-coordinator-gate-execution-v1",
+  "sourceCommit": "3224c9ce5b9175075760a789c1402dd92345cd30",
+  "sourceSnapshot": "/tmp/dreams-production-finish-corrected-source.json",
+  "sourceSnapshotSha256": "c10e79e2c1798315e5267069f8389d6a5f475cd04719d1894a987903b45e7545",
+  "root": "/workspace/dreams-worktrees/camera-copy-correction",
+  "argv": [
+    "node",
+    "./node_modules/expo/bin/cli",
+    "export",
+    "--platform",
+    "android",
+    "--platform",
+    "ios",
+    "--output-dir",
+    "/tmp/dreams-production-finish-corrected-ready-export",
+    "--source-maps",
+    "--max-workers",
+    "1"
+  ],
+  "startedAt": "2026-10-21T07:36:08.045317+00:00",
+  "before": {
+    "files": 688,
+    "snapshotSha256": "c10e79e2c1798315e5267069f8389d6a5f475cd04719d1894a987903b45e7545",
+    "status": "exact"
+  },
+  "complete": true,
+  "endedAt": "2026-10-21T07:37:44.576167+00:00",
+  "elapsedSeconds": 96.531,
+  "exitCode": 0,
+  "raw": {
+    "file": "/tmp/dreams-production-finish-corrected-ready-export.out",
+    "bytes": 2761,
+    "sha256": "6d4c920ab34744aab8edbffae73b5dd3f9a05eabb627c8ae10727fa92d408e48"
+  },
+  "after": {
+    "files": 688,
+    "snapshotSha256": "c10e79e2c1798315e5267069f8389d6a5f475cd04719d1894a987903b45e7545",
+    "status": "exact"
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "baseline": "eeb989e6093eae4655c86d18909c92ab979b02ca",
+  "implementationCheckpoint": "a654a77",
+  "versions": {
+    "world": 41,
+    "engine": 42,
+    "content": 18
+  },
+  "catalogue": {
+    "originalSituations": 274,
+    "originalChoices": 822,
+    "auditedOriginals": 274,
+    "retainedOriginals": 177,
+    "revisedOriginals": 97,
+    "newSituations": 30,
+    "newChoices": 90,
+    "totalSituations": 304,
+    "totalChoices": 912
+  },
+  "audit": {
+    "KEEP": 177,
+    "ENHANCE": 46,
+    "REWRITE": 37,
+    "REPLACE": 14
+  },
+  "tests": {
+    "typecheck": "passed",
+    "regressionSuites": 228,
+    "regressionTests": 2964,
+    "regressionFailures": 0,
+    "unchangedFinalSourceEngineSuiteTests": 7,
+    "engineSuiteStatus": "passed",
+    "engineSuiteSeededLives": 12,
+    "combinedSuites": 229,
+    "combinedPassingTests": 2971,
+    "scope": "Clean final228-suite run plus the unchanged engine suite from the source-stable full run; raw earlier non-engine failures retained in original result file."
+  },
+  "freshBirthToDeathSweep": {
+    "count": 12,
+    "ageRange": [
+      40,
+      92
+    ]
+  },
+  "savedAdultContinuations": {
+    "sourceHash": "ca7cdabff8af765bb0fb4bcc9db0a7a79c4eab00facafb6dfb805faab8971521",
+    "toolHash": "c147153cf850bd5f4e054f7ddec5ec698c9c7a9d41f031cd246954b3f53a0355",
+    "elapsedMs": 226965,
+    "completed": 5
+  },
+  "limitations": [
+    "No human or native visual playtest",
+    "Adult continuation fixtures do not demonstrate newly attained fame/business paths",
+    "No actor-specific or authored legal natural encounter claimed for those fixture continuations; all new choices have controlled valid-context coverage"
+  ]
+}

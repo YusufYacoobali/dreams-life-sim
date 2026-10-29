@@ -1,0 +1,11 @@
+import pathlib,subprocess,json,hashlib,datetime
+base=pathlib.Path('/tmp/dreams-c37-native-captures');diag=base/'cold-newborn/capture-diagnostic.json';logs=[]
+def pin(p):
+ b=p.read_bytes();return dict(file=str(p),bytes=len(b),sha256=hashlib.sha256(b).hexdigest())
+def run(a):
+ p=subprocess.run(a,stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=320);logs.append(dict(argv=a,returncode=p.returncode,stdout=p.stdout.decode(errors='replace'),stderr=p.stderr.decode(errors='replace'),at=datetime.datetime.now(datetime.timezone.utc).isoformat()));assert p.returncode==0,logs[-1]
+run(['python3','/tmp/dreams-native-ui.py','dismiss-expo-notice'])
+run(['python3','/tmp/dreams-native-ui.py','tap','Continue as Maya Singh'])
+run(['python3','/tmp/dreams-native-ui.py','wait-enabled','Begin Life!'])
+run(['python3','/tmp/dreams-c37-capture.py','cold-newborn-completed'])
+d=base/'cold-newborn-completed';e=d/'complete-cold-evidence.json';e.write_text(json.dumps(dict(complete=True,initialActualStopAndRestart=pin(diag),scope='Same actual cold restart. Initial hierarchy observer was interrupted during environment reconnect; no gameplay action occurred. Continue selects actual newborn normally.',events=logs),indent=2)+'\n');(d/'cold-attestation.json').write_text(json.dumps(dict(complete=True,stopped=True,restarted=True,**{'from':'newborn','to':'cold-newborn'},evidence=pin(e)),indent=2)+'\n');print(d)

@@ -1,0 +1,111 @@
+{
+  "date": "2026-10-25",
+  "baseRevision": "dc097168be9636cf7ffcf8cd6f5d7d58787320ab",
+  "fullRegression": {
+    "command": "node node_modules/jest/bin/jest.js --ci --maxWorkers=2 --silent --json",
+    "suites": 337,
+    "cases": 5391,
+    "initialPassedCases": 5390,
+    "initialFailedCases": 1,
+    "skippedCases": 0,
+    "milliseconds": 1017677,
+    "failure": "One stale onboarding expectation that Saved Lives was absent; test updated for navigation, haptic and unchanged saves."
+  },
+  "affectedRerun": {
+    "suites": 2,
+    "casesPassed": 14,
+    "files": [
+      "tests/ui/onboarding-haptics-flow.test.tsx",
+      "tests/config/release-config.test.ts"
+    ]
+  },
+  "pluginCasesPassed": 3,
+  "strictAppAndTestTypes": true,
+  "runtimeGraph": {
+    "modules": 513,
+    "cycles": []
+  },
+  "noticeCheck": true,
+  "finalNativeSourceChecks": {
+    "playStorePackageQueryCount": 1,
+    "privateClockReceiver": true,
+    "notificationIconResource": "@drawable/notification_icon",
+    "whiteTransparentNativeIconSizes": [
+      [
+        24,
+        24
+      ],
+      [
+        36,
+        36
+      ],
+      [
+        48,
+        48
+      ],
+      [
+        72,
+        72
+      ],
+      [
+        96,
+        96
+      ]
+    ],
+    "blockedPermissions": [
+      "android.permission.READ_EXTERNAL_STORAGE",
+      "android.permission.RECORD_AUDIO",
+      "android.permission.SYSTEM_ALERT_WINDOW",
+      "android.permission.WRITE_EXTERNAL_STORAGE"
+    ],
+    "iosNoPushMicrophoneBackgroundAudio": true,
+    "fullAppCompiled": false
+  },
+  "receiverCompile": {
+    "exitCode": 0,
+    "seconds": 3.055,
+    "androidApi": 36,
+    "notificationsVersion": "57.0.23",
+    "kotlinCompiler": "2.1.20",
+    "generatedClasses": 1,
+    "fullAppBuild": false
+  },
+  "exports": {
+    "android": {
+      "bundleBytes": 7523600,
+      "assets": 1234,
+      "verifiedRuntimeSources": 13,
+      "hermesHeader": true
+    },
+    "ios": {
+      "bundleBytes": 7341824,
+      "assets": 1230,
+      "verifiedRuntimeSources": 13,
+      "hermesHeader": true
+    }
+  },
+  "sourceSha256": {
+    "app/(game)/_layout.tsx": "28c80a7edcbf49b948e664f17541687df4c8d805ecc6c738c021b6df1338b651",
+    "app/index.tsx": "a7e9fe40622289cfcba64a5d70f31a8edce5d22ab5769b859fe30005c0fc9e0c",
+    "app/saved-lives.tsx": "080bc791fec392f1b88770d5a07b1a6287bde9a819676306211b917879644b53",
+    "app/settings.tsx": "d56de321c4a252fd798ec919dcaaeb630aa21c62df61ca0aa2f31c1e56738e46",
+    "src/notifications/dailyReminders.ts": "02fb9f980c036b55943a810ed54d0661157e34a46a5ef032f20bd474b7c13bb9",
+    "src/notifications/expoReminderAdapter.ts": "8009858eec75817fc9e8648fd50c02944e77699fb6178ca02a0091e384a31a2f",
+    "src/persistence/archive.ts": "d7c17683b8067684816a8dea1302140e7fa38135aac30d526bdd9506ecc6a501",
+    "src/persistence/repository.ts": "5426aa868aeb893df09b07d5b59122266e1fa55663c8eef034b4f51e8dbe6d97",
+    "src/reviews/nativeReview.ts": "0ca2c9140fe8270bb8ac774893c3c092432feaeba6531409a7f0415cf8452b08",
+    "src/reviews/tracker.ts": "dd0b6ae37bb541976bf3d3cc31cf31f49785d41c167c7ec56bd6aad0e2c73a6e",
+    "src/ui/DailyReminderSettings.tsx": "b73373684fe3568ef3ab54140009ced2f8d3341c927b4eaad2aa9cea5d1b7b64",
+    "src/ui/ReviewPromptHost.tsx": "31863c6e2c37d76be50c44c052154d109258fe6616551995bb3711c9620eb340",
+    "src/ui/StoreReviewAction.tsx": "64f1593f583dc7dd2bc9aa790176e4d19555037babf24f1dc246518c1ef8c038",
+    "app.json": "4954190da05c1b9223b51ac27601f7ded907bf91bc9f1a5ec49f43b7c4cd5420",
+    "app.config.cjs": "dcf176cb70a477a6d4c4b19ba88c79f13e39543162f7d2bf6423f81022fc987e",
+    "eas.json": "f1d87e64c268797e9dc20b0287a5f98faa6c5a909f9c162e11dc5527745e919d",
+    "plugins/withLocalNotifications.cjs": "895def7ab67283fb917b22dde77d814807fc71d5dd33eace6a1e0f07fc56f5b9",
+    "plugins/withStoreReviewVisibility.cjs": "2be8f4dc36ee9a1e88ac5151d6b08f4f9dad87f71013e8322fbe89d79bcd8389",
+    "plugins/templates/DreamsReminderClockReceiver.kt": "4aeb1c59ea2ca73cee565e2cd25b26b7822725c4b3ed6adfe77616ac5c3e2fd3",
+    "assets/notification-icon.png": "33a30a1ee5a0ec7e6ba935de34cffbbc4985aecccf92418a13809fb3c6c5596b",
+    "assets/notification-icon.svg": "333b1d94be72b94c7dc41f063f4ca2a6ac12a4eabeb99720f9e8534f31e753bc"
+  },
+  "installedDeviceOrSignedArtifactVerified": false
+}

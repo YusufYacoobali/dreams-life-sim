@@ -1,0 +1,20 @@
+{
+  "format": "dreams-native-cohort-source-v1",
+  "complete": false,
+  "root": null,
+  "commit": null,
+  "versions": {
+    "world": 37,
+    "engine": 38,
+    "content": 12,
+    "reader": 17
+  },
+  "git": {
+    "head": null,
+    "status": null,
+    "tree": null,
+    "commit": null
+  },
+  "source": {},
+  "cohort": "c38"
+}

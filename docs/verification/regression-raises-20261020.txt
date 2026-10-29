@@ -1,0 +1,106 @@
+
+> dreams-life-sim@1.0.0 test
+> jest --runInBand
+
+PASS tests/game/engine.test.ts (490.304 s)
+PASS tests/ui/saved-files-flow.test.tsx (22.836 s)
+PASS tests/game/royalty.test.ts (21.738 s)
+PASS tests/game/early-home-stories.test.ts (13.003 s)
+PASS tests/persistence/native-workplace-archive.test.ts (11.484 s)
+PASS tests/game/teen-home-stories.test.ts (12.603 s)
+PASS tests/persistence/restored-action-cache.test.ts (11.185 s)
+PASS tests/persistence/native-teen-archive.test.ts (10.036 s)
+PASS tests/game/education-recovery.test.ts (8.795 s)
+PASS tests/ui/scholarship-flow.test.tsx (8.052 s)
+PASS tests/persistence/ordinary-hobby-archive.test.ts (7.824 s)
+PASS tests/ui/education-recovery-flow.test.tsx (7.793 s)
+PASS tests/persistence/action-checkpoints.test.ts (8.343 s)
+PASS tests/ui/royalty-flow.test.tsx (7.705 s)
+PASS tests/persistence/life-preview.test.ts (7.69 s)
+PASS tests/game/childhood-stories.test.ts (6.878 s)
+PASS tests/game/services.test.ts (6.217 s)
+PASS tests/ui/pets-flow.test.tsx (5.792 s)
+PASS tests/persistence/native-school-archive.test.ts (5.536 s)
+PASS tests/ui/saved-life-preview.test.tsx
+PASS tests/state/save-summaries.test.ts (5.113 s)
+PASS tests/persistence/native-arcade-archive.test.ts
+PASS tests/game/music.test.ts
+PASS tests/game/education-work-finance.test.ts
+PASS tests/game/estates.test.ts
+PASS tests/game/businesses.test.ts
+PASS tests/game/creators.test.ts
+PASS tests/ui/ordinary-hobby-flow.test.tsx
+PASS tests/game/scholarships.test.ts
+PASS tests/ui/contacts-flow.test.tsx
+PASS tests/game/social.test.ts
+PASS tests/game/politics.test.ts
+PASS tests/ui/leisure-flow.test.tsx
+PASS tests/game/legal.test.ts
+PASS tests/progression/progress.test.ts
+PASS tests/game/leisure.test.ts
+PASS tests/persistence/responsive-archive.test.ts
+PASS tests/game/careers.test.ts
+PASS tests/game/assets-markets.test.ts
+PASS tests/ui/relocation-flow.test.tsx
+PASS tests/ui/extras-flow.test.tsx
+PASS tests/game/foreign-earnings.test.ts
+PASS tests/game/story-callbacks.test.ts
+PASS tests/game/ordinary-hobbies.test.ts
+PASS tests/ui/workplace-flow.test.tsx
+PASS tests/game/pets.test.ts
+PASS tests/persistence/leisure-archive.test.ts
+PASS tests/game/story-lifecycle.test.ts
+PASS tests/game/relocation.test.ts
+PASS tests/ui/service-flow.test.tsx
+PASS tests/game/credit.test.ts
+PASS tests/ui/story-callback-flow.test.tsx
+PASS tests/ui/credit-flow.test.tsx
+PASS tests/ui/travel-flow.test.tsx
+PASS tests/game/work-raises.test.ts
+PASS tests/game/content-refresh.test.ts
+PASS tests/ui/childhood-story-flow.test.tsx
+PASS tests/game/travel.test.ts
+PASS tests/ui/creator-studio-flow.test.tsx
+PASS tests/ui/business-flow.test.tsx
+PASS tests/game/workplaces.test.ts
+PASS tests/ui/school-flow.test.tsx
+PASS tests/ui/onboarding-flow.test.tsx
+PASS tests/persistence/time-machine.test.ts
+PASS tests/persistence/compressed-lives.test.ts
+PASS tests/persistence/pet-archive.test.ts
+PASS tests/ui/legal-flow.test.tsx
+PASS tests/ui/politics-flow.test.tsx
+PASS tests/ui/startup-flow.test.tsx
+PASS tests/game/relationships.test.ts
+PASS tests/ui/social-flow.test.tsx
+PASS tests/ui/early-home-story-flow.test.tsx
+PASS tests/game/family.test.ts
+PASS tests/ui/music-flow.test.tsx
+PASS tests/ui/career-flow.test.tsx
+PASS tests/game/school.test.ts
+PASS tests/ui/purchase-flow.test.tsx
+PASS tests/ui/health-flow.test.tsx
+PASS tests/ui/relationship-flow.test.tsx
+PASS tests/ui/family-flow.test.tsx
+PASS tests/ui/pension-flow.test.tsx
+PASS tests/ui/time-machine-flow.test.tsx
+PASS tests/game/health.test.ts
+PASS tests/ui/school-plans.test.tsx
+PASS tests/ui/legacy-flow.test.tsx
+PASS tests/persistence/repository.test.ts
+PASS tests/ui/will-flow.test.tsx
+PASS tests/state/preferencesStore.test.ts
+PASS tests/game/save-json.test.ts
+PASS tests/ui/settings-flow.test.tsx
+PASS tests/persistence/base64.test.ts
+PASS tests/game/creation.test.ts
+PASS tests/ui/interactions.test.tsx
+PASS tests/state/gameStore.test.ts
+PASS tests/game/money-format.test.ts
+PASS tests/game/primitives.test.ts
+
+Test Suites: 96 passed, 96 total
+Tests:       1356 passed, 1356 total
+Snapshots:   0 total
+Time:        798.22 s
+Ran all test suites.

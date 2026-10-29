@@ -1,0 +1,838 @@
+{
+  "format": "dreams-onboarding-native-raw-verification-v1",
+  "status": "raw-integrity-passed-not-gameplay-or-visual-acceptance",
+  "complete": true,
+  "scope": "Read-only source/capture provenance, exact protected baseline preservation, actual target-life row ownership, append-only receipts/history and all-eight-table equality at explicitly attested cold reopens. No runtime is loaded and no commands, predictions, seed searches, SQL writes or native actions are performed. Begin Life/command receipts, revision transitions and backup relationships are observations only; command/world semantic acceptance stays pending. This does not establish creation/input correctness, gameplay outcomes, visual quality or independent observation of device process stops.",
+  "source": {
+    "manifest": {
+      "file": "/tmp/dreams-production-gaps-native-source.json",
+      "bytes": 72136,
+      "sha256": "b8b478a3254a63daf2a2a2cfa8f8b91a8ef5e412f64921d0e513a4af2fe0bd90"
+    },
+    "root": "/workspace/dreams-worktrees/integration-production-gaps",
+    "commit": "a4be96ee1e60ab073fbbd2ae95d0ee2d0ee6f361",
+    "versions": {
+      "world": 36,
+      "engine": 37,
+      "content": 12,
+      "reader": 16
+    },
+    "managedFilesVerified": 354,
+    "git": {
+      "head": {
+        "file": "/tmp/dreams-production-gaps-accepted-head.txt",
+        "bytes": 41,
+        "sha256": "8fa676871edecb99716bca8d0d51657f88bab151c38d66d4e949492dede9653f"
+      },
+      "status": {
+        "file": "/tmp/dreams-production-gaps-accepted-status.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "tree": {
+        "file": "/tmp/dreams-production-gaps-accepted-tree.bin",
+        "bytes": 199219,
+        "sha256": "08b917959bcc5a75a651285a8498d8c7e787f493febcc02a6b868d4014660680"
+      },
+      "commit": {
+        "file": "/tmp/dreams-production-gaps-accepted-commit.bin",
+        "bytes": 255,
+        "sha256": "bda84621c180655c127f9dc70f18eef7068aa52f61ba9f2a0ac8def289ac2376"
+      }
+    }
+  },
+  "captures": {
+    "file": "/tmp/dreams-c37-custom-captures.json",
+    "bytes": 13326,
+    "sha256": "ee0b00c004003cc6dbd2443e7f873a2e970f84d69e17520d7b3150f33286e821"
+  },
+  "mode": "custom",
+  "device": "Android24 x86_64 software emulator,390x844, Expo Go57; no physical/standalone/iOS claim",
+  "baseline": {
+    "database": {
+      "main": {
+        "file": "/tmp/dreams-c37-native-precreation-db/dreams.db",
+        "bytes": 3805184,
+        "sha256": "f144f28d9701ff2e4ea3cfe710e8acbc57c27ffee351caa4313f34314d3d7dae"
+      },
+      "wal": {
+        "file": "/tmp/dreams-c37-native-precreation-db/dreams.db-wal",
+        "bytes": 4733912,
+        "sha256": "57728df484c51f670a063da947b192846fa12b9daf869a382b38a35002469595"
+      }
+    },
+    "reader": 16,
+    "tables": {
+      "backups": {
+        "rows": 7,
+        "sha256": "4cc5661c5306ab26c3581bac60d512ee56ba0943e6afbb0bda0cc3834747e0c3"
+      },
+      "branches": {
+        "rows": 1,
+        "sha256": "fbca8816f9bd06ea8d170416427ea734d77405d1c61fc324d0f91306b745f370"
+      },
+      "lives": {
+        "rows": 7,
+        "sha256": "705b33de2131e884a4aa14c7dfed93122a23090047279dbcb47e45d440bfb422"
+      },
+      "preferences": {
+        "rows": 2,
+        "sha256": "439c7df07be842e2d88a5c4e3901fef292b80bc8317269fc0b356d8c055d0413"
+      },
+      "receipts": {
+        "rows": 147,
+        "sha256": "e2fb829b3ff88d279827f50453412aa83a57b269652d8aef6626bc8f758c7e55"
+      },
+      "restore_receipts": {
+        "rows": 1,
+        "sha256": "8f3438adaa30734181d11412661add7dbbb965ca51b1c34185bffb1cc68cb21f"
+      },
+      "snapshot_metadata": {
+        "rows": 66,
+        "sha256": "655370281918d85d738449450959abfed8f323daac600b261dd161f2dc79b8da"
+      },
+      "snapshots": {
+        "rows": 66,
+        "sha256": "dc82847be2784ac8c6be37ba2fc3d769ae86c6eafde1a615cc53db8cab6c9298"
+      }
+    }
+  },
+  "target": {
+    "lifeId": "life_mvhfkffn_1csbqc2_0",
+    "previouslyExisted": false,
+    "initialRevision": 0,
+    "initialPayloadSha256": "6c95de6a7f597431a01daa5c0b5c4b9a88ac60334dd4ea49c932b9eb282c7a7d",
+    "birthCheckpoint": {
+      "file": "/tmp/dreams-c37-native-captures/newborn/birth-checkpoint.txt",
+      "bytes": 3707,
+      "sha256": "6c95de6a7f597431a01daa5c0b5c4b9a88ac60334dd4ea49c932b9eb282c7a7d"
+    }
+  },
+  "phases": [
+    {
+      "id": "newborn",
+      "kind": "created",
+      "database": {
+        "main": {
+          "file": "/tmp/dreams-c37-native-captures/newborn/database/dreams.db",
+          "bytes": 3805184,
+          "sha256": "f144f28d9701ff2e4ea3cfe710e8acbc57c27ffee351caa4313f34314d3d7dae"
+        },
+        "wal": {
+          "file": "/tmp/dreams-c37-native-captures/newborn/database/dreams.db-wal",
+          "bytes": 4733912,
+          "sha256": "6214c2b23e6cb7a079f4cbeab8a2d42a80b70bf51582ffbddf648d955f325d7c"
+        }
+      },
+      "reader": 16,
+      "lifeId": "life_mvhfkffn_1csbqc2_0",
+      "revision": 0,
+      "payloadSha256": "6c95de6a7f597431a01daa5c0b5c4b9a88ac60334dd4ea49c932b9eb282c7a7d",
+      "tables": {
+        "backups": {
+          "rows": 8,
+          "sha256": "639f20637696a219bc622b7394ec2daec755e111cbf3319e7d9f18768ac71cdc"
+        },
+        "branches": {
+          "rows": 1,
+          "sha256": "fbca8816f9bd06ea8d170416427ea734d77405d1c61fc324d0f91306b745f370"
+        },
+        "lives": {
+          "rows": 8,
+          "sha256": "df318e0807231730096cc8d23a61455b065a2a4922106a6a5bfc5c02dc898237"
+        },
+        "preferences": {
+          "rows": 2,
+          "sha256": "17699eecf828e822019797d758bd1054aaa4ce1265a82a10de5a1dffeb3df853"
+        },
+        "receipts": {
+          "rows": 147,
+          "sha256": "e2fb829b3ff88d279827f50453412aa83a57b269652d8aef6626bc8f758c7e55"
+        },
+        "restore_receipts": {
+          "rows": 1,
+          "sha256": "8f3438adaa30734181d11412661add7dbbb965ca51b1c34185bffb1cc68cb21f"
+        },
+        "snapshot_metadata": {
+          "rows": 66,
+          "sha256": "655370281918d85d738449450959abfed8f323daac600b261dd161f2dc79b8da"
+        },
+        "snapshots": {
+          "rows": 66,
+          "sha256": "dc82847be2784ac8c6be37ba2fc3d769ae86c6eafde1a615cc53db8cab6c9298"
+        }
+      },
+      "observed": {
+        "revisionDelta": null,
+        "receiptRowsAdded": 0,
+        "snapshotRowsAdded": 0,
+        "backupEqualsInitialCurrent": true,
+        "backupEqualsPreviousActualCurrent": null
+      },
+      "allProtectedBaselineRowsExact": true,
+      "onlyActualTargetLifeRowsChanged": true,
+      "activeLifePreferenceOnly": true
+    },
+    {
+      "id": "cold-newborn",
+      "kind": "cold",
+      "database": {
+        "main": {
+          "file": "/tmp/dreams-c37-native-captures/cold-newborn-completed/database/dreams.db",
+          "bytes": 3805184,
+          "sha256": "f144f28d9701ff2e4ea3cfe710e8acbc57c27ffee351caa4313f34314d3d7dae"
+        },
+        "wal": {
+          "file": "/tmp/dreams-c37-native-captures/cold-newborn-completed/database/dreams.db-wal",
+          "bytes": 4733912,
+          "sha256": "6214c2b23e6cb7a079f4cbeab8a2d42a80b70bf51582ffbddf648d955f325d7c"
+        }
+      },
+      "reader": 16,
+      "lifeId": "life_mvhfkffn_1csbqc2_0",
+      "revision": 0,
+      "payloadSha256": "6c95de6a7f597431a01daa5c0b5c4b9a88ac60334dd4ea49c932b9eb282c7a7d",
+      "tables": {
+        "backups": {
+          "rows": 8,
+          "sha256": "639f20637696a219bc622b7394ec2daec755e111cbf3319e7d9f18768ac71cdc"
+        },
+        "branches": {
+          "rows": 1,
+          "sha256": "fbca8816f9bd06ea8d170416427ea734d77405d1c61fc324d0f91306b745f370"
+        },
+        "lives": {
+          "rows": 8,
+          "sha256": "df318e0807231730096cc8d23a61455b065a2a4922106a6a5bfc5c02dc898237"
+        },
+        "preferences": {
+          "rows": 2,
+          "sha256": "17699eecf828e822019797d758bd1054aaa4ce1265a82a10de5a1dffeb3df853"
+        },
+        "receipts": {
+          "rows": 147,
+          "sha256": "e2fb829b3ff88d279827f50453412aa83a57b269652d8aef6626bc8f758c7e55"
+        },
+        "restore_receipts": {
+          "rows": 1,
+          "sha256": "8f3438adaa30734181d11412661add7dbbb965ca51b1c34185bffb1cc68cb21f"
+        },
+        "snapshot_metadata": {
+          "rows": 66,
+          "sha256": "655370281918d85d738449450959abfed8f323daac600b261dd161f2dc79b8da"
+        },
+        "snapshots": {
+          "rows": 66,
+          "sha256": "dc82847be2784ac8c6be37ba2fc3d769ae86c6eafde1a615cc53db8cab6c9298"
+        }
+      },
+      "observed": {
+        "revisionDelta": 0,
+        "receiptRowsAdded": 0,
+        "snapshotRowsAdded": 0,
+        "backupEqualsInitialCurrent": null,
+        "backupEqualsPreviousActualCurrent": true
+      },
+      "allProtectedBaselineRowsExact": true,
+      "onlyActualTargetLifeRowsChanged": true,
+      "activeLifePreferenceOnly": true,
+      "allEightTablesExactTo": "newborn",
+      "coldAttestation": {
+        "file": "/tmp/dreams-c37-native-captures/cold-newborn-completed/cold-attestation.json",
+        "bytes": 327,
+        "sha256": "68a6192904c0c46f48499bf3bdce44bd2ece5861c1a2216e5ab077c9aaa2bff6"
+      }
+    },
+    {
+      "id": "begun",
+      "kind": "begin-life",
+      "database": {
+        "main": {
+          "file": "/tmp/dreams-c37-native-captures/begun/database/dreams.db",
+          "bytes": 3805184,
+          "sha256": "f144f28d9701ff2e4ea3cfe710e8acbc57c27ffee351caa4313f34314d3d7dae"
+        },
+        "wal": {
+          "file": "/tmp/dreams-c37-native-captures/begun/database/dreams.db-wal",
+          "bytes": 4733912,
+          "sha256": "28032f89fb16ffbc82e7e1256199c417b6afbbff03f2a3077415d1a677e3591a"
+        }
+      },
+      "reader": 16,
+      "lifeId": "life_mvhfkffn_1csbqc2_0",
+      "revision": 1,
+      "payloadSha256": "3a11267d6802977e4ce0221396c0783ae1e25b4c8cd8f70bb84b1492d3700747",
+      "tables": {
+        "backups": {
+          "rows": 8,
+          "sha256": "639f20637696a219bc622b7394ec2daec755e111cbf3319e7d9f18768ac71cdc"
+        },
+        "branches": {
+          "rows": 1,
+          "sha256": "fbca8816f9bd06ea8d170416427ea734d77405d1c61fc324d0f91306b745f370"
+        },
+        "lives": {
+          "rows": 8,
+          "sha256": "83a81f39408c4eec3285c8813a2c49e0ff0a222d653bf17ef5be62b1c41e135d"
+        },
+        "preferences": {
+          "rows": 2,
+          "sha256": "17699eecf828e822019797d758bd1054aaa4ce1265a82a10de5a1dffeb3df853"
+        },
+        "receipts": {
+          "rows": 148,
+          "sha256": "86e88a4773d7c13d8b33a9c542305db20a23cf2d7d01ac8d8a3674c9123190ae"
+        },
+        "restore_receipts": {
+          "rows": 1,
+          "sha256": "8f3438adaa30734181d11412661add7dbbb965ca51b1c34185bffb1cc68cb21f"
+        },
+        "snapshot_metadata": {
+          "rows": 66,
+          "sha256": "655370281918d85d738449450959abfed8f323daac600b261dd161f2dc79b8da"
+        },
+        "snapshots": {
+          "rows": 66,
+          "sha256": "dc82847be2784ac8c6be37ba2fc3d769ae86c6eafde1a615cc53db8cab6c9298"
+        }
+      },
+      "observed": {
+        "revisionDelta": 1,
+        "receiptRowsAdded": 1,
+        "snapshotRowsAdded": 0,
+        "backupEqualsInitialCurrent": null,
+        "backupEqualsPreviousActualCurrent": true
+      },
+      "allProtectedBaselineRowsExact": true,
+      "onlyActualTargetLifeRowsChanged": true,
+      "activeLifePreferenceOnly": true
+    },
+    {
+      "id": "cold-begun",
+      "kind": "cold",
+      "database": {
+        "main": {
+          "file": "/tmp/dreams-c37-native-captures/cold-begun/database/dreams.db",
+          "bytes": 3805184,
+          "sha256": "f144f28d9701ff2e4ea3cfe710e8acbc57c27ffee351caa4313f34314d3d7dae"
+        },
+        "wal": {
+          "file": "/tmp/dreams-c37-native-captures/cold-begun/database/dreams.db-wal",
+          "bytes": 4733912,
+          "sha256": "28032f89fb16ffbc82e7e1256199c417b6afbbff03f2a3077415d1a677e3591a"
+        }
+      },
+      "reader": 16,
+      "lifeId": "life_mvhfkffn_1csbqc2_0",
+      "revision": 1,
+      "payloadSha256": "3a11267d6802977e4ce0221396c0783ae1e25b4c8cd8f70bb84b1492d3700747",
+      "tables": {
+        "backups": {
+          "rows": 8,
+          "sha256": "639f20637696a219bc622b7394ec2daec755e111cbf3319e7d9f18768ac71cdc"
+        },
+        "branches": {
+          "rows": 1,
+          "sha256": "fbca8816f9bd06ea8d170416427ea734d77405d1c61fc324d0f91306b745f370"
+        },
+        "lives": {
+          "rows": 8,
+          "sha256": "83a81f39408c4eec3285c8813a2c49e0ff0a222d653bf17ef5be62b1c41e135d"
+        },
+        "preferences": {
+          "rows": 2,
+          "sha256": "17699eecf828e822019797d758bd1054aaa4ce1265a82a10de5a1dffeb3df853"
+        },
+        "receipts": {
+          "rows": 148,
+          "sha256": "86e88a4773d7c13d8b33a9c542305db20a23cf2d7d01ac8d8a3674c9123190ae"
+        },
+        "restore_receipts": {
+          "rows": 1,
+          "sha256": "8f3438adaa30734181d11412661add7dbbb965ca51b1c34185bffb1cc68cb21f"
+        },
+        "snapshot_metadata": {
+          "rows": 66,
+          "sha256": "655370281918d85d738449450959abfed8f323daac600b261dd161f2dc79b8da"
+        },
+        "snapshots": {
+          "rows": 66,
+          "sha256": "dc82847be2784ac8c6be37ba2fc3d769ae86c6eafde1a615cc53db8cab6c9298"
+        }
+      },
+      "observed": {
+        "revisionDelta": 0,
+        "receiptRowsAdded": 0,
+        "snapshotRowsAdded": 0,
+        "backupEqualsInitialCurrent": null,
+        "backupEqualsPreviousActualCurrent": false
+      },
+      "allProtectedBaselineRowsExact": true,
+      "onlyActualTargetLifeRowsChanged": true,
+      "activeLifePreferenceOnly": true,
+      "allEightTablesExactTo": "begun",
+      "coldAttestation": {
+        "file": "/tmp/dreams-c37-native-captures/cold-begun/cold-attestation.json",
+        "bytes": 300,
+        "sha256": "ede24fcbc2363fa3dbc1731b70f5669502f8e94f72d59f83a96329eb3e3b74c6"
+      }
+    },
+    {
+      "id": "birthday-decision",
+      "kind": "command",
+      "database": {
+        "main": {
+          "file": "/tmp/dreams-c37-native-captures/birthday-decision/database/dreams.db",
+          "bytes": 3805184,
+          "sha256": "f144f28d9701ff2e4ea3cfe710e8acbc57c27ffee351caa4313f34314d3d7dae"
+        },
+        "wal": {
+          "file": "/tmp/dreams-c37-native-captures/birthday-decision/database/dreams.db-wal",
+          "bytes": 4733912,
+          "sha256": "dd4396fe4b6a06bf25bf5c5d8bb2e72cc3d508e4fc16b85efcbd30faa5604d60"
+        }
+      },
+      "reader": 16,
+      "lifeId": "life_mvhfkffn_1csbqc2_0",
+      "revision": 2,
+      "payloadSha256": "e60fb5793d80aea3365850288c462b89f8b80d84a8c7831ceded8d2d38c5abe0",
+      "tables": {
+        "backups": {
+          "rows": 8,
+          "sha256": "18354121ad0424d83aad84e0962699b47530197a324e83ced31cbe0f937fa9a3"
+        },
+        "branches": {
+          "rows": 1,
+          "sha256": "fbca8816f9bd06ea8d170416427ea734d77405d1c61fc324d0f91306b745f370"
+        },
+        "lives": {
+          "rows": 8,
+          "sha256": "f0f8a3056c6cdf908e5db3f05f4601fc1ada2d87e4463695c39f429e80dec9e7"
+        },
+        "preferences": {
+          "rows": 2,
+          "sha256": "17699eecf828e822019797d758bd1054aaa4ce1265a82a10de5a1dffeb3df853"
+        },
+        "receipts": {
+          "rows": 149,
+          "sha256": "96162e78637357cffe807d8bfcd30685e2980d10fb61b1d3024f005a968aaed4"
+        },
+        "restore_receipts": {
+          "rows": 1,
+          "sha256": "8f3438adaa30734181d11412661add7dbbb965ca51b1c34185bffb1cc68cb21f"
+        },
+        "snapshot_metadata": {
+          "rows": 67,
+          "sha256": "d3920406e0927f0464b2557a6c78d08ed0bb50bc547f6774b4aa36d3f3c30347"
+        },
+        "snapshots": {
+          "rows": 67,
+          "sha256": "53bd0ab895f88acc0d3ee5bf5352736262e87212d5454711bdafdf1a3538f433"
+        }
+      },
+      "observed": {
+        "revisionDelta": 1,
+        "receiptRowsAdded": 1,
+        "snapshotRowsAdded": 1,
+        "backupEqualsInitialCurrent": null,
+        "backupEqualsPreviousActualCurrent": true
+      },
+      "allProtectedBaselineRowsExact": true,
+      "onlyActualTargetLifeRowsChanged": true,
+      "activeLifePreferenceOnly": true
+    },
+    {
+      "id": "cold-birthday-decision",
+      "kind": "cold",
+      "database": {
+        "main": {
+          "file": "/tmp/dreams-c37-native-captures/cold-birthday-decision/database/dreams.db",
+          "bytes": 3805184,
+          "sha256": "f144f28d9701ff2e4ea3cfe710e8acbc57c27ffee351caa4313f34314d3d7dae"
+        },
+        "wal": {
+          "file": "/tmp/dreams-c37-native-captures/cold-birthday-decision/database/dreams.db-wal",
+          "bytes": 4733912,
+          "sha256": "dd4396fe4b6a06bf25bf5c5d8bb2e72cc3d508e4fc16b85efcbd30faa5604d60"
+        }
+      },
+      "reader": 16,
+      "lifeId": "life_mvhfkffn_1csbqc2_0",
+      "revision": 2,
+      "payloadSha256": "e60fb5793d80aea3365850288c462b89f8b80d84a8c7831ceded8d2d38c5abe0",
+      "tables": {
+        "backups": {
+          "rows": 8,
+          "sha256": "18354121ad0424d83aad84e0962699b47530197a324e83ced31cbe0f937fa9a3"
+        },
+        "branches": {
+          "rows": 1,
+          "sha256": "fbca8816f9bd06ea8d170416427ea734d77405d1c61fc324d0f91306b745f370"
+        },
+        "lives": {
+          "rows": 8,
+          "sha256": "f0f8a3056c6cdf908e5db3f05f4601fc1ada2d87e4463695c39f429e80dec9e7"
+        },
+        "preferences": {
+          "rows": 2,
+          "sha256": "17699eecf828e822019797d758bd1054aaa4ce1265a82a10de5a1dffeb3df853"
+        },
+        "receipts": {
+          "rows": 149,
+          "sha256": "96162e78637357cffe807d8bfcd30685e2980d10fb61b1d3024f005a968aaed4"
+        },
+        "restore_receipts": {
+          "rows": 1,
+          "sha256": "8f3438adaa30734181d11412661add7dbbb965ca51b1c34185bffb1cc68cb21f"
+        },
+        "snapshot_metadata": {
+          "rows": 67,
+          "sha256": "d3920406e0927f0464b2557a6c78d08ed0bb50bc547f6774b4aa36d3f3c30347"
+        },
+        "snapshots": {
+          "rows": 67,
+          "sha256": "53bd0ab895f88acc0d3ee5bf5352736262e87212d5454711bdafdf1a3538f433"
+        }
+      },
+      "observed": {
+        "revisionDelta": 0,
+        "receiptRowsAdded": 0,
+        "snapshotRowsAdded": 0,
+        "backupEqualsInitialCurrent": null,
+        "backupEqualsPreviousActualCurrent": false
+      },
+      "allProtectedBaselineRowsExact": true,
+      "onlyActualTargetLifeRowsChanged": true,
+      "activeLifePreferenceOnly": true,
+      "allEightTablesExactTo": "birthday-decision",
+      "coldAttestation": {
+        "file": "/tmp/dreams-c37-native-captures/cold-birthday-decision/cold-attestation.json",
+        "bytes": 336,
+        "sha256": "9a97742d3ec8d0506f9c0f30b7a1925d516ef39323c40a239f4bff047aeb4428"
+      }
+    },
+    {
+      "id": "birthday-result",
+      "kind": "command",
+      "database": {
+        "main": {
+          "file": "/tmp/dreams-c37-native-captures/birthday-result/database/dreams.db",
+          "bytes": 3805184,
+          "sha256": "f144f28d9701ff2e4ea3cfe710e8acbc57c27ffee351caa4313f34314d3d7dae"
+        },
+        "wal": {
+          "file": "/tmp/dreams-c37-native-captures/birthday-result/database/dreams.db-wal",
+          "bytes": 4733912,
+          "sha256": "e915fb6b8d70440a3ead0afdc30885b4a51dacbfc666a869f619775971e434b9"
+        }
+      },
+      "reader": 16,
+      "lifeId": "life_mvhfkffn_1csbqc2_0",
+      "revision": 3,
+      "payloadSha256": "bccaeb5efe9beab592620799989cf718536d84679414264892e53736452913bb",
+      "tables": {
+        "backups": {
+          "rows": 8,
+          "sha256": "36caab578114eda837f52df10f27595db4fc2c2386b797c86d949743c7420967"
+        },
+        "branches": {
+          "rows": 1,
+          "sha256": "fbca8816f9bd06ea8d170416427ea734d77405d1c61fc324d0f91306b745f370"
+        },
+        "lives": {
+          "rows": 8,
+          "sha256": "060a7673b1f335c623a0b4ff9bad539e60e61404eb92984bf2d7508ff37a8963"
+        },
+        "preferences": {
+          "rows": 2,
+          "sha256": "17699eecf828e822019797d758bd1054aaa4ce1265a82a10de5a1dffeb3df853"
+        },
+        "receipts": {
+          "rows": 150,
+          "sha256": "75a2dd21e90e230e64552a4b5c58c2e06dbca337ac996c54d2b5056ecb882bea"
+        },
+        "restore_receipts": {
+          "rows": 1,
+          "sha256": "8f3438adaa30734181d11412661add7dbbb965ca51b1c34185bffb1cc68cb21f"
+        },
+        "snapshot_metadata": {
+          "rows": 67,
+          "sha256": "d3920406e0927f0464b2557a6c78d08ed0bb50bc547f6774b4aa36d3f3c30347"
+        },
+        "snapshots": {
+          "rows": 67,
+          "sha256": "53bd0ab895f88acc0d3ee5bf5352736262e87212d5454711bdafdf1a3538f433"
+        }
+      },
+      "observed": {
+        "revisionDelta": 1,
+        "receiptRowsAdded": 1,
+        "snapshotRowsAdded": 0,
+        "backupEqualsInitialCurrent": null,
+        "backupEqualsPreviousActualCurrent": true
+      },
+      "allProtectedBaselineRowsExact": true,
+      "onlyActualTargetLifeRowsChanged": true,
+      "activeLifePreferenceOnly": true
+    },
+    {
+      "id": "cold-birthday-result",
+      "kind": "cold",
+      "database": {
+        "main": {
+          "file": "/tmp/dreams-c37-native-captures/cold-birthday-result/database/dreams.db",
+          "bytes": 3805184,
+          "sha256": "f144f28d9701ff2e4ea3cfe710e8acbc57c27ffee351caa4313f34314d3d7dae"
+        },
+        "wal": {
+          "file": "/tmp/dreams-c37-native-captures/cold-birthday-result/database/dreams.db-wal",
+          "bytes": 4733912,
+          "sha256": "e915fb6b8d70440a3ead0afdc30885b4a51dacbfc666a869f619775971e434b9"
+        }
+      },
+      "reader": 16,
+      "lifeId": "life_mvhfkffn_1csbqc2_0",
+      "revision": 3,
+      "payloadSha256": "bccaeb5efe9beab592620799989cf718536d84679414264892e53736452913bb",
+      "tables": {
+        "backups": {
+          "rows": 8,
+          "sha256": "36caab578114eda837f52df10f27595db4fc2c2386b797c86d949743c7420967"
+        },
+        "branches": {
+          "rows": 1,
+          "sha256": "fbca8816f9bd06ea8d170416427ea734d77405d1c61fc324d0f91306b745f370"
+        },
+        "lives": {
+          "rows": 8,
+          "sha256": "060a7673b1f335c623a0b4ff9bad539e60e61404eb92984bf2d7508ff37a8963"
+        },
+        "preferences": {
+          "rows": 2,
+          "sha256": "17699eecf828e822019797d758bd1054aaa4ce1265a82a10de5a1dffeb3df853"
+        },
+        "receipts": {
+          "rows": 150,
+          "sha256": "75a2dd21e90e230e64552a4b5c58c2e06dbca337ac996c54d2b5056ecb882bea"
+        },
+        "restore_receipts": {
+          "rows": 1,
+          "sha256": "8f3438adaa30734181d11412661add7dbbb965ca51b1c34185bffb1cc68cb21f"
+        },
+        "snapshot_metadata": {
+          "rows": 67,
+          "sha256": "d3920406e0927f0464b2557a6c78d08ed0bb50bc547f6774b4aa36d3f3c30347"
+        },
+        "snapshots": {
+          "rows": 67,
+          "sha256": "53bd0ab895f88acc0d3ee5bf5352736262e87212d5454711bdafdf1a3538f433"
+        }
+      },
+      "observed": {
+        "revisionDelta": 0,
+        "receiptRowsAdded": 0,
+        "snapshotRowsAdded": 0,
+        "backupEqualsInitialCurrent": null,
+        "backupEqualsPreviousActualCurrent": false
+      },
+      "allProtectedBaselineRowsExact": true,
+      "onlyActualTargetLifeRowsChanged": true,
+      "activeLifePreferenceOnly": true,
+      "allEightTablesExactTo": "birthday-result",
+      "coldAttestation": {
+        "file": "/tmp/dreams-c37-native-captures/cold-birthday-result/cold-attestation.json",
+        "bytes": 330,
+        "sha256": "309343ef695a540b2d10fd9653e5c58cc9873912d791a492590d87b68a3b6ceb"
+      }
+    },
+    {
+      "id": "acknowledged",
+      "kind": "command",
+      "database": {
+        "main": {
+          "file": "/tmp/dreams-c37-native-captures/acknowledged/database/dreams.db",
+          "bytes": 3805184,
+          "sha256": "f144f28d9701ff2e4ea3cfe710e8acbc57c27ffee351caa4313f34314d3d7dae"
+        },
+        "wal": {
+          "file": "/tmp/dreams-c37-native-captures/acknowledged/database/dreams.db-wal",
+          "bytes": 4733912,
+          "sha256": "9bf3d2ad4d9bad2966825b89d8f6fda324d8abe9122bc926011e2eeb314057a4"
+        }
+      },
+      "reader": 16,
+      "lifeId": "life_mvhfkffn_1csbqc2_0",
+      "revision": 4,
+      "payloadSha256": "a53736f8fc3430934e54c947106fae93984c16b3e3a6fcb9b9138bcbfc0a2df5",
+      "tables": {
+        "backups": {
+          "rows": 8,
+          "sha256": "26b01b8ce8e0b7a6e1debe940981b8370ab78ee54bb735f7068fb334f883aa62"
+        },
+        "branches": {
+          "rows": 1,
+          "sha256": "fbca8816f9bd06ea8d170416427ea734d77405d1c61fc324d0f91306b745f370"
+        },
+        "lives": {
+          "rows": 8,
+          "sha256": "77c24c538a1d414d8f5b2925a8df556f03acde22b3f8be83ff901325fd934383"
+        },
+        "preferences": {
+          "rows": 2,
+          "sha256": "17699eecf828e822019797d758bd1054aaa4ce1265a82a10de5a1dffeb3df853"
+        },
+        "receipts": {
+          "rows": 151,
+          "sha256": "c81054a179583b0386e7fb92d608500b9f3d3463b468a743e92334b1d93935cc"
+        },
+        "restore_receipts": {
+          "rows": 1,
+          "sha256": "8f3438adaa30734181d11412661add7dbbb965ca51b1c34185bffb1cc68cb21f"
+        },
+        "snapshot_metadata": {
+          "rows": 67,
+          "sha256": "d3920406e0927f0464b2557a6c78d08ed0bb50bc547f6774b4aa36d3f3c30347"
+        },
+        "snapshots": {
+          "rows": 67,
+          "sha256": "53bd0ab895f88acc0d3ee5bf5352736262e87212d5454711bdafdf1a3538f433"
+        }
+      },
+      "observed": {
+        "revisionDelta": 1,
+        "receiptRowsAdded": 1,
+        "snapshotRowsAdded": 0,
+        "backupEqualsInitialCurrent": null,
+        "backupEqualsPreviousActualCurrent": true
+      },
+      "allProtectedBaselineRowsExact": true,
+      "onlyActualTargetLifeRowsChanged": true,
+      "activeLifePreferenceOnly": true
+    },
+    {
+      "id": "cold-acknowledged",
+      "kind": "cold",
+      "database": {
+        "main": {
+          "file": "/tmp/dreams-c37-native-captures/cold-acknowledged/database/dreams.db",
+          "bytes": 3805184,
+          "sha256": "f144f28d9701ff2e4ea3cfe710e8acbc57c27ffee351caa4313f34314d3d7dae"
+        },
+        "wal": {
+          "file": "/tmp/dreams-c37-native-captures/cold-acknowledged/database/dreams.db-wal",
+          "bytes": 4733912,
+          "sha256": "9bf3d2ad4d9bad2966825b89d8f6fda324d8abe9122bc926011e2eeb314057a4"
+        }
+      },
+      "reader": 16,
+      "lifeId": "life_mvhfkffn_1csbqc2_0",
+      "revision": 4,
+      "payloadSha256": "a53736f8fc3430934e54c947106fae93984c16b3e3a6fcb9b9138bcbfc0a2df5",
+      "tables": {
+        "backups": {
+          "rows": 8,
+          "sha256": "26b01b8ce8e0b7a6e1debe940981b8370ab78ee54bb735f7068fb334f883aa62"
+        },
+        "branches": {
+          "rows": 1,
+          "sha256": "fbca8816f9bd06ea8d170416427ea734d77405d1c61fc324d0f91306b745f370"
+        },
+        "lives": {
+          "rows": 8,
+          "sha256": "77c24c538a1d414d8f5b2925a8df556f03acde22b3f8be83ff901325fd934383"
+        },
+        "preferences": {
+          "rows": 2,
+          "sha256": "17699eecf828e822019797d758bd1054aaa4ce1265a82a10de5a1dffeb3df853"
+        },
+        "receipts": {
+          "rows": 151,
+          "sha256": "c81054a179583b0386e7fb92d608500b9f3d3463b468a743e92334b1d93935cc"
+        },
+        "restore_receipts": {
+          "rows": 1,
+          "sha256": "8f3438adaa30734181d11412661add7dbbb965ca51b1c34185bffb1cc68cb21f"
+        },
+        "snapshot_metadata": {
+          "rows": 67,
+          "sha256": "d3920406e0927f0464b2557a6c78d08ed0bb50bc547f6774b4aa36d3f3c30347"
+        },
+        "snapshots": {
+          "rows": 67,
+          "sha256": "53bd0ab895f88acc0d3ee5bf5352736262e87212d5454711bdafdf1a3538f433"
+        }
+      },
+      "observed": {
+        "revisionDelta": 0,
+        "receiptRowsAdded": 0,
+        "snapshotRowsAdded": 0,
+        "backupEqualsInitialCurrent": null,
+        "backupEqualsPreviousActualCurrent": false
+      },
+      "allProtectedBaselineRowsExact": true,
+      "onlyActualTargetLifeRowsChanged": true,
+      "activeLifePreferenceOnly": true,
+      "allEightTablesExactTo": "acknowledged",
+      "coldAttestation": {
+        "file": "/tmp/dreams-c37-native-captures/cold-acknowledged/cold-attestation.json",
+        "bytes": 321,
+        "sha256": "f9a584b5415c1187fefeaf34efdffb6bc3ba8cca9a8fae7502db475e0ad418c2"
+      }
+    }
+  ],
+  "gameRuntimeLoaded": false,
+  "engineCommandsProjected": 0,
+  "nativeActionsPerformed": 0,
+  "gameplaySemanticAcceptance": false,
+  "visualAcceptance": false,
+  "final": {
+    "lifeId": "life_mvhfkffn_1csbqc2_0",
+    "revision": 4,
+    "tables": {
+      "backups": {
+        "rows": 8,
+        "sha256": "26b01b8ce8e0b7a6e1debe940981b8370ab78ee54bb735f7068fb334f883aa62"
+      },
+      "branches": {
+        "rows": 1,
+        "sha256": "fbca8816f9bd06ea8d170416427ea734d77405d1c61fc324d0f91306b745f370"
+      },
+      "lives": {
+        "rows": 8,
+        "sha256": "77c24c538a1d414d8f5b2925a8df556f03acde22b3f8be83ff901325fd934383"
+      },
+      "preferences": {
+        "rows": 2,
+        "sha256": "17699eecf828e822019797d758bd1054aaa4ce1265a82a10de5a1dffeb3df853"
+      },
+      "receipts": {
+        "rows": 151,
+        "sha256": "c81054a179583b0386e7fb92d608500b9f3d3463b468a743e92334b1d93935cc"
+      },
+      "restore_receipts": {
+        "rows": 1,
+        "sha256": "8f3438adaa30734181d11412661add7dbbb965ca51b1c34185bffb1cc68cb21f"
+      },
+      "snapshot_metadata": {
+        "rows": 67,
+        "sha256": "d3920406e0927f0464b2557a6c78d08ed0bb50bc547f6774b4aa36d3f3c30347"
+      },
+      "snapshots": {
+        "rows": 67,
+        "sha256": "53bd0ab895f88acc0d3ee5bf5352736262e87212d5454711bdafdf1a3538f433"
+      }
+    }
+  },
+  "tools": [
+    {
+      "file": "/workspace/dreams-worktrees/integration-production-gaps/tools/onboarding-native-support.cjs",
+      "bytes": 14609,
+      "sha256": "84ad027de6de2a71d6407c5678e94398519eab3b7d13399d6d5b441ca171132b"
+    },
+    {
+      "file": "/workspace/dreams-worktrees/integration-production-gaps/tools/verify-onboarding-native.cjs",
+      "bytes": 8601,
+      "sha256": "c2973f6fdf25e01d5f231a2867143431e3ea7c0d93aaae1a3c79aaf1740e97af"
+    }
+  ]
+}

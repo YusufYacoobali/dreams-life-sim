@@ -1,0 +1,926 @@
+{
+  "format": "dreams-c37-publication-input-index-v1",
+  "status": "DRAFT-INCOMPLETE-NOT-PUBLISHED",
+  "complete": false,
+  "publicationAllowed": false,
+  "preparedAt": "2026-10-21T00:54:25.599726+00:00",
+  "repository": "YusufYacoobali/dreams-life-sim",
+  "artifactId": "production-gaps-20261021",
+  "scope": "Compact input index only; original evidence bytes are not rewritten or copied. Author subset counts overlap and must never be added to final consolidated totals.",
+  "runtime": {
+    "commit": "b76765e31597062d9f3f3a4f406f3cca56cdb8df",
+    "sourceSnapshot": "/tmp/dreams-production-gaps-runtime-source.json",
+    "expectedPinCount": 656,
+    "versions": {
+      "world": 36,
+      "engine": 37,
+      "content": 12,
+      "reader": 16
+    },
+    "gameSourceHash": "16ab454678ced7a223f1d6c3b6079ea6ac338dfaa11824b13fdb8edcc8ad0b3d",
+    "combinedGamePersistenceSourceHash": "c98f5ccef419042d820b377f36201ce1f4f63a479525ca943e865d77007ca9a5",
+    "acceptedSource": null,
+    "acceptedCommit": null,
+    "testOnlyBridge": {
+      "status": "PENDING",
+      "scope": "School waitlist test-only repair and final source/bridge are not inferred; coordinator must pin exact final differences and unchanged runtime.",
+      "repairCandidate": {
+        "commit": "1457da91665f72f1beef9807a9c969836640aeb6",
+        "base": "4981d473b11bc587046f78caaeb69bcb3277464f",
+        "scope": "Only existing connected admissions test and dedicated acceptance doc; root accepted-source integration and exact unchanged-runtime bridge still pending. Actual current2020 waitlist\u2192Feb rejection roll96/chance92, no offer planning pause, final2021/rev78; old isolated2022offer remains historical, current offer transition unreached.",
+        "focused": "6/1 PASS48.116s; author reports actual closed0",
+        "types": "Affected test dependency graph strict0/empty; not fullapp/alltest",
+        "review": {
+          "status": "approved-chat-attested",
+          "reviewer": "work_dialogs",
+          "rawReport": null,
+          "source": "School author reports exact approval; no raw review file supplied"
+        },
+        "rawFiles": [
+          "/tmp/dreams-admissions-current-waitlist-tests-first.out",
+          "/tmp/dreams-admissions-current-waitlist-types.out",
+          "/tmp/dreams-admissions-current-waitlist-tsconfig.json"
+        ],
+        "document": "/workspace/dreams-worktrees/admissions-current-waitlist/docs/UNIVERSITY_ADMISSIONS_ACCEPTANCE.md"
+      }
+    }
+  },
+  "features": [
+    {
+      "id": "teen-first-relationships",
+      "originalCommits": [
+        "77275deb482ccfab2b57752a5666876d610e1f31",
+        "7ee3377f7a842ca0d3003c2b797502dffe2acabf"
+      ],
+      "integrationCommits": [
+        "fa9bd8f",
+        "295ca21"
+      ],
+      "document": "docs/TEEN_FIRST_RELATIONSHIPS.md",
+      "scope": "Consented actual peer teen dating, bounded age/context, durable Person/Profile review and history; declared unit/SQLite arrangements, not a new natural birth cohort.",
+      "finalEvidence": "42/3 PASS10.436s and strict app/all-test; adjacent99/5 PASS9.396s is a separate overlapping preservation subset. Initial domain23/1 PASS6.521s; initial UI2fail/1pass then1fail/2pass query diagnostics retained; earlier42/3 PASS10.497s precedes final historical-preference assertion.",
+      "rawFiles": [
+        "/tmp/dreams-teen-first-domain-initial.out",
+        "/tmp/dreams-teen-first-app-types-initial.out",
+        "/tmp/dreams-teen-first-ui-initial.out",
+        "/tmp/dreams-teen-first-ui-modal-scope.out",
+        "/tmp/dreams-teen-first-focused-v1.out",
+        "/tmp/dreams-teen-first-focused-final.out",
+        "/tmp/dreams-teen-first-types-final.out",
+        "/tmp/dreams-teen-first-adjacent-final.out"
+      ],
+      "review": {
+        "status": "approved-chat-attested",
+        "reviewer": "work_dialogs",
+        "rawReport": null,
+        "scope": "Reviewer confirmed exact listed chain approval to coordinator/authors in chat; no standalone raw review report exists."
+      }
+    },
+    {
+      "id": "weighted-annual-rarity",
+      "originalCommits": [
+        "2a2361d685dd80c213c7a258feb633a7e45becb7"
+      ],
+      "integrationCommits": [
+        "c5aa4b0"
+      ],
+      "document": "docs/EVENT_RARITY.md",
+      "scope": "Weights100/25/5/1 apply only within the actually eligible annual pool, preserving age/context/cooldown and one events-stream selection draw. Original250 prose/choice projection remains3bcaeee8d5d03b0710cf9a96d0dff6cb53b182f452bc8f52c9a85e5c26be6d01.",
+      "finalEvidence": "20/3 PASS24.849s; strict app/all-test passed. No failed author attempt, natural rarity-rate measurement, new cohort or native pass.",
+      "rawFiles": [
+        "/tmp/dreams-event-rarity-focused-attempt1.out",
+        "/tmp/dreams-event-rarity-types-attempt1.out"
+      ],
+      "review": {
+        "status": "approved-chat-attested",
+        "reviewer": "work_dialogs",
+        "rawReport": null,
+        "scope": "Reviewer confirmed exact listed chain approval to coordinator/authors in chat; no standalone raw review report exists."
+      }
+    },
+    {
+      "id": "one-extremely-rare-adult-scene",
+      "originalCommits": [
+        "077d27e19ce9b9421d07e6ec962bf5c03f8e54f3"
+      ],
+      "integrationCommits": [
+        "33a2b01"
+      ],
+      "document": "docs/RARE_ADULT_STORY.md",
+      "scope": "Exactly one adult-accidental-living-exhibit scene; actual current catalogue251/753, rarity tiers237common/12uncommon/1rare/1extremelyrare. Three capped existing-stat choices; no invented persistent people/assets/fame/income. Isolated recorded-graduate domain context, declared cap setup.",
+      "finalEvidence": "15/2 PASS6.481s; filtered registration4/4 PASS3.413s with281unselected by CLI, no source test removals; strict app/all-test passed. Not all251 naturally observed.",
+      "rawFiles": [
+        "/tmp/dreams-rare-adult-content-focused-attempt1.out",
+        "/tmp/dreams-rare-adult-content-registration-attempt1.out",
+        "/tmp/dreams-rare-adult-content-types-attempt1.out"
+      ],
+      "review": {
+        "status": "approved-chat-attested",
+        "reviewer": "work_dialogs",
+        "rawReport": null,
+        "scope": "Reviewer confirmed exact listed chain approval to coordinator/authors in chat; no standalone raw review report exists."
+      }
+    },
+    {
+      "id": "two-year-childhood-project-recall",
+      "originalCommits": [
+        "c0276fd49377d12d4ad8959123042d978ca8ed97",
+        "a15dcd6d0efd1290e56f66725325db32d2a2c77b"
+      ],
+      "integrationCommits": [
+        "b0fbc53",
+        "a8bb9d6"
+      ],
+      "document": "docs/CHILDHOOD_PROJECT_RECALL.md",
+      "scope": "Newly bound optional project recall; actual v21 age7 context/template binding explicitly arranged, then ordinary commands/fileSQLite March2007 origin to March2009 same saved peer. Exact oldbound/thread omission preserved; genuine v23/v28 negative histories. No natural encounter, new birth, job referral or native claim.",
+      "finalEvidence": "Final10/2 PASS12.760s after first-person copy correction; affected imported application/test graph strict passed (not fullapp/alltest types). Prior10/2 PASS13.824s and strict precede copy fix. Initial36pass/1fail invalid-date boundary and test-only null-flow types diagnostic retained; original shortcallback27pass overlaps earlier combined run.",
+      "rawFiles": [
+        "/tmp/dreams-project-recall-tests-first.out",
+        "/tmp/dreams-project-recall-types.out",
+        "/tmp/dreams-project-recall-domain-final.out",
+        "/tmp/dreams-project-recall-final.out",
+        "/tmp/dreams-project-recall-frozen-tests.out",
+        "/tmp/dreams-project-recall-frozen-types.out",
+        "/tmp/dreams-project-recall-copy-tests.out",
+        "/tmp/dreams-project-recall-copy-types.out",
+        "/tmp/dreams-project-recall-tsconfig.json"
+      ],
+      "review": {
+        "status": "approved-chat-attested",
+        "reviewer": "work_dialogs",
+        "rawReport": null,
+        "scope": "Reviewer confirmed exact listed chain approval to coordinator/authors in chat; no standalone raw review report exists."
+      }
+    },
+    {
+      "id": "university-application-lifecycle",
+      "originalCommits": [
+        "97fc770d7d4191545f37357f4e4ac37e13d16b4d"
+      ],
+      "integrationCommits": [
+        "2459701"
+      ],
+      "document": "docs/UNIVERSITY_ADMISSIONS_ACCEPTANCE.md",
+      "scope": "Free one-draw application, saved one-month waitlist final review, reviewed funded acceptance, expiry/withdrawal and real location/aid/debt guards. Original pupil eight-year policy is source-specific; original2022positive waitlist is not carried as C37current result. No fictional old admissions.",
+      "finalEvidence": "Author100/6 PASS76.654s precedes final confirm type guard; final connected4/1 PASS27.518s and strict app/all-test0. InitialUI2/2failed imported-row assertion and type narrowing diagnostic retained. Consolidated initial C37focused later failed only its old expected waitlist timeline; root owns repair/final acceptance.",
+      "rawFiles": [
+        "/tmp/dreams-university-admissions-ui-first.out",
+        "/tmp/dreams-university-admissions-types-first.out",
+        "/tmp/dreams-university-admissions-focused-first.out",
+        "/tmp/dreams-university-admissions-ui-final.out",
+        "/tmp/dreams-university-admissions-types-final.out"
+      ],
+      "reviewReport": "/tmp/dreams-university-admissions-97fc770-independent-review.md",
+      "review": {
+        "status": "approved",
+        "reviewer": "release_audit",
+        "rawReport": "/tmp/dreams-university-admissions-97fc770-independent-review.md"
+      }
+    },
+    {
+      "id": "factual-study-course-records",
+      "originalCommits": [
+        "873e89739edce1ae9ddb0cfe98840ea3b3ae75fd"
+      ],
+      "integrationCommits": [
+        "511eff8"
+      ],
+      "document": "docs/STUDY_COURSE_RECORDS.md",
+      "scope": "Actual new course starts/first payments and real attended/ended histories; unknown legacy start/admissions/location/currency/payment facts remain null. New genuine old6f producer uses unchanged v24 course, only leave-school+actualack; not natural dropout birth.",
+      "finalEvidence": "Final54/3 PASS44.405s and strict app/all-test0. Initial103pass/4fail of10790.098s retained:3legacy presentation reference comparisons plus paused-course snapshot synchronization. Earlier successful suites overlap final subset. New243132B fixture39bc3670249bcd3ae29c66d0bee6cd80e71ab72977207494559299e0f9e1d7c1; producer actual2commands/no grants.",
+      "rawFiles": [
+        "/tmp/dreams-study-course-focused-first.out",
+        "/tmp/dreams-study-course-focused-final.out",
+        "/tmp/dreams-study-course-types-final.out",
+        "/tmp/dreams-university-legacy-capture.out",
+        "/tmp/dreams-university-legacy-source-tree.txt"
+      ],
+      "reviewReport": "/tmp/dreams-study-courses-873e897-independent-review.md",
+      "review": {
+        "status": "approved",
+        "reviewer": "release_audit",
+        "rawReport": "/tmp/dreams-study-courses-873e897-independent-review.md"
+      }
+    },
+    {
+      "id": "scholarship-retained-save-review",
+      "originalCommits": [
+        "3ba7bb55863420789e4d87519bd8436c7646d27e"
+      ],
+      "integrationCommits": [
+        "b76765e"
+      ],
+      "document": "docs/SCHOLARSHIP_REVIEW_DURABILITY.md",
+      "scope": "UI only exact command/presentation retained until durable success; life/person/residence key, immediate mounted/submission guards, local no-op choices. Real oldpupil2018/roll51, all8rollback/warm0/newconnectioncold/onceack. No core/RNG/aid/tuition changes.",
+      "finalEvidence": "Baseline filtered1fail8.536s confirmed dismissed review; same testSHA2908f47f0b8f1ee5ab5172ddbfd431844672d5b5390b23db9373e0eb4a974744. Fixed3/2 PASS21.731s and strict app/all-test0; includes existingaward/enrolment/renewal journey. Actual same-life meditation then selecting original different-life/sameperson test; residence key source-reviewed, no additional move journey claimed.",
+      "rawFiles": [
+        "/tmp/dreams-scholarship-durable-baseline.out",
+        "/tmp/dreams-scholarship-durable-focused-first.out",
+        "/tmp/dreams-scholarship-durable-types-final.out"
+      ],
+      "reviewReport": "/tmp/dreams-scholarship-3ba7bb5-independent-review.md",
+      "review": {
+        "status": "approved",
+        "reviewer": "release_audit",
+        "rawReport": "/tmp/dreams-scholarship-3ba7bb5-independent-review.md"
+      }
+    },
+    {
+      "id": "observed-npc-dating-separation",
+      "originalCommits": [
+        "8ab2e92e08bde942b353f15d6ce3375f9d49ee7b"
+      ],
+      "integrationCommits": [
+        "101925f"
+      ],
+      "document": "docs/NPC_DATING_SEPARATION.md",
+      "scope": "Known adult existing dating pairs only; one yearly bounded attempt, actual continued/separated history, no player/family settlement impersonation. Declared arranged12pair/3pair units plus real all8SQLite heldfail/retry/cold. Originaltwo-introduction35/35 circle7ordinarycommands yielded actual2025 separationroll14/chance16, world69e1eff0ea0a4075adc47426acaaca5e7bbe53a6f9f53a2064f339716cf260bb. Not naturalfrombirth/newcountrycohort.",
+      "finalEvidence": "Final corrected clock source60/2 PASS16.510s and strict app/all-test0. Prior healthyhelper111/6 PASS31.534s predates clock fix; initial53pass/4fail and84pass/27fail sharedguaranteed-wedding assumption plus type diagnostic retained. V258/2 PASS16.445s is earlier overlap. Healthy50/50 knownpeer test arrangement explicit; production unchanged.",
+      "rawFiles": [
+        "/tmp/dreams-npc-separations-focused-initial.out",
+        "/tmp/dreams-npc-separations-types-initial.out",
+        "/tmp/dreams-npc-separations-focused-v2.out",
+        "/tmp/dreams-npc-separations-focused-final.out",
+        "/tmp/dreams-npc-separations-healthy-final.out",
+        "/tmp/dreams-npc-separations-types-final.out",
+        "/tmp/dreams-npc-separations-clock-final.out",
+        "/tmp/dreams-npc-separations-clock-types-final.out",
+        "/tmp/dreams-npc-separation-fixed-journey-diagnostic.json",
+        "/tmp/dreams-npc-separation-original-circle-diagnostic.cjs",
+        "/tmp/dreams-npc-separation-original-circle-diagnostic.json"
+      ],
+      "review": {
+        "status": "approved-chat-attested",
+        "reviewer": "work_dialogs",
+        "rawReport": null,
+        "scope": "Reviewer confirmed exact listed chain approval to coordinator/authors in chat; no standalone raw review report exists."
+      }
+    },
+    {
+      "id": "italy-adult-work-school-entry",
+      "originalCommits": [
+        "eed54f3472ababd2cbcd0ac3dbf16ca255b3bb30"
+      ],
+      "integrationCommits": [
+        "46e3461"
+      ],
+      "document": "docs/ADULT_WORK_SCHOOL_ENTRY.md",
+      "scope": "Existing adult fulltime contract prevents automatic entry from stage none; activepupils/minors/parttime and real resigned reentry preserved. Originalv23age17\u2192actualfailed18\u2192realjob/loan\u2192Rome workoffer or settlement/localhire\u2192actualage19paidyear; productioncodec only, no SQLite/native/frombirth/cohort.",
+      "finalEvidence": "Baseline3fail/2pass13.764s: both actual ordinary years completed with unintended secondary/reassessment; initial source-only crash prediction superseded, no observed uninterrupted-save crash. Final54/3 PASS16.029s; affected3test productionimportgraph strict0, notfullapp/alltest.",
+      "rawFiles": [
+        "/tmp/dreams-adult-work-school-baseline.out",
+        "/tmp/dreams-adult-work-school-focused.out",
+        "/tmp/dreams-adult-work-school-types.out",
+        "/tmp/dreams-adult-work-school-focused-tsconfig.json",
+        "/tmp/dreams-country-gameplay-audit-20261021/REPORT.md",
+        "/tmp/dreams-country-gameplay-audit-20261021/summary.json",
+        "/tmp/dreams-country-gameplay-audit-20261021/SHA256SUMS",
+        "/tmp/dreams-country-gameplay-audit-20261021/REPRODUCTION.md",
+        "/tmp/dreams-country-gameplay-audit-20261021/reproduction-summary.json",
+        "/tmp/dreams-country-gameplay-audit-20261021/REPRODUCTION_SHA256SUMS"
+      ],
+      "review": {
+        "status": "approved-chat-attested",
+        "reviewer": "work_dialogs",
+        "rawReport": null,
+        "scope": "Reviewer confirmed exact listed chain approval to coordinator/authors in chat; no standalone raw review report exists."
+      }
+    },
+    {
+      "id": "raw-native-onboarding-verifier-helpers",
+      "originalCommits": [
+        "87b792b36bf6ea1b5cc96458fcb4e81c0bc847c0"
+      ],
+      "integrationCommits": [
+        "b90f0bc",
+        "cca8fa8",
+        "c54179e"
+      ],
+      "document": "docs/NATIVE_ONBOARDING_ACCEPTANCE.md",
+      "scope": "Tools/docs only synthetic invalid-game protocol vectors. FullGit sourceproofs/PNGXML pins/readonlySQL/mainWAL/all8preservation/customrandomnewlife/existingtarget strictinitial equality/cold evidence failclosed. No game loader/projection/native/device/gameplay/visual acceptance.",
+      "finalEvidence": "Final in-process Node:test33/33 PASS287.230ms, no applicationtypes gate relevant. node--check3files+diffcheck author actual0 with chat/tool attestation only. Initial Node child isolation and nestedGit EPERM diagnostics retained; partial stdout neveraccepted. No real native source/baseline/capture consumed.",
+      "rawFiles": [
+        "/tmp/dreams-native-onboarding-helper-tests-first.out",
+        "/tmp/dreams-native-onboarding-helper-tests-tap.out",
+        "/tmp/dreams-native-onboarding-helper-tests-in-process.out",
+        "/tmp/dreams-native-onboarding-helper-tests-in-process-second.out"
+      ],
+      "review": {
+        "status": "approved-chat-attested",
+        "reviewer": "work_dialogs",
+        "rawReport": null,
+        "scope": "Reviewer confirmed exact listed chain approval to coordinator/authors in chat; no standalone raw review report exists."
+      }
+    }
+  ],
+  "coordinatorGates": {
+    "initialTypes": {
+      "status": "passed",
+      "sourceCommit": "4981d473b11bc587046f78caaeb69bcb3277464f",
+      "sourcePins": 648,
+      "receipt": "/tmp/dreams-production-gaps-initial-types-receipt.json",
+      "raw": "/tmp/dreams-production-gaps-initial-types.out",
+      "elapsedSeconds": 19.829,
+      "scope": "Initial source only; not final accepted source types."
+    },
+    "initialFocused": {
+      "status": "failed",
+      "sourceCommit": "4981d473b11bc587046f78caaeb69bcb3277464f",
+      "sourcePins": 648,
+      "receipt": "/tmp/dreams-production-gaps-initial-focused-receipt.json",
+      "raw": "/tmp/dreams-production-gaps-initial-focused.out",
+      "tests": {
+        "passed": 318,
+        "failed": 1,
+        "total": 319
+      },
+      "suites": {
+        "passed": 22,
+        "failed": 1,
+        "total": 23
+      },
+      "jestSeconds": 165.607,
+      "wrapperSeconds": 166.167,
+      "scope": "Actual current natural waitlist trajectory differed from old author-source expected timeline; source all648 before/after exact. This is a failed diagnostic, not final acceptance."
+    },
+    "runtimeExport": {
+      "status": "passed-export-pending-bytecode-source-proof",
+      "receipt": "/tmp/dreams-production-gaps-runtime-export-receipt.json",
+      "raw": "/tmp/dreams-production-gaps-runtime-export.out",
+      "elapsedSeconds": 85.294,
+      "scope": "Actual export wrapper complete0 on runtime b767 for Android+iOS. Hermes header/map/all-source coverage proof must be supplied separately; no native/standalone acceptance inferred."
+    },
+    "annual120": {
+      "status": "RUNNING-NOT-ACCEPTED",
+      "receiptPath": "/tmp/dreams-production-gaps-120-receipt.json",
+      "rawPath": "/tmp/dreams-production-gaps-120.ndjson",
+      "stderrPath": "/tmp/dreams-production-gaps-120.err",
+      "receiptPin": null,
+      "scope": "Root-owned registered 120 immutable lives seeds0..119 reused distinct seeds; running bytes not frozen/published or counted as passed."
+    },
+    "acceptedFocused": {
+      "status": "PENDING",
+      "receipt": null
+    },
+    "acceptedTypes": {
+      "status": "PENDING",
+      "receipt": null
+    },
+    "acceptedFullRegression": {
+      "status": "PENDING",
+      "receipt": null
+    },
+    "actualNative": {
+      "status": "PENDING",
+      "captureManifest": null,
+      "reviewedImages": null,
+      "rawVerifier": null,
+      "semanticVerifier": null,
+      "scope": "Helpers synthetic protocol tests are not actual captures/gameplay/visual/native acceptance."
+    },
+    "serial70Performance": {
+      "status": "PENDING",
+      "registration": null,
+      "result": null
+    }
+  },
+  "historicalHostedCI": {
+    "status": "passed",
+    "sourceCommit": "ee3c6755f925156dd3452749e9a266b964ff0fa9",
+    "sourceScope": "Pushed C36 only; never relabel as C37 hosted CI.",
+    "runId": 39521330412,
+    "jobId": 118965603016,
+    "url": "https://github.com/YusufYacoobali/dreams-life-sim/actions/runs/39521330412",
+    "jobUrl": "https://github.com/YusufYacoobali/dreams-life-sim/actions/runs/39521330412/job/118965603016",
+    "runEvent": "push",
+    "conclusion": "success",
+    "completedAt": "2026-10-21T00:47:49Z",
+    "node": "24.21.0",
+    "install": "npm ci",
+    "types": "strict app and all-test passed",
+    "jestCommand": "npm test -- --ci --testTimeout=30000",
+    "tests": 2355,
+    "suites": 185,
+    "jestSeconds": 1232.939,
+    "rawFiles": [
+      "/tmp/dreams-c36-hosted-ci-ee3c675-runs.json",
+      "/tmp/dreams-c36-hosted-ci-ee3c675-jobs.json",
+      "/tmp/dreams-c36-hosted-ci-ee3c675-log.txt"
+    ],
+    "encodingScope": "Exact connector-returned decoded UTF-8 log and JSON response body strings saved unchanged, including log BOM/newlines; not raw transport ZIP bytes."
+  },
+  "limitations": [
+    "No final consolidated pass or completion percentage is asserted by this draft.",
+    "Final root commit/source/test-only bridge and all pending gates need actual coordinator closures and byte pins before publication.",
+    "Raw databases/WAL, Hermes bundles and maps remain external; later reviewed actual PNG/XML may be copied with unchanged bytes and their own source/scope pins.",
+    "Original existing fixture bytes/history remain separate immutable evidence; new legacy incomplete fixture is one explicit old-runtime two-command producer.",
+    "No all251-natural, every optional context, new120seed, iOS/modernAndroid/physical/standalone/store/TalkBack acceptance is implied.",
+    "Import/export/sharing and additional storage/history breadth are parked per user, not active completion gates."
+  ],
+  "missingInputs": [],
+  "artifacts": {
+    "/tmp/dreams-admissions-current-waitlist-tests-first.out": {
+      "file": "/tmp/dreams-admissions-current-waitlist-tests-first.out",
+      "bytes": 1760,
+      "sha256": "bbb2e01d37d8bcdcf4778269ac15669e32c2a00570a19a445463985f1263b598"
+    },
+    "/tmp/dreams-admissions-current-waitlist-tsconfig.json": {
+      "file": "/tmp/dreams-admissions-current-waitlist-tsconfig.json",
+      "bytes": 369,
+      "sha256": "0b974bbd6cc7c7138cdea1bb3f24a47ec7ec3af78bf7767c93b28d4b01ff7dc1"
+    },
+    "/tmp/dreams-admissions-current-waitlist-types.out": {
+      "file": "/tmp/dreams-admissions-current-waitlist-types.out",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/tmp/dreams-adult-work-school-baseline.out": {
+      "file": "/tmp/dreams-adult-work-school-baseline.out",
+      "bytes": 5601,
+      "sha256": "7fdcc18e76d04c6e9848969f215d9dc2614518ab849318eade4ca4345c9f262a"
+    },
+    "/tmp/dreams-adult-work-school-focused-tsconfig.json": {
+      "file": "/tmp/dreams-adult-work-school-focused-tsconfig.json",
+      "bytes": 550,
+      "sha256": "14ec95ca0dab2ba924077694e2347f5c98083812d4c4907659f6880c8ae2b482"
+    },
+    "/tmp/dreams-adult-work-school-focused.out": {
+      "file": "/tmp/dreams-adult-work-school-focused.out",
+      "bytes": 417,
+      "sha256": "67806268e8d25ba2bfe5a1277d3944210ac6a1e16fde12d35b5da7325983e759"
+    },
+    "/tmp/dreams-adult-work-school-types.out": {
+      "file": "/tmp/dreams-adult-work-school-types.out",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/tmp/dreams-c36-hosted-ci-ee3c675-jobs.json": {
+      "file": "/tmp/dreams-c36-hosted-ci-ee3c675-jobs.json",
+      "bytes": 2382,
+      "sha256": "42dcd4ef9135051490b59a0ef7232c09fb4c6f539c59b7adb4183a2a555c01d8"
+    },
+    "/tmp/dreams-c36-hosted-ci-ee3c675-log.txt": {
+      "file": "/tmp/dreams-c36-hosted-ci-ee3c675-log.txt",
+      "bytes": 38070,
+      "sha256": "2c5da6c01f05b3cb9a3500f12bd29b382ab6d13e8c301fcf44c85513529a50fd"
+    },
+    "/tmp/dreams-c36-hosted-ci-ee3c675-runs.json": {
+      "file": "/tmp/dreams-c36-hosted-ci-ee3c675-runs.json",
+      "bytes": 13277,
+      "sha256": "9b2ebc4620f517e81b15bf8ef5fe0eb736ff629b639fc5572d83bbaf581d1057"
+    },
+    "/tmp/dreams-c37-gate.py": {
+      "file": "/tmp/dreams-c37-gate.py",
+      "bytes": 2012,
+      "sha256": "2610caf53a1fdc987bb5d545248afaa9f355401c679b9ae379c59f113129092b"
+    },
+    "/tmp/dreams-country-gameplay-audit-20261021/REPORT.md": {
+      "file": "/tmp/dreams-country-gameplay-audit-20261021/REPORT.md",
+      "bytes": 7378,
+      "sha256": "158bdcbbe8bf9e3771566f8eb742e15685932dcbf3f1c608a800c2a8a7b8dd66"
+    },
+    "/tmp/dreams-country-gameplay-audit-20261021/REPRODUCTION.md": {
+      "file": "/tmp/dreams-country-gameplay-audit-20261021/REPRODUCTION.md",
+      "bytes": 3788,
+      "sha256": "1b4266d89c57cc7bc5b62c4190b9ce9f69eb0ed0989395d55d5afc73d47dc23c"
+    },
+    "/tmp/dreams-country-gameplay-audit-20261021/REPRODUCTION_SHA256SUMS": {
+      "file": "/tmp/dreams-country-gameplay-audit-20261021/REPRODUCTION_SHA256SUMS",
+      "bytes": 174,
+      "sha256": "4aec9d889fa6831d2151948e2812138c18d947f0ff4632a4dc9cdbb3dbd425e8"
+    },
+    "/tmp/dreams-country-gameplay-audit-20261021/SHA256SUMS": {
+      "file": "/tmp/dreams-country-gameplay-audit-20261021/SHA256SUMS",
+      "bytes": 155,
+      "sha256": "bc804ee7c87f4b5813f96dfbe72b3c834ac62df1e5871d6a6e79380044e2e18b"
+    },
+    "/tmp/dreams-country-gameplay-audit-20261021/reproduction-summary.json": {
+      "file": "/tmp/dreams-country-gameplay-audit-20261021/reproduction-summary.json",
+      "bytes": 3275,
+      "sha256": "d883980391ac182614fce2b226aa2a6c10f82343eff5717507c86e371d0c7e98"
+    },
+    "/tmp/dreams-country-gameplay-audit-20261021/summary.json": {
+      "file": "/tmp/dreams-country-gameplay-audit-20261021/summary.json",
+      "bytes": 10702,
+      "sha256": "840bd8912c8b498dc85af4f8a00a1dd6a84c7f28d0cc66bcf5f928876ac0f590"
+    },
+    "/tmp/dreams-event-rarity-focused-attempt1.out": {
+      "file": "/tmp/dreams-event-rarity-focused-attempt1.out",
+      "bytes": 617,
+      "sha256": "a235f24f7b1055363b08836a688eef9e04fc348921e92754026110444fb0254c"
+    },
+    "/tmp/dreams-event-rarity-types-attempt1.out": {
+      "file": "/tmp/dreams-event-rarity-types-attempt1.out",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/tmp/dreams-native-onboarding-helper-tests-first.out": {
+      "file": "/tmp/dreams-native-onboarding-helper-tests-first.out",
+      "bytes": 319,
+      "sha256": "ba5e9e34b95b1280cea0dac60190a55b6503ad3609b248d12dbc1ab1a781631b"
+    },
+    "/tmp/dreams-native-onboarding-helper-tests-in-process-second.out": {
+      "file": "/tmp/dreams-native-onboarding-helper-tests-in-process-second.out",
+      "bytes": 2363,
+      "sha256": "285bd295d82f1c878d062aebe1c8051b5aed2b3c76adb28b248c812bd03c5303"
+    },
+    "/tmp/dreams-native-onboarding-helper-tests-in-process.out": {
+      "file": "/tmp/dreams-native-onboarding-helper-tests-in-process.out",
+      "bytes": 38464,
+      "sha256": "572f81d33d61c4638fed2f7fa2943f3e5377db194ace5f291b4bab4959d7af67"
+    },
+    "/tmp/dreams-native-onboarding-helper-tests-tap.out": {
+      "file": "/tmp/dreams-native-onboarding-helper-tests-tap.out",
+      "bytes": 492,
+      "sha256": "3ba8865bf82782df6d7d2d4745f24cedb965be0ecd6c2488442ee2141bcc9d73"
+    },
+    "/tmp/dreams-npc-separation-fixed-journey-diagnostic.json": {
+      "file": "/tmp/dreams-npc-separation-fixed-journey-diagnostic.json",
+      "bytes": 5380,
+      "sha256": "da56d6494a4f3e3e8188aa96324657a8bf98d0bcfdde4a07c79dd807b505ad90"
+    },
+    "/tmp/dreams-npc-separation-original-circle-diagnostic.cjs": {
+      "file": "/tmp/dreams-npc-separation-original-circle-diagnostic.cjs",
+      "bytes": 1678,
+      "sha256": "def46249fc82c8486db56d2ccab0d3bf86a87729afcf6b08378f799c3d73abc9"
+    },
+    "/tmp/dreams-npc-separation-original-circle-diagnostic.json": {
+      "file": "/tmp/dreams-npc-separation-original-circle-diagnostic.json",
+      "bytes": 1782,
+      "sha256": "44150ef5bead57dafdd0aaac99944cb31638445a7ad8c01063dfb070d877a88f"
+    },
+    "/tmp/dreams-npc-separations-clock-final.out": {
+      "file": "/tmp/dreams-npc-separations-clock-final.out",
+      "bytes": 326,
+      "sha256": "7a8e318c4e30239e4a389a17e416ac482ad843413f274a09fe1cbd80115d16b1"
+    },
+    "/tmp/dreams-npc-separations-clock-types-final.out": {
+      "file": "/tmp/dreams-npc-separations-clock-types-final.out",
+      "bytes": 90,
+      "sha256": "543932f7a867cac23b25fe5912a2a0b0ab563539fbb8a121f7fb83b608c95309"
+    },
+    "/tmp/dreams-npc-separations-focused-final.out": {
+      "file": "/tmp/dreams-npc-separations-focused-final.out",
+      "bytes": 20002,
+      "sha256": "c401d0ae6fee6ef3f0f0420983e39c25fc8424cc3f0eaa8ab6fb4a986e18087a"
+    },
+    "/tmp/dreams-npc-separations-focused-initial.out": {
+      "file": "/tmp/dreams-npc-separations-focused-initial.out",
+      "bytes": 4278,
+      "sha256": "20c587bb4b2297c5c23c95acc5a095708ab059ad615a246a55381096214def57"
+    },
+    "/tmp/dreams-npc-separations-focused-v2.out": {
+      "file": "/tmp/dreams-npc-separations-focused-v2.out",
+      "bytes": 327,
+      "sha256": "4adf0880e911c0e46ce6eaa448c03f02d6c55629743833fe9d7be1a3b6a67d5c"
+    },
+    "/tmp/dreams-npc-separations-healthy-final.out": {
+      "file": "/tmp/dreams-npc-separations-healthy-final.out",
+      "bytes": 692,
+      "sha256": "a96a0c96f2a12d361e736ba1534bac7d178afeffde626669586d2b3fae42b138"
+    },
+    "/tmp/dreams-npc-separations-types-final.out": {
+      "file": "/tmp/dreams-npc-separations-types-final.out",
+      "bytes": 90,
+      "sha256": "543932f7a867cac23b25fe5912a2a0b0ab563539fbb8a121f7fb83b608c95309"
+    },
+    "/tmp/dreams-npc-separations-types-initial.out": {
+      "file": "/tmp/dreams-npc-separations-types-initial.out",
+      "bytes": 200,
+      "sha256": "9537ae2997047b079f7aa153f1c77c01487290a01af0dc5a833440e8d45b5538"
+    },
+    "/tmp/dreams-production-gaps-coordinator-version-union.patch": {
+      "file": "/tmp/dreams-production-gaps-coordinator-version-union.patch",
+      "bytes": 6877,
+      "sha256": "ee58d9b25fd64444319724ed2ffe8c334a5d054c3989923905ce123a7ac9f4f9"
+    },
+    "/tmp/dreams-production-gaps-initial-focused-receipt.json": {
+      "file": "/tmp/dreams-production-gaps-initial-focused-receipt.json",
+      "bytes": 2200,
+      "sha256": "f86ec2392885a0d1fd37ac534538c74b7f00cbb4019cddc2b5bbdb33e44a2b15"
+    },
+    "/tmp/dreams-production-gaps-initial-focused.out": {
+      "file": "/tmp/dreams-production-gaps-initial-focused.out",
+      "bytes": 6633,
+      "sha256": "888daa212a4a37a7cd36665f8df36b92b9b654c92dd25b8103eba178f1083b03"
+    },
+    "/tmp/dreams-production-gaps-initial-head.txt": {
+      "file": "/tmp/dreams-production-gaps-initial-head.txt",
+      "bytes": 41,
+      "sha256": "622728f35cc5f2c364fb647d67f11e47291e257125c333d3bd09ff05c8884e19"
+    },
+    "/tmp/dreams-production-gaps-initial-source.json": {
+      "file": "/tmp/dreams-production-gaps-initial-source.json",
+      "bytes": 71406,
+      "sha256": "3b42538d9284ec3ae8acc310303d24dfb081a1d51616b8534b5583c7265937d8"
+    },
+    "/tmp/dreams-production-gaps-initial-status.txt": {
+      "file": "/tmp/dreams-production-gaps-initial-status.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/tmp/dreams-production-gaps-initial-tree.bin": {
+      "file": "/tmp/dreams-production-gaps-initial-tree.bin",
+      "bytes": 198108,
+      "sha256": "6cca7979a3353676002735ac005a017eadbff7f1dbd1a8e727c83d7e12b884cc"
+    },
+    "/tmp/dreams-production-gaps-initial-types-receipt.json": {
+      "file": "/tmp/dreams-production-gaps-initial-types-receipt.json",
+      "bytes": 1043,
+      "sha256": "38f41dd174cc06674817b823048d59adbe67eb50cc73ea9be57b74216d6972fa"
+    },
+    "/tmp/dreams-production-gaps-initial-types.out": {
+      "file": "/tmp/dreams-production-gaps-initial-types.out",
+      "bytes": 90,
+      "sha256": "543932f7a867cac23b25fe5912a2a0b0ab563539fbb8a121f7fb83b608c95309"
+    },
+    "/tmp/dreams-production-gaps-runtime-export-receipt.json": {
+      "file": "/tmp/dreams-production-gaps-runtime-export-receipt.json",
+      "bytes": 1243,
+      "sha256": "27b25a729aa6eee7f60b217071dba69bba76a9fd4b30f42427ebfd463f557f36"
+    },
+    "/tmp/dreams-production-gaps-runtime-export.out": {
+      "file": "/tmp/dreams-production-gaps-runtime-export.out",
+      "bytes": 2743,
+      "sha256": "b385c8aca63dfe8190060f9cc1930885df457557fc600d3c37ac1da688df91e4"
+    },
+    "/tmp/dreams-production-gaps-runtime-head.txt": {
+      "file": "/tmp/dreams-production-gaps-runtime-head.txt",
+      "bytes": 41,
+      "sha256": "b4774a84c401bb060a8b6b25225f2120cd1ad3d90a65a3a4937f4d3252b80114"
+    },
+    "/tmp/dreams-production-gaps-runtime-source.json": {
+      "file": "/tmp/dreams-production-gaps-runtime-source.json",
+      "bytes": 72346,
+      "sha256": "414aff8b4cdb7fac863e2251015cbd38ca59833d2ee0b802e9b608eb5221c6c4"
+    },
+    "/tmp/dreams-production-gaps-runtime-status.txt": {
+      "file": "/tmp/dreams-production-gaps-runtime-status.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/tmp/dreams-production-gaps-runtime-tree.bin": {
+      "file": "/tmp/dreams-production-gaps-runtime-tree.bin",
+      "bytes": 199138,
+      "sha256": "f7fdd98f64e2f34c56f3596e6b5f0477c5f61889eadde3f33de69e7e6ac7475c"
+    },
+    "/tmp/dreams-production-gaps-source.cjs": {
+      "file": "/tmp/dreams-production-gaps-source.cjs",
+      "bytes": 4528,
+      "sha256": "b050666df0bacac8c91cd2f025830219e87928ef252f4c1f2a1ec20b1f3d9e4d"
+    },
+    "/tmp/dreams-project-recall-copy-tests.out": {
+      "file": "/tmp/dreams-project-recall-copy-tests.out",
+      "bytes": 1034,
+      "sha256": "1bb72667d82661703ed63a0a06e38d90206f0dd4b5d5ab1c40dc7394af795f5d"
+    },
+    "/tmp/dreams-project-recall-copy-types.out": {
+      "file": "/tmp/dreams-project-recall-copy-types.out",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/tmp/dreams-project-recall-domain-final.out": {
+      "file": "/tmp/dreams-project-recall-domain-final.out",
+      "bytes": 1511,
+      "sha256": "eb29e4a4047e3549419db854f791db1d0b11f3060afffe7db6b9c27b48d1a0f6"
+    },
+    "/tmp/dreams-project-recall-final.out": {
+      "file": "/tmp/dreams-project-recall-final.out",
+      "bytes": 1034,
+      "sha256": "a4cdb5dbc81d0f4449445d9161aa2ad8d7a73184f82cbc1194fcc72dfc2d9f8f"
+    },
+    "/tmp/dreams-project-recall-frozen-tests.out": {
+      "file": "/tmp/dreams-project-recall-frozen-tests.out",
+      "bytes": 1019,
+      "sha256": "bb310097a957c5de042e3c8166b911675355ed1db9858903be39bcf424b92b28"
+    },
+    "/tmp/dreams-project-recall-frozen-types.out": {
+      "file": "/tmp/dreams-project-recall-frozen-types.out",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/tmp/dreams-project-recall-tests-first.out": {
+      "file": "/tmp/dreams-project-recall-tests-first.out",
+      "bytes": 3592,
+      "sha256": "293a6efca78984bcff97372c7f802949cc7e43ee9bab330813e74667b58f3d4c"
+    },
+    "/tmp/dreams-project-recall-tsconfig.json": {
+      "file": "/tmp/dreams-project-recall-tsconfig.json",
+      "bytes": 547,
+      "sha256": "ef1fd264004303f9b62ba7bc433692167ff71b144f518e72f636dc3550af6214"
+    },
+    "/tmp/dreams-project-recall-types.out": {
+      "file": "/tmp/dreams-project-recall-types.out",
+      "bytes": 231,
+      "sha256": "0c45833efec8c20ae6c876a2e4f6446a11f425e4a52a75565db01149f8db054f"
+    },
+    "/tmp/dreams-rare-adult-content-focused-attempt1.out": {
+      "file": "/tmp/dreams-rare-adult-content-focused-attempt1.out",
+      "bytes": 305,
+      "sha256": "5834691135af0697d10e7fe34c18e1342403ae82d11bbf15e94c1140a519531b"
+    },
+    "/tmp/dreams-rare-adult-content-registration-attempt1.out": {
+      "file": "/tmp/dreams-rare-adult-content-registration-attempt1.out",
+      "bytes": 596,
+      "sha256": "4688dc27696d54e028f921038ea4569659b2fb9ccfb690649547831ac70dfb9b"
+    },
+    "/tmp/dreams-rare-adult-content-types-attempt1.out": {
+      "file": "/tmp/dreams-rare-adult-content-types-attempt1.out",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/tmp/dreams-scholarship-3ba7bb5-independent-review.md": {
+      "file": "/tmp/dreams-scholarship-3ba7bb5-independent-review.md",
+      "bytes": 3453,
+      "sha256": "0af37f061c267c642474c8eb5d8c81d9ae629daff174b62d09940cfdc629ac9e"
+    },
+    "/tmp/dreams-scholarship-durable-baseline.out": {
+      "file": "/tmp/dreams-scholarship-durable-baseline.out",
+      "bytes": 2779,
+      "sha256": "01cefcc88a6a58935b7b5dc2cf6f6aa41f119925a4abc781af84c82483faf218"
+    },
+    "/tmp/dreams-scholarship-durable-focused-first.out": {
+      "file": "/tmp/dreams-scholarship-durable-focused-first.out",
+      "bytes": 339,
+      "sha256": "2824090aafff5797f044c7bbd46d03bf5bcbc8a52c82e1e02bd22424141e44be"
+    },
+    "/tmp/dreams-scholarship-durable-types-final.out": {
+      "file": "/tmp/dreams-scholarship-durable-types-final.out",
+      "bytes": 90,
+      "sha256": "543932f7a867cac23b25fe5912a2a0b0ab563539fbb8a121f7fb83b608c95309"
+    },
+    "/tmp/dreams-study-course-focused-final.out": {
+      "file": "/tmp/dreams-study-course-focused-final.out",
+      "bytes": 433,
+      "sha256": "741428f9180c1687ce5ab19996f6aad99626b031127d50981e887013902bfc84"
+    },
+    "/tmp/dreams-study-course-focused-first.out": {
+      "file": "/tmp/dreams-study-course-focused-first.out",
+      "bytes": 11151,
+      "sha256": "10cfdd05a144aff2c1537d389df8149ec0152c9de5e9d2f8692f732cf137c022"
+    },
+    "/tmp/dreams-study-course-types-final.out": {
+      "file": "/tmp/dreams-study-course-types-final.out",
+      "bytes": 90,
+      "sha256": "543932f7a867cac23b25fe5912a2a0b0ab563539fbb8a121f7fb83b608c95309"
+    },
+    "/tmp/dreams-study-courses-873e897-independent-review.md": {
+      "file": "/tmp/dreams-study-courses-873e897-independent-review.md",
+      "bytes": 4514,
+      "sha256": "bd1b837ae64398add66070c76c5d98f249e832b5ac4f7a148aeb8c6923b4666c"
+    },
+    "/tmp/dreams-teen-first-adjacent-final.out": {
+      "file": "/tmp/dreams-teen-first-adjacent-final.out",
+      "bytes": 499,
+      "sha256": "e106cbebec454ea59d019e5026a41122a527ca05b58882c0ee35ad974665d360"
+    },
+    "/tmp/dreams-teen-first-app-types-initial.out": {
+      "file": "/tmp/dreams-teen-first-app-types-initial.out",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/tmp/dreams-teen-first-domain-initial.out": {
+      "file": "/tmp/dreams-teen-first-domain-initial.out",
+      "bytes": 2217,
+      "sha256": "5c0782463d3a1b83aae735e0d91aae6133416e7a4541f7c36ee9a7f204dd08b1"
+    },
+    "/tmp/dreams-teen-first-focused-final.out": {
+      "file": "/tmp/dreams-teen-first-focused-final.out",
+      "bytes": 472,
+      "sha256": "f900ef4c236f21cd98684606b04856f0be6759721320748d7469ab6aca876823"
+    },
+    "/tmp/dreams-teen-first-focused-v1.out": {
+      "file": "/tmp/dreams-teen-first-focused-v1.out",
+      "bytes": 455,
+      "sha256": "7405ab87a723aa4fa334804594a5cf1809d16a6755d27bcad33899b1a7be6bfc"
+    },
+    "/tmp/dreams-teen-first-types-final.out": {
+      "file": "/tmp/dreams-teen-first-types-final.out",
+      "bytes": 90,
+      "sha256": "543932f7a867cac23b25fe5912a2a0b0ab563539fbb8a121f7fb83b608c95309"
+    },
+    "/tmp/dreams-teen-first-ui-initial.out": {
+      "file": "/tmp/dreams-teen-first-ui-initial.out",
+      "bytes": 4140,
+      "sha256": "63e7014c13702007f9007c74104aead43bf2834cc391625b67850950857174aa"
+    },
+    "/tmp/dreams-teen-first-ui-modal-scope.out": {
+      "file": "/tmp/dreams-teen-first-ui-modal-scope.out",
+      "bytes": 2932,
+      "sha256": "1bee341b3dc9a2cd1815c9c13795eece7a1fbf621b0ba99027fed918f14fffb8"
+    },
+    "/tmp/dreams-university-admissions-97fc770-independent-review.md": {
+      "file": "/tmp/dreams-university-admissions-97fc770-independent-review.md",
+      "bytes": 4258,
+      "sha256": "3951db6a729253f37291ae73eeaf437f2e01f45c037a4eadf7514d345903a41e"
+    },
+    "/tmp/dreams-university-admissions-focused-first.out": {
+      "file": "/tmp/dreams-university-admissions-focused-first.out",
+      "bytes": 1195,
+      "sha256": "a1d400ccd9dc6addde0e7af447ebd1faa4451482cc6626532390a08a6d7ed9c1"
+    },
+    "/tmp/dreams-university-admissions-types-final.out": {
+      "file": "/tmp/dreams-university-admissions-types-final.out",
+      "bytes": 90,
+      "sha256": "543932f7a867cac23b25fe5912a2a0b0ab563539fbb8a121f7fb83b608c95309"
+    },
+    "/tmp/dreams-university-admissions-types-first.out": {
+      "file": "/tmp/dreams-university-admissions-types-first.out",
+      "bytes": 620,
+      "sha256": "e22a9ee3dea45f788382e5d32fe5d69c88d044055a01b3a985bb12b1c4cb8d6d"
+    },
+    "/tmp/dreams-university-admissions-ui-final.out": {
+      "file": "/tmp/dreams-university-admissions-ui-final.out",
+      "bytes": 871,
+      "sha256": "7615511eb7eadaef231e587e5aa87120fab79a82061cbd0dab9d7396d87a43a1"
+    },
+    "/tmp/dreams-university-admissions-ui-first.out": {
+      "file": "/tmp/dreams-university-admissions-ui-first.out",
+      "bytes": 138798,
+      "sha256": "0467b8d741c488becdbf7d19402d4f8060737d8f7ef2c842ff2f8f9ebc32f218"
+    },
+    "/tmp/dreams-university-legacy-capture.out": {
+      "file": "/tmp/dreams-university-legacy-capture.out",
+      "bytes": 728,
+      "sha256": "085dc19a980f1e856e53dce839523e77f177dffcc99a8295d52628a37f26cddc"
+    },
+    "/tmp/dreams-university-legacy-source-tree.txt": {
+      "file": "/tmp/dreams-university-legacy-source-tree.txt",
+      "bytes": 18508,
+      "sha256": "1b2285fe12b16df5d0619a4ad7821a3686e8557a26fb958b19afa6e42fe3e19d"
+    },
+    "/workspace/dreams-worktrees/admissions-current-waitlist/docs/UNIVERSITY_ADMISSIONS_ACCEPTANCE.md": {
+      "file": "/workspace/dreams-worktrees/admissions-current-waitlist/docs/UNIVERSITY_ADMISSIONS_ACCEPTANCE.md",
+      "bytes": 9801,
+      "sha256": "f7d47b64e817bd79312412e369284dbd1c5b8719f9d7f974830766bb1330a12e"
+    },
+    "/workspace/dreams-worktrees/integration-production-gaps/docs/ADULT_WORK_SCHOOL_ENTRY.md": {
+      "file": "/workspace/dreams-worktrees/integration-production-gaps/docs/ADULT_WORK_SCHOOL_ENTRY.md",
+      "bytes": 3152,
+      "sha256": "ba64cf25553f81051a703ca979f5b1c37c32f676282edad9f61bd72caea3e183"
+    },
+    "/workspace/dreams-worktrees/integration-production-gaps/docs/CHILDHOOD_PROJECT_RECALL.md": {
+      "file": "/workspace/dreams-worktrees/integration-production-gaps/docs/CHILDHOOD_PROJECT_RECALL.md",
+      "bytes": 6521,
+      "sha256": "5a450fb15f40506790d91be2aef74452037add82b6e97695e3efaf234784dce2"
+    },
+    "/workspace/dreams-worktrees/integration-production-gaps/docs/EVENT_RARITY.md": {
+      "file": "/workspace/dreams-worktrees/integration-production-gaps/docs/EVENT_RARITY.md",
+      "bytes": 5510,
+      "sha256": "214113a4c604a7bb440977fadbf8be00ff9e6528160bd8fd0f2869d263d30fa7"
+    },
+    "/workspace/dreams-worktrees/integration-production-gaps/docs/NATIVE_ONBOARDING_ACCEPTANCE.md": {
+      "file": "/workspace/dreams-worktrees/integration-production-gaps/docs/NATIVE_ONBOARDING_ACCEPTANCE.md",
+      "bytes": 8886,
+      "sha256": "4abe45b43be847195a45f6ddc5301ed152573fee8c87c947764c41ef9da122c1"
+    },
+    "/workspace/dreams-worktrees/integration-production-gaps/docs/NPC_DATING_SEPARATION.md": {
+      "file": "/workspace/dreams-worktrees/integration-production-gaps/docs/NPC_DATING_SEPARATION.md",
+      "bytes": 7818,
+      "sha256": "4dc5755748cb709a1c01908d6f76a3267d39c73e9fab35deafd80e76333a43d2"
+    },
+    "/workspace/dreams-worktrees/integration-production-gaps/docs/RARE_ADULT_STORY.md": {
+      "file": "/workspace/dreams-worktrees/integration-production-gaps/docs/RARE_ADULT_STORY.md",
+      "bytes": 2533,
+      "sha256": "bdfb16e3870c7e7e0163dbb40dc11ec473cab466ffe6fdff790bcc210fb57970"
+    },
+    "/workspace/dreams-worktrees/integration-production-gaps/docs/SCHOLARSHIP_REVIEW_DURABILITY.md": {
+      "file": "/workspace/dreams-worktrees/integration-production-gaps/docs/SCHOLARSHIP_REVIEW_DURABILITY.md",
+      "bytes": 3341,
+      "sha256": "747b208eba97d0c1384e2d33cee8d91310e24fb0e2ff543d3b0dbacee349fee5"
+    },
+    "/workspace/dreams-worktrees/integration-production-gaps/docs/STUDY_COURSE_RECORDS.md": {
+      "file": "/workspace/dreams-worktrees/integration-production-gaps/docs/STUDY_COURSE_RECORDS.md",
+      "bytes": 5604,
+      "sha256": "d3b030631444993c4c399ebb0e73d37cc80e087d7ce68b0e56d76734e0a3ff1d"
+    },
+    "/workspace/dreams-worktrees/integration-production-gaps/docs/TEEN_FIRST_RELATIONSHIPS.md": {
+      "file": "/workspace/dreams-worktrees/integration-production-gaps/docs/TEEN_FIRST_RELATIONSHIPS.md",
+      "bytes": 8707,
+      "sha256": "68c14c14ea3d797fa372a227051804fbe8bf3f9a4d69515f8289b7e3e97a5b52"
+    },
+    "/workspace/dreams-worktrees/integration-production-gaps/docs/UNIVERSITY_ADMISSIONS_ACCEPTANCE.md": {
+      "file": "/workspace/dreams-worktrees/integration-production-gaps/docs/UNIVERSITY_ADMISSIONS_ACCEPTANCE.md",
+      "bytes": 6203,
+      "sha256": "c510372f69f2916179192248f32f9ba92669622577e97b86bcd419d809dc287b"
+    },
+    "/workspace/dreams-worktrees/university-admissions/tests/fixtures/v24-university-loan-archive.json": {
+      "file": "/workspace/dreams-worktrees/university-admissions/tests/fixtures/v24-university-loan-archive.json",
+      "bytes": 223408,
+      "sha256": "ac41f013cbda20115f32456ca88373411ee66bf4d6653dc6b30e8e8e5d5503a6",
+      "storage": "Already tracked source/provenance; reference existing file, do not duplicate into publication."
+    },
+    "/workspace/dreams-worktrees/university-admissions/tests/fixtures/v35-legacy-incomplete-course.json": {
+      "file": "/workspace/dreams-worktrees/university-admissions/tests/fixtures/v35-legacy-incomplete-course.json",
+      "bytes": 243132,
+      "sha256": "39bc3670249bcd3ae29c66d0bee6cd80e71ab72977207494559299e0f9e1d7c1",
+      "storage": "Already tracked source/provenance; reference existing file, do not duplicate into publication."
+    },
+    "/workspace/dreams-worktrees/university-admissions/tests/support/capture-legacy-incomplete-course.cjs": {
+      "file": "/workspace/dreams-worktrees/university-admissions/tests/support/capture-legacy-incomplete-course.cjs",
+      "bytes": 6949,
+      "sha256": "9fdbc1c08452106a46cc96dc147a8ea249adc759a8504e06b204c596ad1f86ea",
+      "storage": "Already tracked source/provenance; reference existing file, do not duplicate into publication."
+    }
+  }
+}

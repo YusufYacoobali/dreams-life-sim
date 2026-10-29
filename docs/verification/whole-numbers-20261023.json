@@ -1,0 +1,321 @@
+{
+  "sourceCommit": "8b77c4ec265375d07987f5278d67c40eb0603c50",
+  "baselineCommit": "917eee88f0241140f2ac90cc3734f1921d8b2e7d",
+  "change": "Whole read-only money and numbers throughout the app; exact editable values and calculations retained.",
+  "scope": {
+    "engineChanged": false,
+    "stateChanged": false,
+    "persistenceChanged": false,
+    "fixtureBytesChanged": false,
+    "saveMigrationRequired": false,
+    "appliesTo": "Numeric presentation changes; subsequent upstream creation defaults are retained and checked separately.",
+    "presentationRuntimeFiles": 83,
+    "integratedRuntimeFiles": 86
+  },
+  "presentation": {
+    "money": "Round to the nearest whole major currency unit; preserve currency symbols and local grouping. Nonzero sub-unit amounts show <1.",
+    "otherNumbers": "Whole read-only percentages, holdings and statistics, including existing saved prose and accessibility labels. Compact social counts use full integer grouping.",
+    "editing": "Money, percentage and fractional trade inputs keep exact values; sell-order prefills retain the entire holding.",
+    "excluded": "Internal animation geometry, timers and calculation precision are not changed."
+  },
+  "verification": {
+    "typecheck": {
+      "command": "npm run typecheck",
+      "exit": 0
+    },
+    "imports": {
+      "command": "npm run check:imports",
+      "modules": 497,
+      "cycles": []
+    },
+    "initialUI": {
+      "suites": 136,
+      "tests": 694,
+      "passedSuites": 105,
+      "failedSuites": 31,
+      "failedCases": 71,
+      "exit": 1,
+      "reason": "Presentation queries still expected cents/decimal labels."
+    },
+    "affectedReruns": {
+      "AM": {
+        "suites": 17,
+        "tests": 94,
+        "passingAfterDateQueryFix": true
+      },
+      "date": {
+        "suites": 1,
+        "tests": 1,
+        "exit": 0
+      },
+      "NZ": {
+        "suites": 14,
+        "tests": 74,
+        "exit": 0
+      }
+    },
+    "unit": {
+      "suites": 2,
+      "tests": 71,
+      "exit": 0
+    },
+    "notices": {
+      "exit": 0
+    },
+    "productionExports": [
+      {
+        "platform": "android",
+        "bytes": 7392400,
+        "sha256": "0ebf46eee2ce0c21b921c3e3af5619fbd760183a2e7d9de55d010c893ea99f1c",
+        "exactChangedRuntimeSources": 86
+      },
+      {
+        "platform": "ios",
+        "bytes": 7212208,
+        "sha256": "229f4a702d02c84e907c51a6d538365e22b46aa73b14b9bbcb3d82fe1d66f477",
+        "exactChangedRuntimeSources": 86
+      }
+    ],
+    "nativeDeviceTesting": "Not performed",
+    "presentationCoverage": {
+      "suites": 137,
+      "tests": 727,
+      "uiSuites": 136,
+      "uiTests": 694,
+      "exactCoreMoneyTests": 33,
+      "allPassingAcrossInitialAndAffectedReruns": true
+    },
+    "finalDistinctCoverage": {
+      "suites": 138,
+      "tests": 753,
+      "uiSuites": 136,
+      "uiTests": 697,
+      "exactCoreMoneyTests": 33,
+      "creationDraftTests": 23,
+      "allPassingAcrossInitialAndAffectedReruns": true
+    }
+  },
+  "runtimeSourceHashes": {
+    "app/(game)/(tabs)/assets.tsx": "03044456792a6d2e8a4ac39d9e26b744963fd2e4990827c349478f2dc7248af2",
+    "app/(game)/(tabs)/life.tsx": "61d65431abde969ad5aa52dd44f2c170845ba3c020fa97aa817c7594df8b8f6a",
+    "app/(game)/(tabs)/relationships.tsx": "bb0d758af4b40062a2a5a2e8fcdf1837d1717411ec013f978d5fd68817f39a3f",
+    "app/(game)/asset/[id].tsx": "5ffdedf1018fd981b4b811e93f78114c2cf47682123735ace151089dd0d3b16c",
+    "app/(game)/bank.tsx": "da1408d71836bd078c7dd81e14b53b16fcf238014e98df47bd0019341d9060ac",
+    "app/(game)/business.tsx": "1ebf5c208c1da5b9d431911fd06a212e5e36f79bd831d4fca57d90d5f642b6d5",
+    "app/(game)/campus.tsx": "2d499f3ccbdea10abdbb5fc2d2ee65900f1507a3dcebcfad728d577b7c4a2225",
+    "app/(game)/career-training.tsx": "b7d112636cd9d30e0eac31d4fb93467f00395193bbf2393ff96f237654aa9c32",
+    "app/(game)/career/[kind].tsx": "0459c598ce7ad265de59fbc2f7969f6891b262e822ebf04a8f9fb9b32ada1741",
+    "app/(game)/condition/[id].tsx": "482db277b384f9da2b3775097a109fd10b4fb806a086380e34cc3605ac999608",
+    "app/(game)/coworkers.tsx": "63450ad48975e2cfa537039ec8c346414e5aab6273de610106cb71417ae1d899",
+    "app/(game)/create-post.tsx": "02411d799e1194c33d60edb2ca42f6c99e84546fe6c48f3eb6f61587a3d448d0",
+    "app/(game)/creator-studio/[kind].tsx": "586f46117862bf0f99de1b1367dd0547c0c7b450b7f2c9d8f3ccb8c3fb63c6ec",
+    "app/(game)/cult.tsx": "a9db3fc6029601114084957d176954e185d7f93e90b4c3bd9639db588d9bd8dc",
+    "app/(game)/cult/headquarters.tsx": "e3d5a9d185717818b4a57bd15a238adc124fca712e5324f0a6a3dedf9f7d5560",
+    "app/(game)/destination/[id].tsx": "04df9ffdadc58d4279270b735a4e7b5b256b10c033d558f929fbde37447da687",
+    "app/(game)/divorce.tsx": "24163f1c56e8e1142305af435afc73d17c575fc1f56ca66ea3398cef45550091",
+    "app/(game)/doctor.tsx": "de3abbe4b51875c9f84e9cbc3fbd06e94d84f580fd3cbc0f1edaa7e83ec82d3e",
+    "app/(game)/education.tsx": "af345df7ddef5f5a2cf1981e5a474611388c5422bc3dc25c2f4e58681a3a67a1",
+    "app/(game)/emigrate.tsx": "797eeaa565e96ca0c2ec12f7b8888561c74e3b9bbc4d506436c2491fbaed981d",
+    "app/(game)/entertainment.tsx": "a456ac6262aaecaa13db653a73e76efd560f6d96235eecf06b994b46f40efbe4",
+    "app/(game)/fame.tsx": "0a8f9f68b1c91141f293e87100224c734794c110cee0f0546cac8bcd9e442678",
+    "app/(game)/family.tsx": "c6163e835da59e5be44353df38e6e693e05814b560cc46b7d89d3f89b3cf2ec2",
+    "app/(game)/finances.tsx": "807b7576970cf2daa2ea5f730f893989ca3f2df60a4de5811528b01b95fcce71",
+    "app/(game)/health.tsx": "f69b320a7c64e9152d4fe91ea99a772f063fb8035ed2adf02128529e56dffcff",
+    "app/(game)/household.tsx": "d91e57c35eada56c3c1213b80993d3cb1e769f69136e7e98d4dae41f63c482cb",
+    "app/(game)/investment/[id].tsx": "f03dd17954d417ebaa3c58601e13bfabc63aabb443725e352802135dc9c3bf8c",
+    "app/(game)/investments.tsx": "818b100b60baa00eb750f3339b836e9f81ef25908edc3c093ce95373ec353081",
+    "app/(game)/jobs.tsx": "7b4c0f8375a4c938d6011ccdb2868b002d1979f838313d461f043f97923131e3",
+    "app/(game)/lifestyle.tsx": "b717cdf41ab3206ee476f39f79b1ee6f29360f4c7f5ddf015f8da69fc8afd074",
+    "app/(game)/manage-business/[id].tsx": "b841db73c2ed82195c239b945c7624925bc709585515602e9ab056fa5d263d85",
+    "app/(game)/meet-people.tsx": "766cc2b80ba1e35698100f7932433531d311d8566d754de8769f8834b992f5be",
+    "app/(game)/music-studio.tsx": "8ec7b247a35046a7153e08c802b4946ac00fb4bca85a1f9cdd65d2eee64b594c",
+    "app/(game)/person/[id].tsx": "bb3444bd350ddc26fdf96b16f729154d0ae49bb45f7120899b9c57297679bb68",
+    "app/(game)/pet/[id].tsx": "de262f6ba51f5412b97695fb745ffef60165f1e8c51ef433e36aa297545eceb5",
+    "app/(game)/pets.tsx": "2316bc23b5d7a9ed4335e560ec6b9fa7de4c8d40bafa3e62e95f4e3700977fc3",
+    "app/(game)/politics.tsx": "caaa8465e1a3796bfe7dca45be82cecf3a6f91a69b916bca3344000461a91063",
+    "app/(game)/prison-activities.tsx": "c83e7778a8989e63bde2d2ba2059d879c4d1e026bf9c69f07bc1e3e3ae7f4855",
+    "app/(game)/profile.tsx": "199953ad64c5d627c227fd907eac0a5ce8e3013e31ec0cfd94f041603656d2ee",
+    "app/(game)/royalty.tsx": "bc050771f3ea1b536acab0d5fe431fb8ca27cd4cffb066706a8525af3ecec032",
+    "app/(game)/scholarships.tsx": "daa001ecd170a4d807cd4a4e71435f282c637739f6e56899f50dc398ce5dc97c",
+    "app/(game)/school-contacts.tsx": "71919db7cc8e9d39ac40b08d6c93224954b42c6f31b2cdc21ae4bb1ae7e59187",
+    "app/(game)/school.tsx": "1ff6856c930ada26275dce17ca0237a41ee9e12336d8d24390feb291232f549a",
+    "app/(game)/service/[kind].tsx": "ceb8dfac8a2cdb993b79224c7dd38492565469086ef58032b4fac43442c121dd",
+    "app/(game)/social-media.tsx": "8056f28e4f4fe1de9276770bf5e436bef1826346785c695025f362bb7203dd64",
+    "app/(game)/social-profile/[id].tsx": "d18fc6219b5329bc690333e23e2d33159ed89ce143254f8e34934a5b95aa5f8d",
+    "app/(game)/sponsorships.tsx": "a11053f8b8ea831527268c20ef3c65a06786c069e15c6818b31c5b12212d99b7",
+    "app/(game)/underground.tsx": "cb023d381919306919c48081635b5f3741e74a3de627e8c6b8858c191b8611ae",
+    "app/(game)/will.tsx": "197f5d9d77454e45b35e79ecb041efc68200bf4f97bbdd82689768a7e9a2074f",
+    "app/(game)/work.tsx": "088d924cd805c878af7a90f70f9045556da74108c97958a62b35e6ea38113ec2",
+    "app/appearance.tsx": "9c6a34d4ab8366a01a2f8f0970437fd2b2854d0201ed652678a33865655f6a2f",
+    "app/birth.tsx": "55c2cc223b8d324abd8ac275fa7a5249461e1c293fd42294c684c949fee0536c",
+    "app/death.tsx": "2a85357a6e79335e51c94523e752b0c6be09fe2fe5b62c9271b62c2d4f67ce72",
+    "app/index.tsx": "6c69e6f851f6d9dcb117fa6b8957d577f4ff3b78b1b8e8e3c6b8963615c8447a",
+    "app/legacy.tsx": "20883a65583711416af1c9a5efc5dbecdf31b60500e67cf44433b528504a6836",
+    "app/new-life.tsx": "071fad5f18a225afeb4f8528b2d94bc060fb092834e485d45c15f1a2c4e49b98",
+    "app/saved-life/[id].tsx": "b939d5166c365ba71c4987a2ad7aa66ff010569c6289de4159b8942d88ae0a29",
+    "app/saved-lives.tsx": "521a24fbbf668bbc294eb07fb02bf04fcd4b909fe4d8cdb1fc81468d98c5ad77",
+    "app/settings.tsx": "3d84185338acccec11611bc8b9ad0cd35379cd189cf12bff2340b0b8be3a84fd",
+    "app/time-machine.tsx": "779646b86518367f3c74db3a8428d47c527ffcb3316fe75679781f62a1f503f3",
+    "src/game/content/creationNames.ts": "f90c92cc3b2cb65a09d1f5f0ebe5bda29bbf75104e49fb1ae57ea66e9b2cf59d",
+    "src/game/creationDefaults.ts": "d7e953362fe173097129a1f527c95abab47fdcaeaffa93322538d950d1cf977a",
+    "src/state/creationDraft.ts": "20c71ba369a41dbc385ed152ecf377a09a0bc6208cc99a4b00c7a74db57e6a0c",
+    "src/ui/AssetFeatures.tsx": "46bd4448fc6cde310abf6058192679e53129c0dfb465664bdb436ed8e5d81a15",
+    "src/ui/AssetOfferDetails.tsx": "c97b26de31504b184fab7e9d5bc37dd0fe6c7f763e61487599dcbf1dff0a1c02",
+    "src/ui/CreationElements.tsx": "5b53e5ca33096aa53ace192b104608fe6a1b15def8cf1eeb5e52332d85c0cda1",
+    "src/ui/DailyReminderSettings.tsx": "ab3dc1de666791366e4fc0633055599c26ce635e54a0388950398aed2455628c",
+    "src/ui/DisplayText.tsx": "0169d8ab0b190e6f702874cdf000da7497e6039eeac67c40b5050a4ccfe88fd5",
+    "src/ui/EventModal.tsx": "9ecb22e0bc75c2e6f420d691a68edac7635d087d5bc7cc3efedc7a91edf4be5e",
+    "src/ui/FamilyPreferences.tsx": "1d305bf45faa26ded8dce1871bc3aaf58c690c2501b7c7de392650754d011520",
+    "src/ui/FamilyTreeContent.tsx": "94bb5eecb6c612f52dc7901934d439c2bfd16ebdb634d9a8094d6f5dce32ac40",
+    "src/ui/FilterTabs.tsx": "432725b3484a180333b22f0afa7dfa40912233f2a4b5b6a43f2e6cc46f4a368b",
+    "src/ui/GameShell.tsx": "acdc9cee7a63474f644500c5406cea2ba2d31fcb80be8ac7eee42936242ffbd4",
+    "src/ui/GodModeEditor.tsx": "b21d75151837662a26a74218f6b419013293cab8855d257a3e629d74ddbbdc00",
+    "src/ui/HealthReview.tsx": "6f4845c318b5ab3faa44cb4f712cd950146a7d458102c12a52b45ac05aeebab7",
+    "src/ui/HobbyCommunityEvent.tsx": "4e0c34036284898edaa443350292682d8838321333e3a3c4517a113b20b19340",
+    "src/ui/HobbyRoutine.tsx": "1b2717f04b9b83c25a39436afc8aa75fc7d7384765d758742c5c58fbad4056dd",
+    "src/ui/LegalReview.tsx": "e791ccb1ed6a9e4ab320fdd5d66ebcad3f3f4b78ec7a55d84494362833c799a1",
+    "src/ui/LifetimeStatisticsContent.tsx": "a7efc833013a27ba7be2c762d9c7114e760b9147c3c54c33dcf1762f660da8b0",
+    "src/ui/ProgressElements.tsx": "5055c91266733bb0ac7fe7c80333b8df72dd0648048cc20f6280f1c771b7e3df",
+    "src/ui/PropertyMethodSelector.tsx": "735b079b49d06afef44c8dcedf12ae7d3b72058c4b1a85873f01cb95c8818b23",
+    "src/ui/RelationshipRow.tsx": "0973501ce1c9a86b4e7cdd8ae07b7840879aefb585cab13b9f523303026422f3",
+    "src/ui/SocialBusinessPresentation.tsx": "6901e3f4fa0e351491ce5e704f8e481c568c195bce0ce188efadb914578397c0",
+    "src/ui/cinematic/CinematicTransition.tsx": "5b5e4cf68abccde031b80e6309d4ec0f4fdcf8e271909153df4f5e81f7c32aec",
+    "src/ui/components.tsx": "739fc91939f6d5d9f41cf7ec95f13cfdb7e35e18819a5c0d63250ebbadfab356",
+    "src/ui/displayNumbers.ts": "16e2c884ef9f6b764c556aceac670e98fc7f8f2654c33880aac54f26480f2262"
+  },
+  "logs": {
+    "initialUI": {
+      "path": "/tmp/dreams-whole-ui.log",
+      "sha256": "91c14a6503d11a1d57d489108847179189451634d528ae1eaa6d80c6325a83a2"
+    },
+    "affectedAM": {
+      "path": "/tmp/dreams-whole-tests-am.log",
+      "sha256": "c929a930e88516245c1f8d504935abcd62e2bc33c374d13198d02731c79176d5"
+    },
+    "affectedDate": {
+      "path": "/tmp/dreams-whole-tests-am-date.log",
+      "sha256": "bfb6529815c4387738f42cc5c079475e1396027c95df11ff1b8c02b2c171e7ab"
+    },
+    "affectedNZ": {
+      "path": "/tmp/dreams-whole-tests-nz.log",
+      "sha256": "99781b90b47a6d5a952045b78e01286d932aefd2dfbfc23fd3cce765744c4854"
+    },
+    "unit": {
+      "path": "/tmp/dreams-whole-display-unit.log",
+      "sha256": "0a5e83cb66beb5075ee74a78656f96e8ec66bd6d683e3df5eeb9cc0c1754e2c2"
+    },
+    "types": {
+      "path": "/tmp/dreams-whole-integrated-types.log",
+      "sha256": "543932f7a867cac23b25fe5912a2a0b0ab563539fbb8a121f7fb83b608c95309"
+    },
+    "imports": {
+      "path": "/tmp/dreams-whole-integrated-imports.log",
+      "sha256": "aea874f8c8a8500196115bc15ca8eb5d4f9e8e4a6bebecd6a48de0560950bbb1"
+    },
+    "notices": {
+      "path": "/tmp/dreams-whole-notices.log",
+      "sha256": "2b2786e490d97ef57fd4622e0ef10fb6d3d942cd8c16bea5f16f94f583c02863"
+    },
+    "exports": {
+      "path": "/tmp/dreams-whole-export-integrated.log",
+      "sha256": "64507c99ebbd23382544ef37f2cd9caa5114e719d4d723101074ea91848684a4"
+    },
+    "creation": {
+      "path": "/tmp/dreams-whole-creation.log",
+      "sha256": "6aad0cabb4e9b3aa9557bbff0f6c52294bdc0592eabeb9bab06e13ef6ba47b6f"
+    }
+  },
+  "presentationCommit": "d2c76b5bbfe3375ee3810b81be01837975f3fc21",
+  "presentationRuntimeSourceHashes": {
+    "app/(game)/(tabs)/assets.tsx": "03044456792a6d2e8a4ac39d9e26b744963fd2e4990827c349478f2dc7248af2",
+    "app/(game)/(tabs)/life.tsx": "61d65431abde969ad5aa52dd44f2c170845ba3c020fa97aa817c7594df8b8f6a",
+    "app/(game)/(tabs)/relationships.tsx": "bb0d758af4b40062a2a5a2e8fcdf1837d1717411ec013f978d5fd68817f39a3f",
+    "app/(game)/asset/[id].tsx": "5ffdedf1018fd981b4b811e93f78114c2cf47682123735ace151089dd0d3b16c",
+    "app/(game)/bank.tsx": "da1408d71836bd078c7dd81e14b53b16fcf238014e98df47bd0019341d9060ac",
+    "app/(game)/business.tsx": "1ebf5c208c1da5b9d431911fd06a212e5e36f79bd831d4fca57d90d5f642b6d5",
+    "app/(game)/campus.tsx": "2d499f3ccbdea10abdbb5fc2d2ee65900f1507a3dcebcfad728d577b7c4a2225",
+    "app/(game)/career-training.tsx": "b7d112636cd9d30e0eac31d4fb93467f00395193bbf2393ff96f237654aa9c32",
+    "app/(game)/career/[kind].tsx": "0459c598ce7ad265de59fbc2f7969f6891b262e822ebf04a8f9fb9b32ada1741",
+    "app/(game)/condition/[id].tsx": "482db277b384f9da2b3775097a109fd10b4fb806a086380e34cc3605ac999608",
+    "app/(game)/coworkers.tsx": "63450ad48975e2cfa537039ec8c346414e5aab6273de610106cb71417ae1d899",
+    "app/(game)/create-post.tsx": "02411d799e1194c33d60edb2ca42f6c99e84546fe6c48f3eb6f61587a3d448d0",
+    "app/(game)/creator-studio/[kind].tsx": "586f46117862bf0f99de1b1367dd0547c0c7b450b7f2c9d8f3ccb8c3fb63c6ec",
+    "app/(game)/cult.tsx": "a9db3fc6029601114084957d176954e185d7f93e90b4c3bd9639db588d9bd8dc",
+    "app/(game)/cult/headquarters.tsx": "e3d5a9d185717818b4a57bd15a238adc124fca712e5324f0a6a3dedf9f7d5560",
+    "app/(game)/destination/[id].tsx": "04df9ffdadc58d4279270b735a4e7b5b256b10c033d558f929fbde37447da687",
+    "app/(game)/divorce.tsx": "24163f1c56e8e1142305af435afc73d17c575fc1f56ca66ea3398cef45550091",
+    "app/(game)/doctor.tsx": "de3abbe4b51875c9f84e9cbc3fbd06e94d84f580fd3cbc0f1edaa7e83ec82d3e",
+    "app/(game)/education.tsx": "af345df7ddef5f5a2cf1981e5a474611388c5422bc3dc25c2f4e58681a3a67a1",
+    "app/(game)/emigrate.tsx": "797eeaa565e96ca0c2ec12f7b8888561c74e3b9bbc4d506436c2491fbaed981d",
+    "app/(game)/entertainment.tsx": "a456ac6262aaecaa13db653a73e76efd560f6d96235eecf06b994b46f40efbe4",
+    "app/(game)/fame.tsx": "0a8f9f68b1c91141f293e87100224c734794c110cee0f0546cac8bcd9e442678",
+    "app/(game)/family.tsx": "c6163e835da59e5be44353df38e6e693e05814b560cc46b7d89d3f89b3cf2ec2",
+    "app/(game)/finances.tsx": "807b7576970cf2daa2ea5f730f893989ca3f2df60a4de5811528b01b95fcce71",
+    "app/(game)/health.tsx": "f69b320a7c64e9152d4fe91ea99a772f063fb8035ed2adf02128529e56dffcff",
+    "app/(game)/household.tsx": "d91e57c35eada56c3c1213b80993d3cb1e769f69136e7e98d4dae41f63c482cb",
+    "app/(game)/investment/[id].tsx": "f03dd17954d417ebaa3c58601e13bfabc63aabb443725e352802135dc9c3bf8c",
+    "app/(game)/investments.tsx": "818b100b60baa00eb750f3339b836e9f81ef25908edc3c093ce95373ec353081",
+    "app/(game)/jobs.tsx": "7b4c0f8375a4c938d6011ccdb2868b002d1979f838313d461f043f97923131e3",
+    "app/(game)/lifestyle.tsx": "b717cdf41ab3206ee476f39f79b1ee6f29360f4c7f5ddf015f8da69fc8afd074",
+    "app/(game)/manage-business/[id].tsx": "b841db73c2ed82195c239b945c7624925bc709585515602e9ab056fa5d263d85",
+    "app/(game)/meet-people.tsx": "766cc2b80ba1e35698100f7932433531d311d8566d754de8769f8834b992f5be",
+    "app/(game)/music-studio.tsx": "8ec7b247a35046a7153e08c802b4946ac00fb4bca85a1f9cdd65d2eee64b594c",
+    "app/(game)/person/[id].tsx": "bb3444bd350ddc26fdf96b16f729154d0ae49bb45f7120899b9c57297679bb68",
+    "app/(game)/pet/[id].tsx": "de262f6ba51f5412b97695fb745ffef60165f1e8c51ef433e36aa297545eceb5",
+    "app/(game)/pets.tsx": "2316bc23b5d7a9ed4335e560ec6b9fa7de4c8d40bafa3e62e95f4e3700977fc3",
+    "app/(game)/politics.tsx": "caaa8465e1a3796bfe7dca45be82cecf3a6f91a69b916bca3344000461a91063",
+    "app/(game)/prison-activities.tsx": "c83e7778a8989e63bde2d2ba2059d879c4d1e026bf9c69f07bc1e3e3ae7f4855",
+    "app/(game)/profile.tsx": "199953ad64c5d627c227fd907eac0a5ce8e3013e31ec0cfd94f041603656d2ee",
+    "app/(game)/royalty.tsx": "bc050771f3ea1b536acab0d5fe431fb8ca27cd4cffb066706a8525af3ecec032",
+    "app/(game)/scholarships.tsx": "daa001ecd170a4d807cd4a4e71435f282c637739f6e56899f50dc398ce5dc97c",
+    "app/(game)/school-contacts.tsx": "71919db7cc8e9d39ac40b08d6c93224954b42c6f31b2cdc21ae4bb1ae7e59187",
+    "app/(game)/school.tsx": "1ff6856c930ada26275dce17ca0237a41ee9e12336d8d24390feb291232f549a",
+    "app/(game)/service/[kind].tsx": "ceb8dfac8a2cdb993b79224c7dd38492565469086ef58032b4fac43442c121dd",
+    "app/(game)/social-media.tsx": "8056f28e4f4fe1de9276770bf5e436bef1826346785c695025f362bb7203dd64",
+    "app/(game)/social-profile/[id].tsx": "d18fc6219b5329bc690333e23e2d33159ed89ce143254f8e34934a5b95aa5f8d",
+    "app/(game)/sponsorships.tsx": "a11053f8b8ea831527268c20ef3c65a06786c069e15c6818b31c5b12212d99b7",
+    "app/(game)/underground.tsx": "cb023d381919306919c48081635b5f3741e74a3de627e8c6b8858c191b8611ae",
+    "app/(game)/will.tsx": "197f5d9d77454e45b35e79ecb041efc68200bf4f97bbdd82689768a7e9a2074f",
+    "app/(game)/work.tsx": "088d924cd805c878af7a90f70f9045556da74108c97958a62b35e6ea38113ec2",
+    "app/appearance.tsx": "b83cec968da1f2a9dc19680106820b3d1806aeb55f7787b194284e5a1e49db05",
+    "app/birth.tsx": "55c2cc223b8d324abd8ac275fa7a5249461e1c293fd42294c684c949fee0536c",
+    "app/death.tsx": "2a85357a6e79335e51c94523e752b0c6be09fe2fe5b62c9271b62c2d4f67ce72",
+    "app/index.tsx": "6c69e6f851f6d9dcb117fa6b8957d577f4ff3b78b1b8e8e3c6b8963615c8447a",
+    "app/legacy.tsx": "20883a65583711416af1c9a5efc5dbecdf31b60500e67cf44433b528504a6836",
+    "app/new-life.tsx": "8a98aeaa7e7f04df494776f376615ad80139b0254d3b18f2dbe8004399311516",
+    "app/saved-life/[id].tsx": "b939d5166c365ba71c4987a2ad7aa66ff010569c6289de4159b8942d88ae0a29",
+    "app/saved-lives.tsx": "521a24fbbf668bbc294eb07fb02bf04fcd4b909fe4d8cdb1fc81468d98c5ad77",
+    "app/settings.tsx": "3d84185338acccec11611bc8b9ad0cd35379cd189cf12bff2340b0b8be3a84fd",
+    "app/time-machine.tsx": "779646b86518367f3c74db3a8428d47c527ffcb3316fe75679781f62a1f503f3",
+    "src/ui/AssetFeatures.tsx": "46bd4448fc6cde310abf6058192679e53129c0dfb465664bdb436ed8e5d81a15",
+    "src/ui/AssetOfferDetails.tsx": "c97b26de31504b184fab7e9d5bc37dd0fe6c7f763e61487599dcbf1dff0a1c02",
+    "src/ui/CreationElements.tsx": "5b53e5ca33096aa53ace192b104608fe6a1b15def8cf1eeb5e52332d85c0cda1",
+    "src/ui/DailyReminderSettings.tsx": "ab3dc1de666791366e4fc0633055599c26ce635e54a0388950398aed2455628c",
+    "src/ui/DisplayText.tsx": "0169d8ab0b190e6f702874cdf000da7497e6039eeac67c40b5050a4ccfe88fd5",
+    "src/ui/EventModal.tsx": "9ecb22e0bc75c2e6f420d691a68edac7635d087d5bc7cc3efedc7a91edf4be5e",
+    "src/ui/FamilyPreferences.tsx": "1d305bf45faa26ded8dce1871bc3aaf58c690c2501b7c7de392650754d011520",
+    "src/ui/FamilyTreeContent.tsx": "94bb5eecb6c612f52dc7901934d439c2bfd16ebdb634d9a8094d6f5dce32ac40",
+    "src/ui/FilterTabs.tsx": "432725b3484a180333b22f0afa7dfa40912233f2a4b5b6a43f2e6cc46f4a368b",
+    "src/ui/GameShell.tsx": "acdc9cee7a63474f644500c5406cea2ba2d31fcb80be8ac7eee42936242ffbd4",
+    "src/ui/GodModeEditor.tsx": "b21d75151837662a26a74218f6b419013293cab8855d257a3e629d74ddbbdc00",
+    "src/ui/HealthReview.tsx": "6f4845c318b5ab3faa44cb4f712cd950146a7d458102c12a52b45ac05aeebab7",
+    "src/ui/HobbyCommunityEvent.tsx": "4e0c34036284898edaa443350292682d8838321333e3a3c4517a113b20b19340",
+    "src/ui/HobbyRoutine.tsx": "1b2717f04b9b83c25a39436afc8aa75fc7d7384765d758742c5c58fbad4056dd",
+    "src/ui/LegalReview.tsx": "e791ccb1ed6a9e4ab320fdd5d66ebcad3f3f4b78ec7a55d84494362833c799a1",
+    "src/ui/LifetimeStatisticsContent.tsx": "a7efc833013a27ba7be2c762d9c7114e760b9147c3c54c33dcf1762f660da8b0",
+    "src/ui/ProgressElements.tsx": "5055c91266733bb0ac7fe7c80333b8df72dd0648048cc20f6280f1c771b7e3df",
+    "src/ui/PropertyMethodSelector.tsx": "735b079b49d06afef44c8dcedf12ae7d3b72058c4b1a85873f01cb95c8818b23",
+    "src/ui/RelationshipRow.tsx": "0973501ce1c9a86b4e7cdd8ae07b7840879aefb585cab13b9f523303026422f3",
+    "src/ui/SocialBusinessPresentation.tsx": "6901e3f4fa0e351491ce5e704f8e481c568c195bce0ce188efadb914578397c0",
+    "src/ui/cinematic/CinematicTransition.tsx": "5b5e4cf68abccde031b80e6309d4ec0f4fdcf8e271909153df4f5e81f7c32aec",
+    "src/ui/components.tsx": "739fc91939f6d5d9f41cf7ec95f13cfdb7e35e18819a5c0d63250ebbadfab356",
+    "src/ui/displayNumbers.ts": "16e2c884ef9f6b764c556aceac670e98fc7f8f2654c33880aac54f26480f2262"
+  },
+  "retainedUpstream": {
+    "commit": "7fae0e34362be7564bb90511bdc3da293143dd03",
+    "change": "New-life defaults follow country and gender",
+    "affectedSuites": 6,
+    "affectedTests": 43,
+    "exit": 0
+  }
+}

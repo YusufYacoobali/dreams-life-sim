@@ -1,0 +1,88 @@
+"""Read frozen JSON/source artifacts only. No game import, codec, SQL, policy or replay."""
+from pathlib import Path
+import json,hashlib,collections,re,datetime as dt
+base=Path('/workspace/.cache/dreams-current-c39-policies/criminal-v2');out=Path(__file__).parent
+ref=lambda p:{'file':str(p),'bytes':Path(p).stat().st_size,'sha256':hashlib.sha256(Path(p).read_bytes()).hexdigest()}
+read=lambda p:json.loads(Path(p).read_text())
+canonical=lambda j:json.dumps(j,sort_keys=True,separators=(',',':'),ensure_ascii=False).encode()
+hash_json=lambda j:hashlib.sha256(canonical(j)).hexdigest()
+write=lambda p,j:Path(p).write_text(json.dumps(j,indent=2,ensure_ascii=False)+'\n')
+receipt_path=Path('/tmp/dreams-production-finish-accepted-criminal-v2-receipt.json');receipt=read(receipt_path);snapshot_path=Path(receipt['sourceSnapshot']);snapshot=read(snapshot_path);manifest=read(base/'manifest.json');aggregate=read(base/'result.json');registration=read(manifest['source']['registration']['file'])
+assert receipt['complete'] is True and receipt['exitCode']==0 and receipt['sourceCommit']=='33b6a5fcb0aae73dfc235a15394b34d8afda00cc'
+assert ref(snapshot_path)['sha256']==receipt['sourceSnapshotSha256']=='2e08fd925c673437ff7de7c76c0fd79d02832617d0014efc1c3e471782fe9b56'
+assert receipt['raw']==ref(receipt['raw']['file'])
+assert receipt['raw']['sha256']=='7b5c3e4e65339175ddde47a730f9ef4b3aa89c2be32d98a5220bc82aad512c1a'
+assert registration['complete'] is True and registration['cohortRunAuthorized'] is True
+assert manifest['source']['registration']==ref(manifest['source']['registration']['file']) and manifest['source']['sourceSnapshot']==ref(snapshot_path)
+versions={'world':38,'engine':39,'content':13,'database':18,'checkpoint':'v4'}
+assert manifest['versions']==aggregate['versions']==snapshot['versions']==registration['versions']==versions
+assert manifest['source']==aggregate['sources'] and aggregate['sources']['commit']==snapshot['commit']==registration['commit']==receipt['sourceCommit']
+assert len(snapshot['source'])==manifest['source']['sourceFiles']==688
+for phase in ['before','after']:assert receipt[phase]=={'files':688,'snapshotSha256':receipt['sourceSnapshotSha256'],'status':'exact'}
+for file,digest in manifest['source']['originalProducerHashes'].items():assert snapshot['source'][file]==digest
+for file,digest in aggregate['runtime']['loadedSource'].items():assert snapshot['source'][file]==digest
+countries=['US','CA','GB','AU','FR','DE','ES','IT','BR','IN','JP','ZA'];assignments=[{'country':c,'seed':900+i} for i,c in enumerate(countries)]
+assert manifest['assignments']==aggregate['assignments']==assignments and aggregate['additionalAnnualSeeds']==manifest['additionalAnnualSeeds']==0
+assert aggregate['policyVersion']==2 and aggregate['scenarioB']=={'scenarioBComplete':False}
+expected={'manifest.json','result.json'}|{c+suffix for c in countries for suffix in ['-commands.json','-result.json','-final.checkpoint.json']}
+assert {p.name for p in base.iterdir()}==expected
+raw_bytes=Path(receipt['raw']['file']).read_bytes();aggregate_bytes=(base/'result.json').read_bytes();assert raw_bytes.endswith(aggregate_bytes)
+progress_bytes=raw_bytes[:-len(aggregate_bytes)];progress=[json.loads(line) for line in progress_bytes.decode().splitlines()];assert len(progress)==12
+
+rows=[];all_negative=[];milestone_counts=collections.Counter();verdicts=collections.Counter();command_types=collections.Counter();total_cold=total_custody=total_stipends=0
+for index,assignment in enumerate(assignments):
+ country=assignment['country'];r=read(base/(country+'-result.json'));commands=read(base/(country+'-commands.json'));checkpoint_path=base/(country+'-final.checkpoint.json');checkpoint=read(checkpoint_path)
+ assert r==aggregate['records'][index] and r['country']==country and r['seed']==assignment['seed'] and r['policyVersion']==2
+ assert r['versions']=={'world':38,'engine':39,'content':13} and r['naturallyDied'] is True and r['scenarioBComplete'] is False
+ assert len(commands)==r['commandsAttempted'] and r['commandsCommitted']==r['finalRevision']-r['birthRevision'] and r['birthRevision']==1
+ assert hash_json(commands)==r['traceSha256']
+ assert r['traceEncoding']=='recursive key-sorted JSON with tagged $dreamsBigInt values'
+ assert checkpoint['format']==r['coldChecks'][-1]['format']=='dreams-checkpoint-v4' and r['coldChecks'][-1]['reason']=='final'
+ assert checkpoint_path.stat().st_size==r['coldChecks'][-1]['checkpointBytes']
+ assert checkpoint['bytes']==checkpoint['main']['bytes']+sum(p['bytes'] for p in checkpoint['people'])+sum(p['bytes'] for p in checkpoint['ledger'])
+ assert checkpoint['bytes']+32<=32000000 and r['coldChecks'][-1]['canonicalBytes']<=80000000
+ assert progress[index]['country']==country and progress[index]['seed']==r['seed'] and progress[index]['traceSha256']==r['traceSha256']
+ reached=[k for k,v in r['milestones'].items() if v['status']=='reached'];unreached={k:v for k,v in r['milestones'].items() if v['status']!='reached'}
+ assert progress[index]['reached']==reached and progress[index]['unreached']==list(unreached)
+ assert len(r['milestones'])==26 and all(v['status']=='unreached-at-natural-death' for v in unreached.values())
+ for stage in reached:milestone_counts[stage]+=1
+ assert len(r['schoolWithdrawals'])==1 and r['schoolWithdrawals'][0]==r['milestones']['schoolExit']['evidence']['withdrawal']
+ withdrawal=r['schoolWithdrawals'][0];assert withdrawal['age']>=withdrawal['minimumLeavingAge'] and withdrawal['country']==country
+ withdrawal_commands=[c for c in commands if c['type']=='school-withdraw'];assert any(c['communityId']==withdrawal['communityId'] and c['country']==country and c['city']==withdrawal['city'] and c['school']==withdrawal['school'] for c in withdrawal_commands)
+ assert [i['offence'] for i in r['incidents']]==['shoplift','pickpocket','burglary']
+ assert len({i['date']['year'] for i in r['incidents']})==3 and all(c['plea']=='not-guilty' for c in r['cases'])
+ case_map={c['id']:c for c in r['cases']}
+ for s in r['sentences']:
+  assert s['state']=='released' and s['servedMonths']+s['creditedMonths']==s['totalMonths'] and s['studyMonths']<=s['servedMonths']
+  assert all(case_map[k]['status']=='convicted' for k in s['caseIds'])
+ for case in r['cases']:verdicts[case['status']]+=1
+ assert all(w['ordinaryWageReceipts']==0 for w in r['custodyWindows'])
+ pay={x['id']:x for x in r['legalAndCrimeReceipts'] if x['category']=='prison-pay'}
+ for w in r['custodyWindows']:
+  for payment in w['prisonStipends']:assert payment in pay and int(pay[payment]['cashDelta']['$dreamsBigInt'])>0
+ total_custody+=len(r['custodyWindows']);total_stipends+=len(pay);total_cold+=len(r['coldChecks'])
+ assert all(a['move'] is None for a in r['foreignApplications'])
+ n=lambda m:int(m['minor']['$dreamsBigInt'])
+ estate=r['estate'];currency=estate['netWorthAtDeath']['currency']
+ parts=[estate[k] for k in ['fees','tax','charity','debtWrittenOff']]+[d[k] for d in estate['distributions'] for k in ['cash','assetValue']]
+ assert all(m['currency']==currency for m in parts)
+ distributed=sum(n(d['cash'])+n(d['assetValue']) for d in estate['distributions']);costs=n(estate['tax'])+n(estate['fees'])+n(estate['charity']);assert distributed+costs==n(estate['netWorthAtDeath'])+n(estate['debtWrittenOff'])
+ negative=[{'index':i,'pointer':'/observations/'+str(i),'stage':x['stage'],'outcome':x['outcome'],'detail':x['detail']} for i,x in enumerate(r['observations']) if x['outcome'] in ['ineligible','rejected-without-state-or-rng-change']]
+ all_negative.extend([{'country':country,**x} for x in negative]);command_types.update(c['type'] for c in commands)
+ assert sum(x['outcome']=='rejected-without-state-or-rng-change' for x in r['observations'])==r['commandsAttempted']-r['commandsCommitted']
+ rows.append({'country':country,'seed':r['seed'],'ageAtDeath':r['ageAtEnd'],'death':r['milestones']['death']['evidence'],'attempted':r['commandsAttempted'],'committed':r['commandsCommitted'],'birthRevision':r['birthRevision'],'finalRevision':r['finalRevision'],'reachedCount':len(reached),'reached':reached,'unreached':unreached,'schoolExit':withdrawal,'cases':[{'id':c['id'],'offence':c['offence'],'status':c['status'],'sentenceMonths':c['sentenceMonths'],'plea':c['plea'],'counsel':c['counsel'],'bailState':c['bailState']} for c in r['cases']],'sentences':[{'id':s['id'],'totalMonths':s['totalMonths'],'servedMonths':s['servedMonths'],'creditedMonths':s['creditedMonths'],'studyMonths':s['studyMonths'],'state':s['state'],'releaseReason':s['releaseReason']} for s in r['sentences']],'remandRows':len(r['remand']),'custodyWindows':len(r['custodyWindows']),'ordinaryWageReceiptsInReportedCustodyWindows':0,'prisonPayRows':len(pay),'foreignApplications':[{'id':a['id'],'destinationId':a['destinationId'],'status':a['status'],'applicationFee':a['applicationFee'],'applicationTransactionId':a['applicationTransactionId'],'move':a['move']} for a in r['foreignApplications']],'trips':[{'id':t['id'],'destinationId':t['destinationId'],'status':t['status'],'paid':t['paid'],'refund':t['refund'],'endReason':t.get('endReason')} for t in r['trips']],'retirement':r['milestones']['retirement'],'rehired':r['milestones']['rehired'],'recordWorkGate':r['milestones']['recordWorkGate'],'recordExpired':r['milestones']['recordExpired'],'workHistory':r['workHistory'],'estateConservation':{'independentlyReconciledReportedAmounts':True,'currency':currency,'distributedAndCosts':str(distributed+costs),'netWorthPlusWrittenOff':str(n(estate['netWorthAtDeath'])+n(estate['debtWrittenOff']))},'cold':{'reportedRoundTrips':len(r['coldChecks']),'formatCounts':dict(collections.Counter(c['format'] for c in r['coldChecks'])),'final':r['coldChecks'][-1],'declaredCompactTupleBytes':checkpoint['bytes'],'note':'V4 header bytes are the compact raw part sum, not canonical JSON length. The producer compared the full canonical world on each round trip; this review did not rerun the codec.'},'traceSha256':r['traceSha256'],'traceHashIndependentlyRecomputed':True,'finalWorldSha256':r['finalWorldSha256'],'finalWorldShaScope':'Producer-reported canonical world hash; the checkpoint file was independently pinned without game codec decoding.','rawRefs':{suffix:ref(base/(country+suffix)) for suffix in ['-result.json','-commands.json','-final.checkpoint.json']},'preservedRawArrays':{field:{'pointer':'/'+field,'count':len(r[field]),'canonicalArraySha256':hash_json(r[field])} for field in ['observations','coldChecks','custodyWindows','explicitGaps','incidents','cases','sentences','remand','legalAndCrimeReceipts','foreignApplications','trips']},'negativeObservationRefs':negative})
+
+artifacts={str(p):ref(p) for p in sorted(base.iterdir())}
+source_artifacts={str(p):ref(p) for p in [receipt_path,Path(receipt['raw']['file']),snapshot_path,Path(manifest['source']['registration']['file'])]}
+for group in ['git']:
+ for p in registration[group].values():assert ref(p['file'])==p;source_artifacts[p['file']]=p
+for group in ['copyBridge','testOnlySourceBridge']:
+ p=registration[group];assert ref(p['file'])==p;source_artifacts[p['file']]=p
+original=dict(manifest['source']['originalProducerHashes'])
+loaded=dict(aggregate['runtime']['loadedSource'])
+for file in ['tools/current-policy/run-criminal-v2.cjs','tools/current-policy/run-ab.cjs','tools/current-policy/source.cjs','tests/support/criminalPolicy.ts','tests/support/sqlite.ts','src/persistence/checkpoints.ts']:
+ source_artifacts[str(Path(snapshot['root'])/file)]=ref(Path(snapshot['root'])/file);assert source_artifacts[str(Path(snapshot['root'])/file)]['sha256']==snapshot['source'][file]
+write(out/'artifact-manifest.json',{'format':'dreams-current-bv2-artifact-source-pins-v1','sourceCommit':snapshot['commit'],'policyArtifacts':artifacts,'sourceAndGateArtifacts':source_artifacts,'originalProducerHashes':original,'runtimeLoadedSourceHashes':loaded,'scope':'The 38 actual closed-run policy files and the complete frozen 688-file map reference; no old producer files were rewritten and no raw artifacts were recreated.'})
+report={'format':'dreams-current-bv2-independent-output-review-v1','reviewer':'/root/hobby_review','kind':'Codex read-only actual-artifact review','externalHuman':False,'reviewedAt':dt.datetime.now(dt.timezone.utc).isoformat(),'status':'reviewed-no-artifact-reconciliation-defect','sourceCommit':snapshot['commit'],'versions':versions,'sourceSnapshot':ref(snapshot_path),'sourceFiles':688,'gameSourceHash':snapshot['gameSourceHash'],'combinedGamePersistenceSourceHash':snapshot['combinedGamePersistenceSourceHash'],'rootGate':{'session':'77019','receipt':ref(receipt_path),'raw':receipt['raw'],'exitCode':0,'complete':True,'wrapperSeconds':receipt['elapsedSeconds'],'adapterSeconds':aggregate['elapsedMs']/1000,'sourceBeforeAfter':'all 688 exact'},'scope':aggregate['scope'],'assignments':assignments,'additionalAnnualSeeds':0,'totals':{'lives':12,'naturallyDied':12,'milestones':dict(milestone_counts),'all26ReportedMilestonesReachedCountries':[r['country'] for r in rows if r['reachedCount']==26],'scenarioBCompleteClaimed':False,'attempted':sum(r['attempted'] for r in rows),'committed':sum(r['committed'] for r in rows),'explicitRejectedCommands':sum(r['attempted']-r['committed'] for r in rows),'availabilityIneligibleObservations':sum(x['outcome']=='ineligible' for x in all_negative),'reportedColdRoundTrips':total_cold,'custodyWindows':total_custody,'ordinaryWageReceiptsInReportedCustodyWindows':0,'recordedPrisonPayRows':total_stipends,'incidents':sum(len(read(base/(c+'-result.json'))['incidents']) for c in countries),'cases':dict(verdicts),'sentences':sum(len(r['sentences']) for r in rows),'remandRows':sum(r['remandRows'] for r in rows),'foreignApplicationStatuses':dict(collections.Counter(a['status'] for r in rows for a in r['foreignApplications'])),'tripStatuses':dict(collections.Counter(t['status'] for r in rows for t in r['trips'])),'commandTypes':dict(command_types)},'countryRows':rows,'findings':[], 'materialScopeObservations':['All 12 actual withdrawals occurred at saved country minima. Withdrawal itself awards no qualification; any later qualification must be supported by actual subsequent study.','Italy has 2 acquittals and 2 remand rows but no sentence, prison pay or release. Its 16 unreached milestones remain genuine natural outcomes.','The paid GB Paris trip was interrupted during actual legal consequences; holidayCompleted remains unreached.','AU, BR and IT died before their retirement milestone; US and JP have no observed delayedArrest.','Six countries reached all 26 recorded milestone names. Complete Scenario B remains false: seizure, contraband, native, multigeneration and all-choice coverage were not established.','Foreign work applications only: 22 applications, with no move or foreign contract acceptance. This does not establish foreign residence or earnings.','Actual unforced engine deaths include recorded Hypertension (IT) and declining health (ZA), as well as deaths labelled natural causes.'],'artifactManifest':ref(out/'artifact-manifest.json'),'preselectedGB902':next(r['rawRefs'] for r in rows if r['country']=='GB'),'limits':['Only birth uses the actual in-memory SQLite/store. Later immutable engine commands and production checkpoint comparisons do not establish full-life SQLite or native coverage.','This review reads actual JSON, source and hashes only. No game runtime, world decode, policy, codec, SQL, test, device, replay or outcome search was executed.','The 413 producer-reported round-trip assertions include overlapping milestone, bound and final states. They are not 413 new reviewer replays or distinct lives.','All raw unreached objects, observations, negative availability details, cold checks and financial records remain in the exact pinned country files. This summary does not replace or repair them.','Elapsed time describes the cohort duration, not physical UI latency.','Reused seeds 900..911 add no distinct annual seeds to the separate 120-seed coverage. This policy does not run Scenarios A or C.']}
+write(out/'report.json',report)
+print(json.dumps({'report':ref(out/'report.json'),'manifest':ref(out/'artifact-manifest.json'),'lives':12,'cold':total_cold,'caseVerdicts':dict(verdicts),'all26Countries':report['totals']['all26ReportedMilestonesReachedCountries'],'milestoneCounts':dict(milestone_counts),'artifactCount':len(artifacts)},indent=2))

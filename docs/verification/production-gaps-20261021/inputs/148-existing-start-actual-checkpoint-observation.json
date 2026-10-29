@@ -1,0 +1,36 @@
+{
+  "scope": "Read-only actual captured current checkpoint observation; no command or future outcome executed.",
+  "sourceCommit": "a4be96ee1e60ab073fbbd2ae95d0ee2d0ee6f361",
+  "id": "life_native_adult_friend_v30_s0",
+  "revision": 140,
+  "versions": [
+    36,
+    37,
+    12
+  ],
+  "date": {
+    "year": 2050,
+    "month": 10,
+    "day": 20
+  },
+  "birthAcknowledged": true,
+  "person": {
+    "id": "person_player",
+    "name": "Nia Carter",
+    "born": {
+      "year": 2026,
+      "month": 10,
+      "day": 20
+    },
+    "appearance": {
+      "face": 2,
+      "skin": 3,
+      "hair": 5,
+      "hairColor": 2
+    }
+  },
+  "pending": null,
+  "annual": null,
+  "universityApplications": [],
+  "studyCourses": []
+}

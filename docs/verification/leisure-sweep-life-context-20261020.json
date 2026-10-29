@@ -1,0 +1,781 @@
+{
+  "scope": "twelve country-specific birth-to-death pure-engine journeys; first available choices, healthy routine from six, real ordinary job applications/retirement, at most one adopted dog, reviewed guitar routine plus rotating reading/gaming/cooking/gardening second routine and annual venue cycle; no fixture funds, RNG or outcome changes; not native, all-choice, 120-year or multi-generation acceptance",
+  "sourceHash": "3c36dbab6a9980784fa3d81dcf54d7038e41a869815e912583f2fbf0a8983a98",
+  "ordinaryHobbies": true,
+  "stateMode": "validated immutable",
+  "versions": {
+    "world": 30,
+    "engine": 31,
+    "content": 8
+  },
+  "node": "v24.19.0",
+  "elapsedMs": 178374,
+  "records": [
+    {
+      "seed": 900,
+      "country": "US",
+      "ageAtDeath": 83,
+      "commands": 418,
+      "workMonths": 588,
+      "hobbies": [
+        {
+          "kind": "guitar",
+          "proficiency": 100,
+          "plans": [
+            {
+              "status": "adult-review",
+              "mode": "community",
+              "payerId": "person_parent1"
+            },
+            {
+              "status": "died",
+              "mode": "community",
+              "payerId": "person_player"
+            }
+          ],
+          "attendedMonths": 911,
+          "pausedMonths": 1,
+          "smartsGains": 0,
+          "musicGains": 98
+        },
+        {
+          "kind": "reading",
+          "proficiency": 100,
+          "plans": [
+            {
+              "status": "adult-review",
+              "mode": "community",
+              "payerId": "person_parent1"
+            },
+            {
+              "status": "died",
+              "mode": "community",
+              "payerId": "person_player"
+            }
+          ],
+          "attendedMonths": 911,
+          "pausedMonths": 1,
+          "smartsGains": 17,
+          "musicGains": 0
+        }
+      ],
+      "acceptedOutings": 75,
+      "refusedOutings": 1,
+      "pets": [
+        {
+          "status": "deceased",
+          "ending": "age",
+          "periods": 134,
+          "visits": 2
+        }
+      ],
+      "ledgerRows": 48126,
+      "coldRoundTripExact": true,
+      "worldSha256": "23680931ee71fa949bd38a9355dfe04d75b5ba29b54e92303fc03db4730b708d",
+      "elapsedMs": 26016
+    },
+    {
+      "seed": 901,
+      "country": "CA",
+      "ageAtDeath": 99,
+      "commands": 496,
+      "workMonths": 564,
+      "hobbies": [
+        {
+          "kind": "guitar",
+          "proficiency": 100,
+          "plans": [
+            {
+              "status": "adult-review",
+              "mode": "community",
+              "payerId": "person_parent1"
+            },
+            {
+              "status": "died",
+              "mode": "community",
+              "payerId": "person_player"
+            }
+          ],
+          "attendedMonths": 1070,
+          "pausedMonths": 37,
+          "smartsGains": 0,
+          "musicGains": 100
+        },
+        {
+          "kind": "gaming",
+          "proficiency": 100,
+          "plans": [
+            {
+              "status": "adult-review",
+              "mode": "community",
+              "payerId": "person_parent1"
+            },
+            {
+              "status": "died",
+              "mode": "community",
+              "payerId": "person_player"
+            }
+          ],
+          "attendedMonths": 1070,
+          "pausedMonths": 37,
+          "smartsGains": 0,
+          "musicGains": 0
+        }
+      ],
+      "acceptedOutings": 88,
+      "refusedOutings": 2,
+      "pets": [
+        {
+          "status": "deceased",
+          "ending": "age",
+          "periods": 154,
+          "visits": 4
+        }
+      ],
+      "ledgerRows": 23611,
+      "coldRoundTripExact": true,
+      "worldSha256": "b9a53928de797e36014824d4160364200bbbc168f1cbf4a91a4db9ce1a5c8c8b",
+      "elapsedMs": 23570
+    },
+    {
+      "seed": 902,
+      "country": "GB",
+      "ageAtDeath": 65,
+      "commands": 349,
+      "workMonths": 575,
+      "hobbies": [
+        {
+          "kind": "guitar",
+          "proficiency": 100,
+          "plans": [
+            {
+              "status": "adult-review",
+              "mode": "community",
+              "payerId": "person_parent1"
+            },
+            {
+              "status": "died",
+              "mode": "community",
+              "payerId": "person_player"
+            }
+          ],
+          "attendedMonths": 706,
+          "pausedMonths": 0,
+          "smartsGains": 0,
+          "musicGains": 98
+        },
+        {
+          "kind": "cooking",
+          "proficiency": 100,
+          "plans": [
+            {
+              "status": "declined",
+              "mode": "community",
+              "payerId": "person_parent1"
+            },
+            {
+              "status": "adult-review",
+              "mode": "community",
+              "payerId": "person_parent1"
+            },
+            {
+              "status": "died",
+              "mode": "community",
+              "payerId": "person_player"
+            }
+          ],
+          "attendedMonths": 670,
+          "pausedMonths": 0,
+          "smartsGains": 0,
+          "musicGains": 0
+        }
+      ],
+      "acceptedOutings": 59,
+      "refusedOutings": 0,
+      "pets": [
+        {
+          "status": "deceased",
+          "ending": "age",
+          "periods": 127,
+          "visits": 5
+        }
+      ],
+      "ledgerRows": 24311,
+      "coldRoundTripExact": true,
+      "worldSha256": "512f9afcba00cb571ada088f687cc5ce127c681fb56fcd591fe495dbcdbff403",
+      "elapsedMs": 6694
+    },
+    {
+      "seed": 903,
+      "country": "AU",
+      "ageAtDeath": 77,
+      "commands": 392,
+      "workMonths": 588,
+      "hobbies": [
+        {
+          "kind": "guitar",
+          "proficiency": 100,
+          "plans": [
+            {
+              "status": "adult-review",
+              "mode": "community",
+              "payerId": "person_parent1"
+            },
+            {
+              "status": "died",
+              "mode": "community",
+              "payerId": "person_player"
+            }
+          ],
+          "attendedMonths": 842,
+          "pausedMonths": 3,
+          "smartsGains": 0,
+          "musicGains": 98
+        },
+        {
+          "kind": "gardening",
+          "proficiency": 100,
+          "plans": [
+            {
+              "status": "adult-review",
+              "mode": "community",
+              "payerId": "person_parent1"
+            },
+            {
+              "status": "died",
+              "mode": "community",
+              "payerId": "person_player"
+            }
+          ],
+          "attendedMonths": 842,
+          "pausedMonths": 3,
+          "smartsGains": 0,
+          "musicGains": 0
+        }
+      ],
+      "acceptedOutings": 69,
+      "refusedOutings": 2,
+      "pets": [
+        {
+          "status": "deceased",
+          "ending": "age",
+          "periods": 132,
+          "visits": 1
+        }
+      ],
+      "ledgerRows": 35103,
+      "coldRoundTripExact": true,
+      "worldSha256": "4cd19e34fecf13e71d8c0ac19aee7e0e103f80e879ca0835ec9a01ce83680196",
+      "elapsedMs": 11161
+    },
+    {
+      "seed": 904,
+      "country": "FR",
+      "ageAtDeath": 82,
+      "commands": 415,
+      "workMonths": 552,
+      "hobbies": [
+        {
+          "kind": "guitar",
+          "proficiency": 100,
+          "plans": [
+            {
+              "status": "adult-review",
+              "mode": "community",
+              "payerId": "person_parent1"
+            },
+            {
+              "status": "died",
+              "mode": "community",
+              "payerId": "person_player"
+            }
+          ],
+          "attendedMonths": 900,
+          "pausedMonths": 1,
+          "smartsGains": 0,
+          "musicGains": 100
+        },
+        {
+          "kind": "reading",
+          "proficiency": 100,
+          "plans": [
+            {
+              "status": "adult-review",
+              "mode": "community",
+              "payerId": "person_parent1"
+            },
+            {
+              "status": "died",
+              "mode": "community",
+              "payerId": "person_player"
+            }
+          ],
+          "attendedMonths": 900,
+          "pausedMonths": 1,
+          "smartsGains": 6,
+          "musicGains": 0
+        }
+      ],
+      "acceptedOutings": 75,
+      "refusedOutings": 1,
+      "pets": [
+        {
+          "status": "deceased",
+          "ending": "age",
+          "periods": 173,
+          "visits": 2
+        }
+      ],
+      "ledgerRows": 35106,
+      "coldRoundTripExact": true,
+      "worldSha256": "c4b4602c81d94bcd6df9e2ba83420cb10506991efa0821e172d830caff3f2eb8",
+      "elapsedMs": 13976
+    },
+    {
+      "seed": 905,
+      "country": "DE",
+      "ageAtDeath": 83,
+      "commands": 440,
+      "workMonths": 588,
+      "hobbies": [
+        {
+          "kind": "guitar",
+          "proficiency": 100,
+          "plans": [
+            {
+              "status": "adult-review",
+              "mode": "community",
+              "payerId": "person_parent1"
+            },
+            {
+              "status": "died",
+              "mode": "community",
+              "payerId": "person_player"
+            }
+          ],
+          "attendedMonths": 913,
+          "pausedMonths": 3,
+          "smartsGains": 0,
+          "musicGains": 100
+        },
+        {
+          "kind": "gaming",
+          "proficiency": 100,
+          "plans": [
+            {
+              "status": "adult-review",
+              "mode": "community",
+              "payerId": "person_parent1"
+            },
+            {
+              "status": "died",
+              "mode": "community",
+              "payerId": "person_player"
+            }
+          ],
+          "attendedMonths": 913,
+          "pausedMonths": 3,
+          "smartsGains": 0,
+          "musicGains": 0
+        }
+      ],
+      "acceptedOutings": 77,
+      "refusedOutings": 0,
+      "pets": [
+        {
+          "status": "deceased",
+          "ending": "health",
+          "periods": 172,
+          "visits": 6
+        }
+      ],
+      "ledgerRows": 31033,
+      "coldRoundTripExact": true,
+      "worldSha256": "74748eeefd63642b3f1d4cd8dda406b559717f0e6cee6184fde510c0e140d967",
+      "elapsedMs": 16830
+    },
+    {
+      "seed": 906,
+      "country": "ES",
+      "ageAtDeath": 69,
+      "commands": 347,
+      "workMonths": 588,
+      "hobbies": [
+        {
+          "kind": "guitar",
+          "proficiency": 100,
+          "plans": [
+            {
+              "status": "adult-review",
+              "mode": "community",
+              "payerId": "person_parent1"
+            },
+            {
+              "status": "died",
+              "mode": "community",
+              "payerId": "person_player"
+            }
+          ],
+          "attendedMonths": 746,
+          "pausedMonths": 2,
+          "smartsGains": 0,
+          "musicGains": 100
+        },
+        {
+          "kind": "cooking",
+          "proficiency": 100,
+          "plans": [
+            {
+              "status": "adult-review",
+              "mode": "community",
+              "payerId": "person_parent1"
+            },
+            {
+              "status": "died",
+              "mode": "community",
+              "payerId": "person_player"
+            }
+          ],
+          "attendedMonths": 722,
+          "pausedMonths": 2,
+          "smartsGains": 0,
+          "musicGains": 0
+        }
+      ],
+      "acceptedOutings": 63,
+      "refusedOutings": 0,
+      "pets": [
+        {
+          "status": "deceased",
+          "ending": "age",
+          "periods": 137,
+          "visits": 1
+        }
+      ],
+      "ledgerRows": 21365,
+      "coldRoundTripExact": true,
+      "worldSha256": "72432066beb9474e0dfed84f8ef8b27eeb4f0b9e463a3764eefa8b032152695b",
+      "elapsedMs": 9617
+    },
+    {
+      "seed": 907,
+      "country": "IT",
+      "ageAtDeath": 85,
+      "commands": 419,
+      "workMonths": 576,
+      "hobbies": [
+        {
+          "kind": "guitar",
+          "proficiency": 100,
+          "plans": [
+            {
+              "status": "adult-review",
+              "mode": "community",
+              "payerId": "person_parent1"
+            },
+            {
+              "status": "died",
+              "mode": "community",
+              "payerId": "person_player"
+            }
+          ],
+          "attendedMonths": 920,
+          "pausedMonths": 5,
+          "smartsGains": 0,
+          "musicGains": 100
+        },
+        {
+          "kind": "gardening",
+          "proficiency": 100,
+          "plans": [
+            {
+              "status": "adult-review",
+              "mode": "community",
+              "payerId": "person_parent1"
+            },
+            {
+              "status": "died",
+              "mode": "community",
+              "payerId": "person_player"
+            }
+          ],
+          "attendedMonths": 920,
+          "pausedMonths": 5,
+          "smartsGains": 0,
+          "musicGains": 0
+        }
+      ],
+      "acceptedOutings": 76,
+      "refusedOutings": 0,
+      "pets": [
+        {
+          "status": "deceased",
+          "ending": "age",
+          "periods": 117,
+          "visits": 0
+        }
+      ],
+      "ledgerRows": 50238,
+      "coldRoundTripExact": true,
+      "worldSha256": "2fab01ab09caee084785783a69826e0c1f0f68c48289170b99ff1babc57687cb",
+      "elapsedMs": 20373
+    },
+    {
+      "seed": 908,
+      "country": "BR",
+      "ageAtDeath": 79,
+      "commands": 401,
+      "workMonths": 564,
+      "hobbies": [
+        {
+          "kind": "guitar",
+          "proficiency": 100,
+          "plans": [
+            {
+              "status": "adult-review",
+              "mode": "community",
+              "payerId": "person_parent1"
+            },
+            {
+              "status": "died",
+              "mode": "community",
+              "payerId": "person_player"
+            }
+          ],
+          "attendedMonths": 820,
+          "pausedMonths": 48,
+          "smartsGains": 0,
+          "musicGains": 100
+        },
+        {
+          "kind": "reading",
+          "proficiency": 100,
+          "plans": [
+            {
+              "status": "adult-review",
+              "mode": "community",
+              "payerId": "person_parent1"
+            },
+            {
+              "status": "died",
+              "mode": "community",
+              "payerId": "person_player"
+            }
+          ],
+          "attendedMonths": 820,
+          "pausedMonths": 48,
+          "smartsGains": 6,
+          "musicGains": 0
+        }
+      ],
+      "acceptedOutings": 68,
+      "refusedOutings": 2,
+      "pets": [
+        {
+          "status": "deceased",
+          "ending": "age",
+          "periods": 144,
+          "visits": 4
+        }
+      ],
+      "ledgerRows": 21256,
+      "coldRoundTripExact": true,
+      "worldSha256": "60304077c9d9a7101098643f5f6f5fbb47d976c1dec299eb99206d3107cab7cc",
+      "elapsedMs": 12548
+    },
+    {
+      "seed": 909,
+      "country": "IN",
+      "ageAtDeath": 82,
+      "commands": 417,
+      "workMonths": 504,
+      "hobbies": [
+        {
+          "kind": "guitar",
+          "proficiency": 100,
+          "plans": [
+            {
+              "status": "adult-review",
+              "mode": "community",
+              "payerId": "person_parent1"
+            },
+            {
+              "status": "died",
+              "mode": "community",
+              "payerId": "person_player"
+            }
+          ],
+          "attendedMonths": 905,
+          "pausedMonths": 2,
+          "smartsGains": 0,
+          "musicGains": 100
+        },
+        {
+          "kind": "gaming",
+          "proficiency": 100,
+          "plans": [
+            {
+              "status": "adult-review",
+              "mode": "community",
+              "payerId": "person_parent1"
+            },
+            {
+              "status": "died",
+              "mode": "community",
+              "payerId": "person_player"
+            }
+          ],
+          "attendedMonths": 905,
+          "pausedMonths": 2,
+          "smartsGains": 0,
+          "musicGains": 0
+        }
+      ],
+      "acceptedOutings": 75,
+      "refusedOutings": 1,
+      "pets": [
+        {
+          "status": "deceased",
+          "ending": "age",
+          "periods": 190,
+          "visits": 2
+        }
+      ],
+      "ledgerRows": 36305,
+      "coldRoundTripExact": true,
+      "worldSha256": "f755105dbea69e80606cfd0aad1432dfd4162fd8dbefd7d3b760829db96093b7",
+      "elapsedMs": 16978
+    },
+    {
+      "seed": 910,
+      "country": "JP",
+      "ageAtDeath": 73,
+      "commands": 372,
+      "workMonths": 564,
+      "hobbies": [
+        {
+          "kind": "guitar",
+          "proficiency": 100,
+          "plans": [
+            {
+              "status": "declined",
+              "mode": "community",
+              "payerId": "person_parent1"
+            },
+            {
+              "status": "adult-review",
+              "mode": "community",
+              "payerId": "person_parent1"
+            },
+            {
+              "status": "died",
+              "mode": "community",
+              "payerId": "person_player"
+            }
+          ],
+          "attendedMonths": 778,
+          "pausedMonths": 2,
+          "smartsGains": 0,
+          "musicGains": 98
+        },
+        {
+          "kind": "cooking",
+          "proficiency": 100,
+          "plans": [
+            {
+              "status": "adult-review",
+              "mode": "community",
+              "payerId": "person_parent1"
+            },
+            {
+              "status": "died",
+              "mode": "community",
+              "payerId": "person_player"
+            }
+          ],
+          "attendedMonths": 766,
+          "pausedMonths": 2,
+          "smartsGains": 0,
+          "musicGains": 0
+        }
+      ],
+      "acceptedOutings": 67,
+      "refusedOutings": 0,
+      "pets": [
+        {
+          "status": "deceased",
+          "ending": "health",
+          "periods": 182,
+          "visits": 2
+        }
+      ],
+      "ledgerRows": 27786,
+      "coldRoundTripExact": true,
+      "worldSha256": "68e79168af35ebcd3c409a47b3ba9d460b2e2fb999a8c0f166e5a697a739091d",
+      "elapsedMs": 10387
+    },
+    {
+      "seed": 911,
+      "country": "ZA",
+      "ageAtDeath": 65,
+      "commands": 335,
+      "workMonths": 564,
+      "hobbies": [
+        {
+          "kind": "guitar",
+          "proficiency": 100,
+          "plans": [
+            {
+              "status": "adult-review",
+              "mode": "community",
+              "payerId": "person_parent1"
+            },
+            {
+              "status": "died",
+              "mode": "community",
+              "payerId": "person_player"
+            }
+          ],
+          "attendedMonths": 699,
+          "pausedMonths": 2,
+          "smartsGains": 0,
+          "musicGains": 100
+        },
+        {
+          "kind": "gardening",
+          "proficiency": 100,
+          "plans": [
+            {
+              "status": "adult-review",
+              "mode": "community",
+              "payerId": "person_parent1"
+            },
+            {
+              "status": "died",
+              "mode": "community",
+              "payerId": "person_player"
+            }
+          ],
+          "attendedMonths": 699,
+          "pausedMonths": 2,
+          "smartsGains": 0,
+          "musicGains": 0
+        }
+      ],
+      "acceptedOutings": 59,
+      "refusedOutings": 0,
+      "pets": [
+        {
+          "status": "deceased",
+          "ending": "age",
+          "periods": 128,
+          "visits": 1
+        }
+      ],
+      "ledgerRows": 35329,
+      "coldRoundTripExact": true,
+      "worldSha256": "2ee5cdc698506fb45ba1ce943a4ed5ef63eff639a23c70d584cd825470b478b0",
+      "elapsedMs": 10218
+    }
+  ]
+}

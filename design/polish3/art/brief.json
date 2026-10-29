@@ -1,0 +1,931 @@
+{
+  "generator": "Built-in image_gen.imagegen only; Krea not used",
+  "sourceReference": "assets/generated/activity-atlas.png and design/polish/event-icons.png inspected visually",
+  "style": "Original rounded colorful softly dimensional mobile-game illustrations; true transparent background; distinct role/action-specific compositions. Six 4x4 sheets and one 2x2 addition, 100 individual icons.",
+  "jobs": [
+    {
+      "id": "shop-assistant-part",
+      "title": "Weekend Shop Assistant",
+      "partTime": true,
+      "subject": "A paper shopping bag with neatly folded shirt and handheld barcode scanner; weekend retail helper."
+    },
+    {
+      "id": "cafe-part",
+      "title": "Part-time Caf\u00e9 Assistant",
+      "partTime": true,
+      "subject": "A caf\u00e9 clearing tray with two mugs, folded cloth and small order pad; table-service helper."
+    },
+    {
+      "id": "cleaner",
+      "title": "Cleaner",
+      "partTime": false,
+      "subject": "A bright mop bucket, upright mop and spray bottle with a floor-warning sign."
+    },
+    {
+      "id": "retail",
+      "title": "Retail Assistant",
+      "partTime": false,
+      "subject": "A friendly shop checkout with cash register, receipt and colourful clothes on a rack."
+    },
+    {
+      "id": "barista",
+      "title": "Barista",
+      "partTime": false,
+      "subject": "A polished espresso machine pouring into a cup with latte art, coffee beans beside it."
+    },
+    {
+      "id": "warehouse",
+      "title": "Warehouse Assistant",
+      "partTime": false,
+      "subject": "A warehouse hand pallet jack carrying neatly strapped cardboard boxes, scanner attached."
+    },
+    {
+      "id": "administrator",
+      "title": "Administrator",
+      "partTime": false,
+      "subject": "A desktop appointment calendar, file folders, pen pot and tidy office telephone."
+    },
+    {
+      "id": "support",
+      "title": "Customer Support Adviser",
+      "partTime": false,
+      "subject": "A customer-support headset beside a laptop showing two chat bubbles, no words."
+    },
+    {
+      "id": "plumber",
+      "title": "Plumber",
+      "partTime": false,
+      "subject": "A red pipe wrench beside a curved water pipe, valve and plumber tool bag."
+    },
+    {
+      "id": "technician",
+      "title": "Laboratory Technician",
+      "partTime": false,
+      "subject": "A laboratory sample rack, microscope, pipette and labelled-looking colour-coded test tubes without words."
+    },
+    {
+      "id": "designer",
+      "title": "Graphic Designer",
+      "partTime": false,
+      "subject": "A graphics tablet and stylus displaying colourful vector shapes, colour swatches nearby."
+    },
+    {
+      "id": "teacher",
+      "title": "Teacher",
+      "partTime": false,
+      "subject": "A small classroom chalkboard, apple and stack of exercise books with pencil."
+    },
+    {
+      "id": "developer",
+      "title": "Software Developer",
+      "partTime": false,
+      "subject": "A laptop displaying simple code-like brackets with an external keyboard and small desktop monitor."
+    },
+    {
+      "id": "accountant",
+      "title": "Accountant",
+      "partTime": false,
+      "subject": "A desktop calculator with ledger book, receipt stack and pencil, no currency text."
+    },
+    {
+      "id": "researcher",
+      "title": "Research Scientist",
+      "partTime": false,
+      "subject": "A molecular model, conical flask and research notebook under a magnifying glass."
+    },
+    {
+      "id": "journalist",
+      "title": "Journalist",
+      "partTime": false,
+      "subject": "A reporter microphone, press notebook and compact voice recorder beside a folded newspaper."
+    },
+    {
+      "id": "lawyer",
+      "title": "Lawyer",
+      "partTime": false,
+      "subject": "A brass balance scale, bound legal volumes and a closed document folder."
+    },
+    {
+      "id": "doctor",
+      "title": "Doctor",
+      "partTime": false,
+      "subject": "A stethoscope around a white doctor coat collar with medical examination clipboard."
+    },
+    {
+      "id": "receptionist",
+      "title": "Hotel Receptionist",
+      "partTime": false,
+      "subject": "A hotel reception desk bell, key rack and reservation book, inviting luggage beside desk."
+    },
+    {
+      "id": "postal-worker",
+      "title": "Postal Worker",
+      "partTime": false,
+      "subject": "A blue postal satchel with colourful envelopes and a small mailbox."
+    },
+    {
+      "id": "delivery-driver",
+      "title": "Delivery Driver",
+      "partTime": false,
+      "subject": "A compact delivery van beside a parcel and handheld route device."
+    },
+    {
+      "id": "bus-driver",
+      "title": "Bus Driver",
+      "partTime": false,
+      "subject": "A cheerful city bus front three-quarter view with steering wheel detail and destination display without text."
+    },
+    {
+      "id": "gardener",
+      "title": "Gardener",
+      "partTime": false,
+      "subject": "A watering can, hand trowel, pruning shears and pot of colourful flowering plants."
+    },
+    {
+      "id": "kitchen-assistant",
+      "title": "Kitchen Assistant",
+      "partTime": false,
+      "subject": "A dish rack, washing-up gloves, pot and neatly stacked clean dinner plates."
+    },
+    {
+      "id": "cook",
+      "title": "Cook",
+      "partTime": false,
+      "subject": "A frying pan with fresh vegetables, chopping board and kitchen spatula."
+    },
+    {
+      "id": "baker",
+      "title": "Baker",
+      "partTime": false,
+      "subject": "A flour-dusted rolling pin, golden bread loaves and a tray of croissants."
+    },
+    {
+      "id": "chef",
+      "title": "Head Chef",
+      "partTime": false,
+      "subject": "A tall chef toque above a plated restaurant meal with chef knife and tasting spoon."
+    },
+    {
+      "id": "electrician",
+      "title": "Electrician",
+      "partTime": false,
+      "subject": "An electrician multimeter, insulated pliers, neatly coiled wire and safety gloves."
+    },
+    {
+      "id": "carpenter",
+      "title": "Carpenter",
+      "partTime": false,
+      "subject": "A wooden workbench corner with hand saw, carpenter square, wood shavings and mallet."
+    },
+    {
+      "id": "mechanic",
+      "title": "Vehicle Mechanic",
+      "partTime": false,
+      "subject": "An open car engine block with socket wrench, oil can and mechanic work gloves."
+    },
+    {
+      "id": "welder",
+      "title": "Welder",
+      "partTime": false,
+      "subject": "A protective welding helmet, welding torch and steel joint with a small controlled spark."
+    },
+    {
+      "id": "care-worker",
+      "title": "Care Worker",
+      "partTime": false,
+      "subject": "A warm folded care blanket, supported hand motif and small medicine organiser, no medical cross emphasis."
+    },
+    {
+      "id": "nurse",
+      "title": "Nurse",
+      "partTime": false,
+      "subject": "A nurse scrub top, blood-pressure cuff, thermometer and hospital identification badge without text."
+    },
+    {
+      "id": "physiotherapist",
+      "title": "Physiotherapist",
+      "partTime": false,
+      "subject": "A resistance exercise band, therapy roller and joint model on a treatment bench."
+    },
+    {
+      "id": "engineer",
+      "title": "Civil Engineer",
+      "partTime": false,
+      "subject": "A yellow hard hat, rolled bridge blueprint and model steel bridge support."
+    },
+    {
+      "id": "architect",
+      "title": "Architect",
+      "partTime": false,
+      "subject": "An architectural house model, rolled drawing, triangular scale ruler and drawing compass."
+    },
+    {
+      "id": "data-analyst",
+      "title": "Data Analyst",
+      "partTime": false,
+      "subject": "A desktop monitor showing distinct colourful chart panels with magnifier and spreadsheet sheet."
+    },
+    {
+      "id": "it-technician",
+      "title": "IT Support Technician",
+      "partTime": false,
+      "subject": "An open desktop computer tower with screwdriver, router and neatly coiled network cable."
+    },
+    {
+      "id": "librarian",
+      "title": "Librarian",
+      "partTime": false,
+      "subject": "A tall library book trolley with neatly sorted books and a small catalogue drawer."
+    },
+    {
+      "id": "social-worker",
+      "title": "Social Worker",
+      "partTime": false,
+      "subject": "A supportive family figurine beside a folder, home-visit notebook and warm helping-hands motif."
+    },
+    {
+      "id": "marketing-executive",
+      "title": "Marketing Executive",
+      "partTime": false,
+      "subject": "A campaign planning board with colourful audience cards, small megaphone and idea bulb."
+    },
+    {
+      "id": "human-resources",
+      "title": "Human Resources Officer",
+      "partTime": false,
+      "subject": "A desk with staff identification cards, interview appointment notebook and two-person icon card."
+    },
+    {
+      "id": "project-manager",
+      "title": "Project Manager",
+      "partTime": false,
+      "subject": "A project planning board with task cards, milestone flags and a small clock."
+    },
+    {
+      "id": "operations-manager",
+      "title": "Operations Manager",
+      "partTime": false,
+      "subject": "A distribution floor plan clipboard, warehouse gear symbol and stock-flow arrows with small boxes."
+    },
+    {
+      "id": "sales-representative",
+      "title": "Sales Representative",
+      "partTime": false,
+      "subject": "A sample presentation case, sales folder and small handshake emblem."
+    },
+    {
+      "id": "estate-agent",
+      "title": "Estate Agent",
+      "partTime": false,
+      "subject": "A house keyring, miniature for-sale house and property brochure without writing."
+    },
+    {
+      "id": "insurance-adviser",
+      "title": "Insurance Adviser",
+      "partTime": false,
+      "subject": "A shield protecting a miniature house and car beside policy documents and reading glasses."
+    },
+    {
+      "id": "bank-clerk",
+      "title": "Bank Clerk",
+      "partTime": false,
+      "subject": "A bank service counter with cash tray, banknotes and transaction stamp."
+    },
+    {
+      "id": "procurement-officer",
+      "title": "Procurement Officer",
+      "partTime": false,
+      "subject": "A supplier catalogue with three sample boxes, purchase order clipboard and comparison tags without writing."
+    },
+    {
+      "id": "logistics-coordinator",
+      "title": "Logistics Coordinator",
+      "partTime": false,
+      "subject": "A colourful route map, parcel tracking scanner and delivery schedule clipboard."
+    },
+    {
+      "id": "software-tester",
+      "title": "Software Tester",
+      "partTime": false,
+      "subject": "A tablet showing checkmarks and bug icon, test checklist and magnifying glass."
+    },
+    {
+      "id": "cybersecurity-analyst",
+      "title": "Cybersecurity Analyst",
+      "partTime": false,
+      "subject": "A computer monitor with protected padlock, shield, network nodes and security token."
+    },
+    {
+      "id": "library-part",
+      "title": "Part-time Library Assistant",
+      "partTime": true,
+      "subject": "A returned-books drop box with three books and handheld book scanner; distinct from librarian trolley."
+    },
+    {
+      "id": "cinema-part",
+      "title": "Part-time Cinema Usher",
+      "partTime": true,
+      "subject": "A cinema ticket roll, torch, folded usher jacket and red cinema seat."
+    },
+    {
+      "id": "grocery-part",
+      "title": "Part-time Grocery Picker",
+      "partTime": true,
+      "subject": "A grocery picking basket with milk, vegetables, packaged loaf and handheld scanner."
+    },
+    {
+      "id": "pet-care-part",
+      "title": "Part-time Pet Care Assistant",
+      "partTime": true,
+      "subject": "A pet lead, feeding bowl, brush and folded towel with a small friendly paw motif."
+    },
+    {
+      "id": "tutor-part",
+      "title": "Part-time Homework Tutor",
+      "partTime": true,
+      "subject": "An open maths exercise book, pencil, small whiteboard and helpful desk lamp."
+    },
+    {
+      "id": "market-stall-part",
+      "title": "Part-time Market Stall Assistant",
+      "partTime": true,
+      "subject": "A colourful striped market stall canopy with crates of fresh fruit and mechanical produce scales."
+    },
+    {
+      "id": "firefighter",
+      "title": "Firefighter",
+      "partTime": false,
+      "subject": "A bright firefighter helmet, neatly rolled fire hose with nozzle, protective gloves and a small extinguisher. Friendly polished equipment illustration, distinct from police and paramedic."
+    },
+    {
+      "id": "paramedic",
+      "title": "Paramedic",
+      "partTime": false,
+      "subject": "A colourful emergency medical jump bag open with a compact monitor, bandage roll and stethoscope beside it. Original medical responder equipment, distinct from doctor coat and nurse scrub artwork."
+    },
+    {
+      "id": "police-officer",
+      "title": "Police Officer",
+      "partTime": false,
+      "subject": "A navy police peaked cap, handheld radio and incident notebook with a simple blue shield badge. Friendly rounded community police equipment, no gun or handcuffs, no text."
+    },
+    {
+      "id": "construction-worker",
+      "title": "Construction Worker",
+      "partTime": false,
+      "subject": "A yellow construction hard hat, orange reflective work vest and bricklaying trowel with two red bricks and mortar. Distinct from engineer bridge blueprint and carpenter tools."
+    }
+  ],
+  "sheets": [
+    {
+      "file": "actions-a.png",
+      "generated": "/workspace/generated_images/exec-ce67db44-dfd9-4e5d-8ac8-11882f9bf295.png",
+      "entries": [
+        {
+          "id": "talk",
+          "kind": "actions",
+          "subject": "talk"
+        },
+        {
+          "id": "compliment",
+          "kind": "actions",
+          "subject": "compliment"
+        },
+        {
+          "id": "spend-time",
+          "kind": "actions",
+          "subject": "spend time"
+        },
+        {
+          "id": "argue",
+          "kind": "actions",
+          "subject": "argue"
+        },
+        {
+          "id": "apologise",
+          "kind": "actions",
+          "subject": "apologise"
+        },
+        {
+          "id": "insult",
+          "kind": "actions",
+          "subject": "insult"
+        },
+        {
+          "id": "distance",
+          "kind": "actions",
+          "subject": "distance"
+        },
+        {
+          "id": "ask-advice",
+          "kind": "actions",
+          "subject": "ask advice"
+        },
+        {
+          "id": "ask-permission",
+          "kind": "actions",
+          "subject": "ask permission"
+        },
+        {
+          "id": "ask-activity",
+          "kind": "actions",
+          "subject": "ask activity"
+        },
+        {
+          "id": "request-gift",
+          "kind": "actions",
+          "subject": "request gift"
+        },
+        {
+          "id": "praise",
+          "kind": "actions",
+          "subject": "praise"
+        },
+        {
+          "id": "scold",
+          "kind": "actions",
+          "subject": "scold"
+        },
+        {
+          "id": "ask-help",
+          "kind": "actions",
+          "subject": "ask help"
+        },
+        {
+          "id": "give-money",
+          "kind": "actions",
+          "subject": "give money"
+        },
+        {
+          "id": "ask-money",
+          "kind": "actions",
+          "subject": "ask money"
+        }
+      ]
+    },
+    {
+      "file": "actions-b.png",
+      "generated": "/workspace/generated_images/exec-21041bce-caa8-4b36-b8fd-020b6bfa2e6e.png",
+      "entries": [
+        {
+          "id": "ask-loan",
+          "kind": "actions",
+          "subject": "ask loan"
+        },
+        {
+          "id": "accept-loan",
+          "kind": "actions",
+          "subject": "accept loan"
+        },
+        {
+          "id": "decline-loan",
+          "kind": "actions",
+          "subject": "decline loan"
+        },
+        {
+          "id": "repay-loan",
+          "kind": "actions",
+          "subject": "repay loan"
+        },
+        {
+          "id": "academic-help",
+          "kind": "actions",
+          "subject": "academic help"
+        },
+        {
+          "id": "work-feedback",
+          "kind": "actions",
+          "subject": "work feedback"
+        },
+        {
+          "id": "request-raise",
+          "kind": "actions",
+          "subject": "request raise"
+        },
+        {
+          "id": "review-custody",
+          "kind": "actions",
+          "subject": "review custody"
+        },
+        {
+          "id": "move-in",
+          "kind": "actions",
+          "subject": "move in"
+        },
+        {
+          "id": "ask-date",
+          "kind": "actions",
+          "subject": "ask date"
+        },
+        {
+          "id": "propose",
+          "kind": "actions",
+          "subject": "propose"
+        },
+        {
+          "id": "plan-wedding",
+          "kind": "actions",
+          "subject": "plan wedding"
+        },
+        {
+          "id": "family-planning",
+          "kind": "actions",
+          "subject": "family planning"
+        },
+        {
+          "id": "divorce",
+          "kind": "actions",
+          "subject": "divorce"
+        },
+        {
+          "id": "breakup",
+          "kind": "actions",
+          "subject": "breakup"
+        },
+        {
+          "id": "social-profile",
+          "kind": "actions",
+          "subject": "social profile"
+        }
+      ]
+    },
+    {
+      "file": "mixed.png",
+      "prompt": "Generate ONE original polished colorful icon sprite sheet for a mobile life-simulator game. Exactly sixteen separate fully finished illustrations arranged on a regular 4x4 square grid, read row by row. TRUE transparent RGBA background between objects, no opaque background, no cards, no checkerboard, no panel gridlines. No captions, no text, no lettering or watermark. Use very generous transparent gutters: each illustration must fit fully within central 78% of its own cell, centered, no object crossing a cell boundary and no edge clipping. Cohesive rounded hand-painted cartoon game art, richly saturated balanced colors, clean dark colored outlines, smooth soft dimensional cel shading, small glossy highlights. Friendly, inviting, original tangible objects, not flat vector glyphs or emoji. Bold clear silhouettes, limited but expressive well-drawn detail so each icon reads at36px. Camera and lighting consistent. Each is a DIFFERENT authored composition with distinct actual role-specific tools and props, never one generic briefcase repeated. Correct natural object proportions, not photorealistic. No colored circular backplates. Here are EXACT sixteen illustrations in order:\nROW 1 COLUMN 1: Two cheerful young adult friends exchanging a bright woven friendship bracelet with a little golden star, teal and orange clothing, warm close friendship.\nROW 1 COLUMN 2: Two distinct matching woven friendship bracelets now visibly untied and resting apart, purple and turquoise threads, no broken romantic heart.\nROW 1 COLUMN 3: Two friendly fully clothed teen students taking a shy afternoon walk together with ice cream cones and backpacks, a little park shrub; innocent first date.\nROW 1 COLUMN 4: Two fully clothed teen students gently going separate ways on a tiny forked park path, contrasting backpacks, no threat or violence.\nROW 2 COLUMN 1: A beautiful open treasure chest full of gold coins, with a tiny red-roof house and turquoise car among the wealth, clearly personal total assets. No bank building, no ledger.\nROW 2 COLUMN 2: An open orange financial ledger with a blue cash-flow chart card, green notes and small gold coins moving along a curved teal arrow, a tidy pen. Financial records and spending, no bank building or treasure chest.\nROW 2 COLUMN 3: A paper shopping bag with neatly folded shirt and handheld barcode scanner; weekend retail helper.\nROW 2 COLUMN 4: A caf\u00e9 clearing tray with two mugs, folded cloth and small order pad; table-service helper.\nROW 3 COLUMN 1: A bright mop bucket, upright mop and spray bottle with a floor-warning sign.\nROW 3 COLUMN 2: A friendly shop checkout with cash register, receipt and colourful clothes on a rack.\nROW 3 COLUMN 3: A polished espresso machine pouring into a cup with latte art, coffee beans beside it.\nROW 3 COLUMN 4: A warehouse hand pallet jack carrying neatly strapped cardboard boxes, scanner attached.\nROW 4 COLUMN 1: A desktop appointment calendar, file folders, pen pot and tidy office telephone.\nROW 4 COLUMN 2: A customer-support headset beside a laptop showing two chat bubbles, no words.\nROW 4 COLUMN 3: A red pipe wrench beside a curved water pipe, valve and plumber tool bag.\nROW 4 COLUMN 4: A laboratory sample rack, microscope, pipette and labelled-looking colour-coded test tubes without words.\nThe subject labels are instructions only: put NO words in the rendered artwork. Preserve clear cell separation and genuine transparent background. All sixteen beautiful illustrations fully visible and uncropped.",
+      "generated": "/workspace/generated_images/exec-20979d8a-4732-4729-93c8-8eb8f7ccc230.png",
+      "entries": [
+        {
+          "id": "become-best-friends",
+          "kind": "actions",
+          "subject": "Two cheerful young adult friends exchanging a bright woven friendship bracelet with a little golden star, teal and orange clothing, warm close friendship."
+        },
+        {
+          "id": "end-best-friendship",
+          "kind": "actions",
+          "subject": "Two distinct matching woven friendship bracelets now visibly untied and resting apart, purple and turquoise threads, no broken romantic heart."
+        },
+        {
+          "id": "ask-teen-date",
+          "kind": "actions",
+          "subject": "Two friendly fully clothed teen students taking a shy afternoon walk together with ice cream cones and backpacks, a little park shrub; innocent first date."
+        },
+        {
+          "id": "end-teen-relationship",
+          "kind": "actions",
+          "subject": "Two fully clothed teen students gently going separate ways on a tiny forked park path, contrasting backpacks, no threat or violence."
+        },
+        {
+          "id": "net-worth",
+          "kind": "finance",
+          "subject": "A beautiful open treasure chest full of gold coins, with a tiny red-roof house and turquoise car among the wealth, clearly personal total assets. No bank building, no ledger."
+        },
+        {
+          "id": "finances",
+          "kind": "finance",
+          "subject": "An open orange financial ledger with a blue cash-flow chart card, green notes and small gold coins moving along a curved teal arrow, a tidy pen. Financial records and spending, no bank building or treasure chest."
+        },
+        {
+          "id": "shop-assistant-part",
+          "kind": "jobs",
+          "subject": "A paper shopping bag with neatly folded shirt and handheld barcode scanner; weekend retail helper."
+        },
+        {
+          "id": "cafe-part",
+          "kind": "jobs",
+          "subject": "A caf\u00e9 clearing tray with two mugs, folded cloth and small order pad; table-service helper."
+        },
+        {
+          "id": "cleaner",
+          "kind": "jobs",
+          "subject": "A bright mop bucket, upright mop and spray bottle with a floor-warning sign."
+        },
+        {
+          "id": "retail",
+          "kind": "jobs",
+          "subject": "A friendly shop checkout with cash register, receipt and colourful clothes on a rack."
+        },
+        {
+          "id": "barista",
+          "kind": "jobs",
+          "subject": "A polished espresso machine pouring into a cup with latte art, coffee beans beside it."
+        },
+        {
+          "id": "warehouse",
+          "kind": "jobs",
+          "subject": "A warehouse hand pallet jack carrying neatly strapped cardboard boxes, scanner attached."
+        },
+        {
+          "id": "administrator",
+          "kind": "jobs",
+          "subject": "A desktop appointment calendar, file folders, pen pot and tidy office telephone."
+        },
+        {
+          "id": "support",
+          "kind": "jobs",
+          "subject": "A customer-support headset beside a laptop showing two chat bubbles, no words."
+        },
+        {
+          "id": "plumber",
+          "kind": "jobs",
+          "subject": "A red pipe wrench beside a curved water pipe, valve and plumber tool bag."
+        },
+        {
+          "id": "technician",
+          "kind": "jobs",
+          "subject": "A laboratory sample rack, microscope, pipette and labelled-looking colour-coded test tubes without words."
+        }
+      ]
+    },
+    {
+      "file": "jobs-1.png",
+      "prompt": "Generate ONE original polished colorful icon sprite sheet for a mobile life-simulator game. Exactly sixteen separate fully finished illustrations arranged on a regular 4x4 square grid, read row by row. TRUE transparent RGBA background between objects, no opaque background, no cards, no checkerboard, no panel gridlines. No captions, no text, no lettering or watermark. Use very generous transparent gutters: each illustration must fit fully within central 78% of its own cell, centered, no object crossing a cell boundary and no edge clipping. Cohesive rounded hand-painted cartoon game art, richly saturated balanced colors, clean dark colored outlines, smooth soft dimensional cel shading, small glossy highlights. Friendly, inviting, original tangible objects, not flat vector glyphs or emoji. Bold clear silhouettes, limited but expressive well-drawn detail so each icon reads at36px. Camera and lighting consistent. Each is a DIFFERENT authored composition with distinct actual role-specific tools and props, never one generic briefcase repeated. Correct natural object proportions, not photorealistic. No colored circular backplates. Here are EXACT sixteen illustrations in order:\nROW 1 COLUMN 1: A graphics tablet and stylus displaying colourful vector shapes, colour swatches nearby.\nROW 1 COLUMN 2: A small classroom chalkboard, apple and stack of exercise books with pencil.\nROW 1 COLUMN 3: A laptop displaying simple code-like brackets with an external keyboard and small desktop monitor.\nROW 1 COLUMN 4: A desktop calculator with ledger book, receipt stack and pencil, no currency text.\nROW 2 COLUMN 1: A molecular model, conical flask and research notebook under a magnifying glass.\nROW 2 COLUMN 2: A reporter microphone, press notebook and compact voice recorder beside a folded newspaper.\nROW 2 COLUMN 3: A brass balance scale, bound legal volumes and a closed document folder.\nROW 2 COLUMN 4: A stethoscope around a white doctor coat collar with medical examination clipboard.\nROW 3 COLUMN 1: A hotel reception desk bell, key rack and reservation book, inviting luggage beside desk.\nROW 3 COLUMN 2: A blue postal satchel with colourful envelopes and a small mailbox.\nROW 3 COLUMN 3: A compact delivery van beside a parcel and handheld route device.\nROW 3 COLUMN 4: A cheerful city bus front three-quarter view with steering wheel detail and destination display without text.\nROW 4 COLUMN 1: A watering can, hand trowel, pruning shears and pot of colourful flowering plants.\nROW 4 COLUMN 2: A dish rack, washing-up gloves, pot and neatly stacked clean dinner plates.\nROW 4 COLUMN 3: A frying pan with fresh vegetables, chopping board and kitchen spatula.\nROW 4 COLUMN 4: A flour-dusted rolling pin, golden bread loaves and a tray of croissants.\nThe subject labels are instructions only: put NO words in the rendered artwork. Preserve clear cell separation and genuine transparent background. All sixteen beautiful illustrations fully visible and uncropped.",
+      "generated": "/workspace/generated_images/exec-f08b98c5-d928-48a0-ab28-4e115e40044f.png",
+      "entries": [
+        {
+          "id": "designer",
+          "kind": "jobs",
+          "subject": "A graphics tablet and stylus displaying colourful vector shapes, colour swatches nearby."
+        },
+        {
+          "id": "teacher",
+          "kind": "jobs",
+          "subject": "A small classroom chalkboard, apple and stack of exercise books with pencil."
+        },
+        {
+          "id": "developer",
+          "kind": "jobs",
+          "subject": "A laptop displaying simple code-like brackets with an external keyboard and small desktop monitor."
+        },
+        {
+          "id": "accountant",
+          "kind": "jobs",
+          "subject": "A desktop calculator with ledger book, receipt stack and pencil, no currency text."
+        },
+        {
+          "id": "researcher",
+          "kind": "jobs",
+          "subject": "A molecular model, conical flask and research notebook under a magnifying glass."
+        },
+        {
+          "id": "journalist",
+          "kind": "jobs",
+          "subject": "A reporter microphone, press notebook and compact voice recorder beside a folded newspaper."
+        },
+        {
+          "id": "lawyer",
+          "kind": "jobs",
+          "subject": "A brass balance scale, bound legal volumes and a closed document folder."
+        },
+        {
+          "id": "doctor",
+          "kind": "jobs",
+          "subject": "A stethoscope around a white doctor coat collar with medical examination clipboard."
+        },
+        {
+          "id": "receptionist",
+          "kind": "jobs",
+          "subject": "A hotel reception desk bell, key rack and reservation book, inviting luggage beside desk."
+        },
+        {
+          "id": "postal-worker",
+          "kind": "jobs",
+          "subject": "A blue postal satchel with colourful envelopes and a small mailbox."
+        },
+        {
+          "id": "delivery-driver",
+          "kind": "jobs",
+          "subject": "A compact delivery van beside a parcel and handheld route device."
+        },
+        {
+          "id": "bus-driver",
+          "kind": "jobs",
+          "subject": "A cheerful city bus front three-quarter view with steering wheel detail and destination display without text."
+        },
+        {
+          "id": "gardener",
+          "kind": "jobs",
+          "subject": "A watering can, hand trowel, pruning shears and pot of colourful flowering plants."
+        },
+        {
+          "id": "kitchen-assistant",
+          "kind": "jobs",
+          "subject": "A dish rack, washing-up gloves, pot and neatly stacked clean dinner plates."
+        },
+        {
+          "id": "cook",
+          "kind": "jobs",
+          "subject": "A frying pan with fresh vegetables, chopping board and kitchen spatula."
+        },
+        {
+          "id": "baker",
+          "kind": "jobs",
+          "subject": "A flour-dusted rolling pin, golden bread loaves and a tray of croissants."
+        }
+      ]
+    },
+    {
+      "file": "jobs-2.png",
+      "prompt": "Generate ONE original polished colorful icon sprite sheet for a mobile life-simulator game. Exactly sixteen separate fully finished illustrations arranged on a regular 4x4 square grid, read row by row. TRUE transparent RGBA background between objects, no opaque background, no cards, no checkerboard, no panel gridlines. No captions, no text, no lettering or watermark. Use very generous transparent gutters: each illustration must fit fully within central 78% of its own cell, centered, no object crossing a cell boundary and no edge clipping. Cohesive rounded hand-painted cartoon game art, richly saturated balanced colors, clean dark colored outlines, smooth soft dimensional cel shading, small glossy highlights. Friendly, inviting, original tangible objects, not flat vector glyphs or emoji. Bold clear silhouettes, limited but expressive well-drawn detail so each icon reads at36px. Camera and lighting consistent. Each is a DIFFERENT authored composition with distinct actual role-specific tools and props, never one generic briefcase repeated. Correct natural object proportions, not photorealistic. No colored circular backplates. Here are EXACT sixteen illustrations in order:\nROW 1 COLUMN 1: A tall chef toque above a plated restaurant meal with chef knife and tasting spoon.\nROW 1 COLUMN 2: An electrician multimeter, insulated pliers, neatly coiled wire and safety gloves.\nROW 1 COLUMN 3: A wooden workbench corner with hand saw, carpenter square, wood shavings and mallet.\nROW 1 COLUMN 4: An open car engine block with socket wrench, oil can and mechanic work gloves.\nROW 2 COLUMN 1: A protective welding helmet, welding torch and steel joint with a small controlled spark.\nROW 2 COLUMN 2: A warm folded care blanket, supported hand motif and small medicine organiser, no medical cross emphasis.\nROW 2 COLUMN 3: A nurse scrub top, blood-pressure cuff, thermometer and hospital identification badge without text.\nROW 2 COLUMN 4: A resistance exercise band, therapy roller and joint model on a treatment bench.\nROW 3 COLUMN 1: A yellow hard hat, rolled bridge blueprint and model steel bridge support.\nROW 3 COLUMN 2: An architectural house model, rolled drawing, triangular scale ruler and drawing compass.\nROW 3 COLUMN 3: A desktop monitor showing distinct colourful chart panels with magnifier and spreadsheet sheet.\nROW 3 COLUMN 4: An open desktop computer tower with screwdriver, router and neatly coiled network cable.\nROW 4 COLUMN 1: A tall library book trolley with neatly sorted books and a small catalogue drawer.\nROW 4 COLUMN 2: A supportive family figurine beside a folder, home-visit notebook and warm helping-hands motif.\nROW 4 COLUMN 3: A campaign planning board with colourful audience cards, small megaphone and idea bulb.\nROW 4 COLUMN 4: A desk with staff identification cards, interview appointment notebook and two-person icon card.\nThe subject labels are instructions only: put NO words in the rendered artwork. Preserve clear cell separation and genuine transparent background. All sixteen beautiful illustrations fully visible and uncropped.",
+      "generated": "/workspace/generated_images/exec-d30bbd52-4b38-488f-952c-24f217cf37a3.png",
+      "entries": [
+        {
+          "id": "chef",
+          "kind": "jobs",
+          "subject": "A tall chef toque above a plated restaurant meal with chef knife and tasting spoon."
+        },
+        {
+          "id": "electrician",
+          "kind": "jobs",
+          "subject": "An electrician multimeter, insulated pliers, neatly coiled wire and safety gloves."
+        },
+        {
+          "id": "carpenter",
+          "kind": "jobs",
+          "subject": "A wooden workbench corner with hand saw, carpenter square, wood shavings and mallet."
+        },
+        {
+          "id": "mechanic",
+          "kind": "jobs",
+          "subject": "An open car engine block with socket wrench, oil can and mechanic work gloves."
+        },
+        {
+          "id": "welder",
+          "kind": "jobs",
+          "subject": "A protective welding helmet, welding torch and steel joint with a small controlled spark."
+        },
+        {
+          "id": "care-worker",
+          "kind": "jobs",
+          "subject": "A warm folded care blanket, supported hand motif and small medicine organiser, no medical cross emphasis."
+        },
+        {
+          "id": "nurse",
+          "kind": "jobs",
+          "subject": "A nurse scrub top, blood-pressure cuff, thermometer and hospital identification badge without text."
+        },
+        {
+          "id": "physiotherapist",
+          "kind": "jobs",
+          "subject": "A resistance exercise band, therapy roller and joint model on a treatment bench."
+        },
+        {
+          "id": "engineer",
+          "kind": "jobs",
+          "subject": "A yellow hard hat, rolled bridge blueprint and model steel bridge support."
+        },
+        {
+          "id": "architect",
+          "kind": "jobs",
+          "subject": "An architectural house model, rolled drawing, triangular scale ruler and drawing compass."
+        },
+        {
+          "id": "data-analyst",
+          "kind": "jobs",
+          "subject": "A desktop monitor showing distinct colourful chart panels with magnifier and spreadsheet sheet."
+        },
+        {
+          "id": "it-technician",
+          "kind": "jobs",
+          "subject": "An open desktop computer tower with screwdriver, router and neatly coiled network cable."
+        },
+        {
+          "id": "librarian",
+          "kind": "jobs",
+          "subject": "A tall library book trolley with neatly sorted books and a small catalogue drawer."
+        },
+        {
+          "id": "social-worker",
+          "kind": "jobs",
+          "subject": "A supportive family figurine beside a folder, home-visit notebook and warm helping-hands motif."
+        },
+        {
+          "id": "marketing-executive",
+          "kind": "jobs",
+          "subject": "A campaign planning board with colourful audience cards, small megaphone and idea bulb."
+        },
+        {
+          "id": "human-resources",
+          "kind": "jobs",
+          "subject": "A desk with staff identification cards, interview appointment notebook and two-person icon card."
+        }
+      ]
+    },
+    {
+      "file": "jobs-3.png",
+      "prompt": "Generate ONE original polished colorful icon sprite sheet for a mobile life-simulator game. Exactly sixteen separate fully finished illustrations arranged on a regular 4x4 square grid, read row by row. TRUE transparent RGBA background between objects, no opaque background, no cards, no checkerboard, no panel gridlines. No captions, no text, no lettering or watermark. Use very generous transparent gutters: each illustration must fit fully within central 78% of its own cell, centered, no object crossing a cell boundary and no edge clipping. Cohesive rounded hand-painted cartoon game art, richly saturated balanced colors, clean dark colored outlines, smooth soft dimensional cel shading, small glossy highlights. Friendly, inviting, original tangible objects, not flat vector glyphs or emoji. Bold clear silhouettes, limited but expressive well-drawn detail so each icon reads at36px. Camera and lighting consistent. Each is a DIFFERENT authored composition with distinct actual role-specific tools and props, never one generic briefcase repeated. Correct natural object proportions, not photorealistic. No colored circular backplates. Here are EXACT sixteen illustrations in order:\nROW 1 COLUMN 1: A project planning board with task cards, milestone flags and a small clock.\nROW 1 COLUMN 2: A distribution floor plan clipboard, warehouse gear symbol and stock-flow arrows with small boxes.\nROW 1 COLUMN 3: A sample presentation case, sales folder and small handshake emblem.\nROW 1 COLUMN 4: A house keyring, miniature for-sale house and property brochure without writing.\nROW 2 COLUMN 1: A shield protecting a miniature house and car beside policy documents and reading glasses.\nROW 2 COLUMN 2: A bank service counter with cash tray, banknotes and transaction stamp.\nROW 2 COLUMN 3: A supplier catalogue with three sample boxes, purchase order clipboard and comparison tags without writing.\nROW 2 COLUMN 4: A colourful route map, parcel tracking scanner and delivery schedule clipboard.\nROW 3 COLUMN 1: A tablet showing checkmarks and bug icon, test checklist and magnifying glass.\nROW 3 COLUMN 2: A computer monitor with protected padlock, shield, network nodes and security token.\nROW 3 COLUMN 3: A returned-books drop box with three books and handheld book scanner; distinct from librarian trolley.\nROW 3 COLUMN 4: A cinema ticket roll, torch, folded usher jacket and red cinema seat.\nROW 4 COLUMN 1: A grocery picking basket with milk, vegetables, packaged loaf and handheld scanner.\nROW 4 COLUMN 2: A pet lead, feeding bowl, brush and folded towel with a small friendly paw motif.\nROW 4 COLUMN 3: An open maths exercise book, pencil, small whiteboard and helpful desk lamp.\nROW 4 COLUMN 4: A colourful striped market stall canopy with crates of fresh fruit and mechanical produce scales.\nThe subject labels are instructions only: put NO words in the rendered artwork. Preserve clear cell separation and genuine transparent background. All sixteen beautiful illustrations fully visible and uncropped.",
+      "generated": "/workspace/generated_images/exec-e310c925-99e9-4ff4-9da0-9ed466f2743a.png",
+      "entries": [
+        {
+          "id": "project-manager",
+          "kind": "jobs",
+          "subject": "A project planning board with task cards, milestone flags and a small clock."
+        },
+        {
+          "id": "operations-manager",
+          "kind": "jobs",
+          "subject": "A distribution floor plan clipboard, warehouse gear symbol and stock-flow arrows with small boxes."
+        },
+        {
+          "id": "sales-representative",
+          "kind": "jobs",
+          "subject": "A sample presentation case, sales folder and small handshake emblem."
+        },
+        {
+          "id": "estate-agent",
+          "kind": "jobs",
+          "subject": "A house keyring, miniature for-sale house and property brochure without writing."
+        },
+        {
+          "id": "insurance-adviser",
+          "kind": "jobs",
+          "subject": "A shield protecting a miniature house and car beside policy documents and reading glasses."
+        },
+        {
+          "id": "bank-clerk",
+          "kind": "jobs",
+          "subject": "A bank service counter with cash tray, banknotes and transaction stamp."
+        },
+        {
+          "id": "procurement-officer",
+          "kind": "jobs",
+          "subject": "A supplier catalogue with three sample boxes, purchase order clipboard and comparison tags without writing."
+        },
+        {
+          "id": "logistics-coordinator",
+          "kind": "jobs",
+          "subject": "A colourful route map, parcel tracking scanner and delivery schedule clipboard."
+        },
+        {
+          "id": "software-tester",
+          "kind": "jobs",
+          "subject": "A tablet showing checkmarks and bug icon, test checklist and magnifying glass."
+        },
+        {
+          "id": "cybersecurity-analyst",
+          "kind": "jobs",
+          "subject": "A computer monitor with protected padlock, shield, network nodes and security token."
+        },
+        {
+          "id": "library-part",
+          "kind": "jobs",
+          "subject": "A returned-books drop box with three books and handheld book scanner; distinct from librarian trolley."
+        },
+        {
+          "id": "cinema-part",
+          "kind": "jobs",
+          "subject": "A cinema ticket roll, torch, folded usher jacket and red cinema seat."
+        },
+        {
+          "id": "grocery-part",
+          "kind": "jobs",
+          "subject": "A grocery picking basket with milk, vegetables, packaged loaf and handheld scanner."
+        },
+        {
+          "id": "pet-care-part",
+          "kind": "jobs",
+          "subject": "A pet lead, feeding bowl, brush and folded towel with a small friendly paw motif."
+        },
+        {
+          "id": "tutor-part",
+          "kind": "jobs",
+          "subject": "An open maths exercise book, pencil, small whiteboard and helpful desk lamp."
+        },
+        {
+          "id": "market-stall-part",
+          "kind": "jobs",
+          "subject": "A colourful striped market stall canopy with crates of fresh fruit and mechanical produce scales."
+        }
+      ]
+    },
+    {
+      "file": "jobs-emergency.png",
+      "rows": 2,
+      "columns": 2,
+      "prompt": "Create a coordinated 2 by 2 sheet of FOUR distinct original colorful mobile life-simulation game job illustrations, matching the supplied reference's exact visual treatment: polished rounded cartoon objects, clean warm colored contour lines, saturated balanced colors, soft dimensional cel-like shading, high quality hand-illustrated detail, inviting mobile-game style. Real transparent background, no panels, no tile shapes, no labels, no letters, no watermarks, no emoji, no cast ground shadows. Keep generous clear transparent gutters between the four illustrations; each must fit entirely in its own equal quadrant with about 12 percent transparent margin. Consistent apparent scale, 3/4 perspective, object compositions rather than people; readable as small 40px icons. Order is strict: top-left firefighter: a bright red firefighter helmet with yellow visor beside a carefully coiled red fire hose with silver nozzle and a compact red fire axe, distinct bold firefighting equipment silhouette. Top-right paramedic: an open bright green and white emergency response bag with a portable defibrillator showing a simple heartbeat shape, folded bandages and compact medical shears; distinctive ambulance emergency response gear, no text, no logo, avoid a doctor coat/stethoscope. Bottom-left police officer: a navy police peaked cap, gold generic shield badge with no words, black radio with antenna and small blue notebook, friendly nonviolent public-service equipment, no weapon. Bottom-right construction worker: a yellow hardhat, orange safety vest, small stack of red bricks and builder's trowel, distinctive hands-on building-site tools; do not use blueprints or an architect model. Exactly 4 cohesive compositions, no extra fifth artwork. Preserve genuine alpha across all empty regions.",
+      "reference": "design/polish3/art/jobs-2.png",
+      "generated": "/workspace/generated_images/exec-93cae634-b023-4d52-ac24-2ea5d2cfe771.png",
+      "entries": [
+        {
+          "id": "firefighter",
+          "kind": "jobs",
+          "subject": "A red firefighter helmet and yellow visor, coiled fire hose with silver nozzle and red fire axe."
+        },
+        {
+          "id": "paramedic",
+          "kind": "jobs",
+          "subject": "An open green emergency response bag with defibrillator, bandages and medical shears."
+        },
+        {
+          "id": "police-officer",
+          "kind": "jobs",
+          "subject": "A navy police cap, generic gold shield badge, radio and incident notebook, without weapons."
+        },
+        {
+          "id": "construction-worker",
+          "kind": "jobs",
+          "subject": "A yellow hardhat, orange reflective safety vest, red bricks and bricklaying trowel with mortar."
+        }
+      ]
+    }
+  ]
+}

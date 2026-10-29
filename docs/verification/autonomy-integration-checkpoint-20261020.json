@@ -1,0 +1,86 @@
+{
+  "recordedAt": "2026-10-20T21:11:04.391642+00:00",
+  "status": "verified-source-checkpoint-with-independent-acceptance-still-in-progress",
+  "sourceRuntimeCommit": "5245fbb88f1dff6e92b5726bf730512bd2aa60ed",
+  "regressionSourceCommit": "e0bf44c6c1a7d6bf06a880d26c7471b03e9e90bf",
+  "sourceSnapshotCapturedAfterStartWithExactGitObjectProof": true,
+  "versions": {
+    "world": 33,
+    "engine": 34,
+    "content": 9,
+    "database": 13,
+    "checkpoint": "v4"
+  },
+  "gameSourceHash": "ed3148b53360a79b7ee7237c7a1916d6e878f00662609bf0b3a2a7c027a39f6f",
+  "combinedGamePersistenceSourceHash": "311399f14576a4baba505d5045e890a48cb6365cd7f938159fc55601497200ba",
+  "regression": {
+    "sessionClosed": true,
+    "exitCode": 0,
+    "tests": 2100,
+    "suites": 147,
+    "elapsedSeconds": 1260.991
+  },
+  "strictAppAndTestTypes": {
+    "sessionClosed": true,
+    "exitCode": 0
+  },
+  "sameImmutableAnnualPolicy": {
+    "sessionClosed": true,
+    "exitCode": 0,
+    "count": 120,
+    "seeds": [
+      0,
+      119
+    ],
+    "elapsedMs": 687245,
+    "additionalDistinctSeeds": 0,
+    "wholeTerminalWorldEqualityToOlderSourceClaimed": false
+  },
+  "freshAndroidAndIosHermesExports": {
+    "sessionClosed": true,
+    "exitCode": 0,
+    "nativeDeviceAcceptanceClaimed": false
+  },
+  "initialRegressionFailure": {
+    "failedTests": 1,
+    "passedTests": 2078,
+    "suites": 145,
+    "elapsedSeconds": 1172.283,
+    "cause": "Future-reader refusal test still used13, now supported. Test moved to14; no runtime or assertion weakening; complete final suite rerun passed."
+  },
+  "actualNativeCompletedScope": "Android24 software emulator/ExpoGo57.0.9. Reader12to13 and normal/130% opening previews/review cancellation keep all8tables unchanged. Existing AlexMartin1 to school17 normal commands; observed firstdecision2/result3 and school17 match entire projected worlds. Unchanged club/conduct/study controls and cancellation keep all8tables exact at17. Six other lives/backups including Nia134,60originalmoments/metadata and119originalreceipts preserved. Actual edited school results/cold checks still in progress; no new full native pass here.",
+  "inProgress": [
+    "Three real School edits and cold saved results, final acknowledgement",
+    "Serial70sample fixed-world action benchmark",
+    "Optional entrepreneur country continuation: completed natural US92,11otherindependentcountries running/queued",
+    "Final detailed evidence publication and next independently reviewed production features"
+  ],
+  "parked": "Additional import/export/sharing/load-save/TimeMachine/history-storage breadth; preserve automatic saving and exact resume.",
+  "overallCompletionEstimatePercent": 58,
+  "artifacts": {
+    "autonomy-integration-source-20261020.json": {
+      "sha256": "067bd9e268e59e3502040ca4fd6e2db8899651aac8c52346b8feafb2cab61a43",
+      "bytes": 58041
+    },
+    "regression-autonomy-integration-20261020.txt": {
+      "sha256": "e5376ac5c394fa1a7d7a4a432f3e58b9e4be7dee8c17ee83b86b08363f0c0cb9",
+      "bytes": 6687
+    },
+    "regression-autonomy-initial-failed-20261020.txt": {
+      "sha256": "b2a645e7fc3050017aa291dc8d77a498c0194838ecb1e4ecf6b2a42adf6179b2",
+      "bytes": 8739
+    },
+    "types-autonomy-integration-20261020.txt": {
+      "sha256": "543932f7a867cac23b25fe5912a2a0b0ab563539fbb8a121f7fb83b608c95309",
+      "bytes": 90
+    },
+    "life-sweep-autonomy-integration-120-20261020.ndjson": {
+      "sha256": "94f9adb4ad2e849da21bb217d22fbaecc9a372f40c8bacd26c5fff0fcfdcce31",
+      "bytes": 37660
+    },
+    "hermes-autonomy-integration-20261020.txt": {
+      "sha256": "134f27ad51fb797690f7dad75a1363fd2cb17920e82cb1dba1ddc37deefc7002",
+      "bytes": 2661
+    }
+  }
+}

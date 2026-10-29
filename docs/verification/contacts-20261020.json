@@ -1,0 +1,41 @@
+{
+  "recordedOn": "2026-10-20",
+  "baseCommit": "dac880d",
+  "scope": "Virtualised relationship list with factual role filters/name search/compact shortcuts and childhood-specific Family guidance; shared unchanged filter UI extracted from Extras",
+  "source": {
+    "app/(game)/(tabs)/relationships.tsx": "b206f868d1d4cc9a9461ee1e094afbfd1c32d88f23fbde43ae615debb5af9c71",
+    "app/(game)/achievements.tsx": "f556893946d885fc812e178dc5e51bc4dc0346108dd9fdd7654a9ed3afa97792",
+    "app/(game)/challenges.tsx": "c724751608fa722221b59bbceb41dc34567618a7a1bee871f00cfc6973656180",
+    "app/(game)/family.tsx": "6ab56651b995339d62e5f9eb73515f179c5d24a94633815eadfa1ccac5da1259",
+    "src/ui/FilterTabs.tsx": "cc538788b966c58c8396e1633ce4e2e22ab18ac7bf7144a2f25cbfbb21b0a168",
+    "src/ui/ProgressElements.tsx": "a85a6f1bd3642a728807308f7a28219343d5ce7dc7b5a4f870060041414dae72",
+    "tests/ui/contacts-flow.test.tsx": "33b430e37df4d8c37f0b62a10b99523a36eef8b77a628cbc579abf1106bfa429"
+  },
+  "verification": {
+    "tests": 16,
+    "suites": 6,
+    "seconds": 16.799,
+    "strictApplicationAndTestTypes": true,
+    "nativeRecord": "android24-contacts-20261020/read-only-exact.json",
+    "completeRegression": "1,226 tests / 80 suites at e5a4aaf; no new whole-suite total"
+  },
+  "exports": [
+    {
+      "file": "_expo/static/js/android/entry-8a047d49e0d9b470428ddfadad6c9eff.hbc",
+      "bytes": 5348621,
+      "sha256": "95fb529f8204722f4ec9c10b22eb4c98ea59d573a03ea417da7045d039f77cd1"
+    },
+    {
+      "file": "_expo/static/js/ios/entry-57d49a57186592a17eb514459792685e.hbc",
+      "bytes": 5043440,
+      "sha256": "79d9c614e4158eea93bc7ab65a28074cc14e9db850c5fc126ef07a37a143f742"
+    }
+  ],
+  "gamePersistenceAndSweepToolUnchangedFromBase": true,
+  "versions": {
+    "world": 28,
+    "engine": 27,
+    "content": 4,
+    "database": 6
+  }
+}

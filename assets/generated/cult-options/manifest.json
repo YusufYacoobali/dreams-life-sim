@@ -1,0 +1,157 @@
+{
+  "generator": "Built-in Image Gen",
+  "date": "2026-10-25",
+  "source": "design/cult-options/cult-options.png",
+  "sourceSha256": "8d746f9c1e1c1327a3d18043becc34abc19bb6ac68f93ec613a7a50a48e5120f",
+  "sourceSize": [
+    1536,
+    1024
+  ],
+  "icons": [
+    {
+      "file": "assets/generated/cult-options/meeting-chair.png",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 62157,
+      "sha256": "4d3a88ff789fa15cdacac94446de1fc3330e76be739fd6848483fb85e808b523",
+      "alphaBounds": [
+        31,
+        12,
+        225,
+        244
+      ],
+      "id": "meeting-chair",
+      "subject": "Blue folding meeting chair",
+      "cell": 0,
+      "source_rect": [
+        77,
+        51,
+        460,
+        510
+      ]
+    },
+    {
+      "file": "assets/generated/cult-options/cabin.png",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 71628,
+      "sha256": "88e759222179d3c577b3ed1643b5837a5e9ebf772b0ed1876672c8ea3b12216c",
+      "alphaBounds": [
+        12,
+        27,
+        244,
+        228
+      ],
+      "id": "cabin",
+      "subject": "Timber cabin with blue pitched roof",
+      "cell": 1,
+      "source_rect": [
+        521,
+        65,
+        1026,
+        502
+      ]
+    },
+    {
+      "file": "assets/generated/cult-options/farmhouse.png",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 80118,
+      "sha256": "1609075194d54a26aea0230963407156654d256d9381f4b9bdcc863eada375bf",
+      "alphaBounds": [
+        12,
+        18,
+        244,
+        238
+      ],
+      "id": "farmhouse",
+      "subject": "Cream farmhouse with terracotta roof",
+      "cell": 2,
+      "source_rect": [
+        1047,
+        54,
+        1521,
+        504
+      ]
+    },
+    {
+      "file": "assets/generated/cult-options/warehouse.png",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 53695,
+      "sha256": "d41e3011832fc536a458497e4b81472f660270964d8449e37d4c929e1a3167fe",
+      "alphaBounds": [
+        12,
+        51,
+        244,
+        205
+      ],
+      "id": "warehouse",
+      "subject": "Blue grey warehouse with roller door",
+      "cell": 3,
+      "source_rect": [
+        28,
+        589,
+        578,
+        953
+      ]
+    },
+    {
+      "file": "assets/generated/cult-options/bed.png",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 55336,
+      "sha256": "1aafac00937d738ac9a56304c19a5381ca7ebada7fe367d4c36370ab3b5dc308",
+      "alphaBounds": [
+        12,
+        25,
+        244,
+        230
+      ],
+      "id": "bed",
+      "subject": "Human single bed with blue blanket",
+      "cell": 4,
+      "source_rect": [
+        578,
+        554,
+        1057,
+        977
+      ]
+    },
+    {
+      "file": "assets/generated/cult-options/monument.png",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 41783,
+      "sha256": "037fcd7f7dc9e22abb55c4e524f648e53c8fd18da6a2a0096995673e0aa69e4a",
+      "alphaBounds": [
+        49,
+        12,
+        207,
+        244
+      ],
+      "id": "monument",
+      "subject": "Stone obelisk on a gold-trimmed plinth",
+      "cell": 5,
+      "source_rect": [
+        1132,
+        514,
+        1457,
+        990
+      ]
+    }
+  ],
+  "runtimeBytes": 364717
+}

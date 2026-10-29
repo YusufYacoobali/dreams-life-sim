@@ -1,0 +1,70 @@
+{
+  "checkpoint": "A",
+  "status": "ready for user visual approval",
+  "productionFilesModified": false,
+  "typecheck": {
+    "command": "npm run typecheck",
+    "exitCode": 0,
+    "scope": "strict application and tests"
+  },
+  "focusedTests": {
+    "command": "npm test -- --runTestsByPath tests/ui/portrait-accessibility.test.tsx tests/ui/appearance-labels.test.tsx tests/ui/onboarding-flow.test.tsx tests/ui/profile-overview-save-flow.test.tsx",
+    "suites": 4,
+    "tests": 21,
+    "exitCode": 0,
+    "scope": "existing renderer, semantics and save journeys; prototypes not integrated"
+  },
+  "artworkChecks": [
+    {
+      "file": "01-short-black.png",
+      "size": [
+        640,
+        640
+      ],
+      "mode": "RGBA",
+      "borderAlphaMax": 0
+    },
+    {
+      "file": "02-brown-shoulder.png",
+      "size": [
+        640,
+        640
+      ],
+      "mode": "RGBA",
+      "borderAlphaMax": 0
+    },
+    {
+      "file": "03-curly-black.png",
+      "size": [
+        640,
+        640
+      ],
+      "mode": "RGBA",
+      "borderAlphaMax": 0
+    },
+    {
+      "file": "04-blonde.png",
+      "size": [
+        640,
+        640
+      ],
+      "mode": "RGBA",
+      "borderAlphaMax": 0
+    }
+  ],
+  "visualReview": [
+    "Short black hair: clear silhouette, visible neck/teal clothing, readable at 52px.",
+    "Brown shoulder length: clean front/back hair silhouette, light skin, coral clothing.",
+    "Black curls: grouped illustrated curls, dark skin keeps visible eyes and mouth, cobalt clothing.",
+    "Blonde: coherent golden silhouette, warm light skin, turquoise clothing.",
+    "All four: transparent backgrounds, no clipped hair, visible shoulders, crisp at small sizes, no sepia tint or 3D head rendering."
+  ],
+  "pending": [
+    "User visual approval",
+    "Reusable layer artwork and registration",
+    "All 16 new presets and full colour/face coverage",
+    "Newborn through elderly illustration stages",
+    "Production renderer integration with unchanged save format and interface",
+    "Native Android/iOS screenshots and rendering/performance acceptance"
+  ]
+}

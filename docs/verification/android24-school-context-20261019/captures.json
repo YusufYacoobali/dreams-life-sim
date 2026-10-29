@@ -1,0 +1,57 @@
+{
+  "scope": "Unmodified actual Android 24 390x844 captures; school/profile tab context and real academic help; software emulator is not physical timing or full-release acceptance",
+  "captures": {
+    "academic-help-control.png": {
+      "bytes": 42956,
+      "sha256": "5b819faa8efdec314b089521e5e65d46beb52beea10fb8466f1a6a7e50686043"
+    },
+    "academic-help-result.png": {
+      "bytes": 53162,
+      "sha256": "66ea0a16b4a3771a6e98ef6704b26cd8ef0674e501be42f6494c0a49ef1d4d97"
+    },
+    "academic-help-used.png": {
+      "bytes": 43298,
+      "sha256": "584a666a15d13a1a11142d4f8ee05ac858f56fa5a16007d32fe23a2fb267f27b"
+    },
+    "classmate-final.png": {
+      "bytes": 49177,
+      "sha256": "258f1d95bc6e3c5d74ea76f304b71efd9231cd7d9f087f8af05e42db2866c703"
+    },
+    "classmate-profile-after.png": {
+      "bytes": 49137,
+      "sha256": "cea3aebc6f20df95a34787f49e412517a0fdab1594347a5f7f2588f04e52c1c1"
+    },
+    "classmate-profile-before.png": {
+      "bytes": 48990,
+      "sha256": "29bb43c2ff0dc94a2de9d89f0fae5b6aaf06db6d389bf23b3334c6f1a1a31698"
+    },
+    "classmate-search.png": {
+      "bytes": 43674,
+      "sha256": "20100696ca395062e16c7c7df6673f7f505dc178fbfdffc88dfb5949b107de26"
+    },
+    "classmates.png": {
+      "bytes": 51656,
+      "sha256": "78890f2015297ba75b4747bedd491c5f1db6086ec43514a654d6a527c0827a4b"
+    },
+    "filtered-search-after-back.png": {
+      "bytes": 31218,
+      "sha256": "8863e3e517939ab6fdb6bb09b73d09b57529e3f6eea0e13edcbaa90662745140"
+    },
+    "parent-profile.png": {
+      "bytes": 47283,
+      "sha256": "60d9cdf2cb452361502b6c6371425654087eb243bb65b239d2e0b8a09b004c95"
+    },
+    "relationships.png": {
+      "bytes": 69443,
+      "sha256": "0854d280258a66268eff7dac5310735c86d29c67b90d3c32481466c7812acbf4"
+    },
+    "teacher-list.png": {
+      "bytes": 34072,
+      "sha256": "bb24494c4715027c87ad5d10b8e2d9e80584cf3b0a0e3950af764a472d39c0cd"
+    },
+    "teacher-profile.png": {
+      "bytes": 53471,
+      "sha256": "cb534ad4a2709d7870724f3bbf8bef50f91411eeaab40d5f385315e60d02688c"
+    }
+  }
+}

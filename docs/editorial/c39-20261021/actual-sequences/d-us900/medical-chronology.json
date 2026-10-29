@@ -1,0 +1,2353 @@
+[
+  {
+    "ordinal": 19,
+    "date": {
+      "day": 1,
+      "month": 11,
+      "year": 2021
+    },
+    "age": 21,
+    "eventId": "emergency_condition_person_player_61_0_2021",
+    "conditionId": "condition_person_player_61_0",
+    "conditionType": "asthma",
+    "finalFirstDiagnosisDate": {
+      "year": 2022,
+      "month": 1,
+      "day": 1
+    },
+    "actualKnownDiagnosisDisclosed": false,
+    "actualSetup": "Your symptoms have become serious: recurring wheezing and shortness of breath. A hospital assessment can begin treatment and may require a short stay. The quoted care costs $360.00; an unpaid emergency bill remains a real obligation.",
+    "selected": {
+      "authoredBranch": 2,
+      "eligibleIndex": 1,
+      "id": "decline",
+      "sourceIndex": 1
+    },
+    "actualResult": {
+      "body": "You declined the assessment. The condition remains active and the risk has not gone away.",
+      "effects": [
+        {
+          "id": "care",
+          "label": "Medical care",
+          "tone": "negative",
+          "value": "Declined"
+        }
+      ],
+      "id": "emergency_condition_person_player_61_0_2021_result",
+      "illustration": "care",
+      "kind": "result",
+      "title": "Care declined"
+    },
+    "actualJournals": [
+      {
+        "category": "event",
+        "date": {
+          "day": 1,
+          "month": 11,
+          "year": 2021
+        },
+        "id": "emergency_condition_person_player_61_0_2021_choice",
+        "personId": "person_player",
+        "text": "I declined urgent medical assessment."
+      }
+    ]
+  },
+  {
+    "ordinal": 20,
+    "date": {
+      "day": 1,
+      "month": 1,
+      "year": 2022
+    },
+    "age": 22,
+    "eventId": "emergency_condition_person_player_61_0_2022",
+    "conditionId": "condition_person_player_61_0",
+    "conditionType": "asthma",
+    "finalFirstDiagnosisDate": {
+      "year": 2022,
+      "month": 1,
+      "day": 1
+    },
+    "actualKnownDiagnosisDisclosed": false,
+    "actualSetup": "Your symptoms have become serious: recurring wheezing and shortness of breath. A hospital assessment can begin treatment and may require a short stay. The quoted care costs $360.00; an unpaid emergency bill remains a real obligation.",
+    "selected": {
+      "authoredBranch": 1,
+      "eligibleIndex": 0,
+      "id": "care",
+      "sourceIndex": 0
+    },
+    "actualResult": {
+      "body": "The assessment, treatment outcome and bill are recorded. A hospital stay affects study and paid work as time passes.",
+      "effects": [
+        {
+          "id": "care",
+          "label": "Medical care",
+          "tone": "positive",
+          "value": "Admitted to hospital"
+        }
+      ],
+      "id": "emergency_condition_person_player_61_0_2022_result",
+      "illustration": "care",
+      "kind": "result",
+      "title": "Medical care arranged"
+    },
+    "actualJournals": [
+      {
+        "category": "health",
+        "date": {
+          "day": 1,
+          "month": 1,
+          "year": 2022
+        },
+        "id": "fact_67_265",
+        "personId": "person_player",
+        "text": "I began medication care for Asthma."
+      },
+      {
+        "category": "event",
+        "date": {
+          "day": 1,
+          "month": 1,
+          "year": 2022
+        },
+        "id": "emergency_condition_person_player_61_0_2022_choice",
+        "personId": "person_player",
+        "text": "I accepted urgent medical care."
+      }
+    ]
+  },
+  {
+    "ordinal": 22,
+    "date": {
+      "day": 1,
+      "month": 1,
+      "year": 2023
+    },
+    "age": 23,
+    "eventId": "emergency_condition_person_player_61_0_2023",
+    "conditionId": "condition_person_player_61_0",
+    "conditionType": "asthma",
+    "finalFirstDiagnosisDate": {
+      "year": 2022,
+      "month": 1,
+      "day": 1
+    },
+    "actualKnownDiagnosisDisclosed": true,
+    "actualSetup": "Your symptoms have become serious: recurring wheezing and shortness of breath. You have been diagnosed with Asthma. A hospital assessment can begin treatment and may require a short stay. The quoted care costs $360.00; an unpaid emergency bill remains a real obligation.",
+    "selected": {
+      "authoredBranch": 1,
+      "eligibleIndex": 0,
+      "id": "care",
+      "sourceIndex": 0
+    },
+    "actualResult": {
+      "body": "The assessment, treatment outcome and bill are recorded. A hospital stay affects study and paid work as time passes.",
+      "effects": [
+        {
+          "id": "care",
+          "label": "Medical care",
+          "tone": "positive",
+          "value": "Admitted to hospital"
+        }
+      ],
+      "id": "emergency_condition_person_player_61_0_2023_result",
+      "illustration": "care",
+      "kind": "result",
+      "title": "Medical care arranged"
+    },
+    "actualJournals": [
+      {
+        "category": "health",
+        "date": {
+          "day": 1,
+          "month": 1,
+          "year": 2023
+        },
+        "id": "fact_72_280",
+        "personId": "person_player",
+        "text": "I began medication care for Asthma."
+      },
+      {
+        "category": "event",
+        "date": {
+          "day": 1,
+          "month": 1,
+          "year": 2023
+        },
+        "id": "emergency_condition_person_player_61_0_2023_choice",
+        "personId": "person_player",
+        "text": "I accepted urgent medical care."
+      }
+    ]
+  },
+  {
+    "ordinal": 24,
+    "date": {
+      "day": 1,
+      "month": 1,
+      "year": 2024
+    },
+    "age": 24,
+    "eventId": "emergency_condition_person_player_61_0_2024",
+    "conditionId": "condition_person_player_61_0",
+    "conditionType": "asthma",
+    "finalFirstDiagnosisDate": {
+      "year": 2022,
+      "month": 1,
+      "day": 1
+    },
+    "actualKnownDiagnosisDisclosed": true,
+    "actualSetup": "Your symptoms have become serious: recurring wheezing and shortness of breath. You have been diagnosed with Asthma. A hospital assessment can begin treatment and may require a short stay. The quoted care costs $360.00; an unpaid emergency bill remains a real obligation.",
+    "selected": {
+      "authoredBranch": 1,
+      "eligibleIndex": 0,
+      "id": "care",
+      "sourceIndex": 0
+    },
+    "actualResult": {
+      "body": "The assessment, treatment outcome and bill are recorded. A hospital stay affects study and paid work as time passes.",
+      "effects": [
+        {
+          "id": "care",
+          "label": "Medical care",
+          "tone": "positive",
+          "value": "Admitted to hospital"
+        }
+      ],
+      "id": "emergency_condition_person_player_61_0_2024_result",
+      "illustration": "care",
+      "kind": "result",
+      "title": "Medical care arranged"
+    },
+    "actualJournals": [
+      {
+        "category": "health",
+        "date": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "id": "fact_77_295",
+        "personId": "person_player",
+        "text": "I began medication care for Asthma."
+      },
+      {
+        "category": "event",
+        "date": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "id": "emergency_condition_person_player_61_0_2024_choice",
+        "personId": "person_player",
+        "text": "I accepted urgent medical care."
+      }
+    ]
+  },
+  {
+    "ordinal": 26,
+    "date": {
+      "day": 1,
+      "month": 1,
+      "year": 2025
+    },
+    "age": 25,
+    "eventId": "emergency_condition_person_player_61_0_2025",
+    "conditionId": "condition_person_player_61_0",
+    "conditionType": "asthma",
+    "finalFirstDiagnosisDate": {
+      "year": 2022,
+      "month": 1,
+      "day": 1
+    },
+    "actualKnownDiagnosisDisclosed": true,
+    "actualSetup": "Your symptoms have become serious: recurring wheezing and shortness of breath. You have been diagnosed with Asthma. A hospital assessment can begin treatment and may require a short stay. The quoted care costs $360.00; an unpaid emergency bill remains a real obligation.",
+    "selected": {
+      "authoredBranch": 1,
+      "eligibleIndex": 0,
+      "id": "care",
+      "sourceIndex": 0
+    },
+    "actualResult": {
+      "body": "The assessment, treatment outcome and bill are recorded. A hospital stay affects study and paid work as time passes.",
+      "effects": [
+        {
+          "id": "care",
+          "label": "Medical care",
+          "tone": "positive",
+          "value": "Admitted to hospital"
+        }
+      ],
+      "id": "emergency_condition_person_player_61_0_2025_result",
+      "illustration": "care",
+      "kind": "result",
+      "title": "Medical care arranged"
+    },
+    "actualJournals": [
+      {
+        "category": "health",
+        "date": {
+          "day": 1,
+          "month": 1,
+          "year": 2025
+        },
+        "id": "fact_82_316",
+        "personId": "person_player",
+        "text": "I began medication care for Asthma."
+      },
+      {
+        "category": "event",
+        "date": {
+          "day": 1,
+          "month": 1,
+          "year": 2025
+        },
+        "id": "emergency_condition_person_player_61_0_2025_choice",
+        "personId": "person_player",
+        "text": "I accepted urgent medical care."
+      }
+    ]
+  },
+  {
+    "ordinal": 27,
+    "date": {
+      "day": 1,
+      "month": 12,
+      "year": 2025
+    },
+    "age": 25,
+    "eventId": "emergency_condition_person_player_76_1_2025",
+    "conditionId": "condition_person_player_76_1",
+    "conditionType": "anxiety",
+    "finalFirstDiagnosisDate": {
+      "year": 2031,
+      "month": 2,
+      "day": 1
+    },
+    "actualKnownDiagnosisDisclosed": false,
+    "actualSetup": "Your symptoms have become serious: persistent worry and disrupted sleep. A hospital assessment can begin treatment and may require a short stay. The quoted care costs $360.00; an unpaid emergency bill remains a real obligation.",
+    "selected": {
+      "authoredBranch": 2,
+      "eligibleIndex": 1,
+      "id": "decline",
+      "sourceIndex": 1
+    },
+    "actualResult": {
+      "body": "You declined the assessment. The condition remains active and the risk has not gone away.",
+      "effects": [
+        {
+          "id": "care",
+          "label": "Medical care",
+          "tone": "negative",
+          "value": "Declined"
+        }
+      ],
+      "id": "emergency_condition_person_player_76_1_2025_result",
+      "illustration": "care",
+      "kind": "result",
+      "title": "Care declined"
+    },
+    "actualJournals": [
+      {
+        "category": "event",
+        "date": {
+          "day": 1,
+          "month": 12,
+          "year": 2025
+        },
+        "id": "emergency_condition_person_player_76_1_2025_choice",
+        "personId": "person_player",
+        "text": "I declined urgent medical assessment."
+      }
+    ]
+  },
+  {
+    "ordinal": 28,
+    "date": {
+      "day": 1,
+      "month": 1,
+      "year": 2026
+    },
+    "age": 26,
+    "eventId": "emergency_condition_person_player_61_0_2026",
+    "conditionId": "condition_person_player_61_0",
+    "conditionType": "asthma",
+    "finalFirstDiagnosisDate": {
+      "year": 2022,
+      "month": 1,
+      "day": 1
+    },
+    "actualKnownDiagnosisDisclosed": true,
+    "actualSetup": "Your symptoms have become serious: recurring wheezing and shortness of breath. You have been diagnosed with Asthma. A hospital assessment can begin treatment and may require a short stay. The quoted care costs $360.00; an unpaid emergency bill remains a real obligation.",
+    "selected": {
+      "authoredBranch": 1,
+      "eligibleIndex": 0,
+      "id": "care",
+      "sourceIndex": 0
+    },
+    "actualResult": {
+      "body": "The assessment, treatment outcome and bill are recorded. A hospital stay affects study and paid work as time passes.",
+      "effects": [
+        {
+          "id": "care",
+          "label": "Medical care",
+          "tone": "positive",
+          "value": "Admitted to hospital"
+        }
+      ],
+      "id": "emergency_condition_person_player_61_0_2026_result",
+      "illustration": "care",
+      "kind": "result",
+      "title": "Medical care arranged"
+    },
+    "actualJournals": [
+      {
+        "category": "health",
+        "date": {
+          "day": 1,
+          "month": 1,
+          "year": 2026
+        },
+        "id": "fact_88_333",
+        "personId": "person_player",
+        "text": "I began medication care for Asthma."
+      },
+      {
+        "category": "event",
+        "date": {
+          "day": 1,
+          "month": 1,
+          "year": 2026
+        },
+        "id": "emergency_condition_person_player_61_0_2026_choice",
+        "personId": "person_player",
+        "text": "I accepted urgent medical care."
+      }
+    ]
+  },
+  {
+    "ordinal": 29,
+    "date": {
+      "day": 1,
+      "month": 4,
+      "year": 2026
+    },
+    "age": 26,
+    "eventId": "emergency_condition_person_player_76_1_2026",
+    "conditionId": "condition_person_player_76_1",
+    "conditionType": "anxiety",
+    "finalFirstDiagnosisDate": {
+      "year": 2031,
+      "month": 2,
+      "day": 1
+    },
+    "actualKnownDiagnosisDisclosed": false,
+    "actualSetup": "Your symptoms have become serious: persistent worry and disrupted sleep. A hospital assessment can begin treatment and may require a short stay. The quoted care costs $360.00; an unpaid emergency bill remains a real obligation.",
+    "selected": {
+      "authoredBranch": 2,
+      "eligibleIndex": 1,
+      "id": "decline",
+      "sourceIndex": 1
+    },
+    "actualResult": {
+      "body": "You declined the assessment. The condition remains active and the risk has not gone away.",
+      "effects": [
+        {
+          "id": "care",
+          "label": "Medical care",
+          "tone": "negative",
+          "value": "Declined"
+        }
+      ],
+      "id": "emergency_condition_person_player_76_1_2026_result",
+      "illustration": "care",
+      "kind": "result",
+      "title": "Care declined"
+    },
+    "actualJournals": [
+      {
+        "category": "event",
+        "date": {
+          "day": 1,
+          "month": 4,
+          "year": 2026
+        },
+        "id": "emergency_condition_person_player_76_1_2026_choice",
+        "personId": "person_player",
+        "text": "I declined urgent medical assessment."
+      }
+    ]
+  },
+  {
+    "ordinal": 30,
+    "date": {
+      "day": 1,
+      "month": 1,
+      "year": 2027
+    },
+    "age": 27,
+    "eventId": "emergency_condition_person_player_61_0_2027",
+    "conditionId": "condition_person_player_61_0",
+    "conditionType": "asthma",
+    "finalFirstDiagnosisDate": {
+      "year": 2022,
+      "month": 1,
+      "day": 1
+    },
+    "actualKnownDiagnosisDisclosed": true,
+    "actualSetup": "Your symptoms have become serious: recurring wheezing and shortness of breath. You have been diagnosed with Asthma. A hospital assessment can begin treatment and may require a short stay. The quoted care costs $360.00; an unpaid emergency bill remains a real obligation.",
+    "selected": {
+      "authoredBranch": 1,
+      "eligibleIndex": 0,
+      "id": "care",
+      "sourceIndex": 0
+    },
+    "actualResult": {
+      "body": "The assessment, treatment outcome and bill are recorded. A hospital stay affects study and paid work as time passes.",
+      "effects": [
+        {
+          "id": "care",
+          "label": "Medical care",
+          "tone": "positive",
+          "value": "Admitted to hospital"
+        }
+      ],
+      "id": "emergency_condition_person_player_61_0_2027_result",
+      "illustration": "care",
+      "kind": "result",
+      "title": "Medical care arranged"
+    },
+    "actualJournals": [
+      {
+        "category": "health",
+        "date": {
+          "day": 1,
+          "month": 1,
+          "year": 2027
+        },
+        "id": "fact_94_354",
+        "personId": "person_player",
+        "text": "I began medication care for Asthma."
+      },
+      {
+        "category": "event",
+        "date": {
+          "day": 1,
+          "month": 1,
+          "year": 2027
+        },
+        "id": "emergency_condition_person_player_61_0_2027_choice",
+        "personId": "person_player",
+        "text": "I accepted urgent medical care."
+      }
+    ]
+  },
+  {
+    "ordinal": 31,
+    "date": {
+      "day": 1,
+      "month": 4,
+      "year": 2027
+    },
+    "age": 27,
+    "eventId": "emergency_condition_person_player_76_1_2027",
+    "conditionId": "condition_person_player_76_1",
+    "conditionType": "anxiety",
+    "finalFirstDiagnosisDate": {
+      "year": 2031,
+      "month": 2,
+      "day": 1
+    },
+    "actualKnownDiagnosisDisclosed": false,
+    "actualSetup": "Your symptoms have become serious: persistent worry and disrupted sleep. A hospital assessment can begin treatment and may require a short stay. The quoted care costs $360.00; an unpaid emergency bill remains a real obligation.",
+    "selected": {
+      "authoredBranch": 2,
+      "eligibleIndex": 1,
+      "id": "decline",
+      "sourceIndex": 1
+    },
+    "actualResult": {
+      "body": "You declined the assessment. The condition remains active and the risk has not gone away.",
+      "effects": [
+        {
+          "id": "care",
+          "label": "Medical care",
+          "tone": "negative",
+          "value": "Declined"
+        }
+      ],
+      "id": "emergency_condition_person_player_76_1_2027_result",
+      "illustration": "care",
+      "kind": "result",
+      "title": "Care declined"
+    },
+    "actualJournals": [
+      {
+        "category": "event",
+        "date": {
+          "day": 1,
+          "month": 4,
+          "year": 2027
+        },
+        "id": "emergency_condition_person_player_76_1_2027_choice",
+        "personId": "person_player",
+        "text": "I declined urgent medical assessment."
+      }
+    ]
+  },
+  {
+    "ordinal": 32,
+    "date": {
+      "day": 1,
+      "month": 1,
+      "year": 2028
+    },
+    "age": 28,
+    "eventId": "emergency_condition_person_player_61_0_2028",
+    "conditionId": "condition_person_player_61_0",
+    "conditionType": "asthma",
+    "finalFirstDiagnosisDate": {
+      "year": 2022,
+      "month": 1,
+      "day": 1
+    },
+    "actualKnownDiagnosisDisclosed": true,
+    "actualSetup": "Your symptoms have become serious: recurring wheezing and shortness of breath. You have been diagnosed with Asthma. A hospital assessment can begin treatment and may require a short stay. The quoted care costs $360.00; an unpaid emergency bill remains a real obligation.",
+    "selected": {
+      "authoredBranch": 1,
+      "eligibleIndex": 0,
+      "id": "care",
+      "sourceIndex": 0
+    },
+    "actualResult": {
+      "body": "The assessment, treatment outcome and bill are recorded. A hospital stay affects study and paid work as time passes.",
+      "effects": [
+        {
+          "id": "care",
+          "label": "Medical care",
+          "tone": "positive",
+          "value": "Admitted to hospital"
+        }
+      ],
+      "id": "emergency_condition_person_player_61_0_2028_result",
+      "illustration": "care",
+      "kind": "result",
+      "title": "Medical care arranged"
+    },
+    "actualJournals": [
+      {
+        "category": "health",
+        "date": {
+          "day": 1,
+          "month": 1,
+          "year": 2028
+        },
+        "id": "fact_100_377",
+        "personId": "person_player",
+        "text": "I began medication care for Asthma."
+      },
+      {
+        "category": "event",
+        "date": {
+          "day": 1,
+          "month": 1,
+          "year": 2028
+        },
+        "id": "emergency_condition_person_player_61_0_2028_choice",
+        "personId": "person_player",
+        "text": "I accepted urgent medical care."
+      }
+    ]
+  },
+  {
+    "ordinal": 33,
+    "date": {
+      "day": 1,
+      "month": 4,
+      "year": 2028
+    },
+    "age": 28,
+    "eventId": "emergency_condition_person_player_76_1_2028",
+    "conditionId": "condition_person_player_76_1",
+    "conditionType": "anxiety",
+    "finalFirstDiagnosisDate": {
+      "year": 2031,
+      "month": 2,
+      "day": 1
+    },
+    "actualKnownDiagnosisDisclosed": false,
+    "actualSetup": "Your symptoms have become serious: persistent worry and disrupted sleep. A hospital assessment can begin treatment and may require a short stay. The quoted care costs $360.00; an unpaid emergency bill remains a real obligation.",
+    "selected": {
+      "authoredBranch": 2,
+      "eligibleIndex": 1,
+      "id": "decline",
+      "sourceIndex": 1
+    },
+    "actualResult": {
+      "body": "You declined the assessment. The condition remains active and the risk has not gone away.",
+      "effects": [
+        {
+          "id": "care",
+          "label": "Medical care",
+          "tone": "negative",
+          "value": "Declined"
+        }
+      ],
+      "id": "emergency_condition_person_player_76_1_2028_result",
+      "illustration": "care",
+      "kind": "result",
+      "title": "Care declined"
+    },
+    "actualJournals": [
+      {
+        "category": "event",
+        "date": {
+          "day": 1,
+          "month": 4,
+          "year": 2028
+        },
+        "id": "emergency_condition_person_player_76_1_2028_choice",
+        "personId": "person_player",
+        "text": "I declined urgent medical assessment."
+      }
+    ]
+  },
+  {
+    "ordinal": 34,
+    "date": {
+      "day": 1,
+      "month": 1,
+      "year": 2029
+    },
+    "age": 29,
+    "eventId": "emergency_condition_person_player_61_0_2029",
+    "conditionId": "condition_person_player_61_0",
+    "conditionType": "asthma",
+    "finalFirstDiagnosisDate": {
+      "year": 2022,
+      "month": 1,
+      "day": 1
+    },
+    "actualKnownDiagnosisDisclosed": true,
+    "actualSetup": "Your symptoms have become serious: recurring wheezing and shortness of breath. You have been diagnosed with Asthma. A hospital assessment can begin treatment and may require a short stay. The quoted care costs $360.00; an unpaid emergency bill remains a real obligation.",
+    "selected": {
+      "authoredBranch": 1,
+      "eligibleIndex": 0,
+      "id": "care",
+      "sourceIndex": 0
+    },
+    "actualResult": {
+      "body": "The assessment, treatment outcome and bill are recorded. A hospital stay affects study and paid work as time passes.",
+      "effects": [
+        {
+          "id": "care",
+          "label": "Medical care",
+          "tone": "positive",
+          "value": "Admitted to hospital"
+        }
+      ],
+      "id": "emergency_condition_person_player_61_0_2029_result",
+      "illustration": "care",
+      "kind": "result",
+      "title": "Medical care arranged"
+    },
+    "actualJournals": [
+      {
+        "category": "health",
+        "date": {
+          "day": 1,
+          "month": 1,
+          "year": 2029
+        },
+        "id": "fact_106_396",
+        "personId": "person_player",
+        "text": "I began medication care for Asthma."
+      },
+      {
+        "category": "event",
+        "date": {
+          "day": 1,
+          "month": 1,
+          "year": 2029
+        },
+        "id": "emergency_condition_person_player_61_0_2029_choice",
+        "personId": "person_player",
+        "text": "I accepted urgent medical care."
+      }
+    ]
+  },
+  {
+    "ordinal": 35,
+    "date": {
+      "day": 1,
+      "month": 4,
+      "year": 2029
+    },
+    "age": 29,
+    "eventId": "emergency_condition_person_player_76_1_2029",
+    "conditionId": "condition_person_player_76_1",
+    "conditionType": "anxiety",
+    "finalFirstDiagnosisDate": {
+      "year": 2031,
+      "month": 2,
+      "day": 1
+    },
+    "actualKnownDiagnosisDisclosed": false,
+    "actualSetup": "Your symptoms have become serious: persistent worry and disrupted sleep. A hospital assessment can begin treatment and may require a short stay. The quoted care costs $360.00; an unpaid emergency bill remains a real obligation.",
+    "selected": {
+      "authoredBranch": 2,
+      "eligibleIndex": 1,
+      "id": "decline",
+      "sourceIndex": 1
+    },
+    "actualResult": {
+      "body": "You declined the assessment. The condition remains active and the risk has not gone away.",
+      "effects": [
+        {
+          "id": "care",
+          "label": "Medical care",
+          "tone": "negative",
+          "value": "Declined"
+        }
+      ],
+      "id": "emergency_condition_person_player_76_1_2029_result",
+      "illustration": "care",
+      "kind": "result",
+      "title": "Care declined"
+    },
+    "actualJournals": [
+      {
+        "category": "event",
+        "date": {
+          "day": 1,
+          "month": 4,
+          "year": 2029
+        },
+        "id": "emergency_condition_person_player_76_1_2029_choice",
+        "personId": "person_player",
+        "text": "I declined urgent medical assessment."
+      }
+    ]
+  },
+  {
+    "ordinal": 36,
+    "date": {
+      "day": 1,
+      "month": 1,
+      "year": 2030
+    },
+    "age": 30,
+    "eventId": "emergency_condition_person_player_61_0_2030",
+    "conditionId": "condition_person_player_61_0",
+    "conditionType": "asthma",
+    "finalFirstDiagnosisDate": {
+      "year": 2022,
+      "month": 1,
+      "day": 1
+    },
+    "actualKnownDiagnosisDisclosed": true,
+    "actualSetup": "Your symptoms have become serious: recurring wheezing and shortness of breath. You have been diagnosed with Asthma. A hospital assessment can begin treatment and may require a short stay. The quoted care costs $360.00; an unpaid emergency bill remains a real obligation.",
+    "selected": {
+      "authoredBranch": 1,
+      "eligibleIndex": 0,
+      "id": "care",
+      "sourceIndex": 0
+    },
+    "actualResult": {
+      "body": "The assessment, treatment outcome and bill are recorded. A hospital stay affects study and paid work as time passes.",
+      "effects": [
+        {
+          "id": "care",
+          "label": "Medical care",
+          "tone": "positive",
+          "value": "Admitted to hospital"
+        }
+      ],
+      "id": "emergency_condition_person_player_61_0_2030_result",
+      "illustration": "care",
+      "kind": "result",
+      "title": "Medical care arranged"
+    },
+    "actualJournals": [
+      {
+        "category": "health",
+        "date": {
+          "day": 1,
+          "month": 1,
+          "year": 2030
+        },
+        "id": "fact_112_416",
+        "personId": "person_player",
+        "text": "I began medication care for Asthma."
+      },
+      {
+        "category": "event",
+        "date": {
+          "day": 1,
+          "month": 1,
+          "year": 2030
+        },
+        "id": "emergency_condition_person_player_61_0_2030_choice",
+        "personId": "person_player",
+        "text": "I accepted urgent medical care."
+      }
+    ]
+  },
+  {
+    "ordinal": 37,
+    "date": {
+      "day": 1,
+      "month": 4,
+      "year": 2030
+    },
+    "age": 30,
+    "eventId": "emergency_condition_person_player_76_1_2030",
+    "conditionId": "condition_person_player_76_1",
+    "conditionType": "anxiety",
+    "finalFirstDiagnosisDate": {
+      "year": 2031,
+      "month": 2,
+      "day": 1
+    },
+    "actualKnownDiagnosisDisclosed": false,
+    "actualSetup": "Your symptoms have become serious: persistent worry and disrupted sleep. A hospital assessment can begin treatment and may require a short stay. The quoted care costs $360.00; an unpaid emergency bill remains a real obligation.",
+    "selected": {
+      "authoredBranch": 2,
+      "eligibleIndex": 1,
+      "id": "decline",
+      "sourceIndex": 1
+    },
+    "actualResult": {
+      "body": "You declined the assessment. The condition remains active and the risk has not gone away.",
+      "effects": [
+        {
+          "id": "care",
+          "label": "Medical care",
+          "tone": "negative",
+          "value": "Declined"
+        }
+      ],
+      "id": "emergency_condition_person_player_76_1_2030_result",
+      "illustration": "care",
+      "kind": "result",
+      "title": "Care declined"
+    },
+    "actualJournals": [
+      {
+        "category": "event",
+        "date": {
+          "day": 1,
+          "month": 4,
+          "year": 2030
+        },
+        "id": "emergency_condition_person_player_76_1_2030_choice",
+        "personId": "person_player",
+        "text": "I declined urgent medical assessment."
+      }
+    ]
+  },
+  {
+    "ordinal": 38,
+    "date": {
+      "day": 1,
+      "month": 5,
+      "year": 2030
+    },
+    "age": 30,
+    "eventId": "emergency_condition_person_player_103_2_2030",
+    "conditionId": "condition_person_player_103_2",
+    "conditionType": "diabetes",
+    "finalFirstDiagnosisDate": {
+      "year": 2030,
+      "month": 5,
+      "day": 1
+    },
+    "actualKnownDiagnosisDisclosed": false,
+    "actualSetup": "Your symptoms have become serious: unusual thirst and persistent fatigue. A hospital assessment can begin treatment and may require a short stay. The quoted care costs $540.00; an unpaid emergency bill remains a real obligation.",
+    "selected": {
+      "authoredBranch": 1,
+      "eligibleIndex": 0,
+      "id": "care",
+      "sourceIndex": 0
+    },
+    "actualResult": {
+      "body": "The assessment, treatment outcome and bill are recorded. A hospital stay affects study and paid work as time passes.",
+      "effects": [
+        {
+          "id": "care",
+          "label": "Medical care",
+          "tone": "positive",
+          "value": "Admitted to hospital"
+        }
+      ],
+      "id": "emergency_condition_person_player_103_2_2030_result",
+      "illustration": "care",
+      "kind": "result",
+      "title": "Medical care arranged"
+    },
+    "actualJournals": [
+      {
+        "category": "health",
+        "date": {
+          "day": 1,
+          "month": 5,
+          "year": 2030
+        },
+        "id": "fact_118_431",
+        "personId": "person_player",
+        "text": "I began medication care for Diabetes."
+      },
+      {
+        "category": "event",
+        "date": {
+          "day": 1,
+          "month": 5,
+          "year": 2030
+        },
+        "id": "emergency_condition_person_player_103_2_2030_choice",
+        "personId": "person_player",
+        "text": "I accepted urgent medical care."
+      }
+    ]
+  },
+  {
+    "ordinal": 39,
+    "date": {
+      "day": 1,
+      "month": 1,
+      "year": 2031
+    },
+    "age": 31,
+    "eventId": "emergency_condition_person_player_61_0_2031",
+    "conditionId": "condition_person_player_61_0",
+    "conditionType": "asthma",
+    "finalFirstDiagnosisDate": {
+      "year": 2022,
+      "month": 1,
+      "day": 1
+    },
+    "actualKnownDiagnosisDisclosed": true,
+    "actualSetup": "Your symptoms have become serious: recurring wheezing and shortness of breath. You have been diagnosed with Asthma. A hospital assessment can begin treatment and may require a short stay. The quoted care costs $360.00; an unpaid emergency bill remains a real obligation.",
+    "selected": {
+      "authoredBranch": 2,
+      "eligibleIndex": 1,
+      "id": "decline",
+      "sourceIndex": 1
+    },
+    "actualResult": {
+      "body": "You declined the assessment. The condition remains active and the risk has not gone away.",
+      "effects": [
+        {
+          "id": "care",
+          "label": "Medical care",
+          "tone": "negative",
+          "value": "Declined"
+        }
+      ],
+      "id": "emergency_condition_person_player_61_0_2031_result",
+      "illustration": "care",
+      "kind": "result",
+      "title": "Care declined"
+    },
+    "actualJournals": [
+      {
+        "category": "event",
+        "date": {
+          "day": 1,
+          "month": 1,
+          "year": 2031
+        },
+        "id": "emergency_condition_person_player_61_0_2031_choice",
+        "personId": "person_player",
+        "text": "I declined urgent medical assessment."
+      }
+    ]
+  },
+  {
+    "ordinal": 40,
+    "date": {
+      "day": 1,
+      "month": 2,
+      "year": 2031
+    },
+    "age": 31,
+    "eventId": "emergency_condition_person_player_76_1_2031",
+    "conditionId": "condition_person_player_76_1",
+    "conditionType": "anxiety",
+    "finalFirstDiagnosisDate": {
+      "year": 2031,
+      "month": 2,
+      "day": 1
+    },
+    "actualKnownDiagnosisDisclosed": false,
+    "actualSetup": "Your symptoms have become serious: persistent worry and disrupted sleep. A hospital assessment can begin treatment and may require a short stay. The quoted care costs $360.00; an unpaid emergency bill remains a real obligation.",
+    "selected": {
+      "authoredBranch": 1,
+      "eligibleIndex": 0,
+      "id": "care",
+      "sourceIndex": 0
+    },
+    "actualResult": {
+      "body": "The assessment, treatment outcome and bill are recorded. A hospital stay affects study and paid work as time passes.",
+      "effects": [
+        {
+          "id": "care",
+          "label": "Medical care",
+          "tone": "positive",
+          "value": "Admitted to hospital"
+        }
+      ],
+      "id": "emergency_condition_person_player_76_1_2031_result",
+      "illustration": "care",
+      "kind": "result",
+      "title": "Medical care arranged"
+    },
+    "actualJournals": [
+      {
+        "category": "health",
+        "date": {
+          "day": 1,
+          "month": 2,
+          "year": 2031
+        },
+        "id": "fact_124_448",
+        "personId": "person_player",
+        "text": "I began therapy care for Anxiety disorder."
+      },
+      {
+        "category": "event",
+        "date": {
+          "day": 1,
+          "month": 2,
+          "year": 2031
+        },
+        "id": "emergency_condition_person_player_76_1_2031_choice",
+        "personId": "person_player",
+        "text": "I accepted urgent medical care."
+      }
+    ]
+  },
+  {
+    "ordinal": 41,
+    "date": {
+      "day": 1,
+      "month": 5,
+      "year": 2031
+    },
+    "age": 31,
+    "eventId": "emergency_condition_person_player_103_2_2031",
+    "conditionId": "condition_person_player_103_2",
+    "conditionType": "diabetes",
+    "finalFirstDiagnosisDate": {
+      "year": 2030,
+      "month": 5,
+      "day": 1
+    },
+    "actualKnownDiagnosisDisclosed": true,
+    "actualSetup": "Your symptoms have become serious: unusual thirst and persistent fatigue. You have been diagnosed with Diabetes. A hospital assessment can begin treatment and may require a short stay. The quoted care costs $540.00; an unpaid emergency bill remains a real obligation.",
+    "selected": {
+      "authoredBranch": 2,
+      "eligibleIndex": 1,
+      "id": "decline",
+      "sourceIndex": 1
+    },
+    "actualResult": {
+      "body": "You declined the assessment. The condition remains active and the risk has not gone away.",
+      "effects": [
+        {
+          "id": "care",
+          "label": "Medical care",
+          "tone": "negative",
+          "value": "Declined"
+        }
+      ],
+      "id": "emergency_condition_person_player_103_2_2031_result",
+      "illustration": "care",
+      "kind": "result",
+      "title": "Care declined"
+    },
+    "actualJournals": [
+      {
+        "category": "event",
+        "date": {
+          "day": 1,
+          "month": 5,
+          "year": 2031
+        },
+        "id": "emergency_condition_person_player_103_2_2031_choice",
+        "personId": "person_player",
+        "text": "I declined urgent medical assessment."
+      }
+    ]
+  },
+  {
+    "ordinal": 42,
+    "date": {
+      "day": 1,
+      "month": 1,
+      "year": 2032
+    },
+    "age": 32,
+    "eventId": "emergency_condition_person_player_61_0_2032",
+    "conditionId": "condition_person_player_61_0",
+    "conditionType": "asthma",
+    "finalFirstDiagnosisDate": {
+      "year": 2022,
+      "month": 1,
+      "day": 1
+    },
+    "actualKnownDiagnosisDisclosed": true,
+    "actualSetup": "Your symptoms have become serious: recurring wheezing and shortness of breath. You have been diagnosed with Asthma. A hospital assessment can begin treatment and may require a short stay. The quoted care costs $360.00; an unpaid emergency bill remains a real obligation.",
+    "selected": {
+      "authoredBranch": 1,
+      "eligibleIndex": 0,
+      "id": "care",
+      "sourceIndex": 0
+    },
+    "actualResult": {
+      "body": "The assessment, treatment outcome and bill are recorded. A hospital stay affects study and paid work as time passes.",
+      "effects": [
+        {
+          "id": "care",
+          "label": "Medical care",
+          "tone": "positive",
+          "value": "Admitted to hospital"
+        }
+      ],
+      "id": "emergency_condition_person_player_61_0_2032_result",
+      "illustration": "care",
+      "kind": "result",
+      "title": "Medical care arranged"
+    },
+    "actualJournals": [
+      {
+        "category": "health",
+        "date": {
+          "day": 1,
+          "month": 1,
+          "year": 2032
+        },
+        "id": "fact_128_455",
+        "personId": "person_player",
+        "text": "I began medication care for Asthma."
+      },
+      {
+        "category": "event",
+        "date": {
+          "day": 1,
+          "month": 1,
+          "year": 2032
+        },
+        "id": "emergency_condition_person_player_61_0_2032_choice",
+        "personId": "person_player",
+        "text": "I accepted urgent medical care."
+      }
+    ]
+  },
+  {
+    "ordinal": 43,
+    "date": {
+      "day": 1,
+      "month": 4,
+      "year": 2032
+    },
+    "age": 32,
+    "eventId": "emergency_condition_person_player_76_1_2032",
+    "conditionId": "condition_person_player_76_1",
+    "conditionType": "anxiety",
+    "finalFirstDiagnosisDate": {
+      "year": 2031,
+      "month": 2,
+      "day": 1
+    },
+    "actualKnownDiagnosisDisclosed": true,
+    "actualSetup": "Your symptoms have become serious: persistent worry and disrupted sleep. You have been diagnosed with Anxiety disorder. A hospital assessment can begin treatment and may require a short stay. The quoted care costs $360.00; an unpaid emergency bill remains a real obligation.",
+    "selected": {
+      "authoredBranch": 2,
+      "eligibleIndex": 1,
+      "id": "decline",
+      "sourceIndex": 1
+    },
+    "actualResult": {
+      "body": "You declined the assessment. The condition remains active and the risk has not gone away.",
+      "effects": [
+        {
+          "id": "care",
+          "label": "Medical care",
+          "tone": "negative",
+          "value": "Declined"
+        }
+      ],
+      "id": "emergency_condition_person_player_76_1_2032_result",
+      "illustration": "care",
+      "kind": "result",
+      "title": "Care declined"
+    },
+    "actualJournals": [
+      {
+        "category": "event",
+        "date": {
+          "day": 1,
+          "month": 4,
+          "year": 2032
+        },
+        "id": "emergency_condition_person_player_76_1_2032_choice",
+        "personId": "person_player",
+        "text": "I declined urgent medical assessment."
+      }
+    ]
+  },
+  {
+    "ordinal": 44,
+    "date": {
+      "day": 1,
+      "month": 5,
+      "year": 2032
+    },
+    "age": 32,
+    "eventId": "emergency_condition_person_player_103_2_2032",
+    "conditionId": "condition_person_player_103_2",
+    "conditionType": "diabetes",
+    "finalFirstDiagnosisDate": {
+      "year": 2030,
+      "month": 5,
+      "day": 1
+    },
+    "actualKnownDiagnosisDisclosed": true,
+    "actualSetup": "Your symptoms have become serious: unusual thirst and persistent fatigue. You have been diagnosed with Diabetes. A hospital assessment can begin treatment and may require a short stay. The quoted care costs $540.00; an unpaid emergency bill remains a real obligation.",
+    "selected": {
+      "authoredBranch": 1,
+      "eligibleIndex": 0,
+      "id": "care",
+      "sourceIndex": 0
+    },
+    "actualResult": {
+      "body": "The assessment, treatment outcome and bill are recorded. A hospital stay affects study and paid work as time passes.",
+      "effects": [
+        {
+          "id": "care",
+          "label": "Medical care",
+          "tone": "positive",
+          "value": "Admitted to hospital"
+        }
+      ],
+      "id": "emergency_condition_person_player_103_2_2032_result",
+      "illustration": "care",
+      "kind": "result",
+      "title": "Medical care arranged"
+    },
+    "actualJournals": [
+      {
+        "category": "health",
+        "date": {
+          "day": 1,
+          "month": 5,
+          "year": 2032
+        },
+        "id": "fact_134_469",
+        "personId": "person_player",
+        "text": "I began medication care for Diabetes."
+      },
+      {
+        "category": "event",
+        "date": {
+          "day": 1,
+          "month": 5,
+          "year": 2032
+        },
+        "id": "emergency_condition_person_player_103_2_2032_choice",
+        "personId": "person_player",
+        "text": "I accepted urgent medical care."
+      }
+    ]
+  },
+  {
+    "ordinal": 45,
+    "date": {
+      "day": 1,
+      "month": 1,
+      "year": 2033
+    },
+    "age": 33,
+    "eventId": "emergency_condition_person_player_61_0_2033",
+    "conditionId": "condition_person_player_61_0",
+    "conditionType": "asthma",
+    "finalFirstDiagnosisDate": {
+      "year": 2022,
+      "month": 1,
+      "day": 1
+    },
+    "actualKnownDiagnosisDisclosed": true,
+    "actualSetup": "Your symptoms have become serious: recurring wheezing and shortness of breath. You have been diagnosed with Asthma. A hospital assessment can begin treatment and may require a short stay. The quoted care costs $360.00; an unpaid emergency bill remains a real obligation.",
+    "selected": {
+      "authoredBranch": 2,
+      "eligibleIndex": 1,
+      "id": "decline",
+      "sourceIndex": 1
+    },
+    "actualResult": {
+      "body": "You declined the assessment. The condition remains active and the risk has not gone away.",
+      "effects": [
+        {
+          "id": "care",
+          "label": "Medical care",
+          "tone": "negative",
+          "value": "Declined"
+        }
+      ],
+      "id": "emergency_condition_person_player_61_0_2033_result",
+      "illustration": "care",
+      "kind": "result",
+      "title": "Care declined"
+    },
+    "actualJournals": [
+      {
+        "category": "event",
+        "date": {
+          "day": 1,
+          "month": 1,
+          "year": 2033
+        },
+        "id": "emergency_condition_person_player_61_0_2033_choice",
+        "personId": "person_player",
+        "text": "I declined urgent medical assessment."
+      }
+    ]
+  },
+  {
+    "ordinal": 46,
+    "date": {
+      "day": 1,
+      "month": 2,
+      "year": 2033
+    },
+    "age": 33,
+    "eventId": "emergency_condition_person_player_76_1_2033",
+    "conditionId": "condition_person_player_76_1",
+    "conditionType": "anxiety",
+    "finalFirstDiagnosisDate": {
+      "year": 2031,
+      "month": 2,
+      "day": 1
+    },
+    "actualKnownDiagnosisDisclosed": true,
+    "actualSetup": "Your symptoms have become serious: persistent worry and disrupted sleep. You have been diagnosed with Anxiety disorder. A hospital assessment can begin treatment and may require a short stay. The quoted care costs $360.00; an unpaid emergency bill remains a real obligation.",
+    "selected": {
+      "authoredBranch": 1,
+      "eligibleIndex": 0,
+      "id": "care",
+      "sourceIndex": 0
+    },
+    "actualResult": {
+      "body": "The assessment, treatment outcome and bill are recorded. A hospital stay affects study and paid work as time passes.",
+      "effects": [
+        {
+          "id": "care",
+          "label": "Medical care",
+          "tone": "positive",
+          "value": "Admitted to hospital"
+        }
+      ],
+      "id": "emergency_condition_person_player_76_1_2033_result",
+      "illustration": "care",
+      "kind": "result",
+      "title": "Medical care arranged"
+    },
+    "actualJournals": [
+      {
+        "category": "health",
+        "date": {
+          "day": 1,
+          "month": 2,
+          "year": 2033
+        },
+        "id": "fact_140_485",
+        "personId": "person_player",
+        "text": "I began therapy care for Anxiety disorder."
+      },
+      {
+        "category": "event",
+        "date": {
+          "day": 1,
+          "month": 2,
+          "year": 2033
+        },
+        "id": "emergency_condition_person_player_76_1_2033_choice",
+        "personId": "person_player",
+        "text": "I accepted urgent medical care."
+      }
+    ]
+  },
+  {
+    "ordinal": 47,
+    "date": {
+      "day": 1,
+      "month": 5,
+      "year": 2033
+    },
+    "age": 33,
+    "eventId": "emergency_condition_person_player_103_2_2033",
+    "conditionId": "condition_person_player_103_2",
+    "conditionType": "diabetes",
+    "finalFirstDiagnosisDate": {
+      "year": 2030,
+      "month": 5,
+      "day": 1
+    },
+    "actualKnownDiagnosisDisclosed": true,
+    "actualSetup": "Your symptoms have become serious: unusual thirst and persistent fatigue. You have been diagnosed with Diabetes. A hospital assessment can begin treatment and may require a short stay. The quoted care costs $540.00; an unpaid emergency bill remains a real obligation.",
+    "selected": {
+      "authoredBranch": 2,
+      "eligibleIndex": 1,
+      "id": "decline",
+      "sourceIndex": 1
+    },
+    "actualResult": {
+      "body": "You declined the assessment. The condition remains active and the risk has not gone away.",
+      "effects": [
+        {
+          "id": "care",
+          "label": "Medical care",
+          "tone": "negative",
+          "value": "Declined"
+        }
+      ],
+      "id": "emergency_condition_person_player_103_2_2033_result",
+      "illustration": "care",
+      "kind": "result",
+      "title": "Care declined"
+    },
+    "actualJournals": [
+      {
+        "category": "event",
+        "date": {
+          "day": 1,
+          "month": 5,
+          "year": 2033
+        },
+        "id": "emergency_condition_person_player_103_2_2033_choice",
+        "personId": "person_player",
+        "text": "I declined urgent medical assessment."
+      }
+    ]
+  },
+  {
+    "ordinal": 48,
+    "date": {
+      "day": 1,
+      "month": 1,
+      "year": 2034
+    },
+    "age": 34,
+    "eventId": "emergency_condition_person_player_61_0_2034",
+    "conditionId": "condition_person_player_61_0",
+    "conditionType": "asthma",
+    "finalFirstDiagnosisDate": {
+      "year": 2022,
+      "month": 1,
+      "day": 1
+    },
+    "actualKnownDiagnosisDisclosed": true,
+    "actualSetup": "Your symptoms have become serious: recurring wheezing and shortness of breath. You have been diagnosed with Asthma. A hospital assessment can begin treatment and may require a short stay. The quoted care costs $360.00; an unpaid emergency bill remains a real obligation.",
+    "selected": {
+      "authoredBranch": 1,
+      "eligibleIndex": 0,
+      "id": "care",
+      "sourceIndex": 0
+    },
+    "actualResult": {
+      "body": "The assessment, treatment outcome and bill are recorded. A hospital stay affects study and paid work as time passes.",
+      "effects": [
+        {
+          "id": "care",
+          "label": "Medical care",
+          "tone": "positive",
+          "value": "Admitted to hospital"
+        }
+      ],
+      "id": "emergency_condition_person_player_61_0_2034_result",
+      "illustration": "care",
+      "kind": "result",
+      "title": "Medical care arranged"
+    },
+    "actualJournals": [
+      {
+        "category": "health",
+        "date": {
+          "day": 1,
+          "month": 1,
+          "year": 2034
+        },
+        "id": "fact_144_491",
+        "personId": "person_player",
+        "text": "I began medication care for Asthma."
+      },
+      {
+        "category": "event",
+        "date": {
+          "day": 1,
+          "month": 1,
+          "year": 2034
+        },
+        "id": "emergency_condition_person_player_61_0_2034_choice",
+        "personId": "person_player",
+        "text": "I accepted urgent medical care."
+      }
+    ]
+  },
+  {
+    "ordinal": 49,
+    "date": {
+      "day": 1,
+      "month": 4,
+      "year": 2034
+    },
+    "age": 34,
+    "eventId": "emergency_condition_person_player_76_1_2034",
+    "conditionId": "condition_person_player_76_1",
+    "conditionType": "anxiety",
+    "finalFirstDiagnosisDate": {
+      "year": 2031,
+      "month": 2,
+      "day": 1
+    },
+    "actualKnownDiagnosisDisclosed": true,
+    "actualSetup": "Your symptoms have become serious: persistent worry and disrupted sleep. You have been diagnosed with Anxiety disorder. A hospital assessment can begin treatment and may require a short stay. The quoted care costs $360.00; an unpaid emergency bill remains a real obligation.",
+    "selected": {
+      "authoredBranch": 2,
+      "eligibleIndex": 1,
+      "id": "decline",
+      "sourceIndex": 1
+    },
+    "actualResult": {
+      "body": "You declined the assessment. The condition remains active and the risk has not gone away.",
+      "effects": [
+        {
+          "id": "care",
+          "label": "Medical care",
+          "tone": "negative",
+          "value": "Declined"
+        }
+      ],
+      "id": "emergency_condition_person_player_76_1_2034_result",
+      "illustration": "care",
+      "kind": "result",
+      "title": "Care declined"
+    },
+    "actualJournals": [
+      {
+        "category": "event",
+        "date": {
+          "day": 1,
+          "month": 4,
+          "year": 2034
+        },
+        "id": "emergency_condition_person_player_76_1_2034_choice",
+        "personId": "person_player",
+        "text": "I declined urgent medical assessment."
+      }
+    ]
+  },
+  {
+    "ordinal": 50,
+    "date": {
+      "day": 1,
+      "month": 5,
+      "year": 2034
+    },
+    "age": 34,
+    "eventId": "emergency_condition_person_player_103_2_2034",
+    "conditionId": "condition_person_player_103_2",
+    "conditionType": "diabetes",
+    "finalFirstDiagnosisDate": {
+      "year": 2030,
+      "month": 5,
+      "day": 1
+    },
+    "actualKnownDiagnosisDisclosed": true,
+    "actualSetup": "Your symptoms have become serious: unusual thirst and persistent fatigue. You have been diagnosed with Diabetes. A hospital assessment can begin treatment and may require a short stay. The quoted care costs $540.00; an unpaid emergency bill remains a real obligation.",
+    "selected": {
+      "authoredBranch": 1,
+      "eligibleIndex": 0,
+      "id": "care",
+      "sourceIndex": 0
+    },
+    "actualResult": {
+      "body": "The assessment, treatment outcome and bill are recorded. A hospital stay affects study and paid work as time passes.",
+      "effects": [
+        {
+          "id": "care",
+          "label": "Medical care",
+          "tone": "positive",
+          "value": "Admitted to hospital"
+        }
+      ],
+      "id": "emergency_condition_person_player_103_2_2034_result",
+      "illustration": "care",
+      "kind": "result",
+      "title": "Medical care arranged"
+    },
+    "actualJournals": [
+      {
+        "category": "health",
+        "date": {
+          "day": 1,
+          "month": 5,
+          "year": 2034
+        },
+        "id": "fact_150_506",
+        "personId": "person_player",
+        "text": "I began medication care for Diabetes."
+      },
+      {
+        "category": "event",
+        "date": {
+          "day": 1,
+          "month": 5,
+          "year": 2034
+        },
+        "id": "emergency_condition_person_player_103_2_2034_choice",
+        "personId": "person_player",
+        "text": "I accepted urgent medical care."
+      }
+    ]
+  },
+  {
+    "ordinal": 51,
+    "date": {
+      "day": 1,
+      "month": 1,
+      "year": 2035
+    },
+    "age": 35,
+    "eventId": "emergency_condition_person_player_61_0_2035",
+    "conditionId": "condition_person_player_61_0",
+    "conditionType": "asthma",
+    "finalFirstDiagnosisDate": {
+      "year": 2022,
+      "month": 1,
+      "day": 1
+    },
+    "actualKnownDiagnosisDisclosed": true,
+    "actualSetup": "Your symptoms have become serious: recurring wheezing and shortness of breath. You have been diagnosed with Asthma. A hospital assessment can begin treatment and may require a short stay. The quoted care costs $360.00; an unpaid emergency bill remains a real obligation.",
+    "selected": {
+      "authoredBranch": 2,
+      "eligibleIndex": 1,
+      "id": "decline",
+      "sourceIndex": 1
+    },
+    "actualResult": {
+      "body": "You declined the assessment. The condition remains active and the risk has not gone away.",
+      "effects": [
+        {
+          "id": "care",
+          "label": "Medical care",
+          "tone": "negative",
+          "value": "Declined"
+        }
+      ],
+      "id": "emergency_condition_person_player_61_0_2035_result",
+      "illustration": "care",
+      "kind": "result",
+      "title": "Care declined"
+    },
+    "actualJournals": [
+      {
+        "category": "event",
+        "date": {
+          "day": 1,
+          "month": 1,
+          "year": 2035
+        },
+        "id": "emergency_condition_person_player_61_0_2035_choice",
+        "personId": "person_player",
+        "text": "I declined urgent medical assessment."
+      }
+    ]
+  },
+  {
+    "ordinal": 52,
+    "date": {
+      "day": 1,
+      "month": 2,
+      "year": 2035
+    },
+    "age": 35,
+    "eventId": "emergency_condition_person_player_76_1_2035",
+    "conditionId": "condition_person_player_76_1",
+    "conditionType": "anxiety",
+    "finalFirstDiagnosisDate": {
+      "year": 2031,
+      "month": 2,
+      "day": 1
+    },
+    "actualKnownDiagnosisDisclosed": true,
+    "actualSetup": "Your symptoms have become serious: persistent worry and disrupted sleep. You have been diagnosed with Anxiety disorder. A hospital assessment can begin treatment and may require a short stay. The quoted care costs $360.00; an unpaid emergency bill remains a real obligation.",
+    "selected": {
+      "authoredBranch": 1,
+      "eligibleIndex": 0,
+      "id": "care",
+      "sourceIndex": 0
+    },
+    "actualResult": {
+      "body": "The assessment, treatment outcome and bill are recorded. A hospital stay affects study and paid work as time passes.",
+      "effects": [
+        {
+          "id": "care",
+          "label": "Medical care",
+          "tone": "positive",
+          "value": "Admitted to hospital"
+        }
+      ],
+      "id": "emergency_condition_person_player_76_1_2035_result",
+      "illustration": "care",
+      "kind": "result",
+      "title": "Medical care arranged"
+    },
+    "actualJournals": [
+      {
+        "category": "health",
+        "date": {
+          "day": 1,
+          "month": 2,
+          "year": 2035
+        },
+        "id": "fact_156_526",
+        "personId": "person_player",
+        "text": "I began therapy care for Anxiety disorder."
+      },
+      {
+        "category": "event",
+        "date": {
+          "day": 1,
+          "month": 2,
+          "year": 2035
+        },
+        "id": "emergency_condition_person_player_76_1_2035_choice",
+        "personId": "person_player",
+        "text": "I accepted urgent medical care."
+      }
+    ]
+  },
+  {
+    "ordinal": 53,
+    "date": {
+      "day": 1,
+      "month": 5,
+      "year": 2035
+    },
+    "age": 35,
+    "eventId": "emergency_condition_person_player_103_2_2035",
+    "conditionId": "condition_person_player_103_2",
+    "conditionType": "diabetes",
+    "finalFirstDiagnosisDate": {
+      "year": 2030,
+      "month": 5,
+      "day": 1
+    },
+    "actualKnownDiagnosisDisclosed": true,
+    "actualSetup": "Your symptoms have become serious: unusual thirst and persistent fatigue. You have been diagnosed with Diabetes. A hospital assessment can begin treatment and may require a short stay. The quoted care costs $540.00; an unpaid emergency bill remains a real obligation.",
+    "selected": {
+      "authoredBranch": 2,
+      "eligibleIndex": 1,
+      "id": "decline",
+      "sourceIndex": 1
+    },
+    "actualResult": {
+      "body": "You declined the assessment. The condition remains active and the risk has not gone away.",
+      "effects": [
+        {
+          "id": "care",
+          "label": "Medical care",
+          "tone": "negative",
+          "value": "Declined"
+        }
+      ],
+      "id": "emergency_condition_person_player_103_2_2035_result",
+      "illustration": "care",
+      "kind": "result",
+      "title": "Care declined"
+    },
+    "actualJournals": [
+      {
+        "category": "event",
+        "date": {
+          "day": 1,
+          "month": 5,
+          "year": 2035
+        },
+        "id": "emergency_condition_person_player_103_2_2035_choice",
+        "personId": "person_player",
+        "text": "I declined urgent medical assessment."
+      }
+    ]
+  },
+  {
+    "ordinal": 54,
+    "date": {
+      "day": 1,
+      "month": 1,
+      "year": 2036
+    },
+    "age": 36,
+    "eventId": "emergency_condition_person_player_61_0_2036",
+    "conditionId": "condition_person_player_61_0",
+    "conditionType": "asthma",
+    "finalFirstDiagnosisDate": {
+      "year": 2022,
+      "month": 1,
+      "day": 1
+    },
+    "actualKnownDiagnosisDisclosed": true,
+    "actualSetup": "Your symptoms have become serious: recurring wheezing and shortness of breath. You have been diagnosed with Asthma. A hospital assessment can begin treatment and may require a short stay. The quoted care costs $360.00; an unpaid emergency bill remains a real obligation.",
+    "selected": {
+      "authoredBranch": 1,
+      "eligibleIndex": 0,
+      "id": "care",
+      "sourceIndex": 0
+    },
+    "actualResult": {
+      "body": "The assessment, treatment outcome and bill are recorded. A hospital stay affects study and paid work as time passes.",
+      "effects": [
+        {
+          "id": "care",
+          "label": "Medical care",
+          "tone": "positive",
+          "value": "Admitted to hospital"
+        }
+      ],
+      "id": "emergency_condition_person_player_61_0_2036_result",
+      "illustration": "care",
+      "kind": "result",
+      "title": "Medical care arranged"
+    },
+    "actualJournals": [
+      {
+        "category": "health",
+        "date": {
+          "day": 1,
+          "month": 1,
+          "year": 2036
+        },
+        "id": "fact_160_538",
+        "personId": "person_player",
+        "text": "I began medication care for Asthma."
+      },
+      {
+        "category": "event",
+        "date": {
+          "day": 1,
+          "month": 1,
+          "year": 2036
+        },
+        "id": "emergency_condition_person_player_61_0_2036_choice",
+        "personId": "person_player",
+        "text": "I accepted urgent medical care."
+      }
+    ]
+  },
+  {
+    "ordinal": 55,
+    "date": {
+      "day": 1,
+      "month": 4,
+      "year": 2036
+    },
+    "age": 36,
+    "eventId": "emergency_condition_person_player_76_1_2036",
+    "conditionId": "condition_person_player_76_1",
+    "conditionType": "anxiety",
+    "finalFirstDiagnosisDate": {
+      "year": 2031,
+      "month": 2,
+      "day": 1
+    },
+    "actualKnownDiagnosisDisclosed": true,
+    "actualSetup": "Your symptoms have become serious: persistent worry and disrupted sleep. You have been diagnosed with Anxiety disorder. A hospital assessment can begin treatment and may require a short stay. The quoted care costs $360.00; an unpaid emergency bill remains a real obligation.",
+    "selected": {
+      "authoredBranch": 2,
+      "eligibleIndex": 1,
+      "id": "decline",
+      "sourceIndex": 1
+    },
+    "actualResult": {
+      "body": "You declined the assessment. The condition remains active and the risk has not gone away.",
+      "effects": [
+        {
+          "id": "care",
+          "label": "Medical care",
+          "tone": "negative",
+          "value": "Declined"
+        }
+      ],
+      "id": "emergency_condition_person_player_76_1_2036_result",
+      "illustration": "care",
+      "kind": "result",
+      "title": "Care declined"
+    },
+    "actualJournals": [
+      {
+        "category": "event",
+        "date": {
+          "day": 1,
+          "month": 4,
+          "year": 2036
+        },
+        "id": "emergency_condition_person_player_76_1_2036_choice",
+        "personId": "person_player",
+        "text": "I declined urgent medical assessment."
+      }
+    ]
+  },
+  {
+    "ordinal": 56,
+    "date": {
+      "day": 1,
+      "month": 5,
+      "year": 2036
+    },
+    "age": 36,
+    "eventId": "emergency_condition_person_player_103_2_2036",
+    "conditionId": "condition_person_player_103_2",
+    "conditionType": "diabetes",
+    "finalFirstDiagnosisDate": {
+      "year": 2030,
+      "month": 5,
+      "day": 1
+    },
+    "actualKnownDiagnosisDisclosed": true,
+    "actualSetup": "Your symptoms have become serious: unusual thirst and persistent fatigue. You have been diagnosed with Diabetes. A hospital assessment can begin treatment and may require a short stay. The quoted care costs $540.00; an unpaid emergency bill remains a real obligation.",
+    "selected": {
+      "authoredBranch": 1,
+      "eligibleIndex": 0,
+      "id": "care",
+      "sourceIndex": 0
+    },
+    "actualResult": {
+      "body": "The assessment, treatment outcome and bill are recorded. A hospital stay affects study and paid work as time passes.",
+      "effects": [
+        {
+          "id": "care",
+          "label": "Medical care",
+          "tone": "positive",
+          "value": "Admitted to hospital"
+        }
+      ],
+      "id": "emergency_condition_person_player_103_2_2036_result",
+      "illustration": "care",
+      "kind": "result",
+      "title": "Medical care arranged"
+    },
+    "actualJournals": [
+      {
+        "category": "health",
+        "date": {
+          "day": 1,
+          "month": 5,
+          "year": 2036
+        },
+        "id": "fact_166_550",
+        "personId": "person_player",
+        "text": "I began medication care for Diabetes."
+      },
+      {
+        "category": "event",
+        "date": {
+          "day": 1,
+          "month": 5,
+          "year": 2036
+        },
+        "id": "emergency_condition_person_player_103_2_2036_choice",
+        "personId": "person_player",
+        "text": "I accepted urgent medical care."
+      }
+    ]
+  },
+  {
+    "ordinal": 57,
+    "date": {
+      "day": 1,
+      "month": 1,
+      "year": 2037
+    },
+    "age": 37,
+    "eventId": "emergency_condition_person_player_76_1_2037",
+    "conditionId": "condition_person_player_76_1",
+    "conditionType": "anxiety",
+    "finalFirstDiagnosisDate": {
+      "year": 2031,
+      "month": 2,
+      "day": 1
+    },
+    "actualKnownDiagnosisDisclosed": true,
+    "actualSetup": "Your symptoms have become serious: persistent worry and disrupted sleep. You have been diagnosed with Anxiety disorder. A hospital assessment can begin treatment and may require a short stay. The quoted care costs $360.00; an unpaid emergency bill remains a real obligation.",
+    "selected": {
+      "authoredBranch": 2,
+      "eligibleIndex": 1,
+      "id": "decline",
+      "sourceIndex": 1
+    },
+    "actualResult": {
+      "body": "You declined the assessment. The condition remains active and the risk has not gone away.",
+      "effects": [
+        {
+          "id": "care",
+          "label": "Medical care",
+          "tone": "negative",
+          "value": "Declined"
+        }
+      ],
+      "id": "emergency_condition_person_player_76_1_2037_result",
+      "illustration": "care",
+      "kind": "result",
+      "title": "Care declined"
+    },
+    "actualJournals": [
+      {
+        "category": "event",
+        "date": {
+          "day": 1,
+          "month": 1,
+          "year": 2037
+        },
+        "id": "emergency_condition_person_player_76_1_2037_choice",
+        "personId": "person_player",
+        "text": "I declined urgent medical assessment."
+      }
+    ]
+  },
+  {
+    "ordinal": 58,
+    "date": {
+      "day": 1,
+      "month": 2,
+      "year": 2037
+    },
+    "age": 37,
+    "eventId": "emergency_condition_person_player_103_2_2037",
+    "conditionId": "condition_person_player_103_2",
+    "conditionType": "diabetes",
+    "finalFirstDiagnosisDate": {
+      "year": 2030,
+      "month": 5,
+      "day": 1
+    },
+    "actualKnownDiagnosisDisclosed": true,
+    "actualSetup": "Your symptoms have become serious: unusual thirst and persistent fatigue. You have been diagnosed with Diabetes. A hospital assessment can begin treatment and may require a short stay. The quoted care costs $540.00; an unpaid emergency bill remains a real obligation.",
+    "selected": {
+      "authoredBranch": 1,
+      "eligibleIndex": 0,
+      "id": "care",
+      "sourceIndex": 0
+    },
+    "actualResult": {
+      "body": "The assessment, treatment outcome and bill are recorded. A hospital stay affects study and paid work as time passes.",
+      "effects": [
+        {
+          "id": "care",
+          "label": "Medical care",
+          "tone": "positive",
+          "value": "Admitted to hospital"
+        }
+      ],
+      "id": "emergency_condition_person_player_103_2_2037_result",
+      "illustration": "care",
+      "kind": "result",
+      "title": "Medical care arranged"
+    },
+    "actualJournals": [
+      {
+        "category": "health",
+        "date": {
+          "day": 1,
+          "month": 2,
+          "year": 2037
+        },
+        "id": "fact_172_563",
+        "personId": "person_player",
+        "text": "I began medication care for Diabetes."
+      },
+      {
+        "category": "event",
+        "date": {
+          "day": 1,
+          "month": 2,
+          "year": 2037
+        },
+        "id": "emergency_condition_person_player_103_2_2037_choice",
+        "personId": "person_player",
+        "text": "I accepted urgent medical care."
+      }
+    ]
+  },
+  {
+    "ordinal": 59,
+    "date": {
+      "day": 1,
+      "month": 1,
+      "year": 2038
+    },
+    "age": 38,
+    "eventId": "emergency_condition_person_player_76_1_2038",
+    "conditionId": "condition_person_player_76_1",
+    "conditionType": "anxiety",
+    "finalFirstDiagnosisDate": {
+      "year": 2031,
+      "month": 2,
+      "day": 1
+    },
+    "actualKnownDiagnosisDisclosed": true,
+    "actualSetup": "Your symptoms have become serious: persistent worry and disrupted sleep. You have been diagnosed with Anxiety disorder. A hospital assessment can begin treatment and may require a short stay. The quoted care costs $360.00; an unpaid emergency bill remains a real obligation.",
+    "selected": {
+      "authoredBranch": 2,
+      "eligibleIndex": 1,
+      "id": "decline",
+      "sourceIndex": 1
+    },
+    "actualResult": {
+      "body": "You declined the assessment. The condition remains active and the risk has not gone away.",
+      "effects": [
+        {
+          "id": "care",
+          "label": "Medical care",
+          "tone": "negative",
+          "value": "Declined"
+        }
+      ],
+      "id": "emergency_condition_person_player_76_1_2038_result",
+      "illustration": "care",
+      "kind": "result",
+      "title": "Care declined"
+    },
+    "actualJournals": [
+      {
+        "category": "event",
+        "date": {
+          "day": 1,
+          "month": 1,
+          "year": 2038
+        },
+        "id": "emergency_condition_person_player_76_1_2038_choice",
+        "personId": "person_player",
+        "text": "I declined urgent medical assessment."
+      }
+    ]
+  },
+  {
+    "ordinal": 60,
+    "date": {
+      "day": 1,
+      "month": 2,
+      "year": 2038
+    },
+    "age": 38,
+    "eventId": "emergency_condition_person_player_103_2_2038",
+    "conditionId": "condition_person_player_103_2",
+    "conditionType": "diabetes",
+    "finalFirstDiagnosisDate": {
+      "year": 2030,
+      "month": 5,
+      "day": 1
+    },
+    "actualKnownDiagnosisDisclosed": true,
+    "actualSetup": "Your symptoms have become serious: unusual thirst and persistent fatigue. You have been diagnosed with Diabetes. A hospital assessment can begin treatment and may require a short stay. The quoted care costs $540.00; an unpaid emergency bill remains a real obligation.",
+    "selected": {
+      "authoredBranch": 1,
+      "eligibleIndex": 0,
+      "id": "care",
+      "sourceIndex": 0
+    },
+    "actualResult": {
+      "body": "The assessment, treatment outcome and bill are recorded. A hospital stay affects study and paid work as time passes.",
+      "effects": [
+        {
+          "id": "care",
+          "label": "Medical care",
+          "tone": "positive",
+          "value": "Admitted to hospital"
+        }
+      ],
+      "id": "emergency_condition_person_player_103_2_2038_result",
+      "illustration": "care",
+      "kind": "result",
+      "title": "Medical care arranged"
+    },
+    "actualJournals": [
+      {
+        "category": "health",
+        "date": {
+          "day": 1,
+          "month": 2,
+          "year": 2038
+        },
+        "id": "fact_178_583",
+        "personId": "person_player",
+        "text": "I began medication care for Diabetes."
+      },
+      {
+        "category": "event",
+        "date": {
+          "day": 1,
+          "month": 2,
+          "year": 2038
+        },
+        "id": "emergency_condition_person_player_103_2_2038_choice",
+        "personId": "person_player",
+        "text": "I accepted urgent medical care."
+      }
+    ]
+  },
+  {
+    "ordinal": 61,
+    "date": {
+      "day": 1,
+      "month": 1,
+      "year": 2039
+    },
+    "age": 39,
+    "eventId": "emergency_condition_person_player_76_1_2039",
+    "conditionId": "condition_person_player_76_1",
+    "conditionType": "anxiety",
+    "finalFirstDiagnosisDate": {
+      "year": 2031,
+      "month": 2,
+      "day": 1
+    },
+    "actualKnownDiagnosisDisclosed": true,
+    "actualSetup": "Your symptoms have become serious: persistent worry and disrupted sleep. You have been diagnosed with Anxiety disorder. A hospital assessment can begin treatment and may require a short stay. The quoted care costs $360.00; an unpaid emergency bill remains a real obligation.",
+    "selected": {
+      "authoredBranch": 2,
+      "eligibleIndex": 1,
+      "id": "decline",
+      "sourceIndex": 1
+    },
+    "actualResult": {
+      "body": "You declined the assessment. The condition remains active and the risk has not gone away.",
+      "effects": [
+        {
+          "id": "care",
+          "label": "Medical care",
+          "tone": "negative",
+          "value": "Declined"
+        }
+      ],
+      "id": "emergency_condition_person_player_76_1_2039_result",
+      "illustration": "care",
+      "kind": "result",
+      "title": "Care declined"
+    },
+    "actualJournals": [
+      {
+        "category": "event",
+        "date": {
+          "day": 1,
+          "month": 1,
+          "year": 2039
+        },
+        "id": "emergency_condition_person_player_76_1_2039_choice",
+        "personId": "person_player",
+        "text": "I declined urgent medical assessment."
+      }
+    ]
+  }
+]

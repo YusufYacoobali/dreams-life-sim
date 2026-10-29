@@ -1,0 +1,117 @@
+{
+  "status": "passed",
+  "observedAt": "2026-10-20T23:27:27.684896+00:00",
+  "candidateCommit": "b3bf10821605271a3b039815af2b61f352e49a48",
+  "scope": "Actual isolated-source native Life and Profile read-only browsing preserves all8 raw tables and reader14 exactly at Nia138. Root personally viewed both PNG/XML pairs: facial details, skin/hair colour, clipping and both sizes accepted. No all-palette, modern Android/iOS pixel or physical performance claim. Initial helper wrong label interrupted without action and first-source production export rejected separately.",
+  "nativeSourceProof": "/tmp/dreams-portrait-isolated-native-source-proof.json",
+  "captures": [
+    {
+      "prefix": "/tmp/dreams-portrait-isolated-native-life",
+      "pngSha256": "c73fd274b38b52396c27a52e644666d805f51c7277d20704f713cdeec96125de",
+      "xmlSha256": "3a4bcaec441883f90e81a06c9d09cdc67ae286396dead484d4621dca0aaf279f"
+    },
+    {
+      "prefix": "/tmp/dreams-portrait-isolated-native-profile",
+      "pngSha256": "c5f1264f4cf6961af77cee5e59f2f2ef976600eb69adb16e4ba71d0a3c9fdc72",
+      "xmlSha256": "ea17b3e685dd1ea75276460da06a104140094641f6b154093a175c512cbbafef"
+    }
+  ],
+  "databases": [
+    {
+      "folder": "/tmp/dreams-opening-next-native-final138-db",
+      "files": {
+        "/tmp/dreams-opening-next-native-final138-db/dreams.db-wal": {
+          "bytes": 4733912,
+          "sha256": "ccd6c71ee84fab77c3bf0915d4e7c140be373c8519b9b8730ac37486f38f8bf7"
+        },
+        "/tmp/dreams-opening-next-native-final138-db/dreams.db": {
+          "bytes": 3805184,
+          "sha256": "d89355bf9c69e4c8e413080dc6478ef39a230ea2287977abeaaecaae0da1da81"
+        }
+      },
+      "reader": 14,
+      "tables": {
+        "backups": {
+          "rows": 7,
+          "sha256": "5f13ad33f9093ef944e5779fe5d14e1cf98214a53ec8d9c84c86237d9624c566"
+        },
+        "branches": {
+          "rows": 1,
+          "sha256": "fbca8816f9bd06ea8d170416427ea734d77405d1c61fc324d0f91306b745f370"
+        },
+        "lives": {
+          "rows": 7,
+          "sha256": "a75c9221f4a4d49851db30d8e939d409361f202854bb836ca4c9a246a895bace"
+        },
+        "preferences": {
+          "rows": 2,
+          "sha256": "439c7df07be842e2d88a5c4e3901fef292b80bc8317269fc0b356d8c055d0413"
+        },
+        "receipts": {
+          "rows": 145,
+          "sha256": "7e52ee88501ec76f35db61835040e8a5a92f5f71bf59bdccc7c4a156c1d7ffe8"
+        },
+        "restore_receipts": {
+          "rows": 1,
+          "sha256": "8f3438adaa30734181d11412661add7dbbb965ca51b1c34185bffb1cc68cb21f"
+        },
+        "snapshot_metadata": {
+          "rows": 66,
+          "sha256": "655370281918d85d738449450959abfed8f323daac600b261dd161f2dc79b8da"
+        },
+        "snapshots": {
+          "rows": 66,
+          "sha256": "dc82847be2784ac8c6be37ba2fc3d769ae86c6eafde1a615cc53db8cab6c9298"
+        }
+      }
+    },
+    {
+      "folder": "/tmp/dreams-portrait-isolated-native-db",
+      "files": {
+        "/tmp/dreams-portrait-isolated-native-db/dreams.db-wal": {
+          "bytes": 4733912,
+          "sha256": "ccd6c71ee84fab77c3bf0915d4e7c140be373c8519b9b8730ac37486f38f8bf7"
+        },
+        "/tmp/dreams-portrait-isolated-native-db/dreams.db": {
+          "bytes": 3805184,
+          "sha256": "d89355bf9c69e4c8e413080dc6478ef39a230ea2287977abeaaecaae0da1da81"
+        }
+      },
+      "reader": 14,
+      "tables": {
+        "backups": {
+          "rows": 7,
+          "sha256": "5f13ad33f9093ef944e5779fe5d14e1cf98214a53ec8d9c84c86237d9624c566"
+        },
+        "branches": {
+          "rows": 1,
+          "sha256": "fbca8816f9bd06ea8d170416427ea734d77405d1c61fc324d0f91306b745f370"
+        },
+        "lives": {
+          "rows": 7,
+          "sha256": "a75c9221f4a4d49851db30d8e939d409361f202854bb836ca4c9a246a895bace"
+        },
+        "preferences": {
+          "rows": 2,
+          "sha256": "439c7df07be842e2d88a5c4e3901fef292b80bc8317269fc0b356d8c055d0413"
+        },
+        "receipts": {
+          "rows": 145,
+          "sha256": "7e52ee88501ec76f35db61835040e8a5a92f5f71bf59bdccc7c4a156c1d7ffe8"
+        },
+        "restore_receipts": {
+          "rows": 1,
+          "sha256": "8f3438adaa30734181d11412661add7dbbb965ca51b1c34185bffb1cc68cb21f"
+        },
+        "snapshot_metadata": {
+          "rows": 66,
+          "sha256": "655370281918d85d738449450959abfed8f323daac600b261dd161f2dc79b8da"
+        },
+        "snapshots": {
+          "rows": 66,
+          "sha256": "dc82847be2784ac8c6be37ba2fc3d769ae86c6eafde1a615cc53db8cab6c9298"
+        }
+      }
+    }
+  ]
+}

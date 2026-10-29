@@ -1,0 +1,43 @@
+import React from 'react';
+import { act, fireEvent, render, screen, waitFor } from '@testing-library/react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { createGameStore } from '../../src/state/gameStore';
+import { decodeWorld } from '../../src/game/model';
+import { accountFor } from '../../src/game/systems/common';
+import { SaveRepository } from '../../src/persistence/repository';
+import { database } from '../support/sqlite';
+import { ThemeProvider } from '../../src/ui/theme';
+import graduateFixture from '../fixtures/v3-employed-graduate.json';
+
+let mockStore: ReturnType<typeof createGameStore>;
+jest.mock('expo-router', () => ({ useLocalSearchParams: () => ({ id: 'studio' }), router: { back: jest.fn(), navigate: jest.fn(), dismissTo: jest.fn() } }));
+jest.mock('../../src/state/useGame', () => ({ useGame: (selector: unknown) => require('zustand').useStore(mockStore, selector) }));
+import Offer from '../../app/(game)/offer/[id]';
+import { PendingEvent } from '../../src/ui/PendingEvent';
+
+test('a native purchase confirmation rolls back a failed write, retries and restores the exact committed ownership', async () => {
+  const { sqlite, driver } = database(); const repository = new SaveRepository(driver);
+  await repository.initialise(); const initial = decodeWorld(JSON.stringify(graduateFixture));
+  const account = accountFor(initial); account.cash += 100000000n; account.openingCash += 100000000n;
+  await repository.create(initial);
+  mockStore = createGameStore({ repository: async () => repository, date: () => initial.date, id: () => 'life_unused' });
+  await mockStore.getState().bootstrap();
+  sqlite.exec("CREATE TRIGGER fail_receipt BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
+  const view = render(<SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider><Offer /><PendingEvent /></ThemeProvider></SafeAreaProvider>);
+  fireEvent.press(screen.getByRole('button', { name: 'Review Purchase' }));
+  await act(async () => { fireEvent.press(screen.getByRole('button', { name: 'Confirm Purchase' })); });
+  await waitFor(() => expect(screen.getByText(/couldn't be saved/)).toBeOnTheScreen());
+  expect(mockStore.getState().world).toEqual(initial); expect(await repository.load(initial.id)).toEqual(initial);
+  sqlite.exec('DROP TRIGGER fail_receipt');
+  fireEvent.press(screen.getByRole('button', { name: 'Review Purchase' }));
+  await act(async () => { fireEvent.press(screen.getByRole('button', { name: 'Confirm Purchase' })); });
+  await waitFor(() => expect(screen.getByText('It’s yours')).toBeOnTheScreen());
+  const committed = mockStore.getState().world!;
+  expect(committed.assets.filter(asset => asset.ownerId === committed.activePersonId)).toHaveLength(1);
+  expect(accountFor(committed).cash).toBeLessThan(accountFor(initial).cash);
+  expect(await repository.load(initial.id)).toEqual(committed);
+  await act(async () => { fireEvent.press(screen.getByRole('button', { name: 'Continue' })); });
+  await waitFor(() => expect(mockStore.getState().world?.pending).toBeNull());
+  expect(mockStore.getState().world?.assets).toEqual(committed.assets);
+  view.unmount(); sqlite.close();
+});

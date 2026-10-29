@@ -1,0 +1,30 @@
+
+> dreams-life-sim@1.0.0 test
+> jest --runInBand --runInBand --testTimeout=30000 --runTestsByPath tests/game/best-friends.test.ts tests/persistence/best-friends-migration.test.ts tests/ui/best-friends-flow.test.tsx tests/game/story-name-collisions.test.ts tests/ui/story-name-collision-flow.test.tsx tests/game/health-emergency-context.test.ts tests/game/editorial-policy.test.ts tests/ui/family-tree-late-spouse.test.tsx tests/ui/terminal-biography-data.test.ts tests/ui/terminal-biography-flow.test.tsx tests/ui/special-career-exits-flow.test.tsx tests/ui/music-career-exit-flow.test.tsx tests/ui/model-career-acceptance-flow.test.tsx
+
+PASS tests/ui/special-career-exits-flow.test.tsx (23.77 s)
+PASS tests/ui/model-career-acceptance-flow.test.tsx (6.017 s)
+  ● Console
+
+    console.info
+      Model archive continuation {"sourceRevision":70,"sourceDate":{"year":2023,"month":7,"day":1},"preparedDate":{"year":2026,"month":1,"day":1},"trainedMonths":30,"trainingFees":"120000","skill":60,"selectionAttempts":1,"annualPay":"4896000","projectPeriods":3,"modelGross":"1224000","currency":"USD","finalDate":{"year":2028,"month":1,"day":1},"finalRevision":96,"ordinaryPreparationAndContinuationCommands":22,"originalFixtureSha256":"665a7b3736518e9e9f4d7c4a2d12eb08e746ddc528baaa868eb02d5e903f8e34"}
+
+      at Object.info (tests/ui/model-career-acceptance-flow.test.tsx:132:13)
+
+PASS tests/persistence/best-friends-migration.test.ts (11.534 s)
+PASS tests/game/story-name-collisions.test.ts (8.072 s)
+PASS tests/ui/music-career-exit-flow.test.tsx
+PASS tests/game/editorial-policy.test.ts
+PASS tests/ui/terminal-biography-flow.test.tsx
+PASS tests/game/best-friends.test.ts
+PASS tests/ui/best-friends-flow.test.tsx
+PASS tests/ui/terminal-biography-data.test.ts
+PASS tests/ui/story-name-collision-flow.test.tsx
+PASS tests/game/health-emergency-context.test.ts
+PASS tests/ui/family-tree-late-spouse.test.tsx
+
+Test Suites: 13 passed, 13 total
+Tests:       66 passed, 66 total
+Snapshots:   0 total
+Time:        68.762 s, estimated 72 s
+Ran all test suites within paths "tests/game/best-friends.test.ts", "tests/persistence/best-friends-migration.test.ts", "tests/ui/best-friends-flow.test.tsx", "tests/game/story-name-collisions.test.ts", "tests/ui/story-name-collision-flow.test.tsx", "tests/game/health-emergency-context.test.ts", "tests/game/editorial-policy.test.ts", "tests/ui/family-tree-late-spouse.test.tsx", "tests/ui/terminal-biography-data.test.ts", "tests/ui/terminal-biography-flow.test.tsx", "tests/ui/special-career-exits-flow.test.tsx", "tests/ui/music-career-exit-flow.test.tsx", "tests/ui/model-career-acceptance-flow.test.tsx".

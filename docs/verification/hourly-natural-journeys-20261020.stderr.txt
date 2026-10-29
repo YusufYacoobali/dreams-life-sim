@@ -1,0 +1,12 @@
+{"event":"hourly-life-complete","country":"US","seed":900,"targetWeeklyHours":8,"ageAtDeath":42,"commands":215,"coldChecks":46,"paidPeriods":288,"contracts":5,"rateChanges":0,"elapsedMs":13512}
+{"event":"hourly-life-complete","country":"CA","seed":901,"targetWeeklyHours":12,"ageAtDeath":83,"commands":443,"coldChecks":104,"paidPeriods":588,"contracts":1,"rateChanges":45,"elapsedMs":25489}
+{"event":"hourly-life-complete","country":"GB","seed":902,"targetWeeklyHours":20,"ageAtDeath":78,"commands":437,"coldChecks":102,"paidPeriods":576,"contracts":1,"rateChanges":41,"elapsedMs":32685}
+{"event":"hourly-life-complete","country":"AU","seed":903,"targetWeeklyHours":8,"ageAtDeath":76,"commands":397,"coldChecks":82,"paidPeriods":612,"contracts":1,"rateChanges":20,"elapsedMs":41638}
+{"event":"hourly-life-complete","country":"FR","seed":904,"targetWeeklyHours":12,"ageAtDeath":84,"commands":442,"coldChecks":102,"paidPeriods":576,"contracts":1,"rateChanges":45,"elapsedMs":33671}
+{"event":"hourly-life-complete","country":"DE","seed":905,"targetWeeklyHours":20,"ageAtDeath":79,"commands":427,"coldChecks":103,"paidPeriods":588,"contracts":1,"rateChanges":42,"elapsedMs":40774}
+{"event":"hourly-life-complete","country":"ES","seed":906,"targetWeeklyHours":8,"ageAtDeath":72,"commands":420,"coldChecks":107,"paidPeriods":600,"contracts":1,"rateChanges":41,"elapsedMs":33608}
+{"event":"hourly-life-complete","country":"IT","seed":907,"targetWeeklyHours":12,"ageAtDeath":70,"commands":362,"coldChecks":83,"paidPeriods":612,"contracts":5,"rateChanges":17,"elapsedMs":66442}
+{"event":"hourly-life-complete","country":"BR","seed":908,"targetWeeklyHours":20,"ageAtDeath":94,"commands":448,"coldChecks":92,"paidPeriods":564,"contracts":1,"rateChanges":34,"elapsedMs":33617}
+{"event":"hourly-life-complete","country":"IN","seed":909,"targetWeeklyHours":8,"ageAtDeath":78,"commands":413,"coldChecks":96,"paidPeriods":516,"contracts":1,"rateChanges":38,"elapsedMs":37636}
+{"event":"hourly-life-complete","country":"JP","seed":910,"targetWeeklyHours":12,"ageAtDeath":73,"commands":415,"coldChecks":104,"paidPeriods":576,"contracts":1,"rateChanges":40,"elapsedMs":43061}
+{"event":"hourly-life-complete","country":"ZA","seed":911,"targetWeeklyHours":20,"ageAtDeath":79,"commands":426,"coldChecks":99,"paidPeriods":564,"contracts":1,"rateChanges":36,"elapsedMs":38290}

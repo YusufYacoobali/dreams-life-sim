@@ -1,0 +1,22 @@
+{
+  "scope": "Actual Android 24 Directory picker folder export while another life is active; read-only comparison of native SQLite copies",
+  "file": "Download/Dreams-save-2026-10-19T22-55-03-765Z-0.dreams.json",
+  "bytes": 10279,
+  "sha256": "312c70f99429b55ec3b2e5b82ce0ccdb8b1279aeb1cb331ff9a243fb64ee130b",
+  "chosenLife": "Ren Watanabe",
+  "chosenRevision": 4,
+  "chosenWorldAndOriginalMomentExact": true,
+  "activeLife": "Riley Kelly",
+  "activeRevision": 45,
+  "importedResultAcknowledgedExactlyOnce": true,
+  "allDatabaseTablesUnchanged": {
+    "backups": 3,
+    "branches": 0,
+    "lives": 3,
+    "preferences": 1,
+    "receipts": 9,
+    "restore_receipts": 0,
+    "snapshot_metadata": 11,
+    "snapshots": 11
+  }
+}

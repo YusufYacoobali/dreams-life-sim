@@ -1,0 +1,65 @@
+{
+  "recordedOn": "2026-10-20",
+  "baseCommit": "dd62665",
+  "scope": "Current-source validated immutable pure-engine lifetimes, first eligible choices; no optional coworker introductions, not native or SQLite",
+  "start": {
+    "event": "sweep-start",
+    "scope": "pure engine / cloud Node; first eligible choices; newborn acknowledgement flag set before engine progression; not native or SQLite",
+    "stateMode": "validated immutable",
+    "node": "v24.19.0",
+    "count": 120,
+    "startSeed": 0,
+    "gameSourceHash": "ffddd2e4436f75f6395deed03e6ebb88f10efa262186e5990b6f0745b95fb3db",
+    "toolSourceHash": "b57b6bb3befdba4e776217b3ebf79c1fe4892f2cd7a260fa9b7e928bca75e20e",
+    "setupMs": 2249
+  },
+  "completion": {
+    "event": "sweep-complete",
+    "count": 120,
+    "startSeed": 0,
+    "completed": 120,
+    "stateMode": "validated immutable",
+    "versions": {
+      "world": 29,
+      "engine": 28,
+      "content": 5
+    },
+    "gameSourceHash": "ffddd2e4436f75f6395deed03e6ebb88f10efa262186e5990b6f0745b95fb3db",
+    "toolSourceHash": "b57b6bb3befdba4e776217b3ebf79c1fe4892f2cd7a260fa9b7e928bca75e20e",
+    "countryCounts": {
+      "AU": 10,
+      "IT": 11,
+      "BR": 12,
+      "ZA": 10,
+      "ES": 12,
+      "US": 13,
+      "CA": 10,
+      "GB": 10,
+      "DE": 12,
+      "FR": 6,
+      "IN": 6,
+      "JP": 8
+    },
+    "ageRange": [
+      40,
+      98
+    ],
+    "maxPeople": 24,
+    "maxLedgerRows": 55199,
+    "elapsedMs": 668791
+  },
+  "distinctSeeds": 120,
+  "seeds": [
+    0,
+    119
+  ],
+  "exitCode": 0,
+  "stderrBytes": 0,
+  "raw": {
+    "file": "life-sweep-workplaces-120-20261020.ndjson",
+    "sha256": "de0a10fb86d0a6d68b122dc328615e9e59aa3508c4f7da0989677c99c02fa997"
+  },
+  "priorContentFiveSameSeedsOrdinaryMetricsExact": true,
+  "priorCountNotAdditionalDistinctSeeds": true,
+  "limits": "Separate workplace domain/UI/native checks cover introductions, feedback, employment identities and pay. Earlier 1000 lives belong to world28/content4. No physical-device, every optional action, 120-year/1000-person/multigeneration acceptance."
+}

@@ -1,0 +1,29 @@
+{
+  "complete": true,
+  "name": "newborn",
+  "events": [
+    {
+      "argv": [
+        "python3",
+        "/tmp/dreams-native-ui.py",
+        "inspect",
+        "/tmp/dreams-c37-native-captures/newborn/ui"
+      ],
+      "returncode": 0,
+      "stdout": "[('', 'Begin Life!', '[16,734][374,784]')]\n",
+      "stderr": "",
+      "at": "2026-10-21T01:26:58.119114+00:00"
+    },
+    {
+      "argv": [
+        "python3",
+        "/tmp/dreams-copy-native-db.py",
+        "/tmp/dreams-c37-native-captures/newborn/database"
+      ],
+      "returncode": 0,
+      "stdout": "/tmp/dreams-c37-native-captures/newborn/database\n",
+      "stderr": "",
+      "at": "2026-10-21T01:26:58.828477+00:00"
+    }
+  ]
+}

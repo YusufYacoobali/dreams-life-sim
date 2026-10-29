@@ -1,0 +1,561 @@
+{
+  "format": "dreams-current-offline-android-prebuild-inspection-v1",
+  "recordedAt": "2026-10-21T09:40:00.708128+00:00",
+  "status": "passed-generated-source-only-unbuilt",
+  "root": "/workspace/dreams-worktrees/native-prebuild-current",
+  "sourceCommit": "83adaea6f92523d04a27df2e77b11e0a8b14ef1d",
+  "sourceSnapshot": {
+    "file": "/tmp/dreams-production-ui-complete-source.json",
+    "bytes": 77733,
+    "sha256": "85b203f84cc1e4f06b931794adaabfebee400b142155b6ea7443bb4b8e066e7d"
+  },
+  "all703SourceFilesExactBeforeAndAfter": true,
+  "actualPrebuildExit": 0,
+  "startedAt": "2026-10-21T09:31:25Z",
+  "closedAt": "2026-10-21T09:31:29Z",
+  "commandInputs": {
+    "file": "/tmp/dreams-native-prebuild-current-evidence/inputs.json",
+    "bytes": 2052,
+    "sha256": "967cb1954c211811df1b629685acc967ed3bb6ec88f2dc7af16ea441139bdf28"
+  },
+  "trackedWorktreeCleanAfterScriptRestoration": true,
+  "generatedAndroidDirectoryIgnored": true,
+  "prebuildTrackedChanges": {
+    "onlyFile": "package.json",
+    "onlyFields": [
+      "scripts.android",
+      "scripts.ios"
+    ],
+    "preservedAfterPrebuild": "package-after-prebuild.json",
+    "restoredExactOriginalBytes": true
+  },
+  "identity": {
+    "name": "Dreams Life Simulator",
+    "androidPackage": "com.yusufyacoobali.dreamslifesim",
+    "namespace": "com.yusufyacoobali.dreamslifesim",
+    "versionName": "1.0.0",
+    "versionCode": 1,
+    "scheme": "dreams-life",
+    "portrait": true,
+    "launcherExported": true
+  },
+  "buildSource": {
+    "expo": "57.0.30",
+    "reactNative": "0.86.3",
+    "gradleWrapper": "9.3.1",
+    "androidGradlePluginFromReactNativeCatalog": "8.12.0",
+    "minSdk": 24,
+    "compileSdk": 36,
+    "targetSdk": 36,
+    "buildTools": "36.0.0",
+    "ndkVersion": "27.1.12297006",
+    "cmake": "RNplugin supplies default CMakeLists path; generated app does not pin CMake version; actual Gradle resolution unrun.",
+    "hermes": true,
+    "hermesV1Default": true,
+    "requiredReactAndroidCoordinate": "com.facebook.react:react-android:0.86.3",
+    "requiredHermesCoordinate": "com.facebook.hermes:hermes-android:250829098.0.17",
+    "fabricNewArchitecture": true,
+    "edgeToEdge": true,
+    "architectures": [
+      "armeabi-v7a",
+      "arm64-v8a",
+      "x86",
+      "x86_64"
+    ],
+    "releaseUsesTemplateDebugSigning": true,
+    "distributionSigningConfigured": false,
+    "releaseMinifyDefault": false,
+    "mergedManifestAvailable": false,
+    "gradleInvoked": false
+  },
+  "manifestSource": {
+    "permissions": [
+      {
+        "name": "android.permission.INTERNET"
+      },
+      {
+        "name": "android.permission.MODIFY_AUDIO_SETTINGS"
+      },
+      {
+        "name": "android.permission.READ_EXTERNAL_STORAGE",
+        "maxSdkVersion": "32"
+      },
+      {
+        "name": "android.permission.SYSTEM_ALERT_WINDOW"
+      },
+      {
+        "name": "android.permission.VIBRATE"
+      },
+      {
+        "name": "android.permission.WRITE_EXTERNAL_STORAGE",
+        "maxSdkVersion": "32"
+      }
+    ],
+    "allowBackup": true,
+    "backupRulesPresent": false,
+    "debugOnlyCleartextTraffic": true,
+    "productionManifestCleartextAttributePresent": false,
+    "audioRecordingPermissionPresent": false,
+    "updatesEnabled": false
+  },
+  "generatedResources": {
+    "images": [
+      {
+        "path": "android/app/src/main/res/drawable-hdpi/splashscreen_logo.png",
+        "width": 432,
+        "height": 432,
+        "mode": "RGBA",
+        "bytes": 20754,
+        "sha256": "721c895579cb08ec4c9a0fe7dadafe9a97c33ef758d3578ad5e8b540de59f974"
+      },
+      {
+        "path": "android/app/src/main/res/drawable-mdpi/splashscreen_logo.png",
+        "width": 288,
+        "height": 288,
+        "mode": "RGBA",
+        "bytes": 12863,
+        "sha256": "f84b9b17a4a1c7d7dd840cd272c07a6c3fd66d5a9826b64bb53facb6f176bc24"
+      },
+      {
+        "path": "android/app/src/main/res/drawable-xhdpi/splashscreen_logo.png",
+        "width": 576,
+        "height": 576,
+        "mode": "RGBA",
+        "bytes": 29081,
+        "sha256": "e1c5250e339add5ed7849cb0859d052edb9781abb91db049e68ae3a4059247d7"
+      },
+      {
+        "path": "android/app/src/main/res/drawable-xxhdpi/splashscreen_logo.png",
+        "width": 864,
+        "height": 864,
+        "mode": "RGBA",
+        "bytes": 47123,
+        "sha256": "23d97ccb41a821ee345b2c5bb0c9bdab730a751a9227925acbf0af021dc38a9b"
+      },
+      {
+        "path": "android/app/src/main/res/drawable-xxxhdpi/splashscreen_logo.png",
+        "width": 1152,
+        "height": 1152,
+        "mode": "RGBA",
+        "bytes": 66529,
+        "sha256": "be9fac5c4cda48c41dce592288c486524bba3e4ca7fa00c0a04a46928154b5bf"
+      },
+      {
+        "path": "android/app/src/main/res/mipmap-hdpi/ic_launcher.webp",
+        "width": 72,
+        "height": 72,
+        "mode": "RGBA",
+        "bytes": 6665,
+        "sha256": "c6743a192d13f6590fe3bf1000e02fec0ccf3c31f5ff69f72ca31c300acf3bb6"
+      },
+      {
+        "path": "android/app/src/main/res/mipmap-hdpi/ic_launcher_foreground.webp",
+        "width": 162,
+        "height": 162,
+        "mode": "RGBA",
+        "bytes": 27910,
+        "sha256": "712339736da10f562e1a7b54047b5429cfb5ffa35461c70b90b9cb082737776c"
+      },
+      {
+        "path": "android/app/src/main/res/mipmap-hdpi/ic_launcher_round.webp",
+        "width": 72,
+        "height": 72,
+        "mode": "RGBA",
+        "bytes": 7169,
+        "sha256": "81069b080c2253e398f8130384d82fd4182486544d436c4bb520afb30693f875"
+      },
+      {
+        "path": "android/app/src/main/res/mipmap-mdpi/ic_launcher.webp",
+        "width": 48,
+        "height": 48,
+        "mode": "RGBA",
+        "bytes": 3330,
+        "sha256": "0d1d10c0618423801cfe0060700c49e2f301ff62893866462f19387cd6ddf5a4"
+      },
+      {
+        "path": "android/app/src/main/res/mipmap-mdpi/ic_launcher_foreground.webp",
+        "width": 108,
+        "height": 108,
+        "mode": "RGBA",
+        "bytes": 13762,
+        "sha256": "f4bae91ce0cbe2ca380a7c3d83e43a33a7a835e6288c8c0755633df1f5e639ba"
+      },
+      {
+        "path": "android/app/src/main/res/mipmap-mdpi/ic_launcher_round.webp",
+        "width": 48,
+        "height": 48,
+        "mode": "RGBA",
+        "bytes": 3647,
+        "sha256": "bc29f90d5b5fcdf78dd4e330a798784c55e9604344e349503ead6200a05a3034"
+      },
+      {
+        "path": "android/app/src/main/res/mipmap-xhdpi/ic_launcher.webp",
+        "width": 96,
+        "height": 96,
+        "mode": "RGBA",
+        "bytes": 11142,
+        "sha256": "c65e3623b328f1fb54c73e3dcbae742d6997a04eb2ac3e7384afe4530a51b43d"
+      },
+      {
+        "path": "android/app/src/main/res/mipmap-xhdpi/ic_launcher_foreground.webp",
+        "width": 216,
+        "height": 216,
+        "mode": "RGBA",
+        "bytes": 47381,
+        "sha256": "e36191a455a55dba4ef03b39151c37aff08ee1ecc09ff23b5fa46b2b247f6a4e"
+      },
+      {
+        "path": "android/app/src/main/res/mipmap-xhdpi/ic_launcher_round.webp",
+        "width": 96,
+        "height": 96,
+        "mode": "RGBA",
+        "bytes": 11893,
+        "sha256": "edec760e8f6c6faff09d460c233f21d2b20eab6da49b2f3646e32eb9816edf81"
+      },
+      {
+        "path": "android/app/src/main/res/mipmap-xxhdpi/ic_launcher.webp",
+        "width": 144,
+        "height": 144,
+        "mode": "RGBA",
+        "bytes": 22600,
+        "sha256": "0c01600fac8c83f7ad996600b84f7c3ef36d2bd0908bc34897263fc543cc4ffa"
+      },
+      {
+        "path": "android/app/src/main/res/mipmap-xxhdpi/ic_launcher_foreground.webp",
+        "width": 324,
+        "height": 324,
+        "mode": "RGBA",
+        "bytes": 102034,
+        "sha256": "f07946d3170e7ad00b566efcac437d8d474d41093210e2b84bc5b50f93167d99"
+      },
+      {
+        "path": "android/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.webp",
+        "width": 144,
+        "height": 144,
+        "mode": "RGBA",
+        "bytes": 23737,
+        "sha256": "2eb8f56654ec0f639e1445718116f5cd35199dd5106a765aaae2d8a2621dc8ba"
+      },
+      {
+        "path": "android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.webp",
+        "width": 192,
+        "height": 192,
+        "mode": "RGBA",
+        "bytes": 37999,
+        "sha256": "2afbf3df3c9a05ea9d461b702c5f0122b5e583fa57cc1054015cc8b5393c0c7b"
+      },
+      {
+        "path": "android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_foreground.webp",
+        "width": 432,
+        "height": 432,
+        "mode": "RGBA",
+        "bytes": 175898,
+        "sha256": "814fabfa1827aa8ca8591741d1147f827235023f6bd56910bbee3ece3904a4ba"
+      },
+      {
+        "path": "android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.webp",
+        "width": 192,
+        "height": 192,
+        "mode": "RGBA",
+        "bytes": 39769,
+        "sha256": "4b1b09d3bd65383081a0c4128a00fc05ca14cb51d30e3cddec2826c4893e51d2"
+      }
+    ],
+    "fontFilesGenerated": [],
+    "fontScope": "Ionicons is a locally installed Metro asset dependency; no final bundle/TTF/APK resource merge was generated or accepted by prebuild.",
+    "visualSourceReview": "Generated192px launcher WebP was viewed; gold life-path/sun/cloud mark on navy. Generated-source inspection only, not an installed launcher mask/readability pass.",
+    "installedLauncherMaskAccepted": false
+  },
+  "generatedFiles": [
+    {
+      "path": "android/.gitignore",
+      "bytes": 183,
+      "sha256": "ed2e83b6a71e3b048dc2681be0bdf534a5ec81d4eded17012e78a6b252422465"
+    },
+    {
+      "path": "android/app/build.gradle",
+      "bytes": 8226,
+      "sha256": "3e6a098947e5078f7feb0043e75344d99b0a573d146d51ea7a7b0a8c87755b5e"
+    },
+    {
+      "path": "android/app/proguard-rules.pro",
+      "bytes": 562,
+      "sha256": "8bd4d7b69a1d78e8322b459b5e8d48234adce7481df04da34c0140d52ffb367a"
+    },
+    {
+      "path": "android/app/src/debug/AndroidManifest.xml",
+      "bytes": 374,
+      "sha256": "fb1795032c764d975376e1612ab7022058eca2268a45efbe731a47a5d3ac0f60"
+    },
+    {
+      "path": "android/app/src/debugOptimized/AndroidManifest.xml",
+      "bytes": 374,
+      "sha256": "fb1795032c764d975376e1612ab7022058eca2268a45efbe731a47a5d3ac0f60"
+    },
+    {
+      "path": "android/app/src/main/AndroidManifest.xml",
+      "bytes": 2427,
+      "sha256": "e7bf01e9a093d1e0b1c0a96d4357b7383f70d8e4fca3cfad304de7c3ea5cb0df"
+    },
+    {
+      "path": "android/app/src/main/java/com/yusufyacoobali/dreamslifesim/MainActivity.kt",
+      "bytes": 2202,
+      "sha256": "a29b61241b71c1306d367698d8ce71c3f7828d1a85a89145da1f40debb1d6849"
+    },
+    {
+      "path": "android/app/src/main/java/com/yusufyacoobali/dreamslifesim/MainApplication.kt",
+      "bytes": 1504,
+      "sha256": "c17b545f4f51e9b9c29b940f405ca2c3bc3e8a48a3532b01964e7869d216ab80"
+    },
+    {
+      "path": "android/app/src/main/res/drawable/ic_launcher_background.xml",
+      "bytes": 245,
+      "sha256": "51fca95679d075ddbe2b9fe7ad2efb5ef545c5770a9ad6cafe8bf610c18c67be"
+    },
+    {
+      "path": "android/app/src/main/res/drawable/rn_edit_text_material.xml",
+      "bytes": 1917,
+      "sha256": "738e3aaad53180caba1419a6d5db8465a0742662fe59a4bbaf05f1061cbc3390"
+    },
+    {
+      "path": "android/app/src/main/res/drawable-hdpi/splashscreen_logo.png",
+      "bytes": 20754,
+      "sha256": "721c895579cb08ec4c9a0fe7dadafe9a97c33ef758d3578ad5e8b540de59f974"
+    },
+    {
+      "path": "android/app/src/main/res/drawable-mdpi/splashscreen_logo.png",
+      "bytes": 12863,
+      "sha256": "f84b9b17a4a1c7d7dd840cd272c07a6c3fd66d5a9826b64bb53facb6f176bc24"
+    },
+    {
+      "path": "android/app/src/main/res/drawable-xhdpi/splashscreen_logo.png",
+      "bytes": 29081,
+      "sha256": "e1c5250e339add5ed7849cb0859d052edb9781abb91db049e68ae3a4059247d7"
+    },
+    {
+      "path": "android/app/src/main/res/drawable-xxhdpi/splashscreen_logo.png",
+      "bytes": 47123,
+      "sha256": "23d97ccb41a821ee345b2c5bb0c9bdab730a751a9227925acbf0af021dc38a9b"
+    },
+    {
+      "path": "android/app/src/main/res/drawable-xxxhdpi/splashscreen_logo.png",
+      "bytes": 66529,
+      "sha256": "be9fac5c4cda48c41dce592288c486524bba3e4ca7fa00c0a04a46928154b5bf"
+    },
+    {
+      "path": "android/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml",
+      "bytes": 257,
+      "sha256": "03d70962a0beea2bb6ab1a838b015d90da6c33adb045ff85f7b198aca70df08d"
+    },
+    {
+      "path": "android/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml",
+      "bytes": 257,
+      "sha256": "03d70962a0beea2bb6ab1a838b015d90da6c33adb045ff85f7b198aca70df08d"
+    },
+    {
+      "path": "android/app/src/main/res/mipmap-hdpi/ic_launcher.webp",
+      "bytes": 6665,
+      "sha256": "c6743a192d13f6590fe3bf1000e02fec0ccf3c31f5ff69f72ca31c300acf3bb6"
+    },
+    {
+      "path": "android/app/src/main/res/mipmap-hdpi/ic_launcher_foreground.webp",
+      "bytes": 27910,
+      "sha256": "712339736da10f562e1a7b54047b5429cfb5ffa35461c70b90b9cb082737776c"
+    },
+    {
+      "path": "android/app/src/main/res/mipmap-hdpi/ic_launcher_round.webp",
+      "bytes": 7169,
+      "sha256": "81069b080c2253e398f8130384d82fd4182486544d436c4bb520afb30693f875"
+    },
+    {
+      "path": "android/app/src/main/res/mipmap-mdpi/ic_launcher.webp",
+      "bytes": 3330,
+      "sha256": "0d1d10c0618423801cfe0060700c49e2f301ff62893866462f19387cd6ddf5a4"
+    },
+    {
+      "path": "android/app/src/main/res/mipmap-mdpi/ic_launcher_foreground.webp",
+      "bytes": 13762,
+      "sha256": "f4bae91ce0cbe2ca380a7c3d83e43a33a7a835e6288c8c0755633df1f5e639ba"
+    },
+    {
+      "path": "android/app/src/main/res/mipmap-mdpi/ic_launcher_round.webp",
+      "bytes": 3647,
+      "sha256": "bc29f90d5b5fcdf78dd4e330a798784c55e9604344e349503ead6200a05a3034"
+    },
+    {
+      "path": "android/app/src/main/res/mipmap-xhdpi/ic_launcher.webp",
+      "bytes": 11142,
+      "sha256": "c65e3623b328f1fb54c73e3dcbae742d6997a04eb2ac3e7384afe4530a51b43d"
+    },
+    {
+      "path": "android/app/src/main/res/mipmap-xhdpi/ic_launcher_foreground.webp",
+      "bytes": 47381,
+      "sha256": "e36191a455a55dba4ef03b39151c37aff08ee1ecc09ff23b5fa46b2b247f6a4e"
+    },
+    {
+      "path": "android/app/src/main/res/mipmap-xhdpi/ic_launcher_round.webp",
+      "bytes": 11893,
+      "sha256": "edec760e8f6c6faff09d460c233f21d2b20eab6da49b2f3646e32eb9816edf81"
+    },
+    {
+      "path": "android/app/src/main/res/mipmap-xxhdpi/ic_launcher.webp",
+      "bytes": 22600,
+      "sha256": "0c01600fac8c83f7ad996600b84f7c3ef36d2bd0908bc34897263fc543cc4ffa"
+    },
+    {
+      "path": "android/app/src/main/res/mipmap-xxhdpi/ic_launcher_foreground.webp",
+      "bytes": 102034,
+      "sha256": "f07946d3170e7ad00b566efcac437d8d474d41093210e2b84bc5b50f93167d99"
+    },
+    {
+      "path": "android/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.webp",
+      "bytes": 23737,
+      "sha256": "2eb8f56654ec0f639e1445718116f5cd35199dd5106a765aaae2d8a2621dc8ba"
+    },
+    {
+      "path": "android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.webp",
+      "bytes": 37999,
+      "sha256": "2afbf3df3c9a05ea9d461b702c5f0122b5e583fa57cc1054015cc8b5393c0c7b"
+    },
+    {
+      "path": "android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_foreground.webp",
+      "bytes": 175898,
+      "sha256": "814fabfa1827aa8ca8591741d1147f827235023f6bd56910bbee3ece3904a4ba"
+    },
+    {
+      "path": "android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.webp",
+      "bytes": 39769,
+      "sha256": "4b1b09d3bd65383081a0c4128a00fc05ca14cb51d30e3cddec2826c4893e51d2"
+    },
+    {
+      "path": "android/app/src/main/res/values/colors.xml",
+      "bytes": 172,
+      "sha256": "823bb0e4331391e7b6e58d5e9afc8f5e64294f131c9bbdfc975a48f60b9cdbc0"
+    },
+    {
+      "path": "android/app/src/main/res/values/strings.xml",
+      "bytes": 174,
+      "sha256": "112c6739423407860af131a1d33306de998514f0b2831f39bfa6d98fd8d7bd87"
+    },
+    {
+      "path": "android/app/src/main/res/values/styles.xml",
+      "bytes": 592,
+      "sha256": "e40414258372e05336fde31cd6a59ba286f0735dcc548fec42180b59af12b0f0"
+    },
+    {
+      "path": "android/build.gradle",
+      "bytes": 556,
+      "sha256": "bdb916d3fe7085c9e9f3bb45bd5eacb97f5d2c5a2b2af965642f7d904739ca68"
+    },
+    {
+      "path": "android/gradle/wrapper/gradle-wrapper.jar",
+      "bytes": 46175,
+      "sha256": "b3a875ddc1f044746e1b1a55f645584505f4a10438c1afea9f15e92a7c42ec13"
+    },
+    {
+      "path": "android/gradle/wrapper/gradle-wrapper.properties",
+      "bytes": 252,
+      "sha256": "a180163249c7252412ddaee1c7adcf59f6494b1183136f690fbd9a3b8aaed00e"
+    },
+    {
+      "path": "android/gradle.properties",
+      "bytes": 2567,
+      "sha256": "d02b52da10bf3abb24279fd102df47694b8130a6b7fe6110cc47a9476ac8673c"
+    },
+    {
+      "path": "android/gradlew",
+      "bytes": 8618,
+      "sha256": "fb68debc1b1acf8ec55dc0d5e5495e1dedd0bd6b61f304bee61613eeb2bd9b92"
+    },
+    {
+      "path": "android/gradlew.bat",
+      "bytes": 3093,
+      "sha256": "982f1b2979dd2d13505c11e92192ab43eef338242ca61587f86f8d7fbc86f67b"
+    },
+    {
+      "path": "android/settings.gradle",
+      "bytes": 1274,
+      "sha256": "41899038ac0f8569e07ecb260b77fe68f44710e153283cfcdece0eae9c0def54"
+    }
+  ],
+  "excludedSigningFiles": [
+    {
+      "path": "android/app/debug.keystore",
+      "reason": "Template development signing material excluded from reads, copying and artifact inventory hashes."
+    }
+  ],
+  "portableRawSourceCopies": [
+    {
+      "source": "android/app/src/main/AndroidManifest.xml",
+      "artifact": "android__app__src__main__AndroidManifest.xml.txt",
+      "bytes": 2427,
+      "sha256": "e7bf01e9a093d1e0b1c0a96d4357b7383f70d8e4fca3cfad304de7c3ea5cb0df"
+    },
+    {
+      "source": "android/app/src/debug/AndroidManifest.xml",
+      "artifact": "android__app__src__debug__AndroidManifest.xml.txt",
+      "bytes": 374,
+      "sha256": "fb1795032c764d975376e1612ab7022058eca2268a45efbe731a47a5d3ac0f60"
+    },
+    {
+      "source": "android/app/src/debugOptimized/AndroidManifest.xml",
+      "artifact": "android__app__src__debugOptimized__AndroidManifest.xml.txt",
+      "bytes": 374,
+      "sha256": "fb1795032c764d975376e1612ab7022058eca2268a45efbe731a47a5d3ac0f60"
+    },
+    {
+      "source": "android/build.gradle",
+      "artifact": "android__build.gradle.txt",
+      "bytes": 556,
+      "sha256": "bdb916d3fe7085c9e9f3bb45bd5eacb97f5d2c5a2b2af965642f7d904739ca68"
+    },
+    {
+      "source": "android/settings.gradle",
+      "artifact": "android__settings.gradle.txt",
+      "bytes": 1274,
+      "sha256": "41899038ac0f8569e07ecb260b77fe68f44710e153283cfcdece0eae9c0def54"
+    },
+    {
+      "source": "android/gradle.properties",
+      "artifact": "android__gradle.properties.txt",
+      "bytes": 2567,
+      "sha256": "d02b52da10bf3abb24279fd102df47694b8130a6b7fe6110cc47a9476ac8673c"
+    },
+    {
+      "source": "android/gradle/wrapper/gradle-wrapper.properties",
+      "artifact": "android__gradle__wrapper__gradle-wrapper.properties.txt",
+      "bytes": 252,
+      "sha256": "a180163249c7252412ddaee1c7adcf59f6494b1183136f690fbd9a3b8aaed00e"
+    },
+    {
+      "source": "android/app/src/main/res/values/strings.xml",
+      "artifact": "android__app__src__main__res__values__strings.xml.txt",
+      "bytes": 174,
+      "sha256": "112c6739423407860af131a1d33306de998514f0b2831f39bfa6d98fd8d7bd87"
+    },
+    {
+      "source": "android/app/src/main/res/values/colors.xml",
+      "artifact": "android__app__src__main__res__values__colors.xml.txt",
+      "bytes": 172,
+      "sha256": "823bb0e4331391e7b6e58d5e9afc8f5e64294f131c9bbdfc975a48f60b9cdbc0"
+    },
+    {
+      "source": "android/app/src/main/res/values/styles.xml",
+      "artifact": "android__app__src__main__res__values__styles.xml.txt",
+      "bytes": 592,
+      "sha256": "e40414258372e05336fde31cd6a59ba286f0735dcc548fec42180b59af12b0f0"
+    },
+    {
+      "source": "android/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml",
+      "artifact": "android__app__src__main__res__mipmap-anydpi-v26__ic_launcher.xml.txt",
+      "bytes": 257,
+      "sha256": "03d70962a0beea2bb6ab1a838b015d90da6c33adb045ff85f7b198aca70df08d"
+    }
+  ],
+  "noNetworkOrInstallRequested": true,
+  "noAdbOrNativeInput": true,
+  "noIosBuild": true,
+  "noApkAabOrMergedReleaseArtifact": true,
+  "noNewGameplayGateCredit": true,
+  "limits": "Offline native source generation only; dependency resolution/build/signing/merged permissions/OS backup/font packaging/airplane mode/physical/TalkBack/audio/iOS remain separate. Root controls ongoing native/scenario/session acceptance."
+}

@@ -1,0 +1,1049 @@
+{
+  "scope": "Declared funded adult starts; nine complete cult careers, ordinary engine actions and annual advancement, then collapse or disbandment. The struggling cohort starts with declared low public standing, stress and high-heat beliefs; outcomes are not edited. Before/after command traces and non-prose final worlds match. Not natural-birth encounter claims.",
+  "results": [
+    {
+      "policy": "short",
+      "country": "US",
+      "commands": 20,
+      "years": 4,
+      "status": "collapsed",
+      "followers": 39,
+      "loyalty": 88,
+      "satisfaction": 84,
+      "heat": 0,
+      "treasury": "0",
+      "arrears": "0",
+      "threads": 4,
+      "scenes": [
+        "cult-treasurer-envelope",
+        "adult-repair-table",
+        "cult-lunar-exam",
+        "cult-family-at-the-gate",
+        "cult-unexpected-crowd",
+        "adult-instruction-last-page"
+      ],
+      "samples": [
+        {
+          "title": "A visible envelope",
+          "body": "You refuse to approve the fund without records. Sam Reed takes the envelope back and suddenly remembers some receipts."
+        },
+        {
+          "title": "A useful admission",
+          "body": "The volunteer stops and explains the failed mechanism. You learn more from the mistake than from the planned demonstration."
+        },
+        {
+          "title": "Back to the roundabout",
+          "body": "You pay for more lessons. Taylor Reed agrees to watch the road this time, even if the moon is doing something suspicious."
+        },
+        {
+          "title": "Age 32",
+          "body": "Another year passed. The ordinary days were part of my life too."
+        },
+        {
+          "title": "A less sacred introduction",
+          "body": "You introduce Avery Vale. They use your old name. The room enjoys it enough to make you nervous."
+        },
+        {
+          "title": "Room for the believers",
+          "body": "You hire more space. Taylor Reed can finish a sentence without being asked where the toilet is."
+        },
+        {
+          "title": "Age 33",
+          "body": "Another year passed. The ordinary days were part of my life too."
+        },
+        {
+          "title": "Your organisation has collapsed",
+          "body": "The Other Door could not cover its bills for four consecutive months. Your leadership has ended and the inner circle has left. Communal funds were used to settle outstanding bills where possible, unpaid bills were written off and any remaining funds were distributed to the community. Your personal funds were kept separate."
+        },
+        {
+          "title": "A long public fart",
+          "body": "You open the valve. The canoe collapses over eight uninterrupted seconds of rude noise. The instructor waits until everyone has stopped laughing to explain the warning."
+        }
+      ],
+      "random": {
+        "events": 2562994690,
+        "npcs": 1347586735,
+        "economy": 3712406575,
+        "outcomes": 1920421544
+      },
+      "mechanicsSha256": "77d3eae8094c1b0eb55444379ee1cc497650dfe11fef0ffce09c2242fc239bda"
+    },
+    {
+      "policy": "short",
+      "country": "GB",
+      "commands": 20,
+      "years": 4,
+      "status": "collapsed",
+      "followers": 39,
+      "loyalty": 88,
+      "satisfaction": 84,
+      "heat": 0,
+      "treasury": "0",
+      "arrears": "0",
+      "threads": 4,
+      "scenes": [
+        "cult-treasurer-envelope",
+        "adult-repair-table",
+        "cult-lunar-exam",
+        "cult-family-at-the-gate",
+        "cult-unexpected-crowd",
+        "adult-instruction-last-page"
+      ],
+      "samples": [
+        {
+          "title": "A visible envelope",
+          "body": "You refuse to approve the fund without records. Freddie Morgan takes the envelope back and suddenly remembers some receipts."
+        },
+        {
+          "title": "A useful admission",
+          "body": "The volunteer stops and explains the failed mechanism. You learn more from the mistake than from the planned demonstration."
+        },
+        {
+          "title": "Back to the roundabout",
+          "body": "You pay for more lessons. Harry Morgan agrees to watch the road this time, even if the moon is doing something suspicious."
+        },
+        {
+          "title": "Age 32",
+          "body": "Another year passed. The ordinary days were part of my life too."
+        },
+        {
+          "title": "A less sacred introduction",
+          "body": "You introduce Grace Vale. They use your old name. The room enjoys it enough to make you nervous."
+        },
+        {
+          "title": "Room for the believers",
+          "body": "You hire more space. Harry Morgan can finish a sentence without being asked where the toilet is."
+        },
+        {
+          "title": "Age 33",
+          "body": "Another year passed. The ordinary days were part of my life too."
+        },
+        {
+          "title": "Your organisation has collapsed",
+          "body": "The Other Door could not cover its bills for four consecutive months. Your leadership has ended and the inner circle has left. Communal funds were used to settle outstanding bills where possible, unpaid bills were written off and any remaining funds were distributed to the community. Your personal funds were kept separate."
+        },
+        {
+          "title": "A long public fart",
+          "body": "You open the valve. The canoe collapses over eight uninterrupted seconds of rude noise. The instructor waits until everyone has stopped laughing to explain the warning."
+        }
+      ],
+      "random": {
+        "events": 2562994690,
+        "npcs": 4002811809,
+        "economy": 3712406575,
+        "outcomes": 1920421544
+      },
+      "mechanicsSha256": "4de60eb19665ed45525b402b3ac4f35e17860e4afd1828021b3a6f3c0b8e9a5e"
+    },
+    {
+      "policy": "short",
+      "country": "JP",
+      "commands": 20,
+      "years": 4,
+      "status": "collapsed",
+      "followers": 39,
+      "loyalty": 88,
+      "satisfaction": 84,
+      "heat": 0,
+      "treasury": "0",
+      "arrears": "0",
+      "threads": 4,
+      "scenes": [
+        "cult-treasurer-envelope",
+        "adult-repair-table",
+        "cult-lunar-exam",
+        "cult-family-at-the-gate",
+        "cult-unexpected-crowd",
+        "adult-instruction-last-page"
+      ],
+      "samples": [
+        {
+          "title": "A visible envelope",
+          "body": "You refuse to approve the fund without records. Akari Tanaka takes the envelope back and suddenly remembers some receipts."
+        },
+        {
+          "title": "A useful admission",
+          "body": "The volunteer stops and explains the failed mechanism. You learn more from the mistake than from the planned demonstration."
+        },
+        {
+          "title": "Back to the roundabout",
+          "body": "You pay for more lessons. Sora Tanaka agrees to watch the road this time, even if the moon is doing something suspicious."
+        },
+        {
+          "title": "Age 32",
+          "body": "Another year passed. The ordinary days were part of my life too."
+        },
+        {
+          "title": "A less sacred introduction",
+          "body": "You introduce Hina Vale. They use your old name. The room enjoys it enough to make you nervous."
+        },
+        {
+          "title": "Room for the believers",
+          "body": "You hire more space. Sora Tanaka can finish a sentence without being asked where the toilet is."
+        },
+        {
+          "title": "Age 33",
+          "body": "Another year passed. The ordinary days were part of my life too."
+        },
+        {
+          "title": "Your organisation has collapsed",
+          "body": "The Other Door could not cover its bills for four consecutive months. Your leadership has ended and the inner circle has left. Communal funds were used to settle outstanding bills where possible, unpaid bills were written off and any remaining funds were distributed to the community. Your personal funds were kept separate."
+        },
+        {
+          "title": "A long public fart",
+          "body": "You open the valve. The canoe collapses over eight uninterrupted seconds of rude noise. The instructor waits until everyone has stopped laughing to explain the warning."
+        }
+      ],
+      "random": {
+        "events": 2562994690,
+        "npcs": 1347586735,
+        "economy": 3712406575,
+        "outcomes": 1920421544
+      },
+      "mechanicsSha256": "79250b6cdaf9a1070757b4238865f2a920ce7c1437be0206567a23bbf2abbd68"
+    },
+    {
+      "policy": "struggling",
+      "country": "US",
+      "commands": 104,
+      "years": 8,
+      "status": "disbanded",
+      "followers": 39,
+      "loyalty": 96,
+      "satisfaction": 100,
+      "heat": 99,
+      "treasury": "0",
+      "arrears": "0",
+      "threads": 15,
+      "scenes": [
+        "cult-family-at-the-gate",
+        "cult-green-moon",
+        "wellbeing-habit-one-miss",
+        "cult-aura-invoice",
+        "cult-unexpected-crowd",
+        "adult-password-on-paper",
+        "cult-activity-sermon-crown",
+        "cult-lunar-exam",
+        "cult-treasurer-envelope",
+        "adult-name-pronunciation",
+        "adult-silent-notification",
+        "cult-activity-stunt-sponsor",
+        "wellbeing-meal-comparison",
+        "wellbeing-unhurried-breath",
+        "cult-activity-dream-copy",
+        "wellbeing-one-more-episode",
+        "medical-emergency",
+        "adult-free-sample-opinion"
+      ],
+      "samples": [
+        {
+          "title": "Not a single convert",
+          "body": "You finish your pitch to a bus queue just as the bus arrives. Everyone finds somewhere else to be.\n\n0 new followers joined; $0.00 in joining fees reached the treasury."
+        },
+        {
+          "title": "They would like an answer",
+          "body": "You interpret a follower’s dream. They correct you in front of everyone, then correct your interpretation of the correction."
+        },
+        {
+          "title": "Dream Circle: you pulled it off",
+          "body": "You hear everyone’s dream. One is an elaborate account of making a sandwich. You wait for the revelation; it is the sandwich.\n\nThe event cost $80.00; voluntary contributions were $6.40."
+        },
+        {
+          "title": "You have made a promise",
+          "body": "You promise the moon will turn green within a year. A follower writes down the date while looking straight at you. Your deadline is 12 months."
+        },
+        {
+          "title": "A less sacred introduction",
+          "body": "You introduce Avery Vale. They use your old name. The room enjoys it enough to make you nervous."
+        },
+        {
+          "title": "You take it back",
+          "body": "You admit the moon was never going to turn green. A follower slowly puts away the paint chart and asks what else you guessed."
+        },
+        {
+          "title": "The dog retains top billing",
+          "body": "You write “Still doing this.” The round dog remains the journal’s most exciting development. You are back on schedule."
+        },
+        {
+          "title": "Not a single convert",
+          "body": "Your clip gets comments, arguments and an unsolicited haircut suggestion. It gets no recruits.\n\n0 new followers joined; $0.00 in joining fees reached the treasury."
+        },
+        {
+          "title": "The sermon is over",
+          "body": "You explain dream messages. A follower shuts their eyes and calls it research."
+        },
+        {
+          "title": "The Quiet Table: you pulled it off",
+          "body": "You sit through a peaceful silence, broken mainly by the chairs. Followers leave looking less exhausted.\n\nThe event cost $60.00; voluntary contributions were $27.20."
+        },
+        {
+          "title": "Your glow costs money",
+          "body": "You pay the refund. The donor studies you for a change in brightness, then counts the money again."
+        },
+        {
+          "title": "Room for the believers",
+          "body": "You hire more space. Taylor Reed can finish a sentence without being asked where the toilet is."
+        },
+        {
+          "title": "Future you gets better information",
+          "body": "You replace the riddle with a useful explanation and keep it somewhere appropriate."
+        },
+        {
+          "title": "Your newest followers",
+          "body": "You get a signed form. Other visitors thank you for the refreshments with the firm politeness of people refusing a second date.\n\n1 new follower joined; $200.00 in joining fees reached the treasury. The headquarters is at capacity."
+        },
+        {
+          "title": "Let me finish first",
+          "body": "You agree who speaks and when. Taylor Reed insists on finishing their turn even when you dislike the answer."
+        },
+        {
+          "title": "Community Supper: you pulled it off",
+          "body": "You serve the supper. Everyone eats, and the loudest dispute concerns who gets the last helping.\n\nThe event cost $180.00; voluntary contributions were $29.60."
+        },
+        {
+          "title": "Back to the roundabout",
+          "body": "You pay for more lessons. Taylor Reed agrees to watch the road this time, even if the moon is doing something suspicious."
+        },
+        {
+          "title": "A visible envelope",
+          "body": "You refuse to approve the fund without records. Sam Reed takes the envelope back and suddenly remembers some receipts."
+        },
+        {
+          "title": "A manageable correction",
+          "body": "The host repeats it correctly and moves on. The proposed nickname retires before its first appearance."
+        },
+        {
+          "title": "Not a single convert",
+          "body": "Your followers bring friends. The friends enjoy seeing them and decline to turn the friendship into a membership.\n\n0 new followers joined; $0.00 in joining fees reached the treasury."
+        },
+        {
+          "title": "You have their attention",
+          "body": "You describe a life hidden in a dream. Followers start comparing their own, talking over you to explain which alternate self had the worst marriage."
+        },
+        {
+          "title": "Starlight Vigil: you pulled it off",
+          "body": "You watch the sky with the group. A follower proposes a warm coat as the evening’s most convincing source of protection.\n\nThe event cost $120.00; voluntary contributions were $28.80."
+        },
+        {
+          "title": "A less sacred introduction",
+          "body": "You introduce Avery Vale. They use your old name. The room enjoys it enough to make you nervous."
+        },
+        {
+          "title": "The photographs help",
+          "body": "You attach a photo of weeds and broken plant pots. Two people volunteer. A third asks for a picture of you holding today’s newspaper. You decline that part."
+        }
+      ],
+      "random": {
+        "events": 3243618957,
+        "npcs": 3730979715,
+        "economy": 3884832063,
+        "outcomes": 3041057890
+      },
+      "mechanicsSha256": "cb11568e3350875e48777e0366bc6cfda6e1698f8dd60561bd2dd485dd2e651f"
+    },
+    {
+      "policy": "struggling",
+      "country": "GB",
+      "commands": 104,
+      "years": 8,
+      "status": "disbanded",
+      "followers": 39,
+      "loyalty": 96,
+      "satisfaction": 100,
+      "heat": 99,
+      "treasury": "0",
+      "arrears": "0",
+      "threads": 15,
+      "scenes": [
+        "cult-family-at-the-gate",
+        "cult-green-moon",
+        "wellbeing-habit-one-miss",
+        "cult-aura-invoice",
+        "cult-unexpected-crowd",
+        "adult-password-on-paper",
+        "cult-activity-sermon-crown",
+        "cult-lunar-exam",
+        "cult-treasurer-envelope",
+        "adult-name-pronunciation",
+        "adult-silent-notification",
+        "cult-activity-stunt-sponsor",
+        "wellbeing-meal-comparison",
+        "wellbeing-unhurried-breath",
+        "cult-activity-dream-copy",
+        "wellbeing-one-more-episode",
+        "medical-emergency",
+        "adult-free-sample-opinion"
+      ],
+      "samples": [
+        {
+          "title": "Not a single convert",
+          "body": "You finish your pitch to a bus queue just as the bus arrives. Everyone finds somewhere else to be.\n\n0 new followers joined; £0.00 in joining fees reached the treasury."
+        },
+        {
+          "title": "They would like an answer",
+          "body": "You interpret a follower’s dream. They correct you in front of everyone, then correct your interpretation of the correction."
+        },
+        {
+          "title": "Dream Circle: you pulled it off",
+          "body": "You hear everyone’s dream. One is an elaborate account of making a sandwich. You wait for the revelation; it is the sandwich.\n\nThe event cost £58.00; voluntary contributions were £4.64."
+        },
+        {
+          "title": "You have made a promise",
+          "body": "You promise the moon will turn green within a year. A follower writes down the date while looking straight at you. Your deadline is 12 months."
+        },
+        {
+          "title": "A less sacred introduction",
+          "body": "You introduce Grace Vale. They use your old name. The room enjoys it enough to make you nervous."
+        },
+        {
+          "title": "You take it back",
+          "body": "You admit the moon was never going to turn green. A follower slowly puts away the paint chart and asks what else you guessed."
+        },
+        {
+          "title": "The dog retains top billing",
+          "body": "You write “Still doing this.” The round dog remains the journal’s most exciting development. You are back on schedule."
+        },
+        {
+          "title": "Not a single convert",
+          "body": "Your clip gets comments, arguments and an unsolicited haircut suggestion. It gets no recruits.\n\n0 new followers joined; £0.00 in joining fees reached the treasury."
+        },
+        {
+          "title": "The sermon is over",
+          "body": "You explain dream messages. A follower shuts their eyes and calls it research."
+        },
+        {
+          "title": "The Quiet Table: you pulled it off",
+          "body": "You sit through a peaceful silence, broken mainly by the chairs. Followers leave looking less exhausted.\n\nThe event cost £43.50; voluntary contributions were £19.72."
+        },
+        {
+          "title": "Your glow costs money",
+          "body": "You pay the refund. The donor studies you for a change in brightness, then counts the money again."
+        },
+        {
+          "title": "Room for the believers",
+          "body": "You hire more space. Harry Morgan can finish a sentence without being asked where the toilet is."
+        },
+        {
+          "title": "Future you gets better information",
+          "body": "You replace the riddle with a useful explanation and keep it somewhere appropriate."
+        },
+        {
+          "title": "Your newest followers",
+          "body": "You get a signed form. Other visitors thank you for the refreshments with the firm politeness of people refusing a second date.\n\n1 new follower joined; £145.00 in joining fees reached the treasury. The headquarters is at capacity."
+        },
+        {
+          "title": "Let me finish first",
+          "body": "You agree who speaks and when. Harry Morgan insists on finishing their turn even when you dislike the answer."
+        },
+        {
+          "title": "Community Supper: you pulled it off",
+          "body": "You serve the supper. Everyone eats, and the loudest dispute concerns who gets the last helping.\n\nThe event cost £130.50; voluntary contributions were £21.46."
+        },
+        {
+          "title": "Back to the roundabout",
+          "body": "You pay for more lessons. Harry Morgan agrees to watch the road this time, even if the moon is doing something suspicious."
+        },
+        {
+          "title": "A visible envelope",
+          "body": "You refuse to approve the fund without records. Freddie Morgan takes the envelope back and suddenly remembers some receipts."
+        },
+        {
+          "title": "A manageable correction",
+          "body": "The host repeats it correctly and moves on. The proposed nickname retires before its first appearance."
+        },
+        {
+          "title": "Not a single convert",
+          "body": "Your followers bring friends. The friends enjoy seeing them and decline to turn the friendship into a membership.\n\n0 new followers joined; £0.00 in joining fees reached the treasury."
+        },
+        {
+          "title": "You have their attention",
+          "body": "You describe a life hidden in a dream. Followers start comparing their own, talking over you to explain which alternate self had the worst marriage."
+        },
+        {
+          "title": "Starlight Vigil: you pulled it off",
+          "body": "You watch the sky with the group. A follower proposes a warm coat as the evening’s most convincing source of protection.\n\nThe event cost £87.00; voluntary contributions were £20.88."
+        },
+        {
+          "title": "A less sacred introduction",
+          "body": "You introduce Grace Vale. They use your old name. The room enjoys it enough to make you nervous."
+        },
+        {
+          "title": "The photographs help",
+          "body": "You attach a photo of weeds and broken plant pots. Two people volunteer. A third asks for a picture of you holding today’s newspaper. You decline that part."
+        }
+      ],
+      "random": {
+        "events": 3243618957,
+        "npcs": 2850955557,
+        "economy": 3884832063,
+        "outcomes": 3041057890
+      },
+      "mechanicsSha256": "e6853c3405a723e448347734245486ce8af3644f135adfc55860a16a586b7cd6"
+    },
+    {
+      "policy": "struggling",
+      "country": "JP",
+      "commands": 104,
+      "years": 8,
+      "status": "disbanded",
+      "followers": 39,
+      "loyalty": 96,
+      "satisfaction": 100,
+      "heat": 99,
+      "treasury": "0",
+      "arrears": "0",
+      "threads": 15,
+      "scenes": [
+        "cult-family-at-the-gate",
+        "cult-green-moon",
+        "wellbeing-habit-one-miss",
+        "cult-aura-invoice",
+        "cult-unexpected-crowd",
+        "adult-password-on-paper",
+        "cult-activity-sermon-crown",
+        "cult-lunar-exam",
+        "cult-treasurer-envelope",
+        "adult-name-pronunciation",
+        "adult-silent-notification",
+        "cult-activity-stunt-sponsor",
+        "wellbeing-meal-comparison",
+        "wellbeing-unhurried-breath",
+        "cult-activity-dream-copy",
+        "wellbeing-one-more-episode",
+        "medical-emergency",
+        "adult-free-sample-opinion"
+      ],
+      "samples": [
+        {
+          "title": "Not a single convert",
+          "body": "You finish your pitch to a bus queue just as the bus arrives. Everyone finds somewhere else to be.\n\n0 new followers joined; ¥0 in joining fees reached the treasury."
+        },
+        {
+          "title": "They would like an answer",
+          "body": "You interpret a follower’s dream. They correct you in front of everyone, then correct your interpretation of the correction."
+        },
+        {
+          "title": "Dream Circle: you pulled it off",
+          "body": "You hear everyone’s dream. One is an elaborate account of making a sandwich. You wait for the revelation; it is the sandwich.\n\nThe event cost ¥6,400; voluntary contributions were ¥512."
+        },
+        {
+          "title": "You have made a promise",
+          "body": "You promise the moon will turn green within a year. A follower writes down the date while looking straight at you. Your deadline is 12 months."
+        },
+        {
+          "title": "A less sacred introduction",
+          "body": "You introduce Hina Vale. They use your old name. The room enjoys it enough to make you nervous."
+        },
+        {
+          "title": "You take it back",
+          "body": "You admit the moon was never going to turn green. A follower slowly puts away the paint chart and asks what else you guessed."
+        },
+        {
+          "title": "The dog retains top billing",
+          "body": "You write “Still doing this.” The round dog remains the journal’s most exciting development. You are back on schedule."
+        },
+        {
+          "title": "Not a single convert",
+          "body": "Your clip gets comments, arguments and an unsolicited haircut suggestion. It gets no recruits.\n\n0 new followers joined; ¥0 in joining fees reached the treasury."
+        },
+        {
+          "title": "The sermon is over",
+          "body": "You explain dream messages. A follower shuts their eyes and calls it research."
+        },
+        {
+          "title": "The Quiet Table: you pulled it off",
+          "body": "You sit through a peaceful silence, broken mainly by the chairs. Followers leave looking less exhausted.\n\nThe event cost ¥4,800; voluntary contributions were ¥2,176."
+        },
+        {
+          "title": "Your glow costs money",
+          "body": "You pay the refund. The donor studies you for a change in brightness, then counts the money again."
+        },
+        {
+          "title": "Room for the believers",
+          "body": "You hire more space. Sora Tanaka can finish a sentence without being asked where the toilet is."
+        },
+        {
+          "title": "Future you gets better information",
+          "body": "You replace the riddle with a useful explanation and keep it somewhere appropriate."
+        },
+        {
+          "title": "Your newest followers",
+          "body": "You get a signed form. Other visitors thank you for the refreshments with the firm politeness of people refusing a second date.\n\n1 new follower joined; ¥16,000 in joining fees reached the treasury. The headquarters is at capacity."
+        },
+        {
+          "title": "Let me finish first",
+          "body": "You agree who speaks and when. Sora Tanaka insists on finishing their turn even when you dislike the answer."
+        },
+        {
+          "title": "Community Supper: you pulled it off",
+          "body": "You serve the supper. Everyone eats, and the loudest dispute concerns who gets the last helping.\n\nThe event cost ¥14,400; voluntary contributions were ¥2,368."
+        },
+        {
+          "title": "Back to the roundabout",
+          "body": "You pay for more lessons. Sora Tanaka agrees to watch the road this time, even if the moon is doing something suspicious."
+        },
+        {
+          "title": "A visible envelope",
+          "body": "You refuse to approve the fund without records. Akari Tanaka takes the envelope back and suddenly remembers some receipts."
+        },
+        {
+          "title": "A manageable correction",
+          "body": "The host repeats it correctly and moves on. The proposed nickname retires before its first appearance."
+        },
+        {
+          "title": "Not a single convert",
+          "body": "Your followers bring friends. The friends enjoy seeing them and decline to turn the friendship into a membership.\n\n0 new followers joined; ¥0 in joining fees reached the treasury."
+        },
+        {
+          "title": "You have their attention",
+          "body": "You describe a life hidden in a dream. Followers start comparing their own, talking over you to explain which alternate self had the worst marriage."
+        },
+        {
+          "title": "Starlight Vigil: you pulled it off",
+          "body": "You watch the sky with the group. A follower proposes a warm coat as the evening’s most convincing source of protection.\n\nThe event cost ¥9,600; voluntary contributions were ¥2,304."
+        },
+        {
+          "title": "A less sacred introduction",
+          "body": "You introduce Hina Vale. They use your old name. The room enjoys it enough to make you nervous."
+        },
+        {
+          "title": "The photographs help",
+          "body": "You attach a photo of weeds and broken plant pots. Two people volunteer. A third asks for a picture of you holding today’s newspaper. You decline that part."
+        }
+      ],
+      "random": {
+        "events": 3243618957,
+        "npcs": 2531249572,
+        "economy": 3884832063,
+        "outcomes": 3041057890
+      },
+      "mechanicsSha256": "24e8b8da15edabefafcedb96d801924a666dd9fc2db521799cdea731b544a538"
+    },
+    {
+      "policy": "successful",
+      "country": "US",
+      "commands": 129,
+      "years": 8,
+      "status": "disbanded",
+      "followers": 799,
+      "loyalty": 100,
+      "satisfaction": 100,
+      "heat": 0,
+      "treasury": "0",
+      "arrears": "0",
+      "threads": 22,
+      "scenes": [
+        "cult-family-at-the-gate",
+        "cult-green-moon",
+        "wellbeing-habit-one-miss",
+        "cult-retreat-roof",
+        "cult-unexpected-crowd",
+        "adult-password-on-paper",
+        "cult-activity-supper-seats",
+        "cult-documentary-clipboard",
+        "cult-treasurer-envelope",
+        "cult-red-tagged-exit",
+        "cult-activity-referral-table",
+        "cult-lunar-exam",
+        "wellbeing-waiting-without-feed",
+        "cult-activity-sermon-question",
+        "adult-community-poster",
+        "cult-opening-deposit",
+        "adult-free-sample-opinion",
+        "cult-activity-open-door",
+        "cult-merchandise-star",
+        "medical-emergency",
+        "wellbeing-meal-comparison"
+      ],
+      "samples": [
+        {
+          "title": "Your money goes in",
+          "body": "You put the money into the communal treasury. It now belongs to the organisation."
+        },
+        {
+          "title": "Your newest followers",
+          "body": "You squeeze a pitch between people dodging your leaflets. One passer-by changes direction twice to avoid your explanation.\n\n1 new follower joined; $40.00 in joining fees reached the treasury."
+        },
+        {
+          "title": "They would like an answer",
+          "body": "You interpret a follower’s dream. They correct you in front of everyone, then correct your interpretation of the correction."
+        },
+        {
+          "title": "Dream Circle: you pulled it off",
+          "body": "You hear everyone’s dream. One is an elaborate account of making a sandwich. You wait for the revelation; it is the sandwich.\n\nThe event cost $80.00; voluntary contributions were $7.20."
+        },
+        {
+          "title": "You have made a promise",
+          "body": "You promise the moon will turn green within a year. A follower writes down the date while looking straight at you. Your deadline is 12 months."
+        },
+        {
+          "title": "A less sacred introduction",
+          "body": "You introduce Avery Vale. They use your old name. The room enjoys it enough to make you nervous."
+        },
+        {
+          "title": "You take it back",
+          "body": "You admit the moon was never going to turn green. A follower slowly puts away the paint chart and asks what else you guessed."
+        },
+        {
+          "title": "The dog retains top billing",
+          "body": "You write “Still doing this.” The round dog remains the journal’s most exciting development. You are back on schedule."
+        },
+        {
+          "title": "Your money goes in",
+          "body": "You put the money into the communal treasury. It now belongs to the organisation."
+        },
+        {
+          "title": "Your newest followers",
+          "body": "Your clip finds an interested audience. Most commenters still prefer arguing with one another under your invitation.\n\n10 new followers joined; $400.00 in joining fees reached the treasury."
+        },
+        {
+          "title": "You have their attention",
+          "body": "You describe a life hidden in a dream. Followers start comparing their own, talking over you to explain which alternate self had the worst marriage."
+        },
+        {
+          "title": "The Quiet Table: you pulled it off",
+          "body": "You sit through a peaceful silence, broken mainly by the chairs. Followers leave looking less exhausted.\n\nThe event cost $60.00; voluntary contributions were $36.00."
+        },
+        {
+          "title": "The bucket loses its job",
+          "body": "You pay to fix the roof. Taylor Reed removes the bucket from your chair before it can attract another donation."
+        },
+        {
+          "title": "Room for the believers",
+          "body": "You hire more space. Taylor Reed can finish a sentence without being asked where the toilet is."
+        },
+        {
+          "title": "Future you gets better information",
+          "body": "You replace the riddle with a useful explanation and keep it somewhere appropriate."
+        },
+        {
+          "title": "Your money goes in",
+          "body": "You put the money into the communal treasury. It now belongs to the organisation."
+        },
+        {
+          "title": "Your newest followers",
+          "body": "Visitors sign up after your talk. One tries to finish the refreshments before their enlightenment begins.\n\n19 new followers joined; $760.00 in joining fees reached the treasury."
+        },
+        {
+          "title": "You have their attention",
+          "body": "You describe a life hidden in a dream. Followers start comparing their own, talking over you to explain which alternate self had the worst marriage."
+        },
+        {
+          "title": "Dinner beats the apology",
+          "body": "You pay for more food. The waiting guests eat while the inner circle tries to look as though it only had one helping."
+        },
+        {
+          "title": "Very little to censor",
+          "body": "You let the cameras follow a normal day. They capture a long meeting, bills and someone asking when lunch is."
+        },
+        {
+          "title": "A visible envelope",
+          "body": "You refuse to approve the fund without records. Sam Reed takes the envelope back and suddenly remembers some receipts."
+        },
+        {
+          "title": "A less fatal throne",
+          "body": "You drag your chair away and pay for the safety work. Jordan Ellis has to find a new place for you to look important."
+        },
+        {
+          "title": "Age 33",
+          "body": "Another year passed. The ordinary days were part of my life too."
+        },
+        {
+          "title": "Your money goes in",
+          "body": "You put the money into the communal treasury. It now belongs to the organisation."
+        }
+      ],
+      "random": {
+        "events": 3051795366,
+        "npcs": 142696383,
+        "economy": 3884832063,
+        "outcomes": 3041057890
+      },
+      "mechanicsSha256": "54593035c5a3eaf9516ba682cd3c675cfd8776029526a49e6da678eb91dca974"
+    },
+    {
+      "policy": "successful",
+      "country": "GB",
+      "commands": 129,
+      "years": 8,
+      "status": "disbanded",
+      "followers": 799,
+      "loyalty": 100,
+      "satisfaction": 100,
+      "heat": 0,
+      "treasury": "0",
+      "arrears": "0",
+      "threads": 22,
+      "scenes": [
+        "cult-family-at-the-gate",
+        "cult-green-moon",
+        "wellbeing-habit-one-miss",
+        "cult-retreat-roof",
+        "cult-unexpected-crowd",
+        "adult-password-on-paper",
+        "cult-activity-supper-seats",
+        "cult-documentary-clipboard",
+        "cult-treasurer-envelope",
+        "cult-red-tagged-exit",
+        "cult-activity-referral-table",
+        "cult-lunar-exam",
+        "wellbeing-waiting-without-feed",
+        "cult-activity-sermon-question",
+        "adult-community-poster",
+        "cult-opening-deposit",
+        "adult-free-sample-opinion",
+        "cult-activity-open-door",
+        "cult-merchandise-star",
+        "medical-emergency",
+        "wellbeing-meal-comparison"
+      ],
+      "samples": [
+        {
+          "title": "Your money goes in",
+          "body": "You put the money into the communal treasury. It now belongs to the organisation."
+        },
+        {
+          "title": "Your newest followers",
+          "body": "You squeeze a pitch between people dodging your leaflets. One passer-by changes direction twice to avoid your explanation.\n\n1 new follower joined; £29.00 in joining fees reached the treasury."
+        },
+        {
+          "title": "They would like an answer",
+          "body": "You interpret a follower’s dream. They correct you in front of everyone, then correct your interpretation of the correction."
+        },
+        {
+          "title": "Dream Circle: you pulled it off",
+          "body": "You hear everyone’s dream. One is an elaborate account of making a sandwich. You wait for the revelation; it is the sandwich.\n\nThe event cost £58.00; voluntary contributions were £5.22."
+        },
+        {
+          "title": "You have made a promise",
+          "body": "You promise the moon will turn green within a year. A follower writes down the date while looking straight at you. Your deadline is 12 months."
+        },
+        {
+          "title": "A less sacred introduction",
+          "body": "You introduce Grace Vale. They use your old name. The room enjoys it enough to make you nervous."
+        },
+        {
+          "title": "You take it back",
+          "body": "You admit the moon was never going to turn green. A follower slowly puts away the paint chart and asks what else you guessed."
+        },
+        {
+          "title": "The dog retains top billing",
+          "body": "You write “Still doing this.” The round dog remains the journal’s most exciting development. You are back on schedule."
+        },
+        {
+          "title": "Your money goes in",
+          "body": "You put the money into the communal treasury. It now belongs to the organisation."
+        },
+        {
+          "title": "Your newest followers",
+          "body": "Your clip finds an interested audience. Most commenters still prefer arguing with one another under your invitation.\n\n10 new followers joined; £290.00 in joining fees reached the treasury."
+        },
+        {
+          "title": "You have their attention",
+          "body": "You describe a life hidden in a dream. Followers start comparing their own, talking over you to explain which alternate self had the worst marriage."
+        },
+        {
+          "title": "The Quiet Table: you pulled it off",
+          "body": "You sit through a peaceful silence, broken mainly by the chairs. Followers leave looking less exhausted.\n\nThe event cost £43.50; voluntary contributions were £26.10."
+        },
+        {
+          "title": "The bucket loses its job",
+          "body": "You pay to fix the roof. Harry Morgan removes the bucket from your chair before it can attract another donation."
+        },
+        {
+          "title": "Room for the believers",
+          "body": "You hire more space. Harry Morgan can finish a sentence without being asked where the toilet is."
+        },
+        {
+          "title": "Future you gets better information",
+          "body": "You replace the riddle with a useful explanation and keep it somewhere appropriate."
+        },
+        {
+          "title": "Your money goes in",
+          "body": "You put the money into the communal treasury. It now belongs to the organisation."
+        },
+        {
+          "title": "Your newest followers",
+          "body": "Visitors sign up after your talk. One tries to finish the refreshments before their enlightenment begins.\n\n19 new followers joined; £551.00 in joining fees reached the treasury."
+        },
+        {
+          "title": "You have their attention",
+          "body": "You describe a life hidden in a dream. Followers start comparing their own, talking over you to explain which alternate self had the worst marriage."
+        },
+        {
+          "title": "Dinner beats the apology",
+          "body": "You pay for more food. The waiting guests eat while the inner circle tries to look as though it only had one helping."
+        },
+        {
+          "title": "Very little to censor",
+          "body": "You let the cameras follow a normal day. They capture a long meeting, bills and someone asking when lunch is."
+        },
+        {
+          "title": "A visible envelope",
+          "body": "You refuse to approve the fund without records. Freddie Morgan takes the envelope back and suddenly remembers some receipts."
+        },
+        {
+          "title": "A less fatal throne",
+          "body": "You drag your chair away and pay for the safety work. Amelia Ahmed has to find a new place for you to look important."
+        },
+        {
+          "title": "Age 33",
+          "body": "Another year passed. The ordinary days were part of my life too."
+        },
+        {
+          "title": "Your money goes in",
+          "body": "You put the money into the communal treasury. It now belongs to the organisation."
+        }
+      ],
+      "random": {
+        "events": 3051795366,
+        "npcs": 3166416039,
+        "economy": 3884832063,
+        "outcomes": 3041057890
+      },
+      "mechanicsSha256": "c9363daf655c274c63c31bf3183456950619ce0344041849f94dad9613084884"
+    },
+    {
+      "policy": "successful",
+      "country": "JP",
+      "commands": 129,
+      "years": 8,
+      "status": "disbanded",
+      "followers": 799,
+      "loyalty": 100,
+      "satisfaction": 100,
+      "heat": 0,
+      "treasury": "0",
+      "arrears": "0",
+      "threads": 22,
+      "scenes": [
+        "cult-family-at-the-gate",
+        "cult-green-moon",
+        "wellbeing-habit-one-miss",
+        "cult-retreat-roof",
+        "cult-unexpected-crowd",
+        "adult-password-on-paper",
+        "cult-activity-supper-seats",
+        "cult-documentary-clipboard",
+        "cult-treasurer-envelope",
+        "cult-red-tagged-exit",
+        "cult-activity-referral-table",
+        "cult-lunar-exam",
+        "wellbeing-waiting-without-feed",
+        "cult-activity-sermon-question",
+        "adult-community-poster",
+        "cult-opening-deposit",
+        "adult-free-sample-opinion",
+        "cult-activity-open-door",
+        "cult-merchandise-star",
+        "medical-emergency",
+        "wellbeing-meal-comparison"
+      ],
+      "samples": [
+        {
+          "title": "Your money goes in",
+          "body": "You put the money into the communal treasury. It now belongs to the organisation."
+        },
+        {
+          "title": "Your newest followers",
+          "body": "You squeeze a pitch between people dodging your leaflets. One passer-by changes direction twice to avoid your explanation.\n\n1 new follower joined; ¥3,200 in joining fees reached the treasury."
+        },
+        {
+          "title": "They would like an answer",
+          "body": "You interpret a follower’s dream. They correct you in front of everyone, then correct your interpretation of the correction."
+        },
+        {
+          "title": "Dream Circle: you pulled it off",
+          "body": "You hear everyone’s dream. One is an elaborate account of making a sandwich. You wait for the revelation; it is the sandwich.\n\nThe event cost ¥6,400; voluntary contributions were ¥576."
+        },
+        {
+          "title": "You have made a promise",
+          "body": "You promise the moon will turn green within a year. A follower writes down the date while looking straight at you. Your deadline is 12 months."
+        },
+        {
+          "title": "A less sacred introduction",
+          "body": "You introduce Hina Vale. They use your old name. The room enjoys it enough to make you nervous."
+        },
+        {
+          "title": "You take it back",
+          "body": "You admit the moon was never going to turn green. A follower slowly puts away the paint chart and asks what else you guessed."
+        },
+        {
+          "title": "The dog retains top billing",
+          "body": "You write “Still doing this.” The round dog remains the journal’s most exciting development. You are back on schedule."
+        },
+        {
+          "title": "Your money goes in",
+          "body": "You put the money into the communal treasury. It now belongs to the organisation."
+        },
+        {
+          "title": "Your newest followers",
+          "body": "Your clip finds an interested audience. Most commenters still prefer arguing with one another under your invitation.\n\n10 new followers joined; ¥32,000 in joining fees reached the treasury."
+        },
+        {
+          "title": "You have their attention",
+          "body": "You describe a life hidden in a dream. Followers start comparing their own, talking over you to explain which alternate self had the worst marriage."
+        },
+        {
+          "title": "The Quiet Table: you pulled it off",
+          "body": "You sit through a peaceful silence, broken mainly by the chairs. Followers leave looking less exhausted.\n\nThe event cost ¥4,800; voluntary contributions were ¥2,880."
+        },
+        {
+          "title": "The bucket loses its job",
+          "body": "You pay to fix the roof. Sora Tanaka removes the bucket from your chair before it can attract another donation."
+        },
+        {
+          "title": "Room for the believers",
+          "body": "You hire more space. Sora Tanaka can finish a sentence without being asked where the toilet is."
+        },
+        {
+          "title": "Future you gets better information",
+          "body": "You replace the riddle with a useful explanation and keep it somewhere appropriate."
+        },
+        {
+          "title": "Your money goes in",
+          "body": "You put the money into the communal treasury. It now belongs to the organisation."
+        },
+        {
+          "title": "Your newest followers",
+          "body": "Visitors sign up after your talk. One tries to finish the refreshments before their enlightenment begins.\n\n19 new followers joined; ¥60,800 in joining fees reached the treasury."
+        },
+        {
+          "title": "You have their attention",
+          "body": "You describe a life hidden in a dream. Followers start comparing their own, talking over you to explain which alternate self had the worst marriage."
+        },
+        {
+          "title": "Dinner beats the apology",
+          "body": "You pay for more food. The waiting guests eat while the inner circle tries to look as though it only had one helping."
+        },
+        {
+          "title": "Very little to censor",
+          "body": "You let the cameras follow a normal day. They capture a long meeting, bills and someone asking when lunch is."
+        },
+        {
+          "title": "A visible envelope",
+          "body": "You refuse to approve the fund without records. Akari Tanaka takes the envelope back and suddenly remembers some receipts."
+        },
+        {
+          "title": "A less fatal throne",
+          "body": "You drag your chair away and pay for the safety work. Yui Watanabe has to find a new place for you to look important."
+        },
+        {
+          "title": "Age 33",
+          "body": "Another year passed. The ordinary days were part of my life too."
+        },
+        {
+          "title": "Your money goes in",
+          "body": "You put the money into the communal treasury. It now belongs to the organisation."
+        }
+      ],
+      "random": {
+        "events": 3051795366,
+        "npcs": 3237933536,
+        "economy": 3884832063,
+        "outcomes": 3041057890
+      },
+      "mechanicsSha256": "349b9e8477a009d4b23faaaa92eb5966ab9765fb94d243e14ee8ddc72edaf375"
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+
+> dreams-life-sim@1.0.0 test
+> jest --runInBand tests/ui tests/state tests/progression
+
+PASS tests/ui/saved-files-flow.test.tsx (26.551 s)
+PASS tests/progression/expanded-progress.test.ts (12.1 s)
+PASS tests/ui/workplace-story-flow.test.tsx (7.7 s)
+PASS tests/ui/scholarship-flow.test.tsx (5.953 s)
+PASS tests/ui/education-recovery-flow.test.tsx (5.447 s)
+PASS tests/ui/royalty-flow.test.tsx (5.321 s)
+PASS tests/state/save-summaries.test.ts
+PASS tests/ui/saved-life-preview.test.tsx
+PASS tests/ui/health-flow.test.tsx
+PASS tests/ui/pets-flow.test.tsx
+PASS tests/ui/contacts-flow.test.tsx
+PASS tests/ui/ordinary-hobby-flow.test.tsx
+PASS tests/ui/leisure-flow.test.tsx
+PASS tests/progression/progress.test.ts
+PASS tests/ui/relocation-flow.test.tsx
+PASS tests/ui/extras-flow.test.tsx
+PASS tests/ui/story-callback-flow.test.tsx
+PASS tests/ui/service-flow.test.tsx
+PASS tests/ui/life-context-story-flow.test.tsx
+PASS tests/ui/adult-relationship-story-flow.test.tsx
+PASS tests/ui/travel-flow.test.tsx
+PASS tests/ui/business-flow.test.tsx
+PASS tests/ui/credit-flow.test.tsx
+PASS tests/ui/creator-studio-flow.test.tsx
+PASS tests/ui/onboarding-flow.test.tsx
+PASS tests/ui/workplace-flow.test.tsx
+PASS tests/ui/childhood-story-flow.test.tsx
+PASS tests/ui/job-interview-flow.test.tsx
+PASS tests/ui/school-flow.test.tsx
+PASS tests/ui/music-flow.test.tsx
+PASS tests/ui/politics-flow.test.tsx
+PASS tests/ui/legal-flow.test.tsx
+PASS tests/ui/career-flow.test.tsx
+PASS tests/ui/startup-flow.test.tsx
+PASS tests/ui/social-flow.test.tsx
+PASS tests/ui/early-home-story-flow.test.tsx
+PASS tests/ui/time-machine-flow.test.tsx
+PASS tests/ui/purchase-flow.test.tsx
+PASS tests/ui/legacy-flow.test.tsx
+PASS tests/ui/pension-flow.test.tsx
+PASS tests/ui/relationship-flow.test.tsx
+PASS tests/ui/family-flow.test.tsx
+PASS tests/ui/school-plans.test.tsx
+PASS tests/ui/will-flow.test.tsx
+PASS tests/state/preferencesStore.test.ts
+PASS tests/ui/settings-flow.test.tsx
+PASS tests/ui/interactions.test.tsx
+PASS tests/state/gameStore.test.ts
+
+Test Suites: 48 passed, 48 total
+Tests:       129 passed, 129 total
+Snapshots:   0 total
+Time:        117.885 s, estimated 123 s
+Ran all test suites matching /tests\/ui|tests\/state|tests\/progression/i.

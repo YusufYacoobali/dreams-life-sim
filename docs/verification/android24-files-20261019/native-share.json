@@ -1,0 +1,19 @@
+{
+  "scope": "Actual native Expo file write and Android chooser launch; system image has no receiving share app, so no external transfer established",
+  "bytes": 10279,
+  "sha256": "312c70f99429b55ec3b2e5b82ce0ccdb8b1279aeb1cb331ff9a243fb64ee130b",
+  "name": "Ren Watanabe",
+  "revision": 4,
+  "date": {
+    "year": 2027,
+    "month": 10,
+    "day": 19
+  },
+  "snapshots": 1,
+  "smarts": 93,
+  "world": {
+    "schema": 28,
+    "engine": 27,
+    "content": 4
+  }
+}

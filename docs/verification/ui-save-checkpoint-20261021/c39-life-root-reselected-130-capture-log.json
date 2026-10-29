@@ -1,0 +1,29 @@
+{
+  "complete": true,
+  "name": "life-root-reselected-130",
+  "events": [
+    {
+      "argv": [
+        "python3",
+        "/tmp/dreams-native-ui.py",
+        "inspect",
+        "/tmp/dreams-c39-ui-native-captures/life-root-reselected-130/ui"
+      ],
+      "returncode": 0,
+      "stdout": "[('', 'My Life profile. Nia Carter. Age 24. Unemployed. Bank balance $33,695.98', '[0,24][390,131]'), ('', 'Age Up', '[16,661][310,723]'), ('', 'More Life Options', '[320,661][374,723]'), ('', 'Life', '[0,740][98,796]'), ('', 'Assets', '[98,740][195,796]'), ('', 'Relationships', '[195,740][293,796]'), ('', 'Activities', '[293,740][390,796]')]\n",
+      "stderr": "",
+      "at": "2026-10-21T09:18:57.971084+00:00"
+    },
+    {
+      "argv": [
+        "python3",
+        "/tmp/dreams-copy-native-db.py",
+        "/tmp/dreams-c39-ui-native-captures/life-root-reselected-130/database"
+      ],
+      "returncode": 0,
+      "stdout": "/tmp/dreams-c39-ui-native-captures/life-root-reselected-130/database\n",
+      "stderr": "",
+      "at": "2026-10-21T09:18:59.034538+00:00"
+    }
+  ]
+}

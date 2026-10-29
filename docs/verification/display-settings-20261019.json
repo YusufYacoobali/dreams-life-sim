@@ -1,0 +1,63 @@
+{
+  "recordedOn": "2026-10-19",
+  "basedOnCommit": "29a8c88",
+  "scope": "local display preferences and shared page status-bar props; no native visual acceptance",
+  "versions": {
+    "world": 25,
+    "engine": 24,
+    "content": 3,
+    "database": 4,
+    "displaySettings": 1
+  },
+  "gameSourceUnchanged": true,
+  "gameSourceHash": "4875659620673b3e9a2e4c99b8777058d714e7237fcc6a1e95d7b47d8bfbb3c8",
+  "connectedRegression": {
+    "command": "npx jest --runInBand tests/ui tests/state tests/persistence",
+    "exitCode": 0,
+    "tests": 107,
+    "suites": 36,
+    "seconds": 100.108
+  },
+  "finalOpeningFlow": {
+    "tests": 6,
+    "suites": 3,
+    "seconds": 3.886,
+    "exitCode": 0
+  },
+  "strictTypes": true,
+  "hermesExports": [
+    "android",
+    "ios"
+  ],
+  "bundledAssets": 46,
+  "metroCurrentManifestAndSourceHTTP200": [
+    "android",
+    "ios"
+  ],
+  "nativeConfigIntrospection": {
+    "userInterfaceStyle": "automatic",
+    "systemUIModule": "57.0.4",
+    "androidResource": "automatic",
+    "iosInfoPlist": "Automatic",
+    "offlineSdkDependenciesAligned": true
+  },
+  "persistence": {
+    "realSQLiteFailureRetry": true,
+    "coldStoreResume": true,
+    "unchangedEntireLifeExports": true,
+    "independentLifeImportSelect": true,
+    "unreadableDataRetainedUntilExplicitReset": true,
+    "overlappingWritesRejected": true
+  },
+  "fullRegressionReference": {
+    "sourceCommit": "c09ec6b",
+    "tests": 983,
+    "suites": 64,
+    "note": "precedes display follow-up; overlapping checks are not added to a new full-suite total"
+  },
+  "remaining": [
+    "actual native status bars, theme transitions, keyboard, large text and screen readers",
+    "Android/iOS responsive device journeys and standalone native build",
+    "all remaining production gameplay, content, country/source, storage and release gates"
+  ]
+}

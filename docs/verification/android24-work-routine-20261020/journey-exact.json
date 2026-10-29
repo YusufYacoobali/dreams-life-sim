@@ -1,0 +1,71 @@
+{
+  "scope": "Actual Android24 software emulator / ExpoGo57.0.9. Existing Nia23 native126, unchanged/cancelled work routine review, actual edited work routine, process-stop cold saved result and acknowledgement. No native data/version/date/funds/RNG edits or imports. Not native birth-to-work, physical latency, standalone or iOS acceptance.",
+  "baseCommit": "e41a2db59149f4b6e6388f84044a339eca6d2467",
+  "lifeId": "life_native_adult_friend_v30_s0",
+  "initialRevision": 126,
+  "phases": [
+    {
+      "phase": "before",
+      "revision": 126,
+      "worldSha256": "88247f0799070f77ceed1d036e97c3f196e83fefbd284dda4409db7c82697c2d",
+      "routine": "balanced",
+      "pending": null,
+      "annual": null,
+      "allSixInactiveLivesBackupsAnd59Moments111OriginalReceiptsExact": true,
+      "allEightTablesExact": true,
+      "lives": 7,
+      "moments": 59,
+      "receipts": 111
+    },
+    {
+      "phase": "unchanged",
+      "revision": 126,
+      "worldSha256": "88247f0799070f77ceed1d036e97c3f196e83fefbd284dda4409db7c82697c2d",
+      "routine": "balanced",
+      "pending": null,
+      "annual": null,
+      "allSixInactiveLivesBackupsAnd59Moments111OriginalReceiptsExact": true,
+      "allEightTablesExact": true,
+      "lives": 7,
+      "moments": 59,
+      "receipts": 111
+    },
+    {
+      "phase": "result",
+      "revision": 127,
+      "worldSha256": "e9acb40e0f599d1fc777302a3179b2e6c358755de39d22122398ca8c7b926632",
+      "routine": "hard",
+      "pending": "Work routine updated",
+      "annual": null,
+      "allSixInactiveLivesBackupsAnd59Moments111OriginalReceiptsExact": true,
+      "lives": 7,
+      "moments": 59,
+      "receipts": 112
+    },
+    {
+      "phase": "cold-result",
+      "revision": 127,
+      "worldSha256": "e9acb40e0f599d1fc777302a3179b2e6c358755de39d22122398ca8c7b926632",
+      "routine": "hard",
+      "pending": "Work routine updated",
+      "annual": null,
+      "allSixInactiveLivesBackupsAnd59Moments111OriginalReceiptsExact": true,
+      "allEightTablesExact": true,
+      "lives": 7,
+      "moments": 59,
+      "receipts": 112
+    },
+    {
+      "phase": "final",
+      "revision": 128,
+      "worldSha256": "9929bb7e9f97f00eb3d04abe726fdba762cd21c328978d8a2664c5201a121ae3",
+      "routine": "hard",
+      "pending": null,
+      "annual": null,
+      "allSixInactiveLivesBackupsAnd59Moments111OriginalReceiptsExact": true,
+      "lives": 7,
+      "moments": 59,
+      "receipts": 113
+    }
+  ]
+}

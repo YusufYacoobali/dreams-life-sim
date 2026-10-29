@@ -1,0 +1,21 @@
+{
+  "complete": true,
+  "at": "2026-10-21T09:24:26.304049+00:00",
+  "scope": "Actual C39 source-matched read-only UI browsing and section/tab changes; root personally reviewed all PNG/XML. All8table rows and reader18 stay exact. Corrected Profile and whole Lifestyle tab words fit130%text. SelectedLife/Profile and selectedActivities/Education return owncategoryroots without writes.",
+  "source": "83adaea6f92523d04a27df2e77b11e0a8b14ef1d",
+  "coordinatorFlowSession": 11837,
+  "flowActualExitCode": 0,
+  "phases": [
+    "existing-start",
+    "profile-130-corrected",
+    "life-root-reselected-130",
+    "education-nested-130",
+    "activities-root-reselected-130",
+    "lifestyle-tabs-130-corrected",
+    "lifestyle-sleep-130",
+    "lifestyle-meditation-130"
+  ],
+  "allEightTableRowsExact": true,
+  "actualGameCommands": 0,
+  "normalFontNativeReviewPending": true
+}

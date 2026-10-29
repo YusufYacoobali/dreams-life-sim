@@ -1,0 +1,909 @@
+{
+  "format": "dreams-final-source-gates-verification-v1",
+  "complete": true,
+  "status": "final33b-regression-annual-and-AB-technical-gates-passed-other-acceptance-pending",
+  "recordedAt": "2026-10-21T08:31:52.870895+00:00",
+  "overallGameAcceptanceComplete": false,
+  "scope": "Bounded documentation checkpoint for actual closed current source gates and A/B policy execution. It is not a completed game, universal scenario success, current native/large-text/continuous-play/physical/release acceptance or new runtime test.",
+  "source": {
+    "commit": "33b6a5fcb0aae73dfc235a15394b34d8afda00cc",
+    "versions": {
+      "world": 38,
+      "engine": 39,
+      "content": 13,
+      "database": 18,
+      "checkpoint": "v4"
+    },
+    "snapshot": {
+      "file": "production-finish-source-checkpoint-20261021/074-dreams-production-finish-accepted-source.json",
+      "bytes": 75993,
+      "sha256": "2e08fd925c673437ff7de7c76c0fd79d02832617d0014efc1c3e471782fe9b56"
+    },
+    "files": 688,
+    "combinedGamePersistenceSourceHash": "d72d52f3d6a6e312e490a525c0638638af6c5bb27449ffb8a0dd5833e10acbc0",
+    "git": {
+      "head": {
+        "file": "final-regression-20261021/001-source-head.txt",
+        "bytes": 41,
+        "sha256": "b9a599d126c0e48bba9068d643cdd829d293c7440013d5bed168fa3343b17554"
+      },
+      "status": {
+        "file": "final-regression-20261021/002-source-status.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "tree": {
+        "file": "final-regression-20261021/003-source-tree.bin",
+        "bytes": 207286,
+        "sha256": "e7f52b1e3ff5f493af48873f9b294ac569d7ed288ca33b35a673ee52e6594284"
+      },
+      "commit": {
+        "file": "final-regression-20261021/004-source-commit.bin",
+        "bytes": 258,
+        "sha256": "26498430e369b214199f030aee7f5a8fa6c9d87e5998d1342f4101ecc033824f"
+      }
+    },
+    "namedFilesVerified": {
+      "file": "final-regression-20261021/source-verification.json",
+      "bytes": 843,
+      "sha256": "37084bff9d518f3c8ce3d6458d4c822ed9918bf4e20d3ce10d9a341f4cf8a395"
+    },
+    "mainDocumentationBase": "9ad6330b005e26ed0760c6f29343c5d686680b05"
+  },
+  "currentGates": {
+    "full": {
+      "status": "passed",
+      "sourceCommit": "33b6a5fcb0aae73dfc235a15394b34d8afda00cc",
+      "receipt": {
+        "file": "final-regression-20261021/005-full-receipt.json",
+        "bytes": 1093,
+        "sha256": "56faef1e1245ae3e92a7c0a6d0d0e35c8c48ffb893615c25924d87065abe849c"
+      },
+      "raw": {
+        "file": "final-regression-20261021/006-full.out",
+        "bytes": 17026,
+        "sha256": "2b3d6eebeae5781367587b9f5ad14ab879688206ea3b967d3d955d4a2ad22907"
+      },
+      "startedAt": "2026-10-21T07:49:23.445994+00:00",
+      "endedAt": "2026-10-21T08:19:09.276557+00:00",
+      "wrapperSeconds": 1785.831,
+      "beforeAfter688Source": "exact",
+      "tests": 2686,
+      "suites": 211,
+      "jestSeconds": 1784.801,
+      "scope": "One complete current33b regression. Author subsets are not added to its count; original66ec2683pass/3fail remains historical diagnostic."
+    },
+    "annual120": {
+      "status": "passed",
+      "sourceCommit": "33b6a5fcb0aae73dfc235a15394b34d8afda00cc",
+      "receipt": {
+        "file": "final-regression-20261021/007-annual120-receipt.json",
+        "bytes": 1096,
+        "sha256": "9fcc9e173f1cdbf3741d1d7ba228977378589190c3d600015680e5d8c2df7155"
+      },
+      "raw": {
+        "file": "final-regression-20261021/008-annual120.out",
+        "bytes": 37787,
+        "sha256": "a6d271d7f79387461e4219423aa2061f079b242d7ff3c1751e0710ee7bf7dec1"
+      },
+      "startedAt": "2026-10-21T07:51:46.890063+00:00",
+      "endedAt": "2026-10-21T08:05:00.416817+00:00",
+      "wrapperSeconds": 793.527,
+      "beforeAfter688Source": "exact",
+      "completed": 120,
+      "seeds": [
+        0,
+        119
+      ],
+      "stateMode": "validated immutable",
+      "driverMilliseconds": 791642,
+      "countryCounts": {
+        "AU": 10,
+        "IT": 11,
+        "BR": 12,
+        "ZA": 10,
+        "ES": 12,
+        "US": 13,
+        "CA": 10,
+        "GB": 10,
+        "DE": 12,
+        "FR": 6,
+        "IN": 6,
+        "JP": 8
+      },
+      "scope": "Same immutable pure-engine annual seeds0..119; no additional distinct120 seeds, SQLite/native creation, every-choice or whole-UI claim."
+    }
+  },
+  "types": {
+    "status": "passed",
+    "sourceCommit": "33b6a5fcb0aae73dfc235a15394b34d8afda00cc",
+    "receipt": {
+      "file": "production-finish-source-checkpoint-20261021/078-dreams-production-finish-accepted-types-receipt.json",
+      "bytes": 1050,
+      "sha256": "a9e743233a77096d2eec956fba348bbb32c96328f444564a92f001014e5fff80"
+    },
+    "raw": {
+      "file": "production-finish-source-checkpoint-20261021/077-dreams-production-finish-accepted-types.out",
+      "bytes": 90,
+      "sha256": "543932f7a867cac23b25fe5912a2a0b0ab563539fbb8a121f7fb83b608c95309"
+    },
+    "scope": "Actual strict application/all-test exit0, not rerun for this documentation."
+  },
+  "focused": {
+    "status": "passed",
+    "sourceCommit": "33b6a5fcb0aae73dfc235a15394b34d8afda00cc",
+    "tests": 18,
+    "suites": 3,
+    "jestSeconds": 27.291,
+    "receipt": {
+      "file": "production-finish-source-checkpoint-20261021/076-dreams-production-finish-accepted-focused-receipt.json",
+      "bytes": 1267,
+      "sha256": "2dc0ef29ed2ded543248f8531fdc7463f43e29c9dc09eb7b0858debc9a8f1669"
+    },
+    "raw": {
+      "file": "production-finish-source-checkpoint-20261021/075-dreams-production-finish-accepted-focused.out",
+      "bytes": 414,
+      "sha256": "58a8a71c0a3903011570ee2eee5d7f2918850db4474683c99efd5b7462eda378"
+    },
+    "scope": "Overlapping affected callback/pacing subset; do not add counts to the complete full regression."
+  },
+  "policyCohorts": {
+    "A": {
+      "status": "completed-technical-policy-cohort",
+      "adapter": "professional-v3",
+      "receipt": {
+        "file": "final-regression-20261021/009-professional-v3-receipt.json",
+        "bytes": 1293,
+        "sha256": "63747fa9a3101e25a645d7de8539534a9dc32e397771506b314eddecbbcc66cb"
+      },
+      "raw": {
+        "file": "/tmp/dreams-production-finish-accepted-professional-v3.out",
+        "bytes": 8154923,
+        "sha256": "cb91675f8b610b3a0f3af4427b9a87a42c3c81c21b157232ef522e260cdca3a8",
+        "storage": "external-raw-not-copied",
+        "pinBasis": "Independent exact byte hash checked during this documentation preparation; unmodified original full output retained externally."
+      },
+      "wrapperSeconds": 529.213,
+      "sourceCommit": "33b6a5fcb0aae73dfc235a15394b34d8afda00cc",
+      "sourceBeforeAfter688": "exact",
+      "countries": 12,
+      "seedRange": [
+        900,
+        911
+      ],
+      "naturalDeaths": 12,
+      "producerConservedEstates": 12,
+      "committedCommands": 6593,
+      "producerReportedWholeCodecChecks": 939,
+      "allRequestedGoalsReachedLives": 5,
+      "scenarioA": {
+        "everyRequestedMilestoneReachedInEveryObservedLife": false
+      },
+      "scenarioB": "unrun by this policy",
+      "countryOutcomes": [
+        {
+          "country": "US",
+          "seed": 900,
+          "ageAtDeath": 57,
+          "milestonesReached": 18,
+          "milestoneCount": 20,
+          "unreached": {
+            "retirement": {
+              "status": "unreached-at-natural-death",
+              "lastObservedRestriction": null
+            },
+            "pensionPayment": {
+              "status": "unreached-at-natural-death",
+              "lastObservedRestriction": null
+            }
+          }
+        },
+        {
+          "country": "CA",
+          "seed": 901,
+          "ageAtDeath": 96,
+          "milestonesReached": 19,
+          "milestoneCount": 20,
+          "unreached": {
+            "child": {
+              "status": "unreached-at-natural-death",
+              "lastObservedRestriction": {
+                "stage": "child",
+                "outcome": "ineligible",
+                "age": 84,
+                "date": {
+                  "year": 2084,
+                  "month": 1,
+                  "day": 1
+                },
+                "detail": {
+                  "reason": "Both partners need to want a child"
+                }
+              }
+            }
+          }
+        },
+        {
+          "country": "GB",
+          "seed": 902,
+          "ageAtDeath": 72,
+          "milestonesReached": 19,
+          "milestoneCount": 20,
+          "unreached": {
+            "child": {
+              "status": "unreached-at-natural-death",
+              "lastObservedRestriction": {
+                "stage": "child",
+                "outcome": "ineligible",
+                "age": 72,
+                "date": {
+                  "year": 2072,
+                  "month": 1,
+                  "day": 1
+                },
+                "detail": {
+                  "reason": "Both partners need to want a child"
+                }
+              }
+            }
+          }
+        },
+        {
+          "country": "AU",
+          "seed": 903,
+          "ageAtDeath": 98,
+          "milestonesReached": 19,
+          "milestoneCount": 20,
+          "unreached": {
+            "child": {
+              "status": "unreached-at-natural-death",
+              "lastObservedRestriction": {
+                "stage": "child",
+                "outcome": "ineligible",
+                "age": 86,
+                "date": {
+                  "year": 2086,
+                  "month": 1,
+                  "day": 1
+                },
+                "detail": {
+                  "reason": "Both partners need to want a child"
+                }
+              }
+            }
+          }
+        },
+        {
+          "country": "FR",
+          "seed": 904,
+          "ageAtDeath": 82,
+          "milestonesReached": 20,
+          "milestoneCount": 20,
+          "unreached": {}
+        },
+        {
+          "country": "DE",
+          "seed": 905,
+          "ageAtDeath": 72,
+          "milestonesReached": 19,
+          "milestoneCount": 20,
+          "unreached": {
+            "child": {
+              "status": "unreached-at-natural-death",
+              "lastObservedRestriction": {
+                "stage": "child",
+                "outcome": "ineligible",
+                "age": 72,
+                "date": {
+                  "year": 2072,
+                  "month": 1,
+                  "day": 1
+                },
+                "detail": {
+                  "reason": "Both partners need to want a child"
+                }
+              }
+            }
+          }
+        },
+        {
+          "country": "ES",
+          "seed": 906,
+          "ageAtDeath": 86,
+          "milestonesReached": 20,
+          "milestoneCount": 20,
+          "unreached": {}
+        },
+        {
+          "country": "IT",
+          "seed": 907,
+          "ageAtDeath": 62,
+          "milestonesReached": 18,
+          "milestoneCount": 20,
+          "unreached": {
+            "retirement": {
+              "status": "unreached-at-natural-death",
+              "lastObservedRestriction": null
+            },
+            "pensionPayment": {
+              "status": "unreached-at-natural-death",
+              "lastObservedRestriction": null
+            }
+          }
+        },
+        {
+          "country": "BR",
+          "seed": 908,
+          "ageAtDeath": 76,
+          "milestonesReached": 20,
+          "milestoneCount": 20,
+          "unreached": {}
+        },
+        {
+          "country": "IN",
+          "seed": 909,
+          "ageAtDeath": 92,
+          "milestonesReached": 19,
+          "milestoneCount": 20,
+          "unreached": {
+            "child": {
+              "status": "unreached-at-natural-death",
+              "lastObservedRestriction": {
+                "stage": "child",
+                "outcome": "ineligible",
+                "age": 83,
+                "date": {
+                  "year": 2083,
+                  "month": 1,
+                  "day": 1
+                },
+                "detail": {
+                  "reason": "Both partners need to want a child"
+                }
+              }
+            }
+          }
+        },
+        {
+          "country": "JP",
+          "seed": 910,
+          "ageAtDeath": 93,
+          "milestonesReached": 20,
+          "milestoneCount": 20,
+          "unreached": {}
+        },
+        {
+          "country": "ZA",
+          "seed": 911,
+          "ageAtDeath": 86,
+          "milestonesReached": 20,
+          "milestoneCount": 20,
+          "unreached": {}
+        }
+      ],
+      "scope": "Current professional policyv3: original v2 decision rules/order preserved except actual free saved university application, ordinary waitlist review and separate real offered-place funding. Fixed reused country seeds900..911. Actual in-memory SQLite/store StartLife+birth acknowledgement only, then immutable pure-engine commands and exact full production-codec comparisons. Outcomes/omissions may differ; no hidden roll, date/stat/cash/world preparation or success search. Not full-life SQLite/native/physical/all-choice/multigeneration acceptance.",
+      "limits": "Technical completed execution is not universal ScenarioA/B success. Every refusal and unreached outcome remains in external raw results. Only birth/acknowledgement use actual in-memory SQLite/store; later commands and whole production-codec comparisons are pure-engine. No full-life SQLite/native or additional annual seeds."
+    },
+    "B": {
+      "status": "completed-technical-policy-cohort",
+      "adapter": "criminal-v2",
+      "receipt": {
+        "file": "final-regression-20261021/010-criminal-v2-receipt.json",
+        "bytes": 1280,
+        "sha256": "bb07e686678b4f3737e4149b91eb97f7707a5dbdb88b6b187c784f770350948b"
+      },
+      "raw": {
+        "file": "/tmp/dreams-production-finish-accepted-criminal-v2.out",
+        "bytes": 657841,
+        "sha256": "7b5c3e4e65339175ddde47a730f9ef4b3aa89c2be32d98a5220bc82aad512c1a",
+        "storage": "external-raw-not-copied",
+        "pinBasis": "Independent exact byte hash checked during this documentation preparation; unmodified original full output retained externally."
+      },
+      "wrapperSeconds": 151.557,
+      "sourceCommit": "33b6a5fcb0aae73dfc235a15394b34d8afda00cc",
+      "sourceBeforeAfter688": "exact",
+      "countries": 12,
+      "seedRange": [
+        900,
+        911
+      ],
+      "naturalDeaths": 12,
+      "producerConservedEstates": 12,
+      "committedCommands": 3117,
+      "producerReportedWholeCodecChecks": 413,
+      "allRequestedGoalsReachedLives": null,
+      "scenarioA": "unrun by this policy",
+      "scenarioB": {
+        "scenarioBComplete": false
+      },
+      "countryOutcomes": [
+        {
+          "country": "US",
+          "seed": 900,
+          "ageAtDeath": 73,
+          "milestonesReached": 25,
+          "milestoneCount": 26,
+          "unreached": {
+            "delayedArrest": {
+              "status": "unreached-at-natural-death",
+              "lastObservedRestriction": null
+            }
+          }
+        },
+        {
+          "country": "CA",
+          "seed": 901,
+          "ageAtDeath": 85,
+          "milestonesReached": 26,
+          "milestoneCount": 26,
+          "unreached": {}
+        },
+        {
+          "country": "GB",
+          "seed": 902,
+          "ageAtDeath": 68,
+          "milestonesReached": 25,
+          "milestoneCount": 26,
+          "unreached": {
+            "holidayCompleted": {
+              "status": "unreached-at-natural-death",
+              "lastObservedRestriction": null
+            }
+          }
+        },
+        {
+          "country": "AU",
+          "seed": 903,
+          "ageAtDeath": 50,
+          "milestonesReached": 25,
+          "milestoneCount": 26,
+          "unreached": {
+            "retirement": {
+              "status": "unreached-at-natural-death",
+              "lastObservedRestriction": null
+            }
+          }
+        },
+        {
+          "country": "FR",
+          "seed": 904,
+          "ageAtDeath": 86,
+          "milestonesReached": 26,
+          "milestoneCount": 26,
+          "unreached": {}
+        },
+        {
+          "country": "DE",
+          "seed": 905,
+          "ageAtDeath": 75,
+          "milestonesReached": 26,
+          "milestoneCount": 26,
+          "unreached": {}
+        },
+        {
+          "country": "ES",
+          "seed": 906,
+          "ageAtDeath": 79,
+          "milestonesReached": 26,
+          "milestoneCount": 26,
+          "unreached": {}
+        },
+        {
+          "country": "IT",
+          "seed": 907,
+          "ageAtDeath": 54,
+          "milestonesReached": 10,
+          "milestoneCount": 26,
+          "unreached": {
+            "delayedArrest": {
+              "status": "unreached-at-natural-death",
+              "lastObservedRestriction": null
+            },
+            "conviction": {
+              "status": "unreached-at-natural-death",
+              "lastObservedRestriction": null
+            },
+            "prisonRoutine": {
+              "status": "unreached-at-natural-death",
+              "lastObservedRestriction": null
+            },
+            "prisonTime": {
+              "status": "unreached-at-natural-death",
+              "lastObservedRestriction": null
+            },
+            "prisonStudy": {
+              "status": "unreached-at-natural-death",
+              "lastObservedRestriction": null
+            },
+            "prisonPay": {
+              "status": "unreached-at-natural-death",
+              "lastObservedRestriction": null
+            },
+            "prisonConnection": {
+              "status": "unreached-at-natural-death",
+              "lastObservedRestriction": null
+            },
+            "custodyGuard": {
+              "status": "unreached-at-natural-death",
+              "lastObservedRestriction": null
+            },
+            "release": {
+              "status": "unreached-at-natural-death",
+              "lastObservedRestriction": null
+            },
+            "recordWorkGate": {
+              "status": "unreached-at-natural-death",
+              "lastObservedRestriction": null
+            },
+            "foreignWorkApplication": {
+              "status": "unreached-at-natural-death",
+              "lastObservedRestriction": null
+            },
+            "holiday": {
+              "status": "unreached-at-natural-death",
+              "lastObservedRestriction": null
+            },
+            "holidayCompleted": {
+              "status": "unreached-at-natural-death",
+              "lastObservedRestriction": null
+            },
+            "recordExpired": {
+              "status": "unreached-at-natural-death",
+              "lastObservedRestriction": null
+            },
+            "rehired": {
+              "status": "unreached-at-natural-death",
+              "lastObservedRestriction": null
+            },
+            "retirement": {
+              "status": "unreached-at-natural-death",
+              "lastObservedRestriction": null
+            }
+          }
+        },
+        {
+          "country": "BR",
+          "seed": 908,
+          "ageAtDeath": 46,
+          "milestonesReached": 25,
+          "milestoneCount": 26,
+          "unreached": {
+            "retirement": {
+              "status": "unreached-at-natural-death",
+              "lastObservedRestriction": null
+            }
+          }
+        },
+        {
+          "country": "IN",
+          "seed": 909,
+          "ageAtDeath": 80,
+          "milestonesReached": 26,
+          "milestoneCount": 26,
+          "unreached": {}
+        },
+        {
+          "country": "JP",
+          "seed": 910,
+          "ageAtDeath": 74,
+          "milestonesReached": 25,
+          "milestoneCount": 26,
+          "unreached": {
+            "delayedArrest": {
+              "status": "unreached-at-natural-death",
+              "lastObservedRestriction": null
+            }
+          }
+        },
+        {
+          "country": "ZA",
+          "seed": 911,
+          "ageAtDeath": 76,
+          "milestonesReached": 26,
+          "milestoneCount": 26,
+          "unreached": {}
+        }
+      ],
+      "scope": "Current-source registration wrapper around unchanged criminal policyv2. Same fixed reused country seeds900..911; original withdrawal/offence/not-guilty/custody/release decisions and all refused/unreached outcomes retained. Actual in-memory SQLite/store birth only, then immutable pure-engine commands/full production checkpoints. Not full-life SQLite/native/physical/seizure/multigeneration or universally completed Scenario B.",
+      "limits": "Technical completed execution is not universal ScenarioA/B success. Every refusal and unreached outcome remains in external raw results. Only birth/acknowledgement use actual in-memory SQLite/store; later commands and whole production-codec comparisons are pure-engine. No full-life SQLite/native or additional annual seeds."
+    }
+  },
+  "bridgedPriorGates": {
+    "copyCorrection": {
+      "file": "production-finish-source-checkpoint-20261021/091-dreams-production-finish-copy-bridge.json",
+      "bytes": 1574,
+      "sha256": "8bf26a7f43b5be065807094cd2a4ecac967727c3b5935ba9f928252fc10617ee"
+    },
+    "correctedToFinalTestOnly": {
+      "file": "production-finish-source-checkpoint-20261021/092-dreams-production-finish-corrected-accepted-bridge.json",
+      "bytes": 1268,
+      "sha256": "3cfa8821af8a0031996123a5d7f91c6248366c1e7aabe415c813cc5759500a8d"
+    },
+    "correctedSourceCommit": "3224c9ce5b9175075760a789c1402dd92345cd30",
+    "copyAffectedTests": 87,
+    "copyAffectedSuites": 4,
+    "hermesMappedRuntimeFilesPerPlatform": 334,
+    "hermesPlatforms": [
+      "android",
+      "ios"
+    ],
+    "hermesProof": {
+      "file": "production-finish-source-checkpoint-20261021/090-dreams-production-finish-corrected-ready-export-proof.json",
+      "bytes": 74454,
+      "sha256": "bc6fb9d59d6d18b1c36424ec9cf71e799f3a1cefffb0eab085cb4b55060f7358"
+    },
+    "performanceReceipt": {
+      "file": "production-finish-source-checkpoint-20261021/069-dreams-c39-actions-receipt.json",
+      "bytes": 5546,
+      "sha256": "0084465b3d430ec8daacde3f55f6f2fd1a760ea172209340e1a33990d73ca301"
+    },
+    "performanceSummary": {
+      "file": "production-finish-source-checkpoint-20261021/070-dreams-c39-actions-summary.json",
+      "bytes": 17365,
+      "sha256": "a7dc899c82b060529543989903f1fb4bf47b3a9e6bb64017612d1091b0e30b22"
+    },
+    "measuredWarmCases": 14,
+    "measuredWarmSamples": 70,
+    "measuredWarmFullCheckpointUnpacks": 0,
+    "scope": "Actual corrected3224 export/performance evidence is runtime-byte-exact to33b through the explicit one-test-only bridge; preserve both source identities. Cloud Node/on-disk SQLite measurements are not rendered UI/physicalp95."
+  },
+  "nativeProgress": {
+    "status": "partial-coordinator-observation-only-full-acceptance-pending",
+    "observation": "Root coordinator reported initial08:23metadata/Profile observations and actual08:32large-text finding. This documentation task only copies/hashes supplied capture bytes; it does not execute native checks or establish a native pass.",
+    "C38readerTransition": "16→17",
+    "allEightTablesExact": "Coordinator reported exact after metadata-only marker update; raw native closure is not established by this record.",
+    "profile": "Normal-font Profile reviewed by coordinator; later actual130percent capture has the known layout defect below.",
+    "largeText130Percent": {
+      "status": "failed-layout-acceptance-open",
+      "initialDiagnostic": "Changing to130percent caused reload; the initial capture was splash and is not a large-text UI pass.",
+      "laterActualCapture": {
+        "coordinatorObservedAt": "2026-10-21T08:32UTC",
+        "knownFinding": "A long Secondary qualification squeezes the Education title into Edu/cati/on.",
+        "rawImage": {
+          "file": "final-regression-20261021/native-profile-130-known-issue-ui.png",
+          "bytes": 71933,
+          "sha256": "06ae4bcb128b27fc1cbbf18f39488c69af001558106ed513c34a6185dfcf0776"
+        },
+        "rawLabels": {
+          "file": "final-regression-20261021/native-profile-130-known-issue-ui.xml",
+          "bytes": 28933,
+          "sha256": "2492615ca1e2989f81e22f4dbddd468e570b5aca680575d52b235266abf31360"
+        },
+        "captureLog": {
+          "file": "final-regression-20261021/native-profile-130-known-issue-capture-log.json",
+          "bytes": 1092,
+          "sha256": "551b6ee9ddd7de30d1c0d378bd513b0587c4135264bd77d4a6ad73b17d7cab58"
+        },
+        "scope": "One actual C38 Profile capture supplied/reviewed by the root coordinator; no new routine, C39, full large-text or native acceptance pass.",
+        "followup": "School owns a responsive shared ActionRow fix in a separate9ad-based worktree. The fix and final130percent acceptance remain pending."
+      }
+    },
+    "newRoutineActions": "pending",
+    "C39Native": "pending",
+    "continuous30MinuteUI": "pending"
+  },
+  "pending": {
+    "C": {
+      "status": "running-as-of-coordinator-update",
+      "sourceCommit": "33b6a5fcb0aae73dfc235a15394b34d8afda00cc",
+      "startedAt": "2026-10-21T08:14:32.357757+00:00",
+      "mutableOutputCopied": false
+    },
+    "D": {
+      "status": "actual-process-closed0-observed-outcome-review-pending",
+      "sourceCommit": "33b6a5fcb0aae73dfc235a15394b34d8afda00cc",
+      "receipt": {
+        "file": "final-regression-20261021/editorial-v2-receipt.json",
+        "bytes": 1283,
+        "sha256": "d7d718436e9bbc462743c47f0a66d3cbbadba74d4484579cc21b8544da726126"
+      },
+      "raw": {
+        "file": "/tmp/dreams-production-finish-accepted-editorial-v2.out",
+        "bytes": 834714,
+        "sha256": "c1304730115d08b682454a0c6052c9151a67b8e9ebf198b0e469c1a473a8daf5",
+        "storage": "external-full-raw-not-copied",
+        "pinBasis": "Independent exact byte hash checked for this documentation followup; no editorial result/codec/gameplay replay performed."
+      },
+      "startedAt": "2026-10-21T08:22:45.020904+00:00",
+      "endedAt": "2026-10-21T08:32:53.310251+00:00",
+      "wrapperSeconds": 608.289,
+      "beforeAfter688Source": "exact",
+      "scope": "Actual completed driver process is credited; natural scene/branch/context coverage and refusals require separate review. No universal all795branches or native acceptance claim."
+    },
+    "release": "Current native/cold/actions/normal130percent/continuous30minuteUI, balance/sequence, standaloneAndroid/actualiOS/physical/spokenaccessibility/release acceptance remain open.",
+    "expandedAnnualCoverage": {
+      "status": "partial-running-not-1000-accepted",
+      "sourceCommit": "33b6a5fcb0aae73dfc235a15394b34d8afda00cc",
+      "targetTotalUniqueSeeds": 1000,
+      "alreadyClosedSeedRange": [
+        0,
+        119
+      ],
+      "activeSeedRange": [
+        120,
+        559
+      ],
+      "pendingSeedRange": [
+        560,
+        999
+      ],
+      "activeCoordinatorSession": "21918",
+      "sameUnchangedAnnualDriver": true,
+      "scope": "Coordinator-reported active command on frozen33b. Existing120closed observations are part of the1000TOTAL, not1120newseeds. No receipt/footer/1000pass is provided or claimed here; running outputs are not copied."
+    }
+  },
+  "historicalRecords": {
+    "alreadyCompleteC37": {
+      "file": "production-gaps-20261021.json",
+      "bytes": 236086,
+      "sha256": "8067b89e987936adf0de9277e8253ac97c187282ec94fec71b96f157c4297acd"
+    },
+    "earlierWorkingSourceCheckpoint": {
+      "file": "production-finish-source-checkpoint-20261021.json",
+      "bytes": 32190,
+      "sha256": "a63b2710fc517d890e6b8553c5e0c13b9c1d65c787f42a389a2033ff4f99356e"
+    },
+    "scope": "Historical records remain byte-exact with their recorded source/pending states. Current closures are additive here; the prior66ec3failure output is never relabelled as current33b pass."
+  },
+  "historicalUnavailableArtifacts": [
+    {
+      "expected": {
+        "file": "/tmp/dreams-npc-retirement-move-fixed-journey.json",
+        "bytes": 2562,
+        "sha256": "5af70cffbd0c2dc6ff300d2c143a3a16238161b0938cf436f05f9fa458da8b00"
+      },
+      "status": "historical-bytes-unavailable",
+      "reason": "npc-moves.test.ts159 unconditionally writes this fixed temporary report path in full runs; later tests overwrote its bytes. The old report origin cannot be proved from its hash alone. The old pin is unavailable and is not relabelled or reconstructed; other63manifest files are exact."
+    }
+  ],
+  "reviewAndPreparationReports": {
+    "professionalCountryReview": {
+      "file": "final-regression-20261021/011-dreams-c39-professional-v3-country-outcomes-20261021.md",
+      "bytes": 13492,
+      "sha256": "6732df24f87687f753968ee1f6ebdbbecd02a28b2a30ea82ae558a2ba2910d11"
+    },
+    "professionalCountryReviewDetails": {
+      "file": "final-regression-20261021/012-dreams-c39-professional-v3-country-outcomes-20261021.json",
+      "bytes": 160548,
+      "sha256": "45ce111f0ca8e75c796aeff568998ce77ec7d608d8f80abb27902848701e055e"
+    },
+    "pendingPublishingInputs": {
+      "file": "final-regression-20261021/013-dreams-production-finish-final-publication-inputs-v2-20261021.json",
+      "bytes": 154012,
+      "sha256": "1273d038c501899c0e8bf76bf012b5f9d5178f3de8ff734efffad891859b45f7"
+    },
+    "pendingPublishingPlan": {
+      "file": "final-regression-20261021/014-dreams-production-finish-final-publication-plan-v2-20261021.md",
+      "bytes": 6929,
+      "sha256": "fbbbb3795b6d2b2ba39c876830e0da89d791a599701a9c573fd3e68a3588c6d5"
+    }
+  },
+  "reportScope": "The professional report is a source/byte review of completed results. The copied v2 publishing preparation remains complete:false/publicationAllowed:false with C/D/native/30minute pending as observed then; it is not a publisher execution, authorization or acceptance pass. Its earlier pending D status predates the actual08:22D start. This additive checkpoint now credits the separately observed08:32Dprocessclosure with outcome reviewpending; none of the copied earlier preparatory files were rewritten.",
+  "artifacts": {
+    "final-regression-20261021/001-source-head.txt": {
+      "original": "/tmp/dreams-production-finish-accepted-head.txt",
+      "bytes": 41,
+      "sha256": "b9a599d126c0e48bba9068d643cdd829d293c7440013d5bed168fa3343b17554"
+    },
+    "final-regression-20261021/002-source-status.txt": {
+      "original": "/tmp/dreams-production-finish-accepted-status.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "final-regression-20261021/003-source-tree.bin": {
+      "original": "/tmp/dreams-production-finish-accepted-tree.bin",
+      "bytes": 207286,
+      "sha256": "e7f52b1e3ff5f493af48873f9b294ac569d7ed288ca33b35a673ee52e6594284"
+    },
+    "final-regression-20261021/004-source-commit.bin": {
+      "original": "/tmp/dreams-production-finish-accepted-commit.bin",
+      "bytes": 258,
+      "sha256": "26498430e369b214199f030aee7f5a8fa6c9d87e5998d1342f4101ecc033824f"
+    },
+    "final-regression-20261021/005-full-receipt.json": {
+      "original": "/tmp/dreams-production-finish-accepted-regression-receipt.json",
+      "bytes": 1093,
+      "sha256": "56faef1e1245ae3e92a7c0a6d0d0e35c8c48ffb893615c25924d87065abe849c"
+    },
+    "final-regression-20261021/006-full.out": {
+      "original": "/tmp/dreams-production-finish-accepted-regression.out",
+      "bytes": 17026,
+      "sha256": "2b3d6eebeae5781367587b9f5ad14ab879688206ea3b967d3d955d4a2ad22907"
+    },
+    "final-regression-20261021/007-annual120-receipt.json": {
+      "original": "/tmp/dreams-production-finish-accepted-120-receipt.json",
+      "bytes": 1096,
+      "sha256": "9fcc9e173f1cdbf3741d1d7ba228977378589190c3d600015680e5d8c2df7155"
+    },
+    "final-regression-20261021/008-annual120.out": {
+      "original": "/tmp/dreams-production-finish-accepted-120.out",
+      "bytes": 37787,
+      "sha256": "a6d271d7f79387461e4219423aa2061f079b242d7ff3c1751e0710ee7bf7dec1"
+    },
+    "final-regression-20261021/009-professional-v3-receipt.json": {
+      "original": "/tmp/dreams-production-finish-accepted-professional-v3-receipt.json",
+      "bytes": 1293,
+      "sha256": "63747fa9a3101e25a645d7de8539534a9dc32e397771506b314eddecbbcc66cb"
+    },
+    "final-regression-20261021/010-criminal-v2-receipt.json": {
+      "original": "/tmp/dreams-production-finish-accepted-criminal-v2-receipt.json",
+      "bytes": 1280,
+      "sha256": "bb07e686678b4f3737e4149b91eb97f7707a5dbdb88b6b187c784f770350948b"
+    },
+    "final-regression-20261021/011-dreams-c39-professional-v3-country-outcomes-20261021.md": {
+      "original": "/tmp/dreams-c39-professional-v3-country-outcomes-20261021.md",
+      "bytes": 13492,
+      "sha256": "6732df24f87687f753968ee1f6ebdbbecd02a28b2a30ea82ae558a2ba2910d11"
+    },
+    "final-regression-20261021/012-dreams-c39-professional-v3-country-outcomes-20261021.json": {
+      "original": "/tmp/dreams-c39-professional-v3-country-outcomes-20261021.json",
+      "bytes": 160548,
+      "sha256": "45ce111f0ca8e75c796aeff568998ce77ec7d608d8f80abb27902848701e055e"
+    },
+    "final-regression-20261021/013-dreams-production-finish-final-publication-inputs-v2-20261021.json": {
+      "original": "/tmp/dreams-production-finish-final-publication-inputs-v2-20261021.json",
+      "bytes": 154012,
+      "sha256": "1273d038c501899c0e8bf76bf012b5f9d5178f3de8ff734efffad891859b45f7"
+    },
+    "final-regression-20261021/014-dreams-production-finish-final-publication-plan-v2-20261021.md": {
+      "original": "/tmp/dreams-production-finish-final-publication-plan-v2-20261021.md",
+      "bytes": 6929,
+      "sha256": "fbbbb3795b6d2b2ba39c876830e0da89d791a599701a9c573fd3e68a3588c6d5"
+    },
+    "final-regression-20261021/source-verification.json": {
+      "original": "Generated documentation-only688namedfile SHA256 check",
+      "bytes": 843,
+      "sha256": "37084bff9d518f3c8ce3d6458d4c822ed9918bf4e20d3ce10d9a341f4cf8a395"
+    },
+    "final-regression-20261021/native-profile-130-known-issue-ui.png": {
+      "original": "/tmp/dreams-c38-native-captures/profile-130-ready/ui.png",
+      "bytes": 71933,
+      "sha256": "06ae4bcb128b27fc1cbbf18f39488c69af001558106ed513c34a6185dfcf0776"
+    },
+    "final-regression-20261021/native-profile-130-known-issue-ui.xml": {
+      "original": "/tmp/dreams-c38-native-captures/profile-130-ready/ui.xml",
+      "bytes": 28933,
+      "sha256": "2492615ca1e2989f81e22f4dbddd468e570b5aca680575d52b235266abf31360"
+    },
+    "final-regression-20261021/native-profile-130-known-issue-capture-log.json": {
+      "original": "/tmp/dreams-c38-native-captures/profile-130-ready/capture-log.json",
+      "bytes": 1092,
+      "sha256": "551b6ee9ddd7de30d1c0d378bd513b0587c4135264bd77d4a6ad73b17d7cab58"
+    },
+    "final-regression-20261021/editorial-v2-receipt.json": {
+      "original": "/tmp/dreams-production-finish-accepted-editorial-v2-receipt.json",
+      "bytes": 1283,
+      "sha256": "d7d718436e9bbc462743c47f0a66d3cbbadba74d4484579cc21b8544da726126"
+    }
+  },
+  "originalToPortable": {
+    "/tmp/dreams-production-finish-accepted-head.txt": "final-regression-20261021/001-source-head.txt",
+    "/tmp/dreams-production-finish-accepted-status.txt": "final-regression-20261021/002-source-status.txt",
+    "/tmp/dreams-production-finish-accepted-tree.bin": "final-regression-20261021/003-source-tree.bin",
+    "/tmp/dreams-production-finish-accepted-commit.bin": "final-regression-20261021/004-source-commit.bin",
+    "/tmp/dreams-production-finish-accepted-regression-receipt.json": "final-regression-20261021/005-full-receipt.json",
+    "/tmp/dreams-production-finish-accepted-regression.out": "final-regression-20261021/006-full.out",
+    "/tmp/dreams-production-finish-accepted-120-receipt.json": "final-regression-20261021/007-annual120-receipt.json",
+    "/tmp/dreams-production-finish-accepted-120.out": "final-regression-20261021/008-annual120.out",
+    "/tmp/dreams-production-finish-accepted-professional-v3-receipt.json": "final-regression-20261021/009-professional-v3-receipt.json",
+    "/tmp/dreams-production-finish-accepted-criminal-v2-receipt.json": "final-regression-20261021/010-criminal-v2-receipt.json",
+    "/tmp/dreams-c39-professional-v3-country-outcomes-20261021.md": "final-regression-20261021/011-dreams-c39-professional-v3-country-outcomes-20261021.md",
+    "/tmp/dreams-c39-professional-v3-country-outcomes-20261021.json": "final-regression-20261021/012-dreams-c39-professional-v3-country-outcomes-20261021.json",
+    "/tmp/dreams-production-finish-final-publication-inputs-v2-20261021.json": "final-regression-20261021/013-dreams-production-finish-final-publication-inputs-v2-20261021.json",
+    "/tmp/dreams-production-finish-final-publication-plan-v2-20261021.md": "final-regression-20261021/014-dreams-production-finish-final-publication-plan-v2-20261021.md",
+    "/tmp/dreams-c38-native-captures/profile-130-ready/ui.png": "final-regression-20261021/native-profile-130-known-issue-ui.png",
+    "/tmp/dreams-c38-native-captures/profile-130-ready/ui.xml": "final-regression-20261021/native-profile-130-known-issue-ui.xml",
+    "/tmp/dreams-c38-native-captures/profile-130-ready/capture-log.json": "final-regression-20261021/native-profile-130-known-issue-capture-log.json",
+    "/tmp/dreams-production-finish-accepted-editorial-v2-receipt.json": "final-regression-20261021/editorial-v2-receipt.json"
+  },
+  "overallEffortEstimatePercent": 75,
+  "limits": [
+    "No tests, types, codecs, policies, game commands, SQLite, exports, UI/native or performance gates ran for this documentation-only change.",
+    "Same120annual seeds and fixed country900..911 per policy are reused; do not sum repeated seeds or overlapping author subset counts.",
+    "A reaches all20requested goals in5/12actual lives, not universal success. B remains explicitly incomplete even where all26tracked observations were reached.",
+    "External A/B full raw outputs are byte-pinned, not copied or silently replaced by this small portable folder. Their complete country/status omissions remain retained.",
+    "The old C38fixed-path report expected5af70c... is unavailable after overwrite; no reconstructed/relabelled report or64/64preservation claim is made.",
+    "Source688equality covers named frozen gameplay files; main separately includes reviewedc49native protocol tools and documentation.",
+    "Import/export/sharing/TimeMachine/additionalhistory/storagebreadth remains parked."
+  ]
+}

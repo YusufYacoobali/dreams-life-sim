@@ -1,0 +1,1 @@
+{"ageAtDeath":98,"commands":2224,"country":"IN","coverage":{"allPhasesReached":true,"orderedScenarioCComplete":true,"reached":["birth","school","social","fame50","business","brandEarned","investment","family","death"],"unreached":[]},"elapsedMs":888692,"event":"entrepreneur-life-complete","maxFame":100,"seed":909}

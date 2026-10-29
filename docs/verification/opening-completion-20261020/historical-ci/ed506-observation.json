@@ -1,0 +1,29 @@
+{
+  "format": "dreams-hosted-ci-observation-v1",
+  "observedAt": "2026-10-20 22:33:42 UTC",
+  "sourceCommit": "ed506a1338bf7369cb14efb1de1745be8033fcc7",
+  "run": {
+    "id": 39504687484,
+    "url": "https://github.com/YusufYacoobali/dreams-life-sim/actions/runs/39504687484",
+    "status": "completed",
+    "conclusion": "success",
+    "createdAt": "2026-10-20T21:59:12Z",
+    "updatedAt": "2026-10-20T22:11:21Z"
+  },
+  "jobs": [
+    {
+      "id": 118910559658,
+      "name": "regression",
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ],
+  "result": {
+    "tests": 2100,
+    "suites": 147,
+    "seconds": 692.706,
+    "strictAppAndTests": true
+  },
+  "scope": "Hosted Linux locked install, strict app/test types and complete Jest regression on exact pushed ed506a1. No C35, native build, device or physical performance claim.",
+  "logFile": "/tmp/dreams-hosted-ci-ed506-20261020.txt"
+}

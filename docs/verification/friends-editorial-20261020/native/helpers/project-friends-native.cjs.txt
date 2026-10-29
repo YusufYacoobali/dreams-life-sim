@@ -1,0 +1,49 @@
+#!/usr/bin/env node
+'use strict';
+
+// One preregistered ordinary proposal, then its separate acknowledgement.
+// This produces expected states only; it never writes SQL or acts on a device.
+const h = require('./friends-native-support.cjs');
+const { fs, path, assert, hash, readJSON, fileProof, argumentsFor, verifySource, toolsProof, runtime, capture, assertStableCapture, selectedLife, assertBaseline, writeJSON } = h;
+const usage = 'node tools/project-friends-native.cjs --output /tmp/NEW-plan.json [--source /ABS/FROZEN/SOURCE] [--database /ABS/dreams.db] [--source-pins /ABS/initial-source.json]';
+if (process.argv.includes('--help')) { console.log(usage); process.exit(0); }
+const options = argumentsFor(process.argv.slice(2), ['--output', '--source', '--database', '--source-pins'], usage);
+const source = options['--source'] ?? path.resolve(__dirname, '..'), pinsFile = options['--source-pins'] ?? h.initialPins;
+const sourceBefore = verifySource(source, pinsFile), toolsBefore = toolsProof();
+const baseline = capture(options['--database'] ?? h.baselinePath); assertBaseline(baseline);
+const readinessPath = '/tmp/dreams-friends-native-readiness.json', readiness = readJSON(readinessPath);
+assert.equal(hash(fs.readFileSync(readinessPath)), '5ec905ef1b5e9f9f27e26db0a1b7bcdc8bb481a4336e6447bde3517b3a530f32');
+assert.deepEqual(baseline.hashes, readiness.rawTablesBefore, 'Use the genuine final138 input, not a prepared life');
+const game = runtime(source, true), serialize = value => JSON.parse(JSON.stringify(value, game.moneyJSON));
+const row = selectedLife(baseline), initial = game.unpackCheckpoint(row.payload, true), actor = initial.people[initial.activePersonId];
+assert.deepEqual([initial.schemaVersion, initial.engineVersion, initial.contentVersion], [35, 36, 11]);
+assert.equal(initial.revision, 138); assert.equal(initial.pending, null); assert.equal(initial.annual, null); assert.equal(initial.birthAcknowledged, true);
+assert.deepEqual(initial.bestFriendships, []); const originalCanonical = game.encodeWorld(initial);
+assert.equal(hash(originalCanonical), readiness.projectedWorld.canonicalSha256BeforeGuards);
+const personId = 'person_npc_15_5', friend = initial.people[personId]; assert.equal(game.fullName(friend), 'Morgan Bennett');
+const relation = initial.relationships.find(item => (item.from === actor.id && item.to === friend.id || item.to === actor.id && item.from === friend.id) && item.roles.includes('friend'));
+assert(relation); assert.equal(relation.strength, 90); assert.equal(relation.trust, 64);
+assert.equal(game.bestFriendshipReason(initial, personId), undefined, 'Use this actual eligible friend without preparation');
+const command = { type: 'propose-best-friendship', lifeId: initial.id, actorId: actor.id, personId, relationshipId: relation.id, country: actor.country, city: actor.city };
+// No randomInteger/draw inspection, alternate choice, seed search, replay or reroll.
+const proposed = game.resolveCommand(initial, command, true);
+assert.equal(proposed.revision, 139); assert.equal(proposed.pending?.kind, 'result'); assert.equal(proposed.bestFriendships.length, 1);
+assert.deepEqual(proposed.people, initial.people); assert.deepEqual(proposed.accounts, initial.accounts); assert.deepEqual(proposed.ledger, initial.ledger); assert.deepEqual(proposed.relationships, initial.relationships);
+assert.equal(game.encodeWorld(initial), originalCanonical, 'Projection modified the input');
+const acknowledgement = { type: 'acknowledge', resultId: proposed.pending.id };
+const acknowledged = game.resolveCommand(proposed, acknowledgement, true);
+assert.equal(acknowledged.revision, 140); assert.equal(acknowledged.pending, null); assert.equal(acknowledged.annual, null);
+assert.deepEqual(acknowledged.bestFriendships, proposed.bestFriendships); assert.deepEqual(acknowledged.random, proposed.random);
+const state = world => ({ lifeId: world.id, personId: world.activePersonId, name: game.fullName(world.people[world.activePersonId]), age: game.ageOn(world.people[world.activePersonId], world.date), revision: world.revision, date: world.date, worldSha256: hash(game.encodeWorld(world)), pending: serialize(world.pending), annual: serialize(world.annual), bestFriendships: serialize(world.bestFriendships), ledgerRows: world.ledger.length, people: Object.keys(world.people).length });
+const trace = [{ command, ...state(proposed), expectedReceipts: 146 }, { command: acknowledgement, ...state(acknowledged), expectedReceipts: 147 }];
+assertStableCapture(baseline); const sourceAfter = verifySource(source, pinsFile); assert.deepEqual(sourceAfter, sourceBefore); assert.deepEqual(toolsProof(), toolsBefore);
+const plan = { format: 'dreams-c36-best-friend-native-plan-v1', status: 'expected-only-not-native-acceptance', complete: false,
+  scope: 'One fixed ordinary immutable engine proposal to genuine eligible Morgan from actual C35 Nia138, then its actual result acknowledgement. Exactly two resolveCommand calls. No alternate choice, seed/stat/funds/date/world override, random peeking, outcome search, reroll, SQL write or native input. All projected outcomes remain expected until independently captured native databases match.',
+  source: { root: source, projectionBaseCommit: '1a90884119b2c4f8989d13f044f8e69101169b11', before: sourceBefore, after: sourceAfter, tools: toolsBefore, node: game.node, typescript: game.typescript, versions: { world: 35, engine: 36, content: 11, reader: 15, checkpoint: 'v4' } },
+  input: { dbPath: baseline.file, files: baseline.files, reader: baseline.reader, tables: baseline.hashes, activeLife: initial.id, rawNiaPayloadSha256: hash(row.payload), migrated: state(initial), readiness: fileProof(readinessPath) },
+  migrationExpectation: { from: 14, to: 15, allEightTablesExact: true, noEagerPayloadRewrite: true, noNativeMigrationObservedYet: true },
+  target: { personId, name: game.fullName(friend), relationshipId: relation.id, bond: relation.strength, trust: relation.trust, country: friend.country, city: friend.city },
+  trace, final: state(acknowledged), requiredNativePhases: h.phases, inputAllEightRawTablesExact: true, inputDatabaseAndWalBytesExact: true, engineCommandsProjected: 2, proposalAttempts: 1, nativeCommandsExecuted: 0,
+};
+writeJSON(options['--output'], plan);
+console.log(JSON.stringify({ output: options['--output'], sha256: fileProof(options['--output']).sha256, status: plan.status, target: plan.target, commands: trace.map(step => ({ command: step.command, revision: step.revision, worldSha256: step.worldSha256, pending: step.pending, expectedReceipts: step.expectedReceipts })), inputAllEightRawTablesExact: true, inputDatabaseAndWalBytesExact: true, sourceBeforeAfterExact: true }, null, 2));

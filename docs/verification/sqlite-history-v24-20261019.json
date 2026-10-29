@@ -1,0 +1,64 @@
+{
+  "recordedOn": "2026-10-19",
+  "sourceCommit": "bc8a39cf1df102f6b3b90285c46cdf088ae91adc",
+  "command": "node tools/benchmark-sqlite-history.cjs",
+  "processExitCode": 0,
+  "driverHash": "36dd83038c95dae599788974221ab562c38004d03bc3814eb93520a467b48041",
+  "versions": {
+    "world": 24,
+    "engine": 23,
+    "content": 3,
+    "database": 4
+  },
+  "measurement": {
+    "scope": "one complete life / real repository / cloud Node SQLite; not native or multi-generation",
+    "node": "v24.19.0",
+    "sourceHash": "e4ec12d3c44b90983202e7cc7421d7debfdadab8e796556c6019da2504ca6c45",
+    "seed": 42,
+    "born": "2026-10-18",
+    "years": 79,
+    "ageAtDeath": 78,
+    "people": 18,
+    "ledgerRows": 47202,
+    "commands": 236,
+    "snapshots": 79,
+    "payloads": {
+      "lives": {
+        "rows": 1,
+        "bytes": 802722
+      },
+      "backups": {
+        "rows": 1,
+        "bytes": 798422
+      },
+      "snapshots": {
+        "rows": 79,
+        "bytes": 27379799
+      }
+    },
+    "beforeClose": {
+      "databaseBytes": 29986816,
+      "walBytes": 6377792,
+      "sharedMemoryBytes": 32768,
+      "totalBytes": 36397376
+    },
+    "afterClose": {
+      "databaseBytes": 29986816,
+      "walBytes": 0,
+      "sharedMemoryBytes": 0,
+      "totalBytes": 29986816
+    },
+    "peakDiskBytes": 36397376,
+    "commandP95Ms": 1586.853707000002,
+    "commitP95Ms": 1422.8368489999993,
+    "coldLoadMs": 773.8562630000233,
+    "coldLoadExactMatch": true,
+    "elapsedMs": 158244
+  },
+  "limitations": [
+    "One 79-observation life, not 120 years or multi-generation storage acceptance",
+    "A fresh database; not an in-place shrink measurement",
+    "Cloud timing overlaps emulator startup and is not native or controlled performance evidence",
+    "No plain-row baseline was rerun for world 24; prior world-23 comparison is historical"
+  ]
+}

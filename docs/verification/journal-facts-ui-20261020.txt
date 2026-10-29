@@ -1,0 +1,13 @@
+PASS tests/ui/ordinary-hobby-flow.test.tsx
+PASS tests/ui/leisure-flow.test.tsx
+PASS tests/ui/story-callback-flow.test.tsx
+PASS tests/ui/onboarding-flow.test.tsx
+PASS tests/ui/childhood-story-flow.test.tsx
+PASS tests/ui/early-home-story-flow.test.tsx
+PASS tests/ui/school-plans.test.tsx
+
+Test Suites: 7 passed, 7 total
+Tests:       11 passed, 11 total
+Snapshots:   0 total
+Time:        11.328 s, estimated 12 s
+Ran all test suites matching /tests\/ui\/onboarding-flow.test.tsx|tests\/ui\/childhood-story-flow.test.tsx|tests\/ui\/early-home-story-flow.test.tsx|tests\/ui\/leisure-flow.test.tsx|tests\/ui\/ordinary-hobby-flow.test.tsx|tests\/ui\/school-plans.test.tsx|tests\/ui\/story-callback-flow.test.tsx/i.

@@ -1,0 +1,342 @@
+{
+  "scope": "Twelve country-specific pure-engine cloud lives; natural ages, healthy routine, part-time/full-time interviews, first available annual choices, real work/pay and eligible retirement; unanswered/result codec checks and withdrawal; no fixture money/stats/RNG/outcome edits. Not native, SQLite, all-choice, physical performance or multi-generation acceptance.",
+  "gameSourceHash": "4d73f53c098e3fa1fb2a11fa4a116d34a16382fc7aafe85472c3cadd3ca297ad",
+  "toolSourceHash": "fd92de70315dad8535a3c57a8fd83c75c27319e333a58803fd1991a1fa4f2912",
+  "versions": {
+    "world": 30,
+    "engine": 30,
+    "content": 7
+  },
+  "elapsedMs": 63712,
+  "records": [
+    {
+      "country": "US",
+      "seed": 900,
+      "ageAtDeath": 77,
+      "commands": 240,
+      "coldChecks": 8,
+      "interviews": [
+        {
+          "age": 16,
+          "roleId": "cafe-part",
+          "accepted": true
+        },
+        {
+          "age": 18,
+          "roleId": "administrator",
+          "accepted": true
+        }
+      ],
+      "paidMonths": 612,
+      "pensionEarned": "2057438",
+      "worldSha256": "12d2b4407a052dcb509b47bda028f2c1a9c8d973568711b7a697a2c459e5e349"
+    },
+    {
+      "country": "CA",
+      "seed": 901,
+      "ageAtDeath": 85,
+      "commands": 249,
+      "coldChecks": 8,
+      "interviews": [
+        {
+          "age": 16,
+          "roleId": "cafe-part",
+          "accepted": true
+        },
+        {
+          "age": 18,
+          "roleId": "administrator",
+          "accepted": true
+        }
+      ],
+      "paidMonths": 588,
+      "pensionEarned": "3026024",
+      "worldSha256": "c25f223e712c89b75352f60314512bf4412061ddb5b72c1df84dd6589b44c2dd"
+    },
+    {
+      "country": "GB",
+      "seed": 902,
+      "ageAtDeath": 75,
+      "commands": 234,
+      "coldChecks": 8,
+      "interviews": [
+        {
+          "age": 16,
+          "roleId": "cafe-part",
+          "accepted": true
+        },
+        {
+          "age": 18,
+          "roleId": "administrator",
+          "accepted": true
+        }
+      ],
+      "paidMonths": 612,
+      "pensionEarned": "1523391",
+      "worldSha256": "b0acfc75ff5bd565ed5bb67c6c6d2aebe630c590f726f3be88165daad21afdf0"
+    },
+    {
+      "country": "AU",
+      "seed": 903,
+      "ageAtDeath": 76,
+      "commands": 234,
+      "coldChecks": 12,
+      "interviews": [
+        {
+          "age": 16,
+          "roleId": "cafe-part",
+          "accepted": true
+        },
+        {
+          "age": 18,
+          "roleId": "administrator",
+          "accepted": false
+        },
+        {
+          "age": 18,
+          "roleId": "retail",
+          "accepted": true
+        },
+        {
+          "age": 41,
+          "roleId": "administrator",
+          "accepted": true
+        }
+      ],
+      "paidMonths": 612,
+      "pensionEarned": "1992925",
+      "worldSha256": "af0c3fdcd566d4cdcb3e27faf94ed9749030ee77922982502ada63feb3000935"
+    },
+    {
+      "country": "FR",
+      "seed": 904,
+      "ageAtDeath": 52,
+      "commands": 159,
+      "coldChecks": 7,
+      "interviews": [
+        {
+          "age": 16,
+          "roleId": "cafe-part",
+          "accepted": true
+        },
+        {
+          "age": 18,
+          "roleId": "administrator",
+          "accepted": true
+        }
+      ],
+      "paidMonths": 437,
+      "pensionEarned": "0",
+      "worldSha256": "904045c2a32d334f6e8e47c31b6306860617c91abed64e0880dcf1b14ca2419e"
+    },
+    {
+      "country": "DE",
+      "seed": 905,
+      "ageAtDeath": 80,
+      "commands": 244,
+      "coldChecks": 10,
+      "interviews": [
+        {
+          "age": 16,
+          "roleId": "cafe-part",
+          "accepted": false
+        },
+        {
+          "age": 17,
+          "roleId": "cafe-part",
+          "accepted": true
+        },
+        {
+          "age": 18,
+          "roleId": "administrator",
+          "accepted": true
+        }
+      ],
+      "paidMonths": 600,
+      "pensionEarned": "2282064",
+      "worldSha256": "03515b637e668c652f7525102af9d63697511e31b4dc1a293a79a581da6c0f8c"
+    },
+    {
+      "country": "ES",
+      "seed": 906,
+      "ageAtDeath": 77,
+      "commands": 234,
+      "coldChecks": 10,
+      "interviews": [
+        {
+          "age": 16,
+          "roleId": "cafe-part",
+          "accepted": false
+        },
+        {
+          "age": 17,
+          "roleId": "cafe-part",
+          "accepted": true
+        },
+        {
+          "age": 18,
+          "roleId": "administrator",
+          "accepted": true
+        }
+      ],
+      "paidMonths": 600,
+      "pensionEarned": "1592683",
+      "worldSha256": "24615c47f91b24ad17443fd89cb385d284e95d98902444c4342b23155651cce3"
+    },
+    {
+      "country": "IT",
+      "seed": 907,
+      "ageAtDeath": 75,
+      "commands": 220,
+      "coldChecks": 8,
+      "interviews": [
+        {
+          "age": 16,
+          "roleId": "cafe-part",
+          "accepted": true
+        },
+        {
+          "age": 19,
+          "roleId": "administrator",
+          "accepted": true
+        }
+      ],
+      "paidMonths": 612,
+      "pensionEarned": "1001051",
+      "worldSha256": "13ebc4b259b127be3b7130762d56b9cb480cdcb3ecf28b1ea242f8456f521f8e"
+    },
+    {
+      "country": "BR",
+      "seed": 908,
+      "ageAtDeath": 90,
+      "commands": 270,
+      "coldChecks": 12,
+      "interviews": [
+        {
+          "age": 16,
+          "roleId": "cafe-part",
+          "accepted": true
+        },
+        {
+          "age": 18,
+          "roleId": "administrator",
+          "accepted": false
+        },
+        {
+          "age": 18,
+          "roleId": "retail",
+          "accepted": false
+        },
+        {
+          "age": 18,
+          "roleId": "cleaner",
+          "accepted": true
+        }
+      ],
+      "paidMonths": 588,
+      "pensionEarned": "1116929",
+      "worldSha256": "ca2e1be34b7d63c3155ef6170f42ef213a0945feb08fb081af0c2b5577d76ede"
+    },
+    {
+      "country": "IN",
+      "seed": 909,
+      "ageAtDeath": 80,
+      "commands": 251,
+      "coldChecks": 14,
+      "interviews": [
+        {
+          "age": 16,
+          "roleId": "cafe-part",
+          "accepted": false
+        },
+        {
+          "age": 17,
+          "roleId": "cafe-part",
+          "accepted": false
+        },
+        {
+          "age": 17,
+          "roleId": "shop-assistant-part",
+          "accepted": true
+        },
+        {
+          "age": 18,
+          "roleId": "administrator",
+          "accepted": false
+        },
+        {
+          "age": 18,
+          "roleId": "retail",
+          "accepted": true
+        }
+      ],
+      "paidMonths": 516,
+      "pensionEarned": "17628488",
+      "worldSha256": "91599120bea16d00f789e7550c003adf95287d4ab554a77a633ab7b1917de909"
+    },
+    {
+      "country": "JP",
+      "seed": 910,
+      "ageAtDeath": 74,
+      "commands": 223,
+      "coldChecks": 10,
+      "interviews": [
+        {
+          "age": 16,
+          "roleId": "cafe-part",
+          "accepted": false
+        },
+        {
+          "age": 17,
+          "roleId": "cafe-part",
+          "accepted": true
+        },
+        {
+          "age": 18,
+          "roleId": "administrator",
+          "accepted": true
+        }
+      ],
+      "paidMonths": 576,
+      "pensionEarned": "1714133",
+      "worldSha256": "87d5027ac17d957dcf68ee8cef1edc4c13b85b0c310eecc142d11bf279f139e9"
+    },
+    {
+      "country": "ZA",
+      "seed": 911,
+      "ageAtDeath": 60,
+      "commands": 194,
+      "coldChecks": 13,
+      "interviews": [
+        {
+          "age": 16,
+          "roleId": "cafe-part",
+          "accepted": true
+        },
+        {
+          "age": 18,
+          "roleId": "administrator",
+          "accepted": true
+        },
+        {
+          "age": 49,
+          "roleId": "administrator",
+          "accepted": true
+        },
+        {
+          "age": 55,
+          "roleId": "administrator",
+          "accepted": false
+        },
+        {
+          "age": 55,
+          "roleId": "retail",
+          "accepted": true
+        }
+      ],
+      "paidMonths": 504,
+      "pensionEarned": "0",
+      "worldSha256": "5f9a6103e08b5bb192056188688b878ff23665291ab101218d8ff5d73f294a36"
+    }
+  ]
+}

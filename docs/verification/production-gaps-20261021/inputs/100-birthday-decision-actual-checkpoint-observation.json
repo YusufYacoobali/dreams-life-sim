@@ -1,0 +1,126 @@
+{
+  "scope": "Read-only actual captured current checkpoint observation; no command or future outcome executed.",
+  "sourceCommit": "a4be96ee1e60ab073fbbd2ae95d0ee2d0ee6f361",
+  "id": "life_mvhfkffn_1csbqc2_0",
+  "revision": 2,
+  "versions": [
+    36,
+    37,
+    12
+  ],
+  "date": {
+    "year": 2027,
+    "month": 10,
+    "day": 21
+  },
+  "birthAcknowledged": true,
+  "person": {
+    "id": "person_player",
+    "name": "Maya Singh",
+    "born": {
+      "year": 2026,
+      "month": 10,
+      "day": 21
+    },
+    "appearance": {
+      "face": 1,
+      "skin": 0,
+      "hair": 5,
+      "hairColor": 0
+    }
+  },
+  "pending": {
+    "kind": "decision",
+    "id": "event_2027_first-bubble-catch",
+    "templateId": "first-bubble-catch",
+    "title": "A very brief possession",
+    "body": "A soap bubble floats past your nose. You reach for it. Your new favourite thing has already resigned.",
+    "illustration": "birthday",
+    "personIds": [
+      "person_player"
+    ],
+    "choices": [
+      {
+        "id": "chase",
+        "label": "Go after the next one",
+        "effects": [
+          {
+            "kind": "stat",
+            "personId": "person_player",
+            "stat": "happiness",
+            "delta": 4
+          },
+          {
+            "kind": "stat",
+            "personId": "person_player",
+            "stat": "energy",
+            "delta": -2
+          }
+        ],
+        "resultTitle": "Plenty of vacancies",
+        "resultBody": "There are more bubbles. You spend several happy minutes failing to keep any of them.",
+        "journal": "I chased soap bubbles and caught absolutely nothing."
+      },
+      {
+        "id": "watch",
+        "label": "Watch where it goes",
+        "effects": [
+          {
+            "kind": "stat",
+            "personId": "person_player",
+            "stat": "smarts",
+            "delta": 3
+          },
+          {
+            "kind": "stat",
+            "personId": "person_player",
+            "stat": "discipline",
+            "delta": 1
+          }
+        ],
+        "resultTitle": "A longer visit",
+        "resultBody": "The next bubble drifts past your hand. Leaving it alone makes it last longer.",
+        "journal": "I watched a soap bubble float away instead of grabbing it."
+      },
+      {
+        "id": "complain",
+        "label": "Complain about the disappearing bubble",
+        "effects": [
+          {
+            "kind": "stat",
+            "personId": "person_player",
+            "stat": "stress",
+            "delta": 2
+          },
+          {
+            "kind": "stat",
+            "personId": "person_player",
+            "stat": "happiness",
+            "delta": -1
+          }
+        ],
+        "resultTitle": "Customer service unavailable",
+        "resultBody": "The bubble does not return. Another one lands on your sleeve and meets the same end.",
+        "journal": "I objected when a soap bubble disappeared."
+      }
+    ]
+  },
+  "annual": {
+    "id": "year_1",
+    "startDate": {
+      "year": 2026,
+      "month": 10,
+      "day": 21
+    },
+    "targetDate": {
+      "year": 2027,
+      "month": 10,
+      "day": 21
+    },
+    "monthsProcessed": 12,
+    "stage": "complete",
+    "pausedForPlanning": false
+  },
+  "universityApplications": [],
+  "studyCourses": []
+}

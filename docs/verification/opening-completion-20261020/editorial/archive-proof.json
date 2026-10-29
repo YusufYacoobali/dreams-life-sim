@@ -1,0 +1,70 @@
+{
+  "format": "dreams-editorial-lossless-archive-proof-v1",
+  "status": "byte-preservation-passed",
+  "gameplayGateClaimedByArchive": false,
+  "scope": "Archive byte-preservation proof only. Every file/directory in the completed editorial raw folder is included without ignore rules; raw file bytes/path names are preserved, while tar modes/uid/gid/names/mtime and gzip header name/time are deliberately normalized for determinism. This proves no new gameplay, content coverage, native, action performance or full Scenario acceptance. Coordinator-reported editorial session24133 CLOSED0 remains a separate gate observation; Story owns actual analysis. Exact stdout/progress/root registration are distinct separately hash-pinned artifacts, not rewritten aggregate substitutes.",
+  "archive": {
+    "file": "/tmp/dreams-opening-next-editorial-lossless.tar.gz",
+    "bytes": 6793399,
+    "sha256": "a947ddf5e84aaa39340ac3ff6bf8bf998177a297ba6547db92adbe7958e5621d"
+  },
+  "perEntryManifest": {
+    "file": "/tmp/dreams-opening-next-editorial-archive-manifest.json",
+    "bytes": 31367,
+    "sha256": "1ec524b54baf7a22c3f6b9fe18d40271e398cf4261206b2c166914c939c420ca"
+  },
+  "counts": {
+    "regularFiles": 87,
+    "directoriesIncludingRoot": 13,
+    "archiveMembers": 100,
+    "uncompressedFileBytes": 30974791,
+    "expandedTarBytes": 31057920,
+    "excludedEntries": 0
+  },
+  "expandedTarSha256": "b9089e890c4dd33bcab9481708de857bc711ea7b3abee11d2fbc23f7ca2436a0",
+  "verification": {
+    "archiveDecodedEveryMember": true,
+    "everyDecodedRegularFileByteIdentical": true,
+    "allDirectoriesPresent": true,
+    "noExtraMissingDuplicateOrIgnoredMembers": true,
+    "fullGzipTrailerValidated": true,
+    "secondIndependentBuildCompressedBytesIdentical": true,
+    "allOriginalFilesAndSeparateReferencesUnchangedAfterVerification": true
+  },
+  "separateExactRawReferences": {
+    "stdout": {
+      "file": "/tmp/dreams-opening-next-editorial.out",
+      "bytes": 742870,
+      "sha256": "f2b3be4c7d4805324b8bc2153c961a9d29cbc57b6887c8c067d1d45253169e96"
+    },
+    "progress": {
+      "file": "/tmp/dreams-opening-next-editorial.ndjson",
+      "bytes": 16660,
+      "sha256": "7b8d9a80ebbba4f0d5df0cd36498fb27bd4c13fe428880adce7586be2e319c47"
+    },
+    "rootManifest": {
+      "file": "/tmp/dreams-opening-next-editorial-manifest.json",
+      "bytes": 2566,
+      "sha256": "e6ecafc9f5dd2f9a078069204500db5cb52c428cb53183c0bff6f350e23db55a"
+    },
+    "finalSourceSnapshot": {
+      "file": "/tmp/dreams-opening-next-final-source.json",
+      "bytes": 63906,
+      "sha256": "521383d65749b98c4dab8396a3604857dbeff6b69020927b7d99cfee96e296cc"
+    }
+  },
+  "sourceCommit": "73cedc7643fa3cbcd0ad32dfa27abfb59dac8aaa",
+  "producerToolCommit": "1d607b9dc18d22c0a056b2f8a9e1198654120ffd",
+  "separateExactProducerSourceCopies": [
+    {
+      "file": "/tmp/dreams-opening-next-editorial-producer-runner.cjs.txt",
+      "bytes": 12868,
+      "sha256": "e0eb16fb73962b9632b4949a5ed1d729d8aca97be1607490a964c5a10abe1706"
+    },
+    {
+      "file": "/tmp/dreams-opening-next-editorial-producer-policy.ts.txt",
+      "bytes": 14958,
+      "sha256": "0e2bf26c25d28c24d8ac9111fe2f3de704a1cadb0e8e98df82b4dbf93bcf3c72"
+    }
+  ]
+}

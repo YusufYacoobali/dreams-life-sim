@@ -1,0 +1,59 @@
+{
+  "recordedOn": "2026-10-19",
+  "basedOnCommit": "11556ff",
+  "versions": {
+    "world": 24,
+    "engine": 23,
+    "content": 3,
+    "database": 4
+  },
+  "gameSourceHash": "7680a530c54ea2a17e457f860db3a3ce793e993ff300eb2870f9c19103a32946",
+  "fullRegression": {
+    "command": "npm test",
+    "exitCode": 0,
+    "tests": 938,
+    "suites": 62,
+    "seconds": 697.17,
+    "coreLives": 12
+  },
+  "strictTypes": true,
+  "hermesExports": [
+    "android",
+    "ios"
+  ],
+  "bundledAssets": 46,
+  "metroCurrentManifestAndBundleHTTP200": [
+    "android",
+    "ios"
+  ],
+  "recoveryUi": {
+    "realSQLite": true,
+    "genuineHistoricalBranch": true,
+    "enrolmentRollbackRetry": true,
+    "finalAwardingCommandRollbackRetry": true,
+    "coldExactResume": true
+  },
+  "art": {
+    "sourceSha256": "60800298fd36cb6eeb74a51f7044b619f460f430ea7df786f758ecbb1158671e",
+    "registeredSubjects": 6,
+    "integratedSubjects": 5,
+    "browserReviewSizes": [
+      48,
+      128
+    ],
+    "browserThemes": [
+      "light",
+      "dark"
+    ],
+    "gallery": "school-art-20261019.png",
+    "nativeAcceptance": false
+  },
+  "expandedSweepAtCheckpoint": "world-24 120/120 complete, 2040.171 seconds, unchanged game-source hash; see life-sweep-v24-120-20261019.json",
+  "currentStorageMeasurement": "236 actual commands / 79 historical moments, exact cold world, 29986816 bytes closed / 36397376 peak; see sqlite-history-v24-20261019.json",
+  "remaining": [
+    "scholarships and restricted tuition aid",
+    "full national/regional school stages and qualification paths",
+    "native visual, accessibility, memory/timing and release acceptance",
+    "1000-seed/person, 120-year and multi-generation gates"
+  ]
+}

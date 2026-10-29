@@ -1,0 +1,55 @@
+import React from 'react';
+import { act, fireEvent, render, screen, waitFor } from '@testing-library/react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { createGameStore } from '../../src/state/gameStore';
+import { createLife, randomCreation } from '../../src/game/createLife';
+import { resolveCommand } from '../../src/game/engine';
+import { SaveRepository } from '../../src/persistence/repository';
+import { database } from '../support/sqlite';
+import { ThemeProvider } from '../../src/ui/theme';
+let mockStore: ReturnType<typeof createGameStore>;
+let mockFocused = true;
+jest.mock('expo-router', () => ({ router: { back: jest.fn(), replace: jest.fn(), navigate: jest.fn() }, Redirect: () => null,
+  useFocusEffect: (callback: () => void) => require('react').useEffect(() => { if (mockFocused) return callback(); }, [callback, mockFocused]),
+}));
+jest.mock('@expo/vector-icons/Ionicons', () => () => null);
+jest.mock('../../src/state/useGame', () => ({ useGame: (selector: unknown) => require('zustand').useStore(mockStore, selector) }));
+import TimeMachine from '../../app/time-machine';
+test('native historical confirmation rolls back a failed branch and retries once with the same new life ID', async () => {
+  const { sqlite, driver } = database(), repository = new SaveRepository(driver); await repository.initialise();
+  const before = { ...createLife('life_history', 42, randomCreation(42), { year: 2026, month: 10, day: 18 }), birthAcknowledged: true }; await repository.create(before);
+  const future = resolveCommand(before, { type: 'advance' }); await repository.commit(future, before.revision, 'advance', true);
+  const id = jest.fn(() => 'life_branch'); const deps = { repository: async () => repository, date: () => before.date, id };
+  mockStore = createGameStore(deps); await mockStore.getState().bootstrap();
+  const view = render(<SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider><TimeMachine /></ThemeProvider></SafeAreaProvider>);
+  await waitFor(() => expect(screen.getByRole('button', { name: /Age 0/ })).toBeEnabled());
+  sqlite.exec("CREATE TRIGGER fail_restore BEFORE INSERT ON restore_receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
+  fireEvent.press(screen.getByRole('button', { name: /Age 0/ })); await act(async () => { fireEvent.press(screen.getByRole('button', { name: 'Restore as New Branch' })); });
+  await waitFor(() => expect(screen.getByText(/Could not restore this checkpoint/)).toBeOnTheScreen()); expect(await repository.load(before.id)).toEqual(future); expect(await repository.list()).toHaveLength(1);
+  sqlite.exec('DROP TRIGGER fail_restore');
+  fireEvent.press(screen.getByRole('button', { name: /Age 0/ })); await act(async () => { fireEvent.press(screen.getByRole('button', { name: 'Restore as New Branch' })); });
+  await waitFor(() => expect(mockStore.getState().world?.id).toBe('life_branch')); expect(id).toHaveBeenCalledTimes(1);
+  const restarted = createGameStore(deps); await restarted.getState().bootstrap(); expect(restarted.getState().world).toEqual({ ...before, id: 'life_branch' }); expect(await repository.load(before.id)).toEqual(future);
+  view.unmount(); sqlite.close();
+});
+
+test('hidden history does no extra work when gameplay changes and reads once when the player returns', async () => {
+  const { sqlite, driver } = database(), repository = new SaveRepository(driver); await repository.initialise();
+  const world = { ...createLife('life_focus', 42, randomCreation(42), { year: 2026, month: 10, day: 19 }), birthAcknowledged: true };
+  await repository.create(world);
+  mockStore = createGameStore({ repository: async () => repository, date: () => world.date, id: () => 'life_focus_branch' });
+  await mockStore.getState().bootstrap(); const read = jest.spyOn(repository, 'snapshots');
+  const page = () => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider><TimeMachine /></ThemeProvider></SafeAreaProvider>;
+  mockFocused = false; const view = render(page());
+  await act(async () => { expect(await mockStore.getState().dispatch({ type: 'health-routine', routine: world.people[world.activePersonId].health.routine })).toBe(true); });
+  expect(read).not.toHaveBeenCalled();
+  mockFocused = true; view.rerender(page());
+  await waitFor(() => expect(read).toHaveBeenCalledTimes(1)); await waitFor(() => expect(mockStore.getState().busy).toBe(false));
+  mockFocused = false; view.rerender(page());
+  const pending = mockStore.getState().world!.pending!;
+  await act(async () => { expect(await mockStore.getState().dispatch({ type: 'acknowledge', resultId: pending.id })).toBe(true); });
+  expect(read).toHaveBeenCalledTimes(1);
+  mockFocused = true; view.rerender(page());
+  await waitFor(() => expect(read).toHaveBeenCalledTimes(2)); await waitFor(() => expect(mockStore.getState().busy).toBe(false));
+  view.unmount(); read.mockRestore(); sqlite.close();
+});

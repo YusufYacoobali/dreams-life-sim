@@ -1,0 +1,56 @@
+{
+  "format": "dreams-coordinator-gate-execution-v1",
+  "sourceCommit": "4981d473b11bc587046f78caaeb69bcb3277464f",
+  "sourceSnapshot": "/tmp/dreams-production-gaps-initial-source.json",
+  "sourceSnapshotSha256": "3b42538d9284ec3ae8acc310303d24dfb081a1d51616b8534b5583c7265937d8",
+  "root": "/workspace/dreams-worktrees/integration-production-gaps",
+  "argv": [
+    "node",
+    "./node_modules/jest/bin/jest.js",
+    "--runInBand",
+    "--testTimeout=30000",
+    "tests/game/teen-relationships.test.ts",
+    "tests/ui/teen-relationship-save-flow.test.tsx",
+    "tests/persistence/teen-relationship-compatibility.test.ts",
+    "tests/game/university-admissions.test.ts",
+    "tests/ui/university-admissions-save-flow.test.tsx",
+    "tests/game/study-course-records.test.ts",
+    "tests/game/npc-separations.test.ts",
+    "tests/state/npc-separations-save.test.ts",
+    "tests/game/event-rarity.test.ts",
+    "tests/game/rare-adult-story.test.ts",
+    "tests/game/project-years-callback.test.ts",
+    "tests/ui/project-years-callback-flow.test.tsx",
+    "tests/persistence/production-gaps-migration.test.ts",
+    "tests/persistence/best-friends-migration.test.ts",
+    "tests/persistence/opening-migration.test.ts",
+    "tests/game/npc-courtships.test.ts",
+    "tests/game/npc-relationships.test.ts",
+    "tests/state/npc-courtships-save.test.ts",
+    "tests/state/npc-relationships-save.test.ts",
+    "tests/game/scholarships.test.ts",
+    "tests/game/education-recovery.test.ts",
+    "tests/game/family.test.ts",
+    "tests/game/relationships.test.ts"
+  ],
+  "startedAt": "2026-10-21T00:42:25.293561+00:00",
+  "before": {
+    "files": 648,
+    "snapshotSha256": "3b42538d9284ec3ae8acc310303d24dfb081a1d51616b8534b5583c7265937d8",
+    "status": "exact"
+  },
+  "complete": true,
+  "endedAt": "2026-10-21T00:45:11.460787+00:00",
+  "elapsedSeconds": 166.167,
+  "exitCode": 1,
+  "raw": {
+    "file": "/tmp/dreams-production-gaps-initial-focused.out",
+    "bytes": 6633,
+    "sha256": "888daa212a4a37a7cd36665f8df36b92b9b654c92dd25b8103eba178f1083b03"
+  },
+  "after": {
+    "files": 648,
+    "snapshotSha256": "3b42538d9284ec3ae8acc310303d24dfb081a1d51616b8534b5583c7265937d8",
+    "status": "exact"
+  }
+}

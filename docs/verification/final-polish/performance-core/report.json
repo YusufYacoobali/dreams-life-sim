@@ -1,0 +1,4183 @@
+{
+  "baselineCommit": "3c797e2253c98714c79d73191a09889774afccd5",
+  "scope": "Performance-only candidate before the independent medical/social/partner integration. World48/engine50/content27 on both sides. No native-device, real frame or React claim in this core report.",
+  "sourceHashes": {
+    "baseline": "dd8d8598d31b225ce39365175a0216e09ed3323f70089984b996d231854e9549",
+    "candidate": "1e8de309945519af869f281cf15e92d1ce3d924eb913fbb524ff02542e39c752"
+  },
+  "changedRuntimeFiles": {
+    "src/game/model.ts": "a6ee624bfa6c6c7828f2df4e514a92bdbb222f92778f1d443f51f1aa76526ef8",
+    "src/game/ledgerIndex.ts": "42d67a6adc71730eb16604bc7d631989b2a647fecc1e62b99519921c7ad94099",
+    "src/persistence/checkpoints.ts": "13bce7f4c6b8e23341fcc2f15a745a16688f0c6d41d0034076e5fc93c622c513"
+  },
+  "artifacts": {
+    "workloads": {
+      "file": "workloads.json.gz",
+      "bytes": 2023612,
+      "sha256": "25b4f30388f0a90147c20bf7246c5cd4e77f4b9413c2ce05cdd691a57ab850eb",
+      "compressedBytes": 1485051,
+      "compressedSha256": "a6c3856c079ad07a4dfc47db44269022c68b137befbdc1f69b7672dd2d3233cb"
+    },
+    "commands": {
+      "file": "commands.json.gz",
+      "bytes": 21627,
+      "sha256": "31caad3f0e30d14adb4cc817a2ac26b9ed61adcbd67f8c29aacb7a87335c0e8f",
+      "compressedBytes": 2406,
+      "compressedSha256": "a54a41013488ac23d6d7821b33a4fe21e038c7ce1344854e7d1beb2bbb0eb79b"
+    },
+    "sqlite-before": {
+      "file": "sqlite-before.json.gz",
+      "bytes": 1045605,
+      "sha256": "ed93f37c50da27f286e96e5b6b1ecf959a7744775ab46c372260769e766b6e5c",
+      "compressedBytes": 107404,
+      "compressedSha256": "7d89c0c08dc55f36ad4caecc3bbfc54fb2f3621605c26ed55b6eccefe482eefc"
+    },
+    "sqlite-after": {
+      "file": "sqlite-after.json.gz",
+      "bytes": 541010,
+      "sha256": "5b5b935e7eca0e1395250d79e735ad1b2a17ca8ec5b1670f877fbe052a7a5786",
+      "compressedBytes": 59166,
+      "compressedSha256": "3a4771e4f4927fa6268a841eb12080c1c6f3265f61ebe3d96bad4bf1d9cc2233"
+    },
+    "interleaved": {
+      "file": "interleaved.json.gz",
+      "bytes": 341582,
+      "sha256": "10cf92596babef9f7a0423c196f507f777330d69c5aa1f1e4b4652f6be9af4e4",
+      "compressedBytes": 37992,
+      "compressedSha256": "9fa14eef44e1c4291bdcd782420e8e0d3535f0634cf46808ac4bb979691dd3da"
+    }
+  },
+  "inputReproduction": {
+    "exactBytes": true,
+    "sha256": "25b4f30388f0a90147c20bf7246c5cd4e77f4b9413c2ce05cdd691a57ab850eb",
+    "seed": 42,
+    "date": {
+      "year": 2026,
+      "month": 10,
+      "day": 24
+    },
+    "preparedInMemoryWithProductionCommands": true,
+    "trialPersistence": "Each fixed world is saved, loaded and committed through the real SaveRepository on on-disk Node SQLite/WAL. No life is made immortal, and no generated date, balance, result or RNG is patched. Only production-equivalent birth acknowledgement is represented directly."
+  },
+  "workloads": [
+    {
+      "age": 10,
+      "revision": 32,
+      "date": {
+        "year": 2036,
+        "month": 10,
+        "day": 24
+      },
+      "people": 13,
+      "ledgerRows": 2576,
+      "journalRows": 94,
+      "children": 0,
+      "assets": 0,
+      "socialAccounts": 0,
+      "sha256": "8d95bb86ca1b6d3a932891d21cb37bdcb8d8c3175accfa57135691573944f3ea"
+    },
+    {
+      "age": 25,
+      "revision": 98,
+      "date": {
+        "year": 2051,
+        "month": 10,
+        "day": 24
+      },
+      "people": 17,
+      "ledgerRows": 8574,
+      "journalRows": 293,
+      "children": 0,
+      "assets": 1,
+      "socialAccounts": 2,
+      "sha256": "dffea59e89367a8a901a80d0f23c20f827785858d74ff18fa2bd83be724b05a0"
+    },
+    {
+      "age": 50,
+      "revision": 187,
+      "date": {
+        "year": 2076,
+        "month": 10,
+        "day": 24
+      },
+      "people": 20,
+      "ledgerRows": 21867,
+      "journalRows": 669,
+      "children": 1,
+      "assets": 1,
+      "socialAccounts": 2,
+      "sha256": "dde6af767d0e6997f603d135480a50341f6e7ca25a0d58ab7f74df283c84bbf1"
+    },
+    {
+      "age": 70,
+      "revision": 260,
+      "date": {
+        "year": 2096,
+        "month": 10,
+        "day": 24
+      },
+      "people": 22,
+      "ledgerRows": 36636,
+      "journalRows": 984,
+      "children": 1,
+      "assets": 1,
+      "socialAccounts": 2,
+      "sha256": "1add15b0e579a0c2c1e26a212fa6b8959c27486cfb98771be41f4456f340284b"
+    },
+    {
+      "age": 90,
+      "revision": 342,
+      "date": {
+        "year": 2116,
+        "month": 10,
+        "day": 24
+      },
+      "people": 23,
+      "ledgerRows": 47204,
+      "journalRows": 1241,
+      "children": 1,
+      "assets": 1,
+      "socialAccounts": 2,
+      "sha256": "8b6090ed2836d9578a16be55a3214c8c056364a31cccb705c4a3f891b6d4b897"
+    }
+  ],
+  "allFifteenWorldsCommandsRngAndCheckpointBytesIdentical": [
+    {
+      "age": 10,
+      "kind": "routine",
+      "worldSha256": "91938df55bb6f40cf5c822e6ea9d59758587196a6fb3f337d8aa540e05ccc923",
+      "checkpointBytes": 48137
+    },
+    {
+      "age": 10,
+      "kind": "firstAgeUp",
+      "worldSha256": "ad573668ac63b05f514c8e3556309ac9c9dd6497979217dd131f13bab9e5d9ea",
+      "checkpointBytes": 53054
+    },
+    {
+      "age": 10,
+      "kind": "fullYear",
+      "worldSha256": "79ccfead3eed0aeb245b9ecfa0fb1df5d261d356d334cf7e114155c574f7e39c",
+      "checkpointBytes": 52858
+    },
+    {
+      "age": 25,
+      "kind": "routine",
+      "worldSha256": "7c63bad60ea9c1b2678ba3b58fbf4af77d1a859cc559e82ce0840d7b476cf732",
+      "checkpointBytes": 141484
+    },
+    {
+      "age": 25,
+      "kind": "firstAgeUp",
+      "worldSha256": "e16bb5738dcfaccac019c60c1383bea844be6d224d4a2d2f578021f93d6a7776",
+      "checkpointBytes": 142116
+    },
+    {
+      "age": 25,
+      "kind": "fullYear",
+      "worldSha256": "34305cbe80309517827ac64371c9921e0e6e2b23411150f1a94de1caa55ccd6c",
+      "checkpointBytes": 146296
+    },
+    {
+      "age": 50,
+      "kind": "routine",
+      "worldSha256": "38d49f2aaa572ede59df436f692f9e3051a3c43a11664b64478b2399f2541b74",
+      "checkpointBytes": 378973
+    },
+    {
+      "age": 50,
+      "kind": "firstAgeUp",
+      "worldSha256": "8c002e0487d1317a0ccd411362c27461e75d0772db31f8beb757a532735f26c0",
+      "checkpointBytes": 393601
+    },
+    {
+      "age": 50,
+      "kind": "fullYear",
+      "worldSha256": "53cabbfd0d9cac84199f0ea5482ec9277c6b3293d10ae118189803f2165bfa8b",
+      "checkpointBytes": 393409
+    },
+    {
+      "age": 70,
+      "kind": "routine",
+      "worldSha256": "b8e7f338f8cc2e9655438772d3df3bec8ab60adc681286f4fd4c938e58c2e009",
+      "checkpointBytes": 634797
+    },
+    {
+      "age": 70,
+      "kind": "firstAgeUp",
+      "worldSha256": "1207ebdd8f956716fd1a076645fff26ff5e93271cbc127d445949781ee19b1ce",
+      "checkpointBytes": 644473
+    },
+    {
+      "age": 70,
+      "kind": "fullYear",
+      "worldSha256": "42f01ba05e8014b4983aa91b99f19833c85be07bfe34ac4cd02ed108f6617bf0",
+      "checkpointBytes": 644869
+    },
+    {
+      "age": 90,
+      "kind": "routine",
+      "worldSha256": "9fd0e037bde1ad206247325e1a4797abaaf233f0ec3fe19512d45432ed3382a2",
+      "checkpointBytes": 816706
+    },
+    {
+      "age": 90,
+      "kind": "firstAgeUp",
+      "worldSha256": "cfdf3484dcf30612b491cf659789e4b767909ccdef2e87478927e97ffa18b4f0",
+      "checkpointBytes": 818002
+    },
+    {
+      "age": 90,
+      "kind": "fullYear",
+      "worldSha256": "7635590d82625faf6cc551b26e93d6b37e8d223bd6ec965cda4a1115c6a8f530",
+      "checkpointBytes": 820622
+    }
+  ],
+  "method": {
+    "interleaved": {
+      "samples": 11,
+      "warmups": 1,
+      "order": "baseline/candidate then candidate/baseline, alternating for each sample",
+      "quantiles": "nearest-rank median and p95",
+      "forcedGc": "outside both measured spans at each pair boundary when --expose-gc supplied",
+      "cpu": "process.cpuUsage includes process CPU, including V8 workers; distinct from elapsed time"
+    },
+    "sqlite": {
+      "beforeSamples": 11,
+      "afterSamples": 5,
+      "warmups": 1,
+      "scope": "Actual SQLite transaction/write timing; before/after were separate runs under shared host load. Raw reports retained. Summary recomputes nearest-rank quantiles from raw samples; raw driver uses the lower empirical quantile estimator. Do not attribute absolute run-to-run differences solely to code.",
+      "checks": "Exact final cold world and Before Age Up world, deterministic repeated outputs/commands/checkpoint sizes; backup revision checked here. Focused repository tests separately verify exact backup bytes/content, failure rollback, idempotency and restore."
+    }
+  },
+  "pairedCases": [
+    {
+      "age": 10,
+      "kind": "routine",
+      "input": {
+        "age": 10,
+        "revision": 32,
+        "date": {
+          "year": 2036,
+          "month": 10,
+          "day": 24
+        },
+        "people": 13,
+        "ledgerRows": 2576,
+        "journalRows": 94,
+        "children": 0,
+        "assets": 0,
+        "socialAccounts": 0,
+        "sha256": "8d95bb86ca1b6d3a932891d21cb37bdcb8d8c3175accfa57135691573944f3ea"
+      },
+      "inputSha256": "8d95bb86ca1b6d3a932891d21cb37bdcb8d8c3175accfa57135691573944f3ea",
+      "outcomeSha256": "91938df55bb6f40cf5c822e6ea9d59758587196a6fb3f337d8aa540e05ccc923",
+      "commands": 1,
+      "timings": {
+        "totalMs": {
+          "baseline": {
+            "median": 13.453341000000364,
+            "p95": 30.193132999998852
+          },
+          "candidate": {
+            "median": 11.344845999999961,
+            "p95": 31.27614899999935
+          }
+        },
+        "resolveMs": {
+          "baseline": {
+            "median": 7.836879000000408,
+            "p95": 8.778736000000208
+          },
+          "candidate": {
+            "median": 3.3727020000005723,
+            "p95": 7.264255000000048
+          }
+        },
+        "packMs": {
+          "baseline": {
+            "median": 5.601537000000462,
+            "p95": 21.81492799999978
+          },
+          "candidate": {
+            "median": 7.829466999999568,
+            "p95": 23.98994599999969
+          }
+        },
+        "cpuMs": {
+          "baseline": {
+            "median": 27.199,
+            "p95": 41.044
+          },
+          "candidate": {
+            "median": 20.105,
+            "p95": 39.894
+          }
+        },
+        "heapDeltaBytes": {
+          "baseline": {
+            "median": 2862608,
+            "p95": 3416584
+          },
+          "candidate": {
+            "median": 2339336,
+            "p95": 2974032
+          }
+        }
+      },
+      "medianPairedRatio": 0.927283414502588,
+      "phases": {
+        "copyWorld": {
+          "baseline": {
+            "median": 0.4694610000005923,
+            "p95": 0.8970050000007177
+          },
+          "candidate": {
+            "median": 0.47667100000035134,
+            "p95": 0.6530990000010206
+          }
+        },
+        "shapeParse": {
+          "baseline": {
+            "median": 2.094068000000334,
+            "p95": 6.13026600000012
+          },
+          "candidate": {
+            "median": 1.010921999999482,
+            "p95": 5.294816999999966
+          }
+        },
+        "freezing": {
+          "baseline": {
+            "median": 0.34967499999947904,
+            "p95": 4.432093999999779
+          },
+          "candidate": {
+            "median": 0.033908000001247274,
+            "p95": 0.15186199999880046
+          }
+        },
+        "validateWorld": {
+          "baseline": {
+            "median": 6.859405000001061,
+            "p95": 8.128767000000153
+          },
+          "candidate": {
+            "median": 2.835254999999961,
+            "p95": 6.479409999999916
+          }
+        }
+      }
+    },
+    {
+      "age": 10,
+      "kind": "firstAgeUp",
+      "input": {
+        "age": 10,
+        "revision": 32,
+        "date": {
+          "year": 2036,
+          "month": 10,
+          "day": 24
+        },
+        "people": 13,
+        "ledgerRows": 2576,
+        "journalRows": 94,
+        "children": 0,
+        "assets": 0,
+        "socialAccounts": 0,
+        "sha256": "8d95bb86ca1b6d3a932891d21cb37bdcb8d8c3175accfa57135691573944f3ea"
+      },
+      "inputSha256": "8d95bb86ca1b6d3a932891d21cb37bdcb8d8c3175accfa57135691573944f3ea",
+      "outcomeSha256": "ad573668ac63b05f514c8e3556309ac9c9dd6497979217dd131f13bab9e5d9ea",
+      "commands": 1,
+      "timings": {
+        "totalMs": {
+          "baseline": {
+            "median": 29.60247199999867,
+            "p95": 54.99696099999892
+          },
+          "candidate": {
+            "median": 31.217021000000386,
+            "p95": 69.50095200000032
+          }
+        },
+        "resolveMs": {
+          "baseline": {
+            "median": 22.906292000001486,
+            "p95": 44.03607799999918
+          },
+          "candidate": {
+            "median": 16.713198999999804,
+            "p95": 60.246978999999556
+          }
+        },
+        "packMs": {
+          "baseline": {
+            "median": 8.102313999999751,
+            "p95": 11.697126000000935
+          },
+          "candidate": {
+            "median": 7.655032000000574,
+            "p95": 19.87477399999989
+          }
+        },
+        "cpuMs": {
+          "baseline": {
+            "median": 34.833,
+            "p95": 379.872
+          },
+          "candidate": {
+            "median": 40.879,
+            "p95": 85.104
+          }
+        },
+        "heapDeltaBytes": {
+          "baseline": {
+            "median": 7441136,
+            "p95": 7562568
+          },
+          "candidate": {
+            "median": 7828544,
+            "p95": 8682384
+          }
+        }
+      },
+      "medianPairedRatio": 0.9688436154561827,
+      "phases": {
+        "copyWorld": {
+          "baseline": {
+            "median": 0.3796469999997498,
+            "p95": 1.627786000000924
+          },
+          "candidate": {
+            "median": 0.4984859999985929,
+            "p95": 0.6683920000014041
+          }
+        },
+        "monthlySimulation": {
+          "baseline": {
+            "median": 8.78526999999849,
+            "p95": 35.345930000004955
+          },
+          "candidate": {
+            "median": 5.5454570000001695,
+            "p95": 39.00594500000261
+          }
+        },
+        "annualSimulation": {
+          "baseline": {
+            "median": 1.6460929999993823,
+            "p95": 12.369754000001194
+          },
+          "candidate": {
+            "median": 1.6877929999991466,
+            "p95": 11.470209999999497
+          }
+        },
+        "shapeParse": {
+          "baseline": {
+            "median": 2.7859110000008513,
+            "p95": 7.644455999999991
+          },
+          "candidate": {
+            "median": 3.3307999999997264,
+            "p95": 43.810051000000385
+          }
+        },
+        "freezing": {
+          "baseline": {
+            "median": 0.4848729999994248,
+            "p95": 0.7185989999998128
+          },
+          "candidate": {
+            "median": 0.5061319999986154,
+            "p95": 1.1475129999998899
+          }
+        },
+        "validateWorld": {
+          "baseline": {
+            "median": 6.744984000000841,
+            "p95": 20.655907999998817
+          },
+          "candidate": {
+            "median": 7.655849000000671,
+            "p95": 52.87604300000021
+          }
+        }
+      }
+    },
+    {
+      "age": 10,
+      "kind": "fullYear",
+      "input": {
+        "age": 10,
+        "revision": 32,
+        "date": {
+          "year": 2036,
+          "month": 10,
+          "day": 24
+        },
+        "people": 13,
+        "ledgerRows": 2576,
+        "journalRows": 94,
+        "children": 0,
+        "assets": 0,
+        "socialAccounts": 0,
+        "sha256": "8d95bb86ca1b6d3a932891d21cb37bdcb8d8c3175accfa57135691573944f3ea"
+      },
+      "inputSha256": "8d95bb86ca1b6d3a932891d21cb37bdcb8d8c3175accfa57135691573944f3ea",
+      "outcomeSha256": "79ccfead3eed0aeb245b9ecfa0fb1df5d261d356d334cf7e114155c574f7e39c",
+      "commands": 2,
+      "timings": {
+        "totalMs": {
+          "baseline": {
+            "median": 34.5120190000016,
+            "p95": 55.013426000001346
+          },
+          "candidate": {
+            "median": 32.630332000000635,
+            "p95": 58.390285999998014
+          }
+        },
+        "resolveMs": {
+          "baseline": {
+            "median": 15.967508999998245,
+            "p95": 39.60038899999927
+          },
+          "candidate": {
+            "median": 19.533864999997604,
+            "p95": 42.319079999997484
+          }
+        },
+        "packMs": {
+          "baseline": {
+            "median": 13.220992999998998,
+            "p95": 34.52109300000302
+          },
+          "candidate": {
+            "median": 14.166779999999562,
+            "p95": 21.867949999999837
+          }
+        },
+        "cpuMs": {
+          "baseline": {
+            "median": 43.926,
+            "p95": 62.065
+          },
+          "candidate": {
+            "median": 52.128,
+            "p95": 71.298
+          }
+        },
+        "heapDeltaBytes": {
+          "baseline": {
+            "median": 9407368,
+            "p95": 9565784
+          },
+          "candidate": {
+            "median": 9597528,
+            "p95": 9796480
+          }
+        }
+      },
+      "medianPairedRatio": 0.6873443122225571,
+      "phases": {
+        "copyWorld": {
+          "baseline": {
+            "median": 0.7713680000015302,
+            "p95": 0.9942469999987225
+          },
+          "candidate": {
+            "median": 0.8742779999993218,
+            "p95": 1.7974250000042957
+          }
+        },
+        "monthlySimulation": {
+          "baseline": {
+            "median": 2.5480119999956514,
+            "p95": 24.368784999995114
+          },
+          "candidate": {
+            "median": 3.1038819999885163,
+            "p95": 17.8835880000006
+          }
+        },
+        "annualSimulation": {
+          "baseline": {
+            "median": 0.9778189999997267,
+            "p95": 4.9189469999982975
+          },
+          "candidate": {
+            "median": 0.8931009999978414,
+            "p95": 2.4331830000010086
+          }
+        },
+        "shapeParse": {
+          "baseline": {
+            "median": 3.9355260000011185,
+            "p95": 7.871024000003672
+          },
+          "candidate": {
+            "median": 3.3132450000011886,
+            "p95": 18.43540500000381
+          }
+        },
+        "freezing": {
+          "baseline": {
+            "median": 0.7580400000006193,
+            "p95": 21.523572000005515
+          },
+          "candidate": {
+            "median": 0.39554299999872455,
+            "p95": 0.9477800000022398
+          }
+        },
+        "validateWorld": {
+          "baseline": {
+            "median": 10.09061699999802,
+            "p95": 35.50441000000137
+          },
+          "candidate": {
+            "median": 10.872953000001871,
+            "p95": 35.88372099999833
+          }
+        }
+      }
+    },
+    {
+      "age": 25,
+      "kind": "routine",
+      "input": {
+        "age": 25,
+        "revision": 98,
+        "date": {
+          "year": 2051,
+          "month": 10,
+          "day": 24
+        },
+        "people": 17,
+        "ledgerRows": 8574,
+        "journalRows": 293,
+        "children": 0,
+        "assets": 1,
+        "socialAccounts": 2,
+        "sha256": "dffea59e89367a8a901a80d0f23c20f827785858d74ff18fa2bd83be724b05a0"
+      },
+      "inputSha256": "dffea59e89367a8a901a80d0f23c20f827785858d74ff18fa2bd83be724b05a0",
+      "outcomeSha256": "7c63bad60ea9c1b2678ba3b58fbf4af77d1a859cc559e82ce0840d7b476cf732",
+      "commands": 1,
+      "timings": {
+        "totalMs": {
+          "baseline": {
+            "median": 24.016790999998193,
+            "p95": 42.93971500000043
+          },
+          "candidate": {
+            "median": 22.004956999997376,
+            "p95": 41.59717599999931
+          }
+        },
+        "resolveMs": {
+          "baseline": {
+            "median": 10.834516000002623,
+            "p95": 13.37384199999724
+          },
+          "candidate": {
+            "median": 8.82048500000019,
+            "p95": 20.6425530000015
+          }
+        },
+        "packMs": {
+          "baseline": {
+            "median": 11.018936000000394,
+            "p95": 32.09641199999896
+          },
+          "candidate": {
+            "median": 11.463297999998758,
+            "p95": 27.642848999999842
+          }
+        },
+        "cpuMs": {
+          "baseline": {
+            "median": 48.6,
+            "p95": 73.043
+          },
+          "candidate": {
+            "median": 24.542,
+            "p95": 64.531
+          }
+        },
+        "heapDeltaBytes": {
+          "baseline": {
+            "median": 6252408,
+            "p95": 6470720
+          },
+          "candidate": {
+            "median": 5164344,
+            "p95": 5193688
+          }
+        }
+      },
+      "medianPairedRatio": 0.907775272724867,
+      "phases": {
+        "copyWorld": {
+          "baseline": {
+            "median": 0.7852239999992889,
+            "p95": 1.2285010000014154
+          },
+          "candidate": {
+            "median": 0.9746640000012121,
+            "p95": 2.291273999999248
+          }
+        },
+        "shapeParse": {
+          "baseline": {
+            "median": 4.632509000002756,
+            "p95": 6.723002999999153
+          },
+          "candidate": {
+            "median": 2.132666000001336,
+            "p95": 13.013778999997157
+          }
+        },
+        "freezing": {
+          "baseline": {
+            "median": 1.011930000000575,
+            "p95": 2.34711999999854
+          },
+          "candidate": {
+            "median": 0.042477999999391614,
+            "p95": 0.04815699999744538
+          }
+        },
+        "validateWorld": {
+          "baseline": {
+            "median": 9.998712000000523,
+            "p95": 12.401154999999562
+          },
+          "candidate": {
+            "median": 7.4182289999989734,
+            "p95": 19.71775599999819
+          }
+        }
+      }
+    },
+    {
+      "age": 25,
+      "kind": "firstAgeUp",
+      "input": {
+        "age": 25,
+        "revision": 98,
+        "date": {
+          "year": 2051,
+          "month": 10,
+          "day": 24
+        },
+        "people": 17,
+        "ledgerRows": 8574,
+        "journalRows": 293,
+        "children": 0,
+        "assets": 1,
+        "socialAccounts": 2,
+        "sha256": "dffea59e89367a8a901a80d0f23c20f827785858d74ff18fa2bd83be724b05a0"
+      },
+      "inputSha256": "dffea59e89367a8a901a80d0f23c20f827785858d74ff18fa2bd83be724b05a0",
+      "outcomeSha256": "e16bb5738dcfaccac019c60c1383bea844be6d224d4a2d2f578021f93d6a7776",
+      "commands": 1,
+      "timings": {
+        "totalMs": {
+          "baseline": {
+            "median": 42.14203300000008,
+            "p95": 60.8798139999999
+          },
+          "candidate": {
+            "median": 47.16998500000045,
+            "p95": 135.46185400000104
+          }
+        },
+        "resolveMs": {
+          "baseline": {
+            "median": 24.064280999999028,
+            "p95": 38.63492599999881
+          },
+          "candidate": {
+            "median": 25.605203999999503,
+            "p95": 89.56217000000106
+          }
+        },
+        "packMs": {
+          "baseline": {
+            "median": 16.26551599999948,
+            "p95": 29.514603999999963
+          },
+          "candidate": {
+            "median": 18.54399299999932,
+            "p95": 62.41278299999976
+          }
+        },
+        "cpuMs": {
+          "baseline": {
+            "median": 48.029,
+            "p95": 97.801
+          },
+          "candidate": {
+            "median": 57.702,
+            "p95": 111.673
+          }
+        },
+        "heapDeltaBytes": {
+          "baseline": {
+            "median": 8683256,
+            "p95": 9014080
+          },
+          "candidate": {
+            "median": 9437856,
+            "p95": 9834992
+          }
+        }
+      },
+      "medianPairedRatio": 1.1193096688050233,
+      "phases": {
+        "copyWorld": {
+          "baseline": {
+            "median": 1.2365279999976337,
+            "p95": 2.0446109999975306
+          },
+          "candidate": {
+            "median": 1.433948000001692,
+            "p95": 3.640309000002162
+          }
+        },
+        "monthlySimulation": {
+          "baseline": {
+            "median": 1.0339639999983774,
+            "p95": 2.834563000000344
+          },
+          "candidate": {
+            "median": 1.1081600000034086,
+            "p95": 20.604614999996556
+          }
+        },
+        "shapeParse": {
+          "baseline": {
+            "median": 5.581131999999343,
+            "p95": 25.680763000000297
+          },
+          "candidate": {
+            "median": 8.215940999998566,
+            "p95": 48.33969900000011
+          }
+        },
+        "freezing": {
+          "baseline": {
+            "median": 1.2605040000016743,
+            "p95": 2.2325870000022405
+          },
+          "candidate": {
+            "median": 1.1983110000001034,
+            "p95": 24.90802100000292
+          }
+        },
+        "validateWorld": {
+          "baseline": {
+            "median": 21.520605000001524,
+            "p95": 36.27233400000114
+          },
+          "candidate": {
+            "median": 23.705995999996958,
+            "p95": 80.31833499999993
+          }
+        }
+      }
+    },
+    {
+      "age": 25,
+      "kind": "fullYear",
+      "input": {
+        "age": 25,
+        "revision": 98,
+        "date": {
+          "year": 2051,
+          "month": 10,
+          "day": 24
+        },
+        "people": 17,
+        "ledgerRows": 8574,
+        "journalRows": 293,
+        "children": 0,
+        "assets": 1,
+        "socialAccounts": 2,
+        "sha256": "dffea59e89367a8a901a80d0f23c20f827785858d74ff18fa2bd83be724b05a0"
+      },
+      "inputSha256": "dffea59e89367a8a901a80d0f23c20f827785858d74ff18fa2bd83be724b05a0",
+      "outcomeSha256": "34305cbe80309517827ac64371c9921e0e6e2b23411150f1a94de1caa55ccd6c",
+      "commands": 5,
+      "timings": {
+        "totalMs": {
+          "baseline": {
+            "median": 194.6698699999979,
+            "p95": 401.9242540000014
+          },
+          "candidate": {
+            "median": 193.7345860000023,
+            "p95": 539.4811480000026
+          }
+        },
+        "resolveMs": {
+          "baseline": {
+            "median": 116.78781199999503,
+            "p95": 259.1028839999926
+          },
+          "candidate": {
+            "median": 119.58276999999362,
+            "p95": 450.890535999999
+          }
+        },
+        "packMs": {
+          "baseline": {
+            "median": 75.1610359999977,
+            "p95": 142.70451599999797
+          },
+          "candidate": {
+            "median": 73.73676999999589,
+            "p95": 113.26608899999701
+          }
+        },
+        "cpuMs": {
+          "baseline": {
+            "median": 203.684,
+            "p95": 487.83
+          },
+          "candidate": {
+            "median": 201.466,
+            "p95": 559.691
+          }
+        },
+        "heapDeltaBytes": {
+          "baseline": {
+            "median": 41058696,
+            "p95": 45946800
+          },
+          "candidate": {
+            "median": -36848264,
+            "p95": 43741072
+          }
+        }
+      },
+      "medianPairedRatio": 1.0122104673116403,
+      "phases": {
+        "copyWorld": {
+          "baseline": {
+            "median": 6.5777969999981,
+            "p95": 13.02408899999864
+          },
+          "candidate": {
+            "median": 8.216212999999698,
+            "p95": 20.17564000000857
+          }
+        },
+        "monthlySimulation": {
+          "baseline": {
+            "median": 13.6139020000046,
+            "p95": 26.243727000000945
+          },
+          "candidate": {
+            "median": 12.923612999999023,
+            "p95": 66.83277900000394
+          }
+        },
+        "shapeParse": {
+          "baseline": {
+            "median": 34.54875999999422,
+            "p95": 143.76789200000349
+          },
+          "candidate": {
+            "median": 38.65948399999979,
+            "p95": 310.3914700000023
+          }
+        },
+        "freezing": {
+          "baseline": {
+            "median": 7.3092929999984335,
+            "p95": 13.344121999994968
+          },
+          "candidate": {
+            "median": 5.0755950000093435,
+            "p95": 24.00835200000074
+          }
+        },
+        "validateWorld": {
+          "baseline": {
+            "median": 89.91146099999969,
+            "p95": 222.97439100000338
+          },
+          "candidate": {
+            "median": 93.08613699999842,
+            "p95": 360.9152049999939
+          }
+        },
+        "annualSimulation": {
+          "baseline": {
+            "median": 2.571459999999206,
+            "p95": 5.568147999998473
+          },
+          "candidate": {
+            "median": 2.6462659999997413,
+            "p95": 6.09024700000009
+          }
+        }
+      }
+    },
+    {
+      "age": 50,
+      "kind": "routine",
+      "input": {
+        "age": 50,
+        "revision": 187,
+        "date": {
+          "year": 2076,
+          "month": 10,
+          "day": 24
+        },
+        "people": 20,
+        "ledgerRows": 21867,
+        "journalRows": 669,
+        "children": 1,
+        "assets": 1,
+        "socialAccounts": 2,
+        "sha256": "dde6af767d0e6997f603d135480a50341f6e7ca25a0d58ab7f74df283c84bbf1"
+      },
+      "inputSha256": "dde6af767d0e6997f603d135480a50341f6e7ca25a0d58ab7f74df283c84bbf1",
+      "outcomeSha256": "38d49f2aaa572ede59df436f692f9e3051a3c43a11664b64478b2399f2541b74",
+      "commands": 1,
+      "timings": {
+        "totalMs": {
+          "baseline": {
+            "median": 67.88528399999632,
+            "p95": 98.50438700000086
+          },
+          "candidate": {
+            "median": 51.75387600000249,
+            "p95": 67.42316600000049
+          }
+        },
+        "resolveMs": {
+          "baseline": {
+            "median": 41.465696999999636,
+            "p95": 63.94017100000201
+          },
+          "candidate": {
+            "median": 31.913042000000132,
+            "p95": 41.408464000000095
+          }
+        },
+        "packMs": {
+          "baseline": {
+            "median": 28.960583000000042,
+            "p95": 62.254141999997955
+          },
+          "candidate": {
+            "median": 18.7038939999984,
+            "p95": 26.002827999996953
+          }
+        },
+        "cpuMs": {
+          "baseline": {
+            "median": 107.369,
+            "p95": 174.572
+          },
+          "candidate": {
+            "median": 73.419,
+            "p95": 95.054
+          }
+        },
+        "heapDeltaBytes": {
+          "baseline": {
+            "median": 15570840,
+            "p95": 18510688
+          },
+          "candidate": {
+            "median": 12952096,
+            "p95": 12997016
+          }
+        }
+      },
+      "medianPairedRatio": 0.675894047173025,
+      "phases": {
+        "copyWorld": {
+          "baseline": {
+            "median": 3.9052540000047884,
+            "p95": 14.989931000003708
+          },
+          "candidate": {
+            "median": 3.386288000001514,
+            "p95": 5.330896999999823
+          }
+        },
+        "shapeParse": {
+          "baseline": {
+            "median": 14.186336999999185,
+            "p95": 33.098846000000776
+          },
+          "candidate": {
+            "median": 6.074577999999747,
+            "p95": 12.68354299999919
+          }
+        },
+        "freezing": {
+          "baseline": {
+            "median": 3.5167980000042007,
+            "p95": 4.149779999999737
+          },
+          "candidate": {
+            "median": 0.07796999999845866,
+            "p95": 0.1511190000019269
+          }
+        },
+        "validateWorld": {
+          "baseline": {
+            "median": 33.93412499999977,
+            "p95": 59.60657500000525
+          },
+          "candidate": {
+            "median": 27.9871490000005,
+            "p95": 38.20951900000364
+          }
+        }
+      }
+    },
+    {
+      "age": 50,
+      "kind": "firstAgeUp",
+      "input": {
+        "age": 50,
+        "revision": 187,
+        "date": {
+          "year": 2076,
+          "month": 10,
+          "day": 24
+        },
+        "people": 20,
+        "ledgerRows": 21867,
+        "journalRows": 669,
+        "children": 1,
+        "assets": 1,
+        "socialAccounts": 2,
+        "sha256": "dde6af767d0e6997f603d135480a50341f6e7ca25a0d58ab7f74df283c84bbf1"
+      },
+      "inputSha256": "dde6af767d0e6997f603d135480a50341f6e7ca25a0d58ab7f74df283c84bbf1",
+      "outcomeSha256": "8c002e0487d1317a0ccd411362c27461e75d0772db31f8beb757a532735f26c0",
+      "commands": 1,
+      "timings": {
+        "totalMs": {
+          "baseline": {
+            "median": 94.19411499999842,
+            "p95": 471.49586299999646
+          },
+          "candidate": {
+            "median": 99.42717300000368,
+            "p95": 273.84064899999794
+          }
+        },
+        "resolveMs": {
+          "baseline": {
+            "median": 69.23669099999825,
+            "p95": 253.8912100000016
+          },
+          "candidate": {
+            "median": 71.3655329999965,
+            "p95": 197.25520400000096
+          }
+        },
+        "packMs": {
+          "baseline": {
+            "median": 25.679577999995672,
+            "p95": 345.3710989999963
+          },
+          "candidate": {
+            "median": 29.57221300000674,
+            "p95": 81.05600499999855
+          }
+        },
+        "cpuMs": {
+          "baseline": {
+            "median": 144.428,
+            "p95": 430.404
+          },
+          "candidate": {
+            "median": 153.222,
+            "p95": 336.8
+          }
+        },
+        "heapDeltaBytes": {
+          "baseline": {
+            "median": 31096944,
+            "p95": 31359784
+          },
+          "candidate": {
+            "median": 32099560,
+            "p95": 32475472
+          }
+        }
+      },
+      "medianPairedRatio": 0.9981950470499926,
+      "phases": {
+        "copyWorld": {
+          "baseline": {
+            "median": 3.0558280000041123,
+            "p95": 8.695834000005561
+          },
+          "candidate": {
+            "median": 3.088194999996631,
+            "p95": 8.674335999996401
+          }
+        },
+        "monthlySimulation": {
+          "baseline": {
+            "median": 14.01047600000311,
+            "p95": 25.37851199999568
+          },
+          "candidate": {
+            "median": 13.483061000006273,
+            "p95": 26.730802999991283
+          }
+        },
+        "annualSimulation": {
+          "baseline": {
+            "median": 1.9906640000044717,
+            "p95": 10.295406999997795
+          },
+          "candidate": {
+            "median": 2.0580399999962538,
+            "p95": 8.687844000000041
+          }
+        },
+        "shapeParse": {
+          "baseline": {
+            "median": 15.448777999998129,
+            "p95": 31.11330799999996
+          },
+          "candidate": {
+            "median": 13.035608999998658,
+            "p95": 23.809543000003032
+          }
+        },
+        "freezing": {
+          "baseline": {
+            "median": 2.7674540000007255,
+            "p95": 8.525455000002694
+          },
+          "candidate": {
+            "median": 2.9268430000010994,
+            "p95": 6.634526000001642
+          }
+        },
+        "validateWorld": {
+          "baseline": {
+            "median": 47.44974899999943,
+            "p95": 209.35109799999918
+          },
+          "candidate": {
+            "median": 54.42754600000626,
+            "p95": 160.79118400000152
+          }
+        }
+      }
+    },
+    {
+      "age": 50,
+      "kind": "fullYear",
+      "input": {
+        "age": 50,
+        "revision": 187,
+        "date": {
+          "year": 2076,
+          "month": 10,
+          "day": 24
+        },
+        "people": 20,
+        "ledgerRows": 21867,
+        "journalRows": 669,
+        "children": 1,
+        "assets": 1,
+        "socialAccounts": 2,
+        "sha256": "dde6af767d0e6997f603d135480a50341f6e7ca25a0d58ab7f74df283c84bbf1"
+      },
+      "inputSha256": "dde6af767d0e6997f603d135480a50341f6e7ca25a0d58ab7f74df283c84bbf1",
+      "outcomeSha256": "53cabbfd0d9cac84199f0ea5482ec9277c6b3293d10ae118189803f2165bfa8b",
+      "commands": 2,
+      "timings": {
+        "totalMs": {
+          "baseline": {
+            "median": 206.51507699999638,
+            "p95": 1113.1161509999947
+          },
+          "candidate": {
+            "median": 191.8748659999983,
+            "p95": 1145.2373649999936
+          }
+        },
+        "resolveMs": {
+          "baseline": {
+            "median": 106.22903500000393,
+            "p95": 747.728836000002
+          },
+          "candidate": {
+            "median": 140.738652,
+            "p95": 796.7552279999945
+          }
+        },
+        "packMs": {
+          "baseline": {
+            "median": 51.02578699999867,
+            "p95": 365.3288109999994
+          },
+          "candidate": {
+            "median": 54.385484999991604,
+            "p95": 348.3657019999955
+          }
+        },
+        "cpuMs": {
+          "baseline": {
+            "median": 193.092,
+            "p95": 1141.017
+          },
+          "candidate": {
+            "median": 206.461,
+            "p95": 1221.227
+          }
+        },
+        "heapDeltaBytes": {
+          "baseline": {
+            "median": 44347832,
+            "p95": 46189840
+          },
+          "candidate": {
+            "median": -42733264,
+            "p95": 43599936
+          }
+        }
+      },
+      "medianPairedRatio": 0.9744240333550285,
+      "phases": {
+        "copyWorld": {
+          "baseline": {
+            "median": 4.711203000006208,
+            "p95": 147.2835449999984
+          },
+          "candidate": {
+            "median": 5.907420999996248,
+            "p95": 41.56546700000035
+          }
+        },
+        "monthlySimulation": {
+          "baseline": {
+            "median": 13.918851000002178,
+            "p95": 29.11075699999492
+          },
+          "candidate": {
+            "median": 12.702281999983825,
+            "p95": 144.8623729999963
+          }
+        },
+        "annualSimulation": {
+          "baseline": {
+            "median": 1.8278990000035265,
+            "p95": 5.590669999997772
+          },
+          "candidate": {
+            "median": 2.69808500000363,
+            "p95": 9.958405999997922
+          }
+        },
+        "shapeParse": {
+          "baseline": {
+            "median": 26.293952999993053,
+            "p95": 163.94766700000037
+          },
+          "candidate": {
+            "median": 54.743861999995715,
+            "p95": 185.72157800000423
+          }
+        },
+        "freezing": {
+          "baseline": {
+            "median": 5.634665999998106,
+            "p95": 44.499392999998236
+          },
+          "candidate": {
+            "median": 3.9394070000053034,
+            "p95": 8.46697299999505
+          }
+        },
+        "validateWorld": {
+          "baseline": {
+            "median": 93.94718499999726,
+            "p95": 698.1108709999899
+          },
+          "candidate": {
+            "median": 114.7714449999985,
+            "p95": 755.3735359999919
+          }
+        }
+      }
+    },
+    {
+      "age": 70,
+      "kind": "routine",
+      "input": {
+        "age": 70,
+        "revision": 260,
+        "date": {
+          "year": 2096,
+          "month": 10,
+          "day": 24
+        },
+        "people": 22,
+        "ledgerRows": 36636,
+        "journalRows": 984,
+        "children": 1,
+        "assets": 1,
+        "socialAccounts": 2,
+        "sha256": "1add15b0e579a0c2c1e26a212fa6b8959c27486cfb98771be41f4456f340284b"
+      },
+      "inputSha256": "1add15b0e579a0c2c1e26a212fa6b8959c27486cfb98771be41f4456f340284b",
+      "outcomeSha256": "b8e7f338f8cc2e9655438772d3df3bec8ab60adc681286f4fd4c938e58c2e009",
+      "commands": 1,
+      "timings": {
+        "totalMs": {
+          "baseline": {
+            "median": 79.54085800000757,
+            "p95": 152.5129900000029
+          },
+          "candidate": {
+            "median": 63.82680500000424,
+            "p95": 111.17637000000104
+          }
+        },
+        "resolveMs": {
+          "baseline": {
+            "median": 39.97527500000433,
+            "p95": 109.89655000000494
+          },
+          "candidate": {
+            "median": 44.808688999997685,
+            "p95": 81.29448900000716
+          }
+        },
+        "packMs": {
+          "baseline": {
+            "median": 38.13010699998995,
+            "p95": 71.96611999999732
+          },
+          "candidate": {
+            "median": 17.69400199998927,
+            "p95": 36.73730000000796
+          }
+        },
+        "cpuMs": {
+          "baseline": {
+            "median": 95.181,
+            "p95": 156.47
+          },
+          "candidate": {
+            "median": 88.051,
+            "p95": 110.867
+          }
+        },
+        "heapDeltaBytes": {
+          "baseline": {
+            "median": 21616360,
+            "p95": 21692832
+          },
+          "candidate": {
+            "median": 18134464,
+            "p95": 18202744
+          }
+        }
+      },
+      "medianPairedRatio": 0.7289632837176618,
+      "phases": {
+        "copyWorld": {
+          "baseline": {
+            "median": 3.0422560000006342,
+            "p95": 13.241573999999673
+          },
+          "candidate": {
+            "median": 3.3428879999992205,
+            "p95": 9.62307200000214
+          }
+        },
+        "shapeParse": {
+          "baseline": {
+            "median": 15.44172499999695,
+            "p95": 54.94996300000639
+          },
+          "candidate": {
+            "median": 9.510511999993469,
+            "p95": 42.66420099999232
+          }
+        },
+        "freezing": {
+          "baseline": {
+            "median": 4.07210699999996,
+            "p95": 9.419830000013462
+          },
+          "candidate": {
+            "median": 0.06705599999986589,
+            "p95": 0.4408649999968475
+          }
+        },
+        "validateWorld": {
+          "baseline": {
+            "median": 37.623147999998764,
+            "p95": 96.26549599999271
+          },
+          "candidate": {
+            "median": 29.413590000011027,
+            "p95": 76.31540099999984
+          }
+        }
+      }
+    },
+    {
+      "age": 70,
+      "kind": "firstAgeUp",
+      "input": {
+        "age": 70,
+        "revision": 260,
+        "date": {
+          "year": 2096,
+          "month": 10,
+          "day": 24
+        },
+        "people": 22,
+        "ledgerRows": 36636,
+        "journalRows": 984,
+        "children": 1,
+        "assets": 1,
+        "socialAccounts": 2,
+        "sha256": "1add15b0e579a0c2c1e26a212fa6b8959c27486cfb98771be41f4456f340284b"
+      },
+      "inputSha256": "1add15b0e579a0c2c1e26a212fa6b8959c27486cfb98771be41f4456f340284b",
+      "outcomeSha256": "1207ebdd8f956716fd1a076645fff26ff5e93271cbc127d445949781ee19b1ce",
+      "commands": 1,
+      "timings": {
+        "totalMs": {
+          "baseline": {
+            "median": 250.73100100000738,
+            "p95": 1845.860753999994
+          },
+          "candidate": {
+            "median": 226.1620430000039,
+            "p95": 1427.9009850000002
+          }
+        },
+        "resolveMs": {
+          "baseline": {
+            "median": 172.698092000006,
+            "p95": 1189.5782819999877
+          },
+          "candidate": {
+            "median": 184.79597300000023,
+            "p95": 1240.2433410000085
+          }
+        },
+        "packMs": {
+          "baseline": {
+            "median": 60.39031899999827,
+            "p95": 656.2732720000058
+          },
+          "candidate": {
+            "median": 59.83850200001325,
+            "p95": 355.48893999999564
+          }
+        },
+        "cpuMs": {
+          "baseline": {
+            "median": 242.459,
+            "p95": 1244.88
+          },
+          "candidate": {
+            "median": 416.556,
+            "p95": 1442.05
+          }
+        },
+        "heapDeltaBytes": {
+          "baseline": {
+            "median": 41253296,
+            "p95": 41899136
+          },
+          "candidate": {
+            "median": 39487808,
+            "p95": 40675168
+          }
+        }
+      },
+      "medianPairedRatio": 1.1424830983890635,
+      "phases": {
+        "copyWorld": {
+          "baseline": {
+            "median": 6.110599999999977,
+            "p95": 62.59610600001179
+          },
+          "candidate": {
+            "median": 8.996003000007477,
+            "p95": 57.68797899999481
+          }
+        },
+        "monthlySimulation": {
+          "baseline": {
+            "median": 12.371007999987341,
+            "p95": 43.64122399999178
+          },
+          "candidate": {
+            "median": 11.76410300002317,
+            "p95": 115.21127400001569
+          }
+        },
+        "shapeParse": {
+          "baseline": {
+            "median": 36.06360500000301,
+            "p95": 259.61487599999236
+          },
+          "candidate": {
+            "median": 58.248718000002555,
+            "p95": 316.0893780000042
+          }
+        },
+        "freezing": {
+          "baseline": {
+            "median": 8.669699999998556,
+            "p95": 172.86679600000207
+          },
+          "candidate": {
+            "median": 4.797415999986697,
+            "p95": 109.82706300000427
+          }
+        },
+        "validateWorld": {
+          "baseline": {
+            "median": 125.91785300000629,
+            "p95": 1174.754304999995
+          },
+          "candidate": {
+            "median": 160.32325799998944,
+            "p95": 1129.3439920000092
+          }
+        }
+      }
+    },
+    {
+      "age": 70,
+      "kind": "fullYear",
+      "input": {
+        "age": 70,
+        "revision": 260,
+        "date": {
+          "year": 2096,
+          "month": 10,
+          "day": 24
+        },
+        "people": 22,
+        "ledgerRows": 36636,
+        "journalRows": 984,
+        "children": 1,
+        "assets": 1,
+        "socialAccounts": 2,
+        "sha256": "1add15b0e579a0c2c1e26a212fa6b8959c27486cfb98771be41f4456f340284b"
+      },
+      "inputSha256": "1add15b0e579a0c2c1e26a212fa6b8959c27486cfb98771be41f4456f340284b",
+      "outcomeSha256": "42f01ba05e8014b4983aa91b99f19833c85be07bfe34ac4cd02ed108f6617bf0",
+      "commands": 4,
+      "timings": {
+        "totalMs": {
+          "baseline": {
+            "median": 710.4063940000051,
+            "p95": 1698.416121999995
+          },
+          "candidate": {
+            "median": 614.8422259999934,
+            "p95": 1495.8352650000015
+          }
+        },
+        "resolveMs": {
+          "baseline": {
+            "median": 478.3128769999894,
+            "p95": 1163.0220739999786
+          },
+          "candidate": {
+            "median": 427.6528810000018,
+            "p95": 1048.335460000002
+          }
+        },
+        "packMs": {
+          "baseline": {
+            "median": 220.90632200002437,
+            "p95": 535.9996600000013
+          },
+          "candidate": {
+            "median": 136.7045340000186,
+            "p95": 447.3955260000075
+          }
+        },
+        "cpuMs": {
+          "baseline": {
+            "median": 612.078,
+            "p95": 1066.695
+          },
+          "candidate": {
+            "median": 482.125,
+            "p95": 777.157
+          }
+        },
+        "heapDeltaBytes": {
+          "baseline": {
+            "median": 47431304,
+            "p95": 53654432
+          },
+          "candidate": {
+            "median": 17403320,
+            "p95": 37858320
+          }
+        }
+      },
+      "medianPairedRatio": 0.8641392323774255,
+      "phases": {
+        "copyWorld": {
+          "baseline": {
+            "median": 27.89272499999788,
+            "p95": 102.57731999998214
+          },
+          "candidate": {
+            "median": 34.316374000001815,
+            "p95": 98.7682489999861
+          }
+        },
+        "monthlySimulation": {
+          "baseline": {
+            "median": 12.420521999971243,
+            "p95": 48.02361199998995
+          },
+          "candidate": {
+            "median": 13.965219000019715,
+            "p95": 37.60134299995843
+          }
+        },
+        "shapeParse": {
+          "baseline": {
+            "median": 109.46431900000607,
+            "p95": 331.3146759999945
+          },
+          "candidate": {
+            "median": 122.0552209999878,
+            "p95": 221.69566600001417
+          }
+        },
+        "freezing": {
+          "baseline": {
+            "median": 32.978367999981856,
+            "p95": 112.70089100000041
+          },
+          "candidate": {
+            "median": 12.457648000010522,
+            "p95": 43.74205100000836
+          }
+        },
+        "validateWorld": {
+          "baseline": {
+            "median": 442.57000199997856,
+            "p95": 1076.9307209999824
+          },
+          "candidate": {
+            "median": 392.8541090000217,
+            "p95": 918.435639999996
+          }
+        },
+        "annualSimulation": {
+          "baseline": {
+            "median": 2.372237999996287,
+            "p95": 39.657164999996894
+          },
+          "candidate": {
+            "median": 2.5810599999967963,
+            "p95": 14.583687999998801
+          }
+        }
+      }
+    },
+    {
+      "age": 90,
+      "kind": "routine",
+      "input": {
+        "age": 90,
+        "revision": 342,
+        "date": {
+          "year": 2116,
+          "month": 10,
+          "day": 24
+        },
+        "people": 23,
+        "ledgerRows": 47204,
+        "journalRows": 1241,
+        "children": 1,
+        "assets": 1,
+        "socialAccounts": 2,
+        "sha256": "8b6090ed2836d9578a16be55a3214c8c056364a31cccb705c4a3f891b6d4b897"
+      },
+      "inputSha256": "8b6090ed2836d9578a16be55a3214c8c056364a31cccb705c4a3f891b6d4b897",
+      "outcomeSha256": "9fd0e037bde1ad206247325e1a4797abaaf233f0ec3fe19512d45432ed3382a2",
+      "commands": 1,
+      "timings": {
+        "totalMs": {
+          "baseline": {
+            "median": 98.62820599999395,
+            "p95": 266.02479799999855
+          },
+          "candidate": {
+            "median": 75.43745200001285,
+            "p95": 104.94400400001905
+          }
+        },
+        "resolveMs": {
+          "baseline": {
+            "median": 62.04892300002393,
+            "p95": 83.59740199998487
+          },
+          "candidate": {
+            "median": 47.84645799998543,
+            "p95": 71.34908600000199
+          }
+        },
+        "packMs": {
+          "baseline": {
+            "median": 34.80886599997757,
+            "p95": 189.4582539999974
+          },
+          "candidate": {
+            "median": 24.98567599998205,
+            "p95": 36.317215999995824
+          }
+        },
+        "cpuMs": {
+          "baseline": {
+            "median": 106.08,
+            "p95": 307.423
+          },
+          "candidate": {
+            "median": 105.309,
+            "p95": 136.565
+          }
+        },
+        "heapDeltaBytes": {
+          "baseline": {
+            "median": 28964888,
+            "p95": 33121824
+          },
+          "candidate": {
+            "median": 24042408,
+            "p95": 24171120
+          }
+        }
+      },
+      "medianPairedRatio": 0.7138884297061221,
+      "phases": {
+        "copyWorld": {
+          "baseline": {
+            "median": 6.205924999987474,
+            "p95": 11.88636500001303
+          },
+          "candidate": {
+            "median": 6.898980999976629,
+            "p95": 31.159182000003057
+          }
+        },
+        "shapeParse": {
+          "baseline": {
+            "median": 25.372987000009743,
+            "p95": 38.86163199998555
+          },
+          "candidate": {
+            "median": 10.800449000002118,
+            "p95": 26.706575000018347
+          }
+        },
+        "freezing": {
+          "baseline": {
+            "median": 6.384411999984877,
+            "p95": 10.470551000005798
+          },
+          "candidate": {
+            "median": 0.08224499999778345,
+            "p95": 0.18357100000139326
+          }
+        },
+        "validateWorld": {
+          "baseline": {
+            "median": 55.33045000000857,
+            "p95": 77.56421100001899
+          },
+          "candidate": {
+            "median": 41.0699270000041,
+            "p95": 58.184929999988526
+          }
+        }
+      }
+    },
+    {
+      "age": 90,
+      "kind": "firstAgeUp",
+      "input": {
+        "age": 90,
+        "revision": 342,
+        "date": {
+          "year": 2116,
+          "month": 10,
+          "day": 24
+        },
+        "people": 23,
+        "ledgerRows": 47204,
+        "journalRows": 1241,
+        "children": 1,
+        "assets": 1,
+        "socialAccounts": 2,
+        "sha256": "8b6090ed2836d9578a16be55a3214c8c056364a31cccb705c4a3f891b6d4b897"
+      },
+      "inputSha256": "8b6090ed2836d9578a16be55a3214c8c056364a31cccb705c4a3f891b6d4b897",
+      "outcomeSha256": "cfdf3484dcf30612b491cf659789e4b767909ccdef2e87478927e97ffa18b4f0",
+      "commands": 1,
+      "timings": {
+        "totalMs": {
+          "baseline": {
+            "median": 184.82166600000346,
+            "p95": 305.38890900000115
+          },
+          "candidate": {
+            "median": 174.53422400000272,
+            "p95": 226.88955500000156
+          }
+        },
+        "resolveMs": {
+          "baseline": {
+            "median": 129.24348000000464,
+            "p95": 206.90749000001233
+          },
+          "candidate": {
+            "median": 133.67092800000682,
+            "p95": 176.77192800000194
+          }
+        },
+        "packMs": {
+          "baseline": {
+            "median": 54.85127199999988,
+            "p95": 98.4723080000258
+          },
+          "candidate": {
+            "median": 42.73182899999665,
+            "p95": 89.26696200002334
+          }
+        },
+        "cpuMs": {
+          "baseline": {
+            "median": 226.563,
+            "p95": 278.92
+          },
+          "candidate": {
+            "median": 208.601,
+            "p95": 261.014
+          }
+        },
+        "heapDeltaBytes": {
+          "baseline": {
+            "median": 46901328,
+            "p95": 48210832
+          },
+          "candidate": {
+            "median": 43620664,
+            "p95": 43911656
+          }
+        }
+      },
+      "medianPairedRatio": 0.9425969842734992,
+      "phases": {
+        "copyWorld": {
+          "baseline": {
+            "median": 6.967139999993378,
+            "p95": 15.101887999975588
+          },
+          "candidate": {
+            "median": 10.527656999998726,
+            "p95": 40.7976609999896
+          }
+        },
+        "monthlySimulation": {
+          "baseline": {
+            "median": 2.3318259999796283,
+            "p95": 2.987678000004962
+          },
+          "candidate": {
+            "median": 2.921675999998115,
+            "p95": 7.010709999973187
+          }
+        },
+        "shapeParse": {
+          "baseline": {
+            "median": 24.88745700000436,
+            "p95": 50.94227800000226
+          },
+          "candidate": {
+            "median": 28.94345700001577,
+            "p95": 34.89576399998623
+          }
+        },
+        "freezing": {
+          "baseline": {
+            "median": 8.627452000015182,
+            "p95": 24.10043500000029
+          },
+          "candidate": {
+            "median": 5.270145000016782,
+            "p95": 10.774168999982066
+          }
+        },
+        "validateWorld": {
+          "baseline": {
+            "median": 118.30161600001156,
+            "p95": 199.27365499999723
+          },
+          "candidate": {
+            "median": 117.6368599999987,
+            "p95": 164.072342999978
+          }
+        }
+      }
+    },
+    {
+      "age": 90,
+      "kind": "fullYear",
+      "input": {
+        "age": 90,
+        "revision": 342,
+        "date": {
+          "year": 2116,
+          "month": 10,
+          "day": 24
+        },
+        "people": 23,
+        "ledgerRows": 47204,
+        "journalRows": 1241,
+        "children": 1,
+        "assets": 1,
+        "socialAccounts": 2,
+        "sha256": "8b6090ed2836d9578a16be55a3214c8c056364a31cccb705c4a3f891b6d4b897"
+      },
+      "inputSha256": "8b6090ed2836d9578a16be55a3214c8c056364a31cccb705c4a3f891b6d4b897",
+      "outcomeSha256": "7635590d82625faf6cc551b26e93d6b37e8d223bd6ec965cda4a1115c6a8f530",
+      "commands": 6,
+      "timings": {
+        "totalMs": {
+          "baseline": {
+            "median": 1083.8970529999933,
+            "p95": 1279.4768829999957
+          },
+          "candidate": {
+            "median": 964.3224639999971,
+            "p95": 1058.2567409999901
+          }
+        },
+        "resolveMs": {
+          "baseline": {
+            "median": 582.8539379999856,
+            "p95": 699.393836000032
+          },
+          "candidate": {
+            "median": 529.7841149999877,
+            "p95": 579.9151699999929
+          }
+        },
+        "packMs": {
+          "baseline": {
+            "median": 512.7163860000437,
+            "p95": 608.0635790000379
+          },
+          "candidate": {
+            "median": 443.9668900000106,
+            "p95": 481.27138099996955
+          }
+        },
+        "cpuMs": {
+          "baseline": {
+            "median": 1175.174,
+            "p95": 1322.772
+          },
+          "candidate": {
+            "median": 1039.844,
+            "p95": 1127.287
+          }
+        },
+        "heapDeltaBytes": {
+          "baseline": {
+            "median": 46149016,
+            "p95": 53665728
+          },
+          "candidate": {
+            "median": 68456560,
+            "p95": 84295656
+          }
+        }
+      },
+      "medianPairedRatio": 0.8685696488737511,
+      "phases": {
+        "copyWorld": {
+          "baseline": {
+            "median": 44.75786300000618,
+            "p95": 67.90674599999329
+          },
+          "candidate": {
+            "median": 41.91287400003057,
+            "p95": 50.22325999996974
+          }
+        },
+        "monthlySimulation": {
+          "baseline": {
+            "median": 9.221992999955546,
+            "p95": 12.80009599996265
+          },
+          "candidate": {
+            "median": 9.43454199997359,
+            "p95": 16.730073999991873
+          }
+        },
+        "shapeParse": {
+          "baseline": {
+            "median": 151.9573050000181,
+            "p95": 174.17780599999242
+          },
+          "candidate": {
+            "median": 101.19800600004965,
+            "p95": 123.53270800004248
+          }
+        },
+        "freezing": {
+          "baseline": {
+            "median": 44.40269499999704,
+            "p95": 65.25886599998921
+          },
+          "candidate": {
+            "median": 18.832599999994272,
+            "p95": 36.36375699995551
+          }
+        },
+        "validateWorld": {
+          "baseline": {
+            "median": 529.7640659999452,
+            "p95": 632.9049680000171
+          },
+          "candidate": {
+            "median": 474.22436400002334,
+            "p95": 520.4845140000107
+          }
+        },
+        "annualSimulation": {
+          "baseline": {
+            "median": 2.027274000021862,
+            "p95": 3.8004070000024512
+          },
+          "candidate": {
+            "median": 1.993940999993356,
+            "p95": 2.9887309999903664
+          }
+        }
+      }
+    }
+  ],
+  "sqlite": {
+    "before": [
+      {
+        "age": 10,
+        "kind": "routine",
+        "totalMs": {
+          "median": 15.846067000000403,
+          "p95": 21.995538999999553
+        },
+        "resolveMs": {
+          "median": 6.675204999999551,
+          "p95": 9.081271999999444
+        },
+        "commitMs": {
+          "median": 8.395306000000346,
+          "p95": 15.467584999999417
+        },
+        "phases": {
+          "copyWorld": {
+            "median": 0.5596820000000662,
+            "p95": 0.8564120000000912
+          },
+          "shapeParse": {
+            "median": 3.1745190000001458,
+            "p95": 5.853576999999859
+          },
+          "freezing": {
+            "median": 0.8272859999997308,
+            "p95": 1.028729999999996
+          },
+          "validateWorld": {
+            "median": 5.695244999999886,
+            "p95": 8.35512700000072
+          },
+          "monthlySimulation": {
+            "median": 0,
+            "p95": 0
+          },
+          "annualSimulation": {
+            "median": 0,
+            "p95": 0
+          },
+          "packCheckpoint": {
+            "median": 7.8186510000005,
+            "p95": 14.95969199999945
+          },
+          "sqliteTransaction": {
+            "median": 0.6309629999996105,
+            "p95": 0.8088749999997162
+          },
+          "sqliteReads": {
+            "median": 0.17047999999977037,
+            "p95": 0.2922130000006291
+          },
+          "sqliteWrites": {
+            "median": 0.1439990000008038,
+            "p95": 0.3470869999991919
+          }
+        },
+        "heapDeltaBytes": {
+          "median": 2576800,
+          "p95": 2992512
+        },
+        "gcEvents": 11,
+        "gcMs": 642.1028569998452
+      },
+      {
+        "age": 10,
+        "kind": "firstAgeUp",
+        "totalMs": {
+          "median": 41.76533399999971,
+          "p95": 74.86491599999863
+        },
+        "resolveMs": {
+          "median": 29.922817000000578,
+          "p95": 62.742231000000174
+        },
+        "commitMs": {
+          "median": 12.116739999999481,
+          "p95": 20.01899400000002
+        },
+        "phases": {
+          "copyWorld": {
+            "median": 0.6094580000008136,
+            "p95": 0.7418670000006387
+          },
+          "shapeParse": {
+            "median": 3.023519000000306,
+            "p95": 3.973748999998861
+          },
+          "freezing": {
+            "median": 0.9363420000008773,
+            "p95": 2.523616000000402
+          },
+          "validateWorld": {
+            "median": 15.228583000000071,
+            "p95": 32.60434999999961
+          },
+          "monthlySimulation": {
+            "median": 9.400977000001149,
+            "p95": 34.64355600000272
+          },
+          "annualSimulation": {
+            "median": 1.9465150000014546,
+            "p95": 8.621932000000015
+          },
+          "packCheckpoint": {
+            "median": 10.966941999999108,
+            "p95": 16.667444999999134
+          },
+          "sqliteTransaction": {
+            "median": 1.1237499999988358,
+            "p95": 4.2840980000000854
+          },
+          "sqliteReads": {
+            "median": 0.16613599999982398,
+            "p95": 0.1989159999993717
+          },
+          "sqliteWrites": {
+            "median": 0.2615850000001956,
+            "p95": 0.47981199999958335
+          }
+        },
+        "heapDeltaBytes": {
+          "median": 7292296,
+          "p95": 7583384
+        },
+        "gcEvents": 22,
+        "gcMs": 904.3926940001547
+      },
+      {
+        "age": 10,
+        "kind": "fullYear",
+        "totalMs": {
+          "median": 48.26977900000202,
+          "p95": 108.40719700000045
+        },
+        "resolveMs": {
+          "median": 29.212628999997833,
+          "p95": 83.78521599999658
+        },
+        "commitMs": {
+          "median": 15.152658000002702,
+          "p95": 38.727810000003956
+        },
+        "phases": {
+          "copyWorld": {
+            "median": 0.8950670000012906,
+            "p95": 1.2885449999994307
+          },
+          "shapeParse": {
+            "median": 4.317337000000407,
+            "p95": 18.770323000000644
+          },
+          "freezing": {
+            "median": 1.0979210000004969,
+            "p95": 2.493975000001228
+          },
+          "validateWorld": {
+            "median": 18.907905999998547,
+            "p95": 73.41908099999637
+          },
+          "monthlySimulation": {
+            "median": 4.436732999995002,
+            "p95": 9.751504000003479
+          },
+          "annualSimulation": {
+            "median": 1.6655209999989893,
+            "p95": 16.512133000000176
+          },
+          "packCheckpoint": {
+            "median": 13.44900300000154,
+            "p95": 37.730892999999924
+          },
+          "sqliteTransaction": {
+            "median": 1.0665699999990466,
+            "p95": 3.6424499999993714
+          },
+          "sqliteReads": {
+            "median": 0.24568899999940186,
+            "p95": 2.8552700000036566
+          },
+          "sqliteWrites": {
+            "median": 0.36172500000066066,
+            "p95": 0.4673480000019481
+          }
+        },
+        "heapDeltaBytes": {
+          "median": 9603096,
+          "p95": 9862568
+        },
+        "gcEvents": 22,
+        "gcMs": 808.6926829998847
+      },
+      {
+        "age": 25,
+        "kind": "routine",
+        "totalMs": {
+          "median": 30.276373000000603,
+          "p95": 48.03972000000067
+        },
+        "resolveMs": {
+          "median": 14.929041999999754,
+          "p95": 26.390513999998802
+        },
+        "commitMs": {
+          "median": 14.813249999999243,
+          "p95": 22.15977500000008
+        },
+        "phases": {
+          "copyWorld": {
+            "median": 1.15948600000047,
+            "p95": 1.380831999998918
+          },
+          "shapeParse": {
+            "median": 5.811880999997811,
+            "p95": 10.038512999999512
+          },
+          "freezing": {
+            "median": 2.0316639999982726,
+            "p95": 2.846828000001551
+          },
+          "validateWorld": {
+            "median": 13.630200999999943,
+            "p95": 25.312974000000395
+          },
+          "monthlySimulation": {
+            "median": 0,
+            "p95": 0
+          },
+          "annualSimulation": {
+            "median": 0,
+            "p95": 0
+          },
+          "packCheckpoint": {
+            "median": 13.709328000000824,
+            "p95": 21.39910400000008
+          },
+          "sqliteTransaction": {
+            "median": 0.758161999998265,
+            "p95": 1.0872009999984584
+          },
+          "sqliteReads": {
+            "median": 0.26640100000440725,
+            "p95": 0.5785839999989548
+          },
+          "sqliteWrites": {
+            "median": 0.22296500000084052,
+            "p95": 0.5487469999970926
+          }
+        },
+        "heapDeltaBytes": {
+          "median": 6201920,
+          "p95": 6240360
+        },
+        "gcEvents": 33,
+        "gcMs": 1144.0091180000454
+      },
+      {
+        "age": 25,
+        "kind": "firstAgeUp",
+        "totalMs": {
+          "median": 63.07854600000064,
+          "p95": 168.95920000000478
+        },
+        "resolveMs": {
+          "median": 47.48559100000057,
+          "p95": 149.0533099999957
+        },
+        "commitMs": {
+          "median": 16.51507799999672,
+          "p95": 24.610262000001967
+        },
+        "phases": {
+          "copyWorld": {
+            "median": 1.0348329999978887,
+            "p95": 1.9013519999934942
+          },
+          "shapeParse": {
+            "median": 6.049488000004203,
+            "p95": 23.13142499999958
+          },
+          "freezing": {
+            "median": 1.327504000000772,
+            "p95": 2.025215000001481
+          },
+          "validateWorld": {
+            "median": 44.87080799999967,
+            "p95": 138.97717900000134
+          },
+          "monthlySimulation": {
+            "median": 1.127210999999079,
+            "p95": 1.3598410000013246
+          },
+          "annualSimulation": {
+            "median": 0,
+            "p95": 0
+          },
+          "packCheckpoint": {
+            "median": 15.201183999997738,
+            "p95": 23.35167200000069
+          },
+          "sqliteTransaction": {
+            "median": 1.2343259999979637,
+            "p95": 1.8684460000004037
+          },
+          "sqliteReads": {
+            "median": 0.32343399999808753,
+            "p95": 0.4636239999963436
+          },
+          "sqliteWrites": {
+            "median": 0.41462899999169167,
+            "p95": 0.8468720000091707
+          }
+        },
+        "heapDeltaBytes": {
+          "median": 8688400,
+          "p95": 8751696
+        },
+        "gcEvents": 44,
+        "gcMs": 1298.8297789995559
+      },
+      {
+        "age": 25,
+        "kind": "fullYear",
+        "totalMs": {
+          "median": 250.72961600000417,
+          "p95": 549.6640489999991
+        },
+        "resolveMs": {
+          "median": 158.6954409999962,
+          "p95": 454.3907679999975
+        },
+        "commitMs": {
+          "median": 93.9051089999848,
+          "p95": 101.92941900000733
+        },
+        "phases": {
+          "copyWorld": {
+            "median": 7.054153999997652,
+            "p95": 26.42594499999541
+          },
+          "shapeParse": {
+            "median": 37.43173899999965,
+            "p95": 109.61238800000865
+          },
+          "freezing": {
+            "median": 9.898517000001448,
+            "p95": 21.539550000001327
+          },
+          "validateWorld": {
+            "median": 134.86456399999588,
+            "p95": 411.0719719999979
+          },
+          "monthlySimulation": {
+            "median": 16.633184000005713,
+            "p95": 41.759221000014804
+          },
+          "annualSimulation": {
+            "median": 2.673116999998456,
+            "p95": 7.747820999997202
+          },
+          "packCheckpoint": {
+            "median": 82.2151509999967,
+            "p95": 95.12818499999412
+          },
+          "sqliteTransaction": {
+            "median": 6.025762000004761,
+            "p95": 24.377153000008548
+          },
+          "sqliteReads": {
+            "median": 1.501719999985653,
+            "p95": 2.7003639999966254
+          },
+          "sqliteWrites": {
+            "median": 1.636220999986108,
+            "p95": 3.7521019999985583
+          }
+        },
+        "heapDeltaBytes": {
+          "median": 41599952,
+          "p95": 46530736
+        },
+        "gcEvents": 55,
+        "gcMs": 2292.2226299999747
+      },
+      {
+        "age": 50,
+        "kind": "routine",
+        "totalMs": {
+          "median": 116.85130599999684,
+          "p95": 208.2281010000006
+        },
+        "resolveMs": {
+          "median": 73.74162899999646,
+          "p95": 114.73606799999834
+        },
+        "commitMs": {
+          "median": 49.14927300000272,
+          "p95": 94.62645199999679
+        },
+        "phases": {
+          "copyWorld": {
+            "median": 3.4546790000022156,
+            "p95": 12.39833599999838
+          },
+          "shapeParse": {
+            "median": 25.968425999992178,
+            "p95": 49.27415199999814
+          },
+          "freezing": {
+            "median": 5.822046000001137,
+            "p95": 13.943283999993582
+          },
+          "validateWorld": {
+            "median": 62.13003600000229,
+            "p95": 107.20104199998605
+          },
+          "monthlySimulation": {
+            "median": 0,
+            "p95": 0
+          },
+          "annualSimulation": {
+            "median": 0,
+            "p95": 0
+          },
+          "packCheckpoint": {
+            "median": 46.14914100000169,
+            "p95": 87.58733799999754
+          },
+          "sqliteTransaction": {
+            "median": 2.3700260000041453,
+            "p95": 32.183898000002955
+          },
+          "sqliteReads": {
+            "median": 0.5789740000036545,
+            "p95": 4.618484999999055
+          },
+          "sqliteWrites": {
+            "median": 0.6947159999836003,
+            "p95": 1.7213110000011511
+          }
+        },
+        "heapDeltaBytes": {
+          "median": 14985560,
+          "p95": 15849280
+        },
+        "gcEvents": 88,
+        "gcMs": 5043.160336000496
+      },
+      {
+        "age": 50,
+        "kind": "firstAgeUp",
+        "totalMs": {
+          "median": 245.70079599999008,
+          "p95": 3408.795800000007
+        },
+        "resolveMs": {
+          "median": 203.3883269999933,
+          "p95": 2797.2067370000004
+        },
+        "commitMs": {
+          "median": 46.27848300000187,
+          "p95": 611.5811349999858
+        },
+        "phases": {
+          "copyWorld": {
+            "median": 3.3405500000080792,
+            "p95": 15.487967000008211
+          },
+          "shapeParse": {
+            "median": 16.088552999994135,
+            "p95": 39.79126600000018
+          },
+          "freezing": {
+            "median": 5.535518999997294,
+            "p95": 45.39126099999703
+          },
+          "validateWorld": {
+            "median": 189.10864700001548,
+            "p95": 2634.203400000013
+          },
+          "monthlySimulation": {
+            "median": 13.779464999999618,
+            "p95": 116.93928700000106
+          },
+          "annualSimulation": {
+            "median": 2.484937000001082,
+            "p95": 30.476261999996495
+          },
+          "packCheckpoint": {
+            "median": 43.178218000000925,
+            "p95": 592.1939269999857
+          },
+          "sqliteTransaction": {
+            "median": 2.6481299999868497,
+            "p95": 19.348933999979636
+          },
+          "sqliteReads": {
+            "median": 0.5675259999989066,
+            "p95": 13.50620300002629
+          },
+          "sqliteWrites": {
+            "median": 1.026475999984541,
+            "p95": 5.150598000007449
+          }
+        },
+        "heapDeltaBytes": {
+          "median": 30421824,
+          "p95": 32063240
+        },
+        "gcEvents": 121,
+        "gcMs": 5063.761100000003
+      },
+      {
+        "age": 50,
+        "kind": "fullYear",
+        "totalMs": {
+          "median": 342.0607270000037,
+          "p95": 843.3854280000087
+        },
+        "resolveMs": {
+          "median": 292.3351880000264,
+          "p95": 538.0496820000117
+        },
+        "commitMs": {
+          "median": 74.58527300000424,
+          "p95": 305.3007019999786
+        },
+        "phases": {
+          "copyWorld": {
+            "median": 7.938166999985697,
+            "p95": 77.89795400001458
+          },
+          "shapeParse": {
+            "median": 29.518679000000702,
+            "p95": 78.05527700000675
+          },
+          "freezing": {
+            "median": 12.375116999988677,
+            "p95": 17.699110999994446
+          },
+          "validateWorld": {
+            "median": 255.75760300000547,
+            "p95": 353.26958600000944
+          },
+          "monthlySimulation": {
+            "median": 19.924752000020817,
+            "p95": 148.4590699999826
+          },
+          "annualSimulation": {
+            "median": 1.969807999994373,
+            "p95": 12.845541000016965
+          },
+          "packCheckpoint": {
+            "median": 68.68975099996896,
+            "p95": 300.69802299997536
+          },
+          "sqliteTransaction": {
+            "median": 5.239280999987386,
+            "p95": 13.312570000009146
+          },
+          "sqliteReads": {
+            "median": 0.9916089999605902,
+            "p95": 2.124714999983553
+          },
+          "sqliteWrites": {
+            "median": 1.7307670000009239,
+            "p95": 10.160054999985732
+          }
+        },
+        "heapDeltaBytes": {
+          "median": 45317464,
+          "p95": 45954600
+        },
+        "gcEvents": 121,
+        "gcMs": 4967.529751999769
+      },
+      {
+        "age": 70,
+        "kind": "routine",
+        "totalMs": {
+          "median": 72.35795700000017,
+          "p95": 122.69212400002289
+        },
+        "resolveMs": {
+          "median": 42.27912500000093,
+          "p95": 92.32803499998408
+        },
+        "commitMs": {
+          "median": 27.93929099998786,
+          "p95": 46.43471700002556
+        },
+        "phases": {
+          "copyWorld": {
+            "median": 3.3930530000070576,
+            "p95": 6.730130000010831
+          },
+          "shapeParse": {
+            "median": 14.54226600000402,
+            "p95": 47.47626399999717
+          },
+          "freezing": {
+            "median": 5.472825000004377,
+            "p95": 14.126611999992747
+          },
+          "validateWorld": {
+            "median": 38.73931399997673,
+            "p95": 85.4513829999778
+          },
+          "monthlySimulation": {
+            "median": 0,
+            "p95": 0
+          },
+          "annualSimulation": {
+            "median": 0,
+            "p95": 0
+          },
+          "packCheckpoint": {
+            "median": 24.63440000000992,
+            "p95": 42.997460999991745
+          },
+          "sqliteTransaction": {
+            "median": 3.4084420000144746,
+            "p95": 4.599557999987155
+          },
+          "sqliteReads": {
+            "median": 0.8941809999814723,
+            "p95": 1.3615739999804646
+          },
+          "sqliteWrites": {
+            "median": 1.248332000017399,
+            "p95": 1.9026399999856949
+          }
+        },
+        "heapDeltaBytes": {
+          "median": 22212032,
+          "p95": 22300184
+        },
+        "gcEvents": 132,
+        "gcMs": 4057.388865000452
+      },
+      {
+        "age": 70,
+        "kind": "firstAgeUp",
+        "totalMs": {
+          "median": 344.6895739999891,
+          "p95": 483.7905080000055
+        },
+        "resolveMs": {
+          "median": 288.41118299998925,
+          "p95": 394.88046000001486
+        },
+        "commitMs": {
+          "median": 52.83998199997586,
+          "p95": 110.29717999999411
+        },
+        "phases": {
+          "copyWorld": {
+            "median": 4.309538000001339,
+            "p95": 5.644228999997722
+          },
+          "shapeParse": {
+            "median": 21.546940000000177,
+            "p95": 41.52521100000013
+          },
+          "freezing": {
+            "median": 7.0935869999811985,
+            "p95": 15.026006000000052
+          },
+          "validateWorld": {
+            "median": 274.70990400001756,
+            "p95": 382.7326560000074
+          },
+          "monthlySimulation": {
+            "median": 7.721340000018245,
+            "p95": 13.430779000045732
+          },
+          "annualSimulation": {
+            "median": 0,
+            "p95": 0
+          },
+          "packCheckpoint": {
+            "median": 48.775565999996616,
+            "p95": 104.78466599999228
+          },
+          "sqliteTransaction": {
+            "median": 4.175591999955941,
+            "p95": 16.3910179999948
+          },
+          "sqliteReads": {
+            "median": 0.9317880000453442,
+            "p95": 1.0868630000040866
+          },
+          "sqliteWrites": {
+            "median": 1.8284229999408126,
+            "p95": 13.905093999987002
+          }
+        },
+        "heapDeltaBytes": {
+          "median": 42097424,
+          "p95": 42849368
+        },
+        "gcEvents": 198,
+        "gcMs": 6905.122302998789
+      },
+      {
+        "age": 70,
+        "kind": "fullYear",
+        "totalMs": {
+          "median": 468.49084199999925,
+          "p95": 489.3482400000212
+        },
+        "resolveMs": {
+          "median": 336.44390899996506,
+          "p95": 355.92001200001687
+        },
+        "commitMs": {
+          "median": 133.37165999994613,
+          "p95": 150.30844100000104
+        },
+        "phases": {
+          "copyWorld": {
+            "median": 12.969051000021864,
+            "p95": 20.312374999921303
+          },
+          "shapeParse": {
+            "median": 49.02696699992521,
+            "p95": 79.86800800001947
+          },
+          "freezing": {
+            "median": 19.2996840000269,
+            "p95": 22.879378999990877
+          },
+          "validateWorld": {
+            "median": 314.6844900000724,
+            "p95": 335.41968499997165
+          },
+          "monthlySimulation": {
+            "median": 6.630854999937583,
+            "p95": 10.289486999856308
+          },
+          "annualSimulation": {
+            "median": 1.4866540000075474,
+            "p95": 3.490369000006467
+          },
+          "packCheckpoint": {
+            "median": 114.98732799995923,
+            "p95": 128.6975149999489
+          },
+          "sqliteTransaction": {
+            "median": 17.33744100003969,
+            "p95": 22.380387000041083
+          },
+          "sqliteReads": {
+            "median": 3.4244610000168905,
+            "p95": 5.431070999999065
+          },
+          "sqliteWrites": {
+            "median": 6.125097999989521,
+            "p95": 6.756526000041049
+          }
+        },
+        "heapDeltaBytes": {
+          "median": 50578168,
+          "p95": 58452088
+        },
+        "gcEvents": 198,
+        "gcMs": 2924.8763809993397
+      },
+      {
+        "age": 90,
+        "kind": "routine",
+        "totalMs": {
+          "median": 92.42816499999026,
+          "p95": 126.59918799996376
+        },
+        "resolveMs": {
+          "median": 53.56051100004697,
+          "p95": 71.4951819999842
+        },
+        "commitMs": {
+          "median": 38.86702599999262,
+          "p95": 70.65270599996438
+        },
+        "phases": {
+          "copyWorld": {
+            "median": 3.6767990000080317,
+            "p95": 5.607165000052191
+          },
+          "shapeParse": {
+            "median": 16.85902299999725,
+            "p95": 38.26882300002035
+          },
+          "freezing": {
+            "median": 9.584481000027154,
+            "p95": 12.539583000005223
+          },
+          "validateWorld": {
+            "median": 48.73623300000327,
+            "p95": 67.55969700001879
+          },
+          "monthlySimulation": {
+            "median": 0,
+            "p95": 0
+          },
+          "annualSimulation": {
+            "median": 0,
+            "p95": 0
+          },
+          "packCheckpoint": {
+            "median": 35.425348999968264,
+            "p95": 62.23675199999707
+          },
+          "sqliteTransaction": {
+            "median": 3.4234149999683723,
+            "p95": 8.365336999995634
+          },
+          "sqliteReads": {
+            "median": 0.8315219999640249,
+            "p95": 3.2903370000422
+          },
+          "sqliteWrites": {
+            "median": 1.5331020000157878,
+            "p95": 2.2603450000169687
+          }
+        },
+        "heapDeltaBytes": {
+          "median": 29591576,
+          "p95": 29678344
+        },
+        "gcEvents": 176,
+        "gcMs": 3401.305663001258
+      },
+      {
+        "age": 90,
+        "kind": "firstAgeUp",
+        "totalMs": {
+          "median": 358.181510000024,
+          "p95": 839.6032450000057
+        },
+        "resolveMs": {
+          "median": 317.5053300000145,
+          "p95": 752.8472089999705
+        },
+        "commitMs": {
+          "median": 52.8082529999665,
+          "p95": 93.2123759999522
+        },
+        "phases": {
+          "copyWorld": {
+            "median": 4.759367999969982,
+            "p95": 18.36445900000399
+          },
+          "shapeParse": {
+            "median": 24.4329119999893,
+            "p95": 48.504888999974355
+          },
+          "freezing": {
+            "median": 12.389238999981899,
+            "p95": 22.23451899999054
+          },
+          "validateWorld": {
+            "median": 310.66899400000693,
+            "p95": 732.8926559999818
+          },
+          "monthlySimulation": {
+            "median": 2.069026999932248,
+            "p95": 9.478148999914993
+          },
+          "annualSimulation": {
+            "median": 0,
+            "p95": 0
+          },
+          "packCheckpoint": {
+            "median": 45.48361100000329,
+            "p95": 82.01988199999323
+          },
+          "sqliteTransaction": {
+            "median": 8.318227999960072,
+            "p95": 18.717612000007648
+          },
+          "sqliteReads": {
+            "median": 0.9903830000548624,
+            "p95": 5.745474999945145
+          },
+          "sqliteWrites": {
+            "median": 4.911269000032917,
+            "p95": 6.425719999941066
+          }
+        },
+        "heapDeltaBytes": {
+          "median": 47666336,
+          "p95": 48118072
+        },
+        "gcEvents": 253,
+        "gcMs": 5650.554840000463
+      },
+      {
+        "age": 90,
+        "kind": "fullYear",
+        "totalMs": {
+          "median": 1393.4322120000143,
+          "p95": 1980.201577000029
+        },
+        "resolveMs": {
+          "median": 844.2377849999466,
+          "p95": 1233.403961000091
+        },
+        "commitMs": {
+          "median": 540.0230410000077,
+          "p95": 746.7186709999805
+        },
+        "phases": {
+          "copyWorld": {
+            "median": 38.33277400006773,
+            "p95": 54.942831000022124
+          },
+          "shapeParse": {
+            "median": 123.87181099993177,
+            "p95": 161.4795639999793
+          },
+          "freezing": {
+            "median": 62.22311699995771,
+            "p95": 94.94396000000415
+          },
+          "validateWorld": {
+            "median": 793.6988949999213,
+            "p95": 1161.6475540000247
+          },
+          "monthlySimulation": {
+            "median": 9.765080999874044,
+            "p95": 25.633046999864746
+          },
+          "annualSimulation": {
+            "median": 1.8947700000135228,
+            "p95": 3.1716400000150315
+          },
+          "packCheckpoint": {
+            "median": 498.35602900001686,
+            "p95": 688.2196760000661
+          },
+          "sqliteTransaction": {
+            "median": 34.77974899997935,
+            "p95": 58.32686300011119
+          },
+          "sqliteReads": {
+            "median": 6.823854000016581,
+            "p95": 9.993129000009503
+          },
+          "sqliteWrites": {
+            "median": 11.664234000141732,
+            "p95": 22.119958999974187
+          }
+        },
+        "heapDeltaBytes": {
+          "median": 49262480,
+          "p95": 54383200
+        },
+        "gcEvents": 242,
+        "gcMs": 5671.932244001189
+      }
+    ],
+    "after": [
+      {
+        "age": 10,
+        "kind": "routine",
+        "totalMs": {
+          "median": 36.06314399999974,
+          "p95": 60.06822000000102
+        },
+        "resolveMs": {
+          "median": 15.206723999999667,
+          "p95": 47.86586899999929
+        },
+        "commitMs": {
+          "median": 13.135557999999946,
+          "p95": 45.664724000000206
+        },
+        "phases": {
+          "copyWorld": {
+            "median": 1.1366930000003777,
+            "p95": 9.413837000000058
+          },
+          "shapeParse": {
+            "median": 2.027932000000874,
+            "p95": 24.08340599999974
+          },
+          "freezing": {
+            "median": 0.043373000000428874,
+            "p95": 0.13377399999990303
+          },
+          "validateWorld": {
+            "median": 11.877244000001156,
+            "p95": 30.087079999999332
+          },
+          "monthlySimulation": {
+            "median": 0,
+            "p95": 0
+          },
+          "annualSimulation": {
+            "median": 0,
+            "p95": 0
+          },
+          "packCheckpoint": {
+            "median": 12.513606000000436,
+            "p95": 44.5986869999997
+          },
+          "sqliteTransaction": {
+            "median": 0.8136579999991227,
+            "p95": 1.4668280000005325
+          },
+          "sqliteReads": {
+            "median": 0.2530880000031175,
+            "p95": 0.5978689999992639
+          },
+          "sqliteWrites": {
+            "median": 0.2342530000005354,
+            "p95": 0.349765999999363
+          }
+        },
+        "heapDeltaBytes": {
+          "median": 2740888,
+          "p95": 2755096
+        },
+        "gcEvents": 5,
+        "gcMs": 623.1670840003062
+      },
+      {
+        "age": 10,
+        "kind": "firstAgeUp",
+        "totalMs": {
+          "median": 59.74453799999901,
+          "p95": 98.24186799999916
+        },
+        "resolveMs": {
+          "median": 35.65644400000019,
+          "p95": 73.90005399999973
+        },
+        "commitMs": {
+          "median": 22.106730999999854,
+          "p95": 26.086404999998194
+        },
+        "phases": {
+          "copyWorld": {
+            "median": 0.6326840000001539,
+            "p95": 1.365033999998559
+          },
+          "shapeParse": {
+            "median": 5.380630999999994,
+            "p95": 21.357686999999714
+          },
+          "freezing": {
+            "median": 0.6497860000017681,
+            "p95": 0.9975159999994503
+          },
+          "validateWorld": {
+            "median": 21.00996099999975,
+            "p95": 42.97514999999839
+          },
+          "monthlySimulation": {
+            "median": 13.814938000006805,
+            "p95": 29.957683999997244
+          },
+          "annualSimulation": {
+            "median": 1.928981000000931,
+            "p95": 5.153940999998667
+          },
+          "packCheckpoint": {
+            "median": 21.091604999999618,
+            "p95": 24.804478999998537
+          },
+          "sqliteTransaction": {
+            "median": 1.047946000000593,
+            "p95": 1.2614859999994223
+          },
+          "sqliteReads": {
+            "median": 0.23558799999955227,
+            "p95": 0.27773899999920104
+          },
+          "sqliteWrites": {
+            "median": 0.2531440000020666,
+            "p95": 0.45042999999895983
+          }
+        },
+        "heapDeltaBytes": {
+          "median": 7895488,
+          "p95": 8162880
+        },
+        "gcEvents": 10,
+        "gcMs": 698.7783219998237
+      },
+      {
+        "age": 10,
+        "kind": "fullYear",
+        "totalMs": {
+          "median": 57.30902399999832,
+          "p95": 72.51628100000016
+        },
+        "resolveMs": {
+          "median": 38.18410699999731,
+          "p95": 50.40784700000222
+        },
+        "commitMs": {
+          "median": 15.710870999999315,
+          "p95": 22.09135999999853
+        },
+        "phases": {
+          "copyWorld": {
+            "median": 1.3419599999979255,
+            "p95": 6.195435000005091
+          },
+          "shapeParse": {
+            "median": 6.6882059999989,
+            "p95": 7.882337999999436
+          },
+          "freezing": {
+            "median": 0.4776959999981045,
+            "p95": 1.5023269999983313
+          },
+          "validateWorld": {
+            "median": 22.30704699999842,
+            "p95": 40.32903200000146
+          },
+          "monthlySimulation": {
+            "median": 5.586192999999184,
+            "p95": 11.687594000002719
+          },
+          "annualSimulation": {
+            "median": 1.6632449999997334,
+            "p95": 2.6872309999998834
+          },
+          "packCheckpoint": {
+            "median": 13.300396000002365,
+            "p95": 20.28866100000232
+          },
+          "sqliteTransaction": {
+            "median": 1.7553030000017316,
+            "p95": 2.171061999997619
+          },
+          "sqliteReads": {
+            "median": 0.37114699999801815,
+            "p95": 0.6101910000033968
+          },
+          "sqliteWrites": {
+            "median": 0.41715499999554595,
+            "p95": 0.8079250000009779
+          }
+        },
+        "heapDeltaBytes": {
+          "median": 9835808,
+          "p95": 9898016
+        },
+        "gcEvents": 10,
+        "gcMs": 520.0713969997596
+      },
+      {
+        "age": 25,
+        "kind": "routine",
+        "totalMs": {
+          "median": 29.125270000000455,
+          "p95": 29.224464999999327
+        },
+        "resolveMs": {
+          "median": 12.907074999999168,
+          "p95": 13.403903999998874
+        },
+        "commitMs": {
+          "median": 15.811819000002288,
+          "p95": 16.883452000001853
+        },
+        "phases": {
+          "copyWorld": {
+            "median": 1.1309129999972356,
+            "p95": 4.726564000000508
+          },
+          "shapeParse": {
+            "median": 5.778129999998782,
+            "p95": 5.946241999998165
+          },
+          "freezing": {
+            "median": 0.048480000001291046,
+            "p95": 0.11775200000192854
+          },
+          "validateWorld": {
+            "median": 11.581838999998581,
+            "p95": 12.21517699999822
+          },
+          "monthlySimulation": {
+            "median": 0,
+            "p95": 0
+          },
+          "annualSimulation": {
+            "median": 0,
+            "p95": 0
+          },
+          "packCheckpoint": {
+            "median": 14.96268599999894,
+            "p95": 15.83068700000149
+          },
+          "sqliteTransaction": {
+            "median": 0.999840000000404,
+            "p95": 1.153415999997378
+          },
+          "sqliteReads": {
+            "median": 0.33828900000298745,
+            "p95": 0.46761899999910383
+          },
+          "sqliteWrites": {
+            "median": 0.2590879999988829,
+            "p95": 0.3865750000004482
+          }
+        },
+        "heapDeltaBytes": {
+          "median": 5752232,
+          "p95": 5759392
+        },
+        "gcEvents": 15,
+        "gcMs": 840.8778939996846
+      },
+      {
+        "age": 25,
+        "kind": "firstAgeUp",
+        "totalMs": {
+          "median": 76.88484199999948,
+          "p95": 96.50965799999904
+        },
+        "resolveMs": {
+          "median": 55.55714599999919,
+          "p95": 75.88515499999994
+        },
+        "commitMs": {
+          "median": 20.61387100000138,
+          "p95": 25.887681000000157
+        },
+        "phases": {
+          "copyWorld": {
+            "median": 0.9881090000017139,
+            "p95": 1.5093249999990803
+          },
+          "shapeParse": {
+            "median": 8.405271000003268,
+            "p95": 9.88333799999964
+          },
+          "freezing": {
+            "median": 1.8388429999977234,
+            "p95": 8.677455999997619
+          },
+          "validateWorld": {
+            "median": 53.61545300000216,
+            "p95": 73.94104399999924
+          },
+          "monthlySimulation": {
+            "median": 0.9600639999989653,
+            "p95": 1.4310930000028748
+          },
+          "annualSimulation": {
+            "median": 0,
+            "p95": 0
+          },
+          "packCheckpoint": {
+            "median": 18.10493199999837,
+            "p95": 23.540498000002117
+          },
+          "sqliteTransaction": {
+            "median": 2.3195379999997385,
+            "p95": 2.6103109999967273
+          },
+          "sqliteReads": {
+            "median": 0.5216489999984333,
+            "p95": 0.6412810000001627
+          },
+          "sqliteWrites": {
+            "median": 0.8608319999948435,
+            "p95": 1.1025429999972403
+          }
+        },
+        "heapDeltaBytes": {
+          "median": 9540488,
+          "p95": 9561712
+        },
+        "gcEvents": 20,
+        "gcMs": 1022.1670479991008
+      },
+      {
+        "age": 25,
+        "kind": "fullYear",
+        "totalMs": {
+          "median": 197.78197200000432,
+          "p95": 205.29133100000035
+        },
+        "resolveMs": {
+          "median": 115.22767199999362,
+          "p95": 129.40241099999548
+        },
+        "commitMs": {
+          "median": 70.1254470000058,
+          "p95": 82.49025800000527
+        },
+        "phases": {
+          "copyWorld": {
+            "median": 6.456533999997191,
+            "p95": 7.5466490000035265
+          },
+          "shapeParse": {
+            "median": 25.14201699999103,
+            "p95": 36.50142700001015
+          },
+          "freezing": {
+            "median": 3.5751749999981257,
+            "p95": 4.319906000004266
+          },
+          "validateWorld": {
+            "median": 94.40361000000848,
+            "p95": 107.37541800000326
+          },
+          "monthlySimulation": {
+            "median": 10.478173999996216,
+            "p95": 16.7448929999955
+          },
+          "annualSimulation": {
+            "median": 2.7436589999997523,
+            "p95": 4.563772000001336
+          },
+          "packCheckpoint": {
+            "median": 63.43546100000094,
+            "p95": 76.71561799999472
+          },
+          "sqliteTransaction": {
+            "median": 5.590783999985433,
+            "p95": 6.614405000000261
+          },
+          "sqliteReads": {
+            "median": 1.4961650000113877,
+            "p95": 1.8398749999905704
+          },
+          "sqliteWrites": {
+            "median": 1.4755009999862523,
+            "p95": 2.3588939999899594
+          }
+        },
+        "heapDeltaBytes": {
+          "median": 41782832,
+          "p95": 44456504
+        },
+        "gcEvents": 25,
+        "gcMs": 673.8873369991779
+      },
+      {
+        "age": 50,
+        "kind": "routine",
+        "totalMs": {
+          "median": 65.3670409999977,
+          "p95": 219.73150100000203
+        },
+        "resolveMs": {
+          "median": 31.26344600000448,
+          "p95": 174.2322090000016
+        },
+        "commitMs": {
+          "median": 37.11226300000271,
+          "p95": 45.05026799999905
+        },
+        "phases": {
+          "copyWorld": {
+            "median": 3.6122269999978016,
+            "p95": 9.024233999996795
+          },
+          "shapeParse": {
+            "median": 6.081350000000384,
+            "p95": 28.97763500000292
+          },
+          "freezing": {
+            "median": 0.07003700000495883,
+            "p95": 0.10823099999834085
+          },
+          "validateWorld": {
+            "median": 28.523646000001463,
+            "p95": 164.99986999999965
+          },
+          "monthlySimulation": {
+            "median": 0,
+            "p95": 0
+          },
+          "annualSimulation": {
+            "median": 0,
+            "p95": 0
+          },
+          "packCheckpoint": {
+            "median": 31.24367699999857,
+            "p95": 40.22097600000416
+          },
+          "sqliteTransaction": {
+            "median": 4.796694999997271,
+            "p95": 5.842685000003257
+          },
+          "sqliteReads": {
+            "median": 0.7653240000072401,
+            "p95": 4.671226000005845
+          },
+          "sqliteWrites": {
+            "median": 0.8128939999951399,
+            "p95": 1.135461000012583
+          }
+        },
+        "heapDeltaBytes": {
+          "median": 13798640,
+          "p95": 14592848
+        },
+        "gcEvents": 36,
+        "gcMs": 2906.2667669993825
+      },
+      {
+        "age": 50,
+        "kind": "firstAgeUp",
+        "totalMs": {
+          "median": 287.3497999999963,
+          "p95": 2548.2283310000057
+        },
+        "resolveMs": {
+          "median": 238.8449280000059,
+          "p95": 2390.8436819999915
+        },
+        "commitMs": {
+          "median": 48.49573999999848,
+          "p95": 157.37317099999927
+        },
+        "phases": {
+          "copyWorld": {
+            "median": 3.109268999993219,
+            "p95": 15.578034000005573
+          },
+          "shapeParse": {
+            "median": 17.876399999993737,
+            "p95": 273.85089299999527
+          },
+          "freezing": {
+            "median": 4.82850000000326,
+            "p95": 21.989283000002615
+          },
+          "validateWorld": {
+            "median": 191.0378869999986,
+            "p95": 2260.516386999996
+          },
+          "monthlySimulation": {
+            "median": 43.978220000019064,
+            "p95": 93.4261440000264
+          },
+          "annualSimulation": {
+            "median": 3.147179999999935,
+            "p95": 21.14884899999015
+          },
+          "packCheckpoint": {
+            "median": 45.26732300000731,
+            "p95": 114.25312400000985
+          },
+          "sqliteTransaction": {
+            "median": 3.194543000005069,
+            "p95": 43.03329700000177
+          },
+          "sqliteReads": {
+            "median": 0.5228389999974752,
+            "p95": 8.053057999990415
+          },
+          "sqliteWrites": {
+            "median": 1.2068700000090757,
+            "p95": 18.2358389999863
+          }
+        },
+        "heapDeltaBytes": {
+          "median": 32358832,
+          "p95": 33135240
+        },
+        "gcEvents": 55,
+        "gcMs": 4521.7235499981325
+      },
+      {
+        "age": 50,
+        "kind": "fullYear",
+        "totalMs": {
+          "median": 555.1740139999893,
+          "p95": 749.2269510000042
+        },
+        "resolveMs": {
+          "median": 458.86332800000673,
+          "p95": 621.9076020000066
+        },
+        "commitMs": {
+          "median": 96.23677499998303,
+          "p95": 127.20465699999477
+        },
+        "phases": {
+          "copyWorld": {
+            "median": 8.058642000003601,
+            "p95": 10.071266000013566
+          },
+          "shapeParse": {
+            "median": 48.664629999999306,
+            "p95": 70.35153400000127
+          },
+          "freezing": {
+            "median": 8.76518900001247,
+            "p95": 23.76912500000617
+          },
+          "validateWorld": {
+            "median": 424.77299699999276,
+            "p95": 590.4311640000087
+          },
+          "monthlySimulation": {
+            "median": 19.055538999993587,
+            "p95": 23.993768999993335
+          },
+          "annualSimulation": {
+            "median": 4.154208000007202,
+            "p95": 24.403653000015765
+          },
+          "packCheckpoint": {
+            "median": 88.42288499997812,
+            "p95": 118.99370099999942
+          },
+          "sqliteTransaction": {
+            "median": 7.742898000011337,
+            "p95": 9.391680999979144
+          },
+          "sqliteReads": {
+            "median": 1.6551129999570549,
+            "p95": 2.217728999996325
+          },
+          "sqliteWrites": {
+            "median": 3.2157460000016727,
+            "p95": 3.99200699996436
+          }
+        },
+        "heapDeltaBytes": {
+          "median": 44573096,
+          "p95": 45345928
+        },
+        "gcEvents": 55,
+        "gcMs": 3347.7144410007168
+      },
+      {
+        "age": 70,
+        "kind": "routine",
+        "totalMs": {
+          "median": 114.9968649999937,
+          "p95": 122.94788699998753
+        },
+        "resolveMs": {
+          "median": 64.90961599998991,
+          "p95": 78.77824600000167
+        },
+        "commitMs": {
+          "median": 44.13389699999243,
+          "p95": 55.44206800000393
+        },
+        "phases": {
+          "copyWorld": {
+            "median": 4.766040999995312,
+            "p95": 7.681781999999657
+          },
+          "shapeParse": {
+            "median": 9.333475999999791,
+            "p95": 22.409871999989264
+          },
+          "freezing": {
+            "median": 0.09594900000956841,
+            "p95": 0.10094699999899603
+          },
+          "validateWorld": {
+            "median": 59.87880600002245,
+            "p95": 73.85014799999772
+          },
+          "monthlySimulation": {
+            "median": 0,
+            "p95": 0
+          },
+          "annualSimulation": {
+            "median": 0,
+            "p95": 0
+          },
+          "packCheckpoint": {
+            "median": 40.7902260000119,
+            "p95": 50.71895099998801
+          },
+          "sqliteTransaction": {
+            "median": 3.398685000021942,
+            "p95": 4.687257999990834
+          },
+          "sqliteReads": {
+            "median": 0.9628779999911785,
+            "p95": 1.07326400000602
+          },
+          "sqliteWrites": {
+            "median": 1.0974379999970552,
+            "p95": 1.6490799999446608
+          }
+        },
+        "heapDeltaBytes": {
+          "median": 21076640,
+          "p95": 21079800
+        },
+        "gcEvents": 60,
+        "gcMs": 2508.806712000631
+      },
+      {
+        "age": 70,
+        "kind": "firstAgeUp",
+        "totalMs": {
+          "median": 341.3058439999877,
+          "p95": 831.7018709999975
+        },
+        "resolveMs": {
+          "median": 298.6268300000229,
+          "p95": 773.816221999994
+        },
+        "commitMs": {
+          "median": 54.683542999991914,
+          "p95": 57.874944000010146
+        },
+        "phases": {
+          "copyWorld": {
+            "median": 4.596652999985963,
+            "p95": 19.02003099999274
+          },
+          "shapeParse": {
+            "median": 19.991636999999173,
+            "p95": 75.2694649999903
+          },
+          "freezing": {
+            "median": 3.8693469999998342,
+            "p95": 5.614479999989271
+          },
+          "validateWorld": {
+            "median": 286.389668000018,
+            "p95": 732.0995089999924
+          },
+          "monthlySimulation": {
+            "median": 8.6656930000172,
+            "p95": 22.56831299996702
+          },
+          "annualSimulation": {
+            "median": 0,
+            "p95": 0
+          },
+          "packCheckpoint": {
+            "median": 49.71678800001973,
+            "p95": 53.3076230000006
+          },
+          "sqliteTransaction": {
+            "median": 5.23614500000258,
+            "p95": 5.857532000023639
+          },
+          "sqliteReads": {
+            "median": 0.841366000007838,
+            "p95": 1.3352869999944232
+          },
+          "sqliteWrites": {
+            "median": 2.1803149999759626,
+            "p95": 3.247098999971058
+          }
+        },
+        "heapDeltaBytes": {
+          "median": 41952248,
+          "p95": 42164320
+        },
+        "gcEvents": 85,
+        "gcMs": 2615.76350899972
+      },
+      {
+        "age": 70,
+        "kind": "fullYear",
+        "totalMs": {
+          "median": 541.7568699999829,
+          "p95": 1181.0334440000006
+        },
+        "resolveMs": {
+          "median": 430.84143400000175,
+          "p95": 502.4402560000017
+        },
+        "commitMs": {
+          "median": 114.69016399999964,
+          "p95": 678.2165719999466
+        },
+        "phases": {
+          "copyWorld": {
+            "median": 21.86259400000563,
+            "p95": 55.947495000000345
+          },
+          "shapeParse": {
+            "median": 44.95285899998271,
+            "p95": 58.37572299997555
+          },
+          "freezing": {
+            "median": 12.588133000012022,
+            "p95": 15.992532000003848
+          },
+          "validateWorld": {
+            "median": 388.80661200001487,
+            "p95": 450.3512009999831
+          },
+          "monthlySimulation": {
+            "median": 7.136254999961238,
+            "p95": 19.528067000035662
+          },
+          "annualSimulation": {
+            "median": 2.1580900000117254,
+            "p95": 3.0245470000081696
+          },
+          "packCheckpoint": {
+            "median": 94.71853000001283,
+            "p95": 332.14048099998035
+          },
+          "sqliteTransaction": {
+            "median": 19.859708000003593,
+            "p95": 345.1879740000004
+          },
+          "sqliteReads": {
+            "median": 4.078404000058072,
+            "p95": 261.30843400000595
+          },
+          "sqliteWrites": {
+            "median": 6.418287000036798,
+            "p95": 30.672900000063237
+          }
+        },
+        "heapDeltaBytes": {
+          "median": 36143392,
+          "p95": 44297752
+        },
+        "gcEvents": 85,
+        "gcMs": 1963.8119990015402
+      },
+      {
+        "age": 90,
+        "kind": "routine",
+        "totalMs": {
+          "median": 128.2870919999841,
+          "p95": 169.62590899999486
+        },
+        "resolveMs": {
+          "median": 71.56899800000247,
+          "p95": 84.7263619999867
+        },
+        "commitMs": {
+          "median": 64.35939500000677,
+          "p95": 84.65707600000314
+        },
+        "phases": {
+          "copyWorld": {
+            "median": 7.920517999998992,
+            "p95": 19.524795000004815
+          },
+          "shapeParse": {
+            "median": 9.506213999993633,
+            "p95": 15.715786999993725
+          },
+          "freezing": {
+            "median": 0.08238300000084564,
+            "p95": 0.09030100001837127
+          },
+          "validateWorld": {
+            "median": 61.86787900002673,
+            "p95": 80.38884499997948
+          },
+          "monthlySimulation": {
+            "median": 0,
+            "p95": 0
+          },
+          "annualSimulation": {
+            "median": 0,
+            "p95": 0
+          },
+          "packCheckpoint": {
+            "median": 57.343777000001865,
+            "p95": 72.78030399998534
+          },
+          "sqliteTransaction": {
+            "median": 6.889502999983961,
+            "p95": 11.83676900001592
+          },
+          "sqliteReads": {
+            "median": 1.793454999977257,
+            "p95": 2.801999999996042
+          },
+          "sqliteWrites": {
+            "median": 3.646344999986468,
+            "p95": 6.5690819999726955
+          }
+        },
+        "heapDeltaBytes": {
+          "median": 27832104,
+          "p95": 28100952
+        },
+        "gcEvents": 80,
+        "gcMs": 2631.322233001236
+      },
+      {
+        "age": 90,
+        "kind": "firstAgeUp",
+        "totalMs": {
+          "median": 321.856410999957,
+          "p95": 1307.8477399999974
+        },
+        "resolveMs": {
+          "median": 286.17045699997107,
+          "p95": 1123.868317000015
+        },
+        "commitMs": {
+          "median": 38.5910520000034,
+          "p95": 183.61908099998254
+        },
+        "phases": {
+          "copyWorld": {
+            "median": 4.4795869999798015,
+            "p95": 23.32126500000595
+          },
+          "shapeParse": {
+            "median": 18.54259899997851,
+            "p95": 69.25951400000486
+          },
+          "freezing": {
+            "median": 4.008860000001732,
+            "p95": 41.32873799998197
+          },
+          "validateWorld": {
+            "median": 281.27072899998166,
+            "p95": 1087.2883529999817
+          },
+          "monthlySimulation": {
+            "median": 2.151551999966614,
+            "p95": 12.407363000005716
+          },
+          "annualSimulation": {
+            "median": 0,
+            "p95": 0
+          },
+          "packCheckpoint": {
+            "median": 32.4491299999645,
+            "p95": 150.8182969999907
+          },
+          "sqliteTransaction": {
+            "median": 6.104036000033375,
+            "p95": 32.52834299998358
+          },
+          "sqliteReads": {
+            "median": 1.130202999978792,
+            "p95": 8.460828999988735
+          },
+          "sqliteWrites": {
+            "median": 2.801138999988325,
+            "p95": 14.58901799999876
+          }
+        },
+        "heapDeltaBytes": {
+          "median": 46929496,
+          "p95": 47911192
+        },
+        "gcEvents": 110,
+        "gcMs": 2522.1159120006487
+      },
+      {
+        "age": 90,
+        "kind": "fullYear",
+        "totalMs": {
+          "median": 1511.7705579999601,
+          "p95": 2078.91606899997
+        },
+        "resolveMs": {
+          "median": 1064.1642239999492,
+          "p95": 1520.2897590000066
+        },
+        "commitMs": {
+          "median": 447.3627170000109,
+          "p95": 558.1154020000831
+        },
+        "phases": {
+          "copyWorld": {
+            "median": 44.59985900000902,
+            "p95": 78.78285200003302
+          },
+          "shapeParse": {
+            "median": 146.84761499991873,
+            "p95": 200.4273080001003
+          },
+          "freezing": {
+            "median": 31.70698600000469,
+            "p95": 43.46601600002032
+          },
+          "validateWorld": {
+            "median": 1003.3299019999104,
+            "p95": 1434.9208510000026
+          },
+          "monthlySimulation": {
+            "median": 11.577086000004783,
+            "p95": 19.089193000050727
+          },
+          "annualSimulation": {
+            "median": 1.8356800000183284,
+            "p95": 7.369884999992792
+          },
+          "packCheckpoint": {
+            "median": 401.4471730000223,
+            "p95": 489.6921320000547
+          },
+          "sqliteTransaction": {
+            "median": 45.55783300002804,
+            "p95": 67.90270999999484
+          },
+          "sqliteReads": {
+            "median": 9.216103999991901,
+            "p95": 15.067560000054073
+          },
+          "sqliteWrites": {
+            "median": 14.788261999783572,
+            "p95": 25.914619999937713
+          }
+        },
+        "heapDeltaBytes": {
+          "median": 85496176,
+          "p95": 88517520
+        },
+        "gcEvents": 111,
+        "gcMs": 2892.349580001086
+      }
+    ]
+  },
+  "verification": {
+    "suites": 8,
+    "tests": [
+      {
+        "file": "tests/persistence/tuple-checkpoints.test.ts",
+        "tests": 20
+      },
+      {
+        "file": "tests/persistence/restored-action-cache.test.ts",
+        "tests": 6
+      },
+      {
+        "file": "tests/persistence/native-people-block-archive.test.ts",
+        "tests": 2
+      },
+      {
+        "file": "tests/persistence/action-checkpoints.test.ts",
+        "tests": 8
+      },
+      {
+        "file": "tests/persistence/responsive-archive.test.ts",
+        "tests": 1
+      },
+      {
+        "file": "tests/persistence/repository.test.ts",
+        "tests": 9
+      },
+      {
+        "file": "tests/game/certified-branches.test.ts",
+        "tests": 12
+      },
+      {
+        "file": "tests/persistence/certified-json-cache.test.ts",
+        "tests": 2
+      }
+    ],
+    "failed": 0,
+    "typecheckPassed": true,
+    "sourceStableDuringBothFinalBenchmarks": true,
+    "allOldFixturesUnchanged": true,
+    "fullSuiteDeferredToIntegratedRoot": true,
+    "logs": {
+      "dreams-final-perf-integrity-final2.json": {
+        "sha256": "88af9be336619abf518585d0bfc7fa192f84f44febd4d94821e4649d4eccf555"
+      },
+      "dreams-final-perf-json-cache-tests.json": {
+        "sha256": "8c0eaf8611f197d4fe08be2bdb96a02281db397ae0ad37a5a388b2359335692f"
+      },
+      "dreams-final-perf-typecheck-verified.log": {
+        "sha256": "543932f7a867cac23b25fe5912a2a0b0ab563539fbb8a121f7fb83b608c95309"
+      },
+      "dreams-final-perf-reproduction.log": {
+        "sha256": "3d02229a5be95247725e890669aee7d63c88c00f4e6a77ced3605a182687f38c"
+      }
+    }
+  },
+  "limits": [
+    "Shared cloud CPU/memory load causes large tails, including GC; eleven pairs are a small diagnostic cohort, not a device population.",
+    "Ordinary actions improve; first Age Up chunks and some younger full-year cases are mixed. No uniform percentage or worst-case guarantee.",
+    "No Android/iOS release-device tap latency, real frame stalls, native SQLite bridge, React publication, peak RSS or battery measurement here. UI agent supplies separate React/journal evidence.",
+    "Full integrity traversal and copying remain. An exploratory age70 first Age Up profile still spent about25–35ms rebuilding its ledger index; this is recorded as a remaining cost, not an implemented optimisation."
+  ]
+}

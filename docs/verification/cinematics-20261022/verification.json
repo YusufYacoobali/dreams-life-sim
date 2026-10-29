@@ -1,0 +1,95 @@
+{
+  "date": "2026-10-22",
+  "branch": "work",
+  "motionTimingsMs": {
+    "welcome": 2600,
+    "birth": 1500,
+    "death": 1800
+  },
+  "focusedChecks": {
+    "suites": 4,
+    "tests": 12,
+    "result": "passed"
+  },
+  "feedbackSettingsRecheck": {
+    "tests": 16,
+    "result": "passed"
+  },
+  "historicalPolicyRecheck": {
+    "tests": 5,
+    "result": "passed"
+  },
+  "typecheck": "passed",
+  "nativeExports": [
+    {
+      "platform": "ios",
+      "file": "entry-3214ec6c5510ad97129a1a7bb466752d.hbc",
+      "bytes": 7499770,
+      "sha256": "6cd08d8c80dee99424167c5c9ed2cd39816ffd67e2854b806c4c7cce2a62cf05"
+    },
+    {
+      "platform": "android",
+      "file": "entry-ba21d2addc99d3eebad7304029393dd5.hbc",
+      "bytes": 7704616,
+      "sha256": "935ed495c68eef9c1ab005fc3277efce8d8a8d826c7ffe13bcd9f411e24e19e4"
+    }
+  ],
+  "sdkCompatibility": "installed versions match Expo 57 bundled module metadata; offline expo install --check passed",
+  "nativeSplashIntrospection": {
+    "androidBackground": "#061633",
+    "iosStoryboardNamedColor": [
+      {
+        "$": {
+          "name": "SplashScreenBackground"
+        },
+        "color": [
+          {
+            "$": {
+              "alpha": "1.000",
+              "blue": "0.200000000000000",
+              "green": "0.0862745098039216",
+              "red": "0.0235294117647059",
+              "customColorSpace": "sRGB",
+              "colorSpace": "custom"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "renderedReview": {
+    "renderer": "Chromium, real CinematicInk/Reanimated and existing screen components, read-only fixture adapter",
+    "viewports": [
+      "320x568",
+      "400x900",
+      "768x1024"
+    ],
+    "browserAnimationSampling": [
+      {
+        "cpuThrottle": 1,
+        "frames": 167,
+        "medianMs": 16.7,
+        "p95Ms": 16.7,
+        "framesOver34ms": 0
+      },
+      {
+        "cpuThrottle": 4,
+        "frames": 166,
+        "medianMs": 16.7,
+        "p95Ms": 16.7,
+        "framesOver34ms": 0
+      }
+    ]
+  },
+  "nativeDevicePlayback": "not run",
+  "physicalDevicePerformance": "not measured",
+  "gameStatePersistenceEngineRngChanges": false,
+  "regression": {
+    "result": "passed",
+    "completedSuites": 233,
+    "execution": "153 completed suites from broad run; remaining 80 suites passed in a separate run, including rechecks of the two initial failures",
+    "excludedSuite": "tests/game/engine.test.ts",
+    "excludedReason": "Interrupted the long-running 12-complete-life engine soak; engine source is unchanged",
+    "completedSuitePathsSha256": "5e71716c30a3de92595e9272974f9c396128ecb9520ef228b428b19cd0412049"
+  }
+}

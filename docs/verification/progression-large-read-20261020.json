@@ -1,0 +1,40 @@
+{
+  "scope": "Five warm cloud Node progress-view reads of the unchanged actual natural year91 fixture. Not action/save timings, physical p95 or a paired performance comparison. Native VM active elsewhere; host-sensitive diagnostics.",
+  "fixture": "tests/fixtures/v30-family-year91-checkpoint.json",
+  "fixtureSha256": "00941dcb880910e2156e86280ea0e2b8b3198b623902ae2ad340c182830793cb",
+  "people": 36,
+  "ledgerRows": 63304,
+  "allWorldFieldsUnchanged": true,
+  "samples": [
+    {
+      "ms": 5.7983540000000175,
+      "achievements": 40,
+      "challenges": 12,
+      "earned": 5
+    },
+    {
+      "ms": 4.102324999999837,
+      "achievements": 40,
+      "challenges": 12,
+      "earned": 5
+    },
+    {
+      "ms": 3.550496000000294,
+      "achievements": 40,
+      "challenges": 12,
+      "earned": 5
+    },
+    {
+      "ms": 2.932217000000037,
+      "achievements": 40,
+      "challenges": 12,
+      "earned": 5
+    },
+    {
+      "ms": 2.5235529999999926,
+      "achievements": 40,
+      "challenges": 12,
+      "earned": 5
+    }
+  ]
+}

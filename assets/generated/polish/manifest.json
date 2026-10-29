@@ -1,0 +1,473 @@
+{
+  "generator": "built-in image_gen.imagegen only",
+  "reference": "assets/generated/activity-atlas.png",
+  "sources": [
+    {
+      "file": "design/polish/event-icons.png",
+      "sha256": "e32b0c63bd7f15b9241bc40b63da8158a440ace2f0ea9908aa5dc68f115195fc",
+      "sprites": [
+        {
+          "id": "toys",
+          "rect": [
+            17,
+            36,
+            374,
+            358
+          ]
+        },
+        {
+          "id": "mischief",
+          "rect": [
+            382,
+            38,
+            709,
+            369
+          ]
+        },
+        {
+          "id": "school-life",
+          "rect": [
+            721,
+            46,
+            1048,
+            367
+          ]
+        },
+        {
+          "id": "friends",
+          "rect": [
+            1049,
+            60,
+            1448,
+            361
+          ]
+        },
+        {
+          "id": "family-life",
+          "rect": [
+            23,
+            391,
+            390,
+            731
+          ]
+        },
+        {
+          "id": "surprise",
+          "rect": [
+            389,
+            401,
+            719,
+            715
+          ]
+        },
+        {
+          "id": "everyday",
+          "rect": [
+            720,
+            416,
+            1081,
+            704
+          ]
+        },
+        {
+          "id": "health-check",
+          "rect": [
+            1093,
+            402,
+            1423,
+            717
+          ]
+        },
+        {
+          "id": "life-star",
+          "rect": [
+            44,
+            742,
+            356,
+            1041
+          ]
+        },
+        {
+          "id": "archive",
+          "rect": [
+            379,
+            719,
+            712,
+            1044
+          ]
+        },
+        {
+          "id": "settings",
+          "rect": [
+            755,
+            728,
+            1059,
+            1043
+          ]
+        },
+        {
+          "id": "loan",
+          "rect": [
+            1100,
+            738,
+            1422,
+            1042
+          ]
+        }
+      ]
+    },
+    {
+      "file": "design/polish/pet-icons.png",
+      "sha256": "1684fa04e7b4c6a58103adfd43880ae8863393f173e857e44831e883006ba9a1",
+      "sprites": [
+        {
+          "id": "pet-cat",
+          "rect": [
+            14,
+            24,
+            322,
+            391
+          ]
+        },
+        {
+          "id": "pet-dog",
+          "rect": [
+            369,
+            15,
+            700,
+            391
+          ]
+        },
+        {
+          "id": "pet-rabbit",
+          "rect": [
+            761,
+            23,
+            1074,
+            407
+          ]
+        },
+        {
+          "id": "pet-bird",
+          "rect": [
+            1127,
+            24,
+            1434,
+            419
+          ]
+        },
+        {
+          "id": "pet-feed",
+          "rect": [
+            12,
+            455,
+            354,
+            699
+          ]
+        },
+        {
+          "id": "pet-vet",
+          "rect": [
+            383,
+            412,
+            712,
+            703
+          ]
+        },
+        {
+          "id": "pet-play",
+          "rect": [
+            739,
+            470,
+            1080,
+            709
+          ]
+        },
+        {
+          "id": "pet-training",
+          "rect": [
+            1089,
+            421,
+            1437,
+            703
+          ]
+        },
+        {
+          "id": "pet-memorial",
+          "rect": [
+            8,
+            733,
+            360,
+            1052
+          ]
+        },
+        {
+          "id": "pet-walk",
+          "rect": [
+            369,
+            728,
+            713,
+            1055
+          ]
+        },
+        {
+          "id": "pet-bed",
+          "rect": [
+            703,
+            743,
+            1095,
+            1086
+          ]
+        },
+        {
+          "id": "pet-adoption",
+          "rect": [
+            1085,
+            710,
+            1448,
+            1068
+          ]
+        }
+      ]
+    }
+  ],
+  "icons": {
+    "toys": {
+      "file": "toys.png",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 82483,
+      "sha256": "31157b43692e25e135ecbd3a5c07156401e3892a6c40b3dda831d89b3b81e81b",
+      "sourceSheet": "design/action-icons/symbols.png",
+      "sourceRect": [
+        661,
+        14,
+        922,
+        322
+      ]
+    },
+    "mischief": {
+      "file": "mischief.png",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 71871,
+      "sha256": "2593246c84c268f05039ce04db674d6bc73a30bf538073b7da84b3eafe365811"
+    },
+    "school-life": {
+      "file": "school-life.png",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 86520,
+      "sha256": "38026e325eba55ea86de72d3dc2472f7e7ec60af896b54a9174e779552104718"
+    },
+    "friends": {
+      "file": "friends.png",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 71353,
+      "sha256": "ead791394a170cfd4996d412e02fea2204b4ad8bc708cf4071880ff2fc6124d2"
+    },
+    "family-life": {
+      "file": "family-life.png",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 93079,
+      "sha256": "f97dfe4a976964fdf17f1478e972a01a253fc60628e5b871ddd2e6ac74bcc56c"
+    },
+    "surprise": {
+      "file": "surprise.png",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 76420,
+      "sha256": "75dc0a2bf6ed5e5a413057a4871e15999093696f5a4f17dbe2967685abd83d85"
+    },
+    "everyday": {
+      "file": "everyday.png",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 58439,
+      "sha256": "f684292a9784e7c9999bcb0644b5d66d24983d8c6ee377242ef168a903a58a08",
+      "sourceSheet": "design/action-icons/symbols.png",
+      "sourceRect": [
+        37,
+        60,
+        323,
+        297
+      ]
+    },
+    "health-check": {
+      "file": "health-check.png",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 84564,
+      "sha256": "89aa48904d4b55ea8f957dc336cd8ac4277065011d56926f3ea3d79fc88d6668"
+    },
+    "life-star": {
+      "file": "life-star.png",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 67202,
+      "sha256": "68e2c38b10fc990b60fb98bb77034579317be4324210584a780f625a9a5ce402"
+    },
+    "archive": {
+      "file": "archive.png",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 77195,
+      "sha256": "0f67adfb9350cfa5d43eddd486bd4225574c68dfed29c62ab9a4dec711cd2936"
+    },
+    "settings": {
+      "file": "settings.png",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 75519,
+      "sha256": "1e672ed7a06bde0215513fb492fa93da76bde4f06a987f71456d4f20fb49521a"
+    },
+    "loan": {
+      "file": "loan.png",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 78690,
+      "sha256": "2b5974f029a2250b2a41f2f4c1d77ec461e54c38dcbf0706601fe32ac7685e83"
+    },
+    "pet-cat": {
+      "file": "pet-cat.png",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 79224,
+      "sha256": "d86158a55c6f693e8343bd9ba91e07658b7f1653c5e095f7d09936647a82698d"
+    },
+    "pet-dog": {
+      "file": "pet-dog.png",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 84694,
+      "sha256": "bc2b8eea9e77c3fd63ab8aa909c2897d174a77de186cf748cafeab5c61887cb8"
+    },
+    "pet-rabbit": {
+      "file": "pet-rabbit.png",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 55111,
+      "sha256": "d34953302808e78fbfe162fc7b13605ea53c2ee60de5d4dd47bf296875c2d4f9"
+    },
+    "pet-bird": {
+      "file": "pet-bird.png",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 65898,
+      "sha256": "78f43152737398b0b270f6033e208e45f560a1293f553fbaf1f328726f93b7e7"
+    },
+    "pet-feed": {
+      "file": "pet-feed.png",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 57582,
+      "sha256": "9edbe9dc9433e6eb2a22fc73f13095d2e248a6ad6abf08d282a9deb87ff22230"
+    },
+    "pet-vet": {
+      "file": "pet-vet.png",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 77803,
+      "sha256": "a71024aa8074a2ada1b6c461abde0fa8f85154ab5995b13c87af35c084604f3b"
+    },
+    "pet-play": {
+      "file": "pet-play.png",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 59774,
+      "sha256": "3d0407de6424a81aac863f0805153e10c1e8b76d7d3d13a7e2b07b22fceede33"
+    },
+    "pet-training": {
+      "file": "pet-training.png",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 65747,
+      "sha256": "1c831577875379780a29ea82cf2185123c54b88c1413221df7149154c2fa59b0",
+      "sourceSheet": "design/action-icons/symbols.png",
+      "sourceRect": [
+        336,
+        61,
+        612,
+        299
+      ]
+    },
+    "pet-memorial": {
+      "file": "pet-memorial.png",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 77742,
+      "sha256": "97311758a89001e437f94845caabfea6a173b58039498a0753bcca8b1503df3d"
+    },
+    "pet-walk": {
+      "file": "pet-walk.png",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 85752,
+      "sha256": "3994450e304b75e2bbcc24fd1dc8686db6587d81e098988b5c5e49c2caf40030"
+    },
+    "pet-bed": {
+      "file": "pet-bed.png",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 65140,
+      "sha256": "99dd6915fcb80e9cd6ca2d1ae02476df929fdcb203dc0852605b0c94b48a19c6"
+    },
+    "pet-adoption": {
+      "file": "pet-adoption.png",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 80804,
+      "sha256": "a4b16091225d96428664f0e6f3e6eccd325807a64e0c01090028721cc1c6c44d"
+    }
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "format": "dreams-c39-actual-sequence-publication-source-bridge-v1",
+  "actualRunSourceCommit": "33b6a5fcb0aae73dfc235a15394b34d8afda00cc",
+  "publicationBaseCommit": "63a03c97166d5a45d997dd94f7bb5b9533297bf7",
+  "method": "Read immutable Git ls-tree blob IDs for both commits and compare the complete 335 app/src path sets; hash the one differing file. No game/world/policy module or test was executed.",
+  "actualRunSourceManifest": {
+    "file": "accepted-source.json",
+    "files": 688,
+    "sha256": "2e08fd925c673437ff7de7c76c0fd79d02832617d0014efc1c3e471782fe9b56"
+  },
+  "appSrcComparison": {
+    "filesAtEachCommit": 335,
+    "identicalFiles": 334,
+    "addedPaths": [],
+    "removedPaths": [],
+    "changedFiles": [
+      {
+        "path": "src/ui/components.tsx",
+        "actualRun": {
+          "mode": "100644",
+          "gitBlob": "5796fed462554791e02de5a20f1b5a437d575387",
+          "bytes": 8350,
+          "sha256": "947aafd656a74675b64fd0dadeb0735583e4ac1cdc0b30b73599b454bfa5df4b"
+        },
+        "publicationBase": {
+          "mode": "100644",
+          "gitBlob": "c4fe1e6dbd881e3c4ac6c1b9b45e2852df629caf",
+          "bytes": 9024,
+          "sha256": "6fbcd3002eb9055dcf59bb4350bc9d9039d2d3fe5dd47167156f6fa2b5886834"
+        }
+      }
+    ],
+    "actualRunGitTreeListingSha256": "24992b82abc03ae60ae2486d71d62f99313f998d516a46379d19f8a0564ee7f5",
+    "publicationBaseGitTreeListingSha256": "6b6cb6c3bb7018ded613bdfee67dd824112309adebac9d7093e9921e677baf15"
+  },
+  "gameSubtree": {
+    "path": "src/game",
+    "actualRunGitTree": "e4d010e1ab83372e1da8c5e3b96ed7dbf0d7c7cb",
+    "publicationBaseGitTree": "e4d010e1ab83372e1da8c5e3b96ed7dbf0d7c7cb",
+    "identical": true
+  },
+  "ledgerManifestScope": "The 335-file current-source-pins.json belongs to the original corrected source-ledger candidate d4da6b5. It is retained unchanged as historical source-review evidence, not relabelled as an exact335-file map of this later UI publication base.",
+  "limits": [
+    "Actual sequence reports remain attributed to 33b; no native/UI acceptance is inferred from game subtree equality.",
+    "The 688-file actual-run manifest is preserved exactly, not regenerated for a later checkout.",
+    "Docs-only publication does not alter runtime, tests, fixtures, gallery captures, old reviewer data or original ledger rows."
+  ]
+}

@@ -1,0 +1,616 @@
+{
+  "scope": "React Native Web render of production Welcome/OpeningScene; controlled read-only saved-world fixture, router and icon-font adapters; 2x text metrics approximate native font scaling, not device evidence",
+  "sourceHashes": {
+    "app/index.tsx": "152dfeb2ad045e264c405bdcd98b02d823aab9f7bf999aceef5f52e36211e832",
+    "src/ui/OpeningScene.tsx": "8b45961ddfdb17b91dadda537dada0116b2d5334b2e595c39a5bf4639c58ef6e",
+    "app/_layout.tsx": "c1e13efe3cb8308b91a549285a487c64da729588de5812fc843303c5c2409063",
+    "src/ui/cinematic/CinematicTransition.tsx": "9a130aa275d55508bfea212af4a8d18dfc446a1fbff5bf7f500195a82228cc05",
+    "src/ui/cinematic/CinematicInk.tsx": "37210cb5d32982a5031201efcc3df3d40e3c2060d50e9e74405e1cebed121b40",
+    "package-lock.json": "763a61aeed652d3d25f00090aa187ea86ac9e968ef926c750ffb58d4b7fb6adb"
+  },
+  "results": [
+    {
+      "id": "new-phone",
+      "width": 390,
+      "height": 844,
+      "state": "new",
+      "appearance": "light",
+      "bounds": [
+        {
+          "label": "Help",
+          "x": 330,
+          "y": 28,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "label": "Start New Life",
+          "x": 24,
+          "y": 558.15625,
+          "width": 342,
+          "height": 56
+        },
+        {
+          "label": "Random Life",
+          "x": 24,
+          "y": 626.15625,
+          "width": 342,
+          "height": 48
+        }
+      ],
+      "interactions": [
+        "start",
+        "random",
+        "help"
+      ],
+      "routes": [
+        {
+          "pathname": "/new-life",
+          "params": {
+            "seed": "42",
+            "mode": "custom"
+          }
+        },
+        {
+          "pathname": "/new-life",
+          "params": {
+            "seed": "42",
+            "mode": "random"
+          }
+        },
+        "/help"
+      ],
+      "errors": []
+    },
+    {
+      "id": "returning-phone",
+      "width": 390,
+      "height": 844,
+      "state": "returning",
+      "appearance": "dark",
+      "bounds": [
+        {
+          "label": "Help",
+          "x": 330,
+          "y": 28,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "label": "Continue Life as Leonardo Ricci",
+          "x": 24,
+          "y": 523.15625,
+          "width": 342,
+          "height": 56
+        },
+        {
+          "label": "Start New Life",
+          "x": 24,
+          "y": 591.15625,
+          "width": 342,
+          "height": 58
+        },
+        {
+          "label": "Random Life",
+          "x": 24,
+          "y": 661.15625,
+          "width": 342,
+          "height": 48
+        }
+      ],
+      "interactions": [
+        "continue",
+        "start",
+        "random",
+        "help"
+      ],
+      "routes": [
+        "/life",
+        {
+          "pathname": "/new-life",
+          "params": {
+            "seed": "42",
+            "mode": "custom"
+          }
+        },
+        {
+          "pathname": "/new-life",
+          "params": {
+            "seed": "42",
+            "mode": "random"
+          }
+        },
+        "/help"
+      ],
+      "errors": []
+    },
+    {
+      "id": "new-small",
+      "width": 320,
+      "height": 568,
+      "state": "new",
+      "appearance": "light",
+      "bounds": [
+        {
+          "label": "Help",
+          "x": 260,
+          "y": 28,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "label": "Start New Life",
+          "x": 24,
+          "y": 385.828125,
+          "width": 272,
+          "height": 56
+        },
+        {
+          "label": "Random Life",
+          "x": 24,
+          "y": 453.828125,
+          "width": 272,
+          "height": 48
+        }
+      ],
+      "interactions": [
+        "start",
+        "random",
+        "help"
+      ],
+      "routes": [
+        {
+          "pathname": "/new-life",
+          "params": {
+            "seed": "42",
+            "mode": "custom"
+          }
+        },
+        {
+          "pathname": "/new-life",
+          "params": {
+            "seed": "42",
+            "mode": "random"
+          }
+        },
+        "/help"
+      ],
+      "errors": []
+    },
+    {
+      "id": "returning-small",
+      "width": 320,
+      "height": 568,
+      "state": "returning",
+      "appearance": "dark",
+      "bounds": [
+        {
+          "label": "Help",
+          "x": 260,
+          "y": 28,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "label": "Continue Life as Leonardo Ricci",
+          "x": 24,
+          "y": 363.65625,
+          "width": 272,
+          "height": 56
+        },
+        {
+          "label": "Start New Life",
+          "x": 24,
+          "y": 431.65625,
+          "width": 272,
+          "height": 58
+        },
+        {
+          "label": "Random Life",
+          "x": 24,
+          "y": 501.65625,
+          "width": 272,
+          "height": 48
+        }
+      ],
+      "interactions": [
+        "continue",
+        "start",
+        "random",
+        "help"
+      ],
+      "routes": [
+        "/life",
+        {
+          "pathname": "/new-life",
+          "params": {
+            "seed": "42",
+            "mode": "custom"
+          }
+        },
+        {
+          "pathname": "/new-life",
+          "params": {
+            "seed": "42",
+            "mode": "random"
+          }
+        },
+        "/help"
+      ],
+      "errors": []
+    },
+    {
+      "id": "returning-tall",
+      "width": 430,
+      "height": 932,
+      "state": "returning",
+      "appearance": "light",
+      "bounds": [
+        {
+          "label": "Help",
+          "x": 370,
+          "y": 28,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "label": "Continue Life as Leonardo Ricci",
+          "x": 35,
+          "y": 567.15625,
+          "width": 360,
+          "height": 56
+        },
+        {
+          "label": "Start New Life",
+          "x": 35,
+          "y": 635.15625,
+          "width": 360,
+          "height": 58
+        },
+        {
+          "label": "Random Life",
+          "x": 35,
+          "y": 705.15625,
+          "width": 360,
+          "height": 48
+        }
+      ],
+      "interactions": [
+        "continue",
+        "start",
+        "random",
+        "help"
+      ],
+      "routes": [
+        "/life",
+        {
+          "pathname": "/new-life",
+          "params": {
+            "seed": "42",
+            "mode": "custom"
+          }
+        },
+        {
+          "pathname": "/new-life",
+          "params": {
+            "seed": "42",
+            "mode": "random"
+          }
+        },
+        "/help"
+      ],
+      "errors": []
+    },
+    {
+      "id": "new-tablet",
+      "width": 768,
+      "height": 1024,
+      "state": "new",
+      "appearance": "light",
+      "bounds": [
+        {
+          "label": "Help",
+          "x": 708,
+          "y": 28,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "label": "Start New Life",
+          "x": 204,
+          "y": 648.15625,
+          "width": 360,
+          "height": 56
+        },
+        {
+          "label": "Random Life",
+          "x": 204,
+          "y": 716.15625,
+          "width": 360,
+          "height": 48
+        }
+      ],
+      "interactions": [
+        "start",
+        "random",
+        "help"
+      ],
+      "routes": [
+        {
+          "pathname": "/new-life",
+          "params": {
+            "seed": "42",
+            "mode": "custom"
+          }
+        },
+        {
+          "pathname": "/new-life",
+          "params": {
+            "seed": "42",
+            "mode": "random"
+          }
+        },
+        "/help"
+      ],
+      "errors": []
+    },
+    {
+      "id": "returning-tablet",
+      "width": 1024,
+      "height": 1366,
+      "state": "returning",
+      "appearance": "dark",
+      "bounds": [
+        {
+          "label": "Help",
+          "x": 964,
+          "y": 28,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "label": "Continue Life as Leonardo Ricci",
+          "x": 332,
+          "y": 784.15625,
+          "width": 360,
+          "height": 56
+        },
+        {
+          "label": "Start New Life",
+          "x": 332,
+          "y": 852.15625,
+          "width": 360,
+          "height": 58
+        },
+        {
+          "label": "Random Life",
+          "x": 332,
+          "y": 922.15625,
+          "width": 360,
+          "height": 48
+        }
+      ],
+      "interactions": [
+        "continue",
+        "start",
+        "random",
+        "help"
+      ],
+      "routes": [
+        "/life",
+        {
+          "pathname": "/new-life",
+          "params": {
+            "seed": "42",
+            "mode": "custom"
+          }
+        },
+        {
+          "pathname": "/new-life",
+          "params": {
+            "seed": "42",
+            "mode": "random"
+          }
+        },
+        "/help"
+      ],
+      "errors": []
+    },
+    {
+      "id": "returning-large-text",
+      "width": 320,
+      "height": 568,
+      "state": "returning",
+      "appearance": "dark",
+      "fontScale": 2,
+      "bounds": [
+        {
+          "label": "Help",
+          "x": 260,
+          "y": 28,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "label": "Continue Life as Leonardo Ricci",
+          "x": 24,
+          "y": 449.65625,
+          "width": 272,
+          "height": 128
+        },
+        {
+          "label": "Start New Life",
+          "x": 24,
+          "y": 589.65625,
+          "width": 272,
+          "height": 82
+        },
+        {
+          "label": "Random Life",
+          "x": 24,
+          "y": 683.65625,
+          "width": 272,
+          "height": 72
+        }
+      ],
+      "interactions": [
+        "continue",
+        "start",
+        "random",
+        "help"
+      ],
+      "routes": [
+        "/life",
+        {
+          "pathname": "/new-life",
+          "params": {
+            "seed": "42",
+            "mode": "custom"
+          }
+        },
+        {
+          "pathname": "/new-life",
+          "params": {
+            "seed": "42",
+            "mode": "random"
+          }
+        },
+        "/help"
+      ],
+      "errors": []
+    },
+    {
+      "id": "new-large-text",
+      "width": 390,
+      "height": 844,
+      "state": "new",
+      "appearance": "light",
+      "fontScale": 2,
+      "bounds": [
+        {
+          "label": "Help",
+          "x": 330,
+          "y": 28,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "label": "Start New Life",
+          "x": 24,
+          "y": 542.828125,
+          "width": 342,
+          "height": 80
+        },
+        {
+          "label": "Random Life",
+          "x": 24,
+          "y": 634.828125,
+          "width": 342,
+          "height": 72
+        }
+      ],
+      "interactions": [
+        "start",
+        "random",
+        "help"
+      ],
+      "routes": [
+        {
+          "pathname": "/new-life",
+          "params": {
+            "seed": "42",
+            "mode": "custom"
+          }
+        },
+        {
+          "pathname": "/new-life",
+          "params": {
+            "seed": "42",
+            "mode": "random"
+          }
+        },
+        "/help"
+      ],
+      "errors": []
+    },
+    {
+      "id": "loading-phone",
+      "width": 390,
+      "height": 844,
+      "state": "loading",
+      "appearance": "dark",
+      "bounds": [
+        {
+          "label": "Help",
+          "x": 330,
+          "y": 28,
+          "width": 44,
+          "height": 44
+        }
+      ],
+      "interactions": [],
+      "routes": [],
+      "errors": []
+    },
+    {
+      "id": "error-phone",
+      "width": 390,
+      "height": 844,
+      "state": "error",
+      "appearance": "light",
+      "bounds": [
+        {
+          "label": "Help",
+          "x": 330,
+          "y": 28,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "label": "Try Again",
+          "x": 41,
+          "y": 544.65625,
+          "width": 308,
+          "height": 50
+        },
+        {
+          "label": "Start New Life",
+          "x": 24,
+          "y": 623.65625,
+          "width": 342,
+          "height": 56
+        },
+        {
+          "label": "Random Life",
+          "x": 24,
+          "y": 691.65625,
+          "width": 342,
+          "height": 48
+        }
+      ],
+      "interactions": [
+        "start",
+        "random",
+        "help"
+      ],
+      "routes": [
+        {
+          "pathname": "/new-life",
+          "params": {
+            "seed": "42",
+            "mode": "custom"
+          }
+        },
+        {
+          "pathname": "/new-life",
+          "params": {
+            "seed": "42",
+            "mode": "random"
+          }
+        },
+        "/help"
+      ],
+      "errors": []
+    }
+  ]
+}

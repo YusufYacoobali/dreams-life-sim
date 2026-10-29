@@ -1,0 +1,29 @@
+{
+  "recordedOn": "2026-10-19",
+  "baseCommit": "3b5d961",
+  "scope": "Life journal UI only; list follows initial measurement and new facts, manual dragging stops follow; game and persistence source unchanged",
+  "source": {
+    "app/(game)/(tabs)/life.tsx": "ee8228bc67343fa3c9cc2849f61509f57af8b8c7444e9a47a04117fad13426ef"
+  },
+  "verification": {
+    "tests": 13,
+    "suites": 4,
+    "seconds": 6.479,
+    "strictApplicationAndTestTypes": true,
+    "nativeLayoutEstablishedByActualCaptures": true,
+    "completeRegression": "1,226 tests / 80 suites at e5a4aaf; no new whole-suite total"
+  },
+  "exports": [
+    {
+      "file": "_expo/static/js/android/entry-c3e670ce1ec7234519ead8ed9a098a94.hbc",
+      "bytes": 5310586,
+      "sha256": "41c5d8e4bd0416bebc6a50e9c30510550f9181d06c399445c30e908dffc7d828"
+    },
+    {
+      "file": "_expo/static/js/ios/entry-aea7ce85b53736ce0d5d47cad667035d.hbc",
+      "bytes": 5005310,
+      "sha256": "56cb22e1329e7c6ade96306eb046572b51b19070411980842e48118bde238b54"
+    }
+  ],
+  "unchangedGameAndPersistenceSourceHash": "cca2039afee12cf05ff902cb6fc1ef3228777d90fd498fffdf91c63a381e8d30"
+}

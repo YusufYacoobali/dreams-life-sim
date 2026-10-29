@@ -1,0 +1,183 @@
+{
+  "scope": "Read-only actual captured current checkpoint observation; no command or future outcome executed.",
+  "sourceCommit": "a4be96ee1e60ab073fbbd2ae95d0ee2d0ee6f361",
+  "id": "life_native_adult_friend_v30_s0",
+  "revision": 145,
+  "versions": [
+    36,
+    37,
+    12
+  ],
+  "date": {
+    "year": 2050,
+    "month": 10,
+    "day": 20
+  },
+  "birthAcknowledged": true,
+  "person": {
+    "id": "person_player",
+    "name": "Nia Carter",
+    "born": {
+      "year": 2026,
+      "month": 10,
+      "day": 20
+    },
+    "appearance": {
+      "face": 2,
+      "skin": 3,
+      "hair": 5,
+      "hairColor": 2
+    },
+    "education": {
+      "stage": "university",
+      "field": "computing",
+      "school": "New York University",
+      "months": 0,
+      "requiredMonths": 48,
+      "grades": 74,
+      "effort": "balanced",
+      "funding": "cash",
+      "tuition": "1400000n",
+      "tuitionPaidMonths": 12,
+      "paused": false,
+      "qualifications": [
+        {
+          "level": "secondary",
+          "field": "general",
+          "year": 2044
+        }
+      ],
+      "lastStudyYear": null
+    },
+    "employment": null
+  },
+  "pending": {
+    "kind": "result",
+    "id": "action_144",
+    "title": "You’re enrolled",
+    "body": "You accepted the offered place and the reviewed first year is funded. Future annual tuition needs funding while you study; scholarship renewal requirements apply. Living costs and existing debt are separate.",
+    "illustration": "education",
+    "effects": [
+      {
+        "id": "tuition",
+        "label": "First-year tuition billed",
+        "value": "$14,000.00",
+        "tone": "negative"
+      }
+    ]
+  },
+  "annual": null,
+  "universityApplications": [
+    {
+      "id": "admission_person_player_142_0",
+      "personId": "person_player",
+      "policyVersion": 1,
+      "field": "computing",
+      "country": "US",
+      "city": "New York",
+      "school": "New York University",
+      "currency": "USD",
+      "annualTuition": "1400000n",
+      "requiredMonths": 48,
+      "applied": {
+        "year": 2050,
+        "month": 10,
+        "day": 20
+      },
+      "grades": 74,
+      "smarts": 71,
+      "roll": 2,
+      "chance": 93,
+      "status": "enrolled",
+      "transitions": [
+        {
+          "date": {
+            "year": 2050,
+            "month": 10,
+            "day": 20
+          },
+          "status": "accepted"
+        },
+        {
+          "date": {
+            "year": 2050,
+            "month": 10,
+            "day": 20
+          },
+          "status": "enrolled"
+        }
+      ],
+      "reviewDue": null,
+      "review": null,
+      "offered": {
+        "year": 2050,
+        "month": 10,
+        "day": 20
+      },
+      "expires": {
+        "year": 2051,
+        "month": 10,
+        "day": 20
+      },
+      "ended": {
+        "year": 2050,
+        "month": 10,
+        "day": 20
+      },
+      "enrolment": {
+        "date": {
+          "year": 2050,
+          "month": 10,
+          "day": 20
+        },
+        "funding": "cash",
+        "scholarshipId": null,
+        "billed": "1400000n",
+        "waived": "0n",
+        "transactionId": "txn_144_8392",
+        "loanTransactionId": null,
+        "loanInterestBps": null
+      }
+    }
+  ],
+  "studyCourses": [
+    {
+      "id": "study_person_player_144_0",
+      "personId": "person_player",
+      "origin": "enrolment",
+      "status": "active",
+      "program": "university",
+      "field": "computing",
+      "school": "New York University",
+      "country": "US",
+      "city": "New York",
+      "currency": "USD",
+      "recorded": {
+        "year": 2050,
+        "month": 10,
+        "day": 20
+      },
+      "started": {
+        "year": 2050,
+        "month": 10,
+        "day": 20
+      },
+      "ended": null,
+      "months": 0,
+      "requiredMonths": 48,
+      "grades": 74,
+      "funding": "cash",
+      "annualTuition": "1400000n",
+      "tuitionPaidMonths": 12,
+      "admissionId": "admission_person_player_142_0",
+      "firstPayment": {
+        "funding": "cash",
+        "scholarshipId": null,
+        "billed": "1400000n",
+        "waived": "0n",
+        "transactionId": "txn_144_8392",
+        "loanTransactionId": null
+      }
+    }
+  ]
+}

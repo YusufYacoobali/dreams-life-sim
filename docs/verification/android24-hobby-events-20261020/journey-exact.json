@@ -1,0 +1,435 @@
+{
+  "scope": "Actual Android24 software emulator / official ExpoGo57.0.9. Existing Nia22 native117, real reading routine and normal paid year, natural pet death/interruption, hobby scene, reviewed relaxed club entry, cold result, acknowledgement and read-only history. No native SQL/world/date/funds/RNG edits or imports. Not native birth-to-event, physical latency, standalone or iOS acceptance.",
+  "baseCommit": "2a2ea82a491f264f56ab02c14ab3095c8dc0bdc0",
+  "lifeId": "life_native_adult_friend_v30_s0",
+  "versions": {
+    "world": 31,
+    "engine": 32,
+    "content": 8,
+    "database": 11,
+    "checkpoint": "v4"
+  },
+  "initialRevision": 117,
+  "phases": [
+    {
+      "phase": "before",
+      "revision": 117,
+      "worldSha256": "db88755cd41408db29ab62f96fc313fb915c1dc30bb0b8d57781e59d06f5c347",
+      "pending": null,
+      "annual": null,
+      "attendedMonths": 0,
+      "events": [],
+      "allSixInactiveLivesAndBackupsExact": true,
+      "all58OriginalMomentsMetadataAnd102ReceiptsExact": true,
+      "allEightTablesExact": true,
+      "lives": 7,
+      "moments": 58,
+      "receipts": 102
+    },
+    {
+      "phase": "browsed",
+      "revision": 117,
+      "worldSha256": "db88755cd41408db29ab62f96fc313fb915c1dc30bb0b8d57781e59d06f5c347",
+      "pending": null,
+      "annual": null,
+      "attendedMonths": 0,
+      "events": [],
+      "allSixInactiveLivesAndBackupsExact": true,
+      "all58OriginalMomentsMetadataAnd102ReceiptsExact": true,
+      "allEightTablesExact": true,
+      "lives": 7,
+      "moments": 58,
+      "receipts": 102
+    },
+    {
+      "phase": "planned",
+      "revision": 118,
+      "worldSha256": "cebe0301705a2fe6daad04db3a9c0417f5f22d9a772277288821a4e452105467",
+      "pending": "Your routine is arranged",
+      "annual": null,
+      "attendedMonths": 0,
+      "events": [],
+      "allSixInactiveLivesAndBackupsExact": true,
+      "all58OriginalMomentsMetadataAnd102ReceiptsExact": true,
+      "lives": 7,
+      "moments": 58,
+      "receipts": 103
+    },
+    {
+      "phase": "planned-ack",
+      "revision": 119,
+      "worldSha256": "85fa51aa1fb4e0c51e0b4db0ebac89ae969657e4e0857cf55a78be448f017a4e",
+      "pending": null,
+      "annual": null,
+      "attendedMonths": 0,
+      "events": [],
+      "allSixInactiveLivesAndBackupsExact": true,
+      "all58OriginalMomentsMetadataAnd102ReceiptsExact": true,
+      "lives": 7,
+      "moments": 58,
+      "receipts": 104
+    },
+    {
+      "phase": "bereavement",
+      "revision": 120,
+      "worldSha256": "2ead37615b7e5b157d236b3eca54db993aeb831a0f9026901791278ddbd5c41b",
+      "pending": "Goodbye, Buddy",
+      "annual": {
+        "id": "year_119",
+        "startDate": {
+          "year": 2048,
+          "month": 10,
+          "day": 20
+        },
+        "targetDate": {
+          "year": 2049,
+          "month": 10,
+          "day": 20
+        },
+        "monthsProcessed": 11,
+        "stage": "months",
+        "pausedForPlanning": true
+      },
+      "attendedMonths": 11,
+      "events": [],
+      "allSixInactiveLivesAndBackupsExact": true,
+      "all58OriginalMomentsMetadataAnd102ReceiptsExact": true,
+      "lives": 7,
+      "moments": 59,
+      "receipts": 105
+    },
+    {
+      "phase": "annual",
+      "revision": 121,
+      "worldSha256": "7c74a82d98c082f396f53067b24971688b19e5496f9b7b5a30e7928d239c064d",
+      "pending": null,
+      "annual": {
+        "id": "year_119",
+        "startDate": {
+          "year": 2048,
+          "month": 10,
+          "day": 20
+        },
+        "targetDate": {
+          "year": 2049,
+          "month": 10,
+          "day": 20
+        },
+        "monthsProcessed": 11,
+        "stage": "months",
+        "pausedForPlanning": true
+      },
+      "attendedMonths": 11,
+      "events": [],
+      "allSixInactiveLivesAndBackupsExact": true,
+      "all58OriginalMomentsMetadataAnd102ReceiptsExact": true,
+      "lives": 7,
+      "moments": 59,
+      "receipts": 106
+    },
+    {
+      "phase": "scene",
+      "revision": 122,
+      "worldSha256": "8ba1a527f90e613de5d08dc906b9cf865878726ad211fef5608af99068b6efb2",
+      "pending": "Your name is on the list",
+      "annual": {
+        "id": "year_119",
+        "startDate": {
+          "year": 2048,
+          "month": 10,
+          "day": 20
+        },
+        "targetDate": {
+          "year": 2049,
+          "month": 10,
+          "day": 20
+        },
+        "monthsProcessed": 12,
+        "stage": "complete",
+        "pausedForPlanning": false
+      },
+      "attendedMonths": 12,
+      "events": [],
+      "allSixInactiveLivesAndBackupsExact": true,
+      "all58OriginalMomentsMetadataAnd102ReceiptsExact": true,
+      "lives": 7,
+      "moments": 59,
+      "receipts": 107
+    },
+    {
+      "phase": "scene-choice",
+      "revision": 123,
+      "worldSha256": "f8ea98272444c5fa7204d76edb178b828f987be6e5a3186f07ff59f367b17b9a",
+      "pending": "The intended performer appears",
+      "annual": {
+        "id": "year_119",
+        "startDate": {
+          "year": 2048,
+          "month": 10,
+          "day": 20
+        },
+        "targetDate": {
+          "year": 2049,
+          "month": 10,
+          "day": 20
+        },
+        "monthsProcessed": 12,
+        "stage": "complete",
+        "pausedForPlanning": false
+      },
+      "attendedMonths": 12,
+      "events": [],
+      "allSixInactiveLivesAndBackupsExact": true,
+      "all58OriginalMomentsMetadataAnd102ReceiptsExact": true,
+      "lives": 7,
+      "moments": 59,
+      "receipts": 108
+    },
+    {
+      "phase": "ready",
+      "revision": 124,
+      "worldSha256": "95f72f6bd0930434974e8a81852cf31aa731ed0ed9cd37124286c2443088eab0",
+      "pending": null,
+      "annual": null,
+      "attendedMonths": 12,
+      "events": [],
+      "allSixInactiveLivesAndBackupsExact": true,
+      "all58OriginalMomentsMetadataAnd102ReceiptsExact": true,
+      "lives": 7,
+      "moments": 59,
+      "receipts": 109
+    },
+    {
+      "phase": "large-ready",
+      "revision": 124,
+      "worldSha256": "95f72f6bd0930434974e8a81852cf31aa731ed0ed9cd37124286c2443088eab0",
+      "pending": null,
+      "annual": null,
+      "attendedMonths": 12,
+      "events": [],
+      "allSixInactiveLivesAndBackupsExact": true,
+      "all58OriginalMomentsMetadataAnd102ReceiptsExact": true,
+      "allEightTablesExact": true,
+      "lives": 7,
+      "moments": 59,
+      "receipts": 109
+    },
+    {
+      "phase": "entry",
+      "revision": 125,
+      "worldSha256": "5c2b78d9d83c48f92b89f09b4cd3fee0bfd874f898bf3403c0d4a3365c405084",
+      "pending": "Part of the club",
+      "annual": null,
+      "attendedMonths": 12,
+      "events": [
+        {
+          "kind": "reading",
+          "approach": "relaxed",
+          "paid": "400",
+          "currency": "USD",
+          "payerId": "person_player",
+          "recognized": false,
+          "roll": 78,
+          "chance": 59,
+          "effects": [
+            {
+              "stat": "energy",
+              "before": 98,
+              "after": 94
+            },
+            {
+              "stat": "happiness",
+              "before": 96,
+              "after": 100
+            },
+            {
+              "stat": "stress",
+              "before": 0,
+              "after": 0
+            },
+            {
+              "stat": "respect",
+              "before": 82,
+              "after": 82
+            }
+          ]
+        }
+      ],
+      "allSixInactiveLivesAndBackupsExact": true,
+      "all58OriginalMomentsMetadataAnd102ReceiptsExact": true,
+      "lives": 7,
+      "moments": 59,
+      "receipts": 110
+    },
+    {
+      "phase": "cold-entry",
+      "revision": 125,
+      "worldSha256": "5c2b78d9d83c48f92b89f09b4cd3fee0bfd874f898bf3403c0d4a3365c405084",
+      "pending": "Part of the club",
+      "annual": null,
+      "attendedMonths": 12,
+      "events": [
+        {
+          "kind": "reading",
+          "approach": "relaxed",
+          "paid": "400",
+          "currency": "USD",
+          "payerId": "person_player",
+          "recognized": false,
+          "roll": 78,
+          "chance": 59,
+          "effects": [
+            {
+              "stat": "energy",
+              "before": 98,
+              "after": 94
+            },
+            {
+              "stat": "happiness",
+              "before": 96,
+              "after": 100
+            },
+            {
+              "stat": "stress",
+              "before": 0,
+              "after": 0
+            },
+            {
+              "stat": "respect",
+              "before": 82,
+              "after": 82
+            }
+          ]
+        }
+      ],
+      "allSixInactiveLivesAndBackupsExact": true,
+      "all58OriginalMomentsMetadataAnd102ReceiptsExact": true,
+      "allEightTablesExact": true,
+      "lives": 7,
+      "moments": 59,
+      "receipts": 110
+    },
+    {
+      "phase": "final",
+      "revision": 126,
+      "worldSha256": "88247f0799070f77ceed1d036e97c3f196e83fefbd284dda4409db7c82697c2d",
+      "pending": null,
+      "annual": null,
+      "attendedMonths": 12,
+      "events": [
+        {
+          "kind": "reading",
+          "approach": "relaxed",
+          "paid": "400",
+          "currency": "USD",
+          "payerId": "person_player",
+          "recognized": false,
+          "roll": 78,
+          "chance": 59,
+          "effects": [
+            {
+              "stat": "energy",
+              "before": 98,
+              "after": 94
+            },
+            {
+              "stat": "happiness",
+              "before": 96,
+              "after": 100
+            },
+            {
+              "stat": "stress",
+              "before": 0,
+              "after": 0
+            },
+            {
+              "stat": "respect",
+              "before": 82,
+              "after": 82
+            }
+          ]
+        }
+      ],
+      "allSixInactiveLivesAndBackupsExact": true,
+      "all58OriginalMomentsMetadataAnd102ReceiptsExact": true,
+      "lives": 7,
+      "moments": 59,
+      "receipts": 111
+    },
+    {
+      "phase": "browsed-final",
+      "revision": 126,
+      "worldSha256": "88247f0799070f77ceed1d036e97c3f196e83fefbd284dda4409db7c82697c2d",
+      "pending": null,
+      "annual": null,
+      "attendedMonths": 12,
+      "events": [
+        {
+          "kind": "reading",
+          "approach": "relaxed",
+          "paid": "400",
+          "currency": "USD",
+          "payerId": "person_player",
+          "recognized": false,
+          "roll": 78,
+          "chance": 59,
+          "effects": [
+            {
+              "stat": "energy",
+              "before": 98,
+              "after": 94
+            },
+            {
+              "stat": "happiness",
+              "before": 96,
+              "after": 100
+            },
+            {
+              "stat": "stress",
+              "before": 0,
+              "after": 0
+            },
+            {
+              "stat": "respect",
+              "before": 82,
+              "after": 82
+            }
+          ]
+        }
+      ],
+      "allSixInactiveLivesAndBackupsExact": true,
+      "all58OriginalMomentsMetadataAnd102ReceiptsExact": true,
+      "allEightTablesExact": true,
+      "lives": 7,
+      "moments": 59,
+      "receipts": 111
+    }
+  ],
+  "final": {
+    "revision": 126,
+    "age": 23,
+    "lives": 7,
+    "moments": 59,
+    "receipts": 111,
+    "reading": {
+      "attendedMonths": 12,
+      "proficiency": 24,
+      "paid": "9600",
+      "monthlyFee": "800",
+      "payerId": "person_player",
+      "currency": "USD"
+    },
+    "entry": {
+      "kind": "reading",
+      "approach": "relaxed",
+      "paid": "400",
+      "currency": "USD",
+      "recognized": false
+    },
+    "paidWorkMonths": 48,
+    "annualGross": "3360000"
+  },
+  "originalFontScale": "1.0",
+  "largeTextFontScale": "1.3",
+  "restoredFontScale": "1.0"
+}

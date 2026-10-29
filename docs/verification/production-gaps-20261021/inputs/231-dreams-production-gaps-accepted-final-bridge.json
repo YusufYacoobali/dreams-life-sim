@@ -1,0 +1,19 @@
+{
+  "complete": true,
+  "fromCommit": "a4be96ee1e60ab073fbbd2ae95d0ee2d0ee6f361",
+  "toCommit": "85f6ff8637ba3de9d0f04421307419b1d9609864",
+  "sourcePins": 656,
+  "changed": [
+    "tests/game/story-lifecycle.test.ts",
+    "tests/game/story-name-collisions.test.ts",
+    "tests/ui/adult-relationship-story-flow.test.tsx",
+    "tests/ui/childhood-story-flow.test.tsx",
+    "tests/ui/ordinary-hobby-flow.test.tsx",
+    "tests/ui/story-consequence-labels-flow.test.tsx",
+    "tests/ui/student-loan-rate-flow.test.tsx",
+    "tests/ui/workplace-story-flow.test.tsx"
+  ],
+  "unchangedGameSourceHash": "16ab454678ced7a223f1d6c3b6079ea6ac338dfaa11824b13fdb8edcc8ad0b3d",
+  "unchangedGamePersistenceSourceHash": "c98f5ccef419042d820b377f36201ce1f4f63a479525ca943e865d77007ca9a5",
+  "scope": "Only eight reviewed stale acceptance tests differ. All application, source, assets, configuration, drivers and original fixtures are byte-exact; actual native/build/annual observations retain their original frozen-source scope."
+}

@@ -1,0 +1,161 @@
+"""Root-only later C37 action gate. Preparation does not execute this program.
+
+No ADB, signals, process termination, pause or resume operations are performed.
+Root must first stop the app and close its exact QEMU/Metro and heavy gates.
+"""
+import argparse
+import datetime as dt
+import hashlib
+import json
+import math
+import os
+from pathlib import Path
+import re
+import subprocess
+import time
+
+DRIVER = '19da212c32feb53a2f264b4c6062cd0b7a68146a762f82841890ea410408bbe9'
+RUNTIME = 'c98f5ccef419042d820b377f36201ce1f4f63a479525ca943e865d77007ca9a5'
+VERSIONS = {'world': 36, 'engine': 37, 'content': 12, 'database': 16, 'checkpoint': 'v4'}
+INPUTS = {
+    'tests/fixtures/v25-content4-bubble-archive.json': (18099, '62eb00b7031c2d7f866e784ccb59462069cfc58be0e0a8fa8cac34fe5b9ddcc4'),
+    'tests/fixtures/v27-leisure-archive.json': (140456, '5027d51240dfcae2b5b17b0040282cf627943f4c4323d130e8667c2fc870335a'),
+    'tests/fixtures/v28-native-teen-archive.json': (575472, '396a5c3526b4e6d845e917e4b27caa4048e295b47f4952c05268c65013948d82'),
+    'docs/verification/action-latency-inputs-v25-20261019.json': (794714, '8a2d5c4cb1782fa27b495e80dc34b409a636956aba35de3850762403aea2a6a9'),
+}
+LABELS = ['Begin Life', 'First-year choice', 'First-year choice Continue', 'Age-seven callback', 'Age-seven callback Continue', 'Age-30 routine', 'Age-60 routine', '100-known-contact routine', '100-known-contact first Age Up step', '1000-known-contact routine', '1000-known-contact first Age Up step', 'Prepared teen coworker introduction', 'Prepared supervisor feedback', 'Prepared raise request']
+COMMANDS = [None, 'choose', 'acknowledge', 'choose', 'acknowledge', 'health-routine', 'health-routine', 'health-routine', 'advance', 'health-routine', 'advance', 'meet-coworkers', 'work-feedback', 'request-raise']
+SCOPE = ('Unpaired cloud Node/on-disk SQLite fixed-world diagnostics: excluded warm-up then five measured trials per case; no rendered UI/native/physical p95 or guaranteed speedup. Four generated-at-once 100/1000-contact stress inputs and ordinary-command prepared workplace inputs retain the unchanged driver scope. Begin Life uses the driver save kernel, not the store/UI birth path.')
+
+def now(): return dt.datetime.now(dt.timezone.utc).isoformat()
+def sha(data): return hashlib.sha256(data).hexdigest()
+def read(path): return json.loads(Path(path).read_text())
+def ref(path):
+    path = Path(path); data = path.read_bytes()
+    return {'file': str(path), 'bytes': len(data), 'sha256': sha(data)}
+def require(condition, message):
+    if not condition: raise ValueError(message)
+def write(path, data, exclusive=False):
+    with path.open('x' if exclusive else 'w') as output: output.write(json.dumps(data, indent=2) + '\n')
+
+def verify_source(root, source_path, pinned):
+    require(ref(source_path) == pinned, 'Frozen source snapshot changed')
+    snapshot = read(source_path)
+    require(snapshot['root'] == str(root) and re.fullmatch('[0-9a-f]{40}', snapshot['commit']), 'Source root/commit mismatch')
+    require(snapshot['versions'] == VERSIONS and snapshot['combinedGamePersistenceSourceHash'] == RUNTIME, 'This gate accepts only the frozen C37 runtime')
+    for file, digest in snapshot['source'].items():
+        require(not Path(file).is_absolute() and '..' not in Path(file).parts, 'Unsafe source pin path')
+        require(sha((root / file).read_bytes()) == digest, 'Frozen source changed: ' + file)
+    actual_runtime = {str(path.relative_to(root)) for folder in ['src/game', 'src/persistence'] for path in (root / folder).rglob('*.ts')}
+    pinned_runtime = {file for file in snapshot['source'] if file.endswith('.ts') and file.startswith(('src/game/', 'src/persistence/'))}
+    require(actual_runtime == pinned_runtime, 'Added/missing game or persistence source')
+    require(snapshot['source'].get('tools/benchmark-actions.cjs') == DRIVER and sha((root / 'tools/benchmark-actions.cjs').read_bytes()) == DRIVER, 'Original action driver changed')
+    for file, (size, digest) in INPUTS.items():
+        actual = ref(root / file)
+        require(actual['bytes'] == size and actual['sha256'] == digest and snapshot['source'].get(file, digest) == digest, 'Original immutable input changed: ' + file)
+    return {'status': 'exact', 'sourceFiles': len(snapshot['source']), 'sourceSnapshot': pinned, 'combinedGamePersistenceSourceHash': RUNTIME, 'driverHash': DRIVER, 'fixedInputs': [dict(file=file, bytes=size, sha256=digest) for file, (size, digest) in INPUTS.items()]}
+
+def verify_quiet(path, root, snapshot, source_ref, qemu_pid, metro_pid):
+    quiet = read(path)
+    require(quiet['format'] == 'dreams-c37-action-quiescence-attestation-v1' and quiet['complete'] is True, 'Root must finish the quiescence attestation')
+    require(quiet['sourceCommit'] == snapshot['commit'] and quiet['sourceSnapshotSha256'] == source_ref['sha256'] and quiet['root'] == str(root), 'Quiescence uses another source')
+    elapsed = dt.datetime.now(dt.timezone.utc) - dt.datetime.fromisoformat(quiet['recordedAt'])
+    require(0 <= elapsed.total_seconds() <= 1800, 'Root attestation must be actual/recent')
+    require(quiet['nativeAppStopped'] is True and quiet['allHeavyGatesClosed'] is True and quiet['noReplacementEmulatorOrMetroRunning'] is True and quiet['statement'].strip(), 'Root must close the app/native/heavy processes before measurement')
+    require([(row['role'], row['pid']) for row in quiet['closedProcesses']] == [('qemu', qemu_pid), ('metro', metro_pid)], 'Use the actual current owned PID identities, not historical C36 PIDs')
+    observed = []
+    for row in quiet['closedProcesses']:
+        require(row['processClosed'] is True and row['uid'] == os.getuid() and str(row['startTicks']).isdigit() and row['argv'] and row['closedAt'], 'Missing actual closed-process identity')
+        require('qemu-system' in row['argv'][0] if row['role'] == 'qemu' else Path(row['argv'][0]).name in ['node', 'nodejs'] and 'start' in row['argv'] and any('expo' in part for part in row['argv']), 'Closed process identity does not describe the actual QEMU/Metro role')
+        require(dt.datetime.fromisoformat(row['closedAt']) <= dt.datetime.fromisoformat(quiet['recordedAt']), 'Attestation predates process closure')
+        proc = Path('/proc') / str(row['pid']) / 'stat'
+        if proc.exists():
+            fields = proc.read_text().rsplit(') ', 1)[1].split()
+            require(fields[19] != str(row['startTicks']) or fields[0] == 'Z', 'Recorded owned process is still running/stopped; root must close it first')
+            observed.append({'role': row['role'], 'pid': row['pid'], 'state': fields[0], 'originalIdentityGoneOrZombie': True})
+        else: observed.append({'role': row['role'], 'pid': row['pid'], 'originalIdentityGoneOrZombie': True})
+    require(quiet['closedGateEvidence'], 'Root must link actual full/native/heavy gate closure evidence')
+    for row in quiet['closedGateEvidence']:
+        require(row['processClosed'] is True and type(row['exitCode']) is int and row['session'], 'Gate closure must be an actual coordinator observation')
+        require(ref(row['raw']['file']) == row['raw'], 'Gate closure raw evidence changed')
+    return {'attestation': ref(path), 'closedProcessObservations': observed, 'processSignalsSent': False, 'nativeCommandsExecuted': False}
+
+def verify_results(raw_path, stderr_path):
+    data = read(raw_path); progress = stderr_path.read_text().splitlines()
+    require(data['sourceHash'] == RUNTIME and data['driverHash'] == DRIVER, 'Actual driver/runtime output mismatch')
+    require(data['startingRows'] == 'current format, compression blocks primed by cold open', 'Unexpected starting-row mode')
+    require(data['scope'] == 'five warm cloud Node/on-disk SQLite samples per fixed world; optional population inputs are generated stress setups; every cold world and backup exact; not native', 'Unexpected driver scope')
+    require([row['label'] for row in data['results']] == LABELS, 'Missing/extra action cases')
+    results = []; measured = 0
+    for index, row in enumerate(data['results']):
+        command = row.get('command'); command_type = command['type'] if command else None
+        require(command_type == COMMANDS[index] and len(row['trials']) == 5, 'Wrong case/number of trials')
+        require(re.fullmatch('[0-9a-f]{64}', row['inputSha256']) and row['inputBytes'] > 0, 'Missing actual fixed input identity')
+        sizes = row['checkpointBytes']
+        require(sizes['input'] > 0 and sizes['current'] > 0 and sizes['backup'] == sizes['input'], 'Incomplete current/backup sizes')
+        require(sizes['beforeAgeUp'] == (sizes['input'] if command_type == 'advance' else 0), 'Missing original BeforeAgeUp size')
+        for trial in row['trials']:
+            measured += 1
+            for metric in ['totalMs', 'resolveMs', 'commitMs', 'coldOpenMs']:
+                require(type(trial[metric]) in (int, float) and math.isfinite(trial[metric]) and trial[metric] >= 0, 'Invalid measured timing')
+            require(abs(trial['totalMs'] - trial['resolveMs'] - trial['commitMs']) < 0.00001, 'Timing phases do not reconcile')
+            require(trial['phases'] and trial['phases'].get('packCheckpoint', {}).get('calls', 0) > 0, 'Missing actual checkpoint phase measurements')
+            require(trial['phases'].get('unpackCheckpoint', {}).get('calls', 0) == 0, 'Measured warm action used full checkpoint unpack')
+        for metric in ['totalMs', 'resolveMs', 'commitMs', 'coldOpenMs']:
+            require(row['medianMs'][metric] == sorted(trial[metric] for trial in row['trials'])[2], 'Reported median differs from raw five trials')
+        completed = [line for line in progress if line.startswith(row['label'] + ': ') and line.endswith(' ms')]
+        require(len(completed) == 1 and abs(float(completed[0][len(row['label']) + 2:-3]) - row['medianMs']['totalMs']) <= 0.00500001, 'Missing or mismatched completed case stderr')
+        require(bool(row.get('setup')) == (index in [7, 8, 9, 10]), 'Only the four registered population cases are generated stress')
+        if row.get('setup'):
+            setup = row['setup']
+            require(setup['scope'] == 'generated-at-once known-contact stress case from the genuine age-30 checkpoint; not natural/native progression', 'Lost generated stress scope')
+            require(setup['knownContacts'] == (1000 if row['label'].startswith('1000-') else 100) and setup['totalPeople'] == setup['initialPeople'] + setup['addedContacts'], 'Population setup counts differ')
+            require(re.fullmatch('[0-9a-f]{64}', row['outcome']['worldSha256']) and row['outcome']['beforeAgeUpSnapshotRetained'] == (command_type == 'advance'), 'Missing deterministic stress outcome evidence')
+        results.append({key: row[key] for key in ['label', 'command', 'inputSha256', 'inputBytes', 'checkpointBytes', 'ledgerRows', 'medianMs'] if key in row} | {'rawJsonPointer': '/results/' + str(index), 'measuredWarmSamples': 5, 'fullWarmUnpackCalls': 0} | ({'setup': row['setup'], 'outcome': row['outcome']} if row.get('setup') else {}))
+    require(measured == 70, 'Require exactly70 measured warm samples')
+    return {'node': data['node'], 'totals': {'cases': 14, 'measuredWarmSamples': 70, 'fullMeasuredWarmUnpackCalls': 0, 'excludedWarmups': 14, 'successfulDriverExecutions': 84, 'wholeColdCurrentAssertions': 84, 'wholeColdBackupAssertions': 84, 'originalBeforeAgeUpPayloadAssertions': 12}, 'assertionScope': 'Successful unmodified driver exit establishes whole cold current/backup equality for all six executions per case, original raw BeforeAgeUp bytes for two AgeUp cases, deterministic size/outcome and source/driver before-after assertions. The wrapper independently checks all70 stored warm unpack counters. Counts84/12 are derived assertions, not extra stored timing samples.', 'results': results}
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--root', required=True); parser.add_argument('--source', required=True)
+    parser.add_argument('--quiescence', required=True); parser.add_argument('--prefix', required=True)
+    parser.add_argument('--qemu-pid', type=int, required=True); parser.add_argument('--metro-pid', type=int, required=True)
+    parser.add_argument('--execute', action='store_true', required=True)
+    args = parser.parse_args(); root = Path(args.root).resolve(); source = Path(args.source).resolve()
+    require(args.prefix.startswith('/tmp/') and args.qemu_pid > 0 and args.metro_pid > 0 and args.qemu_pid != args.metro_pid, 'Use new /tmp output names and actual distinct PID identities')
+    paths = {name: Path(args.prefix + suffix) for name, suffix in [('raw', '.json'), ('stderr', '.stderr.txt'), ('receipt', '-receipt.json'), ('summary', '-summary.json')]}
+    require(not any(path.exists() for path in paths.values()), 'Never overwrite a prior run or failed diagnostic')
+    pinned = ref(source); snapshot = read(source); wrapper = ref(__file__)
+    argv = ['node', 'tools/benchmark-actions.cjs', '--source', str(root), '--profile', '--population', '--workplaces', '--raises']
+    record = {'format': 'dreams-c37-action-gate-receipt-v1', 'status': 'pending', 'complete': False, 'benchmarkExecuted': False, 'processClosed': False, 'sourceCommit': snapshot['commit'], 'sourceSnapshot': pinned, 'root': str(root), 'argv': argv, 'wrapper': wrapper, 'scope': SCOPE, 'startedAt': now()}
+    write(paths['receipt'], record, True); clock = time.monotonic(); code = 1
+    try:
+        record['before'] = verify_source(root, source, pinned)
+        record['quiescence'] = verify_quiet(args.quiescence, root, snapshot, pinned, args.qemu_pid, args.metro_pid)
+        record['benchmarkStartedAt'] = now()
+        with paths['raw'].open('xb') as out, paths['stderr'].open('xb') as err:
+            with subprocess.Popen(argv, cwd=root, stdout=out, stderr=err) as child:
+                record['benchmarkExecuted'] = True; record['benchmarkPid'] = child.pid
+                write(paths['receipt'], record); code = child.wait()
+                record['exitCode'] = code; record['processClosed'] = True
+        record['benchmarkFinishedAt'] = now(); record['after'] = verify_source(root, source, pinned)
+        require(ref(__file__) == wrapper, 'Gate wrapper changed during measurement')
+        require(ref(args.quiescence) == record['quiescence']['attestation'], 'Root quiescence attestation changed during measurement')
+        require(code == 0, 'Actual benchmark process failed; retain raw diagnostics')
+        summary = verify_results(paths['raw'], paths['stderr'])
+        summary |= {'format': 'dreams-c37-action-summary-v1', 'status': 'passed', 'complete': True, 'sourceCommit': snapshot['commit'], 'versions': VERSIONS, 'combinedGamePersistenceSourceHash': RUNTIME, 'driverHash': DRIVER, 'sourceSnapshot': pinned, 'raw': ref(paths['raw']), 'stderr': ref(paths['stderr']), 'scope': SCOPE}
+        write(paths['summary'], summary, True); record['summary'] = ref(paths['summary'])
+        record['status'] = 'passed'; record['complete'] = True
+    except BaseException as error:
+        record['status'] = 'failed'; record['error'] = repr(error); code = code or 2
+        try: record['afterFailure'] = verify_source(root, source, pinned)
+        except BaseException as source_error: record['sourceVerificationError'] = repr(source_error)
+    finally:
+        record['finishedAt'] = now(); record['elapsedSeconds'] = round(time.monotonic() - clock, 3)
+        for name in ['raw', 'stderr']:
+            if paths[name].exists(): record[name] = ref(paths[name])
+        write(paths['receipt'], record)
+    print(json.dumps({'status': record['status'], 'complete': record['complete'], 'benchmarkExecuted': record['benchmarkExecuted'], 'processClosed': record['processClosed'], 'receipt': ref(paths['receipt'])}), flush=True)
+    raise SystemExit(0 if record['complete'] else code)
+
+if __name__ == '__main__': main()

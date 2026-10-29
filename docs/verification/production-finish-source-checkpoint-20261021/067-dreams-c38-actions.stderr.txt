@@ -1,0 +1,14 @@
+Begin Life: 1.15 ms
+First-year choice: 2.25 ms
+First-year choice Continue: 2.05 ms
+Age-seven callback: 4.65 ms
+Age-seven callback Continue: 10.20 ms
+Age-30 routine: 14.67 ms
+Age-60 routine: 59.25 ms
+100-known-contact routine: 28.43 ms
+100-known-contact first Age Up step: 66.95 ms
+1000-known-contact routine: 141.04 ms
+1000-known-contact first Age Up step: 522.98 ms
+Prepared teen coworker introduction: 11.72 ms
+Prepared supervisor feedback: 11.16 ms
+Prepared raise request: 10.79 ms

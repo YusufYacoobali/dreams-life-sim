@@ -1,0 +1,37 @@
+{
+  "format": "dreams-coordinator-gate-execution-v1",
+  "sourceCommit": "33b6a5fcb0aae73dfc235a15394b34d8afda00cc",
+  "sourceSnapshot": "/tmp/dreams-production-finish-accepted-source.json",
+  "sourceSnapshotSha256": "2e08fd925c673437ff7de7c76c0fd79d02832617d0014efc1c3e471782fe9b56",
+  "root": "/workspace/dreams-worktrees/project-callback-pacing-test",
+  "argv": [
+    "node",
+    "node_modules/jest/bin/jest.js",
+    "--runInBand",
+    "--testTimeout=30000",
+    "--runTestsByPath",
+    "tests/game/project-years-callback.test.ts",
+    "tests/game/annual-pacing.test.ts",
+    "tests/state/annual-pacing-save.test.ts"
+  ],
+  "startedAt": "2026-10-21T07:49:23.425655+00:00",
+  "before": {
+    "files": 688,
+    "snapshotSha256": "2e08fd925c673437ff7de7c76c0fd79d02832617d0014efc1c3e471782fe9b56",
+    "status": "exact"
+  },
+  "complete": true,
+  "endedAt": "2026-10-21T07:49:51.315185+00:00",
+  "elapsedSeconds": 27.89,
+  "exitCode": 0,
+  "raw": {
+    "file": "/tmp/dreams-production-finish-accepted-focused.out",
+    "bytes": 414,
+    "sha256": "58a8a71c0a3903011570ee2eee5d7f2918850db4474683c99efd5b7462eda378"
+  },
+  "after": {
+    "files": 688,
+    "snapshotSha256": "2e08fd925c673437ff7de7c76c0fd79d02832617d0014efc1c3e471782fe9b56",
+    "status": "exact"
+  }
+}

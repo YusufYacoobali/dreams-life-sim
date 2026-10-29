@@ -1,0 +1,26 @@
+{
+  "format": "dreams-native-cohort-semantic-replay-v1",
+  "complete": true,
+  "cohort": "c38",
+  "capturesManifest": {
+    "file": "/tmp/dreams-c38-native-captures.json",
+    "bytes": 17089,
+    "sha256": "08fb77c72da287235214dc84b126ff6f830d2cc7e044b10ea9295cf80a0e5de8"
+  },
+  "rawSupport": {
+    "file": "/workspace/dreams-life-sim/tools/native-cohort-raw-support.cjs",
+    "bytes": 15099,
+    "sha256": "878716f2dbf2e0d820038e8a729a071f2c230e476e3a9c23dafc40034b2e3de0"
+  },
+  "rawVerification": {
+    "file": "/tmp/dreams-c38-native-raw-result.json",
+    "bytes": 27051,
+    "sha256": "81b846407fc7bc6dd0db50c165c352538a781800e8635566a8a82f1370ac2276"
+  },
+  "producer": {
+    "file": "/tmp/dreams-c38-assemble-semantic-trace.py",
+    "bytes": 3433,
+    "sha256": "69cef8037f7e7b0a597bd280b1d34133a2f3062c836acadc528e61de66fcf756"
+  },
+  "scope": "Actual raw-passed C38 capture trace, containing only the already-performed supplied health-routine and action_148 acknowledgement commands. JSON/byte assembly only: no replay, projection, outcome search, SQLite, native action or visual acceptance. Historical130layout defects remain findings."
+}

@@ -1,0 +1,61 @@
+{
+  "recordedOn": "2026-10-20",
+  "sourceCheckpoint": "53b8647",
+  "scope": "pure engine / cloud Node; first eligible choices; newborn acknowledgement flag set before engine progression; not native or SQLite",
+  "stateMode": "validated immutable",
+  "node": "v24.19.0",
+  "setupMs": 1433,
+  "exitCode": 0,
+  "stdout": "docs/verification/life-sweep-v28-1000-20261020.ndjson",
+  "stdoutBytes": 310559,
+  "stdoutSha256": "3038b1d32f339196dff4394060881b6a2343fa77b3a8eb2c601e8e16695204df",
+  "stderrBytes": 0,
+  "uniqueSeeds": 1000,
+  "seedRange": [
+    0,
+    999
+  ],
+  "everyRequestedSeedComplete": true,
+  "allVersionsVerified": {
+    "world": 28,
+    "engine": 27,
+    "content": 4
+  },
+  "gameAndToolSourceHashesUnchanged": true,
+  "completeRecord": {
+    "event": "sweep-complete",
+    "count": 1000,
+    "startSeed": 0,
+    "completed": 1000,
+    "stateMode": "validated immutable",
+    "versions": {
+      "world": 28,
+      "engine": 27,
+      "content": 4
+    },
+    "gameSourceHash": "f58496a063413f6805d159d775abcd9f743feff3f5cddb24dd0672b487baec5f",
+    "toolSourceHash": "b57b6bb3befdba4e776217b3ebf79c1fe4892f2cd7a260fa9b7e928bca75e20e",
+    "countryCounts": {
+      "AU": 88,
+      "IT": 87,
+      "BR": 87,
+      "ZA": 87,
+      "ES": 81,
+      "US": 81,
+      "CA": 84,
+      "GB": 89,
+      "DE": 77,
+      "FR": 86,
+      "IN": 63,
+      "JP": 90
+    },
+    "ageRange": [
+      25,
+      102
+    ],
+    "maxPeople": 26,
+    "maxLedgerRows": 61778,
+    "elapsedMs": 5030819
+  },
+  "limits": "Pure engine and first eligible choices; newborn acknowledgement flag set before progression. Not SQLite/native, all branches/optional actions, 120-year, 1,000-person or multi-generation acceptance. No new whole-Jest total."
+}

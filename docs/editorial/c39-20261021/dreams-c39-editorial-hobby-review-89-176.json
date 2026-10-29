@@ -1,0 +1,1541 @@
+{
+  "format": "dreams-editorial-codex-source-review-v1",
+  "sourceCommit": "66ec642e4c9a9332eac322bd8fb12e0a6a3d8e87",
+  "runtimeSourceIdenticalTo": "ca7c72c743b98eda7c73054960bea90256b0b76f",
+  "inventorySha256": "a4fe4e6c5ab33d2a3507ce54db77198b2ab180fb59070db099036e916d10dcd7",
+  "reviewInputSha256": "e85f195f894440d751a5468c76d633bda541251d9eeff166991966fa9d418f79",
+  "range": {
+    "start": 89,
+    "end": 176
+  },
+  "reviewer": {
+    "agent": "/root/hobby_review",
+    "kind": "Codex source review",
+    "externalHuman": false
+  },
+  "status": "reviewed-no-concrete-defect",
+  "reviewedEntries": 88,
+  "reviewedChoices": 264,
+  "reviewedFields": [
+    "actual title",
+    "full actual setup",
+    "all three choice labels",
+    "all result titles and complete results",
+    "all first-person journal variants",
+    "all stat/grade/skill/relationship effect declarations",
+    "authored age/context and shared eligibility/binding source"
+  ],
+  "categoryMethod": "One planned primary thematic category based on dominant incident/text, with explicit content-specific rationale; age/context flags and source groups do not force quotas. University/early independence includes practical adult organisation and communication; a category is not an assertion of a new system mechanic.",
+  "categoryCounts": {
+    "school-teenage-life": 11,
+    "employment-special-careers": 10,
+    "relationships-family": 35,
+    "travel-pets-hobbies-entertainment": 11,
+    "university-early-independence": 16,
+    "health-later-life": 3,
+    "money-assets-investments": 2
+  },
+  "sourcePins": {
+    "inventory": {
+      "file": "/tmp/dreams-c39-editorial-static-20261021/inventory.json",
+      "bytes": 110896,
+      "sha256": "a4fe4e6c5ab33d2a3507ce54db77198b2ab180fb59070db099036e916d10dcd7"
+    },
+    "reviewInput": {
+      "file": "/tmp/dreams-c39-editorial-review-input-20261021.json",
+      "bytes": 472370,
+      "sha256": "e85f195f894440d751a5468c76d633bda541251d9eeff166991966fa9d418f79"
+    },
+    "gitObjectSnapshotPins": {
+      "file": "/tmp/dreams-c39-editorial-static-20261021/source-pins.json",
+      "bytes": 55174,
+      "sha256": "ba03bdaeea85bd6f30f1564ff8dc71707e1844369fefe1f057d58ef7dcd61386"
+    },
+    "reviewedSourceFiles": {
+      "src/game/content/adultRelationshipStories.ts": {
+        "file": "/tmp/dreams-c39-editorial-static-20261021/src/game/content/adultRelationshipStories.ts",
+        "bytes": 18496,
+        "sha256": "b9c67d4786df03f35a80474a71cc460a6304ada8e070bb2b5338537baf07d0b3"
+      },
+      "src/game/content/childhood.ts": {
+        "file": "/tmp/dreams-c39-editorial-static-20261021/src/game/content/childhood.ts",
+        "bytes": 29293,
+        "sha256": "cb9717d6cff94fea4b88a9b1aee60615e0d432ff75c828fadeed49b8626721f6"
+      },
+      "src/game/content/eventTypes.ts": {
+        "file": "/tmp/dreams-c39-editorial-static-20261021/src/game/content/eventTypes.ts",
+        "bytes": 2016,
+        "sha256": "18a3fb5421d9a676114a2a2c6b6c4322173006b6ee711a0e51a7c68de7d027cb"
+      },
+      "src/game/content/events.ts": {
+        "file": "/tmp/dreams-c39-editorial-static-20261021/src/game/content/events.ts",
+        "bytes": 36977,
+        "sha256": "bedbc38de54431894038b8564a5761e3af843aede20b1de2205b7565a68f53ca"
+      },
+      "src/game/content/homeLifeStories.ts": {
+        "file": "/tmp/dreams-c39-editorial-static-20261021/src/game/content/homeLifeStories.ts",
+        "bytes": 6481,
+        "sha256": "2bbe896e1f82aff4b8b2c11f71bca78851fd2d07d8638bccb9534c95d83b1702"
+      },
+      "src/game/content/lifeSituation.ts": {
+        "file": "/tmp/dreams-c39-editorial-static-20261021/src/game/content/lifeSituation.ts",
+        "bytes": 1091,
+        "sha256": "ed4f094421bf67385a5bd627b84feb0fe0d263f4e741efc2afb1abb513b03aa0"
+      },
+      "src/game/content/ordinaryAdultStories.ts": {
+        "file": "/tmp/dreams-c39-editorial-static-20261021/src/game/content/ordinaryAdultStories.ts",
+        "bytes": 25103,
+        "sha256": "3a50385701b2bef4eba567aa3c127954f03f940163692f3bd123104ac6c79f3d"
+      },
+      "src/game/content/parentingStories.ts": {
+        "file": "/tmp/dreams-c39-editorial-static-20261021/src/game/content/parentingStories.ts",
+        "bytes": 22681,
+        "sha256": "0cd65f5a112137cf379ca95be07d86b235ed29d68136f396f2dd1ff036e72c2a"
+      },
+      "src/game/content/wellbeingStories.ts": {
+        "file": "/tmp/dreams-c39-editorial-static-20261021/src/game/content/wellbeingStories.ts",
+        "bytes": 16754,
+        "sha256": "1ec30a2da1e4706f559043ee5d743ec48ce4aa2f2fce9dd49c6307a760214443"
+      },
+      "src/game/content/workplaceStories.ts": {
+        "file": "/tmp/dreams-c39-editorial-static-20261021/src/game/content/workplaceStories.ts",
+        "bytes": 12002,
+        "sha256": "fc17de8c9f9e18d1fabb04227dfb57564df7d5f6e62e3617cf27eca0a6b33a93"
+      },
+      "src/game/systems/lifeStoryContext.ts": {
+        "file": "/tmp/dreams-c39-editorial-static-20261021/src/game/systems/lifeStoryContext.ts",
+        "bytes": 5086,
+        "sha256": "eeedeace0d92a47d76ac57a61b602d2c5477d23118c69538289caf919d8a556c"
+      },
+      "src/game/systems/storyContext.ts": {
+        "file": "/tmp/dreams-c39-editorial-static-20261021/src/game/systems/storyContext.ts",
+        "bytes": 3525,
+        "sha256": "24a239302080a2a6d908bd874a6ab402ffb184a3e4671b0cd42ec5c5ab2ccb7c"
+      }
+    },
+    "copyProjectionHashesPreserved": {
+      "original250NarrativeProjectionSha256": "3bcaeee8d5d03b0710cf9a96d0dff6cb53b182f452bc8f52c9a85e5c26be6d01",
+      "original251NarrativeProjectionSha256": "bc07ab4021af523d792f2202fe223759ab89b1c169be64c64e201063b6e6069b",
+      "current265NarrativeProjectionSha256": "43975d2d8c2acf049d576582870cdd18385080e16d1d93b74d435cfcdeb41ae5"
+    }
+  },
+  "rows": [
+    {
+      "index": 89,
+      "id": "school-homework-soap",
+      "category": "school-teenage-life",
+      "rationale": "Washed homework offers redo, explanation or a false art excuse; actual teacher and primary-school guards support the dialogue, and grades/bond effects distinguish the redo and failed excuse without promising a numeric increase in prose.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/childhood.ts",
+      "line": 165,
+      "sourceLiteralSha256": "0a2a79f4c40e54e733dea22e304d48dbae62869bc26992d4d9fc4919da8ff25d",
+      "reviewedChoiceIds": [
+        "redo",
+        "explain",
+        "art"
+      ]
+    },
+    {
+      "index": 90,
+      "id": "school-bench-reserve",
+      "category": "school-teenage-life",
+      "rationale": "The solitary classmate can receive company, an invitation or no intervention; peer-bond gains attach only to the social branches, while joining the game retains an unpunished small happiness alternative.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/childhood.ts",
+      "line": 174,
+      "sourceLiteralSha256": "ed571d4b2a9481b491fcdff3ea9218214e3ce1ccfe2050df2cc74e4d76213051",
+      "reviewedChoiceIds": [
+        "sit",
+        "invite",
+        "queue"
+      ]
+    },
+    {
+      "index": 91,
+      "id": "school-race-false-start",
+      "category": "school-teenage-life",
+      "rationale": "An early-start practice race can be restarted, defended as a victory or laughed off; the real teacher context and sport practice on the fair restart fit the outcomes, without inventing a medal or legal penalty.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/childhood.ts",
+      "line": 183,
+      "sourceLiteralSha256": "062cbfe0236391e84eeeddaf6e0f43527575f6fba9fe28ec23242ec20cce9f35",
+      "reviewedChoiceIds": [
+        "restart",
+        "finish",
+        "laugh"
+      ]
+    },
+    {
+      "index": 92,
+      "id": "school-tiny-editor",
+      "category": "school-teenage-life",
+      "rationale": "The soup newsletter branches separate fact-checking, a cartoon and declining participation; a real school peer supports the named collaboration, and only reporting adds the small declared content skill.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/childhood.ts",
+      "line": 192,
+      "sourceLiteralSha256": "140c42023cd6d2d0e21bfeb34cd3268d2ac7fbda81006ae4e05b77a805449250",
+      "reviewedChoiceIds": [
+        "report",
+        "cartoon",
+        "decline"
+      ]
+    },
+    {
+      "index": 93,
+      "id": "school-glitter-border",
+      "category": "school-teenage-life",
+      "rationale": "Glitter cleanup, a prevention funnel and blowing it airborne produce different teacher reactions; energy/discipline/science and teacher-bond effects match those immediate actions without inventing a bill.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/childhood.ts",
+      "line": 201,
+      "sourceLiteralSha256": "5886262afb81d9eef4dc6a1d6595a43e57b9b5a087b9b80b79ec0a69e2f91321",
+      "reviewedChoiceIds": [
+        "clean",
+        "plan",
+        "fan"
+      ]
+    },
+    {
+      "index": 94,
+      "id": "teen-homework-leak",
+      "category": "school-teenage-life",
+      "rationale": "Leaked homework answers can be ignored, worked through together or copied with an obvious error; current classmate/teacher bindings and grade/bond penalties keep this a school consequence rather than a criminal record.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/childhood.ts",
+      "line": 210,
+      "sourceLiteralSha256": "461509f5a12ebf6b54c4b42ed148a5d89236565bce41e97d309e215cc916428c",
+      "reviewedChoiceIds": [
+        "own",
+        "together",
+        "copy"
+      ]
+    },
+    {
+      "index": 95,
+      "id": "teen-group-project-credit",
+      "category": "school-teenage-life",
+      "rationale": "Missing presentation credit can be corrected publicly, discussed privately or demanded with an interruption; teacher and peer consequences are attached to those distinct responses, with no fabricated qualification or project callback.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/childhood.ts",
+      "line": 219,
+      "sourceLiteralSha256": "8a97efa06d1b11fc29aaf7267b9b659c77a41d0343e8e1911552d83f681bddc8",
+      "reviewedChoiceIds": [
+        "clarify",
+        "private",
+        "interrupt"
+      ]
+    },
+    {
+      "index": 96,
+      "id": "teen-mic-still-live",
+      "category": "school-teenage-life",
+      "rationale": "The live microphone can be switched off, followed by an apology or made worse with beeps; named teacher/peer roles and their bond changes support the immediate school embarrassment, with no invented broadcast account.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/childhood.ts",
+      "line": 228,
+      "sourceLiteralSha256": "ed469936d2011ea525069f189e4dd2b01b5bb76444c399054027a5a36796bee0",
+      "reviewedChoiceIds": [
+        "switch",
+        "apologise",
+        "beep"
+      ]
+    },
+    {
+      "index": 97,
+      "id": "teen-solo-rehearsal",
+      "category": "school-teenage-life",
+      "rationale": "Rehearsing, listening to stage-fright concerns and leaving honestly are distinct responses to the real classmate; music practice belongs to rehearsal, and the free decline gains energy without a friendship penalty.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/childhood.ts",
+      "line": 237,
+      "sourceLiteralSha256": "f6f5dc049bb97c575766872ac249f7d4be2394607dbfc6dc66380d0241f0d888",
+      "reviewedChoiceIds": [
+        "stay",
+        "talk",
+        "leave"
+      ]
+    },
+    {
+      "index": 98,
+      "id": "teen-exam-freeze",
+      "category": "school-teenage-life",
+      "rationale": "Starting elsewhere in a practice exam, reviewing it with the teacher and freezing on question one differ in grades/stress; the practice framing avoids promising a national assessment or qualification result.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/childhood.ts",
+      "line": 246,
+      "sourceLiteralSha256": "377cfc12f2e47c156235772b4dfee749cb674f3a8087344196cb7c407bb7709e",
+      "reviewedChoiceIds": [
+        "skip",
+        "help",
+        "panic"
+      ]
+    },
+    {
+      "index": 99,
+      "id": "teen-canteen-review",
+      "category": "school-teenage-life",
+      "rationale": "The canteen review can become useful feedback, stay private or be read aloud; teacher/peer effects reflect those choices, and publication/fame or an actual restaurant review account is never granted.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/childhood.ts",
+      "line": 255,
+      "sourceLiteralSha256": "6e1a31748ada268f9d276be473c903114d33d87a2a7eb408033307eb231cd946",
+      "reviewedChoiceIds": [
+        "feedback",
+        "private",
+        "read"
+      ]
+    },
+    {
+      "index": 100,
+      "id": "work-three-priorities",
+      "category": "employment-special-careers",
+      "rationale": "Three competing priorities are resolved by ordering, repeating instructions or guessing; the bound current supervisor and discipline/stress/bond effects fit an ordinary workplace discussion without promising a raise.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/workplaceStories.ts",
+      "line": 6,
+      "sourceLiteralSha256": "acabe93552f2ffd23e2559bf6eb496f8fb4bbe8c06a9644204926d4e5057a03f",
+      "reviewedChoiceIds": [
+        "order",
+        "repeat",
+        "guess"
+      ]
+    },
+    {
+      "index": 101,
+      "id": "work-unfamiliar-process",
+      "category": "employment-special-careers",
+      "rationale": "An unfamiliar process invites a demonstration, shared notes or bluffing; actual introduced coworker context supports the named teaching, and the bluff carries stress/respect effects rather than invented job progress.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/workplaceStories.ts",
+      "line": 15,
+      "sourceLiteralSha256": "6c00c7c81cd6a7d849b1f60edcf0db10ab836ec413f76792efdf49cdd3adbb74",
+      "reviewedChoiceIds": [
+        "ask",
+        "notes",
+        "pretend"
+      ]
+    },
+    {
+      "index": 102,
+      "id": "work-breakroom-sign",
+      "category": "employment-special-careers",
+      "rationale": "Cleaning the break area, clarifying the note or posting sarcasm lead to different local outcomes; the sarcastic branch can amuse while harming coworker bond, which matches the single laugh and unchanged mess.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/workplaceStories.ts",
+      "line": 24,
+      "sourceLiteralSha256": "e58d876c3ad5540e8062599e9f22a02f1bf79b295c09fcb2e4a55620021ad7f1",
+      "reviewedChoiceIds": [
+        "clear",
+        "suggest",
+        "reply"
+      ]
+    },
+    {
+      "index": 103,
+      "id": "work-break-playlist",
+      "category": "employment-special-careers",
+      "rationale": "The long-intro song allows attentive listening, a recommendation trade or a quiet break; current coworker presence and small social/rest effects fit, and asking for quiet does not punish the bond.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/workplaceStories.ts",
+      "line": 33,
+      "sourceLiteralSha256": "073051669ca055e1c5259d1914228055d2d8ab60e1c682fb94dca8e79077ac9f",
+      "reviewedChoiceIds": [
+        "listen",
+        "trade",
+        "quiet"
+      ]
+    },
+    {
+      "index": 104,
+      "id": "work-message-love",
+      "category": "employment-special-careers",
+      "rationale": "The accidental family sign-off can be corrected, joked about or reread anxiously; supervisor-bond gains attach to the first two, and the harmless mistake is neither treated as sexual consent nor escalated into disciplinary machinery.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/workplaceStories.ts",
+      "line": 42,
+      "sourceLiteralSha256": "bf4edf6a85df44c82d9907141b4373bf9f4aee1787dbf1c10e0ae5434e295fd3",
+      "reviewedChoiceIds": [
+        "correct",
+        "joke",
+        "inspect"
+      ]
+    },
+    {
+      "index": 105,
+      "id": "work-photo-blink",
+      "category": "employment-special-careers",
+      "rationale": "The blinking group photo can be retaken, enjoyed or declined; the real coworker reaction and modest happiness/bond/rest effects agree, with no social-media publication or compulsory posing inferred.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/workplaceStories.ts",
+      "line": 51,
+      "sourceLiteralSha256": "29d3eca241826eb15253244b9a07239c5859c203eafa18dd2e3db63a280a391f",
+      "reviewedChoiceIds": [
+        "retake",
+        "keep",
+        "decline"
+      ]
+    },
+    {
+      "index": 106,
+      "id": "work-safety-arrow",
+      "category": "employment-special-careers",
+      "rationale": "Reporting a misleading safety sign or asking for the actual route engages the real supervisor; ignoring it has mild personal effects, while repairs stay with an authorised person and no accident/injury is fabricated.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/workplaceStories.ts",
+      "line": 60,
+      "sourceLiteralSha256": "c260ae08480f70236e0e6376e2321be872ac1c8a04c3d31989f7894aa844bc69",
+      "reviewedChoiceIds": [
+        "report",
+        "route",
+        "ignore"
+      ]
+    },
+    {
+      "index": 107,
+      "id": "work-shared-credit",
+      "category": "employment-special-careers",
+      "rationale": "The shared-credit scene binds two real work roles; naming the coworker or saying both contributed improves the relevant bonds, while taking all praise harms only the coworker bond and does not award pay or tenure.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/workplaceStories.ts",
+      "line": 69,
+      "sourceLiteralSha256": "e41cfff957644921093560d175abaae1a59da89cd43f37e4e38dd70bb886e601",
+      "reviewedChoiceIds": [
+        "name",
+        "both",
+        "take"
+      ]
+    },
+    {
+      "index": 108,
+      "id": "work-question-at-door",
+      "category": "employment-special-careers",
+      "rationale": "A multipart question at break time can be deferred, narrowed or answered in full; the real supervisor context supports the timing agreement, with energy/stress effects matching whether the break survives.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/workplaceStories.ts",
+      "line": 78,
+      "sourceLiteralSha256": "48007e42130ead38cf2e33e73eb82bee07f1be460aada0d2d2f78495012f401f",
+      "reviewedChoiceIds": [
+        "later",
+        "clarify",
+        "all"
+      ]
+    },
+    {
+      "index": 109,
+      "id": "work-quiet-kindness",
+      "category": "employment-special-careers",
+      "rationale": "A coworker returns a misplaced ordinary item; thanks and shared laughter improve that existing relationship, while rushing off loses bond, without silently creating a priced asset or financial transaction.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/workplaceStories.ts",
+      "line": 87,
+      "sourceLiteralSha256": "e77a68436c8dc829a02397578cbe069c7a2b145d6c3d0cc483a742b24eccbbc3",
+      "reviewedChoiceIds": [
+        "thanks",
+        "laugh",
+        "rush"
+      ]
+    },
+    {
+      "index": 110,
+      "id": "friend-long-voice-note",
+      "category": "relationships-family",
+      "rationale": "A real adult friend's long voice note can be heard, condensed to its question or interrupted with a wrong guess; the energy and friend-bond differences fit, and no new contact or account is invented.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/adultRelationshipStories.ts",
+      "line": 6,
+      "sourceLiteralSha256": "5dc8b08ae4ab5351890504a82e689f8ad284feb36f2bc3fe923950c9b6a4f9c7",
+      "reviewedChoiceIds": [
+        "listen",
+        "summary",
+        "guess"
+      ]
+    },
+    {
+      "index": 111,
+      "id": "friend-different-budget",
+      "category": "relationships-family",
+      "rationale": "The friend's budget boundary leads to a free walk, sitting and talking or dismissing the limit; prose explicitly avoids buying anything, matching the absence of money effects and the negative bond for insisting.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/adultRelationshipStories.ts",
+      "line": 15,
+      "sourceLiteralSha256": "e5351dfdc67c4b28b0a0956ed1a1abe4c60277f4535056bbfb9dfd51883ca4ff",
+      "reviewedChoiceIds": [
+        "walk",
+        "ask",
+        "insist"
+      ]
+    },
+    {
+      "index": 112,
+      "id": "friend-advice-or-listening",
+      "category": "relationships-family",
+      "rationale": "Listening, asking what support is wanted and delivering unsolicited solutions are meaningfully different; the real friend's reactions align with bond changes, without claiming that advice cures a condition or grants progress.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/adultRelationshipStories.ts",
+      "line": 24,
+      "sourceLiteralSha256": "3bba73c3df630879d8e005e7b98c047c86c35b74eeeb31c3ba623ee35b78399d",
+      "reviewedChoiceIds": [
+        "ask",
+        "listen",
+        "lecture"
+      ]
+    },
+    {
+      "index": 113,
+      "id": "friend-creative-feedback",
+      "category": "relationships-family",
+      "rationale": "Specific praise, permission for detailed feedback and needless harshness produce distinct friend responses to a poem; the bond/respect effects match and do not invent a published work or creator income.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/adultRelationshipStories.ts",
+      "line": 33,
+      "sourceLiteralSha256": "bdc3b4fadc5e16629081c91b1c5f6b5a58b1cc2b871475bc61b46d9a19507a38",
+      "reviewedChoiceIds": [
+        "specific",
+        "permission",
+        "brutal"
+      ]
+    },
+    {
+      "index": 114,
+      "id": "friend-interrupted-thought",
+      "category": "relationships-family",
+      "rationale": "Asking to finish, patiently returning to the point and interrupting louder deal differently with the same real friend; bond/stress/energy effects fit the resulting complete or competing sentences.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/adultRelationshipStories.ts",
+      "line": 42,
+      "sourceLiteralSha256": "46bdf8ef54cec5434ccd33ba6db847d8e8eb033afa28a5d548cffc9f2072176a",
+      "reviewedChoiceIds": [
+        "finish",
+        "return",
+        "compete"
+      ]
+    },
+    {
+      "index": 115,
+      "id": "friend-unwanted-nickname",
+      "category": "relationships-family",
+      "rationale": "An actual friend's unwanted nickname can be refused plainly, retired with a joke or tolerated; bond and stress effects match the stated boundary, with no saved identity/name change claimed.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/adultRelationshipStories.ts",
+      "line": 51,
+      "sourceLiteralSha256": "c9b9fca930478ca7b4cd948a18ad8c15edac6169f5e42017e9bfb785dd269d24",
+      "reviewedChoiceIds": [
+        "plain",
+        "light",
+        "pretend"
+      ]
+    },
+    {
+      "index": 116,
+      "id": "friend-quiet-company",
+      "category": "relationships-family",
+      "rationale": "Comfortable silence can be enjoyed, checked or filled with exhausting chatter; the first two improve the real friend bond while chatter costs energy, and no negative bond is imposed simply for talking.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/adultRelationshipStories.ts",
+      "line": 60,
+      "sourceLiteralSha256": "ef02898da4eefbd9a096c6ec38fd2e9f0df0a65edcd9b95a7abe883c5fbe97fc",
+      "reviewedChoiceIds": [
+        "quiet",
+        "check",
+        "fill"
+      ]
+    },
+    {
+      "index": 117,
+      "id": "friend-changed-opinion",
+      "category": "relationships-family",
+      "rationale": "A changed opinion can be explained, explored through questions or used to insult the friend; the bond consequences follow the conversation, with no political affiliation or historical belief record fabricated.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/adultRelationshipStories.ts",
+      "line": 69,
+      "sourceLiteralSha256": "e3da8733f1721c26fc53c0750bf82fe18fce1421c6b19e43dd09348ba123050a",
+      "reviewedChoiceIds": [
+        "explain",
+        "curious",
+        "dismiss"
+      ]
+    },
+    {
+      "index": 118,
+      "id": "partner-phone-attention",
+      "category": "relationships-family",
+      "rationale": "Attention to a partner's conversation can be restored, explicitly paused or falsely claimed; the current adult partner binding and contrasting bond changes fit, without phone ownership or message-account effects.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/adultRelationshipStories.ts",
+      "line": 78,
+      "sourceLiteralSha256": "2b6a8360be20290c30535e41f0fb1e42e565d34316d6c8eb7b5cb6707fe449a7",
+      "reviewedChoiceIds": [
+        "away",
+        "explain",
+        "deny"
+      ]
+    },
+    {
+      "index": 119,
+      "id": "partner-alone-time",
+      "category": "relationships-family",
+      "rationale": "A partner's request for solitude can be respected, clarified or turned into a relationship test; supportive alternatives and the anxious response have proportionate bond/stress effects, without forcing a separation.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/adultRelationshipStories.ts",
+      "line": 87,
+      "sourceLiteralSha256": "a12293f9d7fd72ba99cab9527cddd7e91775f55805b88d8062ff741bfe4476d3",
+      "reviewedChoiceIds": [
+        "respect",
+        "clarify",
+        "test"
+      ]
+    },
+    {
+      "index": 120,
+      "id": "partner-money-conversation",
+      "category": "relationships-family",
+      "rationale": "The spending discussion is about mutual comfort and honesty; all three results explicitly remain a conversation without purchase, consistent with bond/stat effects and no cash, debt or shared-account movement.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/adultRelationshipStories.ts",
+      "line": 96,
+      "sourceLiteralSha256": "0bdae0f8edcc6de0941cee20a89bbd622a26e1e51e07798a64c828fb51f6a1aa",
+      "reviewedChoiceIds": [
+        "honest",
+        "both",
+        "boast"
+      ]
+    },
+    {
+      "index": 121,
+      "id": "partner-other-couples",
+      "category": "relationships-family",
+      "rationale": "Other couples' photos prompt a specific needs conversation, appreciation of ordinary moments or competition; actual partner bond effects fit the tone, and no new social account or couple's private state is asserted.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/adultRelationshipStories.ts",
+      "line": 105,
+      "sourceLiteralSha256": "d1f5aa8e68f27e4c67d05aefeffc47f4aa20209425d001cd079101af9a39e3be",
+      "reviewedChoiceIds": [
+        "specific",
+        "ordinary",
+        "compete"
+      ]
+    },
+    {
+      "index": 122,
+      "id": "partner-disagreement-loop",
+      "category": "relationships-family",
+      "rationale": "Reflecting the partner's point, taking a calm pause and listing old grievances have distinct outcomes; the existing partner bond shifts without pretending that every disagreement causes a legal or marital-status change.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/adultRelationshipStories.ts",
+      "line": 114,
+      "sourceLiteralSha256": "7f3a4c11bcdc9f3b4d2810471217c1ce3658fcb3e8468ecdd3824f389e50c608",
+      "reviewedChoiceIds": [
+        "reflect",
+        "pause",
+        "score"
+      ]
+    },
+    {
+      "index": 123,
+      "id": "partner-public-affection",
+      "category": "relationships-family",
+      "rationale": "The public hand-holding scene permits explaining discomfort, finding shared comfort or snapping; current available adult-partner guards support being out together, and no affection is forced or treated as a paid/sexual action.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/adultRelationshipStories.ts",
+      "line": 123,
+      "sourceLiteralSha256": "33894f2c6a4ff0e9c01990af9032ddb847e1721ca72b83b12b911313175dee2a",
+      "reviewedChoiceIds": [
+        "explain",
+        "ask",
+        "snap"
+      ]
+    },
+    {
+      "index": 124,
+      "id": "partner-arrives-late",
+      "category": "relationships-family",
+      "rationale": "A late partner can be asked for context, told the effect of the wait or met with accusations; bond/stress changes match the response without inventing a reason for lateness or changing relationship status.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/adultRelationshipStories.ts",
+      "line": 132,
+      "sourceLiteralSha256": "69528087f0b262cbdd47add9780f4a42b6e7e54c46e8618a1fcf82e65291767b",
+      "reviewedChoiceIds": [
+        "ask",
+        "impact",
+        "speech"
+      ]
+    },
+    {
+      "index": 125,
+      "id": "adult-wrong-name-badge",
+      "category": "travel-pets-hobbies-entertainment",
+      "rationale": "At a free community event, the mistaken Organiser badge can be corrected, temporarily helped with or misused for confident directions; results stay situational, with no actual employment, fee or new authority granted.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/ordinaryAdultStories.ts",
+      "line": 4,
+      "sourceLiteralSha256": "c1c1d25dbdd8df122980122b4fb77af29cff1f23fac08d19f4e5e3bd8690818f",
+      "reviewedChoiceIds": [
+        "correct",
+        "help",
+        "invent"
+      ]
+    },
+    {
+      "index": 126,
+      "id": "adult-wave-behind",
+      "category": "university-early-independence",
+      "rationale": "A wave aimed elsewhere can be acknowledged, shared with the balloon owner or disguised as stretching; the adult local communication mishap has small personal effects and never creates a persistent friend.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/ordinaryAdultStories.ts",
+      "line": 9,
+      "sourceLiteralSha256": "5b71b31c77f38969a816a8fd8c498e142c07f50a5ec3c03ee071d3fcde84db66",
+      "reviewedChoiceIds": [
+        "laugh",
+        "commit",
+        "freeze"
+      ]
+    },
+    {
+      "index": 127,
+      "id": "adult-free-lecture-question",
+      "category": "travel-pets-hobbies-entertainment",
+      "rationale": "A free public talk offers a specific question, listening or an unprepared blanket challenge; learning/respect/stress effects fit this leisure encounter, without university credit or an expert qualification claim.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/ordinaryAdultStories.ts",
+      "line": 14,
+      "sourceLiteralSha256": "441800f1352e5089b3f3b992ff025ed0bcdfb730a76aaf5509eb9260b4449932",
+      "reviewedChoiceIds": [
+        "ask",
+        "listen",
+        "announce"
+      ]
+    },
+    {
+      "index": 128,
+      "id": "adult-queue-merge",
+      "category": "university-early-independence",
+      "rationale": "Two queues can alternate, settle while the player waits or become a personal argument; ordinary coordination is the dominant adult-independence incident, and no invented business service/payment is involved.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/ordinaryAdultStories.ts",
+      "line": 19,
+      "sourceLiteralSha256": "74c2a08ca5cb473808b0328ea96068705cb64967b23510f097beaa65944358d7",
+      "reviewedChoiceIds": [
+        "alternate",
+        "wait",
+        "push"
+      ]
+    },
+    {
+      "index": 129,
+      "id": "adult-community-map",
+      "category": "university-early-independence",
+      "rationale": "A misplaced city-map sticker can be reported, understood or argued with; the actual city token and local-presence guard support wayfinding, with no real trip, currency charge or geographic move created.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/ordinaryAdultStories.ts",
+      "line": 24,
+      "sourceLiteralSha256": "8d957cbd051f74a1126aed3d7a8f927e1a84a19839f1d0a49974b9ca6bb9e7bc",
+      "reviewedChoiceIds": [
+        "report",
+        "orient",
+        "follow"
+      ]
+    },
+    {
+      "index": 130,
+      "id": "adult-open-mic-list",
+      "category": "travel-pets-hobbies-entertainment",
+      "rationale": "The free open-mic name mix-up permits correction, a short joke or hiding; brief performance and stress/happiness effects fit, and neither a paid gig, published work nor saved fame is claimed.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/ordinaryAdultStories.ts",
+      "line": 29,
+      "sourceLiteralSha256": "5d918136951738aa621a1916db02b11610ecdcfa81b9320974d97fdbd02a669c",
+      "reviewedChoiceIds": [
+        "correct",
+        "joke",
+        "hide"
+      ]
+    },
+    {
+      "index": 131,
+      "id": "adult-borrowed-pen",
+      "category": "university-early-independence",
+      "rationale": "A closely watched borrowed pen can be returned, asked about or accidentally pocketed then returned; no permanent possession or theft incident is awarded, matching a practical adult social-responsibility scene.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/ordinaryAdultStories.ts",
+      "line": 34,
+      "sourceLiteralSha256": "65c2b89511cb51b915786b657f892f685e34f8db43a22692939d25806223f08a",
+      "reviewedChoiceIds": [
+        "return",
+        "ask",
+        "pocket"
+      ]
+    },
+    {
+      "index": 132,
+      "id": "adult-weather-expert",
+      "category": "university-early-independence",
+      "rationale": "Uncertain weather can be admitted, met with shelter directions or falsely forecast; the ordinary stranger encounter and mild effects fit, with no job, scientific claim or actual weather-system change inferred.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/ordinaryAdultStories.ts",
+      "line": 39,
+      "sourceLiteralSha256": "6d68c4150c19eed19c06e3186211515ca29b8d6dd78e8b0c02b67ea139962256",
+      "reviewedChoiceIds": [
+        "honest",
+        "shelter",
+        "predict"
+      ]
+    },
+    {
+      "index": 133,
+      "id": "adult-instruction-last-page",
+      "category": "travel-pets-hobbies-entertainment",
+      "rationale": "The free paper-folding workshop supports restarting, adapting the shape or blaming paper; small discipline/creative effects fit a leisure activity without buying materials, awarding a qualification or enrolling in a course.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/ordinaryAdultStories.ts",
+      "line": 44,
+      "sourceLiteralSha256": "44ace6f556e984ac1085ce626c2d500e18d2c5ddc6fd81ef2741b2f2e60d7a4a",
+      "reviewedChoiceIds": [
+        "restart",
+        "adapt",
+        "blame"
+      ]
+    },
+    {
+      "index": 134,
+      "id": "adult-empty-calendar",
+      "category": "health-later-life",
+      "rationale": "The free hour can remain rest, hold one limited task or fill with obligations; energy/stress outcomes reflect pacing and overcommitment, without diagnosing illness or claiming to rewrite a real calendar system.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/ordinaryAdultStories.ts",
+      "line": 49,
+      "sourceLiteralSha256": "47f4b401a9e258c9fd165d1f52efd7a57358a20859a3c1ef3618916877db46b6",
+      "reviewedChoiceIds": [
+        "keep",
+        "choose",
+        "fill"
+      ]
+    },
+    {
+      "index": 135,
+      "id": "adult-unwanted-speech",
+      "category": "university-early-independence",
+      "rationale": "A neighbourhood meeting offers concise contribution, declining to speak or rambling; practical adult communication dominates, and the result grants no political office, audience account or statutory decision power.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/ordinaryAdultStories.ts",
+      "line": 54,
+      "sourceLiteralSha256": "effb0efdb025cd6ffd7bd46aa092a2f7351c4a4316dccbf506b279a6f60e13d4",
+      "reviewedChoiceIds": [
+        "brief",
+        "pass",
+        "ramble"
+      ]
+    },
+    {
+      "index": 136,
+      "id": "adult-compliment-practice",
+      "category": "health-later-life",
+      "rationale": "Accepting a compliment, sharing credit and rebutting it focus on self-acceptance and stress; happiness/respect differences fit without implying that the player acquired treatment or a new diagnosis.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/ordinaryAdultStories.ts",
+      "line": 59,
+      "sourceLiteralSha256": "bdc4f56368b818f1a73bf17de1605091ba6891bab4bb4866e2ebecaa085f22f5",
+      "reviewedChoiceIds": [
+        "thanks",
+        "share",
+        "reject"
+      ]
+    },
+    {
+      "index": 137,
+      "id": "adult-repair-table",
+      "category": "travel-pets-hobbies-entertainment",
+      "rationale": "The free repair demonstration offers questions, patient observation or heckling; its harmless practice mechanism avoids hazardous repair/ownership assumptions, and learning stays a stat effect rather than paid work or a certification.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/ordinaryAdultStories.ts",
+      "line": 64,
+      "sourceLiteralSha256": "e9de891e12f29466f64c6bb05022006e46e990666f0d4115de861dcaafe9b7c5",
+      "reviewedChoiceIds": [
+        "ask",
+        "observe",
+        "heckle"
+      ]
+    },
+    {
+      "index": 138,
+      "id": "adult-community-poster",
+      "category": "university-early-independence",
+      "rationale": "The poster's conflicting dates can be verified, left unresolved or wrongly inferred from typography; practical information-checking dominates and no event booking, ticket purchase or actual date mutation is promised.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/ordinaryAdultStories.ts",
+      "line": 69,
+      "sourceLiteralSha256": "b0fd3b270e5e8916b97a52ad954d22f583433b4d6b0ae6e4835298f4091253c9",
+      "reviewedChoiceIds": [
+        "check",
+        "note",
+        "announce"
+      ]
+    },
+    {
+      "index": 139,
+      "id": "adult-name-pronunciation",
+      "category": "university-early-independence",
+      "rationale": "A public host's mispronunciation and unwanted nickname can be corrected, joked about or accepted temporarily; unlike the named-friend nickname scene this is anonymous public communication, with no identity or friend-bond rewrite.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/ordinaryAdultStories.ts",
+      "line": 74,
+      "sourceLiteralSha256": "cf16e03a3cb7d40845bdcbb7219fe036faefbb8384eb36c92c66b93422ab468e",
+      "reviewedChoiceIds": [
+        "correct",
+        "light",
+        "accept"
+      ]
+    },
+    {
+      "index": 140,
+      "id": "adult-shortcut-stairs",
+      "category": "university-early-independence",
+      "rationale": "A misleading building shortcut allows the familiar accessible route, slow exploration or rushing; energy/stress differences fit wayfinding, and no unmodelled physical disability or compulsory stair use is presumed.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/ordinaryAdultStories.ts",
+      "line": 79,
+      "sourceLiteralSha256": "a3190fe6dd5e80f047f5b98488af67ee3e684ffe6e6a0451572f4452c341c301",
+      "reviewedChoiceIds": [
+        "return",
+        "explore",
+        "race"
+      ]
+    },
+    {
+      "index": 141,
+      "id": "adult-small-volunteer-task",
+      "category": "travel-pets-hobbies-entertainment",
+      "rationale": "The volunteer banner task can be helped, delayed for calmer wind or abandoned without notice; it is a free local community activity with modest social/personal effects, not actual employment or a financial obligation.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/ordinaryAdultStories.ts",
+      "line": 84,
+      "sourceLiteralSha256": "8b1253f08f77a922d009fc68bad05eb2ce39f0ead52f215e1c8813d3f1709465",
+      "reviewedChoiceIds": [
+        "help",
+        "suggest",
+        "release"
+      ]
+    },
+    {
+      "index": 142,
+      "id": "adult-uncertain-memory",
+      "category": "travel-pets-hobbies-entertainment",
+      "rationale": "A public reminiscence with a film-borrowed car chase can be corrected, narrowed or embellished; the activity and entertainment framing fit, and this uncommon scene does not manufacture a stored cross-life callback.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/ordinaryAdultStories.ts",
+      "line": 89,
+      "sourceLiteralSha256": "ef6961691f8c6e16a850108d80d0435d8efc40b4ca4a645293842f5172864076",
+      "reviewedChoiceIds": [
+        "admit",
+        "separate",
+        "continue"
+      ]
+    },
+    {
+      "index": 143,
+      "id": "adult-free-sample-opinion",
+      "category": "travel-pets-hobbies-entertainment",
+      "rationale": "A free demonstration's feedback can identify an improvement, praise a useful explanation or expand into an essay; results and personal effects fit the leisure encounter, without a review-account, payment or reputation-system grant.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/ordinaryAdultStories.ts",
+      "line": 94,
+      "sourceLiteralSha256": "cd07f0ef3ac71defe1f5a4547f84b557288055af4e9307276883a464c11d596b",
+      "reviewedChoiceIds": [
+        "specific",
+        "kind",
+        "essay"
+      ]
+    },
+    {
+      "index": 144,
+      "id": "adult-seat-with-a-view",
+      "category": "travel-pets-hobbies-entertainment",
+      "rationale": "At a free event the selected seat can be offered, politely retained or defended with a lecture; the first two remain reasonable choices with distinct effects and no ticket, reservation or ownership entitlement is invented.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/ordinaryAdultStories.ts",
+      "line": 99,
+      "sourceLiteralSha256": "64eb924642ab6f0d324703ce9c67cd0bfaae5f8555dbd6925c584600f8dd7df5",
+      "reviewedChoiceIds": [
+        "move",
+        "decline",
+        "lecture"
+      ]
+    },
+    {
+      "index": 145,
+      "id": "adult-password-on-paper",
+      "category": "university-early-independence",
+      "rationale": "The cryptic private reminder can be rewritten, reconstructed or deferred; practical organisation and its discipline/stress effects agree, and the wording avoids exposing an actual saved password or inventing an account.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/ordinaryAdultStories.ts",
+      "line": 104,
+      "sourceLiteralSha256": "92e4c9f7cf7924559cfa43ba17fa68ae4150c32bf1a3c651c2c60cc62e69512d",
+      "reviewedChoiceIds": [
+        "rewrite",
+        "reconstruct",
+        "trust"
+      ]
+    },
+    {
+      "index": 146,
+      "id": "adult-lost-glove",
+      "category": "university-early-independence",
+      "rationale": "The lost glove can go to reception, remain visible or provoke excessive questioning; practical adult responsibility dominates, and no glove asset, theft record or payment is silently added.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/ordinaryAdultStories.ts",
+      "line": 109,
+      "sourceLiteralSha256": "22a457ff15bd7d9f99c3719cf1c455e84d3381160a5e2818e479640661b3ab0a",
+      "reviewedChoiceIds": [
+        "desk",
+        "visible",
+        "detective"
+      ]
+    },
+    {
+      "index": 147,
+      "id": "adult-perfect-introduction",
+      "category": "university-early-independence",
+      "rationale": "A short discussion-circle introduction can stay brief, invite others' views or become a boastful biography; respect/stress effects agree, without creating an actual acquaintance or claiming unrecorded personal achievements.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/ordinaryAdultStories.ts",
+      "line": 114,
+      "sourceLiteralSha256": "5f843aa31ebe1e5dec9d955e68b774432b6cf67b8b7e065926c713abdc436eea",
+      "reviewedChoiceIds": [
+        "brief",
+        "question",
+        "compete"
+      ]
+    },
+    {
+      "index": 148,
+      "id": "adult-silent-notification",
+      "category": "university-early-independence",
+      "rationale": "The overedited greeting can be sent, paused or polished indefinitely; practical everyday communication has coherent discipline/energy/stress effects and does not create or publish a social-media post.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/ordinaryAdultStories.ts",
+      "line": 119,
+      "sourceLiteralSha256": "e09588384136e5e0e42a2569fab89c72d5aec5c9b68eb1bc2fb2204bfc8941e9",
+      "reviewedChoiceIds": [
+        "send",
+        "pause",
+        "polish"
+      ]
+    },
+    {
+      "index": 149,
+      "id": "adult-neighbourhood-song",
+      "category": "travel-pets-hobbies-entertainment",
+      "rationale": "The free neighbourhood singalong allows joining, listening for familiar words or policing lyrics; the leisure scene offers a valid quieter option and grants neither a paid music release nor recorded audience/fame.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/ordinaryAdultStories.ts",
+      "line": 124,
+      "sourceLiteralSha256": "4b0b9c35e262311318c7689facac68919d4492e77a9ee7a309ef56abba793459",
+      "reviewedChoiceIds": [
+        "laugh",
+        "listen",
+        "correct"
+      ]
+    },
+    {
+      "index": 150,
+      "id": "family-baby-serious-face",
+      "category": "relationships-family",
+      "rationale": "A co-resident actual baby/young toddler receives playful conversation, quiet company or exaggerated requests for feedback; child-bond and parent-rest effects fit, without interpreting baby noises as real consent or adult speech.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/parentingStories.ts",
+      "line": 4,
+      "sourceLiteralSha256": "4539fd8ecbd9bf8a5d8a6558b56b61bad61003324e3c18562774fbdf04dbb86c",
+      "reviewedChoiceIds": [
+        "reply",
+        "quiet",
+        "perform"
+      ]
+    },
+    {
+      "index": 151,
+      "id": "family-baby-ordinary-song",
+      "category": "relationships-family",
+      "rationale": "The sock song can be repeated, softened or overcomplicated; actual baby-group presence supports the interaction, and bond/rest effects differ without turning the song into recorded music production.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/parentingStories.ts",
+      "line": 9,
+      "sourceLiteralSha256": "09b7deea05d856009df55cfea98ebcf5416e512f8eccbd218aeaa6d3c7d78b90",
+      "reviewedChoiceIds": [
+        "repeat",
+        "soft",
+        "improve"
+      ]
+    },
+    {
+      "index": 152,
+      "id": "family-baby-outfit-debate",
+      "category": "relationships-family",
+      "rationale": "Comfort, one outfit adjustment and obsessive matching are distinct parenting responses; baby-group and shared-household guards fit, no clothing is purchased, and prolonged perfectionism has only the small declared bond cost.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/parentingStories.ts",
+      "line": 14,
+      "sourceLiteralSha256": "bc17373d2d9468f8692245b35fd539742769bc97bca4d85c8ac4435c7b751929",
+      "reviewedChoiceIds": [
+        "keep",
+        "change",
+        "perfect"
+      ]
+    },
+    {
+      "index": 153,
+      "id": "family-drawing-label",
+      "category": "relationships-family",
+      "rationale": "The young child's drawing can be explained, praised specifically or corrected harshly; actual child-bond effects match the response, and humorous mistaken anatomy does not change either person's recorded appearance.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/parentingStories.ts",
+      "line": 19,
+      "sourceLiteralSha256": "ddacef4fa015b437d84d8b645e70e7561543b363929e3b2095594d91fc3c1119",
+      "reviewedChoiceIds": [
+        "ask",
+        "detail",
+        "correct"
+      ]
+    },
+    {
+      "index": 154,
+      "id": "family-helpful-spill",
+      "category": "relationships-family",
+      "rationale": "A young child's wet-table help can be finished together, replaced by a smaller task or redone with complaints; parenting/bond effects match encouragement versus dismissal without pretending the child has paid employment.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/parentingStories.ts",
+      "line": 24,
+      "sourceLiteralSha256": "03a4f4e013e4a35c4bea05ca6dc2b945b2fcf5f3b1ae24b04283273f42a92eb6",
+      "reviewedChoiceIds": [
+        "together",
+        "simple",
+        "redo"
+      ]
+    },
+    {
+      "index": 155,
+      "id": "family-bedtime-detour",
+      "category": "relationships-family",
+      "rationale": "A story's side questions can be explored, saved for its ending or shut down; the existing child's shared attention drives the bond effects, with no separate scheduled callback promised by the immediate conversational wording.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/parentingStories.ts",
+      "line": 29,
+      "sourceLiteralSha256": "806b600a546eb6214cb7c402f314a47589e49c97f1a8a141ea8fabc67166d71f",
+      "reviewedChoiceIds": [
+        "invent",
+        "save",
+        "shush"
+      ]
+    },
+    {
+      "index": 156,
+      "id": "family-private-drawer",
+      "category": "relationships-family",
+      "rationale": "The young child's private collection permits asking, discussing safety exceptions or disregarding the sign; actual same-household child guards fit, and privacy/bond effects do not create a new property title or force a search mechanic.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/parentingStories.ts",
+      "line": 34,
+      "sourceLiteralSha256": "0ca44501bac023c8bfce582bb650ac8e5696640c6667c0bda642f2263eeb4b3f",
+      "reviewedChoiceIds": [
+        "respect",
+        "explain",
+        "ignore"
+      ]
+    },
+    {
+      "index": 157,
+      "id": "family-game-rules-change",
+      "category": "relationships-family",
+      "rationale": "Changing game rules can be agreed, made knowingly silly or dominated by the adult; child-bond and enjoyment effects follow family play, while the intentionally absurd treaty language remains harmless rather than a legal event.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/parentingStories.ts",
+      "line": 39,
+      "sourceLiteralSha256": "d0d45b4ee65b38ab715fb2ce161a898d93dabb53b101bae6ea60d62488123e71",
+      "reviewedChoiceIds": [
+        "agree",
+        "silly",
+        "dominate"
+      ]
+    },
+    {
+      "index": 158,
+      "id": "family-impossible-question",
+      "category": "relationships-family",
+      "rationale": "The unanswerable sky question can be researched together, honestly deferred or met with an invented answer; smarts/respect/bond effects fit learning and honesty without creating a scientific qualification or teaching false factual advice.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/parentingStories.ts",
+      "line": 44,
+      "sourceLiteralSha256": "aa28e8598c8b197ca1317fc4b997a955192dd30fa42a80ec81c0d594161e28d9",
+      "reviewedChoiceIds": [
+        "learn",
+        "admit",
+        "invent"
+      ]
+    },
+    {
+      "index": 159,
+      "id": "family-collection-tour",
+      "category": "relationships-family",
+      "rationale": "The collection tour allows curiosity, a clearly limited attentive period or dismissal; the positive bond for a finite boundary is coherent, and no collectible asset or ownership transfer is awarded.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/parentingStories.ts",
+      "line": 49,
+      "sourceLiteralSha256": "f64633385dc982857f78c961846dfca33b40af8bd94be41d10ff5118a2d983f2",
+      "reviewedChoiceIds": [
+        "notice",
+        "limit",
+        "dismiss"
+      ]
+    },
+    {
+      "index": 160,
+      "id": "family-teen-new-opinion",
+      "category": "relationships-family",
+      "rationale": "A teen child's reasoned opinion can be heard, answered without a lecture or dismissed for age; the actual teen-group family context and bond changes fit, with no forced preference, political belief or qualification change.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/parentingStories.ts",
+      "line": 54,
+      "sourceLiteralSha256": "5faf462886e5f69b303fa851204112e85052f2e718ad75099117c89cb4f956e7",
+      "reviewedChoiceIds": [
+        "listen",
+        "explain",
+        "dismiss"
+      ]
+    },
+    {
+      "index": 161,
+      "id": "family-teen-closed-door",
+      "category": "relationships-family",
+      "rationale": "The teen's request to knock can be respected, discussed with real emergency exceptions or ignored; same-household child eligibility supports the door interaction and the bond effects avoid treating ordinary privacy as misconduct.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/parentingStories.ts",
+      "line": 59,
+      "sourceLiteralSha256": "b382bd94315106914d0178d0308166b82ebb48fd575833c4d7fe4e1ef1c54aa9",
+      "reviewedChoiceIds": [
+        "knock",
+        "agree",
+        "enter"
+      ]
+    },
+    {
+      "index": 162,
+      "id": "family-teen-music-volume",
+      "category": "relationships-family",
+      "rationale": "Loud music can prompt a workable-volume request, curiosity first or an insult; actual teen child and shared-home context fit, and the effects concern relationship quality rather than banning an entire genre or fabricating music ownership.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/parentingStories.ts",
+      "line": 64,
+      "sourceLiteralSha256": "60f3a90441e71ddfe57dc4b75b51d91bf24df77bc23f1634926abfa9a024e8b9",
+      "reviewedChoiceIds": [
+        "request",
+        "curious",
+        "insult"
+      ]
+    },
+    {
+      "index": 163,
+      "id": "family-teen-future-pressure",
+      "category": "relationships-family",
+      "rationale": "The teen's future pressure can be narrowed to a next step, heard or overwritten by a parent; family support dominates over school administration, and the effects grant neither admission, qualification nor a job.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/parentingStories.ts",
+      "line": 69,
+      "sourceLiteralSha256": "e7482d695102073ec3af6a1c9c6e39e5c666fa714e90090a8304801f83b12b47",
+      "reviewedChoiceIds": [
+        "explore",
+        "listen",
+        "announce"
+      ]
+    },
+    {
+      "index": 164,
+      "id": "family-teen-reliable-apology",
+      "category": "relationships-family",
+      "rationale": "The mistaken accusation can be plainly apologised for, repaired or defended; the stronger positive/negative child-bond effects fit the actual parental mistake, without inventing a criminal accusation or legal sanction.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/parentingStories.ts",
+      "line": 74,
+      "sourceLiteralSha256": "3b1b9b9d40d2a3f0c8075a0add08938579b8f1e97e67d5e3469d39945d170d9d",
+      "reviewedChoiceIds": [
+        "apologise",
+        "repair",
+        "qualify"
+      ]
+    },
+    {
+      "index": 165,
+      "id": "family-adult-advice-permission",
+      "category": "relationships-family",
+      "rationale": "An adult child's decision permits checking whether advice is wanted, reflecting options or directing them; actual living local child presence is enough without co-residence, and bond effects preserve their independent decision rather than issuing a command.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/parentingStories.ts",
+      "line": 79,
+      "sourceLiteralSha256": "938828b388f4b29b8d6390927c0f8e9901e716d0fbcb2f1fa79be51f95456b8d",
+      "reviewedChoiceIds": [
+        "ask",
+        "listen",
+        "direct"
+      ]
+    },
+    {
+      "index": 166,
+      "id": "family-adult-inherited-phrase",
+      "category": "relationships-family",
+      "rationale": "A familiar parental phrase can be laughed at, updated by the adult child or defended pompously; the existing family relation supports recognition and bond effects, without pretending this is a persisted inheritance or financial asset.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/parentingStories.ts",
+      "line": 84,
+      "sourceLiteralSha256": "045b7eb7cee9522ae493c9737a329594439450891d6f9f9a44bb6ad735f60fff",
+      "reviewedChoiceIds": [
+        "laugh",
+        "ask",
+        "lecture"
+      ]
+    },
+    {
+      "index": 167,
+      "id": "family-adult-family-story",
+      "category": "relationships-family",
+      "rationale": "The family anecdote can include another memory, compare details or enforce an official version; the two perspectives and bond effects are coherent, and no actual recorded historical event is rewritten by this generic story.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/parentingStories.ts",
+      "line": 89,
+      "sourceLiteralSha256": "908e3102b2a8467d130988ee230dcb0f0cf0295597b41adbff072d248acc8f1f",
+      "reviewedChoiceIds": [
+        "include",
+        "compare",
+        "overrule"
+      ]
+    },
+    {
+      "index": 168,
+      "id": "family-adult-new-tradition",
+      "category": "relationships-family",
+      "rationale": "A family tradition can be tried differently, combined or rejected; bond effects reflect willingness to listen, while the text creates no paid celebration, scheduled obligation or deletion of old memories.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/parentingStories.ts",
+      "line": 94,
+      "sourceLiteralSha256": "b57e30028b37ef08c559701cd054e221f4ad58c040083b12365c0cf997ab3321",
+      "reviewedChoiceIds": [
+        "try",
+        "combine",
+        "refuse"
+      ]
+    },
+    {
+      "index": 169,
+      "id": "family-adult-parent-question",
+      "category": "relationships-family",
+      "rationale": "The adult child can hear uncertainty, a harmless embarrassing anecdote or another lecture; the real parent-child relation supports the past-life-stage conversation, without inventing a specific recorded career, achievement or cross-life memory.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/parentingStories.ts",
+      "line": 99,
+      "sourceLiteralSha256": "939220fdd87bf0f15fbd884f5e914d86ad90884f9f1f277b8c161fc1a7aa322d",
+      "reviewedChoiceIds": [
+        "honest",
+        "funny",
+        "lesson"
+      ]
+    },
+    {
+      "index": 170,
+      "id": "home-key-bowl",
+      "category": "university-early-independence",
+      "rationale": "Keys beside their designated bowl can be placed correctly, accommodated by moving the bowl or overengineered; practical household organisation dominates, and the actual home prerequisite does not invent a key asset or a charge.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/homeLifeStories.ts",
+      "line": 4,
+      "sourceLiteralSha256": "6a527710133a7ca3d3f3a6fb96d33a5cd646e5098abe72bb10f2fec4b523f8b0",
+      "reviewedChoiceIds": [
+        "place",
+        "move",
+        "search"
+      ]
+    },
+    {
+      "index": 171,
+      "id": "home-squeak-investigation",
+      "category": "money-assets-investments",
+      "rationale": "A repeated chair squeak in the genuine household home can be located, avoided temporarily or overtested; this small home-maintenance incident has no repair-payment or asset-condition gain claim, matching the personal effects.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/homeLifeStories.ts",
+      "line": 9,
+      "sourceLiteralSha256": "f3335fe2b8df78d2edeff636f75e9673bf8b19513233057cf3758069b3a61aab",
+      "reviewedChoiceIds": [
+        "check",
+        "shift",
+        "test"
+      ]
+    },
+    {
+      "index": 172,
+      "id": "home-box-worth-keeping",
+      "category": "university-early-independence",
+      "rationale": "The spare box can be recycled, given a real organising purpose or hoarded; adult household organisation drives discipline/stress differences, without counting the ordinary packaging as a bought possession or investment.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/homeLifeStories.ts",
+      "line": 14,
+      "sourceLiteralSha256": "0515e47c401117a99d6c5345fc0a5e91f4c0564abc6f1aa5a8d42c3fa48d8668",
+      "reviewedChoiceIds": [
+        "recycle",
+        "use",
+        "store"
+      ]
+    },
+    {
+      "index": 173,
+      "id": "home-window-cleaning-discovery",
+      "category": "money-assets-investments",
+      "rationale": "The home window smudge can be cleaned locally, scheduled or observed pointlessly; genuine home context supports minor upkeep, and no bird/pet, repair bill or property-value increase is created by the prose.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/homeLifeStories.ts",
+      "line": 19,
+      "sourceLiteralSha256": "019e555befe64b5140b3c195435a0e764fb7f5d5fce4a7ed10c957b505dfb63a",
+      "reviewedChoiceIds": [
+        "clean",
+        "schedule",
+        "observe"
+      ]
+    },
+    {
+      "index": 174,
+      "id": "home-found-old-list",
+      "category": "university-early-independence",
+      "rationale": "An old urgent list can be re-evaluated, remembered or adopted wholesale; practical management of household tasks is the primary incident, and the stress effects do not revive actual past debts or scheduled obligations.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/homeLifeStories.ts",
+      "line": 24,
+      "sourceLiteralSha256": "a7f72eac070cc350ec8752696cca5adc5d2caefa57351885ea88533c075cdc81",
+      "reviewedChoiceIds": [
+        "review",
+        "remember",
+        "adopt"
+      ]
+    },
+    {
+      "index": 175,
+      "id": "home-unexpected-echo",
+      "category": "travel-pets-hobbies-entertainment",
+      "rationale": "The home echo can become a brief playful experiment, quiet listening or excessive noise; ordinary domestic entertainment and its small personal effects fit, with no invented neighbour, noise offence or actual physics system promised.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/homeLifeStories.ts",
+      "line": 29,
+      "sourceLiteralSha256": "2b752880270a90044dda013dcabb2604500917d6922612c161cc47fce69d7f2d",
+      "reviewedChoiceIds": [
+        "play",
+        "notice",
+        "loud"
+      ]
+    },
+    {
+      "index": 176,
+      "id": "wellbeing-search-results",
+      "category": "health-later-life",
+      "rationale": "Searching information about a diagnosed chronic condition can become consultation questions, source checking or anxious refreshing; the actual active diagnosed twelve-month chronic-context guard supports naming it, and effects grant no diagnosis, treatment, cure or consultation charge.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/wellbeingStories.ts",
+      "line": 4,
+      "sourceLiteralSha256": "699061ed5dffaf05972ac023b18dd25bb90b4cd56adfa23c1cb858dee166411a",
+      "reviewedChoiceIds": [
+        "questions",
+        "sources",
+        "refresh"
+      ]
+    }
+  ],
+  "findings": [],
+  "limits": [
+    "Codex editorial source review only, not external-human editorial review.",
+    "No runtime/world/binding loader, random draw, seed search, policy, codec, SQLite, test, export or device operation was executed.",
+    "No natural encounter, country-law fixture, capped-effect execution or rendered UI acceptance is established.",
+    "Numeric effect declarations were checked against prose; absence of a concrete source mismatch is not proof every runtime cap/eligibility path passed.",
+    "Only entries89..176 are reviewed here; no global all265 or allcontexts acceptance claim.",
+    "No original inventory, source, copy, fixture or hash was changed."
+  ]
+}

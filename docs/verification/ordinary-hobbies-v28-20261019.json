@@ -1,0 +1,89 @@
+{
+  "recordedOn": "2026-10-19",
+  "basedOnCommit": "4663c9c",
+  "candidateIdentity": "world28/engine27/content4/database6; exact hashes below; game source fixed through final sweep, diagnostics and full regression",
+  "gameSourceHash": "afe7c166d6857985514bc96eee7374d416d8d7e10fc4dc279303e92bf277cabd",
+  "gameAndPersistenceSourceHash": "cca2039afee12cf05ff902cb6fc1ef3228777d90fd498fffdf91c63a381e8d30",
+  "distinctSituations": 90,
+  "verification": {
+    "domain": {
+      "tests": 112,
+      "suites": 2,
+      "seconds": 5.174
+    },
+    "connectedUiAndReaderUpgrade": {
+      "tests": 9,
+      "suites": 2,
+      "seconds": 11.292,
+      "scope": "Overlaps existing checkpoint checks; not additive to the complete regression"
+    },
+    "fullRegression": {
+      "tests": 1226,
+      "suites": 80,
+      "seconds": 668.278,
+      "exitCode": 0
+    },
+    "strictSourceAndTestTypes": true,
+    "hermes": [
+      {
+        "platform": "android",
+        "bytes": 5308983,
+        "sha256": "f127b3673d13e0035216ceb6ac5c6fa9bee0eecb402c1b1ba017dbe2b97241bc",
+        "assets": 41
+      },
+      {
+        "platform": "ios",
+        "bytes": 5004730,
+        "sha256": "33ba83f21d4f7692018313ad7dfea10717543bb5d30b6883e6e3ae6e88856ec9",
+        "assets": 37
+      }
+    ],
+    "distinctAssets": 48,
+    "metro": [
+      {
+        "platform": "android",
+        "manifestStatus": 200,
+        "bundleStatus": 200,
+        "bytes": 9722788,
+        "sha256": "b40d8962e986c73d4023b446face458e8b9ca4d9778eee7896530bd19e3b3d26",
+        "world28": true,
+        "eightHobbies": true,
+        "reader6": true,
+        "actualCappedPracticeResult": true
+      },
+      {
+        "platform": "ios",
+        "manifestStatus": 200,
+        "bundleStatus": 200,
+        "bytes": 9089394,
+        "sha256": "bd34f7d35430f1d048f2cb0ad54a12dcfd558f85fb824d623fe0b397c4d2b95f",
+        "world28": true,
+        "eightHobbies": true,
+        "reader6": true,
+        "actualCappedPracticeResult": true
+      }
+    ],
+    "nativeAcceptance": false
+  },
+  "artwork": {
+    "path": "assets/generated/ordinary-hobby-atlas.png",
+    "width": 1254,
+    "height": 1254,
+    "sha256": "a1f23261204633eb61dc2b991f5c26d8db2b9c3182d7f6cdf1bd97b9091dcf1a",
+    "pixelEdits": false,
+    "review": "Original source and prior 48/128px light/dark browser gallery; not native acceptance"
+  },
+  "sweep": {
+    "record": "ordinary-hobby-lives-v28-20261019.json",
+    "lives": 12,
+    "elapsedMs": 154477,
+    "attendedMonths": 20896,
+    "pausedMonths": 124
+  },
+  "actionDiagnostic": "ordinary-hobby-actions-v28-20261019.json",
+  "limits": [
+    "Eight core hobby kinds and four outings; wider reference leisure/theatre/media/extras remain incomplete.",
+    "Venue ages/fees are authored game policies, not national law or clinical/educational certification.",
+    "Native visual/performance/release and 1000-person/120-year/multi-generation/storage gates remain open."
+  ]
+}

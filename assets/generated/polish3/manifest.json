@@ -1,0 +1,3483 @@
+{
+  "generator": "Built-in image_gen.imagegen only; Krea not used",
+  "style_reference": "assets/generated/activity-atlas.png and design/polish/event-icons.png inspected visually",
+  "registration": "Alpha component ownership; authored pixels cropped and scaled proportionally, never redrawn.",
+  "sources": [
+    {
+      "file": "design/polish3/art/actions-a.png",
+      "generated_path": "/workspace/generated_images/exec-ce67db44-dfd9-4e5d-8ac8-11882f9bf295.png",
+      "sha256": "a9352253aad0100b582e2da03d5354f63b0d2a8336e64312505375c32a5654dd",
+      "size": [
+        1254,
+        1254
+      ],
+      "sprites": [
+        {
+          "id": "talk",
+          "kind": "actions",
+          "cell": 0,
+          "rect": [
+            0,
+            57,
+            338,
+            280
+          ]
+        },
+        {
+          "id": "compliment",
+          "kind": "actions",
+          "cell": 1,
+          "rect": [
+            322,
+            17,
+            609,
+            283
+          ]
+        },
+        {
+          "id": "spend-time",
+          "kind": "actions",
+          "cell": 2,
+          "rect": [
+            608,
+            29,
+            943,
+            326
+          ]
+        },
+        {
+          "id": "argue",
+          "kind": "actions",
+          "cell": 3,
+          "rect": [
+            929,
+            46,
+            1242,
+            295
+          ]
+        },
+        {
+          "id": "apologise",
+          "kind": "actions",
+          "cell": 4,
+          "rect": [
+            0,
+            321,
+            311,
+            647
+          ]
+        },
+        {
+          "id": "insult",
+          "kind": "actions",
+          "cell": 5,
+          "rect": [
+            303,
+            314,
+            629,
+            601
+          ]
+        },
+        {
+          "id": "distance",
+          "kind": "actions",
+          "cell": 6,
+          "rect": [
+            606,
+            335,
+            951,
+            656
+          ]
+        },
+        {
+          "id": "ask-advice",
+          "kind": "actions",
+          "cell": 7,
+          "rect": [
+            958,
+            318,
+            1240,
+            649
+          ]
+        },
+        {
+          "id": "ask-permission",
+          "kind": "actions",
+          "cell": 8,
+          "rect": [
+            0,
+            582,
+            337,
+            952
+          ]
+        },
+        {
+          "id": "ask-activity",
+          "kind": "actions",
+          "cell": 9,
+          "rect": [
+            305,
+            572,
+            647,
+            942
+          ]
+        },
+        {
+          "id": "request-gift",
+          "kind": "actions",
+          "cell": 10,
+          "rect": [
+            612,
+            605,
+            939,
+            929
+          ]
+        },
+        {
+          "id": "praise",
+          "kind": "actions",
+          "cell": 11,
+          "rect": [
+            925,
+            618,
+            1254,
+            961
+          ]
+        },
+        {
+          "id": "scold",
+          "kind": "actions",
+          "cell": 12,
+          "rect": [
+            11,
+            914,
+            328,
+            1226
+          ]
+        },
+        {
+          "id": "ask-help",
+          "kind": "actions",
+          "cell": 13,
+          "rect": [
+            326,
+            909,
+            643,
+            1230
+          ]
+        },
+        {
+          "id": "give-money",
+          "kind": "actions",
+          "cell": 14,
+          "rect": [
+            626,
+            935,
+            948,
+            1230
+          ]
+        },
+        {
+          "id": "ask-money",
+          "kind": "actions",
+          "cell": 15,
+          "rect": [
+            942,
+            915,
+            1229,
+            1223
+          ]
+        }
+      ]
+    },
+    {
+      "file": "design/polish3/art/actions-b.png",
+      "generated_path": "/workspace/generated_images/exec-21041bce-caa8-4b36-b8fd-020b6bfa2e6e.png",
+      "sha256": "30d43dce7d021615d5d98b0433193f9dfb74c9d414511710543ad0f2fae38086",
+      "size": [
+        1254,
+        1254
+      ],
+      "sprites": [
+        {
+          "id": "ask-loan",
+          "kind": "actions",
+          "cell": 0,
+          "rect": [
+            25,
+            66,
+            316,
+            335
+          ]
+        },
+        {
+          "id": "accept-loan",
+          "kind": "actions",
+          "cell": 1,
+          "rect": [
+            335,
+            49,
+            635,
+            310
+          ]
+        },
+        {
+          "id": "decline-loan",
+          "kind": "actions",
+          "cell": 2,
+          "rect": [
+            628,
+            41,
+            956,
+            332
+          ]
+        },
+        {
+          "id": "repay-loan",
+          "kind": "actions",
+          "cell": 3,
+          "rect": [
+            948,
+            17,
+            1245,
+            320
+          ]
+        },
+        {
+          "id": "academic-help",
+          "kind": "actions",
+          "cell": 4,
+          "rect": [
+            0,
+            323,
+            324,
+            605
+          ]
+        },
+        {
+          "id": "work-feedback",
+          "kind": "actions",
+          "cell": 5,
+          "rect": [
+            328,
+            349,
+            635,
+            659
+          ]
+        },
+        {
+          "id": "request-raise",
+          "kind": "actions",
+          "cell": 6,
+          "rect": [
+            622,
+            306,
+            929,
+            652
+          ]
+        },
+        {
+          "id": "review-custody",
+          "kind": "actions",
+          "cell": 7,
+          "rect": [
+            925,
+            328,
+            1254,
+            633
+          ]
+        },
+        {
+          "id": "move-in",
+          "kind": "actions",
+          "cell": 8,
+          "rect": [
+            0,
+            631,
+            326,
+            918
+          ]
+        },
+        {
+          "id": "ask-date",
+          "kind": "actions",
+          "cell": 9,
+          "rect": [
+            317,
+            639,
+            647,
+            906
+          ]
+        },
+        {
+          "id": "propose",
+          "kind": "actions",
+          "cell": 10,
+          "rect": [
+            625,
+            633,
+            934,
+            916
+          ]
+        },
+        {
+          "id": "plan-wedding",
+          "kind": "actions",
+          "cell": 11,
+          "rect": [
+            923,
+            624,
+            1246,
+            947
+          ]
+        },
+        {
+          "id": "family-planning",
+          "kind": "actions",
+          "cell": 12,
+          "rect": [
+            11,
+            934,
+            325,
+            1226
+          ]
+        },
+        {
+          "id": "divorce",
+          "kind": "actions",
+          "cell": 13,
+          "rect": [
+            320,
+            934,
+            635,
+            1254
+          ]
+        },
+        {
+          "id": "breakup",
+          "kind": "actions",
+          "cell": 14,
+          "rect": [
+            656,
+            962,
+            932,
+            1208
+          ]
+        },
+        {
+          "id": "social-profile",
+          "kind": "actions",
+          "cell": 15,
+          "rect": [
+            947,
+            933,
+            1229,
+            1220
+          ]
+        }
+      ]
+    },
+    {
+      "file": "design/polish3/art/mixed.png",
+      "generated_path": "/workspace/generated_images/exec-20979d8a-4732-4729-93c8-8eb8f7ccc230.png",
+      "sha256": "ee15d5a4fbfad3b7f0f937a415fb8a1812278d71b888aaaf873df6216a5fe0e3",
+      "size": [
+        1355,
+        1160
+      ],
+      "sprites": [
+        {
+          "id": "become-best-friends",
+          "kind": "actions",
+          "cell": 0,
+          "rect": [
+            12,
+            23,
+            347,
+            352
+          ]
+        },
+        {
+          "id": "end-best-friendship",
+          "kind": "actions",
+          "cell": 1,
+          "rect": [
+            352,
+            55,
+            682,
+            294
+          ]
+        },
+        {
+          "id": "ask-teen-date",
+          "kind": "actions",
+          "cell": 2,
+          "rect": [
+            686,
+            19,
+            1005,
+            326
+          ]
+        },
+        {
+          "id": "end-teen-relationship",
+          "kind": "actions",
+          "cell": 3,
+          "rect": [
+            1007,
+            46,
+            1347,
+            350
+          ]
+        },
+        {
+          "id": "net-worth",
+          "kind": "finance",
+          "cell": 4,
+          "rect": [
+            0,
+            298,
+            341,
+            599
+          ]
+        },
+        {
+          "id": "finances",
+          "kind": "finance",
+          "cell": 5,
+          "rect": [
+            340,
+            327,
+            710,
+            572
+          ]
+        },
+        {
+          "id": "shop-assistant-part",
+          "kind": "jobs",
+          "cell": 6,
+          "rect": [
+            687,
+            337,
+            1007,
+            585
+          ]
+        },
+        {
+          "id": "cafe-part",
+          "kind": "jobs",
+          "cell": 7,
+          "rect": [
+            1015,
+            345,
+            1355,
+            584
+          ]
+        },
+        {
+          "id": "cleaner",
+          "kind": "jobs",
+          "cell": 8,
+          "rect": [
+            31,
+            592,
+            355,
+            880
+          ]
+        },
+        {
+          "id": "retail",
+          "kind": "jobs",
+          "cell": 9,
+          "rect": [
+            348,
+            620,
+            679,
+            874
+          ]
+        },
+        {
+          "id": "barista",
+          "kind": "jobs",
+          "cell": 10,
+          "rect": [
+            692,
+            575,
+            1007,
+            888
+          ]
+        },
+        {
+          "id": "warehouse",
+          "kind": "jobs",
+          "cell": 11,
+          "rect": [
+            1035,
+            597,
+            1341,
+            873
+          ]
+        },
+        {
+          "id": "administrator",
+          "kind": "jobs",
+          "cell": 12,
+          "rect": [
+            0,
+            868,
+            355,
+            1160
+          ]
+        },
+        {
+          "id": "support",
+          "kind": "jobs",
+          "cell": 13,
+          "rect": [
+            337,
+            901,
+            678,
+            1140
+          ]
+        },
+        {
+          "id": "plumber",
+          "kind": "jobs",
+          "cell": 14,
+          "rect": [
+            693,
+            876,
+            1016,
+            1143
+          ]
+        },
+        {
+          "id": "technician",
+          "kind": "jobs",
+          "cell": 15,
+          "rect": [
+            1017,
+            871,
+            1339,
+            1144
+          ]
+        }
+      ]
+    },
+    {
+      "file": "design/polish3/art/jobs-1.png",
+      "generated_path": "/workspace/generated_images/exec-f08b98c5-d928-48a0-ab28-4e115e40044f.png",
+      "sha256": "6c0c07c8be167bebe745ba52f930624dc028ca6e7c4fb514ff87492e8ca9c727",
+      "size": [
+        1367,
+        1151
+      ],
+      "sprites": [
+        {
+          "id": "designer",
+          "kind": "jobs",
+          "cell": 0,
+          "rect": [
+            0,
+            34,
+            353,
+            304
+          ]
+        },
+        {
+          "id": "teacher",
+          "kind": "jobs",
+          "cell": 1,
+          "rect": [
+            349,
+            14,
+            682,
+            302
+          ]
+        },
+        {
+          "id": "developer",
+          "kind": "jobs",
+          "cell": 2,
+          "rect": [
+            684,
+            20,
+            1004,
+            294
+          ]
+        },
+        {
+          "id": "accountant",
+          "kind": "jobs",
+          "cell": 3,
+          "rect": [
+            1038,
+            17,
+            1367,
+            310
+          ]
+        },
+        {
+          "id": "researcher",
+          "kind": "jobs",
+          "cell": 4,
+          "rect": [
+            25,
+            304,
+            310,
+            589
+          ]
+        },
+        {
+          "id": "journalist",
+          "kind": "jobs",
+          "cell": 5,
+          "rect": [
+            351,
+            316,
+            684,
+            574
+          ]
+        },
+        {
+          "id": "lawyer",
+          "kind": "jobs",
+          "cell": 6,
+          "rect": [
+            694,
+            304,
+            1017,
+            588
+          ]
+        },
+        {
+          "id": "doctor",
+          "kind": "jobs",
+          "cell": 7,
+          "rect": [
+            1033,
+            300,
+            1357,
+            585
+          ]
+        },
+        {
+          "id": "receptionist",
+          "kind": "jobs",
+          "cell": 8,
+          "rect": [
+            0,
+            571,
+            342,
+            849
+          ]
+        },
+        {
+          "id": "postal-worker",
+          "kind": "jobs",
+          "cell": 9,
+          "rect": [
+            348,
+            580,
+            666,
+            867
+          ]
+        },
+        {
+          "id": "delivery-driver",
+          "kind": "jobs",
+          "cell": 10,
+          "rect": [
+            687,
+            612,
+            1030,
+            864
+          ]
+        },
+        {
+          "id": "bus-driver",
+          "kind": "jobs",
+          "cell": 11,
+          "rect": [
+            1020,
+            580,
+            1358,
+            845
+          ]
+        },
+        {
+          "id": "gardener",
+          "kind": "jobs",
+          "cell": 12,
+          "rect": [
+            0,
+            857,
+            341,
+            1151
+          ]
+        },
+        {
+          "id": "kitchen-assistant",
+          "kind": "jobs",
+          "cell": 13,
+          "rect": [
+            350,
+            887,
+            692,
+            1137
+          ]
+        },
+        {
+          "id": "cook",
+          "kind": "jobs",
+          "cell": 14,
+          "rect": [
+            685,
+            873,
+            1021,
+            1138
+          ]
+        },
+        {
+          "id": "baker",
+          "kind": "jobs",
+          "cell": 15,
+          "rect": [
+            1028,
+            867,
+            1356,
+            1142
+          ]
+        }
+      ]
+    },
+    {
+      "file": "design/polish3/art/jobs-2.png",
+      "generated_path": "/workspace/generated_images/exec-d30bbd52-4b38-488f-952c-24f217cf37a3.png",
+      "sha256": "41076ab03864ba7c560a8fb7cb2c3e675fcb132237933e6fdda942d0670c6a71",
+      "size": [
+        1308,
+        1203
+      ],
+      "sprites": [
+        {
+          "id": "chef",
+          "kind": "jobs",
+          "cell": 0,
+          "rect": [
+            0,
+            15,
+            327,
+            293
+          ]
+        },
+        {
+          "id": "electrician",
+          "kind": "jobs",
+          "cell": 1,
+          "rect": [
+            349,
+            29,
+            649,
+            294
+          ]
+        },
+        {
+          "id": "carpenter",
+          "kind": "jobs",
+          "cell": 2,
+          "rect": [
+            659,
+            22,
+            958,
+            296
+          ]
+        },
+        {
+          "id": "mechanic",
+          "kind": "jobs",
+          "cell": 3,
+          "rect": [
+            990,
+            25,
+            1292,
+            293
+          ]
+        },
+        {
+          "id": "welder",
+          "kind": "jobs",
+          "cell": 4,
+          "rect": [
+            16,
+            304,
+            331,
+            636
+          ]
+        },
+        {
+          "id": "care-worker",
+          "kind": "jobs",
+          "cell": 5,
+          "rect": [
+            335,
+            308,
+            660,
+            594
+          ]
+        },
+        {
+          "id": "nurse",
+          "kind": "jobs",
+          "cell": 6,
+          "rect": [
+            659,
+            314,
+            971,
+            586
+          ]
+        },
+        {
+          "id": "physiotherapist",
+          "kind": "jobs",
+          "cell": 7,
+          "rect": [
+            976,
+            309,
+            1291,
+            601
+          ]
+        },
+        {
+          "id": "engineer",
+          "kind": "jobs",
+          "cell": 8,
+          "rect": [
+            11,
+            605,
+            331,
+            884
+          ]
+        },
+        {
+          "id": "architect",
+          "kind": "jobs",
+          "cell": 9,
+          "rect": [
+            337,
+            607,
+            658,
+            888
+          ]
+        },
+        {
+          "id": "data-analyst",
+          "kind": "jobs",
+          "cell": 10,
+          "rect": [
+            655,
+            606,
+            983,
+            883
+          ]
+        },
+        {
+          "id": "it-technician",
+          "kind": "jobs",
+          "cell": 11,
+          "rect": [
+            978,
+            595,
+            1284,
+            886
+          ]
+        },
+        {
+          "id": "librarian",
+          "kind": "jobs",
+          "cell": 12,
+          "rect": [
+            0,
+            873,
+            345,
+            1203
+          ]
+        },
+        {
+          "id": "social-worker",
+          "kind": "jobs",
+          "cell": 13,
+          "rect": [
+            348,
+            880,
+            652,
+            1183
+          ]
+        },
+        {
+          "id": "marketing-executive",
+          "kind": "jobs",
+          "cell": 14,
+          "rect": [
+            657,
+            877,
+            984,
+            1185
+          ]
+        },
+        {
+          "id": "human-resources",
+          "kind": "jobs",
+          "cell": 15,
+          "rect": [
+            978,
+            892,
+            1298,
+            1183
+          ]
+        }
+      ]
+    },
+    {
+      "file": "design/polish3/art/jobs-3.png",
+      "generated_path": "/workspace/generated_images/exec-e310c925-99e9-4ff4-9da0-9ed466f2743a.png",
+      "sha256": "de0089ff296e4ba4610ffb86d6028602b457fde2f6e0262ae6d54e91c3a6871e",
+      "size": [
+        1254,
+        1254
+      ],
+      "sprites": [
+        {
+          "id": "project-manager",
+          "kind": "jobs",
+          "cell": 0,
+          "rect": [
+            0,
+            54,
+            310,
+            324
+          ]
+        },
+        {
+          "id": "operations-manager",
+          "kind": "jobs",
+          "cell": 1,
+          "rect": [
+            312,
+            36,
+            633,
+            316
+          ]
+        },
+        {
+          "id": "sales-representative",
+          "kind": "jobs",
+          "cell": 2,
+          "rect": [
+            608,
+            60,
+            954,
+            325
+          ]
+        },
+        {
+          "id": "estate-agent",
+          "kind": "jobs",
+          "cell": 3,
+          "rect": [
+            947,
+            59,
+            1244,
+            276
+          ]
+        },
+        {
+          "id": "insurance-adviser",
+          "kind": "jobs",
+          "cell": 4,
+          "rect": [
+            0,
+            337,
+            321,
+            617
+          ]
+        },
+        {
+          "id": "bank-clerk",
+          "kind": "jobs",
+          "cell": 5,
+          "rect": [
+            304,
+            312,
+            630,
+            613
+          ]
+        },
+        {
+          "id": "procurement-officer",
+          "kind": "jobs",
+          "cell": 6,
+          "rect": [
+            618,
+            320,
+            937,
+            622
+          ]
+        },
+        {
+          "id": "logistics-coordinator",
+          "kind": "jobs",
+          "cell": 7,
+          "rect": [
+            945,
+            314,
+            1254,
+            613
+          ]
+        },
+        {
+          "id": "software-tester",
+          "kind": "jobs",
+          "cell": 8,
+          "rect": [
+            0,
+            614,
+            312,
+            939
+          ]
+        },
+        {
+          "id": "cybersecurity-analyst",
+          "kind": "jobs",
+          "cell": 9,
+          "rect": [
+            320,
+            630,
+            634,
+            922
+          ]
+        },
+        {
+          "id": "library-part",
+          "kind": "jobs",
+          "cell": 10,
+          "rect": [
+            637,
+            618,
+            955,
+            933
+          ]
+        },
+        {
+          "id": "cinema-part",
+          "kind": "jobs",
+          "cell": 11,
+          "rect": [
+            939,
+            649,
+            1240,
+            918
+          ]
+        },
+        {
+          "id": "grocery-part",
+          "kind": "jobs",
+          "cell": 12,
+          "rect": [
+            24,
+            935,
+            342,
+            1222
+          ]
+        },
+        {
+          "id": "pet-care-part",
+          "kind": "jobs",
+          "cell": 13,
+          "rect": [
+            318,
+            992,
+            633,
+            1226
+          ]
+        },
+        {
+          "id": "tutor-part",
+          "kind": "jobs",
+          "cell": 14,
+          "rect": [
+            638,
+            945,
+            951,
+            1226
+          ]
+        },
+        {
+          "id": "market-stall-part",
+          "kind": "jobs",
+          "cell": 15,
+          "rect": [
+            945,
+            935,
+            1239,
+            1222
+          ]
+        }
+      ]
+    },
+    {
+      "file": "design/polish3/art/jobs-emergency.png",
+      "generated_path": "/workspace/generated_images/exec-93cae634-b023-4d52-ac24-2ea5d2cfe771.png",
+      "sha256": "f30fc1d43c828543bf875e6275ad8819c29691d698db8c3c1f7ae75fc79e0708",
+      "size": [
+        1308,
+        1202
+      ],
+      "sprites": [
+        {
+          "id": "firefighter",
+          "kind": "jobs",
+          "cell": 0,
+          "rect": [
+            0,
+            2,
+            662,
+            589
+          ]
+        },
+        {
+          "id": "paramedic",
+          "kind": "jobs",
+          "cell": 1,
+          "rect": [
+            664,
+            30,
+            1294,
+            603
+          ]
+        },
+        {
+          "id": "police-officer",
+          "kind": "jobs",
+          "cell": 2,
+          "rect": [
+            15,
+            622,
+            684,
+            1188
+          ]
+        },
+        {
+          "id": "construction-worker",
+          "kind": "jobs",
+          "cell": 3,
+          "rect": [
+            673,
+            620,
+            1302,
+            1187
+          ]
+        }
+      ]
+    },
+    {
+      "file": "design/action-icons/actions-1.png",
+      "generated_path": "/workspace/generated_images/exec-54bc737f-81a7-456e-860d-523082012601.png",
+      "sha256": "1553b935e396827a1cb931d9109a5617ee77ad357155ee01610c77ec174d1798",
+      "size": [
+        1448,
+        1086
+      ]
+    },
+    {
+      "file": "design/action-icons/actions-2.png",
+      "generated_path": "/workspace/generated_images/exec-d9d2099e-a053-478d-96de-5ea1c98d7638.png",
+      "sha256": "8223dccc0b46eb9d4e260622ef76272f1a3244aeee78497449b3b31e37f6bcc9",
+      "size": [
+        1448,
+        1086
+      ]
+    },
+    {
+      "file": "design/action-icons/jobs.png",
+      "generated_path": "/workspace/generated_images/exec-96765238-fed1-4c2f-a1bc-0e6defc09214.png",
+      "sha256": "12267c50aa0b42201ff47a5a93928e60babab7c3cbe81162830ec4d65f878629",
+      "size": [
+        1448,
+        1086
+      ]
+    },
+    {
+      "file": "design/action-icons/symbols.png",
+      "generated_path": "/workspace/generated_images/exec-e94b5fb4-96a3-4124-87b4-b77ed0405301.png",
+      "sha256": "fffe3bc4bc23761505264d801895aab22c74c7914001b63d66c4deb7844b30db",
+      "size": [
+        1254,
+        1254
+      ]
+    },
+    {
+      "file": "design/action-icons/jobs-extra.png",
+      "generated_path": "/workspace/generated_images/exec-9b94ac5d-3c2f-453e-a35f-c67fa3b40369.png",
+      "sha256": "cb8b2dd79776184d018c8683e7282f365d0575c9cacd987ce3c0353ca7ea6023",
+      "size": [
+        1536,
+        1024
+      ]
+    }
+  ],
+  "icons": {
+    "actions:talk": {
+      "id": "talk",
+      "kind": "actions",
+      "file": "actions/talk.png",
+      "source": "actions-a.png",
+      "cell": 0,
+      "source_rect": [
+        0,
+        57,
+        338,
+        280
+      ],
+      "subject": "talk",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 47717,
+      "sha256": "a3e0b3b5fac3fe7fbdf890c1d56baf72ca9b60d1da6ef056ff043843eaf919c4"
+    },
+    "actions:compliment": {
+      "id": "compliment",
+      "kind": "actions",
+      "file": "actions/compliment.png",
+      "source": "design/action-icons/actions-1.png",
+      "cell": 0,
+      "source_rect": [
+        48,
+        61,
+        369,
+        342
+      ],
+      "subject": "A blue speech bubble with one pink heart inset in it.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 61589,
+      "sha256": "9dae5c09038d9ccbcbe6561986711154db251227762f4a1f0913b382123f790e",
+      "alphaBounds": [
+        13,
+        27,
+        244,
+        228
+      ]
+    },
+    "actions:spend-time": {
+      "id": "spend-time",
+      "kind": "actions",
+      "file": "actions/spend-time.png",
+      "source": "design/action-icons/actions-1.png",
+      "cell": 1,
+      "source_rect": [
+        387,
+        92,
+        789,
+        316
+      ],
+      "subject": "A friendly handshake, two hands with simple blue and teal cuffs, no other objects.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 47140,
+      "sha256": "227557835d73b83524c1791300fcc40ec2e6ff3cf5f6ae57c3323ccd44d75b99",
+      "alphaBounds": [
+        12,
+        63,
+        243,
+        192
+      ]
+    },
+    "actions:argue": {
+      "id": "argue",
+      "kind": "actions",
+      "file": "actions/argue.png",
+      "source": "design/action-icons/actions-1.png",
+      "cell": 2,
+      "source_rect": [
+        806,
+        46,
+        1115,
+        338
+      ],
+      "subject": "One red angular speech bubble with a simple angry expression, no person or second bubble.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 60445,
+      "sha256": "4d72b3c13b41a39ddf949ef8588848fc16553725c9a23df6aacc62a775f1e931",
+      "alphaBounds": [
+        12,
+        19,
+        242,
+        236
+      ]
+    },
+    "actions:apologise": {
+      "id": "apologise",
+      "kind": "actions",
+      "file": "actions/apologise.png",
+      "source": "design/action-icons/actions-1.png",
+      "cell": 3,
+      "source_rect": [
+        1122,
+        36,
+        1427,
+        345
+      ],
+      "subject": "One soft white surrender flag on a short blue pole, cloth large and clearly readable.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 56141,
+      "sha256": "3397da3a6300cbfd16832ad80e1838c083a73e739b2103a8db180a1e810b87bd",
+      "alphaBounds": [
+        14,
+        12,
+        242,
+        242
+      ]
+    },
+    "actions:insult": {
+      "id": "insult",
+      "kind": "actions",
+      "file": "actions/insult.png",
+      "source": "design/action-icons/actions-2.png",
+      "cell": 11,
+      "source_rect": [
+        1104,
+        731,
+        1432,
+        1028
+      ],
+      "subject": "One purple jagged speech bubble with a small storm cloud inset, no person or separate objects.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 67404,
+      "sha256": "2cec8fdd30781fe3b40e9c036a1627732e82d851e9fe77f47f8ba89bc8a875f8",
+      "alphaBounds": [
+        13,
+        24,
+        243,
+        232
+      ]
+    },
+    "actions:distance": {
+      "id": "distance",
+      "kind": "actions",
+      "file": "actions/distance.png",
+      "source": "design/action-icons/actions-1.png",
+      "cell": 4,
+      "source_rect": [
+        41,
+        416,
+        402,
+        676
+      ],
+      "subject": "One short blue chain link broken cleanly in the centre, its two halves forming one unified symbol.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 49195,
+      "sha256": "6cfc1d7cc0897e08b93a7468d7d23581bec130e9cb36775b587c9905a004eece",
+      "alphaBounds": [
+        13,
+        45,
+        243,
+        211
+      ]
+    },
+    "actions:ask-advice": {
+      "id": "ask-advice",
+      "kind": "actions",
+      "file": "actions/ask-advice.png",
+      "source": "design/action-icons/actions-1.png",
+      "cell": 5,
+      "source_rect": [
+        458,
+        366,
+        698,
+        697
+      ],
+      "subject": "One warm gold lightbulb, a clean simple silhouette without extra rays or props.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 51672,
+      "sha256": "065f67c0b5358512792ebcaf7c7b794c67df6233eaaa2a7ae753a6da3490a100",
+      "alphaBounds": [
+        44,
+        13,
+        212,
+        244
+      ]
+    },
+    "actions:ask-permission": {
+      "id": "ask-permission",
+      "kind": "actions",
+      "file": "actions/ask-permission.png",
+      "source": "design/action-icons/actions-1.png",
+      "cell": 6,
+      "source_rect": [
+        781,
+        404,
+        1094,
+        684
+      ],
+      "subject": "One teal speech bubble with a large simple white check inset in it.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 63275,
+      "sha256": "ba1e0e5219e0ef46802e51bd946f62ac2b2eedcd776762b3c227b24a4110e528",
+      "alphaBounds": [
+        12,
+        24,
+        244,
+        231
+      ]
+    },
+    "actions:ask-activity": {
+      "id": "ask-activity",
+      "kind": "actions",
+      "file": "actions/ask-activity.png",
+      "source": "design/action-icons/actions-1.png",
+      "cell": 7,
+      "source_rect": [
+        1119,
+        369,
+        1418,
+        702
+      ],
+      "subject": "One cheerful blue and gold diamond kite with a short curved tail.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 55859,
+      "sha256": "f757af4246c82d254fa3afb2f6266dc8be68e6ed82cdad91afef4ab62d2ac26f",
+      "alphaBounds": [
+        24,
+        13,
+        231,
+        243
+      ]
+    },
+    "actions:request-gift": {
+      "id": "request-gift",
+      "kind": "actions",
+      "file": "actions/request-gift.png",
+      "source": "actions-a.png",
+      "cell": 10,
+      "source_rect": [
+        612,
+        605,
+        939,
+        929
+      ],
+      "subject": "request gift",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 76560,
+      "sha256": "add1618e589afe618e92a7a82f704fb2001d3022f8ac3c57eb05213a700dd0b0"
+    },
+    "actions:praise": {
+      "id": "praise",
+      "kind": "actions",
+      "file": "actions/praise.png",
+      "source": "design/action-icons/actions-1.png",
+      "cell": 8,
+      "source_rect": [
+        33,
+        729,
+        348,
+        1029
+      ],
+      "subject": "One dimensional gold five-pointed star, no secondary sparkles.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 59916,
+      "sha256": "f92b72de3ec1a0922d50c125c300e40bc1e99736efb76c22071df79c103dac2d",
+      "alphaBounds": [
+        13,
+        17,
+        244,
+        238
+      ]
+    },
+    "actions:scold": {
+      "id": "scold",
+      "kind": "actions",
+      "file": "actions/scold.png",
+      "source": "design/action-icons/actions-1.png",
+      "cell": 9,
+      "source_rect": [
+        414,
+        728,
+        728,
+        1015
+      ],
+      "subject": "One gold speech bubble with a large dark exclamation mark inset in it.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 62669,
+      "sha256": "77c24a39f0f47cc3352535294d9d753fc4bccd9ba51800abf9163baf71c0e923",
+      "alphaBounds": [
+        13,
+        22,
+        243,
+        234
+      ]
+    },
+    "actions:ask-help": {
+      "id": "ask-help",
+      "kind": "actions",
+      "file": "actions/ask-help.png",
+      "source": "design/action-icons/actions-1.png",
+      "cell": 10,
+      "source_rect": [
+        762,
+        718,
+        1099,
+        1040
+      ],
+      "subject": "One blue and white lifebuoy, without scenery or extra items.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 69847,
+      "sha256": "3483ed3a82b770294a7c98f83c6c83cb4ad9d7aeb0e2c617b0d03b715342eff7",
+      "alphaBounds": [
+        12,
+        17,
+        243,
+        238
+      ]
+    },
+    "actions:give-money": {
+      "id": "give-money",
+      "kind": "actions",
+      "file": "actions/give-money.png",
+      "source": "actions-a.png",
+      "cell": 14,
+      "source_rect": [
+        626,
+        935,
+        948,
+        1230
+      ],
+      "subject": "give money",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 66542,
+      "sha256": "99028a56246fd73ac262d7cddde9f536c4bb20080a866f3104abb91d5be0de54"
+    },
+    "actions:ask-money": {
+      "id": "ask-money",
+      "kind": "actions",
+      "file": "actions/ask-money.png",
+      "source": "actions-a.png",
+      "cell": 15,
+      "source_rect": [
+        942,
+        915,
+        1229,
+        1223
+      ],
+      "subject": "ask money",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 63823,
+      "sha256": "a7d37627f1997c15171bc25d8227c6912df94134b9e28b09991b66fcefb6b7f4"
+    },
+    "actions:ask-loan": {
+      "id": "ask-loan",
+      "kind": "actions",
+      "file": "actions/ask-loan.png",
+      "source": "design/action-icons/actions-2.png",
+      "cell": 5,
+      "source_rect": [
+        385,
+        399,
+        699,
+        722
+      ],
+      "subject": "One folded blue financial agreement page with a gold coin emblem printed on it, no text or loose coins.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 70735,
+      "sha256": "5074c55dcf9a3ba45a8584fbea9ddc490553d9b6d5472cf4c3f9ac0de18c6d2a",
+      "alphaBounds": [
+        16,
+        13,
+        240,
+        243
+      ]
+    },
+    "actions:accept-loan": {
+      "id": "accept-loan",
+      "kind": "actions",
+      "file": "actions/accept-loan.png",
+      "source": "actions-b.png",
+      "cell": 1,
+      "source_rect": [
+        335,
+        49,
+        635,
+        310
+      ],
+      "subject": "accept loan",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 62514,
+      "sha256": "489b00f2357ed44e22867decb438c27a9f724b6d76624374461fc90bf268a76b"
+    },
+    "actions:decline-loan": {
+      "id": "decline-loan",
+      "kind": "actions",
+      "file": "actions/decline-loan.png",
+      "source": "actions-b.png",
+      "cell": 2,
+      "source_rect": [
+        628,
+        41,
+        956,
+        332
+      ],
+      "subject": "decline loan",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 59824,
+      "sha256": "d511fa28489d3bf8b2ab6b0ef3133f654948103b390b4f94729177cee076c65e"
+    },
+    "actions:repay-loan": {
+      "id": "repay-loan",
+      "kind": "actions",
+      "file": "actions/repay-loan.png",
+      "source": "actions-b.png",
+      "cell": 3,
+      "source_rect": [
+        948,
+        17,
+        1245,
+        320
+      ],
+      "subject": "repay loan",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 69679,
+      "sha256": "3b39d8fd1c6357e2c2873f36c10fdf8ff6ab790755b0b65a7aabe8aef58734ca"
+    },
+    "actions:academic-help": {
+      "id": "academic-help",
+      "kind": "actions",
+      "file": "actions/academic-help.png",
+      "source": "design/action-icons/actions-2.png",
+      "cell": 3,
+      "source_rect": [
+        1082,
+        104,
+        1422,
+        335
+      ],
+      "subject": "One open blue book with cream pages, no text, bulb or pencil.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 54524,
+      "sha256": "a91d0102ee77391abadb5780d2218876d45ba693d3300d421c6d3438ae260327",
+      "alphaBounds": [
+        12,
+        50,
+        243,
+        207
+      ]
+    },
+    "actions:work-feedback": {
+      "id": "work-feedback",
+      "kind": "actions",
+      "file": "actions/work-feedback.png",
+      "source": "design/action-icons/actions-2.png",
+      "cell": 4,
+      "source_rect": [
+        38,
+        374,
+        335,
+        718
+      ],
+      "subject": "One blue clipboard with a simple green check on its page, no magnifier or briefcase.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 64814,
+      "sha256": "54d71b8ac4c49c142efcf710fa04c6d16e7d3fc00bcedd8d502541a808dc40b2",
+      "alphaBounds": [
+        28,
+        12,
+        228,
+        243
+      ]
+    },
+    "actions:request-raise": {
+      "id": "request-raise",
+      "kind": "actions",
+      "file": "actions/request-raise.png",
+      "source": "design/action-icons/actions-2.png",
+      "cell": 6,
+      "source_rect": [
+        764,
+        425,
+        1032,
+        711
+      ],
+      "subject": "One neatly stacked group of large gold coins, a single unified coin stack without hands or briefcase.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 75610,
+      "sha256": "2b87f6da2e06a045f650483af3be55bade7cee6ed0a7a21d1dc70d84da26849b",
+      "alphaBounds": [
+        19,
+        12,
+        235,
+        244
+      ]
+    },
+    "actions:review-custody": {
+      "id": "review-custody",
+      "kind": "actions",
+      "file": "actions/review-custody.png",
+      "source": "design/action-icons/actions-2.png",
+      "cell": 0,
+      "source_rect": [
+        48,
+        54,
+        337,
+        360
+      ],
+      "subject": "One protective blue shield with a pink heart inset in its centre.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 74118,
+      "sha256": "9d39aa7d907ece64398f7e9370fbec5401f58b051ce87f49442a937dd9291856",
+      "alphaBounds": [
+        18,
+        13,
+        237,
+        243
+      ]
+    },
+    "actions:move-in": {
+      "id": "move-in",
+      "kind": "actions",
+      "file": "actions/move-in.png",
+      "source": "design/action-icons/actions-2.png",
+      "cell": 1,
+      "source_rect": [
+        398,
+        42,
+        695,
+        360
+      ],
+      "subject": "One substantial gold house key, no house or luggage.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 57875,
+      "sha256": "af648da3871c5e1a47db3cedecc1eff90f8a32abd3ee35b8b41d3224d06ba5f1",
+      "alphaBounds": [
+        20,
+        13,
+        235,
+        243
+      ]
+    },
+    "actions:ask-date": {
+      "id": "ask-date",
+      "kind": "actions",
+      "file": "actions/ask-date.png",
+      "source": "design/action-icons/actions-2.png",
+      "cell": 7,
+      "source_rect": [
+        1063,
+        414,
+        1439,
+        686
+      ],
+      "subject": "One unified pair of clinking blue mugs with a small heart inset in each mug, no flowers or other items.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 55801,
+      "sha256": "87b52820e80fb6e562c83fb2d85d44bb38bb728934014445c5ef2982f0b78e1b",
+      "alphaBounds": [
+        13,
+        45,
+        244,
+        212
+      ]
+    },
+    "actions:propose": {
+      "id": "propose",
+      "kind": "actions",
+      "file": "actions/propose.png",
+      "source": "actions-b.png",
+      "cell": 10,
+      "source_rect": [
+        625,
+        633,
+        934,
+        916
+      ],
+      "subject": "propose",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 79740,
+      "sha256": "4b7f1eb22ae6e86d48d4cd1ab5b1752a861b99b0e7585e401089c6bb15317fd7"
+    },
+    "actions:plan-wedding": {
+      "id": "plan-wedding",
+      "kind": "actions",
+      "file": "actions/plan-wedding.png",
+      "source": "design/action-icons/actions-2.png",
+      "cell": 2,
+      "source_rect": [
+        730,
+        99,
+        1065,
+        330
+      ],
+      "subject": "One unified pair of gently overlapping gold wedding rings, no people or flowers.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 61345,
+      "sha256": "dafae630ce568078aec0325c304a392ff2da28f389fd57dd25ed02f8f264e1f0",
+      "alphaBounds": [
+        12,
+        48,
+        243,
+        207
+      ]
+    },
+    "actions:family-planning": {
+      "id": "family-planning",
+      "kind": "actions",
+      "file": "actions/family-planning.png",
+      "source": "design/action-icons/actions-1.png",
+      "cell": 11,
+      "source_rect": [
+        1129,
+        718,
+        1420,
+        1041
+      ],
+      "subject": "One blue and gold baby rattle, large rounded handle and simple form.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 51456,
+      "sha256": "76a8b2cca082b05eea601dd9dff47d0cd0ee6c685bdc5b90a910ba068f79ae99",
+      "alphaBounds": [
+        23,
+        13,
+        231,
+        243
+      ]
+    },
+    "actions:divorce": {
+      "id": "divorce",
+      "kind": "actions",
+      "file": "actions/divorce.png",
+      "source": "design/action-icons/actions-2.png",
+      "cell": 8,
+      "source_rect": [
+        29,
+        747,
+        342,
+        1030
+      ],
+      "subject": "One cream certificate page neatly torn down the middle, its halves still close together, without rings, pen or writing.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 70999,
+      "sha256": "7d695edf4d9dc9cc4fb9f47f60913740f5b3aadcddb0d0a1179872beaed25e6b",
+      "alphaBounds": [
+        13,
+        25,
+        243,
+        232
+      ]
+    },
+    "actions:breakup": {
+      "id": "breakup",
+      "kind": "actions",
+      "file": "actions/breakup.png",
+      "source": "actions-b.png",
+      "cell": 14,
+      "source_rect": [
+        656,
+        962,
+        932,
+        1208
+      ],
+      "subject": "breakup",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 85615,
+      "sha256": "cc16e68b8cedaa56050a64512547aa55236c67eac06509a570ecf8784232c761"
+    },
+    "actions:social-profile": {
+      "id": "social-profile",
+      "kind": "actions",
+      "file": "actions/social-profile.png",
+      "source": "actions-b.png",
+      "cell": 15,
+      "source_rect": [
+        947,
+        933,
+        1229,
+        1220
+      ],
+      "subject": "social profile",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 92605,
+      "sha256": "3d3a498c9fc764fc3a20e10e3c8afbb0cea69bd3decd4f7a5018de9cf2059669"
+    },
+    "actions:become-best-friends": {
+      "id": "become-best-friends",
+      "kind": "actions",
+      "file": "actions/become-best-friends.png",
+      "source": "mixed.png",
+      "cell": 0,
+      "source_rect": [
+        12,
+        23,
+        347,
+        352
+      ],
+      "subject": "Two cheerful young adult friends exchanging a bright woven friendship bracelet with a little golden star, teal and orange clothing, warm close friendship.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 97518,
+      "sha256": "6cbf3633cf4b3edcd8ef29a53b9ea9414c3f6db504a4fa777230e68aeece3519"
+    },
+    "actions:end-best-friendship": {
+      "id": "end-best-friendship",
+      "kind": "actions",
+      "file": "actions/end-best-friendship.png",
+      "source": "mixed.png",
+      "cell": 1,
+      "source_rect": [
+        352,
+        55,
+        682,
+        294
+      ],
+      "subject": "Two distinct matching woven friendship bracelets now visibly untied and resting apart, purple and turquoise threads, no broken romantic heart.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 58539,
+      "sha256": "d78fe74d41af8ae2672d4f40a9209f863a2102b892abade6d171da421aa1166f"
+    },
+    "actions:ask-teen-date": {
+      "id": "ask-teen-date",
+      "kind": "actions",
+      "file": "actions/ask-teen-date.png",
+      "source": "design/action-icons/actions-2.png",
+      "cell": 9,
+      "source_rect": [
+        392,
+        760,
+        715,
+        1018
+      ],
+      "subject": "One warm coral envelope with a simple heart seal, no people or scenery.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 62237,
+      "sha256": "70f5e6f9d6c0b79fadcdad1d8d11dd1180739d85260d944dd83141952fee16d9",
+      "alphaBounds": [
+        12,
+        36,
+        243,
+        220
+      ]
+    },
+    "actions:end-teen-relationship": {
+      "id": "end-teen-relationship",
+      "kind": "actions",
+      "file": "actions/end-teen-relationship.png",
+      "source": "design/action-icons/actions-2.png",
+      "cell": 10,
+      "source_rect": [
+        756,
+        763,
+        1069,
+        1021
+      ],
+      "subject": "One pink heart-shaped paper note with a clean central tear, without words, scenery or other items.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 64582,
+      "sha256": "3d3c4e8535eb5b7a02f720e82244c5f25d3f51a640d94f61d5ebdd5552a4e517",
+      "alphaBounds": [
+        13,
+        33,
+        243,
+        222
+      ]
+    },
+    "finance:net-worth": {
+      "id": "net-worth",
+      "kind": "finance",
+      "file": "finance/net-worth.png",
+      "source": "mixed.png",
+      "cell": 4,
+      "source_rect": [
+        0,
+        298,
+        341,
+        599
+      ],
+      "subject": "A beautiful open treasure chest full of gold coins, with a tiny red-roof house and turquoise car among the wealth, clearly personal total assets. No bank building, no ledger.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 84613,
+      "sha256": "eabd22eac3d6abf28f949e19352962ae14dec15b4b2e67602d51bf969623ef60"
+    },
+    "finance:finances": {
+      "id": "finances",
+      "kind": "finance",
+      "file": "finance/finances.png",
+      "source": "mixed.png",
+      "cell": 5,
+      "source_rect": [
+        340,
+        327,
+        710,
+        572
+      ],
+      "subject": "An open orange financial ledger with a blue cash-flow chart card, green notes and small gold coins moving along a curved teal arrow, a tidy pen. Financial records and spending, no bank building or treasure chest.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 73232,
+      "sha256": "d5caa50ef299dd37796ce94d190f429d12fc5799cf88112e7c47760eea6da652"
+    },
+    "jobs:shop-assistant-part": {
+      "id": "shop-assistant-part",
+      "kind": "jobs",
+      "file": "jobs/shop-assistant-part.png",
+      "source": "mixed.png",
+      "cell": 6,
+      "source_rect": [
+        687,
+        337,
+        1007,
+        585
+      ],
+      "subject": "A paper shopping bag with neatly folded shirt and handheld barcode scanner; weekend retail helper.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 68412,
+      "sha256": "6373f24a0f59f943dfe07d5560380ee128b7afc333ad5d57a89a20ee2f9ceb01"
+    },
+    "jobs:cafe-part": {
+      "id": "cafe-part",
+      "kind": "jobs",
+      "file": "jobs/cafe-part.png",
+      "source": "mixed.png",
+      "cell": 7,
+      "source_rect": [
+        1015,
+        345,
+        1355,
+        584
+      ],
+      "subject": "A caf\u00e9 clearing tray with two mugs, folded cloth and small order pad; table-service helper.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 67610,
+      "sha256": "96559f52f12975fb0fc22b393c49cd2f16f5549848ecda848104258429671517"
+    },
+    "jobs:cleaner": {
+      "id": "cleaner",
+      "kind": "jobs",
+      "file": "jobs/cleaner.png",
+      "source": "mixed.png",
+      "cell": 8,
+      "source_rect": [
+        31,
+        592,
+        355,
+        880
+      ],
+      "subject": "A bright mop bucket, upright mop and spray bottle with a floor-warning sign.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 71173,
+      "sha256": "bfd3287f18c772c73754155da1d80fdabe0af83d94b21a8f9844e533c3504c0c"
+    },
+    "jobs:retail": {
+      "id": "retail",
+      "kind": "jobs",
+      "file": "jobs/retail.png",
+      "source": "design/action-icons/jobs.png",
+      "cell": 11,
+      "source_rect": [
+        1100,
+        731,
+        1426,
+        1038
+      ],
+      "subject": "One simple blue shop cash register with a gold drawer, no clothing rack or stock.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 74214,
+      "sha256": "2d62475aafc5e07db201ecee85d6f363ce7a2774935932040e5193114c5a8b19",
+      "alphaBounds": [
+        12,
+        20,
+        244,
+        236
+      ]
+    },
+    "jobs:barista": {
+      "id": "barista",
+      "kind": "jobs",
+      "file": "jobs/barista.png",
+      "source": "mixed.png",
+      "cell": 10,
+      "source_rect": [
+        692,
+        575,
+        1007,
+        888
+      ],
+      "subject": "A polished espresso machine pouring into a cup with latte art, coffee beans beside it.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 99609,
+      "sha256": "6c1865e4b5598f179f8f9e9b1b8e25b6a0046e805ed1dcd6bbb82198e46709cf"
+    },
+    "jobs:warehouse": {
+      "id": "warehouse",
+      "kind": "jobs",
+      "file": "jobs/warehouse.png",
+      "source": "mixed.png",
+      "cell": 11,
+      "source_rect": [
+        1035,
+        597,
+        1341,
+        873
+      ],
+      "subject": "A warehouse hand pallet jack carrying neatly strapped cardboard boxes, scanner attached.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 83102,
+      "sha256": "19f167d7bb89b656251a7610a799b2ccc1a516dda121caec8b684088ac8b514b"
+    },
+    "jobs:administrator": {
+      "id": "administrator",
+      "kind": "jobs",
+      "file": "jobs/administrator.png",
+      "source": "mixed.png",
+      "cell": 12,
+      "source_rect": [
+        0,
+        868,
+        355,
+        1160
+      ],
+      "subject": "A desktop appointment calendar, file folders, pen pot and tidy office telephone.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 73343,
+      "sha256": "1a0ccd4100852cad00ec85e15a14cfdeafb26a0a945c2512dd4c47bcfcce686e"
+    },
+    "jobs:support": {
+      "id": "support",
+      "kind": "jobs",
+      "file": "jobs/support.png",
+      "source": "mixed.png",
+      "cell": 13,
+      "source_rect": [
+        337,
+        901,
+        678,
+        1140
+      ],
+      "subject": "A customer-support headset beside a laptop showing two chat bubbles, no words.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 59102,
+      "sha256": "78065579d0ebc4d282f1cf4cbd889f4f89256ebde63f33e73801140b36f6b1f5"
+    },
+    "jobs:plumber": {
+      "id": "plumber",
+      "kind": "jobs",
+      "file": "jobs/plumber.png",
+      "source": "design/action-icons/jobs.png",
+      "cell": 0,
+      "source_rect": [
+        52,
+        49,
+        358,
+        379
+      ],
+      "subject": "One large red pipe wrench, no pipes or toolbox.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 56991,
+      "sha256": "4cd0ec55197c3d67bf770d1f28c9fdbe0de5a78c48a9ad1b06f3bb902cd20f31",
+      "alphaBounds": [
+        20,
+        13,
+        234,
+        243
+      ]
+    },
+    "jobs:technician": {
+      "id": "technician",
+      "kind": "jobs",
+      "file": "jobs/technician.png",
+      "source": "mixed.png",
+      "cell": 15,
+      "source_rect": [
+        1017,
+        871,
+        1339,
+        1144
+      ],
+      "subject": "A laboratory sample rack, microscope, pipette and labelled-looking colour-coded test tubes without words.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 80066,
+      "sha256": "7cf8b319a9f0ab0ce0cc479ef3316491c9f84fae16cec0ef369366e42d39cfb5"
+    },
+    "jobs:designer": {
+      "id": "designer",
+      "kind": "jobs",
+      "file": "jobs/designer.png",
+      "source": "jobs-1.png",
+      "cell": 0,
+      "source_rect": [
+        0,
+        34,
+        353,
+        304
+      ],
+      "subject": "A graphics tablet and stylus displaying colourful vector shapes, colour swatches nearby.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 64659,
+      "sha256": "628761419b8b0effba19e15cd1919a8f8d67d0fc74add35e1e1f75fb3986bfba"
+    },
+    "jobs:teacher": {
+      "id": "teacher",
+      "kind": "jobs",
+      "file": "jobs/teacher.png",
+      "source": "jobs-1.png",
+      "cell": 1,
+      "source_rect": [
+        349,
+        14,
+        682,
+        302
+      ],
+      "subject": "A small classroom chalkboard, apple and stack of exercise books with pencil.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 80964,
+      "sha256": "3e34b9e443ee6316013b1a0015cb1eed76dbefca881416478932cbf34e6492f7"
+    },
+    "jobs:developer": {
+      "id": "developer",
+      "kind": "jobs",
+      "file": "jobs/developer.png",
+      "source": "jobs-1.png",
+      "cell": 2,
+      "source_rect": [
+        684,
+        20,
+        1004,
+        294
+      ],
+      "subject": "A laptop displaying simple code-like brackets with an external keyboard and small desktop monitor.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 86050,
+      "sha256": "a1330a487dede490ce8089a32571b6893f839d0da15c1192f86d5de8315b9205"
+    },
+    "jobs:accountant": {
+      "id": "accountant",
+      "kind": "jobs",
+      "file": "jobs/accountant.png",
+      "source": "jobs-1.png",
+      "cell": 3,
+      "source_rect": [
+        1038,
+        17,
+        1367,
+        310
+      ],
+      "subject": "A desktop calculator with ledger book, receipt stack and pencil, no currency text.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 85282,
+      "sha256": "bba990f5d5e5150be9c4bebaafb4c669b53c5a33bc83bcc7416a7c49a01455aa"
+    },
+    "jobs:researcher": {
+      "id": "researcher",
+      "kind": "jobs",
+      "file": "jobs/researcher.png",
+      "source": "design/action-icons/jobs.png",
+      "cell": 1,
+      "source_rect": [
+        451,
+        54,
+        692,
+        375
+      ],
+      "subject": "One rounded laboratory flask filled with blue liquid, no notebook, molecule or tools.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 56860,
+      "sha256": "0030a7d3f5559a592b9487818560631c376ed41a6b57432e25190948f730e4aa",
+      "alphaBounds": [
+        41,
+        13,
+        215,
+        243
+      ]
+    },
+    "jobs:journalist": {
+      "id": "journalist",
+      "kind": "jobs",
+      "file": "jobs/journalist.png",
+      "source": "jobs-1.png",
+      "cell": 5,
+      "source_rect": [
+        351,
+        316,
+        684,
+        574
+      ],
+      "subject": "A reporter microphone, press notebook and compact voice recorder beside a folded newspaper.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 80315,
+      "sha256": "0b276ea816dfcab0985902dda5abfc80d9e403d0037699eb14f482a896deadb7"
+    },
+    "jobs:lawyer": {
+      "id": "lawyer",
+      "kind": "jobs",
+      "file": "jobs/lawyer.png",
+      "source": "design/action-icons/jobs.png",
+      "cell": 8,
+      "source_rect": [
+        27,
+        712,
+        373,
+        1032
+      ],
+      "subject": "One unified gold balance scale of justice, no books, case or paperwork.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 64503,
+      "sha256": "00011c7040c7690dc3bc2271a8de63853caa5a0e1aa7ac97cd4061a5ca65e7bd",
+      "alphaBounds": [
+        13,
+        21,
+        243,
+        235
+      ]
+    },
+    "jobs:doctor": {
+      "id": "doctor",
+      "kind": "jobs",
+      "file": "jobs/doctor.png",
+      "source": "jobs-1.png",
+      "cell": 7,
+      "source_rect": [
+        1033,
+        300,
+        1357,
+        585
+      ],
+      "subject": "A stethoscope around a white doctor coat collar with medical examination clipboard.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 87256,
+      "sha256": "342829a6295021806f0d0bfa2e6fe7a23665e7214e031b32f9489e577041fbff"
+    },
+    "jobs:receptionist": {
+      "id": "receptionist",
+      "kind": "jobs",
+      "file": "jobs/receptionist.png",
+      "source": "jobs-1.png",
+      "cell": 8,
+      "source_rect": [
+        0,
+        571,
+        342,
+        849
+      ],
+      "subject": "A hotel reception desk bell, key rack and reservation book, inviting luggage beside desk.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 79558,
+      "sha256": "39ea59fb5e9201c497c0e546cf19834a5d8ec10b5b8491eea65234ecfd9cb41a"
+    },
+    "jobs:postal-worker": {
+      "id": "postal-worker",
+      "kind": "jobs",
+      "file": "jobs/postal-worker.png",
+      "source": "design/action-icons/jobs-extra.png",
+      "cell": 3,
+      "source_rect": [
+        42,
+        525,
+        476,
+        956
+      ],
+      "subject": "One cheerful red rounded roadside mailbox with its little flag integrated; no mailbag, loose envelopes or scene.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 63024,
+      "sha256": "88d87c07f843cf2d954958069518ddd08a1f6ea80537533b3e3684f6c414f185",
+      "alphaBounds": [
+        12,
+        13,
+        244,
+        243
+      ]
+    },
+    "jobs:delivery-driver": {
+      "id": "delivery-driver",
+      "kind": "jobs",
+      "file": "jobs/delivery-driver.png",
+      "source": "jobs-1.png",
+      "cell": 10,
+      "source_rect": [
+        687,
+        612,
+        1030,
+        864
+      ],
+      "subject": "A compact delivery van beside a parcel and handheld route device.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 71535,
+      "sha256": "40de6923a3bfa72360646804c04dbc19780ece0ed87b62854bcf1f677d766627"
+    },
+    "jobs:bus-driver": {
+      "id": "bus-driver",
+      "kind": "jobs",
+      "file": "jobs/bus-driver.png",
+      "source": "jobs-1.png",
+      "cell": 11,
+      "source_rect": [
+        1020,
+        580,
+        1358,
+        845
+      ],
+      "subject": "A cheerful city bus front three-quarter view with steering wheel detail and destination display without text.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 80901,
+      "sha256": "4a5ca288f02c15d11b7aabef4d856edb6adca05caa4dd9dbab15d10785a34f3a"
+    },
+    "jobs:gardener": {
+      "id": "gardener",
+      "kind": "jobs",
+      "file": "jobs/gardener.png",
+      "source": "design/action-icons/jobs-extra.png",
+      "cell": 4,
+      "source_rect": [
+        509,
+        532,
+        1029,
+        949
+      ],
+      "subject": "One green watering can with a short gold spout, no plant, trowel, flower or landscape.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 59730,
+      "sha256": "7010f8d98d7cafa72059e51659ba8902da28c9e5d2b81237aa4d8f7680318488",
+      "alphaBounds": [
+        12,
+        35,
+        244,
+        221
+      ]
+    },
+    "jobs:kitchen-assistant": {
+      "id": "kitchen-assistant",
+      "kind": "jobs",
+      "file": "jobs/kitchen-assistant.png",
+      "source": "design/action-icons/jobs-extra.png",
+      "cell": 5,
+      "source_rect": [
+        1060,
+        533,
+        1494,
+        955
+      ],
+      "subject": "One clean white dinner plate with a blue rim, gentle dimensional shading; no gloves, rack or utensils.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 72209,
+      "sha256": "26ec981bb986426d6e0bb8c4d55c48ac8966bb6e1aabb37959f979829724016d",
+      "alphaBounds": [
+        12,
+        15,
+        244,
+        241
+      ]
+    },
+    "jobs:cook": {
+      "id": "cook",
+      "kind": "jobs",
+      "file": "jobs/cook.png",
+      "source": "jobs-1.png",
+      "cell": 14,
+      "source_rect": [
+        685,
+        873,
+        1021,
+        1138
+      ],
+      "subject": "A frying pan with fresh vegetables, chopping board and kitchen spatula.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 85140,
+      "sha256": "cfe53ee03aa9e9c444593a6669586c9bdeb9958721567382c7a3b6f6aae6eef7"
+    },
+    "jobs:baker": {
+      "id": "baker",
+      "kind": "jobs",
+      "file": "jobs/baker.png",
+      "source": "jobs-1.png",
+      "cell": 15,
+      "source_rect": [
+        1028,
+        867,
+        1356,
+        1142
+      ],
+      "subject": "A flour-dusted rolling pin, golden bread loaves and a tray of croissants.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 99217,
+      "sha256": "58a64255f7e89589c884e310f7187ad550993f3b11247b9b806bf3cb8e0836e1"
+    },
+    "jobs:chef": {
+      "id": "chef",
+      "kind": "jobs",
+      "file": "jobs/chef.png",
+      "source": "jobs-2.png",
+      "cell": 0,
+      "source_rect": [
+        0,
+        15,
+        327,
+        293
+      ],
+      "subject": "A tall chef toque above a plated restaurant meal with chef knife and tasting spoon.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 74673,
+      "sha256": "7f76c62d52a74acd181988d662f035b9a720b36a5d8eb907495c82e365463def"
+    },
+    "jobs:electrician": {
+      "id": "electrician",
+      "kind": "jobs",
+      "file": "jobs/electrician.png",
+      "source": "design/action-icons/jobs.png",
+      "cell": 2,
+      "source_rect": [
+        766,
+        61,
+        1046,
+        379
+      ],
+      "subject": "One yellow handheld electrical multimeter with its leads neatly stowed against the case.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 84055,
+      "sha256": "381b39b14743935c7713680818d526f683a7ac53e8d16ab957c032184ac53594",
+      "alphaBounds": [
+        27,
+        13,
+        230,
+        243
+      ]
+    },
+    "jobs:carpenter": {
+      "id": "carpenter",
+      "kind": "jobs",
+      "file": "jobs/carpenter.png",
+      "source": "jobs-2.png",
+      "cell": 2,
+      "source_rect": [
+        659,
+        22,
+        958,
+        296
+      ],
+      "subject": "A wooden workbench corner with hand saw, carpenter square, wood shavings and mallet.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 106606,
+      "sha256": "285e947ef90e31b88790fefe3207d07d1a5bde8ddea763cdead63aba9577256c"
+    },
+    "jobs:mechanic": {
+      "id": "mechanic",
+      "kind": "jobs",
+      "file": "jobs/mechanic.png",
+      "source": "design/action-icons/jobs.png",
+      "cell": 3,
+      "source_rect": [
+        1101,
+        74,
+        1416,
+        370
+      ],
+      "subject": "One simple silver engine block, no tools or oil can, broad uncluttered shapes.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 89206,
+      "sha256": "8a92af1ed7c03131151e06109e326ef2ab875d44ce3b8249e7ded8dfc490447a",
+      "alphaBounds": [
+        13,
+        20,
+        243,
+        236
+      ]
+    },
+    "jobs:welder": {
+      "id": "welder",
+      "kind": "jobs",
+      "file": "jobs/welder.png",
+      "source": "jobs-2.png",
+      "cell": 4,
+      "source_rect": [
+        16,
+        304,
+        331,
+        636
+      ],
+      "subject": "A protective welding helmet, welding torch and steel joint with a small controlled spark.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 82090,
+      "sha256": "09ee8a2d25d0c96d234edc612b7181c3c855640a7bb0c760b8817ffb0c69604e"
+    },
+    "jobs:care-worker": {
+      "id": "care-worker",
+      "kind": "jobs",
+      "file": "jobs/care-worker.png",
+      "source": "jobs-2.png",
+      "cell": 5,
+      "source_rect": [
+        335,
+        308,
+        660,
+        594
+      ],
+      "subject": "A warm folded care blanket, supported hand motif and small medicine organiser, no medical cross emphasis.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 99699,
+      "sha256": "9357a2844a861123a33a81a4bbb22cda1eb2208c12c0c049179fdbb25be19df7"
+    },
+    "jobs:nurse": {
+      "id": "nurse",
+      "kind": "jobs",
+      "file": "jobs/nurse.png",
+      "source": "jobs-2.png",
+      "cell": 6,
+      "source_rect": [
+        659,
+        314,
+        971,
+        586
+      ],
+      "subject": "A nurse scrub top, blood-pressure cuff, thermometer and hospital identification badge without text.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 92513,
+      "sha256": "05d14af259e4f2476aa188ad8f003f2411c67cb40e2eb4c3e637cf9e6c861e6b"
+    },
+    "jobs:physiotherapist": {
+      "id": "physiotherapist",
+      "kind": "jobs",
+      "file": "jobs/physiotherapist.png",
+      "source": "jobs-2.png",
+      "cell": 7,
+      "source_rect": [
+        976,
+        309,
+        1291,
+        601
+      ],
+      "subject": "A resistance exercise band, therapy roller and joint model on a treatment bench.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 96012,
+      "sha256": "d8dbdbe4fdf7bc7f18cd43679bece4930d01e4ad109a1402fb1f12aba36a00e8"
+    },
+    "jobs:engineer": {
+      "id": "engineer",
+      "kind": "jobs",
+      "file": "jobs/engineer.png",
+      "source": "design/action-icons/jobs.png",
+      "cell": 10,
+      "source_rect": [
+        736,
+        768,
+        1082,
+        1025
+      ],
+      "subject": "One blue engineering hard hat with a small gold gear emblem inset, no plans or tools.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 56340,
+      "sha256": "7b0c0df26d2f57dd4fba2096559d68cd4fbf0f2cb9c7c8193863e2c416d69089",
+      "alphaBounds": [
+        13,
+        43,
+        243,
+        213
+      ]
+    },
+    "jobs:architect": {
+      "id": "architect",
+      "kind": "jobs",
+      "file": "jobs/architect.png",
+      "source": "jobs-2.png",
+      "cell": 9,
+      "source_rect": [
+        337,
+        607,
+        658,
+        888
+      ],
+      "subject": "An architectural house model, rolled drawing, triangular scale ruler and drawing compass.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 96610,
+      "sha256": "de4c6b134d2dbe9c36d068416d935d81bc2f8a215c5c4a9726f06a1bed075e93"
+    },
+    "jobs:data-analyst": {
+      "id": "data-analyst",
+      "kind": "jobs",
+      "file": "jobs/data-analyst.png",
+      "source": "jobs-2.png",
+      "cell": 10,
+      "source_rect": [
+        655,
+        606,
+        983,
+        883
+      ],
+      "subject": "A desktop monitor showing distinct colourful chart panels with magnifier and spreadsheet sheet.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 78505,
+      "sha256": "da33992e7d0c11d31f6edded3e389ca9b422cf14c70ec9c4257eb2c5baf1466e"
+    },
+    "jobs:it-technician": {
+      "id": "it-technician",
+      "kind": "jobs",
+      "file": "jobs/it-technician.png",
+      "source": "jobs-2.png",
+      "cell": 11,
+      "source_rect": [
+        978,
+        595,
+        1284,
+        886
+      ],
+      "subject": "An open desktop computer tower with screwdriver, router and neatly coiled network cable.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 105120,
+      "sha256": "10bfde40176d8b102125275edb97c671710acba5255e74b79c64c5152520457e"
+    },
+    "jobs:librarian": {
+      "id": "librarian",
+      "kind": "jobs",
+      "file": "jobs/librarian.png",
+      "source": "jobs-2.png",
+      "cell": 12,
+      "source_rect": [
+        0,
+        873,
+        345,
+        1203
+      ],
+      "subject": "A tall library book trolley with neatly sorted books and a small catalogue drawer.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 79565,
+      "sha256": "23c99adcf3ca679fda0b993616ac060c74a53bc6c012884a77e70e95c33e5bff"
+    },
+    "jobs:social-worker": {
+      "id": "social-worker",
+      "kind": "jobs",
+      "file": "jobs/social-worker.png",
+      "source": "jobs-2.png",
+      "cell": 13,
+      "source_rect": [
+        348,
+        880,
+        652,
+        1183
+      ],
+      "subject": "A supportive family figurine beside a folder, home-visit notebook and warm helping-hands motif.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 97460,
+      "sha256": "15202d1f50a1a777e8eb6fcbc03a7e7459d423e800319636c2a6449853989bbd"
+    },
+    "jobs:marketing-executive": {
+      "id": "marketing-executive",
+      "kind": "jobs",
+      "file": "jobs/marketing-executive.png",
+      "source": "design/action-icons/jobs.png",
+      "cell": 4,
+      "source_rect": [
+        36,
+        399,
+        380,
+        704
+      ],
+      "subject": "One blue megaphone with a gold rim, without boards or lightbulbs.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 61808,
+      "sha256": "196f58f1b6343281e8c9b898a9e8338ca98834d5594f07943f8b17cc8ff0c87c",
+      "alphaBounds": [
+        12,
+        26,
+        244,
+        230
+      ]
+    },
+    "jobs:human-resources": {
+      "id": "human-resources",
+      "kind": "jobs",
+      "file": "jobs/human-resources.png",
+      "source": "jobs-2.png",
+      "cell": 15,
+      "source_rect": [
+        978,
+        892,
+        1298,
+        1183
+      ],
+      "subject": "A desk with staff identification cards, interview appointment notebook and two-person icon card.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 98295,
+      "sha256": "707f5ab683a80630c24191d6c133e4ca976d98f39fa524fb698a1b5b1fb48e34"
+    },
+    "jobs:project-manager": {
+      "id": "project-manager",
+      "kind": "jobs",
+      "file": "jobs/project-manager.png",
+      "source": "jobs-3.png",
+      "cell": 0,
+      "source_rect": [
+        0,
+        54,
+        310,
+        324
+      ],
+      "subject": "A project planning board with task cards, milestone flags and a small clock.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 71724,
+      "sha256": "f569bc0bbf2adf6f540ea915395128997755df15dd798e28a4e30e589f6515e5"
+    },
+    "jobs:operations-manager": {
+      "id": "operations-manager",
+      "kind": "jobs",
+      "file": "jobs/operations-manager.png",
+      "source": "design/action-icons/jobs-extra.png",
+      "cell": 0,
+      "source_rect": [
+        49,
+        53,
+        503,
+        492
+      ],
+      "subject": "One substantial blue gear with a gold central hub; no clipboard, truck or separate symbols.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 68730,
+      "sha256": "57096413df6e827d0800c8ad5bf1cb153223ce8202b6723b6640acc92b385614",
+      "alphaBounds": [
+        12,
+        16,
+        244,
+        240
+      ]
+    },
+    "jobs:sales-representative": {
+      "id": "sales-representative",
+      "kind": "jobs",
+      "file": "jobs/sales-representative.png",
+      "source": "jobs-3.png",
+      "cell": 2,
+      "source_rect": [
+        608,
+        60,
+        954,
+        325
+      ],
+      "subject": "A sample presentation case, sales folder and small handshake emblem.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 72699,
+      "sha256": "fe52ccb6cd8be397e92b17491f3c3c075a4da4383daf264a52236571d43b05b8"
+    },
+    "jobs:estate-agent": {
+      "id": "estate-agent",
+      "kind": "jobs",
+      "file": "jobs/estate-agent.png",
+      "source": "jobs-3.png",
+      "cell": 3,
+      "source_rect": [
+        947,
+        59,
+        1244,
+        276
+      ],
+      "subject": "A house keyring, miniature for-sale house and property brochure without writing.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 81237,
+      "sha256": "2e6fe9b1a5ee8f2de6ad01696bbea1c4dfe4ff1d562f58649ea49b1ac8ff104c"
+    },
+    "jobs:insurance-adviser": {
+      "id": "insurance-adviser",
+      "kind": "jobs",
+      "file": "jobs/insurance-adviser.png",
+      "source": "design/action-icons/jobs.png",
+      "cell": 5,
+      "source_rect": [
+        435,
+        395,
+        708,
+        697
+      ],
+      "subject": "One substantial blue and gold shield with a white check inset, no car, house or paperwork.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 72021,
+      "sha256": "7244fa0ca579c5a7198f82a1d6d1f0d1a38275a8cf1ccd6f552c3221e7af90bb",
+      "alphaBounds": [
+        23,
+        14,
+        233,
+        244
+      ]
+    },
+    "jobs:bank-clerk": {
+      "id": "bank-clerk",
+      "kind": "jobs",
+      "file": "jobs/bank-clerk.png",
+      "source": "jobs-3.png",
+      "cell": 5,
+      "source_rect": [
+        304,
+        312,
+        630,
+        613
+      ],
+      "subject": "A bank service counter with cash tray, banknotes and transaction stamp.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 83320,
+      "sha256": "a571bbf1c370246a1f46669ee5d8af1c69d77d39c3cb668a8553a97b3603ca10"
+    },
+    "jobs:procurement-officer": {
+      "id": "procurement-officer",
+      "kind": "jobs",
+      "file": "jobs/procurement-officer.png",
+      "source": "design/action-icons/jobs-extra.png",
+      "cell": 1,
+      "source_rect": [
+        554,
+        73,
+        996,
+        498
+      ],
+      "subject": "One closed golden cardboard parcel with a broad blue tape band; no bags, checklist or extra boxes.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 67805,
+      "sha256": "f031e08856959713dc30a23468acb65b221be3ef990c740fe3d0ccb8d77e2e7c",
+      "alphaBounds": [
+        12,
+        16,
+        244,
+        239
+      ]
+    },
+    "jobs:logistics-coordinator": {
+      "id": "logistics-coordinator",
+      "kind": "jobs",
+      "file": "jobs/logistics-coordinator.png",
+      "source": "design/action-icons/jobs-extra.png",
+      "cell": 2,
+      "source_rect": [
+        1109,
+        55,
+        1446,
+        477
+      ],
+      "subject": "One bold blue location pin with a gold inset, no map, scanner or parcel.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 55534,
+      "sha256": "5975eefdf690838b59b2729162404c7d99e47364dcc2b6bb6e95d0404a9de44f",
+      "alphaBounds": [
+        35,
+        12,
+        219,
+        244
+      ]
+    },
+    "jobs:software-tester": {
+      "id": "software-tester",
+      "kind": "jobs",
+      "file": "jobs/software-tester.png",
+      "source": "jobs-3.png",
+      "cell": 8,
+      "source_rect": [
+        0,
+        614,
+        312,
+        939
+      ],
+      "subject": "A tablet showing checkmarks and bug icon, test checklist and magnifying glass.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 70043,
+      "sha256": "cd9a8477df9b6148074b2de2027d49d70b81e2ed307f6de538a6b17b7b18e757"
+    },
+    "jobs:cybersecurity-analyst": {
+      "id": "cybersecurity-analyst",
+      "kind": "jobs",
+      "file": "jobs/cybersecurity-analyst.png",
+      "source": "jobs-3.png",
+      "cell": 9,
+      "source_rect": [
+        320,
+        630,
+        634,
+        922
+      ],
+      "subject": "A computer monitor with protected padlock, shield, network nodes and security token.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 71161,
+      "sha256": "a9fcbe3319f8bc65e0ef4439273e04a5ad0fc4dce5b35f621108bf77477f296b"
+    },
+    "jobs:library-part": {
+      "id": "library-part",
+      "kind": "jobs",
+      "file": "jobs/library-part.png",
+      "source": "jobs-3.png",
+      "cell": 10,
+      "source_rect": [
+        637,
+        618,
+        955,
+        933
+      ],
+      "subject": "A returned-books drop box with three books and handheld book scanner; distinct from librarian trolley.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 73531,
+      "sha256": "be792d98bedcda4ae78a4530d6ce2341813e90249524ddf82248f6d88b77c8e3"
+    },
+    "jobs:cinema-part": {
+      "id": "cinema-part",
+      "kind": "jobs",
+      "file": "jobs/cinema-part.png",
+      "source": "jobs-3.png",
+      "cell": 11,
+      "source_rect": [
+        939,
+        649,
+        1240,
+        918
+      ],
+      "subject": "A cinema ticket roll, torch, folded usher jacket and red cinema seat.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 76673,
+      "sha256": "49a750e2c2fbe107e41b04e3b642edc9f8a3d59f818556c87d75153dee29b9ad"
+    },
+    "jobs:grocery-part": {
+      "id": "grocery-part",
+      "kind": "jobs",
+      "file": "jobs/grocery-part.png",
+      "source": "jobs-3.png",
+      "cell": 12,
+      "source_rect": [
+        24,
+        935,
+        342,
+        1222
+      ],
+      "subject": "A grocery picking basket with milk, vegetables, packaged loaf and handheld scanner.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 86074,
+      "sha256": "4bd19db9afaff3429531a6045d1af0871025d7c7b93adcb52b247e83eb19a742"
+    },
+    "jobs:pet-care-part": {
+      "id": "pet-care-part",
+      "kind": "jobs",
+      "file": "jobs/pet-care-part.png",
+      "source": "design/action-icons/jobs.png",
+      "cell": 7,
+      "source_rect": [
+        1116,
+        446,
+        1425,
+        704
+      ],
+      "subject": "One purple pet leash neatly coiled, no bowl, brush, ball or animal.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 82257,
+      "sha256": "2c4b5b653b6c55e4ae4bcca08848b62de509545c121e604807745af8f22a8728",
+      "alphaBounds": [
+        12,
+        32,
+        243,
+        225
+      ]
+    },
+    "jobs:tutor-part": {
+      "id": "tutor-part",
+      "kind": "jobs",
+      "file": "jobs/tutor-part.png",
+      "source": "jobs-3.png",
+      "cell": 14,
+      "source_rect": [
+        638,
+        945,
+        951,
+        1226
+      ],
+      "subject": "An open maths exercise book, pencil, small whiteboard and helpful desk lamp.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 79566,
+      "sha256": "c38a0972bcc6bf0b7b6949e61f3d6b552d25e83180cf32820083e1baa990d8b6"
+    },
+    "jobs:market-stall-part": {
+      "id": "market-stall-part",
+      "kind": "jobs",
+      "file": "jobs/market-stall-part.png",
+      "source": "jobs-3.png",
+      "cell": 15,
+      "source_rect": [
+        945,
+        935,
+        1239,
+        1222
+      ],
+      "subject": "A colourful striped market stall canopy with crates of fresh fruit and mechanical produce scales.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 104960,
+      "sha256": "7f774a234bf64d0d9d438ebd2cbe5590b82bc9a1349ed7ded948524f201bc5d9"
+    },
+    "jobs:firefighter": {
+      "id": "firefighter",
+      "kind": "jobs",
+      "file": "jobs/firefighter.png",
+      "source": "jobs-emergency.png",
+      "cell": 0,
+      "source_rect": [
+        0,
+        2,
+        662,
+        589
+      ],
+      "subject": "A red firefighter helmet and yellow visor, coiled fire hose with silver nozzle and red fire axe.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 85547,
+      "sha256": "032f54df7c8e1380693b6fe8b68ab96604ed581b40cfd8b6db9a49e11b2458d1"
+    },
+    "jobs:paramedic": {
+      "id": "paramedic",
+      "kind": "jobs",
+      "file": "jobs/paramedic.png",
+      "source": "design/action-icons/jobs.png",
+      "cell": 9,
+      "source_rect": [
+        393,
+        736,
+        722,
+        1029
+      ],
+      "subject": "One closed green medical bag with a large white cross, no exposed tools or other supplies.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 65381,
+      "sha256": "dacf9742ad93c216d3a79c51fb66d336d0ac52ee11d0880b646e5146f66de11d",
+      "alphaBounds": [
+        12,
+        25,
+        244,
+        231
+      ]
+    },
+    "jobs:police-officer": {
+      "id": "police-officer",
+      "kind": "jobs",
+      "file": "jobs/police-officer.png",
+      "source": "jobs-emergency.png",
+      "cell": 2,
+      "source_rect": [
+        15,
+        622,
+        684,
+        1188
+      ],
+      "subject": "A navy police cap, generic gold shield badge, radio and incident notebook, without weapons.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 91701,
+      "sha256": "e49010d3df4cb4e2118fd9bd2081950d1498d42d2bcde75f6c8b2fdbdf58cd6a"
+    },
+    "jobs:construction-worker": {
+      "id": "construction-worker",
+      "kind": "jobs",
+      "file": "jobs/construction-worker.png",
+      "source": "design/action-icons/jobs.png",
+      "cell": 6,
+      "source_rect": [
+        729,
+        423,
+        1081,
+        696
+      ],
+      "subject": "One yellow construction hard hat, no vest, bricks or trowel.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 57467,
+      "sha256": "6887eeb4213f9f9acbf3ae929804d09d5bd4fde4c43f97ab335758708c1b49f7",
+      "alphaBounds": [
+        12,
+        38,
+        243,
+        218
+      ]
+    }
+  }
+}

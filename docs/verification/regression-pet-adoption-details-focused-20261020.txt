@@ -1,0 +1,13 @@
+
+> dreams-life-sim@1.0.0 test
+> jest --runInBand --runTestsByPath tests/ui/pets-flow.test.tsx
+
+PASS tests/ui/pets-flow.test.tsx (6.341 s)
+  ✓ a genuine newborn archive reaches age six, reviews actual parental costs and retries adoption, vet and monthly progression through real SQLite cold resumes (2833 ms)
+  ✓ the pinned natural owner-loss checkpoint rolls back atomically, retries with the same care history and resumes cold without a second fee (1270 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       2 passed, 2 total
+Snapshots:   0 total
+Time:        6.656 s
+Ran all test suites within paths "tests/ui/pets-flow.test.tsx".

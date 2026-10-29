@@ -1,0 +1,170 @@
+{
+  "format": "dreams-c39-action-quiescence-attestation-v1",
+  "complete": true,
+  "root": "/workspace/dreams-worktrees/camera-copy-correction",
+  "sourceCommit": "3224c9ce5b9175075760a789c1402dd92345cd30",
+  "sourceSnapshotSha256": "c10e79e2c1798315e5267069f8389d6a5f475cd04719d1894a987903b45e7545",
+  "recordedAt": "2026-10-21T07:42:58.646636+00:00",
+  "nativeAppStopped": true,
+  "allHeavyGatesClosed": true,
+  "noReplacementEmulatorOrMetroRunning": true,
+  "closedProcesses": [
+    {
+      "role": "qemu",
+      "pid": 171418,
+      "uid": 1000,
+      "startTicks": "12564243",
+      "argv": [
+        "/workspace/.cache/android-native-check/sdk/emulator/qemu/linux-x86_64/qemu-system-x86_64-headless",
+        "-avd",
+        "dreams_api24",
+        "-port",
+        "5560",
+        "-no-window",
+        "-no-audio",
+        "-no-boot-anim",
+        "-no-snapshot",
+        "-no-metrics",
+        "-accel",
+        "off",
+        "-gpu",
+        "swiftshader_indirect",
+        "-memory",
+        "1536",
+        "-cores",
+        "2",
+        "-prop",
+        "dalvik.vm.heapsize=384m"
+      ],
+      "closedAt": "2026-10-21T07:29:56.925173+00:00",
+      "processClosed": true,
+      "signal": "SIGTERM",
+      "originalIdentityGoneOrZombie": true
+    },
+    {
+      "role": "metro",
+      "pid": 172965,
+      "uid": 1000,
+      "startTicks": "12644810",
+      "argv": [
+        "node",
+        "--dns-result-order=ipv4first",
+        "./node_modules/expo/bin/cli",
+        "start",
+        "--localhost",
+        "--port",
+        "8081",
+        "--max-workers",
+        "1"
+      ],
+      "closedAt": "2026-10-21T07:29:56.724484+00:00",
+      "processClosed": true,
+      "signal": "SIGTERM",
+      "originalIdentityGoneOrZombie": true
+    }
+  ],
+  "closedGateEvidence": [
+    {
+      "session": "61646",
+      "processClosed": true,
+      "exitCode": 0,
+      "raw": {
+        "file": "/tmp/dreams-production-gaps-final-regression.out",
+        "bytes": 16515,
+        "sha256": "f8ebb2950632c72f07a862664c531d772188ff829c4cf48e2ed4662a243993e1"
+      }
+    },
+    {
+      "session": "77892",
+      "processClosed": true,
+      "exitCode": 0,
+      "raw": {
+        "file": "/tmp/dreams-retirement-accessibility-final-regression.out",
+        "bytes": 16680,
+        "sha256": "008be63b6ed0be36ce8c5ac41fe3cd711e2ed080fa5a6f40f3a907f603bc40a7"
+      }
+    },
+    {
+      "session": "99317",
+      "processClosed": true,
+      "exitCode": 1,
+      "raw": {
+        "file": "/tmp/dreams-production-finish-final-regression.out",
+        "bytes": 29144,
+        "sha256": "416444b2a5dc73f2f51cf9d4e7faddeb2e90ba5323b961c55c36d46a2e369135"
+      }
+    },
+    {
+      "session": "82586",
+      "processClosed": true,
+      "exitCode": 0,
+      "raw": {
+        "file": "/tmp/dreams-retirement-accessibility-final-120.out",
+        "bytes": 37795,
+        "sha256": "1040d28a0b6bdcbad54fb3b912e4647902caf640ff293e3716fd6d613dec304d"
+      }
+    },
+    {
+      "session": "7512",
+      "processClosed": true,
+      "exitCode": 0,
+      "raw": {
+        "file": "/tmp/dreams-production-finish-final-120.out",
+        "bytes": 37787,
+        "sha256": "40573f07f7622dc08ca610d748db09343e042e58af08cf390cb051111d740c23"
+      }
+    },
+    {
+      "session": "14843",
+      "processClosed": true,
+      "exitCode": 0,
+      "raw": {
+        "file": "/tmp/dreams-production-finish-corrected-ready-focused.out",
+        "bytes": 487,
+        "sha256": "259f9f7af111a44ba35b5e34e70cf510ea7d428fb1ba34ffd0440ef5b1e96f69"
+      }
+    },
+    {
+      "session": "39089",
+      "processClosed": true,
+      "exitCode": 0,
+      "raw": {
+        "file": "/tmp/dreams-production-finish-corrected-ready-types.out",
+        "bytes": 90,
+        "sha256": "543932f7a867cac23b25fe5912a2a0b0ab563539fbb8a121f7fb83b608c95309"
+      }
+    },
+    {
+      "session": "91127",
+      "processClosed": true,
+      "exitCode": 0,
+      "raw": {
+        "file": "/tmp/dreams-production-finish-corrected-ready-export.out",
+        "bytes": 2761,
+        "sha256": "6d4c920ab34744aab8edbffae73b5dd3f9a05eabb627c8ae10727fa92d408e48"
+      }
+    },
+    {
+      "session": "43328",
+      "processClosed": true,
+      "exitCode": 0,
+      "raw": {
+        "file": "/tmp/dreams-c37-custom-semantic-result.json",
+        "bytes": 31742,
+        "sha256": "85fe9b1b55340a2e776f0ccb4daf2d940fb508f14d89a78aeb4864cb6fcd16dc"
+      }
+    },
+    {
+      "session": "17377",
+      "processClosed": true,
+      "exitCode": 0,
+      "raw": {
+        "file": "/tmp/dreams-c37-university-semantic-result.json",
+        "bytes": 38349,
+        "sha256": "b4aa6a8cdaaadb746ea6a55d249c9d095c0130861c38ac3328f8055f00bfa5ae"
+      }
+    }
+  ],
+  "statement": "Root personally observed actual closure of every current heavy/test/native process. C39 initial full FAILED3 stale negative assertions, retained exactly; closure is not a pass. C37 actual native complete. C38/C39 future native and final callback test correction remain pending; they do not run during this measurement. Only current root benchmark runs; idle historical preview servers have zero observed CPU. Closed original process identities verified, no replacements found. Source-specific performance observation is independent of unrun later native acceptance.",
+  "preparationNote": "Pending template, not quiescence evidence. Root records current actual identities and closure facts only after native/full/author/heavy work closes. No process control is performed by either wrapper."
+}

@@ -1,0 +1,12 @@
+{
+  "complete": true,
+  "stopped": true,
+  "restarted": true,
+  "from": "begun",
+  "to": "cold-begun",
+  "evidence": {
+    "file": "/tmp/dreams-c37-native-captures/cold-begun/capture-log.json",
+    "bytes": 3499,
+    "sha256": "3bfda91fdb60c165acd2372dcadd316af31df3134ab38c5df5c7150d6409298e"
+  }
+}

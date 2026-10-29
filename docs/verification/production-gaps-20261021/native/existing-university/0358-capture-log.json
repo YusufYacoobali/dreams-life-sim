@@ -1,0 +1,123 @@
+{
+  "complete": true,
+  "name": "cold-acknowledged",
+  "events": [
+    {
+      "argv": [
+        "/workspace/.cache/android-native-check/sdk/platform-tools/adb",
+        "-s",
+        "emulator-5560",
+        "shell",
+        "am",
+        "force-stop",
+        "host.exp.exponent"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "",
+      "at": "2026-10-21T07:18:38.819944+00:00"
+    },
+    {
+      "argv": [
+        "/workspace/.cache/android-native-check/sdk/platform-tools/adb",
+        "-s",
+        "emulator-5560",
+        "shell",
+        "pidof",
+        "host.exp.exponent"
+      ],
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "",
+      "at": "2026-10-21T07:18:39.035287+00:00"
+    },
+    {
+      "argv": [
+        "/workspace/.cache/android-native-check/sdk/platform-tools/adb",
+        "-s",
+        "emulator-5560",
+        "shell",
+        "am",
+        "start",
+        "-a",
+        "android.intent.action.VIEW",
+        "-d",
+        "exp://127.0.0.1:8081"
+      ],
+      "returncode": 0,
+      "stdout": "Starting: Intent { act=android.intent.action.VIEW dat=exp://127.0.0.1:8081 }\n",
+      "stderr": "",
+      "at": "2026-10-21T07:18:41.477951+00:00"
+    },
+    {
+      "argv": [
+        "python3",
+        "/tmp/dreams-native-ui.py",
+        "wait-enabled",
+        "Continue as Nia Carter"
+      ],
+      "returncode": 0,
+      "stdout": "Fresh hierarchy unavailable; retrying\nFresh hierarchy unavailable; retrying\nEnabled: Continue as Nia Carter\n",
+      "stderr": "ERROR: null root node returned by UiTestAutomationBridge.\nERROR: null root node returned by UiTestAutomationBridge.\n",
+      "at": "2026-10-21T07:21:29.329965+00:00"
+    },
+    {
+      "argv": [
+        "python3",
+        "/tmp/dreams-native-ui.py",
+        "dismiss-expo-notice"
+      ],
+      "returncode": 0,
+      "stdout": "Dismissed Expo development notice\n",
+      "stderr": "",
+      "at": "2026-10-21T07:21:37.392298+00:00"
+    },
+    {
+      "argv": [
+        "python3",
+        "/tmp/dreams-native-ui.py",
+        "tap",
+        "Continue as Nia Carter"
+      ],
+      "returncode": 0,
+      "stdout": "Tapped Continue as Nia Carter\n",
+      "stderr": "",
+      "at": "2026-10-21T07:21:45.509878+00:00"
+    },
+    {
+      "argv": [
+        "python3",
+        "/tmp/dreams-native-ui.py",
+        "wait-enabled",
+        "Age Up"
+      ],
+      "returncode": 0,
+      "stdout": "Enabled: Age Up\n",
+      "stderr": "",
+      "at": "2026-10-21T07:22:11.912268+00:00"
+    },
+    {
+      "argv": [
+        "python3",
+        "/tmp/dreams-native-ui.py",
+        "inspect",
+        "/tmp/dreams-c37-university-final-captures/cold-acknowledged/ui"
+      ],
+      "returncode": 0,
+      "stdout": "[('', 'My Life profile', '[0,24][390,102]'), ('', 'Age Up', '[16,661][310,723]'), ('', 'More Life Options', '[320,661][374,723]'), ('', 'Life', '[0,740][98,796]'), ('', 'Assets', '[98,740][195,796]'), ('', 'Relationships', '[195,740][293,796]'), ('', 'Activities', '[293,740][390,796]')]\n",
+      "stderr": "",
+      "at": "2026-10-21T07:22:18.097661+00:00"
+    },
+    {
+      "argv": [
+        "python3",
+        "/tmp/dreams-copy-native-db.py",
+        "/tmp/dreams-c37-university-final-captures/cold-acknowledged/database"
+      ],
+      "returncode": 0,
+      "stdout": "/tmp/dreams-c37-university-final-captures/cold-acknowledged/database\n",
+      "stderr": "",
+      "at": "2026-10-21T07:22:20.399933+00:00"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "scope": "Syntax trees ignoring narrative/JSX text and source positions; identifiers, numeric values, structure and hex colours preserved. No layout, component or navigation changes.",
+  "results": [
+    {
+      "file": "app/(game)/cult.tsx",
+      "before": "694377574b506e5052bab69bf1f70f411788f0a4b731705ecb579cfeaf04a79e",
+      "after": "694377574b506e5052bab69bf1f70f411788f0a4b731705ecb579cfeaf04a79e"
+    },
+    {
+      "file": "app/(game)/cult/headquarters.tsx",
+      "before": "7ddc9d73d322cd5bfddf5fa53ab948003796e5268a49096c7f22594318be8b04",
+      "after": "7ddc9d73d322cd5bfddf5fa53ab948003796e5268a49096c7f22594318be8b04"
+    }
+  ]
+}

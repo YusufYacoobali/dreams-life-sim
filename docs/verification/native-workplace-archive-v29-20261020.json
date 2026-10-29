@@ -1,0 +1,72 @@
+{
+  "recordedOn": "2026-10-20",
+  "scope": "Genuine actual native declined feedback54 exported with clean unmodified pushed 60f5ed9 before raise-request schema work; no stat, world, RNG, outcome, version or history edits",
+  "producerCommit": "60f5ed99fc9917535ba5c06d34ebcf45c079e2b2",
+  "producerCombinedGamePersistenceHash": "9e00267b94e314af94582fc5656e44a87854cedd346b343d95e1ab1c6bc3d878",
+  "sourceDatabase": "Actual Android revision54 feedback-result copy before cold restart",
+  "fixture": "tests/fixtures/v29-native-workplace-archive.json",
+  "bytes": 671975,
+  "sha256": "824ba73545b1ed57dc2a1b9df5f154c8eed4c5987aa071ea6fc68b1716a32de2",
+  "wholeWorldSha256": "45676a9a913bfb17f0808f7128d733ca489eeea048e6533d8acbed1a6bbc34a5",
+  "currentCheckpointByteExact": true,
+  "originalSeventeenMomentPayloadsAndMetadataExact": true,
+  "originalSixteenTeenMomentsRetainedExactly": true,
+  "versions": {
+    "world": 29,
+    "engine": 28,
+    "content": 5
+  },
+  "revision": 54,
+  "moments": 17,
+  "result": {
+    "kind": "result",
+    "id": "action_53",
+    "title": "Not a good time",
+    "body": "Thando is too busy to talk. You leave the discussion for another year.",
+    "illustration": "career",
+    "effects": [
+      {
+        "id": "performance",
+        "label": "Performance",
+        "value": "+0%",
+        "tone": "neutral"
+      },
+      {
+        "id": "energy",
+        "label": "Energy",
+        "value": "\u22124%",
+        "tone": "negative"
+      }
+    ]
+  },
+  "feedback": {
+    "date": {
+      "year": 2043,
+      "month": 10,
+      "day": 20
+    },
+    "supervisorId": "person_npc_49_16",
+    "supervisorEmploymentId": "employment_background_person_npc_49_16",
+    "paidMonths": 12,
+    "trustAtRequest": 35,
+    "chance": 67,
+    "roll": 87,
+    "accepted": false,
+    "performanceBefore": 57,
+    "performanceGain": 0
+  },
+  "teamIds": [
+    "person_npc_49_16",
+    "person_npc_49_17",
+    "person_npc_49_18"
+  ],
+  "verification": {
+    "preservationAndSQLiteRetryColdChecks": 2,
+    "suites": 1,
+    "seconds": 11.775,
+    "exitCode": 0,
+    "strictApplicationAndTestTypes": true,
+    "runtimeSourceUnchanged": true,
+    "notANewCompleteRegressionTotal": true
+  }
+}

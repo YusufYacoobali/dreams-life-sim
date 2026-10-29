@@ -1,0 +1,563 @@
+{
+  "format": "dreams-c35-publication-inputs-v1",
+  "status": "ready-to-publish-after-actual-gates",
+  "scope": "Draft only. Root reviews and executes after actual complete native/action evidence. No repository copying or documentation rewriting has occurred.",
+  "sourceCommit": "73cedc7643fa3cbcd0ad32dfa27abfb59dac8aaa",
+  "initialSourceCommit": "5a2565458fa5de90c1acaf0e110fc980f6476b64",
+  "versions": {
+    "world": 34,
+    "engine": 35,
+    "content": 10,
+    "database": 14,
+    "checkpoint": "v4"
+  },
+  "outputRecord": "docs/verification/opening-completion-20261020.json",
+  "artifactDirectory": "docs/verification/opening-completion-20261020",
+  "fixedCopies": [
+    {
+      "key": "source-initial",
+      "source": "/tmp/dreams-opening-next-source.json",
+      "target": "opening-completion-20261020/source/initial.json",
+      "bytes": 63888,
+      "sha256": "d8b64edf446bd213c4cf10418848bbe4b785362a3d9ce06fbc6ba8e8aae39359"
+    },
+    {
+      "key": "source-initial-head",
+      "source": "/tmp/dreams-opening-next-source-head.txt",
+      "target": "opening-completion-20261020/source/initial-head.txt",
+      "bytes": 41,
+      "sha256": "ce21d75d587fb0bee2a0b348b1ed1509425d1561f8456ff5ecacb74de59fa88f"
+    },
+    {
+      "key": "source-initial-tree",
+      "source": "/tmp/dreams-opening-next-source-tree.bin",
+      "target": "opening-completion-20261020/source/initial-tree.bin",
+      "bytes": 154349,
+      "sha256": "756b24a3b543a371009907fad3e1140ccc7e13fb1244a345b989a5596d55e9d6"
+    },
+    {
+      "key": "source-initial-status",
+      "source": "/tmp/dreams-opening-next-source-status.txt",
+      "target": "opening-completion-20261020/source/initial-status.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "source-final",
+      "source": "/tmp/dreams-opening-next-final-source.json",
+      "target": "opening-completion-20261020/source/final.json",
+      "bytes": 63906,
+      "sha256": "521383d65749b98c4dab8396a3604857dbeff6b69020927b7d99cfee96e296cc"
+    },
+    {
+      "key": "source-final-head",
+      "source": "/tmp/dreams-opening-next-final-source-head.txt",
+      "target": "opening-completion-20261020/source/final-head.txt",
+      "bytes": 41,
+      "sha256": "9c6a2de022927e980e8d86e1fda78e7975c6c94c09722d50ca2f3c0c8917d52f"
+    },
+    {
+      "key": "source-final-tree",
+      "source": "/tmp/dreams-opening-next-final-source-tree.bin",
+      "target": "opening-completion-20261020/source/final-tree.bin",
+      "bytes": 154349,
+      "sha256": "1ff2eed1274bd2a0ed16a24c13a68537b27fbb9b0f956cc371f6ed15ebd4b948"
+    },
+    {
+      "key": "source-final-status",
+      "source": "/tmp/dreams-opening-next-final-source-status.txt",
+      "target": "opening-completion-20261020/source/final-status.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "source-helper",
+      "source": "/tmp/dreams-opening-next-source.cjs",
+      "target": "opening-completion-20261020/source/capture-source.cjs.txt",
+      "bytes": 4525,
+      "sha256": "d99ce7361e293c4347078eff9ecde081b9a8347e8a79bc8edd72c53a80faec17"
+    },
+    {
+      "key": "source-after",
+      "source": "/tmp/dreams-opening-next-final-source-verification.out",
+      "target": "opening-completion-20261020/source/final-verification.txt",
+      "bytes": 167,
+      "sha256": "16312056bd1b10cb502305dd9d8fdaad078062f6bd69fbe0b2c154970ed2d99d"
+    },
+    {
+      "key": "regression",
+      "source": "/tmp/dreams-opening-next-regression-final.out",
+      "target": "opening-completion-20261020/checks/regression-final.txt",
+      "bytes": 7897,
+      "sha256": "62c79d62c0a42cc3ad079d8484ed8a338bbfb35fffe469488213d43433ed3c53"
+    },
+    {
+      "key": "regression-receipt",
+      "source": "/tmp/dreams-opening-next-regression-final-receipt.json",
+      "target": "opening-completion-20261020/checks/regression-final-receipt.json",
+      "bytes": 931,
+      "sha256": "3c33b92e61ee78d7fe6ef1d1032008e0a9fb2f37fad9b396783a2df053792311"
+    },
+    {
+      "key": "types",
+      "source": "/tmp/dreams-opening-next-types-final.out",
+      "target": "opening-completion-20261020/checks/types-final.txt",
+      "bytes": 90,
+      "sha256": "543932f7a867cac23b25fe5912a2a0b0ab563539fbb8a121f7fb83b608c95309"
+    },
+    {
+      "key": "regression-initial",
+      "source": "/tmp/dreams-opening-next-regression-initial-failed-interrupted.out",
+      "target": "opening-completion-20261020/diagnostics/regression-initial-failed-interrupted.txt",
+      "bytes": 37824,
+      "sha256": "18b40c88a9383698f2365e93694685b3d3cfde7172944d8f837cb79457cc9e5c"
+    },
+    {
+      "key": "regression-interruption",
+      "source": "/tmp/dreams-opening-next-regression-initial-interruption.json",
+      "target": "opening-completion-20261020/diagnostics/regression-initial-interruption.json",
+      "bytes": 1024,
+      "sha256": "15136358c0e829f08d245716e33801c74756d01f468e8a67583f41e5f87c87ed"
+    },
+    {
+      "key": "annual",
+      "source": "/tmp/dreams-opening-next-120.ndjson",
+      "target": "opening-completion-20261020/checks/annual120.ndjson",
+      "bytes": 37786,
+      "sha256": "9c10119f4a54b365d01cac06fb4787f19dd467e7b51dd58f4eab8eedf2672464"
+    },
+    {
+      "key": "annual-stderr",
+      "source": "/tmp/dreams-opening-next-120.err",
+      "target": "opening-completion-20261020/checks/annual120.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "export-initial",
+      "source": "/tmp/dreams-opening-next-export.out",
+      "target": "opening-completion-20261020/diagnostics/export-initial-failed.txt",
+      "bytes": 1528,
+      "sha256": "fb8be16ede008a17674a46489d441a20e8f852d7a3ccacca6f6657a1ad9acee9"
+    },
+    {
+      "key": "export-final",
+      "source": "/tmp/dreams-opening-next-export-retry.out",
+      "target": "opening-completion-20261020/checks/export-final.txt",
+      "bytes": 2660,
+      "sha256": "89b46d64f224dac1593e12080ab0e11c7de015f2b186f822bffebbfecfb3abd7"
+    },
+    {
+      "key": "criminal-raw",
+      "source": "/tmp/dreams-opening-next-criminal-v2.json",
+      "target": "opening-completion-20261020/criminal/raw-result.json",
+      "bytes": 609849,
+      "sha256": "42862c0fd39f1bf30d1348e626f37290dc5e950f109c2a0a8a7156b6ab92a2ff"
+    },
+    {
+      "key": "criminal-progress",
+      "source": "/tmp/dreams-opening-next-criminal-v2.ndjson",
+      "target": "opening-completion-20261020/criminal/progress.ndjson",
+      "bytes": 13852,
+      "sha256": "fe1ea013de288a25f4d2453760a5f4ea74de9e7ab9f8271aa2db707f92029a5f"
+    },
+    {
+      "key": "criminal-manifest",
+      "source": "/tmp/dreams-opening-next-criminal-manifest.json",
+      "target": "opening-completion-20261020/criminal/manifest.json",
+      "bytes": 3431,
+      "sha256": "effa51892cfffd55fb4a121e10ffabde3520efd998ca1b4fadf3cd568f8fce6f"
+    },
+    {
+      "key": "criminal-summary",
+      "source": "/tmp/dreams-opening-next-criminal-summary.json",
+      "target": "opening-completion-20261020/criminal/summary.json",
+      "bytes": 83430,
+      "sha256": "dab489544b3d4e22f3cdcb0e8eb2f0b3843eec8efe69b0506b1e9203b519987a"
+    },
+    {
+      "key": "criminal-short",
+      "source": "/tmp/dreams-opening-next-criminal-summary-short.md",
+      "target": "opening-completion-20261020/criminal/summary.md",
+      "bytes": 3655,
+      "sha256": "b4b4cc9ec54285a7d6b23c24f50cbf496c6286d1ac033603e97b08c58a68defd"
+    },
+    {
+      "key": "editorial-archive",
+      "source": "/tmp/dreams-opening-next-editorial-lossless.tar.gz",
+      "target": "opening-completion-20261020/editorial/full-raw.tar.gz",
+      "bytes": 6793399,
+      "sha256": "a947ddf5e84aaa39340ac3ff6bf8bf998177a297ba6547db92adbe7958e5621d"
+    },
+    {
+      "key": "editorial-archive-manifest",
+      "source": "/tmp/dreams-opening-next-editorial-archive-manifest.json",
+      "target": "opening-completion-20261020/editorial/archive-manifest.json",
+      "bytes": 31367,
+      "sha256": "1ec524b54baf7a22c3f6b9fe18d40271e398cf4261206b2c166914c939c420ca"
+    },
+    {
+      "key": "editorial-archive-proof",
+      "source": "/tmp/dreams-opening-next-editorial-archive-proof.json",
+      "target": "opening-completion-20261020/editorial/archive-proof.json",
+      "bytes": 3215,
+      "sha256": "2a2afb368cc6a09b7c0f73ade3157b407409a318c28f5a7d5959ca4ea8acaefb"
+    },
+    {
+      "key": "editorial-stdout",
+      "source": "/tmp/dreams-opening-next-editorial.out",
+      "target": "opening-completion-20261020/editorial/stdout.json",
+      "bytes": 742870,
+      "sha256": "f2b3be4c7d4805324b8bc2153c961a9d29cbc57b6887c8c067d1d45253169e96"
+    },
+    {
+      "key": "editorial-progress",
+      "source": "/tmp/dreams-opening-next-editorial.ndjson",
+      "target": "opening-completion-20261020/editorial/progress.ndjson",
+      "bytes": 16660,
+      "sha256": "7b8d9a80ebbba4f0d5df0cd36498fb27bd4c13fe428880adce7586be2e319c47"
+    },
+    {
+      "key": "editorial-manifest",
+      "source": "/tmp/dreams-opening-next-editorial-manifest.json",
+      "target": "opening-completion-20261020/editorial/manifest.json",
+      "bytes": 2566,
+      "sha256": "e6ecafc9f5dd2f9a078069204500db5cb52c428cb53183c0bff6f350e23db55a"
+    },
+    {
+      "key": "editorial-producer-tool",
+      "source": "/tmp/dreams-opening-next-editorial-producer-runner.cjs.txt",
+      "target": "opening-completion-20261020/editorial/producer-runner.cjs.txt",
+      "bytes": 12868,
+      "sha256": "e0eb16fb73962b9632b4949a5ed1d729d8aca97be1607490a964c5a10abe1706"
+    },
+    {
+      "key": "editorial-producer-helper",
+      "source": "/tmp/dreams-opening-next-editorial-producer-policy.ts.txt",
+      "target": "opening-completion-20261020/editorial/producer-policy.ts.txt",
+      "bytes": 14958,
+      "sha256": "0e2bf26c25d28c24d8ac9111fe2f3de704a1cadb0e8e98df82b4dbf93bcf3c72"
+    },
+    {
+      "key": "native-plan",
+      "source": "/tmp/dreams-opening-next-native-command-plan.json",
+      "target": "opening-completion-20261020/native/command-plan.json",
+      "bytes": 21045,
+      "sha256": "f0833c07dbd93877211b03c267701f7e24ff50cfc3c25b955c3617e3dd2d74df"
+    },
+    {
+      "key": "native-settings",
+      "source": "/tmp/dreams-opening-next-native-expected-settings.json",
+      "target": "opening-completion-20261020/native/expected-settings.json",
+      "bytes": 91,
+      "sha256": "42d74e12e99c1dfe73012e00ec23296f2dd99d790c8c353b210ad1eadcc7b6e8"
+    },
+    {
+      "key": "native-plan-tool",
+      "source": "/tmp/dreams-opening-next-native-plan.cjs",
+      "target": "opening-completion-20261020/native/project-native.cjs.txt",
+      "bytes": 18513,
+      "sha256": "876f6358ccf72a3e6caf7afda005dd74192c3c3ad827b5eb61c0a5ccdaa3a8f5"
+    },
+    {
+      "key": "native-verifier-tool",
+      "source": "/tmp/dreams-opening-next-native-verify.cjs",
+      "target": "opening-completion-20261020/native/verify-native.cjs.txt",
+      "bytes": 17580,
+      "sha256": "c60683d263cce17bc936e50ba936b3aa3e3a24d38ff8edaa14cf21e4f5a6b92e"
+    },
+    {
+      "key": "actions-plan",
+      "source": "/tmp/dreams-opening-next-actions-plan.json",
+      "target": "opening-completion-20261020/actions/plan.json",
+      "bytes": 4306,
+      "sha256": "1c4504a0d4148c360975ced71c5b475b6fc391cff26324023a8746cf089803af"
+    },
+    {
+      "key": "actions-input-pins",
+      "source": "/tmp/dreams-opening-next-actions-input-pins.json",
+      "target": "opening-completion-20261020/actions/input-pins.json",
+      "bytes": 1159,
+      "sha256": "f45d69f853f02855ebf3b669bbd39747448a2310df1c058775cece78af8c4a3d"
+    },
+    {
+      "key": "actions-helper",
+      "source": "/tmp/dreams-opening-next-actions-summary.cjs",
+      "target": "opening-completion-20261020/actions/summarize.cjs.txt",
+      "bytes": 13717,
+      "sha256": "d8f6ea364765cdc532362b38a681bd61bcdd4797fa9403196f403acddab54306"
+    },
+    {
+      "key": "actions-readiness",
+      "source": "/tmp/dreams-opening-next-actions-readiness.md",
+      "target": "opening-completion-20261020/actions/readiness.md",
+      "bytes": 3765,
+      "sha256": "6ec3aaa277a5c993a08d878a63a556f8a3fd684e2f05c16f70643b24fcc817b4"
+    },
+    {
+      "key": "exports-metadata",
+      "source": "/tmp/dreams-opening-next-export/metadata.json",
+      "target": "opening-completion-20261020/checks/export-metadata.json",
+      "bytes": 5282,
+      "sha256": "a65f544315d193ce18209e83d61ce4cb8cb865e71049f14c301ec3f69e8912c6"
+    },
+    {
+      "key": "wording-focused",
+      "source": "/tmp/dreams-education-withdrawal-copy-tests.out",
+      "target": "opening-completion-20261020/checks/wording-focused.txt",
+      "bytes": 2821,
+      "sha256": "00300c5e52a8428260c2d709b672281f2b55d6733ef53961f969aa11b1884915"
+    },
+    {
+      "key": "wording-test-types",
+      "source": "/tmp/dreams-education-withdrawal-copy-test-types.out",
+      "target": "opening-completion-20261020/checks/wording-test-types.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "ci-metadata",
+      "source": "/tmp/dreams-hosted-ci-ed506-20261020.json",
+      "target": "opening-completion-20261020/historical-ci/ed506-observation.json",
+      "bytes": 909,
+      "sha256": "d5b9e33e4f74a590948d92fc1bceed649f1eabde07946439187dc4123476164d"
+    },
+    {
+      "key": "ci-log",
+      "source": "/tmp/dreams-hosted-ci-ed506-20261020.txt",
+      "target": "opening-completion-20261020/historical-ci/ed506-log.txt",
+      "bytes": 28144,
+      "sha256": "401e6eafce6a3f8448e8346b4d50abf91c2b2b27ab7996c97e65a29ec50e2afe"
+    },
+    {
+      "key": "criminal-tool",
+      "source": "/workspace/dreams-worktrees/integration-opening-next/tools/run-criminal-policy.cjs",
+      "target": "opening-completion-20261020/criminal/producer-runner.cjs.txt",
+      "bytes": 9585,
+      "sha256": "eb64a09b4f3c91686f970c85359b3012439e9e581ff9e105e4fe223ff87b04bb"
+    },
+    {
+      "key": "criminal-helper",
+      "source": "/workspace/dreams-worktrees/integration-opening-next/tests/support/criminalPolicy.ts",
+      "target": "opening-completion-20261020/criminal/producer-policy.ts.txt",
+      "bytes": 28848,
+      "sha256": "5091b729b69b514d6aab5a8105afd68ef652434e4ac40c549e5c51ce5f801a4f"
+    },
+    {
+      "key": "annual-tool",
+      "source": "/workspace/dreams-worktrees/integration-opening-next/tools/run-life-sweep.cjs",
+      "target": "opening-completion-20261020/checks/annual-driver.cjs.txt",
+      "bytes": 6982,
+      "sha256": "b57b6bb3befdba4e776217b3ebf79c1fe4892f2cd7a260fa9b7e928bca75e20e"
+    },
+    {
+      "key": "actions-driver",
+      "source": "/workspace/dreams-worktrees/integration-opening-next/tools/benchmark-actions.cjs",
+      "target": "opening-completion-20261020/actions/benchmark-driver.cjs.txt",
+      "bytes": 16065,
+      "sha256": "19da212c32feb53a2f264b4c6062cd0b7a68146a762f82841890ea410408bbe9"
+    },
+    {
+      "key": "editorial-analysis-REPORT.md",
+      "source": "/tmp/dreams-editorial-varied-choice-audit-20261020/REPORT.md",
+      "target": "opening-completion-20261020/editorial/analysis/REPORT.md",
+      "bytes": 9496,
+      "sha256": "4a7f31da2991865a6e26b5de6eb60b214c30ed6e332aa0bc66dbce95b24d3c0c"
+    },
+    {
+      "key": "editorial-analysis-SHA256SUMS",
+      "source": "/tmp/dreams-editorial-varied-choice-audit-20261020/SHA256SUMS",
+      "target": "opening-completion-20261020/editorial/analysis/SHA256SUMS",
+      "bytes": 688,
+      "sha256": "3c03e4b1d4f363be76ed21f8f6219e6206b1fce965b82573ff4abb2cc7db2ad0"
+    },
+    {
+      "key": "editorial-analysis-analyse.py",
+      "source": "/tmp/dreams-editorial-varied-choice-audit-20261020/analyse.py",
+      "target": "opening-completion-20261020/editorial/analysis/analyse.py",
+      "bytes": 17913,
+      "sha256": "4c82e90dda564546ca1b02868d22c4c417d72224b65775f60f6befa7c915d140"
+    },
+    {
+      "key": "editorial-analysis-catalogue-observations.ndjson",
+      "source": "/tmp/dreams-editorial-varied-choice-audit-20261020/catalogue-observations.ndjson",
+      "target": "opening-completion-20261020/editorial/analysis/catalogue-observations.ndjson",
+      "bytes": 269005,
+      "sha256": "39f074712b1c9308e4ab45882ffdc87f3e6dfcb96f85752965d96e67bd683f5e"
+    },
+    {
+      "key": "editorial-analysis-early-copy-review.ndjson",
+      "source": "/tmp/dreams-editorial-varied-choice-audit-20261020/early-copy-review.ndjson",
+      "target": "opening-completion-20261020/editorial/analysis/early-copy-review.ndjson",
+      "bytes": 39918,
+      "sha256": "0114e6d848147c6dc9453b4af0422640e1d3475212fa5f9862401ecd4d130954"
+    },
+    {
+      "key": "editorial-analysis-inputs.json",
+      "source": "/tmp/dreams-editorial-varied-choice-audit-20261020/inputs.json",
+      "target": "opening-completion-20261020/editorial/analysis/inputs.json",
+      "bytes": 18386,
+      "sha256": "3122853a595733566fe41decf8d25110173e1fcd8d3cb250c48543d5b425416d"
+    },
+    {
+      "key": "editorial-analysis-medical-context-evidence.json",
+      "source": "/tmp/dreams-editorial-varied-choice-audit-20261020/medical-context-evidence.json",
+      "target": "opening-completion-20261020/editorial/analysis/medical-context-evidence.json",
+      "bytes": 98625,
+      "sha256": "c92cd7fa3f593a00180ba3a50c2619a49eb068451397bdeeda3372f02d7ca022"
+    },
+    {
+      "key": "editorial-analysis-name-collision-evidence.json",
+      "source": "/tmp/dreams-editorial-varied-choice-audit-20261020/name-collision-evidence.json",
+      "target": "opening-completion-20261020/editorial/analysis/name-collision-evidence.json",
+      "bytes": 14137,
+      "sha256": "d11c924c9a1dc35addfc3bf42c8bdd7af9fe6cffe98d00bb71c8211713bfb591"
+    },
+    {
+      "key": "editorial-analysis-summary.json",
+      "source": "/tmp/dreams-editorial-varied-choice-audit-20261020/summary.json",
+      "target": "opening-completion-20261020/editorial/analysis/summary.json",
+      "bytes": 72747,
+      "sha256": "96b75ff9ac9b0608b03cdddac03c2479942cb0234868e8a483066084e3c0b9d7"
+    },
+    {
+      "key": "editorial-analysis-plan",
+      "source": "/tmp/dreams-editorial-varied-choice-analysis-plan-20261020.md",
+      "target": "opening-completion-20261020/editorial/analysis-plan.md",
+      "bytes": 11862,
+      "sha256": "d96ef1bf52f54b715ee8a45ae2247156a7a420df6cd2d49a338c8916f1be5e39"
+    },
+    {
+      "key": "native-additional-rows",
+      "source": "/tmp/dreams-opening-next-native-additional-rows.json",
+      "target": "opening-completion-20261020/native/additional-raw-rows.json",
+      "bytes": 14093,
+      "sha256": "137ab75eac1c7fedf78ffc7c440780aa37532364a7d12141771e33250a431666"
+    },
+    {
+      "key": "native-additional-rows-tool",
+      "source": "/tmp/dreams-opening-next-native-additional-rows.py",
+      "target": "opening-completion-20261020/native/additional-raw-rows.py",
+      "bytes": 4148,
+      "sha256": "0d344e9037f6dc21a5a06fcc694e8ba64cbf32e428964474a4e242297a34bad1"
+    },
+    {
+      "key": "native-self-audit",
+      "source": "/tmp/dreams-opening-next-native-self-audit.md",
+      "target": "opening-completion-20261020/native/self-audit.md",
+      "bytes": 5948,
+      "sha256": "f359dcf29091c227041f3146e97bcda96dc8823c9e16dce93bb97a1c8369e274"
+    },
+    {
+      "key": "native-self-audit-baseline",
+      "source": "/tmp/dreams-opening-next-native-self-audit-baseline.json",
+      "target": "opening-completion-20261020/native/self-audit-baseline.json",
+      "bytes": 1525,
+      "sha256": "a8f19070d00feaacfe5446bc788ce066ef304c9f667cac9bc389048afd3bbb1a"
+    },
+    {
+      "key": "actions-quiescence",
+      "source": "/tmp/dreams-opening-next-actions-quiescence.json",
+      "target": "opening-completion-20261020/actions/quiescence.json",
+      "bytes": 1095,
+      "sha256": "534ecf40aad2db1e53ed5ea3a02a83c6e1f9cb4d6dcddf4ffeace38c4ee70c35"
+    },
+    {
+      "key": "actions-execution",
+      "source": "/tmp/dreams-opening-next-actions-execution.out",
+      "target": "opening-completion-20261020/actions/execution.txt",
+      "bytes": 247,
+      "sha256": "ba63c06b842622382cbb8050067e98e1b20f20b14777517e372c7687db14b901"
+    },
+    {
+      "key": "actions-execution-stderr",
+      "source": "/tmp/dreams-opening-next-actions-execution.stderr.txt",
+      "target": "opening-completion-20261020/actions/execution.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "actions-wrapper",
+      "source": "/tmp/dreams-opening-next-run-actions.py",
+      "target": "opening-completion-20261020/actions/run-actions.py",
+      "bytes": 2931,
+      "sha256": "3db424bc3a13651dac7d16891370f8c9d94223a9961c1fa350148ae063193215"
+    },
+    {
+      "key": "actions-initial-guard",
+      "source": "/tmp/dreams-opening-next-actions-execution-initial-guard-failed.stderr.txt",
+      "target": "opening-completion-20261020/diagnostics/actions-initial-guard.txt",
+      "bytes": 619,
+      "sha256": "42d31ee9bba957d2de8eb77ea549bf7eec311c95e2ee676322c4a1842d288981"
+    },
+    {
+      "key": "actions-initial-wrapper",
+      "source": "/tmp/dreams-opening-next-run-actions-initial.py",
+      "target": "opening-completion-20261020/diagnostics/actions-initial-wrapper.py",
+      "bytes": 2766,
+      "sha256": "7de28895470be56463b9ffd89587ba73c644b7d1b95df7de4c2b428ce035adac"
+    }
+  ],
+  "knownCoordinatorClosures": {
+    "regression": {
+      "session": 28548,
+      "complete": true,
+      "exitCode": 0,
+      "tests": 2282,
+      "suites": 169,
+      "seconds": 1315.195
+    },
+    "types": {
+      "session": 20372,
+      "complete": true,
+      "exitCode": 0
+    },
+    "annual120": {
+      "session": 36516,
+      "complete": true,
+      "exitCode": 0,
+      "elapsedMs": 753071
+    },
+    "exportsRetry": {
+      "session": 12370,
+      "complete": true,
+      "exitCode": 0,
+      "initialExitCode": 7
+    },
+    "criminalV2": {
+      "session": 96731,
+      "complete": true,
+      "exitCode": 0,
+      "elapsedMs": 179765
+    },
+    "editorial": {
+      "session": 24133,
+      "complete": true,
+      "exitCode": 0,
+      "elapsedMs": 677963
+    }
+  },
+  "pending": {
+    "nativeVerifierResult": "/tmp/dreams-opening-next-native-verifier-results.json",
+    "nativeVerifierStdout": "/tmp/dreams-opening-next-native-verifier.out",
+    "nativeExecution": {
+      "complete": true,
+      "exitCode": 0,
+      "executionReference": "root unified exec session46311; read-only10phase verifier actually closed exit0; root nativefinalchain4323 closed0"
+    },
+    "acceptedCaptureManifest": "/tmp/dreams-opening-next-native-accepted-captures.json",
+    "actionsRaw": "/tmp/dreams-opening-next-actions.json",
+    "actionsStderr": "/tmp/dreams-opening-next-actions.stderr.txt",
+    "actionsReceipt": "/tmp/dreams-opening-next-actions-receipt.json",
+    "actionsSummary": "/tmp/dreams-opening-next-actions-summary.json",
+    "actionsShort": "/tmp/dreams-opening-next-actions-summary-short.md"
+  },
+  "notes": [
+    "No copying until every fixed hash and gate plus all dynamic native/action inputs validate.",
+    "Only explicit root-viewed/accepted PNG/XML pairs are copied; no image globbing.",
+    "Native frozen5a projection is linked to final73ced by exact one-test-only source delta.",
+    "Bv2 stores complete observations and command trace hashes, not full command-row files. Editorial archive contains all original command/decision/cold/checkpoint/result files.",
+    "Source/tool archives use .cjs.txt/.ts.txt where applicable, so they do not enter allowJs compilation.",
+    "Olded506 hosted CI success is separate from C35. Initial interrupted regression/export failure remain diagnostics."
+  ]
+}

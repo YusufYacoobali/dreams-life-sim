@@ -1,0 +1,38 @@
+{
+  "kind": "strict-application-and-all-tests-sequential",
+  "worktree": "/workspace/dreams-worktrees/lifestyle-tabs",
+  "baseCommit": "e250c46a0740bd9eec62a9c064ee2bf5365fef2b",
+  "routeSha256Before": "954c00c3285ebc0a8ff7206d86e1af4d25a92eaa95a621b4dede527c65939a0c",
+  "startedAt": "2026-10-21T08:50:04.664489+00:00",
+  "complete": true,
+  "commands": [
+    {
+      "argv": [
+        "node",
+        "node_modules/typescript/bin/tsc",
+        "--noEmit"
+      ],
+      "exitCode": 0,
+      "elapsedSeconds": 15.277
+    },
+    {
+      "argv": [
+        "node",
+        "node_modules/typescript/bin/tsc",
+        "--noEmit",
+        "-p",
+        "tests/tsconfig.json"
+      ],
+      "exitCode": 0,
+      "elapsedSeconds": 26.053
+    }
+  ],
+  "exitCode": 0,
+  "elapsedSeconds": 41.33,
+  "endedAt": "2026-10-21T08:50:45.995103+00:00",
+  "routeSha256After": "954c00c3285ebc0a8ff7206d86e1af4d25a92eaa95a621b4dede527c65939a0c",
+  "log": {
+    "path": "/tmp/dreams-lifestyle-tabs-types.out",
+    "sha256": "e29294d6b4329b9c5e38440b63f80ff6f3b919daa00b5facc4ee12d6c1776ec2"
+  }
+}

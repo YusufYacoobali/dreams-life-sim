@@ -1,0 +1,41 @@
+{
+  "format": "dreams-coordinator-gate-execution-v1",
+  "sourceCommit": "a4be96ee1e60ab073fbbd2ae95d0ee2d0ee6f361",
+  "sourceSnapshot": "/tmp/dreams-production-gaps-accepted-source.json",
+  "sourceSnapshotSha256": "29871b35ebbcb371c1b44036a8c338955e5020f6d7a1fbb783f81e7cdf4c2652",
+  "root": "/workspace/dreams-worktrees/integration-production-gaps",
+  "argv": [
+    "node",
+    "./node_modules/expo/bin/cli",
+    "export",
+    "--platform",
+    "android",
+    "--platform",
+    "ios",
+    "--output-dir",
+    "/tmp/dreams-production-gaps-accepted-export",
+    "--source-maps",
+    "--max-workers",
+    "1"
+  ],
+  "startedAt": "2026-10-21T01:06:28.592586+00:00",
+  "before": {
+    "files": 656,
+    "snapshotSha256": "29871b35ebbcb371c1b44036a8c338955e5020f6d7a1fbb783f81e7cdf4c2652",
+    "status": "exact"
+  },
+  "complete": true,
+  "endedAt": "2026-10-21T01:07:44.831495+00:00",
+  "elapsedSeconds": 76.239,
+  "exitCode": 0,
+  "raw": {
+    "file": "/tmp/dreams-production-gaps-accepted-export.out",
+    "bytes": 2752,
+    "sha256": "53b417131efd777c7b22fb40a23bdf3270a9c2b78dd3ebe18d3f3bb3217bd4a6"
+  },
+  "after": {
+    "files": 656,
+    "snapshotSha256": "29871b35ebbcb371c1b44036a8c338955e5020f6d7a1fbb783f81e7cdf4c2652",
+    "status": "exact"
+  }
+}

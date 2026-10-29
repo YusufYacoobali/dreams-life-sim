@@ -1,0 +1,20 @@
+import { situation as s } from './lifeSituation';
+
+/** Only matching recorded postsecondary courses can supply these situations. */
+export const studyLifeTemplates = [
+  s("study-timetable-colour-code", "Understand everything, 9–5", "Your revision timetable for {studyField} at {studySchool} has been shared as an example. There is a problem: you filled it with things you hoped would happen, including an eight-hour block labelled Understand Everything.", [
+    ["practice", "Replace the fiction with one finished task", {"smarts": 4, "discipline": 3, "energy": -3}, "Become an expert takes longer", "You complete a small piece of {studyField} work. It takes longer than the block labelled Become an Expert, but fits marginally better before lunch.", "I replaced an unrealistic {studyField} timetable with actual coursework.", {"grades": 3}],
+    ["reset", "Admit the timetable is aspirational fiction", {"respect": 4, "stress": -3, "energy": 1}, "A promising new genre", "The organiser thanks you for your honesty, then asks whether you can make a fictional weekend version. Apparently everyone liked the colours.", "I admitted that my widely shared {studyField} timetable was mostly fantasy."],
+    ["perfect", "Offer to explain your timetable to everyone", {"respect": -5, "stress": 6, "discipline": -4}, "Allocate time wisely", "Someone asks when you do the actual {studyField} work. You point at Self-Reflection and abruptly end the talk.", "I bluffed through a presentation about a {studyField} timetable I had not followed.", {"grades": -4}],
+  ], {"study": "active", "illustration": "education"}),
+  s('study-paused-unsolicited-tip', 'Financial genius', 'Your {studyField} course at {studySchool} is paused because you cannot cover tuition. Someone tells you to “just try harder”. Apparently, you forgot to try having money.', [
+    ['explain', 'Ask whether their advice comes with tuition', { respect: 3, stress: -1 }, 'The motivational speech ends', 'You ask if they would like to cover the fee. They would not. Suddenly, everyone agrees the problem involves money.', 'I challenged glib advice about my tuition pause in {studyField}.'],
+    ['private', 'Thank them for absolutely nothing', { stress: -3, discipline: 2 }, 'Advice returned unopened', 'You end the conversation before it becomes a lecture about positive thinking. The course can wait; so can their next tip.', 'I shut down unsolicited advice about my paused {studyField} course.'],
+    ['pretend', 'Claim you have already graduated', { happiness: 2, stress: 5, respect: -3 }, 'A fictional qualification needs details', 'They ask about your final project. You describe a topic you have not studied yet and regret inviting questions.', 'I claimed to have finished my {studyField} course while it was still paused.'],
+  ], { study: 'paused', illustration: 'education' }),
+  s('study-confident-fake-source', 'According to Professor Madeup', 'While revising {studyField} at {studySchool}, you find a very confident online explanation. Its main source is “insert credible reference here”.', [
+    ['verify', 'Check the claim against your course material', { smarts: 4, discipline: 3, energy: -3 }, 'Confidence was doing most of the work', 'The explanation mixed one useful point with two inventions. You keep the real point and work through it properly.', 'I checked a dubious {studyField} explanation against my course material.'],
+    ['discard', 'Close it and take a short break', { stress: -3, energy: 2 }, 'One less fake expert', 'You stop arguing with a paragraph that cannot answer you. A few quiet minutes beat another suspicious citation.', 'I stepped away from an unreliable {studyField} study guide.'],
+    ['defend', 'Defend the answer because it sounds impressive', { happiness: 2, smarts: -2, respect: -3, stress: 4 }, 'The source is still a placeholder', 'You repeat the claim aloud, reach the invented citation and hear how thin it sounds. You have practised sounding certain instead of understanding it.', 'I repeated an unsupported {studyField} claim instead of checking it.'],
+  ], { study: 'active', rarity: 'uncommon', illustration: 'education' }),
+];

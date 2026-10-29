@@ -1,0 +1,109 @@
+{
+  "audit": "deferred-event-writing-mechanics",
+  "oldCommit": "2ef980cf4fc30ceeac77a9c9406ed74e90098fcd",
+  "newWritingCommit": "d861b33a9323bdafc10cb8c74191afac6d756cb4",
+  "upstreamCommit": "aab4f88061d6489af542dded061d9b1e7adb44ad",
+  "typescriptVersion": "6.0.3",
+  "method": "Parse each complete TypeScript file; serialize every AST node as syntax-kind, literal/identifier text and ordered children, excluding SourceFile.text. Replace only the listed prose StringLiteral nodes with <prose>. Compare serialized ASTs and SHA-256 hashes; compare unmasked ASTs with d861b33 and the integrated working tree. Whitespace, quote delimiters and comments are not execution syntax.",
+  "maskedFields": [
+    "s argument 1: scene title",
+    "s argument 2: scene body",
+    "s argument 3 choice tuple index 1: label",
+    "s argument 3 choice tuple index 3: result title",
+    "s argument 3 choice tuple index 4: result body",
+    "s argument 3 choice tuple index 5: journal"
+  ],
+  "unchanged": [
+    "scene and choice IDs",
+    "scene and choice ordering",
+    "stat, economic, skill and bond effects",
+    "eligibility gates and option objects",
+    "weights and rarity",
+    "RNG expressions and control flow"
+  ],
+  "changedSceneCount": 19,
+  "allFiveProseOnly": true,
+  "allNewFilesMatchWritingAndIntegratedSources": true,
+  "verificationBoundary": "Static source comparison only. No full regression or 120-life soak was rerun for this prose-only merge; prior mechanical verification retains its original source scope.",
+  "files": [
+    {
+      "path": "src/game/content/hobbyLifeStories.ts",
+      "sceneCount": 11,
+      "changedSceneCount": 1,
+      "changedSceneIds": [
+        "hobby-gardening-labels"
+      ],
+      "oldMaskedAstSha256": "03b2992a5c0748458e970306e3a7951508901772ecef9d4b65762af05658a7a3",
+      "newMaskedAstSha256": "03b2992a5c0748458e970306e3a7951508901772ecef9d4b65762af05658a7a3",
+      "allNonProseAstNodesEqual": true,
+      "d861b33FullAstMatchesUpstream": true,
+      "currentFullAstMatchesUpstream": true
+    },
+    {
+      "path": "src/game/content/laterLifeStories.ts",
+      "sceneCount": 12,
+      "changedSceneCount": 4,
+      "changedSceneIds": [
+        "later-forgotten-telephone-number",
+        "later-photo-at-edge",
+        "later-offered-a-hand",
+        "later-recording-labelled-retro"
+      ],
+      "oldMaskedAstSha256": "3f9bc29159e30cde5cbf795a0265296221f1d89822e61847c166c8788df16d2e",
+      "newMaskedAstSha256": "3f9bc29159e30cde5cbf795a0265296221f1d89822e61847c166c8788df16d2e",
+      "allNonProseAstNodesEqual": true,
+      "d861b33FullAstMatchesUpstream": true,
+      "currentFullAstMatchesUpstream": true
+    },
+    {
+      "path": "src/game/content/petLifeStories.ts",
+      "sceneCount": 11,
+      "changedSceneCount": 3,
+      "changedSceneIds": [
+        "pet-cat-slow-blink",
+        "pet-rabbit-floor-level",
+        "pet-familiar-presence"
+      ],
+      "oldMaskedAstSha256": "6f64398b7c5907a4e34a27c150bd1f783a20af72f5eddf7a977bb1d7e5b30f99",
+      "newMaskedAstSha256": "6f64398b7c5907a4e34a27c150bd1f783a20af72f5eddf7a977bb1d7e5b30f99",
+      "allNonProseAstNodesEqual": true,
+      "d861b33FullAstMatchesUpstream": true,
+      "currentFullAstMatchesUpstream": true
+    },
+    {
+      "path": "src/game/content/travelMemoryStories.ts",
+      "sceneCount": 10,
+      "changedSceneCount": 3,
+      "changedSceneIds": [
+        "travel-memory-one-good-habit",
+        "travel-memory-imperfect-weather",
+        "travel-memory-short-version"
+      ],
+      "oldMaskedAstSha256": "5da0e0366d339eed52c02d1504fe0e5c815ba0cb3dfc9fbf9df4dcc39a2ba407",
+      "newMaskedAstSha256": "5da0e0366d339eed52c02d1504fe0e5c815ba0cb3dfc9fbf9df4dcc39a2ba407",
+      "allNonProseAstNodesEqual": true,
+      "d861b33FullAstMatchesUpstream": true,
+      "currentFullAstMatchesUpstream": true
+    },
+    {
+      "path": "src/game/content/wellbeingStories.ts",
+      "sceneCount": 15,
+      "changedSceneCount": 8,
+      "changedSceneIds": [
+        "wellbeing-search-results",
+        "wellbeing-other-peoples-progress",
+        "wellbeing-stretch-after-sitting",
+        "wellbeing-quiet-not-silent",
+        "wellbeing-waiting-without-feed",
+        "wellbeing-good-day-pressure",
+        "wellbeing-habit-one-miss",
+        "wellbeing-unhurried-breath"
+      ],
+      "oldMaskedAstSha256": "4a4714ed250d5a9f9747027d3689b346c5b0b1b2bb6cf9aa6bf549ac601ad9a2",
+      "newMaskedAstSha256": "4a4714ed250d5a9f9747027d3689b346c5b0b1b2bb6cf9aa6bf549ac601ad9a2",
+      "allNonProseAstNodesEqual": true,
+      "d861b33FullAstMatchesUpstream": true,
+      "currentFullAstMatchesUpstream": true
+    }
+  ]
+}

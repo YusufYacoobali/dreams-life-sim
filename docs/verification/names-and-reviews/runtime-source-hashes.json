@@ -1,0 +1,12 @@
+{
+  "src/game/content/creationNames.ts": "30d2d2d3ab65bf4919bd08711b43a455f39202af132b07c8af1705fd3c813dc9",
+  "src/game/content/nameExpansion.ts": "beb7d2a63867fa56c42e7a6c8df973035ac217d9723cac104c64e74c9730d4f0",
+  "src/game/names.ts": "b369545969d9a3836169397612dc22e2ffa5092f6ff2da5f9dc9c695d130f653",
+  "src/game/countries.ts": "0eb33869dfdf738832badbdd72cbd6b814fa69c90648ee5651d3c0027b6ee0e1",
+  "src/game/createLife.ts": "52aa5bc0e62e23374d9e56e2eaef0a6bc77bb96a44084f936377ec7b2441756b",
+  "src/game/systems/family.ts": "6c718d2053030f76e78977c356614513bca9f086ae173a87fe45cb419ec6855a",
+  "src/game/systems/npcs.ts": "bf665c705233231216970d67eee9301ef5735076db8b6daa0296aa88f108ca9b",
+  "src/reviews/nativeReview.ts": "6c870808aa468bec62e042aaff6b3ebbb0131ce83251d2ca2b6dfa798d8c9cbe",
+  "src/reviews/tracker.ts": "8dd446459a93177d63bb30fbc57aa7785ec215871f70e9fca56092b2419ea290",
+  "src/ui/ReviewPromptHost.tsx": "455b82ad9edbe3c8af00203d64f1039317b1fc670f29c4819118549e5fe67a2d"
+}

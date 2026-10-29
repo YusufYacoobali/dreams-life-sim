@@ -1,0 +1,49 @@
+'use strict';
+// Coordinator-only source inventory, or a read-only recheck of that inventory.
+// Git tree/head/status proof files are produced separately by successful shell
+// commands. No subprocess, game command, native action or gate runs here.
+const fs = require('node:fs'), path = require('node:path'), crypto = require('node:crypto'), assert = require('node:assert/strict');
+const [mode, root, commit, output, proofPrefix] = process.argv.slice(2);
+assert(['--capture', '--verify'].includes(mode)); assert(path.isAbsolute(root)); assert.match(commit, /^[0-9a-f]{40}$/); assert(output.startsWith('/tmp/'));
+const sha = bytes => crypto.createHash('sha256').update(bytes).digest('hex');
+if (mode === '--verify') {
+  const record = JSON.parse(fs.readFileSync(output, 'utf8')); assert.equal(record.commit, commit); assert.equal(record.root, root);
+  for (const [file, expected] of Object.entries(record.source)) assert.equal(sha(fs.readFileSync(path.join(root, file))), expected, 'Source changed: ' + file);
+  console.log(JSON.stringify({ status: 'exact', commit, files: Object.keys(record.source).length, snapshotSha256: sha(fs.readFileSync(output)) }));
+} else {
+  assert(!fs.existsSync(output), 'Never overwrite a source snapshot');
+  const prefix = proofPrefix || '/tmp/dreams-production-gaps-source-'; assert(prefix.startsWith('/tmp/'));
+  const proofFiles = { head: prefix + 'head.txt', tree: prefix + 'tree.bin', status: prefix + 'status.txt' };
+  assert.equal(fs.readFileSync(proofFiles.head, 'utf8').trim(), commit); assert.equal(fs.readFileSync(proofFiles.status, 'utf8'), '', 'Source must be clean');
+  const all = new Map();
+  for (const row of fs.readFileSync(proofFiles.tree, 'utf8').split('\0').filter(Boolean)) {
+    const match = /^(100644|100755) blob ([a-f0-9]{40})\t(.+)$/.exec(row);
+    if (!match) { assert.match(row, /^120000 blob [a-f0-9]{40}\t.+$/); continue; }
+    all.set(match[3], match[2]);
+  }
+  const config = new Set(['package.json', 'package-lock.json', 'app.json', 'tsconfig.json', 'babel.config.cjs', 'jest.config.cjs', 'metro.config.cjs', '.github/workflows/quality.yml']);
+  const inventory = [...all.keys()].filter(file => /^(?:app|src|tests|tools|assets)\//.test(file) || config.has(file)).sort();
+  const source = {};
+  for (const file of inventory) {
+    const bytes = fs.readFileSync(path.join(root, file));
+    const oid = crypto.createHash('sha1').update(Buffer.from('blob ' + bytes.length + '\0')).update(bytes).digest('hex');
+    assert.equal(oid, all.get(file), 'Current file differs from frozen Git source: ' + file); source[file] = sha(bytes);
+  }
+  function treeHash(directories, relative = false) {
+    const hash = crypto.createHash('sha256');
+    const visit = (directory, base) => {
+      for (const entry of fs.readdirSync(path.join(root, directory), { withFileTypes: true }).sort((a, b) => a.name.localeCompare(b.name))) {
+        const file = path.posix.join(directory, entry.name);
+        if (entry.isDirectory()) visit(file, base);
+        else if (file.endsWith('.ts')) hash.update(relative ? path.posix.relative(base, file) : file).update('\0').update(fs.readFileSync(path.join(root, file))).update('\0');
+      }
+    };
+    for (const base of directories) visit(base, base); return hash.digest('hex');
+  }
+  const create = fs.readFileSync(path.join(root, 'src/game/createLife.ts'), 'utf8');
+  assert.match(create, /schemaVersion: 36, engineVersion: 37, contentVersion: 12/);
+  assert.match(fs.readFileSync(path.join(root, 'src/persistence/repository.ts'), 'utf8'), /version\.user_version > 16/);
+  const record = { capturedAt: new Date().toISOString(), commit, root, versions: { world: 36, engine: 37, content: 12, database: 16, checkpoint: 'v4' }, scope: 'Exact tracked app/source/tests/fixtures/tools/assets/config bytes against immutable Git blob IDs. Source capture is not a test/build/native pass.', source, gameSourceHash: treeHash(['src/game'], true), combinedGamePersistenceSourceHash: treeHash(['src/game', 'src/persistence']), progressionSourceHash: treeHash(['src/progression'], true), coordinatorProofs: Object.fromEntries(Object.entries(proofFiles).map(([key, file]) => [key, { file, sha256: sha(fs.readFileSync(file)) }])) };
+  fs.writeFileSync(output, JSON.stringify(record, null, 2) + '\n', { flag: 'wx' });
+  console.log(JSON.stringify({ output, snapshotSha256: sha(fs.readFileSync(output)), files: inventory.length, commit, gameSourceHash: record.gameSourceHash, combinedGamePersistenceSourceHash: record.combinedGamePersistenceSourceHash }));
+}

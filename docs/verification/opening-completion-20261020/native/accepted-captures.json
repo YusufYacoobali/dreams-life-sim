@@ -1,0 +1,485 @@
+{
+  "format": "dreams-c35-explicit-native-capture-manifest-v1",
+  "complete": true,
+  "sourceCommit": "73cedc7643fa3cbcd0ad32dfa27abfb59dac8aaa",
+  "runtimeProjectionCommit": "5a2565458fa5de90c1acaf0e110fc980f6476b64",
+  "device": "Actual Android24 QEMU software/SwiftShader ExpoGo57.0.9,390x844; no physical/iOS/standalone claim.",
+  "scope": "Explicit coordinator-viewed25PNG/XML pairs only; excludes every developer-toast/fullLogBox/stale-wait diagnostic. Normal and130% opening review cancellations, actual soft Next/Done, readonly current Profile/Statistics/Finances, settings cold resume, existing Nia selection, two saved-result cold reopens and two separate acknowledgements are accepted only within pictured scope. No new life was created in this C35 native increment. Actual finalfont1.0; ExpoGo force-stopped after final138 capture. No four-command cold or physical/iOS/standalone claim.",
+  "captures": [
+    {
+      "id": "welcome",
+      "fontScale": 1.0,
+      "coordinatorPersonallyViewed": true,
+      "accepted": true,
+      "note": "Existing Alex Continue and ordinary custom/random opening controls.",
+      "files": [
+        {
+          "file": "/tmp/dreams-opening-next-native-welcome.png",
+          "bytes": 376483,
+          "sha256": "a28d236925c4bb8ddefcfb839594fce56d200d9095dc5569cc409b3d60a98af2"
+        },
+        {
+          "file": "/tmp/dreams-opening-next-native-welcome.xml",
+          "bytes": 16570,
+          "sha256": "6fc675a37be5ba6e79cc76cdabbdd8ba65a422718be2e5867b86c4f3894c7ec6"
+        }
+      ]
+    },
+    {
+      "id": "keyboard-first",
+      "fontScale": 1.0,
+      "coordinatorPersonallyViewed": true,
+      "accepted": true,
+      "note": "Actual first-name focus and soft Next above persistent primary action.",
+      "files": [
+        {
+          "file": "/tmp/dreams-opening-next-native-keyboard-first.png",
+          "bytes": 67432,
+          "sha256": "f5d3a1c1d47965b16ec6f97d5ef2c22484add147b31005bb9b228e92ae030b72"
+        },
+        {
+          "file": "/tmp/dreams-opening-next-native-keyboard-first.xml",
+          "bytes": 28642,
+          "sha256": "924ae73e1bc15bf540755fbbc88da44337ad3d9e7fd6eeadd645d162164471cb"
+        }
+      ]
+    },
+    {
+      "id": "keyboard-next",
+      "fontScale": 1.0,
+      "coordinatorPersonallyViewed": true,
+      "accepted": true,
+      "note": "Actual soft Next transferred focus to last name; soft Done reachable.",
+      "files": [
+        {
+          "file": "/tmp/dreams-opening-next-native-keyboard-next.png",
+          "bytes": 66973,
+          "sha256": "a6a560c79f34cd3d74e4483ebe2a16f5534a2c27b2736330a30534b163185333"
+        },
+        {
+          "file": "/tmp/dreams-opening-next-native-keyboard-next.xml",
+          "bytes": 29358,
+          "sha256": "b58008aa4d99445f60dba71712364cd9ee4aaeb072dfb0a5a60472cd6f8dd80d"
+        }
+      ]
+    },
+    {
+      "id": "keyboard-done",
+      "fontScale": 1.0,
+      "coordinatorPersonallyViewed": true,
+      "accepted": true,
+      "note": "Actual soft Done removed keyboard without creating a life.",
+      "files": [
+        {
+          "file": "/tmp/dreams-opening-next-native-keyboard-done.png",
+          "bytes": 62675,
+          "sha256": "67183159e1fb6897bae2b3c15c85d1dc3286f80101065e785a9defbccda0389c"
+        },
+        {
+          "file": "/tmp/dreams-opening-next-native-keyboard-done.xml",
+          "bytes": 29359,
+          "sha256": "3afbf01a189637991f3b62b557b8b3792fe550077bb8817f708f58a31bd7bb2e"
+        }
+      ]
+    },
+    {
+      "id": "review-normal",
+      "fontScale": 1.0,
+      "coordinatorPersonallyViewed": true,
+      "accepted": true,
+      "note": "Bound Alice Romano/Milan/Italy review; reachable confirmation/cancel; full app backdrop.",
+      "files": [
+        {
+          "file": "/tmp/dreams-opening-next-native-review-normal.png",
+          "bytes": 54155,
+          "sha256": "eb5fcf26d5b2155279ad02abbdb2427a59ab6eedff15fd786b063e12601950a3"
+        },
+        {
+          "file": "/tmp/dreams-opening-next-native-review-normal.xml",
+          "bytes": 7981,
+          "sha256": "ffece2c80c1f60b84331c1c73e1a55c38b3310e692095f1b81e305ec5b936f0d"
+        }
+      ]
+    },
+    {
+      "id": "creation-large-clean",
+      "fontScale": 1.3,
+      "coordinatorPersonallyViewed": true,
+      "accepted": true,
+      "note": "Normally generated Mateo López draft; primary creation action reachable.",
+      "files": [
+        {
+          "file": "/tmp/dreams-opening-next-native-creation-large-clean.png",
+          "bytes": 66422,
+          "sha256": "8f679754615a8b31045eeb4f25acf9328f5878588c032ec926684489a3014f77"
+        },
+        {
+          "file": "/tmp/dreams-opening-next-native-creation-large-clean.xml",
+          "bytes": 28653,
+          "sha256": "c5d7d49be36a57bd54527533cf296b9c7871c7d0f62a7485c812740118038067"
+        }
+      ]
+    },
+    {
+      "id": "review-large-clean",
+      "fontScale": 1.3,
+      "coordinatorPersonallyViewed": true,
+      "accepted": true,
+      "note": "Bound Mateo López/Valencia/Spain review; reachable58dp buttons; full app backdrop; cancelled.",
+      "files": [
+        {
+          "file": "/tmp/dreams-opening-next-native-review-large-clean.png",
+          "bytes": 54486,
+          "sha256": "b664214c55c97b5c787415560eb47ac685a76875e65db0ea38df55310b092cb7"
+        },
+        {
+          "file": "/tmp/dreams-opening-next-native-review-large-clean.xml",
+          "bytes": 7988,
+          "sha256": "7d807631a40c1f873c2a5e725cd82d0efa967dcd88b17265b733ec60bde11dd0"
+        }
+      ]
+    },
+    {
+      "id": "profile-large",
+      "fontScale": 1.3,
+      "coordinatorPersonallyViewed": true,
+      "accepted": true,
+      "note": "Existing Alex identity and actual education/occupation/residence rows.",
+      "files": [
+        {
+          "file": "/tmp/dreams-opening-next-native-profile-large.png",
+          "bytes": 83310,
+          "sha256": "2aa7fc81876a1e1429406b4d45186e4e494127eea19d23bddce17d482e384e33"
+        },
+        {
+          "file": "/tmp/dreams-opening-next-native-profile-large.xml",
+          "bytes": 33535,
+          "sha256": "4e65247839c534dfe0178c0e524331460715ae1041e278eb6cb408513e335d26"
+        }
+      ]
+    },
+    {
+      "id": "statistics-large",
+      "fontScale": 1.3,
+      "coordinatorPersonallyViewed": true,
+      "accepted": true,
+      "note": "Existing Alex personal statistics with recorded-history caveat.",
+      "files": [
+        {
+          "file": "/tmp/dreams-opening-next-native-statistics-large.png",
+          "bytes": 67245,
+          "sha256": "ad3d5f1d5dd57f4ae198edad757bc1ece1c9a70264a58fdd7cfa72e265e8dfa2"
+        },
+        {
+          "file": "/tmp/dreams-opening-next-native-statistics-large.xml",
+          "bytes": 32205,
+          "sha256": "cd6d80621c49d9223b288dd79ab8087b915fd578ac07322dea43601d7092e705"
+        }
+      ]
+    },
+    {
+      "id": "statistics-stats-large",
+      "fontScale": 1.3,
+      "coordinatorPersonallyViewed": true,
+      "accepted": true,
+      "note": "All10 actual current stats fit as scrollable accessible content.",
+      "files": [
+        {
+          "file": "/tmp/dreams-opening-next-native-statistics-stats-large.png",
+          "bytes": 58425,
+          "sha256": "5c435f8eddb0b019a292b056dfc0b6a899531e5358b4655f2f136879709a7e8d"
+        },
+        {
+          "file": "/tmp/dreams-opening-next-native-statistics-stats-large.xml",
+          "bytes": 36490,
+          "sha256": "8168a55765f10abeda4ae0e644453eab28d1282ae1dc5756061b7e24610db7c1"
+        }
+      ]
+    },
+    {
+      "id": "statistics-counts-large",
+      "fontScale": 1.3,
+      "coordinatorPersonallyViewed": true,
+      "accepted": true,
+      "note": "Recorded education/work rows and honest sparse-history labels.",
+      "files": [
+        {
+          "file": "/tmp/dreams-opening-next-native-statistics-counts-large.png",
+          "bytes": 71512,
+          "sha256": "fc2fb5cf81f05abb231a0c8f6850ab5d31530b030489b4ac4b1229f181a5bf0c"
+        },
+        {
+          "file": "/tmp/dreams-opening-next-native-statistics-counts-large.xml",
+          "bytes": 29309,
+          "sha256": "a1b27b9c4fe33d4e6124cdbe1da15e7642761240dfcc4ec073e961e33da11bf1"
+        }
+      ]
+    },
+    {
+      "id": "finances-large",
+      "fontScale": 1.3,
+      "coordinatorPersonallyViewed": true,
+      "accepted": true,
+      "note": "Existing Alex2032/EUR current balances and independent year/currency scope.",
+      "files": [
+        {
+          "file": "/tmp/dreams-opening-next-native-finances-large.png",
+          "bytes": 61592,
+          "sha256": "99f345e95420b2394bb402bb35ce6fe24b44fb96efa242301f5662a01c6b7aab"
+        },
+        {
+          "file": "/tmp/dreams-opening-next-native-finances-large.xml",
+          "bytes": 24156,
+          "sha256": "2a11dfc64d7abb6147ebabebc99b3f9a04e42593455add3e586d508c3d1e0f21"
+        }
+      ]
+    },
+    {
+      "id": "settings-off-large",
+      "fontScale": 1.3,
+      "coordinatorPersonallyViewed": true,
+      "accepted": true,
+      "note": "Appearance and app Reduce Motion off; actual OS reduced-motion acknowledgement.",
+      "files": [
+        {
+          "file": "/tmp/dreams-opening-next-native-settings-off-large.png",
+          "bytes": 63164,
+          "sha256": "488bbd9be35e716a881b78bbe8e1aecab66520144019637b54cba02354018951"
+        },
+        {
+          "file": "/tmp/dreams-opening-next-native-settings-off-large.xml",
+          "bytes": 17379,
+          "sha256": "4d5c0c2d34da5a51ad1bdf333c4d618cdd206b7b8ee8c816ea1077b6a1be2cf8"
+        }
+      ]
+    },
+    {
+      "id": "feedback-large",
+      "fontScale": 1.3,
+      "coordinatorPersonallyViewed": true,
+      "accepted": true,
+      "note": "All3 actual app motion/haptic/sound switches on, no physical feedback claim.",
+      "files": [
+        {
+          "file": "/tmp/dreams-opening-next-native-feedback-large.png",
+          "bytes": 82730,
+          "sha256": "a65c8b581834bc03b3e2d124b0d672e1167296fc3f3f1fa611a441bed513324a"
+        },
+        {
+          "file": "/tmp/dreams-opening-next-native-feedback-large.xml",
+          "bytes": 16505,
+          "sha256": "e7502af1de21df092ab7a0736accdb0de15766e6d4af16746eb9af1bdcc7d10b"
+        }
+      ]
+    },
+    {
+      "id": "settings-cold-welcome",
+      "fontScale": 1.0,
+      "coordinatorPersonallyViewed": true,
+      "accepted": true,
+      "note": "Font restored1.0; actual cold Welcome resumes Alex; development notice dismissed.",
+      "files": [
+        {
+          "file": "/tmp/dreams-opening-next-native-settings-cold-welcome.png",
+          "bytes": 376671,
+          "sha256": "0969e18a2343f9fb4e46a39c13127642f4e0be0b2c7822b24c9e9b05361118ea"
+        },
+        {
+          "file": "/tmp/dreams-opening-next-native-settings-cold-welcome.xml",
+          "bytes": 16570,
+          "sha256": "6fc675a37be5ba6e79cc76cdabbdd8ba65a422718be2e5867b86c4f3894c7ec6"
+        }
+      ]
+    },
+    {
+      "id": "nia-existing-entry",
+      "fontScale": 1.0,
+      "coordinatorPersonallyViewed": true,
+      "accepted": true,
+      "note": "Existing Nia entry and genuine Continue; no new life created.",
+      "files": [
+        {
+          "file": "/tmp/dreams-opening-next-native-nia-existing-entry.png",
+          "bytes": 49417,
+          "sha256": "db2810b68f84979b95c299669f6ec6560c913e98e2b46a5f28997e6673840171"
+        },
+        {
+          "file": "/tmp/dreams-opening-next-native-nia-existing-entry.xml",
+          "bytes": 22134,
+          "sha256": "1e8f96b578896dbd0f0b0fcdd07eeaddece6100ac22cf0db710aa6bbbee1d055"
+        }
+      ]
+    },
+    {
+      "id": "nia-selected",
+      "fontScale": 1.0,
+      "coordinatorPersonallyViewed": true,
+      "accepted": true,
+      "note": "Existing Nia age24/revision134 dashboard after normal selection.",
+      "files": [
+        {
+          "file": "/tmp/dreams-opening-next-native-nia-selected.png",
+          "bytes": 77593,
+          "sha256": "ea3d425023f12d16fd4de6bf3b799982e483228f6c8c41d9ca4b61fa5a048206"
+        },
+        {
+          "file": "/tmp/dreams-opening-next-native-nia-selected.xml",
+          "bytes": 40494,
+          "sha256": "6e82e18d58716ce0f995fa0dff40e2e2ed1f7ef39125fd2e0235f8eaf7ddefa3"
+        }
+      ]
+    },
+    {
+      "id": "introduction-review",
+      "fontScale": 1.0,
+      "coordinatorPersonallyViewed": true,
+      "accepted": true,
+      "note": "Actual current paid reading access and self-attending Nia; zero additional fee; normal confirmation.",
+      "files": [
+        {
+          "file": "/tmp/dreams-opening-next-native-introduction-review.png",
+          "bytes": 55366,
+          "sha256": "1bbd3daabc434a887f136ffc1733b8d94b7a2d4e2e4b97a66222a0eb6a05cbc4"
+        },
+        {
+          "file": "/tmp/dreams-opening-next-native-introduction-review.xml",
+          "bytes": 9496,
+          "sha256": "6ed6f8091e8d404dac5ed90ba794a94e1af57cf7ee0b7ccc6fcd23c2ed2192d0"
+        }
+      ]
+    },
+    {
+      "id": "intro135",
+      "fontScale": 1.0,
+      "coordinatorPersonallyViewed": true,
+      "accepted": true,
+      "note": "Actual durable practice introduction135 to Morgan Brooks; saved result remains unacknowledged.",
+      "files": [
+        {
+          "file": "/tmp/dreams-opening-next-native-intro135.png",
+          "bytes": 71742,
+          "sha256": "3db185074854dd301e459fcc7d9b330518a1678dc92b1b4ee5a55b351a1f41f9"
+        },
+        {
+          "file": "/tmp/dreams-opening-next-native-intro135.xml",
+          "bytes": 8082,
+          "sha256": "8d3c335a541db63c6a1711bb8538601a22b1587caf99f9ca041ecd24dc1d1cd4"
+        }
+      ]
+    },
+    {
+      "id": "cold-intro135",
+      "fontScale": 1.0,
+      "coordinatorPersonallyViewed": true,
+      "accepted": true,
+      "note": "Actual cold restart and normal Continue restored the same saved Morgan Brooks result135 before acknowledgement.",
+      "files": [
+        {
+          "file": "/tmp/dreams-opening-next-native-cold-intro135.png",
+          "bytes": 74282,
+          "sha256": "fe8def01d6faf434dff500eb84d9087c0053719e4eaf67764c041dfa09ba16a2"
+        },
+        {
+          "file": "/tmp/dreams-opening-next-native-cold-intro135.xml",
+          "bytes": 8082,
+          "sha256": "8d3c335a541db63c6a1711bb8538601a22b1587caf99f9ca041ecd24dc1d1cd4"
+        }
+      ]
+    },
+    {
+      "id": "ack136",
+      "fontScale": 1.0,
+      "coordinatorPersonallyViewed": true,
+      "accepted": true,
+      "note": "Actual acknowledgement136 saved once; no pending/year remains.",
+      "files": [
+        {
+          "file": "/tmp/dreams-opening-next-native-ack136.png",
+          "bytes": 77858,
+          "sha256": "4100c05a34622941e04f665876df92be4c38fd94e1757ba176e34be098d64ab9"
+        },
+        {
+          "file": "/tmp/dreams-opening-next-native-ack136.xml",
+          "bytes": 40485,
+          "sha256": "32ee10f9fd860774c8e659d7158b094bebfc4d55b7362b6509878d7586a85c58"
+        }
+      ]
+    },
+    {
+      "id": "vaccination-review",
+      "fontScale": 1.0,
+      "coordinatorPersonallyViewed": true,
+      "accepted": true,
+      "note": "Routine10-year protection, actual self-paid90USD fee; both review controls reachable.",
+      "files": [
+        {
+          "file": "/tmp/dreams-opening-next-native-vaccination-review.png",
+          "bytes": 59850,
+          "sha256": "7b55fd2ec7a67e0ec7bc5c1fd2725867be599e71a7c4b46189decfe2af3fced0"
+        },
+        {
+          "file": "/tmp/dreams-opening-next-native-vaccination-review.xml",
+          "bytes": 9281,
+          "sha256": "1cb1633e6dba8a652b1058c2300526abebab666678bb51cdc2b2cd47254711e1"
+        }
+      ]
+    },
+    {
+      "id": "vaccine137",
+      "fontScale": 1.0,
+      "coordinatorPersonallyViewed": true,
+      "accepted": true,
+      "note": "Actual durable vaccination137; no immediate health boost; result left unacknowledged.",
+      "files": [
+        {
+          "file": "/tmp/dreams-opening-next-native-vaccine137.png",
+          "bytes": 60213,
+          "sha256": "855857cd76234dca5f76f78cb74903d43de16672e92149241060f49294c62a5e"
+        },
+        {
+          "file": "/tmp/dreams-opening-next-native-vaccine137.xml",
+          "bytes": 7021,
+          "sha256": "290ae88010c9656021b1935dff51fb8a76185155203307cfd4d48f68641adc93"
+        }
+      ]
+    },
+    {
+      "id": "cold-vaccine137",
+      "fontScale": 1.0,
+      "coordinatorPersonallyViewed": true,
+      "accepted": true,
+      "note": "Actual cold restart and normal Continue restored vaccination137 result before acknowledgement;90USD debit remains.",
+      "files": [
+        {
+          "file": "/tmp/dreams-opening-next-native-cold-vaccine137.png",
+          "bytes": 69675,
+          "sha256": "1add28738f19d9c2a452667237776fe3641ef0a4400f170c45297980990e1c4f"
+        },
+        {
+          "file": "/tmp/dreams-opening-next-native-cold-vaccine137.xml",
+          "bytes": 7021,
+          "sha256": "290ae88010c9656021b1935dff51fb8a76185155203307cfd4d48f68641adc93"
+        }
+      ]
+    },
+    {
+      "id": "final138",
+      "fontScale": 1.0,
+      "coordinatorPersonallyViewed": true,
+      "accepted": true,
+      "note": "Actual acknowledgement138 saved once; normal Life screen, no pending/year; original game remains selectable.",
+      "files": [
+        {
+          "file": "/tmp/dreams-opening-next-native-final138.png",
+          "bytes": 77972,
+          "sha256": "553cc8ed1aaf8a8d81e5f385ba3b2ad71ac7694e320bfa1a9f8468700cd257d5"
+        },
+        {
+          "file": "/tmp/dreams-opening-next-native-final138.xml",
+          "bytes": 40485,
+          "sha256": "5f3d83391d8738308cb8dbecd9ec097974d760221c0cb019c39b051325928852"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,344 @@
+{
+  "format": "dreams-c38-initial-source-comparison-v1",
+  "scope": "Source inventory and read-only byte/Git verification only. No C38 tests, types, build, native, cohort, benchmark or gameplay acceptance. Frozen worktree unchanged.",
+  "from": "a4be96ee1e60ab073fbbd2ae95d0ee2d0ee6f361",
+  "to": "ace1e38e12ae2493501a30e6f003201e0fd6ab41",
+  "sourceSnapshot": {
+    "file": "/tmp/dreams-retirement-accessibility-initial-source.json",
+    "bytes": 73358,
+    "sha256": "0fd4cf109716d1c3013e2c3440942611f2aa3d1b727578d9271b385bd5b681ab"
+  },
+  "producer": {
+    "file": "/tmp/dreams-retirement-accessibility-source.cjs",
+    "bytes": 4528,
+    "sha256": "c294765fc0c988e865ace0c7b4b86d247d3469d44c2ad057efb3bccb9e527b34"
+  },
+  "producerChangeScope": "Only three expected-tag expressions changed from C37 producer; no Node child process. Explicit proofPrefix supplied. Raw commit independently captured and checked separately from producer record.",
+  "sourceCount": 665,
+  "everySourceSha256AndGitBlobExact": true,
+  "fullTreeRawCommitIdentityExact": true,
+  "unchangedOldFixtureCount": 49,
+  "oldFixtures": {
+    "tests/fixtures/README.md": {
+      "sha256": "bc552c3b75aee0cd3154f9e9173c17d3ec7ac216b65414d28e126e43ea434d4b",
+      "gitBlob": "4a502aee6df48ff98c01464be3f61d53b6e57d63"
+    },
+    "tests/fixtures/story-name-collision-cohort.json": {
+      "sha256": "aace3036ec859965955f1d99477d544bac6ad7db240481ba48ce33b4268a0edc",
+      "gitBlob": "aceb2cd3b8b1f4bac67dc6cac759dc700ae36d6a"
+    },
+    "tests/fixtures/v1-newborn.json": {
+      "sha256": "bfe261c95586990b9d32c21955f4d05bb362237e8e2934a136434dd496649a7b",
+      "gitBlob": "37c706b233088ddd2f3868ece56f4fccba5c31c5"
+    },
+    "tests/fixtures/v10-creator-archive.json": {
+      "sha256": "c16dceee7e1430278f770760da215d2e6eff6105acf4af4f5f530dda98590c4d",
+      "gitBlob": "95a45a8f5a8ec8441fd61fee57c5aa5e1ab05225"
+    },
+    "tests/fixtures/v11-business-archive.json": {
+      "sha256": "9bae60094658f5526d88119df7080476ece326d917b6393c38f1dfe940c8002b",
+      "gitBlob": "fd95f4d0ab6abebe02352d480d3a4bad6fff4bc3"
+    },
+    "tests/fixtures/v12-career-archive.json": {
+      "sha256": "665a7b3736518e9e9f4d7c4a2d12eb08e746ddc528baaa868eb02d5e903f8e34",
+      "gitBlob": "ac97f647575bf96aabdd82b7798cc12b91980e2b"
+    },
+    "tests/fixtures/v13-music-archive.json": {
+      "sha256": "d3a161ce0404d92032b39ed89c67159d51d6991c94252e50d10bbc5628935d7a",
+      "gitBlob": "460cc915ed00923c4041ed5d1a4a07c10473da81"
+    },
+    "tests/fixtures/v14-election-archive.json": {
+      "sha256": "9c3251c8f3a40784a8f0641c32d4d4db7e1b2d40dafe223a5576b851574707fe",
+      "gitBlob": "a7d8e73ead3ba8b513be138927d663ac660c1edb"
+    },
+    "tests/fixtures/v15-studio-archive.json": {
+      "sha256": "86b36eeafdc1ecf2fc99313b2f95bdf3ce6e46c16d371cfc43d71ca1321e1ef9",
+      "gitBlob": "948f91bbdcc6d7883e7a46994669d6e564126b08"
+    },
+    "tests/fixtures/v16-service-archive.json": {
+      "sha256": "b6f1b330aa0c9ff004ddda0a27e54f92310c86dfb14e0b0753d4e70533c3fe4c",
+      "gitBlob": "1f369d60f18be4eae0ad1f4fcf512c08ae654740"
+    },
+    "tests/fixtures/v17-pension-archive.json": {
+      "sha256": "2b437e3d6ec9799b42508eef2f798bd75d6c66f7f1f1430d41d6ab2b0a4cf458",
+      "gitBlob": "32301ab3cb7517e780c30f7cd298fbef1f591639"
+    },
+    "tests/fixtures/v17-royal-archive.json": {
+      "sha256": "e27467cfe49202315db981856c81eebb9a579bfb3ec6be3a4165861df403be10",
+      "gitBlob": "439f9d0ebbec4af3bf28d1de1a665397c9176872"
+    },
+    "tests/fixtures/v18-foreign-pension-archive.json": {
+      "sha256": "67204e03663bb0715af6f101932eb7d5371090e5e6a1e1d9ffe7236dc72add9a",
+      "gitBlob": "7811645ab401aced120aeadc9a8401a3d64a182b"
+    },
+    "tests/fixtures/v19-family-trip-archive.json": {
+      "sha256": "0e83856f2c949227c8ae551033ab0609edaa305423497f5105a8c6be68e149a3",
+      "gitBlob": "02362e952a5f61d3586a381e3eea6450b1492798"
+    },
+    "tests/fixtures/v2-birthday-result.json": {
+      "sha256": "29fde2154f3d6d846e92a086e7a6de676148fb5ef3eb219f4767244617536fe8",
+      "gitBlob": "4e06f06e015deaa2896316091b9c4d28c7234dfe"
+    },
+    "tests/fixtures/v20-relocation-archive.json": {
+      "sha256": "930354cc69a1491a8a093430784ec80543e6ccf96200baaa33cadb1f2c468fe2",
+      "gitBlob": "42b0a0807216964181822fe107678dbeaa878732"
+    },
+    "tests/fixtures/v21-school-archive.json": {
+      "sha256": "6813d138fde01ad730d50bd67a5a13aabf367f7fd9f54c208b1a495fe2687dd6",
+      "gitBlob": "df60e41311528435d0300c4a0d3015e99035c804"
+    },
+    "tests/fixtures/v22-school-story-archive.json": {
+      "sha256": "c8ab34823797492828371473dfd43bd07a6b614e4c553e4f3c3a85c706fdafb6",
+      "gitBlob": "3b7c3e936f6c3e6f1e495f293e2cb1e0a2c3937d"
+    },
+    "tests/fixtures/v23-low-grade-school-archive.json": {
+      "sha256": "b849f963a84192ef5fac35bdd2207bc5d9897d7f21b287f4aa464d589d6a73cc",
+      "gitBlob": "4481880aa6e8ece4b6b92d0a9cb895365ef2607d"
+    },
+    "tests/fixtures/v23-school-plans-archive.json": {
+      "sha256": "7cf29da43666633eeea162d70cf2697aef7b09625fbced09641ff74905d38425",
+      "gitBlob": "a79086cfca72d630393df631f408eb78a923a54f"
+    },
+    "tests/fixtures/v24-university-loan-archive.json": {
+      "sha256": "ac41f013cbda20115f32456ca88373411ee66bf4d6653dc6b30e8e8e5d5503a6",
+      "gitBlob": "19dc0ebefa86b98077b50a90e19923b778d1f07e"
+    },
+    "tests/fixtures/v25-content4-bubble-archive.json": {
+      "sha256": "62eb00b7031c2d7f866e784ccb59462069cfc58be0e0a8fa8cac34fe5b9ddcc4",
+      "gitBlob": "9b11aaa9fe67fab6d5881cedccb43a07c8e519fa"
+    },
+    "tests/fixtures/v25-scholarship-archive.json": {
+      "sha256": "59adc60cb6f6ee8725e09e45473397de63e544ecaa52d41c0bb46b08d667200c",
+      "gitBlob": "b7478db1c5a388bad0f1a448b64ce5964db8f172"
+    },
+    "tests/fixtures/v26-household-pet-archive.json": {
+      "sha256": "ee002dcf50843225e2c79caa1bd004066a1e70f076e1db586fd6d889531ab503",
+      "gitBlob": "42a4c25f1b47ae89f012860000a68c279d983264"
+    },
+    "tests/fixtures/v27-leisure-archive.json": {
+      "sha256": "5027d51240dfcae2b5b17b0040282cf627943f4c4323d130e8667c2fc870335a",
+      "gitBlob": "5d8b083eab5a91a623789d02ad977a5b9dfe4f15"
+    },
+    "tests/fixtures/v27-responsive-archive.json": {
+      "sha256": "af176b4ca55e9849091c90e39078f71417b75dc23e5239dbd838bbe8c302e6c0",
+      "gitBlob": "41fb92b66edbc3836aa046c69faefa9362213112"
+    },
+    "tests/fixtures/v28-native-arcade-archive.json": {
+      "sha256": "012a5fd72c64c612e0877c496ff743742d4e8869e0c1673e60ab6d41a7059e50",
+      "gitBlob": "32f6b224102e52904ed72ebeded02d7741bf41fd"
+    },
+    "tests/fixtures/v28-native-school-archive.json": {
+      "sha256": "e0f4847c19bb286728157f5121ba4bf2bf202980c1cb9016c128ab04fc27a084",
+      "gitBlob": "162049554e260b18077f22f514c6f87d8b9cb57f"
+    },
+    "tests/fixtures/v28-native-teen-archive.json": {
+      "sha256": "396a5c3526b4e6d845e917e4b27caa4048e295b47f4952c05268c65013948d82",
+      "gitBlob": "c4263ac1141167d2a702c3ee1b0d4639b860b24e"
+    },
+    "tests/fixtures/v28-ordinary-hobby-archive.json": {
+      "sha256": "0fbab430a991642d3d6b18efa06ef270405aaa99252dc4f70709a1493ad38f63",
+      "gitBlob": "663706250593c9473cef6bf090936c4aaced418a"
+    },
+    "tests/fixtures/v29-native-workplace-archive.json": {
+      "sha256": "824ba73545b1ed57dc2a1b9df5f154c8eed4c5987aa071ea6fc68b1716a32de2",
+      "gitBlob": "7bdf2d1895a8f1da4a32a2a1cbd493b0d5cb5c53"
+    },
+    "tests/fixtures/v3-employed-graduate.json": {
+      "sha256": "de0ab866bf648b0be9c0303734d849d22c21d94b450b5066482f71e0e4822fef",
+      "gitBlob": "34532f35e5639a32d8f2a4cfc79cac172b59e934"
+    },
+    "tests/fixtures/v30-family-year91-checkpoint.json": {
+      "sha256": "00941dcb880910e2156e86280ea0e2b8b3198b623902ae2ad340c182830793cb",
+      "gitBlob": "6a150a3b9790840392866616937178cee07d6c24"
+    },
+    "tests/fixtures/v30-native-interview-checkpoints.json": {
+      "sha256": "2014c9e936f325bce82aef47633f1c7697d22cc421c1a8edebaae09db477a6d3",
+      "gitBlob": "ad4adc31a86abb752dc8da441eb88e38f928acf4"
+    },
+    "tests/fixtures/v30-native-people-block-archive.json": {
+      "sha256": "1e4475aefee73e062ed4e5cb74bb0cd85ff90c2c6386ff94c50b66b7cc14b0e3",
+      "gitBlob": "0d1274fa164c784eafafe1aa9b29943bff6d2b2c"
+    },
+    "tests/fixtures/v30-native-raise-archive.json": {
+      "sha256": "7a3988e9b7675e11ebf58d821a61192e97c759961b59d0a83df0e9c6b682964c",
+      "gitBlob": "031862382166bb1f6d9700ac1954c0d6a49bdef6"
+    },
+    "tests/fixtures/v30-native-workplace-story-archive.json": {
+      "sha256": "3774db894776ba92c4c6ef6b4c10678a4125c53a0ea5ec4044189701fe75e1f1",
+      "gitBlob": "2ad3d706a348882201d1f12eb3e7b261961df175"
+    },
+    "tests/fixtures/v30-pet-owner-loss.json": {
+      "sha256": "8a20bb94a0cfd128b8ecf10fa3fcdf2427638218ce0dca9a53a4504489c8a55b",
+      "gitBlob": "31639fdc4f3a1e9ad2c5ce9c759a0ebfca77e468"
+    },
+    "tests/fixtures/v32-native-hourly-checkpoints.json": {
+      "sha256": "9b12ebf08e9f316398db3ea2bfd7ccf9424bc6233b102be3223c7cb49a85258c",
+      "gitBlob": "16c805027a7d3ad1581ca50210168703e4d97690"
+    },
+    "tests/fixtures/v33-natural-professional-au-checkpoint.json": {
+      "sha256": "e78192b5d1169e8e12d6ead6d07d17c8ccb172852c02f58d6b2cc14bb713e5ad",
+      "gitBlob": "f0b2be1593c144cb0b9608c2981fa61da14be236"
+    },
+    "tests/fixtures/v34-natural-editorial-us-checkpoint.json": {
+      "sha256": "145333258a901f0c8b8e6be5d9db3aca3dc67719e8f7733f384a9c6462d23fa4",
+      "gitBlob": "e928ed8517890507a6b1ad00a02e6669e3dfad15"
+    },
+    "tests/fixtures/v35-legacy-incomplete-course.json": {
+      "sha256": "39bc3670249bcd3ae29c66d0bee6cd80e71ab72977207494559299e0f9e1d7c1",
+      "gitBlob": "0a6a27b377217549c45f2317a1679935874e306f"
+    },
+    "tests/fixtures/v35-native-best-friend-checkpoints.json": {
+      "sha256": "403a622ac0c5b4d9aa6af05382bbb087e9a8c62c4d133a3052363bfb28b6dfe3",
+      "gitBlob": "a20d67636ded0a5974fb83f56f6fad3dcabef735"
+    },
+    "tests/fixtures/v4-property-offer.json": {
+      "sha256": "059cfa6e093e04aed70ea544f2060aa1e002c06880007ac905882e9adf6e035b",
+      "gitBlob": "d81f4cd417409a884812ace213baa9eecd607567"
+    },
+    "tests/fixtures/v5-marriage-result.json": {
+      "sha256": "799929066577ed2db280d8ab4851b7af00de1e5c485215de06385e73b842f95e",
+      "gitBlob": "9fe62ef11dec241d29d9bcf4e04e1e6561b274f0"
+    },
+    "tests/fixtures/v6-birth-result.json": {
+      "sha256": "f5fdff670b0c1bafde59120bbf232f68f083961964d75e068e48e0df8f7d78db",
+      "gitBlob": "0a683b7a8bb1fae8164d520fbb7115f71cd98568"
+    },
+    "tests/fixtures/v7-history-archive.json": {
+      "sha256": "6f1095c988a4272eae93e981292b913e1632e4043d4bc29fe96bebee280b891a",
+      "gitBlob": "620c3b50d282e29b02f9c28dbbc1fad6250d6247"
+    },
+    "tests/fixtures/v8-medical-archive.json": {
+      "sha256": "3129e8624008b2dccb536875667ddf1387ac8e8781fafee325aed06c6bc43f2c",
+      "gitBlob": "91c9725670e7280e3820aa94b9a545fe5ffa7871"
+    },
+    "tests/fixtures/v9-court-archive.json": {
+      "sha256": "715ae0981a89a1dedcd5cbe05dcb0d1e19315f0303648585bc7e019c72379908",
+      "gitBlob": "56ec7ad0985337dd7807952c5e8dc0e0bd7f10e7"
+    }
+  },
+  "packageLock": {
+    "file": "/workspace/dreams-worktrees/integration-retirement-accessibility/package-lock.json",
+    "bytes": 389072,
+    "sha256": "0079491a8e148250f4d4fda7c9fab44d0e1bcb126dea893d06f269489e6a4e1b",
+    "gitBlob": "4d5de8eb3f8b47da3ebf9f2b9fdffc77bbe8e02a",
+    "sameAsC37": true
+  },
+  "packageAndAppConfigSameAsC37": true,
+  "addedSourceFiles": [
+    "src/game/systems/npcMoveSchemas.ts",
+    "src/game/systems/npcMoveValidation.ts",
+    "src/game/systems/npcMoves.ts",
+    "src/ui/appearanceLabels.ts",
+    "tests/game/npc-moves.test.ts",
+    "tests/persistence/npc-moves-migration.test.ts",
+    "tests/state/npc-moves-save.test.ts",
+    "tests/support/npcMoves.ts",
+    "tests/ui/appearance-labels.test.tsx"
+  ],
+  "changedSourceFiles": [
+    "app/(game)/(tabs)/life.tsx",
+    "app/appearance.tsx",
+    "src/game/createLife.ts",
+    "src/game/engine.ts",
+    "src/game/model.ts",
+    "src/persistence/repository.ts",
+    "tests/game/assets-markets.test.ts",
+    "tests/game/businesses.test.ts",
+    "tests/game/careers.test.ts",
+    "tests/game/childhood-stories.test.ts",
+    "tests/game/creators.test.ts",
+    "tests/game/editorial-policy.test.ts",
+    "tests/game/education-recovery.test.ts",
+    "tests/game/entrepreneur-policy.test.ts",
+    "tests/game/estates.test.ts",
+    "tests/game/family.test.ts",
+    "tests/game/foreign-earnings.test.ts",
+    "tests/game/health.test.ts",
+    "tests/game/hourly-work.test.ts",
+    "tests/game/job-interviews.test.ts",
+    "tests/game/legal.test.ts",
+    "tests/game/leisure.test.ts",
+    "tests/game/music.test.ts",
+    "tests/game/npc-separations.test.ts",
+    "tests/game/pets.test.ts",
+    "tests/game/politics.test.ts",
+    "tests/game/professional-policy.test.ts",
+    "tests/game/relationships.test.ts",
+    "tests/game/relocation.test.ts",
+    "tests/game/royalty.test.ts",
+    "tests/game/scholarships.test.ts",
+    "tests/game/school.test.ts",
+    "tests/game/services.test.ts",
+    "tests/game/social.test.ts",
+    "tests/game/story-callbacks.test.ts",
+    "tests/game/story-name-collisions.test.ts",
+    "tests/game/travel.test.ts",
+    "tests/persistence/action-checkpoints.test.ts",
+    "tests/persistence/best-friends-migration.test.ts",
+    "tests/persistence/compressed-lives.test.ts",
+    "tests/persistence/native-arcade-archive.test.ts",
+    "tests/persistence/native-hourly-checkpoints.test.ts",
+    "tests/persistence/native-interview-checkpoints.test.ts",
+    "tests/persistence/native-teen-archive.test.ts",
+    "tests/persistence/opening-migration.test.ts",
+    "tests/persistence/people-blocks.test.ts",
+    "tests/persistence/production-gaps-migration.test.ts",
+    "tests/persistence/repository.test.ts",
+    "tests/persistence/teen-relationship-compatibility.test.ts",
+    "tests/persistence/tuple-checkpoints.test.ts",
+    "tests/state/preferencesStore.test.ts",
+    "tests/ui/new-life-review-flow.test.tsx",
+    "tests/ui/onboarding-flow.test.tsx"
+  ],
+  "removedSourceFiles": [],
+  "approvedIntegrationCommits": [
+    "35f6847b94677eb4b16fa06268da87db61afe04c",
+    "97370503c9d6e79785e409f305fcc767c0185e14",
+    "125064588046271efd98f7132995c6fde5c13e96",
+    "34a950ab30e05928c2d1874c3e4fc6d5b0810ab9",
+    "69e0dd6f9bf0cb4204a9656c07d85299e5762dc6",
+    "96f90c511e171b55ae6e8ff9c65401dde19c9370",
+    "ace1e38e12ae2493501a30e6f003201e0fd6ab41"
+  ],
+  "sourceDifferencesWithinApprovedRetirementUnionAppearanceAndTestAdapters": true,
+  "gameSourceHash": "fee27d58a33bcbb3c43da29b4811fdde70c28a9b25739f8303378cf63aa6fb5a",
+  "combinedGamePersistenceSourceHash": "773fe2a217a84a97588f449ffd037744f2503e2ff020551c9df80e875cfb1a38",
+  "progressionSourceHash": "f72553c4b71ff60609bf6e1938112c034d35f8826b320e768ce024b4f5e79d7f",
+  "proofs": {
+    "head": {
+      "file": "/tmp/dreams-retirement-accessibility-initial-head.txt",
+      "bytes": 41,
+      "sha256": "c6c8d18d9043d6b70114ac92354846c5992a05e32c7e5d9aeb9361f87e0c74e3"
+    },
+    "status": {
+      "file": "/tmp/dreams-retirement-accessibility-initial-status.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tree": {
+      "file": "/tmp/dreams-retirement-accessibility-initial-tree.bin",
+      "bytes": 200420,
+      "sha256": "407dedeec07f0e12005eaa551483a0a7384dbda6de7571286259ea0564540f4e"
+    },
+    "commit": {
+      "file": "/tmp/dreams-retirement-accessibility-initial-commit.bin",
+      "bytes": 257,
+      "sha256": "6defd924960fb09cec0cb1f20a65656dd733f0d46d5f28ace694a42958a19051"
+    },
+    "changes": {
+      "file": "/tmp/dreams-retirement-accessibility-initial-changes.txt",
+      "bytes": 2408,
+      "sha256": "02fffdc36c6a55c5ee06c6b122832f70962451c3cb0ab905104189c5636ae7c9"
+    },
+    "approvedCommits": {
+      "file": "/tmp/dreams-retirement-accessibility-initial-approved-commits.txt",
+      "bytes": 970,
+      "sha256": "4fb52885a179f9a82b674785fd99081148b9396ed78981c556e0b749a673dbb0"
+    }
+  },
+  "c37PublicationV2": {
+    "file": "/tmp/dreams-production-gaps-publication-inputs-v2.json",
+    "bytes": 69141,
+    "sha256": "e962100a21d1de9a6883c6361734b2cb2d22ed2423151b39d3c12c9afedddfd5"
+  }
+}

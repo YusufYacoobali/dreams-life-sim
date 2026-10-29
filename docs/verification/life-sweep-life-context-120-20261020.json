@@ -1,0 +1,58 @@
+{
+  "recordedOn": "2026-10-20",
+  "baseCommit": "2f8ad13c65abd072cb8c614e3aa99714b698adda",
+  "scope": "Same120 immutable pure-engine annual-policy seeds0–119, twelve countries. Not extra distinct seeds, native, SQLite, all choices or physical timing.",
+  "start": {
+    "event": "sweep-start",
+    "scope": "pure engine / cloud Node; first eligible choices; newborn acknowledgement flag set before engine progression; not native or SQLite",
+    "stateMode": "validated immutable",
+    "node": "v24.19.0",
+    "count": 120,
+    "startSeed": 0,
+    "gameSourceHash": "809c034213bab2cb60a3ffc482ad26f106c68a86835913b6e5f02542c065d4ed",
+    "toolSourceHash": "b57b6bb3befdba4e776217b3ebf79c1fe4892f2cd7a260fa9b7e928bca75e20e",
+    "setupMs": 3704
+  },
+  "complete": {
+    "event": "sweep-complete",
+    "count": 120,
+    "startSeed": 0,
+    "completed": 120,
+    "stateMode": "validated immutable",
+    "versions": {
+      "world": 30,
+      "engine": 31,
+      "content": 8
+    },
+    "gameSourceHash": "809c034213bab2cb60a3ffc482ad26f106c68a86835913b6e5f02542c065d4ed",
+    "toolSourceHash": "b57b6bb3befdba4e776217b3ebf79c1fe4892f2cd7a260fa9b7e928bca75e20e",
+    "countryCounts": {
+      "AU": 10,
+      "IT": 11,
+      "BR": 12,
+      "ZA": 10,
+      "ES": 12,
+      "US": 13,
+      "CA": 10,
+      "GB": 10,
+      "DE": 12,
+      "FR": 6,
+      "IN": 6,
+      "JP": 8
+    },
+    "ageRange": [
+      40,
+      98
+    ],
+    "maxPeople": 24,
+    "maxLedgerRows": 55199,
+    "elapsedMs": 712278
+  },
+  "exitCode": 0,
+  "stderrBytes": 0,
+  "raw": "life-sweep-life-context-120-20261020.ndjson",
+  "rawSha256": "047f65f99f5cda061b7dfc08c07f741d5bc77aa78795a50e97c090e32c86d21d",
+  "same120CompleteWorldHashesAndMetricsExactComparedWith": "Same content8 before literal-name correction; normal seed names do not contain replacement syntax. This is not comparison with content7.",
+  "comparisonWithContent7": "Catalogue and engine/content versions change; no whole terminal equality claim.",
+  "newDistinctSeeds": 0
+}

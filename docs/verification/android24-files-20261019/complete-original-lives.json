@@ -1,0 +1,21 @@
+{
+  "scope": "Actual native complete custom/random first years, local share-file contents and saved-life switching before import",
+  "lives": [
+    {
+      "id": "life_mvft3wub_kvw82s_0",
+      "name": "Ren Watanabe",
+      "revision": 4,
+      "payloadSha256": "71421064758082c1f9e6a47e403fa7fddc4f14ea1ccf38acc592acb66895af0a"
+    },
+    {
+      "id": "life_mvfsq7go_7jy1o3_0",
+      "name": "Rohan Sharma",
+      "revision": 4,
+      "payloadSha256": "034a1f381f00f309b79516ec2be12b40d07cb650a576fbd76ba10d843bb429a9"
+    }
+  ],
+  "originalCustomExactlyMatchesSingleAcknowledgement": true,
+  "randomExactlyMatchesNativeShareExport": true,
+  "snapshots": 2,
+  "receipts": 8
+}

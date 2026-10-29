@@ -1,0 +1,77 @@
+{
+  "sourceCommit": "33b6a5fcb0aae73dfc235a15394b34d8afda00cc",
+  "scope": "Read-only requirement/source/evidence reconciliation; no execution of listed tests, runtime replay, native or mutation. Existing historical proof is not promoted to current-source acceptance.",
+  "currentFiles": [
+    {
+      "file": "docs/CALLBACK_ACCEPTANCE.md",
+      "bytes": 5647,
+      "sha256": "cbada933924ffa6c8377f77ec313c4976d7383099e1ee84e9b8e7e75a43b65e8"
+    },
+    {
+      "file": "docs/OPENING_PLAN.md",
+      "bytes": 49073,
+      "sha256": "bcb4fdd5ec0b8627f962e6382426327af60bfa0068dae9947ded1472d3d8ee5e"
+    },
+    {
+      "file": "docs/CHILDHOOD_PROJECT_RECALL.md",
+      "bytes": 6521,
+      "sha256": "5a450fb15f40506790d91be2aef74452037add82b6e97695e3efaf234784dce2"
+    },
+    {
+      "file": "docs/planning/artwork-and-delivery.md",
+      "bytes": 24283,
+      "sha256": "6c7a2418d9e4afea5d5a2a79ac3317ba827550ba968b69f4fa292b8523f0e292"
+    },
+    {
+      "file": "tests/game/story-lifecycle.test.ts",
+      "bytes": 23646,
+      "sha256": "20ca0447aa37044a1fff16e137054ec2767d32efa34b28d2604c5aed4f581269"
+    },
+    {
+      "file": "tests/game/story-callbacks.test.ts",
+      "bytes": 14662,
+      "sha256": "86e75c443a288bfd0c5246f5b65f70173c2ec815dc18935ed3d32ee82f2fc358"
+    },
+    {
+      "file": "tests/ui/story-callback-flow.test.tsx",
+      "bytes": 11140,
+      "sha256": "ac752fdaefb73a71cb059e0a0d7331b5ef17cdc9884f7bf4e501e174bd541569"
+    },
+    {
+      "file": "tests/game/project-years-callback.test.ts",
+      "bytes": 12714,
+      "sha256": "ce6f878ec5c5f4f0d430e14d220f3bba00b5026222b693e39475d68ed61f91c1"
+    },
+    {
+      "file": "tests/ui/project-years-callback-flow.test.tsx",
+      "bytes": 11215,
+      "sha256": "7f80664da7487b1168ef294d8b2448b4ec597f736c2bbb4f77efc353e8ac464c"
+    },
+    {
+      "file": "docs/verification/android24-school-callback-20261020/README.md",
+      "bytes": 2204,
+      "sha256": "9e1be786f230c72b850b565b95b6de4aff08fecba38f0966a363220fc643793f"
+    },
+    {
+      "file": "docs/verification/android24-arcade-20261020/README.md",
+      "bytes": 3749,
+      "sha256": "74752b9ed4ffb07fef201d75d5e2d9f440f49b52984ca9838087bd9100443ca0"
+    }
+  ],
+  "originalGitObjectReads": [
+    {
+      "file": "/tmp/dreams-original-1633359-HANDOFF.md",
+      "producer": "1633359:docs/HANDOFF.md",
+      "sha256": "c97fd067943b6ba5542d03f0b97957c3bfa0f283b9732a590532ea97d39f48a1"
+    },
+    {
+      "file": "/tmp/dreams-original-1633359-OPENING_PLAN.md",
+      "producer": "1633359:docs/OPENING_PLAN.md",
+      "sha256": "6b71fe47532dd179a605d11e6c5a67861cf74f133b390e786cf9ea45b4491acc"
+    }
+  ],
+  "report": {
+    "file": "/tmp/dreams-c39-callback-remaining-20261021.md",
+    "sha256": "9a9e4b4117135532a48a746b6df63fd48634a4b0fdf0d51b82ebc012a472b294"
+  }
+}

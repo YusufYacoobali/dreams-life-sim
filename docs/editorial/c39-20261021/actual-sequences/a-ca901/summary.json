@@ -1,0 +1,309 @@
+{
+  "format": "dreams-c39-recorded-sequence-review-v1",
+  "preselection": {
+    "policy": "Professional A3",
+    "country": "CA",
+    "seed": 901,
+    "selectedBeforeRun": true,
+    "noOutcomeSearch": true
+  },
+  "sourceCommit": "33b6a5fcb0aae73dfc235a15394b34d8afda00cc",
+  "versions": {
+    "world": 38,
+    "engine": 39,
+    "content": 13,
+    "database": 18,
+    "checkpoint": "v4"
+  },
+  "reviewer": {
+    "agent": "/root/story_editorial",
+    "kind": "Codex recorded-artifact/source-correlated narrative review",
+    "externalHuman": false
+  },
+  "player": {
+    "id": "person_player",
+    "name": "Robin Campbell",
+    "born": {
+      "year": 2000,
+      "month": 1,
+      "day": 1
+    },
+    "died": {
+      "year": 2096,
+      "month": 2,
+      "day": 1
+    },
+    "ageAtDeath": 96,
+    "city": "Toronto",
+    "country": "CA"
+  },
+  "timing": {
+    "coordinatorCohortElapsedSeconds": 529.213,
+    "toolCohortElapsedMs": 528439,
+    "producerCanadaElapsedMs": 38659
+  },
+  "actualCounts": {
+    "commandsCommitted": 584,
+    "observations": 257,
+    "producerRecordedColdChecks": 78,
+    "advanceCommands": 97,
+    "resumeCommands": 1,
+    "completedChronologicalBirthdayYears": 96,
+    "fatalPartialFinalAnnualPeriod": true,
+    "catalogueOccurrences": 69,
+    "distinctCatalogueTemplates": 58,
+    "distinctCatalogueBranches": 58,
+    "totalChooseCommands": 72,
+    "catalogueChoiceOrdinalCounts": {
+      "first": 69,
+      "second": 0,
+      "third": 0
+    },
+    "nonCatalogueChoices": 3,
+    "actualRecordedBoundCatalogueResults": 0,
+    "actualRecordedCatalogueEffectRowSnapshots": 0,
+    "actualCatalogueJournalsRead": 69,
+    "callbackThreads": 0,
+    "persistedPlayerJournalFactsAvailable": 427
+  },
+  "periods": [
+    {
+      "period": "early-childhood",
+      "inclusiveAgeRange": [
+        1,
+        5
+      ],
+      "catalogueOccurrences": 5,
+      "distinctTemplates": 5,
+      "birthdayYearsWithoutCatalogueEvent": 0
+    },
+    {
+      "period": "primary-school-age",
+      "inclusiveAgeRange": [
+        6,
+        11
+      ],
+      "catalogueOccurrences": 6,
+      "distinctTemplates": 6,
+      "birthdayYearsWithoutCatalogueEvent": 0
+    },
+    {
+      "period": "secondary-school-age",
+      "inclusiveAgeRange": [
+        12,
+        17
+      ],
+      "catalogueOccurrences": 2,
+      "distinctTemplates": 2,
+      "birthdayYearsWithoutCatalogueEvent": 4
+    },
+    {
+      "period": "adult-before-retirement",
+      "inclusiveAgeRange": [
+        18,
+        64
+      ],
+      "catalogueOccurrences": 32,
+      "distinctTemplates": 30,
+      "birthdayYearsWithoutCatalogueEvent": 15
+    },
+    {
+      "period": "retirement-and-later-life",
+      "inclusiveAgeRange": [
+        65,
+        96
+      ],
+      "catalogueOccurrences": 24,
+      "distinctTemplates": 17,
+      "birthdayYearsWithoutCatalogueEvent": 8
+    }
+  ],
+  "actualSourcePredicateOccurrencesOverlapping": {
+    "parent": 5,
+    "school": 4,
+    "classmate": 2,
+    "teacher": 3,
+    "local": 39,
+    "coworker": 8,
+    "workplace": 12,
+    "partner": 3,
+    "supervisor": 4,
+    "home": 4
+  },
+  "categoryOccurrenceCounts": {
+    "birth-early-childhood": 4,
+    "travel-pets-hobbies-entertainment": 8,
+    "relationships-family": 6,
+    "school-teenage-life": 4,
+    "employment-special-careers": 12,
+    "university-early-independence": 5,
+    "health-later-life": 28,
+    "fame-social-media": 1,
+    "money-assets-investments": 1
+  },
+  "repeats": [
+    {
+      "templateId": "birthday-number",
+      "ages": [
+        77,
+        86
+      ],
+      "gapsYears": [
+        9
+      ]
+    },
+    {
+      "templateId": "community-garden",
+      "ages": [
+        66,
+        79
+      ],
+      "gapsYears": [
+        13
+      ]
+    },
+    {
+      "templateId": "familiar-street",
+      "ages": [
+        50,
+        73
+      ],
+      "gapsYears": [
+        23
+      ]
+    },
+    {
+      "templateId": "home-found-old-list",
+      "ages": [
+        41,
+        52
+      ],
+      "gapsYears": [
+        11
+      ]
+    },
+    {
+      "templateId": "useful-advice",
+      "ages": [
+        70,
+        75,
+        92
+      ],
+      "gapsYears": [
+        5,
+        17
+      ]
+    },
+    {
+      "templateId": "wellbeing-one-more-episode",
+      "ages": [
+        76,
+        95
+      ],
+      "gapsYears": [
+        19
+      ]
+    },
+    {
+      "templateId": "wellbeing-quiet-not-silent",
+      "ages": [
+        80,
+        90
+      ],
+      "gapsYears": [
+        10
+      ]
+    },
+    {
+      "templateId": "wellbeing-stretch-after-sitting",
+      "ages": [
+        35,
+        49
+      ],
+      "gapsYears": [
+        14
+      ]
+    },
+    {
+      "templateId": "wellbeing-waiting-without-feed",
+      "ages": [
+        25,
+        65,
+        82
+      ],
+      "gapsYears": [
+        40,
+        17
+      ]
+    }
+  ],
+  "quietCatalogueAges": [
+    12,
+    13,
+    14,
+    17,
+    19,
+    21,
+    24,
+    27,
+    28,
+    29,
+    32,
+    34,
+    37,
+    45,
+    48,
+    54,
+    57,
+    60,
+    61,
+    71,
+    78,
+    83,
+    84,
+    88,
+    89,
+    91,
+    93
+  ],
+  "milestoneStatuses": {
+    "primarySchool": "reached",
+    "secondarySchool": "reached",
+    "secondaryQualification": "reached",
+    "universityAdmission": "reached",
+    "degree": "reached",
+    "qualifiedJob": "reached",
+    "paidQualifiedJob": "reached",
+    "feedback": "reached",
+    "raise": "reached",
+    "promotion": "reached",
+    "partner": "reached",
+    "marriage": "reached",
+    "child": "unreached-at-natural-death",
+    "mortgageHome": "reached",
+    "investment": "reached",
+    "dividend": "reached",
+    "retirement": "reached",
+    "pensionPayment": "reached",
+    "death": "reached",
+    "estate": "reached"
+  },
+  "unreached": [
+    "child: joint child-preference requirement not met;64 actual ineligible observations, no override",
+    "project/arcade origin and deferred/24-month callbacks: no origin chosen, no story thread",
+    "Teen dating, actual child/pet/attended-hobby/completed-trip/known-condition/special-career catalogue contexts not encountered",
+    "corrected camera away branch: actual camera choice was nose, not away",
+    "second and third catalogue branches:0 observed",
+    "raw bound setup/results/effect-row cap checks: not retained by A3 telemetry"
+  ],
+  "findings": [],
+  "conclusion": "No concrete narrative contradiction identified in this fixed life’s69 actual chosen-ID/journal occurrences and separately source-correlated58 selected branches. This is a scoped recorded-sequence review, not full result/effect-row/native/SQLite-life/30-minute/all-country/all795-branch acceptance.",
+  "limits": [
+    "No game execution, replay, rerun, RNG call, seed search, native/UI action or source change.",
+    "The current authored setup/label/result/requested effects are correlated to actual selected IDs; they are not captured historical bound scenes.",
+    "Saved role/date records corroborate named journals but do not reconstruct every past location, choice availability or intermediate person stat.",
+    "Actual producer78coldChecks and final world hash are recorded/pinned, not re-executed or independently canonical-hash verified by this review.",
+    "B GB902 and D US900 are separate preselected future reviews; no evidence is borrowed from them.",
+    "All69 catalogue journals and separately selected milestone/health/education facts were read;427 player journal facts are available, not a claim that every financial line was independently audited here."
+  ]
+}

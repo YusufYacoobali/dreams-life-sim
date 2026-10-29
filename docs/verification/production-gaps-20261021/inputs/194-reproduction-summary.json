@@ -1,0 +1,86 @@
+{
+  "sourceCommit": "eed54f3472ababd2cbcd0ac3dbf16ca255b3bb30",
+  "baseSourceCommit": "c9a7f5b845694e5f8446c50115fb1fd6c3e69b03",
+  "status": "Implemented; independent review requested; parent owns integration",
+  "priorSourceOnlyAuditPreserved": true,
+  "observedDefect": "Both genuine ordinary age18 work-relocation and settlement/local-hiring continuations completed a paid year while also auto-enrolling in Rome secondary school and recording a second failed assessment at19,153study months rather than original142.",
+  "uninterruptedNaturalSaveCrashObserved": false,
+  "validationConflictScope": "Source and declared intermediate boundary only; no actual natural interrupted-save crash claimed.",
+  "change": "Skip automatic stage-none school entry only while an adult has an actual full-time job-catalogue role; preserve current pupils/minors/part-time and ordinary entry after resignation.",
+  "baseline": {
+    "session": 39333,
+    "actualExit": 1,
+    "suitesFailed": 1,
+    "testsFailed": 3,
+    "testsPassed": 2,
+    "testsTotal": 5,
+    "seconds": 13.764
+  },
+  "correctedFocused": {
+    "session": 64997,
+    "actualExit": 0,
+    "suitesPassed": 3,
+    "testsPassed": 54,
+    "seconds": 16.029,
+    "scope": [
+      "new adult-work-school-entry5cases",
+      "existing education-recovery",
+      "existing school-withdrawal"
+    ]
+  },
+  "strict": {
+    "session": 24171,
+    "actualExit": 0,
+    "emptyLog": true,
+    "scope": "Affected three test files and their production import graph; not a fullapp or alltests typecheck."
+  },
+  "notRun": [
+    "full regression",
+    "native",
+    "SQLite journey",
+    "cohort",
+    "exports"
+  ],
+  "pins": [
+    {
+      "path": "/workspace/dreams-worktrees/country-gameplay-audit/src/game/systems/education.ts",
+      "bytes": 14580,
+      "sha256": "984a60d8bf11e04b65128e12bc598dde709ba8deb26760da06ca10669bdb1841"
+    },
+    {
+      "path": "/workspace/dreams-worktrees/country-gameplay-audit/tests/game/adult-work-school-entry.test.ts",
+      "bytes": 9130,
+      "sha256": "3e89fde649d0c07b2ff0cbf69e9ccf3e688ff07deb829781461c298273c5444e"
+    },
+    {
+      "path": "/workspace/dreams-worktrees/country-gameplay-audit/docs/ADULT_WORK_SCHOOL_ENTRY.md",
+      "bytes": 3152,
+      "sha256": "ba64cf25553f81051a703ca979f5b1c37c32f676282edad9f61bd72caea3e183"
+    },
+    {
+      "path": "/workspace/dreams-worktrees/country-gameplay-audit/tests/fixtures/v23-low-grade-school-archive.json",
+      "bytes": 204340,
+      "sha256": "b849f963a84192ef5fac35bdd2207bc5d9897d7f21b287f4aa464d589d6a73cc"
+    },
+    {
+      "path": "/tmp/dreams-adult-work-school-baseline.out",
+      "bytes": 5601,
+      "sha256": "7fdcc18e76d04c6e9848969f215d9dc2614518ab849318eade4ca4345c9f262a"
+    },
+    {
+      "path": "/tmp/dreams-adult-work-school-focused.out",
+      "bytes": 417,
+      "sha256": "67806268e8d25ba2bfe5a1277d3944210ac6a1e16fde12d35b5da7325983e759"
+    },
+    {
+      "path": "/tmp/dreams-adult-work-school-types.out",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/tmp/dreams-adult-work-school-focused-tsconfig.json",
+      "bytes": 550,
+      "sha256": "14ec95ca0dab2ba924077694e2347f5c98083812d4c4907659f6880c8ae2b482"
+    }
+  ]
+}

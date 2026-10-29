@@ -1,0 +1,144 @@
+10-20 07:11:48.044 13601 13649 F libc    : Fatal signal 11 (SIGSEGV), code 1, fault addr 0xc in tid 13649 (RenderThread)
+10-20 07:11:48.198 14400 14400 F DEBUG   : *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***
+10-20 07:11:48.198 14400 14400 F DEBUG   : Build fingerprint: 'Android/sdk_phone_x86_64/generic_x86_64:7.0/NYC/4174735:userdebug/test-keys'
+10-20 07:11:48.198 14400 14400 F DEBUG   : Revision: '0'
+10-20 07:11:48.198 14400 14400 F DEBUG   : ABI: 'x86_64'
+10-20 07:11:48.199 14400 14400 F DEBUG   : pid: 13601, tid: 13649, name: RenderThread  >>> host.exp.exponent <<<
+10-20 07:11:48.199 14400 14400 F DEBUG   : signal 11 (SIGSEGV), code 1 (SEGV_MAPERR), fault addr 0xc
+10-20 07:11:48.200 14400 14400 F DEBUG   :     rax 000074580b56ea80  rbx 00007459c0d2e960  rcx 0000000000000000  rdx 000074580a7e5900
+10-20 07:11:48.200 14400 14400 F DEBUG   :     rsi 000074580b56e380  rdi 000074580b56e498
+10-20 07:11:48.200 14400 14400 F DEBUG   :     r8  0000000000000000  r9  00007459a295b7c0  r10 0000000000000061  r11 0000000000000001
+10-20 07:11:48.200 14400 14400 F DEBUG   :     r12 000074580c9a0e48  r13 0000000000000000  r14 00007459a1933dd0  r15 000074580d1e7400
+10-20 07:11:48.200 14400 14400 F DEBUG   :     cs  0000000000000033  ss  000000000000002b
+10-20 07:11:48.200 14400 14400 F DEBUG   :     rip 00007459c0cf8175  rbp 0000000000000005  rsp 00007459a1931050  eflags 0000000000000207
+10-20 07:11:48.236 14400 14400 F DEBUG   : 
+10-20 07:11:48.236 14400 14400 F DEBUG   : backtrace:
+10-20 07:11:48.236 14400 14400 F DEBUG   :     #00 pc 000000000009d175  /system/lib64/libhwui.so
+10-20 07:11:48.236 14400 14400 F DEBUG   :     #01 pc 000000000009c05d  /system/lib64/libhwui.so
+10-20 07:11:48.236 14400 14400 F DEBUG   :     #02 pc 000000000009c6d9  /system/lib64/libhwui.so
+10-20 07:11:48.236 14400 14400 F DEBUG   :     #03 pc 000000000009deaf  /system/lib64/libhwui.so
+10-20 07:11:48.236 14400 14400 F DEBUG   :     #04 pc 000000000009c05d  /system/lib64/libhwui.so
+10-20 07:11:48.237 14400 14400 F DEBUG   :     #05 pc 000000000009c6d9  /system/lib64/libhwui.so
+10-20 07:11:48.237 14400 14400 F DEBUG   :     #06 pc 000000000009deaf  /system/lib64/libhwui.so
+10-20 07:11:48.237 14400 14400 F DEBUG   :     #07 pc 000000000009c05d  /system/lib64/libhwui.so
+10-20 07:11:48.237 14400 14400 F DEBUG   :     #08 pc 000000000009c6d9  /system/lib64/libhwui.so
+10-20 07:11:48.237 14400 14400 F DEBUG   :     #09 pc 000000000009deaf  /system/lib64/libhwui.so
+10-20 07:11:48.237 14400 14400 F DEBUG   :     #10 pc 000000000009c05d  /system/lib64/libhwui.so
+10-20 07:11:48.237 14400 14400 F DEBUG   :     #11 pc 000000000009c6d9  /system/lib64/libhwui.so
+10-20 07:11:48.237 14400 14400 F DEBUG   :     #12 pc 000000000009deaf  /system/lib64/libhwui.so
+10-20 07:11:48.237 14400 14400 F DEBUG   :     #13 pc 000000000009c05d  /system/lib64/libhwui.so
+10-20 07:11:48.237 14400 14400 F DEBUG   :     #14 pc 000000000009c6d9  /system/lib64/libhwui.so
+10-20 07:11:48.237 14400 14400 F DEBUG   :     #15 pc 000000000009deaf  /system/lib64/libhwui.so
+10-20 07:11:48.237 14400 14400 F DEBUG   :     #16 pc 000000000009c05d  /system/lib64/libhwui.so
+10-20 07:11:48.237 14400 14400 F DEBUG   :     #17 pc 000000000009c6d9  /system/lib64/libhwui.so
+10-20 07:11:48.237 14400 14400 F DEBUG   :     #18 pc 000000000009deaf  /system/lib64/libhwui.so
+10-20 07:11:48.237 14400 14400 F DEBUG   :     #19 pc 000000000009c05d  /system/lib64/libhwui.so
+10-20 07:11:48.237 14400 14400 F DEBUG   :     #20 pc 000000000009c6d9  /system/lib64/libhwui.so
+10-20 07:11:48.237 14400 14400 F DEBUG   :     #21 pc 000000000009deaf  /system/lib64/libhwui.so
+10-20 07:11:48.237 14400 14400 F DEBUG   :     #22 pc 000000000009c05d  /system/lib64/libhwui.so
+10-20 07:11:48.237 14400 14400 F DEBUG   :     #23 pc 000000000009c6d9  /system/lib64/libhwui.so
+10-20 07:11:48.237 14400 14400 F DEBUG   :     #24 pc 000000000009deaf  /system/lib64/libhwui.so
+10-20 07:11:48.237 14400 14400 F DEBUG   :     #25 pc 000000000009c05d  /system/lib64/libhwui.so
+10-20 07:11:48.237 14400 14400 F DEBUG   :     #26 pc 000000000009c6d9  /system/lib64/libhwui.so
+10-20 07:11:48.238 14400 14400 F DEBUG   :     #27 pc 000000000009deaf  /system/lib64/libhwui.so
+10-20 07:11:48.238 14400 14400 F DEBUG   :     #28 pc 000000000009c05d  /system/lib64/libhwui.so
+10-20 07:11:48.238 14400 14400 F DEBUG   :     #29 pc 000000000009c6d9  /system/lib64/libhwui.so
+10-20 07:11:48.238 14400 14400 F DEBUG   :     #30 pc 000000000009deaf  /system/lib64/libhwui.so
+10-20 07:11:48.238 14400 14400 F DEBUG   :     #31 pc 000000000009c05d  /system/lib64/libhwui.so
+10-20 07:11:48.238 14400 14400 F DEBUG   :     #32 pc 000000000009c6d9  /system/lib64/libhwui.so
+10-20 07:11:48.238 14400 14400 F DEBUG   :     #33 pc 000000000009deaf  /system/lib64/libhwui.so
+10-20 07:11:48.238 14400 14400 F DEBUG   :     #34 pc 000000000009c05d  /system/lib64/libhwui.so
+10-20 07:11:48.238 14400 14400 F DEBUG   :     #35 pc 000000000009c6d9  /system/lib64/libhwui.so
+10-20 07:11:48.238 14400 14400 F DEBUG   :     #36 pc 000000000009deaf  /system/lib64/libhwui.so
+10-20 07:11:48.238 14400 14400 F DEBUG   :     #37 pc 000000000009c05d  /system/lib64/libhwui.so
+10-20 07:11:48.238 14400 14400 F DEBUG   :     #38 pc 000000000009c6d9  /system/lib64/libhwui.so
+10-20 07:11:48.238 14400 14400 F DEBUG   :     #39 pc 000000000009deaf  /system/lib64/libhwui.so
+10-20 07:11:48.238 14400 14400 F DEBUG   :     #40 pc 000000000009c05d  /system/lib64/libhwui.so
+10-20 07:11:48.238 14400 14400 F DEBUG   :     #41 pc 000000000009c6d9  /system/lib64/libhwui.so
+10-20 07:11:48.238 14400 14400 F DEBUG   :     #42 pc 000000000009deaf  /system/lib64/libhwui.so
+10-20 07:11:48.238 14400 14400 F DEBUG   :     #43 pc 000000000009c05d  /system/lib64/libhwui.so
+10-20 07:11:48.238 14400 14400 F DEBUG   :     #44 pc 000000000009c6d9  /system/lib64/libhwui.so
+10-20 07:11:48.238 14400 14400 F DEBUG   :     #45 pc 000000000009deaf  /system/lib64/libhwui.so
+10-20 07:11:48.244 14400 14400 F DEBUG   :     #46 pc 000000000009c05d  /system/lib64/libhwui.so
+10-20 07:11:48.244 14400 14400 F DEBUG   :     #47 pc 000000000009c6d9  /system/lib64/libhwui.so
+10-20 07:11:48.244 14400 14400 F DEBUG   :     #48 pc 000000000009c947  /system/lib64/libhwui.so
+10-20 07:11:48.244 14400 14400 F DEBUG   :     #49 pc 00000000000358a5  /system/lib64/libhwui.so
+10-20 07:11:48.244 14400 14400 F DEBUG   :     #50 pc 00000000000381e5  /system/lib64/libhwui.so
+10-20 07:11:48.245 14400 14400 F DEBUG   :     #51 pc 000000000003da28  /system/lib64/libhwui.so (_ZN7android10uirenderer12renderthread12RenderThread10threadLoopEv+136)
+10-20 07:11:48.245 14400 14400 F DEBUG   :     #52 pc 0000000000012c49  /system/lib64/libutils.so (_ZN7android6Thread11_threadLoopEPv+313)
+10-20 07:11:48.245 14400 14400 F DEBUG   :     #53 pc 00000000000a95f3  /system/lib64/libandroid_runtime.so (_ZN7android14AndroidRuntime15javaThreadShellEPv+99)
+10-20 07:11:48.251 14400 14400 F DEBUG   :     #54 pc 0000000000089771  /system/lib64/libc.so (_ZL15__pthread_startPv+177)
+10-20 07:11:48.251 14400 14400 F DEBUG   :     #55 pc 00000000000299eb  /system/lib64/libc.so (__start_thread+11)
+10-20 07:11:48.251 14400 14400 F DEBUG   :     #56 pc 000000000001ca65  /system/lib64/libc.so (__bionic_clone+53)
+10-20 07:20:15.970 14448 14498 F libc    : Fatal signal 11 (SIGSEGV), code 1, fault addr 0xc in tid 14498 (RenderThread)
+10-20 07:20:16.073 15061 15061 F DEBUG   : *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***
+10-20 07:20:16.074 15061 15061 F DEBUG   : Build fingerprint: 'Android/sdk_phone_x86_64/generic_x86_64:7.0/NYC/4174735:userdebug/test-keys'
+10-20 07:20:16.074 15061 15061 F DEBUG   : Revision: '0'
+10-20 07:20:16.075 15061 15061 F DEBUG   : ABI: 'x86_64'
+10-20 07:20:16.078 15061 15061 F DEBUG   : pid: 14448, tid: 14498, name: RenderThread  >>> host.exp.exponent <<<
+10-20 07:20:16.079 15061 15061 F DEBUG   : signal 11 (SIGSEGV), code 1 (SEGV_MAPERR), fault addr 0xc
+10-20 07:20:16.079 15061 15061 F DEBUG   :     rax 00007459a04f4700  rbx 00007459c0d2e960  rcx 0000000000000000  rdx 00007458dc91eb80
+10-20 07:20:16.079 15061 15061 F DEBUG   :     rsi 00007459a04f4380  rdi 00007459a04f4498
+10-20 07:20:16.079 15061 15061 F DEBUG   :     r8  0000000000000000  r9  000074580859db60  r10 000000000000002f  r11 0000000000000001
+10-20 07:20:16.079 15061 15061 F DEBUG   :     r12 000074580c9ccf48  r13 0000000000000000  r14 00007459a1818dd0  r15 00007459a0fcc400
+10-20 07:20:16.079 15061 15061 F DEBUG   :     cs  0000000000000033  ss  000000000000002b
+10-20 07:20:16.079 15061 15061 F DEBUG   :     rip 00007459c0cf8175  rbp 0000000000000005  rsp 00007459a1816050  eflags 0000000000000207
+10-20 07:20:16.116 15061 15061 F DEBUG   : 
+10-20 07:20:16.116 15061 15061 F DEBUG   : backtrace:
+10-20 07:20:16.116 15061 15061 F DEBUG   :     #00 pc 000000000009d175  /system/lib64/libhwui.so
+10-20 07:20:16.116 15061 15061 F DEBUG   :     #01 pc 000000000009c05d  /system/lib64/libhwui.so
+10-20 07:20:16.117 15061 15061 F DEBUG   :     #02 pc 000000000009c6d9  /system/lib64/libhwui.so
+10-20 07:20:16.117 15061 15061 F DEBUG   :     #03 pc 000000000009deaf  /system/lib64/libhwui.so
+10-20 07:20:16.117 15061 15061 F DEBUG   :     #04 pc 000000000009c05d  /system/lib64/libhwui.so
+10-20 07:20:16.117 15061 15061 F DEBUG   :     #05 pc 000000000009c6d9  /system/lib64/libhwui.so
+10-20 07:20:16.117 15061 15061 F DEBUG   :     #06 pc 000000000009deaf  /system/lib64/libhwui.so
+10-20 07:20:16.117 15061 15061 F DEBUG   :     #07 pc 000000000009c05d  /system/lib64/libhwui.so
+10-20 07:20:16.117 15061 15061 F DEBUG   :     #08 pc 000000000009c6d9  /system/lib64/libhwui.so
+10-20 07:20:16.117 15061 15061 F DEBUG   :     #09 pc 000000000009deaf  /system/lib64/libhwui.so
+10-20 07:20:16.117 15061 15061 F DEBUG   :     #10 pc 000000000009c05d  /system/lib64/libhwui.so
+10-20 07:20:16.117 15061 15061 F DEBUG   :     #11 pc 000000000009c6d9  /system/lib64/libhwui.so
+10-20 07:20:16.117 15061 15061 F DEBUG   :     #12 pc 000000000009deaf  /system/lib64/libhwui.so
+10-20 07:20:16.117 15061 15061 F DEBUG   :     #13 pc 000000000009c05d  /system/lib64/libhwui.so
+10-20 07:20:16.117 15061 15061 F DEBUG   :     #14 pc 000000000009c6d9  /system/lib64/libhwui.so
+10-20 07:20:16.117 15061 15061 F DEBUG   :     #15 pc 000000000009deaf  /system/lib64/libhwui.so
+10-20 07:20:16.117 15061 15061 F DEBUG   :     #16 pc 000000000009c05d  /system/lib64/libhwui.so
+10-20 07:20:16.117 15061 15061 F DEBUG   :     #17 pc 000000000009c6d9  /system/lib64/libhwui.so
+10-20 07:20:16.117 15061 15061 F DEBUG   :     #18 pc 000000000009deaf  /system/lib64/libhwui.so
+10-20 07:20:16.117 15061 15061 F DEBUG   :     #19 pc 000000000009c05d  /system/lib64/libhwui.so
+10-20 07:20:16.117 15061 15061 F DEBUG   :     #20 pc 000000000009c6d9  /system/lib64/libhwui.so
+10-20 07:20:16.117 15061 15061 F DEBUG   :     #21 pc 000000000009deaf  /system/lib64/libhwui.so
+10-20 07:20:16.117 15061 15061 F DEBUG   :     #22 pc 000000000009c05d  /system/lib64/libhwui.so
+10-20 07:20:16.117 15061 15061 F DEBUG   :     #23 pc 000000000009c6d9  /system/lib64/libhwui.so
+10-20 07:20:16.117 15061 15061 F DEBUG   :     #24 pc 000000000009deaf  /system/lib64/libhwui.so
+10-20 07:20:16.117 15061 15061 F DEBUG   :     #25 pc 000000000009c05d  /system/lib64/libhwui.so
+10-20 07:20:16.117 15061 15061 F DEBUG   :     #26 pc 000000000009c6d9  /system/lib64/libhwui.so
+10-20 07:20:16.118 15061 15061 F DEBUG   :     #27 pc 000000000009deaf  /system/lib64/libhwui.so
+10-20 07:20:16.118 15061 15061 F DEBUG   :     #28 pc 000000000009c05d  /system/lib64/libhwui.so
+10-20 07:20:16.118 15061 15061 F DEBUG   :     #29 pc 000000000009c6d9  /system/lib64/libhwui.so
+10-20 07:20:16.118 15061 15061 F DEBUG   :     #30 pc 000000000009deaf  /system/lib64/libhwui.so
+10-20 07:20:16.118 15061 15061 F DEBUG   :     #31 pc 000000000009c05d  /system/lib64/libhwui.so
+10-20 07:20:16.118 15061 15061 F DEBUG   :     #32 pc 000000000009c6d9  /system/lib64/libhwui.so
+10-20 07:20:16.118 15061 15061 F DEBUG   :     #33 pc 000000000009deaf  /system/lib64/libhwui.so
+10-20 07:20:16.118 15061 15061 F DEBUG   :     #34 pc 000000000009c05d  /system/lib64/libhwui.so
+10-20 07:20:16.118 15061 15061 F DEBUG   :     #35 pc 000000000009c6d9  /system/lib64/libhwui.so
+10-20 07:20:16.118 15061 15061 F DEBUG   :     #36 pc 000000000009deaf  /system/lib64/libhwui.so
+10-20 07:20:16.118 15061 15061 F DEBUG   :     #37 pc 000000000009c05d  /system/lib64/libhwui.so
+10-20 07:20:16.118 15061 15061 F DEBUG   :     #38 pc 000000000009c6d9  /system/lib64/libhwui.so
+10-20 07:20:16.118 15061 15061 F DEBUG   :     #39 pc 000000000009deaf  /system/lib64/libhwui.so
+10-20 07:20:16.118 15061 15061 F DEBUG   :     #40 pc 000000000009c05d  /system/lib64/libhwui.so
+10-20 07:20:16.118 15061 15061 F DEBUG   :     #41 pc 000000000009c6d9  /system/lib64/libhwui.so
+10-20 07:20:16.118 15061 15061 F DEBUG   :     #42 pc 000000000009deaf  /system/lib64/libhwui.so
+10-20 07:20:16.118 15061 15061 F DEBUG   :     #43 pc 000000000009c05d  /system/lib64/libhwui.so
+10-20 07:20:16.118 15061 15061 F DEBUG   :     #44 pc 000000000009c6d9  /system/lib64/libhwui.so
+10-20 07:20:16.118 15061 15061 F DEBUG   :     #45 pc 000000000009deaf  /system/lib64/libhwui.so
+10-20 07:20:16.118 15061 15061 F DEBUG   :     #46 pc 000000000009c05d  /system/lib64/libhwui.so
+10-20 07:20:16.118 15061 15061 F DEBUG   :     #47 pc 000000000009c6d9  /system/lib64/libhwui.so
+10-20 07:20:16.118 15061 15061 F DEBUG   :     #48 pc 000000000009c947  /system/lib64/libhwui.so
+10-20 07:20:16.118 15061 15061 F DEBUG   :     #49 pc 00000000000358a5  /system/lib64/libhwui.so
+10-20 07:20:16.118 15061 15061 F DEBUG   :     #50 pc 00000000000381e5  /system/lib64/libhwui.so
+10-20 07:20:16.119 15061 15061 F DEBUG   :     #51 pc 000000000003da28  /system/lib64/libhwui.so (_ZN7android10uirenderer12renderthread12RenderThread10threadLoopEv+136)
+10-20 07:20:16.119 15061 15061 F DEBUG   :     #52 pc 0000000000012c49  /system/lib64/libutils.so (_ZN7android6Thread11_threadLoopEPv+313)
+10-20 07:20:16.119 15061 15061 F DEBUG   :     #53 pc 00000000000a95f3  /system/lib64/libandroid_runtime.so (_ZN7android14AndroidRuntime15javaThreadShellEPv+99)
+10-20 07:20:16.119 15061 15061 F DEBUG   :     #54 pc 0000000000089771  /system/lib64/libc.so (_ZL15__pthread_startPv+177)
+10-20 07:20:16.119 15061 15061 F DEBUG   :     #55 pc 00000000000299eb  /system/lib64/libc.so (__start_thread+11)
+10-20 07:20:16.119 15061 15061 F DEBUG   :     #56 pc 000000000001ca65  /system/lib64/libc.so (__bionic_clone+53)

@@ -1,0 +1,343 @@
+{
+  "format": "dreams-onboarding-native-captures-v1",
+  "complete": true,
+  "mode": "custom",
+  "device": "Android24 x86_64 software emulator,390x844, Expo Go57; no physical/standalone/iOS claim",
+  "scope": "Actual single custom Maya Singh creation inChicago withAvatar7, realBeginLife, firstbirthdaybubblewatch choice and separateacknowledgement. Five actualprocess-stop cold reopens. Root personally reviewed all10actualPNG/XML pairs; firstcold observer interrupted duringservice/environmentreconnect and sameactualcold resumed withoutgameplay, as linked in its completeattestation. Original7lives/backups/history mustremainexact. No seed or outcome search; initialcreation seed was not reconstructed.",
+  "sourceManifest": {
+    "file": "/tmp/dreams-production-gaps-native-source.json",
+    "bytes": 72136,
+    "sha256": "b8b478a3254a63daf2a2a2cfa8f8b91a8ef5e412f64921d0e513a4af2fe0bd90"
+  },
+  "baseline": {
+    "main": {
+      "file": "/tmp/dreams-c37-native-precreation-db/dreams.db",
+      "bytes": 3805184,
+      "sha256": "f144f28d9701ff2e4ea3cfe710e8acbc57c27ffee351caa4313f34314d3d7dae"
+    },
+    "wal": {
+      "file": "/tmp/dreams-c37-native-precreation-db/dreams.db-wal",
+      "bytes": 4733912,
+      "sha256": "57728df484c51f670a063da947b192846fa12b9daf869a382b38a35002469595"
+    }
+  },
+  "birthCheckpoint": {
+    "file": "/tmp/dreams-c37-native-captures/newborn/birth-checkpoint.txt",
+    "bytes": 3707,
+    "sha256": "6c95de6a7f597431a01daa5c0b5c4b9a88ac60334dd4ea49c932b9eb282c7a7d"
+  },
+  "phases": [
+    {
+      "id": "newborn",
+      "kind": "created",
+      "database": {
+        "main": {
+          "file": "/tmp/dreams-c37-native-captures/newborn/database/dreams.db",
+          "bytes": 3805184,
+          "sha256": "f144f28d9701ff2e4ea3cfe710e8acbc57c27ffee351caa4313f34314d3d7dae"
+        },
+        "wal": {
+          "file": "/tmp/dreams-c37-native-captures/newborn/database/dreams.db-wal",
+          "bytes": 4733912,
+          "sha256": "6214c2b23e6cb7a079f4cbeab8a2d42a80b70bf51582ffbddf648d955f325d7c"
+        }
+      },
+      "png": {
+        "file": "/tmp/dreams-c37-native-captures/newborn/ui.png",
+        "bytes": 72841,
+        "sha256": "a2ff5a56b08630d5c8de142825b0ef924944feaaa98d6dcc9d5098c66d4eef5a"
+      },
+      "xml": {
+        "file": "/tmp/dreams-c37-native-captures/newborn/ui.xml",
+        "bytes": 21464,
+        "sha256": "dd1926774e9462e7a2d4f27a69b1f9e4aec5870e405bf8c52611d8d046bdecb3"
+      },
+      "coordinatorPersonallyViewed": true
+    },
+    {
+      "id": "cold-newborn",
+      "kind": "cold",
+      "database": {
+        "main": {
+          "file": "/tmp/dreams-c37-native-captures/cold-newborn-completed/database/dreams.db",
+          "bytes": 3805184,
+          "sha256": "f144f28d9701ff2e4ea3cfe710e8acbc57c27ffee351caa4313f34314d3d7dae"
+        },
+        "wal": {
+          "file": "/tmp/dreams-c37-native-captures/cold-newborn-completed/database/dreams.db-wal",
+          "bytes": 4733912,
+          "sha256": "6214c2b23e6cb7a079f4cbeab8a2d42a80b70bf51582ffbddf648d955f325d7c"
+        }
+      },
+      "png": {
+        "file": "/tmp/dreams-c37-native-captures/cold-newborn-completed/ui.png",
+        "bytes": 72581,
+        "sha256": "123e6f42d168b417283c3d4efd97d17973b766dc19391746f3815028aa1082d3"
+      },
+      "xml": {
+        "file": "/tmp/dreams-c37-native-captures/cold-newborn-completed/ui.xml",
+        "bytes": 21464,
+        "sha256": "dd1926774e9462e7a2d4f27a69b1f9e4aec5870e405bf8c52611d8d046bdecb3"
+      },
+      "coordinatorPersonallyViewed": true,
+      "sameAs": "newborn",
+      "coldAttestation": {
+        "file": "/tmp/dreams-c37-native-captures/cold-newborn-completed/cold-attestation.json",
+        "bytes": 327,
+        "sha256": "68a6192904c0c46f48499bf3bdce44bd2ece5861c1a2216e5ab077c9aaa2bff6"
+      }
+    },
+    {
+      "id": "begun",
+      "kind": "begin-life",
+      "database": {
+        "main": {
+          "file": "/tmp/dreams-c37-native-captures/begun/database/dreams.db",
+          "bytes": 3805184,
+          "sha256": "f144f28d9701ff2e4ea3cfe710e8acbc57c27ffee351caa4313f34314d3d7dae"
+        },
+        "wal": {
+          "file": "/tmp/dreams-c37-native-captures/begun/database/dreams.db-wal",
+          "bytes": 4733912,
+          "sha256": "28032f89fb16ffbc82e7e1256199c417b6afbbff03f2a3077415d1a677e3591a"
+        }
+      },
+      "png": {
+        "file": "/tmp/dreams-c37-native-captures/begun/ui.png",
+        "bytes": 48802,
+        "sha256": "cc2b8fe59bc47df9ec14831b9d5eac0e878d3c3032b91abc3bc2a46ee82204cc"
+      },
+      "xml": {
+        "file": "/tmp/dreams-c37-native-captures/begun/ui.xml",
+        "bytes": 35351,
+        "sha256": "15c5b90a434c6893edd89da7bb3b8a0ceb0d942077081577523b4e013cd6bed8"
+      },
+      "coordinatorPersonallyViewed": true
+    },
+    {
+      "id": "cold-begun",
+      "kind": "cold",
+      "database": {
+        "main": {
+          "file": "/tmp/dreams-c37-native-captures/cold-begun/database/dreams.db",
+          "bytes": 3805184,
+          "sha256": "f144f28d9701ff2e4ea3cfe710e8acbc57c27ffee351caa4313f34314d3d7dae"
+        },
+        "wal": {
+          "file": "/tmp/dreams-c37-native-captures/cold-begun/database/dreams.db-wal",
+          "bytes": 4733912,
+          "sha256": "28032f89fb16ffbc82e7e1256199c417b6afbbff03f2a3077415d1a677e3591a"
+        }
+      },
+      "png": {
+        "file": "/tmp/dreams-c37-native-captures/cold-begun/ui.png",
+        "bytes": 48780,
+        "sha256": "7c914e66021851e28bd5c062364f9ca8f10f4e0c2f40ea7bba9dcee285731adf"
+      },
+      "xml": {
+        "file": "/tmp/dreams-c37-native-captures/cold-begun/ui.xml",
+        "bytes": 35351,
+        "sha256": "15c5b90a434c6893edd89da7bb3b8a0ceb0d942077081577523b4e013cd6bed8"
+      },
+      "coordinatorPersonallyViewed": true,
+      "sameAs": "begun",
+      "coldAttestation": {
+        "file": "/tmp/dreams-c37-native-captures/cold-begun/cold-attestation.json",
+        "bytes": 300,
+        "sha256": "ede24fcbc2363fa3dbc1731b70f5669502f8e94f72d59f83a96329eb3e3b74c6"
+      }
+    },
+    {
+      "id": "birthday-decision",
+      "kind": "command",
+      "database": {
+        "main": {
+          "file": "/tmp/dreams-c37-native-captures/birthday-decision/database/dreams.db",
+          "bytes": 3805184,
+          "sha256": "f144f28d9701ff2e4ea3cfe710e8acbc57c27ffee351caa4313f34314d3d7dae"
+        },
+        "wal": {
+          "file": "/tmp/dreams-c37-native-captures/birthday-decision/database/dreams.db-wal",
+          "bytes": 4733912,
+          "sha256": "dd4396fe4b6a06bf25bf5c5d8bb2e72cc3d508e4fc16b85efcbd30faa5604d60"
+        }
+      },
+      "png": {
+        "file": "/tmp/dreams-c37-native-captures/birthday-decision/ui.png",
+        "bytes": 62789,
+        "sha256": "eb6b02d0dd2c8406251a8aeeaccae6675f23509213ade1bed87079960ea83e53"
+      },
+      "xml": {
+        "file": "/tmp/dreams-c37-native-captures/birthday-decision/ui.xml",
+        "bytes": 8084,
+        "sha256": "edbc966faeaecbcd7bcb3438d200b67a5dccd52d4a3d05fa0508e56efd119bc3"
+      },
+      "coordinatorPersonallyViewed": true,
+      "command": {
+        "type": "advance"
+      }
+    },
+    {
+      "id": "cold-birthday-decision",
+      "kind": "cold",
+      "database": {
+        "main": {
+          "file": "/tmp/dreams-c37-native-captures/cold-birthday-decision/database/dreams.db",
+          "bytes": 3805184,
+          "sha256": "f144f28d9701ff2e4ea3cfe710e8acbc57c27ffee351caa4313f34314d3d7dae"
+        },
+        "wal": {
+          "file": "/tmp/dreams-c37-native-captures/cold-birthday-decision/database/dreams.db-wal",
+          "bytes": 4733912,
+          "sha256": "dd4396fe4b6a06bf25bf5c5d8bb2e72cc3d508e4fc16b85efcbd30faa5604d60"
+        }
+      },
+      "png": {
+        "file": "/tmp/dreams-c37-native-captures/cold-birthday-decision/ui.png",
+        "bytes": 62757,
+        "sha256": "7660b74fb37282158d37d769ce1fda8b4d357e5d76b4a877969afe563927e5de"
+      },
+      "xml": {
+        "file": "/tmp/dreams-c37-native-captures/cold-birthday-decision/ui.xml",
+        "bytes": 8084,
+        "sha256": "edbc966faeaecbcd7bcb3438d200b67a5dccd52d4a3d05fa0508e56efd119bc3"
+      },
+      "coordinatorPersonallyViewed": true,
+      "sameAs": "birthday-decision",
+      "coldAttestation": {
+        "file": "/tmp/dreams-c37-native-captures/cold-birthday-decision/cold-attestation.json",
+        "bytes": 336,
+        "sha256": "9a97742d3ec8d0506f9c0f30b7a1925d516ef39323c40a239f4bff047aeb4428"
+      }
+    },
+    {
+      "id": "birthday-result",
+      "kind": "command",
+      "database": {
+        "main": {
+          "file": "/tmp/dreams-c37-native-captures/birthday-result/database/dreams.db",
+          "bytes": 3805184,
+          "sha256": "f144f28d9701ff2e4ea3cfe710e8acbc57c27ffee351caa4313f34314d3d7dae"
+        },
+        "wal": {
+          "file": "/tmp/dreams-c37-native-captures/birthday-result/database/dreams.db-wal",
+          "bytes": 4733912,
+          "sha256": "e915fb6b8d70440a3ead0afdc30885b4a51dacbfc666a869f619775971e434b9"
+        }
+      },
+      "png": {
+        "file": "/tmp/dreams-c37-native-captures/birthday-result/ui.png",
+        "bytes": 58230,
+        "sha256": "f6293dacddd6e079b7284d7c106560672a097233c7e45c1baa4824e7f2467eec"
+      },
+      "xml": {
+        "file": "/tmp/dreams-c37-native-captures/birthday-result/ui.xml",
+        "bytes": 8253,
+        "sha256": "c850cd6c0bf87a360cd35d4ed271ea12686dbc7f8c0818cde6b0cc3ca8a4f2c2"
+      },
+      "coordinatorPersonallyViewed": true,
+      "command": {
+        "type": "choose",
+        "eventId": "event_2027_first-bubble-catch",
+        "choiceId": "watch"
+      }
+    },
+    {
+      "id": "cold-birthday-result",
+      "kind": "cold",
+      "database": {
+        "main": {
+          "file": "/tmp/dreams-c37-native-captures/cold-birthday-result/database/dreams.db",
+          "bytes": 3805184,
+          "sha256": "f144f28d9701ff2e4ea3cfe710e8acbc57c27ffee351caa4313f34314d3d7dae"
+        },
+        "wal": {
+          "file": "/tmp/dreams-c37-native-captures/cold-birthday-result/database/dreams.db-wal",
+          "bytes": 4733912,
+          "sha256": "e915fb6b8d70440a3ead0afdc30885b4a51dacbfc666a869f619775971e434b9"
+        }
+      },
+      "png": {
+        "file": "/tmp/dreams-c37-native-captures/cold-birthday-result/ui.png",
+        "bytes": 58295,
+        "sha256": "48f7cd6c7d0f45aa4b73335c4804580edf580f9882dfd6e62523095938879969"
+      },
+      "xml": {
+        "file": "/tmp/dreams-c37-native-captures/cold-birthday-result/ui.xml",
+        "bytes": 8253,
+        "sha256": "c850cd6c0bf87a360cd35d4ed271ea12686dbc7f8c0818cde6b0cc3ca8a4f2c2"
+      },
+      "coordinatorPersonallyViewed": true,
+      "sameAs": "birthday-result",
+      "coldAttestation": {
+        "file": "/tmp/dreams-c37-native-captures/cold-birthday-result/cold-attestation.json",
+        "bytes": 330,
+        "sha256": "309343ef695a540b2d10fd9653e5c58cc9873912d791a492590d87b68a3b6ceb"
+      }
+    },
+    {
+      "id": "acknowledged",
+      "kind": "command",
+      "database": {
+        "main": {
+          "file": "/tmp/dreams-c37-native-captures/acknowledged/database/dreams.db",
+          "bytes": 3805184,
+          "sha256": "f144f28d9701ff2e4ea3cfe710e8acbc57c27ffee351caa4313f34314d3d7dae"
+        },
+        "wal": {
+          "file": "/tmp/dreams-c37-native-captures/acknowledged/database/dreams.db-wal",
+          "bytes": 4733912,
+          "sha256": "9bf3d2ad4d9bad2966825b89d8f6fda324d8abe9122bc926011e2eeb314057a4"
+        }
+      },
+      "png": {
+        "file": "/tmp/dreams-c37-native-captures/acknowledged/ui.png",
+        "bytes": 50969,
+        "sha256": "815504b88500c53819b79beb8e4b495827a45db551506dea8ee3c8ed9c40e467"
+      },
+      "xml": {
+        "file": "/tmp/dreams-c37-native-captures/acknowledged/ui.xml",
+        "bytes": 35699,
+        "sha256": "3bead7fbd5a7fdee5bdb5a820e9e11ce98123e81a9a721aa1efea8b2b7cdf8be"
+      },
+      "coordinatorPersonallyViewed": true,
+      "command": {
+        "type": "acknowledge",
+        "resultId": "event_2027_first-bubble-catch_result"
+      }
+    },
+    {
+      "id": "cold-acknowledged",
+      "kind": "cold",
+      "database": {
+        "main": {
+          "file": "/tmp/dreams-c37-native-captures/cold-acknowledged/database/dreams.db",
+          "bytes": 3805184,
+          "sha256": "f144f28d9701ff2e4ea3cfe710e8acbc57c27ffee351caa4313f34314d3d7dae"
+        },
+        "wal": {
+          "file": "/tmp/dreams-c37-native-captures/cold-acknowledged/database/dreams.db-wal",
+          "bytes": 4733912,
+          "sha256": "9bf3d2ad4d9bad2966825b89d8f6fda324d8abe9122bc926011e2eeb314057a4"
+        }
+      },
+      "png": {
+        "file": "/tmp/dreams-c37-native-captures/cold-acknowledged/ui.png",
+        "bytes": 50925,
+        "sha256": "c3d3212bfd96ff4f7234735b0779e26d60d7f1312a26d43dbf3d6356d6d0e2a6"
+      },
+      "xml": {
+        "file": "/tmp/dreams-c37-native-captures/cold-acknowledged/ui.xml",
+        "bytes": 35699,
+        "sha256": "3bead7fbd5a7fdee5bdb5a820e9e11ce98123e81a9a721aa1efea8b2b7cdf8be"
+      },
+      "coordinatorPersonallyViewed": true,
+      "sameAs": "acknowledged",
+      "coldAttestation": {
+        "file": "/tmp/dreams-c37-native-captures/cold-acknowledged/cold-attestation.json",
+        "bytes": 321,
+        "sha256": "f9a584b5415c1187fefeaf34efdffb6bc3ba8cca9a8fae7502db475e0ad418c2"
+      }
+    }
+  ]
+}

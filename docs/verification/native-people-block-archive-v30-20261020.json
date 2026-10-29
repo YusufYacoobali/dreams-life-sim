@@ -1,0 +1,39 @@
+{
+  "recordedOn": "2026-10-20",
+  "scope": "Actual saved native v3 routine result82 exported with isolated unmodified pushed b9a5e65 before future content changes; all20original moments retained",
+  "producerCommit": "b9a5e65e298c4fdfa1229c97408a893560929a7a",
+  "producerSource": "Selected tracked files from git archive, source fingerprint verified; installed dependencies shared without source changes",
+  "producerCombinedGamePersistenceHash": "4493ca6873739e3f07b7aec3a652d67c7872d97a7ab5fec86df8b46db652b111",
+  "fixture": "tests/fixtures/v30-native-people-block-archive.json",
+  "bytes": 1024189,
+  "sha256": "1e4475aefee73e062ed4e5cb74bb0cd85ff90c2c6386ff94c50b66b7cc14b0e3",
+  "wholeWorldSha256": "a2f8fed6fda5898aa0b8d50a6b7301896c54766b64fa1609a667f83b498b87bb",
+  "currentCheckpointByteExact": true,
+  "allOriginalMomentPayloadsAndMetadataExact": true,
+  "all20EarlierNamedWorkplaceMomentsRetainedExactly": true,
+  "versions": {
+    "world": 30,
+    "engine": 29,
+    "content": 6,
+    "database": 7,
+    "checkpoint": 3
+  },
+  "revision": 82,
+  "moments": 20,
+  "result": {
+    "kind": "result",
+    "id": "action_81",
+    "title": "Routine saved",
+    "body": "Your choices affect health, fitness, energy, stress and costs as months pass. Saving a routine does not grant an immediate stat reward.",
+    "illustration": "meditation",
+    "effects": []
+  },
+  "boundSourceRecord": "android24-routine-draft-20261020/journey-exact.json",
+  "verification": {
+    "includedInCompleteRegression": "adult-relationships-content7-20261020.json",
+    "completeRegressionTests": 1437,
+    "producerBytesUnchanged": true,
+    "currentContentMigrationOnly": true,
+    "sqliteFailureRetryColdAckAndAll20OriginalMomentsExact": true
+  }
+}

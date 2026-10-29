@@ -1,0 +1,28 @@
+{
+  "kind": "author-focused-ui",
+  "worktree": "/workspace/dreams-worktrees/lifestyle-tabs",
+  "baseCommit": "e250c46a0740bd9eec62a9c064ee2bf5365fef2b",
+  "routeSha256Before": "954c00c3285ebc0a8ff7206d86e1af4d25a92eaa95a621b4dede527c65939a0c",
+  "argv": [
+    "node",
+    "node_modules/jest/bin/jest.js",
+    "--runInBand",
+    "--ci",
+    "--testTimeout=30000",
+    "--cacheDirectory",
+    "/tmp/dreams-lifestyle-tabs-jest",
+    "--runTestsByPath",
+    "tests/ui/health-flow.test.tsx",
+    "tests/ui/health-review-save-flow.test.tsx"
+  ],
+  "startedAt": "2026-10-21T08:48:36.908442+00:00",
+  "complete": true,
+  "exitCode": 0,
+  "elapsedSeconds": 69.71,
+  "endedAt": "2026-10-21T08:49:46.618644+00:00",
+  "routeSha256After": "954c00c3285ebc0a8ff7206d86e1af4d25a92eaa95a621b4dede527c65939a0c",
+  "log": {
+    "path": "/tmp/dreams-lifestyle-tabs-focused.out",
+    "sha256": "29d242a21a7aac93815d76ba50152311e6aee78c8dc2105da89015392ae1425b"
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "recordedOn": "2026-10-20",
+  "baseCommit": "d7dcc0e555d498dcc9a8055eff986a88733ef2a4",
+  "scope": "40 factual achievements/12 challenges/39 read-only facts, archived creator/royal history, stable personal-loan payoff, lifetime adopter care and bounded visible progress lists. No new game/save state.",
+  "versions": {
+    "world": 30,
+    "engine": 31,
+    "content": 8,
+    "database": 10,
+    "checkpoint": "v4"
+  },
+  "achievements": 40,
+  "challenges": 12,
+  "facts": 39,
+  "gameAndPersistenceUnchanged": true,
+  "combinedGamePersistenceSourceHash": "12e1a38ca5104a66bae29665d7685983690773844247ce5fc38e46ef58e52740",
+  "source": {
+    "src/progression/progress.ts": "140137641e35766abf26553120686c169df9754dfa36feeb8b8452009e38910f",
+    "src/progression/catalog.ts": "0831201f04aa0faaf8ba2ae4d52519112d7e4183c3151c39652ae253ca638679",
+    "src/progression/types.ts": "ab2188ecd31ca63e3534fbed4310791c3c2adf04b73536d036307abb086ea355",
+    "src/progression/facts.ts": "6583ec0ee7b920f91410fb84c50d3f9f6f7afb44aae155bd534c6c63f637d732",
+    "src/ui/ProgressElements.tsx": "1fa0f96205c67d878e572b255c9c87fce3a40ce71b3074909bba5765666e817e",
+    "src/ui/components.tsx": "b6acb5342c87e450b02b45573b54553870e977c020eda5b2f1f59cc389b6278b",
+    "app/(game)/achievements.tsx": "63b02a2d4df66b22b3e09dacd0e52615b169d20031676bcd958b524d965b909d",
+    "app/(game)/challenges.tsx": "b1cd1d73a14c9b7f310bc8d2ebde41008146a1e3c201c632f92e80ca7060df9d",
+    "app/(game)/challenge/[id].tsx": "7c9faef476dbaad3b5eb0d98f63b62ded1964827f2f7689b6092dadde33bfb68",
+    "tests/progression/expanded-progress.test.ts": "487868f38d498a1ec20c1954bd8fd0c087d5a220ff5653d1763d3da7b2d7a9b9",
+    "tests/ui/extras-flow.test.tsx": "bf5599264e8f08283c0769ff73096d707c503e4b5c075102e69d18f918a461bd"
+  },
+  "verification": {
+    "uiStateAndProgression": {
+      "tests": 129,
+      "suites": 48,
+      "seconds": 117.885,
+      "exitCode": 0,
+      "raw": "regression-progression-expanded-ui-20261020.txt",
+      "sha256": "8c37a24067f55a7d315fbb9f59157c4867ca7e47827fbeafed9b0852f9c92a75"
+    },
+    "strictApplicationAndTestTypes": true,
+    "strictTypesExitCode": 0,
+    "bothFreshHermesExports": true,
+    "exportsExitCode": 0,
+    "nativeRecord": "android24-progression-expanded-20261020/journey-exact.json",
+    "nativeChecksExitCode": 0,
+    "largeViewRead": "progression-large-read-20261020.json",
+    "newWholeRegressionOrLifetimeCountClaim": false,
+    "wholeSimulationBaseline": "life-context-stories-content8-20261020.json",
+    "noImmutableFixturesRegenerated": true
+  },
+  "exports": [
+    {
+      "file": "_expo/static/js/android/entry-5ea36f61d01fe805c0b6316c622984d0.hbc",
+      "bytes": 5634407,
+      "sha256": "5b5a6430bdf9cb81746c823bba4064a2c08f646e567a2343f2fdbcf5bb85f8e3"
+    },
+    {
+      "file": "_expo/static/js/ios/entry-4e63b06d681dcf0e25d61816b2ca18a2.hbc",
+      "bytes": 5330406,
+      "sha256": "84015e4e132cbd13e6802def83d2d32731be18ef5a2f2e720b9a01ceb659d287"
+    }
+  ]
+}

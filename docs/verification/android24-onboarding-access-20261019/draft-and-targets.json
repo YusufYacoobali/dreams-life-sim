@@ -1,0 +1,77 @@
+{
+  "scope": "Actual Android 24 UIAutomator values after long-name entry, Australia choice, Avatar 7 selection and Continue back; unsaved draft only",
+  "systemTextScale": 1.3,
+  "firstName": "AlexandriaCassandraMontgomery",
+  "lastName": "Roy",
+  "country": "Australia",
+  "city": "Sydney",
+  "draftIdentityAndLocationPreserved": true,
+  "nativeControlsAtLeast48Dp": [
+    {
+      "label": "Male",
+      "bounds": "[32,177][137,225]",
+      "widthDpAt160Dpi": 105,
+      "heightDpAt160Dpi": 48
+    },
+    {
+      "label": "Female",
+      "bounds": "[143,177][247,225]",
+      "widthDpAt160Dpi": 104,
+      "heightDpAt160Dpi": 48
+    },
+    {
+      "label": "Non-binary",
+      "bounds": "[253,177][358,225]",
+      "widthDpAt160Dpi": 105,
+      "heightDpAt160Dpi": 48
+    },
+    {
+      "label": "Avatars",
+      "bounds": "[16,132][102,180]",
+      "widthDpAt160Dpi": 86,
+      "heightDpAt160Dpi": 48
+    },
+    {
+      "label": "Skin Tone",
+      "bounds": "[107,132][193,180]",
+      "widthDpAt160Dpi": 86,
+      "heightDpAt160Dpi": 48
+    },
+    {
+      "label": "Hair Style",
+      "bounds": "[198,132][283,180]",
+      "widthDpAt160Dpi": 85,
+      "heightDpAt160Dpi": 48
+    },
+    {
+      "label": "Hair Color",
+      "bounds": "[288,132][374,180]",
+      "widthDpAt160Dpi": 86,
+      "heightDpAt160Dpi": 48
+    },
+    {
+      "label": "Oval",
+      "bounds": "[16,624][101,672]",
+      "widthDpAt160Dpi": 85,
+      "heightDpAt160Dpi": 48
+    },
+    {
+      "label": "Round",
+      "bounds": "[107,624][192,672]",
+      "widthDpAt160Dpi": 85,
+      "heightDpAt160Dpi": 48
+    },
+    {
+      "label": "Long",
+      "bounds": "[198,624][283,672]",
+      "widthDpAt160Dpi": 85,
+      "heightDpAt160Dpi": 48
+    },
+    {
+      "label": "Broad",
+      "bounds": "[289,624][374,672]",
+      "widthDpAt160Dpi": 85,
+      "heightDpAt160Dpi": 48
+    }
+  ]
+}
