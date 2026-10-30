@@ -38,7 +38,7 @@ export function MiniGamePlayground() {
       lifeId: 'practice',
       personId: 'practice',
       kind: kind!,
-      ...(kind === 'escape' ? { escapeVersion: 2 as const } : {}),
+      ...(kind === 'escape' ? { escapeVersion: 2 as const, escapePatternVersion: 1 as const } : {}),
       ownerId: 'practice',
       contextId: 'practice',
       started: { year: 2026, month: 1, day: 1 },

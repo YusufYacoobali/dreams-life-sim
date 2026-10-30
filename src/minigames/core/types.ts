@@ -59,6 +59,8 @@ export const miniGameSessionSchema = z.object({
   assisted: z.boolean(),
   // Absent on published v1 sessions; never default during decode.
   escapeVersion: z.literal(2).optional(),
+  // First mixed pattern generator; absent preserves earlier v2 task-stage saves.
+  escapePatternVersion: z.literal(1).optional(),
   status: z.enum(['active', 'completed', 'forfeited']),
   paused: z.boolean(),
   elapsedMs: z.number().int().min(0).max(14000),
@@ -71,7 +73,7 @@ export const miniGameSessionSchema = z.object({
 export type MiniGameSession = z.infer<typeof miniGameSessionSchema>;
 export type Challenge = Pick<
   MiniGameSession,
-  'kind' | 'difficulty' | 'seed' | 'assisted' | 'escapeVersion'
+  'kind' | 'difficulty' | 'seed' | 'assisted' | 'escapeVersion' | 'escapePatternVersion'
 >;
 export type GameEvaluation = {
   finished: boolean;

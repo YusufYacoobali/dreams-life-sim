@@ -13,6 +13,8 @@ export function validateMiniGames(world: World) {
     opportunities = new Set<string>(),
     active = new Set<string>();
   for (const session of world.miniGames) {
+    if (session.escapePatternVersion !== undefined && (session.kind !== 'escape' || session.escapeVersion !== 2))
+      throw Error('A mixed escape pattern requires a v2 escape session');
     const opportunity = [
       session.personId,
       session.kind,

@@ -13,6 +13,7 @@ function start(world = escapePrisoner(), assisted = true) {
   // A genuinely reserved historical v1 attempt: absence must keep its published rules.
   const historical = JSON.parse(encodeWorld(started));
   delete historical.miniGames.at(-1).escapeVersion;
+  delete historical.miniGames.at(-1).escapePatternVersion;
   return decodeWorld(JSON.stringify(historical));
 }
 function solve(input: World) {

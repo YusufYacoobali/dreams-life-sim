@@ -2,6 +2,23 @@
 
 Newly started attempts use optional session `escapeVersion: 2`. Missing version means the published v1 stamp puzzle, with its original sequence, moving gates, mistake budget, scoring and timeout. Decoding never inserts the version. Existing attempts therefore finish under the rules they reserved.
 
+New attempts also store `escapePatternVersion: 1`. A final gameplay review found
+that taking the low two bits of FNV after a final stage digit forced the earlier
+v2 pattern to repeat every four symbols. Across seeds 0–255, each of the three
+highest-difficulty rounds had only four distinct patterns. New patterns draw
+from the existing pure Mulberry32 helper with a local, round-specific seed;
+they never consume a life-simulation random stream. The same sample has
+244 / 254 / 255 distinct patterns at lengths 6 / 7 / 8, with occasional natural
+repetition. These observations check variety. Human difficulty still requires
+playtesting.
+
+The pattern revision remains absent on earlier task-stage v2 sessions. Their
+original symbols, progress and complete outcomes are preserved. Five genuine
+checkpoints captured from `6e35d152` cover started, recall, paused, hint and
+settled states; replay checks compare complete world hashes. The original
+published v1 fixture remains separate and unchanged. A pattern revision attached
+to a v1 session or another game is rejected.
+
 V2 is a pattern-memory game with no countdown deadline. The player studies each round, commits “Hide pattern and begin”, then reconstructs it from four shuffled named gates. The pattern is removed from both the visible and accessibility trees before gate buttons appear. Recall progress displays only checks and dots; feedback never prints the missing symbol. Correct selections advance, incorrect selections consume the attempt's shared mistake budget without resetting or revealing the answer.
 
 | Difficulty | Round lengths | Mistakes allowed |

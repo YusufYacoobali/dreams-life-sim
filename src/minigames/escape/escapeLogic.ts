@@ -1,9 +1,10 @@
 import type { Challenge, GameEvaluation, MiniGameInput } from '../core/types';
 import { challengeSeed } from '../core/difficulty';
+import { nextRandom } from '../../game/random';
 
 export const escapeSymbols = ['sun', 'moon', 'star', 'bird'] as const;
 export type EscapeSymbol = typeof escapeSymbols[number];
-type EscapeChallenge = Pick<Challenge, 'seed' | 'difficulty' | 'escapeVersion'> & Partial<Pick<Challenge, 'assisted'>>;
+type EscapeChallenge = Pick<Challenge, 'seed' | 'difficulty' | 'escapeVersion' | 'escapePatternVersion'> & Partial<Pick<Challenge, 'assisted'>>;
 const level = (difficulty: number) => Math.max(1, Math.min(5, difficulty));
 /** Published v1 mechanics remain unchanged for already reserved attempts. */
 export const escapeSteps = (difficulty: number) => 3 + Math.floor(level(difficulty) / 2);
@@ -13,6 +14,17 @@ export const escapePatternLength = (difficulty: number, round: number) => [3, 4,
 
 /** Abstract memory symbols, not an institution or an escape method. */
 export function escapeSequence(challenge: EscapeChallenge, round = 0): EscapeSymbol[] {
+  if (challenge.escapeVersion === 2 && challenge.escapePatternVersion === 1) {
+    // FNV's low two bits cycle with a final stage digit. Draw from a mixed local
+    // stream instead; it never consumes or changes any life-simulation RNG.
+    let state = challengeSeed(`${challenge.seed}:memory:2:${round}`);
+    return Array.from({ length: escapePatternLength(challenge.difficulty, round) }, () => {
+      const draw = nextRandom(state);
+      state = draw.state;
+      return escapeSymbols[Math.floor(draw.value * escapeSymbols.length)];
+    });
+  }
+  // Published v1 and already-started task-stage v2 attempts keep exact patterns.
   return Array.from({ length: challenge.escapeVersion === 2 ? escapePatternLength(challenge.difficulty, round) : escapeSteps(challenge.difficulty) }, (_, stage) =>
     escapeSymbols[challengeSeed(challenge.escapeVersion === 2 ? `${challenge.seed}:memory:2:${round}:${stage}` : `${challenge.seed}:stamp:${stage}`) % escapeSymbols.length]);
 }

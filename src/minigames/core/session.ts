@@ -55,7 +55,10 @@ export function resolveMiniGame(
       settled: null,
       appliedMonth: null,
     };
-    if (command.kind === 'escape') session.escapeVersion = 2;
+    if (command.kind === 'escape') {
+      session.escapeVersion = 2;
+      session.escapePatternVersion = 1;
+    }
     world.miniGames.push(session);
     // Starting commits the SAME yearly burglary allowance, before any game input.
     if (command.kind === 'crime')

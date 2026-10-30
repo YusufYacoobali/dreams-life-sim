@@ -1,5 +1,8 @@
+import { createHash } from 'node:crypto';
+import { unpackCheckpoint } from '../../src/persistence/checkpoints';
+import stageV2 from '../fixtures/v2-stage-escape-compatibility.json';
 import { decodeWorld, encodeWorld } from '../../src/game/model';
-import { resolveCommand } from '../../src/game/engine';
+import { resolveCommand, type GameCommand } from '../../src/game/engine';
 import { activeSentence } from '../../src/game/systems/legalSchemas';
 import { escapeContext, challengeContext } from '../../src/minigames/core/eligibility';
 import { escapeSequence, escapeState, escapeRounds, escapeMistakes, evaluateEscape } from '../../src/minigames/escape/escapeLogic';
@@ -72,6 +75,7 @@ test('cold reload preserves hidden phase and mistakes; resuming cannot reset, re
   world = resolveCommand(world, { type: 'mini-game-pause', sessionId: session.id, elapsedMs: session.elapsedMs + 200 });
   world = decodeWorld(encodeWorld(world));
   expect(world.miniGames.at(-1)!.inputs).toEqual(transcript);
+  expect(world.miniGames.at(-1)!.escapePatternVersion).toBe(1);
   expect(escapeState(world.miniGames.at(-1)!, transcript)).toMatchObject({ phase: 'recall', mistakes: 1 });
   expect(() => resolveCommand(world, { type: 'mini-game-start', kind: 'escape', ownerId: session.ownerId, contextId: session.contextId, assisted: true })).toThrow(/saved challenge/);
   world = resolveCommand(world, { type: 'mini-game-resume', sessionId: session.id });
@@ -114,4 +118,39 @@ test('failed memory recall creates one genuine escape case and leaves the origin
   expect(decodeWorld(encodeWorld(world))).toEqual(world);
   expect(() => resolveCommand(world, { type: 'mini-game-complete', sessionId: session.id })).toThrow();
   expect(() => resolveCommand(world, { type: 'mini-game-start', kind: 'escape', ownerId: sentence.id, contextId: session.contextId, assisted: true })).toThrow();
+});
+
+
+test('mixed memory patterns vary across seeds without a forced four-symbol cycle; published v1 stays exact', () => {
+  for (let round = 0; round < 3; round++) {
+    const patterns = Array.from({ length: 256 }, (_, seed) => escapeSequence({ seed, difficulty: 5, escapeVersion: 2, escapePatternVersion: 1 }, round));
+    expect(new Set(patterns.map(pattern => pattern.join(','))).size).toBeGreaterThan(200);
+    // Random patterns may repeat. Reject a generator that makes repetition the rule.
+    const fourCycles = patterns.filter(pattern => pattern.slice(4).every((symbol, index) => symbol === pattern[index]));
+    expect(fourCycles.length).toBeLessThan(64);
+  }
+  expect(escapeSequence({ seed: 413, difficulty: 5 })).toEqual(['sun', 'bird', 'star', 'moon', 'sun']);
+});
+
+test('only newly started v2 escape sessions carry the mixed pattern revision', () => {
+  const world = start();
+  expect(world.miniGames.at(-1)).toMatchObject({ escapeVersion: 2, escapePatternVersion: 1 });
+  const invalid = JSON.parse(encodeWorld(world));
+  delete invalid.miniGames.at(-1).escapeVersion;
+  expect(() => decodeWorld(JSON.stringify(invalid))).toThrow(/mixed escape pattern/);
+  invalid.miniGames.at(-1).kind = 'crime';
+  expect(() => decodeWorld(JSON.stringify(invalid))).toThrow(/mixed escape pattern/);
+});
+
+test.each(stageV2.rows.map(row => [row.id, row] as const))('%s preserves its original task-stage v2 pattern and complete result hash', (_, row) => {
+  expect(stageV2.sourceCommit).toBe('6e35d1528f8c1cd6ae8f797c4968cf3bee311226');
+  const digest = (encoded: string) => createHash('sha256').update(encoded).digest('hex');
+  let world = unpackCheckpoint(row.payload);
+  expect(world.miniGames.at(-1)).toHaveProperty('escapeVersion', 2);
+  expect(world.miniGames.at(-1)).not.toHaveProperty('escapePatternVersion');
+  expect(digest(encodeWorld(world))).toBe(row.inputSha256);
+  for (const command of row.commands) world = resolveCommand(decodeWorld(encodeWorld(world)), command as GameCommand);
+  expect(digest(encodeWorld(world))).toBe(row.outcomeSha256);
+  expect(world.miniGames.at(-1)).not.toHaveProperty('escapePatternVersion');
+  expect(() => resolveCommand(world, { type: 'mini-game-complete', sessionId: world.miniGames.at(-1)!.id })).toThrow();
 });
