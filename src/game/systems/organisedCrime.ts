@@ -224,6 +224,21 @@ export function promotionReason(world: World, gang: Gang): string | undefined {
   )
     return "Build more loyalty, reputation and criminal experience";
 }
+/** The exact saved people who can participate in a new crew-led assignment. */
+export function eligibleMissionCrew(world: World, gang: Gang) {
+  const state = gang.organised;
+  if (!state || gang.left) return [];
+  return state.members.filter((member) => {
+    const person = world.people[member.personId];
+    return member.role !== "former" && member.loyalty >= 45 &&
+      member.personId !== state.leaderId && !!person && !person.died &&
+      ageOn(person, world.date) >= Math.max(18, rules[person.country].adultAge) &&
+      !isConfined(world, person) && !person.legal.wanted &&
+      !activeTrip(world, person.id) && !serviceAway(world, person.id) &&
+      person.health.hospitalizedUntil === null && person.stats.health >= 20 &&
+      person.country === state.country && person.city === state.city;
+  });
+}
 export function missionReason(
   world: World,
   gang: Gang,
@@ -246,18 +261,7 @@ export function missionReason(
   if (active(world).stats.energy < 12) return "Recover your energy first";
   if (
     approach === "crew-led" &&
-    !s.members.some(
-      (m) =>
-        m.role !== "former" &&
-        m.loyalty >= 45 &&
-        m.personId !== s.leaderId &&
-        !world.people[m.personId].died &&
-        !isConfined(world, m.personId) &&
-        !activeTrip(world, m.personId) &&
-        !serviceAway(world, m.personId) &&
-        world.people[m.personId].country === s.country &&
-        world.people[m.personId].city === s.city,
-    )
+    eligibleMissionCrew(world, gang).length === 0
   )
     return "You need a trusted, available crew member";
 }
@@ -686,17 +690,10 @@ export function handleOrganisedCrime(
     if (reason) throw new IneligibleAction(reason);
     use(world, gang, "job", 2);
     const mission = organisedMissions.find((m) => m.id === command.mission)!,
-      crew = s.members.filter(
-        (m) =>
-          m.role !== "former" &&
-          m.personId !== s.leaderId &&
-          !world.people[m.personId].died &&
-          !isConfined(world, m.personId) &&
-          !activeTrip(world, m.personId) &&
-          !serviceAway(world, m.personId) &&
-          world.people[m.personId].country === s.country &&
-          world.people[m.personId].city === s.city,
-      ),
+      crew = command.approach === "crew-led" ? eligibleMissionCrew(world, gang) : [],
+      skill = crew.length
+        ? crew.reduce((sum, m) => sum + world.people[m.personId].legal.crimeSkill, 0) / crew.length
+        : 0,
       loyalty = crew.length
         ? crew.reduce((sum, m) => sum + m.loyalty, 0) / crew.length
         : 0;
@@ -710,7 +707,7 @@ export function handleOrganisedCrime(
             ? 15
             : command.approach === "bold"
               ? -7
-              : Math.floor(loyalty / 8)),
+              : Math.floor(loyalty / 10 + skill / 12)),
       ),
     );
     const success = draw(world, "outcomes", 1, 100) <= successChance,
@@ -776,6 +773,8 @@ export function handleOrganisedCrime(
       if (command.approach === "crew-led")
         for (const m of crew) m.loyalty = bounded(m.loyalty + 4);
     }
+    for (const member of crew)
+      memory(member.memories, "mission:" + mission.id + ":" + (success ? "completed" : "failed") + ":" + world.date.year);
     s.jobs.push({
       id: "organised_job_" + source.id,
       category: mission.id,

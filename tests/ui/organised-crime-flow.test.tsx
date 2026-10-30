@@ -123,3 +123,20 @@ test("joining reviews terms, rolls back SQLite failure, retries once and cold-op
   view.unmount();
   sqlite.close();
 });
+
+test('the approach picker disables unavailable Crew-led while leaving Cautious and Bold selectable', async () => {
+  const { resolveCommand } = require('../../src/game/engine') as typeof import('../../src/game/engine');
+  const { sqlite, world } = await setup();
+  let joined = resolveCommand(world, { type: 'organised-join', style: 'street-syndicate' });
+  joined = resolveCommand(joined, { type: 'acknowledge', resultId: joined.pending!.id });
+  for (const member of activeOrganisation(joined)!.organised!.members) member.loyalty = 44;
+  mockStore.setState({ world: joined });
+  const view = render(frame(<Dashboard />));
+  fireEvent.press(screen.getByRole('button', { name: /^The Missing Envelope\./ }));
+  const crew = screen.getByRole('radio', { name: /Crew-led.*trusted, available crew member/ });
+  expect(crew).toBeDisabled();
+  expect(screen.getByRole('radio', { name: 'Cautious · smaller reward, less exposure' })).not.toBeDisabled();
+  expect(screen.getByRole('radio', { name: 'Bold · more reward, more risk' })).not.toBeDisabled();
+  expect(screen.getByText('You need a trusted, available crew member')).toBeOnTheScreen();
+  view.unmount(); sqlite.close();
+});

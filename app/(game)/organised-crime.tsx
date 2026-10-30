@@ -62,7 +62,7 @@ function Dashboard() {
   function select(
     title: string,
     body: string,
-    choices: { id: string; label: string }[],
+    choices: { id: string; label: string; disabledReason?: string }[],
     choose: (id: string) => void,
   ) {
     setSelection({
@@ -217,6 +217,7 @@ function Dashboard() {
                         {
                           id: "crew-led",
                           label: "Crew-led · share credit and responsibility",
+                          disabledReason: missionReason(world, gang, mission.id, "crew-led"),
                         },
                       ],
                       (approach) =>
