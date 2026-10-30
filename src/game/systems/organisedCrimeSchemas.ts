@@ -1,6 +1,8 @@
+import { organisedMissionResultSchema } from './organisedMissionSchemas';
 import { z } from "zod";
 import { dateSchema } from "../calendar";
 import { countryCodes } from "../countries";
+import { crimeStoryConsequenceSchema } from './storyConsequenceSchemas';
 export const organisationStyles = [
   "street-syndicate",
   "fraud-network",
@@ -63,6 +65,7 @@ export const organisedCrimeStateSchema = z.object({
         transactionId: z.string().nullable(),
         proceeds: z.bigint().nonnegative(),
         success: z.boolean(),
+        mission: organisedMissionResultSchema.optional(),
       }),
     )
     .max(32),
@@ -83,7 +86,8 @@ export const organisedCrimeStateSchema = z.object({
   lastStoryYear: z.number().int(),
   activeStory: z
     .object({
-      rulesVersion: z.literal(1),
+      rulesVersion: z.union([z.literal(1), z.literal(2)]),
+      target: z.enum(['member', 'leader', 'rival']).optional(),
       choices: z
         .array(
           z.object({
@@ -104,6 +108,7 @@ export const organisedCrimeStateSchema = z.object({
             evidence: z.boolean().optional(),
             rival: z.number().int().min(-100).max(100).optional(),
             expel: z.boolean().optional(),
+            consequence: crimeStoryConsequenceSchema.optional(),
           }),
         )
         .min(2)

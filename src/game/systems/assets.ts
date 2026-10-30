@@ -1,3 +1,4 @@
+import { recoverStolenVehicle, stolenAssetReason } from './stolenVehicles';
 import { saleQuote } from './assetQuotes';
 export { saleQuote } from './assetQuotes';
 import { qualifyingAnnualIncome } from './credit';
@@ -22,6 +23,7 @@ import { leaveHomeLease, signHomeLease } from './rentalHomes';
 export type OwnedAsset = World['assets'][number];
 const termSchema = z.union([z.literal(120), z.literal(240), z.literal(360)]);
 export const assetCommandSchema = z.discriminatedUnion('type', [
+  z.object({ type: z.literal('return-stolen-vehicle'), assetId: z.string() }).strict(),
   z.object({ type:z.literal('sign-home-lease'),catalogId:z.string(),quotedRent:z.bigint().positive() }),
   z.object({ type:z.literal('end-home-lease'),leaseId:z.string() }),
   z.object({ type: z.literal('buy-asset'), catalogId: z.string(), financing: z.enum(['cash', 'mortgage']), depositBps: z.number().int().min(2000).max(10000), termMonths: termSchema, quotedPrice: z.bigint().positive() }),
@@ -79,6 +81,7 @@ export function ownedAsset(world: World, id: string): OwnedAsset {
 export function completeAssetSale(world: World, assetId: string, price: bigint, foreclosure = false, person = active(world)): RuntimeEffectRow[] {
   const asset = world.assets.find(item => item.id === assetId && item.ownerId === person.id);
   if (!asset) throw new IneligibleAction('You do not own this asset');
+  const stolenReason = stolenAssetReason(asset); if (stolenReason) throw new IneligibleAction(stolenReason);
   const quote = saleQuote(world, asset, price); const account = accountFor(world, person, asset.currency);
   if (!foreclosure && account.cash + quote.proceeds < 0n) throw new IneligibleAction('This sale would not cover the mortgage and fees');
   post(world, price, 0n, 'asset-sale', 'Sold ' + asset.name, null, person, asset.currency);
@@ -132,6 +135,12 @@ export function resolveAssets(world: World, command: AssetCommand, presentPurcha
     return;
   }
   const asset = ownedAsset(world, command.assetId);
+  if (command.type === 'return-stolen-vehicle') {
+    recoverStolenVehicle(world, asset, 'recovered');
+    result(world, 'Vehicle returned', 'The vehicle leaves your possession. Its living registered owner receives it back; otherwise the authorities retain it. You receive no sale proceeds. Returning it does not erase the theft or an existing case.', 'vehicle');
+    return;
+  }
+  if (stolenAssetReason(asset)) throw new IneligibleAction(stolenAssetReason(asset)!);
   if (command.type === 'sell-asset') {
     if (asset.kind === 'property') throw new IneligibleAction('List a property for sale and wait for an offer');
     const quote = saleQuote(world, asset);

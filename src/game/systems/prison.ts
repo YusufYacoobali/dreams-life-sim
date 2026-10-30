@@ -7,6 +7,8 @@ import { rules } from '../rules';
 import { formatMoney } from '../money';
 import { offerPending } from '../pendingQueue';
 import { prisonStories } from '../content/prisonStories';
+import { prisonStoryConsequences } from '../content/prospectiveStoryEffects';
+import type { PrisonStoryConsequence } from './storyConsequenceSchemas';
 import { active, accountFor, availableCash, bounded, draw, fact, post, result } from './common';
 import { activeSentence, isConfined } from './legalSchemas';
 import { prisonContacts, recordPrisonOffence } from './legal';
@@ -71,7 +73,8 @@ function inmateAction(world: World, command: Extract<PrisonCommand, { type: 'pri
   once(world, 'inmate:' + target.id); connectPerson(world, target.id);
   const relation = relationFor(world, actor.id, target.id)!, contact = savedContact(life, target.id), action = command.action;
   const forgiving = target.traits.includes('kind') ? 15 : target.traits.includes('impulsive') ? -10 : 0;
-  const roll = draw(world, 'outcomes', 1, 100), chance = Math.max(10, Math.min(90, Math.round((relation.trust + relation.strength) / 2 + forgiving + (sentence.behavior - 50) / 5 - (contact.rivalry ? 12 : 0))));
+  const reciprocatingPledge = action === 'ask-protection' && contact.protection === 'offered' && contact.memories.some(memory => memory.startsWith('story:prison-favour-interest:pledge-protection:'));
+  const roll = draw(world, 'outcomes', 1, 100), chance = Math.max(10, Math.min(90, Math.round((relation.trust + relation.strength) / 2 + forgiving + (sentence.behavior - 50) / 5 - (contact.rivalry ? 12 : 0) + (reciprocatingPledge ? 10 : 0))));
   let accepted = roll <= chance, body = '', discipline = 0;
   const change = (bond: number, trust: number) => { relation.strength = bounded(relation.strength + bond); relation.trust = bounded(relation.trust + trust); };
   if (action === 'talk') { accepted = true; change(4, 4); actor.stats.stress = bounded(actor.stats.stress - 3); body = target.traits.includes('reserved') ? target.firstName + ' says little, but stays for the conversation. You leave the silence alone.' : target.firstName + ' talks about an ordinary day outside. For a few minutes, the conversation is bigger than the unit.'; }
@@ -108,6 +111,7 @@ export function prisonFamilyReason(world: World, personId: string, action: 'visi
   if (!sentence || !target || target.died || personId === actor.id || !relation) return 'Choose a living person you know';
   if (world.actionCounts[actor.id + ':prison-v2:' + world.date.year + ':family:' + personId + ':' + action]) return 'Already requested this contact this year';
   if (action === 'letter') return;
+  if (action === 'visit' && relation.memories.some(memory => memory.startsWith('prison-visits-paused:'))) return 'Visits are paused after your argument; write an honest letter before asking again';
   if (ageOn(target, world.date) < rules[target.country].adultAge) return action === 'visit' ? 'Visits here require an adult contact; children can exchange letters' : 'Only an adult can provide financial support';
   if (isConfined(world, target) || hospitalized(world, target) || serviceAway(world, target.id)) return 'This person is currently unavailable';
   if (action === 'visit' && !samePhysicalPlace(world, actor.id, target.id)) return 'An in-person visit requires a contact currently in your city';
@@ -120,7 +124,7 @@ function familyContact(world: World, command: Extract<PrisonCommand, { type: 'pr
   once(world, 'family:' + target.id + ':' + command.action);
   const accepted = command.action === 'letter' || draw(world, 'outcomes', 1, 100) <= Math.max(5, Math.min(95, (relation.strength + relation.trust) / 2 + (target.traits.includes('kind') ? 15 : 0)));
   let amount = 0n, body: string, transactionIds: string[] = [];
-  if (command.action === 'letter') { relation.strength = bounded(relation.strength + 4); relation.trust = bounded(relation.trust + 3); actor.stats.stress = bounded(actor.stats.stress - 3); body = 'You send ' + target.firstName + ' an honest letter. You describe the days you usually avoid talking about.'; }
+  if (command.action === 'letter') { relation.memories = relation.memories.filter(memory => !memory.startsWith('prison-visits-paused:')); relation.strength = bounded(relation.strength + 4); relation.trust = bounded(relation.trust + 3); actor.stats.stress = bounded(actor.stats.stress - 3); body = 'You send ' + target.firstName + ' an honest letter. You describe the days you usually avoid talking about.'; }
   else if (command.action === 'visit') { relation.strength = bounded(relation.strength + (accepted ? 8 : -2)); relation.trust = bounded(relation.trust + (accepted ? 4 : 0)); actor.stats.stress = bounded(actor.stats.stress + (accepted ? -6 : 4)); body = accepted ? target.firstName + ' comes to the visiting room. The conversation has awkward pauses and moments you will remember after the door closes.' : target.firstName + ' declines the visit. You can feel rejected without forcing them through the door.'; }
   else {
     const currency = countries[sentence.country].currency, donor = accountFor(world, target, currency), requested = rules[sentence.country].baseWage / 3000n;
@@ -192,8 +196,26 @@ export function refreshPrison(world: World): void {
   }
 }
 
-function storyParticipant(world: World, context: typeof prisonStories[number]['context'], life: PrisonLife) {
-  if (context === 'inmate') return prisonContacts(world).find(person => life.contacts.length < 12 || life.contacts.some(item => item.personId === person.id))?.id;
+function prisonConsequenceCopy(consequence: PrisonStoryConsequence | undefined): string {
+  if (consequence === 'rivalry') return ' The disagreement becomes a rivalry. Any protection or favours between you end.';
+  if (consequence === 'repair') return ' You settle the dispute and end the rivalry.';
+  if (consequence === 'pledge-protection') return ' You promise to stand beside them in the unit.';
+  if (consequence === 'pause-visits') return ' They ask for a pause in visits. Letters remain welcome; an honest letter can reopen the conversation.';
+  if (consequence === 'restore-contact') return ' You agree that future visit requests can be discussed again.';
+  if (consequence === 'send-letter') return ' The letter is sent and recorded in your family-contact history.';
+  if (consequence === 'work-suspension') return ' Staff suspend you from prison work for three months. Your existing sentence stays in place.';
+  if (consequence === 'assault') return ' They are injured, and an assault charge follows.';
+  return '';
+}
+function storyParticipant(world: World, context: typeof prisonStories[number]['context'], life: PrisonLife, preferConflict = false) {
+  if (context === 'inmate') {
+    const contacts = prisonContacts(world).filter(person => !hospitalized(world, person) && (life.contacts.length < 12 || life.contacts.some(item => item.personId === person.id)));
+    if (preferConflict) {
+      const rival = contacts.find(person => life.contacts.some(contact => contact.personId === person.id && contact.rivalry));
+      if (rival) return rival.id;
+    }
+    return contacts[0]?.id;
+  }
   if (context === 'family') return world.relationships.filter(item => item.from === life.personId || item.to === life.personId).map(item => ({ relation: item, person: world.people[item.from === life.personId ? item.to : item.from] })).find(({ relation, person }) => person && !person.died && !isConfined(world, person) && !hospitalized(world, person) && !serviceAway(world, person.id) && ageOn(person, world.date) >= 18 && (relation.roles.some(role => ['parent', 'sibling', 'guardian', 'friend'].includes(role)) || ['dating', 'engaged', 'married'].includes(relation.romance)))?.person.id;
 }
 /** At most one annual offer, no extra RNG or state on an ordinary unconfined life. */
@@ -215,10 +237,12 @@ export function prisonMonth(world: World): void {
     && (story.context !== 'high' || prisonSecurity(world, sentence) === 'high')
     && (story.context !== 'late' || sentence.totalMonths - sentence.servedMonths - sentence.creditedMonths <= 12));
   if (!eligible.length) return;
-  const definition = eligible[draw(world, 'events', 0, eligible.length - 1)], participantId = storyParticipant(world, definition.context, life) ?? null;
+  const definition = eligible[draw(world, 'events', 0, eligible.length - 1)], participantId = storyParticipant(world, definition.context, life, Object.values(prisonStoryConsequences[definition.id] ?? {}).includes('repair')) ?? null;
   if (definition.context === 'inmate' && participantId) { connectPerson(world, participantId); savedContact(life, participantId); }
   const name = participantId ? fullName(world.people[participantId]) : '', bind = (text: string) => text.replaceAll('{name}', name);
-  const scene: PrisonLife['scenes'][number] = { id: 'prisonscene_' + sentence.id + '_' + world.date.year, templateId: definition.id, ruleVersion: 1, sentenceId: sentence.id, personId: actor.id, participantId, offered: { ...world.date }, resolved: null, title: definition.title, body: bind(definition.body), choices: definition.choices.map(choice => ({ ...choice, body: bind(choice.body), journal: bind(choice.journal), changes: { ...choice.changes } })), status: 'offered', choiceId: null };
+  const relation = participantId ? relationFor(world, actor.id, participantId) : null;
+  const participantRole = definition.context === 'inmate' ? 'inmate' as const : relation?.roles.some(role => ['parent', 'sibling', 'guardian'].includes(role)) ? 'family' as const : relation && ['dating', 'engaged', 'married'].includes(relation.romance) ? 'partner' as const : 'friend' as const;
+  const scene: PrisonLife['scenes'][number] = { id: 'prisonscene_' + sentence.id + '_' + world.date.year, templateId: definition.id, ruleVersion: 2, context: definition.context, ...(participantId && relation ? { relationshipId: relation.id, participantRole } : {}), sentenceId: sentence.id, personId: actor.id, participantId, offered: { ...world.date }, resolved: null, title: definition.title, body: bind(definition.body), choices: definition.choices.map(choice => ({ ...choice, body: bind(choice.body) + prisonConsequenceCopy(prisonStoryConsequences[definition.id]?.[choice.id]), journal: bind(choice.journal), changes: { ...choice.changes }, ...(prisonStoryConsequences[definition.id]?.[choice.id] ? { consequence: prisonStoryConsequences[definition.id][choice.id] } : {}) })), status: 'offered', choiceId: null };
   life.scenes.push(scene); life.seenStoryIds.push(definition.id); life.lastStoryYear = world.date.year;
   offerPending(world, { kind: 'decision', id: scene.id, templateId: definition.id, title: scene.title, body: scene.body, illustration: 'prison', personIds: participantId ? [actor.id, participantId] : [actor.id], choices: scene.choices.map(choice => ({ id: choice.id, label: choice.label, effects: [{ kind: 'prison-story', prisonLifeId: life.id, sceneId: scene.id, choiceId: choice.id }], resultTitle: scene.title, resultBody: choice.body, journal: choice.journal })) }, 55);
 }
@@ -227,11 +251,32 @@ export function resolvePrisonStory(world: World, effect: PrisonStoryEffect): { t
   if (!life || !scene || !choice || scene.status !== 'offered') throw new IneligibleAction('This prison decision has already resolved');
   const sentence = activeSentence(world), participant = scene.participantId ? world.people[scene.participantId] : null;
   const definition = prisonStories.find(item => item.id === scene.templateId);
-  const stale = !sentence || sentence.id !== scene.sentenceId || participant?.died || scene.participantId && !participant || definition?.context === 'inmate' && !prisonContacts(world, sentence).some(item => item.id === scene.participantId);
+  const context = scene.ruleVersion === 2 ? scene.context : definition?.context;
+  const originalRelationship = scene.relationshipId ? world.relationships.find(item => item.id === scene.relationshipId) : null;
+  const familyChanged = scene.ruleVersion === 2 && context === 'family' && (!originalRelationship || scene.participantRole === 'partner' && !['dating', 'engaged', 'married'].includes(originalRelationship.romance) || scene.participantRole === 'family' && !originalRelationship.roles.some(role=>['parent', 'sibling', 'guardian'].includes(role)) || scene.participantRole === 'friend' && !originalRelationship.roles.includes('friend'));
+  const stale = !sentence || sentence.id !== scene.sentenceId || participant?.died || scene.participantId && !participant || context === 'inmate' && !prisonContacts(world, sentence).some(item => item.id === scene.participantId)
+    || familyChanged || scene.ruleVersion === 2 && (hospitalized(world, active(world)) || participant && hospitalized(world, participant) || context === 'family' && participant && (isConfined(world, participant) || serviceAway(world, participant.id)) || context === 'work' && !sentence.routine.work || context === 'study' && !sentence.routine.study);
   scene.resolved = { ...world.date }; scene.choiceId = choice.id;
   if (stale) { scene.status = 'cancelled'; return { title: 'Circumstances changed', body: 'Too much has changed to continue this conversation. You leave the situation behind.', journal: 'I could not continue a prison situation because its original circumstances had changed.', effects: [row('scene', 'Situation', 'Cancelled')] }; }
   scene.status = 'resolved'; const changes = choice.changes, actor = active(world), relation = participant && relationFor(world, actor.id, participant.id);
   sentence.behavior = bounded(sentence.behavior + changes.conduct); life.standing = bounded(life.standing + changes.standing); actor.stats.stress = bounded(actor.stats.stress + changes.stress); actor.stats.health = Math.max(1, actor.stats.health + changes.health);
   if (relation) { relation.strength = bounded(relation.strength + changes.bond); relation.trust = bounded(relation.trust + changes.trust); relation.lastInteractionYear = world.date.year; }
-  return { title: scene.title, body: choice.body, journal: choice.journal, effects: [row('conduct', 'Conduct', sentence.behavior + '%'), row('stress', 'Stress', actor.stats.stress + '%'), ...(relation ? [row('bond', 'Bond', relation.strength + '%'), row('trust', 'Trust', relation.trust + '%')] : []), ...(changes.health ? [row('health', 'Health', actor.stats.health + '%', 'negative')] : [])] };
+  const consequence = scene.ruleVersion === 2 ? choice.consequence : undefined, consequenceRows: RuntimeEffectRow[] = [];
+  if (consequence && participant && context === 'inmate') {
+    const contact = savedContact(life, participant.id);
+    if (consequence === 'rivalry' || consequence === 'assault') { contact.rivalry = true; contact.protection = 'none'; contact.favours = 0; }
+    if (consequence === 'repair') { contact.rivalry = false; contact.reported = false; }
+    if (consequence === 'pledge-protection') { contact.protection = 'offered'; contact.rivalry = false; life.loyalty = bounded(life.loyalty + 6); const group = prisonGroup(world); if (group) group.standing = life.standing; }
+    if (consequence === 'assault') { participant.stats.health = Math.max(1, participant.stats.health - 6); recordPrisonOffence(world, actor.id, 'assault', participant.id, true); consequenceRows.push(row('legal-case', 'Assault case', world.cases.at(-1)!.id, 'negative')); }
+    remember(contact, 'story:' + scene.templateId + ':' + consequence + ':' + world.date.year);
+    consequenceRows.push(row('unit-relationship', 'Unit relationship', contact.rivalry ? 'Rival' : contact.protection === 'offered' ? 'Protection pledged' : 'Dispute settled', contact.rivalry ? 'negative' : 'positive'));
+  }
+  if (relation && context === 'family') {
+    if (consequence === 'pause-visits') relation.memories.push('prison-visits-paused:' + world.date.year);
+    if (consequence === 'restore-contact' || consequence === 'send-letter') relation.memories = relation.memories.filter(memory => !memory.startsWith('prison-visits-paused:'));
+    if (consequence === 'send-letter') { life.familyContacts.push({ id: 'prisonletter_' + scene.id, personId: participant!.id, action: 'letter', date: { ...world.date }, accepted: true, amount: 0n, transactionIds: [] }); if (life.familyContacts.length > 48) life.familyContacts.shift(); }
+    if (consequence) consequenceRows.push(row('family-contact', 'Future visits', consequence === 'pause-visits' ? 'Paused; letters welcome' : 'Requests welcome', consequence === 'pause-visits' ? 'negative' : 'positive'));
+  }
+  if (consequence === 'work-suspension') { sentence.routine.work = false; consequenceRows.push(row('work', 'Prison work', 'Suspended for three months', 'negative')); }
+  return { title: scene.title, body: choice.body, journal: choice.journal, effects: [row('conduct', 'Conduct', sentence.behavior + '%'), row('stress', 'Stress', actor.stats.stress + '%'), ...(relation ? [row('bond', 'Bond', relation.strength + '%'), row('trust', 'Trust', relation.trust + '%')] : []), ...(changes.health ? [row('health', 'Health', actor.stats.health + '%', 'negative')] : []), ...consequenceRows] };
 }

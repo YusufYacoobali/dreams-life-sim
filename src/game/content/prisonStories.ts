@@ -39,7 +39,7 @@ export const prisonStories: readonly PrisonStory[] = [
   ] },
   { id: 'prison-missing-mug', title: 'Mug Shot', context: 'inmate', body: '{name} thinks you took a favourite mug. You did not. This has not prevented a surprisingly detailed prosecution.', choices: [
     c('explain', 'Hear the accusation out', 'You let {name} finish, then deny taking it. Being heard takes some heat out of the accusation.', 'I discussed {name}’s missing mug without admitting something I had not done.', { bond: 2, trust: 5, stress: 2 }),
-    c('insult', 'Critique the investigation', 'You call the investigation a crime against thinking. {name} adds that to the case against you.', 'I insulted {name} over a missing mug accusation.', { bond: -10, trust: -8, standing: 3 }),
+    c('insult', 'Settle it with a punch', 'You hit {name} over an accusation about a mug. They were wrong about the mug; they are right about reporting the assault.', 'I assaulted {name} over a missing mug accusation.', { conduct: -15, bond: -10, trust: -8, standing: 3 }),
     c('staff', 'Ask staff to mediate', 'You ask for mediation. The disagreement becomes a staff matter, and {name} resents the audience.', 'I asked staff to mediate an accusation from {name}.', { conduct: 5, bond: -5, trust: -3 }),
   ] },
   { id: 'prison-job-trophy', title: 'Employee of the Month', context: 'work', body: 'Your prison work supervisor praises your reliability. The certificate has a clip-art beach and the words “the world is yours”.', choices: [

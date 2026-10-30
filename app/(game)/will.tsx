@@ -44,7 +44,7 @@ function WillEditor() {
     setMessage(null); submitting.current = true;
     void dispatch({ type: 'save-will', executorId, shares: allocation, bequests }).finally(() => { submitting.current = false; });
   };
-  const assets = [...world.assets.filter(item => item.ownerId === player.id), ...world.businesses.filter(item => item.ownerId === player.id && item.status === 'active')];
+  const assets = [...world.assets.filter(item => item.ownerId === player.id && (!item.stolen || item.stolen.status === 'recovered')), ...world.businesses.filter(item => item.ownerId === player.id && item.status === 'active')];
   const choices = field === 'executor' ? adults.map(person => ({ id: person.id, label: fullName(person) })) : field === 'beneficiary' ? known.filter(person => !shares.some(item => item.personId === person.id)).map(person => ({ id: person.id, label: fullName(person) })) : [{ id: 'none', label: 'Sell and distribute with the estate' }, ...shares.map(item => ({ id: item.personId, label: fullName(world.people[item.personId]) }))];
   const event: EventPresentation | null = field ? { id: 'will:' + field, kind: 'selection', title: field === 'executor' ? 'Choose an executor' : field === 'beneficiary' ? 'Add a beneficiary' : 'Specific bequest', body: field === 'executor' ? 'Choose another living adult you know.' : 'Protected family minima and estate obligations still apply.', choices, confirmLabel: 'Choose' } : null;
   const executor = world.people[executorId], effectiveShares = estateShares(world, player.id);

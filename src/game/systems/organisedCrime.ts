@@ -1,14 +1,17 @@
+import { sameMissionResult, validateOrganisedMissionIncidents } from './organisedMissionValidation';
+import { performOrganisedAssignment } from './organisedAssignments';
 import type { World } from "../model";
 import { indexLedger, type LedgerIndex } from "../ledgerIndex";
 import { ageOn, fullName } from "../personHelpers";
 import { IneligibleAction } from "../errors";
 import { rules } from "../rules";
 import { countries } from "../countries";
-import { formatMoney } from "../money";
 import type { RuntimeEffectRow } from "../runtime";
 import { offerPending } from "../pendingQueue";
 import { organisedMissions, organisations } from "../content/organisedCrime";
 import { organisedCrimeStories } from "../content/organisedCrimeStories";
+import { crimeStoryConsequences } from '../content/prospectiveStoryEffects';
+import type { CrimeStoryConsequence } from './storyConsequenceSchemas';
 import {
   organisedRanks,
   type OrganisedCrimeCommand,
@@ -21,7 +24,6 @@ import { isConfined } from "./legalSchemas";
 import { recordOrganisedCrime } from "./legal";
 import { connectPerson, relationFor } from "./relationships";
 import { createContact } from "./npcs";
-import { addCondition } from "./health";
 import { activeTrip } from "./travelSchemas";
 import { serviceAway } from "./serviceSchemas";
 export { organisedRanks } from "./organisedCrimeSchemas";
@@ -259,11 +261,21 @@ export function missionReason(
   if ((world.actionCounts[countKey(world, gang, "job")] ?? 0) >= 2)
     return "Two criminal assignments are available each year";
   if (active(world).stats.energy < 12) return "Recover your energy first";
+  if (["territory-dispute", "rival-consignment"].includes(missionId) && !s.rivals.some(rival => world.people[rival.personId] && !world.people[rival.personId].died)) return "There is no living rival for this assignment";
   if (
     approach === "crew-led" &&
     eligibleMissionCrew(world, gang).length === 0
   )
     return "You need a trusted, available crew member";
+}
+function crimeConsequenceCopy(consequence: CrimeStoryConsequence | undefined, name: string): string {
+  if (consequence === 'named-rival') return ' ' + name + ' leaves the crew and becomes a rival.';
+  if (consequence === 'investigation') return ' The disclosure also costs ' + name + ' their active crew role.';
+  if (consequence === 'withdraw-role') return ' ' + name + ' loses their place on the active crew.';
+  if (consequence === 'lieutenant') return ' ' + name + ' takes a lieutenant role in the crew.';
+  if (consequence === 'leadership-objection') return ' The boss will oppose your next leadership challenge.';
+  if (consequence === 'leadership-backing') return ' The boss speaks well of you to the crew. It will help in a future leadership vote.';
+  return '';
 }
 function offerStory(world: World, gang: Gang) {
   const s = stateOf(gang);
@@ -276,6 +288,7 @@ function offerStory(world: World, gang: Gang) {
     return (
       !!p &&
       !p.died &&
+      p.health.hospitalizedUntil === null && p.stats.health >= 20 &&
       !isConfined(world, p) &&
       !activeTrip(world, id) &&
       !serviceAway(world, id) &&
@@ -285,6 +298,7 @@ function offerStory(world: World, gang: Gang) {
   };
   const eligible = organisedCrimeStories.filter(
     (story) =>
+      !(s.rivals.length >= 3 && Object.values(crimeStoryConsequences[story.id] ?? {}).includes('named-rival')) &&
       (story.id !== "crew-memory" || s.completedJobs > 0) &&
       !s.seenStories.includes(story.id) &&
       story.minRank <= s.rank &&
@@ -337,7 +351,8 @@ function offerStory(world: World, gang: Gang) {
       : []),
   ];
   s.activeStory = {
-    rulesVersion: 1,
+    rulesVersion: 2,
+    target: story.target,
     choices: choices.map(
       ({
         action,
@@ -353,13 +368,14 @@ function offerStory(world: World, gang: Gang) {
         action,
         journal: journal.replaceAll("{name}", name),
         title: story.title,
-        body: outcome,
+        body: outcome.replaceAll('{name}', name) + crimeConsequenceCopy(crimeStoryConsequences[story.id]?.[action], name),
         loyalty,
         reputation,
         member,
-        evidence,
-        rival,
-        expel,
+        ...(evidence !== undefined ? { evidence } : {}),
+        ...(rival !== undefined ? { rival } : {}),
+        ...(expel !== undefined ? { expel } : {}),
+        ...(crimeStoryConsequences[story.id]?.[action] ? { consequence: crimeStoryConsequences[story.id][action] } : {}),
       }),
     ),
     id: story.id,
@@ -392,7 +408,7 @@ function offerStory(world: World, gang: Gang) {
         },
       ],
       resultTitle: story.title,
-      resultBody: choice.outcome,
+      resultBody: s.activeStory!.choices.find(saved => saved.action === choice.action)!.body,
       journal: choice.journal.replaceAll("{name}", name),
     })),
   });
@@ -417,6 +433,12 @@ export function organisedCrimeChoiceReason(
   if (!world.people[story.personId] || world.people[story.personId].died)
     return "This person is no longer alive; leave the decision behind";
   const target = world.people[story.personId];
+  if (story.rulesVersion === 2 && (target.health.hospitalizedUntil !== null || target.stats.health < 20))
+    return 'This person is recovering and cannot take part; you can leave the organisation';
+  if (story.rulesVersion === 2 && (story.target === 'leader' && gang.organised!.leaderId !== target.id || story.target === 'rival' && !gang.organised!.rivals.some(rival => rival.personId === target.id && !rival.resolved)))
+    return 'Their role in this dispute has changed; you can leave the organisation';
+  if (story.rulesVersion === 2 && story.target !== 'rival' && gang.organised!.members.some(member => member.personId === target.id && member.role === 'former'))
+    return 'This person has left the active crew; you can leave the organisation';
   if (
     isConfined(world, target) ||
     activeTrip(world, target.id) ||
@@ -483,7 +505,34 @@ export function resolveOrganisedCrimeChoice(
     choice.journal.replaceAll("{name}", fullName(world.people[saved.personId])),
     saved.personId,
   );
-  if (choice.evidence)
+  const consequenceRows: RuntimeEffectRow[] = [];
+  if (saved.rulesVersion === 2 && choice.consequence) {
+    const consequence = choice.consequence;
+    if (consequence === 'named-rival') {
+      if (member) member.role = 'former';
+      let grievance = s.rivals.find(item => item.personId === saved.personId);
+      if (!grievance) {
+        grievance = { personId: saved.personId, influence: 35, reputation: 35, resolved: false, memories: [] };
+        s.rivals.push(grievance);
+      }
+      grievance.influence = Math.max(35, grievance.influence); grievance.resolved = false;
+      memory(grievance.memories, 'betrayal:' + saved.id + ':' + world.date.year, 12);
+      consequenceRows.push(row('rival', 'Named rival', fullName(world.people[saved.personId]), 'negative'));
+    } else if (member && (consequence === 'withdraw-role' || consequence === 'investigation')) {
+      member.role = 'former';
+      memory(member.memories, 'removed-after:' + saved.id + ':' + world.date.year);
+      consequenceRows.push(row('crew-role', 'Crew role', 'Former member', 'negative'));
+    } else if (member && consequence === 'lieutenant' && member.role !== 'former') {
+      member.role = 'lieutenant';
+      memory(member.memories, 'promoted-after:' + saved.id + ':' + world.date.year);
+      consequenceRows.push(row('crew-role', 'Crew role', 'Lieutenant', 'positive'));
+    } else if (member && (consequence === 'leadership-objection' || consequence === 'leadership-backing')) {
+      memory(member.memories, 'story-leadership:' + (consequence === 'leadership-backing' ? 'backing' : 'objection') + ':' + world.date.year);
+      consequenceRows.push(row('leadership', 'Future leadership vote', consequence === 'leadership-backing' ? 'Backing recorded' : 'Objection recorded', consequence === 'leadership-backing' ? 'positive' : 'negative'));
+    }
+    addHistory(world, gang, 'consequence:' + consequence, 'My decision involving ' + fullName(world.people[saved.personId]) + ' changed ' + (consequence === 'named-rival' ? 'our rivalry.' : consequence.startsWith('leadership-') ? 'future leadership backing.' : 'their crew role.'), saved.personId);
+  }
+  if (choice.evidence || saved.rulesVersion === 2 && choice.consequence === 'investigation')
     recordOrganisedCrime(world, gang.personId, 0n, {
       riskDeltaBps: 500,
       evidenceDelta: 15,
@@ -496,6 +545,7 @@ export function resolveOrganisedCrimeChoice(
       choice.loyalty >= 0 ? "positive" : "negative",
     ),
     row("reputation", "Reputation", s.reputation + "%"),
+    ...consequenceRows,
   ];
   if (s.loyalty < 15 && s.rank < 4) {
     close(
@@ -689,171 +739,12 @@ export function handleOrganisedCrime(
     );
     if (reason) throw new IneligibleAction(reason);
     use(world, gang, "job", 2);
-    const mission = organisedMissions.find((m) => m.id === command.mission)!,
-      crew = command.approach === "crew-led" ? eligibleMissionCrew(world, gang) : [],
-      skill = crew.length
-        ? crew.reduce((sum, m) => sum + world.people[m.personId].legal.crimeSkill, 0) / crew.length
-        : 0,
-      loyalty = crew.length
-        ? crew.reduce((sum, m) => sum + m.loyalty, 0) / crew.length
-        : 0;
-    const successChance = Math.max(
-      20,
-      Math.min(
-        90,
-        50 +
-          Math.floor(person.legal.crimeSkill / 5) +
-          (command.approach === "cautious"
-            ? 15
-            : command.approach === "bold"
-              ? -7
-              : Math.floor(loyalty / 10 + skill / 12)),
-      ),
-    );
-    const success = draw(world, "outcomes", 1, 100) <= successChance,
-      rewardBps =
-        mission.reward *
-        (command.approach === "bold"
-          ? 145
-          : command.approach === "crew-led"
-            ? 85
-            : 70),
-      gain = success
-        ? (rules[person.country].baseWage * BigInt(rewardBps)) / 1000000n
-        : 0n;
-    const transactionId = gain
-      ? "txn_" + world.revision + "_" + world.ledger.length
-      : null;
-    if (gain)
-      post(
-        world,
-        gain,
-        0n,
-        "crime-proceeds",
-        gang.name + ": " + mission.title + " (" + command.approach + ")",
-      );
-    const source = recordOrganisedCrime(world, person.id, gain, {
-      riskDeltaBps:
-        mission.risk +
-        (command.approach === "cautious"
-          ? -2000
-          : command.approach === "bold"
-            ? 1200
-            : -700),
-      evidenceDelta:
-        command.approach === "bold"
-          ? 12
-          : command.approach === "cautious"
-            ? -12
-            : 0,
-    });
-    const injury =
-      command.approach === "bold" &&
-      draw(world, "outcomes", 1, 100) <= mission.injury;
-    if (injury) {
-      person.stats.health = bounded(person.stats.health - 8);
-      addCondition(world, person, "sprain", 35);
-    }
-    person.stats.energy = bounded(person.stats.energy - 12);
-    person.stats.stress = bounded(
-      person.stats.stress + (command.approach === "cautious" ? 4 : 8),
-    );
-    person.legal.crimeSkill = bounded(
-      person.legal.crimeSkill + (success ? 7 : 3),
-    );
-    s.loyalty = bounded(
-      s.loyalty + (success ? (command.approach === "crew-led" ? 9 : 6) : -7),
-    );
-    s.reputation = bounded(
-      s.reputation + (success ? (command.approach === "bold" ? 12 : 8) : -4),
-    );
-    gang.standing = s.reputation;
-    if (success) {
-      s.completedJobs++;
-      if (command.approach === "crew-led")
-        for (const m of crew) m.loyalty = bounded(m.loyalty + 4);
-    }
-    for (const member of crew)
-      memory(member.memories, "mission:" + mission.id + ":" + (success ? "completed" : "failed") + ":" + world.date.year);
-    s.jobs.push({
-      id: "organised_job_" + source.id,
-      category: mission.id,
-      approach: command.approach,
-      participantIds: [
-        person.id,
-        ...(command.approach === "crew-led" ? crew.map((m) => m.personId) : []),
-      ],
-      date: { ...world.date },
-      incidentId: source.id,
-      transactionId,
-      proceeds: gain,
-      success,
-    });
-    if (s.jobs.length > 32) {
-      const archived = s.jobs.shift()!;
-      s.archivedJobs++;
-      if (archived.success) s.archivedCompleted++;
-      s.archivedProceeds += archived.proceeds;
-    }
-    gang.lastIncomeMonth = monthOf(world);
-    addHistory(
-      world,
-      gang,
-      "job",
-      "I " +
-        (success ? "completed " : "failed ") +
-        mission.title +
-        " for " +
-        gang.name +
-        ".",
-    );
-    fact(
-      world,
-      "I " +
-        (success ? "completed " : "failed ") +
-        mission.title +
-        " for " +
-        gang.name +
-        (gain
-          ? ", receiving " +
-            formatMoney({
-              minor: gain,
-              currency: countries[person.country].currency,
-            }) +
-            " in recorded proceeds."
-          : " without receiving proceeds."),
-      "crime",
-    );
+    const crew = command.approach === "crew-led" ? eligibleMissionCrew(world, gang) : [];
+    performOrganisedAssignment(world, gang, command, crew);
     if (isConfined(world, person)) {
       s.suspended = true;
       if (s.rank === 4) loseLeadership(world, gang, "custody");
     }
-    if (source.stage !== "charged")
-      result(
-        world,
-        success ? "A paid complication" : "An unpaid complication",
-        success
-          ? command.approach === "bold"
-            ? "The job pays. Your name carries further, and so does the evidence."
-            : command.approach === "crew-led"
-              ? "The crew delivers. You keep your agreed proceeds and share the credit."
-              : "You finish carefully. The smaller reward comes with less immediate exposure; an investigation remains possible."
-          : "The assignment fails. The crew remembers the failure, and the evidence does not disappear because you made no money.",
-        "handcuffs",
-        [
-          row(
-            "proceeds",
-            "Recorded proceeds",
-            formatMoney({ minor: gain, currency: source.gain.currency }),
-            gain ? "positive" : "neutral",
-          ),
-          row("evidence", "Evidence", source.evidence + "%", "negative"),
-          row("reputation", "Reputation", s.reputation + "%"),
-          ...(injury
-            ? [row("injury", "Injury", "Sprain recorded", "negative")]
-            : []),
-        ],
-      );
     return;
   }
   if (command.type === "organised-promotion") {
@@ -1215,11 +1106,13 @@ export function handleOrganisedCrime(
       backing = crew.length
         ? crew.reduce((sum, m) => sum + m.loyalty, 0) / crew.length
         : 0,
+      leadershipMemory = s.members.find(member => member.personId === s.leaderId)?.memories.findLast(item => item.startsWith('story-leadership:')),
+      leadershipModifier = leadershipMemory?.startsWith('story-leadership:backing:') ? 10 : leadershipMemory?.startsWith('story-leadership:objection:') ? -10 : 0,
       success =
         draw(world, "outcomes", 1, 100) <=
         Math.min(
           90,
-          20 + Math.floor(backing / 2) + Math.floor(s.reputation / 4),
+          20 + Math.floor(backing / 2) + Math.floor(s.reputation / 4) + leadershipModifier,
         );
     const previous = s.leaderId;
     if (success) {
@@ -1507,9 +1400,13 @@ export function refreshOrganisedCrime(world: World) {
   }
 }
 export function validateOrganisedCrime(world: World, suppliedLedger?: LedgerIndex) {
-  if (!world.gangs.some(gang => gang.organised)) return;
+  if (!world.gangs.some(gang => gang.organised)) {
+    if (world.incidents.some(incident => incident.organisedMission)) throw new Error('Mission facts require their original organisation');
+    return;
+  }
   const incidentIndex = new Map(world.incidents.map(incident => [incident.id, incident]));
   const ledger = suppliedLedger ?? indexLedger(world.ledger);
+  const missionPayments = validateOrganisedMissionIncidents(world, ledger);
   const assignmentIncidents = new Set<string>(), assignmentTransactions = new Set<string>();
   const activeOwners = new Set<string>(),
     events = [world.pending, ...world.deferred.map((e) => e.event)].filter(
@@ -1587,7 +1484,7 @@ export function validateOrganisedCrime(world: World, suppliedLedger?: LedgerInde
         incident.personId !== gang.personId ||
         incident.gain.minor !== job.proceeds ||
         at(job.date) !== at(incident.date) ||
-        incident.offence !== "organized-job" ||
+        (!job.mission && (incident.offence !== "organized-job" || !!incident.organisedMission)) ||
         (!job.success && job.proceeds !== 0n) ||
         job.proceeds > 0n !== !!job.transactionId ||
         (job.transactionId &&
@@ -1599,6 +1496,10 @@ export function validateOrganisedCrime(world: World, suppliedLedger?: LedgerInde
             transaction.currency !== incident.gain.currency))
       )
         throw new Error("Invalid organised assignment proceeds");
+      if (job.mission) {
+        const saved = incident!.organisedMission;
+        if (!saved || saved.jobId !== job.id || saved.gangId !== gang.id || saved.category !== job.category || saved.participantIds.length !== job.participantIds.length || saved.participantIds.some((id, index) => id !== job.participantIds[index]) || !sameMissionResult(saved.result, job.mission) || (job.approach === 'crew-led') !== (job.mission.crew.length > 0) || job.mission.proceedsTransactionId !== job.transactionId || job.success !== ['quiet-profit', 'exposed-profit', 'victim-complaint'].includes(job.mission.outcome)) throw new Error('Invalid saved mission outcome');
+      } else if (job.transactionId && missionPayments.has(job.transactionId)) throw new Error('A historical assignment cannot reuse a new mission payment');
       ids.add(job.id);
       assignmentIncidents.add(job.incidentId);
       if (job.transactionId) assignmentTransactions.add(job.transactionId);
@@ -1620,6 +1521,7 @@ export function validateOrganisedCrime(world: World, suppliedLedger?: LedgerInde
       throw new Error("Invalid organised crime history");
     if (s.activeStory) {
       const story = s.activeStory;
+      if (story.rulesVersion === 1 && (story.target || story.choices.some(choice => choice.consequence)) || story.rulesVersion === 2 && !story.target) throw new Error('A crime situation has incompatible versioned rules');
       if (
         gang.left ||
         !world.people[story.personId] ||

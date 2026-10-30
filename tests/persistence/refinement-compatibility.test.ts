@@ -2,35 +2,16 @@ import { createHash } from 'node:crypto';
 import { mkdtempSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { DatabaseSync } from 'node:sqlite';
 import { decodeWorld, encodeWorld, type World } from '../../src/game/model';
 import { resolveCommand, type GameCommand } from '../../src/game/engine';
 import { packCheckpoint, unpackCheckpoint } from '../../src/persistence/checkpoints';
-import { SaveRepository, type SqlDatabase, type SqlSession } from '../../src/persistence/repository';
+import { SaveRepository } from '../../src/persistence/repository';
 import { database } from '../support/sqlite';
+import { diskDatabase } from '../support/refinementSqlite';
 import captured from '../fixtures/v1-refinement-compatibility.json';
 
 const digest = (world: World) => createHash('sha256').update(encodeWorld(world)).digest('hex');
 const commands = (row: typeof captured.rows[number]) => row.commands as GameCommand[];
-
-function diskDatabase(file: string) {
-  const sqlite = new DatabaseSync(file);
-  sqlite.exec('PRAGMA journal_mode=WAL; PRAGMA foreign_keys=ON');
-  const session: SqlSession = {
-    run: async (sql, values = []) => { sqlite.prepare(sql).run(...values); },
-    get: async <T,>(sql: string, values: (string | number | null)[] = []) => sqlite.prepare(sql).get(...values) as T ?? null,
-    all: async <T,>(sql: string, values: (string | number | null)[] = []) => sqlite.prepare(sql).all(...values) as T[],
-  };
-  const driver: SqlDatabase = {
-    ...session, exec: async sql => { sqlite.exec(sql); },
-    transaction: async action => {
-      sqlite.exec('BEGIN IMMEDIATE');
-      try { const next = await action(session); sqlite.exec('COMMIT'); return next; }
-      catch (error) { sqlite.exec('ROLLBACK'); throw error; }
-    },
-  };
-  return { sqlite, driver };
-}
 
 test.each(captured.rows.map(row => [row.id, row] as const))(
   '%s preserves the complete world produced by the published v1 executable, including bound prose, effects and RNG',

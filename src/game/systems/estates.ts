@@ -1,3 +1,4 @@
+import { seizeStolenVehicles } from './stolenVehicles';
 import { z } from 'zod';
 import { ageOn, compareDates, fullName, Person, World } from '../model';
 import { Currency, currencyDigits, formatMoney, Money, roundRatio } from '../money';
@@ -58,6 +59,7 @@ function estateTax(net: bigint, person: Person) { const rule = rules[person.coun
 export function settleEstate(world: World, personId: string) {
   const prior = world.estates.find(item => item.personId === personId); if (prior) return prior;
   const person = world.people[personId]; if (!person?.died) throw new IneligibleAction('An estate can only settle after death');
+  seizeStolenVehicles(world, personId);
   const valueAtDeath = netWorth(world, personId), currency = valueAtDeath.currency, cash = ensureAccount(world, personId, currency);
   const money = (minor: bigint): Money => ({ minor, currency }), convert = (minor: bigint, from: Currency) => fxMoney(world, { minor, currency: from }, currency).minor;
   const assets = world.assets.filter(item => item.ownerId === personId), propertiesAtDeath = assets.filter(item => item.kind === 'property').length;
@@ -170,7 +172,7 @@ export function resolveEstate(world: World, command: EstateCommand) {
   const executor = world.people[command.executorId];
   if (!executor || executor.died || ageOn(executor, world.date) < 18 || executor.id === person.id) throw new IneligibleAction('Choose another living adult as executor');
   if (command.shares.reduce((sum, item) => sum + item.bps, 0) !== 10000 || new Set(command.shares.map(item => item.personId)).size !== command.shares.length || command.shares.some(item => !world.people[item.personId] || world.people[item.personId].died || item.personId === person.id)) throw new IneligibleAction('Allocate exactly 100% to distinct living beneficiaries');
-  if (new Set(command.bequests.map(item => item.assetId)).size !== command.bequests.length || command.bequests.some(item => !(world.assets.some(asset => asset.id === item.assetId && asset.ownerId === person.id) || world.businesses.some(company => company.id === item.assetId && company.ownerId === person.id && company.status === 'active')) || !command.shares.some(share => share.personId === item.personId))) throw new IneligibleAction('Specific bequests must be owned assets assigned once to a beneficiary');
+  if (new Set(command.bequests.map(item => item.assetId)).size !== command.bequests.length || command.bequests.some(item => !(world.assets.some(asset => asset.id === item.assetId && asset.ownerId === person.id && (!asset.stolen || asset.stolen.status === 'recovered')) || world.businesses.some(company => company.id === item.assetId && company.ownerId === person.id && company.status === 'active')) || !command.shares.some(share => share.personId === item.personId))) throw new IneligibleAction('Specific bequests must be owned assets assigned once to a beneficiary');
   const { type: _type, ...data } = command; world.wills = [...world.wills.filter(item => item.personId !== person.id), { ...data, personId: person.id, updated: { ...world.date } }];
   fact(world, 'I recorded a will and named ' + fullName(executor) + ' as executor.', 'family'); result(world, 'Your wishes are recorded', 'Protected family minimum shares, debts and estate tax still apply. A specific bequest is kept only when the estate can meet those obligations within the recipient’s share.', 'will');
 }

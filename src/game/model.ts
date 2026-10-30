@@ -377,10 +377,17 @@ export function validateWorld(value: unknown, immutable = false): World {
   for (const liability of world.liabilities) if (!world.people[liability.ownerId] || !world.accounts.some(account => account.ownerId === liability.ownerId && account.currency === liability.currency) || liability.principal !== (debtChanges.get(liability.id) ?? 0n)) throw new Error('Debt does not reconcile with ledger');
   for (const debt of world.liabilities) if (debt.creditorId && (!world.people[debt.creditorId] || debt.creditorId === debt.ownerId || !world.accounts.some(account => account.ownerId === debt.creditorId && account.currency === debt.currency))) throw new Error('Invalid internal creditor');
   const assetIds = new Set<string>(); const homes = new Set<string>();
+  const stolenIncidents = new Set<string>(), assetIncidents = new Map(world.incidents.map(incident => [incident.id, incident]));
   for (const asset of world.assets) {
     const catalog = assetCatalog.find(item => item.id === asset.catalogId);
     if (assetIds.has(asset.id) || !catalog || catalog.kind !== asset.kind || (asset.ownerId && !world.people[asset.ownerId]) || compareDates(asset.acquired, world.date) > 0) throw new Error('Invalid physical asset');
     assetIds.add(asset.id);
+    if (asset.stolen) {
+      const theft = asset.stolen, incident = assetIncidents.get(theft.incidentId);
+      if (world.overhaulVersion !== 1 || asset.kind !== 'vehicle' || !incident || incident.offence !== 'vehicle-theft' || incident.personId !== theft.thiefId || incident.stolenVehicle?.assetId !== asset.id || incident.victimId !== theft.registeredOwnerId || !world.people[theft.registeredOwnerId] || incident.gain.minor !== 0n || incident.gain.currency !== asset.currency || stolenIncidents.has(theft.incidentId) || compareDates(asset.acquired, incident.date) > 0 || compareDates(theft.originalTitle.titleSince, incident.date) > 0 || (theft.status === 'held' ? asset.ownershipSource !== 'theft' || asset.ownerId !== theft.thiefId || !!theft.resolved || !!world.people[theft.thiefId].died || asset.pricePaid !== 0n || asset.costBasis !== 0n || asset.insured || compareDates(asset.titleSince, incident.date) !== 0 : !theft.resolved || compareDates(theft.resolved, incident.date) < 0 || compareDates(theft.resolved, world.date) > 0 || (theft.status === 'seized' ? asset.ownerId !== null || asset.ownershipSource !== 'theft' || asset.insured || asset.pricePaid !== 0n || asset.costBasis !== 0n : asset.ownershipSource === 'theft'))) throw new Error('Invalid stolen vehicle provenance');
+      if (theft.status === 'recovered' && asset.ownerId && asset.ownerId !== theft.registeredOwnerId && !(asset.ownershipSource === 'inheritance' && world.estates.some(estate => estate.distributions.some(distribution => distribution.personId === asset.ownerId && distribution.assets.includes(asset.id))))) throw new Error('Recovered vehicle has no lawful title transfer');
+      stolenIncidents.add(theft.incidentId);
+    } else if (asset.ownershipSource === 'theft') throw new Error('Stolen vehicle requires provenance');
     if (asset.ownerId && !world.accounts.some(account => account.ownerId === asset.ownerId && account.currency === asset.currency)) throw new Error('Missing asset currency account');
     if (asset.primaryHome && (!asset.ownerId || asset.kind !== 'property' || asset.rental !== 'none' || homes.has(asset.ownerId))) throw new Error('Invalid primary home');
     if (asset.primaryHome) homes.add(asset.ownerId!);

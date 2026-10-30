@@ -34,7 +34,7 @@ export function romanceReason(world: World, target: Person, fromId = world.activ
   if (!player.attractedTo.includes(target.gender) || !target.attractedTo.includes(player.gender)) return 'Your dating preferences do not match';
   const relation=relationFor(world,fromId,target.id);
   if (relation?.romance==='ex' && relation.memories.some(memory=>memory.startsWith('romance-no-contact:'))) return 'A request for no contact remains in force';
-  if (relation && (world.romanceOffers??[]).some(offer=>offer.relationshipId===relation.id && offer.kind==='space' && (offer.spaceUntilMonth??0)>world.date.year*12+world.date.month-1)) return 'Respect the agreed three months of space before romantic outings';
+  if (relation && (world.romanceOffers??[]).some(offer=>offer.relationshipId===relation.id && (offer.kind==='space' || offer.ruleVersion===2 && offer.storyChoices) && (offer.spaceUntilMonth??0)>world.date.year*12+world.date.month-1)) return 'Respect the agreed three months of space before romantic outings';
   const existing = lookups ? lookups.partner(fromId) : partnerRelation(world, fromId), theirs = lookups ? lookups.partner(target.id) : partnerRelation(world, target.id);
   if (existing && otherPerson(world, existing, fromId).id !== target.id) return 'End your current relationship first';
   if (theirs && otherPerson(world, theirs, target.id).id !== player.id) return 'They are already in a relationship';

@@ -61,3 +61,23 @@ test('eligible participant skill changes the success threshold and excludes nonp
   }
   expect(difference).toBe(true);
 });
+
+test('actual NPC remand and a paid trip exclude the same saved crew after reload', () => {
+  const { recordOrganisedCrime } = require('../../src/game/systems/legal') as typeof import('../../src/game/systems/legal');
+  const { tripQuote } = require('../../src/game/systems/travel') as typeof import('../../src/game/systems/travel');
+  const original = joined(), originalActor = original.activePersonId;
+  const members = activeOrganisation(original)!.organised!.members.filter(member => member.personId !== activeOrganisation(original)!.organised!.leaderId);
+  const detained = members[0].personId, travelling = members[1].personId;
+  recordOrganisedCrime(original, detained, 0n, { riskDeltaBps: 10000, evidenceDelta: 0, reported: true });
+  expect(eligibleMissionCrew(original, activeOrganisation(original)!).map(member => member.personId)).toEqual([travelling]);
+  original.activePersonId = travelling;
+  let away = resolveCommand(original, { type: 'book-trip', destinationId: 'paris', duration: 1, companionIds: [], focus: 'rest', quotedTotal: tripQuote(original, 'paris', 1).total });
+  away = resolveCommand(away, { type: 'acknowledge', resultId: away.pending!.id });
+  away.activePersonId = originalActor;
+  const cold = decodeWorld(encodeWorld(away)), gang = activeOrganisation(cold)!;
+  expect(eligibleMissionCrew(cold, gang)).toEqual([]);
+  expect(missionReason(cold, gang, 'missing-envelope', 'crew-led')).toMatch(/trusted, available/);
+  expect(() => run(cold)).toThrow(/trusted, available/);
+  expect(cold.cases.find(item => item.personId === detained)).toMatchObject({ detained: true });
+  expect(cold.trips.find(item => item.participantIds.includes(travelling))).toMatchObject({ status: 'active' });
+});

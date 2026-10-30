@@ -1,3 +1,4 @@
+import { organisedMissionIncidentSchema } from './organisedMissionSchemas';
 import { z } from 'zod';
 import { organisedCrimeStateSchema } from './organisedCrimeSchemas';
 import { dateSchema } from '../calendar';
@@ -10,6 +11,8 @@ export const newLegal = (): z.infer<typeof personLegalSchema> => ({ wanted: fals
 export const incidentSchema = z.object({
   id: z.string(), personId: z.string(), offence: z.enum(offenceIds), date: dateSchema, country: z.enum(countryCodes), city: z.string(),
   victimId: z.string().nullable(), victimKilled: z.boolean(), gain: money, restitution: money,
+  organisedMission: organisedMissionIncidentSchema.optional(),
+  stolenVehicle: z.object({ rulesVersion: z.literal(1), assetId: z.string() }).optional(),
   evidence: z.number().int().min(0).max(100), detectionRoll: z.number().int().min(1).max(10000), followupRoll: z.number().int().min(1).max(100), trialRoll: z.number().int().min(1).max(100),
   riskBps: z.number().int().min(0).max(10000), investigateMonth: z.number().int(), stage: z.enum(['hidden', 'charged', 'closed']), caseId: z.string().nullable(),
 });

@@ -64,10 +64,17 @@ test.each(['vehicle-theft', 'financial-scam'] as const)('%s saves an actual payo
   let world = resolveCommand(before, { type: 'crime', offence });
   const source = world.incidents.find(incident => incident.personId === world.activePersonId)!;
   expect(source.offence).toBe(offence); expect(source.stage).toBe('charged'); expect(source.evidence).toBeGreaterThan(0);
-  expect(source.gain.minor).toBeGreaterThan(0n);
-  expect(accountFor(world).cash - bank).toBe(source.gain.minor);
-  expect(world.ledger.at(-1)).toMatchObject({ category: 'crime-proceeds', cashDelta: source.gain.minor });
-  expect(world.assets.map(asset => asset.id)).toEqual(assetIds);
+  if (offence === 'vehicle-theft') {
+    expect(source.gain.minor).toBe(0n);
+    expect(accountFor(world).cash).toBe(bank);
+    expect(world.assets).toHaveLength(assetIds.length + 1);
+    expect(world.assets.at(-1)).toMatchObject({ ownerId: null, ownershipSource: 'theft', pricePaid: 0n, stolen: { incidentId: source.id, status: 'seized' } });
+  } else {
+    expect(source.gain.minor).toBeGreaterThan(0n);
+    expect(accountFor(world).cash - bank).toBe(source.gain.minor);
+    expect(world.ledger.at(-1)).toMatchObject({ category: 'crime-proceeds', cashDelta: source.gain.minor });
+    expect(world.assets.map(asset => asset.id)).toEqual(assetIds);
+  }
   const caseId = source.caseId!;
   expect(world.cases.find(item => item.id === caseId)).toMatchObject({ offence, status: 'awaiting-trial', incidentId: source.id, detained: true });
   world = acknowledge(choose(decodeWorld(encodeWorld(world)), 'remand'));
@@ -80,7 +87,7 @@ test.each(['vehicle-theft', 'financial-scam'] as const)('%s saves an actual payo
   expect(activeSentence(world)).toMatchObject({ personId: world.activePersonId, caseIds: [caseId], creditedMonths: 1 });
   expect(world.people[world.activePersonId].employment).toBeNull();
   expect(world.remand.filter(item => item.usedBySentenceId === convicted.sentenceId)).toHaveLength(1);
-  expect(world.ledger.filter(item => item.personId === world.activePersonId && item.category === 'crime-proceeds')).toHaveLength(1);
+  expect(world.ledger.filter(item => item.personId === world.activePersonId && item.category === 'crime-proceeds')).toHaveLength(offence === 'vehicle-theft' ? 0 : 1);
   expect(() => choose(world, 'guilty')).toThrow();
   expect(validateWorld(decodeWorld(encodeWorld(world)))).toEqual(world);
 });

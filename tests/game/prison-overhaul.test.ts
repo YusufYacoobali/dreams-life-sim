@@ -173,7 +173,9 @@ test.each(prisonStories.map(story => [story.id]))('%s offers only real context a
     expect(activeSentence(next)!.behavior).toBe(Math.max(0, Math.min(100, beforeConduct + choice.changes.conduct)));
     expect(prisonLife(next)!.standing).toBe(Math.max(0, Math.min(100, beforeStanding + choice.changes.standing)));
     expect(next.people[next.activePersonId].stats.stress).toBe(Math.max(0, Math.min(100, beforeStress + choice.changes.stress)));
-    expect(next.pending?.body).toBe(choice.body); expect(next.journal.at(-1)!.text).toBe(choice.journal); expect(decodeWorld(encodeWorld(next))).toEqual(next);
+    const result = [next.pending, ...next.deferred.map(item => item.event)].find(event => event?.id === scene.id + '_result');
+    expect(result?.body).toBe(choice.body); expect(next.journal.at(-1)!.text).toBe(choice.journal); expect(decodeWorld(encodeWorld(next))).toEqual(next);
+    if (choice.consequence === 'assault') { expect(next.pending).toMatchObject({ kind: 'decision', templateId: 'arrest' }); expect(next.cases.at(-1)?.offence).toBe('assault'); }
   }
   expect(encodeWorld(world)).toBe(original); expect(unpackCheckpoint(checkpoint)).toEqual(world);
 });

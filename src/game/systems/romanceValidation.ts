@@ -26,9 +26,11 @@ export function validateRomance(world: World) {
     if (!actor || !target || actor.id===target.id || !relation || ![relation.from,relation.to].includes(actor.id) || ![relation.from,relation.to].includes(target.id)) throw new Error('Invalid romance offer participants');
     if (ageOn({...actor,died:null},row.offered)<Math.max(18,rules[actor.country].adultAge) || ageOn({...target,died:null},row.offered)<Math.max(18,rules[target.country].adultAge)) throw new Error('Romance offers require adults');
     if ([actor,target].some(p=>compareDates(row.offered,p.born)<0 || p.died && compareDates(row.offered,p.died)>0) || compareDates(row.offered,world.date)>0 || row.resolved && (compareDates(row.resolved,row.offered)<0 || compareDates(row.resolved,world.date)>0)) throw new Error('Invalid romance offer chronology');
-    if (row.affairId && !(world.affairs??[]).some(a=>a.id===row.affairId && a.actorId===row.personId && a.partnerId===row.actorId)) throw new Error('Invalid bound affair discovery');
+    if (row.affairId && !(world.affairs??[]).some(a=>a.id===row.affairId && (a.actorId===row.personId && a.partnerId===row.actorId || row.ruleVersion===2 && row.storyChoices && a.relationshipId===row.relationshipId && a.actorId===row.actorId && a.partnerId===row.personId))) throw new Error('Invalid bound affair discovery');
     if (!!row.resolved!==!!row.choiceId || !!row.resolved!==!!row.outcome) throw new Error('Incomplete romance response');
     if (row.storyChoices && new Set(row.storyChoices.map(c=>c.id)).size!==row.storyChoices.length) throw new Error('Duplicate romance story choice');
+    if (row.ruleVersion===1 && row.storyChoices?.some(choice=>choice.consequence) || row.ruleVersion===2 && !row.storyChoices) throw new Error('Romance situation has incompatible versioned rules');
+    if (row.storyChoices?.some(choice=>choice.consequence==='affair-discussion') && !row.affairId) throw new Error('An affair discussion requires its actual affair');
   }
   for (const event of [world.pending,...world.deferred.map(r=>r.event)]) {
     if (event?.kind!=='decision') continue;
@@ -37,6 +39,12 @@ export function validateRomance(world: World) {
     if (effects.length!==event.choices.length) throw new Error('Invalid romance decision effects');
     const first=effects[0],row=(world.romanceOffers??[]).find(r=>r.id===first.offerId);
     if (!row || row.id!==event.id || row.resolved || !event.personIds.includes(row.actorId) || !world.people[row.personId].died && !event.personIds.includes(row.personId)) throw new Error('Invalid pending romance offer');
-    for (const [index,effect] of effects.entries()) if (effect.offerId!==row.id || effect.actorId!==row.actorId || effect.personId!==row.personId || effect.relationshipId!==row.relationshipId || effect.choiceId!==event.choices[index].id || event.choices[index].effects.length!==1) throw new Error('Invalid romance choice identity');
+    for (const [index,effect] of effects.entries()) {
+      if (effect.offerId!==row.id || effect.actorId!==row.actorId || effect.personId!==row.personId || effect.relationshipId!==row.relationshipId || effect.ruleVersion!==row.ruleVersion || effect.choiceId!==event.choices[index].id || event.choices[index].effects.length!==1) throw new Error('Invalid romance choice identity');
+      if (row.ruleVersion===2) {
+        const frozen=row.storyChoices!.find(choice=>choice.id===effect.choiceId), displayed=event.choices[index];
+        if (!frozen || displayed.label!==frozen.label || displayed.resultBody!==frozen.body || displayed.journal!==frozen.journal) throw new Error('Romance choice lost its frozen story rules');
+      }
+    }
   }
 }

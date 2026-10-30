@@ -11,6 +11,8 @@ import { isConfined } from './legalSchemas';
 import { hospitalized } from './healthSchemas';
 import { serviceAway } from './serviceSchemas';
 import { romanceDramaStories, type RomanceStory } from '../content/romanceDramaStories';
+import { romanceStoryConsequences } from '../content/prospectiveStoryEffects';
+import type { RomanceStoryConsequence } from './storyConsequenceSchemas';
 import { type Affair, type RomanceCommand, type RomanceChoiceEffect, type RomanceOffer } from './romanceSchemas';
 export { romanceCommandSchema, romanceChoiceEffectSchema } from './romanceSchemas';
 const month = (world: World) => world.date.year * 12 + world.date.month - 1;
@@ -103,7 +105,7 @@ export function romanceActionOptions(world: World, personId: string) {
   else if (!activeRomance(relation) && partnerRelation(world) && compatible(world,active(world),world.people[personId])) actions.push({action:'affair',label:'Pursue an Affair'});
   if (knownAffair(world,personId) && activeRomance(relation)) actions.push({action:'confront',label:'Confront Infidelity'},{action:'explain',label:'Demand an Explanation'},{action:'forgive',label:'Offer Forgiveness'});
   if (relation.roles.some(role=>['friend','parent','guardian','sibling'].includes(role)) && affairs(world).some(a=>(a.actorId===world.activePersonId || a.partnerId===world.activePersonId) && a.knownBy.includes(world.activePersonId) && !a.knownBy.includes(personId) && ![a.actorId,a.partnerId,a.loverId].includes(personId))) actions.push({action:'share-betrayal',label:'Talk About the Betrayal'});
-  return actions.map(option=>({...option,disabledReason:romanceActionReason(world,personId,option.action)}));
+  return actions.map(option=>({...option,label:option.action==='reconcile' && relation.memories.some(memory=>memory.startsWith('romance-reconciliation-open:'))?'Continue Reconciliation':option.label,disabledReason:romanceActionReason(world,personId,option.action)}));
 }
 function createAffair(world: World, actor: Person, target: Person, partner: Relationship) {
   const row: Affair={id:'affair_'+world.revision+'_'+affairs(world).length,actorId:actor.id,partnerId:otherPerson(world,partner,actor.id).id,loverId:target.id,relationshipId:partner.id,started:{...world.date},ended:null,endReason:null,knownBy:[actor.id,target.id],discovered:null,discoveryReason:null};
@@ -156,7 +158,8 @@ export function resolveRomance(world: World, command: RomanceCommand) {
     remember(relation,'romance-no-contact:'+world.date.year); body='You ask '+target.firstName+' not to contact you. Future approaches are blocked unless you later choose to lift the boundary.'; journal='I asked '+target.firstName+' not to contact me.'; effects=rows(world,relation,{stress:-2});
   } else if (command.action==='reconcile') {
     const endedYears=relation.memories.filter(m=>/^(breakup|divorce|npc-separation):\d+$/.test(m)).map(m=>Number(m.split(':')[1]));
-    const since=endedYears.length?world.date.year-Math.max(...endedYears):0, betrayal=affairs(world).some(r=>r.relationshipId===relation.id && r.discovered), chance=Math.max(5,Math.min(80,Math.floor((relation.strength+relation.trust)/2)+(since>=2?10:-15)-(betrayal?25:0)+(target.traits.includes('kind')?10:0)));
+    const since=endedYears.length?world.date.year-Math.max(...endedYears):0, betrayal=affairs(world).some(r=>r.relationshipId===relation.id && r.discovered), initiated=relation.memories.some(memory=>memory.startsWith('romance-reconciliation-open:')), mistrust=relation.memories.some(memory=>memory.startsWith('romance-mistrust:')), chance=Math.max(5,Math.min(80,Math.floor((relation.strength+relation.trust)/2)+(since>=2?10:-15)-(betrayal?25:0)+(target.traits.includes('kind')?10:0)+(initiated?15:0)-(mistrust?15:0)));
+    if (initiated) relation.memories=relation.memories.filter(memory=>!memory.startsWith('romance-reconciliation-open:'));
     const yes=draw(world,'outcomes',1,100)<=chance;
     if (yes) { relation.romance='dating'; if (!relation.roles.includes('partner')) relation.roles.push('partner'); relation.kind='partner'; remember(relation,'reconciled:'+world.date.year); body='You and '+target.firstName+' agree to date again. You discuss what has changed and what must be different this time.'; effects=rows(world,relation,{trust:3,bond:5,happiness:5}); }
     else { remember(relation,'reconciliation-refused:'+world.date.year); body=target.firstName+' declines to restart the relationship. They can value the conversation and still choose a different future.'; effects=rows(world,relation,{happiness:-2}); }
@@ -190,39 +193,68 @@ const writing:Record<Exclude<RomanceOffer['kind'],'story'|'ex'>,{title:string;bo
 };
 export function romanceStoryEligible(world: World, personId: string, story: RomanceStory): boolean {
   const relation=relationFor(world,world.activePersonId,personId); if (!relation) return false;
+  const target=world.people[personId]; if (!target || !adult(world,active(world)) || !adult(world,target)) return false;
   if (!available(world,active(world),world.people[personId])) return false;
   if (story.id==='romance-ex-birthday' && world.date.month!==active(world).born.month) return false;
-  if (story.group==='ex') return relation.romance==='ex' && relation.memories.some(m=>/^(breakup|divorce|npc-separation):\d+$/.test(m) && Number(m.split(':')[1])<world.date.year) && !relation.memories.some(m=>m.startsWith('romance-no-contact:'));
+  if (story.group==='ex') return relation.romance==='ex' && relation.memories.some(m=>/^(breakup|divorce|npc-separation):\d+$/.test(m) && Number(m.split(':')[1])<world.date.year) && !relation.memories.some(m=>m.startsWith('romance-no-contact:')) && (story.id!=='romance-ex-friendship' || !partnerRelation(world) && !partnerRelation(world,personId));
   if (!['dating','engaged','married'].includes(relation.romance)) return false;
   if (story.context==='married' && relation.romance!=='married') return false;
   if (story.id==='romance-grown-together' && !world.marriages.some(m=>!m.ended && [m.a,m.b].includes(world.activePersonId) && [m.a,m.b].includes(personId) && world.date.year*12+world.date.month-(m.started.year*12+m.started.month)>=12)) return false;
-  if ((story.context==='conflict' || story.id==='romance-museum-silence') && !relation.memories.some(m=>m.startsWith('argument:'))) return false;
+  if ((story.context==='conflict' || ['romance-argument-footnotes','romance-wedding-album'].includes(story.id)) && !relation.memories.some(m=>m.startsWith('argument:'))) return false;
+  if (story.id==='romance-public-status' && !affairs(world).some(row=>row.actorId===world.activePersonId && row.partnerId===personId && row.relationshipId===relation.id && row.knownBy.includes(world.activePersonId) && row.knownBy.includes(personId) && row.discovered)) return false;
   if (['romance-two-anniversaries','romance-restaurant-review'].includes(story.id) && !relation.memories.some(m=>m.startsWith('date:') && Number(m.split(':')[1])<world.date.year)) return false;
   return true;
+}
+function romanceConsequenceCopy(consequence: RomanceStoryConsequence | undefined): string {
+  if (consequence === 'jealousy') return ' The mistrust remains unresolved; starting again will be harder.';
+  if (consequence === 'repair-boundary') return ' You agree to handle disagreements directly. Past arguments stay in your history.';
+  if (consequence === 'marriage-discussion') return ' The marriage stays intact. Separation would still mean discussing a settlement.';
+  if (consequence === 'affair-discussion') return ' Neither of you can pretend you are discussing a rumour.';
+  if (consequence === 'temporary-space') return ' You agree to three months without romantic outings. Ordinary communication remains possible.';
+  if (consequence === 'no-contact') return ' Further approaches are blocked unless you deliberately lift the no-contact boundary.';
+  if (consequence === 'reconcile-request') return ' You open a reconciliation discussion. Dating again still needs a separate, mutual decision.';
+  return '';
 }
 export function offerRomance(world: World, personId: string, kind: RomanceOffer['kind'], story?: RomanceStory, affairId:string|null=null): RomanceOffer | undefined {
   if (offers(world).length>=256) return;
   const actor=active(world), target=world.people[personId], relation=target && relationFor(world,actor.id,personId);
   if (!target || !relation || !adult(world,actor) || !adult(world,target) || story && !romanceStoryEligible(world,personId,story)) return;
-  const row:RomanceOffer={id:'romance_'+world.revision+'_'+offers(world).length,ruleVersion:1,actorId:actor.id,personId:target.id,relationshipId:relation.id,kind,templateId:story?.id??'romance-'+kind,offered:{...world.date},resolved:null,affairId,expectedRomance:relation.romance,roll:draw(world,'outcomes',1,100),choiceId:null,outcome:null,spaceUntilMonth:null,ringId:kind==='proposal'?world.assets.find(a=>a.ownerId===target.id && a.catalogId==='engagement-ring')?.id??null:null,...(story?{storyChoices:story.choices.map(c=>({...c,body:nameText(c.body,target),journal:nameText(c.journal,target)}))}:{})};
+  if (story?.id === 'romance-public-status') affairId=affairs(world).findLast(item=>item.relationshipId===relation.id && item.actorId===actor.id && item.partnerId===target.id && item.discovered && item.knownBy.includes(actor.id) && item.knownBy.includes(target.id))?.id??null;
+  const row:RomanceOffer={id:'romance_'+world.revision+'_'+offers(world).length,ruleVersion:story?2:1,actorId:actor.id,personId:target.id,relationshipId:relation.id,kind,templateId:story?.id??'romance-'+kind,offered:{...world.date},resolved:null,affairId,expectedRomance:relation.romance,roll:draw(world,'outcomes',1,100),choiceId:null,outcome:null,spaceUntilMonth:null,ringId:kind==='proposal'?world.assets.find(a=>a.ownerId===target.id && a.catalogId==='engagement-ring')?.id??null:null,...(story?{storyChoices:story.choices.map(c=>({...c,body:nameText(c.body,target)+romanceConsequenceCopy(romanceStoryConsequences[story.id]?.[c.id]),journal:nameText(c.journal,target),...(romanceStoryConsequences[story.id]?.[c.id]?{consequence:romanceStoryConsequences[story.id][c.id]}:{})}))}:{})};
   (world.romanceOffers??=[]).push(row);
   const options=story?story.choices.map(c=>[c.id,c.label] as const):labels[kind], copy=story??writing[kind as Exclude<RomanceOffer['kind'],'story'|'ex'>];
-  offerPending(world,{kind:'decision',id:row.id,templateId:row.templateId,title:copy.title,body:nameText(copy.body,target),illustration:'hearts',personIds:[actor.id,target.id,...(affairId?[affairs(world).find(a=>a.id===affairId)!.loverId]:[])],choices:options.map(([id,label])=>({id,label,effects:[{kind:'romance-choice',ruleVersion:1,offerId:row.id,actorId:actor.id,personId:target.id,relationshipId:relation.id,choiceId:id}],resultTitle:copy.title,resultBody:'Your response is recorded with the people involved.',journal:'I responded to '+target.firstName+'.'}))});
+  offerPending(world,{kind:'decision',id:row.id,templateId:row.templateId,title:copy.title,body:nameText(copy.body,target),illustration:'hearts',personIds:[actor.id,target.id,...(affairId?[affairs(world).find(a=>a.id===affairId)!.loverId]:[])],choices:options.map(([id,label])=>({id,label,effects:[{kind:'romance-choice',ruleVersion:row.ruleVersion,offerId:row.id,actorId:actor.id,personId:target.id,relationshipId:relation.id,choiceId:id}],resultTitle:copy.title,resultBody:row.storyChoices?.find(choice=>choice.id===id)?.body??'Your response is recorded with the people involved.',journal:row.storyChoices?.find(choice=>choice.id===id)?.journal??'I responded to '+target.firstName+'.'}))});
   return row;
 }
 export function resolveRomanceChoice(world: World, effect: RomanceChoiceEffect) {
   const row=offers(world).find(r=>r.id===effect.offerId);
-  if (!row || row.resolved || row.actorId!==world.activePersonId || row.actorId!==effect.actorId || row.personId!==effect.personId || row.relationshipId!==effect.relationshipId) throw new IneligibleAction('This relationship decision is no longer open');
+  if (!row || row.resolved || row.actorId!==world.activePersonId || row.actorId!==effect.actorId || row.personId!==effect.personId || row.relationshipId!==effect.relationshipId || row.ruleVersion!==effect.ruleVersion) throw new IneligibleAction('This relationship decision is no longer open');
   const target=world.people[row.personId], relation=world.relationships.find(r=>r.id===row.relationshipId), actor=active(world);
   const validChoices=row.storyChoices?.map(c=>c.id)??labels[row.kind].map(([id])=>id);
   if (!validChoices.includes(effect.choiceId)) throw new IneligibleAction('Choose an available relationship response');
   row.resolved={...world.date}; row.choiceId=effect.choiceId;
   const finish=(body:string,journal:string,effects:RuntimeEffectRow[]=[])=>{row.outcome=body;return{title:'Your answer',body,journal,effects};};
   if (!target || !relation || !adult(world,target) || !adult(world,actor) || relation.romance!==row.expectedRomance) return finish('The situation has changed. Your earlier offer cannot change a different relationship.','I could not act on an earlier relationship offer because circumstances had changed.');
+  if (row.ruleVersion === 2 && row.storyChoices && (!available(world, actor, target) || row.affairId && !affairs(world).some(affair=>affair.id===row.affairId && affair.relationshipId===relation.id && affair.discovered && affair.knownBy.includes(actor.id) && affair.knownBy.includes(target.id)))) return finish('The people or circumstances behind this conversation are no longer available. The earlier situation is left unresolved.', 'I left an earlier relationship situation because its bound circumstances had changed.');
   const choice=effect.choiceId;
   if (row.storyChoices) {
     if (row.kind==='ex' && ['romance-ex-new-number:no','romance-ex-closure:boundary'].includes(row.templateId+':'+choice)) remember(relation,'romance-no-contact:'+world.date.year);
-    const copy=row.storyChoices.find(c=>c.id===choice)!; remember(relation,'romance-story:'+row.templateId+':'+world.date.year); return finish(copy.body,copy.journal,rows(world,relation,copy)); }
+    const copy=row.storyChoices.find(c=>c.id===choice)!;
+    if (row.ruleVersion === 2 && copy.consequence === 'reconcile-request' && (partnerRelation(world) || partnerRelation(world, target.id))) return finish('Another commitment now prevents a reconciliation discussion. No new relationship is created.', 'I could not begin an earlier reconciliation discussion because circumstances had changed.');
+    remember(relation,'romance-story:'+row.templateId+':'+world.date.year);
+    const effects=rows(world,relation,copy);
+    if (row.ruleVersion === 2 && copy.consequence) {
+      const consequence=copy.consequence;
+      if (consequence==='jealousy') { remember(relation,'romance-mistrust:'+world.date.year); remember(relation,'argument:'+world.date.year); }
+      if (consequence==='repair-boundary') { relation.memories=relation.memories.filter(memory=>!memory.startsWith('romance-mistrust:')); remember(relation,'romance-repair:'+world.date.year); }
+      if (consequence==='no-contact') remember(relation,'romance-no-contact:'+world.date.year);
+      if (consequence==='reconcile-request') remember(relation,'romance-reconciliation-open:'+world.date.year);
+      if (consequence==='temporary-space') { row.spaceUntilMonth=month(world)+3; remember(relation,'space:'+row.spaceUntilMonth); }
+      if (consequence==='marriage-discussion') { remember(relation,'marriage-discussion:'+world.date.year); if (copy.trust<0 || copy.bond<0) remember(relation,'romance-separation-discussion:'+world.date.year); }
+      if (consequence==='affair-discussion' && row.affairId) remember(relation,'affair-confronted:'+row.affairId);
+      effects.push({id:'romance-consequence',label:consequence==='temporary-space'?'Romantic outings':consequence==='reconcile-request'?'Reconciliation':consequence==='no-contact'?'Future approaches':'Shared history',value:consequence==='temporary-space'?'Paused for three months':consequence==='no-contact'?'Blocked':consequence==='reconcile-request'?'Discussion opened':consequence==='repair-boundary'?'Mistrust addressed':consequence==='jealousy'?'Mistrust unresolved':consequence==='affair-discussion'?'Actual betrayal addressed':'Marriage discussion recorded',tone:consequence==='no-contact'||consequence==='temporary-space'||consequence==='jealousy'?'negative':'positive'});
+    }
+    return finish(copy.body,copy.journal,effects); }
   if (row.kind==='proposal') {
     if (choice==='accept') {
       if (relation.romance!=='dating' || !compatible(world,actor,target) || partnerRelation(world)?.id!==relation.id || partnerRelation(world,target.id)?.id!==relation.id) return finish('You cannot accept a proposal while another commitment or changed circumstance prevents it.','I could not accept an earlier marriage proposal.');
@@ -264,6 +296,8 @@ export function romanceYear(world: World) {
       if (contacts.length) createAffair(world,target,contacts[0],relation);
     }
     if (relation.romance==='dating' && relation.strength>=80 && relation.trust>=75 && relation.memories.some(m=>m.startsWith('date:') && Number(m.split(':')[1])<world.date.year) && available(world,actor,target) && !recent('proposal',5) && draw(world,'outcomes',1,100)<=8) { offerRomance(world,target.id,'proposal'); return; }
+    const openDiscussion=relation.memories.findLast(memory=>memory.startsWith('romance-separation-discussion:') || memory.startsWith('romance-repair:'));
+    if (relation.romance==='married' && openDiscussion?.startsWith('romance-separation-discussion:') && world.date.year-Number(openDiscussion.split(':')[1])<=2 && relation.trust<25 && relation.strength<35 && !recent('divorce',6) && available(world,actor,target)) { offerRomance(world,target.id,'divorce'); return; }
     if (conflict && relation.trust<25 && relation.strength<35 && !recent(relation.romance==='married'?'divorce':'breakup',6) && draw(world,'outcomes',1,100)<=15) { offerRomance(world,target.id,relation.romance==='married'?'divorce':'breakup'); return; }
     if (conflict && relation.trust<50 && !recent('space',5) && !offers(world).some(r=>r.relationshipId===relation.id && (r.spaceUntilMonth??0)>month(world)) && draw(world,'outcomes',1,100)<=8) { offerRomance(world,target.id,'space'); return; }
     if (!recent('story',2) && draw(world,'outcomes',1,100)<=10) {

@@ -565,14 +565,14 @@ test('a boss arrested on an actual assignment loses power to a saved crew member
 test('two assignment records cannot reuse one incident even under distinct job identities', () => {
   const world = mission(joined()), state = activeOrganisation(world)!.organised!;
   state.jobs.push({ ...state.jobs[0], id: 'organised_job_duplicate' }); state.completedJobs++;
-  expect(() => decodeWorld(encodeWorld(world))).toThrow(/assignment proceeds/);
+  expect(() => decodeWorld(encodeWorld(world))).toThrow(/assignment proceeds|mission financial provenance/);
 });
 
 test('separate incidents cannot both claim the same proceeds transaction', () => {
   const world = mission(mission(joined())), state = activeOrganisation(world)!.organised!;
   expect(state.jobs[0].incidentId).not.toBe(state.jobs[1].incidentId);
   state.jobs[1].transactionId = state.jobs[0].transactionId;
-  expect(() => decodeWorld(encodeWorld(world))).toThrow(/assignment proceeds/);
+  expect(() => decodeWorld(encodeWorld(world))).toThrow(/assignment proceeds|mission financial provenance/);
 });
 
 test('a second organisation cannot claim an assignment already credited to a former crew', () => {
@@ -582,11 +582,11 @@ test('a second organisation cannot claim an assignment already credited to a for
   world = ack(resolveCommand(world, { type: 'organised-join', style: 'fraud-network' }));
   const state = activeOrganisation(world)!.organised!;
   state.jobs.push({ ...oldJob, id: 'organised_job_cross_crew_duplicate' }); state.completedJobs++;
-  expect(() => decodeWorld(encodeWorld(world))).toThrow(/assignment proceeds/);
+  expect(() => decodeWorld(encodeWorld(world))).toThrow(/assignment proceeds|mission financial provenance/);
 });
 
 test('a payout must belong to the actual assignment calendar month', () => {
   const world = mission(joined()), job = activeOrganisation(world)!.organised!.jobs[0];
   world.ledger.find(transaction => transaction.id === job.transactionId)!.year--;
-  expect(() => decodeWorld(encodeWorld(world))).toThrow(/assignment proceeds/);
+  expect(() => decodeWorld(encodeWorld(world))).toThrow(/assignment proceeds|mission financial provenance/);
 });

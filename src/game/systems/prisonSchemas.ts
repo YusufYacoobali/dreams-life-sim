@@ -1,13 +1,17 @@
 import { z } from 'zod';
 import { dateSchema } from '../calendar';
+import { prisonStoryConsequenceSchema } from './storyConsequenceSchemas';
+import type { World } from '../model';
 
 export const prisonActionIds = ['talk', 'befriend', 'insult', 'intimidate', 'apologise', 'offer-protection', 'ask-protection', 'exchange-favours', 'report', 'challenge', 'repair'] as const;
 const percent = z.number().int().min(0).max(100);
 export const prisonStoryEffectSchema = z.object({ kind: z.literal('prison-story'), prisonLifeId: z.string(), sceneId: z.string(), choiceId: z.string() });
 const storyChangeSchema = z.object({ conduct: z.number().int().min(-30).max(30), bond: z.number().int().min(-30).max(30), trust: z.number().int().min(-30).max(30), stress: z.number().int().min(-20).max(20), standing: z.number().int().min(-20).max(20), health: z.number().int().min(-15).max(0) });
 export const prisonSceneSchema = z.object({
-  id: z.string(), templateId: z.string(), ruleVersion: z.literal(1), sentenceId: z.string(), personId: z.string(), participantId: z.string().nullable(), offered: dateSchema, resolved: dateSchema.nullable(),
-  title: z.string().max(80), body: z.string().max(700), choices: z.array(z.object({ id: z.string(), label: z.string().max(80), body: z.string().max(700), journal: z.string().max(500), changes: storyChangeSchema })).min(2).max(4),
+  id: z.string(), templateId: z.string(), ruleVersion: z.union([z.literal(1), z.literal(2)]), sentenceId: z.string(), personId: z.string(), participantId: z.string().nullable(), offered: dateSchema, resolved: dateSchema.nullable(),
+  context: z.enum(['inmate', 'family', 'work', 'study', 'late', 'any', 'high']).optional(),
+  relationshipId: z.string().optional(), participantRole: z.enum(['inmate', 'family', 'partner', 'friend']).optional(),
+  title: z.string().max(80), body: z.string().max(700), choices: z.array(z.object({ id: z.string(), label: z.string().max(80), body: z.string().max(700), journal: z.string().max(500), changes: storyChangeSchema, consequence: prisonStoryConsequenceSchema.optional() })).min(2).max(4),
   status: z.enum(['offered', 'resolved', 'cancelled']), choiceId: z.string().nullable(),
 });
 export const prisonLifeSchema = z.object({
@@ -26,3 +30,9 @@ export type PrisonCommand = z.infer<typeof prisonCommandSchema>;
 export type PrisonLife = z.infer<typeof prisonLifeSchema>;
 export type PrisonScene = z.infer<typeof prisonSceneSchema>;
 export type PrisonStoryEffect = z.infer<typeof prisonStoryEffectSchema>;
+
+/** A recorded disciplinary suspension ends after three calendar months. */
+export function prisonWorkSuspended(world: World, sentenceId: string): boolean {
+  const now = world.date.year * 12 + world.date.month - 1;
+  return (world.prisonLives ?? []).some(life => life.sentenceId === sentenceId && life.scenes.some(scene => scene.ruleVersion === 2 && scene.status === 'resolved' && scene.resolved && scene.resolved.year * 12 + scene.resolved.month - 1 + 3 > now && scene.choices.find(choice => choice.id === scene.choiceId)?.consequence === 'work-suspension'));
+}

@@ -35,6 +35,12 @@ export function validatePrison(world: World, ledgerIndex?: LedgerIndex): void {
       }
     }
     for (const scene of life.scenes) {
+      if (scene.ruleVersion === 1 && (scene.context || scene.relationshipId || scene.participantRole || scene.choices.some(choice => choice.consequence)) || scene.ruleVersion === 2 && (!scene.context || scene.participantId && (!scene.relationshipId || !scene.participantRole))) throw new Error('Prison situation has incompatible versioned rules');
+      if (scene.relationshipId) {
+        const relation = world.relationships.find(item => item.id === scene.relationshipId);
+        if (!relation || ![relation.from, relation.to].includes(actor.id) || !scene.participantId || ![relation.from, relation.to].includes(scene.participantId)) throw new Error('Prison situation lost its bound relationship');
+      }
+      for (const choice of scene.choices) if (choice.consequence && (['rivalry', 'repair', 'pledge-protection', 'assault'].includes(choice.consequence) && scene.context !== 'inmate' || ['pause-visits', 'restore-contact', 'send-letter'].includes(choice.consequence) && scene.context !== 'family')) throw new Error('Prison consequence has no eligible bound participant');
       if (records.has(scene.id) || stories.has(scene.templateId) || scene.personId !== actor.id || scene.sentenceId !== sentence.id || !prisonStories.some(item => item.id === scene.templateId) || !life.seenStoryIds.includes(scene.templateId) || scene.participantId && (!world.people[scene.participantId] || scene.participantId === actor.id) || future(scene.offered) || compareDates(scene.offered, sentence.started) < 0 || scene.resolved && (future(scene.resolved) || compareDates(scene.resolved, scene.offered) < 0) || scene.status === 'offered' && (scene.resolved || scene.choiceId) || scene.status === 'resolved' && (!scene.resolved || !scene.choiceId || !scene.choices.some(choice => choice.id === scene.choiceId)) || new Set(scene.choices.map(choice => choice.id)).size !== scene.choices.length) throw new Error('Invalid saved prison situation');
       records.add(scene.id); stories.add(scene.templateId);
       const offer = pending.find(item => item?.id === scene.id);
