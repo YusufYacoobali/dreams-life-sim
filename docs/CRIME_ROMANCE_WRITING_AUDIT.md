@@ -1,3 +1,330 @@
+# Annual-story refinement audit — revision 2
+
+This refinement starts at `fc2294b4`. It inspects **121 existing authored annual situations** and their **363 choices**, across childhood, school, study, adult life, work, friendship, romance, parenting, crime/legal proceedings, custody, release and later life. These are catalogue situations, not interaction-response variants. The previous 89-response audit is retained below as historical work.
+
+**26 situations receive copy revisions; 95 are retained.** The revised scenes contain 76 revised choice payoffs. Four setups and several titles/labels are tightened. No event is removed and no annual mechanical effect is changed in this editorial pass. Major new-story consequences are audited separately in the refinement review; inventing injuries, wealth, people or legal results would make these smaller scenes worse.
+
+Each inspection considered the premise, concision, humour, distinct decisions, payoff, bound character fit, truthful effects, repetition and replay value. The row-level disposition explains the strongest reason to keep or revise it. Ordinary quiet, release-adjustment and healthy relationship scenes remain in the mix.
+
+## Prospective publication and save compatibility
+
+`content/annualStoryRefinements.ts` holds explicit `revision: 2` patches whose type permits only prose fields. Original catalogue objects, event IDs, choice IDs, context requirements, rarity, five-year repeat protection, stats and all immediate effects remain unchanged. `bindEvent` applies a patch only when binding a **new** decision for an overhaul-enabled world (`overhaulVersion: 1`). Ordinary legacy and enhanced-creative worlds without that opt-in still bind their original copy. This does not introduce a new world tuple or a mandatory story arc.
+
+Already-bound decisions own literal titles, bodies, labels, result wording, journals, participant IDs and effect snapshots. Resolving, decoding or branching those decisions never calls the revision overlay. A pending original offer therefore keeps its exact wording after opt-in and cold reopen. Old historical journals are never re-rendered from today’s catalogue.
+
+## Complete reviewed annual inventory
+
+The [machine-readable inventory](verification/crime-romance-refinement/annual-editorial-inventory.json) retains the exact original copy, revised copy and classification for each reviewed ID.
+
+| Existing annual ID | Source under `src/game/content/` | Disposition | Reason |
+| --- | --- | --- | --- |
+| `first-cake` | `events.ts` | Rewrite copy | Replace an abstract response with the parent attempting the photograph. |
+| `shoe-principle` | `events.ts` | Rewrite copy | Stage the three decisions through recognisable toddler behaviour. |
+| `blanket-dragon` | `events.ts` | Rewrite copy | Keep the imaginary dragon age-appropriate and give each branch a physical payoff. |
+| `library-card` | `events.ts` | Rewrite copy | Replace general praise with specific reading and librarian responses. |
+| `broken-mug` | `events.ts` | Rewrite copy | Show disappointment, repair and concealment rather than summarising approval. |
+| `rainy-fort` | `events.ts` | Rewrite copy | Give a quiet choice texture and the failed choices specific endings. |
+| `parent-old-music` | `events.ts` | Rewrite copy | Replace generic bonding with recognisable parent and teen reactions. |
+| `group-chat-rumour` | `events.ts` | Rewrite copy | Make the challenge and embarrassment concrete without inventing a saved victim. |
+| `first-presentation` | `events.ts` | Retain | Coin-swallowing escalation and forgotten name already give three distinct payoffs. |
+| `parent-boundary` | `events.ts` | Rewrite copy | Keep remote contact explicit and replace vague tension with actual message behaviour. |
+| `comparison-scroll` | `events.ts` | Rewrite copy | Ground comparison in small behaviour; avoid invented employment or success. |
+| `community-garden` | `events.ts` | Retain | Novelty torso apron drives specific volunteering, learning and refusal branches. |
+| `bad-review` | `events.ts` | Retain | Soup, diagram and online escalation already form a concise comic dispute. |
+| `rest-guilt` | `events.ts` | Retain | Printer argument punctures the relaxation class; leaving and helping differ. |
+| `old-photo` | `events.ts` | Retain | Haircut denial stays gentle and names the actual contacted parent. |
+| `local-meeting` | `events.ts` | Retain | Living memorial subject supplies specific reactions without a false death. |
+| `small-mistake` | `events.ts` | Retain | Public wig message has an immediate, embarrassing reply-all payoff. |
+| `birthday-number` | `events.ts` | Retain | Dead-inventor comparisons give the birthday premise a distinctive target. |
+| `familiar-street` | `events.ts` | Retain | Guide and laundrette owner supply competing versions of the same romance. |
+| `new-skill-late` | `events.ts` | Retain | Forceful No drives lesson, observation and refusal without a qualification claim. |
+| `useful-advice` | `events.ts` | Retain | Tattoo urgency allows listening, shared fallibility and an alienating lecture. |
+| `quiet-morning` | `events.ts` | Retain | Tea and an unnecessary noise investigation make a small restorative scene. |
+| `first-bubble-catch` | `earlyHomeStories.ts` | Retain | Disappearing bubble supports chasing, observing and frustration without adult satire. |
+| `first-tower-demolition` | `earlyHomeStories.ts` | Retain | Rebuilding, deliberate crashing and lining up blocks are different play styles. |
+| `first-camera-closeup` | `earlyHomeStories.ts` | Retain | Nostril, screen wave and back-of-head photos have specific parent reactions. |
+| `first-nap-negotiation` | `earlyHomeStories.ts` | Retain | Sleep, reassurance and yawning protest preserve age-appropriate warmth. |
+| `toddler-parent-name` | `earlyHomeStories.ts` | Retain | No Stop wordplay is specific to the parent-child interaction. |
+| `toddler-ice-cube` | `earlyHomeStories.ts` | Retain | One sock, two socks and freezer request escalate the same innocent mistake. |
+| `toddler-lift-button` | `earlyHomeStories.ts` | Rewrite copy | Stage the parent response and different uses of curiosity. |
+| `toddler-caterpillar-crossing` | `earlyHomeStories.ts` | Retain | Watching, care and an unentered race preserve a small observational moment. |
+| `toddler-why-machine` | `earlyHomeStories.ts` | Retain | Watermelon joke gets questions, a drawing and absurd fruit-salad ambition. |
+| `child-first-loose-tooth` | `earlyHomeStories.ts` | Retain | Clicking tooth turns private curiosity into a recognisable lunch disruption. |
+| `toddler-stairwell-echo` | `schoolDayStories.ts` | Rewrite copy | Differentiate loud, experimental and patient play. |
+| `toddler-zipper-puzzle` | `schoolDayStories.ts` | Rewrite copy | Replace inventor commentary with observable experimentation. |
+| `toddler-shadow-race` | `schoolDayStories.ts` | Rewrite copy | Make shadow play a scene instead of a summary. |
+| `toddler-cardboard-postbox` | `schoolDayStories.ts` | Rewrite copy | Give repeated play an escalating payoff. |
+| `toddler-biscuit-halves` | `schoolDayStories.ts` | Retain | Joining, celebrating and counting crumbs differ without fake extra food. |
+| `school-inverted-map` | `schoolDayStories.ts` | Retain | Final-boss staffroom and treasure toilets give marked work specific comedy. |
+| `school-library-whisper` | `schoolDayStories.ts` | Retain | One-page insult invites criticism, a boundary or retaliatory authorship. |
+| `school-relay-handover` | `schoolDayStories.ts` | Retain | Baton left behind supports practice, instruction and unfair blame. |
+| `school-bean-monitor` | `schoolDayStories.ts` | Retain | Thriving chart versus dead bean rewards evidence over invented achievement. |
+| `school-secret-language` | `schoolDayStories.ts` | Retain | Banana codebook and firing signal give the breached secret concrete payoffs. |
+| `school-label-swap` | `schoolDayStories.ts` | Rewrite copy | Replace generic peer reactions with a precise mistake and embarrassment. |
+| `teen-old-recording` | `teenHomeStories.ts` | Retain | Bath-in-the-clouds explanation balances affection, privacy and playful defence. |
+| `teen-shrinking-sleeves` | `teenHomeStories.ts` | Retain | Little Star photo offers cropping, celebrity play and self-defeating comparison. |
+| `teen-family-game-timer` | `teenHomeStories.ts` | Retain | Competent parent changes the expected power dynamic and stopping choices. |
+| `teen-phone-at-dinner` | `teenHomeStories.ts` | Retain | Private draft joke has actual trust damage when deliberately circulated. |
+| `teen-notification-loop` | `teenHomeStories.ts` | Retain | Admin reply and implausible autocorrect excuse already land cleanly. |
+| `teen-borrowed-charger` | `teenHomeStories.ts` | Retain | Cable in hand makes denial immediately and visibly ridiculous. |
+| `teen-old-interest-box` | `teenHomeStories.ts` | Retain | Dinosaur demand, sock tail and rejection letter distinguish all decisions. |
+| `teen-household-small-meal` | `teenHomeStories.ts` | Retain | Ceiling pancake, spatula and repeated toss have specific physical payoffs. |
+| `teen-parent-voice-note` | `teenHomeStories.ts` | Retain | Goose impression keeps remote communication explicit and chores limited. |
+| `teen-sunday-list` | `teenHomeStories.ts` | Retain | Dummy and second dummy escalate without allowing the actual chore to disappear. |
+| `work-three-priorities` | `workplaceStories.ts` | Retain | Impossible deadlines meet actual performance and trust consequences. |
+| `work-unfamiliar-process` | `workplaceStories.ts` | Retain | Forged check signature has grounded responsibility and job-performance stakes. |
+| `work-breakroom-sign` | `workplaceStories.ts` | Retain | Mother sign offers quiet contribution, clear wording or petty escalation. |
+| `work-break-playlist` | `workplaceStories.ts` | Rewrite copy | Replace interchangeable music-club endings with specific listening behaviour. |
+| `work-message-love` | `workplaceStories.ts` | Retain | Typing indicator and formal sign-off deliver a concise professional embarrassment. |
+| `work-photo-blink` | `workplaceStories.ts` | Retain | Dead-looking portrait and selective crop give specific social payoffs. |
+| `work-safety-arrow` | `workplaceStories.ts` | Retain | Blocked exit choices alter real performance and health without a fake legal case. |
+| `work-shared-credit` | `workplaceStories.ts` | Retain | Original draft proves authorship; taking credit affects actual performance/trust. |
+| `work-question-at-door` | `workplaceStories.ts` | Retain | Apology authorship and urgent appointment produce three distinct responses. |
+| `work-quiet-kindness` | `workplaceStories.ts` | Retain | Returned phone has a specific unsolicited selfie exhibition and reactions. |
+| `work-anonymous-survey` | `workplaceStories.ts` | Retain | Watching supervisor makes the privacy contradiction immediately playable. |
+| `work-salary-privacy` | `workingLifeStories.ts` | Retain | Real salary token and invented extra zero distinguish honesty, privacy and lying. |
+| `work-shared-note-riddle` | `workingLifeStories.ts` | Retain | Firing spreadsheet already has specific conflict, performance and trust effects. |
+| `work-final-file` | `workingLifeStories.ts` | Retain | Unsigned resignation can actually end the current job if the player signs. |
+| `work-forgotten-lunch` | `workingLifeStories.ts` | Retain | Fork prepared for repeated emergencies reveals the colleague through behaviour. |
+| `work-room-temperature` | `workingLifeStories.ts` | Retain | Wet poster and cooling choices link the joke to actual health/performance costs. |
+| `work-training-slogan` | `workingLifeStories.ts` | Retain | Resistant potato classification and eagle confession already produce sharp choices. |
+| `work-honest-view-invited` | `workingLifeStories.ts` | Rewrite copy | Replace process narration and somehow filler with actual edits and reactions. |
+| `work-invitation-outside` | `workingLifeStories.ts` | Retain | False serial-killer rumour is corrected as a rumour, never an invented record. |
+| `work-misnamed-complaint` | `workingLifeStories.ts` | Rewrite copy | Turn three abstract complaint responses into a specific mixed-up wait. |
+| `work-trivia-phone` | `workingLifeStories.ts` | Rewrite copy | Give the ridiculous answer actual content and make escalation visible. |
+| `work-mutual-embellishment` | `workingLifeStories.ts` | Rewrite copy | Make the truthful and dishonest rehearsals concrete without creating an employment offer. |
+| `friend-long-voice-note` | `adultRelationshipStories.ts` | Retain | Impression is overheard by its subject, giving an immediate social reversal. |
+| `friend-different-budget` | `adultRelationshipStories.ts` | Retain | Cake-head order uses a real quoted debit only on the paid choice. |
+| `friend-advice-or-listening` | `adultRelationshipStories.ts` | Retain | Apology/alibi distinction reveals a friend through specific demands. |
+| `friend-creative-feedback` | `adultRelationshipStories.ts` | Retain | Haircut-identifiable villain makes feedback genuinely personal. |
+| `friend-interrupted-thought` | `adultRelationshipStories.ts` | Retain | Unannounced LIVE badge permits a boundary, reversal or grout advert sabotage. |
+| `friend-unwanted-nickname` | `adultRelationshipStories.ts` | Retain | Kettle contest entry and toilet counter-pitch have distinct comic outcomes. |
+| `friend-quiet-company` | `adultRelationshipStories.ts` | Retain | Fake wedding site explicitly remains fake; ending friendship is a real effect. |
+| `friend-changed-opinion` | `adultRelationshipStories.ts` | Retain | Anti-chair principles collapse through toilet exemption and strategic squatting. |
+| `partner-phone-attention` | `adultRelationshipStories.ts` | Retain | Listening-face recording and failed quiz show behaviour rather than stat commentary. |
+| `partner-alone-time` | `adultRelationshipStories.ts` | Retain | Ordinary space remains healthy; an empty-bag exit exposes guilt tactics. |
+| `partner-money-conversation` | `adultRelationshipStories.ts` | Retain | Lottery pie remains imaginary and changes no actual financial ownership. |
+| `partner-other-couples` | `adultRelationshipStories.ts` | Retain | Breakup thumbnail undercuts comparison without inventing a player breakup. |
+| `partner-disagreement-loop` | `adultRelationshipStories.ts` | Retain | Scorecard, unavailable footage and solo championship give distinct argument payoffs. |
+| `partner-public-affection` | `adultRelationshipStories.ts` | Retain | Toilet verse can be revised or cruelly heckled with actual trust consequences. |
+| `partner-arrives-late` | `adultRelationshipStories.ts` | Retain | Overheard impression gives the partner a concrete response without inventing an excuse. |
+| `partner-breakup-script` | `adultRelationshipStories.ts` | Retain | Dishwasher grievance allows serious discussion, shared joke or genuine hurt. |
+| `friend-fake-laugh-rehearsal` | `adultRelationshipStories.ts` | Retain | Recognised fake laugh and donkey coaching reveal the friend through performance. |
+| `study-timetable-colour-code` | `studyLifeStories.ts` | Retain | Understand Everything timetable ties the joke to actual course and grades. |
+| `study-paused-unsolicited-tip` | `studyLifeStories.ts` | Retain | Tuition pause is genuine; rejecting advice does not resume or fund study. |
+| `study-confident-fake-source` | `studyLifeStories.ts` | Rewrite copy | Make verification specific while leaving course progress untouched. |
+| `later-retirement-assumption` | `laterLifeStories.ts` | Rewrite copy | Show the stranger reacting instead of giving a lesson about assumptions. |
+| `later-old-handwriting` | `laterLifeStories.ts` | Retain | Fitted-sheet demand gives retrospective ambition a specific, ordinary failure. |
+| `later-forgotten-telephone-number` | `laterLifeStories.ts` | Retain | Jingle number and scissors supply three concrete search outcomes. |
+| `later-unfamiliar-word` | `laterLifeStories.ts` | Retain | You ate/no crumbs misunderstanding offers learning, play and overreaction. |
+| `later-old-competition` | `laterLifeStories.ts` | Retain | App rulebook and technically correct loss distinguish learning from stubbornness. |
+| `later-photo-at-edge` | `laterLifeStories.ts` | Retain | Last-cake reveal resolves the mystery without an invented historical achievement. |
+| `later-offered-a-hand` | `laterLifeStories.ts` | Retain | Stubborn jar permits cooperation, independence or alienating defensiveness. |
+| `later-changed-favourite` | `laterLifeStories.ts` | Retain | Repeated bucket gag distinguishes nostalgia from continued enjoyment. |
+| `later-recording-labelled-retro` | `laterLifeStories.ts` | Retain | Remote-control archaeology keeps the age joke observational. |
+| `later-another-year-question` | `laterLifeStories.ts` | Retain | Extra-zero cake gives playful choices without changing the saved birth date. |
+| `later-unwilling-exhibition` | `laterLifeStories.ts` | Retain | Pigeon-poo context punctures solemn interpretation without a financial contract. |
+| `later-bingo-rebel` | `laterLifeStories.ts` | Retain | Empty-card rebellion stays a free social game, without invented gambling proceeds. |
+| `later-family-next-visit` | `laterLifeFamilyStories.ts` | Retain | Check Still Alive calendar title creates family warmth or pressure, not a scheduled visit claim. |
+| `later-family-photo-permission` | `laterLifeFamilyStories.ts` | Retain | Six-finger filter ties consent and revenge to a concrete family photograph. |
+| `later-family-premature-tribute` | `laterLifeFamilyStories.ts` | Retain | Still-living tribute is clearly a draft, never a false death record. |
+| `case-question-list` | `legalStories.ts` | Retain | Shampoo rehearsal is absurd while the genuine hearing and evidence remain intact. |
+| `prison-case-boundary` | `legalStories.ts` | Retain | Crime-drama casting exposes bravado; fear can be expressed without legal consequences. |
+| `release-open-afternoon` | `legalStories.ts` | Retain | Plain adjustment scene preserves emotional weight and unstructured freedom. |
+| `case-internet-defence` | `legalStories.ts` | Retain | Wolf-avatar legal expert is funny without changing the actual hearing rules. |
+| `case-heroic-sketch` | `legalStories.ts` | Retain | Courtroom posing never claims to alter evidence or the judgment. |
+| `prison-nickname-audition` | `legalStories.ts` | Retain | Cupboard Professor nickname offers friendly play, refusal and a hurtful insult. |
+| `prison-paper-mastermind` | `legalStories.ts` | Retain | Helicopter cartoon is confined to paper and creates no escape attempt. |
+| `prison-snoring-review` | `legalStories.ts` | Rewrite copy | Give the serious boundary a practical response while preserving the comic alternatives. |
+| `release-automatic-permission` | `legalStories.ts` | Retain | Serious unfamiliar freedom needs no extra joke or forced major consequence. |
+| `family-adult-parent-question` | `parentingStories.ts` | Rewrite copy | Keep memories factual in scope and give the child a distinct reaction to each answer. |
+| `school-microphone-rehearsal` | `schoolDayStories.ts` | Rewrite copy | Give three rehearsal choices distinct spoken and physical endings. |
+
+## Before and after: actual existing choice payoffs
+
+The following 26 pairs quote the original `fc2294b4` catalogue payoff and the prospective revision. Tokens stand for bound saved people or genuine course context. Effects and factual journal meaning are unchanged.
+
+### `first-cake` / `share`
+
+**Before:** {parent} accepts a handful of icing with impressive commitment.
+
+**After:** {parent} eats the icing from your hand. You offer the hand again, now empty. They kiss it, and you immediately reload it with cake.
+
+### `shoe-principle` / `cooperate`
+
+**Before:** Both shoes make it onto the correct feet. A surprisingly productive morning.
+
+**After:** You lean on {parent} while they fasten the shoes. At the door, you lift both feet to demonstrate the finished work. This makes walking difficult.
+
+### `blanket-dragon` / `invite`
+
+**Before:** The dragon listens very quietly. {parent} does all the voices.
+
+**After:** You leave a gap beside you for the dragon. {parent} gives it a squeaky voice. You explain that it is enormous and make them start again.
+
+### `library-card` / `big`
+
+**Before:** You finish some of it, skip a confusing chapter, and learn three words you immediately misuse.
+
+**After:** You rest the book on your knees and work through it in instalments. You learn the word enormous, which finally gives you a useful way to complain about carrying it.
+
+### `broken-mug` / `tell`
+
+**Before:** {parent} is disappointed about the mug and pleased you said something.
+
+**After:** {parent} looks at the broken handle, takes a breath and thanks you for telling them. You stay nearby while they clear up, pointing out pieces you can see.
+
+### `rainy-fort` / `build`
+
+**Before:** It collapses twice. The third version has a reading corner.
+
+**After:** The first roof slides off. The second takes a chair with it. You crawl into the third design with a book and keep one hand on the roof while reading.
+
+### `parent-old-music` / `listen`
+
+**Before:** The story is better than expected. You learn something new about {parent}.
+
+**After:** {parent} tells you where they used to hear it and demonstrates a dance you wish they had only described. You ask another question before the chorus can bring it back.
+
+### `group-chat-rumour` / `question`
+
+**Before:** Nobody produces evidence. The conversation changes topic with suspicious speed.
+
+**After:** You ask for the original source. Three people type at once, then stop. A photograph of somebody’s dinner arrives with unusual urgency.
+
+### `parent-boundary` / `explain`
+
+**Before:** You agree on a check-in time. {parent} admits the silence worried them.
+
+**After:** You answer, then agree when to check in. {parent} sends a relieved thumbs-up. A fifth message begins “Also” but turns out to be about dinner.
+
+### `comparison-scroll` / `close`
+
+**Before:** The laundry is still laundry. At least it is now folded.
+
+**After:** You close the feed and fold the laundry. One sock is missing. You deal with the remaining socks without requiring a beach or an inspirational caption.
+
+### `toddler-stairwell-echo` / `hello`
+
+**Before:** The walls return most of your hello. You start again before they finish.
+
+**After:** You stretch hello until you run out of breath. The stairwell finishes it for you. You gasp, laugh and start again before it is ready.
+
+### `toddler-zipper-puzzle` / `align`
+
+**Before:** You work out which zip goes where. Both jackets survive the experiment.
+
+**After:** You follow the zip down and pull the jackets apart. For a moment you admire the two ordinary jackets. Then you start wondering whether you can do it again.
+
+### `toddler-shadow-race` / `dance`
+
+**Before:** You stop trying to beat the shadow and give it increasingly ridiculous instructions.
+
+**After:** You raise one arm, then both, then wobble your knees. The shadow obeys everything. You finish by bowing to an audience that bows back.
+
+### `toddler-cardboard-postbox` / `repair`
+
+**Before:** The letter stays inside this time. You open the box to make sure it arrived.
+
+**After:** You fold the flaps underneath and post the letter again. Nothing comes out. You tip the box upside down to check that your repair has not eaten it.
+
+### `toddler-lift-button` / `one`
+
+**Before:** The lift takes you where you meant to go. You have performed a valuable public service.
+
+**After:** You press the chosen button. It lights up. You point at the light all the way to the floor so {parent} cannot miss your contribution.
+
+### `school-microphone-rehearsal` / `read`
+
+**Before:** You slow down and read it through. {teacher} asks you to keep that pace.
+
+**After:** You read the announcement slowly. The hall repeats the final word after you. You wait for it to finish before taking a small, unnecessary bow.
+
+### `school-label-swap` / `quiet`
+
+**Before:** {teacher} swaps the labels before the display. The potato keeps its anonymity.
+
+**After:** You point to the names. {teacher} swaps the labels before showing the class. Your drawing is yours again; the potato no longer has your signature.
+
+### `work-break-playlist` / `trade`
+
+**Before:** You disagree about the best part. Neither of you needs to win.
+
+**After:** You swap recommendations. {coworker} plays your choice, nods too carefully and asks when the good bit starts. You point out that they have just talked over it.
+
+### `work-honest-view-invited` / `specific`
+
+**Before:** {supervisor} listens, then crosses out “Everyone”. The discussion becomes more useful immediately.
+
+**After:** You point to one part that cannot work as written. {supervisor} crosses out “Everyone” and writes “Most people”. You point at the same part until they start fixing it.
+
+### `work-misnamed-complaint` / `facts`
+
+**Before:** You separate what the visitor observed from what they assumed. A clearer account is more useful than an instant verdict.
+
+**After:** You check the actual wait and explain the broken clock. The visitor reduces forty minutes to “a while”. {coworker} thanks you for establishing that time was not their personal decision.
+
+### `work-trivia-phone` / `rules`
+
+**Before:** {coworker} laughs and puts the phone away. The question becomes a fairer guessing game.
+
+**After:** You ask whether both players can consult a phone. {coworker} puts theirs down and guesses. You keep guessing too, with nobody pretending to be the referee.
+
+### `work-mutual-embellishment` / `refuse`
+
+**Before:** {coworker} says you are taking it too literally. You explain that references are supposed to contain things that happened.
+
+**After:** You ask which department they ran. {coworker} revises ran to “influenced”. You ask how. They stop asking you to be a reference.
+
+### `study-confident-fake-source` / `verify`
+
+**Before:** The explanation mixed one useful point with two inventions. You keep the real point and work through it properly.
+
+**After:** You compare the explanation with your {studyField} material. One point holds up. The next two rely entirely on the missing reference. You keep the useful bit and cross out the confident nonsense.
+
+### `later-retirement-assumption` / `accurate`
+
+**Before:** You give a short answer. They apologise for inventing your schedule before learning your name.
+
+**After:** You describe a few ordinary things you actually do. The stranger says that sounds tiring. You ask whether they would like to apologise to the birds as well.
+
+### `family-adult-parent-question` / `honest`
+
+**Before:** {child} asks another question. An honest uncertainty gives them more to recognise than a polished example.
+
+**After:** You describe not knowing what came next. {child} asks why you never mentioned that part before. You admit it made a poor introduction to your usual advice.
+
+### `prison-snoring-review` / `honest`
+
+**Before:** {prisonPeer} is embarrassed, but listens. There is no instant cure; at least they stop calling it a gift.
+
+**After:** You ask {prisonPeer} to stop treating your lost sleep as a compliment. They look embarrassed and agree to take the complaint seriously. Nobody promises a silent night.
+
+## Weak choices corrected
+
+| Existing choice | Revised choice and payoff | What improves |
+| --- | --- | --- |
+| `work-trivia-phone/absurd`: “Offer a deliberately ridiculous guess” | “Answer ‘three very committed worms’”; the colleague laughs and the player asks for half a point. | The player gets the actual joke when choosing, followed by a specific response. |
+| `work-misnamed-complaint/facts`: “Clarify what happened without assigning blame” | “Separate the waiting time from the stopped clock”; the visitor revises forty minutes to “a while”. | The procedural choice becomes an identifiable incident with a visible correction. |
+| `work-misnamed-complaint/name`: “Correct the name and listen calmly” | Give the actual colleague’s name and hear the visitor out; the useful question concerns when they will be seen. | Listening has a distinct payoff from proving the clock wrong. |
+| `shoe-principle/protest`: “Present a floor-based protest” | “Lie down until the shoe policy changes”; a foot eventually slides towards the waiting parent. | Age-appropriate action replaces detached narrator phrasing. |
+
+## Duplicate, repetition and truthfulness checks
+
+The reviewed 121 IDs and 363 choice IDs are inventoried individually. New revision payoffs contain no repeated full sentences or duplicate complete results. The overlay introduces no `apparently`, `somehow`, invented second marriage, paid contract, unrecorded arrest, financial reward, purchase, permanent injury or asset ownership. Names remain literal token replacements, including dollar signs and text resembling another token. All revised branches retain the exact original effect snapshots and participants.
+
+Several related premises deliberately remain: the toddler echo versus the early first echo, family voice impressions versus friend impressions, and online comparison versus illness-influencer comparison. Their age, context and decisions differ. One source of repetition that this pass directly reduces is interchangeable “you learn something / they listen / this is useful” payoffs: named people now interrupt, demonstrate, revise, hesitate or object.
+
+## Verification and remaining weaknesses
+
+`tests/game/annual-story-refinement.test.ts` checks all 26 targets, the copy-only rule boundary, unchanged eligibility/effect/participant identities, every revised branch, actual named binding, literal unusual names, cold checkpoint equivalence and exact historical pending preservation across opt-in/reopen/resolution. Fixtures declare their controlled contexts; these are not natural encounter-rate or native-device claims. Full integrated regression and performance evidence are recorded by the final refinement verification. The completed focused run passed **5 suites / 141 cases**, including the new **28-case** refinement suite and the existing adult, school, relationship and work-writing suites. Strict test TypeScript checks also passed.
+
+The wider library still has more situations than this 121-event inspection. Rare specialist careers, travel, pets, hobbies and some secondary-school stories remain outside this review; the inventory makes that boundary explicit. Several serious scenes are intentionally plain. Replay frequency still uses the existing five-year cooldown, so a very long life can revisit a premise; this copy pass does not claim to solve catalogue exhaustion. Actual-device reading, large-text layout and personal comic taste still need human playthrough evidence.
+
+---
+
+# Previous overhaul audit (historical)
+
 # Crime, prison and romance writing audit
 
 This pass starts from `d8f3d99c31d2ef9fddacb9cf5ad0b9cc20172bd0` on `v2`.

@@ -2,6 +2,7 @@ import { ageOn, fullName, World } from '../model';
 import { BoundChoice, Pending } from '../runtime';
 
 import { EventTemplate, StoryStat, storyOption as option } from './eventTypes';
+import { refinedAnnualTemplate } from './annualStoryRefinements';
 import { childhoodTemplates } from './childhood';
 import { dramaticTemplates } from './dramaticEvents';
 import { dramaticContext } from '../systems/dramaticContext';
@@ -307,6 +308,7 @@ export function eligibleTemplates(world: World): readonly EventTemplate[] {
 }
 
 export function bindEvent(world: World, template: EventTemplate): Extract<Pending, { kind: 'decision' }> {
+  template = refinedAnnualTemplate(template, world.overhaulVersion === 1);
   if (template.dramatic) return bindDramaticEvent(world, template);
   const player = world.people[world.activePersonId];
   const parent = templateParent(world, template);
