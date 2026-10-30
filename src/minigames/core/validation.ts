@@ -74,6 +74,7 @@ export function validateMiniGames(world: World) {
         ] !== 1)
     )
       throw Error('Invalid mini-game burglary reservation');
+    if (session.escapeVersion !== undefined && session.kind !== 'escape') throw Error('Escape version on another game');
     if (session.kind === 'escape') {
       const sentence = world.sentences.find(row => row.id === session.ownerId && row.personId === session.personId);
       const incidents = world.incidents.filter(row => row.personId === session.personId && row.offence === 'escape' && row.date.year === session.started.year);
@@ -89,13 +90,13 @@ export function validateMiniGames(world: World) {
       if (
         input.at < prior ||
         input.at > session.elapsedMs ||
-        (session.kind === 'sports'
+        (!(session.kind === 'escape' && session.escapeVersion === 2 && ['stamp', 'escape-recall', 'escape-hint'].includes(input.action.type)) && (session.kind === 'sports'
           ? 'shot'
           : session.kind === 'crime'
             ? 'lock'
             : session.kind === 'escape'
               ? 'stamp'
-              : 'thrust') !== input.action.type
+              : 'thrust') !== input.action.type)
       )
         throw Error('Invalid mini-game input');
       prior = input.at;

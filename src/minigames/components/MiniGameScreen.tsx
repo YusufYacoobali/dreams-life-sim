@@ -73,11 +73,23 @@ const instructions = {
   sports: 'Aim for a corner, then stop the power in the green zone.',
   crime: 'Match the green marker to unlock all three bolts.',
   astronaut: 'Line up with the green port. Tap down to brake.',
-  escape: 'Match the stamp sequence in order. The four gates shuffle after each choice.',
+  escape: 'Remember the stamps, hide the pattern, then recall it from shuffled gates. Each round gets longer. No time limit.',
 };
+
+/** Display the rules owned by the saved attempt; a fresh entry advertises v2. */
+export function miniGameInstructions(kind: MiniGameKind, session: MiniGameSession | null) {
+  const memory = kind === 'escape' && (!session || session.escapeVersion === 2);
+  return {
+    body: kind === 'escape' && !memory
+      ? 'Match the stamp sequence in order. The four gates shuffle after each choice.'
+      : instructions[kind],
+    assisted: memory ? 'Two one-stamp hints per attempt. No time limit.' : 'Take your time. No fast timing.',
+  };
+}
 
 export function MiniGameScreen(props: Props) {
   const { kind, session, practice = false, error, busy } = props,
+    help = miniGameInstructions(kind, session),
     feedback = useFeedback(),
     { height } = useWindowDimensions(),
     insets = useSafeAreaInsets(),
@@ -219,7 +231,7 @@ export function MiniGameScreen(props: Props) {
     return () => clearInterval(timer);
   }, [phase, artReady]);
   useEffect(() => {
-    if (phase !== 'playing' || !session || session.assisted || !artReady)
+    if (phase !== 'playing' || !session || session.assisted || (session.kind === 'escape' && session.escapeVersion === 2) || !artReady)
       return;
     const total = durationMs[kind];
     clock.value = withTiming(
@@ -405,6 +417,7 @@ export function MiniGameScreen(props: Props) {
           kind={kind}
           clock={clock}
           assisted={session.assisted}
+          untimed={session.kind === 'escape' && session.escapeVersion === 2}
         />
       )}
       <ScrollView
@@ -439,7 +452,7 @@ export function MiniGameScreen(props: Props) {
               onInput={input}
             />
           ) : kind === 'escape' ? (
-            <EscapeGame session={session} clock={clock} enabled={enabled}
+            <EscapeGame session={session} clock={clock} enabled={enabled} reducedMotion={feedback.reducedMotion}
               controlsVisible={phase === 'playing' || phase === 'finishing'} onInput={input} />
           ) : (
             <DockingGame
@@ -475,14 +488,14 @@ export function MiniGameScreen(props: Props) {
             <Text accessibilityRole="header" style={[s.title, { textAlign: 'center' }]}>
               {titles[kind]}
             </Text>
-            <Text style={[s.text, { textAlign: 'center' }]}>{instructions[kind]}</Text>
+            <Text style={[s.text, { textAlign: 'center' }]}>{help.body}</Text>
             <Text style={[s.muted, { textAlign: 'center' }]}>
               {practice
                 ? 'Play again whenever you like. Your saved life stays unchanged.'
                 : kind === 'crime'
                   ? 'Uses this year’s burglary. Arrest is possible, even if you forfeit.'
                   : kind === 'escape'
-                    ? 'Uses this year’s escape attempt. Failure or forfeiture can add a real charge. Saved progress resumes after reopening.'
+                    ? 'Uses this year’s escape attempt. Failure or forfeiture adds a real charge. Saved progress resumes after reopening.'
                   : kind === 'sports'
                     ? 'One shot this season. Your result affects the next match.'
                     : 'One attempt this assignment. Your result affects the next mission.'}
@@ -491,7 +504,7 @@ export function MiniGameScreen(props: Props) {
               <View style={{ flex: 1 }}>
                 <Text style={s.text}>Assisted controls</Text>
                 <Text style={s.muted}>
-                  Take your time. No fast timing.
+                  {help.assisted}
                 </Text>
               </View>
               <Switch

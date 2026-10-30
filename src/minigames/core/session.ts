@@ -55,6 +55,7 @@ export function resolveMiniGame(
       settled: null,
       appliedMonth: null,
     };
+    if (command.kind === 'escape') session.escapeVersion = 2;
     world.miniGames.push(session);
     // Starting commits the SAME yearly burglary allowance, before any game input.
     if (command.kind === 'crime')
@@ -100,6 +101,7 @@ export function resolveMiniGame(
     if (input.at < session.elapsedMs || input.at > durationMs[session.kind])
       throw new IneligibleAction('Invalid challenge time');
     if (
+      !(session.kind === 'escape' && session.escapeVersion === 2 && ['stamp', 'escape-recall', 'escape-hint'].includes(input.action.type)) &&
       (session.kind === 'sports'
         ? 'shot'
         : session.kind === 'crime'

@@ -14,10 +14,12 @@ export function MiniGameHUD({
   kind,
   clock,
   assisted,
+  untimed = false,
 }: {
   kind: MiniGameKind;
   clock: SharedValue<number>;
   assisted: boolean;
+  untimed?: boolean;
 }) {
   const total = durationMs[kind],
     [remaining, setRemaining] = useState(Math.ceil(total / 1000));
@@ -35,19 +37,19 @@ export function MiniGameHUD({
   return (
     <View style={{ paddingHorizontal: 22, gap: 7, paddingBottom: 9 }}>
       <View style={[s.row, { justifyContent: 'space-between' }]}>
-        <Text style={[s.muted, { color: c.white }]}>{assisted ? 'Your pace' : 'Time left'}</Text>
+        <Text style={[s.muted, { color: c.white }]}>{assisted || untimed ? 'Your pace' : 'Time left'}</Text>
         <Text
           accessibilityLabel={
-            assisted
+            untimed ? 'Memory challenge, no time limit' : assisted
               ? 'Assisted controls, no real-time deadline'
               : remaining + ' seconds remaining'
           }
           style={[s.muted, { fontVariant: ['tabular-nums'], color: c.white }]}
         >
-          {assisted ? 'Assisted' : remaining + 's'}
+          {assisted ? 'Assisted' : untimed ? 'Memory' : remaining + 's'}
         </Text>
       </View>
-      <Svg
+      {!untimed && <Svg
         height="4"
         width="100%"
         viewBox="0 0 100 4"
@@ -56,7 +58,7 @@ export function MiniGameHUD({
       >
         <Rect width="100" height="4" rx="2" fill="#FFFFFF26" />
         <MovingRect animatedProps={props} height="4" rx="2" fill={c.blue} />
-      </Svg>
+      </Svg>}
     </View>
   );
 }

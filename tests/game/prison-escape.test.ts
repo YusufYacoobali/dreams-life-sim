@@ -9,7 +9,11 @@ import type { MiniGameInput } from '../../src/minigames/core/types';
 import { escapePrisoner } from '../support/prisonEscape';
 
 function start(world = escapePrisoner(), assisted = true) {
-  return resolveCommand(world, { type: 'mini-game-start', kind: 'escape', ownerId: activeSentence(world)!.id, contextId: escapeContext(world), assisted });
+  const started = resolveCommand(world, { type: 'mini-game-start', kind: 'escape', ownerId: activeSentence(world)!.id, contextId: escapeContext(world), assisted });
+  // A genuinely reserved historical v1 attempt: absence must keep its published rules.
+  const historical = JSON.parse(encodeWorld(started));
+  delete historical.miniGames.at(-1).escapeVersion;
+  return decodeWorld(JSON.stringify(historical));
 }
 function solve(input: World) {
   let world = input;

@@ -48,7 +48,7 @@ export function MiniGameEntry({
               : kind === 'astronaut'
                 ? 'affects your next mission period'
                 : kind === 'escape'
-                  ? 'commits to this year’s escape attempt'
+                  ? (session && !session.escapeVersion ? 'commits to this year’s escape attempt' : 'memory challenge, no time limit · commits to this year’s escape attempt')
                 : 'commits to this year’s burglary attempt')
       }
       disabled={busy}

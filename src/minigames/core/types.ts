@@ -30,6 +30,8 @@ export const actionSchema = z.discriminatedUnion('type', [
     type: z.literal('thrust'),
     direction: z.enum(['left', 'right', 'up', 'down', 'coast']),
   }),
+  z.strictObject({ type: z.literal('escape-recall') }),
+  z.strictObject({ type: z.literal('escape-hint') }),
   z.strictObject({
     type: z.literal('stamp'),
     symbol: z.enum(['sun', 'moon', 'star', 'bird']),
@@ -55,6 +57,8 @@ export const miniGameSessionSchema = z.object({
   difficulty: z.number().int().min(1).max(5),
   seed: z.number().int().min(0).max(0xffffffff),
   assisted: z.boolean(),
+  // Absent on published v1 sessions; never default during decode.
+  escapeVersion: z.literal(2).optional(),
   status: z.enum(['active', 'completed', 'forfeited']),
   paused: z.boolean(),
   elapsedMs: z.number().int().min(0).max(14000),
@@ -67,7 +71,7 @@ export const miniGameSessionSchema = z.object({
 export type MiniGameSession = z.infer<typeof miniGameSessionSchema>;
 export type Challenge = Pick<
   MiniGameSession,
-  'kind' | 'difficulty' | 'seed' | 'assisted'
+  'kind' | 'difficulty' | 'seed' | 'assisted' | 'escapeVersion'
 >;
 export type GameEvaluation = {
   finished: boolean;

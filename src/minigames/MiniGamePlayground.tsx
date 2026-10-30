@@ -38,6 +38,7 @@ export function MiniGamePlayground() {
       lifeId: 'practice',
       personId: 'practice',
       kind: kind!,
+      ...(kind === 'escape' ? { escapeVersion: 2 as const } : {}),
       ownerId: 'practice',
       contextId: 'practice',
       started: { year: 2026, month: 1, day: 1 },
@@ -147,7 +148,7 @@ export function MiniGamePlayground() {
                 : game === 'crime'
                   ? 'Three bolts before the alarm'
                   : game === 'escape'
-                    ? 'Follow the stamps through a shifting board'
+                    ? 'Remember a pattern through three shuffled rounds'
                   : 'A drifting approach above Earth'
             }
             onPress={() => {

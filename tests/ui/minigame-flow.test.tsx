@@ -20,7 +20,7 @@ import { athleteFixture, miniGameFixture } from '../support/miniGames';
 import { encodeWorld } from '../../src/game/model';
 import { burglaryContext, escapeContext } from '../../src/minigames/core/eligibility';
 import { activeSentence } from '../../src/game/systems/legalSchemas';
-import { escapeSequence } from '../../src/minigames/escape/escapeLogic';
+import { memorySolution } from '../support/escapeMemory';
 import { escapePrisoner } from '../support/prisonEscape';
 
 let mockStore: ReturnType<typeof createGameStore>,
@@ -120,7 +120,7 @@ jest.mock('react-native-worklets', () => ({
 }));
 import { LiveMiniGame } from '../../src/minigames/LiveMiniGame';
 import { MiniGamePlayground } from '../../src/minigames/MiniGamePlayground';
-import { MiniGameScreen } from '../../src/minigames/components/MiniGameScreen';
+import { MiniGameScreen, miniGameInstructions } from '../../src/minigames/components/MiniGameScreen';
 import { GameButton } from '../../src/minigames/components/GameButton';
 import type { MiniGameAction, MiniGameSession } from '../../src/minigames/core/types';
 import GameLayout from '../../app/(game)/_layout';
@@ -203,13 +203,20 @@ const play = async () => {
   act(() => jest.advanceTimersByTime(1100));
 };
 
-test('the live assisted stamp board saves each choice and escapes the actual sentence once', async () => {
+test('the live assisted memory board hides each preview, saves every choice and escapes the actual sentence once', async () => {
   await setup('escape');
   await show(<LiveMiniGame />);
   await play();
-  const session = mockStore.getState().world!.miniGames[0], sequence = escapeSequence(session);
-  for (let index = 0; index < sequence.length; index++) {
-    fireEvent.press(screen.getByRole('button', { name: `Choose ${sequence[index]} gate` }));
+  const session = mockStore.getState().world!.miniGames[0], solution = memorySolution(session);
+  for (let index = 0; index < solution.length; index++) {
+    const { action } = solution[index];
+    if (action.type === 'escape-recall') {
+      expect(screen.queryByRole('button', { name: /Choose .* gate/ })).toBeNull();
+      fireEvent.press(screen.getByRole('button', { name: 'Hide pattern and begin' }));
+    } else if (action.type === 'stamp') {
+      expect(screen.queryByLabelText('Pattern preview')).toBeNull();
+      fireEvent.press(screen.getByRole('button', { name: `Choose ${action.symbol} gate` }));
+    }
     await waitFor(() => expect(mockStore.getState().world!.miniGames[0].inputs).toHaveLength(index + 1));
     await act(async () => {});
   }
@@ -701,4 +708,22 @@ test('a restored attempt can retry missing artwork before its paused controls be
   await waitFor(() => expect(screen.getByRole('button', { name: 'Resume' })).toBeEnabled());
   expect(mockStore.getState().world!.miniGames).toHaveLength(1);
   expect(mockStore.getState().world!.miniGames[0].id).toBe(id);
+});
+
+
+test('historical v1 escape display retains its matching rules and clock; new entries explain memory and hints', async () => {
+  const historical: MiniGameSession = { ...practiceFlight(false), kind: 'escape' };
+  expect(miniGameInstructions('escape', historical)).toEqual({
+    body: 'Match the stamp sequence in order. The four gates shuffle after each choice.',
+    assisted: 'Take your time. No fast timing.',
+  });
+  expect(miniGameInstructions('escape', null)).toEqual(miniGameInstructions('escape', { ...historical, escapeVersion: 2 }));
+  expect(miniGameInstructions('escape', null).body).toContain('No time limit');
+  expect(miniGameInstructions('escape', null).assisted).toContain('Two one-stamp hints');
+  await show(<MiniGameScreen {...flightProps(historical)} kind="escape" />);
+  act(() => jest.advanceTimersByTime(1100));
+  expect(screen.getByText('Match the next word below. The gates shuffle after every choice.')).toBeOnTheScreen();
+  expect(screen.getByLabelText('14 seconds remaining')).toBeOnTheScreen();
+  expect(screen.queryByLabelText('Memory challenge, no time limit')).toBeNull();
+  expect(screen.queryByRole('button', { name: /Hint: next/ })).toBeNull();
 });

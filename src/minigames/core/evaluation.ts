@@ -12,7 +12,7 @@ export function evaluateSession(session: MiniGameSession): GameEvaluation {
         : session.kind === 'escape'
           ? evaluateEscape(session, session.inputs)
           : evaluateDocking(session, session.inputs, session.elapsedMs);
-  return !outcome.finished && session.elapsedMs >= durationMs[session.kind]
+  return !(session.kind === 'escape' && session.escapeVersion === 2) && !outcome.finished && session.elapsedMs >= durationMs[session.kind]
     ? { finished: true, score: 0, detail: 'Time expired' }
     : outcome;
 }
