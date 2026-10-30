@@ -1,0 +1,69 @@
+{
+  "sourceCommit": null,
+  "started": "2026-10-30T17:31:31.094Z",
+  "finished": "2026-10-30T17:31:33.989Z",
+  "sourceDigest": "77c67f96bc28cc26497f01632885bb8792d75c164cd50e8d5d5e1419e72205c8",
+  "changedSourcesDuringRun": [],
+  "suites": {
+    "total": 1,
+    "passed": 1,
+    "failed": 0,
+    "pending": 0
+  },
+  "cases": {
+    "total": 7,
+    "passed": 7,
+    "failed": 0,
+    "pending": 0,
+    "todo": 0
+  },
+  "files": [
+    {
+      "file": "tests/persistence/stolen-vehicle-refinement.test.ts",
+      "passed": 7,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "cases": [
+        {
+          "name": "a genuine vehicle theft (detected=false) atomically saves one linked inventory record, no cash payout and exactly one incident",
+          "status": "passed",
+          "duration": 451
+        },
+        {
+          "name": "a genuine vehicle theft (detected=true) atomically saves one linked inventory record, no cash payout and exactly one incident",
+          "status": "passed",
+          "duration": 284
+        },
+        {
+          "name": "returning a genuine stolen vehicle on one Time Machine future preserves the charge risk and leaves another future holding the same unsaleable vehicle",
+          "status": "passed",
+          "duration": 384
+        },
+        {
+          "name": "death cannot liquidate or bequeath a held stolen vehicle, and a cold save retains its seizure and original theft identity",
+          "status": "passed",
+          "duration": 166
+        },
+        {
+          "name": "the actual registered owner can sell a returned vehicle with its original purchase basis and retained theft history",
+          "status": "passed",
+          "duration": 155
+        },
+        {
+          "name": "an explicit named victim without a recorded vehicle cannot create a replacement car or consume an attempt",
+          "status": "passed",
+          "duration": 29
+        },
+        {
+          "name": "a previously returned car cannot be stolen repeatedly to manufacture additional inventory or proceeds",
+          "status": "passed",
+          "duration": 102
+        }
+      ]
+    }
+  ],
+  "command": "DREAMS_REFINEMENT_TEST_REPORT=/tmp/dreams-refinement-stolen-final.json node node_modules/jest/bin/jest.js --runInBand tests/persistence/stolen-vehicle-refinement.test.ts --reporters=default --reporters=./tools/refinement-jest-reporter.cjs",
+  "logSha256": "22d62e07c355472bfbff5a37fd865010457241b3eef5b8f00417837907c32e81"
+}

@@ -1,0 +1,54 @@
+{
+  "sourceCommit": "e558b7909423246027e040fc3160f756ed02f03d",
+  "scope": "Actual final escapeSequence module, difficulty5, seeds0..255. Variety property, not human difficulty measurement.",
+  "rows": [
+    {
+      "patternVersion": null,
+      "round": 0,
+      "length": 6,
+      "seeds": 256,
+      "uniquePatterns": 4,
+      "fourCycles": 256
+    },
+    {
+      "patternVersion": null,
+      "round": 1,
+      "length": 7,
+      "seeds": 256,
+      "uniquePatterns": 4,
+      "fourCycles": 256
+    },
+    {
+      "patternVersion": null,
+      "round": 2,
+      "length": 8,
+      "seeds": 256,
+      "uniquePatterns": 4,
+      "fourCycles": 256
+    },
+    {
+      "patternVersion": 1,
+      "round": 0,
+      "length": 6,
+      "seeds": 256,
+      "uniquePatterns": 244,
+      "fourCycles": 16
+    },
+    {
+      "patternVersion": 1,
+      "round": 1,
+      "length": 7,
+      "seeds": 256,
+      "uniquePatterns": 254,
+      "fourCycles": 0
+    },
+    {
+      "patternVersion": 1,
+      "round": 2,
+      "length": 8,
+      "seeds": 256,
+      "uniquePatterns": 255,
+      "fourCycles": 2
+    }
+  ]
+}

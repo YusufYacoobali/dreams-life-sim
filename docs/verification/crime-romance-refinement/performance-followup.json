@@ -1,0 +1,52 @@
+{
+  "scope": "Sequential idle follow-up of the largest five-sample differences. Eleven measured samples after one warm-up. Exact legacy inputs, commands and complete outcomes match in both repeats.",
+  "node": "v24.19.0",
+  "samples": 11,
+  "rows": [
+    {
+      "name": "routine-before",
+      "age": 50,
+      "kind": "routine",
+      "medianMs": 36.33128100000067,
+      "p95Ms": 40.87685099999999,
+      "sourceHash": "15370ba01712db27c00ff2f02c96e09b5a6080cc502f49bf35c18557272d221f",
+      "worldSha256": "2bc7325a962d48827903a1727b08803087afab2cd1e0d1ee1ce4c1fe1c1c40e4"
+    },
+    {
+      "name": "routine-after",
+      "age": 50,
+      "kind": "routine",
+      "medianMs": 36.34191400000054,
+      "p95Ms": 41.43848999999955,
+      "sourceHash": "4062f42fde331da5405a4575eb4e3649cdf330fa87a98454b7b250a0bc0c6fb8",
+      "worldSha256": "2bc7325a962d48827903a1727b08803087afab2cd1e0d1ee1ce4c1fe1c1c40e4"
+    },
+    {
+      "name": "routine-enabled",
+      "age": 50,
+      "kind": "routine",
+      "medianMs": 35.59773800000039,
+      "p95Ms": 49.13000999999986,
+      "sourceHash": "4062f42fde331da5405a4575eb4e3649cdf330fa87a98454b7b250a0bc0c6fb8",
+      "worldSha256": "fad025ba568cdac4f696d3275c281986093e46e84211dbbf66213a3215582057"
+    },
+    {
+      "name": "year-before",
+      "age": 90,
+      "kind": "fullYear",
+      "medianMs": 822.5358639999977,
+      "p95Ms": 955.5460889999958,
+      "sourceHash": "15370ba01712db27c00ff2f02c96e09b5a6080cc502f49bf35c18557272d221f",
+      "worldSha256": "bcb2c1b14adc0df1bfe45918f856255e7d80ceff073d5c1ae35d0642509e9b16"
+    },
+    {
+      "name": "year-after",
+      "age": 90,
+      "kind": "fullYear",
+      "medianMs": 781.3941119999945,
+      "p95Ms": 791.4912949999998,
+      "sourceHash": "4062f42fde331da5405a4575eb4e3649cdf330fa87a98454b7b250a0bc0c6fb8",
+      "worldSha256": "bcb2c1b14adc0df1bfe45918f856255e7d80ceff073d5c1ae35d0642509e9b16"
+    }
+  ]
+}

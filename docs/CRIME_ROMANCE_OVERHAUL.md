@@ -5,6 +5,10 @@ It starts from remote `v2` commit `d8f3d99c`, retaining the latest Actor/Model
 careers and their presentation fixes. It adds no purchase requirement,
 RevenueCat change, dependency or replacement navigation system.
 
+The subsequent refinement starts at published `fc2294b4`. Its current review is
+[Crime, romance and writing refinement](CRIME_ROMANCE_REFINEMENT_REVIEW.md);
+the original overhaul's measurements below remain historical evidence.
+
 ## Organised crime
 
 Organised Crime is available from Activities → Crime and from the Independent
@@ -30,6 +34,23 @@ Availability depends on organisation style, rank and actual available members.
 Caution trades reward for lower detection and evidence; bold assignments pay
 more and can cause a real injury; a capable crew changes the odds and loyalty.
 A successful job can still lead to arrest. A failed job can still leave evidence.
+
+Crew-led eligibility, success benefit and saved participation use the same
+trusted, available members. Former, low-loyalty or unavailable contacts cannot
+earn participation credit. The approach picker explains unavailable crew work.
+
+New assignment records use version 2. Street work changes territorial rival
+influence and reputation; financial schemes debit actual named victims and can
+produce complaints or public scandals affecting existing employment; smuggling
+records fictional cargo delivery, confiscation or betrayal by an actual
+participating associate. Profits, losses, witnesses and reputation need not move
+in the same direction. Each assignment freezes its actual result and links it
+to the legal incident. Existing jobs, incidents and judgments remain literal.
+
+New successful vehicle theft records a car in inventory with a named registered
+owner and theft incident. It pays neither a purchase price nor a substitute cash
+reward. Stolen possession cannot be sold, insured or inherited. Actual arrest
+can seize it; voluntarily returning it preserves the theft and its legal case.
 
 Assignments are limited to two per person per year, across organisations. Promotion, recruitment,
 leadership challenges, rival decisions and an organisation story share a limit
@@ -96,7 +117,17 @@ Escape uses an original abstract symbol puzzle, **Exit Shuffle**, through the
 existing mini-game session infrastructure. It is a short fictional challenge,
 not a representation of real prison escape methods. Security sets the starting
 difficulty; smarts, fitness and criminal experience can reduce it. Five levels
-vary the number of symbols and permitted mistakes. Assisted input is optional.
+vary the number of symbols, rounds and permitted mistakes.
+
+New version-2 sessions separate preview from recall. Hide the pattern before
+selecting shuffled symbols; recall never displays the ordered answer. Each round
+gets longer. There is no countdown deadline. Assisted input offers two limited
+one-symbol hints across the attempt, each hidden before selection resumes.
+Text labels and reduced-motion-aware feedback retain accessible controls.
+Already-started version-1 sessions keep their original matching puzzle.
+New v2 starts record a pattern-generator revision and use well-mixed local
+symbols. Earlier v2 sessions retain their original generator when the revision
+is absent; neither version changes the life-simulation random streams.
 
 Starting reserves that person's annual attempt and binds it to the current
 sentence. The seed, difficulty,
@@ -106,7 +137,7 @@ forfeiture settles that same reservation exactly once. Restarting or abandoning
 the session cannot create a new roll or avoid the attempt limit.
 
 Success escapes the actual active sentence and creates wanted status. Failure
-or forfeiture can produce the existing real escape charge and conduct
+or forfeiture produces the existing real escape charge and conduct
 consequences. Other active cases and custody orders remain relevant. Clutch
 Shot, Safe Cracker and Orbital Docking keep their existing sessions and rules.
 
@@ -171,6 +202,19 @@ factual journals and state changes. Prison scene text and choices are saved with
 their participants and change snapshots. Romance story choices are similarly
 saved so later editorial work cannot silently rewrite an offered outcome.
 
+The refinement selects thirty situations for version-2 typed consequences:
+nine crime, nine prison and twelve romance/ex situations. They affect actual crew
+roles, rivalries, legal incidents, protection, work access, family contact,
+relationship boundaries and later decisions. Revised wording explains the
+consequence. A saved version-1 choice still uses its original rule snapshot.
+
+Fourteen adult romance situations receive sharper, more varied behaviour and
+dramatic choices alongside the retained ordinary and wholesome scenes. Their
+prerequisites use actual arguments, marriages, dates and discovered affairs.
+The separate existing-annual-catalogue audit inspects 121 situations, retaining
+95 and refining 26 prospectively. The original 89 interaction rewrites are a
+different body of work, recorded separately in the writing audit.
+
 ## Compatibility and bounds
 
 Ordinary **World 49 / engine 51 / content 28** and enhanced creative-career
@@ -189,7 +233,8 @@ Unsupported future capability markers are rejected. Existing numeric gang ranks
 0–3 retain their literal values until explicit organisation review; the new
 five-rank state is separate, with a compatible legacy rank projection.
 
-SQLite reader **30** is a metadata-only upgrade. It retains database v4's eight
+SQLite reader **31** supports reader 30 and older supported records through a
+metadata-only upgrade. It retains database v4's eight
 tables and existing payloads. It does not eagerly rewrite current lives,
 backups, receipts, checkpoints or Time Machine branches. Existing genuine
 fixtures remain unchanged.
@@ -209,9 +254,17 @@ payment in the source life.
 
 ## Verification and scope
 
-The [verification report](verification/crime-romance-overhaul/README.md) records
-the actual checks, large-life measurements, self-review and remaining limits.
-The final regression covers **369 suites / 6,107 passing cases**, with no
+The [refinement verification](verification/crime-romance-refinement/README.md)
+covers **378 suites / 6,268 unique passing cases**, the 120-life soak, strict
+app/test types, the 570-module acyclic graph, notices and final Android/iOS
+Hermes exports. All 44 changed runtime sources match both maps. All nine legacy
+large-life benchmark outcomes match the refinement baseline `fc2294b4` exactly.
+Longer repeats did not reproduce the initial five-sample timing differences;
+the report retains every sample and separates full-run/affected-run provenance.
+
+The [original verification report](verification/crime-romance-overhaul/README.md)
+records the original overhaul's checks, large-life measurements and self-review.
+That regression covers **369 suites / 6,107 passing cases**, with no
 unresolved failures or skipped cases. The **120-life soak**, strict app/test
 types, 563-module import check, notice checks and both production Hermes exports
 pass; all 54 changed runtime sources match both platform maps.

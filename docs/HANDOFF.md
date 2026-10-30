@@ -2,6 +2,50 @@
 
 Owner workflow preference: commit and push completed changes to the active development branch unless explicitly told otherwise.
 
+## Crime, romance and writing refinement — 30 October 2026
+
+Continue on **`v2`**. The refinement starts from published `fc2294b4` and preserves
+the existing design, purchases, premium careers, dependencies and artwork.
+Crew eligibility is shared by the picker and resolver. New Exit Shuffle sessions
+use saved, untimed preview/recall rounds, five difficulty profiles, two limited
+assisted hints and reduced-motion-aware feedback; published v1 sessions keep
+their original rules and instructions.
+New v2 starts store `escapePatternVersion: 1` for well-mixed local patterns.
+Absence preserves earlier v2 patterns. Never default that revision during decode
+or change an existing session's generator.
+
+New criminal assignments have versioned results and real style-specific legal,
+financial, rival, cargo, crew and employment consequences. Vehicle theft moves
+one registered asset, freezes its prior title and creates no payout. Stolen
+possession cannot be sold, insured or inherited; return restores the real original
+owner, and arrest/death can seize it. Do not reintroduce fresh cars for named
+victims or overwrite an existing theft's incident identity.
+
+Thirty of the eighty overhaul situations gain frozen v2 typed operations.
+Fourteen romance/ex scenes are rewritten while twenty-one ordinary scenes stay.
+The separate annual-catalogue audit reviews 121 situations, retains 95 and refines
+26 through a prospective prose-only overlay. Original pending wording, effects,
+participants and v1 semantics remain literal. Preserve both ordinary **49/51/28**
+and enhanced creative **50/52/29** capabilities; decoding adds no revision defaults.
+
+SQLite reader **31** upgrades supported reader 30 and older records by changing
+only the metadata marker on compatible eight-table databases. Future reader 32
+is refused. Keep actual receipt rollback/retry, closed-connection reopening,
+backups, checkpoints, branch independence and multi-generation history intact.
+
+Verification covers **all 378 suites / 6,268 unique passing cases** through the
+full frozen run and final affected rerun, with zero failures, skips or missing
+files. The 120-life soak passes, retaining up to 61,470 ledger rows. Strict
+app/test types, the 570-module acyclic graph, notice checks and both final Hermes
+exports pass; all 44 changed runtime sources match both maps. All nine legacy
+benchmark outcomes remain exact. Eleven-sample follow-ups did not reproduce the
+initial timing gaps; retain the raw reports and avoid a native latency claim.
+
+See [the six-issue implementation/gameplay review](CRIME_ROMANCE_REFINEMENT_REVIEW.md),
+[the annual writing inventory](CRIME_ROMANCE_WRITING_AUDIT.md), and
+[the refinement's regression, performance and export evidence](verification/crime-romance-refinement/README.md).
+Installed-device acceptance remains separate from production Hermes exports.
+
 ## Crime, prison, romance and storytelling — 30 October 2026
 
 The `v2` overhaul extends existing gangs, incidents, courts, families and

@@ -1,0 +1,39 @@
+{
+  "sourceCommit": "fc2294b476fec72a77a9a863c7994b025ebe241f",
+  "sourceMethod": "git archive of exact starting commit into isolated /tmp/dreams-refinement-baseline; installed dependencies linked without source edits",
+  "command": "node node_modules/jest/bin/jest.js --runInBand tests/persistence/creative-career-compatibility.test.ts tests/persistence/prospective-gameplay-migration.test.ts tests/persistence/time-machine.test.ts tests/persistence/crime-romance-integration.test.ts",
+  "passedSuites": 4,
+  "passedTests": 37,
+  "failedTests": 0,
+  "skippedTests": 0,
+  "resultSha256": "c08fd2051e5428882f3e298862f193e95c8dae191af2a2d0a6abd81e2ffd2cc1",
+  "logSha256": "f1871ee63e960fc9a33fcb1e55766b2eb6e65867fb3a9d4d0b983292a774540a",
+  "suites": [
+    {
+      "file": "tests/persistence/crime-romance-integration.test.ts",
+      "status": "passed",
+      "passed": 19
+    },
+    {
+      "file": "tests/persistence/time-machine.test.ts",
+      "status": "passed",
+      "passed": 8
+    },
+    {
+      "file": "tests/persistence/prospective-gameplay-migration.test.ts",
+      "status": "passed",
+      "passed": 4
+    },
+    {
+      "file": "tests/persistence/creative-career-compatibility.test.ts",
+      "status": "passed",
+      "passed": 6
+    }
+  ],
+  "legacyFixture": {
+    "file": "tests/fixtures/v1-refinement-compatibility.json",
+    "sha256": "3b64966c88df030152bba2420eb5e2e652e5a3357697b66ef24222b6a884358e",
+    "rows": 12,
+    "description": "Published v1 active and paused escape success/forfeit plus all choices of one organised crime, prison and romance scene. Each includes exact input and full resolved-world SHA256."
+  }
+}

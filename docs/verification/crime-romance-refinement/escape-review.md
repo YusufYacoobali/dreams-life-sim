@@ -37,7 +37,14 @@ An optional 180 ms opacity transition marks changes and gives feedback without c
 
 The saved seed, version and append-only transcript reconstruct every round, phase, input, mistake, hint and outcome. Preview/hint transitions are actual persisted inputs, not local component state. Reopening in recall stays in recall. The existing reservation consumes the person's annual escape allowance at start; wrong controls, replayed transitions, reordered inputs and a second start are rejected. Failure/forfeiture uses the canonical escape incident/case resolver. Success escapes the actual owning sentence and makes the person wanted. Settlement cannot run twice.
 
-Focused verification: **7 suites, 60 cases passed**, covering the five levels across 30 seeds each, v1 compatibility, phased UI visibility, limited hints, reduced-motion rendering, saved resume, actual security, failure and forfeiture cases, success, duplicate settlement rejection, connected SQLite rollback/retry/cold reopening, branch independence and the complete live screen-to-save journey. Existing generic mini-game/session suites are included. Independent exact baseline fixture checks are recorded separately by integrated QA.
+The stage-2 focused run passed **7 suites / 60 cases**, covering the five levels across 30 seeds each, v1 compatibility, phased UI visibility, limited hints, reduced-motion rendering, saved resume, actual security, failure and forfeiture cases, success, duplicate settlement rejection, connected SQLite rollback/retry/cold reopening, branch independence and the complete live screen-to-save journey. Existing generic mini-game/session suites are included. Independent exact baseline fixture checks are recorded separately by integrated QA.
+
+After the generator revision, the final affected run passed **14 suites / 184
+cases** with no skipped cases or source changes. The memory suite now has 17
+cases, including the variety check and five exact earlier-v2 save replays.
+[escape-pattern-variety.json](escape-pattern-variety.json) records the actual
+final module's sampled patterns; the
+[affected report](regression-final-affected.json.gz) retains all case outcomes.
 
 Command:
 

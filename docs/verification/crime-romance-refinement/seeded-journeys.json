@@ -1,0 +1,295 @@
+{
+  "method": "Fixed initial outcome seeds and declared adult boundary contexts; subsequent commands use genuine calendar advancement, affordable bail, hearings, actual financial balances and NPC decisions. No dates, histories or random streams are edited after the initial setup. Every command commits to real on-disk WAL SQLite, closes the connection and loads through a fresh connection. First criminal assignments and affair creation additionally inject receipt rollback, exact retry and duplicate-receipt checks.",
+  "calendarGuard": 20,
+  "guardExplanation": "Original10year scenario budget ended before the next release in the street career. Keeping seed42 and extending the test budget, without gameplay changes, preserves actual48month convictions and yields assignments in2023,2028,2033.",
+  "logSha256": "8c9475f88a6a04db111452e7ff2b40bc6a6b8f9ad360cd863dfe8fa87e532069",
+  "journeys": [
+    {
+      "journey": "street-syndicate",
+      "initialOutcomeSeed": 42,
+      "assignedYears": [
+        2023,
+        2028,
+        2033
+      ],
+      "end": {
+        "year": 2033,
+        "month": 1,
+        "day": 1
+      },
+      "commands": 66,
+      "jobs": [
+        {
+          "id": "organised_job_incident_person_player_69_0",
+          "year": 2023,
+          "outcome": "quiet-profit",
+          "participants": [
+            "person_player",
+            "person_npc_67_4",
+            "person_npc_67_5"
+          ]
+        },
+        {
+          "id": "organised_job_incident_person_player_71_1",
+          "year": 2023,
+          "outcome": "quiet-profit",
+          "participants": [
+            "person_player"
+          ]
+        },
+        {
+          "id": "organised_job_incident_person_player_96_4",
+          "year": 2028,
+          "outcome": "quiet-profit",
+          "participants": [
+            "person_player",
+            "person_npc_67_4",
+            "person_npc_67_5"
+          ]
+        },
+        {
+          "id": "organised_job_incident_person_player_100_5",
+          "year": 2028,
+          "outcome": "quiet-profit",
+          "participants": [
+            "person_player"
+          ]
+        },
+        {
+          "id": "organised_job_incident_person_player_127_8",
+          "year": 2033,
+          "outcome": "exposed-profit",
+          "participants": [
+            "person_player",
+            "person_npc_67_4",
+            "person_npc_67_5"
+          ]
+        },
+        {
+          "id": "organised_job_incident_person_player_129_9",
+          "year": 2033,
+          "outcome": "quiet-profit",
+          "participants": [
+            "person_player"
+          ]
+        }
+      ],
+      "playerCases": [
+        {
+          "offence": "organized-job",
+          "status": "convicted"
+        },
+        {
+          "offence": "organized-job",
+          "status": "convicted"
+        },
+        {
+          "offence": "organized-job",
+          "status": "awaiting-trial"
+        }
+      ]
+    },
+    {
+      "journey": "fraud-network",
+      "initialOutcomeSeed": 314159,
+      "assignedYears": [
+        2023,
+        2024,
+        2027
+      ],
+      "end": {
+        "year": 2027,
+        "month": 1,
+        "day": 1
+      },
+      "commands": 46,
+      "jobs": [
+        {
+          "id": "organised_job_incident_person_player_69_0",
+          "year": 2023,
+          "outcome": "quiet-profit",
+          "participants": [
+            "person_player",
+            "person_npc_67_4",
+            "person_npc_67_5"
+          ]
+        },
+        {
+          "id": "organised_job_incident_person_player_71_1",
+          "year": 2023,
+          "outcome": "quiet-profit",
+          "participants": [
+            "person_player"
+          ]
+        },
+        {
+          "id": "organised_job_incident_person_player_78_2",
+          "year": 2024,
+          "outcome": "quiet-profit",
+          "participants": [
+            "person_player",
+            "person_npc_67_4",
+            "person_npc_67_5"
+          ]
+        },
+        {
+          "id": "organised_job_incident_person_player_80_3",
+          "year": 2024,
+          "outcome": "quiet-profit",
+          "participants": [
+            "person_player"
+          ]
+        },
+        {
+          "id": "organised_job_incident_person_player_105_6",
+          "year": 2027,
+          "outcome": "victim-complaint",
+          "participants": [
+            "person_player",
+            "person_npc_67_4",
+            "person_npc_67_5"
+          ]
+        },
+        {
+          "id": "organised_job_incident_person_player_109_7",
+          "year": 2027,
+          "outcome": "victim-complaint",
+          "participants": [
+            "person_player"
+          ]
+        }
+      ],
+      "playerCases": [
+        {
+          "offence": "financial-scam",
+          "status": "convicted"
+        },
+        {
+          "offence": "financial-scam",
+          "status": "awaiting-trial"
+        },
+        {
+          "offence": "financial-scam",
+          "status": "awaiting-trial"
+        }
+      ]
+    },
+    {
+      "journey": "smuggling-ring",
+      "initialOutcomeSeed": 271828,
+      "assignedYears": [
+        2023,
+        2024,
+        2025
+      ],
+      "end": {
+        "year": 2025,
+        "month": 1,
+        "day": 1
+      },
+      "commands": 31,
+      "jobs": [
+        {
+          "id": "organised_job_incident_person_player_69_0",
+          "year": 2023,
+          "outcome": "quiet-profit",
+          "participants": [
+            "person_player",
+            "person_npc_67_4",
+            "person_npc_67_5"
+          ]
+        },
+        {
+          "id": "organised_job_incident_person_player_73_1",
+          "year": 2023,
+          "outcome": "quiet-profit",
+          "participants": [
+            "person_player"
+          ]
+        },
+        {
+          "id": "organised_job_incident_person_player_82_2",
+          "year": 2024,
+          "outcome": "quiet-profit",
+          "participants": [
+            "person_player",
+            "person_npc_67_4",
+            "person_npc_67_5"
+          ]
+        },
+        {
+          "id": "organised_job_incident_person_player_84_3",
+          "year": 2024,
+          "outcome": "quiet-profit",
+          "participants": [
+            "person_player"
+          ]
+        },
+        {
+          "id": "organised_job_incident_person_player_94_4",
+          "year": 2025,
+          "outcome": "associate-betrayal",
+          "participants": [
+            "person_player",
+            "person_npc_67_4",
+            "person_npc_67_5"
+          ]
+        },
+        {
+          "id": "organised_job_incident_person_player_96_5",
+          "year": 2025,
+          "outcome": "quiet-profit",
+          "participants": [
+            "person_player"
+          ]
+        }
+      ],
+      "playerCases": [
+        {
+          "offence": "contraband",
+          "status": "acquitted"
+        },
+        {
+          "offence": "contraband",
+          "status": "acquitted"
+        }
+      ]
+    },
+    {
+      "journey": "happy-couple",
+      "initialOutcomeSeed": 421,
+      "years": 3,
+      "end": {
+        "year": 2026,
+        "month": 1,
+        "day": 1
+      },
+      "commands": 14,
+      "relation": "dating",
+      "affairs": 0,
+      "offers": []
+    },
+    {
+      "journey": "affair-and-ex",
+      "initialOutcomeSeed": 0,
+      "years": 2,
+      "end": {
+        "year": 2025,
+        "month": 1,
+        "day": 1
+      },
+      "commands": 23,
+      "affairId": "affair_67_0",
+      "relationship": "dating",
+      "history": [
+        "met:2023",
+        "affair-discovered:affair_67_0",
+        "confessed:affair_67_0",
+        "breakup:2023",
+        "ex-apology:2023",
+        "ex-apology:2024",
+        "reconciled:2025"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "sourceCommit": "e558b7909423246027e040fc3160f756ed02f03d",
+  "node": "v24.19.0",
+  "typecheck": {
+    "command": "npm run typecheck",
+    "exit": 0,
+    "scope": "Strict application and test TypeScript"
+  },
+  "imports": {
+    "command": "npm run check:imports",
+    "exit": 0,
+    "modules": 570,
+    "cycles": []
+  },
+  "notices": {
+    "command": "node tools/generate-third-party-notices.cjs --check",
+    "exit": 0,
+    "mode": "check",
+    "directDependencies": 32,
+    "candidateNonDevLockEntries": 790,
+    "versionMatched": 780,
+    "versionMismatches": 0,
+    "notInstalled": 10,
+    "missingLockLicenseMetadata": 1,
+    "withoutReadableNoticeFile": 59,
+    "readableNoticeFiles": 737,
+    "uniqueExactNoticeTexts": 281,
+    "detectedFontFamilies": 1,
+    "projectArtFiles": 1198,
+    "checkedSourceCommit": "6e35d1528f8c1cd6ae8f797c4968cf3bee311226",
+    "inputsUnchangedSinceCheck": true
+  },
+  "preservation": {
+    "comparisonBaseline": "fc2294b476fec72a77a9a863c7994b025ebe241f",
+    "command": "git diff fc2294b4 --exit-code -- package.json package-lock.json assets src/purchases plugins",
+    "exit": 0
+  },
+  "nativeDeviceAcceptance": false
+}

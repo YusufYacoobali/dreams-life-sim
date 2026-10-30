@@ -1,0 +1,202 @@
+{
+  "sourceCommit": null,
+  "started": "2026-10-30T17:29:28.615Z",
+  "finished": "2026-10-30T17:29:54.209Z",
+  "sourceDigest": "1a2a427d19430a92e908ed0f24f5278f84a96f623e46e4b8b424cf55047261cf",
+  "changedSourcesDuringRun": [
+    "tests/game/organised-mission-refinement.test.ts"
+  ],
+  "suites": {
+    "total": 3,
+    "passed": 3,
+    "failed": 0,
+    "pending": 0
+  },
+  "cases": {
+    "total": 29,
+    "passed": 29,
+    "failed": 0,
+    "pending": 0,
+    "todo": 0
+  },
+  "files": [
+    {
+      "file": "tests/persistence/refinement-compatibility.test.ts",
+      "passed": 19,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "cases": [
+        {
+          "name": "v1-escape-success preserves the complete world produced by the published v1 executable, including bound prose, effects and RNG",
+          "status": "passed",
+          "duration": 207
+        },
+        {
+          "name": "v1-escape-forfeit preserves the complete world produced by the published v1 executable, including bound prose, effects and RNG",
+          "status": "passed",
+          "duration": 117
+        },
+        {
+          "name": "v1-escape-paused preserves the complete world produced by the published v1 executable, including bound prose, effects and RNG",
+          "status": "passed",
+          "duration": 137
+        },
+        {
+          "name": "v1-crime-negotiate preserves the complete world produced by the published v1 executable, including bound prose, effects and RNG",
+          "status": "passed",
+          "duration": 101
+        },
+        {
+          "name": "v1-crime-expose preserves the complete world produced by the published v1 executable, including bound prose, effects and RNG",
+          "status": "passed",
+          "duration": 97
+        },
+        {
+          "name": "v1-crime-leave preserves the complete world produced by the published v1 executable, including bound prose, effects and RNG",
+          "status": "passed",
+          "duration": 93
+        },
+        {
+          "name": "v1-prison-agree preserves the complete world produced by the published v1 executable, including bound prose, effects and RNG",
+          "status": "passed",
+          "duration": 106
+        },
+        {
+          "name": "v1-prison-mock preserves the complete world produced by the published v1 executable, including bound prose, effects and RNG",
+          "status": "passed",
+          "duration": 100
+        },
+        {
+          "name": "v1-prison-move preserves the complete world produced by the published v1 executable, including bound prose, effects and RNG",
+          "status": "passed",
+          "duration": 95
+        },
+        {
+          "name": "v1-romance-stop preserves the complete world produced by the published v1 executable, including bound prose, effects and RNG",
+          "status": "passed",
+          "duration": 85
+        },
+        {
+          "name": "v1-romance-choose preserves the complete world produced by the published v1 executable, including bound prose, effects and RNG",
+          "status": "passed",
+          "duration": 81
+        },
+        {
+          "name": "v1-romance-repeat preserves the complete world produced by the published v1 executable, including bound prose, effects and RNG",
+          "status": "passed",
+          "duration": 85
+        },
+        {
+          "name": "v1-escape-paused survives on-disk SQLite rollback, exact retry and a physically closed/reopened database at every command boundary",
+          "status": "passed",
+          "duration": 984
+        },
+        {
+          "name": "v1-crime-expose survives on-disk SQLite rollback, exact retry and a physically closed/reopened database at every command boundary",
+          "status": "passed",
+          "duration": 329
+        },
+        {
+          "name": "v1-prison-mock survives on-disk SQLite rollback, exact retry and a physically closed/reopened database at every command boundary",
+          "status": "passed",
+          "duration": 417
+        },
+        {
+          "name": "v1-romance-repeat survives on-disk SQLite rollback, exact retry and a physically closed/reopened database at every command boundary",
+          "status": "passed",
+          "duration": 255
+        },
+        {
+          "name": "v1-crime-negotiate remains the exact historical decision on an independent Time Machine branch",
+          "status": "passed",
+          "duration": 239
+        },
+        {
+          "name": "v1-prison-agree remains the exact historical decision on an independent Time Machine branch",
+          "status": "passed",
+          "duration": 230
+        },
+        {
+          "name": "v1-romance-stop remains the exact historical decision on an independent Time Machine branch",
+          "status": "passed",
+          "duration": 211
+        }
+      ]
+    },
+    {
+      "file": "tests/persistence/refinement-seeded-journeys.test.ts",
+      "passed": 5,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "cases": [
+        {
+          "name": "street-syndicate persists a seeded criminal career over at least three actual assignment years with named crew, rivals and genuine legal/financial consequences",
+          "status": "passed",
+          "duration": 8639
+        },
+        {
+          "name": "fraud-network persists a seeded criminal career over at least three actual assignment years with named crew, rivals and genuine legal/financial consequences",
+          "status": "passed",
+          "duration": 4497
+        },
+        {
+          "name": "smuggling-ring persists a seeded criminal career over at least three actual assignment years with named crew, rivals and genuine legal/financial consequences",
+          "status": "passed",
+          "duration": 3123
+        },
+        {
+          "name": "a happy seeded couple remains together through three genuine years, ordinary dates, bound scenes and cold SQLite reopening",
+          "status": "passed",
+          "duration": 1154
+        },
+        {
+          "name": "an actual affair, confession and breakup remain history while an ex considers reconciliation after two genuine years",
+          "status": "passed",
+          "duration": 1691
+        }
+      ]
+    },
+    {
+      "file": "tests/persistence/stolen-vehicle-refinement.test.ts",
+      "passed": 5,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "cases": [
+        {
+          "name": "a genuine vehicle theft (detected=false) atomically saves one linked inventory record, no cash payout and exactly one incident",
+          "status": "passed",
+          "duration": 397
+        },
+        {
+          "name": "a genuine vehicle theft (detected=true) atomically saves one linked inventory record, no cash payout and exactly one incident",
+          "status": "passed",
+          "duration": 272
+        },
+        {
+          "name": "returning a genuine stolen vehicle on one Time Machine future preserves the charge risk and leaves another future holding the same unsaleable vehicle",
+          "status": "passed",
+          "duration": 284
+        },
+        {
+          "name": "death cannot liquidate or bequeath a held stolen vehicle, and a cold save retains its seizure and original theft identity",
+          "status": "passed",
+          "duration": 165
+        },
+        {
+          "name": "the actual registered owner can sell a returned vehicle with its original purchase basis and retained theft history",
+          "status": "passed",
+          "duration": 156
+        }
+      ]
+    }
+  ],
+  "exitExplanation": "All29cases passed. Reporter returned nonzero only because unrelated tests/game/organised-mission-refinement.test.ts changed concurrently; no runtime or integration-test source changed. Final full regression supplies stable-source coverage.",
+  "command": "DREAMS_REFINEMENT_TRACE=1 DREAMS_REFINEMENT_TEST_REPORT=/tmp/dreams-refinement-final-integration.json node node_modules/jest/bin/jest.js --runInBand tests/persistence/refinement-seeded-journeys.test.ts tests/persistence/stolen-vehicle-refinement.test.ts tests/persistence/refinement-compatibility.test.ts --reporters=default --reporters=./tools/refinement-jest-reporter.cjs",
+  "logSha256": "8c9475f88a6a04db111452e7ff2b40bc6a6b8f9ad360cd863dfe8fa87e532069"
+}
