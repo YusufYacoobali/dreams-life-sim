@@ -244,7 +244,7 @@ function releaseActor(world: World, career: Career, project: Career['projects'][
   fact(world, 'My ' + metadata.role + ' role in ' + project.name + ' received critics ' + critical + '/100 and audience ' + audience + '/100.' + (award ? ' I won a Lantern Acting Award.' : nomination ? ' It earned an acting nomination.' : ''), 'career', '', person.id);
   if (person.id === world.activePersonId) {
     const money = (minor: bigint) => formatMoney({ minor, currency: project.currency });
-    offerPending(world, { kind: 'result', id: 'actor-release:' + project.id, title: project.name + (completed ? ' is released' : ' closes unfinished'), body: metadata.role + ' · ' + metadata.genre + '. ' + summary + (dropped ? ' Your agency ends representation after repeated failures.' : '') + (!wasComeback && state.comeback ? ' You have a comeback worth talking about.' : ''), illustration: 'actor', effects: [
+    offerPending(world, { kind: 'result', id: 'actor-release:' + project.id, title: project.name + (completed ? metadata.category === 'theatre' ? ' finishes its run' : ' is released' : ' closes unfinished'), body: metadata.role + ' · ' + metadata.genre + '. ' + summary + (dropped ? ' Your agency ends representation after repeated failures.' : '') + (!wasComeback && state.comeback ? ' You have a comeback worth talking about.' : ''), illustration: 'actor', effects: [
       { id: 'quality', label: 'Performance quality', value: project.quality + '%', tone: 'neutral' },
       { id: 'critical', label: 'Critical reception', value: critical + '/100', tone: critical >= 60 ? 'positive' : 'negative' },
       { id: 'audience', label: 'Audience reception', value: audience + '/100 · ' + commercial, tone: audience >= 60 ? 'positive' : 'neutral' },

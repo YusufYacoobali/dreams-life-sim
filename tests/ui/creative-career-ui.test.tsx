@@ -13,6 +13,7 @@ import { CreativeHistory, creativeSettlementPayments } from '../../src/ui/Creati
 import { creativeMonthLabel, creativeMonthNumber } from '../../src/game/systems/creativeSchemas';
 import { unpackCheckpoint } from '../../src/persistence/checkpoints';
 import historicalCreative from '../fixtures/v50-creative-polish-compat.json';
+import { creativeBook, creativeCareer, creativeFinish, experiencedCreative } from '../support/creativeCareer';
 import { useCreativeCareerDialog } from '../../src/ui/CreativeCareerDialog';
 import { Button, Page } from '../../src/ui/components';
 import { ActorDashboard } from '../../src/ui/ActorDashboard';
@@ -81,9 +82,22 @@ test('Actor identity shows the next change date and disables another approach af
 test.each(['cancelledActor', 'cancelledModel'] as const)('%s history labels old interrupted work accurately without rewriting its saved outcome or inventing reviews', key => {
   const world = unpackCheckpoint(historicalCreative[key]), project = world.careers[0].projects[0], saved = encodeWorld(world);
   const view = render(frame(<CreativeHistory career={world.careers[0]} title="Work History" />));
-  expect(screen.getByText(/Unfinished production/)).toBeOnTheScreen();
+  expect(screen.getByText(key === 'cancelledModel' ? /Unfinished booking/ : /Unfinished production/)).toBeOnTheScreen();
   expect(screen.getByText('Earlier saved outcome')).toBeOnTheScreen(); expect(screen.getByText(project.creative!.release!.summary)).toBeOnTheScreen();
   expect(screen.queryByText(/Critical reception|Industry reception|Audience reception/)).toBeNull();
+  expect(encodeWorld(world)).toBe(saved); view.unmount();
+});
+
+test.each(['model', 'actor'] as const)('%s history uses industry-appropriate success wording without rewriting the saved classification', kind => {
+  let world = creativeBook(experiencedCreative(kind), kind, kind === 'model' ? 'runway' : 'studio-film');
+  const metadata = creativeCareer(world, kind).projects.at(-1)!.creative!;
+  metadata.publicity = 50; metadata.audienceRoll = 1; // A strong saved reception fixture for the display boundary.
+  world = creativeFinish(world, kind);
+  const project = creativeCareer(world, kind).projects.at(-1)!, saved = encodeWorld(world);
+  expect(project.creative!.release!.commercial).toBe('blockbuster');
+  const view = render(frame(<CreativeHistory career={creativeCareer(world, kind)} title="Work History" />));
+  expect(screen.getByText(kind === 'model' ? /Major success/ : /Blockbuster/)).toBeOnTheScreen();
+  if (kind === 'model') expect(screen.queryByText(/blockbuster/i)).toBeNull();
   expect(encodeWorld(world)).toBe(saved); view.unmount();
 });
 test.each(['actor', 'model'] as const)('%s career entry is free, confirms before writing and retries a failed save without multiplying contacts', async kind => {

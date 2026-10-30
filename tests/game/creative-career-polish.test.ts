@@ -20,6 +20,14 @@ import historical from '../fixtures/v50-creative-polish-compat.json';
 const strategy = (kind: CreativeKind, alternate = false) => kind === 'actor' ? { type: 'actor-style' as const, style: alternate ? 'popular' as const : 'craft' as const } : { type: 'model-specialise' as const, specialisations: alternate ? ['luxury' as const] : ['editorial' as const, 'runway' as const] };
 const changedAt = (world: World, kind: CreativeKind) => kind === 'actor' ? actorCareer(world)!.actor!.lastStyleMonth : modelCareer(world)!.modelCareer!.lastSpecialisationMonth;
 
+test.each(['theatre', 'independent-film'])('%s completion uses the appropriate title and keeps it through reopening', category => {
+  let world = creativeBook(creativeFixture('actor'), 'actor', category);
+  while (actorCareer(world)!.status === 'active') world = creativePeriod(world);
+  const project = actorCareer(world)!.projects[0];
+  expect(project.status).toBe('completed'); expect(world.pending?.title).toBe(project.name + (category === 'theatre' ? ' finishes its run' : ' is released'));
+  expect(decodeWorld(encodeWorld(world)).pending).toEqual(world.pending);
+});
+
 test.each(['actor', 'model'] as const)('%s initial strategy is free, rejects no-ops without spending the cooldown, and unlocks after exactly twelve months', kind => {
   let world = creativeFixture(kind), initial = encodeWorld(world);
   const noOp = kind === 'actor' ? { type: 'actor-style' as const, style: 'versatile' as const } : { type: 'model-specialise' as const, specialisations: ['commercial' as const] };

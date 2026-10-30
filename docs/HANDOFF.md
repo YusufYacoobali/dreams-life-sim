@@ -2,6 +2,10 @@
 
 Owner workflow preference: commit and push completed changes to the active development branch unless explicitly told otherwise.
 
+## Career presentation labels — 30 October 2026
+
+New theatre completion popups say “finishes its run”. Model history labels cancelled work “Unfinished booking” and displays the shared top success classification as “Major success”; Actor films retain “Blockbuster”. These are presentation corrections: stored classifications, rewards, historical outcomes and already pending text remain unchanged. All 58 focused domain/UI cases, strict app/test types and import checks pass. No broad cohort or native export was repeated for these wording-only changes.
+
 ## Actor and Model gameplay/writing polish — 30 October 2026
 
 The preceding purchases and initial career overhaul are committed at `9f63e029`; this chapter describes the subsequent polish.

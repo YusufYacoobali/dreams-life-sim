@@ -4,6 +4,8 @@ Implemented on `v2`, 30 October 2026. Both careers remain free. The gameplay/wri
 
 ## Final gameplay and writing polish
 
+Presentation follow-up: new theatre completion titles say “finishes its run”; cancelled Model history says “Unfinished booking”; Model's stored `blockbuster` classification displays as “Major success”. Actor films keep “Blockbuster”. No saved data, rewards or already offered text is rewritten. The two affected domain/UI suites pass all 58 cases, including four new regressions, alongside strict types and import checks.
+
 Actor style and Model specialisation sets now commit for twelve in-game months. The initial explicit selection is free; signing a first contract commits an otherwise unchosen default. No-op changes, including reordered identical Model sets, reject without spending the cooldown. Actor must also finish the current production. Model can change its future casting identity while working, without changing the current booking or losing portfolio skills. Its picker reviews the complete one-to-three-area set before one atomic save. Both dashboards show the next available change. Exit/re-entry and cold reopening preserve the commitment.
 
 `lastStyleMonth` and `lastSpecialisationMonth` are optional: old saves receive no backdated timestamp. Actor contracts capture their acting approach. Craft, versatile and popular approaches influence monthly performance as well as the separate critical/audience calculations. The legacy generic focus command cannot bypass the new strategy controls.
