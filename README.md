@@ -8,7 +8,7 @@ Smooth actions, startup/onboarding and early gameplay remain priorities. Automat
 
 The base game is free and uses local saves. Optional permanent careers, God Mode and Time Machine use RevenueCat; no account or subscription is required. See [purchase implementation and exact store setup](docs/MONETISATION.md). Existing local archive/history features remain intact; additional import/export/sharing and history-storage work is parked under the user's current scope. Country models are authored game assumptions; see [rule verification status](docs/COUNTRY_RULES.md).
 
-Actor and Model remain free and now have distinct agency, casting, production, relationship and history systems, plus 28 authored situations each. Actor separates critical and audience reception; Model adds portfolio specialisations and bounded exclusive brand agreements. Existing contracts finish under their saved rules. See [mechanics, save compatibility and verification](docs/ACTOR_MODEL_CAREERS.md).
+Actor and Model remain free and have distinct agency, casting, production, relationship and history systems, plus 28 authored situations each. Actor separates critical and audience reception; Model adds portfolio specialisations and bounded exclusive brand agreements. Strategies commit for twelve months, and unfinished work keeps its own outcome and real earnings. Historical contracts and saved decisions remain compatible. See [mechanics, save compatibility and verification](docs/ACTOR_MODEL_CAREERS.md).
 
 ```sh
 npm ci

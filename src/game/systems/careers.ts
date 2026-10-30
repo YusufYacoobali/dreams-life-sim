@@ -168,6 +168,7 @@ export function resolveCareer(world: World, command: CareerCommand) {
     if (!career)
         throw new IneligibleAction('Choose your recorded career');
     if (command.type === 'career-focus') {
+        if (career.actor || career.modelCareer) throw new IneligibleAction('Choose your acting style or modelling specialisations in the career dashboard');
         if (career.status !== 'active')
             throw new IneligibleAction('An active career is required');
         career.focus = command.focus;
@@ -176,11 +177,14 @@ export function resolveCareer(world: World, command: CareerCommand) {
     else {
         if (!['active', 'between'].includes(career.status))
             throw new IneligibleAction('This career is no longer active');
+        const unfinishedCreative = career.projects.some(project => project.status === 'active' && project.creative);
         if (career.employmentId && person.employment?.id === career.employmentId)
             endEmployment(world);
         career.status = 'left';
         career.ended = { ...world.date };
-        result(world, 'You left the career', 'Future contract pay stops. Your real earnings, skills, colleagues, projects and awards remain recorded.', careerCatalog[career.kind].art);
+        // The creative closure supplies the full unfinished-work result, including
+        // any brand claim. Do not queue a second generic departure message.
+        if (!unfinishedCreative) result(world, 'You left the career', 'Future contract pay stops. Your real earnings, skills, colleagues, projects and awards remain recorded.', careerCatalog[career.kind].art);
     }
 }
 export function careerTrainingMonth(world: World) {

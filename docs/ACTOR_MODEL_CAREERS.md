@@ -1,6 +1,22 @@
 # Actor and Model careers
 
-Implemented on `v2`, 30 October 2026. Both careers remain free. This work preserves the existing uncommitted purchase implementation and adds no purchase gates, products, dependencies or artwork.
+Implemented on `v2`, 30 October 2026. Both careers remain free. The gameplay/writing polish adds no purchase gates, products, dependencies or artwork; RevenueCat and pricing are unchanged.
+
+## Final gameplay and writing polish
+
+Actor style and Model specialisation sets now commit for twelve in-game months. The initial explicit selection is free; signing a first contract commits an otherwise unchosen default. No-op changes, including reordered identical Model sets, reject without spending the cooldown. Actor must also finish the current production. Model can change its future casting identity while working, without changing the current booking or losing portfolio skills. Its picker reviews the complete one-to-three-area set before one atomic save. Both dashboards show the next available change. Exit/re-entry and cold reopening preserve the commitment.
+
+`lastStyleMonth` and `lastSpecialisationMonth` are optional: old saves receive no backdated timestamp. Actor contracts capture their acting approach. Craft, versatile and popular approaches influence monthly performance as well as the separate critical/audience calculations. The legacy generic focus command cannot bypass the new strategy controls.
+
+Newly interrupted work has a distinct cancellation outcome, with no release scores, nominations or award. The result and history retain real wages, signed commissions and professional consequences. Exclusive Model cancellation retains its existing 20% settlement liability; closure and claims are idempotent. Death cancels duties without creating a new claim. Optional `outcomeVersion: 2` and `cancellation` metadata apply to new contracts or a fresh closure of an existing active contract. Historical cancelled/completed projects are never backfilled. Their saved prose and figures remain intact; history labels old cancelled work as unfinished and does not present its old figures as a new review.
+
+New story snapshots use version 2. Active publicity changes are written to the relevant production; negative Model publicity now counts too, at the same half-weight as Actor publicity. The existing production exposure remains, without an additional instant fame gift for the story choice. Between jobs, signed publicity changes affect persistent earned fame, capped at three points per choice. No new fame stat is introduced. Version 1 pending choices retain their original effects and result text, including their old publicity/portfolio/obligation semantics.
+
+Portfolio effects target the current booking's actual specialisation or an explicitly authored area. Added brand obligations target that booking's agreement; otherwise they create the existing bounded first-refusal hold. They cannot silently alter another client's earlier agreement. A reduction requires something relevant to reduce and cannot erase completed appearances. Three previously ineffective negative-obligation effects now change portfolio or production quality to match their revised prose. Agency, fee, relationship and opportunity effects remain real; rival/co-star relationships contribute small, bounded casting differences. New result rows show the changed quality, publicity, future rate, representation, portfolio, opportunity standing or obligations. Releases show new milestones, representation loss, comeback and recognition where supported by state.
+
+The 56 situations and 168 choice IDs are retained. Weaker technical or misleading passages are revised rather than rewriting the whole catalogue. Completed work uses **66 deterministic category/reception variants** across five Actor and six Model categories. Final wording is saved with the outcome; no new RNG draw selects prose. Journal entries remain first person. Financial explanations belong in the labelled receipt/terms rows, not jokes about fictional money in a release paragraph.
+
+Current verification is recorded in the polish verification section below. The initial-overhaul evidence remains separately labelled.
 
 ## Playing the careers
 
@@ -64,7 +80,7 @@ Updated existing acceptance journeys: `tests/ui/model-career-acceptance-flow.tes
 
 Documentation: this file, `docs/HANDOFF.md` and `README.md`. Other dirty files already belonged to the preceding work and are not part of this overhaul.
 
-## Verification
+## Initial overhaul verification (commit `9f63e029`)
 
 Focused coverage includes four distinct three-year journeys through normal monthly engine advancement; 51 new contracts and 156 paid months with archival and achievements; original legacy contract fingerprints; genuine legacy pending saves; real SQLite cold reopening and failed-save retry; historical GBP/JPY conversion receipts; duplicate/corrupt receipt rejection; agency negotiation; sponsorship exclusivity and settlements; deterministic boards; dead-agent replacement; and exit/return/death/retirement/interrupted-year handling.
 
@@ -90,3 +106,29 @@ The updated Model archive UI acceptance journey continues the unchanged Actor ar
 Verification logs are `/tmp/dreams-creative-regression.log`, `/tmp/dreams-creative-final-focused.log`, `/tmp/dreams-creative-final-agency.log`, `/tmp/dreams-model-acceptance-final.log` and `/tmp/dreams-actor-career-flow-final.log`. They are local execution artifacts, not committed fixtures.
 
 Strict application/test TypeScript checks, the **544-module import graph with zero cycles**, licence notice checks and whitespace checks pass. The final checks were repeated after all source/test edits; the strict-type log is `/tmp/dreams-creative-types-verified.log`. Final Hermes exports pass for **Android (3,691 modules)** and **iOS (3,606 modules)**, written to `/tmp/dreams-creative-export`, including the final signed-commission disclosure fix; the log is `/tmp/dreams-creative-export-complete.log`. Exports establish bundle compilation, not signed native builds or physical-device visual/performance acceptance. No real store transactions are involved in either free career.
+
+## Polish verification
+
+The new effect audit runs every one of the 168 choices through real offer/choose commands, including both eligible working/between states for any-phase stories: 183 choice/state cases plus catalogue coverage. It checks each authored target, actual charges, remaining-pay amendments, fixed signed commission, contact history, obligations, result/journal wording, RNG stability and cold reopening. Normal stat caps still apply.
+
+New strategy/outcome tests cover exact twelve-month boundaries, default commitments, no-ops, active productions, immutable existing bookings, exit/re-entry, old missing timestamps, monthly strategy differences, positive/negative publicity, future casting relationships, paid cancellation commissions, single exclusive liabilities, death, all eleven actual paid production categories and all 66 prose variants. UI cases cover draft/review/rollback/retry of a three-area set, displayed cooldowns and historical cancellation presentation.
+
+`tests/fixtures/v50-creative-polish-compat.json` was generated by running the **previous commit `9f63e0294e211d20ddd67805970786808dc6133d`**, rather than constructing old-shaped state with the new engine. It contains Actor and Model pending choices and their expected resolved worlds, plus actual pre-polish cancelled Actor/Model outcomes. Tests compare complete encoded worlds after reopening/resolving. These include the old Model publicity/portfolio path and a fee/scope amendment whose live catalogue text and effects have now changed.
+
+Relevant existing journeys, archive finance, save compatibility and UI tests are rerun. The broader regression command skips only the previously passed 12-life invariant case; it retains the other engine tests and reruns the four three-year creative journeys and 51-contract/156-paid-month finance/archive workload:
+
+```sh
+npx jest --maxWorkers=4 --silent --testTimeout=90000 \
+  --testNamePattern='^(?!12 complete seeded lives preserve invariants)'
+```
+
+Leaving an unfinished production emits one complete closure result, rather than an additional generic departure popup. A focused regression covers both careers.
+
+Final results:
+
+- **356 suites have passing coverage / 5,818 executed cases pass**, including **226 new cases**. The full regression initially passed 355 suites/5,817 cases; one old Model UI assertion expected the former history label. That assertion now matches the clearer completed-work label and its full acceptance journey passes on rerun. The one skipped case is the deliberately excluded 12-life invariant sweep (5,819 total cases including that skip).
+- The final **38-case strategy/outcome/compatibility suite** passes after the single-departure-result change. The **184-case story audit**, **16-case creative UI suite**, existing multi-year journeys, archival finance and save compatibility all pass. New cases comprise 38 strategy/outcome cases, 184 audit cases and four added UI cases.
+- Final strict app/test TypeScript checks pass. The runtime import graph has **545 modules / zero cycles**. Notices and whitespace checks pass. No dependencies, artwork or purchase files changed.
+- Final Hermes exports pass for **iOS (3,607 modules)** and **Android (3,692 modules)** in `/tmp/dreams-polish-export`. The final build's source checksums stayed unchanged, and both platform bundles contain the final category-specific copy.
+
+Logs: `/tmp/dreams-polish-regression.log`, `/tmp/dreams-polish-model-acceptance.log`, `/tmp/dreams-polish-complete-domain.log`, `/tmp/dreams-polish-final-focused.log`, `/tmp/dreams-polish-integration.log`, `/tmp/dreams-polish-types-complete.log` and `/tmp/dreams-polish-export-verified.log`. Logs/exports are local execution artifacts, not committed app assets. The published commit is reported with delivery. Signed native builds and physical-device visual/performance acceptance remain unverified.

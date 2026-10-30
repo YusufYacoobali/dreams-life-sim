@@ -18,6 +18,8 @@ export const creativeOfferSchema = z.object({
 });
 export const creativeReleaseSchema = z.object({ critical: creativePercent, audience: creativePercent, commercial: z.enum(['flop', 'modest', 'hit', 'blockbuster']), nomination: z.boolean(), fame: z.number().int(), reputation: z.number().int(), summary: z.string() });
 export const creativeProjectSchema = z.object({
+  outcomeVersion: z.literal(2).optional(), actingStyle: z.enum(['versatile', 'craft', 'popular']).optional(),
+  cancellation: z.object({ summary: z.string(), reputation: z.number().int(), fame: z.number().int() }).optional(),
   kind: z.enum(creativeKinds), offerId: z.string(), category: z.string(), genre: z.string(), role: z.string(), term: z.number().int().min(1).max(12),
   prestige: creativePercent, popularity: creativePercent, risk: creativePercent, exclusivity: z.boolean(),
   commissionBps: z.number().int().min(0).max(3000), agentId: z.string().nullable(), processedGross: money, commissionPaid: money, commissionTransactions: z.array(z.string()).max(12),
@@ -41,11 +43,12 @@ export const creativeImpactSchema = z.object({
   stress: z.number().int().min(-100).max(100).optional(), health: z.number().int().min(-100).max(100).optional(), publicImage: z.number().int().min(-100).max(100).optional(), portfolio: z.number().int().min(-100).max(100).optional(),
   payBps: z.number().int().min(-5000).max(5000).optional(), costBps: z.number().int().min(0).max(10000).optional(), commissionBps: z.number().int().min(-3000).max(3000).optional(), agencyRisk: z.number().int().min(-100).max(100).optional(), opportunity: z.number().int().min(-100).max(100).optional(), obligation: z.number().int().min(-12).max(12).optional(), leaveAgency: z.boolean().optional(),
 }).strict();
-export const creativeChoiceEffectSchema = z.object({ kind: z.literal('creative-choice'), careerId: z.string(), decisionId: z.string(), choiceId: z.string(), snapshot: z.object({ version: z.literal(1), storyId: z.string(), title: z.string(), contactId: z.string(), projectId: z.string().nullable(), cost: z.object({ minor: z.bigint().nonnegative(), currency: z.enum(['USD','CAD','GBP','AUD','EUR','BRL','INR','JPY','ZAR']) }), impact: creativeImpactSchema }).strict() }).strict();
+export const creativeChoiceEffectSchema = z.object({ kind: z.literal('creative-choice'), careerId: z.string(), decisionId: z.string(), choiceId: z.string(), snapshot: z.object({ version: z.union([z.literal(1), z.literal(2)]), storyId: z.string(), title: z.string(), contactId: z.string(), projectId: z.string().nullable(), portfolioArea: z.enum(['editorial', 'runway', 'commercial', 'luxury', 'lifestyle']).optional(), cost: z.object({ minor: z.bigint().nonnegative(), currency: z.enum(['USD','CAD','GBP','AUD','EUR','BRL','INR','JPY','ZAR']) }), impact: creativeImpactSchema }).strict() }).strict();
 export type CreativeOffer = z.infer<typeof creativeOfferSchema>;
 export type CreativeProject = z.infer<typeof creativeProjectSchema>;
 export type IndustryState = z.infer<typeof industryStateSchema>;
 export type Representation = z.infer<typeof representationSchema>;
 export type CreativeChoiceEffect = z.infer<typeof creativeChoiceEffectSchema>;
 export const creativeMonthNumber = (world: { date: { year: number; month: number } }) => world.date.year * 12 + world.date.month - 1;
+export const creativeMonthLabel = (month: number) => Math.floor(month / 12) + '-' + String(month % 12 + 1).padStart(2, '0');
 export const newIndustryState = (): IndustryState => ({ version: 1, representation: { tier: 'independent', agentId: null, commissionBps: 0, rapport: 55, failures: 0, history: [], archived: 0 }, contacts: {}, board: [], boardSeason: -1, decision: null, seenStories: [], lastDecisionQuarter: -1, decisionCount: 0, milestones: [], completed: 0, totalGross: 0n, totalCommission: 0n, bookingHoldUntil: -1, opportunityBoost: 0, archivedProjects: 0 });

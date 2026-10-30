@@ -11,6 +11,8 @@ export function validateCreativeCareers(world: World) {
     const industry = career.kind === 'actor' ? career.actor?.industry : career.kind === 'model' ? career.modelCareer?.industry : undefined;
     if (career.actor && career.kind !== 'actor' || career.modelCareer && career.kind !== 'model') throw new Error('Industry state belongs to the wrong career');
     if (!industry) { if (career.projects.some(project => project.creative) || career.creativeArchives?.length) throw new Error('Creative project has no industry state'); continue; }
+    const month = world.date.year * 12 + world.date.month - 1;
+    for (const changed of [career.actor?.lastStyleMonth, career.modelCareer?.lastSpecialisationMonth]) if (changed !== undefined && (changed < career.started.year * 12 + career.started.month - 1 || changed > month)) throw new Error('Invalid career strategy date');
     if (new Set(industry.milestones).size !== industry.milestones.length || new Set(industry.seenStories).size !== industry.seenStories.length || new Set(industry.board.map(offer => offer.id)).size !== industry.board.length) throw new Error('Duplicate industry records');
     if (Object.values(industry.contacts).some(id => !world.people[id] || id === career.personId) || new Set(Object.values(industry.contacts)).size !== Object.values(industry.contacts).length) throw new Error('Invalid industry contacts');
     const rep = industry.representation;
@@ -18,6 +20,7 @@ export function validateCreativeCareers(world: World) {
     let gross = 0n, commission = 0n;
     for (const project of [...career.projects, ...(career.creativeArchives ?? [])]) {
       const meta = project.creative; if (!meta) continue;
+      if (meta.actingStyle && meta.kind !== 'actor' || meta.cancellation && (project.status !== 'cancelled' || meta.release || project.award || meta.outcomeVersion !== 2) || meta.outcomeVersion === 2 && project.status === 'cancelled' && meta.release) throw new Error('Invalid creative cancellation');
       if (usedCreativeContracts.has(project.employmentId) || project.grossAtStart !== 0n || jobs.get(project.employmentId)?.grossEarned !== project.grossEarned) throw new Error('Creative projects must reconcile one complete employment contract');
       usedCreativeContracts.add(project.employmentId);
       if (meta.kind !== career.kind || !industry || meta.term !== project.targetMonths || meta.processedGross !== project.grossEarned || meta.commissionPaid > project.grossEarned || meta.agentId && !world.people[meta.agentId] || new Set(meta.choices.map(choice => choice.id)).size !== meta.choices.length) throw new Error('Invalid creative contract');

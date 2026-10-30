@@ -2,6 +2,16 @@
 
 Owner workflow preference: commit and push completed changes to the active development branch unless explicitly told otherwise.
 
+## Actor and Model gameplay/writing polish — 30 October 2026
+
+The preceding purchases and initial career overhaul are committed at `9f63e029`; this chapter describes the subsequent polish.
+
+Continue on **`v2`**. Actor styles and Model specialisation sets now commit for twelve calendar months; Actor must finish the production first. Missing old timestamps are never backdated. A first successful contract commits an unchosen default. Model's picker drafts up to three areas and saves the reviewed set atomically; changing it affects future casting and preserves the portfolio/current booking.
+
+New cancellations have their own outcome and never receive release reviews or awards. Earned wages, commission and exclusive brand claims remain reconciled. Existing historical outcomes are preserved. New version-2 story snapshots fix signed publicity, portfolio targets and scoped obligations; existing version-1 pending choices retain their exact saved text and semantics. Releases now use 66 category/reception variants, with clearer professional changes and milestone feedback. Both careers remain free; purchases/pricing are untouched.
+
+Read [the current mechanics and compatibility/testing details](ACTOR_MODEL_CAREERS.md). New coverage audits all 168 choices and uses genuine pending/cancelled saves generated with the preceding commit. Verification covers **356 suites / 5,818 passing executed cases**, including **226 new cases**, across the full run and focused reruns. One old UI history-label assertion was updated and its complete Model acceptance journey passes. The single 12-life cohort is deliberately skipped; other engine tests, four three-year creative journeys and the 51-contract finance/archive workload pass. Final strict app/test types, the 545-module acyclic import graph, notices and iOS/Android Hermes exports pass. Signed builds and physical-device acceptance remain unverified.
+
 ## Free Actor and Model career overhaul — 30 October 2026
 
 Continue on **`v2`**. Distinct Actor/Model dashboards, agencies, saved castings, production decisions, recurring professional relationships, releases/portfolios, brands, achievements and compact history are implemented. Both remain free. Each has 26 main situations and two action incidents, with three authored choices each. Read [mechanics, exact changed files, compatibility and verification](ACTOR_MODEL_CAREERS.md).

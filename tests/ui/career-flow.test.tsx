@@ -47,6 +47,9 @@ test('native audition rollback/retry creates exactly one contract and team; focu
     };
     expect(encodeWorld(mockStore.getState().world!)).toBe(encodeWorld(initial));
     await retry('Explore Acting Opportunities', 'Explore Acting');
+    await press(/^Character & Craft\./, 'radio'); await press('Set Acting Approach');
+    await waitFor(() => expect(screen.getByRole('header', { name: 'An acting approach' })).toBeOnTheScreen());
+    await acknowledge();
     expect(world().careers).toHaveLength(1); expect(world().careers[0].projects).toHaveLength(0); expect(world().people[world().activePersonId].employment).toBeNull();
     const contacts = world().careers[0].contacts, enteredPeople = Object.keys(world().people);
     expect(contacts).toHaveLength(4); expect(Object.keys(world().careers[0].actor!.industry.contacts)).toHaveLength(4);
@@ -76,9 +79,6 @@ test('native audition rollback/retry creates exactly one contract and team; focu
     expect(project.grossEarned).toBe(0n); expect(project.periods).toHaveLength(0); expect(project.creative).toBeDefined();
     expect(selected.people[selected.activePersonId].employment!.id).toBe(project.employmentId);
     expect(selected.workHistory.filter(item => item.id === project.employmentId)).toHaveLength(1);
-    await press(/^Character & Craft\./, 'radio'); await press('Set Acting Approach');
-    await waitFor(() => expect(screen.getByRole('header', { name: 'An acting approach' })).toBeOnTheScreen());
-    await acknowledge();
     const saved = world();
     expect(saved.careers[0].focus).toBe('craft');
     expect(saved.careers[0].actor!.style).toBe('craft');

@@ -28,6 +28,7 @@ export function careerContractEnded(world: World, employmentId: string) {
         for (const project of career.projects.filter(item => item.status === 'active')) {
             project.grossEarned = history.grossEarned - project.grossAtStart;
             project.status = 'cancelled';
+            if (project.creative) project.creative.outcomeVersion = 2;
             project.ended = { ...world.date };
         }
         career.employmentId = null;

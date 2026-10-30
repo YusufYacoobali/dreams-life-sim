@@ -10,6 +10,7 @@ export type CreativeStory = {
   contact: 'agent' | 'director' | 'costar' | 'rival' | 'designer' | 'photographer';
   phase: 'working' | 'between' | 'any';
   requiresAgency?: boolean; requiresExclusive?: boolean; minCredits?: number; categories?: readonly string[];
+  portfolioArea?: 'editorial' | 'runway' | 'commercial' | 'luxury' | 'lifestyle';
   choices: readonly [CreativeStoryChoice, CreativeStoryChoice, CreativeStoryChoice];
 };
 export type CreativeStoryChoice = { id: string; label: string; result: string; journal: string; impact: CreativeImpact };

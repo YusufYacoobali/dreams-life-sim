@@ -1,6 +1,7 @@
 import { countries } from '../countries';
 import type { World } from '../model';
 import { actorProjectCatalog, actorMilestoneLabels } from '../content/actor';
+import { actorReleaseSummary } from '../content/creativeOutcomes';
 import { IneligibleAction } from '../errors';
 import { formatMoney, roundRatio } from '../money';
 import { forkRandom, randomInteger } from '../random';
@@ -9,7 +10,7 @@ import { offerPending } from '../pendingQueue';
 import { active, accountFor, availableCash, bounded, charge, fact, result } from './common';
 import { selectionReason, type Career } from './careers';
 import { actorProductionActionIds, type ActorCommand, type ActorProductionAction, type ActorState } from './actorSchemas';
-import { creativeMonthNumber, newIndustryState, type CreativeOffer } from './creativeSchemas';
+import { creativeMonthNumber, creativeMonthLabel, newIndustryState, type CreativeOffer } from './creativeSchemas';
 import { beginCreativeContract, changeAgency, creativeOfferReason, ensureCreativeCareer, ensureIndustryContacts, recordCreativeFailure, settleCreativeMonth } from './creativeCore';
 import { activeTrip } from './travelSchemas';
 import { isConfined } from './legalSchemas';
@@ -22,8 +23,8 @@ export type { ActorCommand } from './actorSchemas';
 
 export const actorProductionActions: readonly { id: ActorProductionAction; label: string; description: string }[] = [
   { id: 'prepare', label: 'Prepare the Role', description: 'Fund rehearsal and research. Better preparation supports every remaining production month, at a stress cost.' },
-  { id: 'stunt', label: 'Perform the Stunt', description: 'A saved stunt outcome weighs fitness and preparation. A memorable scene can also become a real injury.' },
-  { id: 'improvise', label: 'Try an Improvisation', description: 'Acting skill can rescue a scene or infuriate the director. The creative risk affects the actual production.' },
+  { id: 'stunt', label: 'Perform the Stunt', description: 'Fitness and preparation give the stunt a chance. A memorable scene can also become a real injury.' },
+  { id: 'improvise', label: 'Try an Improvisation', description: 'Acting skill can rescue a scene or infuriate the director. The creative risk changes the performance.' },
   { id: 'reshoot', label: 'Fund a Reshoot', description: 'Pay for a focused second attempt. Improve the material without extending the signed production term.' },
   { id: 'publicity', label: 'Promote the Production', description: 'Buy a modest publicity campaign. Reach more viewers while giving less attention to the performance.' },
   { id: 'cooperate', label: 'Work with the Cast', description: 'Build trust with the director and co-star. A calmer set helps the work without creating a publicity spectacle.' },
@@ -45,6 +46,13 @@ export function actorEntryReason(world: World): string | undefined {
   if (career?.actor && !['left', 'retired'].includes(career.status)) return 'Your actor career dashboard is already set up';
   if (career?.status === 'active') return 'Finish your existing acting project before choosing the new career system';
   return selectionReason(world, 'actor', true);
+}
+export function actorStyleReason(world: World, style?: ActorState['style']): string | undefined {
+  const career = actorCareer(world), state = career?.actor;
+  if (!state) return 'Explore acting first';
+  if (style === state.style) return 'Your current acting approach';
+  if (career.status === 'active') return 'Finish your current production before changing acting style';
+  if (state.lastStyleMonth !== undefined && creativeMonthNumber(world) < state.lastStyleMonth + 12) return 'Your next style change is available ' + creativeMonthLabel(state.lastStyleMonth + 12);
 }
 export function actorOfferReason(world: World, offer: CreativeOffer): string | undefined {
   const career = actorCareer(world);
@@ -106,7 +114,7 @@ function enter(world: World) {
   const career = ensureCreativeCareer(world, 'actor');
   if (career.actor) {
     if (career.actor.industry.boardSeason !== Math.floor(creativeMonthNumber(world) / 3) || career.actor.boardCountry !== active(world).country) buildBoard(world, career);
-    result(world, 'Return to acting', 'Your credits, awards, representation, professional contacts and previously answered casting opportunities are kept. A new contract still requires a genuine audition.', 'actor');
+    result(world, 'Return to acting', 'You are back in the audition rooms. Some faces are familiar; their opinions have had time to settle. There is still a part to win.', 'actor');
     return;
   }
   const oldCredits = career.projects.filter(project => project.status === 'completed').length, oldAwards = career.projects.filter(project => !!project.award).length;
@@ -115,7 +123,7 @@ function enter(world: World) {
   career.status = 'between'; career.ended = null;
   if (oldCredits) milestone(career.actor, 'first-role'); if (oldAwards) milestone(career.actor, 'acting-award');
   ensureIndustryContacts(world, career, ['agent', 'director', 'costar', 'rival']); buildBoard(world, career);
-  result(world, 'Your acting career, your choices', 'Your existing credits and payments stay intact. Choose representation and a saved casting opportunity. No contract or income starts until an audition actually succeeds.', 'actor');
+  result(world, 'Your acting career, your choices', 'You enter a business where “we’ll be in touch” covers an alarming range of outcomes. Meet your contacts, choose representation and find a role worth chasing.', 'actor');
 }
 function relationshipChange(world: World, career: Career, role: string, delta: number) {
   const id = career.actor?.industry.contacts[role], edge = id && !world.people[id]?.died ? relationFor(world, career.personId, id) : undefined;
@@ -128,7 +136,7 @@ function production(world: World, career: Career, action: ActorProductionAction)
   let note: string;
   if (action === 'prepare') {
     metadata.preparation = bounded(metadata.preparation + 25); metadata.qualityBonus = clampBonus(metadata.qualityBonus + 4); person.stats.stress = bounded(person.stats.stress + 5);
-    note = 'You research the role, rehearse the awkward passages and discover why the character keeps moving to cheaper flats. The preparation now supports the remaining filming periods.';
+    note = 'You research the role, rehearse the awkward passages and discover why the character keeps moving to cheaper flats. The preparation now supports the remaining production months.';
   } else if (action === 'stunt') {
     const safe = metadata.audienceRoll <= Math.min(95, 30 + Math.floor(person.stats.fitness / 2) + Math.floor(metadata.preparation / 4));
     metadata.qualityBonus = clampBonus(metadata.qualityBonus + (safe ? 10 : -9)); metadata.publicity = clampBonus(metadata.publicity + (safe ? 8 : 3));
@@ -152,7 +160,7 @@ function production(world: World, career: Career, action: ActorProductionAction)
   }
   person.stats.energy = bounded(person.stats.energy - 5);
   metadata.choices.push({ id: 'actor-action:' + action, choice: action, month: creativeMonthNumber(world), note });
-  fact(world, 'On ' + project.name + ', ' + note, 'career');
+  fact(world, 'I chose “' + actorProductionActions.find(row => row.id === action)!.label + '” for ' + project.name + '.', 'career');
   result(world, actorProductionActions.find(row => row.id === action)!.label, note, 'actor', cost ? [{ id: 'cost', label: 'Actual production cost', value: formatMoney({ minor: cost, currency: career.currency }), tone: 'negative' }] : []);
 }
 export function resolveActor(world: World, command: ActorCommand) {
@@ -161,29 +169,31 @@ export function resolveActor(world: World, command: ActorCommand) {
   const state = career.actor;
   if (command.type === 'actor-refresh-offers') {
     if (career.status === 'active') throw new IneligibleAction('Finish your current production before reviewing another casting board');
-    buildBoard(world, career); result(world, 'The new casting board', 'A new quarter brings a saved set of roles. Read the pay, term, creative ambitions and entry requirements before committing.', 'actor'); return;
+    buildBoard(world, career); result(world, 'The new casting board', 'A new quarter brings fresh roles. Some promise acclaim, some promise a cheque, and some are surprisingly vague about both.', 'actor'); return;
   }
   if (command.type === 'actor-agency') { changeAgency(world, career, command.tier, command.negotiate); return; }
   if (command.type === 'actor-style') {
-    if (state.style === command.style) throw new IneligibleAction('This is already your acting approach');
+    const reason = actorStyleReason(world, command.style); if (reason) throw new IneligibleAction(reason);
+    state.lastStyleMonth = creativeMonthNumber(world);
     state.style = command.style; career.focus = command.style === 'craft' ? 'craft' : command.style === 'popular' ? 'publicity' : 'balanced';
     result(world, 'An acting approach', command.style === 'craft' ? 'You favour character and critical craft. Popularity is still possible; it will need an audience.' : command.style === 'popular' ? 'You favour accessible performances and publicity. Critics retain the right to be difficult.' : 'You keep your approach versatile, balancing character work with a sustainable professional routine.', 'actor'); return;
   }
   if (command.type === 'actor-production') { production(world, career, command.action); return; }
   const offer = state.industry.board.find(item => item.id === command.offerId);
   if (!offer || offer.status !== 'open' || offer.expires < creativeMonthNumber(world)) throw new IneligibleAction('Choose a current, unattempted casting opportunity');
-  if (command.type === 'actor-decline') { offer.status = 'declined'; result(world, 'Not your part', 'You decline this saved opportunity. No fee, wages or fake credit is created.', 'actor'); return; }
+  if (command.type === 'actor-decline') { offer.status = 'declined'; result(world, 'Not your part', 'You pass on the role and keep your time for something else. There are easier ways to earn a living, although casting offices rarely mention them.', 'actor'); return; }
   const reason = actorOfferReason(world, offer); if (reason) throw new IneligibleAction(reason);
   if (offer.annualPay !== command.quotedAnnualPay) throw new IneligibleAction('Review the current signed-pay quote before auditioning');
   world.actionCounts[attemptKey(world)] = (world.actionCounts[attemptKey(world)] ?? 0) + 1;
   const agency = state.industry.representation.tier === 'major' ? 16 : state.industry.representation.tier === 'boutique' ? 8 : 0;
   const director = state.industry.contacts.director, edge = director ? relationFor(world, career.personId, director) : undefined;
   const appearance = offer.category === 'commercial' ? Math.floor(active(world).stats.looks / 12) : 0;
-  const chance = Math.max(12, Math.min(95, Math.round(40 + active(world).skills.acting / 2 + career.reputation / 4 + Math.min(12, state.credits * 2) + agency + appearance + (state.industry.representation.rapport - 50) / 8 + ((edge?.trust ?? 35) - 35) / 8 - offer.difficulty / 3 - (offer.role === 'lead' ? 5 : 0))));
+  const castSupport = ['costar', 'rival'].reduce((sum, role) => sum + ((relationFor(world, career.personId, state.industry.contacts[role])?.trust ?? 50) - 50) / 25, 0);
+  const chance = Math.max(12, Math.min(95, Math.round(40 + active(world).skills.acting / 2 + career.reputation / 4 + Math.min(12, state.credits * 2) + agency + appearance + castSupport + (state.industry.representation.rapport - 50) / 8 + ((edge?.trust ?? 35) - 35) / 8 - offer.difficulty / 3 - (offer.role === 'lead' ? 5 : 0))));
   if (offer.auditionRoll > chance) {
     offer.status = 'rejected'; career.reputation = bounded(career.reputation - 1); relationshipChange(world, career, 'rival', -2);
     fact(world, 'I auditioned for ' + offer.title + ' but the part went to somebody else.', 'career');
-    result(world, 'The part goes elsewhere', 'Your audition for ' + offer.title + ' is recorded. The casting team chooses somebody else. This offer cannot be rerolled; a new quarter brings different opportunities.', 'actor'); return;
+    result(world, 'The part goes elsewhere', 'The casting team chooses someone else for ' + offer.title + '. Your rival has opinions, none of which you asked for. There will be another audition.', 'actor'); return;
   }
   if (command.negotiate) {
     const accepted = offer.negotiationRoll <= Math.min(90, 35 + Math.floor(career.reputation / 2) + agency + Math.floor((state.industry.representation.rapport - 50) / 5));
@@ -194,17 +204,20 @@ export function resolveActor(world: World, command: ActorCommand) {
   milestone(state, 'first-role'); if (offer.role === 'lead') milestone(state, 'first-lead');
   fact(world, 'I won the ' + offer.role + ' role in ' + offer.title + '.', 'career');
   const gross = roundRatio(offer.annualPay * BigInt(offer.months), 12n);
-  result(world, 'You have the part', offer.title + ' casts you in a ' + offer.role + ' role. This is a ' + offer.months + '-month commitment. Only actual paid production months earn wages; representation commission is deducted from earned pay. The project has no speculative box-office payout.', 'actor', [
+  result(world, 'You have the part', offer.title + ' casts you in a ' + offer.role + ' role. The ' + offer.months + '-month commitment is signed. Now comes the part where you have to perform it.', 'actor', [
     { id: 'contract', label: 'Gross fee if all contract months are paid', value: formatMoney({ minor: gross, currency: career.currency }), tone: 'positive' },
     { id: 'commission', label: 'Agreed representation commission', value: state.industry.representation.commissionBps % 100 === 0 ? state.industry.representation.commissionBps / 100 + '%' : state.industry.representation.commissionBps + ' basis points (100 = 1%)', tone: 'neutral' },
   ]);
 }
 function releaseActor(world: World, career: Career, project: Career['projects'][number]) {
   const state = actorState(career), metadata = project.creative!, person = world.people[career.personId];
-  if (metadata.release) return;
+  if (metadata.release || metadata.cancellation) return;
+  if (project.status === 'cancelled') { cancelActorProduction(world, career, project); return; }
+  const milestonesBefore = new Set(state.industry.milestones);
   const completed = project.status === 'completed';
-  const critical = completed ? bounded(project.quality * .64 + metadata.prestige * .32 + (51 - metadata.criticRoll) * .22 + (state.style === 'craft' ? 8 : state.style === 'popular' ? -2 : 2)) : 0;
-  const audience = completed ? bounded(project.quality * .40 + metadata.popularity * .48 + metadata.publicity * .5 + (51 - metadata.audienceRoll) * .25 + (state.style === 'popular' ? 8 : 0)) : 0;
+  const style = metadata.actingStyle ?? state.style;
+  const critical = completed ? bounded(project.quality * .64 + metadata.prestige * .32 + (51 - metadata.criticRoll) * .22 + (style === 'craft' ? 8 : style === 'popular' ? -2 : 2)) : 0;
+  const audience = completed ? bounded(project.quality * .40 + metadata.popularity * .48 + metadata.publicity * .5 + (51 - metadata.audienceRoll) * .25 + (style === 'popular' ? 8 : 0)) : 0;
   const commercial = audience >= 85 && metadata.popularity >= 70 ? 'blockbuster' : audience >= 65 ? 'hit' : audience >= 42 ? 'modest' : 'flop';
   const nomination = completed && critical >= 76 && metadata.prestige >= 60;
   const award = nomination && critical >= 80 && project.quality >= 80 && project.responseRoll <= 10;
@@ -226,18 +239,20 @@ function releaseActor(world: World, career: Career, project: Career['projects'][
   career.rank = Math.min(3, Math.floor(state.credits / 3));
   if (career.reputation >= 75 && state.credits >= 5) milestone(state, 'established-star');
   relationshipChange(world, career, 'director', critical >= 70 ? 5 : -4); relationshipChange(world, career, 'costar', completed ? 3 : -5);
-  const summary = !completed ? 'The production closes unfinished after too many missed working periods. Your actual paid wages and commission remain recorded.' : critical >= 76 && audience < 55 ? 'Critics adore it. The audience appears to be composed mainly of critics, but a strong credit is still a strong credit.' : critical < 55 && audience >= 65 ? 'The reviews are dreadful. The audience arrives anyway, apparently determined not to do the reading.' : audience >= 85 ? 'The production becomes a major crowd-pleaser. Your contract pays its agreed wages; the fictional ticket sales do not become free personal money.' : critical >= 76 ? 'The performance lands with critics and finds its audience. There is more substance here than the publicity photograph suggested.' : 'The production reaches its audience with a mixed reception. It becomes a real credit rather than a guarantee of the next job.';
+  const summary = actorReleaseSummary(metadata.category, critical, audience);
   metadata.release = { critical, audience, commercial, nomination, fame, reputation, summary };
   fact(world, 'My ' + metadata.role + ' role in ' + project.name + ' received critics ' + critical + '/100 and audience ' + audience + '/100.' + (award ? ' I won a Lantern Acting Award.' : nomination ? ' It earned an acting nomination.' : ''), 'career', '', person.id);
   if (person.id === world.activePersonId) {
     const money = (minor: bigint) => formatMoney({ minor, currency: project.currency });
-    offerPending(world, { kind: 'result', id: 'actor-release:' + project.id, title: project.name + (completed ? ' is released' : ' closes unfinished'), body: metadata.role + ' · ' + metadata.genre + '. ' + summary + (dropped ? ' Your agency ends representation after repeated failures; its history and the former agent remain recorded.' : '') + (!wasComeback && state.comeback ? ' This release marks a recorded comeback.' : ''), illustration: 'actor', effects: [
+    offerPending(world, { kind: 'result', id: 'actor-release:' + project.id, title: project.name + (completed ? ' is released' : ' closes unfinished'), body: metadata.role + ' · ' + metadata.genre + '. ' + summary + (dropped ? ' Your agency ends representation after repeated failures.' : '') + (!wasComeback && state.comeback ? ' You have a comeback worth talking about.' : ''), illustration: 'actor', effects: [
+      { id: 'quality', label: 'Performance quality', value: project.quality + '%', tone: 'neutral' },
       { id: 'critical', label: 'Critical reception', value: critical + '/100', tone: critical >= 60 ? 'positive' : 'negative' },
       { id: 'audience', label: 'Audience reception', value: audience + '/100 · ' + commercial, tone: audience >= 60 ? 'positive' : 'neutral' },
       { id: 'gross', label: 'Actual gross wages', value: money(project.grossEarned), tone: 'positive' },
       { id: 'commission', label: 'Actual agency commission', value: money(metadata.commissionPaid), tone: metadata.commissionPaid ? 'negative' : 'neutral' },
       { id: 'rep', label: 'Industry reputation change', value: (reputation > 0 ? '+' : '') + reputation, tone: reputation >= 0 ? 'positive' : 'negative' },
       { id: 'fame', label: 'Earned fame change', value: (fame > 0 ? '+' : '') + fame, tone: fame >= 0 ? 'positive' : 'negative' },
+      ...state.industry.milestones.filter(id => !milestonesBefore.has(id)).map(id => ({ id: 'milestone:' + id, label: 'Career milestone', value: actorMilestoneLabels[id] ?? id, tone: 'positive' as const })),
       ...(nomination ? [{ id: 'award', label: award ? 'Award' : 'Recognition', value: award ? 'Lantern Acting Award' : 'Acting nomination', tone: 'positive' as const }] : []),
     ] }, 50);
     if (world.annual?.stage === 'months') world.annual.pausedForPlanning = true;
@@ -247,5 +262,30 @@ export function actorMonth(world: World) {
   for (const career of world.careers.filter(item => item.kind === 'actor' && item.actor && item.status === 'active')) settleCreativeMonth(world, career, releaseActor);
 }
 /** Exit/death cancels future production; the shared employment path retains every paid receipt. */
-export function actorExit(_world: World, _personId: string) { /* Shared careerContractEnded handles cancellation without inventing a release. */ }
+function cancelActorProduction(world: World, career: Career, project: Career['projects'][number]) {
+  const metadata = project.creative!, state = actorState(career), person = world.people[career.personId];
+  if (metadata.release || metadata.cancellation) return;
+  const beforeReputation = career.reputation, beforeFame = person.publicLife.earnedFame;
+  const dropped = !person.died && recordCreativeFailure(world, career, true);
+  if (dropped || !person.died && state.industry.representation.failures === 3) { state.collapseCount++; state.comeback = false; milestone(state, 'career-collapse'); }
+  if (!person.died) {
+    career.reputation = bounded(career.reputation - 8); gainPublicFame(world, person, -2);
+    relationshipChange(world, career, 'director', -4); relationshipChange(world, career, 'costar', -5);
+  }
+  const summary = person.died ? 'The production stops before you can finish your part.' : 'Your part ends before the production is finished. There is no finished performance to review.';
+  metadata.cancellation = { summary, reputation: career.reputation - beforeReputation, fame: person.publicLife.earnedFame - beforeFame };
+  if (person.died) return;
+  fact(world, 'I could not finish ' + project.name + '.' + (dropped ? ' My agency dropped me after repeated setbacks.' : ''), 'career', '', person.id);
+  if (person.id === world.activePersonId) offerPending(world, { kind: 'result', id: 'actor-cancelled:' + project.id, title: project.name + ' ends unfinished', body: summary + (dropped ? ' After repeated setbacks, your agent ends the arrangement.' : ''), illustration: 'actor', effects: [
+    { id: 'work', label: 'Contract months elapsed', value: project.months + ' / ' + project.targetMonths + ' months', tone: 'neutral' },
+    { id: 'gross', label: 'Gross wages earned', value: formatMoney({ minor: project.grossEarned, currency: project.currency }), tone: 'positive' },
+    { id: 'commission', label: 'Agency commission paid', value: formatMoney({ minor: metadata.commissionPaid, currency: project.currency }), tone: 'neutral' },
+    { id: 'rep', label: 'Industry reputation change', value: String(metadata.cancellation.reputation), tone: 'negative' },
+    { id: 'fame', label: 'Earned fame change', value: String(metadata.cancellation.fame), tone: 'neutral' },
+  ] }, 50);
+}
+export function actorExit(world: World, personId: string) {
+  for (const career of world.careers.filter(item => item.personId === personId && item.actor))
+    for (const project of career.projects) if (project.status === 'cancelled' && project.creative?.outcomeVersion === 2) cancelActorProduction(world, career, project);
+}
 export { actorMilestoneLabels };

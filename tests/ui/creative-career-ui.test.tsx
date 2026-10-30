@@ -9,7 +9,10 @@ import { SaveRepository } from '../../src/persistence/repository';
 import { database } from '../support/sqlite';
 import { EventModal } from '../../src/ui/EventModal';
 import { ThemeProvider } from '../../src/ui/theme';
-import { creativeSettlementPayments } from '../../src/ui/CreativeCareerUI';
+import { CreativeHistory, creativeSettlementPayments } from '../../src/ui/CreativeCareerUI';
+import { creativeMonthLabel, creativeMonthNumber } from '../../src/game/systems/creativeSchemas';
+import { unpackCheckpoint } from '../../src/persistence/checkpoints';
+import historicalCreative from '../fixtures/v50-creative-polish-compat.json';
 import { useCreativeCareerDialog } from '../../src/ui/CreativeCareerDialog';
 import { Button, Page } from '../../src/ui/components';
 import { ActorDashboard } from '../../src/ui/ActorDashboard';
@@ -44,6 +47,45 @@ async function acknowledge() {
     if (pending?.kind === 'result') expect(await mockStore.getState().dispatch({ type: 'acknowledge', resultId: pending.id })).toBe(true);
   });
 }
+test('a Model can draft three specialisations, review them once and retry one atomic twelve-month commitment', async () => {
+  const { sqlite, repository } = await setup(); await mockStore.getState().dispatch({ type: 'model-enter' }); await acknowledge();
+  const view = render(frame(<ModelCareerDashboard />)), original = encodeWorld(mockStore.getState().world!);
+  await press('Choose Specialisations');
+  await press(/^Editorial & Magazine/, 'radio'); await press('Choose');
+  await press(/^Runway & High Fashion/, 'radio'); await press('Choose');
+  expect(encodeWorld(mockStore.getState().world!)).toBe(original);
+  await press('Review Specialisations', 'radio'); await press('Choose');
+  sqlite.exec("CREATE TRIGGER fail_specialisations BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
+  await press('Set Specialisations'); await waitFor(() => expect(screen.getByRole('alert')).toHaveTextContent(/couldn't be saved/));
+  expect(encodeWorld((await repository.active())!)).toBe(original);
+  sqlite.exec('DROP TRIGGER fail_specialisations'); await press('Set Specialisations');
+  const world = mockStore.getState().world!, state = world.careers[0].modelCareer!;
+  expect(state.specialisations).toEqual(['commercial', 'editorial', 'runway']); expect(state.lastSpecialisationMonth).toBe(creativeMonthNumber(world));
+  expect(screen.getByRole('button', { name: 'Choose Specialisations' })).toBeDisabled();
+  expect(screen.getByText('Next specialisation change: ' + creativeMonthLabel(state.lastSpecialisationMonth! + 12) + '.')).toBeOnTheScreen();
+  expect((await repository.load(world.id)).careers[0].modelCareer).toEqual(state);
+  view.unmount(); sqlite.close();
+});
+
+test('Actor identity shows the next change date and disables another approach after committing', async () => {
+  const { sqlite, repository } = await setup(); await mockStore.getState().dispatch({ type: 'actor-enter' }); await acknowledge();
+  const view = render(frame(<ActorDashboard />));
+  await press(/^Character & Craft\./, 'radio'); await press('Set Acting Approach');
+  const world = mockStore.getState().world!, state = world.careers[0].actor!;
+  expect(screen.getByRole('radio', { name: /^Audience Favourite\./ })).toBeDisabled();
+  expect(screen.getByText('Next style change: ' + creativeMonthLabel(state.lastStyleMonth! + 12) + '.')).toBeOnTheScreen();
+  expect((await repository.load(world.id)).careers[0].actor!.lastStyleMonth).toBe(state.lastStyleMonth);
+  view.unmount(); sqlite.close();
+});
+
+test.each(['cancelledActor', 'cancelledModel'] as const)('%s history labels old interrupted work accurately without rewriting its saved outcome or inventing reviews', key => {
+  const world = unpackCheckpoint(historicalCreative[key]), project = world.careers[0].projects[0], saved = encodeWorld(world);
+  const view = render(frame(<CreativeHistory career={world.careers[0]} title="Work History" />));
+  expect(screen.getByText(/Unfinished production/)).toBeOnTheScreen();
+  expect(screen.getByText('Earlier saved outcome')).toBeOnTheScreen(); expect(screen.getByText(project.creative!.release!.summary)).toBeOnTheScreen();
+  expect(screen.queryByText(/Critical reception|Industry reception|Audience reception/)).toBeNull();
+  expect(encodeWorld(world)).toBe(saved); view.unmount();
+});
 test.each(['actor', 'model'] as const)('%s career entry is free, confirms before writing and retries a failed save without multiplying contacts', async kind => {
   const { sqlite, repository, world } = await setup(), before = await repository.export(world.id), originalPeople = Object.keys(world.people).length;
   const view = render(frame(kind === 'actor' ? <ActorDashboard /> : <ModelCareerDashboard />));

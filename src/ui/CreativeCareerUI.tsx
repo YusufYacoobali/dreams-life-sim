@@ -111,10 +111,12 @@ export function CreativeHistory({ career, title }: { career: Career; title: stri
   const money = (amount: bigint, currency: Career['currency']) => formatMoney({ minor: amount, currency });
   return <Card><Heading size={20}>{title}</Heading>{!history.length && <Body muted>Your completed and interrupted work will stay here.</Body>}
     {history.slice(currentPage * 4, currentPage * 4 + 4).map(project => <Card key={project.id}>
-      <Heading size={18}>{project.name}</Heading><Body muted>{project.status} · {project.ended?.year} · {project.months} recorded months</Body>
+      <Heading size={18}>{project.name}</Heading><Body muted>{project.status === 'cancelled' ? 'Unfinished production' : 'Completed'} · {project.ended?.year} · {project.months} contract months</Body>
       {project.creative && <Body>{project.creative.role} · {creativeLabel(project.creative.category)}</Body>}
       <SocialBusinessFacts items={[{ label: 'Actual gross earnings', value: money(project.grossEarned, project.currency) }, ...(project.creative ? [{ label: 'Agency commission paid', value: money(project.creative.commissionPaid, project.currency) }] : [])]} />
-      {project.creative?.release && <><Body>{project.creative.release.summary}</Body><Body muted>Critical reception {project.creative.release.critical}% · Audience reception {project.creative.release.audience}% · {creativeLabel(project.creative.release.commercial)}</Body>{project.creative.release.nomination && <Body>Award nomination recorded</Body>}</>}
+      {project.creative?.cancellation && <Body>{project.creative.cancellation.summary}</Body>}
+      {project.creative?.release && project.status === 'cancelled' && <><Body muted>Earlier saved outcome</Body><Body>{project.creative.release.summary}</Body></>}
+      {project.creative?.release && project.status === 'completed' && <><Body>{project.creative.release.summary}</Body><Body muted>{project.creative.kind === 'model' ? 'Industry reception' : 'Critical reception'} {project.creative.release.critical}% · Audience reception {project.creative.release.audience}% · {creativeLabel(project.creative.release.commercial)}</Body>{project.creative.release.nomination && <Body>Award nomination</Body>}</>}
       {project.award && <Body>{project.award}</Body>}
     </Card>)}
     {history.length > 4 && <><Body muted>Work {currentPage * 4 + 1}–{Math.min(history.length, currentPage * 4 + 4)} of {history.length}</Body><View style={{ gap: 8 }}><Button label="Newer Work" tone="secondary" disabled={currentPage === 0} onPress={() => setPage(Math.max(0, currentPage - 1))} /><Button label="Earlier Work" tone="secondary" disabled={currentPage === maxPage} onPress={() => setPage(currentPage + 1)} /></View></>}
@@ -128,6 +130,7 @@ export function CreativeCurrentProject({ career }: { career: Career }) {
     <StatBar label="Production" value={Math.round(project.months * 100 / project.targetMonths)} color={c.blue} />
     <SocialBusinessFacts items={[{ label: 'Contract progress', value: project.months + ' / ' + project.targetMonths + ' months' }, { label: 'Gross earned', value: money(project.grossEarned) }, { label: 'Commission paid', value: money(project.creative.commissionPaid) }, { label: 'After commission, before tax', value: money(project.grossEarned - project.creative.commissionPaid) }]} />
     <Body muted>Pay arrives only during actual working months. Your decisions affect quality, relationships and the eventual response.</Body>
+    <Body muted>Preparation {project.creative.preparation}% · Quality adjustment {project.creative.qualityBonus > 0 ? '+' : ''}{project.creative.qualityBonus} · Publicity {project.creative.publicity > 0 ? '+' : ''}{project.creative.publicity}</Body>
     {!!project.creative.choices.length && <Body muted>Recent choice: {project.creative.choices.at(-1)!.note}</Body>}
   </Card>;
 }

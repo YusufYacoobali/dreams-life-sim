@@ -25,7 +25,7 @@ export const actorStories: readonly CreativeStory[] = [
     body: 'Your rough audition tape has escaped online, complete with a missed cue, a collapsing backdrop and a heartfelt declaration to a coat stand. {contact} has shared it with the caption “An important new voice”.',
     choices: [
       { id: 'own', label: 'Release a self-mocking commentary', result: 'You are funny about the disaster before anyone else can be cruel about it. People remember your name, although a few casting offices remember the coat stand first.', journal: 'I turned my leaked audition into a joke of my own and gained attention at a professional cost.', impact: { publicity: 12, reputation: -4, relationship: -4, stress: -2 } },
-      { id: 'remove', label: 'Pay for a formal takedown request', result: 'The main upload disappears. Copies remain, because the internet apparently has a pension plan for coat-stand performances. Casting teams appreciate your discretion more than the public does.', journal: 'I paid to challenge the unauthorised audition upload and limited its professional exposure.', impact: { costBps: 180, reputation: 5, publicity: -7, relationship: -7 } },
+      { id: 'remove', label: 'Pay for a formal takedown request', result: 'The main upload disappears. Copies remain, because the internet has a pension plan for coat-stand performances. Casting teams appreciate your discretion more than the public does.', journal: 'I paid to challenge the unauthorised audition upload and limited its professional exposure.', impact: { costBps: 180, reputation: 5, publicity: -7, relationship: -7 } },
       { id: 'context', label: 'Share a polished scene and explain the rehearsal', result: 'The comparison gives people something better to watch. Preparing it takes time from your current role, but the tape begins to look like work in progress rather than a verdict.', journal: 'I answered the leaked tape with a finished scene and rebuilt confidence in my work.', impact: { reputation: 7, opportunity: 4, quality: -3, stress: 5 } },
     ],
   },
@@ -120,7 +120,7 @@ export const actorStories: readonly CreativeStory[] = [
     ],
   },
   {
-    id: 'actor-commercial-comparison', title: 'The heroic supermarket', contact: 'director', phase: 'working',
+    id: 'actor-commercial-comparison', title: 'The heroic supermarket', contact: 'director', phase: 'working', categories: ['independent-film', 'studio-film', 'series'],
     body: 'A sponsor wants your dramatic speech recut into a cheerful commercial for sandwich wraps. {contact} asks whether you would approve the promotional use under a new fee rider. The sandwich now appears to have a more reliable motivation than your character.',
     choices: [
       { id: 'approve', label: 'Approve the promotional use for a higher remaining fee', result: 'The rider increases your remaining contracted rate. The sandwich campaign is cheerful, visible and destined to be mentioned whenever somebody calls you a serious actor.', journal: 'I licensed a promotional recut through a higher remaining production fee.', impact: { payBps: 500, publicity: 8, reputation: -6, relationship: 4 } },

@@ -115,11 +115,14 @@ export function creativeOfferReason(world: World, career: Career, offer: Creativ
 export function beginCreativeContract(world: World, career: Career, offer: CreativeOffer): Career {
   const industry = getIndustry(career); if (!industry) throw new IneligibleAction('Open this career first.');
   const rep = industry.representation;
+  // Commit an unchosen default on signing; never backdate a lock in an old save.
+  if (career.actor && career.actor.lastStyleMonth === undefined) career.actor.lastStyleMonth = creativeMonthNumber(world);
+  if (career.modelCareer && career.modelCareer.lastSpecialisationMonth === undefined) career.modelCareer.lastSpecialisationMonth = creativeMonthNumber(world);
   startCareerContract(world, career.kind, offer.annualPay, world.people[career.personId], false);
   const project = career.projects.find(item => item.status === 'active')!;
   project.id = 'creative_project_' + career.id + '_' + project.employmentId;
   project.name = offer.title; project.targetMonths = offer.months; career.contractMonthsRemaining = offer.months;
-  project.creative = { kind: career.kind as CreativeKind, offerId: offer.id, category: offer.category, genre: offer.genre, role: offer.role, term: offer.months, prestige: offer.prestige, popularity: offer.popularity, risk: offer.risk, exclusivity: offer.exclusivity, commissionBps: rep.commissionBps, agentId: rep.agentId, processedGross: 0n, commissionPaid: 0n, commissionTransactions: [], referenceCurrency: world.people[career.personId].finance.earningsCurrency, normalizedGross: 0n, normalizedCommission: 0n, commissionConversions: [], preparation: 50, qualityBonus: 0, publicity: 0, criticRoll: draw(world, 'outcomes', 1, 100), audienceRoll: draw(world, 'outcomes', 1, 100), choices: [], release: null };
+  project.creative = { outcomeVersion: 2, ...(career.actor ? { actingStyle: career.actor.style } : {}), kind: career.kind as CreativeKind, offerId: offer.id, category: offer.category, genre: offer.genre, role: offer.role, term: offer.months, prestige: offer.prestige, popularity: offer.popularity, risk: offer.risk, exclusivity: offer.exclusivity, commissionBps: rep.commissionBps, agentId: rep.agentId, processedGross: 0n, commissionPaid: 0n, commissionTransactions: [], referenceCurrency: world.people[career.personId].finance.earningsCurrency, normalizedGross: 0n, normalizedCommission: 0n, commissionConversions: [], preparation: 50, qualityBonus: 0, publicity: 0, criticRoll: draw(world, 'outcomes', 1, 100), audienceRoll: draw(world, 'outcomes', 1, 100), choices: [], release: null };
   career.employer = offer.title; world.people[career.personId].employment!.employer = offer.title;
   world.workHistory.find(item => item.id === career.employmentId)!.employer = offer.title;
   return career;
@@ -131,6 +134,7 @@ export function settleCreativeMonth(world: World, career: Career, onRelease: (wo
   if (!project || !meta || !industry || career.lastMonth >= month) return;
   const person = world.people[career.personId], history = world.workHistory.find(item => item.id === career.employmentId);
   if (!history || person.employment?.id !== history.id) throw new Error('Creative production lost its real employment contract');
+  meta.outcomeVersion = 2;
   career.lastMonth = month; project.grossEarned = history.grossEarned - project.grossAtStart;
   const earned = project.grossEarned - meta.processedGross;
   if (earned < 0n) throw new Error('Creative earnings moved backwards');
@@ -144,7 +148,9 @@ export function settleCreativeMonth(world: World, career: Career, onRelease: (wo
   }
   industry.totalGross += history.normalizedGross - meta.normalizedGross; meta.normalizedGross = history.normalizedGross; meta.processedGross = project.grossEarned;
   const attended = !person.died && !isConfined(world, person) && !person.legal.wanted && !hospitalized(world, person) && person.stats.health >= 15 && ageOn(person, world.date) <= careerCatalog[career.kind].maxAge;
-  const score = attended ? bounded(Math.round((person.skills[career.kind === 'actor' ? 'acting' : 'modeling'] * 2 + person.employment.performance + person.stats.discipline) / 4) + Math.round((meta.preparation - 50) / 6) + meta.qualityBonus + draw(world, person.id === world.activePersonId ? 'outcomes' : 'npcs', -8, 8)) : 0;
+  const style = career.kind === 'actor' ? meta.actingStyle ?? career.actor?.style : undefined;
+  const styleBonus = style === 'craft' ? 4 : style === 'popular' ? -2 : style === 'versatile' ? 1 : 0;
+  const score = attended ? bounded(Math.round((person.skills[career.kind === 'actor' ? 'acting' : 'modeling'] * 2 + person.employment.performance + person.stats.discipline) / 4) + Math.round((meta.preparation - 50) / 6) + meta.qualityBonus + styleBonus + draw(world, person.id === world.activePersonId ? 'outcomes' : 'npcs', -8, 8)) : 0;
   project.periods.push({ month, score, attended, success: attended && score >= meta.risk }); project.months++; career.contractMonthsRemaining--;
   project.quality = Math.round(project.periods.reduce((sum, period) => sum + period.score, 0) / project.periods.length);
   person.stats.stress = bounded(person.stats.stress + (meta.preparation > 75 ? 2 : 1)); person.stats.energy = bounded(person.stats.energy - 2);

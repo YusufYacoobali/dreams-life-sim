@@ -275,7 +275,7 @@ test('cold reopening a pending choice preserves quoted cost, impact, contact and
   if (pending.kind !== 'decision') throw new Error('Expected the bound coaching decision');
   const savedChoice = pending.choices.find(item => item.id === 'coach')!, expected = answer(decodeWorld(serialized), 'coach');
   const effect = savedChoice.effects[0]; if (effect.kind !== 'creative-choice') throw new Error('Expected a sealed industry effect');
-  expect(effect.snapshot.version).toBe(1); expect(effect.snapshot.cost.minor).toBe(quoted); expect(effect.snapshot.impact).toEqual(impact);
+  expect(effect.snapshot.version).toBe(2); expect(effect.snapshot.cost.minor).toBe(quoted); expect(effect.snapshot.impact).toEqual(impact);
   try {
     // This represents a later content/balance release. Nothing already offered may be rebound.
     choice.impact.costBps = 9900; choice.impact.quality = -40; choice.impact.reputation = -50; choice.impact.relationship = -90;

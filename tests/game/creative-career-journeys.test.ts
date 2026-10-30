@@ -134,7 +134,7 @@ for (const kind of ['actor', 'model'] as const) {
     const initial = bookedFixture(kind); initial.people[initial.activePersonId].stats.health = 14;
     const world = paidPeriod(initial, kind), recorded = career(world, kind), project = recorded.projects.at(-1)!;
     expect(recorded.status).toBe('retired'); expect(project.status).toBe('cancelled'); expect(project.months).toBe(1); expect(project.months).toBeLessThan(project.targetMonths);
-    expect(project.grossEarned).toBeGreaterThan(0n); expect(project.creative!.release?.nomination).toBe(false); expect(project.award).toBeNull(); expect(world.people[world.activePersonId].employment).toBeNull();
+    expect(project.grossEarned).toBeGreaterThan(0n); expect(project.creative!.release).toBeNull(); expect(project.creative!.cancellation).toBeDefined(); expect(project.award).toBeNull(); expect(world.people[world.activePersonId].employment).toBeNull();
     expect(decodeWorld(encodeWorld(world))).toEqual(world);
   });
   test(kind + ' saved interrupted year resumes the same decision and remaining work without RNG rerolls or repeated pay', () => {

@@ -4,6 +4,8 @@ import { rules } from '../rules';
 import { formatMoney, roundRatio } from '../money';
 import { forkRandom, randomInteger } from '../random';
 import { IneligibleAction } from '../errors';
+import { modelReleaseSummary } from '../content/creativeOutcomes';
+import { offerPending } from '../pendingQueue';
 import { modelBookingContent, modelBookingDefinition, modelSpecialisationContent } from '../content/modelCareer';
 import { active, accountFor, availableCash, bounded, charge, fact, post, result } from './common';
 import { endEmployment } from './work';
@@ -11,7 +13,7 @@ import { gainPublicFame } from './social';
 import { relationFor } from './relationshipQueries';
 import { selectionReason, trainingReason, type Career } from './careers';
 import { beginCreativeContract, changeAgency, creativeOfferReason, ensureCreativeCareer, ensureIndustryContacts, recordCreativeFailure, settleCreativeMonth } from './creativeCore';
-import { creativeMonthNumber, newIndustryState, type CreativeOffer } from './creativeSchemas';
+import { creativeMonthNumber, creativeMonthLabel, newIndustryState, type CreativeOffer } from './creativeSchemas';
 import { type ModelCareerCommand, type ModelCareerState, type ModelSpecialisation } from './modelCareerSchemas';
 export { modelCareerCommandSchema } from './modelCareerSchemas';
 export type { ModelCareerCommand } from './modelCareerSchemas';
@@ -33,6 +35,13 @@ export function modelEntryReason(world: World): string | undefined {
   if (career?.modelCareer && !['left', 'retired'].includes(career.status)) return 'Your modelling portfolio is already open';
   if (career?.status === 'active') return 'Finish or leave your existing modelling project first; its progress is kept';
   return selectionReason(world, 'model', true);
+}
+export function modelSpecialisationReason(world: World, proposed?: readonly ModelSpecialisation[]): string | undefined {
+  const state = modelCareer(world)?.modelCareer;
+  if (!state) return 'Explore modelling first';
+  if (proposed && (proposed.length < 1 || proposed.length > 3 || new Set(proposed).size !== proposed.length)) return 'Choose one to three different specialisations';
+  if (proposed && proposed.length === state.specialisations.length && proposed.every(item => state.specialisations.includes(item))) return 'These are already your specialisations';
+  if (state.lastSpecialisationMonth !== undefined && creativeMonthNumber(world) < state.lastSpecialisationMonth + 12) return 'Your next specialisation change is available ' + creativeMonthLabel(state.lastSpecialisationMonth + 12);
 }
 function emptyModel(world: World, career: Career): ModelCareerState {
   return { version: 1, industry: { ...newIndustryState(), completed: career.projects.filter(project => project.status === 'completed').length }, boardCountry: active(world).country, boards: [], portfolio: { editorial: 10, runway: 10, commercial: 15, luxury: 5, lifestyle: 15 }, specialisations: ['commercial'], professionalism: 50, notableWork: [], brands: [], archivedBrands: 0, archivedWork: 0, lostRepresentation: false, lastPortfolioQuarter: -1, lastBrandActionMonth: -1 };
@@ -123,11 +132,15 @@ function changeContact(world: World, career: Career, role: string, delta: number
 }
 function releaseModel(world: World, career: Career, project: Project) {
   const state = career.modelCareer!, details = project.creative!, person = world.people[career.personId], definition = modelBookingDefinition(details.category)!;
+  if (details.release || details.cancellation) return;
+  if (project.status === 'cancelled') { cancelModelBooking(world, career, project); return; }
+  const milestonesBefore = new Set(state.industry.milestones), beforeReputation = career.reputation, beforeFame = person.publicLife.earnedFame;
   const critical = bounded(Math.round(project.quality * .6 + details.prestige * .25 + state.professionalism * .15) + Math.round((50 - details.criticRoll) / 5));
-  const audience = bounded(Math.round(project.quality * .4 + details.popularity * .45 + Math.max(0, details.publicity)) + Math.round((50 - details.audienceRoll) / 4));
+  const audience = bounded(Math.round(project.quality * .4 + details.popularity * .45 + details.publicity * .5) + Math.round((50 - details.audienceRoll) / 4));
   const completed = project.status === 'completed', success = completed && (critical >= 64 || audience >= 68), fame = completed ? audience >= 85 ? 7 : audience >= 65 ? 4 : 1 : 0, reputation = !completed ? -9 : critical >= 80 ? 10 : success ? 5 : -5;
   career.reputation = bounded(career.reputation + reputation); gainPublicFame(world, person, fame);
-  details.release = { critical, audience, commercial: audience >= 85 ? 'blockbuster' : audience >= 65 ? 'hit' : audience >= 40 ? 'modest' : 'flop', nomination: completed && critical >= 75 && details.prestige >= 65, fame, reputation, summary: completed ? critical >= 80 && audience < 50 ? 'Industry praise; a quiet commercial reception.' : audience >= 85 && critical < 60 ? 'An enormous audience, followed by some very polite fashion reviews.' : success ? 'The work travels further than the mood board.' : 'The client approves the invoice with more enthusiasm than the photographs.' : 'The unfinished booking remains in your actual career history.' };
+  const reputationChange = career.reputation - beforeReputation, fameChange = person.publicLife.earnedFame - beforeFame;
+  details.release = { critical, audience, commercial: audience >= 85 ? 'blockbuster' : audience >= 65 ? 'hit' : audience >= 40 ? 'modest' : 'flop', nomination: critical >= 75 && details.prestige >= 65, fame: fameChange, reputation: reputationChange, summary: modelReleaseSummary(details.category, critical, audience) };
   if (completed) {
     state.industry.completed++;
     state.portfolio[definition.specialisation] = bounded(state.portfolio[definition.specialisation] + (critical >= 75 ? 12 : 6));
@@ -145,14 +158,48 @@ function releaseModel(world: World, career: Career, project: Project) {
     if (critical >= 80 && details.prestige >= 65 && project.quality >= 80 && project.responseRoll <= 10) { project.award = 'Fashion Craft Council recognition'; milestone(state, 'Industry award'); }
     changeContact(world, career, definition.id === 'editorial' ? 'photographer' : 'designer', success ? 5 : -4);
   }
-  if (recordCreativeFailure(world, career, !success)) { milestone(state, 'Lost representation'); state.lostRepresentation = true; }
+  const dropped = recordCreativeFailure(world, career, !success);
+  if (dropped) { milestone(state, 'Lost representation'); state.lostRepresentation = true; }
   career.rank = Math.min(3, Math.floor(state.industry.completed / 3));
-  fact(world, 'My ' + definition.title.toLowerCase() + ', ' + project.name + ', earned ' + formatMoney({ minor: project.grossEarned, currency: project.currency }) + ' gross. ' + details.release.summary, 'career', '', person.id);
-  if (person.id === world.activePersonId) result(world, completed ? 'The booking is out in the world' : 'The booking ends unfinished', project.name + ' · ' + details.role + '. ' + details.release.summary + ' These are the actual paid wages, not an invented campaign valuation.', 'model', [
+  fact(world, 'My ' + definition.title.toLowerCase() + ', ' + project.name + ', received industry ' + critical + '/100 and audience ' + audience + '/100. I earned ' + formatMoney({ minor: project.grossEarned, currency: project.currency }) + ' gross.', 'career', '', person.id);
+  if (person.id === world.activePersonId) result(world, completed ? 'The booking is out in the world' : 'The booking ends unfinished', project.name + ' · ' + details.role + '. ' + details.release.summary + (dropped ? ' Your agent ends the arrangement after repeated setbacks.' : ''), 'model', [
     { id: 'quality', label: 'Performance quality', value: project.quality + '%', tone: 'neutral' }, { id: 'industry', label: 'Industry reception', value: critical + '%', tone: critical >= 65 ? 'positive' : 'negative' }, { id: 'audience', label: 'Audience response', value: audience + '%', tone: audience >= 65 ? 'positive' : 'neutral' },
     { id: 'gross', label: 'Actual gross earnings', value: formatMoney({ minor: project.grossEarned, currency: project.currency }), tone: 'positive' }, { id: 'commission', label: 'Actual agency commission', value: formatMoney({ minor: details.commissionPaid, currency: project.currency }), tone: 'negative' },
-    { id: 'reputation', label: 'Industry reputation change', value: (reputation >= 0 ? '+' : '') + reputation, tone: reputation >= 0 ? 'positive' : 'negative' },
+    { id: 'reputation', label: 'Industry reputation change', value: (reputationChange >= 0 ? '+' : '') + reputationChange, tone: reputationChange >= 0 ? 'positive' : 'negative' },
+    { id: 'fame', label: 'Earned fame change', value: (fameChange >= 0 ? '+' : '') + fameChange, tone: fameChange >= 0 ? 'positive' : 'negative' },
+    ...state.industry.milestones.filter(id => !milestonesBefore.has(id)).map(id => ({ id: 'milestone:' + id, label: 'Career milestone', value: id, tone: 'positive' as const })),
+    ...(project.award ? [{ id: 'award', label: 'Industry recognition', value: project.award, tone: 'positive' as const }] : []),
   ]);
+}
+function cancelModelBooking(world: World, career: Career, project: Project) {
+  const details = project.creative!, state = career.modelCareer!, person = world.people[career.personId];
+  if (details.release || details.cancellation) return;
+  const beforeReputation = career.reputation;
+  const brand = state.brands.find(item => item.projectId === project.id && item.status === 'active');
+  if (brand) {
+    brand.status = person.died ? 'cancelled' : 'breached';
+    if (!person.died) {
+      assessBrandClaim(world, career, brand); career.reputation = bounded(career.reputation - 8);
+      state.professionalism = bounded(state.professionalism - 5); changeContact(world, career, 'designer', -8);
+    }
+  }
+  const dropped = !person.died && recordCreativeFailure(world, career, true);
+  if (!person.died) {
+    career.reputation = bounded(career.reputation - 9); state.professionalism = bounded(state.professionalism - 3);
+    changeContact(world, career, 'photographer', -4);
+    if (dropped) { milestone(state, 'Lost representation'); state.lostRepresentation = true; }
+  }
+  const summary = person.died ? 'The booking stops before you can finish the work.' : 'Your booking ends before the brief is finished. There is no completed work to release.';
+  details.cancellation = { summary, reputation: career.reputation - beforeReputation, fame: 0 };
+  if (person.died) return;
+  fact(world, 'I could not finish ' + project.name + '.' + (brand ? ' The client made a contract settlement claim.' : '') + (dropped ? ' My agency ended our arrangement.' : ''), 'career', '', person.id);
+  if (person.id === world.activePersonId) offerPending(world, { kind: 'result', id: 'model-cancelled:' + project.id, title: project.name + ' ends unfinished', body: summary + (brand ? ' The client claims the agreed settlement for abandoning the booking.' : '') + (dropped ? ' After repeated setbacks, your agent ends the arrangement.' : ''), illustration: 'model', effects: [
+    { id: 'work', label: 'Contract months elapsed', value: project.months + ' / ' + project.targetMonths + ' months', tone: 'neutral' },
+    { id: 'gross', label: 'Gross wages earned', value: formatMoney({ minor: project.grossEarned, currency: project.currency }), tone: 'positive' },
+    { id: 'commission', label: 'Agency commission paid', value: formatMoney({ minor: details.commissionPaid, currency: project.currency }), tone: 'neutral' },
+    { id: 'reputation', label: 'Industry reputation change', value: String(details.cancellation.reputation), tone: 'negative' },
+    ...(brand?.penaltyLiabilityId ? [{ id: 'claim', label: 'Outstanding contract settlement', value: formatMoney({ minor: world.liabilities.find(item => item.id === brand.penaltyLiabilityId)!.principal, currency: brand.currency }), tone: 'negative' as const }] : []),
+  ] }, 50);
 }
 function assessBrandClaim(world: World, career: Career, brand: Brand) {
   const amount = roundRatio(brand.agreedFee, 5n); if (!amount || brand.penaltyLiabilityId) return;
@@ -184,6 +231,7 @@ export function modelCareerMonth(world: World) {
 export function modelCareerExit(world: World, personId: string) {
   for (const career of world.careers.filter(item => item.kind === 'model' && item.personId === personId && item.modelCareer)) {
     const state = career.modelCareer!;
+    for (const project of career.projects) if (project.status === 'cancelled' && project.creative?.outcomeVersion === 2) cancelModelBooking(world, career, project);
     if (world.people[personId].died) {
       for (const brand of state.brands) if (brand.status === 'active') brand.status = 'cancelled';
     } else for (const brand of state.brands.filter(item => item.status === 'active')) {
@@ -205,13 +253,14 @@ export function resolveModelCareer(world: World, command: ModelCareerCommand) {
     career.modelCareer ??= emptyModel(world, career);
     ensureIndustryContacts(world, career, ['agent', 'designer', 'photographer', 'rival']);
     if (career.modelCareer.industry.boardSeason !== quarter(world) || career.modelCareer.boardCountry !== person.country) refreshOffers(world, career as Career & { modelCareer: ModelCareerState });
-    result(world, 'Your modelling portfolio is open', 'Choose your specialisations and inspect real castings. Experience, presentation and professional relationships shape this career; there is no body-perfection checklist.', 'model'); return;
+    result(world, 'Your modelling portfolio is open', 'A few good images. A reliable presentation. Four professionals with very different ideas about what you should do next. Choose your direction and start meeting clients.', 'model'); return;
   }
   const career = requireModel(world), state = career.modelCareer;
   if (command.type === 'model-refresh-offers') { refreshOffers(world, career); result(world, 'The casting board is current', 'These saved opportunities keep their terms and casting response throughout this quarter. Opening the board again does not reroll them.', 'model'); return; }
   if (command.type === 'model-agency') { changeAgency(world, career, command.tier, command.negotiate); if (command.tier !== 'independent') milestone(state, 'Signed by an agency'); return; }
   if (command.type === 'model-specialise') {
-    if (new Set(command.specialisations).size !== command.specialisations.length) throw new IneligibleAction('Choose different portfolio specialisations');
+    const reason = modelSpecialisationReason(world, command.specialisations); if (reason) throw new IneligibleAction(reason);
+    state.lastSpecialisationMonth = creativeMonthNumber(world);
     state.specialisations = [...command.specialisations]; result(world, 'Your modelling identity is set', 'These areas improve your casting fit. Existing credits and all other portfolio experience remain yours.', 'model'); return;
   }
   if (command.type === 'model-portfolio') {
@@ -230,8 +279,9 @@ export function resolveModelCareer(world: World, command: ModelCareerCommand) {
     const definition = modelBookingDefinition(offer.category)!, fit = state.portfolio[definition.specialisation], relation = state.industry.contacts[definition.id === 'editorial' ? 'photographer' : 'designer'], contact = relation ? relationFor(world, person.id, relation) : undefined;
     const agentId = state.industry.representation.agentId, agentRelation = agentId ? relationFor(world, person.id, agentId) : undefined;
     const agencyConnection = agentRelation ? (agentRelation.trust - 35) / 8 + (state.industry.representation.rapport - 50) / 10 : 0;
-    const chance = Math.max(8, Math.min(95, Math.round(person.skills.modeling * .4 + career.reputation * .15 + state.professionalism * .2 + fit * .15 + (state.specialisations.includes(definition.specialisation) ? 8 : 0) + (contact ? (contact.trust - 50) / 10 : 0) + state.industry.opportunityBoost + agencyConnection - offer.difficulty / 5)));
-    if (offer.auditionRoll > chance) { offer.status = 'rejected'; state.professionalism = bounded(state.professionalism + 1); result(world, 'The booking went elsewhere', 'The client chose another model. The saved casting result stays recorded; your existing portfolio remains available for a better-fitting brief.', 'model'); return; }
+    const rivalSupport = ((relationFor(world, person.id, state.industry.contacts.rival)?.trust ?? 50) - 50) / 25;
+    const chance = Math.max(8, Math.min(95, Math.round(person.skills.modeling * .4 + career.reputation * .15 + state.professionalism * .2 + fit * .15 + (state.specialisations.includes(definition.specialisation) ? 8 : 0) + (contact ? (contact.trust - 50) / 10 : 0) + state.industry.opportunityBoost + agencyConnection + rivalSupport - offer.difficulty / 5)));
+    if (offer.auditionRoll > chance) { offer.status = 'rejected'; state.professionalism = bounded(state.professionalism + 1); result(world, 'The booking went elsewhere', 'The client chooses another model. You leave with your portfolio, your afternoon and a renewed appreciation for people who reply to emails.', 'model'); return; }
     offer.status = 'accepted'; beginCreativeContract(world, career, offer);
     const project = career.projects.find(item => item.status === 'active')!, details = project.creative!; details.preparation = Math.min(100, 40 + Math.floor(state.professionalism / 3) + Math.floor(fit / 5));
     if (offer.exclusivity) {
@@ -239,7 +289,7 @@ export function resolveModelCareer(world: World, command: ModelCareerCommand) {
       state.brands.push(brand); while (state.brands.length > 24) { const index = state.brands.findIndex(item => item.status !== 'active'); if (index < 0) throw new Error('Too many active modelling agreements'); state.brands.splice(index, 1); state.archivedBrands++; }
     }
     const netFee = roundRatio(offer.annualPay * BigInt(offer.months), 12n); fact(world, 'I accepted ' + offer.title + ', a ' + definition.title.toLowerCase() + '.', 'career');
-    result(world, 'Your booking is signed', offer.title + ' · ' + offer.role + '. Wages arrive only during actual working months. ' + (offer.exclusivity ? 'Exclusive brand rights run for ' + modelBrandTerm(offer) + ' months; fulfil the quarterly appearances or review the real settlement terms.' : 'There are no competing-brand restrictions after this booking.'), 'model', [{ id: 'fee', label: 'Contracted gross for attended work', value: formatMoney({ minor: netFee, currency: career.currency }), tone: 'positive' }, { id: 'months', label: 'Paid production months', value: String(offer.months), tone: 'neutral' }]); return;
+    result(world, 'Your booking is signed', offer.title + ' · ' + offer.role + '. Payment follows the production schedule. ' + (offer.exclusivity ? 'Exclusive brand rights run for ' + modelBrandTerm(offer) + ' months; fulfil the quarterly appearances or review the real settlement terms.' : 'There are no competing-brand restrictions after this booking.'), 'model', [{ id: 'fee', label: 'Contracted gross for attended work', value: formatMoney({ minor: netFee, currency: career.currency }), tone: 'positive' }, { id: 'months', label: 'Paid production months', value: String(offer.months), tone: 'neutral' }]); return;
   }
   if (command.type === 'model-production') {
     const reason = modelProductionReason(world, command.projectId, command.action); if (reason) throw new IneligibleAction(reason);
@@ -247,14 +297,14 @@ export function resolveModelCareer(world: World, command: ModelCareerCommand) {
     let note = '';
     if (command.action === 'prepare') { details.preparation = bounded(details.preparation + 18); details.qualityBonus = Math.min(50, details.qualityBonus + 5); state.professionalism = bounded(state.professionalism + 3); person.stats.energy = bounded(person.stats.energy - 8); person.stats.stress = bounded(person.stats.stress + 3); note = 'You rehearse the route, test the clothes and solve three problems before anybody calls them a vision.'; }
     if (command.action === 'interpret') { const accepted = details.criticRoll <= Math.min(90, 30 + Math.floor(person.skills.modeling / 2) + Math.floor(state.professionalism / 5)); details.qualityBonus = Math.max(-50, Math.min(50, details.qualityBonus + (accepted ? 13 : -8))); details.publicity = Math.max(-50, Math.min(50, details.publicity + (accepted ? 3 : 8))); changeContact(world, career, 'designer', accepted ? 7 : -6); note = accepted ? 'Your revised brief gives the campaign a point of view. The designer takes notes as though this was always the plan.' : 'Your interpretation is memorable. The client’s email asking what happened is also memorable.'; }
-    if (command.action === 'negotiate') { const accepted = details.audienceRoll <= Math.min(85, 25 + Math.floor(career.reputation / 2) + Math.floor(state.industry.representation.rapport / 5)); if (accepted && person.employment?.id === project.employmentId) person.employment.annualPay = roundRatio(person.employment.annualPay * 110n, 100n); else changeContact(world, career, 'designer', -5); note = accepted ? 'The client signs a ten-percent increase on remaining wage instalments. Past payments stay exactly as paid.' : 'The client declines. Your actual contract pay stays unchanged; their next “quick favour” may be less quick.'; }
+    if (command.action === 'negotiate') { const accepted = details.audienceRoll <= Math.min(85, 25 + Math.floor(career.reputation / 2) + Math.floor(state.industry.representation.rapport / 5)); if (accepted && person.employment?.id === project.employmentId) person.employment.annualPay = roundRatio(person.employment.annualPay * 110n, 100n); else changeContact(world, career, 'designer', -5); note = accepted ? 'The client signs a ten-percent increase on remaining wage instalments. Past payments stay exactly as paid.' : 'The client declines. Your rate stays put; their next “quick favour” may be less quick.'; }
     if (command.action === 'publicity') { details.publicity = Math.min(50, details.publicity + 16); details.qualityBonus = Math.max(-50, details.qualityBonus - 4); person.publicLife.attention = bounded(person.publicLife.attention + 5); person.stats.stress = bounded(person.stats.stress + 5); note = 'You sell the campaign between takes. More people see it; slightly fewer minutes remain for making it.'; }
-    details.choices.push({ id: 'model:' + command.action, choice: command.action, month: creativeMonthNumber(world), note }); fact(world, note, 'career'); result(world, 'Your modelling direction is recorded', note, 'model'); return;
+    details.choices.push({ id: 'model:' + command.action, choice: command.action, month: creativeMonthNumber(world), note }); fact(world, 'I chose to ' + ({ prepare: 'prepare the presentation', interpret: 'propose a creative interpretation', negotiate: 'negotiate the remaining fee', publicity: 'promote the campaign' }[command.action]) + ' for ' + project.name + '.', 'career'); result(world, 'Your modelling direction is recorded', note, 'model'); return;
   }
   const brand = state.brands.find(item => item.id === command.brandId); if (!brand) throw new IneligibleAction('Choose a recorded brand agreement');
   const reason = modelBrandReason(world, brand, command.action); if (reason) throw new IneligibleAction(reason);
   const cost = modelBrandQuote(world, brand, command.action); if (cost !== command.quotedCost) throw new IneligibleAction('Review the current brand settlement quote');
-  if (command.action === 'fulfil') { brand.fulfilled++; brand.lastFulfilledQuarter = quarter(world); state.professionalism = bounded(state.professionalism + 2); changeContact(world, career, 'designer', 3); result(world, 'The brand appearance is delivered', 'You meet one recorded obligation. There is no second sponsorship payment: this work is part of the actual modelling agreement.', 'model'); }
+  if (command.action === 'fulfil') { brand.fulfilled++; brand.lastFulfilledQuarter = quarter(world); state.professionalism = bounded(state.professionalism + 2); changeContact(world, career, 'designer', 3); result(world, 'The brand appearance is delivered', 'You turn up, deliver and make the client’s calendar less threatening. One appearance is complete.', 'model'); }
   if (command.action === 'renegotiate') { brand.negotiated = true; const id = state.industry.contacts.designer, relationship = id ? relationFor(world, person.id, id) : undefined; const accepted = (relationship?.trust ?? 50) + career.reputation >= 115; if (accepted) { brand.ends = Math.max(creativeMonthNumber(world) + 1, brand.ends - 2); brand.obligations = Math.max(brand.fulfilled, brand.obligations - 1, 1); } else changeContact(world, career, 'designer', -4); result(world, accepted ? 'A shorter exclusivity term' : 'The original agreement stands', accepted ? 'The brand releases two months of remaining rights and one unfulfilled appearance. Past wages and the production contract remain unchanged.' : 'Your client declines the amendment. The existing saved agreement remains in force.', 'model'); }
   if (command.action === 'breach') {
     if (cost) {
