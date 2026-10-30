@@ -50,7 +50,7 @@ test('reader12 upgrades without rewriting raw saves; the actual completed payrol
     for (const table of ['lives', 'backups']) sqlite.prepare('UPDATE ' + table + ' SET payload=?').run(payload);
     sqlite.exec('PRAGMA user_version=12');
     const rows = () => Object.fromEntries(sqlite.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name").all().map(row => [row.name, sqlite.prepare('SELECT * FROM ' + row.name + ' ORDER BY 1,2').all()]));
-    const original = rows(), repository = new SaveRepository(driver); await repository.initialise(); expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(30); expect(rows()).toEqual(original);
+    const original = rows(), repository = new SaveRepository(driver); await repository.initialise(); expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(31); expect(rows()).toEqual(original);
     const store = createGameStore({ repository: async () => repository, date: () => world.date, id: () => 'unused' }); expect(await store.getState().bootstrap()).toBe(true); expect(store.getState().world).toEqual(world); expect(rows()).toEqual(original);
     const command = { type: 'choose' as const, eventId: world.pending!.id, choiceId: 'brief' }, unpack = jest.spyOn(checkpoints, 'unpackCheckpoint');
     sqlite.exec("CREATE TRIGGER fail_old_hourly BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");

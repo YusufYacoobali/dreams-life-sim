@@ -168,7 +168,7 @@ test.each([
       const repository = new SaveRepository(driver);
       await repository.initialise();
       expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(
-        30,
+        31,
       );
       expect(await repository.active()).toEqual(migrated);
       expect(await repository.recoveryPreview(raw.id)).toEqual(migrated);
@@ -260,7 +260,7 @@ test.each([
       const repository = new SaveRepository(driver);
       await repository.initialise();
       expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(
-        30,
+        31,
       );
       expect(await repository.active()).toEqual(migrated);
       expect(await repository.recoveryPreview(raw.id)).toEqual(migrated);
@@ -463,7 +463,7 @@ test.each([
       const repository = new SaveRepository(driver);
       await repository.initialise();
       expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(
-        30,
+        31,
       );
       expect(rows()).toEqual(before);
       expect(await repository.active()).toEqual(migrated);
@@ -595,7 +595,7 @@ test('live cult finances, witnesses, deadlines and pending results survive snaps
 });
 
 test.each([24, 25, 26, 27])(
-  'reader%s →30 is metadata only, rolls back a failed marker and preserves every original payload across all eight populated tables',
+  'reader%s →31 is metadata only, rolls back a failed marker and preserves every original payload across all eight populated tables',
   async (reader) => {
     const { sqlite, driver } = database(),
       repository = new SaveRepository(driver);
@@ -691,7 +691,7 @@ test.each([24, 25, 26, 27])(
               ...tx,
               run: async (sql, values) => {
                 await tx.run(sql, values);
-                if (sql === 'PRAGMA user_version = 30')
+                if (sql === 'PRAGMA user_version = 31')
                   throw new Error('interrupted cult reader marker');
               },
             }),
@@ -709,7 +709,7 @@ test.each([24, 25, 26, 27])(
       await cold.initialise();
       expect(unpack).not.toHaveBeenCalled();
       expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(
-        30,
+        31,
       );
       expect(rows()).toEqual(original);
       expect(await cold.active()).toEqual(paused);
