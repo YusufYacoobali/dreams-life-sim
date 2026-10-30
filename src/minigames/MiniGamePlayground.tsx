@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { Redirect, router } from 'expo-router';
-import { Image } from 'react-native';
+import { Image, Text } from 'react-native';
 import { useInternalGodModeAccess } from '../ui/GodModeAccess';
 import {
   ActionRow,
@@ -140,12 +140,14 @@ export function MiniGamePlayground() {
           <ActionRow
             key={game}
             title={titles[game]}
-            icon={<Image source={game === 'sports' ? sceneArt.ball : game === 'crime' ? sceneArt.dial : sceneArt.ship} resizeMode="contain" style={{ width: 40, height: 44 }} accessible={false} />}
+            icon={game === 'escape' ? <Text accessible={false} style={{ fontSize: 32 }}>☆</Text> : <Image source={game === 'sports' ? sceneArt.ball : game === 'crime' ? sceneArt.dial : sceneArt.ship} resizeMode="contain" style={{ width: 40, height: 44 }} accessible={false} />}
             subtitle={
               game === 'sports'
                 ? 'A penalty under stadium lights'
                 : game === 'crime'
                   ? 'Three bolts before the alarm'
+                  : game === 'escape'
+                    ? 'Follow the stamps through a shifting board'
                   : 'A drifting approach above Earth'
             }
             onPress={() => {

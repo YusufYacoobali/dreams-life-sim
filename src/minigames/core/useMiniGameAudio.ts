@@ -6,6 +6,7 @@ const sounds = {
   sports: require('../../../assets/minigames/sports.wav'),
   crime: require('../../../assets/minigames/crime.wav'),
   astronaut: require('../../../assets/minigames/astronaut.wav'),
+  escape: require('../../../assets/minigames/crime.wav'),
 };
 export function useMiniGameAudio(kind: MiniGameKind) {
   const enabled = usePreferences(

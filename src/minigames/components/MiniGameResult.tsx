@@ -86,6 +86,8 @@ export function MiniGameResult({
                     : result.detail === 'The keeper makes the save'
                       ? 'Saved!'
                       : 'Missed!'
+                : session.kind === 'escape'
+                  ? score >= 60 ? 'Out of custody' : 'Escape failed'
                 : session.kind === 'crime'
                   ? score >= 30
                     ? 'Cracked it!'

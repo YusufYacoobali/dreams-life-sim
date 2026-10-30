@@ -26,7 +26,7 @@ const press = async (name: string | RegExp) => { await act(async () => { fireEve
 const choose = async (name: RegExp) => { await act(async () => { fireEvent.press(screen.getByRole('radio', { name })); }); };
 const selection = () => screen.UNSAFE_getAllByType(EventModal).find(item => item.props.event?.id === 'date-activity:' + mockPersonId)!;
 
-test('a real spouse date offers four exact prices locally, retains a failed chosen activity and commits only one explicitly confirmed outcome', async () => {
+test('a real spouse date offers ten exact prices locally, retains a failed chosen activity and commits only one explicitly confirmed outcome', async () => {
   const db = database(), repository = new SaveRepository(db.driver), archived = decodeWorld(JSON.stringify(marriage));
   if (archived.pending?.kind !== 'result') throw new Error('Expected the archived marriage result');
   // Only acknowledge the genuine saved outcome; no eligibility, money or RNG edit.
@@ -42,7 +42,7 @@ test('a real spouse date offers four exact prices locally, retains a failed chos
   const view = render(frame());
   try {
     await press(/^Go on a Date\b/); expect(screen.getByText('A date with ' + fullName(before.people[mockPersonId]))).toBeOnTheScreen();
-    expect(screen.getAllByRole('radio')).toHaveLength(4);
+    expect(screen.getAllByRole('radio')).toHaveLength(10);
     for (const price of [/^Go for a Walk · \$0(?:\s|$)/, /^Go for Coffee · \$10(?:\s|$)/, /^Share a Meal · \$40(?:\s|$)/, /^Watch a Movie · \$30(?:\s|$)/]) expect(screen.getByRole('radio', { name: price })).toBeEnabled();
     expect(screen.getByText(/They can decline; you pay only if they accept/)).toBeOnTheScreen();
     expect(screen.getByRole('button', { name: invite })).toBeDisabled();

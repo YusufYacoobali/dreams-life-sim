@@ -2,6 +2,33 @@
 
 Owner workflow preference: commit and push completed changes to the active development branch unless explicitly told otherwise.
 
+## Crime, prison, romance and storytelling — 30 October 2026
+
+The `v2` overhaul extends existing gangs, incidents, courts, families and
+relationships. Organised Crime is free, with three styles, five ranks, ten
+assignments, persistent named crews/rivals and real proceeds. Prison adds
+security, eleven inmate actions, gang progression, family contact and the saved
+Exit Shuffle puzzle. Romance adds actual affairs/discovery, partner autonomy,
+ex reconciliation, family disclosure and ten date activities. Eighty original
+situations and eighty-nine rewritten existing outcomes retain the current UI.
+
+Both ordinary **49/51/28** and enhanced creative **50/52/29** world tuples remain
+supported. New lives and explicit new feature actions use `overhaulVersion: 1`;
+legacy decoding does not add it or rewrite old pending decisions. Its three
+histories are required when enabled. SQLite reader **30** changes metadata only;
+database v4's eight tables, existing fixtures, receipts and checkpoints remain.
+
+The full regression and final affected reruns cover **369 suites / 6,107 cases**,
+with no unresolved failures or skipped cases. The **120-life soak** passes.
+Strict app/test types, the **563-module** acyclic graph, notice checks and both
+production Hermes exports pass; all **54** changed runtime sources match both
+maps. No dependency, purchase, artwork or main-tab redesign was introduced.
+Installed-device acceptance remains unverified.
+
+See [mechanics and examples](CRIME_ROMANCE_OVERHAUL.md),
+[the writing inventory](CRIME_ROMANCE_WRITING_AUDIT.md), and
+[verification, measured performance and source review](verification/crime-romance-overhaul/README.md).
+
 ## Career presentation labels — 30 October 2026
 
 New theatre completion popups say “finishes its run”. Model history labels cancelled work “Unfinished booking” and displays the shared top success classification as “Major success”; Actor films retain “Blockbuster”. These are presentation corrections: stored classifications, rewards, historical outcomes and already pending text remain unchanged. All 58 focused domain/UI cases, strict app/test types and import checks pass. No broad cohort or native export was repeated for these wording-only changes.

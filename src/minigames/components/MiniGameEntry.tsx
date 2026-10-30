@@ -35,6 +35,8 @@ export function MiniGameEntry({
             ? 'Play Match Challenge'
             : kind === 'astronaut'
               ? 'Docking Challenge'
+              : kind === 'escape'
+                ? 'Exit Shuffle · Escape'
               : 'Safe Cracker · Burglary'
       }
       subtitle={
@@ -45,6 +47,8 @@ export function MiniGameEntry({
               ? 'affects your next match period'
               : kind === 'astronaut'
                 ? 'affects your next mission period'
+                : kind === 'escape'
+                  ? 'commits to this year’s escape attempt'
                 : 'commits to this year’s burglary attempt')
       }
       disabled={busy}

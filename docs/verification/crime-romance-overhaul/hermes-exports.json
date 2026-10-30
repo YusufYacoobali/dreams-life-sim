@@ -1,0 +1,243 @@
+{
+  "command": "CI=1 EXPO_NO_TELEMETRY=1 expo export --platform android --platform ios --max-workers 2 --source-maps",
+  "hermes": true,
+  "changedRuntimeSources": [
+    {
+      "path": "app/(game)/_layout.tsx",
+      "sha256": "67aa19f4939a5f1d8bb406813ea346e52a68c12a4112299efafdd790e4d5d8b0"
+    },
+    {
+      "path": "app/(game)/crime.tsx",
+      "sha256": "1da9e1a3cfbaf250b5c3561d620a823eff5648ade0475486a356e123f09427e8"
+    },
+    {
+      "path": "app/(game)/organised-crime.tsx",
+      "sha256": "269b33d4c7537bd1b8dd9f0fceb0b5a8b246f2b5a8ee3be71804ad3257ba7e17"
+    },
+    {
+      "path": "app/(game)/person/[id].tsx",
+      "sha256": "ad66796cb09da1abed3099eba19b1b47dcc079c59d9e15cbcdfa6dfde0d07443"
+    },
+    {
+      "path": "app/(game)/prison-activities.tsx",
+      "sha256": "360593c3d0d5302a9dee1088bb843006740d8a2c9e380391d2e87eb869bf2d02"
+    },
+    {
+      "path": "app/(game)/prison.tsx",
+      "sha256": "b983cfa440f24808ea9e53ff960affa36bb5081b48b0823ef8f687e79a94141f"
+    },
+    {
+      "path": "app/(game)/special-careers.tsx",
+      "sha256": "c55d97ce2217d0cd3705075085c0fbb98101c9ac274966d21d1519ec5c933442"
+    },
+    {
+      "path": "src/game/choiceAvailability.ts",
+      "sha256": "1782d5a16a59c188c29c0eaa15cad4df3d2ed2ac5ab185b2b9af231ca7647993"
+    },
+    {
+      "path": "src/game/content/conversationWriting.ts",
+      "sha256": "238cb108e8ba4e8b23cac8f496378c61ab3a79ef20cfb71fbaa08eec09e51089"
+    },
+    {
+      "path": "src/game/content/crime.ts",
+      "sha256": "889d0e3d2c97054020c47b4eef50b46895fb851bc252bbf3c9ce42430ea78151"
+    },
+    {
+      "path": "src/game/content/organisedCrime.ts",
+      "sha256": "7c7f56a56418d38f381146b643987867fa4e68a6ad8b8be1c4d42038ce79014f"
+    },
+    {
+      "path": "src/game/content/organisedCrimeStories.ts",
+      "sha256": "d9aa23e700d0e07ca4e5f0780e77ff5ebe81a579efc9c34377978c9be9133d55"
+    },
+    {
+      "path": "src/game/content/personInteractionWriting.ts",
+      "sha256": "01b4abcd8581a0b8260bb71f85eae5bf2e1edc1fbd23f439896e8e929a13f7fe"
+    },
+    {
+      "path": "src/game/content/prisonStories.ts",
+      "sha256": "f92bfeaa12a6da1ccc337e80e87140801a56223f5c81681a7e716fa465eb1fed"
+    },
+    {
+      "path": "src/game/content/romanceDramaStories.ts",
+      "sha256": "35f7a393b26d87f25e4418aec2206f36e421c0ebff00036e641a72645c087b6f"
+    },
+    {
+      "path": "src/game/createLife.ts",
+      "sha256": "f78ab49473723e07548f4559279883034e23f26e4d2e6cdc0764c41ad4bed2c7"
+    },
+    {
+      "path": "src/game/engine.ts",
+      "sha256": "c17f8c7e02158d49bd6ddb3b0f115cf325cf1f1fe535eeb09ab0f61f21adfe75"
+    },
+    {
+      "path": "src/game/model.ts",
+      "sha256": "11e48faa023336ed26bbf1cb56ed03fb0c2b266ffb16b2266e40ec3b9c05b96b"
+    },
+    {
+      "path": "src/game/runtime.ts",
+      "sha256": "968d11005c899202dbcacdbcdc199dc8afea40e1aee73e8814ddd3c6a3cb663d"
+    },
+    {
+      "path": "src/game/systems/dateActivities.ts",
+      "sha256": "efabda4e508e1f5a95d355f5ba1ab2a33b4b90ed6d30b65d18fc8523f5fc2acb"
+    },
+    {
+      "path": "src/game/systems/dateActivitySchemas.ts",
+      "sha256": "2126f93865e8aa5df354da28f9117e74998b35cf9d3115aa9973925b229a0d69"
+    },
+    {
+      "path": "src/game/systems/legal.ts",
+      "sha256": "2f0588f7e53b7ba73e161e72d80e85c48e24b02e32842367ba40e8299b02df24"
+    },
+    {
+      "path": "src/game/systems/legalSchemas.ts",
+      "sha256": "45a2bd4ac8c7dd007a8659177043f734b53d885440707f0a33c5814d4ee68b64"
+    },
+    {
+      "path": "src/game/systems/legalValidation.ts",
+      "sha256": "96cf829a9d64a9ebb438d324893fae7d533c1737ff091721cdfd6cc080f6ace6"
+    },
+    {
+      "path": "src/game/systems/organisedCrime.ts",
+      "sha256": "f84e5cd70d920672162fa04657e28abffa02432eae05ed842b2bd71279067ebb"
+    },
+    {
+      "path": "src/game/systems/organisedCrimeSchemas.ts",
+      "sha256": "fb33b5bc38eb9fa6a367c6403f48aa51caae13a9ceeb906b44700fa15893dad5"
+    },
+    {
+      "path": "src/game/systems/overhaul.ts",
+      "sha256": "901adad2906e01d531b92ada851c550b8bda0051413aa198ef766fe099874518"
+    },
+    {
+      "path": "src/game/systems/prison.ts",
+      "sha256": "61a08d471cc03e21b2769bb2023500016b40086089faeee09a116d454bca87d4"
+    },
+    {
+      "path": "src/game/systems/prisonSchemas.ts",
+      "sha256": "29bb75b67fd18508ad55d6cc4fc9eec6598d36c674d0d5448329851b1cd9ff18"
+    },
+    {
+      "path": "src/game/systems/prisonSecurity.ts",
+      "sha256": "5fa7ebe5d1bde2ea970b2045634d0be712280b9bd822fb3486de1a69273a8de0"
+    },
+    {
+      "path": "src/game/systems/prisonValidation.ts",
+      "sha256": "5a2088a6e7d9923b78697fc01b66b75f386523887e0a1cf4cdce05afc023eb91"
+    },
+    {
+      "path": "src/game/systems/relationshipQueries.ts",
+      "sha256": "bf78bb286d286196bca3d9dc9e3357b29c45e43bcaae23020fc55acbae043d73"
+    },
+    {
+      "path": "src/game/systems/relationships.ts",
+      "sha256": "df2f85dd78c23d35a18ee60e46da54a502f65c10ed12ff9d9a5bf51956baed9b"
+    },
+    {
+      "path": "src/game/systems/romanceDrama.ts",
+      "sha256": "93eb670602d9f4b83fda28c62df3df5a02d08ccd7f6ffd4b45863efe00d40b8e"
+    },
+    {
+      "path": "src/game/systems/romanceSchemas.ts",
+      "sha256": "2b624de06b442b68111a019cbf4145024174c7179059d7e0497304dac5f45806"
+    },
+    {
+      "path": "src/game/systems/romanceValidation.ts",
+      "sha256": "41e7be4780e959cd210166ebef4773810c072c60e9419bd1365d5e7705a21891"
+    },
+    {
+      "path": "src/minigames/MiniGamePlayground.tsx",
+      "sha256": "2a913e870c7782169970a0be6c0f5d3cef3c835c560ec4f090a503b9d9903a97"
+    },
+    {
+      "path": "src/minigames/components/MiniGameEntry.tsx",
+      "sha256": "d9a0052f2264470114da93fe1b7d287309fddd32638eda44da259868f54bee39"
+    },
+    {
+      "path": "src/minigames/components/MiniGameResult.tsx",
+      "sha256": "cc29f3ae9877177ec3aac49487c17b78942a0e7f87e21780f3126b6a34df8da6"
+    },
+    {
+      "path": "src/minigames/components/MiniGameScreen.tsx",
+      "sha256": "54fe9ef252120d7da9abf99f5216ac994929537608ed30ecce97b79fac00f919"
+    },
+    {
+      "path": "src/minigames/components/SceneBackdrop.tsx",
+      "sha256": "e735c4219710fee78c95fd75e3e45e69542888f43b2e9e08f6633298fa8e3a70"
+    },
+    {
+      "path": "src/minigames/components/sceneArtwork.ts",
+      "sha256": "30b608899daa02a7714649b19f2dad389a5a59f21f7bc7dda7d144253d695a8b"
+    },
+    {
+      "path": "src/minigames/core/eligibility.ts",
+      "sha256": "54a2d87269b8c48c878941b634182907965a30dfad00539153f3e97932d7a5bd"
+    },
+    {
+      "path": "src/minigames/core/evaluation.ts",
+      "sha256": "aecf046264ba4b232bd9dc7893c8ab02075c401749c9c236a0f2c961c41d4d1b"
+    },
+    {
+      "path": "src/minigames/core/scoring.ts",
+      "sha256": "fa985c13d4304f86666259a7225308dace1a717ac08e7c5ac45f80765f743a2c"
+    },
+    {
+      "path": "src/minigames/core/session.ts",
+      "sha256": "fe196ef6deb66de975b096ae5de5904f68d368d573ea6624cb35cca1cedfb22b"
+    },
+    {
+      "path": "src/minigames/core/types.ts",
+      "sha256": "c819ecd414df75d4c1e11b1969830a7ddc2afd001989818ebbc85d313e40d186"
+    },
+    {
+      "path": "src/minigames/core/useMiniGameAudio.ts",
+      "sha256": "789de8ad172dc51bce179bd5f18eef39c5c40a3c9f4bdadee39330dde2ce206f"
+    },
+    {
+      "path": "src/minigames/core/validation.ts",
+      "sha256": "bcf8da17b7abded27c58b570f1c21e6d653178dc572442193fce0483df98394b"
+    },
+    {
+      "path": "src/minigames/escape/EscapeGame.tsx",
+      "sha256": "4a9f536d35877434c5732e99778d3bac6f480118119af2754463705f0d045fd3"
+    },
+    {
+      "path": "src/minigames/escape/escapeLogic.ts",
+      "sha256": "61b8f8c927c70d5f5802ecaec49c1002a9126f23b606c1df8a248bcaa6f16e46"
+    },
+    {
+      "path": "src/persistence/repository.ts",
+      "sha256": "e7c4f25a75d2f25845636e2c08492a75a4509269c15e29ca10fa2a3734b88ce0"
+    },
+    {
+      "path": "src/ui/LegalReview.tsx",
+      "sha256": "ab7e31a573a1510c35d343ecdac1f050f34fd39ab60f594308ee47ac6cb3bf91"
+    },
+    {
+      "path": "src/ui/RomanceActions.tsx",
+      "sha256": "673b88fa911e30aab89fa5686d69ae7586626409a52a4afadba123dd20871fbf"
+    }
+  ],
+  "platforms": [
+    {
+      "platform": "android",
+      "bundle": "entry-95bfae08158c3ecb712e527c3de7a02c.hbc",
+      "bundleBytes": 9575428,
+      "bundleSha256": "45ef51202e8f7d8497807a542287eb98f55ef111ce2853f56ef59d8a86d5775b",
+      "sourceMapSha256": "9d02d17d28f2e3059fae5760faac8691329df6210d7552c02947df76cb1771c2",
+      "missing": [],
+      "mismatches": []
+    },
+    {
+      "platform": "ios",
+      "bundle": "entry-eeaac6882c1c63e1afcfd6ff7c06d67e.hbc",
+      "bundleBytes": 9392228,
+      "bundleSha256": "1c429c46d982d968245b9ada4dec0b0f3ae884a6abc31505fead08b149b860e7",
+      "sourceMapSha256": "19e8fc15adb29dd83fcfe8003fea4b867ffa74385f47dd8d834d28fe33d5305c",
+      "missing": [],
+      "mismatches": []
+    }
+  ],
+  "installedDeviceAcceptance": false
+}

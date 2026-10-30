@@ -1,9 +1,13 @@
-export const offenceIds = ['shoplift', 'pickpocket', 'vandalism', 'burglary', 'robbery', 'assault', 'cyber-fraud', 'organized-job', 'bribery', 'escape', 'homicide', 'contraband', 'cult-fraud'] as const;
+export const offenceIds = ['shoplift', 'pickpocket', 'vandalism', 'burglary', 'robbery', 'assault', 'cyber-fraud', 'organized-job', 'vehicle-theft', 'financial-scam', 'extortion', 'high-value-robbery', 'bribery', 'escape', 'homicide', 'contraband', 'cult-fraud'] as const;
 export type OffenceId = typeof offenceIds[number];
-export const actionableCrimes = ['shoplift', 'pickpocket', 'vandalism', 'burglary', 'robbery', 'assault', 'cyber-fraud', 'organized-job'] as const;
+export const actionableCrimes = ['shoplift', 'pickpocket', 'vandalism', 'burglary', 'robbery', 'assault', 'cyber-fraud', 'organized-job', 'vehicle-theft', 'financial-scam', 'extortion', 'high-value-robbery'] as const;
 export type CrimeDefinition = { title: string; category: 'petty' | 'major' | 'cyber' | 'organized'; minAge: number; smarts: number; skill: number; riskBps: number; gainBps: number; fineBps: number; months: number; violent: boolean; description: string };
 /** High-level fictional actions. All money scales from the local authored pay profile. */
 export const offences: Record<OffenceId, CrimeDefinition> = {
+  'vehicle-theft': { title: 'Vehicle Theft', category: 'major', minAge: 18, smarts: 15, skill: 10, riskBps: 5300, gainBps: 650, fineBps: 900, months: 30, violent: false, description: 'A serious property offence with a recorded payoff, evidence and court risk.' },
+  'financial-scam': { title: 'Financial Scam', category: 'cyber', minAge: 18, smarts: 40, skill: 5, riskBps: 5200, gainBps: 850, fineBps: 1300, months: 30, violent: false, description: 'An abstract deceptive scheme. Any proceeds come with evidence and prosecution risk.' },
+  extortion: { title: 'Extortion', category: 'organized', minAge: 18, smarts: 0, skill: 15, riskBps: 6800, gainBps: 700, fineBps: 1500, months: 48, violent: false, description: 'Threaten a real adult contact for money, with trust, restitution and prosecution consequences.' },
+  'high-value-robbery': { title: 'High-value Robbery', category: 'major', minAge: 18, smarts: 30, skill: 35, riskBps: 7800, gainBps: 2200, fineBps: 3000, months: 84, violent: true, description: 'A dangerous violent theft with injury risk, substantial evidence and a long possible sentence.' },
   'cult-fraud': { title: 'Misappropriation of Communal Funds', category: 'major', minAge: 18, smarts: 0, skill: 0, riskBps: 5500, gainBps: 0, fineBps: 1400, months: 36, violent: false, description: 'Diverting communal funds for personal use leaves evidence and restitution obligations.' },
   shoplift: { title: 'Shoplifting', category: 'petty', minAge: 14, smarts: 0, skill: 0, riskBps: 3500, gainBps: 100, fineBps: 200, months: 6, violent: false, description: 'Attempt a petty theft from a local retailer.' },
   pickpocket: { title: 'Pickpocketing', category: 'petty', minAge: 14, smarts: 0, skill: 5, riskBps: 4000, gainBps: 150, fineBps: 250, months: 8, violent: false, description: 'A risky attempt to steal from another person.' },

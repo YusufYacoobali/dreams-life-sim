@@ -1,3 +1,4 @@
+import { HealthLegalArt } from '../../src/assets/HealthLegalArt';
 import { CultArt } from '../../src/assets/CultArt';
 import { activeCult } from '../../src/game/systems/cultSchemas';
 import React from 'react';
@@ -24,6 +25,7 @@ export default function SpecialCareers() {
     </Card>
     <Card><Heading size={18}>Independent Careers</Heading>
       <ActionRow title="Business Owner" subtitle="Your real companies, employees and operating history" icon={<FameBusinessArt id="business" />} onPress={() => router.push('/business')} />
+      <ActionRow title="Organised Crime" subtitle="Build a crew, rise through the ranks and face real consequences" icon={<HealthLegalArt id="handcuffs" />} onPress={() => router.push('/organised-crime')} />
       <ActionRow title="Cult Leader" subtitle={activeCult(world)?.name ?? 'Found a movement, keep your promises and face the consequences'} icon={<CultArt />} onPress={() => router.push('/cult')} />
       {creatorKinds.map(kind => <ActionRow key={kind} title={creatorCatalog[kind].title} subtitle={creatorCatalog[kind].description} icon={<PlatformMark platform={creatorCatalog[kind].platform} />} onPress={() => router.push({ pathname: '/creator-studio/[kind]', params: { kind } })} />)}
     </Card>

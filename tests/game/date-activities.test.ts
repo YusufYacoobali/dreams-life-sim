@@ -25,7 +25,7 @@ test('all12 country quotes use actual currency and exact minor amounts without c
   countryCodes.forEach((country, index) => {
     const world = createLife('life_quote_' + country, 42, { ...randomCreation(42), background: 'ordinary', country, city: countries[country].cities[0] }, { year: 2026, month: 1, day: 1 });
     const parentId = world.relationships[0].from, original = encodeWorld(world), rows = dateActivities(world, parentId), meal = mealAmounts[index];
-    expect(rows.map(row => row.id)).toEqual(ids); expect(rows.map(row => row.cost)).toEqual([0n, meal / 4n, meal, meal * 3n / 4n]);
+    expect(rows.map(row => row.id)).toEqual([...ids,'dinner','outing','park','concert','cooking','surprise']); expect(rows.slice(0,4).map(row => row.cost)).toEqual([0n, meal / 4n, meal, meal * 3n / 4n]);
     expect(rows.every(row => row.currency === countries[country].currency && !!row.disabledReason)).toBe(true);
     expect(dateActivities(world, parentId)).toEqual(rows); expect(encodeWorld(world)).toBe(original);
   });

@@ -4,12 +4,14 @@ import {
   activeMiniGame,
   challengeContext,
   miniGameReason,
+  escapeAttemptKey,
 } from './eligibility';
 import { challengeSeed } from './difficulty';
 import { evaluateSession } from './evaluation';
 import { ratingFor } from './scoring';
 import {
   durationMs,
+  titles,
   type MiniGameCommand,
   type MiniGameSession,
 } from './types';
@@ -59,6 +61,8 @@ export function resolveMiniGame(
       world.actionCounts[
         world.activePersonId + ':legal:' + world.date.year + ':crime:burglary'
       ] = 1;
+    if (command.kind === 'escape')
+      world.actionCounts[escapeAttemptKey(world.activePersonId, world.date.year)] = 1;
     return;
   }
   const session = world.miniGames.find(
@@ -100,7 +104,9 @@ export function resolveMiniGame(
         ? 'shot'
         : session.kind === 'crime'
           ? 'lock'
-          : 'thrust') !== input.action.type
+          : session.kind === 'escape'
+            ? 'stamp'
+            : 'thrust') !== input.action.type
     )
       throw new IneligibleAction('This control belongs to another game');
     if (evaluateSession(session).finished)
@@ -123,8 +129,10 @@ export function resolveMiniGame(
     id: session.id + '_result',
     personId: session.personId,
     date: { ...world.date },
-    category: session.kind === 'crime' ? 'crime' : 'career',
-    text: `${session.kind === 'sports' ? 'Clutch Shot' : session.kind === 'crime' ? 'Safe Cracker' : 'Orbital Docking'}: ${forfeit ? 'forfeited' : session.rating} (${session.score}/100).`,
+    category: session.kind === 'escape' ? 'legal' : session.kind === 'crime' ? 'crime' : 'career',
+    text: session.kind === 'escape'
+      ? `I ${forfeit ? 'abandoned Exit Shuffle' : 'completed Exit Shuffle with ' + session.score + '/100'}.`
+      : `${titles[session.kind]}: ${forfeit ? 'forfeited' : session.rating} (${session.score}/100).`,
   });
   return session;
 }

@@ -18,7 +18,10 @@ import { FeedbackProvider } from '../../src/ui/feedback';
 import { database } from '../support/sqlite';
 import { athleteFixture, miniGameFixture } from '../support/miniGames';
 import { encodeWorld } from '../../src/game/model';
-import { burglaryContext } from '../../src/minigames/core/eligibility';
+import { burglaryContext, escapeContext } from '../../src/minigames/core/eligibility';
+import { activeSentence } from '../../src/game/systems/legalSchemas';
+import { escapeSequence } from '../../src/minigames/escape/escapeLogic';
+import { escapePrisoner } from '../support/prisonEscape';
 
 let mockStore: ReturnType<typeof createGameStore>,
   mockParams: { kind: string; ownerId: string; contextId: string },
@@ -148,12 +151,12 @@ const show = async (children: React.ReactNode) => {
   return view;
 };
 let sqlite: ReturnType<typeof database>['sqlite'], repository: SaveRepository;
-async function setup(kind: 'sports' | 'crime' = 'sports') {
+async function setup(kind: 'sports' | 'crime' | 'escape' = 'sports') {
   const db = database();
   sqlite = db.sqlite;
   repository = new SaveRepository(db.driver);
   await repository.initialise();
-  const world = kind === 'sports' ? athleteFixture() : miniGameFixture();
+  const world = kind === 'sports' ? athleteFixture() : kind === 'escape' ? escapePrisoner() : miniGameFixture();
   await repository.create(world);
   mockStore = createGameStore({
     repository: async () => repository,
@@ -163,10 +166,12 @@ async function setup(kind: 'sports' | 'crime' = 'sports') {
   await mockStore.getState().bootstrap();
   mockParams = {
     kind,
-    ownerId: kind === 'sports' ? world.careers[0].id : world.activePersonId,
+    ownerId: kind === 'sports' ? world.careers[0].id : kind === 'escape' ? activeSentence(world)!.id : world.activePersonId,
     contextId:
       kind === 'sports'
         ? world.careers[0].projects[0].id
+        : kind === 'escape'
+          ? escapeContext(world)
         : burglaryContext(world),
   };
   return world;
@@ -197,6 +202,25 @@ const play = async () => {
   );
   act(() => jest.advanceTimersByTime(1100));
 };
+
+test('the live assisted stamp board saves each choice and escapes the actual sentence once', async () => {
+  await setup('escape');
+  await show(<LiveMiniGame />);
+  await play();
+  const session = mockStore.getState().world!.miniGames[0], sequence = escapeSequence(session);
+  for (let index = 0; index < sequence.length; index++) {
+    fireEvent.press(screen.getByRole('button', { name: `Choose ${sequence[index]} gate` }));
+    await waitFor(() => expect(mockStore.getState().world!.miniGames[0].inputs).toHaveLength(index + 1));
+    await act(async () => {});
+  }
+  act(() => jest.advanceTimersByTime(100));
+  await waitFor(() => expect(mockStore.getState().world!.miniGames[0].status).toBe('completed'));
+  const world = mockStore.getState().world!;
+  expect(world.sentences.find(row => row.id === session.ownerId)?.state).toBe('escaped');
+  expect(world.people[world.activePersonId].legal.wanted).toBe(true);
+  expect(world.incidents.filter(row => row.personId === world.activePersonId && row.offence === 'escape')).toHaveLength(1);
+  expect(screen.getByText('Out of custody')).toBeOnTheScreen();
+});
 
 function practiceFlight(assisted = true): MiniGameSession {
   return {
@@ -598,6 +622,33 @@ test('burglary consequences remain saved behind the challenge and present only a
   expect(screen.getByText('Saved legal scene')).toBeOnTheScreen();
   expect(mockStore.getState().world).toBe(world);
   expect(mockStore.getState().world!.pending).toBe(pending);
+});
+
+test('forfeiting escape in custody keeps its actual charge behind the result, then returns to the saved legal decision', async () => {
+  const initial = await setup('escape'), sentenceId = activeSentence(initial)!.id;
+  const view = await show(<><GameLayout /><LiveMiniGame /></>);
+  await play();
+  fireEvent.press(screen.getByRole('button', { name: 'Pause' }));
+  await waitFor(() => expect(mockStore.getState().world!.miniGames[0].paused).toBe(true));
+  fireEvent.press(screen.getByRole('button', { name: 'Forfeit attempt' }));
+  expect(screen.getByText(/Forfeiting fails this escape attempt/)).toBeOnTheScreen();
+  fireEvent.press(screen.getByRole('button', { name: 'Confirm forfeit' }));
+  await waitFor(() => expect(mockStore.getState().world!.miniGames[0].status).toBe('forfeited'));
+  const saved = mockStore.getState().world!, pending = saved.pending;
+  expect(activeSentence(saved)?.id).toBe(sentenceId);
+  expect(saved.miniGames[0].score).toBe(0);
+  expect(saved.incidents.filter(row => row.personId === saved.activePersonId && row.offence === 'escape')).toHaveLength(1);
+  expect(pending?.kind === 'decision' && pending.templateId).toBe('arrest');
+  expect(screen.getByText('Forfeited')).toBeOnTheScreen();
+  expect(screen.queryByText('Saved legal scene')).toBeNull();
+  fireEvent.press(screen.getByRole('button', { name: 'Continue' }));
+  await waitFor(() => expect(mockBack).toHaveBeenCalledTimes(1));
+  mockRoute = '/prison-activities';
+  view.rerender(frame(<GameLayout />));
+  expect(screen.getByText('Saved legal scene')).toBeOnTheScreen();
+  expect(mockStore.getState().world!.pending).toBe(pending);
+  expect(mockStore.getState().world).toBe(saved);
+  expect(encodeWorld(await repository.load(initial.id))).toBe(encodeWorld(saved));
 });
 
 

@@ -1,4 +1,7 @@
 import { burglaryModifiers } from '../../minigames/core/scoring';
+import { prisonSecurity } from './prisonSecurity';
+import { samePhysicalPlace } from './travelSchemas';
+import { serviceAway } from './serviceSchemas';
 import { z } from 'zod';
 import { ageOn, compareDates, fullName } from '../personHelpers';
 import type { Person, World } from '../model';
@@ -72,6 +75,24 @@ function incident(world: World, person: Person, offence: OffenceId, gain = 0n, v
   const item: Incident = { id: 'incident_' + person.id + '_' + world.revision + '_' + world.incidents.length, personId: person.id, offence, date: { ...world.date }, country: person.country, city: person.city, victimId, victimKilled: false, gain: { minor: gain, currency }, restitution: { minor: restitution, currency }, evidence: draw(world, 'outcomes', 25, 95), detectionRoll: draw(world, 'outcomes', 1, 10000), followupRoll: draw(world, 'outcomes', 1, 100), trialRoll: draw(world, 'outcomes', 1, 100), riskBps: Math.max(1000, definition.riskBps - person.legal.crimeSkill * 20), investigateMonth: absolute(world) + draw(world, 'outcomes', 1, 6), stage: 'hidden', caseId: null };
   world.incidents.push(item); return item;
 }
+/** Fictional assignments share the ordinary evidence, arrest and court pipeline. */
+export function recordOrganisedCrime(world: World, personId: string, gain: bigint, options: { riskDeltaBps: number; evidenceDelta: number; victimId?: string | null }) {
+  const person = world.people[personId];
+  if (!person || person.died || isConfined(world, person) || gain < 0n) throw new IneligibleAction('This assignment cannot create an outside criminal incident');
+  const source = incident(world, person, 'organized-job', gain, options.victimId ?? null);
+  source.riskBps = Math.max(250, Math.min(10000, source.riskBps + options.riskDeltaBps));
+  source.evidence = bounded(source.evidence + options.evidenceDelta);
+  if (source.detectionRoll <= source.riskBps) arrest(world, source);
+  return source;
+}
+/** A prison allegation uses the same incident/case identity as other crimes. */
+export function recordPrisonOffence(world: World, personId: string, offence: 'assault' | 'contraband', victimId: string | null = null, reported = true) {
+  const person = world.people[personId];
+  if (!person || person.died || !isConfined(world, person)) throw new IneligibleAction('A prison offence requires custody');
+  const source = incident(world, person, offence, 0n, victimId, 0n);
+  if (reported || source.detectionRoll <= source.riskBps) arrest(world, source);
+  return source;
+}
 /** A scene may record corruption only after its concrete payment or report. */
 export function recordDramaticCorruption(world: World, personId: string, gain: bigint, reported: boolean, victimId: string | null = null) {
   const source = incident(world, world.people[personId], 'bribery', gain, victimId, gain);
@@ -130,7 +151,7 @@ function arrest(world: World, source: Incident): Case {
 function release(world: World, sentence: Sentence, reason: 'served' | 'parole' | 'appeal') {
   sentence.state = 'released'; sentence.ended = { ...world.date }; sentence.releaseReason = reason;
   const person = world.people[sentence.personId];
-  const gang = world.gangs.find(item => item.id === person.legal.gangId && item.kind === 'prison' && !item.left); if (gang) { gang.left = { ...world.date }; person.legal.gangId = null; }
+  for (const gang of world.gangs.filter(item => item.personId === person.id && item.kind === 'prison' && item.sentenceId === sentence.id && !item.left)) { gang.left = { ...world.date }; if (person.legal.gangId === gang.id) person.legal.gangId = world.gangs.find(item => item.personId === person.id && item.kind === 'street' && !item.left)?.id ?? null; }
   fact(world, 'I was released from ' + sentence.facility + ' after ' + sentence.servedMonths + ' months served and ' + sentence.creditedMonths + ' months of remand credit.', 'legal', '', person.id);
   if (person.id === world.activePersonId) { offerPending(world, { kind: 'result', id: 'release_' + sentence.id, title: 'Released from custody', body: isConfined(world, person) ? 'This sentence ended. Another custody order still applies.' : 'You are free to rebuild your life. Your qualifications, family, property and actual court history remain yours.', illustration: 'release', effects: [row('release', 'Release', reason), row('record', 'Record', reason === 'appeal' ? 'Conviction overturned' : 'Conviction retained')] }, 85); planningPause(world); }
 }
@@ -175,9 +196,10 @@ function commitCrime(world: World, command: Extract<LegalCommand, { type: 'crime
   const reason = modifier ? undefined : crimeReason(world, command.offence); if (reason) throw new IneligibleAction(reason);
   const person = active(world), definition = offences[command.offence]; if (!modifier) limit(world, 'crime:' + command.offence);
   let victim: Person | null = null;
-  if (['pickpocket', 'robbery', 'assault'].includes(command.offence)) {
+  if (['pickpocket', 'robbery', 'assault', 'extortion', 'high-value-robbery'].includes(command.offence)) {
     victim = command.victimId ? world.people[command.victimId] : Object.values(world.people).find(candidate => candidate.id !== person.id && !candidate.died && !isConfined(world, candidate) && candidate.country === person.country && candidate.city === person.city && ageOn(candidate, world.date) >= 18) ?? createContact(world, { age: draw(world, 'npcs', 20, 60) });
     if (!victim || victim.id === person.id || victim.died || isConfined(world, victim) || victim.country !== person.country || victim.city !== person.city || ageOn(victim, world.date) < 18) throw new IneligibleAction('Choose a living adult in your city');
+    if (['extortion', 'high-value-robbery'].includes(command.offence) && (!samePhysicalPlace(world, person.id, victim.id) || serviceAway(world, victim.id) || hospitalized(world, victim))) throw new IneligibleAction('Choose an adult who is currently available in your city');
   }
   let gain = amount(world, definition.gainBps);
   if (modifier) gain = roundRatio(gain * BigInt(modifier.lootBps), 10000n);
@@ -187,6 +209,10 @@ function commitCrime(world: World, command: Extract<LegalCommand, { type: 'crime
   if (modifier) source.riskBps = Math.max(1000, Math.min(9500, source.riskBps + modifier.riskBps));
   person.stats.energy = bounded(person.stats.energy - 10); person.stats.stress = bounded(person.stats.stress + 7); person.stats.respect = bounded(person.stats.respect - (definition.violent ? 8 : 3)); person.legal.crimeSkill = bounded(person.legal.crimeSkill + 5);
   if (command.offence === 'organized-job') { const gang = world.gangs.find(item => item.id === person.legal.gangId)!; gang.standing = bounded(gang.standing + 10); gang.rank = Math.min(3, Math.floor(gang.standing / 25)); gang.lastIncomeMonth = absolute(world); }
+  if (world.overhaulVersion && victim) {
+    const relation = relationFor(world, person.id, victim.id);
+    if (relation) { relation.strength = bounded(relation.strength - (definition.violent ? 30 : 18)); relation.trust = bounded(relation.trust - 35); relation.memories.push('crime-victim:' + source.id); }
+  }
   if (victim && definition.violent) {
     const injury = draw(world, 'outcomes', 8, 30); victim.stats.health = bounded(victim.stats.health - injury); addCondition(world, victim, 'fracture', injury + 20);
     if (victim.stats.health === 0) { source.victimKilled = true; source.offence = 'homicide'; source.riskBps = 10000; death(world, victim.id, 'injuries from an assault'); }
@@ -201,6 +227,28 @@ export function resolveReservedBurglary(world: World, sessionId: string, death: 
   session.appliedMonth = absolute(world);
   commitCrime(world, { type: 'crime', offence: 'burglary' }, death, burglaryModifiers(session.score));
 }
+/** The reserved attempt settles once, including a forfeited puzzle. */
+export function resolveReservedEscape(world: World, sessionId: string) {
+  const session = world.miniGames.find(item => item.id === sessionId && item.personId === world.activePersonId && item.kind === 'escape' && item.status !== 'active');
+  const sentence = session && world.sentences.find(item => item.id === session.ownerId && item.personId === session.personId && item.state === 'active');
+  if (!session || !sentence || session.appliedMonth !== null || session.score === null || world.actionCounts[session.personId + ':legal:' + session.started.year + ':escape'] !== 1) throw new IneligibleAction('This escape attempt has already resolved or lost its sentence');
+  session.appliedMonth = session.started.year * 12 + session.started.month - 1;
+  const person = world.people[session.personId], source = incident(world, person, 'escape');
+  source.riskBps = 10000;
+  if (session.status === 'completed' && session.score >= 60) {
+    sentence.state = 'escaped'; person.legal.wanted = true;
+    for (const item of world.cases.filter(item => item.personId === person.id && item.status === 'awaiting-trial')) {
+      if (item.bailState === 'held') item.bailState = 'forfeited';
+      item.detained = false;
+    }
+    fact(world, 'I escaped from custody. My remaining sentence stopped counting down.', 'legal');
+    result(world, 'Outside, still wanted', 'You cleared the puzzle and got out. Your sentence remains unfinished, an escape incident is recorded, and the police are looking for you.', 'handcuffs', [row('escape', 'Sentence', 'Escaped', 'negative'), row('wanted', 'Police', 'Wanted', 'negative')]);
+  } else {
+    sentence.behavior = bounded(sentence.behavior - 25);
+    fact(world, session.status === 'forfeited' ? 'I abandoned an escape attempt and faced disciplinary action.' : 'My escape attempt failed and I faced disciplinary action.', 'legal');
+    arrest(world, source);
+  }
+}
 export function resolveLegal(world: World, command: LegalCommand, death: Death) {
   const person = active(world), sentence = activeSentence(world);
   if (command.type === 'crime') { commitCrime(world, command, death); return; }
@@ -213,7 +261,8 @@ export function resolveLegal(world: World, command: LegalCommand, death: Death) 
   }
   if (command.type === 'prison-routine') {
     if (!sentence) throw new IneligibleAction('An active sentence is required');
-    if (command.routine.conduct === 'gang' && !world.gangs.some(item => item.id === person.legal.gangId && item.kind === 'prison' && !item.left)) throw new IneligibleAction('You have no prison group affiliation');
+    if (world.overhaulVersion && command.routine.work && prisonSecurity(world, sentence) === 'high' && sentence.behavior < 25) throw new IneligibleAction('Restore conduct to 25% before prison work is available');
+    if (command.routine.conduct === 'gang' && !world.gangs.some(item => item.personId === person.id && item.kind === 'prison' && item.sentenceId === sentence.id && !item.left)) throw new IneligibleAction('You have no prison group affiliation');
     sentence.routine = command.routine; result(world, 'Prison routine saved', 'Work, study, exercise and conduct take effect over actual months in custody.', 'prison'); return;
   }
   if (command.type === 'prison-interact') {
@@ -311,7 +360,7 @@ export function legalMonth(world: World, dischargedFromHospital?: ReadonlySet<st
       sentence.lastServedMonth = month; sentence.servedMonths++;
       const routine = sentence.routine, attending = !hospitalized(world, person) && !dischargedFromHospital?.has(person.id);
       sentence.behavior = bounded(sentence.behavior + (routine.conduct === 'quiet' ? 3 : routine.conduct === 'social' ? 1 : -3));
-      if (routine.work && attending) { const pay = rules[sentence.country].baseWage / 2400n; if (pay) { post(world, pay, 0n, 'prison-pay', 'Prison work stipend', null, person, countries[sentence.country].currency); person.finance.cycleGross += pay; } }
+      if (routine.work && attending && !(world.overhaulVersion && prisonSecurity(world, sentence) === 'high' && sentence.behavior < 25)) { const pay = rules[sentence.country].baseWage / 2400n; if (pay) { post(world, pay, 0n, 'prison-pay', 'Prison work stipend', null, person, countries[sentence.country].currency); person.finance.cycleGross += pay; } }
       if (routine.study && attending) { sentence.studyMonths++; person.stats.smarts = bounded(person.stats.smarts + (sentence.studyMonths % 3 === 0 ? 1 : 0)); if (sentence.studyMonths >= 12 && !person.education.qualifications.some(item => item.level === 'secondary')) { person.education.qualifications.push({ level: 'secondary', field: 'general', year: world.date.year }); person.education.stage = 'none'; fact(world, 'I earned a secondary equivalency qualification through prison study.', 'education', '', person.id); } }
       if (routine.exercise && attending) person.stats.fitness = bounded(person.stats.fitness + 1);
       person.stats.stress = bounded(person.stats.stress + (routine.conduct === 'gang' ? 2 : -1));
@@ -340,6 +389,6 @@ export function legalDeath(world: World, person: Person) {
 /** Shared gate prevents a deep link or direct command from bypassing custody. */
 export function custodyReason(world: World, commandType: string): string | undefined {
   if (!isConfined(world)) return;
-  const permitted = ['advance', 'resume', 'choose', 'acknowledge', 'cult-disband', 'leave-recovery', 'recovery-effort', 'stop-career-training', 'royal-duties', 'renounce-title', 'leave-service', 'return-assignment', 'service-focus', 'leave-career', 'career-focus', 'cancel-recording', 'withdraw-campaign', 'campaign-plan', 'pay-bail', 'retain-counsel', 'prison-routine', 'prison-interact', 'appeal', 'parole', 'escape', 'bribe', 'join-gang', 'leave-gang', 'consult', 'treat', 'stop-treatment', 'vaccinate', 'meditate', 'self-improvement', 'repay', 'exchange', 'save-will', 'revoke-will', 'name-child', 'interact', 'relationship-preferences', 'edit-social', 'social-routine', 'delete-social', 'reopen-social', 'cancel-sponsor', 'business-prices', 'business-marketing', 'business-payout-policy', 'hire-business-staff', 'dismiss-business-staff', 'fund-business', 'improve-business', 'expand-business', 'withdraw-business-profit', 'sell-business', 'breakup', 'end-best-friendship', 'end-teen-relationship', 'gift-money', 'person-action', 'ask-person-support', 'respond-person-loan', 'sell-asset', 'insure', 'rent-property', 'stop-renting', 'list-property', 'cancel-listing', 'sell-investment', 'buy-investment', 'divorce'];
+  const permitted = ['mini-game-start', 'mini-game-input', 'mini-game-pause', 'mini-game-resume', 'mini-game-complete', 'mini-game-forfeit', 'prison-action', 'prison-family-contact', 'prison-group', 'romance-action', 'organised-leave', 'advance', 'resume', 'choose', 'acknowledge', 'cult-disband', 'leave-recovery', 'recovery-effort', 'stop-career-training', 'royal-duties', 'renounce-title', 'leave-service', 'return-assignment', 'service-focus', 'leave-career', 'career-focus', 'cancel-recording', 'withdraw-campaign', 'campaign-plan', 'pay-bail', 'retain-counsel', 'prison-routine', 'prison-interact', 'appeal', 'parole', 'escape', 'bribe', 'join-gang', 'leave-gang', 'consult', 'treat', 'stop-treatment', 'vaccinate', 'meditate', 'self-improvement', 'repay', 'exchange', 'save-will', 'revoke-will', 'name-child', 'interact', 'relationship-preferences', 'edit-social', 'social-routine', 'delete-social', 'reopen-social', 'cancel-sponsor', 'business-prices', 'business-marketing', 'business-payout-policy', 'hire-business-staff', 'dismiss-business-staff', 'fund-business', 'improve-business', 'expand-business', 'withdraw-business-profit', 'sell-business', 'breakup', 'end-best-friendship', 'end-teen-relationship', 'gift-money', 'person-action', 'ask-person-support', 'respond-person-loan', 'sell-asset', 'insure', 'rent-property', 'stop-renting', 'list-property', 'cancel-listing', 'sell-investment', 'buy-investment', 'divorce'];
   return permitted.includes(commandType) ? undefined : 'This activity is unavailable while you are in custody';
 }

@@ -1,0 +1,1242 @@
+{
+  "scope": "Existing published age50/70/90 natural-life workloads, explicit capability and actual recorded join/two cautious assignment commands, including real affordable bail if arrested. Preparation command traces retained. No funds, dates, people, outcomes or random streams are patched.",
+  "originInputSha256": "a6c3856c079ad07a4dfc47db44269022c68b137befbdc1f69b7672dd2d3233cb",
+  "snapshots": [
+    {
+      "summary": {
+        "age": 50,
+        "revision": 194,
+        "date": {
+          "year": 2076,
+          "month": 10,
+          "day": 24
+        },
+        "people": 25,
+        "ledgerRows": 21869,
+        "journalRows": 675,
+        "children": 1,
+        "assets": 1,
+        "socialAccounts": 2,
+        "sha256": "24f72999998f027c3a6bda321481c8721f3e8f5a202ebee9d9d8dc8562b5444c",
+        "originSha256": "dde6af767d0e6997f603d135480a50341f6e7ca25a0d58ab7f74df283c84bbf1"
+      },
+      "preparationCommands": [
+        {
+          "type": "organised-join",
+          "style": "street-syndicate"
+        },
+        {
+          "type": "acknowledge",
+          "resultId": "action_187"
+        },
+        {
+          "type": "organised-mission",
+          "gangId": "gang_person_player_187_0",
+          "mission": "missing-envelope",
+          "approach": "cautious"
+        },
+        {
+          "type": "acknowledge",
+          "resultId": "action_189"
+        },
+        {
+          "type": "organised-mission",
+          "gangId": "gang_person_player_187_0",
+          "mission": "missing-envelope",
+          "approach": "cautious"
+        },
+        {
+          "type": "choose",
+          "eventId": "arrest_case_incident_person_player_191_1",
+          "choiceId": "bail"
+        },
+        {
+          "type": "acknowledge",
+          "resultId": "arrest_case_incident_person_player_191_1_result"
+        }
+      ],
+      "activeOrganisation": {
+        "gangId": "gang_person_player_187_0",
+        "jobs": 2,
+        "members": 3,
+        "playerCases": 1
+      },
+      "preparationOutcome": {
+        "actorId": "person_player",
+        "date": {
+          "year": 2076,
+          "month": 10,
+          "day": 24
+        },
+        "random": {
+          "events": 3873915976,
+          "npcs": 3247455231,
+          "economy": 4133302350,
+          "outcomes": 4279586391
+        },
+        "accounts": [
+          {
+            "id": "account_person_player",
+            "currency": "USD",
+            "cash": {
+              "$dreamsBigInt": "182593830"
+            },
+            "openingCash": {
+              "$dreamsBigInt": "0"
+            }
+          }
+        ],
+        "organisation": {
+          "id": "gang_person_player_187_0",
+          "personId": "person_player",
+          "name": "The Night Exchange",
+          "kind": "street",
+          "sentenceId": null,
+          "joined": {
+            "year": 2076,
+            "month": 10,
+            "day": 24
+          },
+          "left": null,
+          "rank": 0,
+          "standing": 44,
+          "contactIds": [
+            "person_npc_187_20",
+            "person_npc_187_21",
+            "person_npc_187_22",
+            "person_npc_187_23"
+          ],
+          "lastIncomeMonth": 24921,
+          "organised": {
+            "rulesVersion": 1,
+            "worldId": "life_final_performance_42",
+            "style": "street-syndicate",
+            "country": "US",
+            "city": "New York",
+            "rank": 0,
+            "loyalty": 39,
+            "reputation": 44,
+            "completedJobs": 1,
+            "decisions": 0,
+            "leaderId": "person_npc_187_20",
+            "suspended": true,
+            "lastProcessedMonth": 24921,
+            "members": [
+              {
+                "personId": "person_npc_187_20",
+                "loyalty": 60,
+                "ambition": 48,
+                "role": "leader",
+                "memories": []
+              },
+              {
+                "personId": "person_npc_187_21",
+                "loyalty": 50,
+                "ambition": 63,
+                "role": "lieutenant",
+                "memories": []
+              },
+              {
+                "personId": "person_npc_187_22",
+                "loyalty": 50,
+                "ambition": 42,
+                "role": "member",
+                "memories": []
+              }
+            ],
+            "rivals": [
+              {
+                "personId": "person_npc_187_23",
+                "influence": 45,
+                "reputation": 45,
+                "resolved": false,
+                "memories": []
+              }
+            ],
+            "jobs": [
+              {
+                "id": "organised_job_incident_person_player_189_0",
+                "category": "missing-envelope",
+                "approach": "cautious",
+                "participantIds": [
+                  "person_player"
+                ],
+                "date": {
+                  "year": 2076,
+                  "month": 10,
+                  "day": 24
+                },
+                "incidentId": "incident_person_player_189_0",
+                "transactionId": null,
+                "proceeds": {
+                  "$dreamsBigInt": "0"
+                },
+                "success": false
+              },
+              {
+                "id": "organised_job_incident_person_player_191_1",
+                "category": "missing-envelope",
+                "approach": "cautious",
+                "participantIds": [
+                  "person_player"
+                ],
+                "date": {
+                  "year": 2076,
+                  "month": 10,
+                  "day": 24
+                },
+                "incidentId": "incident_person_player_191_1",
+                "transactionId": "txn_191_21867",
+                "proceeds": {
+                  "$dreamsBigInt": "72800"
+                },
+                "success": true
+              }
+            ],
+            "archivedJobs": 0,
+            "archivedCompleted": 0,
+            "archivedProceeds": {
+              "$dreamsBigInt": "0"
+            },
+            "history": [
+              {
+                "date": {
+                  "year": 2076,
+                  "month": 10,
+                  "day": 24
+                },
+                "kind": "joined",
+                "personId": null,
+                "text": "I joined The Night Exchange."
+              },
+              {
+                "date": {
+                  "year": 2076,
+                  "month": 10,
+                  "day": 24
+                },
+                "kind": "job",
+                "personId": null,
+                "text": "I failed The Missing Envelope for The Night Exchange."
+              },
+              {
+                "date": {
+                  "year": 2076,
+                  "month": 10,
+                  "day": 24
+                },
+                "kind": "job",
+                "personId": null,
+                "text": "I completed The Missing Envelope for The Night Exchange."
+              }
+            ],
+            "seenStories": [],
+            "lastStoryYear": 2075,
+            "activeStory": null
+          }
+        },
+        "incidents": [
+          {
+            "id": "incident_person_player_189_0",
+            "personId": "person_player",
+            "offence": "organized-job",
+            "date": {
+              "year": 2076,
+              "month": 10,
+              "day": 24
+            },
+            "country": "US",
+            "city": "New York",
+            "victimId": null,
+            "victimKilled": false,
+            "gain": {
+              "minor": {
+                "$dreamsBigInt": "0"
+              },
+              "currency": "USD"
+            },
+            "restitution": {
+              "minor": {
+                "$dreamsBigInt": "0"
+              },
+              "currency": "USD"
+            },
+            "evidence": 33,
+            "detectionRoll": 9607,
+            "followupRoll": 88,
+            "trialRoll": 94,
+            "riskBps": 3300,
+            "investigateMonth": 24925,
+            "stage": "hidden",
+            "caseId": null
+          },
+          {
+            "id": "incident_person_player_191_1",
+            "personId": "person_player",
+            "offence": "organized-job",
+            "date": {
+              "year": 2076,
+              "month": 10,
+              "day": 24
+            },
+            "country": "US",
+            "city": "New York",
+            "victimId": null,
+            "victimKilled": false,
+            "gain": {
+              "minor": {
+                "$dreamsBigInt": "72800"
+              },
+              "currency": "USD"
+            },
+            "restitution": {
+              "minor": {
+                "$dreamsBigInt": "72800"
+              },
+              "currency": "USD"
+            },
+            "evidence": 59,
+            "detectionRoll": 2374,
+            "followupRoll": 11,
+            "trialRoll": 37,
+            "riskBps": 3240,
+            "investigateMonth": 24927,
+            "stage": "charged",
+            "caseId": "case_incident_person_player_191_1"
+          }
+        ],
+        "cases": [
+          {
+            "id": "case_incident_person_player_191_1",
+            "incidentId": "incident_person_player_191_1",
+            "personId": "person_player",
+            "offence": "organized-job",
+            "country": "US",
+            "city": "New York",
+            "opened": {
+              "year": 2076,
+              "month": 10,
+              "day": 24
+            },
+            "hearing": {
+              "year": 2076,
+              "month": 11,
+              "day": 24
+            },
+            "status": "awaiting-trial",
+            "detained": false,
+            "bail": {
+              "minor": {
+                "$dreamsBigInt": "100000"
+              },
+              "currency": "USD"
+            },
+            "bailState": "held",
+            "counsel": "public",
+            "counselFee": {
+              "minor": {
+                "$dreamsBigInt": "120000"
+              },
+              "currency": "USD"
+            },
+            "counselPaid": false,
+            "evidence": 59,
+            "trialRoll": 37,
+            "baseMonths": 48,
+            "quotedFine": {
+              "minor": {
+                "$dreamsBigInt": "880000"
+              },
+              "currency": "USD"
+            },
+            "plea": null,
+            "resolved": null,
+            "fine": {
+              "minor": {
+                "$dreamsBigInt": "0"
+              },
+              "currency": "USD"
+            },
+            "fineDebtId": null,
+            "fineRefunded": false,
+            "sentenceMonths": 0,
+            "sentenceId": null,
+            "juvenile": false,
+            "cooperation": false
+          }
+        ],
+        "newLedgerRows": [
+          {
+            "id": "txn_191_21867",
+            "personId": "person_player",
+            "accountId": "account_person_player",
+            "liabilityId": null,
+            "year": 2076,
+            "month": 10,
+            "currency": "USD",
+            "cashDelta": {
+              "$dreamsBigInt": "72800"
+            },
+            "debtDelta": {
+              "$dreamsBigInt": "0"
+            },
+            "category": "crime-proceeds",
+            "description": "The Night Exchange: The Missing Envelope (cautious)"
+          },
+          {
+            "id": "txn_192_21868",
+            "personId": "person_player",
+            "accountId": "account_person_player",
+            "liabilityId": null,
+            "year": 2076,
+            "month": 10,
+            "currency": "USD",
+            "cashDelta": {
+              "$dreamsBigInt": "-100000"
+            },
+            "debtDelta": {
+              "$dreamsBigInt": "0"
+            },
+            "category": "bail-held",
+            "description": "Bail placed in escrow"
+          }
+        ]
+      }
+    },
+    {
+      "summary": {
+        "age": 70,
+        "revision": 266,
+        "date": {
+          "year": 2096,
+          "month": 10,
+          "day": 24
+        },
+        "people": 26,
+        "ledgerRows": 36638,
+        "journalRows": 987,
+        "children": 1,
+        "assets": 1,
+        "socialAccounts": 2,
+        "sha256": "b8ed165178c356fe1b7d70147852038c1a2f942f6dfd0d8a4344d31d97159226",
+        "originSha256": "1add15b0e579a0c2c1e26a212fa6b8959c27486cfb98771be41f4456f340284b"
+      },
+      "preparationCommands": [
+        {
+          "type": "organised-join",
+          "style": "street-syndicate"
+        },
+        {
+          "type": "acknowledge",
+          "resultId": "action_260"
+        },
+        {
+          "type": "organised-mission",
+          "gangId": "gang_person_player_260_0",
+          "mission": "missing-envelope",
+          "approach": "cautious"
+        },
+        {
+          "type": "acknowledge",
+          "resultId": "action_262"
+        },
+        {
+          "type": "organised-mission",
+          "gangId": "gang_person_player_260_0",
+          "mission": "missing-envelope",
+          "approach": "cautious"
+        },
+        {
+          "type": "acknowledge",
+          "resultId": "action_264"
+        }
+      ],
+      "activeOrganisation": {
+        "gangId": "gang_person_player_260_0",
+        "jobs": 2,
+        "members": 3,
+        "playerCases": 0
+      },
+      "preparationOutcome": {
+        "actorId": "person_player",
+        "date": {
+          "year": 2096,
+          "month": 10,
+          "day": 24
+        },
+        "random": {
+          "events": 1090808508,
+          "npcs": 1616134640,
+          "economy": 700462494,
+          "outcomes": 3246206821
+        },
+        "accounts": [
+          {
+            "id": "account_person_player",
+            "currency": "USD",
+            "cash": {
+              "$dreamsBigInt": "296453539"
+            },
+            "openingCash": {
+              "$dreamsBigInt": "0"
+            }
+          }
+        ],
+        "organisation": {
+          "id": "gang_person_player_260_0",
+          "personId": "person_player",
+          "name": "The Night Exchange",
+          "kind": "street",
+          "sentenceId": null,
+          "joined": {
+            "year": 2096,
+            "month": 10,
+            "day": 24
+          },
+          "left": null,
+          "rank": 0,
+          "standing": 56,
+          "contactIds": [
+            "person_npc_260_22",
+            "person_npc_260_23",
+            "person_npc_260_24",
+            "person_npc_260_25"
+          ],
+          "lastIncomeMonth": 25161,
+          "organised": {
+            "rulesVersion": 1,
+            "worldId": "life_final_performance_42",
+            "style": "street-syndicate",
+            "country": "US",
+            "city": "New York",
+            "rank": 0,
+            "loyalty": 52,
+            "reputation": 56,
+            "completedJobs": 2,
+            "decisions": 0,
+            "leaderId": "person_npc_260_22",
+            "suspended": false,
+            "lastProcessedMonth": 25161,
+            "members": [
+              {
+                "personId": "person_npc_260_22",
+                "loyalty": 60,
+                "ambition": 70,
+                "role": "leader",
+                "memories": []
+              },
+              {
+                "personId": "person_npc_260_23",
+                "loyalty": 50,
+                "ambition": 67,
+                "role": "lieutenant",
+                "memories": []
+              },
+              {
+                "personId": "person_npc_260_24",
+                "loyalty": 50,
+                "ambition": 80,
+                "role": "member",
+                "memories": []
+              }
+            ],
+            "rivals": [
+              {
+                "personId": "person_npc_260_25",
+                "influence": 45,
+                "reputation": 45,
+                "resolved": false,
+                "memories": []
+              }
+            ],
+            "jobs": [
+              {
+                "id": "organised_job_incident_person_player_262_0",
+                "category": "missing-envelope",
+                "approach": "cautious",
+                "participantIds": [
+                  "person_player"
+                ],
+                "date": {
+                  "year": 2096,
+                  "month": 10,
+                  "day": 24
+                },
+                "incidentId": "incident_person_player_262_0",
+                "transactionId": "txn_262_36636",
+                "proceeds": {
+                  "$dreamsBigInt": "72800"
+                },
+                "success": true
+              },
+              {
+                "id": "organised_job_incident_person_player_264_1",
+                "category": "missing-envelope",
+                "approach": "cautious",
+                "participantIds": [
+                  "person_player"
+                ],
+                "date": {
+                  "year": 2096,
+                  "month": 10,
+                  "day": 24
+                },
+                "incidentId": "incident_person_player_264_1",
+                "transactionId": "txn_264_36637",
+                "proceeds": {
+                  "$dreamsBigInt": "72800"
+                },
+                "success": true
+              }
+            ],
+            "archivedJobs": 0,
+            "archivedCompleted": 0,
+            "archivedProceeds": {
+              "$dreamsBigInt": "0"
+            },
+            "history": [
+              {
+                "date": {
+                  "year": 2096,
+                  "month": 10,
+                  "day": 24
+                },
+                "kind": "joined",
+                "personId": null,
+                "text": "I joined The Night Exchange."
+              },
+              {
+                "date": {
+                  "year": 2096,
+                  "month": 10,
+                  "day": 24
+                },
+                "kind": "job",
+                "personId": null,
+                "text": "I completed The Missing Envelope for The Night Exchange."
+              },
+              {
+                "date": {
+                  "year": 2096,
+                  "month": 10,
+                  "day": 24
+                },
+                "kind": "job",
+                "personId": null,
+                "text": "I completed The Missing Envelope for The Night Exchange."
+              }
+            ],
+            "seenStories": [],
+            "lastStoryYear": 2095,
+            "activeStory": null
+          }
+        },
+        "incidents": [
+          {
+            "id": "incident_person_player_262_0",
+            "personId": "person_player",
+            "offence": "organized-job",
+            "date": {
+              "year": 2096,
+              "month": 10,
+              "day": 24
+            },
+            "country": "US",
+            "city": "New York",
+            "victimId": null,
+            "victimKilled": false,
+            "gain": {
+              "minor": {
+                "$dreamsBigInt": "72800"
+              },
+              "currency": "USD"
+            },
+            "restitution": {
+              "minor": {
+                "$dreamsBigInt": "72800"
+              },
+              "currency": "USD"
+            },
+            "evidence": 46,
+            "detectionRoll": 9974,
+            "followupRoll": 68,
+            "trialRoll": 62,
+            "riskBps": 3300,
+            "investigateMonth": 25164,
+            "stage": "hidden",
+            "caseId": null
+          },
+          {
+            "id": "incident_person_player_264_1",
+            "personId": "person_player",
+            "offence": "organized-job",
+            "date": {
+              "year": 2096,
+              "month": 10,
+              "day": 24
+            },
+            "country": "US",
+            "city": "New York",
+            "victimId": null,
+            "victimKilled": false,
+            "gain": {
+              "minor": {
+                "$dreamsBigInt": "72800"
+              },
+              "currency": "USD"
+            },
+            "restitution": {
+              "minor": {
+                "$dreamsBigInt": "72800"
+              },
+              "currency": "USD"
+            },
+            "evidence": 26,
+            "detectionRoll": 4556,
+            "followupRoll": 9,
+            "trialRoll": 86,
+            "riskBps": 3160,
+            "investigateMonth": 25167,
+            "stage": "hidden",
+            "caseId": null
+          }
+        ],
+        "cases": [],
+        "newLedgerRows": [
+          {
+            "id": "txn_262_36636",
+            "personId": "person_player",
+            "accountId": "account_person_player",
+            "liabilityId": null,
+            "year": 2096,
+            "month": 10,
+            "currency": "USD",
+            "cashDelta": {
+              "$dreamsBigInt": "72800"
+            },
+            "debtDelta": {
+              "$dreamsBigInt": "0"
+            },
+            "category": "crime-proceeds",
+            "description": "The Night Exchange: The Missing Envelope (cautious)"
+          },
+          {
+            "id": "txn_264_36637",
+            "personId": "person_player",
+            "accountId": "account_person_player",
+            "liabilityId": null,
+            "year": 2096,
+            "month": 10,
+            "currency": "USD",
+            "cashDelta": {
+              "$dreamsBigInt": "72800"
+            },
+            "debtDelta": {
+              "$dreamsBigInt": "0"
+            },
+            "category": "crime-proceeds",
+            "description": "The Night Exchange: The Missing Envelope (cautious)"
+          }
+        ]
+      }
+    },
+    {
+      "summary": {
+        "age": 90,
+        "revision": 350,
+        "date": {
+          "year": 2116,
+          "month": 10,
+          "day": 24
+        },
+        "people": 27,
+        "ledgerRows": 47208,
+        "journalRows": 1248,
+        "children": 1,
+        "assets": 1,
+        "socialAccounts": 2,
+        "sha256": "cb60accd83cf3e251fd08f4c0f4b5995a96500dfcbb864071ecf758b0012b0ff",
+        "originSha256": "8b6090ed2836d9578a16be55a3214c8c056364a31cccb705c4a3f891b6d4b897"
+      },
+      "preparationCommands": [
+        {
+          "type": "organised-join",
+          "style": "street-syndicate"
+        },
+        {
+          "type": "acknowledge",
+          "resultId": "action_342"
+        },
+        {
+          "type": "organised-mission",
+          "gangId": "gang_person_player_342_0",
+          "mission": "missing-envelope",
+          "approach": "cautious"
+        },
+        {
+          "type": "choose",
+          "eventId": "arrest_case_incident_person_player_344_0",
+          "choiceId": "bail"
+        },
+        {
+          "type": "acknowledge",
+          "resultId": "arrest_case_incident_person_player_344_0_result"
+        },
+        {
+          "type": "organised-mission",
+          "gangId": "gang_person_player_342_0",
+          "mission": "missing-envelope",
+          "approach": "cautious"
+        },
+        {
+          "type": "choose",
+          "eventId": "arrest_case_incident_person_player_347_1",
+          "choiceId": "bail"
+        },
+        {
+          "type": "acknowledge",
+          "resultId": "arrest_case_incident_person_player_347_1_result"
+        }
+      ],
+      "activeOrganisation": {
+        "gangId": "gang_person_player_342_0",
+        "jobs": 2,
+        "members": 3,
+        "playerCases": 2
+      },
+      "preparationOutcome": {
+        "actorId": "person_player",
+        "date": {
+          "year": 2116,
+          "month": 10,
+          "day": 24
+        },
+        "random": {
+          "events": 139266853,
+          "npcs": 1725792289,
+          "economy": 1562589934,
+          "outcomes": 4236216655
+        },
+        "accounts": [
+          {
+            "id": "account_person_player",
+            "currency": "USD",
+            "cash": {
+              "$dreamsBigInt": "427956182"
+            },
+            "openingCash": {
+              "$dreamsBigInt": "0"
+            }
+          }
+        ],
+        "organisation": {
+          "id": "gang_person_player_342_0",
+          "personId": "person_player",
+          "name": "The Night Exchange",
+          "kind": "street",
+          "sentenceId": null,
+          "joined": {
+            "year": 2116,
+            "month": 10,
+            "day": 24
+          },
+          "left": null,
+          "rank": 0,
+          "standing": 56,
+          "contactIds": [
+            "person_npc_342_23",
+            "person_npc_342_24",
+            "person_npc_342_25",
+            "person_npc_342_26"
+          ],
+          "lastIncomeMonth": 25401,
+          "organised": {
+            "rulesVersion": 1,
+            "worldId": "life_final_performance_42",
+            "style": "street-syndicate",
+            "country": "US",
+            "city": "New York",
+            "rank": 0,
+            "loyalty": 52,
+            "reputation": 56,
+            "completedJobs": 2,
+            "decisions": 0,
+            "leaderId": "person_npc_342_23",
+            "suspended": true,
+            "lastProcessedMonth": 25401,
+            "members": [
+              {
+                "personId": "person_npc_342_23",
+                "loyalty": 60,
+                "ambition": 82,
+                "role": "leader",
+                "memories": []
+              },
+              {
+                "personId": "person_npc_342_24",
+                "loyalty": 50,
+                "ambition": 24,
+                "role": "lieutenant",
+                "memories": []
+              },
+              {
+                "personId": "person_npc_342_25",
+                "loyalty": 50,
+                "ambition": 75,
+                "role": "member",
+                "memories": []
+              }
+            ],
+            "rivals": [
+              {
+                "personId": "person_npc_342_26",
+                "influence": 45,
+                "reputation": 45,
+                "resolved": false,
+                "memories": []
+              }
+            ],
+            "jobs": [
+              {
+                "id": "organised_job_incident_person_player_344_0",
+                "category": "missing-envelope",
+                "approach": "cautious",
+                "participantIds": [
+                  "person_player"
+                ],
+                "date": {
+                  "year": 2116,
+                  "month": 10,
+                  "day": 24
+                },
+                "incidentId": "incident_person_player_344_0",
+                "transactionId": "txn_344_47204",
+                "proceeds": {
+                  "$dreamsBigInt": "72800"
+                },
+                "success": true
+              },
+              {
+                "id": "organised_job_incident_person_player_347_1",
+                "category": "missing-envelope",
+                "approach": "cautious",
+                "participantIds": [
+                  "person_player"
+                ],
+                "date": {
+                  "year": 2116,
+                  "month": 10,
+                  "day": 24
+                },
+                "incidentId": "incident_person_player_347_1",
+                "transactionId": "txn_347_47206",
+                "proceeds": {
+                  "$dreamsBigInt": "72800"
+                },
+                "success": true
+              }
+            ],
+            "archivedJobs": 0,
+            "archivedCompleted": 0,
+            "archivedProceeds": {
+              "$dreamsBigInt": "0"
+            },
+            "history": [
+              {
+                "date": {
+                  "year": 2116,
+                  "month": 10,
+                  "day": 24
+                },
+                "kind": "joined",
+                "personId": null,
+                "text": "I joined The Night Exchange."
+              },
+              {
+                "date": {
+                  "year": 2116,
+                  "month": 10,
+                  "day": 24
+                },
+                "kind": "job",
+                "personId": null,
+                "text": "I completed The Missing Envelope for The Night Exchange."
+              },
+              {
+                "date": {
+                  "year": 2116,
+                  "month": 10,
+                  "day": 24
+                },
+                "kind": "job",
+                "personId": null,
+                "text": "I completed The Missing Envelope for The Night Exchange."
+              }
+            ],
+            "seenStories": [],
+            "lastStoryYear": 2115,
+            "activeStory": null
+          }
+        },
+        "incidents": [
+          {
+            "id": "incident_person_player_344_0",
+            "personId": "person_player",
+            "offence": "organized-job",
+            "date": {
+              "year": 2116,
+              "month": 10,
+              "day": 24
+            },
+            "country": "US",
+            "city": "New York",
+            "victimId": null,
+            "victimKilled": false,
+            "gain": {
+              "minor": {
+                "$dreamsBigInt": "72800"
+              },
+              "currency": "USD"
+            },
+            "restitution": {
+              "minor": {
+                "$dreamsBigInt": "72800"
+              },
+              "currency": "USD"
+            },
+            "evidence": 33,
+            "detectionRoll": 2386,
+            "followupRoll": 66,
+            "trialRoll": 59,
+            "riskBps": 3300,
+            "investigateMonth": 25403,
+            "stage": "charged",
+            "caseId": "case_incident_person_player_344_0"
+          },
+          {
+            "id": "incident_person_player_347_1",
+            "personId": "person_player",
+            "offence": "organized-job",
+            "date": {
+              "year": 2116,
+              "month": 10,
+              "day": 24
+            },
+            "country": "US",
+            "city": "New York",
+            "victimId": null,
+            "victimKilled": false,
+            "gain": {
+              "minor": {
+                "$dreamsBigInt": "72800"
+              },
+              "currency": "USD"
+            },
+            "restitution": {
+              "minor": {
+                "$dreamsBigInt": "72800"
+              },
+              "currency": "USD"
+            },
+            "evidence": 57,
+            "detectionRoll": 2998,
+            "followupRoll": 71,
+            "trialRoll": 45,
+            "riskBps": 3160,
+            "investigateMonth": 25406,
+            "stage": "charged",
+            "caseId": "case_incident_person_player_347_1"
+          }
+        ],
+        "cases": [
+          {
+            "id": "case_incident_person_player_344_0",
+            "incidentId": "incident_person_player_344_0",
+            "personId": "person_player",
+            "offence": "organized-job",
+            "country": "US",
+            "city": "New York",
+            "opened": {
+              "year": 2116,
+              "month": 10,
+              "day": 24
+            },
+            "hearing": {
+              "year": 2116,
+              "month": 11,
+              "day": 24
+            },
+            "status": "awaiting-trial",
+            "detained": false,
+            "bail": {
+              "minor": {
+                "$dreamsBigInt": "100000"
+              },
+              "currency": "USD"
+            },
+            "bailState": "held",
+            "counsel": "public",
+            "counselFee": {
+              "minor": {
+                "$dreamsBigInt": "120000"
+              },
+              "currency": "USD"
+            },
+            "counselPaid": false,
+            "evidence": 33,
+            "trialRoll": 59,
+            "baseMonths": 48,
+            "quotedFine": {
+              "minor": {
+                "$dreamsBigInt": "880000"
+              },
+              "currency": "USD"
+            },
+            "plea": null,
+            "resolved": null,
+            "fine": {
+              "minor": {
+                "$dreamsBigInt": "0"
+              },
+              "currency": "USD"
+            },
+            "fineDebtId": null,
+            "fineRefunded": false,
+            "sentenceMonths": 0,
+            "sentenceId": null,
+            "juvenile": false,
+            "cooperation": false
+          },
+          {
+            "id": "case_incident_person_player_347_1",
+            "incidentId": "incident_person_player_347_1",
+            "personId": "person_player",
+            "offence": "organized-job",
+            "country": "US",
+            "city": "New York",
+            "opened": {
+              "year": 2116,
+              "month": 10,
+              "day": 24
+            },
+            "hearing": {
+              "year": 2116,
+              "month": 11,
+              "day": 24
+            },
+            "status": "awaiting-trial",
+            "detained": false,
+            "bail": {
+              "minor": {
+                "$dreamsBigInt": "100000"
+              },
+              "currency": "USD"
+            },
+            "bailState": "held",
+            "counsel": "public",
+            "counselFee": {
+              "minor": {
+                "$dreamsBigInt": "120000"
+              },
+              "currency": "USD"
+            },
+            "counselPaid": false,
+            "evidence": 57,
+            "trialRoll": 45,
+            "baseMonths": 48,
+            "quotedFine": {
+              "minor": {
+                "$dreamsBigInt": "880000"
+              },
+              "currency": "USD"
+            },
+            "plea": null,
+            "resolved": null,
+            "fine": {
+              "minor": {
+                "$dreamsBigInt": "0"
+              },
+              "currency": "USD"
+            },
+            "fineDebtId": null,
+            "fineRefunded": false,
+            "sentenceMonths": 0,
+            "sentenceId": null,
+            "juvenile": false,
+            "cooperation": false
+          }
+        ],
+        "newLedgerRows": [
+          {
+            "id": "txn_344_47204",
+            "personId": "person_player",
+            "accountId": "account_person_player",
+            "liabilityId": null,
+            "year": 2116,
+            "month": 10,
+            "currency": "USD",
+            "cashDelta": {
+              "$dreamsBigInt": "72800"
+            },
+            "debtDelta": {
+              "$dreamsBigInt": "0"
+            },
+            "category": "crime-proceeds",
+            "description": "The Night Exchange: The Missing Envelope (cautious)"
+          },
+          {
+            "id": "txn_345_47205",
+            "personId": "person_player",
+            "accountId": "account_person_player",
+            "liabilityId": null,
+            "year": 2116,
+            "month": 10,
+            "currency": "USD",
+            "cashDelta": {
+              "$dreamsBigInt": "-100000"
+            },
+            "debtDelta": {
+              "$dreamsBigInt": "0"
+            },
+            "category": "bail-held",
+            "description": "Bail placed in escrow"
+          },
+          {
+            "id": "txn_347_47206",
+            "personId": "person_player",
+            "accountId": "account_person_player",
+            "liabilityId": null,
+            "year": 2116,
+            "month": 10,
+            "currency": "USD",
+            "cashDelta": {
+              "$dreamsBigInt": "72800"
+            },
+            "debtDelta": {
+              "$dreamsBigInt": "0"
+            },
+            "category": "crime-proceeds",
+            "description": "The Night Exchange: The Missing Envelope (cautious)"
+          },
+          {
+            "id": "txn_348_47207",
+            "personId": "person_player",
+            "accountId": "account_person_player",
+            "liabilityId": null,
+            "year": 2116,
+            "month": 10,
+            "currency": "USD",
+            "cashDelta": {
+              "$dreamsBigInt": "-100000"
+            },
+            "debtDelta": {
+              "$dreamsBigInt": "0"
+            },
+            "category": "bail-held",
+            "description": "Bail placed in escrow"
+          }
+        ]
+      }
+    }
+  ]
+}

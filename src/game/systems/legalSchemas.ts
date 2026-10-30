@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { organisedCrimeStateSchema } from './organisedCrimeSchemas';
 import { dateSchema } from '../calendar';
 import { countryCodes } from '../countries';
 import { offenceIds } from '../content/crime';
@@ -28,7 +29,7 @@ export const sentenceSchema = z.object({
 });
 export const remandSchema = z.object({ personId: z.string(), month: z.number().int(), caseIds: z.array(z.string()).min(1), usedBySentenceId: z.string().nullable() });
 export const contrabandSchema = z.object({ id: z.string(), personId: z.string(), kind: z.enum(['counterfeit-watch', 'false-id', 'illicit-substance']), acquired: dateSchema, pricePaid: money, value: money, status: z.enum(['owned', 'sold', 'consumed', 'seized']), alias: z.string().nullable() });
-export const gangSchema = z.object({ id: z.string(), personId: z.string(), name: z.string(), kind: z.enum(['street', 'prison']), sentenceId: z.string().nullable(), joined: dateSchema, left: dateSchema.nullable(), rank: z.number().int().min(0).max(3), standing: z.number().int().min(0).max(100), contactIds: z.array(z.string()), lastIncomeMonth: z.number().int() });
+export const gangSchema = z.object({ id: z.string(), personId: z.string(), name: z.string(), kind: z.enum(['street', 'prison']), sentenceId: z.string().nullable(), joined: dateSchema, left: dateSchema.nullable(), rank: z.number().int().min(0).max(3), standing: z.number().int().min(0).max(100), contactIds: z.array(z.string()), lastIncomeMonth: z.number().int(), organised: organisedCrimeStateSchema.optional() });
 export const activeSentence = (world: World, personId = world.activePersonId) => world.sentences.find(item => item.personId === personId && item.state === 'active');
 export function isConfined(world: World, person: Person | string = world.activePersonId): boolean {
   const id = typeof person === 'string' ? person : person.id;

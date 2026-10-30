@@ -22,7 +22,7 @@ test('the genuine completed C35 US checkpoint keeps its immutable canonical proo
   expect(unpackCheckpoint(packCheckpoint(world), true)).toEqual(world);
 });
 
-test.each([13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26])('reader %s →29 changes only its marker; every original row and C35 payload remains exact before any gameplay save', async version => {
+test.each([13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26])('reader %s →30 changes only its marker; every original row and C35 payload remains exact before any gameplay save', async version => {
   const { sqlite, driver } = database();
   try {
     await new SaveRepository(driver).initialise(); const original = unpackCheckpoint(terminal.checkpoint, true);
@@ -31,9 +31,9 @@ test.each([13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26])('reader %s �
     sqlite.prepare('INSERT INTO preferences(key,value) VALUES(?,?)').run('active_life', original.id); sqlite.exec('PRAGMA user_version=' + version);
     const rows = () => Object.fromEntries(sqlite.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name").all().map(row => [row.name, sqlite.prepare('SELECT * FROM ' + row.name + ' ORDER BY 1,2').all()])), before = rows(); expect(Object.keys(before)).toHaveLength(8);
     for (const table of Object.keys(before)) for (const action of ['INSERT', 'UPDATE', 'DELETE']) sqlite.exec('CREATE TRIGGER deny_' + table + '_' + action + ' BEFORE ' + action + ' ON ' + table + " BEGIN SELECT RAISE(ABORT,'unexpected rewrite'); END");
-    const failing: SqlDatabase = { ...driver, transaction: action => driver.transaction(tx => action({ ...tx, run: async (sql, values) => { await tx.run(sql, values); if (sql === 'PRAGMA user_version = 29') throw new Error('metadata failure'); } })) };
+    const failing: SqlDatabase = { ...driver, transaction: action => driver.transaction(tx => action({ ...tx, run: async (sql, values) => { await tx.run(sql, values); if (sql === 'PRAGMA user_version = 30') throw new Error('metadata failure'); } })) };
     await expect(new SaveRepository(failing).initialise()).rejects.toThrow('metadata failure'); expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(version); expect(rows()).toEqual(before);
-    const unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'), repository = new SaveRepository(driver); await repository.initialise(); expect(unpack).not.toHaveBeenCalled(); expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(29); expect(rows()).toEqual(before);
+    const unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'), repository = new SaveRepository(driver); await repository.initialise(); expect(unpack).not.toHaveBeenCalled(); expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(30); expect(rows()).toEqual(before);
     expect(await repository.active()).toEqual(original); expect(rows()).toEqual(before); expect(sqlite.prepare('SELECT payload FROM lives').get()?.payload).toBe(terminal.checkpoint);
   } finally { jest.restoreAllMocks(); sqlite.close(); }
 }, 30000);

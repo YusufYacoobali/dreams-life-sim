@@ -192,14 +192,15 @@ export function resolveSocial(world: World, command: SocialCommand) {
       settleBackground(world, target, world.date.year * 12 + world.date.month - 1);
       counter(world, target.id, 'date');
       const chance = Math.min(95, 20 + Math.round(relation.strength * 0.6 + player.stats.looks * 0.15));
-      const accepted = draw(world, 'outcomes', 1, 100) <= chance, outcome = dateActivityOutcome(activity.id, fullName(target), accepted, {minor:activity.cost,currency:activity.currency});
+      const accepted = draw(world, 'outcomes', 1, 100) <= chance, outcome = dateActivityOutcome(activity.id, fullName(target), accepted, {minor:activity.cost,currency:activity.currency}, accepted && dateActivityIds.indexOf(activity.id)>=4 ? draw(world,'outcomes',1,100) : 100);
       if (!accepted) { fact(world, outcome.journal, 'relationships'); result(world, outcome.title, outcome.body, 'person-action:ask-date', statChanges(player, { happiness: -2 })); return; }
       if (activity.cost > 0n) charge(world, activity.cost, 'dating', activity.label + ' with ' + fullName(target));
       if (!activeRomance(relation)) relation.romance = 'dating'; if (!relation.roles.includes('partner') && relation.romance !== 'married') relation.roles.push('partner'); syncKind(relation);
       const beforeTrust = relation.trust;
-      relation.trust = bounded(relation.trust + 5); relation.lastInteractionYear = world.date.year; relation.memories.push('date:' + world.date.year);
-      const trust: RuntimeEffectRow = { id: 'trust', label: 'Trust', value: '+' + (relation.trust - beforeTrust) + '%', tone: relation.trust > beforeTrust ? 'positive' : 'neutral' };
-      fact(world, outcome.journal, 'relationships'); result(world, outcome.title, outcome.body, 'person-action:ask-date', [bond(relation, outcome.bond), trust, ...statChanges(player, { happiness: outcome.happiness, energy: outcome.energy })]); return;
+      relation.trust = bounded(relation.trust + outcome.trust); relation.lastInteractionYear = world.date.year; relation.memories.push('date:' + world.date.year);
+      if (outcome.bond<0) relation.memories.push('argument:'+world.date.year);
+      const trust: RuntimeEffectRow = { id: 'trust', label: 'Trust', value: (relation.trust-beforeTrust>=0?'+':'') + (relation.trust - beforeTrust) + '%', tone: relation.trust > beforeTrust ? 'positive' : relation.trust < beforeTrust ? 'negative' : 'neutral' };
+      fact(world, outcome.journal, 'relationships'); result(world, outcome.title, outcome.body, 'person-action:ask-date', [bond(relation, outcome.bond), trust, ...statChanges(player, { happiness: outcome.happiness, energy: outcome.energy, ...(outcome.stress ? {stress:outcome.stress}: {}) })]); return;
     }
     if (hospitalized(world, player) || hospitalized(world, target)) throw new IneligibleAction('Arrange a date after the hospital stay');
     settleBackground(world, target, world.date.year * 12 + world.date.month - 1);

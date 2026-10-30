@@ -68,7 +68,7 @@ test('the real year-91 save crosses the old limit with exact rollback, retry, ba
     await expect(upgraded.initialise()).rejects.toThrow('upgrade failure'); expect(rows()).toEqual(before);
     expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(7);
     sqlite.exec('DROP TRIGGER fail_upgrade'); await upgraded.initialise();
-    expect(rows()).toEqual(before); expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(29);
+    expect(rows()).toEqual(before); expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(30);
     const loaded = await upgraded.load(original.id), next = resolveCommand(loaded, { type: 'advance' }, true);
     const canonical = encodeWorld(next);
     expect(Buffer.byteLength(canonical)).toBeGreaterThan(20_000_000);

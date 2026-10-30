@@ -35,6 +35,7 @@ import { evaluateSession } from '../core/evaluation';
 import { SportsGame } from '../sports/SportsGame';
 import { CrimeGame } from '../crime/CrimeGame';
 import { DockingGame } from '../astronaut/DockingGame';
+import { EscapeGame } from '../escape/EscapeGame';
 import { GameButton } from './GameButton';
 import { SceneBackdrop, ScenePreview } from './SceneBackdrop';
 import { preloadSceneArt } from './sceneArtwork';
@@ -72,6 +73,7 @@ const instructions = {
   sports: 'Aim for a corner, then stop the power in the green zone.',
   crime: 'Match the green marker to unlock all three bolts.',
   astronaut: 'Line up with the green port. Tap down to brake.',
+  escape: 'Match the stamp sequence in order. The four gates shuffle after each choice.',
 };
 
 export function MiniGameScreen(props: Props) {
@@ -436,6 +438,9 @@ export function MiniGameScreen(props: Props) {
               controlsVisible={phase === 'playing' || phase === 'finishing'}
               onInput={input}
             />
+          ) : kind === 'escape' ? (
+            <EscapeGame session={session} clock={clock} enabled={enabled}
+              controlsVisible={phase === 'playing' || phase === 'finishing'} onInput={input} />
           ) : (
             <DockingGame
               key={session.id + ':' + sceneRevision}
@@ -476,6 +481,8 @@ export function MiniGameScreen(props: Props) {
                 ? 'Play again whenever you like. Your saved life stays unchanged.'
                 : kind === 'crime'
                   ? 'Uses this year’s burglary. Arrest is possible, even if you forfeit.'
+                  : kind === 'escape'
+                    ? 'Uses this year’s escape attempt. Failure or forfeiture can add a real charge. Saved progress resumes after reopening.'
                   : kind === 'sports'
                     ? 'One shot this season. Your result affects the next match.'
                     : 'One attempt this assignment. Your result affects the next mission.'}
@@ -579,6 +586,8 @@ export function MiniGameScreen(props: Props) {
               {confirmForfeit
                 ? kind === 'crime'
                   ? 'Forfeiting resolves this burglary as a failure. Detection, evidence and prosecution still apply.'
+                  : kind === 'escape'
+                    ? 'Forfeiting fails this escape attempt. Disciplinary penalties and an escape charge still apply.'
                   : 'This challenge will receive a failed result and cannot be replayed for this opportunity.'
                 : error
                   ? 'Your latest move could not be confirmed. Retry it, or reload your saved progress.'

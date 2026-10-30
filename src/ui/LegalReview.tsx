@@ -1,11 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 import { LegalCommand } from '../game/systems/legal';
+import type { PrisonCommand } from '../game/systems/prisonSchemas';
+import type { OrganisedCrimeCommand } from '../game/systems/organisedCrimeSchemas';
 import { useGame } from '../state/useGame';
 import { HealthLegalArt, HealthLegalArtId } from '../assets/HealthLegalArt';
 import { EffectRow, EventModal, EventPresentation } from './EventModal';
 import { useColors } from './theme';
 import { DisplayText as Text } from './DisplayText';
+type ReviewedLegalCommand = LegalCommand | PrisonCommand | OrganisedCrimeCommand;
 
 export function LegalReviewError({ error }: { error: string | null }) {
   const colors = useColors();
@@ -16,7 +19,7 @@ export function useLegalReview(context = '') {
   const dispatch = useGame(s => s.dispatch), busy = useGame(s => s.busy), error = useGame(s => s.error);
   const identity = useGame(s => s.world?.id + ':' + s.world?.activePersonId) + ':' + context;
   const identityRef = useRef(identity), mounted = useRef(true), submitting = useRef(false);
-  const [review, setReview] = useState<{ identity: string; command: LegalCommand; event: EventPresentation } | null>(null);
+  const [review, setReview] = useState<{ identity: string; command: ReviewedLegalCommand; event: EventPresentation } | null>(null);
   const activeReview = useRef<typeof review>(null);
   if (identityRef.current !== identity) { identityRef.current = identity; activeReview.current = null; }
   useEffect(() => { mounted.current = true; return () => { mounted.current = false; activeReview.current = null; }; }, []);
@@ -24,7 +27,7 @@ export function useLegalReview(context = '') {
   const current = review?.identity === identity ? review : null;
   return {
     isOpen: !!current,
-    confirm(command: LegalCommand, title: string, body: string, terms: EffectRow[] = [], art: HealthLegalArtId = 'justice', confirmLabel = 'Confirm') {
+    confirm(command: ReviewedLegalCommand, title: string, body: string, terms: EffectRow[] = [], art: HealthLegalArtId = 'justice', confirmLabel = 'Confirm') {
       if (!mounted.current || identityRef.current !== identity || busy || submitting.current) return;
       const next = { identity, command, event: { kind: 'confirmation', id: identity + ':' + command.type, title, body, terms, confirmLabel, illustration: <HealthLegalArt id={art} size={64} /> } } satisfies NonNullable<typeof review>;
       activeReview.current = next; setReview(next);

@@ -49,7 +49,7 @@ test.each(countryCodes)('%s introduces actual birthplace, identity, parent ages 
   }
 });
 
-test('all 512 sample generations retain exact pre-feature gameplay, allowing only prospective names and automatic artwork', () => {
+test('all 512 sample generations retain exact pre-feature gameplay, allowing only prospective names, artwork and empty capabilities', () => {
   // Captured from d253718 before implementation; no historical fixtures are rewritten.
   expect(namesBeforeExpansion.sourceCommit).toBe('2bb7ce9b3c301de9a286d2cb90d88fe6a1670c4b');
   expect(createHash('sha256').update(nameSamples).digest('hex')).toBe(namesBeforeExpansion.sha256);
@@ -62,7 +62,8 @@ test('all 512 sample generations retain exact pre-feature gameplay, allowing onl
     // rental/support/mini-game histories. All generated family, money, stats and RNG stay in proof.
     const original = JSON.parse(encodeWorld({ ...world, journal: [] }));
     expect(original).toMatchObject({ schemaVersion: 49, engineVersion: 51, contentVersion: 28, cults: [], rentalLeases: [] });
-    for (const key of ['cults', 'miniGames', 'rentalLeases', 'personSupportRequests', 'personActionHistory']) { expect(original[key]).toEqual([]); delete original[key]; }
+    expect(original.overhaulVersion).toBe(1); delete original.overhaulVersion;
+    for (const key of ['cults', 'miniGames', 'rentalLeases', 'personSupportRequests', 'personActionHistory', 'prisonLives', 'affairs', 'romanceOffers']) { expect(original[key]).toEqual([]); delete original[key]; }
     original.schemaVersion = 41; original.engineVersion = 43; original.contentVersion = 20;
     const oldAppearances=recordedAppearances[seed];expect(Object.keys(world.people)).toEqual(Object.keys(oldAppearances));
     for(const person of Object.values(world.people)){

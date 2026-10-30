@@ -1,17 +1,19 @@
 import { z } from 'zod';
 import { dateSchema } from '../../game/calendar';
 
-export const gameKinds = ['sports', 'crime', 'astronaut'] as const;
+export const gameKinds = ['sports', 'crime', 'astronaut', 'escape'] as const;
 export type MiniGameKind = (typeof gameKinds)[number];
 export const titles = {
   sports: 'Clutch Shot',
   crime: 'Safe Cracker',
   astronaut: 'Orbital Docking',
+  escape: 'Exit Shuffle',
 } as const;
 export const durationMs = {
   sports: 10000,
   crime: 12000,
   astronaut: 14000,
+  escape: 14000,
 } as const;
 export const actionSchema = z.discriminatedUnion('type', [
   z.strictObject({
@@ -27,6 +29,10 @@ export const actionSchema = z.discriminatedUnion('type', [
   z.strictObject({
     type: z.literal('thrust'),
     direction: z.enum(['left', 'right', 'up', 'down', 'coast']),
+  }),
+  z.strictObject({
+    type: z.literal('stamp'),
+    symbol: z.enum(['sun', 'moon', 'star', 'bird']),
   }),
 ]);
 export type MiniGameAction = z.infer<typeof actionSchema>;

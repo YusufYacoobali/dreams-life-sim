@@ -70,13 +70,13 @@ export class SaveRepository {
 
   async initialise(): Promise<void> {
     const version = await this.db.get<{ user_version: number }>('PRAGMA user_version');
-    // Reader 29 understands durable medical episodes and their bound care actions.
+    // Reader 30 understands versioned crime, prison, escape and romance records.
     // Compatible installations upgrade only the marker; payloads stay literal.
-    if (!version || version.user_version > 29) throw new Error('This save database requires a newer version of Dreams');
-    if (version.user_version === 29) return;
-    if (version.user_version >= 13 && version.user_version <= 28) {
+    if (!version || version.user_version > 30) throw new Error('This save database requires a newer version of Dreams');
+    if (version.user_version === 30) return;
+    if (version.user_version >= 13 && version.user_version <= 29) {
       // Existing eight-table databases need no row or checkpoint rewrites.
-      await this.db.transaction(tx => tx.run('PRAGMA user_version = 29'));
+      await this.db.transaction(tx => tx.run('PRAGMA user_version = 30'));
       return;
     }
     const statements = [
@@ -118,7 +118,7 @@ export class SaveRepository {
         await tx.run('DELETE FROM snapshots WHERE life_id=? AND snapshot_id=?', [row.life_id, row.snapshot_id]);
         await this.writeSnapshot(tx, row.life_id, record);
       }
-      await tx.run('PRAGMA user_version = 29');
+      await tx.run('PRAGMA user_version = 30');
     });
   }
 

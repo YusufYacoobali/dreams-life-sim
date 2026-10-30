@@ -70,9 +70,9 @@ test.each([13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26])('complete re
     const baseline = rows(); expect(Object.keys(baseline)).toHaveLength(8);
     for (const table of Object.keys(baseline)) for (const action of ['INSERT', 'UPDATE', 'DELETE']) sqlite.exec('CREATE TRIGGER no_' + table + '_' + action + ' BEFORE ' + action + ' ON ' + table + " BEGIN SELECT RAISE(ABORT,'must not rewrite rows'); END");
     sqlite.exec('PRAGMA user_version=' + marker); const migrated = new SaveRepository(driver); await migrated.initialise();
-    expect(sqlite.prepare('PRAGMA user_version').get()!.user_version).toBe(29); expect(rows()).toEqual(baseline);
+    expect(sqlite.prepare('PRAGMA user_version').get()!.user_version).toBe(30); expect(rows()).toEqual(baseline);
     expect(await migrated.active()).toEqual(before); expect(rows()).toEqual(baseline); await migrated.initialise(); expect(rows()).toEqual(baseline);
-    sqlite.exec('PRAGMA user_version=30'); await expect(new SaveRepository(driver).initialise()).rejects.toThrow(/newer version/); expect(rows()).toEqual(baseline); expect(sqlite.prepare('PRAGMA user_version').get()!.user_version).toBe(30);
+    sqlite.exec('PRAGMA user_version=31'); await expect(new SaveRepository(driver).initialise()).rejects.toThrow(/newer version/); expect(rows()).toEqual(baseline); expect(sqlite.prepare('PRAGMA user_version').get()!.user_version).toBe(31);
   } finally { sqlite.close(); }
 });
 
@@ -81,8 +81,8 @@ test('a failed reader18 marker transaction rolls back and retries without rewrit
   try {
     await new SaveRepository(driver).initialise(); await new SaveRepository(driver).create(decodeWorld(JSON.stringify(graduate)));
     const payloads = () => sqlite.prepare('SELECT payload FROM lives UNION ALL SELECT payload FROM backups').all(); const before = payloads(); sqlite.exec('PRAGMA user_version=18');
-    const failing: SqlDatabase = { ...driver, transaction: action => driver.transaction(tx => action({ ...tx, run: async (sql, values) => { await tx.run(sql, values); if (sql === 'PRAGMA user_version = 29') throw new Error('Interrupted marker write'); } })) };
+    const failing: SqlDatabase = { ...driver, transaction: action => driver.transaction(tx => action({ ...tx, run: async (sql, values) => { await tx.run(sql, values); if (sql === 'PRAGMA user_version = 30') throw new Error('Interrupted marker write'); } })) };
     await expect(new SaveRepository(failing).initialise()).rejects.toThrow(/Interrupted marker/); expect(sqlite.prepare('PRAGMA user_version').get()!.user_version).toBe(18); expect(payloads()).toEqual(before);
-    await new SaveRepository(driver).initialise(); expect(sqlite.prepare('PRAGMA user_version').get()!.user_version).toBe(29); expect(payloads()).toEqual(before);
+    await new SaveRepository(driver).initialise(); expect(sqlite.prepare('PRAGMA user_version').get()!.user_version).toBe(30); expect(payloads()).toEqual(before);
   } finally { sqlite.close(); }
 });

@@ -83,11 +83,11 @@ test.each(['gift','partial','refused','annoyed','loan'] as const)('%s support pr
 test('money replies use natural saved-role language and exact amounts without drawing or inventing a setting',()=>{
   const random=jest.spyOn(Math,'random').mockImplementation(()=>{throw new Error('Copy may not draw randomness');});
   try {
-    expect(moneySupportBody('Morgan','Father','gift','$500.00')).toBe('Your dad comes through with $500.00. The Bank of Dad is open.');
-    expect(moneySupportBody('Morgan','Adoptive Mother','gift','$500.00')).toBe('Your mum comes through with $500.00. The Bank of Mum is open.');
-    expect(moneySupportBody('Sam','Friend','gift','$500.00')).toBe('Sam comes through with $500.00. Friendship has excellent customer service.');
-    expect(moneySupportBody('Sam','Partner','refused','$500.00')).toBe('Your partner says no to $500.00. Love has a budget too.');
-    expect(moneySupportBody('Sam','Former partner','refused','$500.00')).toBe('Sam says no to $500.00. That particular bank is closed.');
+    expect(moneySupportBody('Morgan','Father','gift','$500.00')).toBe('Your dad gives you $500.00. He adds a brief reminder that this is help, not a new income stream.');
+    expect(moneySupportBody('Morgan','Adoptive Mother','gift','$500.00')).toBe('Your mum gives you $500.00. She sends the help without asking you to perform gratitude in instalments.');
+    expect(moneySupportBody('Sam','Friend','gift','$500.00')).toBe('Sam gives you $500.00. You thank them before friendship can acquire a customer-service department.');
+    expect(moneySupportBody('Sam','Partner','refused','$500.00')).toBe('Your partner says no to $500.00. Being together has not made your budgets identical.');
+    expect(moneySupportBody('Sam','Former partner','refused','$500.00')).toBe('Sam says no to $500.00. Repeating the amount would not make it a different question.');
     for(const role of ['Father','Mother','Adoptive Father','Adoptive Mother','Parent','Guardian','Friend','Best friend','Partner','Spouse','Engaged','Son','Daughter','Adopted Son','Brother','Sister','Sibling'])for(const outcome of ['gift','partial','refused','annoyed'] as const){
       const body=moneySupportBody('Morgan',role,outcome,'$500.00','$50.00',false);concise(body);
       expect(body).toContain(outcome==='gift'?'$50.00':'$500.00');if(outcome==='partial')expect(body).toContain('$50.00');

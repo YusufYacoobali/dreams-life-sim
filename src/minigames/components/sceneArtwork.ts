@@ -18,6 +18,8 @@ export const sceneArt = {
 };
 
 export async function preloadSceneArt(kind: MiniGameKind) {
+  // The stamp board is rendered with native text and panels, with no new asset.
+  if (kind === 'escape') return;
   const layers =
     kind === 'sports'
       ? [

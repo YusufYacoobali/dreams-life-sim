@@ -1,3 +1,8 @@
+import { validateOrganisedCrime } from './systems/organisedCrime';
+import { validatePrison } from './systems/prisonValidation';
+import { validateRomance } from './systems/romanceValidation';
+import { prisonLifeSchema } from './systems/prisonSchemas';
+import { affairSchema, romanceOfferSchema } from './systems/romanceSchemas';
 import { cultSchema } from './systems/cultSchemas';
 import { validateCults } from './systems/cultValidation';
 import { miniGameSessionSchema } from '../minigames/core/types';
@@ -127,6 +132,10 @@ const immutableWorlds = new WeakSet<object>();
 const certifiedBranches = new WeakMap<object, Set<string>>();
 const copiedBranches = new WeakMap<object, { key: string; original: object }>();
 export const worldSchema = z.object({
+  overhaulVersion: z.literal(1).optional(),
+  prisonLives: z.array(prisonLifeSchema).max(128).optional(),
+  affairs: z.array(affairSchema).max(128).optional(),
+  romanceOffers: z.array(romanceOfferSchema).max(256).optional(),
   schemaVersion: z.union([z.literal(49), z.literal(50)]), engineVersion: z.union([z.literal(51), z.literal(52)]), contentVersion: z.union([z.literal(28), z.literal(29)]),
   id: z.string().regex(/^life_[a-zA-Z0-9_-]+$/), revision: z.number().int().nonnegative(),
   date: dateSchema, activePersonId: personId,
@@ -218,6 +227,9 @@ function parseWorldShape(value: unknown, immutable = false): World {
         } else parsed[key] = key === 'ledger' && Array.isArray(input[key])
           ? input[key].map(row => immutableTransactions.has(row) ? row : transactionSchema.parse(row))
           : schema.parse(input[key]);
+        // Match the cold parser: optional absent capabilities are absent own
+        // properties, rather than explicit undefined fields in certified worlds.
+        if (parsed[key] === undefined && !Object.prototype.hasOwnProperty.call(input, key)) delete parsed[key];
       } catch (error) {
         if (!(error instanceof z.ZodError)) throw error;
         issues.push(...error.issues.map(issue => ({ ...issue, path: [key, ...issue.path] })));
@@ -238,6 +250,9 @@ function parseWorldShape(value: unknown, immutable = false): World {
 /** Reject contradictory imports/checkpoints rather than repairing them silently. */
 export function validateWorld(value: unknown, immutable = false): World {
   const world = parseWorldShape(value, immutable);
+  if (world.overhaulVersion === 1) {
+    if (!world.prisonLives || !world.affairs || !world.romanceOffers) throw new Error('Missing overhaul capability records');
+  } else if (world.prisonLives || world.affairs || world.romanceOffers || world.gangs.some(gang => gang.organised) || world.incidents.some(incident => ['vehicle-theft', 'financial-scam', 'extortion', 'high-value-robbery'].includes(incident.offence)) || world.miniGames.some(session => session.kind === 'escape')) throw new Error('Overhaul records require their capability version');
   if (!((world.schemaVersion === 49 && world.engineVersion === 51 && world.contentVersion === 28) || (world.schemaVersion === 50 && world.engineVersion === 52 && world.contentVersion === 29))) throw new Error('Invalid world capability version');
   const hasCreative = world.careers.some(career => career.actor || career.modelCareer || career.creativeArchives?.length || career.projects.some(project => project.creative));
   if (hasCreative !== (world.schemaVersion === 50)) throw new Error('Creative careers require the supported creative save format');
@@ -412,6 +427,9 @@ export function validateWorld(value: unknown, immutable = false): World {
   }
   if (world.legacies.length && world.legacies.at(-1)!.toId !== world.activePersonId) throw new Error('Legacy actor differs from its recorded identity');
   validateLegal(world);
+  validateOrganisedCrime(world, ledger);
+  validatePrison(world, ledger);
+  validateRomance(world);
   validateSocial(world);
   validateBusinesses(world);
   validateEarnings(world, ledger);

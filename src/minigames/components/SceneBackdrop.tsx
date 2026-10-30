@@ -11,7 +11,7 @@ export function SceneBackdrop({ kind }: { kind: MiniGameKind }) {
       style={StyleSheet.absoluteFill}
       accessible={false}
     >
-      {kind !== 'crime' && (
+      {kind !== 'crime' && kind !== 'escape' && (
         <Image
           source={kind === 'sports' ? sceneArt.stadium : sceneArt.space}
           resizeMode="cover"
@@ -53,7 +53,7 @@ export function ScenePreview({ kind }: { kind: MiniGameKind }) {
           style={StyleSheet.absoluteFill}
         />
       )}
-      {kind !== 'crime' && (
+      {kind !== 'crime' && kind !== 'escape' && (
         <Image
           source={kind === 'sports' ? sceneArt.goal : sceneArt.station}
           resizeMode="contain"

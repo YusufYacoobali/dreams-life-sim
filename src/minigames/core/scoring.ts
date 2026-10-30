@@ -27,6 +27,9 @@ export function burglaryModifiers(score: number) {
   )[ratingFor(score)];
 }
 export function consequenceText(kind: MiniGameKind, score: number) {
+  if (kind === 'escape') return score >= 60
+    ? 'You escaped your sentence and are wanted. Unserved time remains.'
+    : 'The attempt failed. Conduct and a real escape charge are affected.';
   if (kind === 'crime')
     return score >= 60
       ? 'Better loot, less risk. You can still be arrested.'

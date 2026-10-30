@@ -1,6 +1,7 @@
 import type { World } from '../../game/model';
 import { crimeReason } from '../../game/systems/legal';
-import { isConfined } from '../../game/systems/legalSchemas';
+import { activeSentence, isConfined } from '../../game/systems/legalSchemas';
+import { prisonSecurity } from '../../game/systems/prisonSecurity';
 import { newChallengeDifficulty } from './difficulty';
 import type { MiniGameKind } from './types';
 
@@ -16,6 +17,13 @@ export function challengeContext(
   contextId: string,
 ) {
   const person = world.people[world.activePersonId];
+  if (kind === 'escape') {
+    const sentence = activeSentence(world);
+    if (!sentence || sentence.id !== ownerId || contextId !== escapeContext(world)) return null;
+    const base = { low: 2, medium: 3, high: 5 }[prisonSecurity(world, sentence)];
+    const preparation = Math.floor((person.stats.smarts + person.stats.fitness + person.legal.crimeSkill) / 110);
+    return { difficulty: Math.max(1, Math.min(5, base - preparation)) };
+  }
   if (kind === 'sports') {
     const career = world.careers.find(
       (row) =>
@@ -61,6 +69,9 @@ export function challengeContext(
 }
 export const burglaryContext = (world: World) =>
   `${world.activePersonId}:burglary:${world.date.year}`;
+export const escapeContext = (world: World) =>
+  `${activeSentence(world)?.id ?? 'unavailable'}:escape:${world.date.year}`;
+export const escapeAttemptKey = (personId: string, year: number) => `${personId}:legal:${year}:escape`;
 export function miniGameReason(
   world: World,
   kind: MiniGameKind,
@@ -85,7 +96,7 @@ export function miniGameReason(
   )
     return 'This challenge has already been used';
   if (
-    isConfined(world, person) ||
+    (kind !== 'escape' && isConfined(world, person)) ||
     person.health.hospitalizedUntil !== null ||
     person.stats.health < 20 ||
     person.stats.energy < 10
@@ -93,6 +104,8 @@ export function miniGameReason(
     return 'Recover or resolve custody before playing';
   if (!challengeContext(world, kind, ownerId, contextId))
     return 'This challenge is no longer available';
+  if (kind === 'escape' && world.actionCounts[escapeAttemptKey(person.id, world.date.year)])
+    return 'You already attempted escape this year';
   if (kind === 'crime') {
     if (
       world.serviceCareers.some(
