@@ -76,7 +76,7 @@ jest.mock('../../src/state/usePreferences', () => ({
     }),
 }));
 jest.mock('../../src/ui/GodModeAccess', () => ({
-  useGodModeAccess: () => mockAllowed,
+  useInternalGodModeAccess: () => mockAllowed,
 }));
 jest.mock('lottie-react-native', () => () => null);
 jest.mock('expo-asset', () => ({ Asset: { loadAsync: jest.fn(async () => []) } }));

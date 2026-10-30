@@ -15,7 +15,7 @@ export function progressFacts(world: World, personId = world.activePersonId): Pr
   const projects = { actor: 0, model: 0, athlete: 0, musician: 0, politician: 0 };
   let awardedProjects = 0;
   for (const career of world.careers) if (career.personId === personId) {
-    for (const project of career.projects) if (project.status === 'completed') {
+    for (const project of [...career.projects, ...(career.creativeArchives ?? [])]) if (project.status === 'completed') {
       projects[career.kind]++; if (project.award) awardedProjects++;
     }
   }

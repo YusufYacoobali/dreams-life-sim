@@ -44,7 +44,7 @@ export function trainingReason(world: World, skill: typeof skillIds[number], per
         return 'Recover before beginning this training';
 }
 export function careerPayQuote(world: World, kind: CareerKind, person = active(world)) { const career = world.careers.find(item => item.personId === person.id && item.kind === kind), role = jobs.find(item => item.id === careerCatalog[kind].roleId)!; return roundRatio(rules[person.country].baseWage * BigInt(role.wageBps) * BigInt(100 + (career?.rank ?? 0) * 40 + Math.floor(person.stats.fame / 2)), 1000000n); }
-export function selectionReason(world: World, kind: CareerKind): string | undefined {
+export function selectionReason(world: World, kind: CareerKind, creative = false): string | undefined {
     if (activeCult(world)) return 'Disband your cult before taking another full-time commitment';
     const person = active(world), definition = careerCatalog[kind], age = ageOn(person, world.date);
     if (kind === 'athlete') { const suspension = athleteSuspensionReason(world); if (suspension) return suspension; }
@@ -71,9 +71,9 @@ export function selectionReason(world: World, kind: CareerKind): string | undefi
         return 'Finish or leave your active special career first';
     if (person.skills[definition.skill] < definition.threshold)
         return skillContent[definition.skill].title + ' skill of ' + definition.threshold + '% is required';
-    if (person.stats.health < definition.health || person.stats.fitness < definition.fitness || person.stats.looks < definition.looks || person.stats.smarts < definition.smarts)
-        return 'Requires Health ' + definition.health + '%, Fitness ' + definition.fitness + '%, Looks ' + definition.looks + '% and Smarts ' + definition.smarts + '%';
-    if ((world.actionCounts[person.id + ':career-selection:' + kind + ':' + world.date.year] ?? 0) >= 2)
+    if (person.stats.health < definition.health || person.stats.fitness < (creative && kind === 'model' ? 0 : definition.fitness) || person.stats.looks < (creative && kind === 'model' ? 0 : definition.looks) || person.stats.smarts < definition.smarts)
+        return creative && kind === 'model' ? 'Requires Health ' + definition.health + '% and Smarts ' + definition.smarts + '%. Portfolio and professionalism matter; no appearance-perfection requirement.' : 'Requires Health ' + definition.health + '%, Fitness ' + definition.fitness + '%, Looks ' + definition.looks + '% and Smarts ' + definition.smarts + '%';
+    if (!creative && (world.actionCounts[person.id + ':career-selection:' + kind + ':' + world.date.year] ?? 0) >= 2)
         return 'Two selection attempts are available per career each year';
 }
 function newProject(world: World, career: Career) { const definition = careerCatalog[career.kind], history = world.workHistory.find(item => item.id === career.employmentId)!; return { id: 'project_' + career.id + '_' + career.projects.length, currency: history.currency, name: definition.projects[draw(world, 'events', 0, definition.projects.length - 1)] + (['athlete', 'politician'].includes(career.kind) ? ' ' + (world.date.year + 1) : ''), started: { ...world.date }, ended: null, status: 'active' as const, targetMonths: definition.period, months: 0, employmentId: history.id, grossAtStart: history.grossEarned, grossEarned: 0n, responseRoll: draw(world, 'outcomes', 1, 100), quality: 0, award: null, periods: [] }; }
@@ -146,6 +146,8 @@ export function resolveCareer(world: World, command: CareerCommand) {
         return;
     }
     if (command.type === 'select-career') {
+        const prepared = world.careers.find(item => item.personId === person.id && item.kind === command.kind);
+        if (prepared?.actor || prepared?.modelCareer) throw new IneligibleAction('Choose a saved audition or casting opportunity from your career dashboard.');
         const reason = selectionReason(world, command.kind);
         if (reason)
             throw new IneligibleAction(reason);
@@ -207,6 +209,7 @@ export function careerTrainingMonth(world: World) {
 export function careerMonth(world: World) {
     const month = absolute(world);
     for (const career of world.careers.filter(item => item.status === 'active')) {
+        if (career.projects.some(project => project.status === 'active' && project.creative)) continue;
         const person = world.people[career.personId], definition = careerCatalog[career.kind];
         if (career.lastMonth >= month)
             continue;

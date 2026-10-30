@@ -1,3 +1,7 @@
+import { purchases } from '../../src/purchases/native';
+import { features } from '../../src/purchases/catalog';
+// This existing service-context journey models a licensed player.
+beforeEach(() => { purchases.setState({ ownership: Object.fromEntries(features.map(feature => [feature, true])) as Record<typeof features[number], boolean> }); });
 import React from 'react';
 import { act, fireEvent, render, screen, waitFor } from '@testing-library/react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -55,7 +59,7 @@ function eligibleCandidate() {
 }
 async function setup(initial: World) {
   const { sqlite, driver } = database(), repository = new SaveRepository(driver); await repository.initialise(); await repository.create(initial);
-  const cold = async () => { const repo = new SaveRepository(driver); mockStore = createGameStore({ repository: async () => repo, date: () => initial.date, id: () => 'unused' }); expect(await mockStore.getState().bootstrap()).toBe(true); };
+  const cold = async () => { const repo = new SaveRepository(driver); mockStore = createGameStore({ premiumAccess: () => true,  repository: async () => repo, date: () => initial.date, id: () => 'unused' }); expect(await mockStore.getState().bootstrap()).toBe(true); };
   await cold();
   const rows = () => Object.fromEntries(sqlite.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name").all().map(row => [row.name, sqlite.prepare('SELECT * FROM ' + row.name + ' ORDER BY 1,2').all()]));
   return { sqlite, rows, cold };

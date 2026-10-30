@@ -1,3 +1,4 @@
+import { usePremiumAction } from '../purchases/PurchaseUI';
 import React, { useEffect, useRef, useState } from 'react';
 import type { CultCommand } from '../game/systems/cultSchemas';
 import { useGame } from '../state/useGame';
@@ -36,6 +37,7 @@ export function useCultDialog(cultId?: string) {
       cult?.status,
     ]);
   });
+  const premium = usePremiumAction(identity);
   const [dialog, setDialog] = useState<Dialog | null>(null),
     current = useRef<Dialog | null>(null),
     context = useRef(identity),
@@ -120,6 +122,7 @@ export function useCultDialog(cultId?: string) {
       id: CultArtId = 'cult',
       label = 'Confirm',
     ) {
+      premium.run(command.type === 'found-cult' ? 'cult' : null, command.type, () => {
       open(
         {
           kind: 'confirmation',
@@ -132,6 +135,7 @@ export function useCultDialog(cultId?: string) {
         },
         { command },
       );
+      });
     },
     info(
       title: string,
@@ -150,7 +154,7 @@ export function useCultDialog(cultId?: string) {
       });
     },
     modal: (
-      <EventModal
+      <>{premium.modal}<EventModal
         event={shown?.event ?? null}
         busy={busy}
         selectionSearch={shown?.search}
@@ -185,7 +189,7 @@ export function useCultDialog(cultId?: string) {
             submitting.current = false;
           }
         }}
-      />
+      /></>
     ),
   };
 }

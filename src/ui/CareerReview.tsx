@@ -1,3 +1,5 @@
+import { requiredFeature } from '../purchases/access';
+import { usePremiumAction } from '../purchases/PurchaseUI';
 import React, { useEffect, useRef, useState } from 'react';
 import { CareerCommand } from '../game/systems/careers';
 import { MusicCommand } from '../game/systems/music';
@@ -15,6 +17,7 @@ type Review = { identity: string; command: CareerAction; event: EventPresentatio
 export function useCareerReview(context = '') {
     const dispatch = useGame(s => s.dispatch), busy = useGame(s => s.busy), error = useGame(s => s.error);
     const person = useGame(s => s.world ? s.world.id + ':' + s.world.activePersonId : 'none'), identity = person + ':' + context;
+    const world = useGame(s => s.world), premium = usePremiumAction(identity);
     const mounted = useRef(true), submitting = useRef(false), identityRef = useRef(identity), reviewRef = useRef<Review | null>(null);
     identityRef.current = identity;
     if (reviewRef.current?.identity !== identity) reviewRef.current = null;
@@ -27,9 +30,12 @@ export function useCareerReview(context = '') {
         confirm(command: CareerAction, title: string, body: string, terms: EffectRow[] = [], art: CareerArtId = 'stage', label = 'Confirm') {
             if (!mounted.current || busy || submitting.current || identityRef.current !== identity) return;
             const next: Review = { identity, command, event: { kind: 'confirmation', id: command.type, title, body, terms, illustration: <CareerArt id={art} size={64} />, confirmLabel: label } };
-            reviewRef.current = next; setReview(next);
+            premium.run(world ? requiredFeature(world, command) : null, command.type, () => {
+                if (!mounted.current || identityRef.current !== identity) return;
+                reviewRef.current = next; setReview(next);
+            });
         },
-        modal: <EventModal event={current?.event ?? null} busy={busy} error={error} onCancel={() => {
+        modal: <>{premium.modal}<EventModal event={current?.event ?? null} busy={busy} error={error} onCancel={() => {
             if (busy || submitting.current || !current || !isCurrent(current)) return;
             reviewRef.current = null; setReview(null);
         }} onChoose={async () => {
@@ -38,6 +44,6 @@ export function useCareerReview(context = '') {
             try {
                 if (await dispatch(current.command) && isCurrent(current)) { reviewRef.current = null; setReview(value => value === current ? null : value); }
             } finally { submitting.current = false; }
-        }} />,
+        }} /></>,
     };
 }

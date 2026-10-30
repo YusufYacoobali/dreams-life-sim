@@ -1,3 +1,7 @@
+import { purchases } from '../../src/purchases/native';
+import { features } from '../../src/purchases/catalog';
+// This existing gameplay/save journey uses a licensed-player fixture.
+beforeEach(() => { purchases.setState({ ownership: Object.fromEntries(features.map(feature => [feature, true])) as Record<typeof features[number], boolean> }); });
 import React from 'react';
 import { act, fireEvent, render, screen, waitFor } from '@testing-library/react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -47,7 +51,7 @@ beforeEach(async () => {
   mockShareAvailable.mockResolvedValue(true); mockShare.mockResolvedValue(undefined);
   folder = { createFile: jest.fn((name: string) => new File('content://selected-folder/' + name)) }; mockPickDirectory.mockResolvedValue(folder);
   const opened = database(); sqlite = opened.sqlite; mockRepository = new SaveRepository(opened.driver); await mockRepository.initialise(); await mockRepository.import(JSON.stringify(archive));
-  mockStore = createGameStore({ repository: async () => mockRepository, date: () => ({ year: 2026, month: 10, day: 19 }), id: () => 'unused' }); await mockStore.getState().bootstrap();
+  mockStore = createGameStore({ premiumAccess: () => true,  repository: async () => mockRepository, date: () => ({ year: 2026, month: 10, day: 19 }), id: () => 'unused' }); await mockStore.getState().bootstrap();
 });
 afterEach(() => { sqlite.close(); });
 
@@ -58,7 +62,7 @@ test('View Life Summary routes to a read-only saved life without selecting it or
 });
 
 test('the visible branch label survives a real previous-checkpoint recovery without reloading the list', async () => {
-  mockStore = createGameStore({ repository: async () => mockRepository, date: () => ({ year: 2026, month: 10, day: 20 }), id: () => 'life_visible_recovered_branch' }); await mockStore.getState().bootstrap(); await mockStore.getState().restoreSnapshot('snapshot_r_31'); await mockStore.getState().dispatch({ type: 'advance' });
+  mockStore = createGameStore({ premiumAccess: () => true,  repository: async () => mockRepository, date: () => ({ year: 2026, month: 10, day: 20 }), id: () => 'life_visible_recovered_branch' }); await mockStore.getState().bootstrap(); await mockStore.getState().restoreSnapshot('snapshot_r_31'); await mockStore.getState().dispatch({ type: 'advance' });
   const branchId = mockStore.getState().world!.id, list = jest.spyOn(mockRepository, 'list'); render(frame());
   const label = /Time Machine branch · Riley Kelly, age 7 in 2033/; expect(screen.getByText(label)).toBeOnTheScreen();
   await act(async () => { expect(await mockStore.getState().recoverLife(branchId)).toBe(true); });

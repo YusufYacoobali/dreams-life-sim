@@ -1,32 +1,16 @@
-# God Mode testing
+# God Mode
 
-Open **Settings**, then tap the **App Preferences card three times quickly**
-(no more than 800ms between taps). This reveals the God Mode enable/disable
-toggle and, when enabled, the editor and playground buttons. Profile and Assets
-have no God Mode shortcuts. Use a living, acknowledged life for the editor.
-Switching off leaves saved changes intact.
+God Mode is a permanent purchase (`dreams.god_mode`), also included in Full Unlock. Open **Settings → God Mode** or **Extras → God Mode**. Verified ownership opens the editor; unowned players see a contextual paywall. Deliberately choosing a royal birth in New Life is also a God Mode benefit. Random royal births and marriage into royalty stay free. See [the purchase implementation and exact store setup](MONETISATION.md).
 
-## Build access
+## Internal testing and build access
 
-As reaffirmed on 25 October 2026, God Mode is temporarily available in **all builds**, including production/store builds, at the owner's request for testing. The release audit's production-off change was reverted. `app.config.cjs` embeds `extra.godModeTesting=true` for every profile, without requiring internal-distribution environment switches. Metro/Expo Go development access also remains available.
+Development builds and explicitly configured internal builds retain the existing testing editor and playground. Open Settings and tap **App Preferences three times quickly** (at most 800ms between taps), then enable the saved testing toggle. The reveal resets each app session; prior edits and the toggle choice persist.
 
-The reveal is held only in memory and resets on app restart. The saved toggle
-and prior edits persist, but a saved enabled toggle alone cannot open testing
-tools in a fresh session. Reveal it again through the Settings gesture. The
-editor, playground and actual runtime save commands require both the session
-reveal and loaded enabled preference. Unrevealed/disabled direct editor and
-playground routes return to Settings without displaying testing UI.
+`app.config.cjs` enables internal capability only with `EAS_BUILD_PROFILE=internal|preview|development`, `EAS_BUILD_DISTRIBUTION=internal` and `DREAMS_GOD_MODE_TESTING=1`. Development `__DEV__` access also remains. **Production/store builds disable the hidden testing bypass**, superseding the 25 October testing policy. A saved toggle or repeated taps cannot grant public paid ownership. The mini-game playground remains internal even for Full Unlock owners.
 
-An already installed release APK needs rebuilding and updating to receive the
-change; the present app does not configure OTA updates.
+Use a living, acknowledged life for the editor. Paid ownership does not require the hidden testing toggle. Internal access requires build capability, session reveal and readable, enabled preferences. Public unowned editor links offer the paywall; unauthorized playground links redirect to Settings. Switching off internal testing, losing ownership or restarting never reverses existing saved edits.
 
-`src/access/godMode.ts` contains the build capability policy; `buildAccess.ts`
-supplies trusted build configuration. `src/state/godModeSession.ts` holds the
-nonpersistent reveal. `createGameStore` denies editing unless its access
-dependency allows it, and the native store combines build access, session reveal
-and the loaded testing preference. Missing/invalid capability metadata still
-fails closed outside development. Editing commands have no knowledge of
-purchases. No purchase SDK, entitlement, subscription or paywall is implemented.
+The native game store checks verified SDK ownership (or valid internal test access) at the command boundary, including immediately before committing. Simulation edit commands remain independent of purchase SDK code. Native billing requires rebuilding the app; an older installed binary cannot gain the SDK from JavaScript alone. See the monetisation guide for keys, product mappings and outstanding device/sandbox checks.
 
 ## Editor
 
@@ -47,7 +31,9 @@ Money goes through `post()` with category `god-mode-adjustment`, zero debt delta
 
 `gameStore.editGodMode()` authorizes, validates and commits through the normal repository. A unique retry identifier prevents separate editor sessions from sharing receipts. Failed writes publish no new world. The automatic **Before God Mode** checkpoint, backup, receipt and changed life commit in the same SQLite transaction. Existing Time Machine, export/import and recovery support the resulting saves without a World/schema-version migration.
 
-## Verification
+## Historical verification
+
+These dated checks describe earlier source versions. Current monetisation results and build policy are recorded in [MONETISATION.md](MONETISATION.md).
 
 On 25 October 2026, hiding God Mode behind the Settings triple tap passed
 **172 cases across ten focused suites** after affected reruns, strict app/test

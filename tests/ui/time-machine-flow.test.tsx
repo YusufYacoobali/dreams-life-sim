@@ -1,3 +1,6 @@
+import { purchases } from '../../src/purchases/native';
+import { noOwnership } from '../../src/purchases/catalog';
+beforeEach(() => { purchases.setState({ ownership: noOwnership() }); });
 import React from 'react';
 import { act, fireEvent, render, screen, waitFor } from '@testing-library/react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -19,7 +22,8 @@ test('native historical confirmation rolls back a failed branch and retries once
   const { sqlite, driver } = database(), repository = new SaveRepository(driver); await repository.initialise();
   const before = { ...createLife('life_history', 42, randomCreation(42), { year: 2026, month: 10, day: 18 }), birthAcknowledged: true }; await repository.create(before);
   const future = resolveCommand(before, { type: 'advance' }); await repository.commit(future, before.revision, 'advance', true);
-  const id = jest.fn(() => 'life_branch'); const deps = { repository: async () => repository, date: () => before.date, id };
+  purchases.setState({ ownership: { ...noOwnership(), time_machine: true } });
+  const id = jest.fn(() => 'life_branch'); const deps = { premiumAccess: (feature: string) => feature === 'time_machine', repository: async () => repository, date: () => before.date, id };
   mockStore = createGameStore(deps); await mockStore.getState().bootstrap();
   const view = render(<SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider><TimeMachine /></ThemeProvider></SafeAreaProvider>);
   await waitFor(() => expect(screen.getByRole('button', { name: /Age 0/ })).toBeEnabled());

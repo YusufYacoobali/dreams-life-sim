@@ -1,3 +1,4 @@
+import { validateCreativeCareers } from './creativeValidation';
 import type { World } from '../model';
 import { ageOn } from '../personHelpers';
 import { countries } from '../countries';
@@ -32,7 +33,12 @@ export function validateCareers(world: World) {
                 activeProjects++;
             gross.set(job.id, (gross.get(job.id) ?? 0n) + project.grossEarned);
         }
-        if (active && career.projects.filter(item => item.employmentId === career.employmentId).reduce((sum, item) => sum + item.months, 0) + career.contractMonthsRemaining !== definition.contractMonths)
+        for (const project of career.creativeArchives ?? []) {
+            const job = histories.get(project.employmentId);
+            if (projectIds.has(project.id) || !job || job.personId !== career.personId || job.roleId !== definition.roleId || project.currency !== job.currency || project.status === 'active' || !project.ended || !project.creative || project.months !== project.periodCount || project.months > project.targetMonths || project.attendedPeriods > project.periodCount || project.scoreSum > project.periodCount * 100 || project.quality !== (project.periodCount ? Math.round(project.scoreSum / project.periodCount) : 0) || project.grossAtStart + project.grossEarned > job.grossEarned || compare(project.started, career.started) < 0 || compare(project.started, job.started) < 0 || compare(project.started, world.date) > 0 || compare(project.ended, project.started) < 0 || compare(project.ended, world.date) > 0 || project.status === 'completed' && project.months !== project.targetMonths || project.award && (project.status !== 'completed' || project.quality < 80 || project.responseRoll > 10)) throw new Error('Invalid archived creative project');
+            projectIds.add(project.id); gross.set(job.id, (gross.get(job.id) ?? 0n) + project.grossEarned);
+        }
+        if (active && career.projects.filter(item => item.employmentId === career.employmentId).reduce((sum, item) => sum + item.months, 0) + career.contractMonthsRemaining !== (career.projects.find(project => project.status === 'active')?.creative?.term ?? definition.contractMonths))
             throw new Error('Career contract period count does not reconcile');
         if (activeProjects !== (active ? 1 : 0))
             throw new Error('A career must have exactly one current project while contracted');
@@ -40,5 +46,6 @@ export function validateCareers(world: World) {
     for (const [id, amount] of gross)
         if (histories.get(id)!.grossEarned !== amount)
             throw new Error('Career project earnings do not reconcile to the actual contract');
+    validateCreativeCareers(world);
     validateDopingChecks(world);
 }

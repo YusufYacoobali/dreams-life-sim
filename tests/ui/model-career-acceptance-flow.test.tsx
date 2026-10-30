@@ -12,7 +12,8 @@ import { createGameStore } from '../../src/state/gameStore';
 import { encodeWorld, type World } from '../../src/game/model';
 import { resolveCommand, type GameCommand } from '../../src/game/engine';
 import { choiceUnavailable } from '../../src/game/choiceAvailability';
-import { careerPayQuote, coachingCost, selectionReason } from '../../src/game/systems/careers';
+import { coachingCost, selectionReason } from '../../src/game/systems/careers';
+import { modelOfferReason } from '../../src/game/systems/modelCareer';
 import { formatMoney } from '../../src/game/money';
 import { SaveRepository, type SqlDatabase, type SqlSession } from '../../src/persistence/repository';
 import * as checkpoints from '../../src/persistence/checkpoints';
@@ -83,7 +84,7 @@ test('the unchanged actor archive earns modelling training, signs and completes 
   const durableReview = async (launch: string | RegExp, confirm: string, command: GameCommand) => {
     const initial = world(), canonical = encodeWorld(initial), before = context.rows();
     await press(launch); const reviewed = reviewEvent(); await press('Never mind'); expect(world()).toBe(initial); expect(context.rows()).toEqual(before);
-    await press(launch); const retained = reviewEvent(); expect(retained).toEqual(reviewed); const expected = resolveCommand(initial, command, true), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'), release = context.pauseNextSave();
+    await press(launch); const retained = reviewEvent(); expect({ ...retained, id: undefined, illustration: undefined }).toEqual({ ...reviewed, id: undefined, illustration: undefined }); const expected = resolveCommand(initial, command, true), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'), release = context.pauseNextSave();
     context.sqlite.exec("CREATE TRIGGER fail_model_command BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
     await press(confirm); expect(mockStore.getState().busy).toBe(true); expect(modal().getByRole('button', { name: confirm })).toHaveProp('accessibilityState', { disabled: true, busy: true });
     await press(confirm); await press('Never mind'); await act(async () => { screen.UNSAFE_getByType(Modal).props.onRequestClose(); }); expect(reviewEvent()).toBe(retained); expect(context.rows()).toEqual(before); expect(world()).toBe(initial);
@@ -105,31 +106,49 @@ test('the unchanged actor archive earns modelling training, signs and completes 
     const paidTraining = world().ledger.filter(item => item.personId === world().activePersonId && item.category === 'skill-training'); expect(paidTraining).toHaveLength(30); expect(paidTraining.reduce((sum, item) => sum - item.cashDelta, 0n)).toBe(training.fees);
     expect(world().careers.find(item => item.id === actorCareer.id)).toEqual(actorCareer);
     await dispatch({ type: 'stop-career-training' }); await finish(); expect(selectionReason(world(), 'model')).toBeUndefined();
-    view = render(frame()); const prepared = world(), quote = careerPayQuote(prepared, 'model'), accounts = prepared.accounts, ledger = prepared.ledger;
-    await durableReview('Review Casting', 'Attend Casting', { type: 'select-career', kind: 'model', quotedAnnualPay: quote });
-    // Two normal attempts are the authored annual limit. No seed search, altered
-    // roll or reset is used if the first actually recorded casting rejects us.
-    if (!model() || model().status !== 'active') {
-      expect(world().journal.at(-1)?.text).toMatch(/not selected/); await press('Review Casting'); await press('Attend Casting'); await acknowledgeOnce();
-    }
-    expect(model()?.status).toBe('active'); expect(model().projects[0].grossEarned).toBe(0n); expect(model().projects[0].periods).toHaveLength(0); expect(actor().employment?.paidMonths).toBe(0); expect(actor().employment?.annualPay).toBe(quote);
-    // The normal contract creates actual colleagues and their own accounts;
-    // their opening balances do not belong to, or pay, the player.
+    view = render(frame()); const prepared = world(), accounts = prepared.accounts, ledger = prepared.ledger;
+    await durableReview('Explore Modelling Opportunities', 'Explore Modelling', { type: 'model-enter' });
+    expect(model().status).toBe('between'); expect(model().projects).toHaveLength(0); expect(actor().employment).toBeNull();
+    expect(model().modelCareer!.industry.board).toHaveLength(6);
+    // Industry contacts have their own opening balances; entry pays the player nothing.
     for (const account of accounts) expect(world().accounts).toContainEqual(account);
     expect(world().accounts.filter(item => item.ownerId === world().activePersonId)).toEqual(accounts.filter(item => item.ownerId === prepared.activePersonId));
     for (const account of world().accounts.filter(item => !accounts.some(before => before.id === item.id))) expect(model().contacts).toContain(account.ownerId);
     expect(world().ledger).toEqual(ledger);
-    const selectionAttempts = world().actionCounts[world().activePersonId + ':career-selection:model:' + world().date.year]; expect(selectionAttempts).toBeGreaterThanOrEqual(1); expect(selectionAttempts).toBeLessThanOrEqual(2);
-    expect(model().contacts).toHaveLength(2); for (const id of model().contacts) expect(world().people[id]).toBeDefined();
-    const current = screen.getByRole('radio', { name: /^Keep a Balance\..*This is your current career focus$/ }), selected = world(), selectedRows = context.rows(); expect(current).toBeDisabled(); await act(async () => { fireEvent.press(current); }); expect(world()).toBe(selected); expect(context.rows()).toEqual(selectedRows); expect(screen.queryByText('Update your career focus?')).toBeNull();
+    // Follow the saved board normally: a rejection stays recorded, and another
+    // eligible brief or a later year's board provides the next genuine attempt.
+    let selectionAttempts = 0, seasons = 0, reviewedCasting = false;
+    while (model().status !== 'active') {
+      const offer = model().modelCareer!.industry.board.find(item => !modelOfferReason(world(), item));
+      if (!offer) {
+        if (++seasons > 3) throw Error('No model booking after four ordinary saved casting boards');
+        view.unmount(); view = undefined; await year(); view = render(frame());
+        await press('Review New Bookings'); await press('Review Booking List'); await acknowledgeOnce(); continue;
+      }
+      const launch = 'Review Casting for ' + offer.title, beforeCasting = world();
+      if (!reviewedCasting) { await durableReview(launch, 'Attend Casting', { type: 'model-casting', offerId: offer.id, quotedAnnualPay: offer.annualPay }); reviewedCasting = true; }
+      else { await press(launch); await press('Attend Casting'); await acknowledgeOnce(); }
+      selectionAttempts++;
+      expect(world().accounts).toEqual(beforeCasting.accounts); expect(world().ledger).toEqual(beforeCasting.ledger);
+      expect(model().modelCareer!.industry.board.find(item => item.id === offer.id)!.status).not.toBe('open');
+      expect(model().modelCareer!.industry.board.find(item => item.id === offer.id)!.auditionRoll).toBe(offer.auditionRoll);
+    }
+    const quote = actor().employment!.annualPay, booked = model().projects.find(item => item.status === 'active')!;
+    expect(model()?.status).toBe('active'); expect(model().projects[0].grossEarned).toBe(0n); expect(model().projects[0].periods).toHaveLength(0); expect(actor().employment?.paidMonths).toBe(0); expect(actor().employment?.annualPay).toBe(quote);
+    expect(selectionAttempts).toBeGreaterThanOrEqual(1); expect(selectionAttempts).toBeLessThanOrEqual(16);
+    expect(model().contacts).toHaveLength(4); expect(Object.keys(model().modelCareer!.industry.contacts)).toHaveLength(4); for (const id of model().contacts) expect(world().people[id]).toBeDefined();
+    expect(screen.getByLabelText('Contract progress: 0 / ' + booked.targetMonths + ' months')).toBeOnTheScreen();
+    await durableReview(/^Prepare the Presentation\./, 'Choose This Approach', { type: 'model-production', projectId: booked.id, action: 'prepare' });
+    expect(model().projects[0].creative!.choices.some(item => item.id === 'model:prepare')).toBe(true);
+    await finish();
     view.unmount(); view = undefined; await year();
-    expect(model().status).toBe('between'); expect(model().projects[0].status).toBe('completed'); expect(model().projects[0].months).toBe(3); expect(model().projects[0].periods).toHaveLength(3); expect(model().projects[0].periods.every(item => item.attended)).toBe(true); expect(model().projects[0].grossEarned).toBe(quote / 4n); expect(actor().employment).toBeNull();
-    const completed = model(), employment = world().workHistory.find(item => item.id === completed.projects[0].employmentId)!; expect(employment.monthsWorked).toBe(3); expect(employment.grossEarned).toBe(completed.projects[0].grossEarned);
-    view = render(frame()); expect(screen.getByText('completed · ' + completed.projects[0].ended!.year + ' · 3 recorded periods')).toBeOnTheScreen(); expect(screen.getByLabelText('Recorded gross earnings: ' + displayText(formatMoney({ minor: completed.projects[0].grossEarned, currency: completed.projects[0].currency })) + '. Before tax. Quality ' + completed.projects[0].quality + '%')).toBeOnTheScreen();
-    const beforeLeave = world(); await durableReview(/^Leave This Career\./, 'Leave Career', { type: 'leave-career', careerId: completed.id });
+    expect(model().status).toBe('between'); expect(model().projects[0].status).toBe('completed'); expect(model().projects[0].months).toBe(booked.targetMonths); expect(model().projects[0].periods).toHaveLength(booked.targetMonths); expect(model().projects[0].periods.every(item => item.attended)).toBe(true); expect(model().projects[0].grossEarned).toBeGreaterThan(0n); expect(actor().employment).toBeNull();
+    const completed = model(), employment = world().workHistory.find(item => item.id === completed.projects[0].employmentId)!; expect(employment.monthsWorked).toBe(booked.targetMonths); expect(employment.grossEarned).toBe(completed.projects[0].grossEarned); expect(completed.modelCareer!.industry.totalGross).toBe(employment.normalizedGross);
+    view = render(frame()); expect(screen.getByText('completed · ' + completed.projects[0].ended!.year + ' · ' + booked.targetMonths + ' recorded months')).toBeOnTheScreen(); expect(screen.getByLabelText('Actual gross earnings: ' + displayText(formatMoney({ minor: completed.projects[0].grossEarned, currency: completed.projects[0].currency })))).toBeOnTheScreen(); expect(screen.getByLabelText('Recorded gross earnings: ' + displayText(formatMoney({ minor: employment.normalizedGross, currency: actor().finance.earningsCurrency })) + '. Before commission and tax')).toBeOnTheScreen();
+    const beforeLeave = world(); await durableReview(/^Leave This Modelling Career\./, 'Leave Modelling', { type: 'leave-career', careerId: completed.id });
     const left = world(); expect(model().status).toBe('left'); expect(model().projects).toEqual(completed.projects); expect(model().contacts).toEqual(completed.contacts); expect(left.accounts).toEqual(beforeLeave.accounts); expect(left.ledger).toEqual(beforeLeave.ledger); expect(left.random).toEqual(beforeLeave.random); expect(left.workHistory).toEqual(beforeLeave.workHistory);
     view.unmount(); view = undefined; await year(); expect(model()).toEqual(model(left)); expect(world().workHistory.filter(item => item.personId === world().activePersonId)).toEqual(left.workHistory.filter(item => item.personId === left.activePersonId)); expect(actor().finance.lifetimeGross).toBe(actor(left).finance.lifetimeGross); expect(world().careers.find(item => item.id === actorCareer.id)).toEqual(actorCareer);
-    await cold(); expect(screen.queryByRole('button', { name: /^Leave This Career\./ })).toBeNull(); context.original();
+    await cold(); expect(screen.queryByRole('button', { name: /^Leave This Modelling Career\./ })).toBeNull(); context.original();
     console.info('Model archive continuation', JSON.stringify({ sourceRevision: archived.revision, sourceDate: archived.date, preparedDate: prepared.date, trainedMonths: training.months, trainingFees: training.fees.toString(), skill: actor(prepared).skills.modeling, selectionAttempts, annualPay: quote.toString(), projectPeriods: completed.projects[0].months, modelGross: completed.projects[0].grossEarned.toString(), currency: completed.currency, finalDate: world().date, finalRevision: world().revision, ordinaryPreparationAndContinuationCommands: trace.length, originalFixtureSha256: createHash('sha256').update(readFileSync(join(__dirname, '../fixtures/v12-career-archive.json'))).digest('hex') }));
   } finally { view?.unmount(); jest.restoreAllMocks(); context.close(); }
 }, 90000);

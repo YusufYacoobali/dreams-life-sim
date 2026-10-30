@@ -49,6 +49,7 @@ export default function Settings() {
       {busy && <ActivityIndicator accessibilityLabel="Saving app settings" />}
     </Card>
     <DailyReminderSettings stacked={stacked} />
+    <Card><ActionRow title="Dreams Store" subtitle="Permanent careers, God Mode and Time Machine" onPress={() => router.push('/store')} /><ActionRow title="God Mode" subtitle="Edit your character and choose a royal birth" onPress={() => router.push('/god-mode')} /></Card>
     <GodModeSettings />
     <StoreReviewAction />
     <Card><Heading size={19}>Your saved lives</Heading><Body>Your progress stays on this device. Export a file to keep a copy somewhere you choose.</Body><ActionRow title="Saved Lives" subtitle="Open, import, export or recover a life" onPress={() => router.push('/saved-lives')} /></Card>

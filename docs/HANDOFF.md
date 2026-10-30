@@ -1,5 +1,25 @@
 # Continue Dreams: Life Simulator
 
+Owner workflow preference: commit and push completed changes to the active development branch unless explicitly told otherwise.
+
+## Free Actor and Model career overhaul — 30 October 2026
+
+Continue on **`v2`**. Distinct Actor/Model dashboards, agencies, saved castings, production decisions, recurring professional relationships, releases/portfolios, brands, achievements and compact history are implemented. Both remain free. Each has 26 main situations and two action incidents, with three authored choices each. Read [mechanics, exact changed files, compatibility and verification](ACTOR_MODEL_CAREERS.md).
+
+The preceding purchase work remains in the same uncommitted tree and is preserved. This overhaul adds no purchase gates or dependencies. Legacy active contracts keep their original rules and dashboard; explicit adoption at a safe boundary promotes only that world from 49/51/28 to 50/52/29. Keep both supported formats and the versioned pending-choice snapshots. Never rebook old wages or strip historical projects. New contracts use ordinary payroll with separately reconciled commissions and historical FX receipts; exclusive Model settlements use real liabilities.
+
+Verification covers **354 suites / 5,593 unique cases** across the full run and passing focused reruns, including **135 new career cases**. The initial full run had four failing suites/five cases: two outdated entry flows, two story-rotation assertions and one resource timeout; affected suites now pass. The 12-life invariant sweep, four three-year creative journeys, 51-contract archive/finance run, strict app/test types, 544-module acyclic import graph, notices and Android/iOS Hermes exports pass. See the career guide for exact evidence. Native signed builds and physical-device acceptance remain unverified.
+
+## Permanent purchases and contextual paywalls — 29 October 2026
+
+Continue on **`v2`**. RevenueCat purchases, Dreams Store, contextual career/God Mode/Time Machine paywalls, command-level guards, SDK-only verified ownership, restore/offline handling and purchase analytics are implemented. Read [the implementation and exact manual setup](MONETISATION.md).
+
+Public/store builds now disable the hidden testing bypass. Internal/development testing remains separate; the mini-game playground is not a paid benefit. This supersedes the older release-testing instructions below. Existing active/between-contract career flows, saved edits, history and checkpoints remain compatible; no save schema or simulation rules changed.
+
+The owner still configures Apple/Google non-consumables, RevenueCat's six feature entitlements and mappings, and the two public SDK-key variables. No dashboard changes, publishing or app submission were performed. Missing keys leave free gameplay available and the store unavailable.
+
+Verification: **342 suites / 5,458 unique cases** have passing coverage across the full run and focused reruns. The initial run had six failing suites / seven cases: four licensed-player fixtures, current-source hash observations and one resource timeout; all affected suites pass after the fixes/rerun. All **45 new monetisation cases**, strict app/test types, the **524-module zero-cycle import graph**, notices, Android/iOS autolinking and final Hermes exports pass. The normal **12-life invariant sweep passes**. The separate 120-life soak was stopped after four completed lives and is not claimed as passed. No signed native build, physical-device or store sandbox transaction is claimed. See MONETISATION.md for exact commands, results and the owner's remaining setup/checklist.
+
 ## EAS upload archive reduced below 200 MB — 25 October 2026
 
 Changed the `.easignore` Git exclusion from `/.git/` to `/.git`. EAS checks

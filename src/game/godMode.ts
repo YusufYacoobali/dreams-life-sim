@@ -41,7 +41,7 @@ export function applyGodModeEdits(before: World, input: GodModeEdit): World {
       catch (error) { throw new IneligibleAction(error instanceof Error ? error.message : 'Enter a valid amount.'); }
       const delta = command.operation === 'set' ? amount - account.cash : command.operation === 'add' ? amount : -amount;
       if (account.cash + delta < account.lockedCash) throw new IneligibleAction('The balance cannot be negative or fall below inheritance held in trust.');
-      if (delta) post(world, delta, 0n, godModeMoneyCategory, 'God Mode testing adjustment', null, person, account.currency);
+      if (delta) post(world, delta, 0n, godModeMoneyCategory, 'God Mode adjustment', null, person, account.currency);
     } else if (command.type === 'stat') {
       person.stats[command.stat] = command.value;
       // Fame is recalculated from audience and earned fame during normal play.

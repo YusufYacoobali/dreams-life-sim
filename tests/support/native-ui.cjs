@@ -1,3 +1,5 @@
+// Expo's public env shim is ESM; tests use the process environment without bundling.
+jest.mock('expo/virtual/env', () => ({ env: process.env }));
 // Native chrome requires the separate Android opening run. Component tests keep
 // routing, game state, exact money formatting and real SQLite persistence live.
 jest.mock('expo-status-bar', () => ({ StatusBar: () => null }));

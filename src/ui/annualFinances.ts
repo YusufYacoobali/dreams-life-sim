@@ -27,7 +27,7 @@ assign('refunds', ['fine-refund', 'travel-refund', 'insurance-claim']);
 assign('estate', ['estate-fx', 'estate-investment', 'estate-receivable', 'estate-asset-sale', 'estate-debt', 'estate-debt-close', 'estate-distribution', 'estate-charity']);
 assign('testing', ['god-mode-adjustment']);
 const labels: Record<string, string> = {
-  'god-mode-adjustment': 'God Mode testing adjustment',
+  'god-mode-adjustment': 'God Mode adjustment',
   income: 'Employment pay / pensions', 'background-income': 'Recorded background pay / pensions',
   rent: 'Rental receipts', 'housing-rent':'Home rent paid', dividend: 'Investment dividends', 'business-owner-income': 'Company profit payouts received',
   borrowing: 'Loan proceeds', repayment: 'Debt repayments', interest: 'Interest added to debt',

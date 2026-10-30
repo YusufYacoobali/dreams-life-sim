@@ -1,3 +1,7 @@
+import { purchases } from '../../src/purchases/native';
+import { noOwnership } from '../../src/purchases/catalog';
+// Existing haptic journey deliberately selects royalty as a licensed God Mode player.
+beforeEach(() => { purchases.setState({ ownership: { ...noOwnership(), god_mode: true } }); });
 import React from 'react';
 import { AccessibilityInfo, Platform } from 'react-native';
 import { act, fireEvent, render, screen, waitFor } from '@testing-library/react-native';
@@ -41,7 +45,7 @@ function pressHandler(name: string) {
 async function setup(bootstrap = true, hapticOnly = true) {
   const { sqlite, driver } = database(), repository = new SaveRepository(driver); await repository.initialise();
   let nextYield: Promise<void> | undefined;
-  mockStore = createGameStore({ repository: async () => repository, date: () => ({ year: 2026, month: 10, day: 22 }), id: () => 'life_haptic_opening',
+  mockStore = createGameStore({ premiumAccess: feature => feature === 'god_mode',  repository: async () => repository, date: () => ({ year: 2026, month: 10, day: 22 }), id: () => 'life_haptic_opening',
     yieldToUI: async () => { const held = nextYield; nextYield = undefined; if (held) await held; } });
   if (bootstrap) expect(await mockStore.getState().bootstrap()).toBe(true);
   mockPreferences = createPreferencesStore({ repository: async () => repository }); await mockPreferences.getState().bootstrap();

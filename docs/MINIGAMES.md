@@ -16,7 +16,7 @@ The overhaul passes **37 focused cases in four suites**, app/test typechecks, th
 | Safe Cracker | Crime → Safe Cracker, for Burglary | Uses the existing yearly burglary allowance | 12 seconds |
 | Orbital Docking | Astronaut → active Orbital Research or Habitat Maintenance → Docking Challenge | Once per actual assignment | 14 seconds |
 
-**Settings → God Mode → Mini-Game Playground** offers all three games at difficulty 1–5, without a career or qualification. God Mode is temporarily available in all build profiles, including production, for testing as of 24 October 2026. Enable its saved toggle in Settings to access the playground. Playground input, results and immediate restarts use component-local state and never dispatch to a saved life.
+**Settings → Internal Testing → Mini-Game Playground** offers all three games at difficulty 1–5, without a career or qualification. It is available only in development or explicitly configured internal builds. Reveal internal controls with three quick App Preferences taps, then enable the testing toggle. Public God Mode and Full Unlock purchases do not include this playground. See [current access policy](GOD_MODE.md). Playground input, results and immediate restarts use component-local state and never dispatch to a saved life.
 
 Before Play, **Not now** leaves an optional career challenge unused. **Use normal burglary** runs the ordinary burglary command. Starting Safe Cracker commits the year's burglary allowance immediately; exiting cannot recover it. A shared resume entry remains available above the game screens while an attempt is active.
 

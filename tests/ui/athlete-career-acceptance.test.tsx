@@ -1,3 +1,7 @@
+import { purchases } from '../../src/purchases/native';
+import { features } from '../../src/purchases/catalog';
+// This existing gameplay/save journey uses a licensed-player fixture.
+beforeEach(() => { purchases.setState({ ownership: Object.fromEntries(features.map(feature => [feature, true])) as Record<typeof features[number], boolean> }); });
 import { displayText } from '../../src/ui/displayNumbers';
 import React from 'react';
 import { Modal } from 'react-native';
@@ -63,7 +67,7 @@ async function setup() {
   const pinned = rows(); await repository.import(JSON.stringify(actorArchive)); const original = rows(), initial = (await repository.active())!;
   let nextYield: Promise<void> | undefined;
   const pause = () => { let release!: () => void; nextYield = new Promise<void>(resolve => { release = resolve; }); return release; };
-  async function bootstrap() { mockStore = createGameStore({ repository: async () => repository, date: () => initial.date, id: () => 'unused', yieldToUI: async () => { const pending = nextYield; nextYield = undefined; if (pending) await pending; } }); expect(await mockStore.getState().bootstrap()).toBe(true); }
+  async function bootstrap() { mockStore = createGameStore({ premiumAccess: () => true,  repository: async () => repository, date: () => initial.date, id: () => 'unused', yieldToUI: async () => { const pending = nextYield; nextYield = undefined; if (pending) await pending; } }); expect(await mockStore.getState().bootstrap()).toBe(true); }
   await bootstrap();
   return { get sqlite() { return sqlite; }, rows, pause, cold: async () => { sqlite.close(); repository = new SaveRepository(connect()); await bootstrap(); }, original: () => {
     const current = rows(); for (const table of ['lives', 'backups']) for (const row of pinned[table]) expect(current[table]).toContainEqual(row);

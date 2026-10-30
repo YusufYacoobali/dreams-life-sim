@@ -1,3 +1,4 @@
+import { PurchaseLifecycle } from '../src/purchases/PurchaseLifecycle';
 import React, { useEffect } from 'react';
 import { Stack } from 'expo-router';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -17,7 +18,7 @@ void SplashScreen.preventAutoHideAsync().catch(() => {});
 export default function RootLayout() {
   const appearance = usePreferences(s => s.settings.appearance);
   useEffect(() => { void gameStore.getState().bootstrap(); void preferencesStore.getState().bootstrap(); }, []);
-  return <SafeAreaProvider><ThemeProvider appearance={appearance}><AppFeedback><CinematicTransitionProvider><AppEventModals><RootNavigator /><AppReminders /></AppEventModals></CinematicTransitionProvider></AppFeedback></ThemeProvider></SafeAreaProvider>;
+  return <SafeAreaProvider><ThemeProvider appearance={appearance}><AppFeedback><CinematicTransitionProvider><AppEventModals><RootNavigator /><AppReminders /><PurchaseLifecycle /></AppEventModals></CinematicTransitionProvider></AppFeedback></ThemeProvider></SafeAreaProvider>;
 }
 
 function RootNavigator() {
@@ -29,6 +30,7 @@ function RootNavigator() {
       <Stack.Screen name="new-life" />
       <Stack.Screen name="appearance" />
       <Stack.Screen name="help" />
+      <Stack.Screen name="store" options={{ presentation: 'modal' }} />
       <Stack.Screen name="settings" options={{ presentation: 'modal' }} />
       <Stack.Screen name="god-mode" options={{ presentation: 'modal' }} />
       <Stack.Screen name="mini-game" options={{ presentation: 'fullScreenModal', gestureEnabled: false, animation: 'none' }} />

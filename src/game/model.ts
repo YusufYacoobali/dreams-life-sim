@@ -127,7 +127,7 @@ const immutableWorlds = new WeakSet<object>();
 const certifiedBranches = new WeakMap<object, Set<string>>();
 const copiedBranches = new WeakMap<object, { key: string; original: object }>();
 export const worldSchema = z.object({
-  schemaVersion: z.literal(49), engineVersion: z.literal(51), contentVersion: z.literal(28),
+  schemaVersion: z.union([z.literal(49), z.literal(50)]), engineVersion: z.union([z.literal(51), z.literal(52)]), contentVersion: z.union([z.literal(28), z.literal(29)]),
   id: z.string().regex(/^life_[a-zA-Z0-9_-]+$/), revision: z.number().int().nonnegative(),
   date: dateSchema, activePersonId: personId,
   random: z.object({ events: z.number().int().min(0).max(0xFFFFFFFF), npcs: z.number().int().min(0).max(0xFFFFFFFF), economy: z.number().int().min(0).max(0xFFFFFFFF), outcomes: z.number().int().min(0).max(0xFFFFFFFF) }),
@@ -238,6 +238,11 @@ function parseWorldShape(value: unknown, immutable = false): World {
 /** Reject contradictory imports/checkpoints rather than repairing them silently. */
 export function validateWorld(value: unknown, immutable = false): World {
   const world = parseWorldShape(value, immutable);
+  if (!((world.schemaVersion === 49 && world.engineVersion === 51 && world.contentVersion === 28) || (world.schemaVersion === 50 && world.engineVersion === 52 && world.contentVersion === 29))) throw new Error('Invalid world capability version');
+  const hasCreative = world.careers.some(career => career.actor || career.modelCareer || career.creativeArchives?.length || career.projects.some(project => project.creative));
+  if (hasCreative !== (world.schemaVersion === 50)) throw new Error('Creative careers require the supported creative save format');
+
+
   const ledger = indexLedger(world.ledger, world.ledger.every(row => immutableTransactions.has(row)));
   if (!world.people[world.activePersonId]) throw new Error('Missing active person');
   const accountIds = new Set<string>();
@@ -452,6 +457,10 @@ export function validateWorld(value: unknown, immutable = false): World {
       if (pending.choices.length !== 2 || pending.choices.some(choice => choice.effects.length !== 1) || effects.some(effect => effect.kind !== 'medical-episode') || new Set(effects.map(effect => effect.kind === 'medical-episode' ? effect.conditionId : '')).size !== 1 || effects.some((effect, index) => effect.kind !== 'medical-episode' || effect.action !== required[index])) throw new Error('Invalid medical episode binding');
     }
     for (const choice of pending.choices) for (const effect of choice.effects) {
+      if (effect.kind === 'creative-choice') {
+        const career = world.careers.find(item => item.id === effect.careerId && item.personId === world.activePersonId), industry = career?.actor?.industry ?? career?.modelCareer?.industry;
+        if (!career || !industry?.decision || industry.decision.id !== pending.id || effect.decisionId !== pending.id || industry.decision.storyId !== effect.snapshot.storyId || industry.decision.projectId !== effect.snapshot.projectId || !pending.personIds.includes(career.personId) || !pending.personIds.includes(effect.snapshot.contactId) || !world.people[effect.snapshot.contactId]) throw new Error('Invalid bound industry decision');
+      }
       if (effect.kind === 'school-grade' && (!pending.personIds.includes(effect.personId) || !world.schoolCommunities.some(item => item.id === effect.communityId && item.personId === effect.personId && !item.ended))) throw new Error('Invalid bound school grade');
       if (effect.kind === 'skill' && (!world.people[effect.personId] || !pending.personIds.includes(effect.personId))) throw new Error('Invalid bound skill target');
       if (effect.kind === 'stat' && !world.people[effect.personId]) throw new Error('Invalid effect person');

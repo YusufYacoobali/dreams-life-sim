@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { Redirect, router } from 'expo-router';
 import { Image } from 'react-native';
-import { useGodModeAccess } from '../ui/GodModeAccess';
+import { useInternalGodModeAccess } from '../ui/GodModeAccess';
 import {
   ActionRow,
   Body,
@@ -24,7 +24,7 @@ import { sceneArt } from './components/sceneArtwork';
 
 /** Deliberately has no store, repository, command-dispatch or native-save import. */
 export function MiniGamePlayground() {
-  const allowed = useGodModeAccess(),
+  const allowed = useInternalGodModeAccess(),
     [kind, setKind] = useState<MiniGameKind | null>(null),
     [session, setSession] = useState<MiniGameSession | null>(null),
     sequence = useRef(0),

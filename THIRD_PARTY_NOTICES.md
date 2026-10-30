@@ -6,13 +6,13 @@ Generated deterministically by `node tools/generate-third-party-notices.cjs` fro
 
 ## Inputs and scope
 
-- `package.json` SHA-256 `0ed227781f57f6b64878f2841a544451ffe65f1ac0bd6481241445345976e673`
-- `package-lock.json` SHA-256 `763a61aeed652d3d25f00090aa187ea86ac9e968ef926c750ffb58d4b7fb6adb`
+- `package.json` SHA-256 `084a7dc25a924d2b41ba53d69e897b1a130d6bd8fda03008b775c964d7bdb098`
+- `package-lock.json` SHA-256 `a80ba81d4b399536099801dac4faaac75394732f1af4fe96a29d51490feaca49`
 - `app.json` SHA-256 `ed8812a451b11abd0befd22d0b6b89f31d96c02d18f0adee83347d7ebfe4a024`
 
-**31 direct dependencies; 786 candidate non-dev lock entries; 776 installed version matches; 10 not installed; 0 version mismatches.** These entries include tooling and optional packages, and are not a count of shipped libraries.
+**32 direct dependencies; 790 candidate non-dev lock entries; 780 installed version matches; 10 not installed; 0 version mismatches.** These entries include tooling and optional packages, and are not a count of shipped libraries.
 
-735 readable notice files are preserved as 280 exact text blocks. 1 entries lack lock license metadata; 57 have no readable matching notice file in this installation. Neither condition establishes permission or prohibition. See JSON for exact missing/optional/error evidence.
+737 readable notice files are preserved as 281 exact text blocks. 1 entries lack lock license metadata; 59 have no readable matching notice file in this installation. Neither condition establishes permission or prohibition. See JSON for exact missing/optional/error evidence.
 
 ## Direct dependencies
 
@@ -42,6 +42,7 @@ Generated deterministically by `node tools/generate-third-party-notices.cjs` fro
 | react | 19.2.3 | 19.2.3 | node_modules/react |
 | react-dom | 19.2.3 | 19.2.3 | node_modules/react-dom |
 | react-native | 0.86.3 | 0.86.3 | node_modules/react-native |
+| react-native-purchases | ^11.0.0 | 11.0.0 | node_modules/react-native-purchases |
 | react-native-reanimated | 4.5.1 | 4.5.1 | node_modules/react-native-reanimated |
 | react-native-safe-area-context | ~5.7.0 | 5.7.0 | node_modules/react-native-safe-area-context |
 | react-native-screens | ~4.26.0 | 4.26.2 | node_modules/react-native-screens |
@@ -255,6 +256,9 @@ SPDX/license values below are copied metadata, not inferred or verified legal co
 | @react-native/metro-config@0.86.3 (node_modules/@react-native/metro-config) | MIT | version-matched | (none found) |
 | @react-native/normalize-colors@0.86.3 (node_modules/@react-native/normalize-colors) | MIT | version-matched | (none found) |
 | @react-native/virtualized-lists@0.86.3 (node_modules/@react-native/virtualized-lists) | MIT | version-matched | (none found) |
+| @revenuecat/purchases-js@1.73.1 (node_modules/@revenuecat/purchases-js) | MIT | version-matched | node_modules/@revenuecat/purchases-js/LICENSE [text-b175672dbc142198bae1daa4bdef4893103d75c111a949f1e33d6493d67658bf] |
+| @revenuecat/purchases-js-hybrid-mappings@20.1.0 (node_modules/@revenuecat/purchases-js-hybrid-mappings) | MIT | version-matched | (none found) |
+| @revenuecat/purchases-typescript-internal@20.1.0 (node_modules/@revenuecat/purchases-typescript-internal) | MIT | version-matched | (none found) |
 | @sinclair/typebox@0.27.12 (node_modules/@sinclair/typebox) | MIT | version-matched | node_modules/@sinclair/typebox/license [text-32fb6556bc84c192f493cbb1503b99f6ee893227a9473290e88699fde9807fd3] |
 | @sinonjs/commons@3.0.1 (node_modules/@sinonjs/commons) | BSD-3-Clause | version-matched | node_modules/@sinonjs/commons/LICENSE [text-4df78f3bcde252efdbef67e5a3ef02877be68a4b4ff7ee0c78e4d89a0a7f1f00] |
 | @sinonjs/fake-timers@10.3.0 (node_modules/@sinonjs/fake-timers) | BSD-3-Clause | version-matched | node_modules/@sinonjs/fake-timers/LICENSE [text-660eedb52e4c076d2feae829b12b6b983d54f569221402618eb56cd2bb2ddcfb] |
@@ -700,6 +704,7 @@ SPDX/license values below are copied metadata, not inferred or verified legal co
 | react-native-drawer-layout@4.2.12 (node_modules/react-native-drawer-layout) | MIT | version-matched | node_modules/react-native-drawer-layout/LICENSE [text-41f321b33afaa5cdaeb7c1aecd6fd5c21467ff910fb677aa47c941d05b5032c0] |
 | react-native-gesture-handler@3.4.0 (node_modules/react-native-gesture-handler) | MIT | version-matched | node_modules/react-native-gesture-handler/LICENSE [text-f1ae22eddd3a96c3b7b8a494ef03749ae6a1e19574bacc9c195d83c916de09e2] |
 | react-native-is-edge-to-edge@1.3.1 (node_modules/react-native-is-edge-to-edge) | MIT | version-matched | node_modules/react-native-is-edge-to-edge/LICENSE [text-4efb635cc4fd67f738ce2af65f8b73514ee338d0d201b836ab3a823cfda771d1] |
+| react-native-purchases@11.0.0 (node_modules/react-native-purchases) | MIT | version-matched | node_modules/react-native-purchases/LICENSE [text-b175672dbc142198bae1daa4bdef4893103d75c111a949f1e33d6493d67658bf] |
 | react-native-reanimated@4.5.1 (node_modules/react-native-reanimated) | MIT | version-matched | node_modules/react-native-reanimated/LICENSE [text-f1ae22eddd3a96c3b7b8a494ef03749ae6a1e19574bacc9c195d83c916de09e2] |
 | react-native-safe-area-context@5.7.0 (node_modules/react-native-safe-area-context) | MIT | version-matched | node_modules/react-native-safe-area-context/LICENSE [text-f5c7a4d527258e11fdfe3d84eb73cd14fe6d64224ef051e59f6ee21fe378800c] |
 | react-native-screens@4.26.2 (node_modules/react-native-screens) | MIT | version-matched | node_modules/react-native-screens/LICENSE [text-95b52e497653b738fd50e4bd3a8197dc41593c63129acb4f8069dbf49530ef82] |
@@ -8727,6 +8732,39 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+```
+
+### text-b175672dbc142198bae1daa4bdef4893103d75c111a949f1e33d6493d67658bf
+
+SHA-256 `b175672dbc142198bae1daa4bdef4893103d75c111a949f1e33d6493d67658bf` · 1067 original bytes.
+
+Sources:
+
+- `node_modules/@revenuecat/purchases-js/LICENSE`
+- `node_modules/react-native-purchases/LICENSE`
+
+```text
+MIT License
+
+Copyright (c) 2023 RevenueCat
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 ```
 
 ### text-b1c501095de70182748cb8e8d97ac5577701a4ef3b755ba30d59fd87b24bdb0f

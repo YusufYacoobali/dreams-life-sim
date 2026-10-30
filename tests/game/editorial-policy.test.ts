@@ -97,16 +97,13 @@ test('the historical C35 registration stays exact and rejects newer source befor
   });
   const pins = driver.sourcePins(sourceRoot);
   expect(pins.birthDriver).toBe(driver.expectedC35.birthDriver);
-  // Current work adds app-wide review metadata, store operations and committed
-  // gameplay feedback (5e25344). These are
-  // current-source observations; the historical C35 registration above stays exact.
-  expect(pins.store).toBe('64dc5ac1daef59c9859e08f467cb4cec26a6d20f0e6cb683ff2b8b5e49dd17cd');
-  // Incoming c9d2d0e changes fresh feedback preferences. This observed pin
-  // already matches the untouched 3c797e2 baseline; the C35 registration above
-  // remains its original value and still refuses this newer source.
-  expect(pins.state).toBe('50e3529152907e33b97d774371dc42f50b4e731a38c4d403e512cad6507de596');
-  // The SDK57 native review dependency changes the current lockfile only.
-  expect(pins.lockfile).toBe('763a61aeed652d3d25f00090aa187ea86ac9e968ef926c750ffb58d4b7fb6adb');
+  // Current-source observations include central purchase guards and the RevenueCat
+  // runtime ownership dependency. Historical C35 registration above stays exact.
+  expect(pins.store).toBe('e61e6f204527a5e13fc9424da58645e5bec4994f29c8fedc540249d194c57dad');
+  // Runtime state wiring now reads verified purchase ownership.
+  expect(pins.state).toBe('c6cae51e879641b584e51a63320b8796f135c8ffab405708675e3ccbc295c0b6');
+  // The permanent-purchase SDK changes the current dependency lockfile.
+  expect(pins.lockfile).toBe('a80ba81d4b399536099801dac4faaac75394732f1af4fe96a29d51490feaca49');
   expect(pins.tool).toBe('e0eb16fb73962b9632b4949a5ed1d729d8aca97be1607490a964c5a10abe1706');
   expect(pins.policy).toBe('0e2bf26c25d28c24d8ac9111fe2f3de704a1cadb0e8e98df82b4dbf93bcf3c72');
   for (const key of ['game', 'gameAndPersistence']) expect(pins[key]).not.toBe(driver.expectedC35[key]);

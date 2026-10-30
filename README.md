@@ -1,12 +1,14 @@
 # Dreams: Life Simulator
 
-Continuing in a new cloud chat: use branch **`work`** and read [the handoff](docs/HANDOFF.md) first for the current checkpoint, unfinished work and exact verification limits.
+Continuing in a new cloud chat: use branch **`v2`** and read [the handoff](docs/HANDOFF.md) first for the current checkpoint, unfinished work and exact verification limits.
 
 An offline Expo / React Native life simulator for iOS and Android, in development against the 27 supplied references in `design/`. Creation, deterministic Age Up, education/work, ownership/markets, family/legacy, health, crime/courts/prison, social profiles/fame, businesses, travel/emigration, pets, hobbies and all eleven special-career paths are connected. The source catalogue meets the 250-situation minimum; editorial, balance, visual and release acceptance remain open. See [current progress](docs/PROGRESS.md) and the [completion breakdown](docs/OPENING_PLAN.md) for the implemented scope and remaining production work.
 
 Smooth actions, startup/onboarding and early gameplay remain priorities. Automatic saving publishes only committed results, and reopening resumes the saved decision, outcome or interrupted year. The [opening actions](docs/OPENING_ACTIONS.md), [callback acceptance](docs/CALLBACK_ACCEPTANCE.md) and [hobby events](docs/HOBBY_COMMUNITY_EVENTS.md) documents record actual Android software-emulator checks and their limits. Physical-device performance, standalone builds, iOS interaction and complete reference/accessibility acceptance remain open.
 
-The game is free and uses local saves. No account, subscription or cloud service is planned. Existing local archive/history features remain intact; additional import/export/sharing and history-storage work is parked under the user's current scope. Country models are authored game assumptions; see [rule verification status](docs/COUNTRY_RULES.md).
+The base game is free and uses local saves. Optional permanent careers, God Mode and Time Machine use RevenueCat; no account or subscription is required. See [purchase implementation and exact store setup](docs/MONETISATION.md). Existing local archive/history features remain intact; additional import/export/sharing and history-storage work is parked under the user's current scope. Country models are authored game assumptions; see [rule verification status](docs/COUNTRY_RULES.md).
+
+Actor and Model remain free and now have distinct agency, casting, production, relationship and history systems, plus 28 authored situations each. Actor separates critical and audience reception; Model adds portfolio specialisations and bounded exclusive brand agreements. Existing contracts finish under their saved rules. See [mechanics, save compatibility and verification](docs/ACTOR_MODEL_CAREERS.md).
 
 ```sh
 npm ci
@@ -29,9 +31,9 @@ The optional `node tools/benchmark-history.cjs` diagnostic measures the current 
 
 Full-screen welcome, birth and death ink transitions use local SVG/Reanimated choreography. See [implementation, playback and verification](docs/CINEMATIC_TRANSITIONS.md).
 
-Interactive **Clutch Shot**, **Safe Cracker** and **Orbital Docking** challenges connect to athlete seasons, burglary and astronaut assignments. God Mode includes a practice playground with difficulty selection. See [mini-game controls, save rules and verification](docs/MINIGAMES.md).
+Interactive **Clutch Shot**, **Safe Cracker** and **Orbital Docking** challenges connect to athlete seasons, burglary and astronaut assignments. Internal testing includes a practice playground with difficulty selection; it is separate from purchased God Mode. See [mini-game controls, save rules and verification](docs/MINIGAMES.md).
 
-All builds retain God Mode for ongoing testing, hidden behind **three quick taps on the App Preferences area in Settings**. Reveal it each app session, then use the saved toggle to enable the editor. See [God Mode setup and save behavior](docs/GOD_MODE.md).
+Public God Mode is a permanent purchase available from Settings or Extras. Development and explicitly configured internal builds retain separate testing controls behind **three quick taps on the App Preferences area in Settings**. The practice playground remains internal. See [God Mode access and save behavior](docs/GOD_MODE.md).
 
 **Activities → Your Life → End This Life** finishes the current character’s story after confirmation, using the normal death, estate and child-continuation flow. A **Before End This Life** checkpoint is saved atomically so the earlier life can be restored as a separate branch through Time Machine.
 

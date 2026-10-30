@@ -15,45 +15,18 @@ test('runtime access accepts development or an explicit testing capability', () 
   } finally { globals.__DEV__ = old; Constants.expoConfig!.extra = oldExtra; }
 });
 
-test('every build profile and distribution retains God Mode testing access regardless of environment switches', () => {
+test('public and unknown builds cannot embed the hidden testing bypass, even with the flag enabled', () => {
   const configure = require('../../app.config.cjs'), previous = { ...process.env };
-  const globals = globalThis as unknown as { __DEV__: boolean }, oldDev = __DEV__, oldExtra = Constants.expoConfig!.extra;
   try {
-    globals.__DEV__ = false;
     for (const profile of ['production', 'unknown', '', 'development', 'internal', 'preview']) {
-      process.env.EAS_BUILD_PROFILE = profile;
       for (const distribution of ['store', 'internal', '']) {
-        process.env.EAS_BUILD_DISTRIBUTION = distribution;
         for (const flag of ['1', '0', '', 'true']) {
-          process.env.DREAMS_GOD_MODE_TESTING = flag;
-          const extra = configure({ config: { extra: { godModeTesting: false, unrelated: 1 } } }).extra;
-          expect(extra).toEqual({ godModeTesting: true, unrelated: 1 });
-          Constants.expoConfig!.extra = extra;
-          expect(isGodModeBuild()).toBe(true);
+          Object.assign(process.env, { EAS_BUILD_PROFILE: profile, EAS_BUILD_DISTRIBUTION: distribution, DREAMS_GOD_MODE_TESTING: flag });
+          const allowed = distribution === 'internal' && ['internal', 'preview', 'development'].includes(profile) && flag === '1';
+          expect(configure({ config: { extra: { godModeTesting: true, unrelated: 1 } } }).extra)
+            .toEqual({ godModeTesting: allowed, unrelated: 1 });
         }
       }
     }
-  } finally { process.env = previous; globals.__DEV__ = oldDev; Constants.expoConfig!.extra = oldExtra; }
-});
-
-test('unmarked local builds retain testing capability without environment flags and preserve unrelated config', () => {
-  const configure = require('../../app.config.cjs'), previous = { ...process.env };
-  try {
-    delete process.env.EAS_BUILD_DISTRIBUTION;
-    delete process.env.DREAMS_GOD_MODE_TESTING;
-    delete process.env.EAS_BUILD_PROFILE;
-    expect(configure({ config: { name: 'Dreams', extra: { unrelated: 'kept', godModeTesting: false } } }))
-      .toEqual({ name: 'Dreams', extra: { unrelated: 'kept', godModeTesting: true } });
-    process.env.EXPO_PUBLIC_GOD_MODE_TESTING = '0';
-    for (const profile of ['development', 'internal', 'preview', 'unknown', '']) {
-      process.env.EAS_BUILD_PROFILE = profile;
-      expect(configure({ config: { extra: { godModeTesting: true } } }).extra.godModeTesting)
-        .toBe(true);
-    }
-    delete process.env.EAS_BUILD_PROFILE;
-    process.env.DREAMS_GOD_MODE_TESTING = '1';
-    expect(configure({ config: {} }).extra.godModeTesting).toBe(true);
-    process.env.DREAMS_GOD_MODE_TESTING = 'true';
-    expect(configure({ config: {} }).extra.godModeTesting).toBe(true);
   } finally { process.env = previous; }
 });

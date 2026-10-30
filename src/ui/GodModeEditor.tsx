@@ -1,13 +1,14 @@
+import { FeaturePaywall } from '../purchases/PurchaseUI';
 import React, { useEffect, useState } from 'react';
 import { TextInput, View } from 'react-native';
-import { Redirect, router } from 'expo-router';
+import { router } from 'expo-router';
 import { fullName, type World } from '../game/model';
 import { countries } from '../game/countries';
 import { currencyDigits, formatMoney, parseMoney } from '../game/money';
 import { godModeAttributes, godModeSkills, godModeStats } from '../game/godMode';
 import { draftCommands, godModeDraft, type GodModeDraft } from '../game/godModeDraft';
 import { useGame } from '../state/useGame';
-import { useGodModeAccess } from './GodModeAccess';
+import { useGodModeAccess, useInternalGodModeAccess } from './GodModeAccess';
 import { ActionRow, Body, Button, Card, Header, Heading, Page } from './components';
 import { FilterTabs } from './FilterTabs';
 import { EventModal } from './EventModal';
@@ -19,12 +20,13 @@ const title = (key: string) => key === 'publicImage' ? 'Public image' : key.char
 
 export function GodModeEditor() {
   const allowed = useGodModeAccess(), world = useGame(s => s.world);
-  if (!allowed) return <Redirect href="/settings" />;
+  if (!allowed) return <FeaturePaywall feature="god_mode" trigger="open-god-mode" onDismiss={() => router.back()} onUnlocked={() => {}} />;
   if (!world || world.people[world.activePersonId].died || !world.birthAcknowledged) return <Page bottomSafeArea><Header title="God Mode" onBack={() => router.back()} /><Card><Body>Open a living character before using God Mode.</Body><Button label="Back" onPress={() => router.back()} /></Card></Page>;
   return <Editor key={world.id + ':' + world.activePersonId} world={world} />;
 }
 
 function Editor({ world }: { world: World }) {
+  const internal = useInternalGodModeAccess();
   const [base, setBase] = useState(world), [draft, setDraft] = useState(() => godModeDraft(world));
   const [tab, setTab] = useState<typeof tabs[number]['id']>('money'), [selectedRelation, setSelectedRelation] = useState<string | null>(null);
   const [confirm, setConfirm] = useState<'save' | 'cancel' | null>(null), [error, setError] = useState<string | null>(null);
@@ -63,7 +65,7 @@ function Editor({ world }: { world: World }) {
     <Button label="Save Changes" busy={busy} disabled={disabled || !dirty} onPress={requestSave} />
     <Button label="Cancel" tone="secondary" disabled={busy} onPress={close} />
   </>}><Header title="God Mode Editor" onBack={busy ? undefined : close} />
-    <Card><ActionRow title="Mini-Game Playground" subtitle="Practice all three challenges without changing this life" onPress={() => router.push('/mini-game-playground')} /></Card>
+    {internal && <Card><ActionRow title="Mini-Game Playground" subtitle="Practice all three challenges without changing this life" onPress={() => router.push('/mini-game-playground')} /></Card>}
     <Card><Heading size={20}>{fullName(person)}</Heading><Body muted>Changes apply together when saved. A checkpoint is kept before each edit.</Body>
       <Body muted>Normal gameplay continues to change these values. Fame can rise to the level supported by an existing audience. Health at 0 can cause death on the next Age Up.</Body>
       <Button label="Reset Changes" tone="secondary" disabled={disabled || !dirty} onPress={reset} />
@@ -91,7 +93,7 @@ function Editor({ world }: { world: World }) {
       <Card>{godModeStats.map(key => <Percentage key={key} label={title(key)} value={draft.stats[key]} disabled={disabled} onChange={value => update('stats', key, value)} />)}</Card></>}
     {tab === 'skills' && <><Card><Heading size={19}>Career skills</Heading>{godModeSkills.map(key => <Percentage key={key} label={title(key)} value={draft.skills[key]} disabled={disabled} onChange={value => update('skills', key, value)} />)}</Card><Card><Heading size={19}>Additional attributes</Heading>{godModeAttributes.map(key => <Percentage key={key} label={title(key)} value={draft.attributes[key]} disabled={disabled} onChange={value => update('attributes', key, value)} />)}</Card></>}
     {tab === 'relationships' && <><Card><Heading size={19}>Select a relationship</Heading>{!relationships.length && <Body muted>No relationships available.</Body>}{relationships.map(item => <ActionRow key={item.id} title={fullName(base.people[item.from === person.id ? item.to : item.from])} subtitle={item.kind + (item.id === selectedRelation ? ' · Selected' : '')} disabled={disabled} onPress={() => setSelectedRelation(item.id)} />)}</Card>{relation && <Card><Heading size={19}>Relationship values</Heading>{(['strength', 'trust'] as const).map(field => <Percentage key={field} label={field === 'strength' ? 'Relationship strength' : 'Trust'} value={draft.relationships[relation.id][field]} disabled={disabled} onChange={value => setDraft(previous => ({ ...previous, relationships: { ...previous.relationships, [relation.id]: { ...previous.relationships[relation.id], [field]: value } } }))} />)}<Body muted>Family links, marriage and custody stay intact.</Body></Card>}</>}
-    <EventModal event={confirm ? { id: 'god-mode-' + confirm, kind: 'confirmation', title: confirm === 'save' ? 'Save these testing changes?' : 'Discard unsaved changes?', body: confirm === 'save' ? 'Some balances or attributes will decrease, or stress will increase. Health at 0 can cause death during normal gameplay. A pre-edit checkpoint will be saved.' : 'Your saved life will keep its current values.', terms: [], confirmLabel: confirm === 'save' ? 'Confirm Save Changes' : 'Discard Changes' } : null} busy={busy} error={message} onCancel={() => { setConfirm(null); setError(null); }} onChoose={() => { if (confirm === 'save') void commit(); else router.back(); }} />
+    <EventModal event={confirm ? { id: 'god-mode-' + confirm, kind: 'confirmation', title: confirm === 'save' ? 'Save these changes?' : 'Discard unsaved changes?', body: confirm === 'save' ? 'Some balances or attributes will decrease, or stress will increase. Health at 0 can cause death during normal gameplay. A pre-edit checkpoint will be saved.' : 'Your saved life will keep its current values.', terms: [], confirmLabel: confirm === 'save' ? 'Confirm Save Changes' : 'Discard Changes' } : null} busy={busy} error={message} onCancel={() => { setConfirm(null); setError(null); }} onChoose={() => { if (confirm === 'save') void commit(); else router.back(); }} />
   </Page>;
 }
 

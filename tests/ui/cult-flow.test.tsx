@@ -1,3 +1,7 @@
+import { purchases } from '../../src/purchases/native';
+import { features } from '../../src/purchases/catalog';
+// This existing gameplay/save journey uses a licensed-player fixture.
+beforeEach(() => { purchases.setState({ ownership: Object.fromEntries(features.map(feature => [feature, true])) as Record<typeof features[number], boolean> }); });
 import { displayText } from '../../src/ui/displayNumbers';
 import React from 'react';
 import * as Native from 'react-native';
@@ -144,7 +148,7 @@ async function setup(initial: World) {
   await repository.create(initial);
   let nextYield: Promise<void> | undefined;
   const bootstrap = async (repo: SaveRepository) => {
-    mockStore = createGameStore({
+    mockStore = createGameStore({ premiumAccess: () => true,
       repository: async () => repo,
       date: () => initial.date,
       id: () => 'life_unused',

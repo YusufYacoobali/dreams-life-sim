@@ -1,3 +1,5 @@
+import { modelSponsorshipReason } from './systems/modelCareer';
+import { creativeChoiceReason } from './systems/creativeEvents';
 import { cultChoiceReason } from './systems/cultEvents';
 import type { World } from './model';
 import type { BoundChoice } from './runtime';
@@ -13,9 +15,11 @@ export function choiceUnavailable(world: World, choice: BoundChoice): string | u
   for (const effect of choice.effects) {
     if (effect.kind === 'medical-episode') { const reason = medicalEpisodeReason(world, effect); if (reason) return reason; }
     if (effect.kind === 'story-immediate') { const reason = storyImmediateReason(world, effect); if (reason) return reason; }
+    if (effect.kind === 'creative-choice') { const reason = creativeChoiceReason(world, effect); if (reason) return reason; }
     if (effect.kind === 'cult-choice') { const reason = cultChoiceReason(world, effect); if (reason) return reason; }
     if (effect.kind === 'schedule-story') { const reason = storyContextReason(world, effect); if (reason) return reason; }
     if (effect.kind === 'resolve-story') { const reason = storyChoiceReason(world, effect.threadId, effect.resolution); if (reason) return reason; }
+    if (effect.kind === 'brand-decision' && effect.accepted) { const sponsor = world.sponsorships.find(item => item.id === effect.sponsorId); const reason = sponsor && modelSponsorshipReason(world, sponsor.category); if (reason) return reason; }
     if (effect.kind === 'brand-decision' && effect.accepted && (world.people[world.activePersonId].publicLife.image < 25 || world.sentences.some(item => item.personId === world.activePersonId && item.state === 'active') || world.cases.some(item => item.personId === world.activePersonId && item.detained && item.status === 'awaiting-trial'))) return 'This agreement is unavailable in your current circumstances';
     if (effect.kind === 'legal-bail') {
       const item = world.cases.find(candidate => candidate.id === effect.caseId), account = item && world.accounts.find(candidate => candidate.ownerId === item.personId && candidate.currency === item.bail.currency);

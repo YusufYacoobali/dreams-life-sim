@@ -31,6 +31,7 @@ export default function Extras() {
     <ActionRow title="Black Market" subtitle="Offers, risk and consequences" icon={<HealthLegalArt id="handcuffs" />} onPress={() => router.push('/black-market')} />
     <ActionRow title="Time Machine" subtitle="Preview an earlier moment and branch your life" icon={<HealthLegalArt id="rewind" />} onPress={() => router.push('/time-machine')} />
     </Card><Card><Heading size={19}>Preferences & Help</Heading>
+    <Card><ActionRow title="Dreams Store" subtitle="Permanent careers, God Mode and Time Machine" onPress={() => router.push('/store')} /><ActionRow title="God Mode" subtitle="Edit your character and choose a royal birth" onPress={() => router.push('/god-mode')} /></Card>
     <ActionRow title="Settings" subtitle="Display, motion, sound and haptics" icon={<View accessibilityElementsHidden importantForAccessibility="no-hide-descendants"><Ionicons name="settings-outline" size={30} color={c.muted} /></View>} onPress={() => router.push('/settings')} />
     <ActionRow title="Help" subtitle="Playing, progress and local saves" icon={<View accessibilityElementsHidden importantForAccessibility="no-hide-descendants"><Ionicons name="help-circle-outline" size={32} color={c.link} /></View>} onPress={() => router.push('/help')} />
   </Card><Body muted>Progress belongs to this person and timeline.</Body></Page>;

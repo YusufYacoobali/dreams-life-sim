@@ -18,7 +18,7 @@ export function terminalBiography(world: World, personId = world.activePersonId)
   const careerSentence = career ? (role ? 'Your longest recorded employment was ' + role.title : 'Your record includes employment') + (career.employer ? ' at ' + career.employer : '') + ', with ' + counted(career.monthsWorked, 'recorded employment-month') + '.' : null;
 
   let projects = 0, awards = 0, businesses = 0, assignments = 0;
-  for (const history of world.careers) if (history.personId === personId) for (const project of history.projects) if (project.status === 'completed') { projects++; if (project.award) awards++; }
+  for (const history of world.careers) if (history.personId === personId) for (const project of [...history.projects, ...(history.creativeArchives ?? [])]) if (project.status === 'completed') { projects++; if (project.award) awards++; }
   for (const company of world.businesses) if (company.founderId === personId) businesses++;
   for (const service of world.serviceCareers) if (service.personId === personId) for (const assignment of service.assignments) if (assignment.status === 'completed') assignments++;
   const accomplishments: string[] = [];

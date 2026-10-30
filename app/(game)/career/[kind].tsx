@@ -1,3 +1,5 @@
+import { ActorDashboard } from '../../../src/ui/ActorDashboard';
+import { ModelCareerDashboard } from '../../../src/ui/ModelCareerDashboard';
 import { MiniGameEntry } from '../../../src/minigames/components/MiniGameEntry';
 import React from 'react';
 import { View } from 'react-native';
@@ -16,6 +18,15 @@ import { useColors } from '../../../src/ui/theme';
 import { DisplayText as Text } from '../../../src/ui/DisplayText';
 
 export default function CareerDashboard() {
+  const { kind } = useLocalSearchParams<{kind: string}>(), world = useGame(state => state.world);
+  const career = world?.careers.find(item => item.personId === world.activePersonId && item.kind === kind);
+  // Legacy contracts finish through their original dashboard and outcome loop.
+  if (kind === 'actor' && !(career?.status === 'active' && !career.actor)) return <ActorDashboard />;
+  if (kind === 'model' && !(career?.status === 'active' && !career.modelCareer)) return <ModelCareerDashboard />;
+  return <LegacyCareerDashboard />;
+}
+
+function LegacyCareerDashboard() {
     const { kind: raw } = useLocalSearchParams<{ kind: string }>(), world = useGame(s => s.world)!, busy = useGame(s => s.busy), error = useGame(s => s.error), review = useCareerReview(raw), c = useColors();
     if (!careerKinds.includes(raw as CareerKind))
         return <Page><Header title="Special Careers" onBack={() => router.back()} /><Body>This career is unavailable.</Body></Page>;

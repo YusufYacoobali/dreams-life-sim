@@ -1,3 +1,4 @@
+import { purchases } from '../purchases/native';
 import { useStore } from 'zustand';
 import { createGameStore, GameState } from './gameStore';
 import { openRepository } from '../persistence/native';
@@ -9,6 +10,7 @@ let sequence = 0;
 export const freshSeed = () => Math.floor(Math.random() * 0x100000000);
 export const gameStore = createGameStore({
   repository: openRepository,
+  premiumAccess: feature => purchases.getState().ownership[feature],
   godModeAccess: () => {
     const { ready, loadFailed, settings } = preferencesStore.getState();
     return isGodModeBuild() && godModeSessionStore.getState().revealed && ready && !loadFailed && settings.godModeEnabled;

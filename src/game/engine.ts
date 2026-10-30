@@ -1,3 +1,7 @@
+import { actorCommandSchema, type ActorCommand, resolveActor, actorMonth, actorExit } from './systems/actor';
+import { modelCareerCommandSchema, type ModelCareerCommand, resolveModelCareer, modelCareerMonth, modelCareerExit, modelSponsorshipReason } from './systems/modelCareer';
+import { creativeStoriesMonth, resolveCreativeChoice, cancelCreativeDecision, offerCreativeStory } from './systems/creativeEvents';
+import { compactCreativeHistory } from './systems/creativeArchive';
 import { cultCommandSchema, type CultCommand } from './systems/cultSchemas';
 import { resolveCult } from './systems/cults';
 import { cultMonth } from './systems/cultMonth';
@@ -77,9 +81,9 @@ export { IneligibleAction } from './errors';
 
 const endLifeCommandSchema = z.object({ type: z.literal('end-life'), lifeId: z.string(), personId: z.string(), expectedRevision: z.number().int().nonnegative() }).strict();
 export type EndLifeCommand = z.infer<typeof endLifeCommandSchema>;
-export type GameCommand = { type: 'advance' } | { type: 'resume' } | { type: 'choose'; eventId: string; choiceId: string } | { type: 'acknowledge'; resultId: string } | EndLifeCommand | HobbyEventCommand | LeisureCommand | PetCommand | EducationCommand | WorkCommand | FinanceCommand | AssetCommand | MarketCommand | SocialCommand | FamilyCommand | EstateCommand | HealthCommand | LegalCommand | SocialMediaCommand | BusinessCommand | CareerCommand | MusicCommand | PoliticsCommand | CreatorCommand | ServiceCommand | RoyaltyCommand | TravelCommand | RelocationCommand | SchoolCommand | RecoveryCommand | ScholarshipCommand | WorkplaceCommand | FriendshipCommand | TeenRelationshipCommand | UniversityAdmissionCommand | CampusCommand | PersonSupportCommand | PersonActionCommand | MiniGameCommand | CultCommand;
+export type GameCommand = { type: 'advance' } | { type: 'resume' } | { type: 'choose'; eventId: string; choiceId: string } | { type: 'acknowledge'; resultId: string } | EndLifeCommand | HobbyEventCommand | LeisureCommand | PetCommand | EducationCommand | WorkCommand | FinanceCommand | AssetCommand | MarketCommand | SocialCommand | FamilyCommand | EstateCommand | HealthCommand | LegalCommand | SocialMediaCommand | BusinessCommand | CareerCommand | MusicCommand | PoliticsCommand | CreatorCommand | ServiceCommand | RoyaltyCommand | TravelCommand | RelocationCommand | SchoolCommand | RecoveryCommand | ScholarshipCommand | WorkplaceCommand | FriendshipCommand | TeenRelationshipCommand | UniversityAdmissionCommand | CampusCommand | PersonSupportCommand | PersonActionCommand | MiniGameCommand | CultCommand | ActorCommand | ModelCareerCommand;
 const commandOwners = new Map<string, z.ZodType>();
-for (const schema of [cultCommandSchema, miniGameCommandSchema, personSupportCommandSchema, personActionCommandSchema, campusCommandSchema, universityAdmissionCommandSchema, teenRelationshipCommandSchema, friendshipCommandSchema, hobbyEventCommandSchema, workplaceCommandSchema, schoolCommandSchema, educationCommandSchema, recoveryCommandSchema, scholarshipCommandSchema, workCommandSchema, financeCommandSchema, assetCommandSchema, marketCommandSchema, socialCommandSchema, familyCommandSchema, estateCommandSchema, healthCommandSchema, legalCommandSchema, socialMediaCommandSchema, businessCommandSchema, careerCommandSchema, musicCommandSchema, politicsCommandSchema, creatorCommandSchema, serviceCommandSchema, royaltyCommandSchema, travelCommandSchema, leisureCommandSchema, petCommandSchema, relocationCommandSchema]) {
+for (const schema of [actorCommandSchema, modelCareerCommandSchema, cultCommandSchema, miniGameCommandSchema, personSupportCommandSchema, personActionCommandSchema, campusCommandSchema, universityAdmissionCommandSchema, teenRelationshipCommandSchema, friendshipCommandSchema, hobbyEventCommandSchema, workplaceCommandSchema, schoolCommandSchema, educationCommandSchema, recoveryCommandSchema, scholarshipCommandSchema, workCommandSchema, financeCommandSchema, assetCommandSchema, marketCommandSchema, socialCommandSchema, familyCommandSchema, estateCommandSchema, healthCommandSchema, legalCommandSchema, socialMediaCommandSchema, businessCommandSchema, careerCommandSchema, musicCommandSchema, politicsCommandSchema, creatorCommandSchema, serviceCommandSchema, royaltyCommandSchema, travelCommandSchema, leisureCommandSchema, petCommandSchema, relocationCommandSchema]) {
   for (const option of schema.options) {
     const type = option.shape.type.value;
     if (commandOwners.has(type)) throw new Error('Duplicate game command: ' + type);
@@ -125,6 +129,8 @@ export function recordDeath(world: World, personId: string, cause: string) {
   settleTax(world, person);
   serviceDeath(world,personId);
   if (person.employment) endEmployment(world, personId);
+  actorExit(world, personId); modelCareerExit(world, personId);
+  for (const career of world.careers.filter(item => item.personId === personId)) cancelCreativeDecision(world, career);
   careerDeath(world,personId);
   musicDeath(world,personId);
   politicsDeath(world,personId);
@@ -169,6 +175,7 @@ function processMonth(world: World) {
   careerTrainingMonth(world);
   athleteDopingMonth(world);
   careerMonth(world);
+  actorMonth(world); modelCareerMonth(world); creativeStoriesMonth(world);
   musicMonth(world);
   politicsMonth(world);
   const serviceFatalities=serviceMonth(world);
@@ -184,6 +191,14 @@ function processMonth(world: World) {
   for (const person of actors) npcDiscretionaryMonth(world, person, openingCash.get(person.id)!);
   familyMonth(world);
   legalMonth(world, dischargedFromHospital);
+  for (const career of world.careers) {
+    if (career.actor || career.modelCareer) {
+      const terminal = ['left', 'retired', 'deceased'].includes(career.status), industry = career.actor?.industry ?? career.modelCareer?.industry;
+      if (terminal || career.projects.some(project => project.status === 'cancelled' && project.creative && !project.creative.release)) { if (career.kind === 'actor') actorExit(world, career.personId); else if (career.kind === 'model') modelCareerExit(world, career.personId); }
+      if (terminal || industry?.decision?.projectId && career.projects.some(project => project.id === industry.decision!.projectId && project.status === 'cancelled')) cancelCreativeDecision(world, career);
+    }
+    compactCreativeHistory(career);
+  }
   refreshRoyalSuccession(world,'background');
   for(const loss of serviceFatalities){recordDeath(world,loss.personId,loss.cause);if(world.people[world.activePersonId].died)return;}
   for (const person of Object.values(world.people)) {
@@ -254,13 +269,17 @@ function continueYear(world: World) {
 function applyEffects(world: World, effects: Effect[], relationshipLabels?: BoundChoice['relationshipLabels'], boundChoice?: BoundChoice): z.infer<typeof effectRowSchema>[] {
   return effects.flatMap((effect, index) => {
     if (effect.kind === 'story-immediate') return resolveStoryImmediate(world, effect);
+    if (effect.kind === 'creative-choice') return resolveCreativeChoice(world, effect, boundChoice);
     if (effect.kind === 'cult-choice') return resolveCultChoice(world, effect, boundChoice);
     if (effect.kind === 'dramatic-choice') throw new IneligibleAction('A dramatic decision must have one bound action');
     if (effect.kind === 'medical-episode') throw new IneligibleAction('A medical decision must have one bound action');
     if (effect.kind === 'job-interview') return resolveJobInterview(world, effect).effects;
     if (effect.kind === 'schedule-story') return scheduleStory(world, effect);
     if (effect.kind === 'resolve-story') return resolveStory(world, effect.threadId, effect.resolution);
-    if (effect.kind === 'brand-decision') return brandDecision(world, effect.sponsorId, effect.accepted);
+    if (effect.kind === 'brand-decision') {
+      if (effect.accepted) { const sponsor = world.sponsorships.find(item => item.id === effect.sponsorId); const reason = sponsor && modelSponsorshipReason(world, sponsor.category); if (reason) throw new IneligibleAction(reason); }
+      return brandDecision(world, effect.sponsorId, effect.accepted);
+    }
     if (effect.kind === 'public-response') return respondPublicly(world, effect.controversyId, effect.response);
     if (effect.kind === 'legal-bail') return payBail(world, effect.caseId);
     if (effect.kind === 'legal-plea') return hearCase(world, effect.caseId, effect.plea);
@@ -388,6 +407,8 @@ export function resolveCommand(previous: World, command: GameCommand, immutable 
     else if (world.annual && !world.annual.pausedForPlanning) continueYear(world);
   } else {
     if (world.pending || world.annual && !world.annual.pausedForPlanning) throw new IneligibleAction('Finish the current event first');
+    const acting = parseActivity(actorCommandSchema, command);
+    const modelling = parseActivity(modelCareerCommandSchema, command);
     const cult = parseActivity(cultCommandSchema, command);
     const support = parseActivity(personSupportCommandSchema, command);
     const personAction = parseActivity(personActionCommandSchema, command);
@@ -448,6 +469,8 @@ export function resolveCommand(previous: World, command: GameCommand, immutable 
     else if (legal.success) { resolveLegal(world, legal.data, recordDeath); if (player.stats.health === 0) recordDeath(world, player.id, 'critical health decline'); }
     else if (socialMedia.success) resolveSocialMedia(world, socialMedia.data);
     else if (business.success) resolveBusiness(world, business.data);
+    else if (acting.success) resolveActor(world, acting.data);
+    else if (modelling.success) resolveModelCareer(world, modelling.data);
     else if (career.success) resolveCareer(world,career.data);
     else if (music.success) resolveMusic(world,music.data);
     else if (politics.success) resolvePolitics(world,politics.data);
@@ -471,6 +494,15 @@ export function resolveCommand(previous: World, command: GameCommand, immutable 
       if (participants.length) created.participants = participants;
     }
   }
+  for (const career of world.careers) {
+    if (career.actor || career.modelCareer) {
+      const terminal = ['left', 'retired', 'deceased'].includes(career.status), industry = career.actor?.industry ?? career.modelCareer?.industry;
+      if (terminal || career.projects.some(project => project.status === 'cancelled' && project.creative && !project.creative.release)) { if (career.kind === 'actor') actorExit(world, career.personId); else if (career.kind === 'model') modelCareerExit(world, career.personId); }
+      if (terminal || industry?.decision?.projectId && career.projects.some(project => project.id === industry.decision!.projectId && project.status === 'cancelled')) cancelCreativeDecision(world, career);
+    }
+    compactCreativeHistory(career);
+  }
+  if (command.type === 'actor-production' || command.type === 'model-production') { const career = world.careers.find(item => item.personId === world.activePersonId && item.kind === (command.type === 'actor-production' ? 'actor' : 'model')); if (career) offerCreativeStory(world, career, true); }
   refreshRoyalSuccession(world,'background');
   refreshStudyCourses(world);
   refreshUniversityApplications(world);

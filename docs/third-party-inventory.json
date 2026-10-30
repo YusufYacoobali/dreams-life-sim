@@ -2,8 +2,8 @@
   "formatVersion": 1,
   "scope": "Candidate lock/install/source inventory; includes build tooling and optional packages. Not a shipped-library count, legal clearance, complete font-rights determination, or final native/Metro artifact inventory.",
   "inputs": {
-    "package.json": "0ed227781f57f6b64878f2841a544451ffe65f1ac0bd6481241445345976e673",
-    "package-lock.json": "763a61aeed652d3d25f00090aa187ea86ac9e968ef926c750ffb58d4b7fb6adb",
+    "package.json": "084a7dc25a924d2b41ba53d69e897b1a130d6bd8fda03008b775c964d7bdb098",
+    "package-lock.json": "a80ba81d4b399536099801dac4faaac75394732f1af4fe96a29d51490feaca49",
     "app.json": "ed8812a451b11abd0befd22d0b6b89f31d96c02d18f0adee83347d7ebfe4a024"
   },
   "installationPlatform": {
@@ -13,15 +13,15 @@
   "selection": "All root dependencies and lockfile package records whose dev flag is not true. License/notice filenames are searched recursively, excluding nested node_modules, .git and .cache. Directory symlinks are not followed. Text is deduplicated by exact source bytes; no SPDX value is inferred from filenames or contents.",
   "evidenceLimits": "Missing metadata is not a licensing conclusion. Installed version mismatches must be reconciled. Optional/absent files and source-only art/font references remain explicit. SDK, native Pods/AARs, OS resources, dynamic imports and the final shipped graph need artifact-level review.",
   "summary": {
-    "directDependencies": 31,
-    "candidateNonDevLockEntries": 786,
-    "versionMatched": 776,
+    "directDependencies": 32,
+    "candidateNonDevLockEntries": 790,
+    "versionMatched": 780,
     "versionMismatches": 0,
     "notInstalled": 10,
     "missingLockLicenseMetadata": 1,
-    "withoutReadableNoticeFile": 57,
-    "readableNoticeFiles": 735,
-    "uniqueExactNoticeTexts": 280,
+    "withoutReadableNoticeFile": 59,
+    "readableNoticeFiles": 737,
+    "uniqueExactNoticeTexts": 281,
     "detectedFontFamilies": 1,
     "projectArtFiles": 1198
   },
@@ -169,6 +169,12 @@
       "requested": "0.86.3",
       "lockPath": "node_modules/react-native",
       "lockedVersion": "0.86.3"
+    },
+    {
+      "name": "react-native-purchases",
+      "requested": "^11.0.0",
+      "lockPath": "node_modules/react-native-purchases",
+      "lockedVersion": "11.0.0"
     },
     {
       "name": "react-native-reanimated",
@@ -4704,6 +4710,59 @@
       "installStatus": "version-matched",
       "installedName": "@react-native/virtualized-lists",
       "installedVersion": "0.86.3",
+      "installedLicense": "MIT",
+      "noticeFiles": []
+    },
+    {
+      "name": "@revenuecat/purchases-js",
+      "lockPath": "node_modules/@revenuecat/purchases-js",
+      "version": "1.73.1",
+      "rootDirectDependency": false,
+      "optional": false,
+      "os": null,
+      "cpu": null,
+      "lockLicense": "MIT",
+      "installStatus": "version-matched",
+      "installedName": "@revenuecat/purchases-js",
+      "installedVersion": "1.73.1",
+      "installedLicense": "MIT",
+      "noticeFiles": [
+        {
+          "path": "node_modules/@revenuecat/purchases-js/LICENSE",
+          "status": "text",
+          "bytes": 1067,
+          "sha256": "b175672dbc142198bae1daa4bdef4893103d75c111a949f1e33d6493d67658bf",
+          "documentId": "text-b175672dbc142198bae1daa4bdef4893103d75c111a949f1e33d6493d67658bf"
+        }
+      ]
+    },
+    {
+      "name": "@revenuecat/purchases-js-hybrid-mappings",
+      "lockPath": "node_modules/@revenuecat/purchases-js-hybrid-mappings",
+      "version": "20.1.0",
+      "rootDirectDependency": false,
+      "optional": false,
+      "os": null,
+      "cpu": null,
+      "lockLicense": "MIT",
+      "installStatus": "version-matched",
+      "installedName": "@revenuecat/purchases-js-hybrid-mappings",
+      "installedVersion": "20.1.0",
+      "installedLicense": "MIT",
+      "noticeFiles": []
+    },
+    {
+      "name": "@revenuecat/purchases-typescript-internal",
+      "lockPath": "node_modules/@revenuecat/purchases-typescript-internal",
+      "version": "20.1.0",
+      "rootDirectDependency": false,
+      "optional": false,
+      "os": null,
+      "cpu": null,
+      "lockLicense": "MIT",
+      "installStatus": "version-matched",
+      "installedName": "@revenuecat/purchases-typescript-internal",
+      "installedVersion": "20.1.0",
       "installedLicense": "MIT",
       "noticeFiles": []
     },
@@ -14681,6 +14740,29 @@
           "bytes": 1076,
           "sha256": "4efb635cc4fd67f738ce2af65f8b73514ee338d0d201b836ab3a823cfda771d1",
           "documentId": "text-4efb635cc4fd67f738ce2af65f8b73514ee338d0d201b836ab3a823cfda771d1"
+        }
+      ]
+    },
+    {
+      "name": "react-native-purchases",
+      "lockPath": "node_modules/react-native-purchases",
+      "version": "11.0.0",
+      "rootDirectDependency": true,
+      "optional": false,
+      "os": null,
+      "cpu": null,
+      "lockLicense": "MIT",
+      "installStatus": "version-matched",
+      "installedName": "react-native-purchases",
+      "installedVersion": "11.0.0",
+      "installedLicense": "MIT",
+      "noticeFiles": [
+        {
+          "path": "node_modules/react-native-purchases/LICENSE",
+          "status": "text",
+          "bytes": 1067,
+          "sha256": "b175672dbc142198bae1daa4bdef4893103d75c111a949f1e33d6493d67658bf",
+          "documentId": "text-b175672dbc142198bae1daa4bdef4893103d75c111a949f1e33d6493d67658bf"
         }
       ]
     },
@@ -30904,6 +30986,16 @@
       "text": "MIT License\n\nCopyright (c) 2023 Emil Kowalski\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
       "sources": [
         "node_modules/vaul/LICENSE.md"
+      ]
+    },
+    {
+      "id": "text-b175672dbc142198bae1daa4bdef4893103d75c111a949f1e33d6493d67658bf",
+      "sha256": "b175672dbc142198bae1daa4bdef4893103d75c111a949f1e33d6493d67658bf",
+      "bytes": 1067,
+      "text": "MIT License\n\nCopyright (c) 2023 RevenueCat\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "sources": [
+        "node_modules/@revenuecat/purchases-js/LICENSE",
+        "node_modules/react-native-purchases/LICENSE"
       ]
     },
     {
