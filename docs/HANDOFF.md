@@ -2,6 +2,33 @@
 
 Owner workflow preference: commit and push completed changes to the active development branch unless explicitly told otherwise.
 
+## Lifestyle final polish — implementation pushed 31 October 2026
+
+Current implementation/test source on **`v2`** is **`5f51d2e8`**, based on
+published `439aa14`. The user requested the push before final verification finished;
+**the final-polish plan is not yet fully accepted**. New offers freeze
+`copyVersion:2`, `journalVersion:1`, and `outputVersion:1`: one first-person
+journal, one retained activity, and actual capped/ledger-backed effect rows.
+Missing flags retain published outcomes. All 120 published decisions retain exact
+complete-world hashes, alongside the original first-stage fixtures.
+
+Shared driving ages now govern cash road ownership, licence tests, use and
+maintenance: US/Canada 16, UK/Australia 17, other countries 18; boats/pilot 18.
+Locked inheritance and unrelated adult restrictions remain. All 60 situations
+and major property/vehicle/pet/hobby responses were editorially reviewed, with
+120 separate journals and 25 documented before/after examples. No catalogues,
+artwork, navigation, purchase integrations or save formats change.
+
+Completed: 313 final focused tests across five suites, strict app/test types,
+596-module acyclic import graph, notice checks and both Hermes exports with
+16 exact runtime source matches per platform. The restored workspace still has
+the frozen full regression and 120-life soak running. Do not label their partial
+counts as passes. Finish those reports, then run age 50/70/90 benchmarks after
+heavy workers stop, collect all eight persistent journeys and finalize balance
+and performance documentation. Installed-device acceptance and human playtesting
+remain unverified. See [the implementation](LIFESTYLE_FINAL_POLISH.md) and
+[the timestamped verification status](verification/lifestyle-final-polish/verification-status.json).
+
 ## Property, vehicles, pets and hobbies — 31 October 2026
 
 Continue on **`v2`** from published `2d602ba9`. Gameplay/UI sources are verified at
@@ -513,7 +540,7 @@ Focused acceptance is complete:55affected cases passed in the initial7-suite bat
 
 Runtime **0e72896 is committed and pushed**. Its [Quality39754127738](https://github.com/YusufYacoobali/dreams-life-sim/actions/runs/39754127738) was cancelled after the subsequent user icon-file upload triggered a newer run. The older80a10b5gate below remains separately passing; no reminder-batch full pass, native delivery or installed new-identity acceptance is claimed. The older generated b75native candidate is now stale in both source and native configuration: regenerate from final inputs when packaging resumes. Native emulator/Metro controls remain dormant; no blocked download, Gradle attempt, prebuild or repeat campus journey occurred. The previously observed font-reset/immediate-Expo-reload JNI crash remains open in [RELEASE_READINESS_AUDIT.md](RELEASE_READINESS_AUDIT.md).
 
-The final0e Android/iOS production Hermes export actually exits0 (session6345; `/tmp/dreams-reminders-production-export.exit`/`.log`), from clean frozen `review/reminder-export-0e72896`. Output `/tmp/dreams-reminders-production-export` contains Android5,215,540bytes/iOS4,944,476bytes. Metadata/HBC headers pass, and all12changed runtime source files match both maps exactly. This is one export for the completed feature batch, not an APK/IPA or delivery/device pass. No exporter remains running.
+The final0e Android/iOS production Hermes export actually exits0 (session6345; `/tmp/dreams-reminders-production-export.exit`/`.log`), from clean frozen `review/reminder-export-0e72896`. Output `/tmp/dreams-reminders-production-export` contains Android5,215,540bytes/iOS4,944,476bytes. Metadata/HBC headers pass, and all 12changed runtime source files match both maps exactly. This is one export for the completed feature batch, not an APK/IPA or delivery/device pass. No exporter remains running.
 
 Continue to commit **and push at least every two active hours**. All three independent author workstreams are frozen and integrated; root owns final integration/checkpoint/export. Avoid unchanged regressions and new audit/proof packs.
 

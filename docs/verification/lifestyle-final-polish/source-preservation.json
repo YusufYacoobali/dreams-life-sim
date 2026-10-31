@@ -1,0 +1,42 @@
+{
+  "baseline": "439aa14d80bd03da41d00889adabfb9fb246c0a3",
+  "sourceCommit": "5f51d2e89e589667acb31d67f68e6d066e45e204",
+  "originalArtAndFixtureCount": 1303,
+  "originalArtAndFixturesChanged": [],
+  "protectedPaths": [
+    "package.json",
+    "package-lock.json",
+    "app.config.ts",
+    "src/game/content/assets.ts",
+    "src/game/content/pets.ts",
+    "src/game/content/leisure.ts",
+    "src/game/model.ts",
+    "src/persistence",
+    "src/access",
+    "src/purchases",
+    "plugins"
+  ],
+  "changedProtected": [],
+  "unchangedOrdinaryWorldVersions": "49/51/28",
+  "unchangedEnhancedWorldVersions": "50/52/29",
+  "unchangedReader": 32,
+  "unchangedArchives": [
+    1,
+    2
+  ],
+  "publishedChoiceCapture": {
+    "producerCommit": "439aa14d80bd03da41d00889adabfb9fb246c0a3",
+    "scope": "Exact published source; explicitly funded/controlled eligibility worlds, not natural gameplay journeys. Complete expected choice outcomes computed only by the isolated published implementation.",
+    "file": "tests/fixtures/lifestyle-439-decisions.json.gz",
+    "sha256": "ac4ecbc5f17614f352924fa9162291cff78530c6a8d4978c488ee2bdbd34c97b",
+    "worlds": 60,
+    "choices": 120
+  },
+  "firstStageFixtureSha256": "16db6bc4d24b518fe3f5a6abbd220a1eff8b2c40ed72e7532341da85ff6411c8",
+  "naturalPerformanceArchiveSha256": "a6c3856c079ad07a4dfc47db44269022c68b137befbdc1f69b7672dd2d3233cb",
+  "nativeAcceptance": {
+    "androidDevice": false,
+    "iosSimulator": false,
+    "reason": "Neither adb nor xcrun is available on PATH; no installed-device run was performed."
+  }
+}

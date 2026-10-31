@@ -1,0 +1,38 @@
+{
+  "observedAt": "2026-10-31T14:10:13.680148+00:00",
+  "sourceCommit": "5f51d2e89e589667acb31d67f68e6d066e45e204",
+  "deliveryStatus": "Implementation pushed at user request before final verification completion; plan acceptance remains pending.",
+  "completed": {
+    "focusedFinalCore": {
+      "suites": 5,
+      "passed": 313,
+      "failed": 0,
+      "scope": "All120 new choices, all12 driving policies, published120 outcomes, original first-stage cases and modal recovery."
+    },
+    "strictAppAndTestTypes": true,
+    "acyclicRuntimeModules": 596,
+    "hermesPlatforms": [
+      "android",
+      "ios"
+    ],
+    "exactChangedRuntimeSourcesPerPlatform": 16
+  },
+  "fullRegression": {
+    "status": "running; no final report at observation",
+    "passedSuitesSoFar": 268,
+    "failedSuiteLinesSoFar": [],
+    "countsAreNotFinalAcceptance": true
+  },
+  "soak": {
+    "status": "running; no completion marker at observation",
+    "completedLivesSoFar": 86,
+    "requiredLives": 120
+  },
+  "pending": [
+    "Full Jest completion report with no source drift and zero remaining failures",
+    "120-life soak completion marker",
+    "Final-source age50/70/90 performance measurements",
+    "Complete eight-journey balance report and final verification documentation"
+  ],
+  "nativeDeviceAcceptance": "unverified"
+}

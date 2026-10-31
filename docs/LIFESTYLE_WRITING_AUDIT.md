@@ -1,5 +1,121 @@
 # Lifestyle writing audit
 
+## Final polish from published 439aa14
+
+All sixty setups and all 120 outcomes have been reviewed again. A prospective
+`copyVersion:2` selects the refined prose; `journalVersion:1` freezes a separately
+authored first-person sentence and prevents the extra activity fact;
+`outputVersion:1` displays actual, capped consequences. Missing flags retain the
+published wording, two diary writes and empty effect rows. Existing diaries are
+not rewritten. All 120 published choices retain exact full-world replay hashes.
+
+New operation names describe their actual effect: `pet-health` becomes
+`pet-comfort`, and `competition` becomes `discipline` for the relevant study
+choices. Their original aliases remain for earlier decisions. Neither operation
+claims healing, a qualification, a formal contest or a cash award.
+
+The regular property, vehicle, pet and hobby result messages have also been
+reviewed. They use second-person narrative separately from first-person activity
+histories. Costs, care schedules, eligibility and outcome rolls are unchanged.
+Earlier v1 trip, training and project policies retain their literal messages.
+
+### Representative before/after improvements
+
+| Choice | Published result | New result |
+| --- | --- | --- |
+| home-ceiling-map / repair | The plumber finds the leak. You pay for the repair, and {person} can stop moving the bucket between chairs. | The plumber stops the leak. You pay the bill, and {person} retires the bucket from active service. |
+| home-ceiling-map / estimate | You arrange an inspection and keep the repair estimate. The patch continues its quiet campaign for the landing. | You arrange an inspection. {person} asks whether the damp patch will be paying rent while everyone waits. |
+| home-bass / mediate | You listen to {person} and discuss a sensible way to approach the neighbour. They are relieved you took it seriously. | You listen without making a joke. By the time you leave, {person} is less angry with you. The spoon drawer is still performing. |
+| home-bass / dismiss | {person} stops laughing before you finish. The spoons remain musical; your relationship is less harmonious. | You call it free entertainment. {person} asks whether you would like to sleep beside the subwoofer. The conversation deteriorates. |
+| home-rent-cake / suspicious | They wanted to share a cake. You have made that more complicated than necessary. | You ask what the cake is supposed to achieve. {person} says “a nice afternoon”, very slowly. You have managed to make cake awkward. |
+| home-inspection-shoes / lecture | Your lecture achieves a silence normally reserved for power cuts. {person} will remember it. | You deliver your lecture about shoes. {person} listens with the expression of someone mentally reviewing every rent payment they have ever made. |
+| home-window-herb / refuse | The tenancy continues, but you have become the reason somebody dislikes a building. | You refuse the basil. {person} puts away the little pots. It is a remarkably efficient way to make a home feel less welcoming. |
+| home-investment-argument / listen | You hear {person} out. The fittings can wait while you work out what matters to both of you. | You close the spreadsheet and listen. The fittings are still there tomorrow; this conversation needed you today. |
+| home-investment-argument / numbers | Your spreadsheet remains impressed. {person} would prefer to have been heard. | You explain the numbers again. {person} points out that the spreadsheet has never once asked how their day went. |
+| home-garden-invasion / tend | You tend the actual garden and improve the grounds. The weed has a surprisingly substantial root system. | You spend the afternoon tending the grounds. The weed comes out with enough root attached to suggest a second property underground. |
+| home-covered-damage / claim | You record the damage and make a claim. Your cover pays 80% of the actual value lost; the remainder stays yours. | Your insurer covers part of the storm damage. It is welcome help, although the gutter has left you with a share of the loss. |
+| home-damage-report / report | You report the named tenant’s admission and the actual damage. A vandalism incident is recorded for investigation; a report is not a conviction. | You report the damage and {person}’s admission. There is now a vandalism incident to investigate. The gate has had enough arguments. |
+| vehicle-warning-light / inspect | You pay for the diagnostic work. The vehicle’s condition improves, and the orange symbol finally stops supervising you. | You pay for diagnostic repairs. The warning light finally goes out, allowing you to worry about something without a dashboard symbol. |
+| vehicle-warning-light / hope | The light is still there next time you look. The vehicle’s condition worsens while hope remains unusually affordable. | You decide it is probably seasonal. The condition worsens. The light appears to be enjoying the arrangement. |
+| vehicle-roadtrip-sandwich / clean | You pay for an interior clean. The cleaner does not ask you to identify the former filling. | You pay for a thorough interior clean. The cleaner looks at the former sandwich, then looks at you. Neither of you asks a follow-up question. |
+| vehicle-parking-dispute / argue | The argument outlasts any reasonable use of the space. {person} leaves less impressed with your judgement. | You defend the emotional buffer. {person} suggests buying a smaller ego. Neither of you enjoys the rest of the conversation. |
+| vehicle-mechanic-opera / second | You pay for a second inspection and practical work. The new mechanic uses fewer tragic pauses. | You pay for a second inspection and practical work. This mechanic uses actual nouns instead of tragic pauses. |
+| vehicle-mechanic-opera / leave | You take the quote away before contemplation becomes a bill. A normal service can be reviewed another day. | You leave with the quote. “Investigate later” is considerably cheaper than agreeing while frightened. |
+| vehicle-family-borrow / offer | You suggest reviewing a drive together instead. {person} likes the idea; the invitation and actual trip are still to arrange. | You suggest going together another time. {person} warms to the idea. For now, the keys remain with you. |
+| vehicle-covered-scrape / claim | You record the loss under your cover. Insurance reimburses 80% of the lost value, and the scrape remains part of the vehicle’s history. | Your insurer reimburses part of the loss. The pillar remains offensively intact. |
+| vehicle-damaged-trip / repair | You pay for repairs before setting off. The vehicle becomes less alarming; the outing can be planned afterwards. | You pay for repairs before arranging another outing. The vehicle sounds less like it has a personal grievance. |
+| vehicle-repair-invoice / itemise | You approve and pay for practical, itemised work. The vehicle improves without any charge for a meaningful stare. | You pay for practical, itemised work. “Investigative contemplation” does not survive your reading of the invoice. |
+| vehicle-repair-invoice / decline | You take the quote home. The vehicle remains as it was, but your wallet has escaped the consultation. | You take the quote home. Staring at it in your own kitchen turns out to be free. |
+| vehicle-small-injury / push | You keep lifting and suffer a sprain. The injury is now part of your medical history. | You keep lifting. Your ankle responds with a sprain, bringing a rather firm end to the discussion. |
+| pet-witness / redirect | You patiently practise a more welcoming cue with {subject}. “Absolutely not” begins to lose its monopoly. | You patiently practise a friendlier cue with {subject}. “Absolutely not” finally faces some competition. |
+
+### Sixty-situation disposition
+
+| Situation | Review |
+| --- | --- |
+| home-ceiling-map | Refined setup, repair, estimate; two separately authored first-person journals |
+| home-bass | Refined mediate, dismiss; two separately authored first-person journals |
+| home-rent-cake | Refined suspicious; two separately authored first-person journals |
+| home-inspection-shoes | Refined lecture; two separately authored first-person journals |
+| home-window-herb | Refined refuse; two separately authored first-person journals |
+| home-investment-argument | Refined listen, numbers; two separately authored first-person journals |
+| home-first-dinner | Kept the existing prose; two separately authored first-person journals |
+| home-garden-invasion | Refined tend; two separately authored first-person journals |
+| home-pool-silence | Kept the existing prose; two separately authored first-person journals |
+| home-lock-trouble | Kept the existing prose; two separately authored first-person journals |
+| home-covered-damage | Refined claim; two separately authored first-person journals |
+| home-damage-report | Refined report; two separately authored first-person journals |
+| vehicle-warning-light | Refined inspect, hope; two separately authored first-person journals |
+| vehicle-roadtrip-sandwich | Refined setup, clean; two separately authored first-person journals |
+| vehicle-parking-dispute | Refined argue; two separately authored first-person journals |
+| vehicle-mechanic-opera | Refined second, leave; two separately authored first-person journals |
+| vehicle-family-borrow | Refined offer; two separately authored first-person journals |
+| vehicle-covered-scrape | Refined claim; two separately authored first-person journals |
+| vehicle-damaged-trip | Refined repair; two separately authored first-person journals |
+| vehicle-vintage-admirer | Kept the existing prose; two separately authored first-person journals |
+| vehicle-repair-invoice | Refined itemise, decline; two separately authored first-person journals |
+| vehicle-small-injury | Refined push; two separately authored first-person journals |
+| vehicle-wrong-song | Kept the existing prose; two separately authored first-person journals |
+| vehicle-weather-window | Kept the existing prose; two separately authored first-person journals |
+| pet-witness | Refined redirect; two separately authored first-person journals |
+| pet-certificate | Refined photo; two separately authored first-person journals |
+| pet-election | Refined compete; two separately authored first-person journals |
+| pet-night-builder | Kept the existing prose; two separately authored first-person journals |
+| pet-vegetable-alarm | Kept the existing prose; two separately authored first-person journals |
+| pet-turtle-arrival | Kept the existing prose; two separately authored first-person journals |
+| pet-fish-audience | Kept the existing prose; two separately authored first-person journals |
+| pet-horse-gate | Kept the existing prose; two separately authored first-person journals |
+| pet-rabbit-floor | Kept the existing prose; two separately authored first-person journals |
+| pet-stubborn-school | Kept the existing prose; two separately authored first-person journals |
+| pet-nervous-door | Kept the existing prose; two separately authored first-person journals |
+| pet-affectionate-shadow | Kept the existing prose; two separately authored first-person journals |
+| pet-mischief-sock | Kept the existing prose; two separately authored first-person journals |
+| pet-loyal-wait | Kept the existing prose; two separately authored first-person journals |
+| pet-curious-box | Kept the existing prose; two separately authored first-person journals |
+| pet-energetic-circuit | Kept the existing prose; two separately authored first-person journals |
+| pet-health-patience | Refined setup, supplies; two separately authored first-person journals |
+| pet-family-memory | Kept the existing prose; two separately authored first-person journals |
+| hobby-chess-prodigy | Refined setup, study, laugh; two separately authored first-person journals |
+| hobby-guitar-two-chords | Kept the existing prose; two separately authored first-person journals |
+| hobby-painting-bowl | Kept the existing prose; two separately authored first-person journals |
+| hobby-photo-bin | Kept the existing prose; two separately authored first-person journals |
+| hobby-reading-character | Kept the existing prose; two separately authored first-person journals |
+| hobby-gaming-save | Kept the existing prose; two separately authored first-person journals |
+| hobby-cooking-soup | Kept the existing prose; two separately authored first-person journals |
+| hobby-gardening-one-leaf | Kept the existing prose; two separately authored first-person journals |
+| hobby-running-hill | Kept the existing prose; two separately authored first-person journals |
+| hobby-swimming-lane | Kept the existing prose; two separately authored first-person journals |
+| hobby-writing-adverb | Refined cut; two separately authored first-person journals |
+| hobby-pottery-handle | Refined remake; two separately authored first-person journals |
+| hobby-singing-note | Refined listen; two separately authored first-person journals |
+| hobby-coding-button | Refined debug; two separately authored first-person journals |
+| hobby-fishing-reed | Kept the existing prose; two separately authored first-person journals |
+| hobby-dancing-elbow | Kept the existing prose; two separately authored first-person journals |
+| hobby-project-half | Refined plan; two separately authored first-person journals |
+| hobby-friendly-rival | Refined boast; two separately authored first-person journals |
+
+## Original implementation inventory
+
 Sixty original situations add twelve property, twelve vehicle, eighteen pet and eighteen hobby premises. All retain stable IDs, two different choices, contextual eligibility and frozen, typed operations. Existing annual situations and saved pending wording are not rewritten.
 
 The review removes implementation disclaimers from narrative payoffs, keeps genuine repairs and payments explicit, and mixes quiet affection with embarrassment and occasional conflict. The parrot repeats an ordinary phrase rather than an invented private secret. Named tenants, household members and hobby acquaintances must exist in the simulation. Informal hobby challenges use earned proficiency, a chosen strategy and one saved draw; formal prizes remain in the separate competition system.

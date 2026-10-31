@@ -1,0 +1,32 @@
+{
+  "sourceCommit": "5f51d2e89e589667acb31d67f68e6d066e45e204",
+  "types": {
+    "command": "npm run typecheck",
+    "app": true,
+    "tests": true,
+    "output": "\n> dreams-life-sim@1.0.0 typecheck\n> tsc --noEmit && tsc --noEmit -p tests/tsconfig.json\n\n"
+  },
+  "imports": {
+    "command": "npm run check:imports",
+    "modules": 596,
+    "cycles": []
+  },
+  "notices": {
+    "command": "node tools/generate-third-party-notices.cjs --check",
+    "result": {
+      "mode": "check",
+      "directDependencies": 32,
+      "candidateNonDevLockEntries": 790,
+      "versionMatched": 780,
+      "versionMismatches": 0,
+      "notInstalled": 10,
+      "missingLockLicenseMetadata": 1,
+      "withoutReadableNoticeFile": 59,
+      "readableNoticeFiles": 737,
+      "uniqueExactNoticeTexts": 281,
+      "detectedFontFamilies": 1,
+      "projectArtFiles": 1200
+    }
+  },
+  "diffCheck": true
+}

@@ -9,6 +9,15 @@ eight-table databases by changing only their metadata marker. Reader33 is refuse
 New compressed exports use archive2, preventing older archive1-only apps from
 quietly dropping the expansion. Existing archive1 and plain JSON imports remain supported.
 
+Final polish of the existing systems is described in
+[LIFESTYLE_FINAL_POLISH.md](LIFESTYLE_FINAL_POLISH.md). New situation offers freeze
+`copyVersion:2`, `journalVersion:1` and `outputVersion:1`: separately authored
+first-person journals settle once, and results show actual capped changes and
+ledger-backed costs/insurance. Absence retains published settlement literally.
+The shared driving-age policy also permits eligible teens to purchase road
+vehicles with available cash and use/maintain them with the appropriate licence;
+locked inheritance, borrowing and unrelated adult actions keep their restrictions.
+
 Property and vehicle management is separately reviewed per existing asset. An
 anonymous rental cannot transition while listed or occupied. Original purchases,
 leases, titles, finance, insurance and pending choices remain literal.

@@ -1,0 +1,44 @@
+{
+  "baseline": "439aa14d80bd03da41d00889adabfb9fb246c0a3",
+  "sourceCommit": "5f51d2e89e589667acb31d67f68e6d066e45e204",
+  "command": "npx expo export --platform all --max-workers 1 --source-maps",
+  "scope": "Production Hermes bundle source inclusion; installed-device acceptance unverified",
+  "runtimeSources": {
+    "src/game/content/lifestyleEvents.ts": "57facf23d2ac85b88e24ec2b3bdd2d7b59421fd8744acffa40697814f4ce00eb",
+    "src/game/content/lifestylePolish.ts": "bc7972ae2a3fda4c379d3d496aa9ed47c90a63eae945ebf38ed46dbc3074d715",
+    "src/game/systems/assets.ts": "928ece10d29f57477d947e48f8a41ee89c0fb985aadcab0c544f42d5d14f8d3a",
+    "src/game/systems/health.ts": "713e62c9448c6157c925c12d2a0b55c6156818918e7a79efc0ad425ce3726de9",
+    "src/game/systems/hobbyAccomplishments.ts": "c087ac345e4b1a1c3ac6f6c58be90c97b1c79b30d44a2c10c9fbcd1a99f13edd",
+    "src/game/systems/landlordTenancies.ts": "dd37a8f237324c38ac7d9a8041ad72517d5a58d68bdfbe005bf95dcc41fe09d9",
+    "src/game/systems/lifestyleCommon.ts": "bf49ebb5dd77d0f1f28a72cabff563ef934352448a5834bd83e4820dea19b01e",
+    "src/game/systems/lifestyleSchemas.ts": "930d367795f8d580636b6509997b792dee1c8247ebcc69a15354d661117a2fdc",
+    "src/game/systems/lifestyleStories.ts": "c01dbb94a1c2008ccd2461542e2da13d228e343597c469bd2816111a21dc11b1",
+    "src/game/systems/lifestyleStoryEffects.ts": "6ebc068ef43f8e9797464f8e3a93088e6ffe7caaa9fc7cfef4714522ad5226dc",
+    "src/game/systems/lifestyleValidation.ts": "74ea9c5d9b37df69a5a2f68ccd4c7a6bfd2d1e1f4ebeb9b040ddfefebfdff14f",
+    "src/game/systems/petTraining.ts": "65211731c36eba6e2614ef92002b1a72f0c75681cf458e6ea3484d7a94cdd7d1",
+    "src/game/systems/vehicleActivities.ts": "1adfe44b807a6475f39c4767aa54a7b2eb2ba2987bfe21fec37e9e5d1ecba27f",
+    "src/game/systems/vehicleAgePolicy.ts": "53a236c75d08df7d1e21f9724e2af83d61ca2ae8b1ecf1199097e84139f27147",
+    "src/game/systems/vehicleLicences.ts": "2df81a6a42c9f191d153e24c0c7d7aa5fcbf11ea2bec1f0d3650270d00fdec4e",
+    "src/ui/VehicleLifestyle.tsx": "ed731d85867735e79e8d23ce5e2fd5f53d4780d166c29f165288cedb564a1439"
+  },
+  "platforms": [
+    {
+      "platform": "android",
+      "file": "_expo/static/js/android/entry-885b98d560c6297ff60a93517c28b7c8.hbc",
+      "bytes": 9889124,
+      "sha256": "0f86961995f4ee577fb44a562e509d475388c4c778cda3570d97ce60c7f7b85b",
+      "hermesMagic": "c61fbc03c103191f",
+      "missing": [],
+      "mismatched": []
+    },
+    {
+      "platform": "ios",
+      "file": "_expo/static/js/ios/entry-9938d520a8db05a52c0115d58eee7a95.hbc",
+      "bytes": 9704740,
+      "sha256": "5f282808e5eebece9297539efca32e53d62c163eca12c2d3ae04a18ff0d0131a",
+      "hermesMagic": "c61fbc03c103191f",
+      "missing": [],
+      "mismatched": []
+    }
+  ]
+}
