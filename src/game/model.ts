@@ -610,7 +610,12 @@ function restoreMoney(value: any): any {
 }
 export function decodeWorld(text: string, immutable = false, maxCharacters: 20_000_000 | 80_000_000 = 20_000_000): World {
   if (text.length > maxCharacters) throw new Error('Save is too large');
-  const parsed = restoreMoney(JSON.parse(text));
+  return decodeWorldData(JSON.parse(text), immutable);
+}
+/** Untrusted parsed checkpoint data follows the same money, migration, shape
+ * and full integrity pipeline. The codec enforces its byte/expansion limits. */
+export function decodeWorldData(value: unknown, immutable = false): World {
+  const parsed = restoreMoney(value);
   // Version 1 shipped creation only. Preserve every identity, journal fact and RNG stream.
   if (parsed && parsed.schemaVersion === 1) {
     parsed.schemaVersion = 2;

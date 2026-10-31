@@ -1,6 +1,6 @@
 import { gzipSync, gunzipSync, strFromU8, strToU8 } from 'fflate';
 import { z } from 'zod';
-import { decodeWorld, moneyJSON, worldForEncoding, World } from '../game/model';
+import { decodeWorld, decodeWorldData, moneyJSON, worldForEncoding, World } from '../game/model';
 import { encodeBase64 as base64, decodeBase64 as unbase64 } from './base64';
 function fingerprint(bytes: Uint8Array) {
   let hash = 2166136261;
@@ -133,37 +133,41 @@ export function unpackCheckpoint(payload: string, immutable = false, primePeople
     const main = unpackText(checkpoint.main), root = JSON.parse(main);
     if (!root || typeof root !== 'object' || Array.isArray(root) || 'people' in root || 'ledger' in root || main.at(-1) !== '}') throw new Error('Invalid checkpoint body');
     const peopleTexts = checkpoint.people.map(part => unpackText(part)), seen = new Set<string>();
+    const decodedPeople: Record<string, unknown> = Object.create(null);
     const peopleLengths = peopleTexts.map(text => {
       const group: unknown = JSON.parse(text);
       if (!group || typeof group !== 'object' || Array.isArray(group) || text[0] !== '{' || text.at(-1) !== '}') throw new Error('Invalid checkpoint people');
       const ids = Object.keys(group);
       if (!ids.length || ids.length > peopleChunkSize) throw new Error('Invalid checkpoint people');
-      for (const id of ids) { if (seen.has(id)) throw new Error('Duplicate checkpoint person'); seen.add(id); }
+      for (const id of ids) { if (seen.has(id)) throw new Error('Duplicate checkpoint person'); seen.add(id); decodedPeople[id] = (group as Record<string, unknown>)[id]; }
       return ids.length;
     });
     if (peopleLengths.slice(0, -1).some(length => length !== peopleChunkSize)) throw new Error('Invalid checkpoint people');
-    const expansion = rowExpansion(checkpoint.columns), lengths: number[] = [], chunks: string[] = []; let count = 0;
+    const expansion = rowExpansion(checkpoint.columns), lengths: number[] = [], decodedLedger: Record<string, unknown>[] = []; let count = 0;
     for (const part of checkpoint.ledger) {
       const text = unpackText(part), rows: unknown = JSON.parse(text);
       if (!Array.isArray(rows) || !rows.length || rows.length > chunkSize || text[0] !== '[' || text.at(-1) !== ']') throw new Error('Invalid checkpoint ledger');
       lengths.push(rows.length); count += rows.length;
       // Bound canonical expansion before constructing objects or the final JSON.
       if (checkpoint.bytes + count * expansion + 32 > maxCanonicalBytes) throw new Error('This checkpoint exceeds the supported world size');
-      chunks.push(JSON.stringify(rows.map((row: unknown) => {
+      for (const row of rows) {
         if (!Array.isArray(row) || row.length !== checkpoint.columns.length) throw new Error('Invalid checkpoint transaction');
-        return Object.fromEntries(checkpoint.columns.map((key, index) => {
+        decodedLedger.push(Object.fromEntries(checkpoint.columns.map((key, index) => {
           const value: unknown = row[index];
           if (ledgerMoney.has(key)) {
             if (typeof value !== 'string' || !integerText.test(value)) throw new Error('Invalid checkpoint transaction money');
-            return [key, { $dreamsBigInt: value }];
+            if (!/^-?\d{1,128}$/.test(value)) throw new Error('Invalid money encoding');
+            return [key, BigInt(value)];
           }
-          return [key, value];
-        }));
-      })));
+          // The former intermediate JSON stringify normalised numeric -0.
+          return [key, typeof value === 'number' && Object.is(value, -0) ? 0 : value];
+        })));
+      }
     }
     if (lengths.slice(0, -1).some(length => length !== chunkSize)) throw new Error('Invalid checkpoint ledger');
-    const text = main.slice(0, -1) + ',"people":{' + peopleTexts.map(chunk => chunk.slice(1, -1)).join(',') + '},"ledger":[' + chunks.map(chunk => chunk.slice(1, -1)).join(',') + ']}';
-    const world = decodeWorld(text, immutable, maxCanonicalBytes);
+    root.people = decodedPeople;
+    root.ledger = decodedLedger;
+    const world = decodeWorldData(root, immutable);
     // No persisted tuple or person part is trusted before full world validation.
     if (immutable) {
       if (primePeopleCache) checkpoint.people.forEach((part, index) => cachePeoplePart(peopleTexts[index], part));

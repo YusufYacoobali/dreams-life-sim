@@ -1,5 +1,5 @@
 import { answerReview, decodeReviewTracker, observeReviewCommit, offerReview, reviewCandidateEligible, type ReviewResponse, type ReviewTracker } from '../reviews/tracker';
-import { fullName, immutableWorld, World } from '../game/model';
+import { fullName, immutableWorld, isImmutableWorld, World } from '../game/model';
 import { packCheckpoint, unpackCheckpoint } from './checkpoints';
 import { BranchInfo, branchInfoSchema, decodeSave, encodeSave, SnapshotRecord, snapshotRecord, SnapshotSummary, snapshotSummarySchema, validateSnapshot } from './archive';
 
@@ -131,6 +131,8 @@ export class SaveRepository {
     const row = await this.db.get<{ revision: number; payload: string }>('SELECT revision,payload FROM lives WHERE id=?', [id]);
     if (!row) throw new Error('Saved life not found');
     try {
+      const cached = this.current;
+      if (cached && cached.world.id === id && cached.world.revision === row.revision && cached.payload === row.payload && isImmutableWorld(cached.world)) return cached;
       const world = unpackCheckpoint(row.payload, true, primePeopleCache);
       if (world.id !== id || world.revision !== row.revision) throw new Error('Saved life metadata is inconsistent');
       return { world, payload: row.payload };

@@ -41,6 +41,18 @@ function transactions() {
 }
 afterEach(() => jest.restoreAllMocks());
 
+test('direct tuple decoding preserves the former JSON negative-zero normalization and original chunks', () => {
+  const frame = JSON.parse(packCheckpoint(transactions())) as Frame, last = frame.ledger.length - 1;
+  const rows = JSON.parse(inflate(frame.ledger[last])) as unknown[][];
+  const year = frame.columns.indexOf('year');
+  const text = '[' + rows.map((row, index) => '[' + row.map((value, column) => index === rows.length - 1 && column === year ? '-0' : JSON.stringify(value)).join(',') + ']').join(',') + ']';
+  frame.ledger[last] = part(text); recount(frame);
+  const world = unpackCheckpoint(JSON.stringify(frame), true);
+  expect(world.ledger.at(-1)!.year).toBe(0);
+  expect(Object.is(world.ledger.at(-1)!.year, -0)).toBe(false);
+  expect(JSON.parse(packCheckpoint(world)).ledger).toEqual(frame.ledger);
+});
+
 test('tuple money, Unicode, null references and immutable cold block reuse are exact', () => {
   const world = transactions(), payload = packCheckpoint(world), frame = JSON.parse(payload) as Frame;
   expect(frame.format).toBe('dreams-checkpoint-v4'); expect(frame.ledger.length).toBe(2);
