@@ -41,6 +41,19 @@ function transactions() {
 }
 afterEach(() => jest.restoreAllMocks());
 
+test('v4 migration keeps original version metadata when deciding whether to prime ledger chunks', () => {
+  const frame = JSON.parse(packCheckpoint(transactions())) as Frame;
+  const body = JSON.parse(inflate(frame.main));
+  body.schemaVersion = 48; body.engineVersion = 50; body.contentVersion = 27;
+  frame.main = part(JSON.stringify(body)); recount(frame);
+  const migrated = unpackCheckpoint(JSON.stringify(frame), true);
+  expect(migrated.schemaVersion).toBe(49);
+  const gzip = jest.spyOn(compression, 'gzipSync');
+  const packed = packCheckpoint(migrated);
+  expect(gzip.mock.calls.length).toBeGreaterThanOrEqual(frame.ledger.length + 1);
+  expect(unpackCheckpoint(packed)).toEqual(migrated);
+});
+
 test('direct tuple decoding preserves the former JSON negative-zero normalization and original chunks', () => {
   const frame = JSON.parse(packCheckpoint(transactions())) as Frame, last = frame.ledger.length - 1;
   const rows = JSON.parse(inflate(frame.ledger[last])) as unknown[][];

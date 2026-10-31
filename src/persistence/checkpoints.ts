@@ -165,9 +165,9 @@ export function unpackCheckpoint(payload: string, immutable = false, primePeople
       }
     }
     if (lengths.slice(0, -1).some(length => length !== chunkSize)) throw new Error('Invalid checkpoint ledger');
-    root.people = decodedPeople;
-    root.ledger = decodedLedger;
-    const world = decodeWorldData(root, immutable);
+    // Migrations mutate their input. Keep the original header for the cache
+    // compatibility check below, exactly as the former separate JSON parse did.
+    const world = decodeWorldData({ ...root, people: decodedPeople, ledger: decodedLedger }, immutable);
     // No persisted tuple or person part is trusted before full world validation.
     if (immutable) {
       if (primePeopleCache) checkpoint.people.forEach((part, index) => cachePeoplePart(peopleTexts[index], part));
