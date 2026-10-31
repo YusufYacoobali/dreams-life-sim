@@ -1,4 +1,5 @@
 import { randomInteger } from '../../src/game/random';
+import { rules } from '../../src/game/rules';
 import { lifestyleFixture, act } from '../helpers/lifestyle';
 import { hobbyContent, hobbyKinds, type HobbyKind } from '../../src/game/content/leisure';
 import { hobbyFee, leisureMonth, hobbyContacts } from '../../src/game/systems/leisure';
@@ -44,4 +45,26 @@ test('a new shared memory preserves an existing introduction and long relationsh
     world = act(world, { type: 'shared-hobby-practice', hobbyId: hobby.id, contactId: peer.id });
     expect(hobbyContacts(world, world.hobbies[0]).map(person => person.id)).toContain(peer.id);
     expect(world.relationships.find(row => row.id === edge.id)!.memories.slice(0, original.length)).toEqual(original);
+});
+
+
+test.each([true, false])('shared tickets save actual acceptance %s without charging or claiming attendance for a refusal', accepted => {
+    const world = lifestyleFixture(), contact = world.people.person_parent1;
+    const edge = world.relationships.find(row => [row.from, row.to].includes(world.activePersonId) && [row.from, row.to].includes(contact.id))!;
+    const chance = Math.min(95, 35 + Math.floor(edge.strength / 2));
+    world.random.npcs = Array.from({ length: 1000 }, (_, index) => index + 1).find(seed => (randomInteger(seed, 1, 100).value <= chance) === accepted)!;
+    const draw = randomInteger(world.random.npcs, 1, 100), payerCash = accountFor(world).cash, contactCash = accountFor(world, contact).cash;
+    const fee = rules[world.people[world.activePersonId].country].baseWage * 12n / 10000n * 2n;
+    const command = { type: 'shared-leisure-outing' as const, kind: 'theatre' as const, contactId: contact.id, reviewedPayerId: world.activePersonId, quotedFee: fee };
+    const next = act(world, command), record = next.lifestyle!.records.at(-1)!;
+    expect(record).toMatchObject({ accepted, chance, roll: draw.value, invitedId: contact.id, paid: accepted ? fee : 0n });
+    expect(record.participants).toEqual(accepted ? [world.activePersonId, contact.id] : [world.activePersonId]);
+    expect(record.paymentIds).toHaveLength(accepted ? 1 : 0);
+    expect(accountFor(next).cash).toBe(payerCash - (accepted ? fee : 0n));
+    expect(accountFor(next, next.people[contact.id]).cash).toBe(contactCash);
+    expect(next.random.npcs).toBe(draw.state);
+    const restored = decodeWorld(encodeWorld(next));
+    expect(restored).toEqual(next);
+    expect(() => act(restored, command)).toThrow(/venue per month/);
+    expect(() => act(restored, { type: 'leisure-outing', kind: 'theatre', reviewedPayerId: world.activePersonId, quotedTotal: fee / 2n })).toThrow(/once per month|already|visit/i);
 });
