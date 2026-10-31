@@ -6,7 +6,7 @@ All sixty setups and all 120 outcomes have been reviewed again. A prospective
 `copyVersion:2` selects the refined prose; `journalVersion:1` freezes a separately
 authored first-person sentence and prevents the extra activity fact;
 `outputVersion:1` displays actual, capped consequences. Missing flags retain the
-published wording, two diary writes and empty effect rows. Existing diaries are
+published wording, additional diary writes and empty effect rows. Existing diaries are
 not rewritten. All 120 published choices retain exact full-world replay hashes.
 
 New operation names describe their actual effect: `pet-health` becomes

@@ -1,0 +1,2566 @@
+{
+  "scope": "Sixteen hobbies in both paid modes, sixteen separate actual employed-graduate policy cohorts with two routines each. No funds, dates, health or random streams patched. Each command committed to real SQLite, followed by a closed-connection reopen. Thresholds are observed monthly practice records; not human playtesting.",
+  "sourceCommit": "7fe1a2e151876cdc8ce7b08473b1bd867cd5420e",
+  "rows": [
+    {
+      "kind": "guitar",
+      "mode": "community",
+      "currency": "USD",
+      "monthlyFee": {
+        "$dreamsBigInt": "2400"
+      },
+      "start": {
+        "year": 2023,
+        "month": 1,
+        "day": 1
+      },
+      "end": {
+        "year": 2027,
+        "month": 1,
+        "day": 1
+      },
+      "proficiency": 96,
+      "attendedMonths": 48,
+      "missedMonths": 0,
+      "missedReasons": {},
+      "paid": {
+        "$dreamsBigInt": "115200"
+      },
+      "thresholds": [
+        {
+          "threshold": 15,
+          "date": {
+            "year": 2023,
+            "month": 9,
+            "day": 1
+          },
+          "elapsedMonths": 8,
+          "attendedMonths": 8,
+          "paid": {
+            "$dreamsBigInt": "19200"
+          }
+        },
+        {
+          "threshold": 40,
+          "date": {
+            "year": 2024,
+            "month": 9,
+            "day": 1
+          },
+          "elapsedMonths": 20,
+          "attendedMonths": 20,
+          "paid": {
+            "$dreamsBigInt": "48000"
+          }
+        },
+        {
+          "threshold": 70,
+          "date": {
+            "year": 2025,
+            "month": 12,
+            "day": 1
+          },
+          "elapsedMonths": 35,
+          "attendedMonths": 35,
+          "paid": {
+            "$dreamsBigInt": "84000"
+          }
+        },
+        {
+          "threshold": 90,
+          "date": {
+            "year": 2026,
+            "month": 10,
+            "day": 1
+          },
+          "elapsedMonths": 45,
+          "attendedMonths": 45,
+          "paid": {
+            "$dreamsBigInt": "108000"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "painting",
+      "mode": "community",
+      "currency": "USD",
+      "monthlyFee": {
+        "$dreamsBigInt": "2000"
+      },
+      "start": {
+        "year": 2023,
+        "month": 1,
+        "day": 1
+      },
+      "end": {
+        "year": 2027,
+        "month": 1,
+        "day": 1
+      },
+      "proficiency": 96,
+      "attendedMonths": 48,
+      "missedMonths": 0,
+      "missedReasons": {},
+      "paid": {
+        "$dreamsBigInt": "96000"
+      },
+      "thresholds": [
+        {
+          "threshold": 15,
+          "date": {
+            "year": 2023,
+            "month": 9,
+            "day": 1
+          },
+          "elapsedMonths": 8,
+          "attendedMonths": 8,
+          "paid": {
+            "$dreamsBigInt": "16000"
+          }
+        },
+        {
+          "threshold": 40,
+          "date": {
+            "year": 2024,
+            "month": 9,
+            "day": 1
+          },
+          "elapsedMonths": 20,
+          "attendedMonths": 20,
+          "paid": {
+            "$dreamsBigInt": "40000"
+          }
+        },
+        {
+          "threshold": 70,
+          "date": {
+            "year": 2025,
+            "month": 12,
+            "day": 1
+          },
+          "elapsedMonths": 35,
+          "attendedMonths": 35,
+          "paid": {
+            "$dreamsBigInt": "70000"
+          }
+        },
+        {
+          "threshold": 90,
+          "date": {
+            "year": 2026,
+            "month": 10,
+            "day": 1
+          },
+          "elapsedMonths": 45,
+          "attendedMonths": 45,
+          "paid": {
+            "$dreamsBigInt": "90000"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "photography",
+      "mode": "community",
+      "currency": "USD",
+      "monthlyFee": {
+        "$dreamsBigInt": "2800"
+      },
+      "start": {
+        "year": 2023,
+        "month": 1,
+        "day": 1
+      },
+      "end": {
+        "year": 2027,
+        "month": 1,
+        "day": 1
+      },
+      "proficiency": 96,
+      "attendedMonths": 48,
+      "missedMonths": 0,
+      "missedReasons": {},
+      "paid": {
+        "$dreamsBigInt": "134400"
+      },
+      "thresholds": [
+        {
+          "threshold": 15,
+          "date": {
+            "year": 2023,
+            "month": 9,
+            "day": 1
+          },
+          "elapsedMonths": 8,
+          "attendedMonths": 8,
+          "paid": {
+            "$dreamsBigInt": "22400"
+          }
+        },
+        {
+          "threshold": 40,
+          "date": {
+            "year": 2024,
+            "month": 9,
+            "day": 1
+          },
+          "elapsedMonths": 20,
+          "attendedMonths": 20,
+          "paid": {
+            "$dreamsBigInt": "56000"
+          }
+        },
+        {
+          "threshold": 70,
+          "date": {
+            "year": 2025,
+            "month": 12,
+            "day": 1
+          },
+          "elapsedMonths": 35,
+          "attendedMonths": 35,
+          "paid": {
+            "$dreamsBigInt": "98000"
+          }
+        },
+        {
+          "threshold": 90,
+          "date": {
+            "year": 2026,
+            "month": 10,
+            "day": 1
+          },
+          "elapsedMonths": 45,
+          "attendedMonths": 45,
+          "paid": {
+            "$dreamsBigInt": "126000"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "chess",
+      "mode": "community",
+      "currency": "USD",
+      "monthlyFee": {
+        "$dreamsBigInt": "1200"
+      },
+      "start": {
+        "year": 2023,
+        "month": 1,
+        "day": 1
+      },
+      "end": {
+        "year": 2027,
+        "month": 1,
+        "day": 1
+      },
+      "proficiency": 96,
+      "attendedMonths": 48,
+      "missedMonths": 0,
+      "missedReasons": {},
+      "paid": {
+        "$dreamsBigInt": "57600"
+      },
+      "thresholds": [
+        {
+          "threshold": 15,
+          "date": {
+            "year": 2023,
+            "month": 9,
+            "day": 1
+          },
+          "elapsedMonths": 8,
+          "attendedMonths": 8,
+          "paid": {
+            "$dreamsBigInt": "9600"
+          }
+        },
+        {
+          "threshold": 40,
+          "date": {
+            "year": 2024,
+            "month": 9,
+            "day": 1
+          },
+          "elapsedMonths": 20,
+          "attendedMonths": 20,
+          "paid": {
+            "$dreamsBigInt": "24000"
+          }
+        },
+        {
+          "threshold": 70,
+          "date": {
+            "year": 2025,
+            "month": 12,
+            "day": 1
+          },
+          "elapsedMonths": 35,
+          "attendedMonths": 35,
+          "paid": {
+            "$dreamsBigInt": "42000"
+          }
+        },
+        {
+          "threshold": 90,
+          "date": {
+            "year": 2026,
+            "month": 10,
+            "day": 1
+          },
+          "elapsedMonths": 45,
+          "attendedMonths": 45,
+          "paid": {
+            "$dreamsBigInt": "54000"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "reading",
+      "mode": "community",
+      "currency": "USD",
+      "monthlyFee": {
+        "$dreamsBigInt": "800"
+      },
+      "start": {
+        "year": 2023,
+        "month": 1,
+        "day": 1
+      },
+      "end": {
+        "year": 2027,
+        "month": 1,
+        "day": 1
+      },
+      "proficiency": 96,
+      "attendedMonths": 48,
+      "missedMonths": 0,
+      "missedReasons": {},
+      "paid": {
+        "$dreamsBigInt": "38400"
+      },
+      "thresholds": [
+        {
+          "threshold": 15,
+          "date": {
+            "year": 2023,
+            "month": 9,
+            "day": 1
+          },
+          "elapsedMonths": 8,
+          "attendedMonths": 8,
+          "paid": {
+            "$dreamsBigInt": "6400"
+          }
+        },
+        {
+          "threshold": 40,
+          "date": {
+            "year": 2024,
+            "month": 9,
+            "day": 1
+          },
+          "elapsedMonths": 20,
+          "attendedMonths": 20,
+          "paid": {
+            "$dreamsBigInt": "16000"
+          }
+        },
+        {
+          "threshold": 70,
+          "date": {
+            "year": 2025,
+            "month": 12,
+            "day": 1
+          },
+          "elapsedMonths": 35,
+          "attendedMonths": 35,
+          "paid": {
+            "$dreamsBigInt": "28000"
+          }
+        },
+        {
+          "threshold": 90,
+          "date": {
+            "year": 2026,
+            "month": 10,
+            "day": 1
+          },
+          "elapsedMonths": 45,
+          "attendedMonths": 45,
+          "paid": {
+            "$dreamsBigInt": "36000"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "gaming",
+      "mode": "community",
+      "currency": "USD",
+      "monthlyFee": {
+        "$dreamsBigInt": "1600"
+      },
+      "start": {
+        "year": 2023,
+        "month": 1,
+        "day": 1
+      },
+      "end": {
+        "year": 2027,
+        "month": 1,
+        "day": 1
+      },
+      "proficiency": 96,
+      "attendedMonths": 48,
+      "missedMonths": 0,
+      "missedReasons": {},
+      "paid": {
+        "$dreamsBigInt": "76800"
+      },
+      "thresholds": [
+        {
+          "threshold": 15,
+          "date": {
+            "year": 2023,
+            "month": 9,
+            "day": 1
+          },
+          "elapsedMonths": 8,
+          "attendedMonths": 8,
+          "paid": {
+            "$dreamsBigInt": "12800"
+          }
+        },
+        {
+          "threshold": 40,
+          "date": {
+            "year": 2024,
+            "month": 9,
+            "day": 1
+          },
+          "elapsedMonths": 20,
+          "attendedMonths": 20,
+          "paid": {
+            "$dreamsBigInt": "32000"
+          }
+        },
+        {
+          "threshold": 70,
+          "date": {
+            "year": 2025,
+            "month": 12,
+            "day": 1
+          },
+          "elapsedMonths": 35,
+          "attendedMonths": 35,
+          "paid": {
+            "$dreamsBigInt": "56000"
+          }
+        },
+        {
+          "threshold": 90,
+          "date": {
+            "year": 2026,
+            "month": 10,
+            "day": 1
+          },
+          "elapsedMonths": 45,
+          "attendedMonths": 45,
+          "paid": {
+            "$dreamsBigInt": "72000"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "cooking",
+      "mode": "community",
+      "currency": "USD",
+      "monthlyFee": {
+        "$dreamsBigInt": "2800"
+      },
+      "start": {
+        "year": 2023,
+        "month": 1,
+        "day": 1
+      },
+      "end": {
+        "year": 2027,
+        "month": 1,
+        "day": 1
+      },
+      "proficiency": 96,
+      "attendedMonths": 48,
+      "missedMonths": 0,
+      "missedReasons": {},
+      "paid": {
+        "$dreamsBigInt": "134400"
+      },
+      "thresholds": [
+        {
+          "threshold": 15,
+          "date": {
+            "year": 2023,
+            "month": 9,
+            "day": 1
+          },
+          "elapsedMonths": 8,
+          "attendedMonths": 8,
+          "paid": {
+            "$dreamsBigInt": "22400"
+          }
+        },
+        {
+          "threshold": 40,
+          "date": {
+            "year": 2024,
+            "month": 9,
+            "day": 1
+          },
+          "elapsedMonths": 20,
+          "attendedMonths": 20,
+          "paid": {
+            "$dreamsBigInt": "56000"
+          }
+        },
+        {
+          "threshold": 70,
+          "date": {
+            "year": 2025,
+            "month": 12,
+            "day": 1
+          },
+          "elapsedMonths": 35,
+          "attendedMonths": 35,
+          "paid": {
+            "$dreamsBigInt": "98000"
+          }
+        },
+        {
+          "threshold": 90,
+          "date": {
+            "year": 2026,
+            "month": 10,
+            "day": 1
+          },
+          "elapsedMonths": 45,
+          "attendedMonths": 45,
+          "paid": {
+            "$dreamsBigInt": "126000"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "gardening",
+      "mode": "community",
+      "currency": "USD",
+      "monthlyFee": {
+        "$dreamsBigInt": "1600"
+      },
+      "start": {
+        "year": 2023,
+        "month": 1,
+        "day": 1
+      },
+      "end": {
+        "year": 2027,
+        "month": 1,
+        "day": 1
+      },
+      "proficiency": 96,
+      "attendedMonths": 48,
+      "missedMonths": 0,
+      "missedReasons": {},
+      "paid": {
+        "$dreamsBigInt": "76800"
+      },
+      "thresholds": [
+        {
+          "threshold": 15,
+          "date": {
+            "year": 2023,
+            "month": 9,
+            "day": 1
+          },
+          "elapsedMonths": 8,
+          "attendedMonths": 8,
+          "paid": {
+            "$dreamsBigInt": "12800"
+          }
+        },
+        {
+          "threshold": 40,
+          "date": {
+            "year": 2024,
+            "month": 9,
+            "day": 1
+          },
+          "elapsedMonths": 20,
+          "attendedMonths": 20,
+          "paid": {
+            "$dreamsBigInt": "32000"
+          }
+        },
+        {
+          "threshold": 70,
+          "date": {
+            "year": 2025,
+            "month": 12,
+            "day": 1
+          },
+          "elapsedMonths": 35,
+          "attendedMonths": 35,
+          "paid": {
+            "$dreamsBigInt": "56000"
+          }
+        },
+        {
+          "threshold": 90,
+          "date": {
+            "year": 2026,
+            "month": 10,
+            "day": 1
+          },
+          "elapsedMonths": 45,
+          "attendedMonths": 45,
+          "paid": {
+            "$dreamsBigInt": "72000"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "running",
+      "mode": "community",
+      "currency": "USD",
+      "monthlyFee": {
+        "$dreamsBigInt": "400"
+      },
+      "start": {
+        "year": 2023,
+        "month": 1,
+        "day": 1
+      },
+      "end": {
+        "year": 2027,
+        "month": 1,
+        "day": 1
+      },
+      "proficiency": 96,
+      "attendedMonths": 48,
+      "missedMonths": 0,
+      "missedReasons": {},
+      "paid": {
+        "$dreamsBigInt": "19200"
+      },
+      "thresholds": [
+        {
+          "threshold": 15,
+          "date": {
+            "year": 2023,
+            "month": 9,
+            "day": 1
+          },
+          "elapsedMonths": 8,
+          "attendedMonths": 8,
+          "paid": {
+            "$dreamsBigInt": "3200"
+          }
+        },
+        {
+          "threshold": 40,
+          "date": {
+            "year": 2024,
+            "month": 9,
+            "day": 1
+          },
+          "elapsedMonths": 20,
+          "attendedMonths": 20,
+          "paid": {
+            "$dreamsBigInt": "8000"
+          }
+        },
+        {
+          "threshold": 70,
+          "date": {
+            "year": 2025,
+            "month": 12,
+            "day": 1
+          },
+          "elapsedMonths": 35,
+          "attendedMonths": 35,
+          "paid": {
+            "$dreamsBigInt": "14000"
+          }
+        },
+        {
+          "threshold": 90,
+          "date": {
+            "year": 2026,
+            "month": 10,
+            "day": 1
+          },
+          "elapsedMonths": 45,
+          "attendedMonths": 45,
+          "paid": {
+            "$dreamsBigInt": "18000"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "swimming",
+      "mode": "community",
+      "currency": "USD",
+      "monthlyFee": {
+        "$dreamsBigInt": "1600"
+      },
+      "start": {
+        "year": 2023,
+        "month": 1,
+        "day": 1
+      },
+      "end": {
+        "year": 2027,
+        "month": 1,
+        "day": 1
+      },
+      "proficiency": 96,
+      "attendedMonths": 48,
+      "missedMonths": 0,
+      "missedReasons": {},
+      "paid": {
+        "$dreamsBigInt": "76800"
+      },
+      "thresholds": [
+        {
+          "threshold": 15,
+          "date": {
+            "year": 2023,
+            "month": 9,
+            "day": 1
+          },
+          "elapsedMonths": 8,
+          "attendedMonths": 8,
+          "paid": {
+            "$dreamsBigInt": "12800"
+          }
+        },
+        {
+          "threshold": 40,
+          "date": {
+            "year": 2024,
+            "month": 9,
+            "day": 1
+          },
+          "elapsedMonths": 20,
+          "attendedMonths": 20,
+          "paid": {
+            "$dreamsBigInt": "32000"
+          }
+        },
+        {
+          "threshold": 70,
+          "date": {
+            "year": 2025,
+            "month": 12,
+            "day": 1
+          },
+          "elapsedMonths": 35,
+          "attendedMonths": 35,
+          "paid": {
+            "$dreamsBigInt": "56000"
+          }
+        },
+        {
+          "threshold": 90,
+          "date": {
+            "year": 2026,
+            "month": 10,
+            "day": 1
+          },
+          "elapsedMonths": 45,
+          "attendedMonths": 45,
+          "paid": {
+            "$dreamsBigInt": "72000"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "writing",
+      "mode": "community",
+      "currency": "USD",
+      "monthlyFee": {
+        "$dreamsBigInt": "400"
+      },
+      "start": {
+        "year": 2023,
+        "month": 1,
+        "day": 1
+      },
+      "end": {
+        "year": 2027,
+        "month": 1,
+        "day": 1
+      },
+      "proficiency": 96,
+      "attendedMonths": 48,
+      "missedMonths": 0,
+      "missedReasons": {},
+      "paid": {
+        "$dreamsBigInt": "19200"
+      },
+      "thresholds": [
+        {
+          "threshold": 15,
+          "date": {
+            "year": 2023,
+            "month": 9,
+            "day": 1
+          },
+          "elapsedMonths": 8,
+          "attendedMonths": 8,
+          "paid": {
+            "$dreamsBigInt": "3200"
+          }
+        },
+        {
+          "threshold": 40,
+          "date": {
+            "year": 2024,
+            "month": 9,
+            "day": 1
+          },
+          "elapsedMonths": 20,
+          "attendedMonths": 20,
+          "paid": {
+            "$dreamsBigInt": "8000"
+          }
+        },
+        {
+          "threshold": 70,
+          "date": {
+            "year": 2025,
+            "month": 12,
+            "day": 1
+          },
+          "elapsedMonths": 35,
+          "attendedMonths": 35,
+          "paid": {
+            "$dreamsBigInt": "14000"
+          }
+        },
+        {
+          "threshold": 90,
+          "date": {
+            "year": 2026,
+            "month": 10,
+            "day": 1
+          },
+          "elapsedMonths": 45,
+          "attendedMonths": 45,
+          "paid": {
+            "$dreamsBigInt": "18000"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "pottery",
+      "mode": "community",
+      "currency": "USD",
+      "monthlyFee": {
+        "$dreamsBigInt": "2400"
+      },
+      "start": {
+        "year": 2023,
+        "month": 1,
+        "day": 1
+      },
+      "end": {
+        "year": 2027,
+        "month": 1,
+        "day": 1
+      },
+      "proficiency": 96,
+      "attendedMonths": 48,
+      "missedMonths": 0,
+      "missedReasons": {},
+      "paid": {
+        "$dreamsBigInt": "115200"
+      },
+      "thresholds": [
+        {
+          "threshold": 15,
+          "date": {
+            "year": 2023,
+            "month": 9,
+            "day": 1
+          },
+          "elapsedMonths": 8,
+          "attendedMonths": 8,
+          "paid": {
+            "$dreamsBigInt": "19200"
+          }
+        },
+        {
+          "threshold": 40,
+          "date": {
+            "year": 2024,
+            "month": 9,
+            "day": 1
+          },
+          "elapsedMonths": 20,
+          "attendedMonths": 20,
+          "paid": {
+            "$dreamsBigInt": "48000"
+          }
+        },
+        {
+          "threshold": 70,
+          "date": {
+            "year": 2025,
+            "month": 12,
+            "day": 1
+          },
+          "elapsedMonths": 35,
+          "attendedMonths": 35,
+          "paid": {
+            "$dreamsBigInt": "84000"
+          }
+        },
+        {
+          "threshold": 90,
+          "date": {
+            "year": 2026,
+            "month": 10,
+            "day": 1
+          },
+          "elapsedMonths": 45,
+          "attendedMonths": 45,
+          "paid": {
+            "$dreamsBigInt": "108000"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "singing",
+      "mode": "community",
+      "currency": "USD",
+      "monthlyFee": {
+        "$dreamsBigInt": "1200"
+      },
+      "start": {
+        "year": 2023,
+        "month": 1,
+        "day": 1
+      },
+      "end": {
+        "year": 2027,
+        "month": 1,
+        "day": 1
+      },
+      "proficiency": 96,
+      "attendedMonths": 48,
+      "missedMonths": 0,
+      "missedReasons": {},
+      "paid": {
+        "$dreamsBigInt": "57600"
+      },
+      "thresholds": [
+        {
+          "threshold": 15,
+          "date": {
+            "year": 2023,
+            "month": 9,
+            "day": 1
+          },
+          "elapsedMonths": 8,
+          "attendedMonths": 8,
+          "paid": {
+            "$dreamsBigInt": "9600"
+          }
+        },
+        {
+          "threshold": 40,
+          "date": {
+            "year": 2024,
+            "month": 9,
+            "day": 1
+          },
+          "elapsedMonths": 20,
+          "attendedMonths": 20,
+          "paid": {
+            "$dreamsBigInt": "24000"
+          }
+        },
+        {
+          "threshold": 70,
+          "date": {
+            "year": 2025,
+            "month": 12,
+            "day": 1
+          },
+          "elapsedMonths": 35,
+          "attendedMonths": 35,
+          "paid": {
+            "$dreamsBigInt": "42000"
+          }
+        },
+        {
+          "threshold": 90,
+          "date": {
+            "year": 2026,
+            "month": 10,
+            "day": 1
+          },
+          "elapsedMonths": 45,
+          "attendedMonths": 45,
+          "paid": {
+            "$dreamsBigInt": "54000"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "coding",
+      "mode": "community",
+      "currency": "USD",
+      "monthlyFee": {
+        "$dreamsBigInt": "800"
+      },
+      "start": {
+        "year": 2023,
+        "month": 1,
+        "day": 1
+      },
+      "end": {
+        "year": 2027,
+        "month": 1,
+        "day": 1
+      },
+      "proficiency": 96,
+      "attendedMonths": 48,
+      "missedMonths": 0,
+      "missedReasons": {},
+      "paid": {
+        "$dreamsBigInt": "38400"
+      },
+      "thresholds": [
+        {
+          "threshold": 15,
+          "date": {
+            "year": 2023,
+            "month": 9,
+            "day": 1
+          },
+          "elapsedMonths": 8,
+          "attendedMonths": 8,
+          "paid": {
+            "$dreamsBigInt": "6400"
+          }
+        },
+        {
+          "threshold": 40,
+          "date": {
+            "year": 2024,
+            "month": 9,
+            "day": 1
+          },
+          "elapsedMonths": 20,
+          "attendedMonths": 20,
+          "paid": {
+            "$dreamsBigInt": "16000"
+          }
+        },
+        {
+          "threshold": 70,
+          "date": {
+            "year": 2025,
+            "month": 12,
+            "day": 1
+          },
+          "elapsedMonths": 35,
+          "attendedMonths": 35,
+          "paid": {
+            "$dreamsBigInt": "28000"
+          }
+        },
+        {
+          "threshold": 90,
+          "date": {
+            "year": 2026,
+            "month": 10,
+            "day": 1
+          },
+          "elapsedMonths": 45,
+          "attendedMonths": 45,
+          "paid": {
+            "$dreamsBigInt": "36000"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "fishing",
+      "mode": "community",
+      "currency": "USD",
+      "monthlyFee": {
+        "$dreamsBigInt": "1200"
+      },
+      "start": {
+        "year": 2023,
+        "month": 1,
+        "day": 1
+      },
+      "end": {
+        "year": 2027,
+        "month": 1,
+        "day": 1
+      },
+      "proficiency": 96,
+      "attendedMonths": 48,
+      "missedMonths": 0,
+      "missedReasons": {},
+      "paid": {
+        "$dreamsBigInt": "57600"
+      },
+      "thresholds": [
+        {
+          "threshold": 15,
+          "date": {
+            "year": 2023,
+            "month": 9,
+            "day": 1
+          },
+          "elapsedMonths": 8,
+          "attendedMonths": 8,
+          "paid": {
+            "$dreamsBigInt": "9600"
+          }
+        },
+        {
+          "threshold": 40,
+          "date": {
+            "year": 2024,
+            "month": 9,
+            "day": 1
+          },
+          "elapsedMonths": 20,
+          "attendedMonths": 20,
+          "paid": {
+            "$dreamsBigInt": "24000"
+          }
+        },
+        {
+          "threshold": 70,
+          "date": {
+            "year": 2025,
+            "month": 12,
+            "day": 1
+          },
+          "elapsedMonths": 35,
+          "attendedMonths": 35,
+          "paid": {
+            "$dreamsBigInt": "42000"
+          }
+        },
+        {
+          "threshold": 90,
+          "date": {
+            "year": 2026,
+            "month": 10,
+            "day": 1
+          },
+          "elapsedMonths": 45,
+          "attendedMonths": 45,
+          "paid": {
+            "$dreamsBigInt": "54000"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "dancing",
+      "mode": "community",
+      "currency": "USD",
+      "monthlyFee": {
+        "$dreamsBigInt": "1200"
+      },
+      "start": {
+        "year": 2023,
+        "month": 1,
+        "day": 1
+      },
+      "end": {
+        "year": 2027,
+        "month": 1,
+        "day": 1
+      },
+      "proficiency": 96,
+      "attendedMonths": 48,
+      "missedMonths": 0,
+      "missedReasons": {},
+      "paid": {
+        "$dreamsBigInt": "57600"
+      },
+      "thresholds": [
+        {
+          "threshold": 15,
+          "date": {
+            "year": 2023,
+            "month": 9,
+            "day": 1
+          },
+          "elapsedMonths": 8,
+          "attendedMonths": 8,
+          "paid": {
+            "$dreamsBigInt": "9600"
+          }
+        },
+        {
+          "threshold": 40,
+          "date": {
+            "year": 2024,
+            "month": 9,
+            "day": 1
+          },
+          "elapsedMonths": 20,
+          "attendedMonths": 20,
+          "paid": {
+            "$dreamsBigInt": "24000"
+          }
+        },
+        {
+          "threshold": 70,
+          "date": {
+            "year": 2025,
+            "month": 12,
+            "day": 1
+          },
+          "elapsedMonths": 35,
+          "attendedMonths": 35,
+          "paid": {
+            "$dreamsBigInt": "42000"
+          }
+        },
+        {
+          "threshold": 90,
+          "date": {
+            "year": 2026,
+            "month": 10,
+            "day": 1
+          },
+          "elapsedMonths": 45,
+          "attendedMonths": 45,
+          "paid": {
+            "$dreamsBigInt": "54000"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "guitar",
+      "mode": "lessons",
+      "currency": "USD",
+      "monthlyFee": {
+        "$dreamsBigInt": "9600"
+      },
+      "start": {
+        "year": 2023,
+        "month": 1,
+        "day": 1
+      },
+      "end": {
+        "year": 2027,
+        "month": 1,
+        "day": 1
+      },
+      "proficiency": 100,
+      "attendedMonths": 28,
+      "missedMonths": 20,
+      "missedReasons": {
+        "fatigue": 20
+      },
+      "paid": {
+        "$dreamsBigInt": "268800"
+      },
+      "thresholds": [
+        {
+          "threshold": 15,
+          "date": {
+            "year": 2023,
+            "month": 5,
+            "day": 1
+          },
+          "elapsedMonths": 4,
+          "attendedMonths": 4,
+          "paid": {
+            "$dreamsBigInt": "38400"
+          }
+        },
+        {
+          "threshold": 40,
+          "date": {
+            "year": 2023,
+            "month": 11,
+            "day": 1
+          },
+          "elapsedMonths": 10,
+          "attendedMonths": 10,
+          "paid": {
+            "$dreamsBigInt": "96000"
+          }
+        },
+        {
+          "threshold": 70,
+          "date": {
+            "year": 2024,
+            "month": 10,
+            "day": 1
+          },
+          "elapsedMonths": 21,
+          "attendedMonths": 18,
+          "paid": {
+            "$dreamsBigInt": "172800"
+          }
+        },
+        {
+          "threshold": 90,
+          "date": {
+            "year": 2025,
+            "month": 10,
+            "day": 1
+          },
+          "elapsedMonths": 33,
+          "attendedMonths": 23,
+          "paid": {
+            "$dreamsBigInt": "220800"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "painting",
+      "mode": "lessons",
+      "currency": "USD",
+      "monthlyFee": {
+        "$dreamsBigInt": "8000"
+      },
+      "start": {
+        "year": 2023,
+        "month": 1,
+        "day": 1
+      },
+      "end": {
+        "year": 2027,
+        "month": 1,
+        "day": 1
+      },
+      "proficiency": 92,
+      "attendedMonths": 23,
+      "missedMonths": 25,
+      "missedReasons": {
+        "fatigue": 25
+      },
+      "paid": {
+        "$dreamsBigInt": "184000"
+      },
+      "thresholds": [
+        {
+          "threshold": 15,
+          "date": {
+            "year": 2023,
+            "month": 5,
+            "day": 1
+          },
+          "elapsedMonths": 4,
+          "attendedMonths": 4,
+          "paid": {
+            "$dreamsBigInt": "32000"
+          }
+        },
+        {
+          "threshold": 40,
+          "date": {
+            "year": 2023,
+            "month": 11,
+            "day": 1
+          },
+          "elapsedMonths": 10,
+          "attendedMonths": 10,
+          "paid": {
+            "$dreamsBigInt": "80000"
+          }
+        },
+        {
+          "threshold": 70,
+          "date": {
+            "year": 2025,
+            "month": 2,
+            "day": 1
+          },
+          "elapsedMonths": 25,
+          "attendedMonths": 18,
+          "paid": {
+            "$dreamsBigInt": "144000"
+          }
+        },
+        {
+          "threshold": 90,
+          "date": {
+            "year": 2026,
+            "month": 4,
+            "day": 1
+          },
+          "elapsedMonths": 39,
+          "attendedMonths": 23,
+          "paid": {
+            "$dreamsBigInt": "184000"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "photography",
+      "mode": "lessons",
+      "currency": "USD",
+      "monthlyFee": {
+        "$dreamsBigInt": "11200"
+      },
+      "start": {
+        "year": 2023,
+        "month": 1,
+        "day": 1
+      },
+      "end": {
+        "year": 2027,
+        "month": 1,
+        "day": 1
+      },
+      "proficiency": 100,
+      "attendedMonths": 28,
+      "missedMonths": 20,
+      "missedReasons": {
+        "fatigue": 20
+      },
+      "paid": {
+        "$dreamsBigInt": "313600"
+      },
+      "thresholds": [
+        {
+          "threshold": 15,
+          "date": {
+            "year": 2023,
+            "month": 5,
+            "day": 1
+          },
+          "elapsedMonths": 4,
+          "attendedMonths": 4,
+          "paid": {
+            "$dreamsBigInt": "44800"
+          }
+        },
+        {
+          "threshold": 40,
+          "date": {
+            "year": 2023,
+            "month": 11,
+            "day": 1
+          },
+          "elapsedMonths": 10,
+          "attendedMonths": 10,
+          "paid": {
+            "$dreamsBigInt": "112000"
+          }
+        },
+        {
+          "threshold": 70,
+          "date": {
+            "year": 2024,
+            "month": 10,
+            "day": 1
+          },
+          "elapsedMonths": 21,
+          "attendedMonths": 18,
+          "paid": {
+            "$dreamsBigInt": "201600"
+          }
+        },
+        {
+          "threshold": 90,
+          "date": {
+            "year": 2025,
+            "month": 10,
+            "day": 1
+          },
+          "elapsedMonths": 33,
+          "attendedMonths": 23,
+          "paid": {
+            "$dreamsBigInt": "257600"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "chess",
+      "mode": "lessons",
+      "currency": "USD",
+      "monthlyFee": {
+        "$dreamsBigInt": "4800"
+      },
+      "start": {
+        "year": 2023,
+        "month": 1,
+        "day": 1
+      },
+      "end": {
+        "year": 2027,
+        "month": 1,
+        "day": 1
+      },
+      "proficiency": 92,
+      "attendedMonths": 23,
+      "missedMonths": 25,
+      "missedReasons": {
+        "fatigue": 25
+      },
+      "paid": {
+        "$dreamsBigInt": "110400"
+      },
+      "thresholds": [
+        {
+          "threshold": 15,
+          "date": {
+            "year": 2023,
+            "month": 5,
+            "day": 1
+          },
+          "elapsedMonths": 4,
+          "attendedMonths": 4,
+          "paid": {
+            "$dreamsBigInt": "19200"
+          }
+        },
+        {
+          "threshold": 40,
+          "date": {
+            "year": 2023,
+            "month": 11,
+            "day": 1
+          },
+          "elapsedMonths": 10,
+          "attendedMonths": 10,
+          "paid": {
+            "$dreamsBigInt": "48000"
+          }
+        },
+        {
+          "threshold": 70,
+          "date": {
+            "year": 2025,
+            "month": 2,
+            "day": 1
+          },
+          "elapsedMonths": 25,
+          "attendedMonths": 18,
+          "paid": {
+            "$dreamsBigInt": "86400"
+          }
+        },
+        {
+          "threshold": 90,
+          "date": {
+            "year": 2026,
+            "month": 4,
+            "day": 1
+          },
+          "elapsedMonths": 39,
+          "attendedMonths": 23,
+          "paid": {
+            "$dreamsBigInt": "110400"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "reading",
+      "mode": "lessons",
+      "currency": "USD",
+      "monthlyFee": {
+        "$dreamsBigInt": "3200"
+      },
+      "start": {
+        "year": 2023,
+        "month": 1,
+        "day": 1
+      },
+      "end": {
+        "year": 2027,
+        "month": 1,
+        "day": 1
+      },
+      "proficiency": 100,
+      "attendedMonths": 28,
+      "missedMonths": 20,
+      "missedReasons": {
+        "fatigue": 20
+      },
+      "paid": {
+        "$dreamsBigInt": "89600"
+      },
+      "thresholds": [
+        {
+          "threshold": 15,
+          "date": {
+            "year": 2023,
+            "month": 5,
+            "day": 1
+          },
+          "elapsedMonths": 4,
+          "attendedMonths": 4,
+          "paid": {
+            "$dreamsBigInt": "12800"
+          }
+        },
+        {
+          "threshold": 40,
+          "date": {
+            "year": 2023,
+            "month": 11,
+            "day": 1
+          },
+          "elapsedMonths": 10,
+          "attendedMonths": 10,
+          "paid": {
+            "$dreamsBigInt": "32000"
+          }
+        },
+        {
+          "threshold": 70,
+          "date": {
+            "year": 2024,
+            "month": 10,
+            "day": 1
+          },
+          "elapsedMonths": 21,
+          "attendedMonths": 18,
+          "paid": {
+            "$dreamsBigInt": "57600"
+          }
+        },
+        {
+          "threshold": 90,
+          "date": {
+            "year": 2025,
+            "month": 10,
+            "day": 1
+          },
+          "elapsedMonths": 33,
+          "attendedMonths": 23,
+          "paid": {
+            "$dreamsBigInt": "73600"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "gaming",
+      "mode": "lessons",
+      "currency": "USD",
+      "monthlyFee": {
+        "$dreamsBigInt": "6400"
+      },
+      "start": {
+        "year": 2023,
+        "month": 1,
+        "day": 1
+      },
+      "end": {
+        "year": 2027,
+        "month": 1,
+        "day": 1
+      },
+      "proficiency": 92,
+      "attendedMonths": 23,
+      "missedMonths": 25,
+      "missedReasons": {
+        "fatigue": 25
+      },
+      "paid": {
+        "$dreamsBigInt": "147200"
+      },
+      "thresholds": [
+        {
+          "threshold": 15,
+          "date": {
+            "year": 2023,
+            "month": 5,
+            "day": 1
+          },
+          "elapsedMonths": 4,
+          "attendedMonths": 4,
+          "paid": {
+            "$dreamsBigInt": "25600"
+          }
+        },
+        {
+          "threshold": 40,
+          "date": {
+            "year": 2023,
+            "month": 11,
+            "day": 1
+          },
+          "elapsedMonths": 10,
+          "attendedMonths": 10,
+          "paid": {
+            "$dreamsBigInt": "64000"
+          }
+        },
+        {
+          "threshold": 70,
+          "date": {
+            "year": 2025,
+            "month": 2,
+            "day": 1
+          },
+          "elapsedMonths": 25,
+          "attendedMonths": 18,
+          "paid": {
+            "$dreamsBigInt": "115200"
+          }
+        },
+        {
+          "threshold": 90,
+          "date": {
+            "year": 2026,
+            "month": 4,
+            "day": 1
+          },
+          "elapsedMonths": 39,
+          "attendedMonths": 23,
+          "paid": {
+            "$dreamsBigInt": "147200"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "cooking",
+      "mode": "lessons",
+      "currency": "USD",
+      "monthlyFee": {
+        "$dreamsBigInt": "11200"
+      },
+      "start": {
+        "year": 2023,
+        "month": 1,
+        "day": 1
+      },
+      "end": {
+        "year": 2027,
+        "month": 1,
+        "day": 1
+      },
+      "proficiency": 100,
+      "attendedMonths": 28,
+      "missedMonths": 20,
+      "missedReasons": {
+        "fatigue": 20
+      },
+      "paid": {
+        "$dreamsBigInt": "313600"
+      },
+      "thresholds": [
+        {
+          "threshold": 15,
+          "date": {
+            "year": 2023,
+            "month": 5,
+            "day": 1
+          },
+          "elapsedMonths": 4,
+          "attendedMonths": 4,
+          "paid": {
+            "$dreamsBigInt": "44800"
+          }
+        },
+        {
+          "threshold": 40,
+          "date": {
+            "year": 2023,
+            "month": 11,
+            "day": 1
+          },
+          "elapsedMonths": 10,
+          "attendedMonths": 10,
+          "paid": {
+            "$dreamsBigInt": "112000"
+          }
+        },
+        {
+          "threshold": 70,
+          "date": {
+            "year": 2024,
+            "month": 10,
+            "day": 1
+          },
+          "elapsedMonths": 21,
+          "attendedMonths": 18,
+          "paid": {
+            "$dreamsBigInt": "201600"
+          }
+        },
+        {
+          "threshold": 90,
+          "date": {
+            "year": 2025,
+            "month": 10,
+            "day": 1
+          },
+          "elapsedMonths": 33,
+          "attendedMonths": 23,
+          "paid": {
+            "$dreamsBigInt": "257600"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "gardening",
+      "mode": "lessons",
+      "currency": "USD",
+      "monthlyFee": {
+        "$dreamsBigInt": "6400"
+      },
+      "start": {
+        "year": 2023,
+        "month": 1,
+        "day": 1
+      },
+      "end": {
+        "year": 2027,
+        "month": 1,
+        "day": 1
+      },
+      "proficiency": 92,
+      "attendedMonths": 23,
+      "missedMonths": 25,
+      "missedReasons": {
+        "fatigue": 25
+      },
+      "paid": {
+        "$dreamsBigInt": "147200"
+      },
+      "thresholds": [
+        {
+          "threshold": 15,
+          "date": {
+            "year": 2023,
+            "month": 5,
+            "day": 1
+          },
+          "elapsedMonths": 4,
+          "attendedMonths": 4,
+          "paid": {
+            "$dreamsBigInt": "25600"
+          }
+        },
+        {
+          "threshold": 40,
+          "date": {
+            "year": 2023,
+            "month": 11,
+            "day": 1
+          },
+          "elapsedMonths": 10,
+          "attendedMonths": 10,
+          "paid": {
+            "$dreamsBigInt": "64000"
+          }
+        },
+        {
+          "threshold": 70,
+          "date": {
+            "year": 2025,
+            "month": 2,
+            "day": 1
+          },
+          "elapsedMonths": 25,
+          "attendedMonths": 18,
+          "paid": {
+            "$dreamsBigInt": "115200"
+          }
+        },
+        {
+          "threshold": 90,
+          "date": {
+            "year": 2026,
+            "month": 4,
+            "day": 1
+          },
+          "elapsedMonths": 39,
+          "attendedMonths": 23,
+          "paid": {
+            "$dreamsBigInt": "147200"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "running",
+      "mode": "lessons",
+      "currency": "USD",
+      "monthlyFee": {
+        "$dreamsBigInt": "1600"
+      },
+      "start": {
+        "year": 2023,
+        "month": 1,
+        "day": 1
+      },
+      "end": {
+        "year": 2028,
+        "month": 1,
+        "day": 1
+      },
+      "proficiency": 100,
+      "attendedMonths": 34,
+      "missedMonths": 26,
+      "missedReasons": {
+        "fatigue": 26
+      },
+      "paid": {
+        "$dreamsBigInt": "54400"
+      },
+      "thresholds": [
+        {
+          "threshold": 15,
+          "date": {
+            "year": 2023,
+            "month": 5,
+            "day": 1
+          },
+          "elapsedMonths": 4,
+          "attendedMonths": 4,
+          "paid": {
+            "$dreamsBigInt": "6400"
+          }
+        },
+        {
+          "threshold": 40,
+          "date": {
+            "year": 2023,
+            "month": 11,
+            "day": 1
+          },
+          "elapsedMonths": 10,
+          "attendedMonths": 10,
+          "paid": {
+            "$dreamsBigInt": "16000"
+          }
+        },
+        {
+          "threshold": 70,
+          "date": {
+            "year": 2024,
+            "month": 7,
+            "day": 1
+          },
+          "elapsedMonths": 18,
+          "attendedMonths": 18,
+          "paid": {
+            "$dreamsBigInt": "28800"
+          }
+        },
+        {
+          "threshold": 90,
+          "date": {
+            "year": 2025,
+            "month": 7,
+            "day": 1
+          },
+          "elapsedMonths": 30,
+          "attendedMonths": 23,
+          "paid": {
+            "$dreamsBigInt": "36800"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "swimming",
+      "mode": "lessons",
+      "currency": "USD",
+      "monthlyFee": {
+        "$dreamsBigInt": "6400"
+      },
+      "start": {
+        "year": 2023,
+        "month": 1,
+        "day": 1
+      },
+      "end": {
+        "year": 2028,
+        "month": 1,
+        "day": 1
+      },
+      "proficiency": 96,
+      "attendedMonths": 24,
+      "missedMonths": 36,
+      "missedReasons": {
+        "fatigue": 36
+      },
+      "paid": {
+        "$dreamsBigInt": "153600"
+      },
+      "thresholds": [
+        {
+          "threshold": 15,
+          "date": {
+            "year": 2023,
+            "month": 5,
+            "day": 1
+          },
+          "elapsedMonths": 4,
+          "attendedMonths": 4,
+          "paid": {
+            "$dreamsBigInt": "25600"
+          }
+        },
+        {
+          "threshold": 40,
+          "date": {
+            "year": 2023,
+            "month": 11,
+            "day": 1
+          },
+          "elapsedMonths": 10,
+          "attendedMonths": 10,
+          "paid": {
+            "$dreamsBigInt": "64000"
+          }
+        },
+        {
+          "threshold": 70,
+          "date": {
+            "year": 2025,
+            "month": 3,
+            "day": 1
+          },
+          "elapsedMonths": 26,
+          "attendedMonths": 18,
+          "paid": {
+            "$dreamsBigInt": "115200"
+          }
+        },
+        {
+          "threshold": 90,
+          "date": {
+            "year": 2027,
+            "month": 2,
+            "day": 1
+          },
+          "elapsedMonths": 49,
+          "attendedMonths": 23,
+          "paid": {
+            "$dreamsBigInt": "147200"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "writing",
+      "mode": "lessons",
+      "currency": "USD",
+      "monthlyFee": {
+        "$dreamsBigInt": "1600"
+      },
+      "start": {
+        "year": 2023,
+        "month": 1,
+        "day": 1
+      },
+      "end": {
+        "year": 2028,
+        "month": 1,
+        "day": 1
+      },
+      "proficiency": 100,
+      "attendedMonths": 34,
+      "missedMonths": 26,
+      "missedReasons": {
+        "fatigue": 26
+      },
+      "paid": {
+        "$dreamsBigInt": "54400"
+      },
+      "thresholds": [
+        {
+          "threshold": 15,
+          "date": {
+            "year": 2023,
+            "month": 5,
+            "day": 1
+          },
+          "elapsedMonths": 4,
+          "attendedMonths": 4,
+          "paid": {
+            "$dreamsBigInt": "6400"
+          }
+        },
+        {
+          "threshold": 40,
+          "date": {
+            "year": 2023,
+            "month": 11,
+            "day": 1
+          },
+          "elapsedMonths": 10,
+          "attendedMonths": 10,
+          "paid": {
+            "$dreamsBigInt": "16000"
+          }
+        },
+        {
+          "threshold": 70,
+          "date": {
+            "year": 2024,
+            "month": 7,
+            "day": 1
+          },
+          "elapsedMonths": 18,
+          "attendedMonths": 18,
+          "paid": {
+            "$dreamsBigInt": "28800"
+          }
+        },
+        {
+          "threshold": 90,
+          "date": {
+            "year": 2025,
+            "month": 7,
+            "day": 1
+          },
+          "elapsedMonths": 30,
+          "attendedMonths": 23,
+          "paid": {
+            "$dreamsBigInt": "36800"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "pottery",
+      "mode": "lessons",
+      "currency": "USD",
+      "monthlyFee": {
+        "$dreamsBigInt": "9600"
+      },
+      "start": {
+        "year": 2023,
+        "month": 1,
+        "day": 1
+      },
+      "end": {
+        "year": 2028,
+        "month": 1,
+        "day": 1
+      },
+      "proficiency": 96,
+      "attendedMonths": 24,
+      "missedMonths": 36,
+      "missedReasons": {
+        "fatigue": 36
+      },
+      "paid": {
+        "$dreamsBigInt": "230400"
+      },
+      "thresholds": [
+        {
+          "threshold": 15,
+          "date": {
+            "year": 2023,
+            "month": 5,
+            "day": 1
+          },
+          "elapsedMonths": 4,
+          "attendedMonths": 4,
+          "paid": {
+            "$dreamsBigInt": "38400"
+          }
+        },
+        {
+          "threshold": 40,
+          "date": {
+            "year": 2023,
+            "month": 11,
+            "day": 1
+          },
+          "elapsedMonths": 10,
+          "attendedMonths": 10,
+          "paid": {
+            "$dreamsBigInt": "96000"
+          }
+        },
+        {
+          "threshold": 70,
+          "date": {
+            "year": 2025,
+            "month": 3,
+            "day": 1
+          },
+          "elapsedMonths": 26,
+          "attendedMonths": 18,
+          "paid": {
+            "$dreamsBigInt": "172800"
+          }
+        },
+        {
+          "threshold": 90,
+          "date": {
+            "year": 2027,
+            "month": 2,
+            "day": 1
+          },
+          "elapsedMonths": 49,
+          "attendedMonths": 23,
+          "paid": {
+            "$dreamsBigInt": "220800"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "singing",
+      "mode": "lessons",
+      "currency": "USD",
+      "monthlyFee": {
+        "$dreamsBigInt": "4800"
+      },
+      "start": {
+        "year": 2023,
+        "month": 1,
+        "day": 1
+      },
+      "end": {
+        "year": 2028,
+        "month": 1,
+        "day": 1
+      },
+      "proficiency": 100,
+      "attendedMonths": 34,
+      "missedMonths": 26,
+      "missedReasons": {
+        "fatigue": 26
+      },
+      "paid": {
+        "$dreamsBigInt": "163200"
+      },
+      "thresholds": [
+        {
+          "threshold": 15,
+          "date": {
+            "year": 2023,
+            "month": 5,
+            "day": 1
+          },
+          "elapsedMonths": 4,
+          "attendedMonths": 4,
+          "paid": {
+            "$dreamsBigInt": "19200"
+          }
+        },
+        {
+          "threshold": 40,
+          "date": {
+            "year": 2023,
+            "month": 11,
+            "day": 1
+          },
+          "elapsedMonths": 10,
+          "attendedMonths": 10,
+          "paid": {
+            "$dreamsBigInt": "48000"
+          }
+        },
+        {
+          "threshold": 70,
+          "date": {
+            "year": 2024,
+            "month": 7,
+            "day": 1
+          },
+          "elapsedMonths": 18,
+          "attendedMonths": 18,
+          "paid": {
+            "$dreamsBigInt": "86400"
+          }
+        },
+        {
+          "threshold": 90,
+          "date": {
+            "year": 2025,
+            "month": 7,
+            "day": 1
+          },
+          "elapsedMonths": 30,
+          "attendedMonths": 23,
+          "paid": {
+            "$dreamsBigInt": "110400"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "coding",
+      "mode": "lessons",
+      "currency": "USD",
+      "monthlyFee": {
+        "$dreamsBigInt": "3200"
+      },
+      "start": {
+        "year": 2023,
+        "month": 1,
+        "day": 1
+      },
+      "end": {
+        "year": 2028,
+        "month": 1,
+        "day": 1
+      },
+      "proficiency": 96,
+      "attendedMonths": 24,
+      "missedMonths": 36,
+      "missedReasons": {
+        "fatigue": 36
+      },
+      "paid": {
+        "$dreamsBigInt": "76800"
+      },
+      "thresholds": [
+        {
+          "threshold": 15,
+          "date": {
+            "year": 2023,
+            "month": 5,
+            "day": 1
+          },
+          "elapsedMonths": 4,
+          "attendedMonths": 4,
+          "paid": {
+            "$dreamsBigInt": "12800"
+          }
+        },
+        {
+          "threshold": 40,
+          "date": {
+            "year": 2023,
+            "month": 11,
+            "day": 1
+          },
+          "elapsedMonths": 10,
+          "attendedMonths": 10,
+          "paid": {
+            "$dreamsBigInt": "32000"
+          }
+        },
+        {
+          "threshold": 70,
+          "date": {
+            "year": 2025,
+            "month": 3,
+            "day": 1
+          },
+          "elapsedMonths": 26,
+          "attendedMonths": 18,
+          "paid": {
+            "$dreamsBigInt": "57600"
+          }
+        },
+        {
+          "threshold": 90,
+          "date": {
+            "year": 2027,
+            "month": 2,
+            "day": 1
+          },
+          "elapsedMonths": 49,
+          "attendedMonths": 23,
+          "paid": {
+            "$dreamsBigInt": "73600"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "fishing",
+      "mode": "lessons",
+      "currency": "USD",
+      "monthlyFee": {
+        "$dreamsBigInt": "4800"
+      },
+      "start": {
+        "year": 2023,
+        "month": 1,
+        "day": 1
+      },
+      "end": {
+        "year": 2028,
+        "month": 1,
+        "day": 1
+      },
+      "proficiency": 100,
+      "attendedMonths": 34,
+      "missedMonths": 26,
+      "missedReasons": {
+        "fatigue": 26
+      },
+      "paid": {
+        "$dreamsBigInt": "163200"
+      },
+      "thresholds": [
+        {
+          "threshold": 15,
+          "date": {
+            "year": 2023,
+            "month": 5,
+            "day": 1
+          },
+          "elapsedMonths": 4,
+          "attendedMonths": 4,
+          "paid": {
+            "$dreamsBigInt": "19200"
+          }
+        },
+        {
+          "threshold": 40,
+          "date": {
+            "year": 2023,
+            "month": 11,
+            "day": 1
+          },
+          "elapsedMonths": 10,
+          "attendedMonths": 10,
+          "paid": {
+            "$dreamsBigInt": "48000"
+          }
+        },
+        {
+          "threshold": 70,
+          "date": {
+            "year": 2024,
+            "month": 7,
+            "day": 1
+          },
+          "elapsedMonths": 18,
+          "attendedMonths": 18,
+          "paid": {
+            "$dreamsBigInt": "86400"
+          }
+        },
+        {
+          "threshold": 90,
+          "date": {
+            "year": 2025,
+            "month": 7,
+            "day": 1
+          },
+          "elapsedMonths": 30,
+          "attendedMonths": 23,
+          "paid": {
+            "$dreamsBigInt": "110400"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "dancing",
+      "mode": "lessons",
+      "currency": "USD",
+      "monthlyFee": {
+        "$dreamsBigInt": "4800"
+      },
+      "start": {
+        "year": 2023,
+        "month": 1,
+        "day": 1
+      },
+      "end": {
+        "year": 2028,
+        "month": 1,
+        "day": 1
+      },
+      "proficiency": 96,
+      "attendedMonths": 24,
+      "missedMonths": 36,
+      "missedReasons": {
+        "fatigue": 36
+      },
+      "paid": {
+        "$dreamsBigInt": "115200"
+      },
+      "thresholds": [
+        {
+          "threshold": 15,
+          "date": {
+            "year": 2023,
+            "month": 5,
+            "day": 1
+          },
+          "elapsedMonths": 4,
+          "attendedMonths": 4,
+          "paid": {
+            "$dreamsBigInt": "19200"
+          }
+        },
+        {
+          "threshold": 40,
+          "date": {
+            "year": 2023,
+            "month": 11,
+            "day": 1
+          },
+          "elapsedMonths": 10,
+          "attendedMonths": 10,
+          "paid": {
+            "$dreamsBigInt": "48000"
+          }
+        },
+        {
+          "threshold": 70,
+          "date": {
+            "year": 2025,
+            "month": 3,
+            "day": 1
+          },
+          "elapsedMonths": 26,
+          "attendedMonths": 18,
+          "paid": {
+            "$dreamsBigInt": "86400"
+          }
+        },
+        {
+          "threshold": 90,
+          "date": {
+            "year": 2027,
+            "month": 2,
+            "day": 1
+          },
+          "elapsedMonths": 49,
+          "attendedMonths": 23,
+          "paid": {
+            "$dreamsBigInt": "110400"
+          }
+        }
+      ]
+    }
+  ]
+}

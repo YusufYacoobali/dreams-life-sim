@@ -1,0 +1,29 @@
+{
+  "scope": "One predetermined11-sample follow-up per source on the largest initial legacy gap and the largest initial enabled-vs-plain gap. The enabled follow-up compares identical explicitly enabled inputs on baseline and final sources. No other test/export/soak workers running; raw samples retained. Not native timing.",
+  "initialLargestLegacyRatio": 1.1940060471551686,
+  "initialLargestEnabledVersusPlainRatio": 1.3654803179783754,
+  "comparisons": [
+    {
+      "name": "age90-firstAgeUp",
+      "samples": 11,
+      "beforeMedianMs": 332.00771499999973,
+      "afterMedianMs": 317.05184999999983,
+      "beforeP95Ms": 365.8354399999989,
+      "afterP95Ms": 348.1336550000051,
+      "ratio": 0.95495326064938,
+      "exactCompleteOutcome": true,
+      "inputFileSha256": "25b4f30388f0a90147c20bf7246c5cd4e77f4b9413c2ce05cdd691a57ab850eb"
+    },
+    {
+      "name": "age50-enabled-routine",
+      "samples": 11,
+      "beforeMedianMs": 33.931634000000486,
+      "afterMedianMs": 34.91288199999963,
+      "beforeP95Ms": 42.71347800000058,
+      "afterP95Ms": 38.16492600000038,
+      "ratio": 1.0289183833587008,
+      "exactCompleteOutcome": true,
+      "inputFileSha256": "11b0a361c2a27dd480139aa6db64cc1c9658180f20dba8f02540298bfcb85d3c"
+    }
+  ]
+}

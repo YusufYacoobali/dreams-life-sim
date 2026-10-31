@@ -1,38 +1,65 @@
 {
-  "observedAt": "2026-10-31T14:10:13.680148+00:00",
-  "sourceCommit": "5f51d2e89e589667acb31d67f68e6d066e45e204",
-  "deliveryStatus": "Implementation pushed at user request before final verification completion; plan acceptance remains pending.",
-  "completed": {
-    "focusedFinalCore": {
-      "suites": 5,
-      "passed": 313,
-      "failed": 0,
-      "scope": "All120 new choices, all12 driving policies, published120 outcomes, original first-stage cases and modal recovery."
-    },
+  "observedAt": "2026-10-31T15:56:06.889026+00:00",
+  "runtimeSourceCommit": "7fe1a2e151876cdc8ce7b08473b1bd867cd5420e",
+  "fullRegressionSourceCommit": "5f51d2e89e589667acb31d67f68e6d066e45e204",
+  "deliveryStatus": "Implemented and verified with complete frozen regression plus separate final UI affected rerun; native-device and human acceptance unverified.",
+  "fullRegression": {
+    "suites": 392,
+    "passed": 6959,
+    "failed": 0,
+    "pending": 0,
+    "todo": 0,
+    "changedSourcesDuringRun": [],
+    "seconds": 2347.579,
+    "rawReport": "regression-full.json.gz"
+  },
+  "uiFollowup": {
+    "suites": 3,
+    "passed": 84,
+    "failed": 0,
     "strictAppAndTestTypes": true,
-    "acyclicRuntimeModules": 596,
-    "hermesPlatforms": [
+    "scope": "UI-only adult trade-in explanation/disabled state. Separate affected rerun; not another complete regression."
+  },
+  "soak": {
+    "lives": 120,
+    "seeds": "0\u2013119",
+    "workers": 2,
+    "passed": true,
+    "maxLedgerRows": 61470,
+    "sourceCommit": "5f51d2e89e589667acb31d67f68e6d066e45e204",
+    "gamePersistenceAndPolicyUnchangedByUiFollowup": true
+  },
+  "imports": {
+    "modules": 596,
+    "cycles": [],
+    "graphUnchangedByUiFollowup": true
+  },
+  "hermes": {
+    "platforms": [
       "android",
       "ios"
     ],
-    "exactChangedRuntimeSourcesPerPlatform": 16
+    "exactChangedRuntimeSourcesPerPlatform": 16,
+    "sourceCommit": "7fe1a2e151876cdc8ce7b08473b1bd867cd5420e"
   },
-  "fullRegression": {
-    "status": "running; no final report at observation",
-    "passedSuitesSoFar": 268,
-    "failedSuiteLinesSoFar": [],
-    "countsAreNotFinalAcceptance": true
+  "gameplay": {
+    "persistentJourneys": 8,
+    "additionalHobbyDevelopmentObservations": 32,
+    "allHobbies": 16,
+    "paidModes": 2,
+    "naturalControlEndsAt90": true,
+    "readingLifeNaturalDeathAt84": true
   },
-  "soak": {
-    "status": "running; no completion marker at observation",
-    "completedLivesSoFar": 86,
-    "requiredLives": 120
+  "performance": {
+    "legacyExactOutcomes": 9,
+    "mainProfiles": 36,
+    "samplesPerMainProfile": 5,
+    "fixedFollowupProfiles": 4,
+    "samplesPerFollowupProfile": 11,
+    "activeAge90StopsAtActualDeathAfter3Months": true,
+    "scope": "Sequential isolated cloud Node/real on-disk SQLite, no native timing claim."
   },
-  "pending": [
-    "Full Jest completion report with no source drift and zero remaining failures",
-    "120-life soak completion marker",
-    "Final-source age50/70/90 performance measurements",
-    "Complete eight-journey balance report and final verification documentation"
-  ],
-  "nativeDeviceAcceptance": "unverified"
+  "pendingAutomatedPlanChecks": [],
+  "nativeDeviceAcceptance": "unverified",
+  "humanPlaytesting": "not performed"
 }

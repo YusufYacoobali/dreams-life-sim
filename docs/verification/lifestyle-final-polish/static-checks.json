@@ -1,5 +1,5 @@
 {
-  "sourceCommit": "5f51d2e89e589667acb31d67f68e6d066e45e204",
+  "sourceCommit": "7fe1a2e151876cdc8ce7b08473b1bd867cd5420e",
   "types": {
     "command": "npm run typecheck",
     "app": true,
@@ -9,7 +9,9 @@
   "imports": {
     "command": "npm run check:imports",
     "modules": 596,
-    "cycles": []
+    "cycles": [],
+    "verifiedAtCommit": "5f51d2e89e589667acb31d67f68e6d066e45e204",
+    "unchangedByUiFollowup": true
   },
   "notices": {
     "command": "node tools/generate-third-party-notices.cjs --check",
@@ -26,7 +28,9 @@
       "uniqueExactNoticeTexts": 281,
       "detectedFontFamilies": 1,
       "projectArtFiles": 1200
-    }
+    },
+    "verifiedAtCommit": "5f51d2e89e589667acb31d67f68e6d066e45e204",
+    "inputsUnchangedByUiFollowup": true
   },
   "diffCheck": true
 }

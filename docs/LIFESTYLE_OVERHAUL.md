@@ -17,6 +17,13 @@ ledger-backed costs/insurance. Absence retains published settlement literally.
 The shared driving-age policy also permits eligible teens to purchase road
 vehicles with available cash and use/maintain them with the appropriate licence;
 locked inheritance, borrowing and unrelated adult actions keep their restrictions.
+Adult-only trade-in controls and their replacement choices are disabled for teens,
+with the resolver's adult explanation visible and included in accessibility labels.
+Final evidence records a clean 392-suite/6,959-case frozen run plus a separate
+84-case UI follow-up, the 120-life soak, eight persistent journeys, all sixteen
+hobbies in both paid modes, age 50/70/90 profiles and both final Hermes exports.
+See [the complete evidence index](verification/lifestyle-final-polish/README.md)
+for exact source provenance and the unverified installed-device/human scope.
 
 Property and vehicle management is separately reviewed per existing asset. An
 anonymous rental cannot transition while listed or occupied. Original purchases,

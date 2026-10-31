@@ -1,0 +1,841 @@
+{
+  "sourceCommit": "5f51d2e89e589667acb31d67f68e6d066e45e204",
+  "scope": "Eight automated player policies, each command committed to real SQLite and cold reopened; not human or installed-device playtesting. UI-only follow-up does not alter simulation sources.",
+  "journeys": [
+    {
+      "label": "hobby-specialist",
+      "date": {
+        "year": 2025,
+        "month": 1,
+        "day": 1
+      },
+      "metrics": {
+        "observedYears": 2,
+        "enabledYears": 2,
+        "ageAtEnd": 25,
+        "ended": false,
+        "lifecycleOffers": 1,
+        "averageNewSituationsPerYear": 0.5,
+        "maximumNewSituationsInYear": 1,
+        "perYear": {
+          "2023": 1
+        },
+        "repeatedSituations": [],
+        "decisions": 3,
+        "resultPresentations": 9,
+        "totalExplicitPresentations": 12,
+        "recordBackedMajorSituationResults": 0,
+        "activityCosts": [
+          {
+            "currency": "USD",
+            "kind": "story-hobby-writing-adverb",
+            "paid": {
+              "$dreamsBigInt": "0"
+            },
+            "received": {
+              "$dreamsBigInt": "0"
+            }
+          },
+          {
+            "currency": "USD",
+            "kind": "hobby-competition",
+            "paid": {
+              "$dreamsBigInt": "2400"
+            },
+            "received": {
+              "$dreamsBigInt": "0"
+            }
+          },
+          {
+            "currency": "USD",
+            "kind": "project-start",
+            "paid": {
+              "$dreamsBigInt": "0"
+            },
+            "received": {
+              "$dreamsBigInt": "0"
+            }
+          },
+          {
+            "currency": "USD",
+            "kind": "project-complete",
+            "paid": {
+              "$dreamsBigInt": "0"
+            },
+            "received": {
+              "$dreamsBigInt": "0"
+            }
+          }
+        ],
+        "tenancies": [],
+        "petCosts": [],
+        "hobbies": [
+          {
+            "kind": "writing",
+            "proficiency": 48,
+            "attendedMonths": 24,
+            "thresholds": [
+              {
+                "threshold": 15,
+                "firstReached": {
+                  "year": 2023,
+                  "month": 9,
+                  "day": 1
+                }
+              },
+              {
+                "threshold": 40,
+                "firstReached": {
+                  "year": 2024,
+                  "month": 9,
+                  "day": 1
+                }
+              },
+              {
+                "threshold": 70,
+                "firstReached": null
+              },
+              {
+                "threshold": 90,
+                "firstReached": null
+              }
+            ],
+            "paidPractice": {
+              "$dreamsBigInt": "9600"
+            }
+          }
+        ],
+        "saveBytes": 172515,
+        "checkpointBytes": 20528,
+        "ledgerRows": 419,
+        "ageUpResolveMs": {
+          "samples": 2,
+          "median": 14,
+          "max": 14
+        },
+        "measurementScope": "Automated player policy and cloud Node command-resolution timing. All commands are saved to real SQLite with cold reopening. Manual activity results and automatic situations are counted separately; this is not human playtesting or native frame timing."
+      }
+    },
+    {
+      "label": "long-life-reading",
+      "date": {
+        "year": 2110,
+        "month": 10,
+        "day": 24
+      },
+      "metrics": {
+        "observedYears": 74,
+        "enabledYears": 64,
+        "ageAtEnd": 84,
+        "ended": true,
+        "lifecycleOffers": 13,
+        "averageNewSituationsPerYear": 0.203125,
+        "maximumNewSituationsInYear": 1,
+        "perYear": {
+          "2048": 1,
+          "2053": 1,
+          "2058": 1,
+          "2063": 1,
+          "2069": 1,
+          "2074": 1,
+          "2079": 1,
+          "2084": 1,
+          "2089": 1,
+          "2094": 1,
+          "2099": 1,
+          "2105": 1,
+          "2110": 1
+        },
+        "repeatedSituations": [
+          {
+            "templateId": "hobby-reading-character",
+            "years": 5
+          },
+          {
+            "templateId": "hobby-reading-character",
+            "years": 5
+          },
+          {
+            "templateId": "hobby-reading-character",
+            "years": 5
+          },
+          {
+            "templateId": "hobby-reading-character",
+            "years": 6
+          },
+          {
+            "templateId": "hobby-reading-character",
+            "years": 5
+          },
+          {
+            "templateId": "hobby-reading-character",
+            "years": 5
+          },
+          {
+            "templateId": "hobby-reading-character",
+            "years": 5
+          },
+          {
+            "templateId": "hobby-reading-character",
+            "years": 5
+          },
+          {
+            "templateId": "hobby-reading-character",
+            "years": 5
+          },
+          {
+            "templateId": "hobby-reading-character",
+            "years": 5
+          },
+          {
+            "templateId": "hobby-reading-character",
+            "years": 6
+          },
+          {
+            "templateId": "hobby-reading-character",
+            "years": 5
+          }
+        ],
+        "decisions": 81,
+        "resultPresentations": 223,
+        "totalExplicitPresentations": 304,
+        "recordBackedMajorSituationResults": 0,
+        "activityCosts": [
+          {
+            "currency": "USD",
+            "kind": "casual-hobby",
+            "paid": {
+              "$dreamsBigInt": "0"
+            },
+            "received": {
+              "$dreamsBigInt": "0"
+            }
+          },
+          {
+            "currency": "USD",
+            "kind": "story-hobby-reading-character",
+            "paid": {
+              "$dreamsBigInt": "0"
+            },
+            "received": {
+              "$dreamsBigInt": "0"
+            }
+          }
+        ],
+        "tenancies": [],
+        "petCosts": [],
+        "hobbies": [
+          {
+            "kind": "reading",
+            "proficiency": 100,
+            "attendedMonths": 756,
+            "thresholds": [
+              {
+                "threshold": 15,
+                "firstReached": {
+                  "year": 2048,
+                  "month": 6,
+                  "day": 24
+                }
+              },
+              {
+                "threshold": 40,
+                "firstReached": {
+                  "year": 2049,
+                  "month": 6,
+                  "day": 24
+                }
+              },
+              {
+                "threshold": 70,
+                "firstReached": {
+                  "year": 2050,
+                  "month": 9,
+                  "day": 24
+                }
+              },
+              {
+                "threshold": 90,
+                "firstReached": {
+                  "year": 2051,
+                  "month": 7,
+                  "day": 24
+                }
+              }
+            ],
+            "paidPractice": {
+              "$dreamsBigInt": "604800"
+            }
+          }
+        ],
+        "saveBytes": 12365331,
+        "checkpointBytes": 682385,
+        "ledgerRows": 37296,
+        "ageUpResolveMs": {
+          "samples": 74,
+          "median": 88,
+          "max": 222
+        },
+        "measurementScope": "Automated player policy and cloud Node command-resolution timing. All commands are saved to real SQLite with cold reopening. Manual activity results and automatic situations are counted separately; this is not human playtesting or native frame timing."
+      }
+    },
+    {
+      "label": "multiple-generations",
+      "date": {
+        "year": 2025,
+        "month": 1,
+        "day": 1
+      },
+      "metrics": {
+        "observedYears": 1.25,
+        "enabledYears": 1,
+        "ageAtEnd": 1,
+        "ended": false,
+        "lifecycleOffers": 0,
+        "averageNewSituationsPerYear": 0,
+        "maximumNewSituationsInYear": 0,
+        "perYear": {},
+        "repeatedSituations": [],
+        "decisions": 1,
+        "resultPresentations": 15,
+        "totalExplicitPresentations": 16,
+        "recordBackedMajorSituationResults": 0,
+        "activityCosts": [
+          {
+            "currency": "USD",
+            "kind": "amenity",
+            "paid": {
+              "$dreamsBigInt": "201076"
+            },
+            "received": {
+              "$dreamsBigInt": "0"
+            }
+          },
+          {
+            "currency": "USD",
+            "kind": "vehicle-drive",
+            "paid": {
+              "$dreamsBigInt": "720"
+            },
+            "received": {
+              "$dreamsBigInt": "0"
+            }
+          },
+          {
+            "currency": "USD",
+            "kind": "pet-train",
+            "paid": {
+              "$dreamsBigInt": "0"
+            },
+            "received": {
+              "$dreamsBigInt": "0"
+            }
+          }
+        ],
+        "tenancies": [],
+        "petCosts": [
+          {
+            "id": "pet_93_0",
+            "species": "parrot",
+            "paidCare": {
+              "$dreamsBigInt": "38400"
+            },
+            "carePeriods": 12,
+            "visits": [],
+            "status": "active"
+          }
+        ],
+        "hobbies": [
+          {
+            "kind": "writing",
+            "proficiency": 24,
+            "attendedMonths": 12,
+            "thresholds": [
+              {
+                "threshold": 15,
+                "firstReached": {
+                  "year": 2024,
+                  "month": 9,
+                  "day": 1
+                }
+              },
+              {
+                "threshold": 40,
+                "firstReached": null
+              },
+              {
+                "threshold": 70,
+                "firstReached": null
+              },
+              {
+                "threshold": 90,
+                "firstReached": null
+              }
+            ],
+            "paidPractice": {
+              "$dreamsBigInt": "4800"
+            }
+          }
+        ],
+        "saveBytes": 227778,
+        "checkpointBytes": 24017,
+        "ledgerRows": 591,
+        "ageUpResolveMs": {
+          "samples": 1,
+          "median": 26,
+          "max": 26
+        },
+        "measurementScope": "Automated player policy and cloud Node command-resolution timing. All commands are saved to real SQLite with cold reopening. Manual activity results and automatic situations are counted separately; this is not human playtesting or native frame timing."
+      }
+    },
+    {
+      "label": "ordinary-long-life",
+      "date": {
+        "year": 2116,
+        "month": 10,
+        "day": 24
+      },
+      "metrics": {
+        "observedYears": 80,
+        "enabledYears": 70,
+        "ageAtEnd": 90,
+        "ended": false,
+        "lifecycleOffers": 0,
+        "averageNewSituationsPerYear": 0,
+        "maximumNewSituationsInYear": 0,
+        "perYear": {},
+        "repeatedSituations": [],
+        "decisions": 69,
+        "resultPresentations": 147,
+        "totalExplicitPresentations": 216,
+        "recordBackedMajorSituationResults": 0,
+        "activityCosts": [],
+        "tenancies": [],
+        "petCosts": [],
+        "hobbies": [],
+        "saveBytes": 14868389,
+        "checkpointBytes": 811589,
+        "ledgerRows": 46660,
+        "ageUpResolveMs": {
+          "samples": 80,
+          "median": 91,
+          "max": 196
+        },
+        "measurementScope": "Automated player policy and cloud Node command-resolution timing. All commands are saved to real SQLite with cold reopening. Manual activity results and automatic situations are counted separately; this is not human playtesting or native frame timing."
+      }
+    },
+    {
+      "label": "pet-family-succession",
+      "date": {
+        "year": 2027,
+        "month": 1,
+        "day": 1
+      },
+      "metrics": {
+        "observedYears": 3.25,
+        "enabledYears": 3,
+        "ageAtEnd": 3,
+        "ended": false,
+        "lifecycleOffers": 2,
+        "averageNewSituationsPerYear": 0.6666666666666666,
+        "maximumNewSituationsInYear": 2,
+        "perYear": {
+          "2025": 2
+        },
+        "repeatedSituations": [],
+        "decisions": 5,
+        "resultPresentations": 14,
+        "totalExplicitPresentations": 19,
+        "recordBackedMajorSituationResults": 0,
+        "activityCosts": [
+          {
+            "currency": "USD",
+            "kind": "pet-train",
+            "paid": {
+              "$dreamsBigInt": "0"
+            },
+            "received": {
+              "$dreamsBigInt": "0"
+            }
+          },
+          {
+            "currency": "USD",
+            "kind": "story-pet-witness",
+            "paid": {
+              "$dreamsBigInt": "0"
+            },
+            "received": {
+              "$dreamsBigInt": "0"
+            }
+          },
+          {
+            "currency": "USD",
+            "kind": "story-pet-family-memory",
+            "paid": {
+              "$dreamsBigInt": "0"
+            },
+            "received": {
+              "$dreamsBigInt": "0"
+            }
+          },
+          {
+            "currency": "USD",
+            "kind": "pet-treat",
+            "paid": {
+              "$dreamsBigInt": "5000"
+            },
+            "received": {
+              "$dreamsBigInt": "0"
+            }
+          }
+        ],
+        "tenancies": [],
+        "petCosts": [
+          {
+            "id": "pet_81_0",
+            "species": "parrot",
+            "paidCare": {
+              "$dreamsBigInt": "115200"
+            },
+            "carePeriods": 36,
+            "visits": [
+              {
+                "currency": "USD",
+                "paid": {
+                  "$dreamsBigInt": "4000"
+                }
+              }
+            ],
+            "status": "active"
+          }
+        ],
+        "hobbies": [],
+        "saveBytes": 339072,
+        "checkpointBytes": 30493,
+        "ledgerRows": 934,
+        "ageUpResolveMs": {
+          "samples": 3,
+          "median": 12,
+          "max": 20
+        },
+        "measurementScope": "Automated player policy and cloud Node command-resolution timing. All commands are saved to real SQLite with cold reopening. Manual activity results and automatic situations are counted separately; this is not human playtesting or native frame timing."
+      }
+    },
+    {
+      "label": "property-investor",
+      "date": {
+        "year": 2028,
+        "month": 1,
+        "day": 1
+      },
+      "metrics": {
+        "observedYears": 5,
+        "enabledYears": 5,
+        "ageAtEnd": 28,
+        "ended": false,
+        "lifecycleOffers": 4,
+        "averageNewSituationsPerYear": 0.8,
+        "maximumNewSituationsInYear": 2,
+        "perYear": {
+          "2023": 1,
+          "2024": 2,
+          "2027": 1
+        },
+        "repeatedSituations": [],
+        "decisions": 8,
+        "resultPresentations": 30,
+        "totalExplicitPresentations": 38,
+        "recordBackedMajorSituationResults": 1,
+        "activityCosts": [
+          {
+            "currency": "USD",
+            "kind": "amenity",
+            "paid": {
+              "$dreamsBigInt": "196000"
+            },
+            "received": {
+              "$dreamsBigInt": "0"
+            }
+          },
+          {
+            "currency": "USD",
+            "kind": "tenant-check",
+            "paid": {
+              "$dreamsBigInt": "400"
+            },
+            "received": {
+              "$dreamsBigInt": "0"
+            }
+          },
+          {
+            "currency": "USD",
+            "kind": "story-home-ceiling-map",
+            "paid": {
+              "$dreamsBigInt": "4800"
+            },
+            "received": {
+              "$dreamsBigInt": "0"
+            }
+          },
+          {
+            "currency": "USD",
+            "kind": "tenant-repair",
+            "paid": {
+              "$dreamsBigInt": "17401"
+            },
+            "received": {
+              "$dreamsBigInt": "0"
+            }
+          },
+          {
+            "currency": "USD",
+            "kind": "tenant-arrears",
+            "paid": {
+              "$dreamsBigInt": "0"
+            },
+            "received": {
+              "$dreamsBigInt": "283920"
+            }
+          },
+          {
+            "currency": "USD",
+            "kind": "story-home-rent-cake",
+            "paid": {
+              "$dreamsBigInt": "0"
+            },
+            "received": {
+              "$dreamsBigInt": "0"
+            }
+          },
+          {
+            "currency": "USD",
+            "kind": "story-home-damage-report",
+            "paid": {
+              "$dreamsBigInt": "0"
+            },
+            "received": {
+              "$dreamsBigInt": "0"
+            }
+          },
+          {
+            "currency": "USD",
+            "kind": "story-home-inspection-shoes",
+            "paid": {
+              "$dreamsBigInt": "0"
+            },
+            "received": {
+              "$dreamsBigInt": "0"
+            }
+          }
+        ],
+        "tenancies": [
+          {
+            "id": "tenancy_79",
+            "currency": "USD",
+            "paidRent": {
+              "$dreamsBigInt": "993720"
+            },
+            "periods": 48,
+            "arrears": {
+              "$dreamsBigInt": "85176"
+            },
+            "outstandingMaintenance": {
+              "$dreamsBigInt": "0"
+            },
+            "maintenancePaid": {
+              "$dreamsBigInt": "17401"
+            }
+          }
+        ],
+        "petCosts": [],
+        "hobbies": [],
+        "saveBytes": 564574,
+        "checkpointBytes": 46502,
+        "ledgerRows": 1632,
+        "ageUpResolveMs": {
+          "samples": 5,
+          "median": 15,
+          "max": 24
+        },
+        "measurementScope": "Automated player policy and cloud Node command-resolution timing. All commands are saved to real SQLite with cold reopening. Manual activity results and automatic situations are counted separately; this is not human playtesting or native frame timing."
+      }
+    },
+    {
+      "label": "vehicle-enthusiast",
+      "date": {
+        "year": 2023,
+        "month": 1,
+        "day": 1
+      },
+      "metrics": {
+        "observedYears": 0.08333333333333333,
+        "enabledYears": 0.08333333333333333,
+        "ageAtEnd": 23,
+        "ended": false,
+        "lifecycleOffers": 0,
+        "averageNewSituationsPerYear": 0,
+        "maximumNewSituationsInYear": 0,
+        "perYear": {},
+        "repeatedSituations": [],
+        "decisions": 0,
+        "resultPresentations": 9,
+        "totalExplicitPresentations": 9,
+        "recordBackedMajorSituationResults": 0,
+        "activityCosts": [
+          {
+            "currency": "USD",
+            "kind": "vehicle-road-trip",
+            "paid": {
+              "$dreamsBigInt": "5400"
+            },
+            "received": {
+              "$dreamsBigInt": "0"
+            }
+          },
+          {
+            "currency": "USD",
+            "kind": "vehicle-service",
+            "paid": {
+              "$dreamsBigInt": "7200"
+            },
+            "received": {
+              "$dreamsBigInt": "0"
+            }
+          },
+          {
+            "currency": "USD",
+            "kind": "vehicle-repair",
+            "paid": {
+              "$dreamsBigInt": "21600"
+            },
+            "received": {
+              "$dreamsBigInt": "0"
+            }
+          },
+          {
+            "currency": "USD",
+            "kind": "vehicle-brakes",
+            "paid": {
+              "$dreamsBigInt": "36000"
+            },
+            "received": {
+              "$dreamsBigInt": "0"
+            }
+          },
+          {
+            "currency": "USD",
+            "kind": "vehicle-gift",
+            "paid": {
+              "$dreamsBigInt": "0"
+            },
+            "received": {
+              "$dreamsBigInt": "0"
+            }
+          }
+        ],
+        "tenancies": [],
+        "petCosts": [],
+        "hobbies": [],
+        "saveBytes": 89179,
+        "checkpointBytes": 11675,
+        "ledgerRows": 219,
+        "ageUpResolveMs": {
+          "samples": 0,
+          "median": null,
+          "max": null
+        },
+        "measurementScope": "Automated player policy and cloud Node command-resolution timing. All commands are saved to real SQLite with cold reopening. Manual activity results and automatic situations are counted separately; this is not human playtesting or native frame timing."
+      }
+    },
+    {
+      "label": "young-driver",
+      "date": {
+        "year": 2018,
+        "month": 1,
+        "day": 1
+      },
+      "metrics": {
+        "observedYears": 18,
+        "enabledYears": 18,
+        "ageAtEnd": 18,
+        "ended": false,
+        "lifecycleOffers": 3,
+        "averageNewSituationsPerYear": 0.16666666666666666,
+        "maximumNewSituationsInYear": 2,
+        "perYear": {
+          "2017": 2,
+          "2018": 1
+        },
+        "repeatedSituations": [],
+        "decisions": 19,
+        "resultPresentations": 32,
+        "totalExplicitPresentations": 51,
+        "recordBackedMajorSituationResults": 0,
+        "activityCosts": [
+          {
+            "currency": "USD",
+            "kind": "vehicle-drive",
+            "paid": {
+              "$dreamsBigInt": "280"
+            },
+            "received": {
+              "$dreamsBigInt": "0"
+            }
+          },
+          {
+            "currency": "USD",
+            "kind": "vehicle-service",
+            "paid": {
+              "$dreamsBigInt": "2800"
+            },
+            "received": {
+              "$dreamsBigInt": "0"
+            }
+          },
+          {
+            "currency": "USD",
+            "kind": "story-vehicle-family-borrow",
+            "paid": {
+              "$dreamsBigInt": "0"
+            },
+            "received": {
+              "$dreamsBigInt": "0"
+            }
+          },
+          {
+            "currency": "USD",
+            "kind": "story-vehicle-wrong-song",
+            "paid": {
+              "$dreamsBigInt": "0"
+            },
+            "received": {
+              "$dreamsBigInt": "0"
+            }
+          },
+          {
+            "currency": "USD",
+            "kind": "story-vehicle-weather-window",
+            "paid": {
+              "$dreamsBigInt": "0"
+            },
+            "received": {
+              "$dreamsBigInt": "0"
+            }
+          }
+        ],
+        "tenancies": [],
+        "petCosts": [],
+        "hobbies": [],
+        "saveBytes": 1781749,
+        "checkpointBytes": 98835,
+        "ledgerRows": 5784,
+        "ageUpResolveMs": {
+          "samples": 18,
+          "median": 28,
+          "max": 62
+        },
+        "measurementScope": "Automated player policy and cloud Node command-resolution timing. All commands are saved to real SQLite with cold reopening. Manual activity results and automatic situations are counted separately; this is not human playtesting or native frame timing."
+      }
+    }
+  ]
+}

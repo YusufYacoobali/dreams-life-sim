@@ -1,0 +1,40 @@
+{
+  "completeInvocation": {
+    "sourceCommit": "5f51d2e89e589667acb31d67f68e6d066e45e204",
+    "started": "2026-10-31T13:40:57.786Z",
+    "finished": "2026-10-31T14:20:05.371Z",
+    "suites": {
+      "total": 392,
+      "passed": 392,
+      "failed": 0,
+      "pending": 0
+    },
+    "cases": {
+      "total": 6959,
+      "passed": 6959,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0
+    },
+    "changedSourcesDuringRun": [],
+    "rawReport": "regression-full.json.gz"
+  },
+  "uiFollowup": {
+    "sourceCommit": "7fe1a2e151876cdc8ce7b08473b1bd867cd5420e",
+    "changedRuntimeFiles": [
+      "src/ui/VehicleLifestyle.tsx"
+    ],
+    "suites": 3,
+    "passed": 84,
+    "failed": 0,
+    "files": [
+      "tests/ui/lifestyle-review-flow.test.tsx",
+      "tests/game/lifestyle-vehicles.test.ts",
+      "tests/game/lifestyle-driving-ages.test.ts"
+    ],
+    "command": "npx jest --runInBand tests/ui/lifestyle-review-flow.test.tsx tests/game/lifestyle-vehicles.test.ts tests/game/lifestyle-driving-ages.test.ts",
+    "output": "PASS tests/ui/lifestyle-review-flow.test.tsx (6.395 s)\nPASS tests/game/lifestyle-driving-ages.test.ts\nPASS tests/game/lifestyle-vehicles.test.ts\n\nTest Suites: 3 passed, 3 total\nTests:       84 passed, 84 total\nSnapshots:   0 total\nTime:        9.354 s\nRan all test suites matching /tests\\/ui\\/lifestyle-review-flow.test.tsx|tests\\/game\\/lifestyle-vehicles.test.ts|tests\\/game\\/lifestyle-driving-ages.test.ts/i.\n",
+    "strictTypesAfterUiFollowup": true
+  },
+  "provenance": "The complete clean invocation passed on5f51d2e8. The final7fe1a2e1 UI-only adult trade-in fix has a separate84-case affected rerun. This is not a claim of one complete invocation on the UI follow-up."
+}

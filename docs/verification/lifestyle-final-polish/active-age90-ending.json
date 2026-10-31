@@ -1,0 +1,21 @@
+{
+  "sourceCommit": "7fe1a2e151876cdc8ce7b08473b1bd867cd5420e",
+  "scope": "Independent replay of the measured active age90 fullYear command sequence, with its recorded entire-world hash. No altered dates, health, money or RNG.",
+  "initialDate": {
+    "year": 2116,
+    "month": 10,
+    "day": 24
+  },
+  "finalDate": {
+    "year": 2117,
+    "month": 1,
+    "day": 24
+  },
+  "activePersonDied": {
+    "year": 2117,
+    "month": 1,
+    "day": 24
+  },
+  "commands": 1,
+  "worldSha256": "42a399375d87a320da4e79552894d384104bd66ee361c8c7a235ab786990d3a1"
+}

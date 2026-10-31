@@ -2,32 +2,45 @@
 
 Owner workflow preference: commit and push completed changes to the active development branch unless explicitly told otherwise.
 
-## Lifestyle final polish — implementation pushed 31 October 2026
+## Lifestyle final polish — 31 October 2026
 
-Current implementation/test source on **`v2`** is **`5f51d2e8`**, based on
-published `439aa14`. The user requested the push before final verification finished;
-**the final-polish plan is not yet fully accepted**. New offers freeze
-`copyVersion:2`, `journalVersion:1`, and `outputVersion:1`: one first-person
-journal, one retained activity, and actual capped/ledger-backed effect rows.
-Missing flags retain published outcomes. All 120 published decisions retain exact
-complete-world hashes, alongside the original first-stage fixtures.
+Current gameplay/UI source on **`v2`** is **`7fe1a2e1`**, from published `439aa14`.
+New offers freeze `copyVersion:2`, `journalVersion:1` and `outputVersion:1`:
+one first-person journal, one retained activity and actual capped/ledger-backed
+consequence rows. Missing flags retain literal published behavior, including
+its additional diary writes. Preserve all 120 published complete-world outcomes
+and the original first-stage fixtures. Later writing updates need a new
+prospective copy revision; do not edit already published revision meanings.
 
-Shared driving ages now govern cash road ownership, licence tests, use and
-maintenance: US/Canada 16, UK/Australia 17, other countries 18; boats/pilot 18.
-Locked inheritance and unrelated adult restrictions remain. All 60 situations
-and major property/vehicle/pet/hobby responses were editorially reviewed, with
-120 separate journals and 25 documented before/after examples. No catalogues,
-artwork, navigation, purchase integrations or save formats change.
+Shared road purchase/licence/use/maintenance ages areUS/Canada 16,
+UK/Australia 17 and 18 elsewhere; boats/pilot 18. Locked inheritance and unrelated
+adult restrictions remain. The final UI entry and replacement rows disable
+trade-ins with the resolver's adult explanation. All 60 situations and major
+property/vehicle/pet/hobby responses were reviewed, with 120 separate journals
+and 25 documented before/after examples. No catalogues, artwork, navigation,
+purchase integrations, major systems or save formats change.
 
-Completed: 313 final focused tests across five suites, strict app/test types,
-596-module acyclic import graph, notice checks and both Hermes exports with
-16 exact runtime source matches per platform. The restored workspace still has
-the frozen full regression and 120-life soak running. Do not label their partial
-counts as passes. Finish those reports, then run age 50/70/90 benchmarks after
-heavy workers stop, collect all eight persistent journeys and finalize balance
-and performance documentation. Installed-device acceptance and human playtesting
-remain unverified. See [the implementation](LIFESTYLE_FINAL_POLISH.md) and
-[the timestamped verification status](verification/lifestyle-final-polish/verification-status.json).
+The full frozen `5f51d2e8` invocation passed **392 suites / 6,959 cases** with
+zero failures, pending/todos or source drift. The subsequent UI-only fix passed
+**84 affected cases across three suites** plus strict app/test types. Report
+these as a complete clean earlier-source run and separate UI rerun, never as
+one complete invocation on `7fe1a2e1` or 7,043 unique cases. The 120-life soak passes
+all seeds 0–119, retaining up to 61,470 ledger rows. All game/persistence/policy
+sources remain identical across that UI follow-up. The 596-module import graph
+is acyclic; notice checks and both final Hermes exports pass with 16 exact
+changed runtime sources per platform.
+
+Eight persistent SQLite journeys include real wages, rollback/retry, closed
+connections, Time Machine branches and actual existing-child continuation.
+The enabled ordinary control reaches 90; the paid-reading policy dies naturally
+at 84. All 16 hobbies have 32 additional paid-mode development observations.
+Age 50/70/90 isolated baseline/final/enabled/active profiles retain all nine
+legacy complete outcomes. Fixed 11-sample follow-ups record the initial timing
+gaps honestly. Active 90 dies after three months; do not compare that duration
+as a full twelve-month speedup. Native-device and human playtesting remain
+unverified. See [implementation/save policy](LIFESTYLE_FINAL_POLISH.md),
+[the writing audit](LIFESTYLE_WRITING_AUDIT.md), and
+[all verification, gameplay, performance and reproduction evidence](verification/lifestyle-final-polish/README.md).
 
 ## Property, vehicles, pets and hobbies — 31 October 2026
 

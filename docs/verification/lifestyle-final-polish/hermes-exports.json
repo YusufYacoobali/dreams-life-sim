@@ -1,6 +1,6 @@
 {
   "baseline": "439aa14d80bd03da41d00889adabfb9fb246c0a3",
-  "sourceCommit": "5f51d2e89e589667acb31d67f68e6d066e45e204",
+  "sourceCommit": "7fe1a2e151876cdc8ce7b08473b1bd867cd5420e",
   "command": "npx expo export --platform all --max-workers 1 --source-maps",
   "scope": "Production Hermes bundle source inclusion; installed-device acceptance unverified",
   "runtimeSources": {
@@ -19,23 +19,23 @@
     "src/game/systems/vehicleActivities.ts": "1adfe44b807a6475f39c4767aa54a7b2eb2ba2987bfe21fec37e9e5d1ecba27f",
     "src/game/systems/vehicleAgePolicy.ts": "53a236c75d08df7d1e21f9724e2af83d61ca2ae8b1ecf1199097e84139f27147",
     "src/game/systems/vehicleLicences.ts": "2df81a6a42c9f191d153e24c0c7d7aa5fcbf11ea2bec1f0d3650270d00fdec4e",
-    "src/ui/VehicleLifestyle.tsx": "ed731d85867735e79e8d23ce5e2fd5f53d4780d166c29f165288cedb564a1439"
+    "src/ui/VehicleLifestyle.tsx": "3ac5ec75df2c80d43e317d8f19d32f2d61608df57616e42e22f53c6c4b3af06b"
   },
   "platforms": [
     {
       "platform": "android",
-      "file": "_expo/static/js/android/entry-885b98d560c6297ff60a93517c28b7c8.hbc",
-      "bytes": 9889124,
-      "sha256": "0f86961995f4ee577fb44a562e509d475388c4c778cda3570d97ce60c7f7b85b",
+      "file": "_expo/static/js/android/entry-8af40103589a027464d4462e8b0c15d1.hbc",
+      "bytes": 9889164,
+      "sha256": "8a6a1b32a2f3114050863711604ef3c6743fd91d562518618283579103745b74",
       "hermesMagic": "c61fbc03c103191f",
       "missing": [],
       "mismatched": []
     },
     {
       "platform": "ios",
-      "file": "_expo/static/js/ios/entry-9938d520a8db05a52c0115d58eee7a95.hbc",
-      "bytes": 9704740,
-      "sha256": "5f282808e5eebece9297539efca32e53d62c163eca12c2d3ae04a18ff0d0131a",
+      "file": "_expo/static/js/ios/entry-1033420c9beedfbea7fbadbd58931d56.hbc",
+      "bytes": 9704780,
+      "sha256": "59025a7154c0a70bf530c62c56ea9d636cdfcba08912acfa466b0386c29e046b",
       "hermesMagic": "c61fbc03c103191f",
       "missing": [],
       "mismatched": []

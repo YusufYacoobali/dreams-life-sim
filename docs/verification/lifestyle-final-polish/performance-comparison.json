@@ -1,0 +1,278 @@
+{
+  "scope": "Cloud Node/on-disk SQLite synchronous command spans; one warm-up and fixed saved-world samples. Exact legacy inputs, commands and complete outcome hashes match. Opt-in workloads add only empty prospective capability before command execution. No device, React or native frame claim.",
+  "node": "v24.19.0",
+  "samples": 5,
+  "baselineSourceHash": "24450235e51d8548097be4180d4f10c5c0194740cb3c42a0774bfc9fd13d33b2",
+  "integratedSourceHash": "ae33b8184fb81a87a6c31f2219868435e7904581f682b24f0502d6e0372a2623",
+  "inputFileSha256": "25b4f30388f0a90147c20bf7246c5cd4e77f4b9413c2ce05cdd691a57ab850eb",
+  "enabledInputFileSha256": "11b0a361c2a27dd480139aa6db64cc1c9658180f20dba8f02540298bfcb85d3c",
+  "concurrency": "Run all three measurements sequentially after regression, export, typecheck and soak workers have stopped.",
+  "rows": [
+    {
+      "age": 50,
+      "kind": "routine",
+      "people": 20,
+      "ledgerRows": 21867,
+      "journalRows": 669,
+      "beforeMedianMs": 28.99366800000007,
+      "legacyMedianMs": 34.0503920000001,
+      "enabledMedianMs": 39.590282999999545,
+      "legacyRatio": 1.1744078741606623,
+      "enabledRatio": 1.3654803179783754,
+      "beforeP95Ms": 37.76720699999987,
+      "legacyP95Ms": 39.89339300000029,
+      "enabledP95Ms": 40.612395000000106,
+      "exactLegacyOutcome": true,
+      "enabledCommands": 1
+    },
+    {
+      "age": 50,
+      "kind": "firstAgeUp",
+      "people": 20,
+      "ledgerRows": 21867,
+      "journalRows": 669,
+      "beforeMedianMs": 129.2111649999988,
+      "legacyMedianMs": 133.24654499999997,
+      "enabledMedianMs": 138.77884799999993,
+      "legacyRatio": 1.031230892469712,
+      "enabledRatio": 1.0740468751287957,
+      "beforeP95Ms": 142.5150199999989,
+      "legacyP95Ms": 135.1274510000003,
+      "enabledP95Ms": 160.91999899999792,
+      "exactLegacyOutcome": true,
+      "enabledCommands": 1
+    },
+    {
+      "age": 50,
+      "kind": "fullYear",
+      "people": 20,
+      "ledgerRows": 21867,
+      "journalRows": 669,
+      "beforeMedianMs": 153.26703199999974,
+      "legacyMedianMs": 138.33955299999798,
+      "enabledMedianMs": 164.52733799999987,
+      "legacyRatio": 0.9026047623862006,
+      "enabledRatio": 1.073468546060187,
+      "beforeP95Ms": 154.91287600000214,
+      "legacyP95Ms": 144.03020299999844,
+      "enabledP95Ms": 172.52867200000037,
+      "exactLegacyOutcome": true,
+      "enabledCommands": 2
+    },
+    {
+      "age": 70,
+      "kind": "routine",
+      "people": 22,
+      "ledgerRows": 36636,
+      "journalRows": 984,
+      "beforeMedianMs": 45.03032499999972,
+      "legacyMedianMs": 44.68461799999932,
+      "enabledMedianMs": 50.730947999996715,
+      "legacyRatio": 0.9923227958048181,
+      "enabledRatio": 1.12659520001237,
+      "beforeP95Ms": 46.799426000001404,
+      "legacyP95Ms": 45.20948700000008,
+      "enabledP95Ms": 50.82833300000493,
+      "exactLegacyOutcome": true,
+      "enabledCommands": 1
+    },
+    {
+      "age": 70,
+      "kind": "firstAgeUp",
+      "people": 22,
+      "ledgerRows": 36636,
+      "journalRows": 984,
+      "beforeMedianMs": 204.12990799999534,
+      "legacyMedianMs": 219.5457480000041,
+      "enabledMedianMs": 227.71541199999774,
+      "legacyRatio": 1.0755197518631572,
+      "enabledRatio": 1.1155416383179035,
+      "beforeP95Ms": 209.08558300000004,
+      "legacyP95Ms": 229.95028500000626,
+      "enabledP95Ms": 228.15524699999514,
+      "exactLegacyOutcome": true,
+      "enabledCommands": 1
+    },
+    {
+      "age": 70,
+      "kind": "fullYear",
+      "people": 22,
+      "ledgerRows": 36636,
+      "journalRows": 984,
+      "beforeMedianMs": 380.30815299999813,
+      "legacyMedianMs": 408.6013269999967,
+      "enabledMedianMs": 380.21177299999545,
+      "legacyRatio": 1.0743953916759672,
+      "enabledRatio": 0.9997465739315805,
+      "beforeP95Ms": 381.617345000006,
+      "legacyP95Ms": 409.6412049999999,
+      "enabledP95Ms": 384.344434000006,
+      "exactLegacyOutcome": true,
+      "enabledCommands": 4
+    },
+    {
+      "age": 90,
+      "kind": "routine",
+      "people": 23,
+      "ledgerRows": 47204,
+      "journalRows": 1241,
+      "beforeMedianMs": 52.71296799999982,
+      "legacyMedianMs": 51.10319199999503,
+      "enabledMedianMs": 51.0272510000068,
+      "legacyRatio": 0.9694614805221214,
+      "enabledRatio": 0.9680208293338174,
+      "beforeP95Ms": 54.19932999998855,
+      "legacyP95Ms": 52.387316999993345,
+      "enabledP95Ms": 51.076906000002054,
+      "exactLegacyOutcome": true,
+      "enabledCommands": 1
+    },
+    {
+      "age": 90,
+      "kind": "firstAgeUp",
+      "people": 23,
+      "ledgerRows": 47204,
+      "journalRows": 1241,
+      "beforeMedianMs": 291.66739300001063,
+      "legacyMedianMs": 348.25263099999574,
+      "enabledMedianMs": 328.0650500000047,
+      "legacyRatio": 1.1940060471551686,
+      "enabledRatio": 1.1247916560902396,
+      "beforeP95Ms": 310.9429719999898,
+      "legacyP95Ms": 352.4714160000003,
+      "enabledP95Ms": 334.7198470000003,
+      "exactLegacyOutcome": true,
+      "enabledCommands": 1
+    },
+    {
+      "age": 90,
+      "kind": "fullYear",
+      "people": 23,
+      "ledgerRows": 47204,
+      "journalRows": 1241,
+      "beforeMedianMs": 740.7882390000013,
+      "legacyMedianMs": 742.5251779999962,
+      "enabledMedianMs": 699.5267860000022,
+      "legacyRatio": 1.0023447173005062,
+      "enabledRatio": 0.9443006100424887,
+      "beforeP95Ms": 745.7856710000051,
+      "legacyP95Ms": 743.0293399999937,
+      "enabledP95Ms": 705.4634210000077,
+      "exactLegacyOutcome": true,
+      "enabledCommands": 6
+    }
+  ],
+  "baselineCommit": "439aa14d80bd03da41d00889adabfb9fb246c0a3",
+  "finalSourceCommit": "7fe1a2e151876cdc8ce7b08473b1bd867cd5420e",
+  "activeRows": [
+    {
+      "age": 50,
+      "kind": "routine",
+      "medianMs": 34.81451599999946,
+      "p95Ms": 38.16111099999944,
+      "commands": 1,
+      "finalDate": {
+        "year": 2076,
+        "month": 10,
+        "day": 24
+      }
+    },
+    {
+      "age": 50,
+      "kind": "firstAgeUp",
+      "medianMs": 120.61207400000058,
+      "p95Ms": 135.35636599999998,
+      "commands": 1,
+      "finalDate": {
+        "year": 2077,
+        "month": 10,
+        "day": 24
+      }
+    },
+    {
+      "age": 50,
+      "kind": "fullYear",
+      "medianMs": 175.70268200000282,
+      "p95Ms": 179.68350500000088,
+      "commands": 3,
+      "finalDate": {
+        "year": 2077,
+        "month": 10,
+        "day": 24
+      }
+    },
+    {
+      "age": 70,
+      "kind": "routine",
+      "medianMs": 44.184133000002475,
+      "p95Ms": 44.28900000000067,
+      "commands": 1,
+      "finalDate": {
+        "year": 2096,
+        "month": 10,
+        "day": 24
+      }
+    },
+    {
+      "age": 70,
+      "kind": "firstAgeUp",
+      "medianMs": 198.90785300000425,
+      "p95Ms": 205.90063699999882,
+      "commands": 1,
+      "finalDate": {
+        "year": 2097,
+        "month": 5,
+        "day": 24
+      }
+    },
+    {
+      "age": 70,
+      "kind": "fullYear",
+      "medianMs": 610.2000180000032,
+      "p95Ms": 628.1352239999978,
+      "commands": 9,
+      "finalDate": {
+        "year": 2097,
+        "month": 10,
+        "day": 24
+      }
+    },
+    {
+      "age": 90,
+      "kind": "routine",
+      "medianMs": 57.225460000001476,
+      "p95Ms": 57.94748000000254,
+      "commands": 1,
+      "finalDate": {
+        "year": 2116,
+        "month": 10,
+        "day": 24
+      }
+    },
+    {
+      "age": 90,
+      "kind": "firstAgeUp",
+      "medianMs": 340.9965729999967,
+      "p95Ms": 344.61530600000697,
+      "commands": 1,
+      "finalDate": {
+        "year": 2117,
+        "month": 1,
+        "day": 24
+      }
+    },
+    {
+      "age": 90,
+      "kind": "fullYear",
+      "medianMs": 331.90913,
+      "p95Ms": 333.38877199999115,
+      "commands": 1,
+      "finalDate": {
+        "year": 2117,
+        "month": 1,
+        "day": 24
+      }
+    }
+  ],
+  "activeScope": "Actual prepared ownership/tenancy/pet/hobby input; different pauses, commands and mortality. Active age90 fullYear ends naturally after3 months, not12. Do not interpret its shorter duration as a faster complete year."
+}
