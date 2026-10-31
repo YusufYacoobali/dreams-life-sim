@@ -44,7 +44,7 @@ async function fixtureDatabase(includeAU = false) {
   return { get sqlite() { return sqlite; }, get driver() { return driver; }, current, expected, rows, reopen: () => { sqlite.close(); driver = connect(); return new SaveRepository(driver); }, close: () => { sqlite.close(); rmSync(directory, { recursive: true, force: true }); } };
 }
 
-test('reader13→31 changes metadata only; genuine World33 courtships and old bound hiring results survive closed-connection loading and durable acknowledgement', async () => {
+test('reader13→32 changes metadata only; genuine World33 courtships and old bound hiring results survive closed-connection loading and durable acknowledgement', async () => {
   const context = await fixtureDatabase(true);
   try {
     const before = context.rows(); expect(Object.keys(before)).toHaveLength(8); expect(context.sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(13);

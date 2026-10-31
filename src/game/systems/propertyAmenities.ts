@@ -10,8 +10,8 @@ export const amenities: Record<AmenityId, {
 }> = {
     kitchen: { name: 'Renovated kitchen', bps: 350, minFeet: 0, benefit: 'Supports cooking project work at home.' },
     bathroom: { name: 'Upgraded bathroom', bps: 250, minFeet: 0, benefit: 'Adds lasting value without changing ordinary care.' },
-    gym: { name: 'Home gym', bps: 180, minFeet: 900, benefit: 'Reduces energy used by an attended running or swimming routine.' },
-    garden: { name: 'Garden', bps: 150, minFeet: 700, benefit: 'Supports gardening projects and quiet pet time.' },
+    gym: { name: 'Home gym', bps: 180, minFeet: 900, benefit: 'Supports running project work at home.' },
+    garden: { name: 'Garden', bps: 150, minFeet: 700, benefit: 'Supports gardening project work at home.' },
     'gaming-room': { name: 'Gaming room', bps: 180, minFeet: 900, benefit: 'Supports a gaming project.' },
     studio: { name: 'Music studio', bps: 250, minFeet: 1000, benefit: 'Supports guitar and singing projects.' },
     pool: { name: 'Swimming pool', bps: 650, minFeet: 2200, benefit: 'Supports a swimming project.' },

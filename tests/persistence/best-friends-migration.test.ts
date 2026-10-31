@@ -22,7 +22,7 @@ test('the genuine completed C35 US checkpoint keeps its immutable canonical proo
   expect(unpackCheckpoint(packCheckpoint(world), true)).toEqual(world);
 });
 
-test.each([13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26])('reader %s →31 changes only its marker; every original row and C35 payload remains exact before any gameplay save', async version => {
+test.each([13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26])('reader %s →32 changes only its marker; every original row and C35 payload remains exact before any gameplay save', async version => {
   const { sqlite, driver } = database();
   try {
     await new SaveRepository(driver).initialise(); const original = unpackCheckpoint(terminal.checkpoint, true);

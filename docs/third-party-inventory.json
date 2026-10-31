@@ -23,7 +23,7 @@
     "readableNoticeFiles": 737,
     "uniqueExactNoticeTexts": 281,
     "detectedFontFamilies": 1,
-    "projectArtFiles": 1198
+    "projectArtFiles": 1200
   },
   "directDependencies": [
     {
@@ -18029,6 +18029,7 @@
         "app/saved-lives.tsx",
         "app/settings.tsx",
         "app/time-machine.tsx",
+        "src/assets/LifestyleSymbol.tsx",
         "src/ui/AssetFeatures.tsx",
         "src/ui/EndLifeAction.tsx",
         "src/ui/LifeMilestoneArt.tsx",
@@ -27349,6 +27350,15 @@
       ]
     },
     {
+      "path": "assets/generated/catalogue-lifestyle-vehicles.png",
+      "status": "present",
+      "bytes": 1810938,
+      "sha256": "ba8dce67fbb0d4cba0ccd0840569634f3806679732130fa77f05975f9242bff5",
+      "referencedBy": [
+        "src/assets/CatalogArt.tsx"
+      ]
+    },
+    {
       "path": "assets/generated/catalogue-vehicles.png",
       "status": "present",
       "bytes": 2230886,
@@ -27555,6 +27565,15 @@
       "referencedBy": [
         "src/assets/CultArt.tsx",
         "src/assets/HealthLegalArt.tsx"
+      ]
+    },
+    {
+      "path": "assets/generated/lifestyle-pets-atlas.png",
+      "status": "present",
+      "bytes": 2359392,
+      "sha256": "eb08760080957697cf2e234f2ecc1f31b795fd2990875f7707e376368c86cc13",
+      "referencedBy": [
+        "src/assets/LifestylePetArt.tsx"
       ]
     },
     {

@@ -132,7 +132,7 @@ async function fixtureDatabase(reader: number) {
   };
 }
 
-test.each([13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30])('complete reader%s→31 rolls back a failed marker, cold-retries without any row rewrite and cold-loads genuine prior friendship/current/backup/history', async reader => {
+test.each([13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30])('complete reader%s→32 rolls back a failed marker, cold-retries without any row rewrite and cold-loads genuine prior friendship/current/backup/history', async reader => {
   const context = await fixtureDatabase(reader);
   try {
     const before = context.rows(); expect(Object.keys(before)).toEqual(tables);
@@ -148,7 +148,7 @@ test.each([13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 3
     const current = (await retry.active())!, backup = await retry.recoveryPreview(native.current.lifeId), prior = await retry.previewLife(context.archivedId);
     expect(sha(originalNativeCanonical(current))).toBe(observations[0].canonicalSha); expect(sha(originalNativeCanonical(backup))).toBe(observations[1].canonicalSha);
     expect(encodeWorld(prior)).toBe(encodeWorld(unpackCheckpoint(archive.checkpoint, true))); expect(context.rows()).toEqual(before); context.originalPayloads();
-    const cold = context.reopen(), noTransaction: SqlDatabase = { ...context.driver, transaction: async () => { throw new Error('current reader31 must not open a migration transaction'); } };
+    const cold = context.reopen(), noTransaction: SqlDatabase = { ...context.driver, transaction: async () => { throw new Error('current reader32 must not open a migration transaction'); } };
     await new SaveRepository(noTransaction).initialise(); await cold.initialise();
     expect(encodeWorld((await cold.active())!)).toBe(encodeWorld(current)); expect(encodeWorld(await cold.recoveryPreview(native.current.lifeId))).toBe(encodeWorld(backup)); expect(encodeWorld(await cold.previewLife(context.archivedId))).toBe(encodeWorld(prior));
     expect(context.sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(32); expect(context.rows()).toEqual(before); context.originalPayloads();
@@ -156,7 +156,7 @@ test.each([13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 3
 }, 60000);
 
 test('future reader33 is refused without decode, transaction or changes to any of the eight populated tables', async () => {
-  const context = await fixtureDatabase(32);
+  const context = await fixtureDatabase(33);
   try {
     const before = context.rows(); context.forbidWrites(); const unpack = jest.spyOn(checkpoints, 'unpackCheckpoint');
     const forbidden: SqlDatabase = { ...context.driver, transaction: async () => { throw new Error('future reader must refuse before a transaction'); } };

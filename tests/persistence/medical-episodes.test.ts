@@ -39,7 +39,7 @@ test('independently captured pre-feature World48 medical decisions preserve lite
   }
 });
 
-test('the reader28→31 upgrade changes only the marker, preserves old rows and migrates episode metadata on read', async () => {
+test('the reader28→32 upgrade changes only the marker, preserves old rows and migrates episode metadata on read', async () => {
   const { driver, sqlite } = database();
   try {
     const repository = new SaveRepository(driver); await repository.initialise();
