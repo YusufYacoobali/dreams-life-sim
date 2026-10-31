@@ -1,0 +1,337 @@
+{
+  "scope": "Final evidence JSON/gzip parsing, relative documentation links, unchanged app/src/test tree, per-driver source-domain hashes, current memory driver hash and final Hermes source matches. Manifest excludes itself.",
+  "sourceDomainFingerprints": {
+    "baseline": {
+      "operations": "2d77d3f8a57f1138d524e6012b96965ba00f04da774753cbdedf127063c0f2bc",
+      "sqlite": "ae33b8184fb81a87a6c31f2219868435e7904581f682b24f0502d6e0372a2623"
+    },
+    "final": {
+      "operations": "8aedc0e6d3cd2b33af52fa6fe02e4fda86a73add295310e381d27231655c096f",
+      "sqlite": "fc0bf207bedbb48e3cad89c27702bb43e40ea87aaa82f535315a7a17a2a7553f"
+    }
+  },
+  "parsedJsonFiles": 57,
+  "checksPassed": true,
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 2322,
+      "sha256": "f26403586cc8753c549b0cb1f5ebe0d52133b00f05dbb0391c7799209bd10ca4"
+    },
+    {
+      "path": "after/actions.json.gz",
+      "bytes": 3345,
+      "sha256": "9faae9fd5212532a6b4ce2e9e41bdbdc1a27fbfa23012a94c34f801a09128139"
+    },
+    {
+      "path": "after/active-operations.json.gz",
+      "bytes": 7547,
+      "sha256": "1e21aa33566d3a7ea849d619f1df5fe31174f0db175230f338967c0ab63c71b3"
+    },
+    {
+      "path": "after/active-pairs.json.gz",
+      "bytes": 30248,
+      "sha256": "8c930bc7fccd97c44df11218b79416cce42a98e8cacbacb36b2f59ef157471b9"
+    },
+    {
+      "path": "after/active-sqlite.json.gz",
+      "bytes": 51842,
+      "sha256": "36b3b992ba42a75279160843ab2a604892bddebd5f27d805895d60c731256d69"
+    },
+    {
+      "path": "after/enabled-operations.json.gz",
+      "bytes": 9106,
+      "sha256": "9533fb71b7443fb5e8049c276ce82873b59105d1ba83c0741d14cb52fecdda38"
+    },
+    {
+      "path": "after/enabled-pairs.json.gz",
+      "bytes": 37769,
+      "sha256": "e787f4c2ef00e678d115bba3951b44d152617b4e18b0614baa2f37452469c7cf"
+    },
+    {
+      "path": "after/enabled-sqlite.json.gz",
+      "bytes": 63633,
+      "sha256": "79350b635617e1f246e68d581cfd29020f30c812bde151de996e39effaf6dfa6"
+    },
+    {
+      "path": "after/generations-operations.json.gz",
+      "bytes": 2266,
+      "sha256": "66b3aea76f60ce8b44e0b5abec4c7796894fbef126c3585af1b4eb11d0d3b13d"
+    },
+    {
+      "path": "after/generations-pairs.json.gz",
+      "bytes": 5979,
+      "sha256": "f03155f927cdd841f8dbf162acee9ac155822da648378a98c7852faa30ded3fd"
+    },
+    {
+      "path": "after/generations-sqlite-followup.json.gz",
+      "bytes": 16157,
+      "sha256": "045aa639f9d4c792ccfc8e73e2eb9b462364e70849d699c5a328f76099114726"
+    },
+    {
+      "path": "after/generations-sqlite.json.gz",
+      "bytes": 9374,
+      "sha256": "b9255579c6cad8e8cc3b2c444ee5002cad4466f6e769abfb73cb208b2e8753c6"
+    },
+    {
+      "path": "after/life-journal.json.gz",
+      "bytes": 2113,
+      "sha256": "748622965185923e178df9b52fa39399336b93717b79f7b71b12b08946adb231"
+    },
+    {
+      "path": "after/memory.json.gz",
+      "bytes": 5111,
+      "sha256": "ca0a1a5b879b13c9ec0f792ff720338c41647f963781a33bc4e9f3c1f98daa85"
+    },
+    {
+      "path": "after/ordinary-operations.json.gz",
+      "bytes": 9055,
+      "sha256": "614b012222f31c3a10ed2639987f93d4ee41f122aee7ced41414bb2942af5e52"
+    },
+    {
+      "path": "after/ordinary-pairs.json.gz",
+      "bytes": 37624,
+      "sha256": "db995e5743f46f87408d9ff48b0810b5a474be05b4e55ce4d0346b751121e3f9"
+    },
+    {
+      "path": "after/ordinary-sqlite.json.gz",
+      "bytes": 63281,
+      "sha256": "efefc8bc3517025090909b1a68c8491e755b0fce626c400a6df052c0c375cda6"
+    },
+    {
+      "path": "after/screens.json.gz",
+      "bytes": 1063,
+      "sha256": "49790ebd5b43e14fd7146353e1aeff99d200ed32f44f0ebce0faabfb4c4eb2c7"
+    },
+    {
+      "path": "after.md",
+      "bytes": 7991,
+      "sha256": "7eb19e6f35fa5a3a1268b2096d9137c90bafa6e93f9e9d09496cef77bd2458b9"
+    },
+    {
+      "path": "baseline/active-operations.json.gz",
+      "bytes": 7791,
+      "sha256": "5262d663158c1aa94ec452a4b6cc63fa9d5f1ae7cb40e7d20fb4d9217541c1e0"
+    },
+    {
+      "path": "baseline/age90.cpuprofile.gz",
+      "bytes": 743490,
+      "sha256": "991a29c3b6dc1953231649998b390ca217595d69503ccb32cf875554db2c84ad"
+    },
+    {
+      "path": "baseline/cpu-age90.json.gz",
+      "bytes": 13782,
+      "sha256": "bed0f30a69e1814d2bb1d7e35370d7e77a9a8f950a198188a02663e32944ec05"
+    },
+    {
+      "path": "baseline/detail-age90.json.gz",
+      "bytes": 14688,
+      "sha256": "93818fb3b460eaaa2dcb579b9d8ac9073315bc912617c65d4cc876793d58f019"
+    },
+    {
+      "path": "baseline/detail-certification.json.gz",
+      "bytes": 5621,
+      "sha256": "c5406fa681f47a0ad30590f302228c2cb0b59007d79012f736335c2f057fd928"
+    },
+    {
+      "path": "baseline/detail-new-rows.json.gz",
+      "bytes": 5411,
+      "sha256": "e0970b85f828e7e6a27e301a62b9915cb8b91189a380cb32bb07f3eff849b89c"
+    },
+    {
+      "path": "baseline/enabled-operations.json.gz",
+      "bytes": 9318,
+      "sha256": "ed8cb6af082c7c261642daef65592ac711ea08f7051af2f5c81f55c99bc042fb"
+    },
+    {
+      "path": "baseline/generations-operations.json.gz",
+      "bytes": 2319,
+      "sha256": "489252d89ad30f9046d0fe7cc989323e9b7a4849ee740ac9a4404ab328d277a2"
+    },
+    {
+      "path": "baseline/life-journal.json.gz",
+      "bytes": 2129,
+      "sha256": "d95cce99cc2391b04d9fd68aa5f0229b0f5f12c7cac3d0261b5e1a1870a9453f"
+    },
+    {
+      "path": "baseline/ordinary-actions.json.gz",
+      "bytes": 2645,
+      "sha256": "95dec5ccc0ceb3b0eed128e64b2b2e21660e2097084454d0224e42471607cce4"
+    },
+    {
+      "path": "baseline/ordinary-commands.json.gz",
+      "bytes": 70414,
+      "sha256": "6791da11ab59a3c27f8eda1740681adf115466add19ee3f5c2022ba59e919b95"
+    },
+    {
+      "path": "baseline/ordinary-operations.json.gz",
+      "bytes": 9241,
+      "sha256": "5e5adf183f7a369d3328dc2d533f362d78394095d83e0af0212606ec8fddc6c5"
+    },
+    {
+      "path": "baseline/screens.json.gz",
+      "bytes": 1105,
+      "sha256": "1b480599ed05cc26525c907b3cc8a724d0dc289b45272663e6874fd7efd99e18"
+    },
+    {
+      "path": "baseline-manifest.json",
+      "bytes": 811,
+      "sha256": "344b83bc5661826f4e9ce188316868affea86787f1c12dc779ef2a0f90d8d6bf"
+    },
+    {
+      "path": "baseline.md",
+      "bytes": 5487,
+      "sha256": "28dabe7ec64d2b11b964c7c7789fc8eb50e4cc7fea45cb9ad8eb9f074f268a6e"
+    },
+    {
+      "path": "canonical.json",
+      "bytes": 11105,
+      "sha256": "6c8a6188e11daf5883bf1e00fd8e62c23a4a6c410488dff91b32676937da648d"
+    },
+    {
+      "path": "canonical.json.gz",
+      "bytes": 3447,
+      "sha256": "1f9900143eb9d9329cf6372d6a52adf3b1d2247abd47faf1c2c6910e7f56fbe4"
+    },
+    {
+      "path": "comparison.json",
+      "bytes": 102884,
+      "sha256": "ad195b1ac01ca72b2e86225c10f8f1e73264648e7426349dfa0acf0c5a92e176"
+    },
+    {
+      "path": "controlled-before/actions.json.gz",
+      "bytes": 3373,
+      "sha256": "4584b80d6529a884b43219729e70ddec7c590e84f756fc943306e967635091e2"
+    },
+    {
+      "path": "controlled-before/active-operations.json.gz",
+      "bytes": 7778,
+      "sha256": "a1c9b7c29a9543a1aa10e352ee451eeabb8aacf3f1c740ea531fd1b9af8efe5f"
+    },
+    {
+      "path": "controlled-before/active-sqlite.json.gz",
+      "bytes": 52284,
+      "sha256": "97f4d8bc1ecb804aa43a7811bffb0bbf5c4fe026c5aebd0ed29c4317dfe2f981"
+    },
+    {
+      "path": "controlled-before/enabled-operations.json.gz",
+      "bytes": 9312,
+      "sha256": "030612aac3160a0773c03e101ea8c4b3f57fd526a602d8c66eafb69a4a5462e2"
+    },
+    {
+      "path": "controlled-before/enabled-sqlite.json.gz",
+      "bytes": 63826,
+      "sha256": "fe1d63766288138c8afcf28d12025ab0c0b734a2ec8ebf00ee9476e60806a93a"
+    },
+    {
+      "path": "controlled-before/generations-operations.json.gz",
+      "bytes": 2292,
+      "sha256": "7341143928e451fc414aeadd95156b01bc5e6f9b55677707e85abc77159a3ba7"
+    },
+    {
+      "path": "controlled-before/generations-sqlite-followup.json.gz",
+      "bytes": 16215,
+      "sha256": "adac8a5bb170ff23d68d92945555c069c3516245fb0c13575d1b44bba9eb5180"
+    },
+    {
+      "path": "controlled-before/generations-sqlite.json.gz",
+      "bytes": 9392,
+      "sha256": "429a37857b6ab140b93b6ce9250df3096b26af84a2147772394fa852fbbf204a"
+    },
+    {
+      "path": "controlled-before/memory.json.gz",
+      "bytes": 5105,
+      "sha256": "e8ee04824f64ddb398ce8a2f953b2e7f478516fd31daef9f85756cea8192954a"
+    },
+    {
+      "path": "controlled-before/ordinary-operations.json.gz",
+      "bytes": 9311,
+      "sha256": "623eaef26f90e9aaeb8efbf0af630b4517e7b684e4cef0f8afbf01a67d967b41"
+    },
+    {
+      "path": "controlled-before/ordinary-sqlite.json.gz",
+      "bytes": 63772,
+      "sha256": "518cb0d749aaed6fcf6b564ea23ff394afa67b046546404ade8dc679ac50f506"
+    },
+    {
+      "path": "hermes.json",
+      "bytes": 1376,
+      "sha256": "b350804def3deed3174753815afee2ca0e00c1961a124bfa420ecd6c9476ba8a"
+    },
+    {
+      "path": "inputs/active.json.gz",
+      "bytes": 1484888,
+      "sha256": "70b893dfe661c5d04c5a53854434b980890f48d0c0325220e9cce3e0d3e9ded9"
+    },
+    {
+      "path": "inputs/enabled.json.gz",
+      "bytes": 1496720,
+      "sha256": "4c696bf530d1de51ed70927ceee4abfb047cee5bc965932850a55a69027886fe"
+    },
+    {
+      "path": "inputs/generations.json.gz",
+      "bytes": 18421,
+      "sha256": "79f2ae04d8ee52410a892c2b6b3a22859cbab08a24efb1cf86785e7a48b8e9f0"
+    },
+    {
+      "path": "inputs/ordinary.json.gz",
+      "bytes": 1493074,
+      "sha256": "2e950cc2d3c841d50ddeb4b6a0e2573377b06dbd479f716305f44ef9e36a6ba1"
+    },
+    {
+      "path": "interrupted-review-run.log.gz",
+      "bytes": 5278,
+      "sha256": "f8267590c9356a23b0caeeecf4fd4c49f69642e07eb2660910398e9249569552"
+    },
+    {
+      "path": "positioned-index.json.gz",
+      "bytes": 583,
+      "sha256": "85c1961eab3b1edc32ad1735c6399cd8b3966bf6d19de600269cb928b6fc53d4"
+    },
+    {
+      "path": "preservation.json",
+      "bytes": 2074,
+      "sha256": "5639a9b7c810d3cb301a27b599be5dd5e9fcd107d9d20c648510a3329c04e0cb"
+    },
+    {
+      "path": "regression.json.gz",
+      "bytes": 156578,
+      "sha256": "99911191fd11fc47e96d00278fdc20732fb874ea7a6970acc84f8a6a5980b9c8"
+    },
+    {
+      "path": "regression.log.gz",
+      "bytes": 7267,
+      "sha256": "603438d1f910a583de8b0805481f7738bd28a86aed60d9d73bd08d99f56c7347"
+    },
+    {
+      "path": "reproduction.md",
+      "bytes": 7152,
+      "sha256": "d939912d93b5a75e7264bb438ffbf836c56eef5b15221eec5306bd231fd6bc05"
+    },
+    {
+      "path": "soak.json",
+      "bytes": 32208,
+      "sha256": "87329d0d94a17f7c4c90db4e93f6b90cd94e0daf76428b99c5d99f4a2d771de4"
+    },
+    {
+      "path": "soak.log.gz",
+      "bytes": 3549,
+      "sha256": "dfb9b733cde9208d896307c0b8406c819418cfe893db6eb7fc1cf58661cf3520"
+    },
+    {
+      "path": "stage-b-pairs.json.gz",
+      "bytes": 21270,
+      "sha256": "4547577eb4f88a7193a522d6de17dc27625d1d8b4e9392ac1fca9464cf5b49c1"
+    },
+    {
+      "path": "stage-c-operations.json.gz",
+      "bytes": 9027,
+      "sha256": "531c23b8308522fddbd1572c959ee3da979c91575b2ca1d2ea4a407448ac191c"
+    },
+    {
+      "path": "verification.json",
+      "bytes": 1179,
+      "sha256": "feee9686ed7c495df420530c2e22e90aadc7f491160df87518037cf4c8fc2c53"
+    }
+  ]
+}

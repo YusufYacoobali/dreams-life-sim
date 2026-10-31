@@ -2,6 +2,53 @@
 
 Owner workflow preference: commit and push completed changes to the active development branch unless explicitly told otherwise.
 
+## Mobile performance — 31 October 2026
+
+Current runtime/tests on **`v2`** are **`ffc7d828`**, from published **`8ba6ba14`**.
+Only `model.ts`, `ledgerIndex.ts`, `checkpoints.ts` and `repository.ts` change at
+runtime. Gameplay/content, UI/navigation/art, dependencies, monetisation and
+original fixtures/verification archives remain byte-identical to that baseline.
+
+Ledger shape reuse now uses the existing private whole-branch certificate and
+exact working-copy provenance/row position, replacing per-transaction WeakSet
+registrations. New, moved and changed rows still parse; every balance, reference,
+chronology and cross-system integrity check remains. Object freezing grants no
+certificate. Parsed ledgers retain no origin chain. Lazy positioned lookup builds
+its Map without temporary entry tuples. V4 loading builds the parsed world
+directly, preserving bounded money decoding, all frame/expansion/hash checks and
+the original header's version-based cache eligibility across migration. Warm
+repository reads reuse one certified current world only when life/revision and
+actual SQLite payload bytes agree. Commit integrity reads, atomic backups,
+receipts, rollback and durable publication stay intact.
+
+The complete frozen final run passes **394 suites / 6,976 tests** with no
+failures, skipped/pending/todo cases or source drift. The earlier review-interrupted
+invocation is not added to those counts. The separate **120-life soak** passes
+all seeds with baseline-matching age-at-death/people/ledger counts and up to
+61,470 ledger rows. It began on `41863731`; the final follow-up changes only the
+checkpoint migration-cache guard and its test, with game/engine-test/runner bytes
+identical. The full final run separately covers that corrected decoder. All 35
+independent canonical-world **and packed-byte** comparisons match, including the
+original historical outcome hashes. Strict app/test types, the acyclic 596-module
+import graph, notices and both production Hermes exports pass. All four changed
+runtime files match each platform's source map exactly.
+
+Final Node/real SQLite ordinary full-year p95 is 346 → 181 ms at age 70 and
+744 → 424 ms at age 90; ordinary cold decode medians fall 28–41%. All 44 matched
+command profiles retain complete outcomes. Small young-life variation, including
+one reverse-order successor follow-up, remains visible in the reports.
+
+Preserve the existing virtualisation, statistics memoisation, bounded/weak caches
+and busy-state yield. No broad UI rewrite, extra dependencies or cooperative
+simulation was justified. Release-mode iPhone/Android feedback, save latency,
+frames, native memory and scrolling remain **unverified/open**. Node timings,
+finite memory churn and bundle success do not close that acceptance gate.
+
+See [implementation and risks](MOBILE_PERFORMANCE_OVERHAUL.md),
+[all evidence](verification/mobile-performance/README.md),
+[final measurements](verification/mobile-performance/after.md), and
+[reproduction](verification/mobile-performance/reproduction.md).
+
 ## Lifestyle final polish — 31 October 2026
 
 Current gameplay/UI source on **`v2`** is **`7fe1a2e1`**, from published `439aa14`.

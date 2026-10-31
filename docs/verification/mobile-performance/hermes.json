@@ -1,0 +1,32 @@
+{
+  "baseline": "8ba6ba14c6af47e4d868fc51bf2131d85cc9de1e",
+  "sourceCommit": "ffc7d8282cf7a1bd043015cf9972f77e438a934c",
+  "command": "npx expo export --platform all --max-workers 1 --source-maps",
+  "scope": "Production Hermes bundle source inclusion; installed-device acceptance unverified",
+  "runtimeSources": {
+    "src/game/ledgerIndex.ts": "dd4587cca4605b0018ae1e09c58181182093a371327b7420828bd5c65d63af77",
+    "src/game/model.ts": "2419a7fbb1aad152bbaeac1b0ad93d3d19ff21c1c8c4318a15b8e69a1137ca65",
+    "src/persistence/checkpoints.ts": "3bd62b0c0d24d2f62f2ca3c0099fd4c6d575a285770ca4c5bf3e71808077c726",
+    "src/persistence/repository.ts": "bf12e940460c3b6197bf3de981360511e04de17bf5a49c70e872fe233a7a0004"
+  },
+  "platforms": [
+    {
+      "platform": "android",
+      "file": "_expo/static/js/android/entry-daca541a6447f0e14fd32ecac11541a8.hbc",
+      "bytes": 9887768,
+      "sha256": "80d33ccd788db5480cf08df484f026f00a1292085cdc14cf91f300abe4cc80f7",
+      "hermesMagic": "c61fbc03c103191f",
+      "missing": [],
+      "mismatched": []
+    },
+    {
+      "platform": "ios",
+      "file": "_expo/static/js/ios/entry-515ec4cab3c9d1004b3ad469b6d0007b.hbc",
+      "bytes": 9705432,
+      "sha256": "80530e6ad485a03e5708da7f53e7923e1955b91e4161d517de89bc22b418b9a7",
+      "hermesMagic": "c61fbc03c103191f",
+      "missing": [],
+      "mismatched": []
+    }
+  ]
+}

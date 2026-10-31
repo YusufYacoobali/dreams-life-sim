@@ -1,0 +1,42 @@
+{
+  "sourceCommit": "ffc7d8282cf7a1bd043015cf9972f77e438a934c",
+  "appAndTestTypes": true,
+  "typeCommand": "npm run typecheck",
+  "typeOutput": "\n> dreams-life-sim@1.0.0 typecheck\n> tsc --noEmit && tsc --noEmit -p tests/tsconfig.json\n\n",
+  "imports": {
+    "modules": 596,
+    "cycles": []
+  },
+  "notices": {
+    "mode": "check",
+    "directDependencies": 32,
+    "candidateNonDevLockEntries": 790,
+    "versionMatched": 780,
+    "versionMismatches": 0,
+    "notInstalled": 10,
+    "missingLockLicenseMetadata": 1,
+    "withoutReadableNoticeFile": 59,
+    "readableNoticeFiles": 737,
+    "uniqueExactNoticeTexts": 281,
+    "detectedFontFamilies": 1,
+    "projectArtFiles": 1200
+  },
+  "fullRegression": {
+    "suites": {
+      "total": 394,
+      "passed": 394,
+      "failed": 0,
+      "pending": 0
+    },
+    "cases": {
+      "total": 6976,
+      "passed": 6976,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0
+    },
+    "changedSourcesDuringRun": []
+  },
+  "interruptedRun": "First invocation intentionally stopped during review of original-version cache eligibility. Its partial results are not added to the final complete run.",
+  "nativeAcceptance": "open"
+}

@@ -1,0 +1,300 @@
+{
+  "scope": "Independent archived baseline and candidate decode/canonical/packing comparison. All actual histories retained. No regenerated golden expectations or altered fixtures.",
+  "rows": [
+    {
+      "group": "ordinary",
+      "age": 10,
+      "generation": 1,
+      "schema": 49,
+      "canonicalSha256": "b14ae4aea853a2c06c04baf4ff72b6dfb0ad6342729ad1183d79dc091640684e",
+      "packedSha256": "7e3b361d0a488c1b2acc63eeb9a176acef63f2fa0bea86ab4a6bb66a68dfeb7a",
+      "exact": true
+    },
+    {
+      "group": "ordinary",
+      "age": 25,
+      "generation": 1,
+      "schema": 49,
+      "canonicalSha256": "8cd105382894d4e8a2dce4e0658d72829649576612691ceb32dce0f20652e6d1",
+      "packedSha256": "fec15494f917524c4035fe902ba6e09db60738d39aa5349e18ff6bc1e857ca27",
+      "exact": true
+    },
+    {
+      "group": "ordinary",
+      "age": 50,
+      "generation": 1,
+      "schema": 49,
+      "canonicalSha256": "9d02523ddd7a283860453931947b58b56a6672ad1430b46bd33607cb902352c0",
+      "packedSha256": "d371775fd141527e2ee79e4e410bd7a37ae2e2682389549c8b8b3cbf40625959",
+      "exact": true
+    },
+    {
+      "group": "ordinary",
+      "age": 70,
+      "generation": 1,
+      "schema": 49,
+      "canonicalSha256": "ab6b750d4f889ad2a08944f1269190bdd1745ab215b420c2f0068e169177a5c7",
+      "packedSha256": "d9306350c8b3a7445dafbc4070ea5faa6a01ff633aa479d1139a95e6f72f93c9",
+      "exact": true
+    },
+    {
+      "group": "ordinary",
+      "age": 90,
+      "generation": 1,
+      "schema": 49,
+      "canonicalSha256": "2d51e667fb91baccb51982e516a9daf16ccbdd708d2bd5f54c48435717b77bd1",
+      "packedSha256": "e10c9254868bbe8a5e3baf8341b61c779fd857b50abe54f498614e426b9ace3d",
+      "exact": true
+    },
+    {
+      "group": "enabled",
+      "age": 10,
+      "generation": 1,
+      "schema": 49,
+      "canonicalSha256": "5f54d0fae4406d6f6a6dbd27a76478917996c5c23e32b5bed2e0018631941266",
+      "packedSha256": "75b24ce3589d6abf4c41e1400787a5e4fff076d8deed1adafaf117cea5ba5402",
+      "exact": true
+    },
+    {
+      "group": "enabled",
+      "age": 25,
+      "generation": 1,
+      "schema": 49,
+      "canonicalSha256": "04328a8cfa07b18e07bb3e8c238e5640f12df849763ad87439e68aed4621bb05",
+      "packedSha256": "f52048c38f85e2b7b50981b7f43fd0f42b588709d9d5b127005afb1c6843778c",
+      "exact": true
+    },
+    {
+      "group": "enabled",
+      "age": 50,
+      "generation": 1,
+      "schema": 49,
+      "canonicalSha256": "e974a5db7254552f90d82d2e51e60eb5a6630b9c0d2d04ba0697ce0cbc0ba537",
+      "packedSha256": "564143ed563d55ff7199c0b59efd9334e9ee127ba54595c8aa2b9c13f2ed4baa",
+      "exact": true
+    },
+    {
+      "group": "enabled",
+      "age": 70,
+      "generation": 1,
+      "schema": 49,
+      "canonicalSha256": "12d68b156b3fac857fcd6727e8f928e872d45bfde86f41a7fe29dd1042312a1a",
+      "packedSha256": "5a052918265d3d1eb26fa9dfc0b89c957955efaba883037aa003df19d54ec67e",
+      "exact": true
+    },
+    {
+      "group": "enabled",
+      "age": 90,
+      "generation": 1,
+      "schema": 49,
+      "canonicalSha256": "4506787ad37ed50207e63ecc812cdd1270905719889fe5ac943c9b172b3b402a",
+      "packedSha256": "6f1480f5b084915835eb1cc8b63dabbeed501687a00b6b14ebbeab0d68033e21",
+      "exact": true
+    },
+    {
+      "group": "active",
+      "age": 25,
+      "generation": 1,
+      "schema": 49,
+      "canonicalSha256": "f5b3138c015ec731ea0178c85730645f1f3c4ca06461d3b839054106ebe378c0",
+      "packedSha256": "cab480c48f4b0d486ad55cfc83ab8268131f4c3a0698a8d3edfd0143a7a13bd6",
+      "exact": true
+    },
+    {
+      "group": "active",
+      "age": 50,
+      "generation": 1,
+      "schema": 49,
+      "canonicalSha256": "1057aec8e9ad33ff563a895df51b0e1ce0fe9a377f2e72c7970a4fb484817e53",
+      "packedSha256": "135c2e4f185f65c7fc027c162b242502a8ad7251bfea28a69c1731f1fa664c64",
+      "exact": true
+    },
+    {
+      "group": "active",
+      "age": 70,
+      "generation": 1,
+      "schema": 49,
+      "canonicalSha256": "80d38f0152aefdd9911b0ccba3edca57c47a066a374322a720fa26478ed332a2",
+      "packedSha256": "5cb7cdbc0d9dde748cf27b0ce5bab630da6629be4d272ba31c18ceb8103423d4",
+      "exact": true
+    },
+    {
+      "group": "active",
+      "age": 90,
+      "generation": 1,
+      "schema": 49,
+      "canonicalSha256": "added3cc0990cc3d384a022e966d0d7158681d58618414f24adae4faf35d2b36",
+      "packedSha256": "c3a65a6aec4bc0c6a8817366be7529979d6aab4bd25663196986b6f9b5ba5ba2",
+      "exact": true
+    },
+    {
+      "group": "generations",
+      "age": 1,
+      "generation": 2,
+      "schema": 49,
+      "canonicalSha256": "62b1602c86b8035c6c94e2cf9b44606cd55bc8129ba5a98b82becf2700965c15",
+      "packedSha256": "bcc98cf9283d7b485c289418f5029caaefba903492bcd957ea121fe85f0f479a",
+      "exact": true
+    },
+    {
+      "group": "enhanced-creative",
+      "name": "pending",
+      "schema": 50,
+      "canonicalSha256": "5f910916013de3ce99aab980b4e135f46789d251bfffd3327b039e5b6fd278ea",
+      "packedSha256": "ba845d7a51860b680b59295c86bfc55cb5e4b27d8fa57034b1bac9ea29f6b057",
+      "exact": true
+    },
+    {
+      "group": "enhanced-creative",
+      "name": "expected",
+      "schema": 50,
+      "canonicalSha256": "af1bc89b8708535449c6b32260b3bbaee56c552b272e4bdae284157b9d275ef4",
+      "packedSha256": "7dc8479aa5ba10536c457cafb65f13e1c4654e4e1012f06cec1f2224a45ec8a7",
+      "exact": true
+    },
+    {
+      "group": "enhanced-creative",
+      "name": "cancelledActor",
+      "schema": 50,
+      "canonicalSha256": "5157eaf34bc1c38b825ebed4f6960755a04aaea37a55611c2d2c2f0f51d84db4",
+      "packedSha256": "cc0e61b20808b5ab3d4c9cd9a3868308c2e6952ffd8be3739e0de62e91834f0c",
+      "exact": true
+    },
+    {
+      "group": "enhanced-creative",
+      "name": "cancelledModel",
+      "schema": 50,
+      "canonicalSha256": "849235129ebac82962b6e9b5cfabbd8b9baa8d156e08d692e1fc36942b49ab15",
+      "packedSha256": "5cb1d5ffd5655cda2be80927dc62fe155666f16ee2beca38d58e07125217c5a6",
+      "exact": true
+    },
+    {
+      "group": "enhanced-creative",
+      "name": "pendingModelPublicity",
+      "schema": 50,
+      "canonicalSha256": "982f884a4805fcedbcb34534a0b5e0ff57890f9731f73f4204fba67526c979fb",
+      "packedSha256": "f8c17c90fe25c507a882ab0038106aed9d04b986556ad77edb675cc1823ba679",
+      "exact": true
+    },
+    {
+      "group": "enhanced-creative",
+      "name": "expectedModelPublicity",
+      "schema": 50,
+      "canonicalSha256": "afa864ce79886cf8ae1b3d44a6de0a1128d87f7a7003ecce6a93fe47107674ed",
+      "packedSha256": "31b2de136260dcffcb72098cd7b9394b26f81d6e41a9d82a75b23da26e7da072",
+      "exact": true
+    },
+    {
+      "group": "enhanced-creative",
+      "name": "pendingModelAmendment",
+      "schema": 50,
+      "canonicalSha256": "4dc253c2b67a9eba15c49824589e16fe6859ad3f5d5ab3d0585eaac841641b14",
+      "packedSha256": "7de2534e08246387758aab1154c4747a52e961fa995d63ba60d803369f89e975",
+      "exact": true
+    },
+    {
+      "group": "enhanced-creative",
+      "name": "expectedModelAmendment",
+      "schema": 50,
+      "canonicalSha256": "c867f380b710e9a260652a059cd3495780bd156355473dfa5af5fbe7a37cf55d",
+      "packedSha256": "4f4640215dd57368234410981a642730d37b6cd7757ce573425572a4df7ad73c",
+      "exact": true
+    },
+    {
+      "group": "historical-crime-prison-romance-escape",
+      "name": "v1-escape-success",
+      "schema": 49,
+      "canonicalSha256": "f7d183f5a7670c11590c50846ea7b715b3ad61ca539577ba3dace3b26638829e",
+      "packedSha256": "e07e04a1bec9d0451076853488bb50a944bb7c25497276eb33a734e08c85c4b6",
+      "exact": true
+    },
+    {
+      "group": "historical-crime-prison-romance-escape",
+      "name": "v1-escape-forfeit",
+      "schema": 49,
+      "canonicalSha256": "f88a58f1c580a0e94f03dadacf385b414a19fb72992b807be1dbe02532f5cc05",
+      "packedSha256": "d15358a4cc6640f414142edde3b937d24d24512a61f5ceb491432434379fab7f",
+      "exact": true
+    },
+    {
+      "group": "historical-crime-prison-romance-escape",
+      "name": "v1-escape-paused",
+      "schema": 49,
+      "canonicalSha256": "085b659d77d67246fb16d6418f0858280ad93411308a3137746de1e937ff5ce9",
+      "packedSha256": "85fba574475e62568120a7b65f4758dafee0811c0f16f0bec68b930c7bde35ab",
+      "exact": true
+    },
+    {
+      "group": "historical-crime-prison-romance-escape",
+      "name": "v1-crime-negotiate",
+      "schema": 49,
+      "canonicalSha256": "2a355825fc733455dc8150a77eb12299e11bc0225574a1691817746f4c1f6596",
+      "packedSha256": "54cd4bd1f6f14f7024ad3e54febc7737430266268a8a6a899bede9a381d2062a",
+      "exact": true
+    },
+    {
+      "group": "historical-crime-prison-romance-escape",
+      "name": "v1-crime-expose",
+      "schema": 49,
+      "canonicalSha256": "8206945e3b0a5569def35f9e16e837416967e33c2df7a18da83ed995742667e5",
+      "packedSha256": "c73d4a88a317c65b1c3903ba24cf36ad53b9b2dc6e56b76c7875f48d46fca0a6",
+      "exact": true
+    },
+    {
+      "group": "historical-crime-prison-romance-escape",
+      "name": "v1-crime-leave",
+      "schema": 49,
+      "canonicalSha256": "ce7924709dcb6ea67e1a6fb7ae3ad285859deb86ffc3513cc85daae9703c0587",
+      "packedSha256": "b97206c2edab9701c6acd388062c8a11a7200d4e526eb7dc1841a1446c0e12e0",
+      "exact": true
+    },
+    {
+      "group": "historical-crime-prison-romance-escape",
+      "name": "v1-prison-agree",
+      "schema": 49,
+      "canonicalSha256": "53df0339f2c92bcfa38364c68c74b76927a52926b939b35b4b7713224d4cde18",
+      "packedSha256": "f768033c13bc983961db5218e88fbc20f6c449608fa4dedab3c7b3faf5d6f091",
+      "exact": true
+    },
+    {
+      "group": "historical-crime-prison-romance-escape",
+      "name": "v1-prison-mock",
+      "schema": 49,
+      "canonicalSha256": "d5c1b15a36bb302f627dc7cf38c4c4d57d3dcbd7e929e58e4d432eb4928247be",
+      "packedSha256": "df284ca402e07f1c64f996a09b1697799c1094e8622a41126d61f17dc6f67d90",
+      "exact": true
+    },
+    {
+      "group": "historical-crime-prison-romance-escape",
+      "name": "v1-prison-move",
+      "schema": 49,
+      "canonicalSha256": "17f0f99806efd5bf9c3b10b6e42f668604c7b0b50548bb967fb794ef86c1e534",
+      "packedSha256": "6a7f6185d27d202190a68e861d54f882c0bec16b23e203775ee1df7ced2a04e7",
+      "exact": true
+    },
+    {
+      "group": "historical-crime-prison-romance-escape",
+      "name": "v1-romance-stop",
+      "schema": 49,
+      "canonicalSha256": "ba9ee21d9a32a14ce1c4ab734404ae09835d1c7896534df38a204c17b26cd437",
+      "packedSha256": "5b1cd7467ac63b373e56314f6149f51624ecf506ecdae5ad366232567e1c1042",
+      "exact": true
+    },
+    {
+      "group": "historical-crime-prison-romance-escape",
+      "name": "v1-romance-choose",
+      "schema": 49,
+      "canonicalSha256": "e10fd5216e06326ddcb3728f307753b4729a9b0908c289b888ebecbe1dd2ceea",
+      "packedSha256": "ae75313f26573fdf611b9206f05c8dc26cbd8cb792bcacb581dedf3e27159210",
+      "exact": true
+    },
+    {
+      "group": "historical-crime-prison-romance-escape",
+      "name": "v1-romance-repeat",
+      "schema": 49,
+      "canonicalSha256": "b1a22bfcfcb5378573c113aff97c9ba1187108de3db38e516cbda1c9f42452b2",
+      "packedSha256": "e312e16405922fb5667306c13ed6527bfa6cdf3e441f6216baf1509f63e15d37",
+      "exact": true
+    }
+  ]
+}

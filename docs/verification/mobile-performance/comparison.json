@@ -1,0 +1,3483 @@
+{
+  "baselineCommit": "8ba6ba14c6af47e4d868fc51bf2131d85cc9de1e",
+  "finalRuntimeCommit": "ffc7d8282cf7a1bd043015cf9972f77e438a934c",
+  "scope": "Controlled sequential Node/real SQLite plus alternating same-process command pairs. Source code, canonical outcomes, RNG and command/date equivalence checked; not release-device proof. Cold repository/codec uses warm OS caches.",
+  "ordinaryAges": [
+    10,
+    25,
+    50,
+    70,
+    90
+  ],
+  "operationRows": [
+    {
+      "group": "ordinary",
+      "age": 10,
+      "operation": "validate-certified-copy",
+      "beforeMedianMs": 2.219155999999657,
+      "afterMedianMs": 1.2252669999998034,
+      "beforeP95Ms": 2.523279999999886,
+      "afterP95Ms": 1.8094179999998232,
+      "medianRatio": 0.5521319817083579
+    },
+    {
+      "group": "ordinary",
+      "age": 10,
+      "operation": "checkpoint-warm-pack",
+      "beforeMedianMs": 4.330609000000095,
+      "afterMedianMs": 3.4440819999999803,
+      "beforeP95Ms": 5.554395000000113,
+      "afterP95Ms": 5.73604800000021,
+      "medianRatio": 0.7952881453855346
+    },
+    {
+      "group": "ordinary",
+      "age": 10,
+      "operation": "checkpoint-cold-pack",
+      "beforeMedianMs": 14.57490400000006,
+      "afterMedianMs": 12.850954000000002,
+      "beforeP95Ms": 15.984711000000061,
+      "afterP95Ms": 13.3168169999999,
+      "medianRatio": 0.8817179173186971
+    },
+    {
+      "group": "ordinary",
+      "age": 10,
+      "operation": "checkpoint-cold-unpack",
+      "beforeMedianMs": 22.601622999999563,
+      "afterMedianMs": 15.08688600000005,
+      "beforeP95Ms": 28.140401999999995,
+      "afterP95Ms": 19.772048999999697,
+      "medianRatio": 0.667513390520687
+    },
+    {
+      "group": "ordinary",
+      "age": 10,
+      "operation": "repository-warm-load",
+      "beforeMedianMs": 19.69200699999965,
+      "afterMedianMs": 0.14385700000002544,
+      "beforeP95Ms": 23.047623999999814,
+      "afterP95Ms": 0.14578999999957887,
+      "medianRatio": 0.007305349830518951
+    },
+    {
+      "group": "ordinary",
+      "age": 10,
+      "operation": "repository-cold-reopen",
+      "beforeMedianMs": 25.24009599999954,
+      "afterMedianMs": 14.698159000000487,
+      "beforeP95Ms": 30.150532000000567,
+      "afterP95Ms": 14.795366000000286,
+      "medianRatio": 0.5823337201253417
+    },
+    {
+      "group": "ordinary",
+      "age": 10,
+      "operation": "statistics-projection",
+      "beforeMedianMs": 0.5034089999999196,
+      "afterMedianMs": 0.2738730000000942,
+      "beforeP95Ms": 0.6064040000001114,
+      "afterP95Ms": 0.4216660000001866,
+      "medianRatio": 0.5440367573884017
+    },
+    {
+      "group": "ordinary",
+      "age": 10,
+      "operation": "relationship-projection",
+      "beforeMedianMs": 0.04759199999989505,
+      "afterMedianMs": 0.045288000000255124,
+      "beforeP95Ms": 0.06200399999943329,
+      "afterP95Ms": 0.05020599999988917,
+      "medianRatio": 0.9515885022767481
+    },
+    {
+      "group": "ordinary",
+      "age": 10,
+      "operation": "journal-warm-projection",
+      "beforeMedianMs": 0.019779999999627762,
+      "afterMedianMs": 0.018869000000449887,
+      "beforeP95Ms": 0.020680999999967753,
+      "afterP95Ms": 0.019889999999577412,
+      "medianRatio": 0.9539433771893316
+    },
+    {
+      "group": "ordinary",
+      "age": 10,
+      "operation": "zustand-world-publication",
+      "beforeMedianMs": 0.08752199999980803,
+      "afterMedianMs": 0.11189900000044872,
+      "beforeP95Ms": 0.09580499999992753,
+      "afterP95Ms": 0.14462900000035006,
+      "medianRatio": 1.278524256766232
+    },
+    {
+      "group": "ordinary",
+      "age": 25,
+      "operation": "validate-certified-copy",
+      "beforeMedianMs": 4.425771999999597,
+      "afterMedianMs": 3.69528100000025,
+      "beforeP95Ms": 5.295953999999256,
+      "afterP95Ms": 3.747580000000198,
+      "medianRatio": 0.8349460839827688
+    },
+    {
+      "group": "ordinary",
+      "age": 25,
+      "operation": "checkpoint-warm-pack",
+      "beforeMedianMs": 6.800801999999749,
+      "afterMedianMs": 6.591087000000698,
+      "beforeP95Ms": 6.924318000000312,
+      "afterP95Ms": 7.160546000000068,
+      "medianRatio": 0.9691631957526394
+    },
+    {
+      "group": "ordinary",
+      "age": 25,
+      "operation": "checkpoint-cold-pack",
+      "beforeMedianMs": 38.07542900000044,
+      "afterMedianMs": 34.423727999999755,
+      "beforeP95Ms": 52.45900200000051,
+      "afterP95Ms": 35.87010900000041,
+      "medianRatio": 0.9040929781775895
+    },
+    {
+      "group": "ordinary",
+      "age": 25,
+      "operation": "checkpoint-cold-unpack",
+      "beforeMedianMs": 66.08422299999984,
+      "afterMedianMs": 38.95576099999926,
+      "beforeP95Ms": 75.0170390000003,
+      "afterP95Ms": 49.321178000000145,
+      "medianRatio": 0.5894865556639647
+    },
+    {
+      "group": "ordinary",
+      "age": 25,
+      "operation": "repository-warm-load",
+      "beforeMedianMs": 62.33436999999867,
+      "afterMedianMs": 0.2527109999991808,
+      "beforeP95Ms": 73.4864120000002,
+      "afterP95Ms": 0.3131020000000717,
+      "medianRatio": 0.004054119741631883
+    },
+    {
+      "group": "ordinary",
+      "age": 25,
+      "operation": "repository-cold-reopen",
+      "beforeMedianMs": 65.12444800000048,
+      "afterMedianMs": 43.670357999999396,
+      "beforeP95Ms": 70.7432090000002,
+      "afterP95Ms": 51.96825899999931,
+      "medianRatio": 0.6705678027397495
+    },
+    {
+      "group": "ordinary",
+      "age": 25,
+      "operation": "statistics-projection",
+      "beforeMedianMs": 1.3004110000001674,
+      "afterMedianMs": 1.0399780000007013,
+      "beforeP95Ms": 1.8277360000010958,
+      "afterP95Ms": 1.4028650000000198,
+      "medianRatio": 0.799730239132526
+    },
+    {
+      "group": "ordinary",
+      "age": 25,
+      "operation": "relationship-projection",
+      "beforeMedianMs": 0.0618030000005092,
+      "afterMedianMs": 0.050556000000142376,
+      "beforeP95Ms": 0.07566399999996065,
+      "afterP95Ms": 0.05578400000013062,
+      "medianRatio": 0.818018542784749
+    },
+    {
+      "group": "ordinary",
+      "age": 25,
+      "operation": "journal-warm-projection",
+      "beforeMedianMs": 0.02028999999856751,
+      "afterMedianMs": 0.022833999999420485,
+      "beforeP95Ms": 0.05329100000017206,
+      "afterP95Ms": 0.0631150000008347,
+      "medianRatio": 1.1253819616083087
+    },
+    {
+      "group": "ordinary",
+      "age": 25,
+      "operation": "zustand-world-publication",
+      "beforeMedianMs": 0.09841899999992165,
+      "afterMedianMs": 0.08268499999940104,
+      "beforeP95Ms": 0.10798299999987648,
+      "afterP95Ms": 0.08705099999860977,
+      "medianRatio": 0.8401324947364519
+    },
+    {
+      "group": "ordinary",
+      "age": 50,
+      "operation": "validate-certified-copy",
+      "beforeMedianMs": 14.482313000000431,
+      "afterMedianMs": 10.149450999999317,
+      "beforeP95Ms": 15.657725000000937,
+      "afterP95Ms": 10.718520000000353,
+      "medianRatio": 0.7008169896617353
+    },
+    {
+      "group": "ordinary",
+      "age": 50,
+      "operation": "checkpoint-warm-pack",
+      "beforeMedianMs": 9.533182000001034,
+      "afterMedianMs": 10.486558999999033,
+      "beforeP95Ms": 9.996551000000181,
+      "afterP95Ms": 10.610125999999582,
+      "medianRatio": 1.1000061679298576
+    },
+    {
+      "group": "ordinary",
+      "age": 50,
+      "operation": "checkpoint-cold-pack",
+      "beforeMedianMs": 83.74745699999949,
+      "afterMedianMs": 84.86859000000004,
+      "beforeP95Ms": 89.82922500000132,
+      "afterP95Ms": 88.3310509999992,
+      "medianRatio": 1.01338706917394
+    },
+    {
+      "group": "ordinary",
+      "age": 50,
+      "operation": "checkpoint-cold-unpack",
+      "beforeMedianMs": 142.31606499999907,
+      "afterMedianMs": 102.50229500000023,
+      "beforeP95Ms": 178.09897199999978,
+      "afterP95Ms": 120.50162099999943,
+      "medianRatio": 0.72024402164296
+    },
+    {
+      "group": "ordinary",
+      "age": 50,
+      "operation": "repository-warm-load",
+      "beforeMedianMs": 191.53509199999826,
+      "afterMedianMs": 0.3716499999991356,
+      "beforeP95Ms": 198.02224099999876,
+      "afterP95Ms": 0.48035499999969034,
+      "medianRatio": 0.0019403755004808153
+    },
+    {
+      "group": "ordinary",
+      "age": 50,
+      "operation": "repository-cold-reopen",
+      "beforeMedianMs": 146.89598900000055,
+      "afterMedianMs": 102.52557000000161,
+      "beforeP95Ms": 191.92366799999945,
+      "afterP95Ms": 114.05467199999839,
+      "medianRatio": 0.6979466947868891
+    },
+    {
+      "group": "ordinary",
+      "age": 50,
+      "operation": "statistics-projection",
+      "beforeMedianMs": 2.9159660000004806,
+      "afterMedianMs": 2.7209919999986596,
+      "beforeP95Ms": 3.539085000000341,
+      "afterP95Ms": 4.553284999998141,
+      "medianRatio": 0.9331357087147831
+    },
+    {
+      "group": "ordinary",
+      "age": 50,
+      "operation": "relationship-projection",
+      "beforeMedianMs": 0.03851799999756622,
+      "afterMedianMs": 0.04431699999986449,
+      "beforeP95Ms": 0.03908900000169524,
+      "afterP95Ms": 0.10413700000208337,
+      "medianRatio": 1.1505529882824832
+    },
+    {
+      "group": "ordinary",
+      "age": 50,
+      "operation": "journal-warm-projection",
+      "beforeMedianMs": 0.016254999998636777,
+      "afterMedianMs": 0.01976000000286149,
+      "beforeP95Ms": 0.032298999998602085,
+      "afterP95Ms": 0.01990000000296277,
+      "medianRatio": 1.2156259615206804
+    },
+    {
+      "group": "ordinary",
+      "age": 50,
+      "operation": "zustand-world-publication",
+      "beforeMedianMs": 0.0820239999993646,
+      "afterMedianMs": 0.08317499999975553,
+      "beforeP95Ms": 0.08355600000140839,
+      "afterP95Ms": 0.11211899999761954,
+      "medianRatio": 1.0140324783039092
+    },
+    {
+      "group": "ordinary",
+      "age": 70,
+      "operation": "validate-certified-copy",
+      "beforeMedianMs": 20.39644700000281,
+      "afterMedianMs": 13.431689999997616,
+      "beforeP95Ms": 22.499988999999914,
+      "afterP95Ms": 14.64837500000067,
+      "medianRatio": 0.6585308705970097
+    },
+    {
+      "group": "ordinary",
+      "age": 70,
+      "operation": "checkpoint-warm-pack",
+      "beforeMedianMs": 11.589282000000821,
+      "afterMedianMs": 10.825041000000056,
+      "beforeP95Ms": 13.004857999996602,
+      "afterP95Ms": 11.750766000001022,
+      "medianRatio": 0.9340562253985439
+    },
+    {
+      "group": "ordinary",
+      "age": 70,
+      "operation": "checkpoint-cold-pack",
+      "beforeMedianMs": 147.7555579999971,
+      "afterMedianMs": 132.2656480000005,
+      "beforeP95Ms": 153.94262199999866,
+      "afterP95Ms": 136.95724100000007,
+      "medianRatio": 0.8951652972675526
+    },
+    {
+      "group": "ordinary",
+      "age": 70,
+      "operation": "checkpoint-cold-unpack",
+      "beforeMedianMs": 238.74044400000275,
+      "afterMedianMs": 171.29712199999994,
+      "beforeP95Ms": 320.75372400000197,
+      "afterP95Ms": 210.73806400000103,
+      "medianRatio": 0.7175035747189863
+    },
+    {
+      "group": "ordinary",
+      "age": 70,
+      "operation": "repository-warm-load",
+      "beforeMedianMs": 324.30038200000126,
+      "afterMedianMs": 0.5916219999999157,
+      "beforeP95Ms": 449.48523399999976,
+      "afterP95Ms": 0.6160589999999502,
+      "medianRatio": 0.0018243025072968103
+    },
+    {
+      "group": "ordinary",
+      "age": 70,
+      "operation": "repository-cold-reopen",
+      "beforeMedianMs": 260.08895699999994,
+      "afterMedianMs": 183.15234899999996,
+      "beforeP95Ms": 375.7833460000038,
+      "afterP95Ms": 186.53212500000154,
+      "medianRatio": 0.7041911779437833
+    },
+    {
+      "group": "ordinary",
+      "age": 70,
+      "operation": "statistics-projection",
+      "beforeMedianMs": 4.426724000004469,
+      "afterMedianMs": 3.5813899999993737,
+      "beforeP95Ms": 5.471778999999515,
+      "afterP95Ms": 4.2224610000012035,
+      "medianRatio": 0.8090384672719053
+    },
+    {
+      "group": "ordinary",
+      "age": 70,
+      "operation": "relationship-projection",
+      "beforeMedianMs": 0.04781199999706587,
+      "afterMedianMs": 0.04159300000173971,
+      "beforeP95Ms": 0.050626000003830995,
+      "afterP95Ms": 0.06330600000001141,
+      "medianRatio": 0.8699280516249518
+    },
+    {
+      "group": "ordinary",
+      "age": 70,
+      "operation": "journal-warm-projection",
+      "beforeMedianMs": 0.01718599999730941,
+      "afterMedianMs": 0.017715999998472398,
+      "beforeP95Ms": 0.019719000003533438,
+      "afterP95Ms": 0.022043000000849133,
+      "medianRatio": 1.0308390551173028
+    },
+    {
+      "group": "ordinary",
+      "age": 70,
+      "operation": "zustand-world-publication",
+      "beforeMedianMs": 0.07302999999956228,
+      "afterMedianMs": 0.06877400000303169,
+      "beforeP95Ms": 0.07470199999806937,
+      "afterP95Ms": 0.07446300000083284,
+      "medianRatio": 0.9417225798088991
+    },
+    {
+      "group": "ordinary",
+      "age": 90,
+      "operation": "validate-certified-copy",
+      "beforeMedianMs": 25.544181999997818,
+      "afterMedianMs": 13.166510000002745,
+      "beforeP95Ms": 26.31739699999889,
+      "afterP95Ms": 16.305962999998883,
+      "medianRatio": 0.5154406588554634
+    },
+    {
+      "group": "ordinary",
+      "age": 90,
+      "operation": "checkpoint-warm-pack",
+      "beforeMedianMs": 13.595257000000856,
+      "afterMedianMs": 14.786815999999817,
+      "beforeP95Ms": 14.871772000005876,
+      "afterP95Ms": 16.762094999998226,
+      "medianRatio": 1.0876451986158766
+    },
+    {
+      "group": "ordinary",
+      "age": 90,
+      "operation": "checkpoint-cold-pack",
+      "beforeMedianMs": 173.81314399999974,
+      "afterMedianMs": 172.62842900000396,
+      "beforeP95Ms": 174.31566100000055,
+      "afterP95Ms": 176.4755279999954,
+      "medianRatio": 0.9931839734744354
+    },
+    {
+      "group": "ordinary",
+      "age": 90,
+      "operation": "checkpoint-cold-unpack",
+      "beforeMedianMs": 327.0652009999976,
+      "afterMedianMs": 235.54767300000094,
+      "beforeP95Ms": 510.68358699999953,
+      "afterP95Ms": 254.38981200000126,
+      "medianRatio": 0.7201856763722249
+    },
+    {
+      "group": "ordinary",
+      "age": 90,
+      "operation": "repository-warm-load",
+      "beforeMedianMs": 378.636394000001,
+      "afterMedianMs": 0.7076469999956316,
+      "beforeP95Ms": 686.4304790000024,
+      "afterP95Ms": 0.7328249999991385,
+      "medianRatio": 0.001868935504376343
+    },
+    {
+      "group": "ordinary",
+      "age": 90,
+      "operation": "repository-cold-reopen",
+      "beforeMedianMs": 323.41185300001234,
+      "afterMedianMs": 250.24037599999428,
+      "beforeP95Ms": 555.9271589999989,
+      "afterP95Ms": 266.20855499999743,
+      "medianRatio": 0.7737514060747326
+    },
+    {
+      "group": "ordinary",
+      "age": 90,
+      "operation": "statistics-projection",
+      "beforeMedianMs": 6.4413300000014715,
+      "afterMedianMs": 8.370789000000514,
+      "beforeP95Ms": 9.498871000003419,
+      "afterP95Ms": 9.563076999998884,
+      "medianRatio": 1.2995435725228488
+    },
+    {
+      "group": "ordinary",
+      "age": 90,
+      "operation": "relationship-projection",
+      "beforeMedianMs": 0.05046600000059698,
+      "afterMedianMs": 0.049554000004718546,
+      "beforeP95Ms": 0.05143799999495968,
+      "afterP95Ms": 0.050856000001658686,
+      "medianRatio": 0.9819284271416866
+    },
+    {
+      "group": "ordinary",
+      "age": 90,
+      "operation": "journal-warm-projection",
+      "beforeMedianMs": 0.016864999997778796,
+      "afterMedianMs": 0.01754600000276696,
+      "beforeP95Ms": 0.01862799999071285,
+      "afterP95Ms": 0.019950000001699664,
+      "medianRatio": 1.0403794844398373
+    },
+    {
+      "group": "ordinary",
+      "age": 90,
+      "operation": "zustand-world-publication",
+      "beforeMedianMs": 0.07398200000170618,
+      "afterMedianMs": 0.08709100000123726,
+      "beforeP95Ms": 0.08729199999652337,
+      "afterP95Ms": 0.11048700000537792,
+      "medianRatio": 1.1771917493340105
+    },
+    {
+      "group": "enabled",
+      "age": 10,
+      "operation": "validate-certified-copy",
+      "beforeMedianMs": 2.2364619999998467,
+      "afterMedianMs": 1.2745319999999083,
+      "beforeP95Ms": 2.3182849999998325,
+      "afterP95Ms": 1.8710110000001805,
+      "medianRatio": 0.5698876171381385
+    },
+    {
+      "group": "enabled",
+      "age": 10,
+      "operation": "checkpoint-warm-pack",
+      "beforeMedianMs": 4.502388000000337,
+      "afterMedianMs": 5.642528000000311,
+      "beforeP95Ms": 7.5719560000002275,
+      "afterP95Ms": 5.791773999999805,
+      "medianRatio": 1.2532300636906213
+    },
+    {
+      "group": "enabled",
+      "age": 10,
+      "operation": "checkpoint-cold-pack",
+      "beforeMedianMs": 13.47045100000014,
+      "afterMedianMs": 13.409910000000309,
+      "beforeP95Ms": 13.883714000000055,
+      "afterP95Ms": 14.108353999999963,
+      "medianRatio": 0.9955056441688679
+    },
+    {
+      "group": "enabled",
+      "age": 10,
+      "operation": "checkpoint-cold-unpack",
+      "beforeMedianMs": 20.72815400000036,
+      "afterMedianMs": 16.243122000000767,
+      "beforeP95Ms": 42.4338630000002,
+      "afterP95Ms": 19.301242999999886,
+      "medianRatio": 0.7836260768807722
+    },
+    {
+      "group": "enabled",
+      "age": 10,
+      "operation": "repository-warm-load",
+      "beforeMedianMs": 22.00146399999994,
+      "afterMedianMs": 0.1714190000002418,
+      "beforeP95Ms": 25.303013000000647,
+      "afterP95Ms": 0.19286099999953876,
+      "medianRatio": 0.007791254254727879
+    },
+    {
+      "group": "enabled",
+      "age": 10,
+      "operation": "repository-cold-reopen",
+      "beforeMedianMs": 27.269436999999925,
+      "afterMedianMs": 15.485608999999386,
+      "beforeP95Ms": 27.38445000000047,
+      "afterP95Ms": 23.157867999999326,
+      "medianRatio": 0.5678741735665254
+    },
+    {
+      "group": "enabled",
+      "age": 10,
+      "operation": "statistics-projection",
+      "beforeMedianMs": 0.5217869999996765,
+      "afterMedianMs": 0.37819000000035885,
+      "beforeP95Ms": 0.5699389999999767,
+      "afterP95Ms": 0.8017890000000989,
+      "medianRatio": 0.7247976664819041
+    },
+    {
+      "group": "enabled",
+      "age": 10,
+      "operation": "relationship-projection",
+      "beforeMedianMs": 0.05539299999963987,
+      "afterMedianMs": 0.04821300000003248,
+      "beforeP95Ms": 0.060059999999793945,
+      "afterP95Ms": 0.07214899999962654,
+      "medianRatio": 0.8703807340340103
+    },
+    {
+      "group": "enabled",
+      "age": 10,
+      "operation": "journal-warm-projection",
+      "beforeMedianMs": 0.01900900000055117,
+      "afterMedianMs": 0.018167000000175904,
+      "beforeP95Ms": 0.020571000000018103,
+      "afterP95Ms": 0.020489999999881547,
+      "medianRatio": 0.9557051922588852
+    },
+    {
+      "group": "enabled",
+      "age": 10,
+      "operation": "zustand-world-publication",
+      "beforeMedianMs": 0.09926899999936722,
+      "afterMedianMs": 0.09220900000036636,
+      "beforeP95Ms": 0.11747699999978067,
+      "afterP95Ms": 0.10562899999968067,
+      "medianRatio": 0.9288801136402516
+    },
+    {
+      "group": "enabled",
+      "age": 25,
+      "operation": "validate-certified-copy",
+      "beforeMedianMs": 5.069052999999258,
+      "afterMedianMs": 2.436172999999144,
+      "beforeP95Ms": 5.220201000000088,
+      "afterP95Ms": 3.4541980000003605,
+      "medianRatio": 0.4805972634335251
+    },
+    {
+      "group": "enabled",
+      "age": 25,
+      "operation": "checkpoint-warm-pack",
+      "beforeMedianMs": 7.29123299999992,
+      "afterMedianMs": 6.642425000000003,
+      "beforeP95Ms": 8.29466500000035,
+      "afterP95Ms": 6.807114000000183,
+      "medianRatio": 0.9110153248428731
+    },
+    {
+      "group": "enabled",
+      "age": 25,
+      "operation": "checkpoint-cold-pack",
+      "beforeMedianMs": 38.59811300000001,
+      "afterMedianMs": 35.02531199999976,
+      "beforeP95Ms": 43.227576999999656,
+      "afterP95Ms": 35.644554999999855,
+      "medianRatio": 0.9074358635096941
+    },
+    {
+      "group": "enabled",
+      "age": 25,
+      "operation": "checkpoint-cold-unpack",
+      "beforeMedianMs": 61.04315900000074,
+      "afterMedianMs": 40.57348700000148,
+      "beforeP95Ms": 84.40382299999874,
+      "afterP95Ms": 49.86606800000118,
+      "medianRatio": 0.6646688615836704
+    },
+    {
+      "group": "enabled",
+      "age": 25,
+      "operation": "repository-warm-load",
+      "beforeMedianMs": 61.23900399999911,
+      "afterMedianMs": 0.23817899999994552,
+      "beforeP95Ms": 71.70288100000107,
+      "afterP95Ms": 0.2866729999987001,
+      "medianRatio": 0.003889334973507227
+    },
+    {
+      "group": "enabled",
+      "age": 25,
+      "operation": "repository-cold-reopen",
+      "beforeMedianMs": 65.73637600000075,
+      "afterMedianMs": 40.41758300000038,
+      "beforeP95Ms": 65.96292699999867,
+      "afterP95Ms": 44.740992000000915,
+      "medianRatio": 0.6148434924371237
+    },
+    {
+      "group": "enabled",
+      "age": 25,
+      "operation": "statistics-projection",
+      "beforeMedianMs": 0.924804000000222,
+      "afterMedianMs": 0.8840130000007775,
+      "beforeP95Ms": 1.6262520000000222,
+      "afterP95Ms": 1.083875000000262,
+      "medianRatio": 0.9558922755530527
+    },
+    {
+      "group": "enabled",
+      "age": 25,
+      "operation": "relationship-projection",
+      "beforeMedianMs": 0.05679500000042026,
+      "afterMedianMs": 0.048853000000235625,
+      "beforeP95Ms": 0.10672099999828788,
+      "afterP95Ms": 0.07873800000015763,
+      "medianRatio": 0.8601637468064818
+    },
+    {
+      "group": "enabled",
+      "age": 25,
+      "operation": "journal-warm-projection",
+      "beforeMedianMs": 0.02299499999935506,
+      "afterMedianMs": 0.018278000001373584,
+      "beforeP95Ms": 0.0538909999995667,
+      "afterP95Ms": 0.05270999999993364,
+      "medianRatio": 0.7948684497449979
+    },
+    {
+      "group": "enabled",
+      "age": 25,
+      "operation": "zustand-world-publication",
+      "beforeMedianMs": 0.09028699999907985,
+      "afterMedianMs": 0.08741200000076788,
+      "beforeP95Ms": 0.11069700000007288,
+      "afterP95Ms": 0.14379700000063167,
+      "medianRatio": 0.9681570990470247
+    },
+    {
+      "group": "enabled",
+      "age": 50,
+      "operation": "validate-certified-copy",
+      "beforeMedianMs": 12.88986400000067,
+      "afterMedianMs": 8.454487999999401,
+      "beforeP95Ms": 13.02603099999942,
+      "afterP95Ms": 9.916030999998839,
+      "medianRatio": 0.6559020327909558
+    },
+    {
+      "group": "enabled",
+      "age": 50,
+      "operation": "checkpoint-warm-pack",
+      "beforeMedianMs": 9.601435999999012,
+      "afterMedianMs": 10.83100100000047,
+      "beforeP95Ms": 13.807639999999083,
+      "afterP95Ms": 13.181124000000636,
+      "medianRatio": 1.1280605317789532
+    },
+    {
+      "group": "enabled",
+      "age": 50,
+      "operation": "checkpoint-cold-pack",
+      "beforeMedianMs": 81.56437100000039,
+      "afterMedianMs": 86.26711199999954,
+      "beforeP95Ms": 93.07185000000027,
+      "afterP95Ms": 89.47869699999865,
+      "medianRatio": 1.0576568045868842
+    },
+    {
+      "group": "enabled",
+      "age": 50,
+      "operation": "checkpoint-cold-unpack",
+      "beforeMedianMs": 147.4096660000032,
+      "afterMedianMs": 106.87491300000147,
+      "beforeP95Ms": 168.89939100000265,
+      "afterP95Ms": 117.9326259999998,
+      "medianRatio": 0.7250197080020462
+    },
+    {
+      "group": "enabled",
+      "age": 50,
+      "operation": "repository-warm-load",
+      "beforeMedianMs": 183.6909220000016,
+      "afterMedianMs": 0.356777000000875,
+      "beforeP95Ms": 196.27039800000057,
+      "afterP95Ms": 0.4539250000016182,
+      "medianRatio": 0.0019422680016863974
+    },
+    {
+      "group": "enabled",
+      "age": 50,
+      "operation": "repository-cold-reopen",
+      "beforeMedianMs": 155.5234789999995,
+      "afterMedianMs": 107.02324500000032,
+      "beforeP95Ms": 196.34540099999867,
+      "afterP95Ms": 155.32924300000013,
+      "medianRatio": 0.6881484756394928
+    },
+    {
+      "group": "enabled",
+      "age": 50,
+      "operation": "statistics-projection",
+      "beforeMedianMs": 2.540571000001364,
+      "afterMedianMs": 2.237944000000425,
+      "beforeP95Ms": 5.218747999999323,
+      "afterP95Ms": 3.9693050000023504,
+      "medianRatio": 0.8808822898471341
+    },
+    {
+      "group": "enabled",
+      "age": 50,
+      "operation": "relationship-projection",
+      "beforeMedianMs": 0.04036099999939324,
+      "afterMedianMs": 0.036806000000069616,
+      "beforeP95Ms": 0.04260399999839137,
+      "afterP95Ms": 0.03953900000124122,
+      "medianRatio": 0.9119199227130876
+    },
+    {
+      "group": "enabled",
+      "age": 50,
+      "operation": "journal-warm-projection",
+      "beforeMedianMs": 0.016014000000723172,
+      "afterMedianMs": 0.01724599999943166,
+      "beforeP95Ms": 0.017566999998962274,
+      "afterP95Ms": 0.021822999999130843,
+      "medianRatio": 1.076932683817463
+    },
+    {
+      "group": "enabled",
+      "age": 50,
+      "operation": "zustand-world-publication",
+      "beforeMedianMs": 0.07144800000241958,
+      "afterMedianMs": 0.072029000002658,
+      "beforeP95Ms": 0.08370599999761907,
+      "afterP95Ms": 0.10392700000011246,
+      "medianRatio": 1.0081317881566838
+    },
+    {
+      "group": "enabled",
+      "age": 70,
+      "operation": "validate-certified-copy",
+      "beforeMedianMs": 22.96813100000145,
+      "afterMedianMs": 12.30560499999774,
+      "beforeP95Ms": 28.470338000002812,
+      "afterP95Ms": 13.075957000000926,
+      "medianRatio": 0.5357686700758091
+    },
+    {
+      "group": "enabled",
+      "age": 70,
+      "operation": "checkpoint-warm-pack",
+      "beforeMedianMs": 12.202088000001822,
+      "afterMedianMs": 12.297673999997642,
+      "beforeP95Ms": 12.69340000000011,
+      "afterP95Ms": 14.728255000001809,
+      "medianRatio": 1.0078335773349452
+    },
+    {
+      "group": "enabled",
+      "age": 70,
+      "operation": "checkpoint-cold-pack",
+      "beforeMedianMs": 142.72780299999795,
+      "afterMedianMs": 135.37666499999978,
+      "beforeP95Ms": 146.38116199999786,
+      "afterP95Ms": 142.12378000000172,
+      "medianRatio": 0.9484954028193212
+    },
+    {
+      "group": "enabled",
+      "age": 70,
+      "operation": "checkpoint-cold-unpack",
+      "beforeMedianMs": 273.9464330000046,
+      "afterMedianMs": 182.92903400000068,
+      "beforeP95Ms": 363.4257909999942,
+      "afterP95Ms": 184.8585779999994,
+      "medianRatio": 0.6677547577339603
+    },
+    {
+      "group": "enabled",
+      "age": 70,
+      "operation": "repository-warm-load",
+      "beforeMedianMs": 285.81546899999375,
+      "afterMedianMs": 0.5519519999979821,
+      "beforeP95Ms": 487.7850099999996,
+      "afterP95Ms": 0.5965389999983017,
+      "medianRatio": 0.0019311481003080142
+    },
+    {
+      "group": "enabled",
+      "age": 70,
+      "operation": "repository-cold-reopen",
+      "beforeMedianMs": 250.867422000003,
+      "afterMedianMs": 183.79553099999976,
+      "beforeP95Ms": 392.06051599999773,
+      "afterP95Ms": 191.72116299999834,
+      "medianRatio": 0.7326400914663107
+    },
+    {
+      "group": "enabled",
+      "age": 70,
+      "operation": "statistics-projection",
+      "beforeMedianMs": 5.245390000003681,
+      "afterMedianMs": 7.1612590000004275,
+      "beforeP95Ms": 7.36509500000102,
+      "afterP95Ms": 7.221270000001823,
+      "medianRatio": 1.3652481512328734
+    },
+    {
+      "group": "enabled",
+      "age": 70,
+      "operation": "relationship-projection",
+      "beforeMedianMs": 0.0433950000006007,
+      "afterMedianMs": 0.05257000000347034,
+      "beforeP95Ms": 0.04520799999590963,
+      "afterP95Ms": 0.05466299999898183,
+      "medianRatio": 1.2114298882991734
+    },
+    {
+      "group": "enabled",
+      "age": 70,
+      "operation": "journal-warm-projection",
+      "beforeMedianMs": 0.017145999998319894,
+      "afterMedianMs": 0.015573000000586035,
+      "beforeP95Ms": 0.017547000003105495,
+      "afterP95Ms": 0.01653499999883934,
+      "medianRatio": 0.9082584860674213
+    },
+    {
+      "group": "enabled",
+      "age": 70,
+      "operation": "zustand-world-publication",
+      "beforeMedianMs": 0.07193799999367911,
+      "afterMedianMs": 0.06823200000144425,
+      "beforeP95Ms": 0.08648000000539469,
+      "afterP95Ms": 0.07009599999946658,
+      "medianRatio": 0.9484834163785413
+    },
+    {
+      "group": "enabled",
+      "age": 90,
+      "operation": "validate-certified-copy",
+      "beforeMedianMs": 30.81634500000655,
+      "afterMedianMs": 14.855481999999029,
+      "beforeP95Ms": 33.90983899999992,
+      "afterP95Ms": 17.984291000000667,
+      "medianRatio": 0.4820650210138766
+    },
+    {
+      "group": "enabled",
+      "age": 90,
+      "operation": "checkpoint-warm-pack",
+      "beforeMedianMs": 13.887739999998303,
+      "afterMedianMs": 14.553095999996003,
+      "beforeP95Ms": 14.562346999999136,
+      "afterP95Ms": 15.163916999998037,
+      "medianRatio": 1.0479095950815454
+    },
+    {
+      "group": "enabled",
+      "age": 90,
+      "operation": "checkpoint-cold-pack",
+      "beforeMedianMs": 177.48495800000092,
+      "afterMedianMs": 174.7466710000008,
+      "beforeP95Ms": 182.5542260000002,
+      "afterP95Ms": 178.52072100000078,
+      "medianRatio": 0.9845717235372695
+    },
+    {
+      "group": "enabled",
+      "age": 90,
+      "operation": "checkpoint-cold-unpack",
+      "beforeMedianMs": 410.1207760000034,
+      "afterMedianMs": 248.44219500000327,
+      "beforeP95Ms": 551.3121189999947,
+      "afterP95Ms": 274.9862209999992,
+      "medianRatio": 0.6057781257099768
+    },
+    {
+      "group": "enabled",
+      "age": 90,
+      "operation": "repository-warm-load",
+      "beforeMedianMs": 459.5124979999964,
+      "afterMedianMs": 0.6218779999981052,
+      "beforeP95Ms": 718.4777069999982,
+      "afterP95Ms": 0.8020900000046822,
+      "medianRatio": 0.0013533429508550822
+    },
+    {
+      "group": "enabled",
+      "age": 90,
+      "operation": "repository-cold-reopen",
+      "beforeMedianMs": 326.9961250000051,
+      "afterMedianMs": 236.67581000000064,
+      "beforeP95Ms": 605.1417409999995,
+      "afterP95Ms": 254.80628799999977,
+      "medianRatio": 0.7237878124702454
+    },
+    {
+      "group": "enabled",
+      "age": 90,
+      "operation": "statistics-projection",
+      "beforeMedianMs": 8.561520000002929,
+      "afterMedianMs": 6.1268679999993765,
+      "beforeP95Ms": 11.942806999999448,
+      "afterP95Ms": 10.029512000000977,
+      "medianRatio": 0.7156285332507872
+    },
+    {
+      "group": "enabled",
+      "age": 90,
+      "operation": "relationship-projection",
+      "beforeMedianMs": 0.05018599999311846,
+      "afterMedianMs": 0.04912400000466732,
+      "beforeP95Ms": 0.06361500000639353,
+      "afterP95Ms": 0.07660600000235718,
+      "medianRatio": 0.9788387201889619
+    },
+    {
+      "group": "enabled",
+      "age": 90,
+      "operation": "journal-warm-projection",
+      "beforeMedianMs": 0.021863000001758337,
+      "afterMedianMs": 0.01688500000454951,
+      "beforeP95Ms": 0.04464700000244193,
+      "afterP95Ms": 0.01991000000271015,
+      "medianRatio": 0.7723093812922074
+    },
+    {
+      "group": "enabled",
+      "age": 90,
+      "operation": "zustand-world-publication",
+      "beforeMedianMs": 0.08837299999140669,
+      "afterMedianMs": 0.07416099999682046,
+      "beforeP95Ms": 0.09399199999461416,
+      "afterP95Ms": 0.07715699999971548,
+      "medianRatio": 0.8391816505497359
+    },
+    {
+      "group": "active",
+      "age": 25,
+      "operation": "validate-certified-copy",
+      "beforeMedianMs": 4.3160979999997835,
+      "afterMedianMs": 4.68392300000005,
+      "beforeP95Ms": 5.228313000000071,
+      "afterP95Ms": 5.1615920000003825,
+      "medianRatio": 1.0852216515937045
+    },
+    {
+      "group": "active",
+      "age": 25,
+      "operation": "checkpoint-warm-pack",
+      "beforeMedianMs": 9.021864000000278,
+      "afterMedianMs": 7.118809000000056,
+      "beforeP95Ms": 10.584990999999718,
+      "afterP95Ms": 9.429697999999917,
+      "medianRatio": 0.7890618834422506
+    },
+    {
+      "group": "active",
+      "age": 25,
+      "operation": "checkpoint-cold-pack",
+      "beforeMedianMs": 36.35551099999975,
+      "afterMedianMs": 37.86563400000068,
+      "beforeP95Ms": 36.73514299999988,
+      "afterP95Ms": 39.80424299999959,
+      "medianRatio": 1.0415376639871996
+    },
+    {
+      "group": "active",
+      "age": 25,
+      "operation": "checkpoint-cold-unpack",
+      "beforeMedianMs": 62.14615099999992,
+      "afterMedianMs": 58.05883199999971,
+      "beforeP95Ms": 71.9694129999998,
+      "afterP95Ms": 67.20230999999967,
+      "medianRatio": 0.9342305366586546
+    },
+    {
+      "group": "active",
+      "age": 25,
+      "operation": "repository-warm-load",
+      "beforeMedianMs": 68.87099099999978,
+      "afterMedianMs": 0.2503069999993386,
+      "beforeP95Ms": 72.97289600000022,
+      "afterP95Ms": 0.3657709999997678,
+      "medianRatio": 0.0036344329646619926
+    },
+    {
+      "group": "active",
+      "age": 25,
+      "operation": "repository-cold-reopen",
+      "beforeMedianMs": 67.49062000000049,
+      "afterMedianMs": 46.18932600000062,
+      "beforeP95Ms": 78.93386499999997,
+      "afterP95Ms": 59.23422500000015,
+      "medianRatio": 0.68438141478031
+    },
+    {
+      "group": "active",
+      "age": 25,
+      "operation": "statistics-projection",
+      "beforeMedianMs": 0.7737959999994928,
+      "afterMedianMs": 1.4646990000001097,
+      "beforeP95Ms": 1.3741119999995135,
+      "afterP95Ms": 1.7467339999993783,
+      "medianRatio": 1.8928748662451986
+    },
+    {
+      "group": "active",
+      "age": 25,
+      "operation": "relationship-projection",
+      "beforeMedianMs": 0.05020599999988917,
+      "afterMedianMs": 0.05368099999941478,
+      "beforeP95Ms": 0.06828300000051968,
+      "afterP95Ms": 0.08897399999932532,
+      "medianRatio": 1.069214834870997
+    },
+    {
+      "group": "active",
+      "age": 25,
+      "operation": "journal-warm-projection",
+      "beforeMedianMs": 0.020231000000421773,
+      "afterMedianMs": 0.02204299999993964,
+      "beforeP95Ms": 0.02069099999971513,
+      "afterP95Ms": 0.024215999999796622,
+      "medianRatio": 1.0895655182383515
+    },
+    {
+      "group": "active",
+      "age": 25,
+      "operation": "zustand-world-publication",
+      "beforeMedianMs": 0.11017600000013772,
+      "afterMedianMs": 0.10567900000023656,
+      "beforeP95Ms": 0.12570899999991525,
+      "afterP95Ms": 0.1397209999995539,
+      "medianRatio": 0.9591834882379507
+    },
+    {
+      "group": "active",
+      "age": 50,
+      "operation": "validate-certified-copy",
+      "beforeMedianMs": 12.882415000000037,
+      "afterMedianMs": 10.222433999999339,
+      "beforeP95Ms": 13.35005099999944,
+      "afterP95Ms": 11.121869999999035,
+      "medianRatio": 0.7935184513151695
+    },
+    {
+      "group": "active",
+      "age": 50,
+      "operation": "checkpoint-warm-pack",
+      "beforeMedianMs": 10.25898000000052,
+      "afterMedianMs": 11.565458999999464,
+      "beforeP95Ms": 10.37606600000072,
+      "afterP95Ms": 18.31778999999915,
+      "medianRatio": 1.1273497950087512
+    },
+    {
+      "group": "active",
+      "age": 50,
+      "operation": "checkpoint-cold-pack",
+      "beforeMedianMs": 85.68035299999974,
+      "afterMedianMs": 85.78285099999994,
+      "beforeP95Ms": 87.81724399999985,
+      "afterP95Ms": 91.73459299999922,
+      "medianRatio": 1.0011962835867425
+    },
+    {
+      "group": "active",
+      "age": 50,
+      "operation": "checkpoint-cold-unpack",
+      "beforeMedianMs": 149.36725500000102,
+      "afterMedianMs": 117.73775499999829,
+      "beforeP95Ms": 180.98618899999929,
+      "afterP95Ms": 128.07223799999883,
+      "medianRatio": 0.7882434138593327
+    },
+    {
+      "group": "active",
+      "age": 50,
+      "operation": "repository-warm-load",
+      "beforeMedianMs": 204.6430029999974,
+      "afterMedianMs": 0.4379000000008091,
+      "beforeP95Ms": 225.92579100000148,
+      "afterP95Ms": 0.49061000000074273,
+      "medianRatio": 0.002139823954796122
+    },
+    {
+      "group": "active",
+      "age": 50,
+      "operation": "repository-cold-reopen",
+      "beforeMedianMs": 154.7440999999999,
+      "afterMedianMs": 108.75622099999964,
+      "beforeP95Ms": 206.65192899999965,
+      "afterP95Ms": 122.43520799999897,
+      "medianRatio": 0.702813360897118
+    },
+    {
+      "group": "active",
+      "age": 50,
+      "operation": "statistics-projection",
+      "beforeMedianMs": 3.225173000002542,
+      "afterMedianMs": 2.8744640000004438,
+      "beforeP95Ms": 4.477050000001327,
+      "afterP95Ms": 4.044108000000051,
+      "medianRatio": 0.8912588565010864
+    },
+    {
+      "group": "active",
+      "age": 50,
+      "operation": "relationship-projection",
+      "beforeMedianMs": 0.05582399999912013,
+      "afterMedianMs": 0.05139699999926961,
+      "beforeP95Ms": 0.07402099999671918,
+      "afterP95Ms": 0.05754700000034063,
+      "medianRatio": 0.9206971911736834
+    },
+    {
+      "group": "active",
+      "age": 50,
+      "operation": "journal-warm-projection",
+      "beforeMedianMs": 0.02377599999817903,
+      "afterMedianMs": 0.019720000000233995,
+      "beforeP95Ms": 0.032898999997996725,
+      "afterP95Ms": 0.03183799999897019,
+      "medianRatio": 0.8294078062644819
+    },
+    {
+      "group": "active",
+      "age": 50,
+      "operation": "zustand-world-publication",
+      "beforeMedianMs": 0.10438799999974435,
+      "afterMedianMs": 0.08785299999726703,
+      "beforeP95Ms": 0.10767200000191224,
+      "afterP95Ms": 0.1430560000007972,
+      "medianRatio": 0.8416005670908743
+    },
+    {
+      "group": "active",
+      "age": 70,
+      "operation": "validate-certified-copy",
+      "beforeMedianMs": 20.490028000000166,
+      "afterMedianMs": 10.601886000000377,
+      "beforeP95Ms": 21.912702000001445,
+      "afterP95Ms": 13.251000000000204,
+      "medianRatio": 0.517416862485512
+    },
+    {
+      "group": "active",
+      "age": 70,
+      "operation": "checkpoint-warm-pack",
+      "beforeMedianMs": 12.532649000000674,
+      "afterMedianMs": 11.937717999997403,
+      "beforeP95Ms": 13.198302000000695,
+      "afterP95Ms": 14.870129999999335,
+      "medianRatio": 0.952529509124269
+    },
+    {
+      "group": "active",
+      "age": 70,
+      "operation": "checkpoint-cold-pack",
+      "beforeMedianMs": 134.96436500000345,
+      "afterMedianMs": 132.22938000000067,
+      "beforeP95Ms": 140.65230099999826,
+      "afterP95Ms": 134.6698690000012,
+      "medianRatio": 0.9797355027751014
+    },
+    {
+      "group": "active",
+      "age": 70,
+      "operation": "checkpoint-cold-unpack",
+      "beforeMedianMs": 274.57331200000044,
+      "afterMedianMs": 177.40264599999864,
+      "beforeP95Ms": 342.8373980000033,
+      "afterP95Ms": 194.8361530000002,
+      "medianRatio": 0.6461030196554512
+    },
+    {
+      "group": "active",
+      "age": 70,
+      "operation": "repository-warm-load",
+      "beforeMedianMs": 291.55052100000466,
+      "afterMedianMs": 0.5516920000009122,
+      "beforeP95Ms": 485.08371199999965,
+      "afterP95Ms": 0.6850630000008096,
+      "medianRatio": 0.0018922689560239318
+    },
+    {
+      "group": "active",
+      "age": 70,
+      "operation": "repository-cold-reopen",
+      "beforeMedianMs": 264.45026099999814,
+      "afterMedianMs": 183.4909940000034,
+      "beforeP95Ms": 467.24888899999496,
+      "afterP95Ms": 203.55178499999965,
+      "medianRatio": 0.6938582450482237
+    },
+    {
+      "group": "active",
+      "age": 70,
+      "operation": "statistics-projection",
+      "beforeMedianMs": 4.145591000000422,
+      "afterMedianMs": 4.019780999999057,
+      "beforeP95Ms": 4.8218809999962104,
+      "afterP95Ms": 4.075365000000602,
+      "medianRatio": 0.9696520954427601
+    },
+    {
+      "group": "active",
+      "age": 70,
+      "operation": "relationship-projection",
+      "beforeMedianMs": 0.04887400000006892,
+      "afterMedianMs": 0.048553000000538304,
+      "beforeP95Ms": 0.05691599999408936,
+      "afterP95Ms": 0.0736910000014177,
+      "medianRatio": 0.9934320906917755
+    },
+    {
+      "group": "active",
+      "age": 70,
+      "operation": "journal-warm-projection",
+      "beforeMedianMs": 0.017597000005480368,
+      "afterMedianMs": 0.019559999996999977,
+      "beforeP95Ms": 0.06684999999561114,
+      "afterP95Ms": 0.02062099999966449,
+      "medianRatio": 1.111553105126343
+    },
+    {
+      "group": "active",
+      "age": 70,
+      "operation": "zustand-world-publication",
+      "beforeMedianMs": 0.07197900000028312,
+      "afterMedianMs": 0.08213400000022375,
+      "beforeP95Ms": 0.07408199999917997,
+      "afterP95Ms": 0.11752699999851757,
+      "medianRatio": 1.1410828158199013
+    },
+    {
+      "group": "active",
+      "age": 90,
+      "operation": "validate-certified-copy",
+      "beforeMedianMs": 29.506310999997368,
+      "afterMedianMs": 16.211734000000433,
+      "beforeP95Ms": 31.214746000005107,
+      "afterP95Ms": 17.258481999997457,
+      "medianRatio": 0.5494327637230516
+    },
+    {
+      "group": "active",
+      "age": 90,
+      "operation": "checkpoint-warm-pack",
+      "beforeMedianMs": 14.155305000000226,
+      "afterMedianMs": 14.332269999998971,
+      "beforeP95Ms": 14.763010000002396,
+      "afterP95Ms": 23.525312000005215,
+      "medianRatio": 1.012501673400802
+    },
+    {
+      "group": "active",
+      "age": 90,
+      "operation": "checkpoint-cold-pack",
+      "beforeMedianMs": 177.49092799999926,
+      "afterMedianMs": 172.45017400000506,
+      "beforeP95Ms": 185.20938999999635,
+      "afterP95Ms": 178.29650799999945,
+      "medianRatio": 0.9715999343921723
+    },
+    {
+      "group": "active",
+      "age": 90,
+      "operation": "checkpoint-cold-unpack",
+      "beforeMedianMs": 362.2737130000023,
+      "afterMedianMs": 254.7413330000054,
+      "beforeP95Ms": 520.3163920000006,
+      "afterP95Ms": 263.88918600000034,
+      "medianRatio": 0.7031736608501975
+    },
+    {
+      "group": "active",
+      "age": 90,
+      "operation": "repository-warm-load",
+      "beforeMedianMs": 424.474135000004,
+      "afterMedianMs": 0.7520339999973658,
+      "beforeP95Ms": 655.8258270000078,
+      "afterP95Ms": 0.8603870000006282,
+      "medianRatio": 0.001771683921323872
+    },
+    {
+      "group": "active",
+      "age": 90,
+      "operation": "repository-cold-reopen",
+      "beforeMedianMs": 357.0977469999925,
+      "afterMedianMs": 241.95517699999618,
+      "beforeP95Ms": 574.3798439999955,
+      "afterP95Ms": 251.98195600000327,
+      "medianRatio": 0.6775600771292496
+    },
+    {
+      "group": "active",
+      "age": 90,
+      "operation": "statistics-projection",
+      "beforeMedianMs": 8.470332000011695,
+      "afterMedianMs": 6.801355000003241,
+      "beforeP95Ms": 12.354609000001801,
+      "afterP95Ms": 9.264410000003409,
+      "medianRatio": 0.8029620326563175
+    },
+    {
+      "group": "active",
+      "age": 90,
+      "operation": "relationship-projection",
+      "beforeMedianMs": 0.04695099999662489,
+      "afterMedianMs": 0.04915400000027148,
+      "beforeP95Ms": 0.07047599999350496,
+      "afterP95Ms": 0.08064200000080746,
+      "medianRatio": 1.046921258414197
+    },
+    {
+      "group": "active",
+      "age": 90,
+      "operation": "journal-warm-projection",
+      "beforeMedianMs": 0.018558000010671094,
+      "afterMedianMs": 0.018708000003243797,
+      "beforeP95Ms": 0.020852000001468696,
+      "afterP95Ms": 0.019659999998111743,
+      "medianRatio": 1.008082767134737
+    },
+    {
+      "group": "active",
+      "age": 90,
+      "operation": "zustand-world-publication",
+      "beforeMedianMs": 0.07366100000217557,
+      "afterMedianMs": 0.06973499999730848,
+      "beforeP95Ms": 0.09480299999995623,
+      "afterP95Ms": 0.0713980000000447,
+      "medianRatio": 0.9467017824255558
+    },
+    {
+      "group": "generations",
+      "age": 1,
+      "operation": "validate-certified-copy",
+      "beforeMedianMs": 1.0569239999999809,
+      "afterMedianMs": 1.0672789999998713,
+      "beforeP95Ms": 1.4385999999999513,
+      "afterP95Ms": 1.8290980000001582,
+      "medianRatio": 1.0097972985757637
+    },
+    {
+      "group": "generations",
+      "age": 1,
+      "operation": "checkpoint-warm-pack",
+      "beforeMedianMs": 2.971219999999903,
+      "afterMedianMs": 3.141157000000021,
+      "beforeP95Ms": 3.3523549999999886,
+      "afterP95Ms": 4.136897000000317,
+      "medianRatio": 1.0571943511419968
+    },
+    {
+      "group": "generations",
+      "age": 1,
+      "operation": "checkpoint-cold-pack",
+      "beforeMedianMs": 6.28958399999965,
+      "afterMedianMs": 6.583937000000333,
+      "beforeP95Ms": 6.480180999999902,
+      "afterP95Ms": 6.853213999999753,
+      "medianRatio": 1.0468000745360424
+    },
+    {
+      "group": "generations",
+      "age": 1,
+      "operation": "checkpoint-cold-unpack",
+      "beforeMedianMs": 9.645022000000154,
+      "afterMedianMs": 8.8778870000001,
+      "beforeP95Ms": 10.406020000000353,
+      "afterP95Ms": 9.07830899999999,
+      "medianRatio": 0.9204631155843874
+    },
+    {
+      "group": "generations",
+      "age": 1,
+      "operation": "repository-warm-load",
+      "beforeMedianMs": 8.093202999999903,
+      "afterMedianMs": 0.16703099999995175,
+      "beforeP95Ms": 10.585501000000022,
+      "afterP95Ms": 0.20493900000019494,
+      "medianRatio": 0.02063842955625279
+    },
+    {
+      "group": "generations",
+      "age": 1,
+      "operation": "repository-cold-reopen",
+      "beforeMedianMs": 10.93209300000035,
+      "afterMedianMs": 8.223759999999857,
+      "beforeP95Ms": 12.158112000000074,
+      "afterP95Ms": 11.697247000000061,
+      "medianRatio": 0.7522585107901656
+    },
+    {
+      "group": "generations",
+      "age": 1,
+      "operation": "statistics-projection",
+      "beforeMedianMs": 0.2913189999999304,
+      "afterMedianMs": 0.2097859999994398,
+      "beforeP95Ms": 0.5740450000002966,
+      "afterP95Ms": 0.5464240000001155,
+      "medianRatio": 0.7201246743243316
+    },
+    {
+      "group": "generations",
+      "age": 1,
+      "operation": "relationship-projection",
+      "beforeMedianMs": 0.07082600000012462,
+      "afterMedianMs": 0.05174799999986135,
+      "beforeP95Ms": 0.08125299999937852,
+      "afterP95Ms": 0.06953499999963242,
+      "medianRatio": 0.7306356422750162
+    },
+    {
+      "group": "generations",
+      "age": 1,
+      "operation": "journal-warm-projection",
+      "beforeMedianMs": 0.019248999999945227,
+      "afterMedianMs": 0.021442000000206463,
+      "beforeP95Ms": 0.021633000000292668,
+      "afterP95Ms": 0.023624999999810825,
+      "medianRatio": 1.1139279962734416
+    },
+    {
+      "group": "generations",
+      "age": 1,
+      "operation": "zustand-world-publication",
+      "beforeMedianMs": 0.09181799999987561,
+      "afterMedianMs": 0.10407699999996112,
+      "beforeP95Ms": 0.0986190000003262,
+      "afterP95Ms": 0.1276029999999082,
+      "medianRatio": 1.1335141257716583
+    }
+  ],
+  "actionRows": [
+    {
+      "age": 10,
+      "name": "talk",
+      "beforeMedianMs": 3.115068000000065,
+      "afterMedianMs": 2.056441000000177,
+      "beforeP95Ms": 3.8700360000002547,
+      "afterP95Ms": 2.591938999999911,
+      "outcomeSha256": "47fcd9155f6c52e3952be99375c46c36a1dcb24b67ae7f74a523f2f159870e41"
+    },
+    {
+      "age": 25,
+      "name": "talk",
+      "beforeMedianMs": 5.294334999999592,
+      "afterMedianMs": 4.871405999999752,
+      "beforeP95Ms": 6.841578999999911,
+      "afterP95Ms": 5.110036000000036,
+      "outcomeSha256": "815dd6cbba8d299a94f71d4a8879a2921cd3fd11e6c13ee3f1d66575e4147acf"
+    },
+    {
+      "age": 25,
+      "name": "work-effort",
+      "beforeMedianMs": 4.698014999999941,
+      "afterMedianMs": 4.322377999999844,
+      "beforeP95Ms": 5.3394829999997455,
+      "afterP95Ms": 4.956414000000223,
+      "outcomeSha256": "7f543448b99fc12a25fa2eb641bda0459dde5f2cc698119e8d1d8e7a5a2842b1"
+    },
+    {
+      "age": 25,
+      "name": "buy-possession",
+      "beforeMedianMs": 7.321251999999731,
+      "afterMedianMs": 6.878773999999794,
+      "beforeP95Ms": 8.910267999999633,
+      "afterP95Ms": 9.056217000000288,
+      "outcomeSha256": "c09c3c5b3fbcf4d3dd95b341f8fa4a703f865e76ec63fcd3d05772c14c7edee8"
+    },
+    {
+      "age": 50,
+      "name": "talk",
+      "beforeMedianMs": 15.338332999999693,
+      "afterMedianMs": 11.528474000000642,
+      "beforeP95Ms": 20.719520000000557,
+      "afterP95Ms": 14.769032000000152,
+      "outcomeSha256": "8905b0bc41261378b05bf776d6910d51dc57aff0ad083a2f8b56832522c32256"
+    },
+    {
+      "age": 50,
+      "name": "work-effort",
+      "beforeMedianMs": 15.407160000000658,
+      "afterMedianMs": 9.761760999999751,
+      "beforeP95Ms": 16.98230599999988,
+      "afterP95Ms": 11.855260000000271,
+      "outcomeSha256": "eae3601284a4e21a6b16ae1d9a0c8c83299b579a688be377897f408a84db7212"
+    },
+    {
+      "age": 50,
+      "name": "buy-possession",
+      "beforeMedianMs": 23.85052099999848,
+      "afterMedianMs": 18.567542000000685,
+      "beforeP95Ms": 33.462924000001294,
+      "afterP95Ms": 21.693327000000863,
+      "outcomeSha256": "474a00aee8b18c09806b7b5cc0ee5b35c8213878653e5bf5183ca856cb5075d1"
+    },
+    {
+      "age": 70,
+      "name": "talk",
+      "beforeMedianMs": 20.512947999999597,
+      "afterMedianMs": 14.696214999999938,
+      "beforeP95Ms": 27.03662600000098,
+      "afterP95Ms": 19.163469999999506,
+      "outcomeSha256": "204f42a688a2ad7b734876d4cddeea85c8b8e04641629b4fa7659b86178d1e21"
+    },
+    {
+      "age": 70,
+      "name": "work-effort",
+      "beforeMedianMs": 20.261750000001484,
+      "afterMedianMs": 13.591464000000997,
+      "beforeP95Ms": 22.68463300000076,
+      "afterP95Ms": 16.297904999999446,
+      "outcomeSha256": "16b7305e20fd7c3a636e749e919ea9ea577a3473fb3bcb7c5c9d972346d136cd"
+    },
+    {
+      "age": 70,
+      "name": "buy-possession",
+      "beforeMedianMs": 35.5287900000003,
+      "afterMedianMs": 29.509862000002613,
+      "beforeP95Ms": 44.358132999997906,
+      "afterP95Ms": 32.50027300000147,
+      "outcomeSha256": "bb4de3697eee8fb9fcdbdc7da1d955953c3710c9553195070d071bf011c39524"
+    },
+    {
+      "age": 90,
+      "name": "talk",
+      "beforeMedianMs": 26.327567000000272,
+      "afterMedianMs": 18.450321000000258,
+      "beforeP95Ms": 30.896226000000752,
+      "afterP95Ms": 21.47284999999829,
+      "outcomeSha256": "e29dbc5accf7f96913c5a7dd4d804c9dfff58dbae6fe83f5c822f1c0815f35f6"
+    },
+    {
+      "age": 90,
+      "name": "work-effort",
+      "beforeMedianMs": 24.917352000000392,
+      "afterMedianMs": 17.645147999999608,
+      "beforeP95Ms": 27.159021999999823,
+      "afterP95Ms": 19.219350999999733,
+      "outcomeSha256": "79f85f3f1c73ad950aabb9b99dd857aceb678cb0802bd3347862825f80042218"
+    },
+    {
+      "age": 90,
+      "name": "buy-possession",
+      "beforeMedianMs": 44.41965999999957,
+      "afterMedianMs": 38.0687050000015,
+      "beforeP95Ms": 52.60715500000151,
+      "afterP95Ms": 44.39276199999949,
+      "outcomeSha256": "b6f701310fea9a17d70428b01380135f394c7dde11580193b1384a2e02d55782"
+    }
+  ],
+  "screenRows": [
+    {
+      "age": 10,
+      "screen": "Life",
+      "beforeOpen": {
+        "samples": 11,
+        "medianMs": 13,
+        "p95Ms": 18
+      },
+      "afterOpen": {
+        "samples": 11,
+        "medianMs": 11,
+        "p95Ms": 14
+      },
+      "beforeUnchangedWorldUpdate": {
+        "samples": 11,
+        "medianMs": 1,
+        "p95Ms": 11
+      },
+      "afterUnchangedWorldUpdate": {
+        "samples": 11,
+        "medianMs": 1,
+        "p95Ms": 2
+      },
+      "scope": "Unchanged UI code; test-renderer observations, not native navigation or proof of a rendering optimisation."
+    },
+    {
+      "age": 10,
+      "screen": "Relationships",
+      "beforeOpen": {
+        "samples": 11,
+        "medianMs": 12,
+        "p95Ms": 22
+      },
+      "afterOpen": {
+        "samples": 11,
+        "medianMs": 14,
+        "p95Ms": 27
+      },
+      "beforeUnchangedWorldUpdate": {
+        "samples": 11,
+        "medianMs": 4,
+        "p95Ms": 9
+      },
+      "afterUnchangedWorldUpdate": {
+        "samples": 11,
+        "medianMs": 5,
+        "p95Ms": 10
+      },
+      "scope": "Unchanged UI code; test-renderer observations, not native navigation or proof of a rendering optimisation."
+    },
+    {
+      "age": 10,
+      "screen": "Assets",
+      "beforeOpen": {
+        "samples": 11,
+        "medianMs": 4,
+        "p95Ms": 6
+      },
+      "afterOpen": {
+        "samples": 11,
+        "medianMs": 4,
+        "p95Ms": 7
+      },
+      "beforeUnchangedWorldUpdate": {
+        "samples": 11,
+        "medianMs": 3,
+        "p95Ms": 3
+      },
+      "afterUnchangedWorldUpdate": {
+        "samples": 11,
+        "medianMs": 3,
+        "p95Ms": 5
+      },
+      "scope": "Unchanged UI code; test-renderer observations, not native navigation or proof of a rendering optimisation."
+    },
+    {
+      "age": 10,
+      "screen": "Activities",
+      "beforeOpen": {
+        "samples": 11,
+        "medianMs": 6,
+        "p95Ms": 21
+      },
+      "afterOpen": {
+        "samples": 11,
+        "medianMs": 6,
+        "p95Ms": 53
+      },
+      "beforeUnchangedWorldUpdate": {
+        "samples": 11,
+        "medianMs": 5,
+        "p95Ms": 5
+      },
+      "afterUnchangedWorldUpdate": {
+        "samples": 11,
+        "medianMs": 5,
+        "p95Ms": 5
+      },
+      "scope": "Unchanged UI code; test-renderer observations, not native navigation or proof of a rendering optimisation."
+    },
+    {
+      "age": 10,
+      "screen": "Statistics",
+      "beforeOpen": {
+        "samples": 11,
+        "medianMs": 14,
+        "p95Ms": 24
+      },
+      "afterOpen": {
+        "samples": 11,
+        "medianMs": 12,
+        "p95Ms": 15
+      },
+      "beforeUnchangedWorldUpdate": {
+        "samples": 11,
+        "medianMs": 10,
+        "p95Ms": 13
+      },
+      "afterUnchangedWorldUpdate": {
+        "samples": 11,
+        "medianMs": 10,
+        "p95Ms": 10
+      },
+      "scope": "Unchanged UI code; test-renderer observations, not native navigation or proof of a rendering optimisation."
+    },
+    {
+      "age": 25,
+      "screen": "Life",
+      "beforeOpen": {
+        "samples": 11,
+        "medianMs": 4,
+        "p95Ms": 13
+      },
+      "afterOpen": {
+        "samples": 11,
+        "medianMs": 5,
+        "p95Ms": 6
+      },
+      "beforeUnchangedWorldUpdate": {
+        "samples": 11,
+        "medianMs": 1,
+        "p95Ms": 1
+      },
+      "afterUnchangedWorldUpdate": {
+        "samples": 11,
+        "medianMs": 1,
+        "p95Ms": 1
+      },
+      "scope": "Unchanged UI code; test-renderer observations, not native navigation or proof of a rendering optimisation."
+    },
+    {
+      "age": 25,
+      "screen": "Relationships",
+      "beforeOpen": {
+        "samples": 11,
+        "medianMs": 10,
+        "p95Ms": 29
+      },
+      "afterOpen": {
+        "samples": 11,
+        "medianMs": 13,
+        "p95Ms": 35
+      },
+      "beforeUnchangedWorldUpdate": {
+        "samples": 11,
+        "medianMs": 4,
+        "p95Ms": 12
+      },
+      "afterUnchangedWorldUpdate": {
+        "samples": 11,
+        "medianMs": 4,
+        "p95Ms": 13
+      },
+      "scope": "Unchanged UI code; test-renderer observations, not native navigation or proof of a rendering optimisation."
+    },
+    {
+      "age": 25,
+      "screen": "Assets",
+      "beforeOpen": {
+        "samples": 11,
+        "medianMs": 4,
+        "p95Ms": 9
+      },
+      "afterOpen": {
+        "samples": 11,
+        "medianMs": 9,
+        "p95Ms": 19
+      },
+      "beforeUnchangedWorldUpdate": {
+        "samples": 11,
+        "medianMs": 4,
+        "p95Ms": 16
+      },
+      "afterUnchangedWorldUpdate": {
+        "samples": 11,
+        "medianMs": 8,
+        "p95Ms": 10
+      },
+      "scope": "Unchanged UI code; test-renderer observations, not native navigation or proof of a rendering optimisation."
+    },
+    {
+      "age": 25,
+      "screen": "Activities",
+      "beforeOpen": {
+        "samples": 11,
+        "medianMs": 8,
+        "p95Ms": 44
+      },
+      "afterOpen": {
+        "samples": 11,
+        "medianMs": 5,
+        "p95Ms": 18
+      },
+      "beforeUnchangedWorldUpdate": {
+        "samples": 11,
+        "medianMs": 4,
+        "p95Ms": 22
+      },
+      "afterUnchangedWorldUpdate": {
+        "samples": 11,
+        "medianMs": 4,
+        "p95Ms": 19
+      },
+      "scope": "Unchanged UI code; test-renderer observations, not native navigation or proof of a rendering optimisation."
+    },
+    {
+      "age": 25,
+      "screen": "Statistics",
+      "beforeOpen": {
+        "samples": 11,
+        "medianMs": 6,
+        "p95Ms": 7
+      },
+      "afterOpen": {
+        "samples": 11,
+        "medianMs": 6,
+        "p95Ms": 22
+      },
+      "beforeUnchangedWorldUpdate": {
+        "samples": 11,
+        "medianMs": 4,
+        "p95Ms": 17
+      },
+      "afterUnchangedWorldUpdate": {
+        "samples": 11,
+        "medianMs": 4,
+        "p95Ms": 4
+      },
+      "scope": "Unchanged UI code; test-renderer observations, not native navigation or proof of a rendering optimisation."
+    },
+    {
+      "age": 50,
+      "screen": "Life",
+      "beforeOpen": {
+        "samples": 11,
+        "medianMs": 13,
+        "p95Ms": 33
+      },
+      "afterOpen": {
+        "samples": 11,
+        "medianMs": 10,
+        "p95Ms": 11
+      },
+      "beforeUnchangedWorldUpdate": {
+        "samples": 11,
+        "medianMs": 1,
+        "p95Ms": 2
+      },
+      "afterUnchangedWorldUpdate": {
+        "samples": 11,
+        "medianMs": 1,
+        "p95Ms": 1
+      },
+      "scope": "Unchanged UI code; test-renderer observations, not native navigation or proof of a rendering optimisation."
+    },
+    {
+      "age": 50,
+      "screen": "Relationships",
+      "beforeOpen": {
+        "samples": 11,
+        "medianMs": 11,
+        "p95Ms": 21
+      },
+      "afterOpen": {
+        "samples": 11,
+        "medianMs": 10,
+        "p95Ms": 20
+      },
+      "beforeUnchangedWorldUpdate": {
+        "samples": 11,
+        "medianMs": 4,
+        "p95Ms": 8
+      },
+      "afterUnchangedWorldUpdate": {
+        "samples": 11,
+        "medianMs": 3,
+        "p95Ms": 8
+      },
+      "scope": "Unchanged UI code; test-renderer observations, not native navigation or proof of a rendering optimisation."
+    },
+    {
+      "age": 50,
+      "screen": "Assets",
+      "beforeOpen": {
+        "samples": 11,
+        "medianMs": 4,
+        "p95Ms": 17
+      },
+      "afterOpen": {
+        "samples": 11,
+        "medianMs": 4,
+        "p95Ms": 5
+      },
+      "beforeUnchangedWorldUpdate": {
+        "samples": 11,
+        "medianMs": 3,
+        "p95Ms": 5
+      },
+      "afterUnchangedWorldUpdate": {
+        "samples": 11,
+        "medianMs": 3,
+        "p95Ms": 4
+      },
+      "scope": "Unchanged UI code; test-renderer observations, not native navigation or proof of a rendering optimisation."
+    },
+    {
+      "age": 50,
+      "screen": "Activities",
+      "beforeOpen": {
+        "samples": 11,
+        "medianMs": 5,
+        "p95Ms": 18
+      },
+      "afterOpen": {
+        "samples": 11,
+        "medianMs": 5,
+        "p95Ms": 7
+      },
+      "beforeUnchangedWorldUpdate": {
+        "samples": 11,
+        "medianMs": 4,
+        "p95Ms": 24
+      },
+      "afterUnchangedWorldUpdate": {
+        "samples": 11,
+        "medianMs": 5,
+        "p95Ms": 24
+      },
+      "scope": "Unchanged UI code; test-renderer observations, not native navigation or proof of a rendering optimisation."
+    },
+    {
+      "age": 50,
+      "screen": "Statistics",
+      "beforeOpen": {
+        "samples": 11,
+        "medianMs": 13,
+        "p95Ms": 19
+      },
+      "afterOpen": {
+        "samples": 11,
+        "medianMs": 8,
+        "p95Ms": 19
+      },
+      "beforeUnchangedWorldUpdate": {
+        "samples": 11,
+        "medianMs": 6,
+        "p95Ms": 11
+      },
+      "afterUnchangedWorldUpdate": {
+        "samples": 11,
+        "medianMs": 4,
+        "p95Ms": 6
+      },
+      "scope": "Unchanged UI code; test-renderer observations, not native navigation or proof of a rendering optimisation."
+    },
+    {
+      "age": 70,
+      "screen": "Life",
+      "beforeOpen": {
+        "samples": 11,
+        "medianMs": 11,
+        "p95Ms": 12
+      },
+      "afterOpen": {
+        "samples": 11,
+        "medianMs": 10,
+        "p95Ms": 16
+      },
+      "beforeUnchangedWorldUpdate": {
+        "samples": 11,
+        "medianMs": 1,
+        "p95Ms": 1
+      },
+      "afterUnchangedWorldUpdate": {
+        "samples": 11,
+        "medianMs": 1,
+        "p95Ms": 2
+      },
+      "scope": "Unchanged UI code; test-renderer observations, not native navigation or proof of a rendering optimisation."
+    },
+    {
+      "age": 70,
+      "screen": "Relationships",
+      "beforeOpen": {
+        "samples": 11,
+        "medianMs": 8,
+        "p95Ms": 15
+      },
+      "afterOpen": {
+        "samples": 11,
+        "medianMs": 7,
+        "p95Ms": 16
+      },
+      "beforeUnchangedWorldUpdate": {
+        "samples": 11,
+        "medianMs": 2,
+        "p95Ms": 8
+      },
+      "afterUnchangedWorldUpdate": {
+        "samples": 11,
+        "medianMs": 3,
+        "p95Ms": 10
+      },
+      "scope": "Unchanged UI code; test-renderer observations, not native navigation or proof of a rendering optimisation."
+    },
+    {
+      "age": 70,
+      "screen": "Assets",
+      "beforeOpen": {
+        "samples": 11,
+        "medianMs": 4,
+        "p95Ms": 5
+      },
+      "afterOpen": {
+        "samples": 11,
+        "medianMs": 4,
+        "p95Ms": 15
+      },
+      "beforeUnchangedWorldUpdate": {
+        "samples": 11,
+        "medianMs": 3,
+        "p95Ms": 13
+      },
+      "afterUnchangedWorldUpdate": {
+        "samples": 11,
+        "medianMs": 3,
+        "p95Ms": 4
+      },
+      "scope": "Unchanged UI code; test-renderer observations, not native navigation or proof of a rendering optimisation."
+    },
+    {
+      "age": 70,
+      "screen": "Activities",
+      "beforeOpen": {
+        "samples": 11,
+        "medianMs": 6,
+        "p95Ms": 18
+      },
+      "afterOpen": {
+        "samples": 11,
+        "medianMs": 5,
+        "p95Ms": 18
+      },
+      "beforeUnchangedWorldUpdate": {
+        "samples": 11,
+        "medianMs": 4,
+        "p95Ms": 6
+      },
+      "afterUnchangedWorldUpdate": {
+        "samples": 11,
+        "medianMs": 4,
+        "p95Ms": 5
+      },
+      "scope": "Unchanged UI code; test-renderer observations, not native navigation or proof of a rendering optimisation."
+    },
+    {
+      "age": 70,
+      "screen": "Statistics",
+      "beforeOpen": {
+        "samples": 11,
+        "medianMs": 13,
+        "p95Ms": 20
+      },
+      "afterOpen": {
+        "samples": 11,
+        "medianMs": 8,
+        "p95Ms": 11
+      },
+      "beforeUnchangedWorldUpdate": {
+        "samples": 11,
+        "medianMs": 4,
+        "p95Ms": 45
+      },
+      "afterUnchangedWorldUpdate": {
+        "samples": 11,
+        "medianMs": 4,
+        "p95Ms": 46
+      },
+      "scope": "Unchanged UI code; test-renderer observations, not native navigation or proof of a rendering optimisation."
+    },
+    {
+      "age": 90,
+      "screen": "Life",
+      "beforeOpen": {
+        "samples": 11,
+        "medianMs": 12,
+        "p95Ms": 25
+      },
+      "afterOpen": {
+        "samples": 11,
+        "medianMs": 10,
+        "p95Ms": 18
+      },
+      "beforeUnchangedWorldUpdate": {
+        "samples": 11,
+        "medianMs": 1,
+        "p95Ms": 2
+      },
+      "afterUnchangedWorldUpdate": {
+        "samples": 11,
+        "medianMs": 1,
+        "p95Ms": 1
+      },
+      "scope": "Unchanged UI code; test-renderer observations, not native navigation or proof of a rendering optimisation."
+    },
+    {
+      "age": 90,
+      "screen": "Relationships",
+      "beforeOpen": {
+        "samples": 11,
+        "medianMs": 7,
+        "p95Ms": 8
+      },
+      "afterOpen": {
+        "samples": 11,
+        "medianMs": 6,
+        "p95Ms": 9
+      },
+      "beforeUnchangedWorldUpdate": {
+        "samples": 11,
+        "medianMs": 4,
+        "p95Ms": 5
+      },
+      "afterUnchangedWorldUpdate": {
+        "samples": 11,
+        "medianMs": 4,
+        "p95Ms": 10
+      },
+      "scope": "Unchanged UI code; test-renderer observations, not native navigation or proof of a rendering optimisation."
+    },
+    {
+      "age": 90,
+      "screen": "Assets",
+      "beforeOpen": {
+        "samples": 11,
+        "medianMs": 7,
+        "p95Ms": 21
+      },
+      "afterOpen": {
+        "samples": 11,
+        "medianMs": 4,
+        "p95Ms": 5
+      },
+      "beforeUnchangedWorldUpdate": {
+        "samples": 11,
+        "medianMs": 5,
+        "p95Ms": 53
+      },
+      "afterUnchangedWorldUpdate": {
+        "samples": 11,
+        "medianMs": 3,
+        "p95Ms": 11
+      },
+      "scope": "Unchanged UI code; test-renderer observations, not native navigation or proof of a rendering optimisation."
+    },
+    {
+      "age": 90,
+      "screen": "Activities",
+      "beforeOpen": {
+        "samples": 11,
+        "medianMs": 5,
+        "p95Ms": 5
+      },
+      "afterOpen": {
+        "samples": 11,
+        "medianMs": 5,
+        "p95Ms": 6
+      },
+      "beforeUnchangedWorldUpdate": {
+        "samples": 11,
+        "medianMs": 4,
+        "p95Ms": 4
+      },
+      "afterUnchangedWorldUpdate": {
+        "samples": 11,
+        "medianMs": 4,
+        "p95Ms": 15
+      },
+      "scope": "Unchanged UI code; test-renderer observations, not native navigation or proof of a rendering optimisation."
+    },
+    {
+      "age": 90,
+      "screen": "Statistics",
+      "beforeOpen": {
+        "samples": 11,
+        "medianMs": 12,
+        "p95Ms": 22
+      },
+      "afterOpen": {
+        "samples": 11,
+        "medianMs": 9,
+        "p95Ms": 20
+      },
+      "beforeUnchangedWorldUpdate": {
+        "samples": 11,
+        "medianMs": 4,
+        "p95Ms": 6
+      },
+      "afterUnchangedWorldUpdate": {
+        "samples": 11,
+        "medianMs": 4,
+        "p95Ms": 4
+      },
+      "scope": "Unchanged UI code; test-renderer observations, not native navigation or proof of a rendering optimisation."
+    }
+  ],
+  "sqliteRows": [
+    {
+      "group": "ordinary",
+      "age": 10,
+      "kind": "routine",
+      "commands": 1,
+      "beforeMedianMs": 6.774845999999798,
+      "afterMedianMs": 5.3589710000001105,
+      "beforeP95Ms": 6.958908000000065,
+      "afterP95Ms": 5.489317999999912,
+      "exactOutcome": true
+    },
+    {
+      "group": "ordinary",
+      "age": 10,
+      "kind": "firstAgeUp",
+      "commands": 1,
+      "beforeMedianMs": 18.550072999999884,
+      "afterMedianMs": 13.697164000000157,
+      "beforeP95Ms": 19.78489399999944,
+      "afterP95Ms": 14.602679999999964,
+      "exactOutcome": true
+    },
+    {
+      "group": "ordinary",
+      "age": 10,
+      "kind": "fullYear",
+      "commands": 2,
+      "beforeMedianMs": 19.865214999999807,
+      "afterMedianMs": 14.255646000000525,
+      "beforeP95Ms": 21.641623000000436,
+      "afterP95Ms": 14.812565000000177,
+      "exactOutcome": true
+    },
+    {
+      "group": "ordinary",
+      "age": 25,
+      "kind": "routine",
+      "commands": 1,
+      "beforeMedianMs": 12.85503400000016,
+      "afterMedianMs": 9.66726699999981,
+      "beforeP95Ms": 13.99167800000032,
+      "afterP95Ms": 11.462424000000283,
+      "exactOutcome": true
+    },
+    {
+      "group": "ordinary",
+      "age": 25,
+      "kind": "firstAgeUp",
+      "commands": 1,
+      "beforeMedianMs": 30.61776899999859,
+      "afterMedianMs": 18.30680399999983,
+      "beforeP95Ms": 31.11792299999979,
+      "afterP95Ms": 19.13156799999979,
+      "exactOutcome": true
+    },
+    {
+      "group": "ordinary",
+      "age": 25,
+      "kind": "fullYear",
+      "commands": 5,
+      "beforeMedianMs": 95.68856099999903,
+      "afterMedianMs": 68.64467200000036,
+      "beforeP95Ms": 97.10376499999984,
+      "afterP95Ms": 71.34967900000083,
+      "exactOutcome": true
+    },
+    {
+      "group": "ordinary",
+      "age": 50,
+      "kind": "routine",
+      "commands": 1,
+      "beforeMedianMs": 28.97637399999803,
+      "afterMedianMs": 19.920968000000357,
+      "beforeP95Ms": 32.26548399999956,
+      "afterP95Ms": 20.752854000000298,
+      "exactOutcome": true
+    },
+    {
+      "group": "ordinary",
+      "age": 50,
+      "kind": "firstAgeUp",
+      "commands": 1,
+      "beforeMedianMs": 129.0686859999987,
+      "afterMedianMs": 50.83067799999844,
+      "beforeP95Ms": 142.5790440000019,
+      "afterP95Ms": 52.736863000000085,
+      "exactOutcome": true
+    },
+    {
+      "group": "ordinary",
+      "age": 50,
+      "kind": "fullYear",
+      "commands": 2,
+      "beforeMedianMs": 127.6222749999979,
+      "afterMedianMs": 73.03048299999864,
+      "beforeP95Ms": 127.91746999999668,
+      "afterP95Ms": 75.05109000000084,
+      "exactOutcome": true
+    },
+    {
+      "group": "ordinary",
+      "age": 70,
+      "kind": "routine",
+      "commands": 1,
+      "beforeMedianMs": 43.0069100000037,
+      "afterMedianMs": 27.39085399999749,
+      "beforeP95Ms": 43.85901500000182,
+      "afterP95Ms": 28.52140800000052,
+      "exactOutcome": true
+    },
+    {
+      "group": "ordinary",
+      "age": 70,
+      "kind": "firstAgeUp",
+      "commands": 1,
+      "beforeMedianMs": 219.60508700000355,
+      "afterMedianMs": 59.55866000000242,
+      "beforeP95Ms": 223.85796899999696,
+      "afterP95Ms": 61.54576099999758,
+      "exactOutcome": true
+    },
+    {
+      "group": "ordinary",
+      "age": 70,
+      "kind": "fullYear",
+      "commands": 4,
+      "beforeMedianMs": 323.13245299999835,
+      "afterMedianMs": 178.7886340000041,
+      "beforeP95Ms": 346.12957999999344,
+      "afterP95Ms": 181.4010730000009,
+      "exactOutcome": true
+    },
+    {
+      "group": "ordinary",
+      "age": 90,
+      "kind": "routine",
+      "commands": 1,
+      "beforeMedianMs": 51.758448000007775,
+      "afterMedianMs": 35.1297510000004,
+      "beforeP95Ms": 52.09939399998984,
+      "afterP95Ms": 36.24531399999978,
+      "exactOutcome": true
+    },
+    {
+      "group": "ordinary",
+      "age": 90,
+      "kind": "firstAgeUp",
+      "commands": 1,
+      "beforeMedianMs": 291.818523000009,
+      "afterMedianMs": 60.79390099999728,
+      "beforeP95Ms": 293.84758300000976,
+      "afterP95Ms": 62.289637000001676,
+      "exactOutcome": true
+    },
+    {
+      "group": "ordinary",
+      "age": 90,
+      "kind": "fullYear",
+      "commands": 6,
+      "beforeMedianMs": 726.7278140000126,
+      "afterMedianMs": 412.16559000000416,
+      "beforeP95Ms": 744.2681160000066,
+      "afterP95Ms": 423.72647300000244,
+      "exactOutcome": true
+    },
+    {
+      "group": "enabled",
+      "age": 10,
+      "kind": "routine",
+      "commands": 1,
+      "beforeMedianMs": 7.036340000000109,
+      "afterMedianMs": 6.203293000000031,
+      "beforeP95Ms": 8.760800000000017,
+      "afterP95Ms": 6.774105000000418,
+      "exactOutcome": true
+    },
+    {
+      "group": "enabled",
+      "age": 10,
+      "kind": "firstAgeUp",
+      "commands": 1,
+      "beforeMedianMs": 16.347141000000192,
+      "afterMedianMs": 12.865709000000152,
+      "beforeP95Ms": 17.097451000000092,
+      "afterP95Ms": 13.619694999999865,
+      "exactOutcome": true
+    },
+    {
+      "group": "enabled",
+      "age": 10,
+      "kind": "fullYear",
+      "commands": 2,
+      "beforeMedianMs": 20.155870000000505,
+      "afterMedianMs": 15.772241000000577,
+      "beforeP95Ms": 20.350785000000542,
+      "afterP95Ms": 16.11656999999923,
+      "exactOutcome": true
+    },
+    {
+      "group": "enabled",
+      "age": 25,
+      "kind": "routine",
+      "commands": 1,
+      "beforeMedianMs": 12.622761999999966,
+      "afterMedianMs": 10.59802899999977,
+      "beforeP95Ms": 12.759939000000486,
+      "afterP95Ms": 10.684410999999272,
+      "exactOutcome": true
+    },
+    {
+      "group": "enabled",
+      "age": 25,
+      "kind": "firstAgeUp",
+      "commands": 1,
+      "beforeMedianMs": 31.6534759999995,
+      "afterMedianMs": 15.9774010000001,
+      "beforeP95Ms": 31.878971000000092,
+      "afterP95Ms": 16.56950500000039,
+      "exactOutcome": true
+    },
+    {
+      "group": "enabled",
+      "age": 25,
+      "kind": "fullYear",
+      "commands": 5,
+      "beforeMedianMs": 97.01504899999964,
+      "afterMedianMs": 79.51593999999932,
+      "beforeP95Ms": 103.61077399999886,
+      "afterP95Ms": 79.72306899999967,
+      "exactOutcome": true
+    },
+    {
+      "group": "enabled",
+      "age": 50,
+      "kind": "routine",
+      "commands": 1,
+      "beforeMedianMs": 26.72405500000059,
+      "afterMedianMs": 20.12855800000034,
+      "beforeP95Ms": 27.001382000002195,
+      "afterP95Ms": 20.248177999999825,
+      "exactOutcome": true
+    },
+    {
+      "group": "enabled",
+      "age": 50,
+      "kind": "firstAgeUp",
+      "commands": 1,
+      "beforeMedianMs": 103.20388599999933,
+      "afterMedianMs": 50.34432200000083,
+      "beforeP95Ms": 104.37178700000004,
+      "afterP95Ms": 52.60495000000083,
+      "exactOutcome": true
+    },
+    {
+      "group": "enabled",
+      "age": 50,
+      "kind": "fullYear",
+      "commands": 2,
+      "beforeMedianMs": 139.263551,
+      "afterMedianMs": 70.86987399999998,
+      "beforeP95Ms": 149.12367599999925,
+      "afterP95Ms": 72.14335899999787,
+      "exactOutcome": true
+    },
+    {
+      "group": "enabled",
+      "age": 70,
+      "kind": "routine",
+      "commands": 1,
+      "beforeMedianMs": 43.40568699999858,
+      "afterMedianMs": 27.948402000001806,
+      "beforeP95Ms": 44.507448999996996,
+      "afterP95Ms": 28.62005499999941,
+      "exactOutcome": true
+    },
+    {
+      "group": "enabled",
+      "age": 70,
+      "kind": "firstAgeUp",
+      "commands": 1,
+      "beforeMedianMs": 193.55553399999917,
+      "afterMedianMs": 55.36172799999986,
+      "beforeP95Ms": 205.36445000000094,
+      "afterP95Ms": 57.85034599999926,
+      "exactOutcome": true
+    },
+    {
+      "group": "enabled",
+      "age": 70,
+      "kind": "fullYear",
+      "commands": 4,
+      "beforeMedianMs": 338.4887810000073,
+      "afterMedianMs": 174.88680400000158,
+      "beforeP95Ms": 341.8644059999933,
+      "afterP95Ms": 180.0869240000029,
+      "exactOutcome": true
+    },
+    {
+      "group": "enabled",
+      "age": 90,
+      "kind": "routine",
+      "commands": 1,
+      "beforeMedianMs": 51.00861600000644,
+      "afterMedianMs": 39.103343000002496,
+      "beforeP95Ms": 52.24168500000087,
+      "afterP95Ms": 40.23548700000538,
+      "exactOutcome": true
+    },
+    {
+      "group": "enabled",
+      "age": 90,
+      "kind": "firstAgeUp",
+      "commands": 1,
+      "beforeMedianMs": 304.3966530000034,
+      "afterMedianMs": 61.255001000004995,
+      "beforeP95Ms": 308.2991680000123,
+      "afterP95Ms": 91.66630399999849,
+      "exactOutcome": true
+    },
+    {
+      "group": "enabled",
+      "age": 90,
+      "kind": "fullYear",
+      "commands": 6,
+      "beforeMedianMs": 699.7307299999957,
+      "afterMedianMs": 393.50858999999764,
+      "beforeP95Ms": 707.9800489999907,
+      "afterP95Ms": 408.8946020000003,
+      "exactOutcome": true
+    },
+    {
+      "group": "active",
+      "age": 25,
+      "kind": "routine",
+      "commands": 1,
+      "beforeMedianMs": 16.340511000000333,
+      "afterMedianMs": 13.186133000000154,
+      "beforeP95Ms": 17.66840400000001,
+      "afterP95Ms": 14.42423000000008,
+      "exactOutcome": true
+    },
+    {
+      "group": "active",
+      "age": 25,
+      "kind": "firstAgeUp",
+      "commands": 1,
+      "beforeMedianMs": 39.80723300000045,
+      "afterMedianMs": 20.98536299999978,
+      "beforeP95Ms": 39.8765370000001,
+      "afterP95Ms": 21.432216999999582,
+      "exactOutcome": true
+    },
+    {
+      "group": "active",
+      "age": 25,
+      "kind": "fullYear",
+      "commands": 8,
+      "beforeMedianMs": 169.1731290000007,
+      "afterMedianMs": 123.94292899999982,
+      "beforeP95Ms": 171.33740200000102,
+      "afterP95Ms": 128.51666899999964,
+      "exactOutcome": true
+    },
+    {
+      "group": "active",
+      "age": 50,
+      "kind": "routine",
+      "commands": 1,
+      "beforeMedianMs": 29.678565000000162,
+      "afterMedianMs": 19.21929000000091,
+      "beforeP95Ms": 30.157075999999506,
+      "afterP95Ms": 20.624238000000332,
+      "exactOutcome": true
+    },
+    {
+      "group": "active",
+      "age": 50,
+      "kind": "firstAgeUp",
+      "commands": 1,
+      "beforeMedianMs": 124.93993599999885,
+      "afterMedianMs": 54.87588599999981,
+      "beforeP95Ms": 127.44115700000111,
+      "afterP95Ms": 55.793571000000156,
+      "exactOutcome": true
+    },
+    {
+      "group": "active",
+      "age": 50,
+      "kind": "fullYear",
+      "commands": 3,
+      "beforeMedianMs": 167.3778650000022,
+      "afterMedianMs": 92.54597899999862,
+      "beforeP95Ms": 168.3902730000009,
+      "afterP95Ms": 92.86258599999928,
+      "exactOutcome": true
+    },
+    {
+      "group": "active",
+      "age": 70,
+      "kind": "routine",
+      "commands": 1,
+      "beforeMedianMs": 45.83304599999974,
+      "afterMedianMs": 28.27017600000181,
+      "beforeP95Ms": 51.596459999993385,
+      "afterP95Ms": 28.927647000000434,
+      "exactOutcome": true
+    },
+    {
+      "group": "active",
+      "age": 70,
+      "kind": "firstAgeUp",
+      "commands": 1,
+      "beforeMedianMs": 229.10906599999726,
+      "afterMedianMs": 60.93318799999906,
+      "beforeP95Ms": 233.82463499999722,
+      "afterP95Ms": 61.21562699999777,
+      "exactOutcome": true
+    },
+    {
+      "group": "active",
+      "age": 70,
+      "kind": "fullYear",
+      "commands": 9,
+      "beforeMedianMs": 617.3018959999972,
+      "afterMedianMs": 342.4177650000056,
+      "beforeP95Ms": 656.1852710000094,
+      "afterP95Ms": 350.1794530000043,
+      "exactOutcome": true
+    },
+    {
+      "group": "active",
+      "age": 90,
+      "kind": "routine",
+      "commands": 1,
+      "beforeMedianMs": 54.280317000011564,
+      "afterMedianMs": 36.786894000004395,
+      "beforeP95Ms": 54.46743900000001,
+      "afterP95Ms": 37.196412000004784,
+      "exactOutcome": true
+    },
+    {
+      "group": "active",
+      "age": 90,
+      "kind": "firstAgeUp",
+      "commands": 1,
+      "beforeMedianMs": 359.2785210000002,
+      "afterMedianMs": 66.1522879999975,
+      "beforeP95Ms": 362.70054599999276,
+      "afterP95Ms": 66.46032099999866,
+      "exactOutcome": true
+    },
+    {
+      "group": "active",
+      "age": 90,
+      "kind": "fullYear",
+      "commands": 1,
+      "beforeMedianMs": 322.3040880000044,
+      "afterMedianMs": 63.840628999998444,
+      "beforeP95Ms": 342.0592409999954,
+      "afterP95Ms": 64.19326100000762,
+      "exactOutcome": true
+    },
+    {
+      "group": "generations",
+      "age": 1,
+      "kind": "firstAgeUp",
+      "commands": 1,
+      "beforeMedianMs": 9.303618999999799,
+      "afterMedianMs": 8.758476999999857,
+      "beforeP95Ms": 10.182264999999916,
+      "afterP95Ms": 8.769963999999618,
+      "exactOutcome": true
+    },
+    {
+      "group": "generations",
+      "age": 1,
+      "kind": "fullYear",
+      "commands": 9,
+      "beforeMedianMs": 39.455848999999944,
+      "afterMedianMs": 42.845438000000286,
+      "beforeP95Ms": 39.583861999999954,
+      "afterP95Ms": 45.80388099999982,
+      "exactOutcome": true
+    }
+  ],
+  "pairedRows": [
+    {
+      "group": "ordinary",
+      "age": 10,
+      "kind": "routine",
+      "medianPairedRatio": 0.9119851910167688,
+      "fasterCandidatePairs": 7,
+      "samples": 11,
+      "beforeMedianMs": 4.744233000000349,
+      "afterMedianMs": 4.698554999999942,
+      "beforeP95Ms": 6.005204000000049,
+      "afterP95Ms": 6.28405500000008,
+      "outcomeSha256": "3c65ba60edfe1e371b1542a85364cf8dcf49788fe3ca216331b5e5a420db5af5",
+      "commands": 1
+    },
+    {
+      "group": "ordinary",
+      "age": 10,
+      "kind": "firstAgeUp",
+      "medianPairedRatio": 1.0159921230318705,
+      "fasterCandidatePairs": 5,
+      "samples": 11,
+      "beforeMedianMs": 12.33236399999987,
+      "afterMedianMs": 12.06722499999978,
+      "beforeP95Ms": 20.37373900000057,
+      "afterP95Ms": 17.57351699999981,
+      "outcomeSha256": "486db920f9ceae9097e5961f45ec57a9ace02cf63df26fdc020247a9621f72f4",
+      "commands": 1
+    },
+    {
+      "group": "ordinary",
+      "age": 10,
+      "kind": "fullYear",
+      "medianPairedRatio": 0.9379380255604688,
+      "fasterCandidatePairs": 8,
+      "samples": 11,
+      "beforeMedianMs": 14.655818000000181,
+      "afterMedianMs": 13.682410000000345,
+      "beforeP95Ms": 15.508844000000863,
+      "afterP95Ms": 16.600721000000703,
+      "outcomeSha256": "4e9a62919515469cc5a4611945bd75cf3efdabae7dfcb6b61c0db1cdc861952d",
+      "commands": 2
+    },
+    {
+      "group": "ordinary",
+      "age": 25,
+      "kind": "routine",
+      "medianPairedRatio": 0.7195680789147417,
+      "fasterCandidatePairs": 11,
+      "samples": 11,
+      "beforeMedianMs": 11.865972000000511,
+      "afterMedianMs": 8.830054000000018,
+      "beforeP95Ms": 12.849665000000641,
+      "afterP95Ms": 10.62427899999966,
+      "outcomeSha256": "77850f3440514e77e9502fba01853ffb4169c9881974f5c9c529b63c41aa1dc6",
+      "commands": 1
+    },
+    {
+      "group": "ordinary",
+      "age": 25,
+      "kind": "firstAgeUp",
+      "medianPairedRatio": 0.9074851987303576,
+      "fasterCandidatePairs": 8,
+      "samples": 11,
+      "beforeMedianMs": 19.30030099999931,
+      "afterMedianMs": 17.39196400000037,
+      "beforeP95Ms": 28.753504999999677,
+      "afterP95Ms": 24.46211399999993,
+      "outcomeSha256": "32141965f6fafc328f827ff94a7e1788d5327923a6fb6275566215e22074d160",
+      "commands": 1
+    },
+    {
+      "group": "ordinary",
+      "age": 25,
+      "kind": "fullYear",
+      "medianPairedRatio": 0.8479843367468065,
+      "fasterCandidatePairs": 11,
+      "samples": 11,
+      "beforeMedianMs": 80.99813299999914,
+      "afterMedianMs": 72.50221200000124,
+      "beforeP95Ms": 114.7261299999991,
+      "afterP95Ms": 78.20198699999855,
+      "outcomeSha256": "ca6d29235bf32e666531528c5d8b50c4836199426577286796c4974a2ed999b3",
+      "commands": 5
+    },
+    {
+      "group": "ordinary",
+      "age": 50,
+      "kind": "routine",
+      "medianPairedRatio": 0.808179663832123,
+      "fasterCandidatePairs": 10,
+      "samples": 11,
+      "beforeMedianMs": 22.067925000001196,
+      "afterMedianMs": 17.376360999998724,
+      "beforeP95Ms": 30.880433000000266,
+      "afterP95Ms": 25.380756000000474,
+      "outcomeSha256": "2bc7325a962d48827903a1727b08803087afab2cd1e0d1ee1ce4c1fe1c1c40e4",
+      "commands": 1
+    },
+    {
+      "group": "ordinary",
+      "age": 50,
+      "kind": "firstAgeUp",
+      "medianPairedRatio": 0.8569395458716901,
+      "fasterCandidatePairs": 11,
+      "samples": 11,
+      "beforeMedianMs": 51.68710699999792,
+      "afterMedianMs": 45.59383800000069,
+      "beforeP95Ms": 57.57104799999979,
+      "afterP95Ms": 48.15428900000006,
+      "outcomeSha256": "526e49b9b5ebb2f3d532c330f518410bf5cdae175a646ded711a7798bc58bab0",
+      "commands": 1
+    },
+    {
+      "group": "ordinary",
+      "age": 50,
+      "kind": "fullYear",
+      "medianPairedRatio": 0.8422977067273711,
+      "fasterCandidatePairs": 11,
+      "samples": 11,
+      "beforeMedianMs": 70.6078039999993,
+      "afterMedianMs": 58.808483000000706,
+      "beforeP95Ms": 75.02845100000195,
+      "afterP95Ms": 68.60227999999915,
+      "outcomeSha256": "04298af8a442655d6ac2be8b1170e2da31987a456a1a0546e6cece20960b90b4",
+      "commands": 2
+    },
+    {
+      "group": "ordinary",
+      "age": 70,
+      "kind": "routine",
+      "medianPairedRatio": 0.72828284235225,
+      "fasterCandidatePairs": 11,
+      "samples": 11,
+      "beforeMedianMs": 32.457941000000574,
+      "afterMedianMs": 23.79130300000179,
+      "beforeP95Ms": 38.43161799999871,
+      "afterP95Ms": 26.1116320000001,
+      "outcomeSha256": "ce122e02b53d46893f6e11b217995693958685ead57034ecb8254c5d267148a7",
+      "commands": 1
+    },
+    {
+      "group": "ordinary",
+      "age": 70,
+      "kind": "firstAgeUp",
+      "medianPairedRatio": 0.8289017686151451,
+      "fasterCandidatePairs": 11,
+      "samples": 11,
+      "beforeMedianMs": 63.521129999997356,
+      "afterMedianMs": 52.55692700000145,
+      "beforeP95Ms": 73.66582600000038,
+      "afterP95Ms": 56.83629999999903,
+      "outcomeSha256": "d3bd1805a21240c36335f57ca7f4d17f69840940617580703839eb435876c9ac",
+      "commands": 1
+    },
+    {
+      "group": "ordinary",
+      "age": 70,
+      "kind": "fullYear",
+      "medianPairedRatio": 0.7799596111124861,
+      "fasterCandidatePairs": 11,
+      "samples": 11,
+      "beforeMedianMs": 196.71779799999786,
+      "afterMedianMs": 156.72118800000317,
+      "beforeP95Ms": 247.85807299999942,
+      "afterP95Ms": 174.20015499999863,
+      "outcomeSha256": "33e16f1c32b859ce3a2bf33ce59d409ec0a8f0217b9d1714871c410f924bf6f0",
+      "commands": 4
+    },
+    {
+      "group": "ordinary",
+      "age": 90,
+      "kind": "routine",
+      "medianPairedRatio": 0.7721321963424299,
+      "fasterCandidatePairs": 11,
+      "samples": 11,
+      "beforeMedianMs": 39.194578000002366,
+      "afterMedianMs": 30.581481000001077,
+      "beforeP95Ms": 43.13035800000216,
+      "afterP95Ms": 33.801245999995444,
+      "outcomeSha256": "51c1571c5cee0ce0456a36c59d4e24915b7c7d5897dec923f0473afc5b13825b",
+      "commands": 1
+    },
+    {
+      "group": "ordinary",
+      "age": 90,
+      "kind": "firstAgeUp",
+      "medianPairedRatio": 0.7965946573280355,
+      "fasterCandidatePairs": 9,
+      "samples": 11,
+      "beforeMedianMs": 73.40699499999755,
+      "afterMedianMs": 60.0089930000031,
+      "beforeP95Ms": 85.68181300000288,
+      "afterP95Ms": 83.32268099999783,
+      "outcomeSha256": "c151c1bb6c3054e74be092286f718c79df3d72e2cfb7dad8f56d43ae95b1029d",
+      "commands": 1
+    },
+    {
+      "group": "ordinary",
+      "age": 90,
+      "kind": "fullYear",
+      "medianPairedRatio": 0.8512749170026283,
+      "fasterCandidatePairs": 11,
+      "samples": 11,
+      "beforeMedianMs": 468.6783129999967,
+      "afterMedianMs": 388.6898179999989,
+      "beforeP95Ms": 537.9028109999999,
+      "afterP95Ms": 410.58466499999486,
+      "outcomeSha256": "bcb2c1b14adc0df1bfe45918f856255e7d80ceff073d5c1ae35d0642509e9b16",
+      "commands": 6
+    },
+    {
+      "group": "enabled",
+      "age": 10,
+      "kind": "routine",
+      "medianPairedRatio": 0.8297285819356256,
+      "fasterCandidatePairs": 6,
+      "samples": 11,
+      "beforeMedianMs": 5.108832999999322,
+      "afterMedianMs": 5.164487000000008,
+      "beforeP95Ms": 9.34050600000046,
+      "afterP95Ms": 7.118062999999893,
+      "outcomeSha256": "4de865e9a4dac01c02e2bc10190f8e41ff028cb266de45ccc4dc77193a874dfe",
+      "commands": 1
+    },
+    {
+      "group": "enabled",
+      "age": 10,
+      "kind": "firstAgeUp",
+      "medianPairedRatio": 0.8876961221472125,
+      "fasterCandidatePairs": 7,
+      "samples": 11,
+      "beforeMedianMs": 13.521309999999175,
+      "afterMedianMs": 12.771708000000217,
+      "beforeP95Ms": 24.429707999999664,
+      "afterP95Ms": 18.022335999999996,
+      "outcomeSha256": "df65c02cea5813fa9d240674f6a64e84fab507624a4e564aa1e5c42d6a21e4a8",
+      "commands": 1
+    },
+    {
+      "group": "enabled",
+      "age": 10,
+      "kind": "fullYear",
+      "medianPairedRatio": 0.9002188798722911,
+      "fasterCandidatePairs": 9,
+      "samples": 11,
+      "beforeMedianMs": 14.51161299999967,
+      "afterMedianMs": 12.935144000000037,
+      "beforeP95Ms": 17.20551500000056,
+      "afterP95Ms": 14.72247999999945,
+      "outcomeSha256": "dfec490a45ccfc1fe5cb369a0e56582c3f14054f3535ee144a81bc3dee691a8c",
+      "commands": 2
+    },
+    {
+      "group": "enabled",
+      "age": 25,
+      "kind": "routine",
+      "medianPairedRatio": 0.8541243349855968,
+      "fasterCandidatePairs": 11,
+      "samples": 11,
+      "beforeMedianMs": 10.517990000000282,
+      "afterMedianMs": 9.108524000000216,
+      "beforeP95Ms": 14.163578000000598,
+      "afterP95Ms": 10.598942999999053,
+      "outcomeSha256": "dfacd3093dce8221aaac203d4951bac7e13d7ba432260f44d149dcb282ed12ee",
+      "commands": 1
+    },
+    {
+      "group": "enabled",
+      "age": 25,
+      "kind": "firstAgeUp",
+      "medianPairedRatio": 0.8872449674173418,
+      "fasterCandidatePairs": 8,
+      "samples": 11,
+      "beforeMedianMs": 18.562267999999676,
+      "afterMedianMs": 17.02490300000136,
+      "beforeP95Ms": 22.176038999999946,
+      "afterP95Ms": 19.95647199999985,
+      "outcomeSha256": "d90c29a3c35400113c7a74381f5e882a4d49554032dda7c097ae3bfa02db5dc2",
+      "commands": 1
+    },
+    {
+      "group": "enabled",
+      "age": 25,
+      "kind": "fullYear",
+      "medianPairedRatio": 0.9129246387023106,
+      "fasterCandidatePairs": 9,
+      "samples": 11,
+      "beforeMedianMs": 73.67568000000028,
+      "afterMedianMs": 67.15957099999832,
+      "beforeP95Ms": 82.02441099999851,
+      "afterP95Ms": 82.79385099999854,
+      "outcomeSha256": "3819c66b661dc31274eec5a1140f1d50c1b29461f6703b6e016c76cc6bb6eff6",
+      "commands": 5
+    },
+    {
+      "group": "enabled",
+      "age": 50,
+      "kind": "routine",
+      "medianPairedRatio": 0.8157013640741912,
+      "fasterCandidatePairs": 11,
+      "samples": 11,
+      "beforeMedianMs": 22.14405799999986,
+      "afterMedianMs": 17.890215999999782,
+      "beforeP95Ms": 28.236140999999407,
+      "afterP95Ms": 20.555981999999858,
+      "outcomeSha256": "dfcbd9e60053ccb80464e3b86050b2f8ff73cc6ebed0e4e18341dfaa83f08d7a",
+      "commands": 1
+    },
+    {
+      "group": "enabled",
+      "age": 50,
+      "kind": "firstAgeUp",
+      "medianPairedRatio": 0.8526866524444325,
+      "fasterCandidatePairs": 10,
+      "samples": 11,
+      "beforeMedianMs": 54.5795990000006,
+      "afterMedianMs": 47.20339700000113,
+      "beforeP95Ms": 59.18080700000064,
+      "afterP95Ms": 50.431258999997226,
+      "outcomeSha256": "7f2ddfe3f5fd44b2b53f83e5d9ebcf7c424fb7d2efe2265b8636bccf7768b3d8",
+      "commands": 1
+    },
+    {
+      "group": "enabled",
+      "age": 50,
+      "kind": "fullYear",
+      "medianPairedRatio": 0.8298632666063752,
+      "fasterCandidatePairs": 11,
+      "samples": 11,
+      "beforeMedianMs": 70.93732400000226,
+      "afterMedianMs": 58.83387500000026,
+      "beforeP95Ms": 84.0443180000002,
+      "afterP95Ms": 67.52644099999816,
+      "outcomeSha256": "1318577b5b6097c49ff1b6214830b7889efe719158644b312c368a017ea3e66c",
+      "commands": 2
+    },
+    {
+      "group": "enabled",
+      "age": 70,
+      "kind": "routine",
+      "medianPairedRatio": 0.7942757891984453,
+      "fasterCandidatePairs": 11,
+      "samples": 11,
+      "beforeMedianMs": 31.89569500000289,
+      "afterMedianMs": 25.265606000000844,
+      "beforeP95Ms": 32.99682499999835,
+      "afterP95Ms": 28.268725999998424,
+      "outcomeSha256": "f2412ca5be6a310104c3cf1508f1a6bb79309d60832d47b7039de4217bb5caa5",
+      "commands": 1
+    },
+    {
+      "group": "enabled",
+      "age": 70,
+      "kind": "firstAgeUp",
+      "medianPairedRatio": 0.8371378757122202,
+      "fasterCandidatePairs": 11,
+      "samples": 11,
+      "beforeMedianMs": 63.25649599999815,
+      "afterMedianMs": 54.04172900000049,
+      "beforeP95Ms": 73.67477700000018,
+      "afterP95Ms": 64.79853999999978,
+      "outcomeSha256": "3e6b260a9cbe8cab256ec69ae8f812f72e647234ad2234f8f2222a57335088c3",
+      "commands": 1
+    },
+    {
+      "group": "enabled",
+      "age": 70,
+      "kind": "fullYear",
+      "medianPairedRatio": 0.8190207675906392,
+      "fasterCandidatePairs": 11,
+      "samples": 11,
+      "beforeMedianMs": 184.3733179999981,
+      "afterMedianMs": 156.15514400000393,
+      "beforeP95Ms": 199.78097200000047,
+      "afterP95Ms": 169.59256800000003,
+      "outcomeSha256": "9f3c91cc753e44f6be5840510e8bda9a94d56820ce78dc62ed453033f1add5f6",
+      "commands": 4
+    },
+    {
+      "group": "enabled",
+      "age": 90,
+      "kind": "routine",
+      "medianPairedRatio": 0.7499300769316499,
+      "fasterCandidatePairs": 11,
+      "samples": 11,
+      "beforeMedianMs": 39.642180000002554,
+      "afterMedianMs": 29.755230999995547,
+      "beforeP95Ms": 45.664472000004025,
+      "afterP95Ms": 38.430193000000145,
+      "outcomeSha256": "6cf47d45f8a69976e16c431dc671a0c93d04b6b4d95aef720aa1fffcdc53d191",
+      "commands": 1
+    },
+    {
+      "group": "enabled",
+      "age": 90,
+      "kind": "firstAgeUp",
+      "medianPairedRatio": 0.8001885775066822,
+      "fasterCandidatePairs": 11,
+      "samples": 11,
+      "beforeMedianMs": 68.77800399999978,
+      "afterMedianMs": 55.379675999996834,
+      "beforeP95Ms": 76.7237329999989,
+      "afterP95Ms": 61.22728499999357,
+      "outcomeSha256": "164d862594e632b4acbff6a9bfe90c7ed840f6691e9eb974d6909793c9ff94db",
+      "commands": 1
+    },
+    {
+      "group": "enabled",
+      "age": 90,
+      "kind": "fullYear",
+      "medianPairedRatio": 0.8525150152784012,
+      "fasterCandidatePairs": 11,
+      "samples": 11,
+      "beforeMedianMs": 469.0742170000012,
+      "afterMedianMs": 393.1789179999978,
+      "beforeP95Ms": 503.94202199999563,
+      "afterP95Ms": 419.876860999997,
+      "outcomeSha256": "09719937ce2a55bea35867fa509f0b8abfa57326807baf7309d42d59b112dfbd",
+      "commands": 6
+    },
+    {
+      "group": "active",
+      "age": 25,
+      "kind": "routine",
+      "medianPairedRatio": 0.8779470503460013,
+      "fasterCandidatePairs": 7,
+      "samples": 11,
+      "beforeMedianMs": 15.079993999999715,
+      "afterMedianMs": 12.821477999999843,
+      "beforeP95Ms": 20.739558999999645,
+      "afterP95Ms": 15.596842999999353,
+      "outcomeSha256": "a811dfb6c7e52f8292aa8227ec9544ec111dc14d1624ec5507340ec9a46ce1e9",
+      "commands": 1
+    },
+    {
+      "group": "active",
+      "age": 25,
+      "kind": "firstAgeUp",
+      "medianPairedRatio": 1.0014067852514166,
+      "fasterCandidatePairs": 5,
+      "samples": 11,
+      "beforeMedianMs": 22.390760000000228,
+      "afterMedianMs": 21.951027000000067,
+      "beforeP95Ms": 38.043392999999924,
+      "afterP95Ms": 25.171633999999358,
+      "outcomeSha256": "6f3ec119e03ce558be57d427dee9b0a442a1bb02e89434d8bfe02cedfe58b721",
+      "commands": 1
+    },
+    {
+      "group": "active",
+      "age": 25,
+      "kind": "fullYear",
+      "medianPairedRatio": 0.9297535137887957,
+      "fasterCandidatePairs": 9,
+      "samples": 11,
+      "beforeMedianMs": 137.24485000000095,
+      "afterMedianMs": 130.16387600000053,
+      "beforeP95Ms": 171.33351799999946,
+      "afterP95Ms": 146.92429400000037,
+      "outcomeSha256": "d5367729c84131002876b78bca85180437ffeadaf21300e7b4f0fece05dc1c6f",
+      "commands": 8
+    },
+    {
+      "group": "active",
+      "age": 50,
+      "kind": "routine",
+      "medianPairedRatio": 0.8138973585682535,
+      "fasterCandidatePairs": 11,
+      "samples": 11,
+      "beforeMedianMs": 23.829101999999693,
+      "afterMedianMs": 19.461724000000686,
+      "beforeP95Ms": 24.378952999999456,
+      "afterP95Ms": 22.290107999999236,
+      "outcomeSha256": "d96c114401455394e2a6f8c14c862a0199fbdd8cc1969e3f156bd64a92c39c8e",
+      "commands": 1
+    },
+    {
+      "group": "active",
+      "age": 50,
+      "kind": "firstAgeUp",
+      "medianPairedRatio": 0.8744677905796157,
+      "fasterCandidatePairs": 11,
+      "samples": 11,
+      "beforeMedianMs": 61.86123499999849,
+      "afterMedianMs": 54.97354799999994,
+      "beforeP95Ms": 74.55970500000149,
+      "afterP95Ms": 58.250168999999005,
+      "outcomeSha256": "1ff49aa9bc4b8d0dc4464c42e8885a8ad8185bc4da24e80019f5233177180e15",
+      "commands": 1
+    },
+    {
+      "group": "active",
+      "age": 50,
+      "kind": "fullYear",
+      "medianPairedRatio": 0.8552265052415254,
+      "fasterCandidatePairs": 11,
+      "samples": 11,
+      "beforeMedianMs": 103.33259700000053,
+      "afterMedianMs": 86.0578740000019,
+      "beforeP95Ms": 113.78007200000138,
+      "afterP95Ms": 94.38958799999818,
+      "outcomeSha256": "09b05c3f2379f96a2257c6dfd2807c1f30668d0dcc21e5adf3a34f1df40d114b",
+      "commands": 3
+    },
+    {
+      "group": "active",
+      "age": 70,
+      "kind": "routine",
+      "medianPairedRatio": 0.7774256571126928,
+      "fasterCandidatePairs": 11,
+      "samples": 11,
+      "beforeMedianMs": 31.477537999999186,
+      "afterMedianMs": 24.53286300000036,
+      "beforeP95Ms": 37.93083399999887,
+      "afterP95Ms": 29.15442500000063,
+      "outcomeSha256": "5f918ff29599339d7dcf27582e7bd28e9aaa2fa94ad360530f64b698234f6e4a",
+      "commands": 1
+    },
+    {
+      "group": "active",
+      "age": 70,
+      "kind": "firstAgeUp",
+      "medianPairedRatio": 0.79210529869942,
+      "fasterCandidatePairs": 11,
+      "samples": 11,
+      "beforeMedianMs": 71.63612400000056,
+      "afterMedianMs": 57.1244209999968,
+      "beforeP95Ms": 82.23432200000025,
+      "afterP95Ms": 64.07009200000175,
+      "outcomeSha256": "de998410b2f5bde3e59bd06e8a4ee0eaf91392fba166af5cf786f3d7ca184311",
+      "commands": 1
+    },
+    {
+      "group": "active",
+      "age": 70,
+      "kind": "fullYear",
+      "medianPairedRatio": 0.7783281245375763,
+      "fasterCandidatePairs": 11,
+      "samples": 11,
+      "beforeMedianMs": 434.57998699999735,
+      "afterMedianMs": 341.70351700000174,
+      "beforeP95Ms": 461.77216699999553,
+      "afterP95Ms": 395.78346800000145,
+      "outcomeSha256": "132a205e14ac55af470f5cdfbcfe18626d48ce5d867aa596858c6a7c2099f0dd",
+      "commands": 9
+    },
+    {
+      "group": "active",
+      "age": 90,
+      "kind": "routine",
+      "medianPairedRatio": 0.8078274176512648,
+      "fasterCandidatePairs": 11,
+      "samples": 11,
+      "beforeMedianMs": 43.47712300000421,
+      "afterMedianMs": 33.38819800000056,
+      "beforeP95Ms": 59.32405500000459,
+      "afterP95Ms": 39.27392900000268,
+      "outcomeSha256": "46c6ce34191ffa85b4679e5b29fe1dedfa14c8ab6c2dd31b1cdc840f033437b7",
+      "commands": 1
+    },
+    {
+      "group": "active",
+      "age": 90,
+      "kind": "firstAgeUp",
+      "medianPairedRatio": 0.821225856853742,
+      "fasterCandidatePairs": 11,
+      "samples": 11,
+      "beforeMedianMs": 75.74208499999804,
+      "afterMedianMs": 61.07163199999923,
+      "beforeP95Ms": 84.28674399999727,
+      "afterP95Ms": 74.12077699999645,
+      "outcomeSha256": "42a399375d87a320da4e79552894d384104bd66ee361c8c7a235ab786990d3a1",
+      "commands": 1
+    },
+    {
+      "group": "active",
+      "age": 90,
+      "kind": "fullYear",
+      "medianPairedRatio": 0.8194594918605744,
+      "fasterCandidatePairs": 11,
+      "samples": 11,
+      "beforeMedianMs": 74.37939300000289,
+      "afterMedianMs": 62.280000999999174,
+      "beforeP95Ms": 101.78405599999678,
+      "afterP95Ms": 82.8927690000055,
+      "outcomeSha256": "42a399375d87a320da4e79552894d384104bd66ee361c8c7a235ab786990d3a1",
+      "commands": 1
+    },
+    {
+      "group": "generations",
+      "age": 1,
+      "kind": "firstAgeUp",
+      "medianPairedRatio": 0.8576027401081282,
+      "fasterCandidatePairs": 6,
+      "samples": 11,
+      "beforeMedianMs": 7.512528000000202,
+      "afterMedianMs": 7.3905839999997625,
+      "beforeP95Ms": 12.01237299999957,
+      "afterP95Ms": 11.232066000000486,
+      "outcomeSha256": "a425f5273a3a78e1791ea1d8bdeab853e0968c62e99ed0fc4c1a8bf0d6c39f10",
+      "commands": 1
+    },
+    {
+      "group": "generations",
+      "age": 1,
+      "kind": "fullYear",
+      "medianPairedRatio": 0.9861388687919651,
+      "fasterCandidatePairs": 6,
+      "samples": 11,
+      "beforeMedianMs": 35.342569999999796,
+      "afterMedianMs": 34.2465370000009,
+      "beforeP95Ms": 42.62652299999991,
+      "afterP95Ms": 39.010481000000254,
+      "outcomeSha256": "7257745c432ec16a188eeb18ca2e7f20a68022b2f748fc9cc90bf0640ba6f827",
+      "commands": 9
+    }
+  ],
+  "exactOrdinaryActionCases": 13,
+  "exactCanonicalAndPackedWorlds": 35,
+  "memory": {
+    "before": {
+      "processRssHighWaterBytes": 669569024,
+      "commandTrajectories": {
+        "life_final_performance_42": {
+          "fullYearSequences": 3,
+          "commands": 10,
+          "firstHeapAfterGc": 96812720,
+          "lastHeapAfterGc": 96549784,
+          "firstLedgerRows": 47540,
+          "lastLedgerRows": 48049,
+          "naturalDeath": {
+            "year": 2119,
+            "month": 4,
+            "day": 24
+          }
+        },
+        "life_v3_fixture": {
+          "fullYearSequences": 16,
+          "commands": 127,
+          "firstHeapAfterGc": 68433920,
+          "lastHeapAfterGc": 74218688,
+          "firstLedgerRows": 676,
+          "lastLedgerRows": 5267,
+          "naturalDeath": null
+        }
+      },
+      "retainedHeapByLife": {
+        "life_final_performance_42": {
+          "minHeapAfterGc": 92114848,
+          "maxHeapAfterGc": 92593416,
+          "firstHeapAfterGc": 92484248,
+          "lastHeapAfterGc": 92540800
+        },
+        "life_v3_fixture": {
+          "minHeapAfterGc": 63923904,
+          "maxHeapAfterGc": 64399568,
+          "firstHeapAfterGc": 64286560,
+          "lastHeapAfterGc": 64323408
+        }
+      },
+      "cycles": 32,
+      "actualFullYearSequences": 19,
+      "durableCommands": 137
+    },
+    "after": {
+      "processRssHighWaterBytes": 571269120,
+      "commandTrajectories": {
+        "life_final_performance_42": {
+          "fullYearSequences": 3,
+          "commands": 10,
+          "firstHeapAfterGc": 93141288,
+          "lastHeapAfterGc": 93798888,
+          "firstLedgerRows": 47540,
+          "lastLedgerRows": 48049,
+          "naturalDeath": {
+            "year": 2119,
+            "month": 4,
+            "day": 24
+          }
+        },
+        "life_v3_fixture": {
+          "fullYearSequences": 16,
+          "commands": 127,
+          "firstHeapAfterGc": 66143600,
+          "lastHeapAfterGc": 69313416,
+          "firstLedgerRows": 676,
+          "lastLedgerRows": 5267,
+          "naturalDeath": null
+        }
+      },
+      "retainedHeapByLife": {
+        "life_final_performance_42": {
+          "minHeapAfterGc": 85237368,
+          "maxHeapAfterGc": 86003216,
+          "firstHeapAfterGc": 85237368,
+          "lastHeapAfterGc": 86003216
+        },
+        "life_v3_fixture": {
+          "minHeapAfterGc": 58886352,
+          "maxHeapAfterGc": 59653224,
+          "firstHeapAfterGc": 58886352,
+          "lastHeapAfterGc": 59653224
+        }
+      },
+      "cycles": 32,
+      "actualFullYearSequences": 19,
+      "durableCommands": 137
+    }
+  },
+  "nativeAcceptance": "open; Android/iPhone release profiling unavailable",
+  "generationSqliteFollowup": {
+    "reason": "Original age-1 full-year five-sample median rose 8.6% (3.39 ms); fixed eleven-sample follow-up in reverse process order checks sampling/JIT/GC sensitivity. No runtime changes and no original result discarded.",
+    "order": [
+      "candidate",
+      "baseline"
+    ],
+    "samples": 11,
+    "rows": [
+      {
+        "kind": "firstAgeUp",
+        "beforeMedianMs": 8.236360000000332,
+        "afterMedianMs": 7.640802000000349,
+        "beforeP95Ms": 9.410620999999992,
+        "afterP95Ms": 8.635631999999987,
+        "exactOutcome": true
+      },
+      {
+        "kind": "fullYear",
+        "beforeMedianMs": 39.90496499999972,
+        "afterMedianMs": 37.38770899999963,
+        "beforeP95Ms": 42.19285600000012,
+        "afterP95Ms": 40.111265,
+        "exactOutcome": true
+      }
+    ]
+  }
+}
