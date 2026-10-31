@@ -1,0 +1,18 @@
+{
+  "baselineCommit": "8ba6ba14c6af47e4d868fc51bf2131d85cc9de1e",
+  "capturedAt": "2026-10-31T18:25:49.776202+00:00",
+  "runtimeChangedBeforeAudit": false,
+  "inputGroups": {
+    "ordinary": "25b4f30388f0a90147c20bf7246c5cd4e77f4b9413c2ce05cdd691a57ab850eb",
+    "enabled": "f244c464ae6774f45a7e6cfa3b63956c054bb3ad701de1408d415cff9e6de81a",
+    "active": "a3ce03a23c7f6ed9efea4c3d66b9cba1b8a1d0c8a4a47b8f2f22e44fb1f64459",
+    "generations": "9c0dfb6a0de4b62400a7e46867cd52b6713cc6772940b71dd108903808009110"
+  },
+  "operationInputs": 15,
+  "ordinaryCommandCases": 15,
+  "ordinaryActionCases": 13,
+  "screenProfiles": 25,
+  "nativeAcceptance": "open; no device/simulator available",
+  "memoryScope": "Node operation-boundary heap and lifetime process RSS; no native peak claim",
+  "rawDirectory": "baseline"
+}

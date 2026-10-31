@@ -17,7 +17,9 @@ const { amenityQuote } = load('systems/propertyAmenities'), { askingRent } = loa
 const { licenceFee } = load('systems/vehicleLicences'), { vehicleActivityCost } = load('systems/vehicleActivities');
 const { petAdoptionFee } = load('systems/pets'), { hobbyFee } = load('systems/leisure');
 const bytes = fs.readFileSync(input), fixture = JSON.parse((input.endsWith('.gz') ? gunzipSync(bytes) : bytes).toString('utf8'));
-fixture.snapshots = fixture.snapshots.filter(snapshot => [50, 70, 90].includes(snapshot.summary.age));
+const ages = (flags['--ages'] ?? '50,70,90').split(',').map(Number);
+assert(ages.length && ages.every(age => Number.isInteger(age) && age >= 0 && age <= 120), 'Invalid workload ages');
+fixture.snapshots = fixture.snapshots.filter(snapshot => ages.includes(snapshot.summary.age));
 for (const snapshot of fixture.snapshots) {
   let world = unpackCheckpoint(snapshot.payload); const original = world, preparationCommands = [];
   const command = cmd => { world = resolveCommand(world, cmd, true); preparationCommands.push(cmd); };
