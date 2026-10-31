@@ -75,3 +75,5 @@ Active inputs contain additional genuine people and records, so their timings
 are not a controlled percentage comparison with smaller legacy inputs. Investigate
 large timing gaps with an eleven-sample repeat before drawing conclusions. Cloud
 Node/SQLite spans do not measure React layout, native frame pacing or touch latency.
+
+The final follow-ups use `--samples 11 --ages 90 --kinds fullYear` for baseline/current legacy, and `--samples 11 --ages 70 --kinds firstAgeUp` for baseline/current enabled. Retain distinct outputs and compare the exact legacy outcomes before interpreting timings.

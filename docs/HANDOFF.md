@@ -2,6 +2,65 @@
 
 Owner workflow preference: commit and push completed changes to the active development branch unless explicitly told otherwise.
 
+## Property, vehicles, pets and hobbies — 31 October 2026
+
+Continue on **`v2`** from published `2d602ba9`. Gameplay/UI sources are verified at
+`f5f2d17b`; final test/evidence follow-up is `2750dc35`. The existing navigation,
+cards, asset feature boxes, purchases and RevenueCat remain. All additions are
+free. Two generated atlases extend the current vehicle/pet artwork; original art
+and historical fixtures remain unchanged.
+
+Optional **`lifestyle.version:1`** exists on new lives and through explicit review
+for existing lives. Decoding never adds it. Property management and vehicle use
+are separately reviewed per asset. Anonymous old rentals retain their terms until
+ended through the original path. Keep ordinary **49/51/28**, enhanced creative
+**50/52/29**, overhaul1, stolen-vehicle provenance and all escape-session formats.
+SQLite reader **32** changes only compatible eight-table metadata; reader33 is
+refused. New exports use **archive2**; archive1 and plain imports remain supported.
+
+Twelve one-time paid amenities, named funded applicants, real rent transfers,
+escrow deposits, maintenance, bounded rent reviews, notice and paid eviction
+review extend properties. Transfers, foreclosure and death close agreements and
+return deposits before estate settlement. New room/move suitability never removes
+an existing family or pet. Optional gatherings use actual consent and attendance.
+
+Road/boat/pilot quizzes record answers, fees and retries. Reviewed trips preserve
+listing mileage and add actual distance/wear, with maintenance, repair, upgrades,
+gifts, trade-in and salvage. Twenty road vehicles remain; six boats/aircraft are
+added. Held stolen vehicles cannot become lawful sales, gifts or inheritances.
+Nine species and sixteen adoption profiles add fixed traits, training/tricks,
+species-specific activities, comfort/treatment and distinct family bonds, while
+retaining automatic care, boarding, grief, moves and adult succession.
+
+Sixteen hobbies retain earned practice, both paid modes and the two-routine limit.
+Formal competitions share the annual opportunity with existing community events,
+use real peers/strategy/rolls and pay only actual awards. Four later attended months
+can complete a project in one reviewed session; finished work has no invented
+resale value. Ten outings include a free park visit; safe casual hobbies need no
+paid routine or owned asset. Shared invitations never invent attendance or extra
+proficiency. Sixty situations bind saved subjects/participants/terms, with at most
+two opportunities per person/year and a five-year template cooldown.
+
+Preserve absent optional revisions: **`usageVersion:2`** for new trip distances,
+**`healthVersion:2`** for ageing comfort, **`workVersion:2`** for batched project
+credits and **`contextVersion:2`** for stricter new frozen contexts. Absence retains
+the first implementation commit's literal interpretation. Seven complete outcome
+replays prove that compatibility. Do not default those flags or truncate old
+relationship memories. The original 512-newborn gameplay digest remains exact.
+
+Verification covers **all 388 suites / 6,652 unique passing cases** through the
+full frozen run and final affected rerun, without source drift or missing files.
+The **120-life soak passes**, retaining up to **61,470 ledger rows**. Strict
+app/test types, the **593-module acyclic graph**, notice checks and Android/iOS
+Hermes exports pass. All **58 changed runtime sources** match both maps; both
+new atlases are present byte-for-byte. Five persistent journeys use actual earned
+funds, physically reopened SQLite, rollback/retry, Time Machine branches and
+existing-child continuation. Native-device and human playtesting remain separate.
+
+Read [implementation/save policy](LIFESTYLE_OVERHAUL.md),
+[the sixty-situation writing audit](LIFESTYLE_WRITING_AUDIT.md), and
+[the gameplay, regression, soak, performance and export evidence](verification/lifestyle-overhaul/README.md).
+
 ## Crime, romance and writing refinement — 30 October 2026
 
 Continue on **`v2`**. The refinement starts from published `fc2294b4` and preserves

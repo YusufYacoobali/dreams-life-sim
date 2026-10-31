@@ -1,0 +1,3545 @@
+{
+  "method": "Latest complete result for every current test file: full frozen regression followed by five complete affected suites. Counts include two additional shared-ticket cases and use unique whole-file coverage, not summed duplicate executions. The full raw run retained its original failures; the final rerun corrects reader-marker assertions checks the expanded catalogue after explicit specialty opt-in and checks/excludes only the new empty newborn capability before retaining the historical digest.",
+  "baselineCommit": "2d602ba9641960e9d965765ade9ed9daa6a780f3",
+  "runtimeSourceCommit": "f5f2d17b4dd545250b6de7af4a070843ab89dd51",
+  "sources": {
+    "full": {
+      "sourceCommit": "f5f2d17b4dd545250b6de7af4a070843ab89dd51",
+      "sourceDigest": "7016305fd6528281d2c4c2740521ee189b8cede3d5c7f8067a27f646e1b6ade2",
+      "suites": {
+        "total": 388,
+        "passed": 384,
+        "failed": 4,
+        "pending": 0
+      },
+      "cases": {
+        "total": 6650,
+        "passed": 6627,
+        "failed": 23,
+        "pending": 0,
+        "todo": 0
+      },
+      "changedSourcesDuringRun": []
+    },
+    "finalAffected": {
+      "sourceCommit": "2750dc353a631f935dc475db2d54bbafc58b2230",
+      "sourceDigest": "c1ae562f249822bfbd06ad6ae24776acca12476d3bbab905634c5e6773c74ad4",
+      "suites": {
+        "total": 5,
+        "passed": 5,
+        "failed": 0,
+        "pending": 0
+      },
+      "cases": {
+        "total": 85,
+        "passed": 85,
+        "failed": 0,
+        "pending": 0,
+        "todo": 0
+      },
+      "changedSourcesDuringRun": []
+    }
+  },
+  "coverage": {
+    "suites": 388,
+    "passedCases": 6652,
+    "failed": 0,
+    "pending": 0,
+    "todo": 0,
+    "missingFiles": []
+  },
+  "files": [
+    {
+      "file": "tests/architecture/runtime-imports.test.ts",
+      "passed": 1,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/config/release-config.test.ts",
+      "passed": 14,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/actor-career-overhaul.test.ts",
+      "passed": 14,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/actor-stories.test.ts",
+      "passed": 30,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/adult-relationship-stories.test.ts",
+      "passed": 24,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/adult-work-school-entry.test.ts",
+      "passed": 5,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/adult-writing-overhaul.test.ts",
+      "passed": 29,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/annual-pacing.test.ts",
+      "passed": 8,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/annual-story-refinement.test.ts",
+      "passed": 28,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/asset-catalogue.test.ts",
+      "passed": 3,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "finalAffected"
+    },
+    {
+      "file": "tests/game/assets-markets.test.ts",
+      "passed": 22,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/automatic-appearance-save.test.ts",
+      "passed": 2,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/automatic-appearance.test.ts",
+      "passed": 15,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/best-friends.test.ts",
+      "passed": 22,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/birth-journal.test.ts",
+      "passed": 20,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "finalAffected"
+    },
+    {
+      "file": "tests/game/businesses.test.ts",
+      "passed": 48,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/campus.test.ts",
+      "passed": 15,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/careers.test.ts",
+      "passed": 29,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/certified-branches.test.ts",
+      "passed": 12,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/childhood-stories.test.ts",
+      "passed": 100,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/collapse-notifications.test.ts",
+      "passed": 6,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/content-refresh.test.ts",
+      "passed": 25,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/conversation-writing.test.ts",
+      "passed": 8,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/conversations.test.ts",
+      "passed": 18,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/copy-world.test.ts",
+      "passed": 6,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/creation.test.ts",
+      "passed": 14,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/creative-agency.test.ts",
+      "passed": 5,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/creative-career-journeys.test.ts",
+      "passed": 12,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/creative-career-polish.test.ts",
+      "passed": 40,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/creative-finance-history.test.ts",
+      "passed": 10,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/creative-industry-stories.test.ts",
+      "passed": 17,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/creative-story-effects-audit.test.ts",
+      "passed": 184,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/creators.test.ts",
+      "passed": 38,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/credit.test.ts",
+      "passed": 29,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/crime-romance-editorial.test.ts",
+      "passed": 3,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/crime-romance-writing-contracts.test.ts",
+      "passed": 81,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/criminal-policy.test.ts",
+      "passed": 6,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/cult-activities-polish.test.ts",
+      "passed": 14,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/cult-claims-polish.test.ts",
+      "passed": 26,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/cult-polish-journeys.test.ts",
+      "passed": 3,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/cult-recruiter-writing.test.ts",
+      "passed": 18,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/cult-roster-polish.test.ts",
+      "passed": 11,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/cult-voice.test.ts",
+      "passed": 44,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/cult-writing.test.ts",
+      "passed": 512,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/cults-depth.test.ts",
+      "passed": 232,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/cults-integration.test.ts",
+      "passed": 5,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/cults.test.ts",
+      "passed": 19,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/date-activities.test.ts",
+      "passed": 8,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/deferred-writing.test.ts",
+      "passed": 39,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/domain-copy-clarity.test.ts",
+      "passed": 11,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/dramatic-consequences.test.ts",
+      "passed": 16,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/dramatic-events.test.ts",
+      "passed": 112,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/dramatic-writing.test.ts",
+      "passed": 106,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/early-home-stories.test.ts",
+      "passed": 22,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/editorial-context-acceptance.test.ts",
+      "passed": 5,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/editorial-policy.test.ts",
+      "passed": 5,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/education-milestones.test.ts",
+      "passed": 18,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/education-recovery.test.ts",
+      "passed": 32,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/education-work-finance.test.ts",
+      "passed": 19,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/end-life.test.ts",
+      "passed": 9,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/engine.test.ts",
+      "passed": 7,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/entertainment-overhaul.test.ts",
+      "passed": 93,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/entertainment-system-writing.test.ts",
+      "passed": 3,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/entrepreneur-policy.test.ts",
+      "passed": 18,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/escape-memory.test.ts",
+      "passed": 17,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/estates.test.ts",
+      "passed": 25,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/event-rarity.test.ts",
+      "passed": 7,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/everyday-life-stories.test.ts",
+      "passed": 167,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/family.test.ts",
+      "passed": 22,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/foreign-earnings.test.ts",
+      "passed": 91,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/god-mode.test.ts",
+      "passed": 77,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/health-emergency-context.test.ts",
+      "passed": 5,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/health-legal-availability.test.ts",
+      "passed": 10,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/health.test.ts",
+      "passed": 22,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/hobby-events.test.ts",
+      "passed": 210,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/hobby-introductions.test.ts",
+      "passed": 33,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/hourly-work.test.ts",
+      "passed": 69,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/interview-experience.test.ts",
+      "passed": 20,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/job-interviews.test.ts",
+      "passed": 85,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/legal-stories.test.ts",
+      "passed": 7,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/legal.test.ts",
+      "passed": 50,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/leisure.test.ts",
+      "passed": 58,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/lifestyle-currencies.test.ts",
+      "passed": 60,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/lifestyle-hobbies.test.ts",
+      "passed": 25,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "finalAffected"
+    },
+    {
+      "file": "tests/game/lifestyle-pets.test.ts",
+      "passed": 20,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/lifestyle-property.test.ts",
+      "passed": 9,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/lifestyle-stories.test.ts",
+      "passed": 124,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/lifestyle-vehicles.test.ts",
+      "passed": 20,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/medical-episodes.test.ts",
+      "passed": 21,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/minigames.test.ts",
+      "passed": 12,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/model-career-stories.test.ts",
+      "passed": 2,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/model-career.test.ts",
+      "passed": 22,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/money-format.test.ts",
+      "passed": 31,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/music.test.ts",
+      "passed": 25,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/name-variety.test.ts",
+      "passed": 40,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/npc-courtships.test.ts",
+      "passed": 30,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/npc-moves.test.ts",
+      "passed": 60,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/npc-relationships.test.ts",
+      "passed": 19,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/npc-separations.test.ts",
+      "passed": 59,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/ordinary-crime-overhaul.test.ts",
+      "passed": 5,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/ordinary-hobbies.test.ts",
+      "passed": 60,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/ordinary-jobs.test.ts",
+      "passed": 87,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/organised-crew-refinement.test.ts",
+      "passed": 10,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/organised-crime.test.ts",
+      "passed": 94,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/organised-mission-refinement.test.ts",
+      "passed": 25,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/partner-planning.test.ts",
+      "passed": 10,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/person-actions.test.ts",
+      "passed": 6,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/person-polish3-writing.test.ts",
+      "passed": 15,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/person-support.test.ts",
+      "passed": 6,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/pets.test.ts",
+      "passed": 52,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/polish-minigame-migration.test.ts",
+      "passed": 20,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/polish3-minigames.test.ts",
+      "passed": 9,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/politics.test.ts",
+      "passed": 28,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/primitives.test.ts",
+      "passed": 7,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/prison-escape.test.ts",
+      "passed": 7,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/prison-overhaul.test.ts",
+      "passed": 37,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/professional-policy.test.ts",
+      "passed": 4,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/project-years-callback.test.ts",
+      "passed": 9,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/rare-adult-story.test.ts",
+      "passed": 8,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/relationship-labels.test.ts",
+      "passed": 2,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/relationship-writing-overhaul.test.ts",
+      "passed": 36,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/relationships.test.ts",
+      "passed": 8,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/relocation.test.ts",
+      "passed": 29,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/rental-homes.test.ts",
+      "passed": 18,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/romance-overhaul.test.ts",
+      "passed": 24,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/romance-refinement.test.ts",
+      "passed": 17,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/royalty.test.ts",
+      "passed": 29,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/save-json.test.ts",
+      "passed": 3,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/scholarships.test.ts",
+      "passed": 45,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/school-withdrawal.test.ts",
+      "passed": 17,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/school-writing-overhaul.test.ts",
+      "passed": 24,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/school.test.ts",
+      "passed": 21,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/services.test.ts",
+      "passed": 38,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/social-criticism-cooldown.test.ts",
+      "passed": 12,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/social-criticism-copy.test.ts",
+      "passed": 15,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/social.test.ts",
+      "passed": 31,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/special-career-depth.test.ts",
+      "passed": 50,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/story-callbacks.test.ts",
+      "passed": 27,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/story-consequence-labels.test.ts",
+      "passed": 4,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/story-consequences-refinement.test.ts",
+      "passed": 20,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/story-editorial-context.test.ts",
+      "passed": 20,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/story-immediate.test.ts",
+      "passed": 27,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/story-lifecycle.test.ts",
+      "passed": 26,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/story-name-collisions.test.ts",
+      "passed": 8,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/story-participants.test.ts",
+      "passed": 6,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/study-course-records.test.ts",
+      "passed": 7,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/teen-home-stories.test.ts",
+      "passed": 16,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/teen-relationships.test.ts",
+      "passed": 37,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/travel.test.ts",
+      "passed": 29,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/university-admissions.test.ts",
+      "passed": 12,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/work-raises.test.ts",
+      "passed": 34,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/work-writing-overhaul.test.ts",
+      "passed": 24,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/workplace-stories.test.ts",
+      "passed": 18,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/workplaces.test.ts",
+      "passed": 29,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/game/writing-life-stories.test.ts",
+      "passed": 25,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/notifications/daily-reminders.test.ts",
+      "passed": 18,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/persistence/action-checkpoints.test.ts",
+      "passed": 8,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/persistence/archive-limits.test.ts",
+      "passed": 3,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/persistence/base64.test.ts",
+      "passed": 24,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/persistence/best-friends-migration.test.ts",
+      "passed": 15,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/persistence/birth-journal.test.ts",
+      "passed": 4,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/persistence/certified-json-cache.test.ts",
+      "passed": 2,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/persistence/compressed-lives.test.ts",
+      "passed": 3,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/persistence/creative-career-compatibility.test.ts",
+      "passed": 6,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/persistence/creative-career-currency.test.ts",
+      "passed": 1,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/persistence/crime-romance-integration.test.ts",
+      "passed": 19,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/persistence/cults-migration.test.ts",
+      "passed": 22,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/persistence/legal-story-flow.test.ts",
+      "passed": 1,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/persistence/leisure-archive.test.ts",
+      "passed": 1,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/persistence/life-preview.test.ts",
+      "passed": 4,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/persistence/lifestyle-archive.test.ts",
+      "passed": 2,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/persistence/lifestyle-journeys.test.ts",
+      "passed": 5,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/persistence/lifestyle-stage-compatibility.test.ts",
+      "passed": 7,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/persistence/medical-episodes.test.ts",
+      "passed": 3,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/persistence/native-arcade-archive.test.ts",
+      "passed": 2,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/persistence/native-hourly-checkpoints.test.ts",
+      "passed": 3,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/persistence/native-interview-checkpoints.test.ts",
+      "passed": 2,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/persistence/native-people-block-archive.test.ts",
+      "passed": 2,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/persistence/native-raise-archive.test.ts",
+      "passed": 2,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/persistence/native-school-archive.test.ts",
+      "passed": 2,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/persistence/native-teen-archive.test.ts",
+      "passed": 2,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/persistence/native-workplace-archive.test.ts",
+      "passed": 2,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/persistence/native-workplace-story-archive.test.ts",
+      "passed": 2,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/persistence/npc-moves-migration.test.ts",
+      "passed": 27,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/persistence/opening-migration.test.ts",
+      "passed": 3,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/persistence/ordinary-hobby-archive.test.ts",
+      "passed": 1,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/persistence/people-blocks.test.ts",
+      "passed": 22,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/persistence/person-support-migration.test.ts",
+      "passed": 4,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/persistence/pet-archive.test.ts",
+      "passed": 1,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/persistence/prison-overhaul.test.ts",
+      "passed": 2,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/persistence/production-gaps-migration.test.ts",
+      "passed": 9,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/persistence/prospective-gameplay-migration.test.ts",
+      "passed": 4,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/persistence/refinement-compatibility.test.ts",
+      "passed": 19,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/persistence/refinement-seeded-journeys.test.ts",
+      "passed": 5,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/persistence/repository.test.ts",
+      "passed": 9,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/persistence/responsive-archive.test.ts",
+      "passed": 1,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/persistence/restored-action-cache.test.ts",
+      "passed": 6,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/persistence/reviews.test.ts",
+      "passed": 6,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/persistence/stolen-vehicle-refinement.test.ts",
+      "passed": 7,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/persistence/story-immediate-save.test.ts",
+      "passed": 3,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/persistence/teen-relationship-compatibility.test.ts",
+      "passed": 2,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/persistence/time-machine.test.ts",
+      "passed": 8,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/persistence/tuple-checkpoints.test.ts",
+      "passed": 20,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/persistence/writing-cult-compatibility.test.ts",
+      "passed": 13,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/progression/connections.test.ts",
+      "passed": 4,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/progression/expanded-progress.test.ts",
+      "passed": 18,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/progression/financial-progress.test.ts",
+      "passed": 7,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/progression/progress.test.ts",
+      "passed": 5,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/purchases/access.test.ts",
+      "passed": 13,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/purchases/native.test.ts",
+      "passed": 6,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/purchases/service.test.ts",
+      "passed": 16,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/purchases/ui.test.tsx",
+      "passed": 10,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/reviews/native-review.test.ts",
+      "passed": 15,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/reviews/tracker.test.ts",
+      "passed": 26,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/state/annual-pacing-save.test.ts",
+      "passed": 1,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/state/cinematic-death-save.test.ts",
+      "passed": 1,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/state/conversation-save.test.ts",
+      "passed": 20,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "finalAffected"
+    },
+    {
+      "file": "tests/state/creationDraft.test.ts",
+      "passed": 25,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/state/creative-career-save.test.ts",
+      "passed": 4,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/state/education-milestone-save.test.ts",
+      "passed": 1,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/state/gameplay-feedback.test.ts",
+      "passed": 18,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/state/gameStore.test.ts",
+      "passed": 4,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/state/god-mode-access.test.ts",
+      "passed": 2,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/state/god-mode-hidden-runtime.test.ts",
+      "passed": 1,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/state/god-mode-save.test.ts",
+      "passed": 6,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/state/minigame-save.test.ts",
+      "passed": 5,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/state/npc-courtships-save.test.ts",
+      "passed": 1,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/state/npc-moves-save.test.ts",
+      "passed": 1,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/state/npc-relationships-save.test.ts",
+      "passed": 1,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/state/npc-separations-save.test.ts",
+      "passed": 1,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/state/preferencesStore.test.ts",
+      "passed": 17,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "finalAffected"
+    },
+    {
+      "file": "tests/state/prison-escape-save.test.ts",
+      "passed": 1,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/state/save-summaries.test.ts",
+      "passed": 2,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/adult-relationship-story-flow.test.tsx",
+      "passed": 2,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/annual-finances-flow.test.tsx",
+      "passed": 5,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/annual-finances-projection.test.ts",
+      "passed": 8,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/appearance-labels.test.tsx",
+      "passed": 4,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/asset-bank-save-flow.test.tsx",
+      "passed": 20,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/asset-features.test.tsx",
+      "passed": 9,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/astronaut-career-acceptance-flow.test.tsx",
+      "passed": 1,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/athlete-career-acceptance.test.tsx",
+      "passed": 1,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/audio-controller.test.ts",
+      "passed": 14,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/automatic-avatar-gallery.test.tsx",
+      "passed": 2,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/avatar-v2-integration.test.tsx",
+      "passed": 5,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/best-friends-flow.test.tsx",
+      "passed": 2,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/birth-journal-flow.test.tsx",
+      "passed": 3,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/business-flow.test.tsx",
+      "passed": 1,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/business-review-save-flow.test.tsx",
+      "passed": 10,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/campus-save-flow.test.tsx",
+      "passed": 1,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/career-flow.test.tsx",
+      "passed": 1,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/career-plan-context-flow.test.tsx",
+      "passed": 12,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/career-review-save-flow.test.tsx",
+      "passed": 6,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/catalogue-art.test.tsx",
+      "passed": 2,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/childhood-story-flow.test.tsx",
+      "passed": 1,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/cinematic-assets.test.ts",
+      "passed": 7,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/cinematic-transition.test.tsx",
+      "passed": 9,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/collapse-age-up-flow.test.tsx",
+      "passed": 2,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/contacts-flow.test.tsx",
+      "passed": 3,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/conversation-topic-save-flow.test.tsx",
+      "passed": 2,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/creative-career-ui.test.tsx",
+      "passed": 18,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/creator-studio-flow.test.tsx",
+      "passed": 2,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/credit-flow.test.tsx",
+      "passed": 2,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/cult-art.test.tsx",
+      "passed": 3,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/cult-flow.test.tsx",
+      "passed": 29,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/daily-reminder-settings.test.tsx",
+      "passed": 23,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/date-activity-save-flow.test.tsx",
+      "passed": 1,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/dead-relationships.test.tsx",
+      "passed": 4,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/death-summary-data.test.ts",
+      "passed": 6,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/death-summary-presentation.test.tsx",
+      "passed": 2,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/display-numbers.test.tsx",
+      "passed": 40,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/early-home-story-flow.test.tsx",
+      "passed": 1,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/education-choice-save-flow.test.tsx",
+      "passed": 21,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/education-recovery-flow.test.tsx",
+      "passed": 1,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/emigration-country-default.test.tsx",
+      "passed": 5,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/end-life-flow.test.tsx",
+      "passed": 2,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/event-artwork.test.tsx",
+      "passed": 35,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/event-modal-host.test.tsx",
+      "passed": 9,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/exercise-review-save-flow.test.tsx",
+      "passed": 4,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/extras-flow.test.tsx",
+      "passed": 1,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/family-dialog-save-flow.test.tsx",
+      "passed": 14,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/family-flow.test.tsx",
+      "passed": 1,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/family-tree-late-spouse.test.tsx",
+      "passed": 4,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/feedback-settings-flow.test.tsx",
+      "passed": 19,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/final-medical-capture.test.tsx",
+      "passed": 4,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/final-polish-capture.test.tsx",
+      "passed": 4,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/god-mode-flow.test.tsx",
+      "passed": 9,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/health-flow.test.tsx",
+      "passed": 2,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/health-review-save-flow.test.tsx",
+      "passed": 7,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/hobby-event-flow.test.tsx",
+      "passed": 4,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/hobby-introduction-save-flow.test.tsx",
+      "passed": 5,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/hourly-work-flow.test.tsx",
+      "passed": 2,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/interactions.test.tsx",
+      "passed": 11,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/interview-experience-save-flow.test.tsx",
+      "passed": 2,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/job-interview-flow.test.tsx",
+      "passed": 4,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/journal-projection.test.ts",
+      "passed": 6,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/legacy-flow.test.tsx",
+      "passed": 1,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/legal-flow.test.tsx",
+      "passed": 1,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/legal-review-save-flow.test.tsx",
+      "passed": 5,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/leisure-flow.test.tsx",
+      "passed": 1,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/life-context-story-flow.test.tsx",
+      "passed": 4,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/life-context.test.tsx",
+      "passed": 33,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/life-journal-reuse.test.tsx",
+      "passed": 1,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/life-milestone-motion.test.tsx",
+      "passed": 2,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/lifestyle-review-flow.test.tsx",
+      "passed": 2,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/lifetime-statistics-data.test.ts",
+      "passed": 6,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/lifetime-statistics-flow.test.tsx",
+      "passed": 3,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/medical-episode-flow.test.tsx",
+      "passed": 2,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/minigame-flow.test.tsx",
+      "passed": 20,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/minigame-native-worklets.test.ts",
+      "passed": 8,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/modal-window-layout.test.tsx",
+      "passed": 12,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/model-career-acceptance-flow.test.tsx",
+      "passed": 1,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/music-career-exit-flow.test.tsx",
+      "passed": 1,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/music-flow.test.tsx",
+      "passed": 1,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/new-life-review-flow.test.tsx",
+      "passed": 4,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/onboarding-accessibility-flow.test.tsx",
+      "passed": 2,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/onboarding-flow.test.tsx",
+      "passed": 6,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/onboarding-haptics-flow.test.tsx",
+      "passed": 3,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/ordinary-hobby-flow.test.tsx",
+      "passed": 1,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/ordinary-jobs.test.tsx",
+      "passed": 4,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/organised-crime-flow.test.tsx",
+      "passed": 3,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/page-layout.test.tsx",
+      "passed": 2,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/pension-flow.test.tsx",
+      "passed": 1,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/person-interactions-flow.test.tsx",
+      "passed": 7,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/person-profile-polish3-capture.test.tsx",
+      "passed": 2,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/person-profile-polish3.test.tsx",
+      "passed": 4,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/pets-flow.test.tsx",
+      "passed": 3,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/platform-branding.test.tsx",
+      "passed": 46,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/polish3-art.test.tsx",
+      "passed": 2,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/politics-flow.test.tsx",
+      "passed": 1,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/portrait-accessibility.test.tsx",
+      "passed": 2,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/portrait-plan.test.ts",
+      "passed": 9,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/prison-escape.test.tsx",
+      "passed": 5,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/product-polish-review.test.tsx",
+      "passed": 3,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/profile-overview-save-flow.test.tsx",
+      "passed": 9,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/profile-will-save-flow.test.tsx",
+      "passed": 10,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/progression-continuation-flow.test.tsx",
+      "passed": 6,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/project-years-callback-flow.test.tsx",
+      "passed": 1,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/property-options-flow.test.tsx",
+      "passed": 7,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/purchase-confirmation-save-flow.test.tsx",
+      "passed": 10,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/purchase-flow.test.tsx",
+      "passed": 1,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/recovery-routine-save-flow.test.tsx",
+      "passed": 10,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/relationship-flow.test.tsx",
+      "passed": 2,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/relationship-polish.test.tsx",
+      "passed": 4,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/relocation-flow.test.tsx",
+      "passed": 3,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/rental-save-flow.test.tsx",
+      "passed": 2,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/review-prompt.test.tsx",
+      "passed": 13,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/romance-actions-save-flow.test.tsx",
+      "passed": 1,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/royalty-flow.test.tsx",
+      "passed": 3,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/royalty-review-save-flow.test.tsx",
+      "passed": 5,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/saved-files-flow.test.tsx",
+      "passed": 9,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/saved-life-preview.test.tsx",
+      "passed": 3,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/scene-motion.test.tsx",
+      "passed": 5,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/scholarship-durable-save-flow.test.tsx",
+      "passed": 2,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/scholarship-flow.test.tsx",
+      "passed": 1,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/school-flow.test.tsx",
+      "passed": 2,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/school-plans.test.tsx",
+      "passed": 2,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/school-routine-save-flow.test.tsx",
+      "passed": 3,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/school-withdrawal-flow.test.tsx",
+      "passed": 2,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/service-context-flow.test.tsx",
+      "passed": 3,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/service-flow.test.tsx",
+      "passed": 3,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/settings-flow.test.tsx",
+      "passed": 2,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/simple-symbol-art.test.tsx",
+      "passed": 4,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/social-criticism-persistence-flow.test.tsx",
+      "passed": 4,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/social-flow.test.tsx",
+      "passed": 1,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/social-review-save-flow.test.tsx",
+      "passed": 11,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/special-career-depth-flow.test.tsx",
+      "passed": 1,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/special-career-exits-flow.test.tsx",
+      "passed": 5,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/startup-flow.test.tsx",
+      "passed": 1,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/store-review-action.test.tsx",
+      "passed": 3,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/story-callback-flow.test.tsx",
+      "passed": 2,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/story-consequence-labels-flow.test.tsx",
+      "passed": 1,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/story-name-collision-flow.test.tsx",
+      "passed": 1,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/student-loan-rate-flow.test.tsx",
+      "passed": 9,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/teen-relationship-save-flow.test.tsx",
+      "passed": 3,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/terminal-biography-data.test.ts",
+      "passed": 6,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/terminal-biography-flow.test.tsx",
+      "passed": 2,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/theme-contrast.test.tsx",
+      "passed": 4,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/time-machine-flow.test.tsx",
+      "passed": 2,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/travel-flow.test.tsx",
+      "passed": 2,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/travel-planning-polish.test.tsx",
+      "passed": 7,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/travel-review-save-flow.test.tsx",
+      "passed": 9,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/university-admissions-save-flow.test.tsx",
+      "passed": 6,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/welcome-recovery-flow.test.tsx",
+      "passed": 2,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/welcome-screen.test.tsx",
+      "passed": 10,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/will-flow.test.tsx",
+      "passed": 1,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/work-routine-save-flow.test.tsx",
+      "passed": 8,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/workplace-flow.test.tsx",
+      "passed": 4,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    },
+    {
+      "file": "tests/ui/workplace-story-flow.test.tsx",
+      "passed": 3,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "failureMessage": null,
+      "provenance": "full"
+    }
+  ]
+}

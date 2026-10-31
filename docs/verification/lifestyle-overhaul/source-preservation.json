@@ -1,0 +1,43 @@
+{
+  "baseline": "2d602ba9641960e9d965765ade9ed9daa6a780f3",
+  "sourceCommit": "f5f2d17b4dd545250b6de7af4a070843ab89dd51",
+  "unchangedPackageAccessPurchasePluginFiles": true,
+  "unexpectedChanges": [],
+  "originalAssetAndFixtureFiles": 1300,
+  "originalFilesChanged": [],
+  "historicalCapture": {
+    "producerCommit": "fdfd7a5ff69583a68a1cdb1c2fd2a7aea028fcb1",
+    "scope": "Genuine first-stage code, explicitly funded unit fixtures. Expected complete outcomes were computed only by that frozen implementation. Not natural gameplay journeys.",
+    "fileSha256": "16db6bc4d24b518fe3f5a6abbd220a1eff8b2c40ed72e7532341da85ff6411c8",
+    "cases": [
+      {
+        "name": "existing-v1-boat-trip",
+        "outcomeSha256": "2de68417b7adff3104bb562b8d07ddfc8a11c7075537aad7899173f4a4303d0c"
+      },
+      {
+        "name": "existing-v1-pet-training",
+        "outcomeSha256": "c164450489430462c02c6754faa7fd776317b978bd4d758277e1c0bcd92c71b1"
+      },
+      {
+        "name": "saved-property-story-fix",
+        "outcomeSha256": "2e8c999941fe6f31a6c9094ab33c7278b9cee2fdb74c39868032bdcbf0cb8016"
+      },
+      {
+        "name": "saved-property-story-later",
+        "outcomeSha256": "057c8b7de0066b2ec70586235eff418d896c03b4fc0109a6bbd33378a3c4b9c7"
+      },
+      {
+        "name": "saved-hobby-story-cut",
+        "outcomeSha256": "2068b7564e76d5819834f6fa633570b8b8a2b7acdd789000e10e4623809c68e6"
+      },
+      {
+        "name": "saved-hobby-story-keep",
+        "outcomeSha256": "9f4cabbf5b72ad8282be3b9f50baeabe56610f652b3db32955eebbc0b1136ec5"
+      },
+      {
+        "name": "existing-v1-project-work",
+        "outcomeSha256": "c486d467db51ad9acd1d060db14cd0e6a855446f34135c2d88e9e9e2ab274640"
+      }
+    ]
+  }
+}

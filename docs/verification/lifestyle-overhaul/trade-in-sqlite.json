@@ -1,0 +1,27 @@
+{
+  "scope": "Explicitly funded unit financial scenario using genuine graduate world, actual commands and real on-disk WAL SQLite. No natural journey claim.",
+  "passed": true,
+  "driverSha256": "d1053fdb75ac9779b6ef8dd34181602c86dd0c8122cfc9043769bd837f1711c1",
+  "inputSha256": "ed1b768f11060b133272a8ffb3b6090eb8dbed488bd1395510658ccfd85cdf44",
+  "outcomeSha256": "16275a10f51b4c4a53f5de842cf39e24cb9752d35b256da675ff5dc8bb529447",
+  "actualCashMinor": {
+    "before": "1003846000",
+    "netSale": "605880",
+    "replacement": "3000000",
+    "after": "1001451880"
+  },
+  "assertions": [
+    "actual same original title sold",
+    "exact net sale minus replacement payment",
+    "one actually owned replacement",
+    "replacement requires its own activity review",
+    "stale quote rejected",
+    "archive round-trip exact",
+    "failed receipt preserves all eight tables",
+    "cold failure recovery",
+    "retry commits once",
+    "duplicate receipt idempotent",
+    "cold successful outcome exact",
+    "old title cannot be traded twice"
+  ]
+}

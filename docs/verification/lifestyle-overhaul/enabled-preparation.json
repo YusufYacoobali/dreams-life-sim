@@ -1,0 +1,214 @@
+{
+  "scope": "Actual explicit lifestyle enable and result acknowledgement commands from published ages50/70/90, no active new lifestyle histories or patched values.",
+  "originInputSha256": "a6c3856c079ad07a4dfc47db44269022c68b137befbdc1f69b7672dd2d3233cb",
+  "outputSha256": "11b0a361c2a27dd480139aa6db64cc1c9658180f20dba8f02540298bfcb85d3c",
+  "snapshots": [
+    {
+      "summary": {
+        "age": 50,
+        "revision": 189,
+        "date": {
+          "year": 2076,
+          "month": 10,
+          "day": 24
+        },
+        "people": 20,
+        "ledgerRows": 21867,
+        "journalRows": 669,
+        "children": 1,
+        "assets": 1,
+        "socialAccounts": 2,
+        "sha256": "e974a5db7254552f90d82d2e51e60eb5a6630b9c0d2d04ba0697ce0cbc0ba537",
+        "originSha256": "dde6af767d0e6997f603d135480a50341f6e7ca25a0d58ab7f74df283c84bbf1"
+      },
+      "preparationCommands": [
+        {
+          "type": "enable-lifestyle"
+        },
+        {
+          "type": "acknowledge",
+          "resultId": "action_187"
+        }
+      ],
+      "preparationOutcome": {
+        "actorId": "person_player",
+        "date": {
+          "year": 2076,
+          "month": 10,
+          "day": 24
+        },
+        "random": {
+          "events": 3873915976,
+          "npcs": 1367100821,
+          "economy": 4133302350,
+          "outcomes": 3775633115
+        },
+        "cash": [
+          {
+            "currency": "USD",
+            "cash": {
+              "$dreamsBigInt": "182621030"
+            }
+          }
+        ],
+        "addedPeople": 0,
+        "newLedgerRows": [],
+        "lifestyle": {
+          "version": 1,
+          "enabled": {
+            "year": 2076,
+            "month": 10,
+            "day": 24
+          },
+          "licences": [],
+          "applications": [],
+          "tenancies": [],
+          "records": [],
+          "projects": [],
+          "offers": []
+        },
+        "newAssets": [],
+        "newPets": [],
+        "newHobbies": []
+      }
+    },
+    {
+      "summary": {
+        "age": 70,
+        "revision": 262,
+        "date": {
+          "year": 2096,
+          "month": 10,
+          "day": 24
+        },
+        "people": 22,
+        "ledgerRows": 36636,
+        "journalRows": 984,
+        "children": 1,
+        "assets": 1,
+        "socialAccounts": 2,
+        "sha256": "12d68b156b3fac857fcd6727e8f928e872d45bfde86f41a7fe29dd1042312a1a",
+        "originSha256": "1add15b0e579a0c2c1e26a212fa6b8959c27486cfb98771be41f4456f340284b"
+      },
+      "preparationCommands": [
+        {
+          "type": "enable-lifestyle"
+        },
+        {
+          "type": "acknowledge",
+          "resultId": "action_260"
+        }
+      ],
+      "preparationOutcome": {
+        "actorId": "person_player",
+        "date": {
+          "year": 2096,
+          "month": 10,
+          "day": 24
+        },
+        "random": {
+          "events": 1090808508,
+          "npcs": 1943416925,
+          "economy": 700462494,
+          "outcomes": 2742253545
+        },
+        "cash": [
+          {
+            "currency": "USD",
+            "cash": {
+              "$dreamsBigInt": "296307939"
+            }
+          }
+        ],
+        "addedPeople": 0,
+        "newLedgerRows": [],
+        "lifestyle": {
+          "version": 1,
+          "enabled": {
+            "year": 2096,
+            "month": 10,
+            "day": 24
+          },
+          "licences": [],
+          "applications": [],
+          "tenancies": [],
+          "records": [],
+          "projects": [],
+          "offers": []
+        },
+        "newAssets": [],
+        "newPets": [],
+        "newHobbies": []
+      }
+    },
+    {
+      "summary": {
+        "age": 90,
+        "revision": 344,
+        "date": {
+          "year": 2116,
+          "month": 10,
+          "day": 24
+        },
+        "people": 23,
+        "ledgerRows": 47204,
+        "journalRows": 1241,
+        "children": 1,
+        "assets": 1,
+        "socialAccounts": 2,
+        "sha256": "4506787ad37ed50207e63ecc812cdd1270905719889fe5ac943c9b172b3b402a",
+        "originSha256": "8b6090ed2836d9578a16be55a3214c8c056364a31cccb705c4a3f891b6d4b897"
+      },
+      "preparationCommands": [
+        {
+          "type": "enable-lifestyle"
+        },
+        {
+          "type": "acknowledge",
+          "resultId": "action_342"
+        }
+      ],
+      "preparationOutcome": {
+        "actorId": "person_player",
+        "date": {
+          "year": 2116,
+          "month": 10,
+          "day": 24
+        },
+        "random": {
+          "events": 139266853,
+          "npcs": 221508761,
+          "economy": 1562589934,
+          "outcomes": 3732263379
+        },
+        "cash": [
+          {
+            "currency": "USD",
+            "cash": {
+              "$dreamsBigInt": "428010582"
+            }
+          }
+        ],
+        "addedPeople": 0,
+        "newLedgerRows": [],
+        "lifestyle": {
+          "version": 1,
+          "enabled": {
+            "year": 2116,
+            "month": 10,
+            "day": 24
+          },
+          "licences": [],
+          "applications": [],
+          "tenancies": [],
+          "records": [],
+          "projects": [],
+          "offers": []
+        },
+        "newAssets": [],
+        "newPets": [],
+        "newHobbies": []
+      }
+    }
+  ]
+}

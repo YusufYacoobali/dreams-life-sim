@@ -1,0 +1,104 @@
+{
+  "baseline": "2d602ba9641960e9d965765ade9ed9daa6a780f3",
+  "sourceCommit": "f5f2d17b4dd545250b6de7af4a070843ab89dd51",
+  "command": "npx expo export --platform all --max-workers 1 --source-maps",
+  "scope": "Production Hermes bundle source inclusion; installed-device acceptance unverified",
+  "runtimeSources": {
+    "app/(game)/(tabs)/assets.tsx": "b1bbc8c48bdc07b19731aa5dbada0b00346385a29a215d0314317edfdaca6cbe",
+    "app/(game)/asset/[id].tsx": "054fce4b471c3da8590e5c63023ae2ab46b03c334137dc4e55350e65844de6e3",
+    "app/(game)/entertainment.tsx": "c7f2badb21198a887dbc2ce1421a5019a15f8c70bbaffd8eae9b0dc9c9d7bc78",
+    "app/(game)/hobbies.tsx": "1cca4d8bd66cd9a227141508935c57ad167133a7c23eddfe0d11686ff77c1506",
+    "app/(game)/pet/[id].tsx": "0d3f53936e1a2f7c4e32042c9f0f9e8f20f39f73a456e77d1abc3dc7ead9e20a",
+    "app/(game)/pets.tsx": "011615e2120fdc8aba4e680b8dc978b2d5ae3ad3d526398c6708debe3d695b71",
+    "src/assets/CatalogArt.tsx": "61f4aa05695837b0f0c34b41a1a21fc5b4ea31e7b75d76f64268323a831772de",
+    "src/assets/CompanionArt.tsx": "5fc0026cf830aa1f5376c24a1195a17f674a3075412b7aa2a63633a453baa348",
+    "src/assets/HobbyArt.tsx": "ccd6c46ccaa982f28103c653a25de54e0970694c531eeb81d0d991f7af22251d",
+    "src/assets/LifestylePetArt.tsx": "da280d5a4282aedc6038414bcb49abc5ad4dad37add95d7b036caea1db5ff59d",
+    "src/assets/LifestyleSymbol.tsx": "d343f50c61d3467872fe012907f0064a3597bf6dcb8546bf9d0ca931558c6610",
+    "src/assets/OutingArt.tsx": "401a58e74329db8f7c79792ca8efeae2b38ae4a10eaff7a5375661f28edae42b",
+    "src/assets/catalogueLayout.ts": "78eba2e928569b2a4294b97c1052ae4e39161ece17e03d877b8f04fc4d78fdab",
+    "src/game/choiceAvailability.ts": "e669ef0457daf633c2d550a8fcea836ffd83df5db2500c2c25a8a3347ad2b1d4",
+    "src/game/content/assets.ts": "99f4c895f603a6a28322ba47c5287d2b03cf5ce7326afd20f1f966803754f16b",
+    "src/game/content/hobbyEvents.ts": "a99f83646f7b4d205f5808e3819b19d234e51fbda79e5208600d1806128217db",
+    "src/game/content/leisure.ts": "78d92ac58a4f523352bbced5fb9d36b1c30226b350ba9dac924a727a5dbe0159",
+    "src/game/content/lifestyleEvents.ts": "bd09017c1c9becba3a094ec2d6fbe25208171fe5a84c3aa326f649733ca0f741",
+    "src/game/content/pets.ts": "4200da32e2047feac3fd68506583db7a314468c61447b94c2330d21b91f7b116",
+    "src/game/createLife.ts": "e67877258d008497ca2a53aeeed7f1ddc4de41e1c58cb7ce6dd27fffe9dc958b",
+    "src/game/engine.ts": "8b8d1b9f36c605e7b3ced113ddc0b574164ec22a6238c8f627db95d442dd543a",
+    "src/game/model.ts": "76a5b5fca6945a6e15cb59a234abe7399d740abd5ce005d3de0222b0e06da05e",
+    "src/game/runtime.ts": "2e4300eabbb71f828e55a6ec34e4efbbe18942e792d611a404370bf6b20c062e",
+    "src/game/systems/assets.ts": "38619b1910400b659f2a53354d0e08d8d070f785ff325d539fe1186f4f711fbc",
+    "src/game/systems/hobbyAccomplishments.ts": "56c6fa7716c90377a4b367f6e01de19d70057d89cd00e32ff5f476fbb6cbc868",
+    "src/game/systems/hobbyEvents.ts": "e94a2348d27b622a02fea045185f41678e66def1eac16e43e46ab749bedfd9f6",
+    "src/game/systems/households.ts": "2e8e4580e02d4e78e3453fe02f8bd1bce91589a63f3a6b4479e3b7f99aa68943",
+    "src/game/systems/landlordState.ts": "f363bc9495a71acded845313385df4d9612abd2a921555a255b84893aaa66ca7",
+    "src/game/systems/landlordTenancies.ts": "bfd984087ec6e36ff3a0e4e63a5fed23ad5084ba66bd0887e82475cc5294d346",
+    "src/game/systems/legal.ts": "051725d127ac9a49fdb8b26050f79256cc57324fb214c5b807d8e1b77ef106b1",
+    "src/game/systems/leisure.ts": "642bd197ee66a1a7f8f977ee1763519c13aaec569aad2487db546d78f9b101ba",
+    "src/game/systems/leisureValidation.ts": "df0b40d7cfed65ba68f325eea9de111552b71cbf3708355b493f8428939a58d8",
+    "src/game/systems/lifestyleCommon.ts": "4417283e4e5bf4f73e8ddd4be558d04ba58774e7b8979590f6afbe556494eab9",
+    "src/game/systems/lifestyleSchemas.ts": "29537bf47f2d0e73ed2c24e1ab46ed689bd5d63f8901a5aa9a990e62767dccfc",
+    "src/game/systems/lifestyleStories.ts": "bcb08aaa4dde73d8da0e99a722232321b2747ded0ea62268a1d468d3cb14b6f9",
+    "src/game/systems/lifestyleValidation.ts": "400f7a0fedd1178923c67a936b5b72e40ca700f42bb989ea77045cad03fe1da0",
+    "src/game/systems/petLifestyleState.ts": "348b603578491abc71728dcd48c72fa28adadab5fc05c56e946e15b2f6f20a0d",
+    "src/game/systems/petSchemas.ts": "ae1c02ae26f1d2e3c6878151ecf02710ad53c3d18131946f55984265399d9b83",
+    "src/game/systems/petTraining.ts": "c39335195bd6aeceff9e8a1fe9081ad497ea700e4088f5c03e0fbc4558418a9b",
+    "src/game/systems/petValidation.ts": "2d5c2034bf76743e386dc94782570173953cd9ce3e912560d655b97d6add3600",
+    "src/game/systems/pets.ts": "84c4eab29d5f9cddeaad5eece430825d8765d5e7e548bd3884f81de017838646",
+    "src/game/systems/propertyAmenities.ts": "811db93881cad0e2b37b296d49bbdc922f5c2445329b47bd26fd7365659447c6",
+    "src/game/systems/schemas.ts": "d8b9f4903e7cb7e5165e60880c857fcc4a5648a0ae0d27299880083f20e8333a",
+    "src/game/systems/vehicleActivities.ts": "3ea60ee67fe6992dd7048342be23c89ae3e364bd2e3ed24dcd8a34792ea2daef",
+    "src/game/systems/vehicleLicences.ts": "0461ac7bebd90d41cee20e35cca78e1b13447b41a45207e907469510a5ea5c65",
+    "src/persistence/archive.ts": "b863afd14f593e292f87dd359b87be3085378741411dabc7b403f58b8236832d",
+    "src/persistence/repository.ts": "84d6c2442da7ee5624b2128ca1e481726b68d7c6027e92c95b38833e7e51408d",
+    "src/ui/AssetCatalogue.tsx": "4f22547c08ba1e6c4c7d8029249ca47d50eb5ff330cca1cc0b9dd6fbf704b8e1",
+    "src/ui/AssetFeatures.tsx": "8d2553db45abaff1f2065369033b7131ce91d39bb5e750d76ec5e92b2f73baeb",
+    "src/ui/HobbyLifestyle.tsx": "69bd2f9b20c293d1aa94e7883a89bbdf31fe02b455cd4883b662c2b438b8951b",
+    "src/ui/HobbyRoutine.tsx": "2dd71f28fdb348c1d911ed65df1dabc784d934f97cbfe901558500da4867230d",
+    "src/ui/LifestyleReview.tsx": "44952573ae9898c8ba8edb22cb2f077ba5371ec9b3b760fb9984022acf48d46c",
+    "src/ui/PetLifestyle.tsx": "dc61aaec4e5d7ec6e8431418592972c48e0eefe5fde55127c1b116f0d31c2f24",
+    "src/ui/PropertyLifestyle.tsx": "67bb009aa53bb862bf447fb1a004c2796a8482775f97abe78f81a71054e68a40",
+    "src/ui/SharedLeisure.tsx": "4bba0e8a3eb7fc3bd2b5ba29882c2d77768caf72adbdf6031e02b2f2ef6e189e",
+    "src/ui/VehicleLifestyle.tsx": "ad7441e4b5d64699468bf38ff30396ad0ff6dbda98fe869198c110b0c8986e45",
+    "src/ui/assetFeatureData.ts": "a267984b8e513f06708603ee1c2298bd13cee96f4fea57a7a9dbc919a683eed1",
+    "src/ui/eventArtwork.tsx": "0d3da2007c8f4a2e36b60b860ef1d09b26efa06c506955c8b3156b01cb75ea0b"
+  },
+  "platforms": [
+    {
+      "platform": "android",
+      "file": "_expo/static/js/android/entry-909e116abdf63ea0c28005de8bc06efc.hbc",
+      "bytes": 9850256,
+      "sha256": "935e3242d9f793f7c4caea138d75818317773870d3ff3131968733daaceba6b6",
+      "hermesMagic": "c61fbc03c103191f",
+      "missing": [],
+      "mismatched": []
+    },
+    {
+      "platform": "ios",
+      "file": "_expo/static/js/ios/entry-e583e2eadb62aeb22aa46a53232c0a84.hbc",
+      "bytes": 9669664,
+      "sha256": "d3909e789f9ddce2840352b2b26407b4585694f97c2566a7289d9f236f2fe87e",
+      "hermesMagic": "c61fbc03c103191f",
+      "missing": [],
+      "mismatched": []
+    }
+  ],
+  "generatedArtwork": [
+    {
+      "file": "assets/generated/catalogue-lifestyle-vehicles.png",
+      "bytes": 1810938,
+      "sha256": "ba8dce67fbb0d4cba0ccd0840569634f3806679732130fa77f05975f9242bff5",
+      "exportedFiles": [
+        "assets/cdb993fa4ff9211110b1343221108c4f"
+      ]
+    },
+    {
+      "file": "assets/generated/lifestyle-pets-atlas.png",
+      "bytes": 2359392,
+      "sha256": "eb08760080957697cf2e234f2ecc1f31b795fd2990875f7707e376368c86cc13",
+      "exportedFiles": [
+        "assets/2966f7506c24ab7026d6b04b98923657"
+      ]
+    }
+  ]
+}

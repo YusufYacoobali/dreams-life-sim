@@ -1,0 +1,2353 @@
+{
+  "scope": "Actual enable, modest cash home/kitchen, funded named tenancy/deposit, licence, used car/40-mile trip, dog adoption and paid writing routine commands from published ages50/70/90. No funds, dates, people, health or random streams patched. Routine has not yet attended a month at preparation.",
+  "originInputSha256": "a6c3856c079ad07a4dfc47db44269022c68b137befbdc1f69b7672dd2d3233cb",
+  "outputSha256": "9b40092db9535fd878a6a69dde81e173f1844c6198f344ddf7b1ae4bbbcc48fd",
+  "snapshots": [
+    {
+      "summary": {
+        "age": 50,
+        "revision": 211,
+        "date": {
+          "year": 2076,
+          "month": 10,
+          "day": 24
+        },
+        "people": 23,
+        "ledgerRows": 21874,
+        "journalRows": 679,
+        "children": 1,
+        "assets": 1,
+        "socialAccounts": 2,
+        "sha256": "e397fe998b2b2d9e7429a51270e95bd362a4461944cae0197ed0265bea907633",
+        "originSha256": "dde6af767d0e6997f603d135480a50341f6e7ca25a0d58ab7f74df283c84bbf1"
+      },
+      "preparationCommands": [
+        {
+          "type": "enable-lifestyle"
+        },
+        {
+          "type": "acknowledge",
+          "resultId": "action_187"
+        },
+        {
+          "type": "buy-asset",
+          "catalogId": "mobile-home",
+          "financing": "cash",
+          "depositBps": 10000,
+          "termMonths": 120,
+          "quotedPrice": {
+            "$dreamsBigInt": "10478720"
+          }
+        },
+        {
+          "type": "acknowledge",
+          "resultId": "action_189"
+        },
+        {
+          "type": "enable-property-management",
+          "assetId": "asset_189"
+        },
+        {
+          "type": "acknowledge",
+          "resultId": "action_191"
+        },
+        {
+          "type": "install-amenity",
+          "assetId": "asset_189",
+          "amenity": "kitchen",
+          "quotedCost": {
+            "$dreamsBigInt": "366755"
+          }
+        },
+        {
+          "type": "acknowledge",
+          "resultId": "action_193"
+        },
+        {
+          "type": "find-tenants",
+          "assetId": "asset_189",
+          "quotedRent": {
+            "$dreamsBigInt": "53127"
+          }
+        },
+        {
+          "type": "acknowledge",
+          "resultId": "action_195"
+        },
+        {
+          "type": "review-tenant",
+          "applicationId": "application_195_0",
+          "action": "accept",
+          "quotedDeposit": {
+            "$dreamsBigInt": "53127"
+          }
+        },
+        {
+          "type": "acknowledge",
+          "resultId": "action_197"
+        },
+        {
+          "type": "take-licence-test",
+          "kind": "road",
+          "answers": [
+            1,
+            2,
+            0
+          ],
+          "quotedFee": {
+            "$dreamsBigInt": "800"
+          }
+        },
+        {
+          "type": "acknowledge",
+          "resultId": "action_199"
+        },
+        {
+          "type": "buy-asset",
+          "catalogId": "used-compact",
+          "financing": "cash",
+          "depositBps": 10000,
+          "termMonths": 120,
+          "quotedPrice": {
+            "$dreamsBigInt": "720000"
+          }
+        },
+        {
+          "type": "acknowledge",
+          "resultId": "action_201"
+        },
+        {
+          "type": "enable-vehicle-activities",
+          "assetId": "asset_201"
+        },
+        {
+          "type": "acknowledge",
+          "resultId": "action_203"
+        },
+        {
+          "type": "vehicle-activity",
+          "assetId": "asset_201",
+          "activity": "drive",
+          "contactId": null,
+          "quotedCost": {
+            "$dreamsBigInt": "720"
+          }
+        },
+        {
+          "type": "acknowledge",
+          "resultId": "action_205"
+        },
+        {
+          "type": "adopt-pet",
+          "offerId": "buddy",
+          "name": "Buddy",
+          "reviewedOwnerId": "person_player",
+          "quotedFee": {
+            "$dreamsBigInt": "40000"
+          }
+        },
+        {
+          "type": "acknowledge",
+          "resultId": "action_207"
+        },
+        {
+          "type": "hobby-plan",
+          "kind": "writing",
+          "mode": "community",
+          "reviewedPayerId": "person_player",
+          "quotedMonthlyFee": {
+            "$dreamsBigInt": "400"
+          }
+        },
+        {
+          "type": "acknowledge",
+          "resultId": "action_209"
+        }
+      ],
+      "preparationOutcome": {
+        "actorId": "person_player",
+        "date": {
+          "year": 2076,
+          "month": 10,
+          "day": 24
+        },
+        "random": {
+          "events": 3873915976,
+          "npcs": 3127149137,
+          "economy": 4133302350,
+          "outcomes": 680395962
+        },
+        "cash": [
+          {
+            "currency": "USD",
+            "cash": {
+              "$dreamsBigInt": "170804461"
+            }
+          }
+        ],
+        "addedPeople": 3,
+        "newLedgerRows": [
+          {
+            "id": "txn_189_21867",
+            "personId": "person_player",
+            "accountId": "account_person_player",
+            "liabilityId": null,
+            "year": 2076,
+            "month": 10,
+            "currency": "USD",
+            "cashDelta": {
+              "$dreamsBigInt": "-10688294"
+            },
+            "debtDelta": {
+              "$dreamsBigInt": "0"
+            },
+            "category": "purchase",
+            "description": "Purchased Mobile Home"
+          },
+          {
+            "id": "txn_193_21868",
+            "personId": "person_player",
+            "accountId": "account_person_player",
+            "liabilityId": null,
+            "year": 2076,
+            "month": 10,
+            "currency": "USD",
+            "cashDelta": {
+              "$dreamsBigInt": "-366755"
+            },
+            "debtDelta": {
+              "$dreamsBigInt": "0"
+            },
+            "category": "lifestyle-cost",
+            "description": "Installed kitchen"
+          },
+          {
+            "id": "txn_197_21869",
+            "personId": "person_npc_195_20",
+            "accountId": "account_person_npc_195_20",
+            "liabilityId": null,
+            "year": 2076,
+            "month": 10,
+            "currency": "USD",
+            "cashDelta": {
+              "$dreamsBigInt": "-53127"
+            },
+            "debtDelta": {
+              "$dreamsBigInt": "0"
+            },
+            "category": "lifestyle-deposit",
+            "description": "Tenancy deposit held in escrow"
+          },
+          {
+            "id": "txn_199_21870",
+            "personId": "person_player",
+            "accountId": "account_person_player",
+            "liabilityId": null,
+            "year": 2076,
+            "month": 10,
+            "currency": "USD",
+            "cashDelta": {
+              "$dreamsBigInt": "-800"
+            },
+            "debtDelta": {
+              "$dreamsBigInt": "0"
+            },
+            "category": "lifestyle-cost",
+            "description": "Game road licence test"
+          },
+          {
+            "id": "txn_201_21871",
+            "personId": "person_player",
+            "accountId": "account_person_player",
+            "liabilityId": null,
+            "year": 2076,
+            "month": 10,
+            "currency": "USD",
+            "cashDelta": {
+              "$dreamsBigInt": "-720000"
+            },
+            "debtDelta": {
+              "$dreamsBigInt": "0"
+            },
+            "category": "purchase",
+            "description": "Purchased Used Compact"
+          },
+          {
+            "id": "txn_205_21872",
+            "personId": "person_player",
+            "accountId": "account_person_player",
+            "liabilityId": null,
+            "year": 2076,
+            "month": 10,
+            "currency": "USD",
+            "cashDelta": {
+              "$dreamsBigInt": "-720"
+            },
+            "debtDelta": {
+              "$dreamsBigInt": "0"
+            },
+            "category": "lifestyle-cost",
+            "description": "Vehicle drive"
+          },
+          {
+            "id": "txn_207_21873",
+            "personId": "person_player",
+            "accountId": "account_person_player",
+            "liabilityId": null,
+            "year": 2076,
+            "month": 10,
+            "currency": "USD",
+            "cashDelta": {
+              "$dreamsBigInt": "-40000"
+            },
+            "debtDelta": {
+              "$dreamsBigInt": "0"
+            },
+            "category": "pet-adoption",
+            "description": "Adopted Buddy"
+          }
+        ],
+        "lifestyle": {
+          "version": 1,
+          "enabled": {
+            "year": 2076,
+            "month": 10,
+            "day": 24
+          },
+          "licences": [
+            {
+              "id": "licence_199",
+              "personId": "person_player",
+              "kind": "road",
+              "country": "US",
+              "date": {
+                "year": 2076,
+                "month": 10,
+                "day": 24
+              },
+              "answers": [
+                1,
+                2,
+                0
+              ],
+              "score": 3,
+              "passed": true,
+              "fee": {
+                "$dreamsBigInt": "800"
+              },
+              "paymentId": "txn_199_21870"
+            }
+          ],
+          "applications": [
+            {
+              "id": "application_195_0",
+              "assetId": "asset_189",
+              "landlordId": "person_player",
+              "tenantId": "person_npc_195_20",
+              "date": {
+                "year": 2076,
+                "month": 10,
+                "day": 24
+              },
+              "expiresMonth": 24924,
+              "reliability": 82,
+              "temperament": "private",
+              "funds": {
+                "$dreamsBigInt": "6000000"
+              },
+              "annualIncome": {
+                "$dreamsBigInt": "3750000"
+              },
+              "source": "New York Retail · retail",
+              "checked": false,
+              "status": "accepted"
+            },
+            {
+              "id": "application_195_1",
+              "assetId": "asset_189",
+              "landlordId": "person_player",
+              "tenantId": "person_npc_195_21",
+              "date": {
+                "year": 2076,
+                "month": 10,
+                "day": 24
+              },
+              "expiresMonth": 24924,
+              "reliability": 85,
+              "temperament": "considerate",
+              "funds": {
+                "$dreamsBigInt": "8800000"
+              },
+              "annualIncome": {
+                "$dreamsBigInt": "3400000"
+              },
+              "source": "New York Logistics · warehouse",
+              "checked": false,
+              "status": "expired"
+            },
+            {
+              "id": "application_195_2",
+              "assetId": "asset_189",
+              "landlordId": "person_player",
+              "tenantId": "person_npc_195_22",
+              "date": {
+                "year": 2076,
+                "month": 10,
+                "day": 24
+              },
+              "expiresMonth": 24924,
+              "reliability": 77,
+              "temperament": "considerate",
+              "funds": {
+                "$dreamsBigInt": "800000"
+              },
+              "annualIncome": {
+                "$dreamsBigInt": "4900000"
+              },
+              "source": "New York Facilities · cleaner",
+              "checked": false,
+              "status": "expired"
+            }
+          ],
+          "tenancies": [
+            {
+              "id": "tenancy_197",
+              "applicationId": "application_195_0",
+              "assetId": "asset_189",
+              "landlordId": "person_player",
+              "tenantId": "person_npc_195_20",
+              "currency": "USD",
+              "started": {
+                "year": 2076,
+                "month": 10,
+                "day": 24
+              },
+              "ended": null,
+              "endReason": null,
+              "rent": {
+                "$dreamsBigInt": "53127"
+              },
+              "deposit": {
+                "$dreamsBigInt": "53127"
+              },
+              "depositHeld": {
+                "$dreamsBigInt": "53127"
+              },
+              "depositPaymentId": "txn_197_21869",
+              "depositRefundId": null,
+              "depositRecipientId": null,
+              "lastMonth": 24921,
+              "arrears": {
+                "$dreamsBigInt": "0"
+              },
+              "reliability": 82,
+              "satisfaction": 60,
+              "maintenance": {
+                "$dreamsBigInt": "0"
+              },
+              "lastRentReviewMonth": 24921,
+              "noticeMonth": null,
+              "reviewMonth": null,
+              "reviewPaid": {
+                "$dreamsBigInt": "0"
+              },
+              "reviewPaymentId": null,
+              "periods": []
+            }
+          ],
+          "records": [
+            {
+              "id": "lifestyle_193_0",
+              "personId": "person_player",
+              "date": {
+                "year": 2076,
+                "month": 10,
+                "day": 24
+              },
+              "country": "US",
+              "city": "New York",
+              "currency": "USD",
+              "kind": "amenity",
+              "subjectId": "asset_189",
+              "participants": [
+                "person_player"
+              ],
+              "accepted": true,
+              "chance": null,
+              "roll": null,
+              "paid": {
+                "$dreamsBigInt": "366755"
+              },
+              "received": {
+                "$dreamsBigInt": "0"
+              },
+              "paymentIds": [
+                "txn_193_21868"
+              ],
+              "before": null,
+              "after": null,
+              "distance": 0,
+              "body": "I installed kitchen at Mobile Home. The estimated added value is less than the installation cost."
+            },
+            {
+              "id": "lifestyle_205_1",
+              "personId": "person_player",
+              "date": {
+                "year": 2076,
+                "month": 10,
+                "day": 24
+              },
+              "country": "US",
+              "city": "New York",
+              "currency": "USD",
+              "kind": "vehicle-drive",
+              "subjectId": "asset_201",
+              "participants": [
+                "person_player"
+              ],
+              "accepted": true,
+              "chance": 100,
+              "roll": 100,
+              "paid": {
+                "$dreamsBigInt": "720"
+              },
+              "received": {
+                "$dreamsBigInt": "0"
+              },
+              "paymentIds": [
+                "txn_205_21872"
+              ],
+              "before": 65,
+              "after": 64,
+              "distance": 40,
+              "outcomeChance": 6,
+              "outcomeRoll": 66,
+              "success": true,
+              "body": "I took Used Compact on a 40-mile drive. We returned to the same city. The distance and running cost are recorded."
+            }
+          ],
+          "projects": [],
+          "offers": []
+        },
+        "newAssets": [
+          {
+            "propertyLife": {
+              "version": 1,
+              "enabled": {
+                "year": 2076,
+                "month": 10,
+                "day": 24
+              },
+              "amenities": [
+                {
+                  "kind": "kitchen",
+                  "installed": {
+                    "year": 2076,
+                    "month": 10,
+                    "day": 24
+                  },
+                  "paid": {
+                    "$dreamsBigInt": "366755"
+                  },
+                  "addedValue": {
+                    "$dreamsBigInt": "146702"
+                  },
+                  "paymentId": "txn_193_21868"
+                }
+              ],
+              "lastGatheringMonth": null,
+              "lastInspectionMonth": null
+            },
+            "id": "asset_189",
+            "ownerId": "person_player",
+            "catalogId": "mobile-home",
+            "kind": "property",
+            "name": "Mobile Home",
+            "country": "US",
+            "city": "New York",
+            "currency": "USD",
+            "pricePaid": {
+              "$dreamsBigInt": "10478720"
+            },
+            "costBasis": {
+              "$dreamsBigInt": "11055049"
+            },
+            "value": {
+              "$dreamsBigInt": "10625422"
+            },
+            "condition": 70,
+            "ageMonths": 0,
+            "acquired": {
+              "year": 2076,
+              "month": 10,
+              "day": 24
+            },
+            "mortgageId": null,
+            "primaryHome": false,
+            "rental": "occupied",
+            "rentPerMonth": {
+              "$dreamsBigInt": "53127"
+            },
+            "upkeepBps": 110,
+            "insured": false,
+            "listing": null,
+            "provenance": [
+              "Purchased by Alex Walker in 2076",
+              "Installed kitchen in 2076"
+            ],
+            "ownershipSource": "purchase",
+            "titleSince": {
+              "year": 2076,
+              "month": 10,
+              "day": 24
+            }
+          },
+          {
+            "vehicleLife": {
+              "version": 1,
+              "usageVersion": 2,
+              "enabled": {
+                "year": 2076,
+                "month": 10,
+                "day": 24
+              },
+              "mileage": 68040,
+              "initialMileage": 68000,
+              "lastServiceMonth": null,
+              "appearance": "original",
+              "upgrades": [],
+              "lastUseMonth": 24921
+            },
+            "id": "asset_201",
+            "ownerId": "person_player",
+            "catalogId": "used-compact",
+            "kind": "vehicle",
+            "name": "Used Compact",
+            "country": "US",
+            "city": "New York",
+            "currency": "USD",
+            "pricePaid": {
+              "$dreamsBigInt": "720000"
+            },
+            "costBasis": {
+              "$dreamsBigInt": "720000"
+            },
+            "value": {
+              "$dreamsBigInt": "720000"
+            },
+            "condition": 64,
+            "ageMonths": 0,
+            "acquired": {
+              "year": 2076,
+              "month": 10,
+              "day": 24
+            },
+            "mortgageId": null,
+            "primaryHome": false,
+            "rental": "none",
+            "rentPerMonth": {
+              "$dreamsBigInt": "0"
+            },
+            "upkeepBps": 1200,
+            "insured": false,
+            "listing": null,
+            "provenance": [
+              "Purchased by Alex Walker in 2076",
+              "Vehicle activities enabled in 2076; listing mileage carried forward, prior use unknown."
+            ],
+            "ownershipSource": "purchase",
+            "titleSince": {
+              "year": 2076,
+              "month": 10,
+              "day": 24
+            }
+          }
+        ],
+        "newPets": [
+          {
+            "companion": {
+              "version": 1,
+              "enabled": {
+                "year": 2076,
+                "month": 10,
+                "day": 24
+              },
+              "healthVersion": 2,
+              "ageRelated": false,
+              "supportUntil": 24921,
+              "trait": "loyal",
+              "training": 0,
+              "tricks": [],
+              "condition": "well",
+              "recovery": 0,
+              "lastHealthMonth": 24921,
+              "preventionUntil": 24921,
+              "lastCompetitionYear": null
+            },
+            "pricingVersion": 1,
+            "id": "pet_207_0",
+            "species": "dog",
+            "offerId": "buddy",
+            "breed": "Golden Retriever",
+            "name": "Buddy",
+            "born": {
+              "year": 2075,
+              "month": 10,
+              "day": 24
+            },
+            "adopted": {
+              "year": 2076,
+              "month": 10,
+              "day": 24
+            },
+            "adoptedById": "person_player",
+            "originalOwnerId": "person_player",
+            "ownerId": "person_player",
+            "country": "US",
+            "city": "New York",
+            "status": "active",
+            "ended": null,
+            "endReason": null,
+            "endKind": null,
+            "lifespanMonths": 145,
+            "health": 90,
+            "happiness": 75,
+            "bonds": {
+              "person_player": 30
+            },
+            "temperament": "independent",
+            "illness": "none",
+            "recoveryMonths": 0,
+            "adoptionFee": {
+              "$dreamsBigInt": "40000"
+            },
+            "adoptionCurrency": "USD",
+            "adoptionTransactionId": "txn_207_21873",
+            "consent": {
+              "roll": 100,
+              "chance": 100
+            },
+            "lastMonth": 24921,
+            "unfundedMonths": 0,
+            "lastVetMonth": null,
+            "owners": [
+              {
+                "personId": "person_player",
+                "since": {
+                  "year": 2076,
+                  "month": 10,
+                  "day": 24
+                },
+                "ended": null
+              }
+            ],
+            "periods": [],
+            "moves": [],
+            "visits": []
+          }
+        ],
+        "newHobbies": [
+          {
+            "id": "hobby_person_player_writing",
+            "personId": "person_player",
+            "kind": "writing",
+            "proficiency": 0,
+            "plans": [
+              {
+                "id": "hobby_plan_209_0",
+                "payerId": "person_player",
+                "country": "US",
+                "city": "New York",
+                "currency": "USD",
+                "mode": "community",
+                "monthlyFee": {
+                  "$dreamsBigInt": "400"
+                },
+                "consent": {
+                  "strength": null,
+                  "chance": 100,
+                  "roll": 100,
+                  "accepted": true
+                },
+                "started": {
+                  "year": 2076,
+                  "month": 10,
+                  "day": 24
+                },
+                "ended": null,
+                "endReason": null,
+                "status": "active",
+                "lastMonth": 24921
+              }
+            ],
+            "practices": []
+          }
+        ]
+      }
+    },
+    {
+      "summary": {
+        "age": 70,
+        "revision": 284,
+        "date": {
+          "year": 2096,
+          "month": 10,
+          "day": 24
+        },
+        "people": 25,
+        "ledgerRows": 36643,
+        "journalRows": 994,
+        "children": 1,
+        "assets": 1,
+        "socialAccounts": 2,
+        "sha256": "b170bfcbc5b6b2f1edde559ed1b8fd11e1ee4984f479ab6f90cbd5fda6eb0c6b",
+        "originSha256": "1add15b0e579a0c2c1e26a212fa6b8959c27486cfb98771be41f4456f340284b"
+      },
+      "preparationCommands": [
+        {
+          "type": "enable-lifestyle"
+        },
+        {
+          "type": "acknowledge",
+          "resultId": "action_260"
+        },
+        {
+          "type": "buy-asset",
+          "catalogId": "mobile-home",
+          "financing": "cash",
+          "depositBps": 10000,
+          "termMonths": 120,
+          "quotedPrice": {
+            "$dreamsBigInt": "15254960"
+          }
+        },
+        {
+          "type": "acknowledge",
+          "resultId": "action_262"
+        },
+        {
+          "type": "enable-property-management",
+          "assetId": "asset_262"
+        },
+        {
+          "type": "acknowledge",
+          "resultId": "action_264"
+        },
+        {
+          "type": "install-amenity",
+          "assetId": "asset_262",
+          "amenity": "kitchen",
+          "quotedCost": {
+            "$dreamsBigInt": "533924"
+          }
+        },
+        {
+          "type": "acknowledge",
+          "resultId": "action_266"
+        },
+        {
+          "type": "find-tenants",
+          "assetId": "asset_262",
+          "quotedRent": {
+            "$dreamsBigInt": "77342"
+          }
+        },
+        {
+          "type": "acknowledge",
+          "resultId": "action_268"
+        },
+        {
+          "type": "review-tenant",
+          "applicationId": "application_268_0",
+          "action": "accept",
+          "quotedDeposit": {
+            "$dreamsBigInt": "77342"
+          }
+        },
+        {
+          "type": "acknowledge",
+          "resultId": "action_270"
+        },
+        {
+          "type": "take-licence-test",
+          "kind": "road",
+          "answers": [
+            1,
+            2,
+            0
+          ],
+          "quotedFee": {
+            "$dreamsBigInt": "800"
+          }
+        },
+        {
+          "type": "acknowledge",
+          "resultId": "action_272"
+        },
+        {
+          "type": "buy-asset",
+          "catalogId": "used-compact",
+          "financing": "cash",
+          "depositBps": 10000,
+          "termMonths": 120,
+          "quotedPrice": {
+            "$dreamsBigInt": "720000"
+          }
+        },
+        {
+          "type": "acknowledge",
+          "resultId": "action_274"
+        },
+        {
+          "type": "enable-vehicle-activities",
+          "assetId": "asset_274"
+        },
+        {
+          "type": "acknowledge",
+          "resultId": "action_276"
+        },
+        {
+          "type": "vehicle-activity",
+          "assetId": "asset_274",
+          "activity": "drive",
+          "contactId": null,
+          "quotedCost": {
+            "$dreamsBigInt": "720"
+          }
+        },
+        {
+          "type": "acknowledge",
+          "resultId": "action_278"
+        },
+        {
+          "type": "adopt-pet",
+          "offerId": "buddy",
+          "name": "Buddy",
+          "reviewedOwnerId": "person_player",
+          "quotedFee": {
+            "$dreamsBigInt": "40000"
+          }
+        },
+        {
+          "type": "acknowledge",
+          "resultId": "action_280"
+        },
+        {
+          "type": "hobby-plan",
+          "kind": "writing",
+          "mode": "community",
+          "reviewedPayerId": "person_player",
+          "quotedMonthlyFee": {
+            "$dreamsBigInt": "400"
+          }
+        },
+        {
+          "type": "acknowledge",
+          "resultId": "action_282"
+        }
+      ],
+      "preparationOutcome": {
+        "actorId": "person_player",
+        "date": {
+          "year": 2096,
+          "month": 10,
+          "day": 24
+        },
+        "random": {
+          "events": 1090808508,
+          "npcs": 1871899428,
+          "economy": 700462494,
+          "outcomes": 3941983688
+        },
+        "cash": [
+          {
+            "currency": "USD",
+            "cash": {
+              "$dreamsBigInt": "279452436"
+            }
+          }
+        ],
+        "addedPeople": 3,
+        "newLedgerRows": [
+          {
+            "id": "txn_262_36636",
+            "personId": "person_player",
+            "accountId": "account_person_player",
+            "liabilityId": null,
+            "year": 2096,
+            "month": 10,
+            "currency": "USD",
+            "cashDelta": {
+              "$dreamsBigInt": "-15560059"
+            },
+            "debtDelta": {
+              "$dreamsBigInt": "0"
+            },
+            "category": "purchase",
+            "description": "Purchased Mobile Home"
+          },
+          {
+            "id": "txn_266_36637",
+            "personId": "person_player",
+            "accountId": "account_person_player",
+            "liabilityId": null,
+            "year": 2096,
+            "month": 10,
+            "currency": "USD",
+            "cashDelta": {
+              "$dreamsBigInt": "-533924"
+            },
+            "debtDelta": {
+              "$dreamsBigInt": "0"
+            },
+            "category": "lifestyle-cost",
+            "description": "Installed kitchen"
+          },
+          {
+            "id": "txn_270_36638",
+            "personId": "person_npc_268_22",
+            "accountId": "account_person_npc_268_22",
+            "liabilityId": null,
+            "year": 2096,
+            "month": 10,
+            "currency": "USD",
+            "cashDelta": {
+              "$dreamsBigInt": "-77342"
+            },
+            "debtDelta": {
+              "$dreamsBigInt": "0"
+            },
+            "category": "lifestyle-deposit",
+            "description": "Tenancy deposit held in escrow"
+          },
+          {
+            "id": "txn_272_36639",
+            "personId": "person_player",
+            "accountId": "account_person_player",
+            "liabilityId": null,
+            "year": 2096,
+            "month": 10,
+            "currency": "USD",
+            "cashDelta": {
+              "$dreamsBigInt": "-800"
+            },
+            "debtDelta": {
+              "$dreamsBigInt": "0"
+            },
+            "category": "lifestyle-cost",
+            "description": "Game road licence test"
+          },
+          {
+            "id": "txn_274_36640",
+            "personId": "person_player",
+            "accountId": "account_person_player",
+            "liabilityId": null,
+            "year": 2096,
+            "month": 10,
+            "currency": "USD",
+            "cashDelta": {
+              "$dreamsBigInt": "-720000"
+            },
+            "debtDelta": {
+              "$dreamsBigInt": "0"
+            },
+            "category": "purchase",
+            "description": "Purchased Used Compact"
+          },
+          {
+            "id": "txn_278_36641",
+            "personId": "person_player",
+            "accountId": "account_person_player",
+            "liabilityId": null,
+            "year": 2096,
+            "month": 10,
+            "currency": "USD",
+            "cashDelta": {
+              "$dreamsBigInt": "-720"
+            },
+            "debtDelta": {
+              "$dreamsBigInt": "0"
+            },
+            "category": "lifestyle-cost",
+            "description": "Vehicle drive"
+          },
+          {
+            "id": "txn_280_36642",
+            "personId": "person_player",
+            "accountId": "account_person_player",
+            "liabilityId": null,
+            "year": 2096,
+            "month": 10,
+            "currency": "USD",
+            "cashDelta": {
+              "$dreamsBigInt": "-40000"
+            },
+            "debtDelta": {
+              "$dreamsBigInt": "0"
+            },
+            "category": "pet-adoption",
+            "description": "Adopted Buddy"
+          }
+        ],
+        "lifestyle": {
+          "version": 1,
+          "enabled": {
+            "year": 2096,
+            "month": 10,
+            "day": 24
+          },
+          "licences": [
+            {
+              "id": "licence_272",
+              "personId": "person_player",
+              "kind": "road",
+              "country": "US",
+              "date": {
+                "year": 2096,
+                "month": 10,
+                "day": 24
+              },
+              "answers": [
+                1,
+                2,
+                0
+              ],
+              "score": 3,
+              "passed": true,
+              "fee": {
+                "$dreamsBigInt": "800"
+              },
+              "paymentId": "txn_272_36639"
+            }
+          ],
+          "applications": [
+            {
+              "id": "application_268_0",
+              "assetId": "asset_262",
+              "landlordId": "person_player",
+              "tenantId": "person_npc_268_22",
+              "date": {
+                "year": 2096,
+                "month": 10,
+                "day": 24
+              },
+              "expiresMonth": 25164,
+              "reliability": 75,
+              "temperament": "considerate",
+              "funds": {
+                "$dreamsBigInt": "6800000"
+              },
+              "annualIncome": {
+                "$dreamsBigInt": "8750000"
+              },
+              "source": "New York Media · journalist",
+              "checked": false,
+              "status": "accepted"
+            },
+            {
+              "id": "application_268_1",
+              "assetId": "asset_262",
+              "landlordId": "person_player",
+              "tenantId": "person_npc_268_23",
+              "date": {
+                "year": 2096,
+                "month": 10,
+                "day": 24
+              },
+              "expiresMonth": 25164,
+              "reliability": 84,
+              "temperament": "considerate",
+              "funds": {
+                "$dreamsBigInt": "1200000"
+              },
+              "annualIncome": {
+                "$dreamsBigInt": "4500000"
+              },
+              "source": "New York Retail · retail",
+              "checked": false,
+              "status": "expired"
+            },
+            {
+              "id": "application_268_2",
+              "assetId": "asset_262",
+              "landlordId": "person_player",
+              "tenantId": "person_npc_268_24",
+              "date": {
+                "year": 2096,
+                "month": 10,
+                "day": 24
+              },
+              "expiresMonth": 25164,
+              "reliability": 69,
+              "temperament": "considerate",
+              "funds": {
+                "$dreamsBigInt": "7600000"
+              },
+              "annualIncome": {
+                "$dreamsBigInt": "3200000"
+              },
+              "source": "New York Hospitality · barista",
+              "checked": false,
+              "status": "expired"
+            }
+          ],
+          "tenancies": [
+            {
+              "id": "tenancy_270",
+              "applicationId": "application_268_0",
+              "assetId": "asset_262",
+              "landlordId": "person_player",
+              "tenantId": "person_npc_268_22",
+              "currency": "USD",
+              "started": {
+                "year": 2096,
+                "month": 10,
+                "day": 24
+              },
+              "ended": null,
+              "endReason": null,
+              "rent": {
+                "$dreamsBigInt": "77342"
+              },
+              "deposit": {
+                "$dreamsBigInt": "77342"
+              },
+              "depositHeld": {
+                "$dreamsBigInt": "77342"
+              },
+              "depositPaymentId": "txn_270_36638",
+              "depositRefundId": null,
+              "depositRecipientId": null,
+              "lastMonth": 25161,
+              "arrears": {
+                "$dreamsBigInt": "0"
+              },
+              "reliability": 75,
+              "satisfaction": 60,
+              "maintenance": {
+                "$dreamsBigInt": "0"
+              },
+              "lastRentReviewMonth": 25161,
+              "noticeMonth": null,
+              "reviewMonth": null,
+              "reviewPaid": {
+                "$dreamsBigInt": "0"
+              },
+              "reviewPaymentId": null,
+              "periods": []
+            }
+          ],
+          "records": [
+            {
+              "id": "lifestyle_266_0",
+              "personId": "person_player",
+              "date": {
+                "year": 2096,
+                "month": 10,
+                "day": 24
+              },
+              "country": "US",
+              "city": "New York",
+              "currency": "USD",
+              "kind": "amenity",
+              "subjectId": "asset_262",
+              "participants": [
+                "person_player"
+              ],
+              "accepted": true,
+              "chance": null,
+              "roll": null,
+              "paid": {
+                "$dreamsBigInt": "533924"
+              },
+              "received": {
+                "$dreamsBigInt": "0"
+              },
+              "paymentIds": [
+                "txn_266_36637"
+              ],
+              "before": null,
+              "after": null,
+              "distance": 0,
+              "body": "I installed kitchen at Mobile Home. The estimated added value is less than the installation cost."
+            },
+            {
+              "id": "lifestyle_278_1",
+              "personId": "person_player",
+              "date": {
+                "year": 2096,
+                "month": 10,
+                "day": 24
+              },
+              "country": "US",
+              "city": "New York",
+              "currency": "USD",
+              "kind": "vehicle-drive",
+              "subjectId": "asset_274",
+              "participants": [
+                "person_player"
+              ],
+              "accepted": true,
+              "chance": 100,
+              "roll": 100,
+              "paid": {
+                "$dreamsBigInt": "720"
+              },
+              "received": {
+                "$dreamsBigInt": "0"
+              },
+              "paymentIds": [
+                "txn_278_36641"
+              ],
+              "before": 65,
+              "after": 64,
+              "distance": 40,
+              "outcomeChance": 6,
+              "outcomeRoll": 58,
+              "success": true,
+              "body": "I took Used Compact on a 40-mile drive. We returned to the same city. The distance and running cost are recorded."
+            }
+          ],
+          "projects": [],
+          "offers": []
+        },
+        "newAssets": [
+          {
+            "propertyLife": {
+              "version": 1,
+              "enabled": {
+                "year": 2096,
+                "month": 10,
+                "day": 24
+              },
+              "amenities": [
+                {
+                  "kind": "kitchen",
+                  "installed": {
+                    "year": 2096,
+                    "month": 10,
+                    "day": 24
+                  },
+                  "paid": {
+                    "$dreamsBigInt": "533924"
+                  },
+                  "addedValue": {
+                    "$dreamsBigInt": "213569"
+                  },
+                  "paymentId": "txn_266_36637"
+                }
+              ],
+              "lastGatheringMonth": null,
+              "lastInspectionMonth": null
+            },
+            "id": "asset_262",
+            "ownerId": "person_player",
+            "catalogId": "mobile-home",
+            "kind": "property",
+            "name": "Mobile Home",
+            "country": "US",
+            "city": "New York",
+            "currency": "USD",
+            "pricePaid": {
+              "$dreamsBigInt": "15254960"
+            },
+            "costBasis": {
+              "$dreamsBigInt": "16093983"
+            },
+            "value": {
+              "$dreamsBigInt": "15468529"
+            },
+            "condition": 70,
+            "ageMonths": 0,
+            "acquired": {
+              "year": 2096,
+              "month": 10,
+              "day": 24
+            },
+            "mortgageId": null,
+            "primaryHome": false,
+            "rental": "occupied",
+            "rentPerMonth": {
+              "$dreamsBigInt": "77342"
+            },
+            "upkeepBps": 110,
+            "insured": false,
+            "listing": null,
+            "provenance": [
+              "Purchased by Alex Walker in 2096",
+              "Installed kitchen in 2096"
+            ],
+            "ownershipSource": "purchase",
+            "titleSince": {
+              "year": 2096,
+              "month": 10,
+              "day": 24
+            }
+          },
+          {
+            "vehicleLife": {
+              "version": 1,
+              "usageVersion": 2,
+              "enabled": {
+                "year": 2096,
+                "month": 10,
+                "day": 24
+              },
+              "mileage": 68040,
+              "initialMileage": 68000,
+              "lastServiceMonth": null,
+              "appearance": "original",
+              "upgrades": [],
+              "lastUseMonth": 25161
+            },
+            "id": "asset_274",
+            "ownerId": "person_player",
+            "catalogId": "used-compact",
+            "kind": "vehicle",
+            "name": "Used Compact",
+            "country": "US",
+            "city": "New York",
+            "currency": "USD",
+            "pricePaid": {
+              "$dreamsBigInt": "720000"
+            },
+            "costBasis": {
+              "$dreamsBigInt": "720000"
+            },
+            "value": {
+              "$dreamsBigInt": "720000"
+            },
+            "condition": 64,
+            "ageMonths": 0,
+            "acquired": {
+              "year": 2096,
+              "month": 10,
+              "day": 24
+            },
+            "mortgageId": null,
+            "primaryHome": false,
+            "rental": "none",
+            "rentPerMonth": {
+              "$dreamsBigInt": "0"
+            },
+            "upkeepBps": 1200,
+            "insured": false,
+            "listing": null,
+            "provenance": [
+              "Purchased by Alex Walker in 2096",
+              "Vehicle activities enabled in 2096; listing mileage carried forward, prior use unknown."
+            ],
+            "ownershipSource": "purchase",
+            "titleSince": {
+              "year": 2096,
+              "month": 10,
+              "day": 24
+            }
+          }
+        ],
+        "newPets": [
+          {
+            "companion": {
+              "version": 1,
+              "enabled": {
+                "year": 2096,
+                "month": 10,
+                "day": 24
+              },
+              "healthVersion": 2,
+              "ageRelated": false,
+              "supportUntil": 25161,
+              "trait": "loyal",
+              "training": 0,
+              "tricks": [],
+              "condition": "well",
+              "recovery": 0,
+              "lastHealthMonth": 25161,
+              "preventionUntil": 25161,
+              "lastCompetitionYear": null
+            },
+            "pricingVersion": 1,
+            "id": "pet_280_0",
+            "species": "dog",
+            "offerId": "buddy",
+            "breed": "Golden Retriever",
+            "name": "Buddy",
+            "born": {
+              "year": 2095,
+              "month": 10,
+              "day": 24
+            },
+            "adopted": {
+              "year": 2096,
+              "month": 10,
+              "day": 24
+            },
+            "adoptedById": "person_player",
+            "originalOwnerId": "person_player",
+            "ownerId": "person_player",
+            "country": "US",
+            "city": "New York",
+            "status": "active",
+            "ended": null,
+            "endReason": null,
+            "endKind": null,
+            "lifespanMonths": 159,
+            "health": 90,
+            "happiness": 75,
+            "bonds": {
+              "person_player": 30
+            },
+            "temperament": "independent",
+            "illness": "none",
+            "recoveryMonths": 0,
+            "adoptionFee": {
+              "$dreamsBigInt": "40000"
+            },
+            "adoptionCurrency": "USD",
+            "adoptionTransactionId": "txn_280_36642",
+            "consent": {
+              "roll": 100,
+              "chance": 100
+            },
+            "lastMonth": 25161,
+            "unfundedMonths": 0,
+            "lastVetMonth": null,
+            "owners": [
+              {
+                "personId": "person_player",
+                "since": {
+                  "year": 2096,
+                  "month": 10,
+                  "day": 24
+                },
+                "ended": null
+              }
+            ],
+            "periods": [],
+            "moves": [],
+            "visits": []
+          }
+        ],
+        "newHobbies": [
+          {
+            "id": "hobby_person_player_writing",
+            "personId": "person_player",
+            "kind": "writing",
+            "proficiency": 0,
+            "plans": [
+              {
+                "id": "hobby_plan_282_0",
+                "payerId": "person_player",
+                "country": "US",
+                "city": "New York",
+                "currency": "USD",
+                "mode": "community",
+                "monthlyFee": {
+                  "$dreamsBigInt": "400"
+                },
+                "consent": {
+                  "strength": null,
+                  "chance": 100,
+                  "roll": 100,
+                  "accepted": true
+                },
+                "started": {
+                  "year": 2096,
+                  "month": 10,
+                  "day": 24
+                },
+                "ended": null,
+                "endReason": null,
+                "status": "active",
+                "lastMonth": 25161
+              }
+            ],
+            "practices": []
+          }
+        ]
+      }
+    },
+    {
+      "summary": {
+        "age": 90,
+        "revision": 366,
+        "date": {
+          "year": 2116,
+          "month": 10,
+          "day": 24
+        },
+        "people": 26,
+        "ledgerRows": 47211,
+        "journalRows": 1251,
+        "children": 1,
+        "assets": 1,
+        "socialAccounts": 2,
+        "sha256": "324798872a972523e8c2bc6d41467196ee132ea724a110c6b5fddd5cc3d30839",
+        "originSha256": "8b6090ed2836d9578a16be55a3214c8c056364a31cccb705c4a3f891b6d4b897"
+      },
+      "preparationCommands": [
+        {
+          "type": "enable-lifestyle"
+        },
+        {
+          "type": "acknowledge",
+          "resultId": "action_342"
+        },
+        {
+          "type": "buy-asset",
+          "catalogId": "mobile-home",
+          "financing": "cash",
+          "depositBps": 10000,
+          "termMonths": 120,
+          "quotedPrice": {
+            "$dreamsBigInt": "16169440"
+          }
+        },
+        {
+          "type": "acknowledge",
+          "resultId": "action_344"
+        },
+        {
+          "type": "enable-property-management",
+          "assetId": "asset_344"
+        },
+        {
+          "type": "acknowledge",
+          "resultId": "action_346"
+        },
+        {
+          "type": "install-amenity",
+          "assetId": "asset_344",
+          "amenity": "kitchen",
+          "quotedCost": {
+            "$dreamsBigInt": "565930"
+          }
+        },
+        {
+          "type": "acknowledge",
+          "resultId": "action_348"
+        },
+        {
+          "type": "find-tenants",
+          "assetId": "asset_344",
+          "quotedRent": {
+            "$dreamsBigInt": "81979"
+          }
+        },
+        {
+          "type": "acknowledge",
+          "resultId": "action_350"
+        },
+        {
+          "type": "review-tenant",
+          "applicationId": "application_350_0",
+          "action": "accept",
+          "quotedDeposit": {
+            "$dreamsBigInt": "81979"
+          }
+        },
+        {
+          "type": "acknowledge",
+          "resultId": "action_352"
+        },
+        {
+          "type": "take-licence-test",
+          "kind": "road",
+          "answers": [
+            1,
+            2,
+            0
+          ],
+          "quotedFee": {
+            "$dreamsBigInt": "800"
+          }
+        },
+        {
+          "type": "acknowledge",
+          "resultId": "action_354"
+        },
+        {
+          "type": "buy-asset",
+          "catalogId": "used-compact",
+          "financing": "cash",
+          "depositBps": 10000,
+          "termMonths": 120,
+          "quotedPrice": {
+            "$dreamsBigInt": "720000"
+          }
+        },
+        {
+          "type": "acknowledge",
+          "resultId": "action_356"
+        },
+        {
+          "type": "enable-vehicle-activities",
+          "assetId": "asset_356"
+        },
+        {
+          "type": "acknowledge",
+          "resultId": "action_358"
+        },
+        {
+          "type": "vehicle-activity",
+          "assetId": "asset_356",
+          "activity": "drive",
+          "contactId": null,
+          "quotedCost": {
+            "$dreamsBigInt": "720"
+          }
+        },
+        {
+          "type": "acknowledge",
+          "resultId": "action_360"
+        },
+        {
+          "type": "adopt-pet",
+          "offerId": "buddy",
+          "name": "Buddy",
+          "reviewedOwnerId": "person_player",
+          "quotedFee": {
+            "$dreamsBigInt": "40000"
+          }
+        },
+        {
+          "type": "acknowledge",
+          "resultId": "action_362"
+        },
+        {
+          "type": "hobby-plan",
+          "kind": "writing",
+          "mode": "community",
+          "reviewedPayerId": "person_player",
+          "quotedMonthlyFee": {
+            "$dreamsBigInt": "400"
+          }
+        },
+        {
+          "type": "acknowledge",
+          "resultId": "action_364"
+        }
+      ],
+      "preparationOutcome": {
+        "actorId": "person_player",
+        "date": {
+          "year": 2116,
+          "month": 10,
+          "day": 24
+        },
+        "random": {
+          "events": 139266853,
+          "npcs": 3813122890,
+          "economy": 1562589934,
+          "outcomes": 637026226
+        },
+        "cash": [
+          {
+            "currency": "USD",
+            "cash": {
+              "$dreamsBigInt": "410190303"
+            }
+          }
+        ],
+        "addedPeople": 3,
+        "newLedgerRows": [
+          {
+            "id": "txn_344_47204",
+            "personId": "person_player",
+            "accountId": "account_person_player",
+            "liabilityId": null,
+            "year": 2116,
+            "month": 10,
+            "currency": "USD",
+            "cashDelta": {
+              "$dreamsBigInt": "-16492829"
+            },
+            "debtDelta": {
+              "$dreamsBigInt": "0"
+            },
+            "category": "purchase",
+            "description": "Purchased Mobile Home"
+          },
+          {
+            "id": "txn_348_47205",
+            "personId": "person_player",
+            "accountId": "account_person_player",
+            "liabilityId": null,
+            "year": 2116,
+            "month": 10,
+            "currency": "USD",
+            "cashDelta": {
+              "$dreamsBigInt": "-565930"
+            },
+            "debtDelta": {
+              "$dreamsBigInt": "0"
+            },
+            "category": "lifestyle-cost",
+            "description": "Installed kitchen"
+          },
+          {
+            "id": "txn_352_47206",
+            "personId": "person_npc_350_23",
+            "accountId": "account_person_npc_350_23",
+            "liabilityId": null,
+            "year": 2116,
+            "month": 10,
+            "currency": "USD",
+            "cashDelta": {
+              "$dreamsBigInt": "-81979"
+            },
+            "debtDelta": {
+              "$dreamsBigInt": "0"
+            },
+            "category": "lifestyle-deposit",
+            "description": "Tenancy deposit held in escrow"
+          },
+          {
+            "id": "txn_354_47207",
+            "personId": "person_player",
+            "accountId": "account_person_player",
+            "liabilityId": null,
+            "year": 2116,
+            "month": 10,
+            "currency": "USD",
+            "cashDelta": {
+              "$dreamsBigInt": "-800"
+            },
+            "debtDelta": {
+              "$dreamsBigInt": "0"
+            },
+            "category": "lifestyle-cost",
+            "description": "Game road licence test"
+          },
+          {
+            "id": "txn_356_47208",
+            "personId": "person_player",
+            "accountId": "account_person_player",
+            "liabilityId": null,
+            "year": 2116,
+            "month": 10,
+            "currency": "USD",
+            "cashDelta": {
+              "$dreamsBigInt": "-720000"
+            },
+            "debtDelta": {
+              "$dreamsBigInt": "0"
+            },
+            "category": "purchase",
+            "description": "Purchased Used Compact"
+          },
+          {
+            "id": "txn_360_47209",
+            "personId": "person_player",
+            "accountId": "account_person_player",
+            "liabilityId": null,
+            "year": 2116,
+            "month": 10,
+            "currency": "USD",
+            "cashDelta": {
+              "$dreamsBigInt": "-720"
+            },
+            "debtDelta": {
+              "$dreamsBigInt": "0"
+            },
+            "category": "lifestyle-cost",
+            "description": "Vehicle drive"
+          },
+          {
+            "id": "txn_362_47210",
+            "personId": "person_player",
+            "accountId": "account_person_player",
+            "liabilityId": null,
+            "year": 2116,
+            "month": 10,
+            "currency": "USD",
+            "cashDelta": {
+              "$dreamsBigInt": "-40000"
+            },
+            "debtDelta": {
+              "$dreamsBigInt": "0"
+            },
+            "category": "pet-adoption",
+            "description": "Adopted Buddy"
+          }
+        ],
+        "lifestyle": {
+          "version": 1,
+          "enabled": {
+            "year": 2116,
+            "month": 10,
+            "day": 24
+          },
+          "licences": [
+            {
+              "id": "licence_354",
+              "personId": "person_player",
+              "kind": "road",
+              "country": "US",
+              "date": {
+                "year": 2116,
+                "month": 10,
+                "day": 24
+              },
+              "answers": [
+                1,
+                2,
+                0
+              ],
+              "score": 3,
+              "passed": true,
+              "fee": {
+                "$dreamsBigInt": "800"
+              },
+              "paymentId": "txn_354_47207"
+            }
+          ],
+          "applications": [
+            {
+              "id": "application_350_0",
+              "assetId": "asset_344",
+              "landlordId": "person_player",
+              "tenantId": "person_npc_350_23",
+              "date": {
+                "year": 2116,
+                "month": 10,
+                "day": 24
+              },
+              "expiresMonth": 25404,
+              "reliability": 84,
+              "temperament": "chaotic",
+              "funds": {
+                "$dreamsBigInt": "9600000"
+              },
+              "annualIncome": {
+                "$dreamsBigInt": "4800000"
+              },
+              "source": "New York Hospitality · barista",
+              "checked": false,
+              "status": "accepted"
+            },
+            {
+              "id": "application_350_1",
+              "assetId": "asset_344",
+              "landlordId": "person_player",
+              "tenantId": "person_npc_350_24",
+              "date": {
+                "year": 2116,
+                "month": 10,
+                "day": 24
+              },
+              "expiresMonth": 25404,
+              "reliability": 75,
+              "temperament": "considerate",
+              "funds": {
+                "$dreamsBigInt": "10000000"
+              },
+              "annualIncome": {
+                "$dreamsBigInt": "4000000"
+              },
+              "source": "New York Hospitality · barista",
+              "checked": false,
+              "status": "expired"
+            },
+            {
+              "id": "application_350_2",
+              "assetId": "asset_344",
+              "landlordId": "person_player",
+              "tenantId": "person_npc_350_25",
+              "date": {
+                "year": 2116,
+                "month": 10,
+                "day": 24
+              },
+              "expiresMonth": 25404,
+              "reliability": 72,
+              "temperament": "considerate",
+              "funds": {
+                "$dreamsBigInt": "8400000"
+              },
+              "annualIncome": {
+                "$dreamsBigInt": "5100000"
+              },
+              "source": "New York Logistics · warehouse",
+              "checked": false,
+              "status": "expired"
+            }
+          ],
+          "tenancies": [
+            {
+              "id": "tenancy_352",
+              "applicationId": "application_350_0",
+              "assetId": "asset_344",
+              "landlordId": "person_player",
+              "tenantId": "person_npc_350_23",
+              "currency": "USD",
+              "started": {
+                "year": 2116,
+                "month": 10,
+                "day": 24
+              },
+              "ended": null,
+              "endReason": null,
+              "rent": {
+                "$dreamsBigInt": "81979"
+              },
+              "deposit": {
+                "$dreamsBigInt": "81979"
+              },
+              "depositHeld": {
+                "$dreamsBigInt": "81979"
+              },
+              "depositPaymentId": "txn_352_47206",
+              "depositRefundId": null,
+              "depositRecipientId": null,
+              "lastMonth": 25401,
+              "arrears": {
+                "$dreamsBigInt": "0"
+              },
+              "reliability": 84,
+              "satisfaction": 60,
+              "maintenance": {
+                "$dreamsBigInt": "0"
+              },
+              "lastRentReviewMonth": 25401,
+              "noticeMonth": null,
+              "reviewMonth": null,
+              "reviewPaid": {
+                "$dreamsBigInt": "0"
+              },
+              "reviewPaymentId": null,
+              "periods": []
+            }
+          ],
+          "records": [
+            {
+              "id": "lifestyle_348_0",
+              "personId": "person_player",
+              "date": {
+                "year": 2116,
+                "month": 10,
+                "day": 24
+              },
+              "country": "US",
+              "city": "New York",
+              "currency": "USD",
+              "kind": "amenity",
+              "subjectId": "asset_344",
+              "participants": [
+                "person_player"
+              ],
+              "accepted": true,
+              "chance": null,
+              "roll": null,
+              "paid": {
+                "$dreamsBigInt": "565930"
+              },
+              "received": {
+                "$dreamsBigInt": "0"
+              },
+              "paymentIds": [
+                "txn_348_47205"
+              ],
+              "before": null,
+              "after": null,
+              "distance": 0,
+              "body": "I installed kitchen at Mobile Home. The estimated added value is less than the installation cost."
+            },
+            {
+              "id": "lifestyle_360_1",
+              "personId": "person_player",
+              "date": {
+                "year": 2116,
+                "month": 10,
+                "day": 24
+              },
+              "country": "US",
+              "city": "New York",
+              "currency": "USD",
+              "kind": "vehicle-drive",
+              "subjectId": "asset_356",
+              "participants": [
+                "person_player"
+              ],
+              "accepted": true,
+              "chance": 100,
+              "roll": 100,
+              "paid": {
+                "$dreamsBigInt": "720"
+              },
+              "received": {
+                "$dreamsBigInt": "0"
+              },
+              "paymentIds": [
+                "txn_360_47209"
+              ],
+              "before": 65,
+              "after": 64,
+              "distance": 40,
+              "outcomeChance": 6,
+              "outcomeRoll": 44,
+              "success": true,
+              "body": "I took Used Compact on a 40-mile drive. We returned to the same city. The distance and running cost are recorded."
+            }
+          ],
+          "projects": [],
+          "offers": []
+        },
+        "newAssets": [
+          {
+            "propertyLife": {
+              "version": 1,
+              "enabled": {
+                "year": 2116,
+                "month": 10,
+                "day": 24
+              },
+              "amenities": [
+                {
+                  "kind": "kitchen",
+                  "installed": {
+                    "year": 2116,
+                    "month": 10,
+                    "day": 24
+                  },
+                  "paid": {
+                    "$dreamsBigInt": "565930"
+                  },
+                  "addedValue": {
+                    "$dreamsBigInt": "226372"
+                  },
+                  "paymentId": "txn_348_47205"
+                }
+              ],
+              "lastGatheringMonth": null,
+              "lastInspectionMonth": null
+            },
+            "id": "asset_344",
+            "ownerId": "person_player",
+            "catalogId": "mobile-home",
+            "kind": "property",
+            "name": "Mobile Home",
+            "country": "US",
+            "city": "New York",
+            "currency": "USD",
+            "pricePaid": {
+              "$dreamsBigInt": "16169440"
+            },
+            "costBasis": {
+              "$dreamsBigInt": "17058759"
+            },
+            "value": {
+              "$dreamsBigInt": "16395812"
+            },
+            "condition": 70,
+            "ageMonths": 0,
+            "acquired": {
+              "year": 2116,
+              "month": 10,
+              "day": 24
+            },
+            "mortgageId": null,
+            "primaryHome": false,
+            "rental": "occupied",
+            "rentPerMonth": {
+              "$dreamsBigInt": "81979"
+            },
+            "upkeepBps": 110,
+            "insured": false,
+            "listing": null,
+            "provenance": [
+              "Purchased by Alex Walker in 2116",
+              "Installed kitchen in 2116"
+            ],
+            "ownershipSource": "purchase",
+            "titleSince": {
+              "year": 2116,
+              "month": 10,
+              "day": 24
+            }
+          },
+          {
+            "vehicleLife": {
+              "version": 1,
+              "usageVersion": 2,
+              "enabled": {
+                "year": 2116,
+                "month": 10,
+                "day": 24
+              },
+              "mileage": 68040,
+              "initialMileage": 68000,
+              "lastServiceMonth": null,
+              "appearance": "original",
+              "upgrades": [],
+              "lastUseMonth": 25401
+            },
+            "id": "asset_356",
+            "ownerId": "person_player",
+            "catalogId": "used-compact",
+            "kind": "vehicle",
+            "name": "Used Compact",
+            "country": "US",
+            "city": "New York",
+            "currency": "USD",
+            "pricePaid": {
+              "$dreamsBigInt": "720000"
+            },
+            "costBasis": {
+              "$dreamsBigInt": "720000"
+            },
+            "value": {
+              "$dreamsBigInt": "720000"
+            },
+            "condition": 64,
+            "ageMonths": 0,
+            "acquired": {
+              "year": 2116,
+              "month": 10,
+              "day": 24
+            },
+            "mortgageId": null,
+            "primaryHome": false,
+            "rental": "none",
+            "rentPerMonth": {
+              "$dreamsBigInt": "0"
+            },
+            "upkeepBps": 1200,
+            "insured": false,
+            "listing": null,
+            "provenance": [
+              "Purchased by Alex Walker in 2116",
+              "Vehicle activities enabled in 2116; listing mileage carried forward, prior use unknown."
+            ],
+            "ownershipSource": "purchase",
+            "titleSince": {
+              "year": 2116,
+              "month": 10,
+              "day": 24
+            }
+          }
+        ],
+        "newPets": [
+          {
+            "companion": {
+              "version": 1,
+              "enabled": {
+                "year": 2116,
+                "month": 10,
+                "day": 24
+              },
+              "healthVersion": 2,
+              "ageRelated": false,
+              "supportUntil": 25401,
+              "trait": "loyal",
+              "training": 0,
+              "tricks": [],
+              "condition": "well",
+              "recovery": 0,
+              "lastHealthMonth": 25401,
+              "preventionUntil": 25401,
+              "lastCompetitionYear": null
+            },
+            "pricingVersion": 1,
+            "id": "pet_362_0",
+            "species": "dog",
+            "offerId": "buddy",
+            "breed": "Golden Retriever",
+            "name": "Buddy",
+            "born": {
+              "year": 2115,
+              "month": 10,
+              "day": 24
+            },
+            "adopted": {
+              "year": 2116,
+              "month": 10,
+              "day": 24
+            },
+            "adoptedById": "person_player",
+            "originalOwnerId": "person_player",
+            "ownerId": "person_player",
+            "country": "US",
+            "city": "New York",
+            "status": "active",
+            "ended": null,
+            "endReason": null,
+            "endKind": null,
+            "lifespanMonths": 144,
+            "health": 90,
+            "happiness": 75,
+            "bonds": {
+              "person_player": 30
+            },
+            "temperament": "gentle",
+            "illness": "none",
+            "recoveryMonths": 0,
+            "adoptionFee": {
+              "$dreamsBigInt": "40000"
+            },
+            "adoptionCurrency": "USD",
+            "adoptionTransactionId": "txn_362_47210",
+            "consent": {
+              "roll": 100,
+              "chance": 100
+            },
+            "lastMonth": 25401,
+            "unfundedMonths": 0,
+            "lastVetMonth": null,
+            "owners": [
+              {
+                "personId": "person_player",
+                "since": {
+                  "year": 2116,
+                  "month": 10,
+                  "day": 24
+                },
+                "ended": null
+              }
+            ],
+            "periods": [],
+            "moves": [],
+            "visits": []
+          }
+        ],
+        "newHobbies": [
+          {
+            "id": "hobby_person_player_writing",
+            "personId": "person_player",
+            "kind": "writing",
+            "proficiency": 0,
+            "plans": [
+              {
+                "id": "hobby_plan_364_0",
+                "payerId": "person_player",
+                "country": "US",
+                "city": "New York",
+                "currency": "USD",
+                "mode": "community",
+                "monthlyFee": {
+                  "$dreamsBigInt": "400"
+                },
+                "consent": {
+                  "strength": null,
+                  "chance": 100,
+                  "roll": 100,
+                  "accepted": true
+                },
+                "started": {
+                  "year": 2116,
+                  "month": 10,
+                  "day": 24
+                },
+                "ended": null,
+                "endReason": null,
+                "status": "active",
+                "lastMonth": 25401
+              }
+            ],
+            "practices": []
+          }
+        ]
+      }
+    }
+  ]
+}

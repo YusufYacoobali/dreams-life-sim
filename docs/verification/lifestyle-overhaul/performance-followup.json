@@ -1,0 +1,33 @@
+{
+  "scope": "One warm-up and eleven measured samples per source, sequential after all other test/export/soak workers stopped. Cloud Node/on-disk SQLite, no native latency claim.",
+  "comparisons": [
+    {
+      "name": "age90-fullYear",
+      "age": 90,
+      "kind": "fullYear",
+      "beforeMedianMs": 722.7094050000014,
+      "afterMedianMs": 707.505455999999,
+      "beforeP95Ms": 756.8520910000007,
+      "afterP95Ms": 805.606237,
+      "ratio": 0.9789625693331022,
+      "exactLegacyOutcome": true,
+      "baselineSourceHash": "4062f42fde331da5405a4575eb4e3649cdf330fa87a98454b7b250a0bc0c6fb8",
+      "currentSourceHash": "24450235e51d8548097be4180d4f10c5c0194740cb3c42a0774bfc9fd13d33b2",
+      "samples": 11
+    },
+    {
+      "name": "age70-enabled-firstAgeUp",
+      "age": 70,
+      "kind": "firstAgeUp",
+      "beforeMedianMs": 220.35418500000014,
+      "afterMedianMs": 208.98953600000095,
+      "beforeP95Ms": 242.25903499999913,
+      "afterP95Ms": 224.94306900000083,
+      "ratio": 0.9484255359161925,
+      "exactLegacyOutcome": false,
+      "baselineSourceHash": "4062f42fde331da5405a4575eb4e3649cdf330fa87a98454b7b250a0bc0c6fb8",
+      "currentSourceHash": "24450235e51d8548097be4180d4f10c5c0194740cb3c42a0774bfc9fd13d33b2",
+      "samples": 11
+    }
+  ]
+}
