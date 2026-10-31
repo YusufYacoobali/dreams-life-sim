@@ -124,10 +124,6 @@ export const personSchema = z.object({
 });
 export type Person = z.infer<typeof personSchema>;
 export const journalSchema = z.object({ id: z.string(), date: dateSchema, personId, text: z.string().max(1200), category: z.string() });
-// Only rows certified by a full world validation may take this path. Ledger
-// records are append-only; sharing frozen originals avoids cloning every old
-// transaction for an unrelated button press.
-const immutableTransactions = new WeakSet<object>();
 const immutableWorlds = new WeakSet<object>();
 // Shape certificates belong to one named field and are granted only after all
 // cross-world checks and recursive freezing. Object.freeze alone grants none.
@@ -206,6 +202,19 @@ function sharedCertifiedBranch(key: string, value: unknown): object | undefined 
   const copy = copiedBranches.get(value);
   if (copy?.key === key && certifiedBranches.get(copy.original)?.has(key) && equalCertifiedTree(value, copy.original)) return copy.original;
 }
+function certifiedLedgerSource(rows: unknown[]): World['ledger'] | undefined {
+  if (certifiedBranches.get(rows)?.has('ledger')) return rows as World['ledger'];
+  const copy = copiedBranches.get(rows);
+  if (copy?.key === 'ledger' && certifiedBranches.get(copy.original)?.has('ledger')) return copy.original as World['ledger'];
+}
+/** Exact positions in a privately certified, recursively frozen source prove
+ * old row shapes. Replacements and appended rows still pass the schema. The
+ * parsed array retains no origin link, avoiding a chain of historical arrays. */
+function parseLedgerRows(rows: unknown[]): World['ledger'] {
+  const original = certifiedLedgerSource(rows);
+  return rows.map((row, index) => original && index < original.length && row === original[index]
+    ? original[index] : transactionSchema.parse(row));
+}
 function parseWorldShape(value: unknown, immutable = false): World {
   // Cold JSON/imports have no private certificates: retain the original compiled
   // whole-schema parser rather than paying per-row public parse overhead.
@@ -218,7 +227,7 @@ function parseWorldShape(value: unknown, immutable = false): World {
       const shared = sharedCertifiedBranch(key, input[key]);
       if (shared) { parsed[key] = shared; continue; }
       try {
-        // Reuse individually certified transaction shapes after appending rows.
+        // Reuse only shapes proven by private branch/copy certificates.
         // Every monetary/reference/history check below still runs on the world.
         if (key === 'people' && input[key] && typeof input[key] === 'object' && !Array.isArray(input[key])) {
           const people: Record<string, Person> = {};
@@ -228,7 +237,7 @@ function parseWorldShape(value: unknown, immutable = false): World {
           }
           parsed[key] = people;
         } else parsed[key] = key === 'ledger' && Array.isArray(input[key])
-          ? input[key].map(row => immutableTransactions.has(row) ? row : transactionSchema.parse(row))
+          ? parseLedgerRows(input[key])
           : schema.parse(input[key]);
         // Match the cold parser: optional absent capabilities are absent own
         // properties, rather than explicit undefined fields in certified worlds.
@@ -243,9 +252,9 @@ function parseWorldShape(value: unknown, immutable = false): World {
   }
   if (value && typeof value === 'object' && 'ledger' in value && Array.isArray(value.ledger)) {
     const rows = value.ledger;
-    if (!rows.some(row => immutableTransactions.has(row))) return worldSchema.parse(value);
+    if (!certifiedLedgerSource(rows)) return worldSchema.parse(value);
     const world = worldSchema.parse({ ...value, ledger: [] });
-    world.ledger = rows.map(row => immutableTransactions.has(row) ? row : transactionSchema.parse(row));
+    world.ledger = parseLedgerRows(rows);
     return world;
   }
   return worldSchema.parse(value);
@@ -261,7 +270,7 @@ export function validateWorld(value: unknown, immutable = false): World {
   if (hasCreative !== (world.schemaVersion === 50)) throw new Error('Creative careers require the supported creative save format');
 
 
-  const ledger = indexLedger(world.ledger, world.ledger.every(row => immutableTransactions.has(row)));
+  const ledger = indexLedger(world.ledger, certifiedBranches.get(world.ledger)?.has('ledger') === true);
   if (!world.people[world.activePersonId]) throw new Error('Missing active person');
   const accountIds = new Set<string>();
   const accountCurrencies = new Set<string>();
@@ -520,7 +529,6 @@ export function validateWorld(value: unknown, immutable = false): World {
     }
   }
   if (immutable) {
-    for (const row of world.ledger) if (!immutableTransactions.has(row)) immutableTransactions.add(Object.freeze(row));
     freezeTree(world);
     rememberLedgerIndex(world.ledger, ledger);
     for (const [key, branch] of Object.entries(world)) if (branch && typeof branch === 'object') {
@@ -537,7 +545,7 @@ export function validateWorld(value: unknown, immutable = false): World {
 }
 
 function freezeTree(value: unknown): void {
-  if (!value || typeof value !== 'object' || immutableTransactions.has(value) || Object.isFrozen(value)) return;
+  if (!value || typeof value !== 'object' || Object.isFrozen(value)) return;
   for (const child of Object.values(value)) freezeTree(child);
   Object.freeze(value);
 }

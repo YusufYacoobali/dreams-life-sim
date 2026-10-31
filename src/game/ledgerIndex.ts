@@ -26,7 +26,16 @@ export function indexLedger(rows: World['ledger'], certified = false) {
   let positioned: Map<string, { row: Row; index: number }> | undefined;
   return {
     transactions, cashChanges, debtChanges, accountReferences, debtCurrencies, consistent,
-    get positioned() { return positioned ??= new Map(rows.map((row, index) => [row.id, { row, index }])); },
+    get positioned() {
+      if (!positioned) {
+        positioned = new Map();
+        for (let index = 0; index < rows.length; index++) {
+          const row = rows[index];
+          positioned.set(row.id, { row, index });
+        }
+      }
+      return positioned;
+    },
     categories: (...names: string[]) => names.flatMap(name => byCategory.get(name) ?? []),
   };
 }
