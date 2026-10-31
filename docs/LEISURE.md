@@ -1,5 +1,7 @@
 # Hobbies and paid outings
 
+Current prospective lifestyle additions: [implementation](LIFESTYLE_OVERHAUL.md) and [verification](verification/lifestyle-overhaul/README.md). The historical hobby and leisure design below remains relevant to legacy saves.
+
 World **28 / engine 27 / content 4 / database 6** expands persistent personal
 pursuits to eight, alongside four paid local outings. The distinct situation catalogue stays at
 90; setting routines and reporting outings do not add authored story templates.

@@ -35,8 +35,8 @@ usage starts from the catalogue’s listing mileage, explicitly leaving earlier
 use unknown. Road, boating and pilot awareness quizzes save exact answers,
 fees and pass/failure, with one attempt per month and three per year. Authored
 country age policies apply. Ownership grants no invented historical licence.
-New road trips record40/300 miles, boats12/60, and aircraft120/400 capped
-at70% of catalogue range. Recorded use, fuel/running cost, wear and
+New road trips record 40/300 miles, boats 12/60, and aircraft 120/400 capped
+at 70% of catalogue range. Recorded use, fuel/running cost, wear and
 occasional breakdowns persist; servicing never resets age or mileage. Repairs, cosmetics,
 three one-time upgrades, accepted adult gifts and damaged-vehicle salvage are
 real transactions. Boats and aircraft have six compact offerings with higher
@@ -55,7 +55,7 @@ No new housing rule removes an existing companion.
 
 Sixteen hobbies retain the original eight proficiency/practice histories and
 both paid access modes. Two routines remain the limit. Earned milestones label
-actual proficiency. Annual competitions use six attended months,20 proficiency,
+actual proficiency. Annual competitions use six attended months, 20 proficiency,
 a named peer, consent, a paid entry and recorded chance/roll; awards are actual
 ledger income. The existing club event and new competition share one annual
 opportunity. Four genuinely attended later months complete a personal project,

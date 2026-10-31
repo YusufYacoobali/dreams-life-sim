@@ -9,6 +9,11 @@ import { lifestyleFixture, buyLifestyle, act as apply } from '../helpers/lifesty
 import { encodeWorld } from '../../src/game/model';
 import { ThemeProvider } from '../../src/ui/theme';
 import { PendingEvent } from '../../src/ui/PendingEvent';
+import { LicenceControls } from '../../src/ui/VehicleLifestyle';
+import { licenceFee, licenceQuiz } from '../../src/game/systems/vehicleLicences';
+import { formatMoney } from '../../src/game/money';
+import { decodeSave } from '../../src/persistence/archive';
+import relocation from '../fixtures/v20-relocation-archive.json';
 let mockStore: ReturnType<typeof createGameStore>, mockAssetId = '';
 jest.mock('expo-router', () => ({ router: { back: jest.fn(), push: jest.fn(), navigate: jest.fn() }, useLocalSearchParams: () => ({ id: mockAssetId }) }));
 jest.mock('../../src/state/useGame', () => ({ useGame: (selector: unknown) => require('zustand').useStore(mockStore, selector) }));
@@ -51,4 +56,32 @@ test('an amenity review is read-only, cancellation spends nothing, SQLite failur
     finally {
         sqlite.close();
     }
+});
+
+test('a genuine relocated life reviews and pays its licence in the residence currency while retaining its original account', async () => {
+    const initial = apply(decodeSave(JSON.stringify(relocation)).world, { type: 'enable-lifestyle' });
+    expect(initial.people[initial.activePersonId].country).toBe('JP');
+    expect(initial.accounts.find(row => row.ownerId === initial.activePersonId)!.currency).toBe('USD');
+    const { sqlite, driver } = database(), repository = new SaveRepository(driver);
+    await repository.initialise(); await repository.create(initial);
+    mockStore = createGameStore({ repository: async () => new SaveRepository(driver), date: () => initial.date, id: () => 'unused' });
+    await mockStore.getState().bootstrap();
+    try {
+        const fee = licenceFee(initial, 'road'), before = encodeWorld(initial);
+        const view = render(<SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider><LicenceControls /><PendingEvent /></ThemeProvider></SafeAreaProvider>);
+        await press(/^Driving Licence/);
+        for (const question of licenceQuiz.road) await press(question.answers[question.correct]);
+        await press('Review Test Submission');
+        expect(within(screen.UNSAFE_getByType(Modal)).getByText('The test costs ' + formatMoney({ minor: fee, currency: 'JPY' }) + '. All three answers must be correct. Failed attempts remain paid and saved.')).toBeOnTheScreen();
+        expect(encodeWorld(mockStore.getState().world!)).toBe(before);
+        await press('Never mind');
+        expect(encodeWorld(mockStore.getState().world!)).toBe(before);
+        await press('Review Test Submission'); await press('Confirm');
+        const saved = mockStore.getState().world!;
+        expect(saved.lifestyle!.licences[0].fee).toBe(fee);
+        expect(saved.accounts.find(row => row.ownerId === saved.activePersonId && row.currency === 'USD')).toEqual(initial.accounts.find(row => row.ownerId === initial.activePersonId && row.currency === 'USD'));
+        expect(saved.accounts.find(row => row.ownerId === saved.activePersonId && row.currency === 'JPY')!.cash).toBe(initial.accounts.find(row => row.ownerId === initial.activePersonId && row.currency === 'JPY')!.cash - fee);
+        expect(await new SaveRepository(driver).load(saved.id)).toEqual(saved);
+        view.unmount();
+    } finally { sqlite.close(); }
 });

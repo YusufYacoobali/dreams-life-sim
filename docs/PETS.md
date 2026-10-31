@@ -1,5 +1,7 @@
 # Household companions
 
+Current prospective lifestyle additions: [implementation](LIFESTYLE_OVERHAUL.md) and [verification](verification/lifestyle-overhaul/README.md). The historical pet design below remains relevant to legacy saves.
+
 World **26 / engine 25 / content 4 / database 4** adds persistent dogs, cats,
 rabbits and parrots. Six shelter archetypes have authored ages, breeds and
 personalities. These adoption choices and routine results do not add distinct

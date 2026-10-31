@@ -1,5 +1,7 @@
 # Hobby community events
 
+Current prospective lifestyle additions: [implementation](LIFESTYLE_OVERHAUL.md) and [verification](verification/lifestyle-overhaul/README.md). The historical community-event design below remains relevant to legacy saves.
+
 Each of the eight existing hobbies now has an optional local club event: open
 mic, art display, photo exhibition, chess meet, reading circle, gaming meet,
 cooking tasting or gardening display. These are small community occasions with
