@@ -8,6 +8,9 @@ import { database } from '../support/sqlite';
 import { lifestyleFixture, buyLifestyle, act as apply } from '../helpers/lifestyle';
 import { encodeWorld } from '../../src/game/model';
 import { ThemeProvider } from '../../src/ui/theme';
+import { prepared } from '../helpers/lifestyleStories';
+import { lifestyleTemplates } from '../../src/game/content/lifestyleEvents';
+import { offerLifestyleStory } from '../../src/game/systems/lifestyleStories';
 import { PendingEvent } from '../../src/ui/PendingEvent';
 import { LicenceControls } from '../../src/ui/VehicleLifestyle';
 import { licenceFee, licenceQuiz } from '../../src/game/systems/vehicleLicences';
@@ -84,4 +87,37 @@ test('a genuine relocated life reviews and pays its licence in the residence cur
         expect(await new SaveRepository(driver).load(saved.id)).toEqual(saved);
         view.unmount();
     } finally { sqlite.close(); }
+});
+
+
+test('a large-text story modal survives a failed save and shows actual effects with one first-person journal on retry', async () => {
+    const setup = prepared(lifestyleTemplates.find(row => row.id === 'home-lock-trouble')!);
+    const initial = setup.world; mockAssetId = setup.id;
+    offerLifestyleStory(initial, 'home-lock-trouble', setup.id, true);
+    const journalCount = initial.journal.length, records = initial.lifestyle!.records.length;
+    const { sqlite, driver } = database(), repository = new SaveRepository(driver);
+    await repository.initialise(); await repository.create(initial);
+    mockStore = createGameStore({ repository: async () => new SaveRepository(driver), date: () => initial.date, id: () => 'unused' });
+    await mockStore.getState().bootstrap();
+    const dimensions = jest.spyOn(require('react-native'), 'useWindowDimensions').mockReturnValue({ width: 320, height: 844, scale: 2, fontScale: 2 });
+    const before = encodeWorld(mockStore.getState().world!), view = render(frame());
+    try {
+        expect(encodeWorld(mockStore.getState().world!)).toBe(before);
+        sqlite.exec("CREATE TRIGGER reject_polished_choice BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'polished choice storage failure'); END");
+        await press(/^Pay a locksmith/);
+        await waitFor(() => expect(mockStore.getState().error).toBeTruthy());
+        expect(encodeWorld(mockStore.getState().world!)).toBe(before);
+        expect(within(screen.UNSAFE_getByType(Modal)).getByRole('alert')).toBeOnTheScreen();
+        sqlite.exec('DROP TRIGGER reject_polished_choice');
+        await press(/^Pay a locksmith/);
+        const saved = mockStore.getState().world!;
+        expect(saved.journal.slice(journalCount)).toHaveLength(1);
+        expect(saved.journal.at(-1)!.text).toMatch(/^I paid a locksmith/);
+        expect(saved.lifestyle!.records.length).toBe(records + 1);
+        expect(screen.getByText('Cost paid')).toBeOnTheScreen();
+        expect(screen.getByText('Property condition')).toBeOnTheScreen();
+        expect(await new SaveRepository(driver).load(saved.id)).toEqual(saved);
+        await press('Continue');
+        expect(mockStore.getState().world!.journal).toEqual(saved.journal);
+    } finally { view.unmount(); dimensions.mockRestore(); sqlite.close(); }
 });

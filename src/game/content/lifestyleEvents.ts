@@ -1,7 +1,7 @@
 import type { PetSpecies } from './pets';
 import type { HobbyKind } from './leisure';
 import type { AmenityId } from '../systems/lifestyleSchemas';
-export type LifestyleOperation = { kind: 'condition' | 'maintenance' | 'bond' | 'training' | 'relationship' | 'mood' | 'pet-health' | 'competition' | 'asset-loss' | 'report-damage' | 'injury' | 'pet-comfort' | 'hobby-challenge'; amount: number };
+export type LifestyleOperation = { kind: 'condition' | 'maintenance' | 'bond' | 'training' | 'relationship' | 'mood' | 'pet-health' | 'competition' | 'asset-loss' | 'report-damage' | 'injury' | 'pet-comfort' | 'hobby-challenge' | 'discipline'; amount: number };
 type Choice = { id: string; label: string; costBps: number; body: string; operations: LifestyleOperation[] };
 export type LifestyleTemplate = { id: string; domain: 'property' | 'vehicle' | 'pet' | 'hobby'; title: string; body: string; when?: 'tenant' | 'home' | 'damaged' | 'insured' | 'used' | 'trained' | 'unwell' | 'family' | 'vintage' | 'project' | 'skilled' | 'peer'; species?: PetSpecies; trait?: string; hobby?: HobbyKind; amenity?: AmenityId; choices: readonly [Choice, Choice] };
 /** Original situations; terms and outcomes freeze when offered. */

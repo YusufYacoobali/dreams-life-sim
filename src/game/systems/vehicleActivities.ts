@@ -1,3 +1,4 @@
+import { vehicleMinimumAge } from './vehicleAgePolicy';
 import { ageOn } from '../personHelpers';
 import { parentOf } from './travel';
 import { completeAssetSale, resolveAssets, saleQuote } from './assets';
@@ -21,7 +22,7 @@ export const vehicleCommandSchema = z.discriminatedUnion('type', [
     z.object({ type: z.literal('vehicle-activity'), assetId: z.string(), activity: z.enum(vehicleActivities), contactId: z.string().nullable(), quotedCost: z.bigint().nonnegative() }).strict(),
 ]);
 export type VehicleCommand = z.infer<typeof vehicleCommandSchema>;
-export const vehicleLicenceKind = (asset: World['assets'][number]) => assetCatalog.find(row => row.id === asset.catalogId)?.licenceKind ?? 'road';
+export const vehicleLicenceKind = (asset: Pick<World['assets'][number], 'catalogId'>) => assetCatalog.find(row => row.id === asset.catalogId)?.licenceKind ?? 'road';
 /** Earlier activity sessions retain their v1 distance policy when this revision is absent. */
 export function vehicleTripDistance(asset: World['assets'][number], activity: 'drive' | 'road-trip') {
     if (asset.vehicleLife?.usageVersion !== 2) return activity === 'road-trip' ? 300 : 40;
@@ -37,8 +38,13 @@ export function vehicleActivityCost(world: World, asset: World['assets'][number]
     return (base * (homeAmenity(world, 'garage') && asset.country === active(world).country && asset.city === active(world).city ? 85n : 100n) / 10000n) || 1n; if (activity === 'repair')
     return base * BigInt(Math.min(30, 100 - asset.condition)) / 1000n || 1n; if (activity === 'customise')
     return base / 100n || 1n; return base / 20n || 1n; }
+export function vehicleUseReason(world: World, asset: Pick<World['assets'][number], 'catalogId'>) {
+    const reason = lifestyleReason(world, false); if (reason) return reason;
+    const minimum = vehicleMinimumAge(active(world).country, vehicleLicenceKind(asset));
+    if (ageOn(active(world), world.date) < minimum) return 'Game policy: available from age ' + minimum;
+}
 export function vehicleActivityReason(world: World, asset: World['assets'][number], activity: typeof vehicleActivities[number], contactId: string | null = null) {
-    const common = lifestyleReason(world);
+    const common = vehicleUseReason(world, asset) ?? (activity === 'gift' || activity === 'scrap' ? lifestyleReason(world) : undefined);
     if (common)
         return common;
     if (asset.ownerId !== world.activePersonId || asset.kind !== 'vehicle')
@@ -84,7 +90,7 @@ export function vehicleActivityReason(world: World, asset: World['assets'][numbe
         return 'Insufficient available funds';
 }
 export function resolveVehicle(world: World, command: VehicleCommand) {
-    requireLifestyle(world, command.type !== 'take-licence-test');
+    requireLifestyle(world, false);
     const person = active(world), state = lifestyleState(world), current = month(world);
     if (command.type === 'take-licence-test') {
         const reason = licenceReason(world, command.kind);
@@ -99,7 +105,7 @@ export function resolveVehicle(world: World, command: VehicleCommand) {
         const score = command.answers.filter((answer, index) => answer === licenceQuiz[command.kind][index].correct).length;
         state.licences.push({ id: 'licence_' + world.revision, personId: person.id, kind: command.kind, country: person.country, date: { ...world.date }, answers: [...command.answers], score, passed: score === 3, fee, paymentId: paymentIds[0] });
         fact(world, 'I ' + (score === 3 ? 'passed' : 'did not pass') + ' the game’s ' + command.kind + ' awareness test (' + score + '/3).', 'vehicle');
-        result(world, score === 3 ? 'Ready for the journey' : 'A little more preparation', 'Score: ' + score + '/3. ' + (score === 3 ? 'Your game licence is saved.' : 'The test remains paid. Try again in a later month, up to three attempts per calendar year.') + ' This is a simplified game system, not real-world certification.', 'vehicle');
+        result(world, score === 3 ? 'Ready for the journey' : 'A little more preparation', 'Score: ' + score + '/3. ' + (score === 3 ? 'You passed. The next journey is yours to plan.' : 'The fee stings more than the score. You can try again in a later month, up to three attempts this year.') + ' This is a simplified game system, not real-world certification.', 'vehicle');
         return;
     }
     const asset = world.assets.find(row => row.id === command.assetId && row.ownerId === person.id && row.kind === 'vehicle');
@@ -108,15 +114,17 @@ export function resolveVehicle(world: World, command: VehicleCommand) {
     if (stolenAssetReason(asset))
         throw new IneligibleAction(stolenAssetReason(asset)!);
     if (command.type === 'enable-vehicle-activities') {
+        const reason = vehicleUseReason(world, asset); if (reason) throw new IneligibleAction(reason);
         if (asset.vehicleLife)
             throw new IneligibleAction('Vehicle activities are already enabled');
         const mileage = assetCatalog.find(row => row.id === asset.catalogId)?.listingMileage ?? 0;
         asset.vehicleLife = { version: 1, usageVersion: 2, enabled: { ...world.date }, mileage, initialMileage: mileage, lastServiceMonth: null, appearance: 'original', upgrades: [], lastUseMonth: null };
         asset.provenance.push('Vehicle activities enabled in ' + world.date.year + '; listing mileage carried forward, prior use unknown.');
-        result(world, 'More than a parked asset', 'Future trips record distance and wear. The appropriate game licence is required for use. Existing ownership, condition and age remain. Earlier driving is not invented.', 'vehicle');
+        result(world, 'More than a parked asset', 'The vehicle is ready for you to make plans. You will need its game licence before setting off, and trips bring running costs and wear.', 'vehicle');
         return;
     }
     if (command.type === 'trade-in-vehicle') {
+        requireLifestyle(world);
         if (!asset.vehicleLife || asset.country !== person.country || asset.city !== person.city)
             throw new IneligibleAction('Choose a managed local vehicle');
         const offer = assetCatalog.find(row => row.id === command.catalogId && row.kind === 'vehicle');
@@ -130,8 +138,8 @@ export function resolveVehicle(world: World, command: VehicleCommand) {
         completeAssetSale(world, asset.id, sale.price);
         resolveAssets(world, { type: 'buy-asset', catalogId: offer.id, financing: 'cash', depositBps: 10000, termMonths: 120, quotedPrice: command.quotedPrice }, false);
         const replacement = world.assets.at(-1)!;
-        recordLifestyle(world, { kind: 'vehicle-trade-in', subjectId: asset.id, body: 'I traded in ' + asset.name + ' and purchased ' + replacement.name + '. The original sale, fee, replacement purchase and actual cash difference are recorded separately.' });
-        result(world, 'A different set of keys', state.records.at(-1)!.body, 'vehicle');
+        recordLifestyle(world, { kind: 'vehicle-trade-in', subjectId: asset.id, body: 'I traded in ' + asset.name + ' and purchased ' + replacement.name + '. It was a more expensive conversation than simply admiring the replacement.' });
+        result(world, 'A different set of keys', 'You hand over ' + asset.name + ' and take ownership of ' + replacement.name + '. The familiar search for the controls can begin again.', 'vehicle');
         return;
     }
     const reason = vehicleActivityReason(world, asset, command.activity, command.contactId);
@@ -142,14 +150,14 @@ export function resolveVehicle(world: World, command: VehicleCommand) {
         throw new IneligibleAction('Review the current vehicle quote');
     const life = asset.vehicleLife!, before = asset.condition, contact = command.contactId ? world.people[command.contactId] : undefined;
     const consent = contact ? contactConsent(world, contact) : { chance: 100, roll: 100, accepted: true };
-    let paymentIds: string[] = [], paid = 0n, received = 0n, distance = 0, body: string, outcomeChance: number | undefined, outcomeRoll: number | undefined, success: boolean | undefined;
+    let paymentIds: string[] = [], paid = 0n, received = 0n, distance = 0, body: string, narrative: string | undefined, outcomeChance: number | undefined, outcomeRoll: number | undefined, success: boolean | undefined;
     // Refusal consumes a trip/gift invitation; save/load never rerolls a refusal.
     const key = person.id + ':vehicle-invite:' + asset.id + ':' + command.activity + ':' + (command.contactId ?? '') + ':' + current;
     if (world.actionCounts[key])
         throw new IneligibleAction('This invitation or activity is already recorded this month');
     world.actionCounts[key] = 1;
     if (!consent.accepted)
-        body = nameOf(world, contact!.id) + ' declined my vehicle invitation. No journey, ownership transfer or payment occurred.';
+        { body = 'I invited ' + nameOf(world, contact!.id) + ', but they declined.'; narrative = nameOf(world, contact!.id) + ' declines. You put the plan aside for another day.'; }
     else {
         paymentIds = lifestylePayment(world, cost, 'Vehicle ' + command.activity, asset.currency);
         paid = cost;
@@ -166,21 +174,25 @@ export function resolveVehicle(world: World, command: VehicleCommand) {
             person.stats.energy = bounded(person.stats.energy - (command.activity === 'road-trip' ? 8 : 4));
             person.stats.happiness = bounded(person.stats.happiness + (breakdown ? 0 : 3));
             body = 'I took ' + asset.name + ' on a ' + distance + '-mile ' + (vehicleLicenceKind(asset) === 'road' ? 'drive' : vehicleLicenceKind(asset) === 'boat' ? 'boat outing' : 'leisure flight') + (contact ? ' with ' + nameOf(world, contact.id) : '') + '. ' + (breakdown ? 'A warning light ended the outing. The vehicle needs a paid repair; no injury occurred.' : 'We returned to the same city. The distance and running cost are recorded.');
+            if (life.usageVersion === 2) {
+                body = 'I took ' + asset.name + ' on a ' + distance + '-mile outing' + (contact ? ' with ' + nameOf(world, contact.id) : '') + '. ' + (breakdown ? 'A warning light brought it to an early end.' : 'It was good to get out and return home.');
+                narrative = breakdown ? 'A warning light ends your outing in ' + asset.name + '. You return with a fresh appreciation of uneventful journeys.' : 'You take ' + asset.name + ' out' + (contact ? ' with ' + nameOf(world, contact.id) : '') + ' and return to the same city. For once, the journey gives you nothing to complain about.';
+            }
             if (contact)
                 sharedMemory(world, contact.id, 'vehicle-trip:' + asset.id + ':' + current, breakdown ? 1 : 4);
         }
         else if (command.activity === 'service') {
             life.lastServiceMonth = current;
             asset.condition = bounded(asset.condition + 5);
-            body = 'I serviced ' + asset.name + '. Reliability improved without resetting age or mileage.';
+            body = 'I had ' + asset.name + ' serviced.'; narrative = 'You pay for servicing on ' + asset.name + '. The maintenance checklist looks less accusing afterwards.';
         }
         else if (command.activity === 'repair') {
             asset.condition = bounded(asset.condition + 30);
-            body = 'I paid to repair ' + asset.name + '. Condition improved; its age and actual distance remain.';
+            body = 'I paid for repairs to ' + asset.name + '.'; narrative = 'You pay for repairs to ' + asset.name + '. It is one less piece of work to keep putting off.';
         }
         else if (command.activity === 'customise') {
             life.appearance = (['midnight', 'sunrise', 'forest'] as const)[draw(world, 'outcomes', 0, 2)];
-            body = 'I customised ' + asset.name + ' with a ' + life.appearance + ' finish. Appearance is recorded; no resale profit is promised.';
+            body = 'I chose a ' + life.appearance + ' finish for ' + asset.name + '.'; narrative = 'You give ' + asset.name + ' a ' + life.appearance + ' finish. You take a slightly longer look before leaving it parked.';
         }
         else if (command.activity === 'gift') {
             asset.ownerId = contact!.id;
@@ -188,7 +200,7 @@ export function resolveVehicle(world: World, command: VehicleCommand) {
             asset.titleSince = { ...world.date };
             asset.provenance.push('Gifted by ' + nameOf(world, person.id) + ' to ' + nameOf(world, contact!.id) + ' in ' + world.date.year);
             sharedMemory(world, contact!.id, 'vehicle-gift:' + asset.id + ':' + current, 8);
-            body = 'I gave ' + asset.name + ' to ' + nameOf(world, contact!.id) + '. They accepted the vehicle and its future ownership costs. No licence or cash was invented.';
+            body = 'I gave ' + asset.name + ' to ' + nameOf(world, contact!.id) + '. Handing over the keys felt rather final.';
         }
         else if (command.activity === 'scrap') {
             received = asset.value / 20n;
@@ -199,15 +211,16 @@ export function resolveVehicle(world: World, command: VehicleCommand) {
             asset.ownerId = null;
             asset.insured = false;
             asset.provenance.push('Scrapped by ' + nameOf(world, person.id) + ' in ' + world.date.year);
-            body = 'I scrapped the damaged ' + asset.name + '. Only its recorded salvage proceeds were paid.';
+            body = 'I scrapped the damaged ' + asset.name + ' for its salvage value.'; narrative = 'You say goodbye to ' + asset.name + '. ' + (received ? 'The salvage payment is welcome; the end of the repair bills is rather more welcome.' : 'There is nothing left to recover, but there are no more repair bills to pay.');
         }
         else {
             life.upgrades.push(command.activity);
             asset.costBasis += cost;
             asset.value += cost * 3n / 10n;
-            body = 'I fitted ' + command.activity + ' to ' + asset.name + '. The improvement is saved; estimated added value is less than its cost.';
+            body = 'I paid to fit ' + command.activity + ' to ' + asset.name + '.'; narrative = 'You have ' + command.activity + ' fitted to ' + asset.name + '. You are briefly very interested in explaining the improvement to anyone who asks.';
         }
     }
     recordLifestyle(world, { kind: 'vehicle-' + command.activity, ...(contact ? { invitedId: contact.id } : {}), subjectId: asset.id, currency: asset.currency, participants: [person.id, ...(consent.accepted && contact ? [contact.id] : [])], ...consent, paid, received, paymentIds, before, after: asset.condition, distance, ...(outcomeChance !== undefined ? { outcomeChance, outcomeRoll, success } : {}), body });
-    result(world, consent.accepted ? 'Vehicle record updated' : 'Invitation declined', body, 'vehicle');
+    if (command.activity === 'gift' && consent.accepted) narrative = 'You give ' + asset.name + ' to ' + nameOf(world, contact!.id) + '. Your carefully prepared advice is less exciting than the keys.';
+    result(world, consent.accepted ? life.usageVersion === 2 ? command.activity === 'gift' ? 'A different owner' : command.activity === 'drive' || command.activity === 'road-trip' ? 'Out and back' : 'Looking after it' : 'Vehicle record updated' : 'Invitation declined', narrative ?? body, 'vehicle');
 }

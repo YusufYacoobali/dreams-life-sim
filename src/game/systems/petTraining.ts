@@ -63,7 +63,7 @@ export function resolvePetTraining(world: World, command: PetTrainingCommand) {
             throw new IneligibleAction('Expanded activities are already enabled');
         pet.companion = newCompanion(world, pet);
         fact(world, 'I reviewed expanded care and training for ' + pet.name + '. Existing care and histories remain.', 'pet');
-        result(world, 'More time together', 'Your companion’s additional personality is fixed from their adoption profile. Existing automatic care, health, lifespan, bonds and ownership stay on record.', 'pet-paw');
+        result(world, 'More time together', 'You make room for new routines with your familiar companion. Their personality gives you a few ideas about where to start.', 'pet-paw');
         return;
     }
     const reason = petActivityReason(world, pet, command.activity, command.otherId);
@@ -76,9 +76,9 @@ export function resolvePetTraining(world: World, command: PetTrainingCommand) {
         throw new IneligibleAction('The responsible owner must review paid optional activities');
     world.actionCounts[person.id + ':pet-activity:' + pet.id + ':' + command.activity + ':' + month(world)] = 1;
     const family = command.activity === 'family' ? world.people[command.otherId!] : undefined, consent = family ? contactConsent(world, family) : { chance: 100, roll: 100, accepted: true };
-    let paymentIds: string[] = [], paid = 0n, body: string, before = life.training, after = before, outcomeChance: number | undefined, outcomeRoll: number | undefined, success: boolean | undefined;
+    let paymentIds: string[] = [], paid = 0n, body: string, narrative: string | undefined, before = life.training, after = before, outcomeChance: number | undefined, outcomeRoll: number | undefined, success: boolean | undefined;
     if (!consent.accepted)
-        body = nameOf(world, family!.id) + ' did not join my planned time with ' + pet.name + '. No shared pet memory was invented.';
+        { body = 'I asked ' + nameOf(world, family!.id) + ' to join me with ' + pet.name + ', but they declined.'; narrative = nameOf(world, family!.id) + ' cannot join you. You leave the invitation for another day.'; }
     else {
         paymentIds = lifestylePayment(world, cost, 'Pet ' + command.activity, countries[pet.country].currency, owner);
         paid = cost;
@@ -92,6 +92,7 @@ export function resolvePetTraining(world: World, command: PetTrainingCommand) {
             success = roll <= chance;
             life.training = bounded(life.training + (success ? 8 : 2));
             after = life.training;
+            if (life.healthVersion === 2) narrative = success ? 'You and ' + pet.name + ' finally seem to mean the same thing by that cue. You stop while it still feels like a small victory.' : life.trait === 'stubborn' ? pet.name + ' studies your request and sits elsewhere. You count the little progress and call a truce.' : 'You make a little progress with ' + pet.name + ', then stop before either of you starts resenting the lesson.';
             body = 'I trained ' + pet.name + '. ' + (roll <= chance ? 'The cue finally made sense to both of us.' : life.trait === 'stubborn' ? 'They considered my request and proposed sitting elsewhere.' : 'We made a little progress, then stopped before frustration took over.');
         }
         else if (command.activity === 'trick') {
@@ -102,7 +103,7 @@ export function resolvePetTraining(world: World, command: PetTrainingCommand) {
         }
         else if (command.activity === 'groom') {
             pet.happiness = bounded(pet.happiness + (life.trait === 'nervous' ? 1 : 4));
-            body = 'I ' + (pet.species === 'fish' || pet.species === 'turtle' ? 'cleaned the habitat for ' : 'gently groomed ') + pet.name + '. Routine feeding and basic care continue automatically.';
+            body = 'I ' + (pet.species === 'fish' || pet.species === 'turtle' ? 'cleaned the habitat for ' : 'gently groomed ') + pet.name + '. They seemed satisfied with the attention.';
         }
         else if (command.activity === 'outing')
             body = 'I took ' + pet.name + ' for a suitable supervised outing. ' + (life.trait === 'energetic' ? 'They investigated every smell as if the world had been rewritten overnight.' : 'We let the slower companion set the pace.');
@@ -125,7 +126,7 @@ export function resolvePetTraining(world: World, command: PetTrainingCommand) {
             outcomeChance = Math.min(90, Math.floor(life.training / 2 + (pet.bonds[person.id] ?? 0) / 4));
             outcomeRoll = roll;
             success = recognized;
-            body = pet.name + ' entered a small companion event. ' + (recognized ? 'Their training earned a rosette. They remained much more interested in the bag it came in.' : 'We finished the course in a fairly original order. Other owners applauded our persistence.');
+            body = 'I entered ' + pet.name + ' in a small companion event. ' + (recognized ? 'Their training earned a rosette. They remained much more interested in the bag it came in.' : 'We finished the course in a fairly original order. Other owners applauded our persistence.');
             person.stats.happiness = bounded(person.stats.happiness + (recognized ? 5 : 2));
         }
         else if (command.activity === 'treat') {
@@ -138,19 +139,29 @@ export function resolvePetTraining(world: World, command: PetTrainingCommand) {
                 life.condition = 'recovering';
                 life.recovery = 3;
             }
-            body = 'I paid for veterinary care for ' + pet.name + '. ' + (worked ? 'A treatment plan began; three funded care months are needed for recovery. Ageing itself cannot be cured.' : 'The treatment did not resolve the condition. A later month permits another review.');
+            body = 'I paid for veterinary care for ' + pet.name + '. ' + (worked ? 'We began a care plan and settled into the patient part.' : 'The appointment did not bring the improvement I had hoped for.');
+            narrative = worked ? life.ageRelated ? 'Your vet focuses on comfort for ' + pet.name + '. There is no rewinding the years, but there are ways to make them kinder.' : 'You begin a care plan for ' + pet.name + '. For the next few months, patience and continued care are part of the prescription.' : 'The appointment brings no quick answer. You take ' + pet.name + ' home and keep the routine gentle.';
         }
         else if (command.activity === 'prevent') {
             life.preventionUntil = month(world) + 12;
-            body = 'I paid for preventive care for ' + pet.name + '. It reduces minor-illness risk for twelve months without stopping ageing.';
+            body = 'I arranged preventive care for ' + pet.name + '.'; narrative = 'You arrange preventive care for ' + pet.name + '. It is a reassuringly uneventful appointment.';
         }
         else {
             pet.bonds[family!.id] = bounded((pet.bonds[family!.id] ?? 0) + 8);
-            body = nameOf(world, family!.id) + ' joined me for gentle time with ' + pet.name + '. Their own bond with our companion grew.';
+            body = nameOf(world, family!.id) + ' joined me for gentle time with ' + pet.name + '. It was lovely to watch them find their own rhythm.';
         }
     }
     recordLifestyle(world, { kind: 'pet-' + command.activity, ...(family ? { invitedId: family.id } : {}), ...(command.activity === 'introduce' && command.otherId ? { relatedPetId: command.otherId } : {}), subjectId: pet.id, currency: countries[pet.country].currency, participants: [person.id, ...(consent.accepted && family ? [family.id] : [])], ...consent, paid, paymentIds, before, after, ...(outcomeChance !== undefined ? { outcomeChance, outcomeRoll, success } : {}), body });
-    result(world, consent.accepted ? 'Time with ' + pet.name : 'Another time', body, command.activity === 'competition' ? 'pet-rosette' : 'pet-' + pet.species);
+    if (consent.accepted && !narrative) {
+        if (command.activity === 'trick') narrative = 'You practise the new cue with ' + pet.name + '. You finish before enthusiasm turns into a negotiation.';
+        else if (command.activity === 'groom') narrative = pet.species === 'fish' || pet.species === 'turtle' ? 'You tend ' + pet.name + '’s habitat under close supervision from its resident.' : 'You gently groom ' + pet.name + '. There is now a little less of them attached to everything else.';
+        else if (command.activity === 'outing') narrative = 'You take ' + pet.name + ' on a supervised outing. You let the slower companion set the pace.';
+        else if (command.activity === 'quiet') narrative = 'You sit quietly beside ' + pet.name + '. Nothing needs to be achieved for this to count as a good afternoon.';
+        else if (command.activity === 'introduce') narrative = success ? 'You supervise the introduction. Sharing the space is enough of a victory for today.' : 'You give the animals separate space. Friendship is not something you can schedule.';
+        else if (command.activity === 'competition') narrative = success ? pet.name + ' earns recognition. You admire the rosette; they investigate its bag.' : 'You and ' + pet.name + ' finish in a fairly original order. There is warm applause for persistence.';
+        else if (command.activity === 'family') narrative = nameOf(world, family!.id) + ' joins you with ' + pet.name + '. For a while, nobody seems to need to be anywhere else.';
+    }
+    result(world, consent.accepted ? 'Time with ' + pet.name : 'Another time', narrative ?? body, command.activity === 'competition' ? 'pet-rosette' : 'pet-' + pet.species);
 }
 /** Uses the actual saved care-period draw; existing pets never gain new obligations. */
 export function companionMonth(world: World) {

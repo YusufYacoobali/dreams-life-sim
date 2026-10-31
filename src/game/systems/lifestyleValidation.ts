@@ -1,9 +1,11 @@
+import { polishedLifestyleTemplate } from '../content/lifestylePolish';
 import { validateLeisurePermission } from './leisureValidation';
 import { legacyHobbyKinds, legacyOutingKinds } from '../content/leisure';
 import { legacyPetOfferIds } from '../content/pets';
 import { lifestyleTemplates } from '../content/lifestyleEvents';
 import { assetCatalog } from '../content/assets';
-import { licenceQuiz, roadLicenceAgeV1 } from './vehicleLicences';
+import { licenceQuiz } from './vehicleLicences';
+import { vehicleMinimumAge } from './vehicleAgePolicy';
 import { rules } from '../rules';
 import { roundRatio } from '../money';
 import type { World } from '../model';
@@ -161,7 +163,7 @@ export function validateLifestyle(world: World, ledger = indexLedger(world.ledge
         const actor = person(row.personId), key = row.personId + ':' + row.kind, monthKey = key + ':' + at(row.date), yearKey = key + ':' + row.date.year, count = (licenceYears.get(yearKey) ?? 0) + 1;
         const score = row.answers.filter((answer, index) => answer === licenceQuiz[row.kind][index].correct).length;
         const expectedFee = rules[row.country].baseWage * BigInt(row.kind === 'road' ? 2 : row.kind === 'boat' ? 8 : 35) / 10000n || 1n;
-        if (passed.has(key) || licenceMonths.has(monthKey) || count > 3 || row.score !== score || row.passed !== (row.score === 3) || row.fee !== expectedFee || ageOn({ ...actor, died: null }, row.date) < (row.kind === 'road' ? roadLicenceAgeV1[row.country] : 18) || compareDates(row.date, world.date) > 0)
+        if (passed.has(key) || licenceMonths.has(monthKey) || count > 3 || row.score !== score || row.passed !== (row.score === 3) || row.fee !== expectedFee || ageOn({ ...actor, died: null }, row.date) < vehicleMinimumAge(row.country, row.kind) || compareDates(row.date, world.date) > 0)
             throw new Error('Invalid licence attempt');
         licenceYears.set(yearKey, count);
         licenceMonths.add(monthKey);
@@ -197,7 +199,10 @@ export function validateLifestyle(world: World, ledger = indexLedger(world.ledge
         person(offer.personId);
         if (offer.participantId)
             person(offer.participantId);
-        const template = lifestyleTemplates.find(template => template.id === offer.templateId);
+        const published = lifestyleTemplates.find(template => template.id === offer.templateId);
+        const template = published && (offer.copyVersion === 2 ? polishedLifestyleTemplate(published) : published);
+        const revised = offer.journalVersion === 1;
+        if (revised !== (offer.outputVersion === 1) || revised !== (offer.copyVersion === 2) || offer.choices.some(choice => revised ? !choice.journal || !/^I\b/.test(choice.journal) || !choice.resultTitle : choice.journal !== undefined || choice.resultTitle !== undefined)) throw new Error('Incomplete lifestyle presentation revision');
         for (const choice of offer.choices) {
             const operation = choice.operations.find(operation => operation.kind === 'hobby-challenge');
             if (!!operation !== !!choice.challenge)
@@ -226,7 +231,7 @@ export function validateLifestyle(world: World, ledger = indexLedger(world.ledge
                     training = row.after;
                 }
                 else if (row.kind.startsWith('story-')) {
-                    const offer = state.offers.find(offer => offer.templateId === row.kind.slice(6) && offer.subjectId === pet.id && offer.status === 'resolved' && at(offer.date) <= at(row.date) && offer.choices.some(choice => choice.id === offer.selected && choice.body === row.body));
+                    const offer = state.offers.find(offer => offer.templateId === row.kind.slice(6) && offer.subjectId === pet.id && offer.status === 'resolved' && at(offer.date) <= at(row.date) && offer.choices.some(choice => choice.id === offer.selected && (offer.journalVersion === 1 ? choice.journal : choice.body) === row.body));
                     for (const operation of offer?.choices.find(choice => choice.id === offer.selected)?.operations ?? [])
                         if (operation.kind === 'training')
                             training = Math.min(100, Math.max(0, training + operation.amount));
@@ -243,6 +248,8 @@ export function validateLifestyle(world: World, ledger = indexLedger(world.ledge
                         const offer = offerMap.get(effect.offerId);
                         if (!offer || offer.status !== 'open' || pending.id !== offer.id || !offer.choices.some(row => row.id === effect.choiceId))
                             throw new Error('Lifestyle decision lacks its saved offer');
+                        const saved = offer.choices.find(row => row.id === effect.choiceId)!;
+                        if (offer.journalVersion === 1 && (choice.journal !== saved.journal || choice.resultBody !== saved.body || choice.resultTitle !== saved.resultTitle)) throw new Error('Lifestyle decision lost its frozen presentation');
                     }
     for (const row of ledger.categories('lifestyle-cost', 'lifestyle-transfer', 'lifestyle-prize', 'lifestyle-scrap', 'lifestyle-deposit', 'lifestyle-deposit-refund'))
         if (!used.has(row.id))

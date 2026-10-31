@@ -1,0 +1,58 @@
+import { lifestyleTemplates } from '../../src/game/content/lifestyleEvents';
+import { lifestyleCopyV2 } from '../../src/game/content/lifestylePolish';
+import { offerLifestyleStory } from '../../src/game/systems/lifestyleStories';
+import { captureLifestyleConsequences, lifestyleConsequenceRows } from '../../src/game/systems/lifestyleStoryEffects';
+import { decodeWorld, encodeWorld, type World } from '../../src/game/model';
+import { resolveCommand } from '../../src/game/engine';
+import { formatMoney } from '../../src/game/money';
+import { prepared } from '../helpers/lifestyleStories';
+const cases = lifestyleTemplates.flatMap(template => template.choices.map(choice => ({ template, choiceId: choice.id })));
+test.each(cases)('$template.id / $choiceId has one frozen first-person journal and truthful actual effects', ({ template, choiceId }) => {
+  const setup = prepared(template), initial = setup.world;
+  expect(offerLifestyleStory(initial, template.id, setup.id, true)).toBe(true);
+  const world = decodeWorld(encodeWorld(initial)), offer = world.lifestyle!.offers.at(-1)!, selected = offer.choices.find(row => row.id === choiceId)!;
+  const originalText = encodeWorld(world), journalCount = world.journal.length, activityCount = world.lifestyle!.records.length;
+  const before = captureLifestyleConsequences(world, offer);
+  const next = resolveCommand(world, { type: 'choose', eventId: world.pending!.id, choiceId }, true);
+  expect(encodeWorld(world)).toBe(originalText);
+  expect(next.journal.slice(journalCount).map(row => row.text)).toEqual([selected.journal]);
+  expect(selected.journal).toMatch(/^I\b/);
+  expect(next.lifestyle!.records.length).toBe(activityCount + 1);
+  expect(next.lifestyle!.records.at(-1)!.body).toBe(selected.journal);
+  expect(next.pending?.kind).toBe('result'); if (next.pending?.kind !== 'result') throw Error('Expected one outcome');
+  expect(next.pending.body).toBe(selected.body);
+  const rows = next.pending.effects, after = captureLifestyleConsequences(next, offer);
+  expect(new Set(rows.map(row => row.id)).size).toBe(rows.length);
+  const numeric = (id: string, a: number | undefined, b: number | undefined) => expect(rows.find(row => row.id === id)?.value).toBe(a !== undefined && b !== undefined && a !== b ? a + '% → ' + b + '%' : undefined);
+  for (const key of ['happiness', 'discipline', 'respect'] as const) numeric(key, before.stats[key], after.stats[key]);
+  numeric('condition', before.asset?.condition, after.asset?.condition);
+  numeric('relationship', before.relationship, after.relationship);
+  numeric('satisfaction', before.tenancy?.satisfaction, after.tenancy?.satisfaction);
+  numeric('pet-happiness', before.pet?.happiness, after.pet?.happiness);
+  numeric('training', before.pet?.training, after.pet?.training);
+  numeric('proficiency', before.proficiency, after.proficiency);
+  for (const id of Object.keys(before.pet?.bonds ?? {})) numeric('bond-' + id, before.pet?.bonds[id], after.pet?.bonds[id]);
+  const payments = next.ledger.slice(before.ledgerCursor).filter(row => row.personId === world.activePersonId);
+  const paid = payments.filter(row => row.category === 'lifestyle-cost').reduce((sum, row) => sum - row.cashDelta, 0n);
+  const claim = payments.filter(row => row.category === 'insurance-claim').reduce((sum, row) => sum + row.cashDelta, 0n);
+  expect(rows.find(row => row.id === 'cost-' + offer.currency)?.value).toBe(paid ? formatMoney({ minor: -paid, currency: offer.currency }) : undefined);
+  expect(rows.find(row => row.id === 'insurance-' + offer.currency)?.value).toBe(claim ? formatMoney({ minor: claim, currency: offer.currency }) : undefined);
+  expect(rows.filter(row => row.id.startsWith('injury-'))).toHaveLength(next.people[next.activePersonId].health.conditions.filter(row => !before.conditions.some(old => old.id === row.id)).length);
+  expect(rows.filter(row => row.id.startsWith('incident-'))).toHaveLength(next.incidents.length - world.incidents.length);
+  expect(rows.some(row => /cured|healed|convicted|ownership transferred/i.test(row.value))).toBe(false);
+  const frozen = encodeWorld(next); lifestyleConsequenceRows(next, offer, before); expect(encodeWorld(next)).toBe(frozen);
+  const cold = decodeWorld(frozen), acknowledged = resolveCommand(cold, { type: 'acknowledge', resultId: cold.pending!.id }, true);
+  expect(acknowledged.journal).toEqual(next.journal); expect(acknowledged.lifestyle!.records).toEqual(next.lifestyle!.records);
+});
+test('capped changes show only the actual delta and a later editorial update cannot rewrite the frozen journal', () => {
+  const template = lifestyleTemplates.find(row => row.id === 'home-first-dinner')!, { world, id } = prepared(template);
+  world.people[world.activePersonId].stats.happiness = 99;
+  offerLifestyleStory(world, template.id, id, true);
+  const saved = world.lifestyle!.offers.at(-1)!.choices[0].journal, published = lifestyleCopyV2[template.id].choices[0].journal;
+  try {
+    lifestyleCopyV2[template.id].choices[0].journal = 'I would write something different in a later edition.';
+    const next = resolveCommand(decodeWorld(encodeWorld(world)), { type: 'choose', eventId: world.pending!.id, choiceId: 'stay' }, true);
+    expect(next.journal.at(-1)!.text).toBe(saved);
+    expect(next.pending?.kind === 'result' && next.pending.effects.find(row => row.id === 'happiness')?.value).toBe('99% → 100%');
+  } finally { lifestyleCopyV2[template.id].choices[0].journal = published; }
+});

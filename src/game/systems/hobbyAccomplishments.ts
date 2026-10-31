@@ -3,6 +3,7 @@ import type { World } from '../model';
 import { hobbyContent, hobbyKinds, outingContent, outingKinds, type HobbyKind } from '../content/leisure';
 import { countries } from '../countries';
 import { rules } from '../rules';
+import { formatMoney } from '../money';
 import { IneligibleAction } from '../errors';
 import { accountFor, active, availableCash, bounded, draw, post, result } from './common';
 import { activeHobbyPlan, personHobbies } from './leisureSchemas';
@@ -60,9 +61,9 @@ export function resolveHobbyLifestyle(world: World, command: HobbyLifestyleComma
         person.stats.energy = bounded(person.stats.energy - 4);
         person.stats.happiness = bounded(person.stats.happiness + 2);
         person.stats.stress = bounded(person.stats.stress - 2);
-        const body = 'I spent free time on ' + hobbyContent[command.kind].name.toLowerCase() + ' using local shared resources. It was enjoyable without a paid routine; no proficiency, equipment, qualification or money was invented.';
+        const body = 'I spent some free time on ' + hobbyContent[command.kind].name.toLowerCase() + ' with local shared resources.';
         recordLifestyle(world, { kind: 'casual-hobby', subjectId: command.kind, body });
-        result(world, 'Time of your own', body, 'leisure-' + command.kind);
+        result(world, 'Time of your own', 'You spend a little time on ' + hobbyContent[command.kind].name.toLowerCase() + '. It is pleasant to do something without needing to be impressive at it.', 'leisure-' + command.kind);
         return;
     }
     if (command.type === 'shared-leisure-outing') {
@@ -94,9 +95,9 @@ export function resolveHobbyLifestyle(world: World, command: HobbyLifestyleComma
             person.stats.happiness = bounded(person.stats.happiness + 4);
             sharedMemory(world, contact.id, 'shared-outing:' + command.kind + ':' + current, 5);
         }
-        const body = consent.accepted ? 'I went to ' + venue.name.toLowerCase() + ' with ' + nameOf(world, contact.id) + (payer.id !== person.id ? ', accompanied by ' + nameOf(world, payer.id) : '') + '. The actual tickets and shared memory are recorded.' : 'Our proposed outing did not receive everyone’s agreement. Nobody attended and no tickets were charged.';
+        const body = consent.accepted ? 'I went to ' + venue.name.toLowerCase() + ' with ' + nameOf(world, contact.id) + (payer.id !== person.id ? ', accompanied by ' + nameOf(world, payer.id) : '') + '. It was good to have company.' : 'I suggested an outing, but we could not all agree to go.';
         recordLifestyle(world, { kind: 'shared-outing-' + command.kind, invitedId: contact.id, funding: { payerId: payer.id, quotedFee: fee, permission }, subjectId: command.contactId, participants: consent.accepted ? participants : [person.id], ...consent, paid: payer.id === person.id ? paid : 0n, paymentIds, body });
-        result(world, consent.accepted ? 'A shared afternoon' : 'Another time', body, 'leisure-' + command.kind);
+        result(world, consent.accepted ? 'A shared afternoon' : 'Another time', consent.accepted ? 'You go to ' + venue.name.toLowerCase() + ' with ' + nameOf(world, contact.id) + '. For a while, the usual conversation can wait.' : 'The outing does not come together. You leave the invitation for another time.', 'leisure-' + command.kind);
         return;
     }
     const hobby = command.type === 'work-hobby-project' ? state.projects.find(row => row.id === command.projectId)?.hobbyId : command.type === 'hobby-competition' ? personHobbies(world).find(row => row.kind === command.kind)?.id : command.hobbyId;
@@ -120,7 +121,7 @@ export function resolveHobbyLifestyle(world: World, command: HobbyLifestyleComma
             peerDiscipline: number;
         } | undefined;
         if (!consent.accepted)
-            body = nameOf(world, payer.id) + ' declined my competition request. I did not enter or pay; the annual opportunity is recorded.';
+            body = 'I asked ' + nameOf(world, payer.id) + ' about entering the competition, but they declined.';
         else {
             paymentIds = lifestylePayment(world, fee, 'Hobby competition', countries[person.country].currency, payer);
             paid = fee;
@@ -144,10 +145,11 @@ export function resolveHobbyLifestyle(world: World, command: HobbyLifestyleComma
             sharedMemory(world, peer.id, 'hobby-competition:' + profile.id + ':' + world.date.year + (won ? ':won' : ':lost'), command.approach === 'social' ? 5 : 2);
             person.stats.energy = bounded(person.stats.energy - 4);
             person.stats.respect = bounded(person.stats.respect + (won ? 2 : 0));
-            body = 'I entered a local ' + hobbyContent[command.kind].name.toLowerCase() + ' competition alongside ' + nameOf(world, peer.id) + '. ' + (won ? command.approach === 'social' ? 'Our contribution received an honourable mention. There was no cash award for this approach.' : 'My entry won a recorded cash prize.' : 'My entry did not place. I still had a real afternoon with people who cared about the same thing.') + ' Chance ' + chance + '%, draw ' + roll + '.';
+            body = 'I entered a local ' + hobbyContent[command.kind].name.toLowerCase() + ' competition alongside ' + nameOf(world, peer.id) + '. ' + (won ? command.approach === 'social' ? 'Our contribution received an honourable mention.' : 'My entry won a cash prize.' : 'My entry did not place, but I enjoyed being around people who cared about the same thing.');
         }
         recordLifestyle(world, { kind: 'hobby-competition', funding: { payerId: payer.id, quotedFee: fee, permission: consent }, ...(competition ? { competition } : {}), subjectId: profile.id, participants, chance: consent.chance, roll: consent.roll, accepted: consent.accepted, paid: payer.id === person.id ? paid : 0n, received, paymentIds, before: profile.proficiency, after: profile.proficiency, ...(outcomeChance !== undefined ? { outcomeChance, outcomeRoll, success } : {}), body });
-        result(world, 'An afternoon in good company', body, 'leisure-' + profile.kind);
+        const effects = paymentIds.flatMap(id => { const payment = world.ledger.find(row => row.id === id)!; return payment.cashDelta ? [{ id, label: payment.cashDelta < 0n ? 'Entry fee' : 'Prize received', value: formatMoney({ minor: payment.cashDelta, currency: payment.currency }), tone: payment.cashDelta < 0n ? 'negative' as const : 'positive' as const }] : []; });
+        result(world, success ? 'A moment worth keeping' : consent.accepted ? 'A fair attempt' : 'Another year', consent.accepted ? success ? command.approach === 'social' ? 'Your contribution earns an honourable mention. It is a good afternoon to recognise a few friendly faces.' : 'Your entry wins a prize. You manage to accept it without explaining every difficult bit that led up to this moment.' : 'Your entry does not place. You have a proper attempt behind you now, and something to think about next time.' : nameOf(world, payer.id) + ' declines the request. You put this year’s competition plans away.', 'leisure-' + profile.kind, effects);
         return;
     }
     if (command.type === 'start-hobby-project') {
@@ -158,8 +160,8 @@ export function resolveHobbyLifestyle(world: World, command: HobbyLifestyleComma
         if (state.projects.length >= 512)
             throw new IneligibleAction('The project history limit has been reached');
         state.projects.push({ workVersion: 2, initialPracticeCursor: profile.practices.length, id: 'hobby_project_' + world.revision, personId: person.id, hobbyId: profile.id, title: command.title, started: { ...world.date }, completed: null, progress: 0, lastMonth: current, practiceCursor: profile.practices.length });
-        recordLifestyle(world, { kind: 'project-start', subjectId: profile.id, body: 'I began “' + command.title + '”, a personal ' + hobbyContent[profile.kind].name.toLowerCase() + ' project. Four later attended practice months can contribute to the finished work when I review the project.' });
-        result(world, 'Something of your own', 'The project is started. No physical asset, sale value or qualification has been created.', 'leisure-' + profile.kind);
+        recordLifestyle(world, { kind: 'project-start', subjectId: profile.id, body: 'I began “' + command.title + '”, a personal ' + hobbyContent[profile.kind].name.toLowerCase() + ' project. It was good to have something of my own to work towards.' });
+        result(world, 'Something of your own', 'You begin “' + command.title + '”. The first stretch is mostly possibility. Later practice will give you something to bring back to it.', 'leisure-' + profile.kind);
         return;
     }
     if (command.type === 'work-hobby-project') {
@@ -181,9 +183,9 @@ export function resolveHobbyLifestyle(world: World, command: HobbyLifestyleComma
         person.stats.energy = bounded(person.stats.energy - energy);
         if (project.progress === 4)
             project.completed = { ...world.date };
-        const body = 'I ' + (project.completed ? 'completed' : 'worked on') + ' “' + project.title + '”. ' + (project.completed ? 'It remains a personal accomplishment, with no invented resale value or qualification.' : project.progress + (project.workVersion === 2 ? '/4 parts are complete.' : '/4 work sessions are complete.'));
+        const body = project.workVersion === 2 ? 'I ' + (project.completed ? 'finished' : 'made progress on') + ' “' + project.title + '”. ' + (project.completed ? 'After all the uncertain middle, it was done.' : 'I could see more clearly what it needed next.') : 'I ' + (project.completed ? 'completed' : 'worked on') + ' “' + project.title + '”. ' + (project.completed ? 'It remains a personal accomplishment, with no invented resale value or qualification.' : project.progress + '/4 work sessions are complete.');
         recordLifestyle(world, { kind: project.completed ? 'project-complete' : 'project-work', subjectId: project.id, before, after: project.progress, ...(project.workVersion === 2 ? { projectSession: { practiceBefore, practiceAfter: project.practiceCursor, months: credited } } : {}), body });
-        result(world, project.completed ? 'You finished it' : 'One part closer', body, 'leisure-' + profile.kind);
+        result(world, project.completed ? 'You finished it' : 'One part closer', project.workVersion === 2 ? project.completed ? 'You finish “' + project.title + '”. For once, there is nothing left to put off until the next session.' : 'You bring your later practice back to “' + project.title + '”. ' + project.progress + '/4 parts are complete.' : body, 'leisure-' + profile.kind);
         return;
     }
     if (person.stats.energy < 4) throw new IneligibleAction('Rest before sharing practice');
@@ -207,7 +209,7 @@ export function resolveHobbyLifestyle(world: World, command: HobbyLifestyleComma
         sharedMemory(world, contact.id, 'shared-hobby:' + profile.id + ':' + current, 5);
         person.stats.energy = bounded(person.stats.energy - 4);
     }
-    const body = consent.accepted ? 'I shared ' + hobbyContent[profile.kind].name.toLowerCase() + ' practice with ' + nameOf(world, contact.id) + '. Our shared memory grew; this did not count as another paid lesson or award extra proficiency.' : nameOf(world, contact.id) + ' declined practice together. No attendance or progress was invented.';
+    const body = consent.accepted ? 'I shared ' + hobbyContent[profile.kind].name.toLowerCase() + ' practice with ' + nameOf(world, contact.id) + '. It was easier to laugh about the awkward bits together.' : 'I invited ' + nameOf(world, contact.id) + ' to practise together, but they declined.';
     recordLifestyle(world, { kind: 'shared-hobby', invitedId: contact.id, subjectId: profile.id, participants: [person.id, ...(consent.accepted ? [contact.id] : [])], ...consent, body });
-    result(world, consent.accepted ? 'Someone to share it with' : 'Another time', body, 'leisure-' + profile.kind);
+    result(world, consent.accepted ? 'Someone to share it with' : 'Another time', consent.accepted ? 'You share ' + hobbyContent[profile.kind].name.toLowerCase() + ' practice with ' + nameOf(world, contact.id) + '. The difficult parts make better conversation than either of you expected.' : nameOf(world, contact.id) + ' declines. You leave the invitation open for another day.', 'leisure-' + profile.kind);
 }

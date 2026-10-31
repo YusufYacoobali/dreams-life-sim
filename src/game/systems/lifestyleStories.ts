@@ -1,3 +1,5 @@
+import { polishedLifestyleTemplate } from '../content/lifestylePolish';
+import { captureLifestyleConsequences, lifestyleConsequenceRows } from './lifestyleStoryEffects';
 import { hobbyContacts } from './leisure';
 import type { World } from '../model';
 import { IneligibleAction } from '../errors';
@@ -89,15 +91,22 @@ export function offerLifestyleStory(world: World, templateId?: string, subjectId
         return false;
     if (!forceForTest && draw(world, 'events', 1, 100) > 18)
         return false;
-    const template = eligible[draw(world, 'events', 0, eligible.length - 1)], binding = context(world, template, subjectId)!;
+    const template = polishedLifestyleTemplate(eligible[draw(world, 'events', 0, eligible.length - 1)]), binding = context(world, template, subjectId)!;
     const text = (value: string) => value.replace(/\{(subject|person|project)\}/g, (_token, key: string) => key === 'subject' ? binding.subject : key === 'person' ? binding.other ? nameOf(world, binding.other) : 'your household' : binding.projectTitle);
     const currency = countries[person.country].currency, id = 'lifestyle_offer_' + world.revision + '_' + state.offers.length;
     const challengeRoll = template.choices.some(choice => choice.operations.some(operation => operation.kind === 'hobby-challenge')) ? draw(world, 'outcomes', 1, 100) : null;
     const challengeProfile = world.hobbies.find(row => row.id === binding.id);
-    const choices = template.choices.map(choice => { const operation = choice.operations.find(operation => operation.kind === 'hobby-challenge'); const challenge = operation && challengeProfile && challengeRoll !== null ? { practiceCursor: challengeProfile.practices.length, proficiency: challengeProfile.proficiency, discipline: person.stats.discipline, chance: Math.max(10, Math.min(90, 25 + Math.floor(challengeProfile.proficiency / 2) + Math.floor(person.stats.discipline / 10) + operation.amount)), roll: challengeRoll } : undefined; return ({ id: choice.id, label: choice.label, cost: roundRatio(rules[person.country].baseWage * BigInt(choice.costBps), 10000n), body: text(choice.body + (challenge ? challenge.roll <= challenge.chance ? (template.id === 'hobby-chess-prodigy' ? ' You win the informal game. {person} stays to discuss a turning point.' : ' The attempt comes together. You finish more confident, and it shows.') : (template.id === 'hobby-chess-prodigy' ? ' You lose the informal game. {person} stays to go over a turning point.' : ' This attempt does not come together. Afterwards, you can see one thing to try differently.') : '')), ...(challenge ? { challenge } : {}), operations: choice.operations.map(row => ({ ...row })) }); });
-    state.offers.push({ contextVersion: 2, id, templateId: template.id, personId: person.id, subjectId: binding.id, participantId: binding.other, tenancyId: binding.tenancyId, date: { ...world.date }, country: person.country, city: person.city, currency, context: binding.savedContext, status: 'open', choices, selected: null });
+    const choices = template.choices.map(choice => {
+        const operation = choice.operations.find(operation => operation.kind === 'hobby-challenge');
+        const challenge = operation && challengeProfile && challengeRoll !== null ? { practiceCursor: challengeProfile.practices.length, proficiency: challengeProfile.proficiency, discipline: person.stats.discipline, chance: Math.max(10, Math.min(90, 25 + Math.floor(challengeProfile.proficiency / 2) + Math.floor(person.stats.discipline / 10) + operation.amount)), roll: challengeRoll } : undefined;
+        const won = challenge && challenge.roll <= challenge.chance;
+        const body = choice.body + (challenge ? template.id === 'hobby-chess-prodigy' ? won ? ' You win the informal game. {person} stays to discuss a turning point.' : ' You lose the informal game. {person} stays to go over a turning point.' : won ? ' The attempt comes together. You finish more confident, and it shows.' : ' This attempt does not come together. Afterwards, you can see one thing to try differently.' : '');
+        const journal = choice.journal + (challenge ? won ? ' I was pleased with how the attempt turned out.' : ' I did not get the result I wanted, but saw something to try next time.' : '');
+        return { id: choice.id, label: choice.label, cost: roundRatio(rules[person.country].baseWage * BigInt(choice.costBps), 10000n), body: text(body), journal: text(journal), resultTitle: template.title, ...(challenge ? { challenge } : {}), operations: choice.operations.map(row => ({ ...row })) };
+    });
+    state.offers.push({ journalVersion: 1, outputVersion: 1, copyVersion: 2, contextVersion: 2, id, templateId: template.id, personId: person.id, subjectId: binding.id, participantId: binding.other, tenancyId: binding.tenancyId, date: { ...world.date }, country: person.country, city: person.city, currency, context: binding.savedContext, status: 'open', choices, selected: null });
     const people = [person.id, ...(binding.other ? [binding.other] : [])];
-    offerPending(world, { kind: 'decision', id, templateId: template.id, title: template.title, body: text(template.body), illustration: template.domain === 'property' ? 'property' : template.domain === 'vehicle' ? 'vehicle' : template.domain === 'pet' ? 'pet-' + world.pets.find(row => row.id === binding.id)!.species : 'leisure-' + world.hobbies.find(row => row.id === binding.id)!.kind, personIds: people, choices: choices.map(choice => ({ id: choice.id, label: choice.label + (choice.cost ? ' · ' + formatMoney({ minor: choice.cost, currency }) : ''), effects: [{ kind: 'lifestyle-choice' as const, version: 1 as const, offerId: id, choiceId: choice.id }], resultTitle: 'A part of your life', resultBody: choice.body, journal: choice.body })) }, 28);
+    offerPending(world, { kind: 'decision', id, templateId: template.id, title: template.title, body: text(template.body), illustration: template.domain === 'property' ? 'property' : template.domain === 'vehicle' ? 'vehicle' : template.domain === 'pet' ? 'pet-' + world.pets.find(row => row.id === binding.id)!.species : 'leisure-' + world.hobbies.find(row => row.id === binding.id)!.kind, personIds: people, choices: choices.map(choice => ({ id: choice.id, label: choice.label + (choice.cost ? ' · ' + formatMoney({ minor: choice.cost, currency }) : ''), effects: [{ kind: 'lifestyle-choice' as const, version: 1 as const, offerId: id, choiceId: choice.id }], resultTitle: choice.resultTitle, resultBody: choice.body, journal: choice.journal })) }, 28);
     world.actionCounts[key] = (world.actionCounts[key] ?? 0) + 1;
     if (world.annual?.stage === 'months')
         world.annual.pausedForPlanning = true;
@@ -114,7 +123,7 @@ export function resolveLifestyleChoice(world: World, effect: z.infer<typeof life
         throw new IneligibleAction('This lifestyle decision is no longer open');
     if (!offer) {
         original.status = 'cancelled';
-        return { title: 'Circumstances changed', body: 'The saved people, asset or household circumstances changed. No cost or consequence was applied.', journal: 'A lifestyle decision ended because its original context was no longer current.', effects: [] };
+        return original.journalVersion === 1 ? { title: 'Circumstances changed', body: 'Things have changed since this came up. You leave it there.', journal: 'I let an earlier plan go when the circumstances changed.', effects: [] } : { title: 'Circumstances changed', body: 'The saved people, asset or household circumstances changed. No cost or consequence was applied.', journal: 'A lifestyle decision ended because its original context was no longer current.', effects: [] };
     }
     const choice = offer.choices.find(row => row.id === effect.choiceId);
     if (!choice)
@@ -122,6 +131,7 @@ export function resolveLifestyleChoice(world: World, effect: z.infer<typeof life
     const reason = lifestyleChoiceReason(world, effect);
     if (reason)
         throw new IneligibleAction(reason);
+    const before = offer.outputVersion === 1 ? captureLifestyleConsequences(world, offer) : undefined;
     const paymentIds = lifestylePayment(world, choice.cost, 'Lifestyle situation: ' + offer.templateId, offer.currency), person = active(world), asset = world.assets.find(row => row.id === offer.subjectId), pet = world.pets.find(row => row.id === offer.subjectId), tenancy = offer.tenancyId && world.lifestyle!.tenancies.find(row => row.id === offer.tenancyId);
     let received = 0n;
     for (const operation of choice.operations) {
@@ -160,7 +170,7 @@ export function resolveLifestyleChoice(world: World, effect: z.infer<typeof life
             recordLifestyleVandalism(world, offender.id, person.id, loss);
         }
         else if (operation.kind === 'injury')
-            addCondition(world, person, 'sprain', operation.amount);
+            addCondition(world, person, 'sprain', operation.amount, offer.journalVersion !== 1);
         else if (operation.kind === 'bond' && pet)
             pet.bonds[person.id] = bounded((pet.bonds[person.id] ?? 0) + operation.amount);
         else if (operation.kind === 'training' && pet?.companion)
@@ -175,7 +185,7 @@ export function resolveLifestyleChoice(world: World, effect: z.infer<typeof life
             if (tenancy)
                 tenancy.satisfaction = bounded(tenancy.satisfaction + operation.amount);
         }
-        else if (operation.kind === 'competition')
+        else if ((operation.kind === 'competition' || operation.kind === 'discipline'))
             person.stats.discipline = bounded(person.stats.discipline + operation.amount);
         else if (operation.kind === 'mood')
             person.stats.happiness = bounded(person.stats.happiness + operation.amount);
@@ -183,8 +193,8 @@ export function resolveLifestyleChoice(world: World, effect: z.infer<typeof life
     offer.status = 'resolved';
     offer.selected = choice.id;
     // Insurance payments already have their own established category; the activity record tracks its separate real spending.
-    recordLifestyle(world, { kind: 'story-' + offer.templateId, subjectId: offer.subjectId, participants: [person.id, ...(offer.participantId ? [offer.participantId] : [])], currency: offer.currency, paid: choice.cost, paymentIds, ...(choice.challenge ? { outcomeChance: choice.challenge.chance, outcomeRoll: choice.challenge.roll, success: choice.challenge.roll <= choice.challenge.chance } : {}), body: choice.body });
-    return { title: 'A part of your life', body: choice.body, journal: choice.body, effects: [] };
+    recordLifestyle(world, { kind: 'story-' + offer.templateId, subjectId: offer.subjectId, participants: [person.id, ...(offer.participantId ? [offer.participantId] : [])], currency: offer.currency, paid: choice.cost, paymentIds, ...(choice.challenge ? { outcomeChance: choice.challenge.chance, outcomeRoll: choice.challenge.roll, success: choice.challenge.roll <= choice.challenge.chance } : {}), body: offer.journalVersion === 1 ? choice.journal! : choice.body }, { journal: offer.journalVersion !== 1 });
+    return { title: offer.outputVersion === 1 ? choice.resultTitle! : 'A part of your life', body: choice.body, journal: offer.journalVersion === 1 ? choice.journal! : choice.body, effects: before ? lifestyleConsequenceRows(world, offer, before) : [] };
 }
 export function cancelLifestyleOffers(world: World, personId: string) { for (const offer of world.lifestyle?.offers ?? [])
     if (offer.personId === personId && offer.status === 'open')

@@ -1,3 +1,4 @@
+import { vehicleMinimumAge } from './vehicleAgePolicy';
 import { namedTenancy, endNamedTenancy } from './landlordState';
 import { recoverStolenVehicle, stolenAssetReason } from './stolenVehicles';
 import { saleQuote } from './assetQuotes';
@@ -69,10 +70,11 @@ export function purchaseReason(world: World, offer: AssetOffer, financing: 'cash
   if (isConfined(world)) return 'New purchases are unavailable in custody';
   const person = active(world);
   if (offer.licenceKind && !world.lifestyle) return 'Review and enable the lifestyle expansion before purchasing specialty vehicles';
-  if (ageOn(person, world.date) < rules[person.country].adultAge) return 'Purchases are available to adults';
+  const minimumAge = world.lifestyle && offer.kind === 'vehicle' && (offer.licenceKind ?? 'road') === 'road' && financing === 'cash' ? vehicleMinimumAge(person.country) : rules[person.country].adultAge;
+  if (ageOn(person, world.date) < minimumAge) return minimumAge < 18 ? 'Road vehicle cash purchases are available from age ' + minimumAge : 'Purchases are available to adults';
   if (financing === 'mortgage' && offer.kind !== 'property') return 'Mortgages are only available for property';
   const quote = purchaseQuote(world, offer, financing, depositBps, termMonths);
-  if (accountFor(world).cash < quote.cashRequired) return 'Your balance cannot cover the upfront payment';
+  if (availableCash(accountFor(world)) < quote.cashRequired) return 'Your balance cannot cover the upfront payment';
   if (quote.principal) return debtCapacityReason(world, quote.payment);
 }
 export function ownedAsset(world: World, id: string): OwnedAsset {
@@ -134,7 +136,7 @@ export function resolveAssets(world: World, command: AssetCommand, presentPurcha
     if (quote.principal) makeMortgage(world, asset, quote.principal, quote.interestBps, quote.termMonths);
     charge(world, quote.price + quote.fee, 'purchase', 'Purchased ' + asset.name);
     fact(world, 'I bought ' + asset.name + ' in ' + asset.city + '.', 'assets');
-    if (presentPurchase) result(world, 'It’s yours', 'Ownership and the payment are recorded. Ongoing costs apply as time passes.', asset.kind === 'vehicle' ? 'vehicle' : asset.kind === 'property' ? 'property' : 'money', [{ id: 'paid', label: 'Cash paid upfront', value: formatMoney({ minor: quote.cashRequired, currency: asset.currency }), tone: 'negative' }]);
+    if (presentPurchase) result(world, 'It’s yours', 'You take ownership of ' + asset.name + '. It is yours to enjoy—and look after.', asset.kind === 'vehicle' ? 'vehicle' : asset.kind === 'property' ? 'property' : 'money', [{ id: 'paid', label: 'Cash paid upfront', value: formatMoney({ minor: quote.cashRequired, currency: asset.currency }), tone: 'negative' }]);
     return;
   }
   const asset = ownedAsset(world, command.assetId);
@@ -150,7 +152,7 @@ export function resolveAssets(world: World, command: AssetCommand, presentPurcha
     if (asset.kind === 'property') throw new IneligibleAction('List a property for sale and wait for an offer');
     const quote = saleQuote(world, asset);
     if (command.quotedPrice !== quote.price) throw new IneligibleAction('The offer changed. Review it again');
-    result(world, 'Sale completed', 'The asset has left your ownership and the actual proceeds are in your account.', asset.kind === 'vehicle' ? 'vehicle' : 'money', completeAssetSale(world, asset.id, quote.price));
+    result(world, 'Sale completed', 'You hand over ' + asset.name + '. The proceeds are in your account.', asset.kind === 'vehicle' ? 'vehicle' : 'money', completeAssetSale(world, asset.id, quote.price));
   } else if (command.type === 'list-property') {
     if (asset.kind !== 'property') throw new IneligibleAction('Only properties use sale listings');
     if (command.askingPrice < asset.value / 2n || command.askingPrice > asset.value * 2n) throw new IneligibleAction('Set an asking price between half and twice the estimated value');

@@ -1,3 +1,5 @@
+import { vehicleMinimumAge } from './vehicleAgePolicy';
+export { roadLicenceAgeV1 } from './vehicleAgePolicy';
 import type { CountryCode } from '../countries';
 import type { World } from '../model';
 import { rules } from '../rules';
@@ -5,7 +7,6 @@ import { ageOn } from '../personHelpers';
 import type { licenceKinds } from './lifestyleSchemas';
 export type LicenceKind = typeof licenceKinds[number];
 /** Authored game rules, not a real-world licensing or certification service. */
-export const roadLicenceAgeV1: Record<CountryCode, number> = { US: 16, CA: 16, GB: 17, AU: 17, FR: 18, DE: 18, ES: 18, IT: 18, BR: 18, IN: 18, JP: 18, ZA: 18 };
 export const licenceQuiz: Record<LicenceKind, readonly {
     prompt: string;
     answers: readonly [
@@ -33,7 +34,7 @@ export const licenceQuiz: Record<LicenceKind, readonly {
 };
 export const licenceFee = (world: World, kind: LicenceKind) => rules[world.people[world.activePersonId].country].baseWage * BigInt(kind === 'road' ? 2 : kind === 'boat' ? 8 : 35) / 10000n || 1n;
 export const hasLicence = (world: World, kind: LicenceKind, personId = world.activePersonId) => !!world.lifestyle?.licences.some(row => row.personId === personId && row.kind === kind && row.passed);
-export function licenceReason(world: World, kind: LicenceKind) { const person = world.people[world.activePersonId], min = kind === 'road' ? roadLicenceAgeV1[person.country] : 18; if (ageOn(person, world.date) < min)
+export function licenceReason(world: World, kind: LicenceKind) { const person = world.people[world.activePersonId], min = vehicleMinimumAge(person.country, kind); if (ageOn(person, world.date) < min)
     return 'Game policy: available from age ' + min; if (hasLicence(world, kind))
     return 'You already passed this licence'; const records = world.lifestyle?.licences.filter(row => row.personId === person.id && row.kind === kind && row.date.year === world.date.year) ?? []; if (records.some(row => row.date.month === world.date.month))
     return 'Try again in a later month'; if (records.length >= 3)

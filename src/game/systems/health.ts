@@ -74,11 +74,11 @@ function limit(world: World, action: string, person = active(world)) {
   const key = person.id + ':health:' + world.date.year + ':' + action;
   if (world.actionCounts[key]) throw new IneligibleAction('You have already tried this this year'); world.actionCounts[key] = 1;
 }
-export function addCondition(world: World, person: Person, type: ConditionId, severity: number): Condition {
+export function addCondition(world: World, person: Person, type: ConditionId, severity: number, writeJournal = true): Condition {
   const existing = person.health.conditions.find(item => item.type === type && item.status !== 'recovered');
   if (existing) { existing.severity = bounded(existing.severity + Math.floor(severity / 3)); return existing; }
   const condition: Condition = { id: 'condition_' + person.id + '_' + world.revision + '_' + person.health.conditions.length, type, onset: { ...world.date }, severity: bounded(severity), status: 'active', diagnosed: null, resolved: null, months: 0, treatment: null, lastEmergencyYear: null, episode: newMedicalEpisode() };
-  person.health.conditions.push(condition); fact(world, 'I developed symptoms: ' + conditions[type].symptoms.toLowerCase() + '.', 'health', '', person.id); return condition;
+  person.health.conditions.push(condition); if (writeJournal) fact(world, 'I developed symptoms: ' + conditions[type].symptoms.toLowerCase() + '.', 'health', '', person.id); return condition;
 }
 function diagnose(world: World, patient: Person, provider: Person, service: 'checkup' | 'symptoms' | 'tests' | 'specialist') {
   const diagnosed: Condition[] = [], stream = patient.id === world.activePersonId ? 'outcomes' : 'npcs';

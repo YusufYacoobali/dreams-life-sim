@@ -1,3 +1,4 @@
+import { lifestyleBalance } from './lifestyleBalance';
 import { mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
@@ -13,12 +14,14 @@ export async function lifestyleJourney(initial: World) {
         command: GameCommand;
         date: World['date'];
         revision: number;
+        resolveMs?: number;
+        presentation?: { kind: string; title: string; templateId?: string; effects?: { id: string }[] };
     }[] = [];
     await repository.initialise();
     await repository.create(world);
     const run = { get world() { return world; }, trace,
         async command(command: GameCommand, failReceipt = false) {
-            const before = world, expected = resolveCommand(before, command, true), receipt = 'lifestyle:journey:' + before.revision;
+            const before = world, began = performance.now(), expected = resolveCommand(before, command, true), resolveMs = performance.now() - began, receipt = 'lifestyle:journey:' + before.revision;
             if (failReceipt) {
                 const tables = ['lives', 'preferences', 'receipts', 'snapshots', 'backups', 'snapshot_metadata', 'branches', 'restore_receipts'];
                 const savedRows = () => Object.fromEntries(tables.map(table => [table, sqlite.prepare('SELECT * FROM ' + table).all().map(row => JSON.stringify(row)).sort()]));
@@ -44,7 +47,7 @@ export async function lifestyleJourney(initial: World) {
             await repository.initialise();
             world = await repository.load(before.id);
             expect(world).toEqual(expected);
-            trace.push({ command, date: { ...world.date }, revision: world.revision });
+            trace.push({ command, date: { ...world.date }, revision: world.revision, resolveMs, ...((command.type === 'choose' || command.type === 'acknowledge') && before.pending ? { presentation: { kind: before.pending.kind, title: before.pending.title, ...(before.pending.kind === 'decision' ? { templateId: before.pending.templateId } : { effects: before.pending.effects.map(row => ({ ...row })) }) } } : {}) });
         },
         async settle(onPause?: () => Promise<boolean>) { let guard = 0; while ((world.pending || world.annual) && guard++ < 200) {
             const event = world.pending;
@@ -66,7 +69,7 @@ export async function lifestyleJourney(initial: World) {
         async year(onPause?: () => Promise<boolean>) { await run.command({ type: 'advance' }); await run.settle(onPause); },
         async branch() { const snapshots = await repository.snapshots(world.id); if (!snapshots.length)
             throw Error('Expected a real pre-year snapshot'); const before = world, branch = await repository.restoreBranch(world.id, snapshots[0].id, world.revision, 'life_lifestyle_branch', 'lifestyle-restore'); expect(branch.id).toBe('life_lifestyle_branch'); expect(await repository.load(before.id)).toEqual(before); return branch; },
-        evidence(label: string) { const record = { label, date: world.date, commands: trace, final: { generation: world.generation, activePersonId: world.activePersonId, people: Object.keys(world.people).length, ledgerRows: world.ledger.length, assets: world.assets, pets: world.pets, hobbies: world.hobbies.map(hobby => ({ ...hobby, practices: hobby.practices.length })), lifestyle: world.lifestyle } }; if (process.env.DREAMS_LIFESTYLE_JOURNEY_DIR)
+        evidence(label: string) { const record = { label, date: world.date, metrics: lifestyleBalance(world, trace, initial.date), commands: trace, final: { generation: world.generation, activePersonId: world.activePersonId, activePerson: world.people[world.activePersonId], people: Object.keys(world.people).length, ledgerRows: world.ledger.length, assets: world.assets, pets: world.pets, hobbies: world.hobbies.map(hobby => ({ ...hobby, practices: hobby.practices.length })), lifestyle: world.lifestyle } }; if (process.env.DREAMS_LIFESTYLE_JOURNEY_DIR)
             writeFileSync(join(process.env.DREAMS_LIFESTYLE_JOURNEY_DIR, label + '.json'), JSON.stringify(record, moneyJSON, 2)); return record; },
         close() { sqlite.close(); rmSync(folder, { recursive: true, force: true }); },
     };
