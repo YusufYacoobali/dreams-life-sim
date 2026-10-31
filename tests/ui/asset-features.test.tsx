@@ -52,9 +52,9 @@ function capture(name: string, tree: unknown) {
 }
 afterEach(() => { jest.restoreAllMocks(); mockDispatch.mockReset(); mockPush.mockReset(); });
 
-test('all forty listings have varied, plausible specifications without changing saved asset data', () => {
+test('all forty-six listings have varied, plausible specifications without changing saved asset data', () => {
   const homes = assetCatalog.filter(offer => offer.kind === 'property'), vehicles = assetCatalog.filter(offer => offer.kind === 'vehicle');
-  expect(homes).toHaveLength(20); expect(vehicles).toHaveLength(20);
+  expect(homes).toHaveLength(20); expect(vehicles).toHaveLength(26); expect(vehicles.filter(row => !row.licenceKind)).toHaveLength(20);
   for (const home of homes) {
     expect(home.bedrooms).toBeGreaterThanOrEqual(1);
     expect(home.bathrooms).toBeGreaterThanOrEqual(1); expect(home.bathrooms).toBeLessThanOrEqual(home.bedrooms! + 1);
@@ -66,11 +66,11 @@ test('all forty listings have varied, plausible specifications without changing 
   for (const vehicle of vehicles) {
     expect(Number(vehicle.rangeMiles !== undefined) + Number(vehicle.fuelEconomyMpg !== undefined)).toBe(1);
     expect(vehicle.rangeMiles ?? vehicle.fuelEconomyMpg).toBeGreaterThan(0);
-    expect(vehicle.topSpeedMph).toBeGreaterThanOrEqual(40); expect(vehicle.topSpeedMph).toBeLessThanOrEqual(220);
+    expect(vehicle.topSpeedMph).toBeGreaterThanOrEqual(vehicle.licenceKind === 'boat' ? 8 : 40); expect(vehicle.topSpeedMph).toBeLessThanOrEqual(220);
     expect(Number.isSafeInteger(vehicle.listingMileage)).toBe(true); expect(vehicle.listingMileage).toBeGreaterThanOrEqual(0);
     if (vehicle.id.startsWith('used-')) expect(vehicle.listingMileage).toBeGreaterThan(0);
   }
-  expect(new Set(vehicles.map(vehicle => [vehicle.fuelEconomyMpg, vehicle.rangeMiles, vehicle.topSpeedMph, vehicle.listingMileage].join(':'))).size).toBe(20);
+  expect(new Set(vehicles.map(vehicle => [vehicle.fuelEconomyMpg, vehicle.rangeMiles, vehicle.topSpeedMph, vehicle.listingMileage].join(':'))).size).toBe(26);
   const world = purchase(funded(), 'used-compact'), cold = decodeWorld(encodeWorld(world));
   expect(cold.assets).toEqual(world.assets);
   for (const field of ['bathrooms', 'squareFeet', 'fuelEconomyMpg', 'rangeMiles', 'topSpeedMph', 'listingMileage']) expect(cold.assets[0]).not.toHaveProperty(field);

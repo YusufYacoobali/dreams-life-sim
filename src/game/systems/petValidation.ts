@@ -4,7 +4,7 @@ import type { World } from '../model';
 import { monthFrom } from '../calendar';
 import { countries } from '../countries';
 import { destinations } from '../content/travel';
-import { petOffers, petRules } from '../content/pets';
+import { petOffers, petRules, petOfferFeeBpsV1 } from '../content/pets';
 import { roundRatio } from '../money';
 import { rules } from '../rules';
 import { petBoardingCost, petFoodCost, petVetCost } from './pets';
@@ -40,7 +40,7 @@ export function validatePets(world: World, ledger = indexLedger(world.ledger)) {
   }
   for (const pet of world.pets) {
     const offer = petOffers[pet.offerId], definition = petRules[pet.species], adoption = world.petAdoptions.find(item => item.petId === pet.id);
-    if (ids.has(pet.id) || !pet.id.startsWith('pet_') || !adoption?.accepted || pet.species !== offer.species || pet.breed !== offer.breed || pet.adoptedById !== adoption.personId || pet.originalOwnerId !== adoption.ownerId || compareDates(pet.adopted, adoption.date) !== 0 || compareDates(pet.adopted, world.date) > 0 || pet.consent.roll !== adoption.roll || pet.consent.chance !== adoption.chance || pet.adoptionCurrency !== countries[adoption.country].currency || pet.adoptionFee !== roundRatio(rules[adoption.country].baseWage * BigInt(definition.adoptionBps), 10000n)) throw new Error('Invalid adopted pet');
+    if (ids.has(pet.id) || !pet.id.startsWith('pet_') || !adoption?.accepted || pet.pricingVersion !== adoption.pricingVersion || pet.species !== offer.species || pet.breed !== offer.breed || pet.adoptedById !== adoption.personId || pet.originalOwnerId !== adoption.ownerId || compareDates(pet.adopted, adoption.date) !== 0 || compareDates(pet.adopted, world.date) > 0 || pet.consent.roll !== adoption.roll || pet.consent.chance !== adoption.chance || pet.adoptionCurrency !== countries[adoption.country].currency || pet.adoptionFee !== roundRatio(rules[adoption.country].baseWage * BigInt(pet.pricingVersion === 1 ? petOfferFeeBpsV1[pet.offerId] : definition.adoptionBps), 10000n)) throw new Error('Invalid adopted pet');
     ids.add(pet.id);
     const expectedBorn = monthFrom(pet.adopted, -Math.min(offer.ageMonths, month(pet.adopted) - 12), world.calendarAnchorDay);
     if (compareDates(pet.born, expectedBorn) !== 0 || pet.lifespanMonths < definition.minimumLife || pet.lifespanMonths > definition.maximumLife || pet.lastMonth > now || pet.lastMonth < month(pet.adopted) || pet.lastMonth !== month(pet.adopted) + pet.periods.length) throw new Error('Invalid pet lifetime or monthly cursor');

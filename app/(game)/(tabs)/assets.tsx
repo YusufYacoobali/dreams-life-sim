@@ -1,3 +1,4 @@
+import { LicenceControls } from '../../../src/ui/VehicleLifestyle';
 import { displayQuantity } from "../../../src/ui/displayNumbers";
 import React from 'react';
 import { View, useWindowDimensions } from 'react-native';
@@ -40,6 +41,7 @@ export default function Assets() {
       <ActionRow title="Finances" subtitle="Income, bills, taxes and cash flow" icon={<FinanceArt id="finances" size={40} />} onPress={() => router.push({ pathname: '/finances', params: { tab: 'assets' } })} />
       <ActionRow title="Bank & Loans" subtitle="Borrow, repay and view transactions" icon={<PolishArt id="loan" />} onPress={() => router.push('/bank')} />
     </Card>
+    <LicenceControls />
     {residence && <Card><Heading size={20}>Your Residence</Heading><ActionRow title={residence.name} subtitle={'Rented home · ' + residence.city + ' · ' + formatMoney({ minor: residence.monthlyRent, currency: residence.currency }, countries[player.country].locale) + '/month'} icon={<CatalogArt id={residence.catalogId} size={56} />} onPress={() => router.push({ pathname: '/rental/[id]', params: { id: residence.catalogId } })} /></Card>}
     {(['property', 'vehicle', 'possession'] as const).map(kind => { const inventory = owned.filter(asset => asset.kind === kind); return <Card key={kind}>
       <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>{kind === 'possession' ? <CatalogArt id="watch" size={40} /> : <Illustration id={kind} size={40} />}<View style={{ flex: 1, minWidth: 0 }}><Heading size={20}>{kind === 'property' ? 'Properties' : kind === 'vehicle' ? 'Vehicles' : 'Possessions'}</Heading><Body muted>{inventory.length} owned</Body></View></View>

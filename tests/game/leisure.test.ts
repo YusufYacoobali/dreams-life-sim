@@ -5,7 +5,7 @@ import { GameCommand, recordDeath, resolveCommand } from '../../src/game/engine'
 import { decodeWorld, encodeWorld, validateWorld, World } from '../../src/game/model';
 import { randomInteger } from '../../src/game/random';
 import { choiceUnavailable } from '../../src/game/choiceAvailability';
-import { hobbyKinds, outingKinds } from '../../src/game/content/leisure';
+import { outingContent, hobbyKinds, outingKinds } from '../../src/game/content/leisure';
 import { accountFor, post } from '../../src/game/systems/common';
 import { activeHobbyPlan, personHobbies } from '../../src/game/systems/leisureSchemas';
 import { hobbyFee, hobbyPracticeReason, hobbyReason, leisureMonth, leisurePayer, outingFee, outingReason, refreshLeisure, LeisureCommand } from '../../src/game/systems/leisure';
@@ -75,7 +75,7 @@ test.each(countryCodes)('%s pays two real child tickets from the original adult 
 });
 test.each(outingKinds)('%s adult outings use the actual one-ticket price and no parental draw; refusals never create tickets or effects', kind => {
   const initial = pupil('US', 20); fund(initial); const rng = initial.random.npcs, fee = outingFee(initial, kind), command: LeisureCommand = { type: 'leisure-outing', kind, reviewedPayerId: initial.activePersonId, quotedTotal: fee }, next = act(initial, command); expect(next.random.npcs).toBe(rng); expect(next.leisureOutings[0].participants).toEqual([initial.activePersonId]); expect(act(initial, command)).toEqual(next);
-  if (kind !== 'nightclub') { const child = pupil('US', 10); consent(child, false); const money = structuredClone(child.accounts), refused = act(child, { type: 'leisure-outing', kind, reviewedPayerId: leisurePayer(child)!.id, quotedTotal: outingFee(child, kind) }); expect(refused.accounts).toEqual(money); expect(refused.leisureOutings[0]).toMatchObject({ paid: 0n, paymentId: null, outcome: null, effects: [], consent: { accepted: false } }); }
+  if (outingContent[kind].minAge <= 10) { const child = pupil('US', 10); consent(child, false); const money = structuredClone(child.accounts), refused = act(child, { type: 'leisure-outing', kind, reviewedPayerId: leisurePayer(child)!.id, quotedTotal: outingFee(child, kind) }); expect(refused.accounts).toEqual(money); expect(refused.leisureOutings[0]).toMatchObject({ paid: 0n, paymentId: null, outcome: null, effects: [], consent: { accepted: false } }); }
 });
 test('genuine world-26 pet/current/adoption/pre-year histories gain empty leisure defaults with original people, pets, finances, RNG and choice exactly retained', () => {
   const raw = (payload: string) => JSON.parse(strFromU8(gunzipSync(Buffer.from(JSON.parse(payload).data, 'base64')))), originals = [raw(archive.checkpoint), ...archive.snapshots.map(item => raw(item.payload))], save = decodeSave(JSON.stringify(archive)), worlds = [save.world, ...save.snapshots.map(item => unpackCheckpoint(item.payload))]; worlds.forEach((world, index) => { const encoded = JSON.parse(encodeWorld(world)); expect(originals[index].schemaVersion).toBe(26); expect(originals[index].contentVersion).toBe(4); expect(world.schemaVersion).toBe(49); expect(world.contentVersion).toBe(28); expect(world.hobbies).toEqual([]); expect(world.leisureOutings).toEqual([]); for (const key of Object.keys(originals[index]).filter(key => !['schemaVersion', 'engineVersion', 'contentVersion'].includes(key))) expect(encoded[key]).toEqual(originals[index][key]); });

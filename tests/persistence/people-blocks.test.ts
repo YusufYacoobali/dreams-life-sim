@@ -99,7 +99,7 @@ test('reader eight upgrades an actual v2 current save atomically, keeps all old 
   const upgraded = new SaveRepository(driver); await expect(upgraded.initialise()).rejects.toThrow('storage failure');
   expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(6); expect(rows()).toEqual(before);
   sqlite.exec('DROP TRIGGER fail_reader_seven'); await upgraded.initialise();
-  expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(31); expect(rows()).toEqual(before);
+  expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(32); expect(rows()).toEqual(before);
   const world = await upgraded.load(imported.id);
   const next = resolveCommand(world, { type: 'acknowledge', resultId: world.pending!.id }, true); await upgraded.commit(next, world.revision, 'reader7-native-ack');
   expect(JSON.parse(sqlite.prepare('SELECT payload FROM lives').get()?.payload as string).format).toBe('dreams-checkpoint-v4');
@@ -117,7 +117,7 @@ test('recovering missing historical metadata preserves the original old compress
   expect(sqlite.prepare('SELECT payload FROM snapshots WHERE life_id=? AND snapshot_id=?').get(world.id, point.summary.id)?.payload).toBe(point.payload);
   const metadata = JSON.parse(sqlite.prepare('SELECT metadata FROM snapshot_metadata WHERE life_id=? AND snapshot_id=?').get(world.id, point.summary.id)?.metadata as string);
   expect(metadata).toMatchObject({ id: point.summary.id, revision: point.summary.revision, date: point.summary.date, name: point.summary.name, age: point.summary.age, size: point.payload.length, label: 'Earlier checkpoint' });
-  expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(31); expect(await new SaveRepository(driver).load(world.id)).toEqual(world);
+  expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(32); expect(await new SaveRepository(driver).load(world.id)).toEqual(world);
   sqlite.close();
 });
 

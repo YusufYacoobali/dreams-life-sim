@@ -31,9 +31,9 @@ test.each([13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26])('reader %s â
     sqlite.prepare('INSERT INTO preferences(key,value) VALUES(?,?)').run('active_life', original.id); sqlite.exec('PRAGMA user_version=' + version);
     const rows = () => Object.fromEntries(sqlite.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name").all().map(row => [row.name, sqlite.prepare('SELECT * FROM ' + row.name + ' ORDER BY 1,2').all()])), before = rows(); expect(Object.keys(before)).toHaveLength(8);
     for (const table of Object.keys(before)) for (const action of ['INSERT', 'UPDATE', 'DELETE']) sqlite.exec('CREATE TRIGGER deny_' + table + '_' + action + ' BEFORE ' + action + ' ON ' + table + " BEGIN SELECT RAISE(ABORT,'unexpected rewrite'); END");
-    const failing: SqlDatabase = { ...driver, transaction: action => driver.transaction(tx => action({ ...tx, run: async (sql, values) => { await tx.run(sql, values); if (sql === 'PRAGMA user_version = 31') throw new Error('metadata failure'); } })) };
+    const failing: SqlDatabase = { ...driver, transaction: action => driver.transaction(tx => action({ ...tx, run: async (sql, values) => { await tx.run(sql, values); if (sql === 'PRAGMA user_version = 32') throw new Error('metadata failure'); } })) };
     await expect(new SaveRepository(failing).initialise()).rejects.toThrow('metadata failure'); expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(version); expect(rows()).toEqual(before);
-    const unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'), repository = new SaveRepository(driver); await repository.initialise(); expect(unpack).not.toHaveBeenCalled(); expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(31); expect(rows()).toEqual(before);
+    const unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'), repository = new SaveRepository(driver); await repository.initialise(); expect(unpack).not.toHaveBeenCalled(); expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(32); expect(rows()).toEqual(before);
     expect(await repository.active()).toEqual(original); expect(rows()).toEqual(before); expect(sqlite.prepare('SELECT payload FROM lives').get()?.payload).toBe(terminal.checkpoint);
   } finally { jest.restoreAllMocks(); sqlite.close(); }
 }, 30000);

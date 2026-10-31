@@ -1,3 +1,4 @@
+import { namedTenancy, endNamedTenancy } from './landlordState';
 import { recoverStolenVehicle, stolenAssetReason } from './stolenVehicles';
 import { saleQuote } from './assetQuotes';
 export { saleQuote } from './assetQuotes';
@@ -67,6 +68,7 @@ function debtCapacityReason(world: World, payment: bigint, omitDebtId?: string):
 export function purchaseReason(world: World, offer: AssetOffer, financing: 'cash' | 'mortgage', depositBps = 2000, termMonths = 360): string | undefined {
   if (isConfined(world)) return 'New purchases are unavailable in custody';
   const person = active(world);
+  if (offer.licenceKind && !world.lifestyle) return 'Review and enable the lifestyle expansion before purchasing specialty vehicles';
   if (ageOn(person, world.date) < rules[person.country].adultAge) return 'Purchases are available to adults';
   if (financing === 'mortgage' && offer.kind !== 'property') return 'Mortgages are only available for property';
   const quote = purchaseQuote(world, offer, financing, depositBps, termMonths);
@@ -82,6 +84,7 @@ export function completeAssetSale(world: World, assetId: string, price: bigint, 
   const asset = world.assets.find(item => item.id === assetId && item.ownerId === person.id);
   if (!asset) throw new IneligibleAction('You do not own this asset');
   const stolenReason = stolenAssetReason(asset); if (stolenReason) throw new IneligibleAction(stolenReason);
+  const tenancy = namedTenancy(world, asset.id); if (tenancy) { if (!foreclosure) throw new IneligibleAction('End the named tenancy through its reviewed process before selling'); endNamedTenancy(world, tenancy, 'The lender repossessed the property. The deposit was returned.'); }
   const quote = saleQuote(world, asset, price); const account = accountFor(world, person, asset.currency);
   if (!foreclosure && account.cash + quote.proceeds < 0n) throw new IneligibleAction('This sale would not cover the mortgage and fees');
   post(world, price, 0n, 'asset-sale', 'Sold ' + asset.name, null, person, asset.currency);
@@ -135,6 +138,8 @@ export function resolveAssets(world: World, command: AssetCommand, presentPurcha
     return;
   }
   const asset = ownedAsset(world, command.assetId);
+  if (asset.propertyLife && ['rent-property', 'stop-renting'].includes(command.type)) throw new IneligibleAction('Use named applications and the reviewed tenancy controls for this property');
+  if (namedTenancy(world, asset.id) && ['list-property', 'move-in', 'renovate'].includes(command.type)) throw new IneligibleAction('Resolve the named tenancy before changing this property');
   if (command.type === 'return-stolen-vehicle') {
     recoverStolenVehicle(world, asset, 'recovered');
     result(world, 'Vehicle returned', 'The vehicle leaves your possession. Its living registered owner receives it back; otherwise the authorities retain it. You receive no sale proceeds. Returning it does not erase the theft or an existing case.', 'vehicle');
@@ -171,7 +176,7 @@ export function resolveAssets(world: World, command: AssetCommand, presentPurcha
     if (asset.condition >= 95) throw new IneligibleAction('This asset is already in excellent condition');
     const quote = renovationQuote(asset);
     charge(world, quote.cost, 'maintenance', 'Improved ' + asset.name, undefined, asset.currency);
-    asset.condition = bounded(asset.condition + 20); asset.value += quote.addedValue; asset.costBasis += quote.cost;
+    asset.condition = bounded(asset.condition + 20); asset.value += asset.propertyLife || asset.vehicleLife ? (quote.addedValue < quote.cost / 2n ? quote.addedValue : quote.cost / 2n) : quote.addedValue; asset.costBasis += quote.cost;
     result(world, 'Work completed', 'Condition improved. The estimated value changed by the actual work benefit.', asset.kind === 'vehicle' ? 'vehicle' : 'property', [{ id: 'cost', label: 'Cost', value: formatMoney({ minor: quote.cost, currency: asset.currency }), tone: 'negative' }]);
   } else if (command.type === 'insure') {
     if (asset.kind === 'possession') throw new IneligibleAction('This cover is available for homes and vehicles');
@@ -205,8 +210,8 @@ export function assetsMonth(world: World, person = active(world), movement = upd
     const change = asset.kind === 'property' ? movement : asset.kind === 'vehicle' ? -75 : asset.catalogId === 'rare-book' || asset.catalogId === 'painting' ? draw(world, 'economy', -70, 100) : -30;
     asset.value = roundRatio(asset.value * BigInt(10000 + change), 10000n);
     if (asset.ageMonths % 6 === 0) asset.condition = bounded(asset.condition - 1);
-    if (asset.rental === 'listed' && draw(world, 'economy', 1, 100) <= 55) { asset.rental = 'occupied'; fact(world, 'A tenant moved into ' + asset.name + '.', 'assets', '', person.id); }
-    if (asset.rental === 'occupied' && draw(world, 'economy', 1, 100) <= 90) {
+    if (!asset.propertyLife && asset.rental === 'listed' && draw(world, 'economy', 1, 100) <= 55) { asset.rental = 'occupied'; fact(world, 'A tenant moved into ' + asset.name + '.', 'assets', '', person.id); }
+    if (!asset.propertyLife && asset.rental === 'occupied' && draw(world, 'economy', 1, 100) <= 90) {
       post(world, asset.rentPerMonth, 0n, 'rent', 'Rent from ' + asset.name, null, person, asset.currency);
       person.finance.cycleGross += fxMoney(world, { minor: asset.rentPerMonth, currency: asset.currency }, accountFor(world, person).currency).minor;
     }

@@ -1,3 +1,5 @@
+import { LifestylePetArt, lifestylePetRects } from '../assets/LifestylePetArt';
+import { OutingArt } from '../assets/OutingArt';
 import { CultArt, cultImages, type CultArtId } from '../assets/CultArt';
 import React from 'react';
 import type { World } from '../game/model';
@@ -93,6 +95,11 @@ for (const id of Object.keys(schoolRects) as (keyof typeof schoolRects)[]) regis
 for (const item of assetCatalog) register(item.id,<CatalogArt id={item.id} size={64} />,item.id === 'engagement-ring' ? 'romance' : 'assets');
 
 for (const id of Object.keys(cultImages) as CultArtId[]) register(id === 'cult' ? 'cult' : 'cult-' + id, <CultArt id={id} size={64} />, 'career');
+
+for (const id of Object.keys(lifestylePetRects) as (keyof typeof lifestylePetRects)[]) register('pet-' + id, <LifestylePetArt id={id} size={64} />, 'pets');
+for (const kind of ['running', 'swimming', 'writing', 'pottery', 'singing', 'coding', 'fishing', 'dancing'] as const) register('leisure-' + kind, <HobbyArt kind={kind} size={64} />, 'hobby');
+for (const kind of ['theatre', 'comedy', 'park', 'aquarium', 'sports', 'festival'] as const) register('leisure-' + kind, <OutingArt kind={kind} size={64} />, 'hobby');
+
 
 const categoryArt: Record<EventCategory, string> = {
   romance:'hearts', family:'family-life', friendship:'friends', childhood:'toys', school:'school-life', surprise:'surprise', everyday:'everyday',

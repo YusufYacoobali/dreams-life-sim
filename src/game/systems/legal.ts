@@ -89,6 +89,15 @@ export function recordOrganisedCrime(world: World, personId: string, gain: bigin
   if (options.reported || source.detectionRoll <= source.riskBps) arrest(world, source);
   return source;
 }
+/** A named property-damage report uses the existing case and restitution system. */
+export function recordLifestyleVandalism(world: World, offenderId: string, victimId: string, loss: bigint) {
+  const offender = world.people[offenderId], victim = world.people[victimId];
+  if (!offender || !victim || offenderId === victimId || loss < 0n) throw new IneligibleAction('A damage report needs actual people and loss');
+  const source = incident(world, offender, 'vandalism', 0n, victimId, loss);
+  source.evidence = Math.max(75, source.evidence);
+  return source;
+}
+
 /** A prison allegation uses the same incident/case identity as other crimes. */
 export function recordPrisonOffence(world: World, personId: string, offence: 'assault' | 'contraband', victimId: string | null = null, reported = true) {
   const person = world.people[personId];

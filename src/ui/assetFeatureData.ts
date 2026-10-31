@@ -9,7 +9,7 @@ export type AssetFeature = {
 const number = (value: number) => value.toLocaleString('en-US');
 
 /** Catalogue specs stay outside saves; condition comes from the owned asset. */
-export function assetFeatures(offer: AssetOffer, condition = offer.condition): AssetFeature[] {
+export function assetFeatures(offer: AssetOffer, condition = offer.condition, mileage?: number): AssetFeature[] {
   if (offer.kind === 'property') return [
     ...(offer.bedrooms === undefined ? [] : [{ id: 'beds' as const, label: 'Beds', value: number(offer.bedrooms) }]),
     ...(offer.bathrooms === undefined ? [] : [{ id: 'baths' as const, label: 'Baths', value: number(offer.bathrooms) }]),
@@ -18,7 +18,7 @@ export function assetFeatures(offer: AssetOffer, condition = offer.condition): A
   if (offer.kind !== 'vehicle') return [];
   return [
     { id: 'speed', label: 'Top Speed', value: offer.topSpeedMph === undefined ? 'Unknown' : number(offer.topSpeedMph) + ' mph' },
-    { id: 'mileage', label: 'Mileage', value: offer.listingMileage === undefined ? 'Unknown' : number(offer.listingMileage) + ' mi', note: 'Listing reading' },
+    { id: 'mileage', label: 'Mileage', value: mileage !== undefined ? number(mileage) + ' mi' : offer.listingMileage === undefined ? 'Unknown' : number(offer.listingMileage) + ' mi', note: mileage === undefined ? 'Listing reading' : 'Recorded use' },
     { id: 'condition', label: 'Condition', value: number(condition) + '%' },
   ];
 }

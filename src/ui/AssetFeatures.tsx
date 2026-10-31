@@ -14,10 +14,10 @@ const icons: Record<AssetFeature['id'], React.ComponentProps<typeof Ionicons>['n
 };
 
 /** Three equal specs share one row at ordinary sizes; large text can grow freely. */
-export function AssetFeatures({ offer, condition, decorative = false }: { offer?: AssetOffer; condition?: number; decorative?: boolean }) {
+export function AssetFeatures({ offer, condition, mileage, decorative = false }: { offer?: AssetOffer; condition?: number; mileage?: number; decorative?: boolean }) {
   const c = useColors(), { fontScale } = useWindowDimensions();
   if (!offer) return null;
-  const features = assetFeatures(offer, condition);
+  const features = assetFeatures(offer, condition, mileage);
   if (!features.length) return null;
   const vehicle = offer.kind === 'vehicle', stacked = fontScale >= (vehicle ? 1.6 : 2);
   const propertyColumns = fontScale >= 1.4 ? 2 : 3;

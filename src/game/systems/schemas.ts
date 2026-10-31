@@ -1,3 +1,4 @@
+import { propertyLifeSchema, vehicleLifeSchema } from './lifestyleSchemas';
 import { z } from 'zod';
 import { dateSchema } from '../calendar';
 import { instrumentIds } from '../content/markets';
@@ -33,6 +34,7 @@ export const liabilitySchema = z.object({
   assetId: z.string().nullable().default(null), monthlyPayment: z.bigint().nonnegative().default(0n), remainingMonths: z.number().int().nonnegative().default(0), missedPayments: z.number().int().nonnegative().default(0),
 });
 export const physicalAssetSchema = z.object({
+  propertyLife: propertyLifeSchema.optional(), vehicleLife: vehicleLifeSchema.optional(),
   id: z.string(), ownerId: z.string().nullable(), catalogId: z.string(), kind: z.enum(['property', 'vehicle', 'possession']), name: z.string(),
   country: z.enum(['US', 'CA', 'GB', 'AU', 'FR', 'DE', 'ES', 'IT', 'BR', 'IN', 'JP', 'ZA']), city: z.string(), currency,
   pricePaid: z.bigint().nonnegative(), costBasis: z.bigint().nonnegative(), value: z.bigint().nonnegative(), condition: z.number().int().min(0).max(100), ageMonths: z.number().int().nonnegative(), acquired: dateSchema,

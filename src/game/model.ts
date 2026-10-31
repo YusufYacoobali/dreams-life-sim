@@ -1,3 +1,5 @@
+import { validateLifestyle } from './systems/lifestyleValidation';
+import { lifestyleSchema } from './systems/lifestyleSchemas';
 import { validateOrganisedCrime } from './systems/organisedCrime';
 import { validatePrison } from './systems/prisonValidation';
 import { validateRomance } from './systems/romanceValidation';
@@ -132,6 +134,7 @@ const immutableWorlds = new WeakSet<object>();
 const certifiedBranches = new WeakMap<object, Set<string>>();
 const copiedBranches = new WeakMap<object, { key: string; original: object }>();
 export const worldSchema = z.object({
+  lifestyle: lifestyleSchema.optional(),
   overhaulVersion: z.literal(1).optional(),
   prisonLives: z.array(prisonLifeSchema).max(128).optional(),
   affairs: z.array(affairSchema).max(128).optional(),
@@ -453,6 +456,7 @@ export function validateWorld(value: unknown, immutable = false): World {
   validateUniversityAdmissions(world, ledger);
   validateStudyCourses(world, ledger);
   validateCampusCommunities(world, ledger);
+  validateLifestyle(world, ledger);
   validatePets(world, ledger);
   validateRentalLeases(world, ledger);
   validatePersonSupport(world, ledger);

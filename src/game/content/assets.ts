@@ -3,6 +3,7 @@ export type AssetType = 'property' | 'vehicle' | 'possession';
 export type AssetOffer = {
   id: string; kind: AssetType; name: string; description: string;
   priceBps: number; condition: number; upkeepBps: number;
+  licenceKind?: 'road' | 'boat' | 'pilot';
   bedrooms?: number; bathrooms?: number; squareFeet?: number;
   /** US gallons, so the same figure has an explicit meaning in every country. */
   fuelEconomyMpg?: number;
@@ -57,4 +58,10 @@ export const assetCatalog: readonly AssetOffer[] = [
   { id: 'campervan', kind: 'vehicle', name: 'Camper Van', description: 'A little kitchen, a raised roof and a much longer route home.', priceBps: 32000, condition: 95, upkeepBps: 1900, fuelEconomyMpg: 21, topSpeedMph: 98, listingMileage: 7200 },
   { id: 'supercar', kind: 'vehicle', name: 'Supercar', description: 'Spectacular engineering. Less spectacular speed bumps.', priceBps: 65000, condition: 100, upkeepBps: 2600, fuelEconomyMpg: 15, topSpeedMph: 211, listingMileage: 0 },
   { id: 'grand-tourer', kind: 'vehicle', name: 'Grand Tourer', description: 'A long bonnet and a persuasive argument for the scenic route.', priceBps: 42000, condition: 100, upkeepBps: 2100, fuelEconomyMpg: 20, topSpeedMph: 190, listingMileage: 0 },
+  { id: 'harbour-dinghy', kind: 'vehicle', licenceKind: 'boat', name: 'Harbour Dinghy', description: 'A small boat with a large opinion of a gentle breeze.', priceBps: 2800, condition: 85, upkeepBps: 1800, rangeMiles: 90, topSpeedMph: 24, listingMileage: 1200 },
+  { id: 'weekend-sailboat', kind: 'vehicle', licenceKind: 'boat', name: 'Weekend Sailboat', description: 'Quiet water, tangled ropes and an excuse to switch off.', priceBps: 16000, condition: 95, upkeepBps: 2400, rangeMiles: 500, topSpeedMph: 16, listingMileage: 0 },
+  { id: 'cabin-cruiser', kind: 'vehicle', licenceKind: 'boat', name: 'Cabin Cruiser', description: 'A floating sitting room with spectacular fuel bills.', priceBps: 65000, condition: 100, upkeepBps: 3000, rangeMiles: 350, topSpeedMph: 38, listingMileage: 0 },
+  { id: 'training-plane', kind: 'vehicle', licenceKind: 'pilot', name: 'Two-Seat Trainer', description: 'A little propeller aircraft for carefully planned afternoons.', priceBps: 45000, condition: 90, upkeepBps: 3500, rangeMiles: 600, topSpeedMph: 125, listingMileage: 24000 },
+  { id: 'touring-plane', kind: 'vehicle', licenceKind: 'pilot', name: 'Touring Aircraft', description: 'Four seats. Every passenger has checked the weather.', priceBps: 150000, condition: 100, upkeepBps: 4000, rangeMiles: 1200, topSpeedMph: 215, listingMileage: 0 },
+  { id: 'private-helicopter', kind: 'vehicle', licenceKind: 'pilot', name: 'Private Helicopter', description: 'An impressive arrival and an even more impressive service invoice.', priceBps: 450000, condition: 100, upkeepBps: 4500, rangeMiles: 400, topSpeedMph: 165, listingMileage: 0 },
 ];

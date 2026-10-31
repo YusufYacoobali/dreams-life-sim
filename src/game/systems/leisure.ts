@@ -2,7 +2,7 @@ import { z } from 'zod';
 import { ageOn, fullName } from '../personHelpers';
 import type { Person, World } from '../model';
 import { countries, CountryCode } from '../countries';
-import { hobbyContent, hobbyKinds, HobbyKind, hobbyModes, outingContent, outingKinds, OutingKind } from '../content/leisure';
+import { hobbyContent, legacyHobbyKinds, legacyOutingKinds, hobbyKinds, HobbyKind, hobbyModes, outingContent, outingKinds, OutingKind } from '../content/leisure';
 import { roundRatio } from '../money';
 import { rules } from '../rules';
 import { IneligibleAction } from '../errors';
@@ -23,7 +23,7 @@ export const leisureCommandSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('stop-hobby'), hobbyId: z.string(), planId: z.string() }),
   z.object({ type: z.literal('practise-hobby'), hobbyId: z.string(), planId: z.string() }),
   z.object({ type: z.literal('meet-hobby-peer'), hobbyId: z.string(), planId: z.string(), reviewedPayerId: z.string(), reviewedMonth: z.number().int() }),
-  z.object({ type: z.literal('leisure-outing'), kind: z.enum(outingKinds), reviewedPayerId: z.string(), quotedTotal: z.bigint().positive() }),
+  z.object({ type: z.literal('leisure-outing'), kind: z.enum(outingKinds), reviewedPayerId: z.string(), quotedTotal: z.bigint().nonnegative() }),
 ]);
 export type LeisureCommand = z.infer<typeof leisureCommandSchema>;
 export function leisurePresent(world: World, person: Person) { return !person.died && !activeTrip(world, person.id) && !serviceAway(world, person.id) && !hospitalized(world, person) && !isConfined(world, person) && !person.legal.wanted; }
@@ -39,12 +39,13 @@ export function leisureConsent(world: World, person: Person, payer: Person) {
   return { strength, chance, roll, accepted: roll <= chance };
 }
 export function hobbyReason(world: World, kind: HobbyKind, mode: HobbyPlan['mode']): string | undefined {
+  if (!(legacyHobbyKinds as readonly string[]).includes(kind) && !world.lifestyle) return 'Review and enable lifestyle features for this hobby';
   const person = active(world), payer = leisurePayer(world), existing = personHobbies(world).find(item => item.kind === kind), plan = existing && activeHobbyPlan(existing);
   if (ageOn(person, world.date) < hobbyContent[kind].minAge) return 'Available from age ' + hobbyContent[kind].minAge;
   if (!leisurePresent(world, person)) return 'Return home and resolve your current restrictions first';
   if (!payer) return 'An available actual parent or guardian in your household must agree';
   if (person.stats.health < 25 || person.stats.energy < 4) return 'Rest and recover before starting a routine';
-  if (kind === 'guitar' && person.training?.skill === 'music') return 'Finish or pause your music career-training routine first';
+  if ((kind === 'guitar' || kind === 'singing') && person.training?.skill === 'music') return 'Finish or pause your music career-training routine first';
   if (plan?.mode === mode && plan.payerId === payer.id) return 'This is already your current routine';
   if (!plan && personHobbies(world).filter(item => activeHobbyPlan(item)).length >= 2) return 'Keep at most two active hobby routines';
   if (payer.id !== person.id && world.actionCounts[requestKey(world, kind, mode, payer.id)]) return 'This routine has already been requested from this adult this calendar year';
@@ -58,7 +59,7 @@ export function hobbyPauseReason(world: World, hobby: Hobby, plan: HobbyPlan, ma
   if (hospitalized(world, person) || person.stats.health < 25) return 'health';
   if (person.stats.energy < (!manual && plan.mode === 'lessons' ? 4 : 2)) return 'fatigue';
   if (!leisurePresent(world, payer)) return 'payer-away';
-  if (hobby.kind === 'guitar' && person.training?.skill === 'music') return 'career-training';
+  if ((hobby.kind === 'guitar' || hobby.kind === 'singing') && person.training?.skill === 'music') return 'career-training';
   if (!manual && availableCash(accountFor(world, payer, plan.currency)) < plan.monthlyFee) return 'funds';
   return null;
 }
@@ -128,6 +129,7 @@ export function refreshLeisure(world: World) {
   }
 }
 export function outingReason(world: World, kind: OutingKind): string | undefined {
+  if (!(legacyOutingKinds as readonly string[]).includes(kind) && !world.lifestyle) return 'Review and enable lifestyle features for this outing';
   const person = active(world), payer = leisurePayer(world), venue = outingContent[kind];
   if (ageOn(person, world.date) < venue.minAge) return 'Venue policy: age ' + venue.minAge + ' or older';
   if (!leisurePresent(world, person)) return 'Be available at home for this outing';
@@ -159,7 +161,7 @@ export function resolveLeisure(world: World, command: LeisureCommand) {
       charge(world, total, 'entertainment', outingContent[command.kind].name, undefined, countries[person.country].currency, payer); outcome = draw(world, 'outcomes', 1, 3) as 1 | 2 | 3;
       effects.push(change(world, person, 'happiness', outcome * 2), change(world, person, 'stress', -outcome), change(world, person, 'energy', -outingContent[command.kind].energy)); if (command.kind === 'museum') effects.push(change(world, person, 'smarts', 1));
     }
-    const paid = permission.accepted ? total : 0n; world.leisureOutings.push({ id: 'outing_' + world.revision, personId: person.id, payerId: payer.id, kind: command.kind, date: { ...world.date }, country: person.country, city: person.city, currency: countries[person.country].currency, participants, quotedTotal: total, available, consent: permission, paid, paymentId: permission.accepted ? world.ledger[ledgerCursor].id : null, outcome, effects });
+    const paid = permission.accepted ? total : 0n; world.leisureOutings.push({ id: 'outing_' + world.revision, personId: person.id, payerId: payer.id, kind: command.kind, date: { ...world.date }, country: person.country, city: person.city, currency: countries[person.country].currency, participants, quotedTotal: total, available, consent: permission, paid, paymentId: permission.accepted && total ? world.ledger[ledgerCursor].id : null, outcome, effects });
     const copy = permission.accepted ? outingCopy(command.kind, outcome!) : fullName(payer) + ' did not agree to accompany you. Nobody went and no tickets were charged.';
     fact(world, permission.accepted ? outingJournal[command.kind] : 'My proposed outing was declined by ' + fullName(payer) + '.', 'entertainment');
     result(world, permission.accepted ? outingContent[command.kind].name : 'Staying home', copy, 'leisure-' + command.kind, effects.map(item => ({ id: item.stat, label: item.stat[0].toUpperCase() + item.stat.slice(1), value: (item.after - item.before >= 0 ? '+' : '') + (item.after - item.before) + '%', tone: item.after === item.before ? 'neutral' : (item.stat === 'stress' ? item.after < item.before : item.after > item.before) ? 'positive' : 'negative' }))); return;
@@ -189,7 +191,7 @@ function practice(world: World, hobby: Hobby, plan: HobbyPlan, manual = false) {
     effects.push(change(world, person, 'energy', -(manual || plan.mode === 'community' ? 2 : 4)), change(world, person, 'happiness', 1), change(world, person, 'stress', -1));
     const attendedMonths = hobby.practices.filter(item => item.source === 'monthly' && item.attended).length + 1;
     if (!manual && hobby.kind === 'guitar' && attendedMonths % 3 === 0) effects.push(change(world, person, 'music', 1));
-    if (!manual && (hobby.kind === 'chess' || hobby.kind === 'reading') && attendedMonths % 6 === 0) effects.push(change(world, person, 'smarts', 1));
+    if (!manual && (hobby.kind === 'chess' || hobby.kind === 'reading' || hobby.kind === 'coding') && attendedMonths % 6 === 0) effects.push(change(world, person, 'smarts', 1));
   }
   hobby.practices.push({ sequence: hobby.practices.length, planId: plan.id, date: { ...world.date }, source: manual ? 'manual' : 'monthly', attended, reason, before, gain: hobby.proficiency - before, after: hobby.proficiency, due, available, paid: attended ? due : 0n, paymentId: attended && due ? world.ledger[ledgerCursor].id : null, ledgerCursor, effects });
 }
@@ -201,12 +203,18 @@ export function leisureMonth(world: World) {
     plan.lastMonth = month; practice(world, hobby, plan);
   }
 }
-const outingJournal = { cinema: 'I went to a local film screening.', concert: 'I went to a live concert.', museum: 'I visited a museum exhibition.', nightclub: 'I went dancing at a local venue.' };
+const outingJournal = { cinema: 'I went to a local film screening.', concert: 'I went to a live concert.', museum: 'I visited a museum exhibition.', nightclub: 'I went dancing at a local venue.', theatre: 'I watched a local play.', comedy: 'I went to a comedy show.', park: 'I spent time in the park.', aquarium: 'I visited an aquarium.', sports: 'I watched a local sports match.', festival: 'I visited a community festival.' };
 function outingCopy(kind: OutingKind, outcome: 1 | 2 | 3) {
   const scenes = {
     cinema: ['A tall hat in the row ahead becomes an unofficial supporting character. You still enjoy parts of the film.', 'The film holds your attention. Outside, ordinary daylight feels briefly overexposed.', 'The final scene stays with you all the way home. This was a good reason to leave the sofa.'],
     concert: ['The sound balance improves after the opening songs. Your favourite chorus survives the technical difficulties.', 'The room joins in with the chorus. You carry the tune home, a little less accurately.', 'The final song earns an encore. You leave with tired feet and a very clear memory of the sound.'],
     museum: ['One gallery is closed. You find an unexpectedly interesting cabinet on the way around it.', 'You follow one exhibit into the next and learn something you want to look up later.', 'A small object has a much longer story than you expected. You stay until the room is almost empty.'],
     nightclub: ['The dance floor takes a while to warm up. You find some space when the music changes.', 'You spend the evening dancing and take a break when your feet ask for one.', 'The music keeps finding another song you like. By the time you leave, your feet have earned the journey home.'],
+    theatre: ['A prop door refuses to open. The actor knocks from both sides before carrying on.', 'The room goes quiet for the final scene. Nobody checks a phone.', 'You discuss the ending with a stranger all the way to the exit.'],
+    comedy: ['The comic asks what you do for a living. You develop an urgent interest in your shoes.', 'One joke catches you in the middle of a sip. Your dignity dries eventually.', 'You laugh at something painfully familiar, then laugh again on the way home.'],
+    park: ['A pigeon briefly contests your claim to a bench. You find another.', 'You take the longer path and notice a tree you have passed for years.', 'You stay until the light changes. Nobody needed you to buy anything.'],
+    aquarium: ['The octopus is hiding. The sign insists it is extremely intelligent.', 'A keeper explains an entire miniature ecosystem in one tank.', 'You watch the same small shoal for far longer than you expected.'],
+    sports: ['A spectator behind you announces a substitution louder than the actual coach.', 'The match stays close. You discover you care about the result.', 'A late goal turns complete strangers into a temporary choir.'],
+    festival: ['A gust of wind carries the programme into a soup stall. You improvise.', 'You follow the music to a small stage and stay for the next set.', 'The final performance gathers everyone into the same patch of evening.'],
   }; return scenes[kind][outcome - 1];
 }

@@ -1,3 +1,9 @@
+import { offerLifestyleStory, resolveLifestyleChoice, cancelLifestyleOffers } from './systems/lifestyleStories';
+import { hobbyLifestyleCommandSchema, type HobbyLifestyleCommand, resolveHobbyLifestyle } from './systems/hobbyAccomplishments';
+import { petTrainingCommandSchema, type PetTrainingCommand, resolvePetTraining, companionMonth } from './systems/petTraining';
+import { vehicleCommandSchema, type VehicleCommand, resolveVehicle } from './systems/vehicleActivities';
+import { propertyCommandSchema, type PropertyCommand, resolveProperty, landlordMonth, refreshNamedTenancies } from './systems/landlordTenancies';
+import { newLifestyle } from './systems/lifestyleCommon';
 import { organisedMissions } from './content/organisedCrime';
 import { enableOverhaul } from './systems/overhaul';
 import { organisedCrimeCommandSchema, type OrganisedCrimeCommand } from './systems/organisedCrimeSchemas';
@@ -50,7 +56,7 @@ import { IneligibleAction } from './errors';
 import { educationCommandSchema, EducationCommand, educationMonth, resolveEducation } from './systems/education';
 import { resolveJobInterview, workCommandSchema, WorkCommand, workMonth, resolveWork, endEmployment } from './systems/work';
 import { financeCommandSchema, FinanceCommand, financeMonth, resolveFinance, settleTax } from './systems/finance';
-import { accountFor, post } from './systems/common';
+import { accountFor, post, result } from './systems/common';
 import { assetCommandSchema, AssetCommand, assetsMonth, completeAssetSale, ownedAsset, absoluteMonth, resolveAssets, updatePropertyMarket } from './systems/assets';
 import { marketCommandSchema, MarketCommand, marketMonth, resolveMarket } from './systems/markets';
 import { connectPerson, recordFamilyDeath, refreshFriendship, relationshipsYear, resolveSocial, socialCommandSchema, SocialCommand } from './systems/relationships';
@@ -91,9 +97,9 @@ export { IneligibleAction } from './errors';
 
 const endLifeCommandSchema = z.object({ type: z.literal('end-life'), lifeId: z.string(), personId: z.string(), expectedRevision: z.number().int().nonnegative() }).strict();
 export type EndLifeCommand = z.infer<typeof endLifeCommandSchema>;
-export type GameCommand = { type: 'advance' } | { type: 'resume' } | { type: 'choose'; eventId: string; choiceId: string } | { type: 'acknowledge'; resultId: string } | EndLifeCommand | HobbyEventCommand | LeisureCommand | PetCommand | EducationCommand | WorkCommand | FinanceCommand | AssetCommand | MarketCommand | SocialCommand | FamilyCommand | EstateCommand | HealthCommand | LegalCommand | SocialMediaCommand | BusinessCommand | CareerCommand | MusicCommand | PoliticsCommand | CreatorCommand | ServiceCommand | RoyaltyCommand | TravelCommand | RelocationCommand | SchoolCommand | RecoveryCommand | ScholarshipCommand | WorkplaceCommand | FriendshipCommand | TeenRelationshipCommand | UniversityAdmissionCommand | CampusCommand | PersonSupportCommand | PersonActionCommand | MiniGameCommand | CultCommand | ActorCommand | ModelCareerCommand | OrganisedCrimeCommand | PrisonCommand | RomanceCommand;
+export type GameCommand = HobbyLifestyleCommand | PetTrainingCommand | VehicleCommand | PropertyCommand | { type: 'advance' } | { type: 'resume' } | { type: 'choose'; eventId: string; choiceId: string } | { type: 'acknowledge'; resultId: string } | EndLifeCommand | HobbyEventCommand | LeisureCommand | PetCommand | EducationCommand | WorkCommand | FinanceCommand | AssetCommand | MarketCommand | SocialCommand | FamilyCommand | EstateCommand | HealthCommand | LegalCommand | SocialMediaCommand | BusinessCommand | CareerCommand | MusicCommand | PoliticsCommand | CreatorCommand | ServiceCommand | RoyaltyCommand | TravelCommand | RelocationCommand | SchoolCommand | RecoveryCommand | ScholarshipCommand | WorkplaceCommand | FriendshipCommand | TeenRelationshipCommand | UniversityAdmissionCommand | CampusCommand | PersonSupportCommand | PersonActionCommand | MiniGameCommand | CultCommand | ActorCommand | ModelCareerCommand | OrganisedCrimeCommand | PrisonCommand | RomanceCommand;
 const commandOwners = new Map<string, z.ZodType>();
-for (const schema of [organisedCrimeCommandSchema, prisonCommandSchema, actorCommandSchema, modelCareerCommandSchema, cultCommandSchema, miniGameCommandSchema, personSupportCommandSchema, personActionCommandSchema, campusCommandSchema, universityAdmissionCommandSchema, teenRelationshipCommandSchema, friendshipCommandSchema, hobbyEventCommandSchema, workplaceCommandSchema, schoolCommandSchema, educationCommandSchema, recoveryCommandSchema, scholarshipCommandSchema, workCommandSchema, financeCommandSchema, assetCommandSchema, marketCommandSchema, socialCommandSchema, familyCommandSchema, estateCommandSchema, healthCommandSchema, legalCommandSchema, socialMediaCommandSchema, businessCommandSchema, careerCommandSchema, musicCommandSchema, politicsCommandSchema, creatorCommandSchema, serviceCommandSchema, royaltyCommandSchema, travelCommandSchema, leisureCommandSchema, petCommandSchema, relocationCommandSchema]) {
+for (const schema of [hobbyLifestyleCommandSchema, petTrainingCommandSchema, vehicleCommandSchema, propertyCommandSchema, organisedCrimeCommandSchema, prisonCommandSchema, actorCommandSchema, modelCareerCommandSchema, cultCommandSchema, miniGameCommandSchema, personSupportCommandSchema, personActionCommandSchema, campusCommandSchema, universityAdmissionCommandSchema, teenRelationshipCommandSchema, friendshipCommandSchema, hobbyEventCommandSchema, workplaceCommandSchema, schoolCommandSchema, educationCommandSchema, recoveryCommandSchema, scholarshipCommandSchema, workCommandSchema, financeCommandSchema, assetCommandSchema, marketCommandSchema, socialCommandSchema, familyCommandSchema, estateCommandSchema, healthCommandSchema, legalCommandSchema, socialMediaCommandSchema, businessCommandSchema, careerCommandSchema, musicCommandSchema, politicsCommandSchema, creatorCommandSchema, serviceCommandSchema, royaltyCommandSchema, travelCommandSchema, leisureCommandSchema, petCommandSchema, relocationCommandSchema]) {
   for (const option of schema.options) {
     const type = option.shape.type.value;
     if (commandOwners.has(type)) throw new Error('Duplicate game command: ' + type);
@@ -150,6 +156,7 @@ export function recordDeath(world: World, personId: string, cause: string) {
   royalDeath(world,personId);
   creatorDeath(world,personId);
   petOwnerDied(world, personId);
+  cancelLifestyleOffers(world, personId);
   careAfterDeath(world, personId);
   if (personId === world.activePersonId) {
     journal(world, 'death_' + personId, 'I died at age ' + ageOn(person, world.date) + '. Cause: ' + cause + '.', 'death');
@@ -158,6 +165,7 @@ export function recordDeath(world: World, personId: string, cause: string) {
     const related = world.relationships.some(relation => (relation.from === personId && relation.to === world.activePersonId) || (relation.to === personId && relation.from === world.activePersonId));
     if (related) journal(world, 'death_' + personId, fullName(person) + ' died at age ' + ageOn(person, world.date) + '.', 'family');
   }
+  refreshNamedTenancies(world);
   settleEstate(world, personId);
   refreshStoryThreads(world);
   refreshWorkplaces(world);
@@ -196,10 +204,12 @@ function processMonth(world: World) {
   marketMonth(world);
   const propertyMovement = updatePropertyMarket(world);
   for (const person of actors) { assetsMonth(world, person, propertyMovement); financeMonth(world, person); person.lastEconomicMonth = world.date.year * 12 + world.date.month - 1; }
+  landlordMonth(world);
   const dischargedFromHospital = healthFinanceMonth(world);
   socialMonth(world);
   familyFinanceMonth(world);
   petMonth(world);
+  companionMonth(world);
   leisureMonth(world);
   for (const person of actors) npcDiscretionaryMonth(world, person, openingCash.get(person.id)!);
   familyMonth(world);
@@ -230,6 +240,7 @@ function processMonth(world: World) {
   travelMonth(world);
   storyMonth(world);
   campusPlanningOpportunity(world, firstCampusCourseId);
+  offerLifestyleStory(world);
   if (world.overhaulVersion) { organisedCrimeMonth(world); prisonMonth(world); }
 }
 
@@ -285,6 +296,7 @@ function applyEffects(world: World, effects: Effect[], relationshipLabels?: Boun
   return effects.flatMap((effect, index) => {
     if (effect.kind === 'organised-choice') throw new IneligibleAction('An organisation decision must have one bound action');
     if (effect.kind === 'prison-story') throw new IneligibleAction('A prison decision must have one bound action');
+    if (effect.kind === 'lifestyle-choice') throw new IneligibleAction('A lifestyle decision must have one bound action');
     if (effect.kind === 'romance-choice') throw new IneligibleAction('A romance decision must have one bound action');
     if (effect.kind === 'story-immediate') return resolveStoryImmediate(world, effect);
     if (effect.kind === 'creative-choice') return resolveCreativeChoice(world, effect, boundChoice);
@@ -404,13 +416,14 @@ export function resolveCommand(previous: World, command: GameCommand, immutable 
     const decisionFrame = world.annual;
     const priority = world.pendingPriority || priorityOf(event); world.pending = null; world.pendingPriority = 0;
     const interviewEffect = choice.effects.length === 1 && choice.effects[0].kind === 'job-interview' ? choice.effects[0] : null;
+    const lifestyleEffect = choice.effects.length === 1 && choice.effects[0].kind === 'lifestyle-choice' ? choice.effects[0] : null;
     const dramaticEffect = choice.effects.length === 1 && choice.effects[0].kind === 'dramatic-choice' ? choice.effects[0] : null;
     const organisedEffect = choice.effects.length === 1 && choice.effects[0].kind === 'organised-choice' ? choice.effects[0] : null;
     const prisonEffect = choice.effects.length === 1 && choice.effects[0].kind === 'prison-story' ? choice.effects[0] : null;
     const romanceEffect = choice.effects.length === 1 && choice.effects[0].kind === 'romance-choice' ? choice.effects[0] : null;
     const medicalEffect = choice.effects.length === 1 && choice.effects[0].kind === 'medical-episode' ? choice.effects[0] : null;
     const medicalOutcome = medicalEffect ? resolveMedicalEpisode(world, medicalEffect) : null;
-    const outcome = medicalOutcome ?? (organisedEffect ? resolveOrganisedCrimeOutcome(world, organisedEffect) : prisonEffect ? resolvePrisonStory(world, prisonEffect) : romanceEffect ? resolveRomanceChoice(world, romanceEffect) : interviewEffect ? resolveJobInterview(world, interviewEffect) : dramaticEffect ? resolveDramaticChoice(world, dramaticEffect, recordDeath) : null);
+    const outcome = medicalOutcome ?? (lifestyleEffect ? resolveLifestyleChoice(world, lifestyleEffect) : organisedEffect ? resolveOrganisedCrimeOutcome(world, organisedEffect) : prisonEffect ? resolvePrisonStory(world, prisonEffect) : romanceEffect ? resolveRomanceChoice(world, romanceEffect) : interviewEffect ? resolveJobInterview(world, interviewEffect) : dramaticEffect ? resolveDramaticChoice(world, dramaticEffect, recordDeath) : null);
     const effects = outcome ? outcome.effects : applyEffects(world, choice.effects, choice.relationshipLabels, choice);
     journal(world, event.id + '_choice', outcome?.journal ?? choice.journal, interviewEffect ? 'work' : 'event');
     noteImportantDecision(decisionFrame, event, world.journal.at(-1)!, world.journal.length - 1);
@@ -430,6 +443,10 @@ export function resolveCommand(previous: World, command: GameCommand, immutable 
     else if (world.annual && !world.annual.pausedForPlanning) continueYear(world);
   } else {
     if (world.pending || world.annual && !world.annual.pausedForPlanning) throw new IneligibleAction('Finish the current event first');
+    const hobbyActivity = parseActivity(hobbyLifestyleCommandSchema, command);
+    const petActivity = parseActivity(petTrainingCommandSchema, command);
+    const vehicleAction = parseActivity(vehicleCommandSchema, command);
+    const propertyAction = parseActivity(propertyCommandSchema, command);
     const organisedCrime = parseActivity(organisedCrimeCommandSchema, command);
     const prison = parseActivity(prisonCommandSchema, command);
     const romance = parseActivity(romanceCommandSchema, command);
@@ -469,7 +486,11 @@ export function resolveCommand(previous: World, command: GameCommand, immutable 
     const leisure = parseActivity(leisureCommandSchema, command);
     const pet = parseActivity(petCommandSchema, command);
     const relocation=parseActivity(relocationCommandSchema, command);
-    if (organisedCrime.success) { enableOverhaul(world); handleOrganisedCrime(world, organisedCrime.data); }
+    if (hobbyActivity.success) resolveHobbyLifestyle(world, hobbyActivity.data);
+    else if (petActivity.success) resolvePetTraining(world, petActivity.data);
+    else if (vehicleAction.success) resolveVehicle(world, vehicleAction.data);
+    else if (propertyAction.success) { if (propertyAction.data.type === 'enable-lifestyle') { if (world.lifestyle) throw new IneligibleAction('Lifestyle features are already enabled'); world.lifestyle = newLifestyle(world.date); result(world, 'More ways to live', 'New pet species, hobbies and outings are available. Review prospective management on each existing property or vehicle. Existing costs, licences, rentals and histories are unchanged.', 'property'); } else resolveProperty(world, propertyAction.data); }
+    else if (organisedCrime.success) { enableOverhaul(world); handleOrganisedCrime(world, organisedCrime.data); }
     else if (prison.success) { enableOverhaul(world); resolvePrison(world, prison.data); }
     else if (romance.success) { enableOverhaul(world); resolveRomance(world, romance.data); }
     else if (cult.success) resolveCult(world, cult.data);
@@ -567,6 +588,7 @@ export function resolveCommand(previous: World, command: GameCommand, immutable 
   world.revision++;
   refreshRentalLeases(world);
   refreshPersonSupportOffers(world);
+  refreshNamedTenancies(world);
   if (world.overhaulVersion) { refreshOrganisedCrime(world); refreshPrison(world); refreshRomance(world); }
   return validateWorld(world, immutable);
 }

@@ -7,6 +7,7 @@ const atlas = require('../../assets/generated/ownership-atlas.png');
 const catalogueAtlases = {
   homes: require('../../assets/generated/catalogue-homes.png'),
   vehicles: require('../../assets/generated/catalogue-vehicles.png'),
+  'lifestyle-vehicles': require('../../assets/generated/catalogue-lifestyle-vehicles.png'),
 };
 /** Measured source regions preserve aspect and leave the generated PNG untouched. */
 export function CatalogArt({ id, size = 56 }: { id: string; size?: number }) {

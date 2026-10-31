@@ -79,6 +79,7 @@ export function createLife(id: string, seed: number, raw: Creation, date: GameDa
   const guardians = roll(0, 4) === 0 ? [parent1] : [parent1, parent2];
   const people = Object.fromEntries([player, ...guardians].map(p => [p.id, p]));
   const world = validateWorld({
+    lifestyle: { version: 1, enabled: { ...date }, licences: [], applications: [], tenancies: [], records: [], projects: [], offers: [] },
     schemaVersion: 49, engineVersion: 51, contentVersion: 28, overhaulVersion: 1, prisonLives: [], affairs: [], romanceOffers: [], id, revision: 0, date: { ...date },
     calendarAnchorDay: date.day, annual: null, pending: null, eventHistory: [],
     activePersonId: player.id, birthAcknowledged: false,

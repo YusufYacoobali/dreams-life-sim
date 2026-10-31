@@ -1,3 +1,5 @@
+import { legacyPetOfferIds, petOfferFeeBpsV1 } from '../content/pets';
+import { horseHousing, newCompanion } from './petLifestyleState';
 import { z } from 'zod';
 import { ageOn, compareDates, fullName } from '../personHelpers';
 import type { Person, World } from '../model';
@@ -39,11 +41,13 @@ export function petAdoptionOwner(world: World) {
 export const petFoodCost = (country: CountryCode, species: PetSpecies) => roundRatio(rules[country].baseWage * BigInt(petRules[species].foodBps), 10000n);
 export const petBoardingCost = (country: CountryCode) => roundRatio(rules[country].baseWage, 500n);
 export const petVetCost = (country: CountryCode) => roundRatio(rules[country].baseWage, 1000n);
-export const petAdoptionFee = (world: World, offerId: typeof petOfferIds[number]) => roundRatio(rules[active(world).country].baseWage * BigInt(petRules[petOffers[offerId].species].adoptionBps), 10000n);
+export const petAdoptionFee = (world: World, offerId: typeof petOfferIds[number]) => roundRatio(rules[active(world).country].baseWage * BigInt(world.lifestyle ? petOfferFeeBpsV1[offerId] : petRules[petOffers[offerId].species].adoptionBps), 10000n);
 export const petMoveCost = (world: World, personIds: string[]) => world.pets.filter(pet => pet.status === 'active' && personIds.includes(pet.ownerId)).reduce((sum, pet) => sum + roundRatio(rules[world.people[pet.ownerId].country].baseWage, 200n), 0n);
 const adoptionKey = (world: World, offerId: string) => active(world).id + ':pet-adopt:' + world.date.year + ':' + offerId;
 export function petAdoptionReason(world: World, offerId: typeof petOfferIds[number]): string | undefined {
   const person = active(world), owner = petAdoptionOwner(world);
+  if (!(legacyPetOfferIds as readonly string[]).includes(offerId) && !world.lifestyle) return 'Review and enable lifestyle features for these adoption routes';
+  if (petOffers[offerId].species === 'horse' && (!owner || !horseHousing(world, owner.id))) return 'Review suitable animal-friendly grounds at your household home before adopting a horse';
   if (person.died || ageOn(person, world.date) < 6) return 'Meet and care for household pets from age six';
   if (activeTrip(world) || serviceAway(world) || hospitalized(world, person) || isConfined(world) || person.legal.wanted) return 'Return home and resolve your current restrictions before adopting';
   if (!owner || !availableCarer(world, owner)) return 'An available adult parent or guardian in your household must take responsibility';
@@ -93,10 +97,11 @@ export function resolvePets(world: World, command: PetCommand) {
     const owner = petAdoptionOwner(world)!; if (owner.id !== command.reviewedOwnerId) throw new IneligibleAction('The responsible adult changed; review this adoption again');
     const offer = petOffers[command.offerId], definition = petRules[offer.species], relation = world.relationships.find(item => item.from === owner.id && item.to === person.id || item.to === owner.id && item.from === person.id), chance = owner.id === person.id ? 100 : Math.min(95, 45 + Math.floor((relation?.strength ?? 20) / 2)), roll = owner.id === person.id ? 100 : draw(world, 'npcs', 1, 100), accepted = roll <= chance;
     world.actionCounts[adoptionKey(world, command.offerId)] = 1;
-    const attempt = { id: 'pet_adoption_' + world.revision, personId: person.id, ownerId: owner.id, offerId: command.offerId, date: { ...world.date }, chance, roll, accepted, relationshipStrength: owner.id === person.id ? null : relation?.strength ?? 20, country: owner.country, city: owner.city, petId: accepted ? 'pet_' + world.revision + '_' + world.pets.length : null }; world.petAdoptions.push(attempt);
+    const attempt = { ...(world.lifestyle ? { pricingVersion: 1 as const } : {}), id: 'pet_adoption_' + world.revision, personId: person.id, ownerId: owner.id, offerId: command.offerId, date: { ...world.date }, chance, roll, accepted, relationshipStrength: owner.id === person.id ? null : relation?.strength ?? 20, country: owner.country, city: owner.city, petId: accepted ? 'pet_' + world.revision + '_' + world.pets.length : null }; world.petAdoptions.push(attempt);
     if (!accepted) { fact(world, owner.firstName + ' did not agree to take responsibility for the proposed pet adoption.', 'pet-adoption'); result(world, 'Not the right time for a pet', 'Your ' + (storyParticipants(world, [owner.id])[0]?.role ?? 'responsible adult') + ', ' + fullName(owner) + ', said no. Keep the pet photos handy for next year. No adoption fee was charged.', 'pet-paw'); return; }
     charge(world, fee, 'pet-adoption', 'Adopted ' + command.name, undefined, countries[owner.country].currency, owner);
     const pet: Pet = { id: attempt.petId!, species: offer.species, offerId: command.offerId, breed: offer.breed, name: command.name, born: monthFrom(world.date, -Math.min(offer.ageMonths, absolute(world) - 12), world.calendarAnchorDay), adopted: { ...world.date }, adoptedById: person.id, originalOwnerId: owner.id, ownerId: owner.id, country: owner.country, city: owner.city, status: 'active', ended: null, endReason: null, endKind: null, lifespanMonths: draw(world, 'outcomes', definition.minimumLife, definition.maximumLife), health: 90, happiness: 75, bonds: { [person.id]: 30, ...(owner.id === person.id ? {} : { [owner.id]: 20 }) }, temperament: (['gentle', 'playful', 'independent'] as const)[draw(world, 'outcomes', 0, 2)], illness: 'none', recoveryMonths: 0, adoptionFee: fee, adoptionCurrency: countries[owner.country].currency, adoptionTransactionId: world.ledger.at(-1)!.id, consent: { roll, chance }, lastMonth: absolute(world), unfundedMonths: 0, lastVetMonth: null, owners: [{ personId: owner.id, since: { ...world.date }, ended: null }], periods: [], visits: [], moves: [] };
+    if (world.lifestyle) { pet.pricingVersion = 1; pet.companion = newCompanion(world, pet); }
     world.pets.push(pet); person.stats.happiness = bounded(person.stats.happiness + 4); fact(world, 'I welcomed ' + pet.name + ', a ' + pet.breed.toLowerCase() + ', into our household. ' + fullName(owner) + ' took responsibility for care costs.', 'pet-adoption'); result(world, 'Welcome, ' + pet.name, pet.name + ' is home. Your household just got a little livelier.', 'pet-' + pet.species); return;
   }
   const pet = world.pets.find(item => item.id === command.petId); if (!pet) throw new IneligibleAction('Choose an existing pet');

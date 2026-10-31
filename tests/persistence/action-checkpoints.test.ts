@@ -133,7 +133,7 @@ test('the version-four upgrade is atomic and keeps the original v1 payload until
   expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(4);
   expect(sqlite.prepare('SELECT payload FROM lives').get()?.payload).toBe(archive.checkpoint);
   sqlite.exec('DROP TRIGGER fail_v5'); await updated.initialise();
-  expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(31);
+  expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(32);
   expect(await updated.load(world.id)).toEqual(world);
   expect(sqlite.prepare('SELECT payload FROM lives').get()?.payload).toBe(archive.checkpoint);
   await updated.commit(next, world.revision, 'upgrade_project');
@@ -150,7 +150,7 @@ test('reader seven upgrades a version-five database without rewriting its genuin
   sqlite.exec('PRAGMA user_version=5');
   const moments = sqlite.prepare('SELECT snapshot_id,payload FROM snapshots ORDER BY snapshot_id').all();
   const upgraded = new SaveRepository(driver); await upgraded.initialise();
-  expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(31);
+  expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(32);
   expect(sqlite.prepare('SELECT payload FROM lives').get()?.payload).toBe(responsiveArchive.checkpoint);
   expect(sqlite.prepare('SELECT payload FROM backups').get()?.payload).toBe(responsiveArchive.checkpoint);
   expect(sqlite.prepare('SELECT snapshot_id,payload FROM snapshots ORDER BY snapshot_id').all()).toEqual(moments);

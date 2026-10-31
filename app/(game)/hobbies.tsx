@@ -1,3 +1,5 @@
+import { LifestyleEnable } from '../../src/ui/PropertyLifestyle';
+import { legacyHobbyKinds } from '../../src/game/content/leisure';
 import React from 'react';
 import { View } from 'react-native';
 import { router } from 'expo-router';
@@ -13,6 +15,7 @@ import { useColors } from '../../src/ui/theme';
 export default function Hobbies() {
   const world = useGame(s => s.world)!, hobbies = personHobbies(world), current = hobbies.filter(hobby => activeHobbyPlan(hobby)), c = useColors();
   return <Page><Header title="Hobbies" onBack={() => router.back()} />
+    <LifestyleEnable />
     <Card><Body muted>Pick up to two regular hobbies. Keep school and work; make time for something you enjoy.</Body></Card>
     {current.length > 0 && <Card><Heading size={18}>Your routines</Heading>{current.map(hobby => {
       const plan = activeHobbyPlan(hobby)!;
@@ -22,7 +25,7 @@ export default function Hobbies() {
       </View>;
     })}</Card>}
     <Card><Heading size={18}>Explore hobbies</Heading>
-      {hobbyKinds.filter(kind => !current.some(hobby => hobby.kind === kind)).map(kind => {
+      {(world.lifestyle ? hobbyKinds : legacyHobbyKinds).filter(kind => !current.some(hobby => hobby.kind === kind)).map(kind => {
         const hobby = hobbies.find(item => item.kind === kind);
         return <ActionRow key={kind} title={hobbyContent[kind].name} subtitle={hobbyContent[kind].description} value={hobby && hobby.proficiency > 0 ? hobby.proficiency + '% proficiency' : undefined} icon={<HobbyArt kind={kind} size={40} />} onPress={() => router.push({ pathname: '/hobby/[kind]', params: { kind } })} />;
       })}

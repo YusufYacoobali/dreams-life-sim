@@ -21,6 +21,7 @@ export function hobbyEventReason(world: World, kind: HobbyKind, approach: HobbyE
   if (!hobby || !plan || plan.country !== person.country || plan.city !== person.city) return 'Join a current local hobby routine first';
   if (hobby.practices.filter(row => row.source === 'monthly' && row.attended).length < 12) return 'Attend 12 monthly practices before your first community event';
   if (hobby.proficiency < 20) return 'Build at least 20 proficiency through practice';
+  if (world.lifestyle?.records.some(row => row.personId === person.id && row.kind === 'hobby-competition' && row.subjectId === hobby.id && row.date.year === world.date.year)) return 'You already entered or requested a competition this calendar year';
   if (world.hobbyEvents.some(row => row.personId === person.id && row.kind === kind && row.date.year === world.date.year)) return 'You already entered or requested this hobby’s event this calendar year';
   if (person.stats.health < 25 || person.stats.energy < hobbyEventApproachContent[approach].energy) return 'Rest and recover before this approach';
   if (!payer) return 'An available actual parent or guardian in your household must agree';

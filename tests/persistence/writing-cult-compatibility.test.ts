@@ -79,7 +79,7 @@ test.each(records)('$name: reader26 upgrades rows literally; failed choice rolls
   sqlite.prepare('INSERT INTO snapshot_metadata(life_id,snapshot_id,revision,metadata) VALUES(?,?,?,?)').run(initial.id, oldPoint.summary.id, initial.revision, JSON.stringify(oldPoint.summary));
   sqlite.exec('PRAGMA user_version=26');
   const rows = () => Object.fromEntries(sqlite.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name").all().map(row => [row.name, sqlite.prepare('SELECT * FROM ' + row.name + ' ORDER BY 1,2').all()])), originalRows = rows();
-  await new SaveRepository(driver).initialise(); expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(31); expect(rows()).toEqual(originalRows);
+  await new SaveRepository(driver).initialise(); expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(32); expect(rows()).toEqual(originalRows);
   const createStore = () => createGameStore({ repository: async () => new SaveRepository(driver), date: () => initial.date, id: () => 'unused' });
   let store = createStore(); await store.getState().bootstrap(); expect(store.getState().world).toEqual(initial); expect(rows()).toEqual(originalRows);
   if (initial.pending?.kind !== 'decision') throw new Error('Lost genuine decision');
@@ -97,7 +97,7 @@ test.each(records)('$name: reader26 upgrades rows literally; failed choice rolls
   sqlite.close();
 });
 
-test('future reader32 is refused without changing its marker or data', async () => {
-  const { sqlite, driver } = database(); sqlite.exec('PRAGMA user_version=32');
-  await expect(new SaveRepository(driver).initialise()).rejects.toThrow('newer version'); expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(32); sqlite.close();
+test('future reader33 is refused without changing its marker or data', async () => {
+  const { sqlite, driver } = database(); sqlite.exec('PRAGMA user_version=33');
+  await expect(new SaveRepository(driver).initialise()).rejects.toThrow('newer version'); expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(33); sqlite.close();
 });

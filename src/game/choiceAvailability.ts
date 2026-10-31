@@ -1,3 +1,4 @@
+import { lifestyleChoiceReason } from './systems/lifestyleStories';
 import { organisedCrimeChoiceReason } from './systems/organisedCrime';
 import { modelSponsorshipReason } from './systems/modelCareer';
 import { creativeChoiceReason } from './systems/creativeEvents';
@@ -14,6 +15,7 @@ export function choiceUnavailable(world: World, choice: BoundChoice): string | u
   if (choice.effects.length === 1 && choice.effects[0].kind === 'dramatic-choice') return dramaticChoiceReason(world, choice.effects[0]);
   if (choice.disabledReason) return choice.disabledReason;
   for (const effect of choice.effects) {
+    if (effect.kind === 'lifestyle-choice') { const reason = lifestyleChoiceReason(world, effect); if (reason) return reason; }
     if (effect.kind === 'organised-choice') { const reason = organisedCrimeChoiceReason(world, effect); if (reason) return reason; }
     if (effect.kind === 'medical-episode') { const reason = medicalEpisodeReason(world, effect); if (reason) return reason; }
     if (effect.kind === 'story-immediate') { const reason = storyImmediateReason(world, effect); if (reason) return reason; }

@@ -1,3 +1,4 @@
+import { LifestyleSymbol } from './LifestyleSymbol';
 import React from 'react';
 import { Image, View } from 'react-native';
 import type { HobbyKind } from '../game/content/leisure';
@@ -22,5 +23,7 @@ export function OrdinaryHobbyArt({ id, size = 40, label }: { id: OrdinaryHobbyAr
 }
 
 export function HobbyArt({ kind, size = 40 }: { kind: HobbyKind; size?: number }) {
-  return ordinary(kind) ? <OrdinaryHobbyArt id={kind} size={size} /> : <PetsLeisureArt id={kind} size={size} />;
+  const icons = { running: 'walk-outline', swimming: 'water-outline', writing: 'create-outline', pottery: 'color-palette-outline', singing: 'mic-outline', coding: 'code-slash-outline', fishing: 'fish-outline', dancing: 'musical-notes-outline' } as const;
+  if (kind in icons) return <LifestyleSymbol name={icons[kind as keyof typeof icons]} size={size} />;
+  return ordinary(kind) ? <OrdinaryHobbyArt id={kind} size={size} /> : <PetsLeisureArt id={kind as 'guitar' | 'painting' | 'photography' | 'chess'} size={size} />;
 }

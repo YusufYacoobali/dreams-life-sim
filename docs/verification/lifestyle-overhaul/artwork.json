@@ -1,0 +1,20 @@
+{
+  "generator": "image_gen",
+  "scope": "Two new unmodified transparent PNG atlases. Existing PNGs are retained; native components clip measured rectangles at render time. Visual source review and component tests do not establish installed-device acceptance.",
+  "references": [
+    "assets/generated/catalogue-vehicles.png",
+    "assets/generated/polish/pet-dog.png"
+  ],
+  "files": [
+    {
+      "file": "assets/generated/catalogue-lifestyle-vehicles.png",
+      "bytes": 1810938,
+      "sha256": "ba8dce67fbb0d4cba0ccd0840569634f3806679732130fa77f05975f9242bff5"
+    },
+    {
+      "file": "assets/generated/lifestyle-pets-atlas.png",
+      "bytes": 2359392,
+      "sha256": "eb08760080957697cf2e234f2ecc1f31b795fd2990875f7707e376368c86cc13"
+    }
+  ]
+}

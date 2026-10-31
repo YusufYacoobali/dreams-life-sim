@@ -49,12 +49,12 @@ test('the reader28→31 upgrade changes only the marker, preserves old rows and 
     sqlite.exec('PRAGMA user_version=28');
     const rows = () => Object.fromEntries(sqlite.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name").all().map(row => [String(row.name), sqlite.prepare('SELECT * FROM ' + row.name + ' ORDER BY 1,2').all()]));
     const old = rows(), migrated = new SaveRepository(driver); await migrated.initialise();
-    expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(31);
+    expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(32);
     expect(rows()).toEqual(old);
     const loaded = await migrated.load(world.id);
     expect(loaded).toEqual(world); expect(rows()).toEqual(old);
     expect(loaded!.people[loaded!.activePersonId].health.conditions[0].episode).toEqual({ notified: true, assessed: false, admissionAt: null, stabilized: false });
-    sqlite.exec('PRAGMA user_version=32'); await expect(new SaveRepository(driver).initialise()).rejects.toThrow(/newer version/);
+    sqlite.exec('PRAGMA user_version=33'); await expect(new SaveRepository(driver).initialise()).rejects.toThrow(/newer version/);
   } finally { sqlite.close(); }
 });
 

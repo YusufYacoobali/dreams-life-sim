@@ -88,7 +88,7 @@ async function fixtureDatabase() {
   };
 }
 
-test('reader15→31 changes only the marker and cold-loads both actual nonempty-friendship checkpoints without eager row rewrites', async () => {
+test('reader15→32 changes only the marker and cold-loads both actual nonempty-friendship checkpoints without eager row rewrites', async () => {
   const context = await fixtureDatabase();
   try {
     const before = context.rows(); expect(Object.keys(before)).toEqual(tables);
@@ -96,7 +96,7 @@ test('reader15→31 changes only the marker and cold-loads both actual nonempty-
     expect(context.sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(15); context.forbidRowWrites();
     const unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'), repository = new SaveRepository(context.driver);
     await repository.initialise(); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore();
-    expect(context.sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(31); expect(context.rows()).toEqual(before);
+    expect(context.sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(32); expect(context.rows()).toEqual(before);
     const current = await repository.active(), backup = await repository.recoveryPreview(native.current.lifeId);
     expect(current).not.toBeNull(); expect(sha(originalCanonical(current!))).toBe(observations[0].canonicalSha); expect(sha(originalCanonical(backup))).toBe(observations[1].canonicalSha);
     expect(current!.pending).toBeNull(); expect(backup.pending).toMatchObject({ kind: 'result', id: 'action_138', title: 'Your best friend' });
@@ -108,31 +108,31 @@ test('reader15→31 changes only the marker and cold-loads both actual nonempty-
     expect(context.rows()).toEqual(before);
     expect(context.sqlite.prepare('SELECT payload FROM lives').get()?.payload).toBe(native.current.checkpoint);
     expect(context.sqlite.prepare('SELECT payload FROM backups').get()?.payload).toBe(native.backup.checkpoint);
-    expect(context.sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(31);
+    expect(context.sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(32);
   } finally { jest.restoreAllMocks(); context.close(); }
 });
 
-test('failure after writing the reader31 marker rolls back to supported15 with every original row intact before a cold retry', async () => {
+test('failure after writing the reader32 marker rolls back to supported15 with every original row intact before a cold retry', async () => {
   const context = await fixtureDatabase();
   try {
     const before = context.rows(); context.forbidRowWrites(); const driver = context.driver;
     const failing: SqlDatabase = { ...driver, transaction: action => driver.transaction(tx => action({ ...tx, run: async (sql, values) => {
-      await tx.run(sql, values); if (sql === 'PRAGMA user_version = 31') throw new Error('controlled marker failure');
+      await tx.run(sql, values); if (sql === 'PRAGMA user_version = 32') throw new Error('controlled marker failure');
     } })) };
     await expect(new SaveRepository(failing).initialise()).rejects.toThrow('controlled marker failure');
     expect(context.sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(15); expect(context.rows()).toEqual(before);
-    const retry = context.reopen(); await retry.initialise(); expect(context.sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(31); expect(context.rows()).toEqual(before);
+    const retry = context.reopen(); await retry.initialise(); expect(context.sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(32); expect(context.rows()).toEqual(before);
     expect(sha(originalCanonical((await retry.active())!))).toBe(observations[0].canonicalSha);
     expect(sha(originalCanonical(await retry.recoveryPreview(native.current.lifeId)))).toBe(observations[1].canonicalSha); expect(context.rows()).toEqual(before);
   } finally { context.close(); }
 });
 
-test('unsupported reader32 is refused before any mutation of the retained native current/backup database', async () => {
+test('unsupported reader33 is refused before any mutation of the retained native current/backup database', async () => {
   const context = await fixtureDatabase();
   try {
-    context.sqlite.exec('PRAGMA user_version=32'); const before = context.rows(); context.forbidRowWrites();
+    context.sqlite.exec('PRAGMA user_version=33'); const before = context.rows(); context.forbidRowWrites();
     await expect(new SaveRepository(context.driver).initialise()).rejects.toThrow('newer version');
-    expect(context.sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(32); expect(context.rows()).toEqual(before);
+    expect(context.sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(33); expect(context.rows()).toEqual(before);
   } finally { context.close(); }
 });
 

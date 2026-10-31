@@ -1,3 +1,6 @@
+import { SharedLeisure } from '../../src/ui/SharedLeisure';
+import { OutingArt } from '../../src/assets/OutingArt';
+import { legacyOutingKinds } from '../../src/game/content/leisure';
 import React, { useState } from 'react';
 import { View } from 'react-native';
 import { router } from 'expo-router';
@@ -30,7 +33,7 @@ export default function Entertainment() {
         </View>
       </View>
       <Body muted>Reviewing an outing is free. Tickets are charged only when you confirm and attend; a declined request costs nothing. One visit to each venue is available per month.</Body>
-      {outingKinds.map(kind => <ActionRow key={kind} title={outingContent[kind].name} subtitle={outingContent[kind].description + ' Energy needed: ' + outingContent[kind].energy + '%.'} icon={<PetsLeisureArt id={kind} size={40} />} value={money(outingFee(world, kind))} disabled={busy} disabledReason={outingReason(world, kind)} onPress={() => open(kind)} />)}
+      {(world.lifestyle ? outingKinds : legacyOutingKinds).map(kind => <ActionRow key={kind} title={outingContent[kind].name} subtitle={outingContent[kind].description + ' Energy needed: ' + outingContent[kind].energy + '%.'} icon={<OutingArt kind={kind} size={40} />} value={money(outingFee(world, kind))} disabled={busy} disabledReason={outingReason(world, kind)} onPress={() => open(kind)} />)}
     </Card>
     <Card><Heading size={18}>Create and Perform</Heading><ActionRow title="Acting & Stage Work" subtitle="Auditions, contracts and roles" icon={<CareerArt id="actor" size={40} />} onPress={() => router.push('/career/actor')} /><ActionRow title="Music Studio" subtitle="Your recordings, budget and releases" icon={<CareerArt id="musician" size={40} />} onPress={() => router.push('/music-studio')} /><ActionRow title="Video Studio" subtitle="Your channel, production and crew" icon={<CareerArt id="video" size={40} />} onPress={() => router.push({ pathname: '/creator-studio/[kind]', params: { kind: 'youtuber' } })} /><ActionRow title="Streaming Studio" subtitle="Your live channel and recorded production" icon={<CareerArt id="streamer" size={40} />} onPress={() => router.push({ pathname: '/creator-studio/[kind]', params: { kind: 'streamer' } })} /></Card>
     <Card>
@@ -44,6 +47,7 @@ export default function Entertainment() {
       </View>)}
       {history.length > historyLimit && <Button label="Show Earlier Outings" tone="secondary" onPress={() => setHistoryLimit(historyLimit + 6)} />}
     </Card>
+    <SharedLeisure />
     <EventModal event={review?.event ?? null} busy={busy} error={error} onCancel={() => setReview(null)} onChoose={() => { if (review) void dispatch(review.command).then(ok => { if (ok) setReview(null); }); }} />
   </Page>;
 }

@@ -66,7 +66,7 @@ export function validateLeisure(world: World, ledger = indexLedger(world.ledger)
         if (row.available < row.due || row.paid !== row.due || row.paid > 0n && !row.paymentId || row.paid === 0n && row.paymentId) throw new Error('Hobby fee is not funded');
         if (row.paymentId) payment(row.paymentId, plan.payerId, plan.currency, row.paid, 'hobby', row.date, row.ledgerCursor);
         const deltas: Partial<Record<LeisureEffect['stat'], number>> = { energy: -(row.source === 'manual' || plan.mode === 'community' ? 2 : 4), happiness: 1, stress: -1 };
-        if (row.source === 'monthly') { attendedMonths++; if (hobby.kind === 'guitar' && attendedMonths % 3 === 0) deltas.music = 1; if ((hobby.kind === 'chess' || hobby.kind === 'reading') && attendedMonths % 6 === 0) deltas.smarts = 1; }
+        if (row.source === 'monthly') { attendedMonths++; if (hobby.kind === 'guitar' && attendedMonths % 3 === 0) deltas.music = 1; if ((hobby.kind === 'chess' || hobby.kind === 'reading' || hobby.kind === 'coding') && attendedMonths % 6 === 0) deltas.smarts = 1; }
         if (row.effects.find(effect => effect.stat === 'energy')!.before < -deltas.energy!) throw new Error('Hobby attendance lacks its required energy');
         effects(row.effects, deltas);
       }
@@ -82,7 +82,7 @@ export function validateLeisure(world: World, ledger = indexLedger(world.ledger)
     ids.add(outing.id); outingMonths.add(key); permission(person.id, outing.payerId, outing.date, outing.consent);
     if (!outing.consent.accepted) { if (outing.paid !== 0n || outing.paymentId || outing.outcome || outing.effects.length) throw new Error('Refused outing cannot create attendance or payment'); }
     else {
-      if (outing.paid !== outing.quotedTotal || !outing.paymentId || !outing.outcome) throw new Error('Accepted outing lacks its actual ticket payment/outcome'); payment(outing.paymentId, outing.payerId, outing.currency, outing.paid, 'entertainment', outing.date);
+      if (outing.paid !== outing.quotedTotal || !!outing.paymentId !== (outing.paid > 0n) || !outing.outcome) throw new Error('Accepted outing lacks its actual ticket payment/outcome'); if (outing.paymentId) payment(outing.paymentId, outing.payerId, outing.currency, outing.paid, 'entertainment', outing.date);
       const deltas: Partial<Record<LeisureEffect['stat'], number>> = { happiness: outing.outcome * 2, stress: -outing.outcome, energy: -content.energy }; if (outing.kind === 'museum') deltas.smarts = 1; if (outing.effects.find(effect => effect.stat === 'energy')?.before! < content.energy) throw new Error('Outing lacks the required energy'); effects(outing.effects, deltas);
     }
   }
