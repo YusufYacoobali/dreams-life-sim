@@ -15,7 +15,8 @@ test('the expanded catalogue preserves every existing offer, ID, price and condi
   for (const kind of ['property','vehicle'] as const) {
     const offers = assetCatalog.filter(offer => offer.kind === kind);
     const oldPrices = previousCatalog.filter(offer => offer.kind === kind).map(offer => offer.priceBps);
-    expect(offers).toHaveLength(20);
+    expect(offers).toHaveLength(kind === 'vehicle' ? 26 : 20);
+    if (kind === 'vehicle') { expect(offers.filter(offer => !offer.licenceKind)).toHaveLength(20); expect(offers.filter(offer => offer.licenceKind)).toHaveLength(6); }
     expect(Math.min(...offers.map(offer => offer.priceBps))).toBeLessThan(Math.min(...oldPrices));
     expect(Math.max(...offers.map(offer => offer.priceBps))).toBeGreaterThan(Math.max(...oldPrices));
     for (const offer of offers) {
@@ -30,7 +31,11 @@ test('the expanded catalogue preserves every existing offer, ID, price and condi
 
 test('every house and vehicle can be bought at its local quote and survives a saved-life round trip', () => {
   for (const offer of assetCatalog.filter(item => item.kind !== 'possession')) {
-    const before = decodeWorld(JSON.stringify(graduateFixture));
+    let before = decodeWorld(JSON.stringify(graduateFixture));
+    if (offer.licenceKind) {
+      before = resolveCommand(before, { type: 'enable-lifestyle' });
+      if (before.pending?.kind === 'result') before = resolveCommand(before, { type: 'acknowledge', resultId: before.pending.id });
+    }
     const account = accountFor(before), funding = 1_000_000_000_000n;
     account.openingCash += funding; account.cash += funding;
     const quote = purchaseQuote(before,offer,'cash');

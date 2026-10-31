@@ -10,7 +10,7 @@ regenerate historical fixtures or replace long lives with short synthetic worlds
 npm run typecheck
 npm run check:imports
 node tools/generate-third-party-notices.cjs --check
-DREAMS_REFINEMENT_TEST_REPORT=/tmp/full.json DREAMS_REFINEMENT_SOURCE_COMMIT=SOURCE_COMMIT npx jest --runInBand --reporters=default --reporters=./tools/refinement-jest-reporter.cjs
+DREAMS_REFINEMENT_TEST_REPORT=/tmp/full.json DREAMS_REFINEMENT_SOURCE_COMMIT=SOURCE_COMMIT npx jest --maxWorkers=2 --reporters=default --reporters=./tools/refinement-jest-reporter.cjs
 DREAMS_SOAK_WORKERS=2 npm run test:soak -- 120
 EXPO_NO_TELEMETRY=1 npx expo export --platform all --max-workers 1 --source-maps --output-dir /tmp/lifestyle-export
 node tools/verify-lifestyle-export.cjs /tmp/lifestyle-export /tmp/hermes.json

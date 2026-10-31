@@ -63,6 +63,7 @@ test('all 512 sample generations retain exact pre-feature gameplay, allowing onl
     const original = JSON.parse(encodeWorld({ ...world, journal: [] }));
     expect(original).toMatchObject({ schemaVersion: 49, engineVersion: 51, contentVersion: 28, cults: [], rentalLeases: [] });
     expect(original.overhaulVersion).toBe(1); delete original.overhaulVersion;
+    expect(original.lifestyle).toEqual({ version: 1, enabled: date, licences: [], applications: [], tenancies: [], records: [], projects: [], offers: [] }); delete original.lifestyle;
     for (const key of ['cults', 'miniGames', 'rentalLeases', 'personSupportRequests', 'personActionHistory', 'prisonLives', 'affairs', 'romanceOffers']) { expect(original[key]).toEqual([]); delete original[key]; }
     original.schemaVersion = 41; original.engineVersion = 43; original.contentVersion = 20;
     const oldAppearances=recordedAppearances[seed];expect(Object.keys(world.people)).toEqual(Object.keys(oldAppearances));
