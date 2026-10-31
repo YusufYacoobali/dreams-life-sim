@@ -102,14 +102,15 @@ export function validateLifestyle(world: World, ledger = indexLedger(world.ledge
     for (const record of state.records) {
         identity(record.id);
         person(record.personId);
-        for (const id of record.participants)
-            person(id);
+        for (const id of record.participants) { const participant = person(id); if (compareDates(participant.born, record.date) > 0 || participant.died && compareDates(participant.died, record.date) < 0) throw new Error('Lifestyle participant was unavailable on the recorded date'); }
+        if (record.invitedId) person(record.invitedId);
+        if (record.relatedPetId && !world.pets.some(pet => pet.id === record.relatedPetId && pet.id !== record.subjectId)) throw new Error('Missing related pet');
         if (compareDates(record.date, world.date) > 0 || compareDates(record.date, state.enabled) < 0 || new Set(record.participants).size !== record.participants.length || record.chance === null !== (record.roll === null))
             throw new Error('Invalid lifestyle record');
         let out = 0n, income = 0n;
         for (const id of record.paymentIds) {
             const row = ledger.positioned.get(id)?.row;
-            if (!row || used.has(id) || !['lifestyle-cost', 'lifestyle-transfer', 'lifestyle-prize', 'lifestyle-scrap'].includes(row.category))
+            if (!row || used.has(id) || row.year !== record.date.year || row.month !== record.date.month || row.currency !== record.currency || !['lifestyle-cost', 'lifestyle-transfer', 'lifestyle-prize', 'lifestyle-scrap'].includes(row.category))
                 throw new Error('Lifestyle history lacks payment');
             used.add(id);
             if (row.personId === record.personId) {
@@ -119,9 +120,10 @@ export function validateLifestyle(world: World, ledger = indexLedger(world.ledge
                     income += row.cashDelta;
             }
         }
+        if (record.chance !== null && record.accepted !== (record.roll! <= record.chance)) throw new Error('Lifestyle consent differs from its saved draw');
         if (record.accepted === false && (record.paid || record.received || record.distance || record.participants.length > 1) || record.outcomeChance !== undefined && (record.outcomeRoll === undefined || record.success !== (record.kind.startsWith('vehicle-') ? record.outcomeRoll > record.outcomeChance : record.outcomeRoll <= record.outcomeChance)))
             throw new Error('False lifestyle outcome');
-        if (record.kind.startsWith('vehicle-') && (!assetMap.get(record.subjectId)?.vehicleLife || record.distance && ![40, 300].includes(record.distance)))
+        if (record.kind.startsWith('vehicle-') && (!assetMap.get(record.subjectId)?.vehicleLife || record.distance && (record.distance > 1000 || !['vehicle-drive', 'vehicle-road-trip'].includes(record.kind))))
             throw new Error('Vehicle activity lacks its saved asset');
         if (record.kind.startsWith('pet-') && !world.pets.some(pet => pet.id === record.subjectId && pet.companion))
             throw new Error('Pet activity lacks its companion');
@@ -169,9 +171,25 @@ export function validateLifestyle(world: World, ledger = indexLedger(world.ledge
     }
     for (const project of state.projects) {
         identity(project.id);
-        const hobby = world.hobbies.find(hobby => hobby.id === project.hobbyId && hobby.personId === project.personId), rows = (recordsBySubject.get(project.id) ?? []).filter(row => row.kind === 'project-work' || row.kind === 'project-complete');
-        if (!hobby || !!project.completed !== (project.progress === 4) || project.lastMonth > now || compareDates(project.started, world.date) > 0 || rows.length !== project.progress || rows.some((row, index) => row.before !== index || row.after !== index + 1 || at(row.date) <= (index ? at(rows[index - 1].date) : at(project.started))) || project.practiceCursor > hobby.practices.length)
-            throw new Error('Invalid hobby project');
+        const hobby = world.hobbies.find(hobby => hobby.id === project.hobbyId && hobby.personId === project.personId);
+        const rows = (recordsBySubject.get(project.id) ?? []).filter(row => row.kind === 'project-work' || row.kind === 'project-complete');
+        if (!hobby || !!project.completed !== (project.progress === 4) || project.lastMonth > now || compareDates(project.started, world.date) > 0 || project.practiceCursor > hobby.practices.length || project.completed && (compareDates(project.completed, project.started) < 0 || compareDates(project.completed, world.date) > 0 || !rows.length || compareDates(project.completed, rows.at(-1)!.date) !== 0)) throw new Error('Invalid hobby project');
+        if (project.workVersion !== 2) {
+            if (rows.length !== project.progress || rows.some((row, index) => row.before !== index || row.after !== index + 1 || at(row.date) <= (index ? at(rows[index - 1].date) : at(project.started)))) throw new Error('Invalid hobby project');
+        } else {
+            let cursor = project.initialPracticeCursor, progress = 0, previousMonth = at(project.started);
+            if (cursor === undefined || cursor > hobby.practices.length) throw new Error('Missing project practice origin');
+            for (const row of rows) {
+                const session = row.projectSession;
+                if (!session || session.practiceBefore !== cursor || session.practiceAfter > hobby.practices.length || session.practiceAfter < cursor || row.before !== progress || at(row.date) <= previousMonth) throw new Error('Invalid project work session');
+                const actual = hobby.practices.slice(cursor, session.practiceAfter);
+                const attended = actual.filter(practice => practice.attended && practice.source === 'monthly').length;
+                const earned = Math.min(4 - progress, attended);
+                if (!earned || session.months !== earned || row.after !== progress + earned || actual.some(practice => compareDates(practice.date, row.date) > 0 || practice.attended && practice.source === 'monthly' && compareDates(practice.date, project.started) <= 0)) throw new Error('Project work lacks actual practice');
+                progress += earned; cursor = session.practiceAfter; previousMonth = at(row.date);
+            }
+            if (progress !== project.progress || cursor !== project.practiceCursor || previousMonth !== project.lastMonth) throw new Error('Project progress does not reconcile');
+        }
     }
     const offerMap = new Map(state.offers.map(offer => [offer.id, offer]));
     for (const offer of state.offers) {
@@ -197,6 +215,7 @@ export function validateLifestyle(world: World, ledger = indexLedger(world.ledge
     for (const pet of world.pets)
         if (pet.companion) {
             const life = pet.companion;
+        if (life.healthVersion === 2 && (typeof life.ageRelated !== 'boolean' || typeof life.supportUntil !== 'number' || life.ageRelated && !['ageing', 'recovering'].includes(life.condition) || life.condition === 'ageing' && !life.ageRelated)) throw new Error('Invalid age-related pet care');
             if (compareDates(life.enabled, state.enabled) < 0 || compareDates(life.enabled, world.date) > 0 || life.lastHealthMonth > now || new Set(life.tricks).size !== life.tricks.length || (life.condition === 'recovering') !== (life.recovery > 0))
                 throw new Error('Invalid companion profile');
             let training = 0;

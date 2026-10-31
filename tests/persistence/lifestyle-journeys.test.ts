@@ -114,7 +114,7 @@ test('hobby specialist: actual paid practice, introduction, competition and comp
         await run.act({ type: 'hobby-competition', kind: 'writing', approach: 'bold', reviewedPayerId: run.world.activePersonId, quotedFee: competitionFee(run.world, 'writing') }, true);
         await run.act({ type: 'start-hobby-project', hobbyId: hobby.id, title: 'The last bus out of town' });
         const id = run.world.lifestyle!.projects[0].id;
-        for (let part = 0; part < 4; part++) {
+        for (let part = 0; !run.world.lifestyle!.projects[0].completed && part < 4; part++) {
             await run.year();
             await run.act({ type: 'work-hobby-project', projectId: id }, true);
         }
@@ -176,4 +176,46 @@ test('pet owner and ordinary family: genuine adopted companion, earned training,
     finally {
         run.close();
     }
+}, 180000);
+
+test('multiple generations retain real home improvements, vehicle mileage, a family pet and the deceased hobby history without copying licences or proficiency', async () => {
+    const run = await lifestyleJourney(decodeWorld(JSON.stringify(familyBirth)));
+    try {
+        await run.settle();
+        await run.act({ type: 'enable-lifestyle' });
+        const homeOffer = assetCatalog.find(row => row.id === 'mobile-home')!;
+        const carOffer = assetCatalog.find(row => row.id === 'used-compact')!;
+        for (let year = 0; (purchaseReason(run.world, homeOffer, 'mortgage') || availableCash(accountFor(run.world)) < purchaseQuote(run.world, homeOffer, 'mortgage').price * 2n + purchaseQuote(run.world, carOffer, 'cash').cashRequired) && year < 10; year++) await run.year();
+        await run.act({ type: 'buy-asset', catalogId: homeOffer.id, financing: 'mortgage', depositBps: 2000, termMonths: 360, quotedPrice: purchaseQuote(run.world, homeOffer, 'mortgage').price });
+        const homeId = run.world.assets.at(-1)!.id;
+        await run.act({ type: 'enable-property-management', assetId: homeId });
+        await run.act({ type: 'install-amenity', assetId: homeId, amenity: 'kitchen', quotedCost: amenityQuote(run.world.assets.at(-1)!, 'kitchen').cost });
+        await run.act({ type: 'take-licence-test', kind: 'road', answers: [1, 2, 0], quotedFee: licenceFee(run.world, 'road') });
+        await run.act({ type: 'buy-asset', catalogId: carOffer.id, financing: 'cash', depositBps: 10000, termMonths: 120, quotedPrice: purchaseQuote(run.world, carOffer, 'cash').price });
+        const carId = run.world.assets.at(-1)!.id;
+        await run.act({ type: 'enable-vehicle-activities', assetId: carId });
+        await run.act({ type: 'vehicle-activity', assetId: carId, activity: 'drive', contactId: null, quotedCost: vehicleActivityCost(run.world, run.world.assets.at(-1)!, 'drive') });
+        await run.act({ type: 'adopt-pet', offerId: 'olive', name: 'Olive', reviewedOwnerId: run.world.activePersonId, quotedFee: petAdoptionFee(run.world, 'olive') });
+        const petId = run.world.pets.at(-1)!.id;
+        await run.act({ type: 'pet-activity', petId, activity: 'train', otherId: null, quotedFee: 0n, reviewedOwnerId: run.world.activePersonId });
+        await run.act({ type: 'hobby-plan', kind: 'writing', mode: 'community', reviewedPayerId: run.world.activePersonId, quotedMonthlyFee: hobbyFee(run.world.people[run.world.activePersonId].country, 'writing', 'community') });
+        await run.year();
+        const oldId = run.world.activePersonId, child = childrenOf(run.world, oldId).find(person => !person.died)!;
+        const marriage = run.world.marriages.find(row => !row.ended && (row.a === oldId || row.b === oldId))!, spouseId = marriage.a === oldId ? marriage.b : marriage.a;
+        await run.act({ type: 'save-will', executorId: spouseId, shares: [{ personId: child.id, bps: 10000 }], bequests: [{ assetId: homeId, personId: child.id }, { assetId: carId, personId: child.id }] });
+        const home = run.world.assets.find(asset => asset.id === homeId)!, car = run.world.assets.find(asset => asset.id === carId)!, pet = run.world.pets.find(pet => pet.id === petId)!, hobby = run.world.hobbies.find(row => row.personId === oldId && row.kind === 'writing')!;
+        expect(hobby.proficiency).toBeGreaterThan(0);
+        await run.act({ type: 'end-life', lifeId: run.world.id, personId: oldId, expectedRevision: run.world.revision }, true);
+        const inheritedHome = run.world.assets.find(asset => asset.id === homeId)!, inheritedCar = run.world.assets.find(asset => asset.id === carId)!;
+        expect(inheritedHome.ownerId).toBe(child.id); expect(inheritedCar.ownerId).toBe(child.id);
+        expect(inheritedHome.ownershipSource).toBe('inheritance'); expect(inheritedHome.propertyLife).toEqual(home.propertyLife);
+        expect(inheritedCar.vehicleLife).toEqual(car.vehicleLife);
+        await run.command({ type: 'continue-child', personId: child.id }, true);
+        expect(run.world.hobbies.find(row => row.id === hobby.id)!.proficiency).toBe(hobby.proficiency);
+        expect(run.world.hobbies.some(row => row.personId === child.id)).toBe(false);
+        expect(run.world.lifestyle!.licences.some(row => row.personId === child.id)).toBe(false);
+        expect(run.world.pets.find(row => row.id === petId)!.companion!.training).toBe(pet.companion!.training);
+        expect(run.world.pets.find(row => row.id === petId)!.ownerId).toBe(spouseId);
+        run.evidence('multiple-generations');
+    } finally { run.close(); }
 }, 180000);

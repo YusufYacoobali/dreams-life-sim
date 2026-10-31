@@ -169,6 +169,11 @@ export function resolveAssets(world: World, command: AssetCommand, presentPurcha
     asset.rental = 'none'; asset.rentPerMonth = 0n; result(world, 'Rental arrangement ended', 'Future rent stops. You still own the property.', 'property');
   } else if (command.type === 'move-in') {
     if (asset.kind !== 'property' || asset.rental !== 'none' || asset.listing || asset.country !== person.country) throw new IneligibleAction('Choose an available home in your country of residence');
+    if (asset.propertyLife && person.householdId) {
+      const occupants = Object.values(world.people).filter(member => !member.died && member.householdId === person.householdId).length;
+      const bedrooms = assetCatalog.find(offer => offer.id === asset.catalogId)?.bedrooms ?? 1;
+      if (occupants > bedrooms * 2) throw new IneligibleAction('This managed home does not have enough sleeping space for your current household');
+    }
     world.assets.filter(item => item.ownerId === person.id).forEach(item => { item.primaryHome = item.id === asset.id; });
     person.city = asset.city; result(world, 'You moved in', 'This is now your primary home. The housing part of your monthly living costs is reduced; ownership costs remain.', 'property');
     const household = world.households.find(item => item.id === person.householdId); if (household) { household.homeAssetId = asset.id; for (const id of household.members) if (!world.people[id].died) world.people[id].city = asset.city; }

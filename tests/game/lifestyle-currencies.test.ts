@@ -1,0 +1,25 @@
+import { pupil } from '../support/pupil';
+import { act, buyLifestyle } from '../helpers/lifestyle';
+import { countryCodes, countries } from '../../src/game/countries';
+import { rules } from '../../src/game/rules';
+import { petAdoptionFee, petFoodCost, petMonth, petVetCost } from '../../src/game/systems/pets';
+import { petOffers, type petOfferIds } from '../../src/game/content/pets';
+import { accountFor, post } from '../../src/game/systems/common';
+import { decodeWorld, encodeWorld } from '../../src/game/model';
+import { monthFrom } from '../../src/game/calendar';
+const offers: readonly typeof petOfferIds[number][] = ['biscuit', 'doug', 'pebble', 'admiral', 'maple'];
+test.each(countryCodes.flatMap(country => offers.map(offerId => [country, offerId] as const)))('%s %s adoption, automatic care and veterinary payments retain their actual local minor units', (country, offerId) => {
+  let world = pupil(country, 20); post(world, rules[country].baseWage * 200n, 0n, 'unit-funding', 'Explicit country fixture');
+  if (offerId === 'maple') world = buyLifestyle(world, 'country-estate');
+  const offer = petOffers[offerId], start = accountFor(world).cash, fee = petAdoptionFee(world, offerId);
+  world = act(world, { type: 'adopt-pet', offerId, name: offer.name, reviewedOwnerId: world.activePersonId, quotedFee: fee });
+  expect(accountFor(world).cash).toBe(start - fee); const petId = world.pets.at(-1)!.id;
+  world.date = monthFrom(world.date, 1); petMonth(world);
+  expect(world.pets.at(-1)!.periods[0]).toMatchObject({ currency: countries[country].currency, paid: petFoodCost(country, offer.species), ownerId: world.activePersonId });
+  if (world.pending?.kind === 'result') world = act(world, { type: 'acknowledge', resultId: world.pending.id });
+  const beforeVet = accountFor(world).cash;
+  world = act(world, { type: 'pet-vet', petId, reviewedOwnerId: world.activePersonId, quotedFee: petVetCost(country) });
+  expect(accountFor(world).cash).toBe(beforeVet - petVetCost(country));
+  expect(world.pets.at(-1)!.visits.at(-1)!.currency).toBe(countries[country].currency);
+  expect(decodeWorld(encodeWorld(world))).toEqual(world);
+});

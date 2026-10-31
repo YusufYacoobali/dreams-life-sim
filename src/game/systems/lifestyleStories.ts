@@ -19,7 +19,7 @@ import { addCondition } from './health';
 import { recordLifestyleVandalism } from './legal';
 import { createContact } from './npcs';
 import { connectPerson } from './relationships';
-function context(world: World, template: LifestyleTemplate, subjectId?: string) {
+function context(world: World, template: LifestyleTemplate, subjectId?: string, contextVersion: 1 | 2 = 2) {
     const person = active(world);
     if (!world.lifestyle || !presentAtHome(world) || person.stats.health < 25)
         return;
@@ -36,7 +36,7 @@ function context(world: World, template: LifestyleTemplate, subjectId?: string) 
             other = tenancy!.tenantId;
             tenancyId = tenancy!.id;
         }
-        savedContext = asset.ownerId + ':' + asset.rental + ':' + (asset.insured ? 'insured' : 'bare');
+        savedContext = asset.ownerId + ':' + asset.rental + ':' + (asset.insured ? 'insured' : 'bare') + (contextVersion === 2 ? ':' + asset.value + ':' + asset.condition : '');
     }
     else if (template.domain === 'pet') {
         const pet = householdPets(world).find(row => (!subjectId || row.id === subjectId) && row.companion && (!template.species || row.species === template.species) && (!template.trait || row.companion.trait === template.trait) && (template.when !== 'trained' || row.companion.training >= 25) && (template.when !== 'unwell' || row.illness !== 'none' || row.companion.condition !== 'well'));
@@ -44,7 +44,7 @@ function context(world: World, template: LifestyleTemplate, subjectId?: string) 
             return;
         id = pet.id;
         subject = pet.name;
-        savedContext = pet.ownerId + ':' + pet.status + ':' + pet.country + ':' + pet.city;
+        savedContext = pet.ownerId + ':' + pet.status + ':' + pet.country + ':' + pet.city + (contextVersion === 2 ? ':' + pet.illness + ':' + pet.companion!.condition + ':' + pet.companion!.training : '');
     }
     else {
         const hobby = world.hobbies.find(row => row.personId === person.id && (!subjectId || row.id === subjectId) && (!template.hobby || row.kind === template.hobby) && activeHobbyPlan(row) && row.practices.some(practice => practice.attended && practice.source === 'monthly') && (template.when !== 'skilled' || row.proficiency >= 40) && (template.when !== 'project' || world.lifestyle!.projects.some(project => project.hobbyId === row.id && !project.completed)));
@@ -69,23 +69,33 @@ function context(world: World, template: LifestyleTemplate, subjectId?: string) 
 }
 export function offerLifestyleStory(world: World, templateId?: string, subjectId?: string, forceForTest = false) {
     const state = world.lifestyle, person = active(world);
-    if (!state || state.offers.length >= 512 || !presentAtHome(world))
+    if (!state || state.offers.length >= 512 || state.records.length + state.offers.filter(offer => offer.status === 'open').length >= 4096 || !presentAtHome(world))
         return false;
     const key = person.id + ':lifestyle-story:' + world.date.year;
     if (!forceForTest && (world.actionCounts[key] ?? 0) >= 2)
         return false;
-    const eligible = lifestyleTemplates.filter(template => (!templateId || template.id === templateId) && !state.offers.some(row => row.templateId === template.id && row.personId === person.id && world.date.year - row.date.year < 5) && context(world, template, subjectId));
+    const domains = new Set<string>();
+    for (const asset of world.assets) if (asset.ownerId === person.id && asset.country === person.country && asset.city === person.city && asset.stolen?.status !== 'held') {
+        if (asset.propertyLife) domains.add('property');
+        if (asset.vehicleLife) domains.add('vehicle');
+    }
+    if (householdPets(world).some(pet => pet.companion)) domains.add('pet');
+    if (world.hobbies.some(hobby => hobby.personId === person.id && activeHobbyPlan(hobby) && hobby.practices.some(row => row.attended && row.source === 'monthly'))) domains.add('hobby');
+    if (!domains.size) return false;
+    const lastOffered = new Map<string, number>();
+    for (const offer of state.offers) if (offer.personId === person.id) lastOffered.set(offer.templateId, Math.max(lastOffered.get(offer.templateId) ?? -Infinity, offer.date.year));
+    const eligible = lifestyleTemplates.filter(template => domains.has(template.domain) && (!templateId || template.id === templateId) && world.date.year - (lastOffered.get(template.id) ?? -Infinity) >= 5 && context(world, template, subjectId));
     if (!eligible.length)
         return false;
     if (!forceForTest && draw(world, 'events', 1, 100) > 18)
         return false;
     const template = eligible[draw(world, 'events', 0, eligible.length - 1)], binding = context(world, template, subjectId)!;
-    const text = (value: string) => value.replace(/\{subject\}/g, binding.subject).replace(/\{person\}/g, binding.other ? nameOf(world, binding.other) : 'your household').replace(/\{project\}/g, binding.projectTitle);
+    const text = (value: string) => value.replace(/\{(subject|person|project)\}/g, (_token, key: string) => key === 'subject' ? binding.subject : key === 'person' ? binding.other ? nameOf(world, binding.other) : 'your household' : binding.projectTitle);
     const currency = countries[person.country].currency, id = 'lifestyle_offer_' + world.revision + '_' + state.offers.length;
     const challengeRoll = template.choices.some(choice => choice.operations.some(operation => operation.kind === 'hobby-challenge')) ? draw(world, 'outcomes', 1, 100) : null;
     const challengeProfile = world.hobbies.find(row => row.id === binding.id);
-    const choices = template.choices.map(choice => { const operation = choice.operations.find(operation => operation.kind === 'hobby-challenge'); const challenge = operation && challengeProfile && challengeRoll !== null ? { practiceCursor: challengeProfile.practices.length, proficiency: challengeProfile.proficiency, discipline: person.stats.discipline, chance: Math.max(10, Math.min(90, 25 + Math.floor(challengeProfile.proficiency / 2) + Math.floor(person.stats.discipline / 10) + operation.amount)), roll: challengeRoll } : undefined; return ({ id: choice.id, label: choice.label, cost: roundRatio(rules[person.country].baseWage * BigInt(choice.costBps), 10000n), body: text(text(choice.body) + (challenge ? challenge.roll <= challenge.chance ? (template.id === 'hobby-chess-prodigy' ? ' You win the informal game. {person} stays to discuss a turning point.' : ' The attempt comes together. You finish more confident, and it shows.') : (template.id === 'hobby-chess-prodigy' ? ' You lose the informal game. {person} stays to go over a turning point.' : ' This attempt does not come together. Afterwards, you can see one thing to try differently.') : '')), ...(challenge ? { challenge } : {}), operations: choice.operations.map(row => ({ ...row })) }); });
-    state.offers.push({ id, templateId: template.id, personId: person.id, subjectId: binding.id, participantId: binding.other, tenancyId: binding.tenancyId, date: { ...world.date }, country: person.country, city: person.city, currency, context: binding.savedContext, status: 'open', choices, selected: null });
+    const choices = template.choices.map(choice => { const operation = choice.operations.find(operation => operation.kind === 'hobby-challenge'); const challenge = operation && challengeProfile && challengeRoll !== null ? { practiceCursor: challengeProfile.practices.length, proficiency: challengeProfile.proficiency, discipline: person.stats.discipline, chance: Math.max(10, Math.min(90, 25 + Math.floor(challengeProfile.proficiency / 2) + Math.floor(person.stats.discipline / 10) + operation.amount)), roll: challengeRoll } : undefined; return ({ id: choice.id, label: choice.label, cost: roundRatio(rules[person.country].baseWage * BigInt(choice.costBps), 10000n), body: text(choice.body + (challenge ? challenge.roll <= challenge.chance ? (template.id === 'hobby-chess-prodigy' ? ' You win the informal game. {person} stays to discuss a turning point.' : ' The attempt comes together. You finish more confident, and it shows.') : (template.id === 'hobby-chess-prodigy' ? ' You lose the informal game. {person} stays to go over a turning point.' : ' This attempt does not come together. Afterwards, you can see one thing to try differently.') : '')), ...(challenge ? { challenge } : {}), operations: choice.operations.map(row => ({ ...row })) }); });
+    state.offers.push({ contextVersion: 2, id, templateId: template.id, personId: person.id, subjectId: binding.id, participantId: binding.other, tenancyId: binding.tenancyId, date: { ...world.date }, country: person.country, city: person.city, currency, context: binding.savedContext, status: 'open', choices, selected: null });
     const people = [person.id, ...(binding.other ? [binding.other] : [])];
     offerPending(world, { kind: 'decision', id, templateId: template.id, title: template.title, body: text(template.body), illustration: template.domain === 'property' ? 'property' : template.domain === 'vehicle' ? 'vehicle' : template.domain === 'pet' ? 'pet-' + world.pets.find(row => row.id === binding.id)!.species : 'leisure-' + world.hobbies.find(row => row.id === binding.id)!.kind, personIds: people, choices: choices.map(choice => ({ id: choice.id, label: choice.label + (choice.cost ? ' · ' + formatMoney({ minor: choice.cost, currency }) : ''), effects: [{ kind: 'lifestyle-choice' as const, version: 1 as const, offerId: id, choiceId: choice.id }], resultTitle: 'A part of your life', resultBody: choice.body, journal: choice.body })) }, 28);
     world.actionCounts[key] = (world.actionCounts[key] ?? 0) + 1;
@@ -94,7 +104,7 @@ export function offerLifestyleStory(world: World, templateId?: string, subjectId
     return true;
 }
 function currentOffer(world: World, id: string) { const offer = world.lifestyle?.offers.find(row => row.id === id && row.status === 'open'); if (!offer)
-    return; const template = lifestyleTemplates.find(row => row.id === offer.templateId), binding = template && context(world, template, offer.subjectId); if (offer.personId !== world.activePersonId || active(world).country !== offer.country || active(world).city !== offer.city || !binding || binding.savedContext !== offer.context || binding.other !== offer.participantId || binding.tenancyId !== offer.tenancyId)
+    return; const template = lifestyleTemplates.find(row => row.id === offer.templateId), binding = template && context(world, template, offer.subjectId, offer.contextVersion ?? 1); if (offer.personId !== world.activePersonId || active(world).country !== offer.country || active(world).city !== offer.city || !binding || binding.savedContext !== offer.context || binding.other !== offer.participantId || binding.tenancyId !== offer.tenancyId)
     return; return offer; }
 export function lifestyleChoiceReason(world: World, effect: z.infer<typeof lifestyleChoiceSchema>) { const offer = currentOffer(world, effect.offerId), choice = offer?.choices.find(row => row.id === effect.choiceId); if (offer && choice && availableCash(accountFor(world, active(world), offer.currency)) < choice.cost)
     return 'Insufficient available funds for this saved choice'; }

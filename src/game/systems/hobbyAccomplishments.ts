@@ -14,7 +14,7 @@ import { parentOf } from './travel';
 import { ageOn } from '../personHelpers';
 import type { AmenityId } from './lifestyleSchemas';
 import { homeAmenity } from './propertyAmenities';
-import { contactConsent, lifestyleMonthNumber as month, lifestylePayment, lifestyleState, localContactReason, nameOf, recordLifestyle, requireLifestyle, sharedMemory } from './lifestyleCommon';
+import { contactConsent, lifestyleMonthNumber as month, lifestylePayment, lifestyleState, lifestyleReason, localContactReason, nameOf, recordLifestyle, requireLifestyle, sharedMemory } from './lifestyleCommon';
 export const hobbyLifestyleCommandSchema = z.discriminatedUnion('type', [
     z.object({ type: z.literal('hobby-competition'), kind: z.enum(hobbyKinds), approach: z.enum(['steady', 'bold', 'social']), reviewedPayerId: z.string(), quotedFee: z.bigint().nonnegative() }).strict(),
     z.object({ type: z.literal('start-hobby-project'), hobbyId: z.string(), title: z.string().trim().min(1).max(70).refine(value => !/[\u0000-\u001f]/.test(value)) }).strict(),
@@ -27,18 +27,28 @@ export type HobbyLifestyleCommand = z.infer<typeof hobbyLifestyleCommandSchema>;
 export const hobbyMilestone = (proficiency: number) => proficiency >= 90 ? 'Master' : proficiency >= 70 ? 'Expert' : proficiency >= 40 ? 'Skilled' : proficiency >= 15 ? 'Developing' : 'Beginner';
 export const competitionFee = (world: World, kind: HobbyKind) => rules[active(world).country].baseWage * BigInt(hobbyContent[kind].feeBps + 2) / 5000n || 1n;
 export const competitionChance = (proficiency: number, discipline: number, approach: 'steady' | 'bold' | 'social', peer: number) => Math.max(10, Math.min(90, 25 + Math.floor(proficiency * 0.6) + Math.floor(discipline / 10) - Math.floor(peer / 4) + (approach === 'steady' ? 10 : approach === 'bold' ? -10 : 0)));
-export function competitionReason(world: World, kind: HobbyKind) { const person = active(world), hobby = personHobbies(world).find(row => row.kind === kind), plan = hobby && activeHobbyPlan(hobby); if (!world.lifestyle)
+export function competitionReason(world: World, kind: HobbyKind) { const common = lifestyleReason(world, false); if (common) return common; const person = active(world), hobby = personHobbies(world).find(row => row.kind === kind), plan = hobby && activeHobbyPlan(hobby); if (!world.lifestyle)
     return 'Review and enable lifestyle features first'; if (!hobby || !plan || hobby.proficiency < 20 || hobby.practices.filter(row => row.source === 'monthly' && row.attended).length < 6)
     return 'Build 20 proficiency and attend six monthly practices in a current routine'; if (!leisurePresent(world, person) || hobbyPauseReason(world, hobby, plan, true))
     return 'Be available and healthy at your current routine'; if (!leisurePayer(world))
     return 'An available actual parent or guardian must agree'; if (world.hobbyEvents.some(row => row.personId === person.id && row.kind === kind && row.date.year === world.date.year) || world.lifestyle.records.some(row => row.personId === person.id && row.kind === 'hobby-competition' && row.subjectId === hobby.id && row.date.year === world.date.year))
-    return 'One competition or community-event request per hobby each year'; }
+    return 'One competition or community-event request per hobby each year'; if (availableCash(accountFor(world, leisurePayer(world)!)) < competitionFee(world, kind)) return 'The responsible payer cannot cover the competition entry'; }
 const projectAmenity: Partial<Record<HobbyKind, AmenityId>> = { guitar: 'studio', singing: 'studio', writing: 'office', coding: 'office', pottery: 'workshop', gardening: 'garden', swimming: 'pool', running: 'gym', cooking: 'kitchen', gaming: 'gaming-room', painting: 'workshop', photography: 'office' };
 export function projectEnergy(world: World, kind: HobbyKind) { return projectAmenity[kind] && homeAmenity(world, projectAmenity[kind]!) ? 2 : 4; }
+export function projectWorkReason(world: World, projectId: string) {
+    const base = lifestyleReason(world, false, 0); if (base) return base;
+    const project = world.lifestyle?.projects.find(row => row.id === projectId && row.personId === world.activePersonId && !row.completed);
+    if (!project) return 'Choose your unfinished project';
+    const hobby = personHobbies(world).find(row => row.id === project.hobbyId), plan = hobby && activeHobbyPlan(hobby);
+    if (!hobby || !plan || hobbyPauseReason(world, hobby, plan, true)) return 'Choose an available current hobby routine';
+    if (project.lastMonth === month(world) || !hobby.practices.slice(project.practiceCursor).some(row => row.attended && row.source === 'monthly')) return 'Attend another month of practice before the next project session';
+    if (active(world).stats.energy < projectEnergy(world, hobby.kind)) return 'Rest before working on your project';
+}
 export function resolveHobbyLifestyle(world: World, command: HobbyLifestyleCommand) {
-    requireLifestyle(world, false);
+    requireLifestyle(world, false, 0);
     const state = lifestyleState(world), person = active(world), current = month(world);
     if (command.type === 'casual-hobby') {
+        if (person.stats.energy < 4) throw new IneligibleAction('Rest before this activity');
         if (ageOn(person, world.date) < hobbyContent[command.kind].minAge)
             throw new IneligibleAction('Wait until this hobby’s minimum age');
         const key = person.id + ':casual-hobby:' + current;
@@ -85,7 +95,7 @@ export function resolveHobbyLifestyle(world: World, command: HobbyLifestyleComma
             sharedMemory(world, contact.id, 'shared-outing:' + command.kind + ':' + current, 5);
         }
         const body = consent.accepted ? 'I went to ' + venue.name.toLowerCase() + ' with ' + nameOf(world, contact.id) + (payer.id !== person.id ? ', accompanied by ' + nameOf(world, payer.id) : '') + '. The actual tickets and shared memory are recorded.' : 'Our proposed outing did not receive everyone’s agreement. Nobody attended and no tickets were charged.';
-        recordLifestyle(world, { kind: 'shared-outing-' + command.kind, funding: { payerId: payer.id, quotedFee: fee, permission }, subjectId: command.contactId, participants: consent.accepted ? participants : [person.id], ...consent, paid: payer.id === person.id ? paid : 0n, paymentIds, body });
+        recordLifestyle(world, { kind: 'shared-outing-' + command.kind, invitedId: contact.id, funding: { payerId: payer.id, quotedFee: fee, permission }, subjectId: command.contactId, participants: consent.accepted ? participants : [person.id], ...consent, paid: payer.id === person.id ? paid : 0n, paymentIds, body });
         result(world, consent.accepted ? 'A shared afternoon' : 'Another time', body, 'leisure-' + command.kind);
         return;
     }
@@ -147,12 +157,13 @@ export function resolveHobbyLifestyle(world: World, command: HobbyLifestyleComma
             throw new IneligibleAction('Finish your current project first');
         if (state.projects.length >= 512)
             throw new IneligibleAction('The project history limit has been reached');
-        state.projects.push({ id: 'hobby_project_' + world.revision, personId: person.id, hobbyId: profile.id, title: command.title, started: { ...world.date }, completed: null, progress: 0, lastMonth: current, practiceCursor: profile.practices.length });
-        recordLifestyle(world, { kind: 'project-start', subjectId: profile.id, body: 'I began “' + command.title + '”, a personal ' + hobbyContent[profile.kind].name.toLowerCase() + ' project. Four later attended practice months and explicit work sessions are required to finish.' });
+        state.projects.push({ workVersion: 2, initialPracticeCursor: profile.practices.length, id: 'hobby_project_' + world.revision, personId: person.id, hobbyId: profile.id, title: command.title, started: { ...world.date }, completed: null, progress: 0, lastMonth: current, practiceCursor: profile.practices.length });
+        recordLifestyle(world, { kind: 'project-start', subjectId: profile.id, body: 'I began “' + command.title + '”, a personal ' + hobbyContent[profile.kind].name.toLowerCase() + ' project. Four later attended practice months can contribute to the finished work when I review the project.' });
         result(world, 'Something of your own', 'The project is started. No physical asset, sale value or qualification has been created.', 'leisure-' + profile.kind);
         return;
     }
     if (command.type === 'work-hobby-project') {
+        const reason = projectWorkReason(world, command.projectId); if (reason) throw new IneligibleAction(reason);
         const project = state.projects.find(row => row.id === command.projectId && row.personId === person.id && !row.completed);
         if (!project)
             throw new IneligibleAction('Choose your unfinished project');
@@ -161,21 +172,26 @@ export function resolveHobbyLifestyle(world: World, command: HobbyLifestyleComma
         const energy = projectEnergy(world, profile.kind);
         if (person.stats.energy < energy)
             throw new IneligibleAction('Rest before working on your project');
-        project.progress++;
+        const practiceBefore = project.practiceCursor, before = project.progress;
+        const attended = profile.practices.slice(practiceBefore).filter(row => row.attended && row.source === 'monthly').length;
+        const credited = project.workVersion === 2 ? Math.min(4 - project.progress, attended) : 1;
+        project.progress += credited;
         project.lastMonth = current;
         project.practiceCursor = profile.practices.length;
         person.stats.energy = bounded(person.stats.energy - energy);
         if (project.progress === 4)
             project.completed = { ...world.date };
-        const body = 'I ' + (project.completed ? 'completed' : 'worked on') + ' “' + project.title + '”. ' + (project.completed ? 'It remains a personal accomplishment, with no invented resale value or qualification.' : project.progress + '/4 work sessions are complete.');
-        recordLifestyle(world, { kind: project.completed ? 'project-complete' : 'project-work', subjectId: project.id, before: project.progress - 1, after: project.progress, body });
+        const body = 'I ' + (project.completed ? 'completed' : 'worked on') + ' “' + project.title + '”. ' + (project.completed ? 'It remains a personal accomplishment, with no invented resale value or qualification.' : project.progress + (project.workVersion === 2 ? '/4 parts are complete.' : '/4 work sessions are complete.'));
+        recordLifestyle(world, { kind: project.completed ? 'project-complete' : 'project-work', subjectId: project.id, before, after: project.progress, ...(project.workVersion === 2 ? { projectSession: { practiceBefore, practiceAfter: project.practiceCursor, months: credited } } : {}), body });
         result(world, project.completed ? 'You finished it' : 'One part closer', body, 'leisure-' + profile.kind);
         return;
     }
+    if (person.stats.energy < 4) throw new IneligibleAction('Rest before sharing practice');
     const reason = localContactReason(world, command.contactId, true);
     if (reason)
         throw new IneligibleAction(reason);
     const contact = world.people[command.contactId];
+    if (ageOn(contact, world.date) < hobbyContent[profile.kind].minAge) throw new IneligibleAction('Your guest must meet this hobby’s minimum age');
     if (ageOn(contact, world.date) < 18 && (person.householdId !== contact.householdId || !parentOf(world, person.id, contact.id)))
         throw new IneligibleAction('Practise with your actual co-resident child or an adult contact');
     if (ageOn(person, world.date) < 18 && !leisurePayer(world))
@@ -192,6 +208,6 @@ export function resolveHobbyLifestyle(world: World, command: HobbyLifestyleComma
         person.stats.energy = bounded(person.stats.energy - 4);
     }
     const body = consent.accepted ? 'I shared ' + hobbyContent[profile.kind].name.toLowerCase() + ' practice with ' + nameOf(world, contact.id) + '. Our shared memory grew; this did not count as another paid lesson or award extra proficiency.' : nameOf(world, contact.id) + ' declined practice together. No attendance or progress was invented.';
-    recordLifestyle(world, { kind: 'shared-hobby', subjectId: profile.id, participants: [person.id, ...(consent.accepted ? [contact.id] : [])], ...consent, body });
+    recordLifestyle(world, { kind: 'shared-hobby', invitedId: contact.id, subjectId: profile.id, participants: [person.id, ...(consent.accepted ? [contact.id] : [])], ...consent, body });
     result(world, consent.accepted ? 'Someone to share it with' : 'Another time', body, 'leisure-' + profile.kind);
 }

@@ -13,7 +13,7 @@ export type BranchInfo = z.infer<typeof branchInfoSchema>;
 const maxCheckpointCharacters = 44_000_000;
 const recordSchema = z.object({ summary: snapshotSummarySchema, payload: z.string().max(maxCheckpointCharacters) });
 export type SnapshotRecord = z.infer<typeof recordSchema>;
-const archiveSchema = z.object({ format: z.literal('dreams-save-archive'), version: z.literal(1), checkpoint: z.string().max(maxCheckpointCharacters), snapshots: z.array(recordSchema).max(5000), branch: branchInfoSchema.nullable() });
+const archiveSchema = z.object({ format: z.literal('dreams-save-archive'), version: z.union([z.literal(1), z.literal(2)]), checkpoint: z.string().max(maxCheckpointCharacters), snapshots: z.array(recordSchema).max(5000), branch: branchInfoSchema.nullable() });
 export type SaveContents = { world: World; snapshots: SnapshotRecord[]; branch: BranchInfo | null };
 export function snapshotRecord(world: World, createdAt: string, label: string, payload = packCheckpoint(world)): SnapshotRecord {
   const person = world.people[world.activePersonId];
@@ -37,7 +37,7 @@ export function decodeSave(text: string): SaveContents {
   return { world, snapshots: archive.snapshots, branch: archive.branch };
 }
 export function encodeSave(contents: SaveContents): string {
-  const text = JSON.stringify({ format: 'dreams-save-archive', version: 1, checkpoint: packCheckpoint(contents.world), snapshots: contents.snapshots, branch: contents.branch });
+  const text = JSON.stringify({ format: 'dreams-save-archive', version: 2, checkpoint: packCheckpoint(contents.world), snapshots: contents.snapshots, branch: contents.branch });
   if (text.length > 64_000_000) throw new Error('This archive exceeds the supported export size');
   return text;
 }

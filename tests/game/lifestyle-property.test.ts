@@ -43,3 +43,10 @@ test('an unpaid tenancy requires real notice, an independent paid review and ano
     expect(world.lifestyle!.tenancies[0].arrears).toBeGreaterThan(0n);
     expect(decodeWorld(encodeWorld(world))).toEqual(world);
 });
+
+test('optional dedicated rooms respect current household living space without removing an existing amenity', () => {
+    let world = managed(); const id = world.assets.at(-1)!.id;
+    for (const amenity of ['gym', 'office', 'studio'] as const) world = act(world, { type: 'install-amenity', assetId: id, amenity, quotedCost: amenityQuote(world.assets.at(-1)!, amenity).cost });
+    expect(() => act(world, { type: 'install-amenity', assetId: id, amenity: 'cinema', quotedCost: amenityQuote(world.assets.at(-1)!, 'cinema').cost })).toThrow(/living space/);
+    expect(world.assets.at(-1)!.propertyLife!.amenities).toHaveLength(3);
+});

@@ -1,3 +1,4 @@
+import { formatMoney } from '../money';
 import { fxMoney } from '../valuation';
 import { z } from 'zod';
 import type { World } from '../model';
@@ -131,6 +132,7 @@ export function resolveProperty(world: World, command: PropertyCommand) {
             row.satisfaction = bounded(row.satisfaction - 5);
         }
         else if (command.action === 'inspect') {
+            if (asset.country !== player.country || asset.city !== player.city) throw new IneligibleAction('Return to the property’s city for an in-person inspection');
             if (asset.propertyLife?.lastInspectionMonth !== null && current - (asset.propertyLife?.lastInspectionMonth ?? current) < 6)
                 throw new IneligibleAction('Respect privacy: inspections are available every six months');
             asset.propertyLife!.lastInspectionMonth = current;
@@ -159,7 +161,7 @@ export function resolveProperty(world: World, command: PropertyCommand) {
                 player.finance.supportIncomeDue += income;
             }
             row.satisfaction = bounded(row.satisfaction + 3);
-            recordLifestyle(world, { kind: 'tenant-arrears', subjectId: row.id, currency: row.currency, participants: [player.id, tenant.id], received: paid, paymentIds: ids, body: 'I discussed rent with ' + fullName(tenant) + '. We transferred only the available arrears payment; ' + row.arrears + ' minor units remain unpaid.' });
+            recordLifestyle(world, { kind: 'tenant-arrears', subjectId: row.id, currency: row.currency, participants: [player.id, tenant.id], received: paid, paymentIds: ids, body: 'I discussed rent with ' + fullName(tenant) + '. We transferred only the available arrears payment; ' + formatMoney({ minor: row.arrears, currency: row.currency }) + ' remains unpaid.' });
         }
         else if (command.action === 'renew') {
             if (current - row.lastRentReviewMonth < 12)
@@ -199,7 +201,7 @@ export function resolveProperty(world: World, command: PropertyCommand) {
             endNamedTenancy(world, row, 'A reviewed unpaid tenancy ended after notice. The deposit was returned in full.');
         }
         fact(world, 'I recorded a tenancy ' + command.action + ' with ' + fullName(tenant) + ' at ' + asset.name + '.', 'property');
-        result(world, 'Tenancy updated', command.action === 'notice' ? 'Two months’ notice is recorded. A paid independent review and a further month are required before eviction. Repairs must be complete; two rents must remain unpaid.' : command.action === 'inspect' ? 'Inspection complete. Outstanding maintenance: ' + row.maintenance + ' minor units. No repairs have been charged.' : command.action === 'discuss' ? state.records.at(-1)!.body : 'The saved agreement and actual transactions have been updated.', 'property');
+        result(world, 'Tenancy updated', command.action === 'notice' ? 'Two months’ notice is recorded. A paid independent review and a further month are required before eviction. Repairs must be complete; two rents must remain unpaid.' : command.action === 'inspect' ? 'Inspection complete. Outstanding maintenance: ' + formatMoney({ minor: row.maintenance, currency: row.currency }) + '. No repairs have been charged.' : command.action === 'discuss' ? state.records.at(-1)!.body : 'The saved agreement and actual transactions have been updated.', 'property');
         return;
     }
     const asset = property(world, command.assetId);
@@ -222,7 +224,7 @@ export function resolveProperty(world: World, command: PropertyCommand) {
         return;
     }
     if (command.type === 'install-amenity') {
-        const reason = amenityReason(asset, command.amenity);
+        const reason = amenityReason(asset, command.amenity, world);
         if (reason)
             throw new IneligibleAction(reason);
         const quote = amenityQuote(asset, command.amenity);
@@ -238,6 +240,7 @@ export function resolveProperty(world: World, command: PropertyCommand) {
         return;
     }
     if (command.type === 'find-tenants') {
+        if (state.applications.some(row => row.assetId === asset.id && current - (row.date.year * 12 + row.date.month - 1) < 3)) throw new IneligibleAction('Allow three months between batches of tenant applications');
         if (asset.rental === 'occupied' || asset.listing || state.applications.some(row => row.assetId === asset.id && row.status === 'open'))
             throw new IneligibleAction('Resolve current applications or the existing tenancy first');
         const reason = rentalPriceReason(asset, command.quotedRent);
@@ -289,6 +292,6 @@ export function resolveProperty(world: World, command: PropertyCommand) {
         player.stats.energy = bounded(player.stats.energy - 4);
     }
     const body = consent.accepted ? fullName(contact) + ' came to my ' + command.activity + ' at ' + asset.name + '. ' + (damage ? 'Someone demonstrated a dance move the floor could not support. The damage remains for a paid repair.' : command.activity === 'dinner' ? 'We stayed at the table long after the plates were empty.' : 'For once, the photographs captured people actually enjoying themselves.') : fullName(contact) + ' declined my invitation. Nobody attended and I paid nothing.';
-    recordLifestyle(world, { kind: 'home-' + command.activity, subjectId: asset.id, participants: [player.id, ...(consent.accepted ? [contact.id] : [])], ...consent, paid, paymentIds: ids, body });
+    recordLifestyle(world, { kind: 'home-' + command.activity, invitedId: contact.id, subjectId: asset.id, participants: [player.id, ...(consent.accepted ? [contact.id] : [])], ...consent, paid, paymentIds: ids, body });
     result(world, consent.accepted ? 'People under one roof' : 'Another evening', body, 'property');
 }

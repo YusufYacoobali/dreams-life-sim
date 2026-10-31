@@ -1,6 +1,7 @@
+import { randomInteger } from '../../src/game/random';
 import { lifestyleFixture, act } from '../helpers/lifestyle';
 import { hobbyContent, hobbyKinds, type HobbyKind } from '../../src/game/content/leisure';
-import { hobbyFee, leisureMonth } from '../../src/game/systems/leisure';
+import { hobbyFee, leisureMonth, hobbyContacts } from '../../src/game/systems/leisure';
 import { competitionFee, hobbyMilestone } from '../../src/game/systems/hobbyAccomplishments';
 import { decodeWorld, encodeWorld, validateWorld, type World } from '../../src/game/model';
 import { monthFrom } from '../../src/game/calendar';
@@ -18,4 +19,29 @@ test('a finished personal project needs four later attended months, retains its 
 test('unattended and repeated work sessions cannot fabricate project progress', () => { let world = prepared(); world = act(world, { type: 'start-hobby-project', hobbyId: world.hobbies[0].id, title: 'One actual project' }); world.date = monthFrom(world.date, 1); const payer = accountFor(world); post(world, -payer.cash, 0n, 'unit-drawdown', 'Explicit unit fixture'); leisureMonth(world); expect(() => act(world, { type: 'work-hobby-project', projectId: world.lifestyle!.projects[0].id })).toThrow(/another month/); });
 test('a free casual session and a park visit work without property, vehicles, income or spare cash', () => { let world = lifestyleFixture(); const cash = accountFor(world); post(world, -cash.cash, 0n, 'unit-drawdown', 'Explicit unit fixture'); world = act(world, { type: 'casual-hobby', kind: 'reading' }); expect(accountFor(world).cash).toBe(0n); expect(world.hobbies).toEqual([]); world = act(world, { type: 'leisure-outing', kind: 'park', reviewedPayerId: world.activePersonId, quotedTotal: 0n }); expect(world.leisureOutings.at(-1)).toMatchObject({ paid: 0n, paymentId: null, consent: { accepted: true } }); expect(world.assets).toHaveLength(0); expect(decodeWorld(encodeWorld(world))).toEqual(world); });
 test('proficiency milestones describe earned thresholds without awarding qualifications or money', () => { expect([0, 15, 40, 70, 90].map(hobbyMilestone)).toEqual(['Beginner', 'Developing', 'Skilled', 'Expert', 'Master']); });
-test('a tampered prize or fabricated project session is rejected on import', () => { const original = prepared(); let world = act(original, { type: 'hobby-competition', kind: 'writing', approach: 'steady', reviewedPayerId: original.activePersonId, quotedFee: competitionFee(original, 'writing') }); world.lifestyle!.records.at(-1)!.before = 100; expect(() => validateWorld(world)).toThrow(/proficiency/); world = act(original, { type: 'start-hobby-project', hobbyId: original.hobbies[0].id, title: 'A project' }); world.lifestyle!.projects[0].progress = 1; expect(() => validateWorld(world)).toThrow(/project/); });
+test('a tampered prize or fabricated project session is rejected on import', () => { const original = prepared(); let world = act(original, { type: 'hobby-competition', kind: 'writing', approach: 'steady', reviewedPayerId: original.activePersonId, quotedFee: competitionFee(original, 'writing') }); world.lifestyle!.records.at(-1)!.before = 100; expect(() => validateWorld(world)).toThrow(/proficiency/); world = act(original, { type: 'start-hobby-project', hobbyId: original.hobbies[0].id, title: 'A project' }); world.lifestyle!.projects[0].progress = 1; expect(() => validateWorld(world)).toThrow(/project/i); });
+
+test('one project review can finish four genuinely attended later months without a four-year tap chain', () => {
+    let world = prepared();
+    world = act(world, { type: 'start-hobby-project', hobbyId: world.hobbies[0].id, title: 'A complete little story' });
+    const projectId = world.lifestyle!.projects[0].id;
+    for (let index = 0; index < 4; index++) { world.date = monthFrom(world.date, 1); leisureMonth(world); }
+    const proficiency = world.hobbies[0].proficiency;
+    world = act(world, { type: 'work-hobby-project', projectId });
+    expect(world.lifestyle!.projects[0]).toMatchObject({ workVersion: 2, progress: 4, completed: world.date });
+    expect(world.lifestyle!.records.at(-1)!.projectSession?.months).toBe(4);
+    expect(world.hobbies[0].proficiency).toBe(proficiency);
+    expect(decodeWorld(encodeWorld(world))).toEqual(world);
+});
+
+test('a new shared memory preserves an existing introduction and long relationship history', () => {
+    let world = prepared(); const hobby = world.hobbies[0], plan = hobby.plans.find(plan => plan.status === 'active')!;
+    world = act(world, { type: 'meet-hobby-peer', hobbyId: hobby.id, planId: plan.id, reviewedPayerId: plan.payerId, reviewedMonth: world.date.year * 12 + world.date.month - 1 });
+    const peer = hobbyContacts(world, world.hobbies[0])[0], edge = world.relationships.find(row => [row.from, row.to].includes(peer.id) && [row.from, row.to].includes(world.activePersonId))!;
+    // Explicit unit history: these entries represent already-retained older memories.
+    const original = [...edge.memories, ...Array.from({ length: 105 }, (_, index) => 'existing-history:' + index)]; edge.memories = [...original];
+    const chance = Math.min(95, 35 + Math.floor(edge.strength / 2)); world.random.npcs = Array.from({ length: 1000 }, (_, index) => index + 1).find(seed => randomInteger(seed, 1, 100).value <= chance)!;
+    world = act(world, { type: 'shared-hobby-practice', hobbyId: hobby.id, contactId: peer.id });
+    expect(hobbyContacts(world, world.hobbies[0]).map(person => person.id)).toContain(peer.id);
+    expect(world.relationships.find(row => row.id === edge.id)!.memories.slice(0, original.length)).toEqual(original);
+});

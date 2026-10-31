@@ -43,6 +43,7 @@ export function petActivityReason(world: World, pet: Pet, activity: typeof petAc
         return 'Choose an available member of your own household';
     if ((activity === 'treat' || activity === 'prevent') && pet.ownerId !== world.activePersonId)
         return 'The responsible adult must review and fund this care';
+    if (activity === 'treat' && pet.companion.condition === 'ageing' && (pet.companion.supportUntil ?? 0) > month(world)) return 'The existing age-related comfort plan remains current';
     if (activity === 'treat' && ['well', 'recovering'].includes(pet.companion.condition))
         return 'There is no untreated additional condition';
     if (activity === 'prevent' && pet.companion.preventionUntil > month(world))
@@ -113,7 +114,7 @@ export function resolvePetTraining(world: World, command: PetTrainingCommand) {
         }
         else if (command.activity === 'introduce') {
             const other = world.pets.find(row => row.id === command.otherId)!;
-            const settled = draw(world, 'outcomes', 1, 100) <= 60 + Math.floor(life.training / 5);
+            const chance = 60 + Math.floor(life.training / 5) - (life.trait === 'nervous' ? 10 : 0), roll = draw(world, 'outcomes', 1, 100), settled = roll <= chance; outcomeChance = chance; outcomeRoll = roll; success = settled;
             pet.happiness = bounded(pet.happiness + (settled ? 3 : -2));
             other.happiness = bounded(other.happiness + (settled ? 3 : -2));
             body = 'I supervised an introduction between ' + pet.name + ' and ' + other.name + '. ' + (settled ? 'They tolerated sharing the room. We ended on that small victory.' : 'They wanted separate space. I separated them without forcing a friendship.');
@@ -133,6 +134,7 @@ export function resolvePetTraining(world: World, command: PetTrainingCommand) {
             outcomeRoll = roll;
             success = worked;
             if (worked) {
+                if (life.healthVersion === 2 && life.condition === 'ageing') { life.ageRelated = true; life.supportUntil = month(world) + 15; }
                 life.condition = 'recovering';
                 life.recovery = 3;
             }
@@ -147,7 +149,7 @@ export function resolvePetTraining(world: World, command: PetTrainingCommand) {
             body = nameOf(world, family!.id) + ' joined me for gentle time with ' + pet.name + '. Their own bond with our companion grew.';
         }
     }
-    recordLifestyle(world, { kind: 'pet-' + command.activity, subjectId: pet.id, currency: countries[pet.country].currency, participants: [person.id, ...(consent.accepted && family ? [family.id] : [])], ...consent, paid, paymentIds, before, after, ...(outcomeChance !== undefined ? { outcomeChance, outcomeRoll, success } : {}), body });
+    recordLifestyle(world, { kind: 'pet-' + command.activity, ...(family ? { invitedId: family.id } : {}), ...(command.activity === 'introduce' && command.otherId ? { relatedPetId: command.otherId } : {}), subjectId: pet.id, currency: countries[pet.country].currency, participants: [person.id, ...(consent.accepted && family ? [family.id] : [])], ...consent, paid, paymentIds, before, after, ...(outcomeChance !== undefined ? { outcomeChance, outcomeRoll, success } : {}), body });
     result(world, consent.accepted ? 'Time with ' + pet.name : 'Another time', body, command.activity === 'competition' ? 'pet-rosette' : 'pet-' + pet.species);
 }
 /** Uses the actual saved care-period draw; existing pets never gain new obligations. */
@@ -166,7 +168,7 @@ export function companionMonth(world: World) {
         if (life.condition === 'recovering') {
             life.recovery--;
             if (!life.recovery)
-                life.condition = 'well';
+                life.condition = life.healthVersion === 2 && life.ageRelated ? 'ageing' : 'well';
         }
         else if (life.condition === 'well' && current >= life.preventionUntil) {
             if (period.healthRoll === 3)
@@ -174,10 +176,10 @@ export function companionMonth(world: World) {
             else if (period.healthRoll === 4 && life.trait === 'nervous')
                 life.condition = 'anxiety';
             else if (current - (pet.born.year * 12 + pet.born.month - 1) >= pet.lifespanMonths * 4 / 5 && period.healthRoll <= 10)
-                life.condition = 'ageing';
+                { life.condition = 'ageing'; if (life.healthVersion === 2) life.ageRelated = true; }
         }
         // Additional problems affect comfort/behaviour, not sudden mandatory vet costs or death.
-        if (life.condition !== 'well')
+        if (life.condition !== 'well' && !(life.condition === 'ageing' && (life.supportUntil ?? 0) > current))
             pet.happiness = bounded(pet.happiness - (life.condition === 'anxiety' ? 1 : 2));
         if (period.carerId && period.care === 'family')
             pet.bonds[period.carerId] = bounded((pet.bonds[period.carerId] ?? 0) + 1);

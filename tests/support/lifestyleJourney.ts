@@ -20,11 +20,18 @@ export async function lifestyleJourney(initial: World) {
         async command(command: GameCommand, failReceipt = false) {
             const before = world, expected = resolveCommand(before, command, true), receipt = 'lifestyle:journey:' + before.revision;
             if (failReceipt) {
-                const receipts = sqlite.prepare('SELECT * FROM receipts ORDER BY 1,2').all();
+                const tables = ['lives', 'preferences', 'receipts', 'snapshots', 'backups', 'snapshot_metadata', 'branches', 'restore_receipts'];
+                const savedRows = () => Object.fromEntries(tables.map(table => [table, sqlite.prepare('SELECT * FROM ' + table).all().map(row => JSON.stringify(row)).sort()]));
+                const beforeRows = savedRows();
                 sqlite.exec("CREATE TRIGGER reject_lifestyle_receipt BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'controlled lifestyle save failure'); END");
                 await expect(repository.commit(expected, before.revision, receipt, command.type === 'advance')).rejects.toThrow('controlled lifestyle save failure');
+                expect(savedRows()).toEqual(beforeRows);
+                sqlite.close();
+                ({ sqlite, driver } = diskDatabase(file));
+                repository = new SaveRepository(driver);
+                await repository.initialise();
                 expect(await repository.load(before.id)).toEqual(before);
-                expect(sqlite.prepare('SELECT * FROM receipts ORDER BY 1,2').all()).toEqual(receipts);
+                expect(savedRows()).toEqual(beforeRows);
                 sqlite.exec('DROP TRIGGER reject_lifestyle_receipt');
                 expect(resolveCommand(before, command, true)).toEqual(expected);
             }

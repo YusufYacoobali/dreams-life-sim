@@ -14,3 +14,12 @@ test('ownership alone cannot drive, licence then real usage adds mileage once an
 test('mileage and licence tampering cannot fabricate use or a pass', () => { const original = car(); const altered = decodeWorld(encodeWorld(original)); altered.assets.at(-1)!.vehicleLife!.mileage++; expect(() => validateWorld(altered)).toThrow(/mileage/); const passed = act(original, { type: 'take-licence-test', kind: 'road', answers: [1, 2, 0], quotedFee: licenceFee(original, 'road') }); passed.lifestyle!.licences[0].answers = [0, 0, 0]; expect(() => validateWorld(passed)).toThrow(/licence/); });
 test('upgrades pay once, add less resale value than cost and cannot be fitted twice', () => { let world = car(); const asset = world.assets.at(-1)!, cost = vehicleActivityCost(world, asset, 'brakes'); world = act(world, { type: 'vehicle-activity', assetId: asset.id, activity: 'brakes', contactId: null, quotedCost: cost }); expect(world.assets.at(-1)!.value - asset.value).toBeLessThan(cost); expect(() => act(world, { type: 'vehicle-activity', assetId: asset.id, activity: 'brakes', contactId: null, quotedCost: cost })).toThrow(/already/); });
 test.each(['harbour-dinghy', 'training-plane', 'private-helicopter'])('%s requires the corresponding saved licence for leisure use', catalog => { let world = buyLifestyle(lifestyleFixture(), catalog); const id = world.assets.at(-1)!.id; world = act(world, { type: 'enable-vehicle-activities', assetId: id }); const kind = catalog === 'harbour-dinghy' ? 'boat' : 'pilot'; expect(vehicleActivityReason(world, world.assets.at(-1)!, 'drive')).toContain(kind); world = act(world, { type: 'take-licence-test', kind, answers: [1, 2, 0], quotedFee: licenceFee(world, kind) }); expect(vehicleActivityReason(world, world.assets.at(-1)!, 'drive')).toBeUndefined(); });
+
+test('new boats use a suitable saved short-trip distance while earlier vehicle policies remain literal', () => {
+    let world = buyLifestyle(lifestyleFixture(), 'harbour-dinghy'); const id = world.assets.at(-1)!.id;
+    world = act(world, { type: 'enable-vehicle-activities', assetId: id });
+    world = act(world, { type: 'take-licence-test', kind: 'boat', answers: [1, 2, 0], quotedFee: licenceFee(world, 'boat') });
+    world = act(world, { type: 'vehicle-activity', assetId: id, activity: 'drive', contactId: null, quotedCost: vehicleActivityCost(world, world.assets.at(-1)!, 'drive') });
+    expect(world.lifestyle!.records.at(-1)!.distance).toBe(12);
+    expect(world.assets.at(-1)!.vehicleLife!.mileage).toBe(1212);
+});

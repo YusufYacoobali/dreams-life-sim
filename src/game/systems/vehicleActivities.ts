@@ -22,9 +22,16 @@ export const vehicleCommandSchema = z.discriminatedUnion('type', [
 ]);
 export type VehicleCommand = z.infer<typeof vehicleCommandSchema>;
 export const vehicleLicenceKind = (asset: World['assets'][number]) => assetCatalog.find(row => row.id === asset.catalogId)?.licenceKind ?? 'road';
+/** Earlier activity sessions retain their v1 distance policy when this revision is absent. */
+export function vehicleTripDistance(asset: World['assets'][number], activity: 'drive' | 'road-trip') {
+    if (asset.vehicleLife?.usageVersion !== 2) return activity === 'road-trip' ? 300 : 40;
+    const kind = vehicleLicenceKind(asset), range = assetCatalog.find(row => row.id === asset.catalogId)?.rangeMiles;
+    const desired = kind === 'boat' ? activity === 'drive' ? 12 : 60 : kind === 'pilot' ? activity === 'drive' ? 120 : 400 : activity === 'drive' ? 40 : 300;
+    return kind !== 'road' && range ? Math.min(desired, Math.floor(range * 0.7)) : desired;
+}
 export function vehicleActivityCost(world: World, asset: World['assets'][number], activity: typeof vehicleActivities[number]) { const base = asset.pricePaid || asset.costBasis || asset.value || 1n; if (activity === 'gift' || activity === 'scrap')
     return 0n; if (activity === 'drive' || activity === 'road-trip') {
-    const distance = activity === 'road-trip' ? 300 : 40, classMultiplier = vehicleLicenceKind(asset) === 'pilot' ? 8n : vehicleLicenceKind(asset) === 'boat' ? 3n : 1n;
+    const distance = vehicleTripDistance(asset, activity), classMultiplier = vehicleLicenceKind(asset) === 'pilot' ? 8n : vehicleLicenceKind(asset) === 'boat' ? 3n : 1n;
     return (base * BigInt(distance) * classMultiplier / 40000n) || 1n;
 } if (activity === 'service')
     return (base * (homeAmenity(world, 'garage') && asset.country === active(world).country && asset.city === active(world).city ? 85n : 100n) / 10000n) || 1n; if (activity === 'repair')
@@ -42,6 +49,7 @@ export function vehicleActivityReason(world: World, asset: World['assets'][numbe
         return 'Review vehicle activities first';
     if (asset.country !== active(world).country || asset.city !== active(world).city)
         return 'Return to the vehicle’s registered city';
+    if (contactId && !['drive', 'road-trip', 'gift'].includes(activity)) return 'Only trips and vehicle gifts can include an invitation';
     if (contactId) {
         const reason = localContactReason(world, contactId, activity !== 'gift');
         if (reason)
@@ -103,7 +111,7 @@ export function resolveVehicle(world: World, command: VehicleCommand) {
         if (asset.vehicleLife)
             throw new IneligibleAction('Vehicle activities are already enabled');
         const mileage = assetCatalog.find(row => row.id === asset.catalogId)?.listingMileage ?? 0;
-        asset.vehicleLife = { version: 1, enabled: { ...world.date }, mileage, initialMileage: mileage, lastServiceMonth: null, appearance: 'original', upgrades: [], lastUseMonth: null };
+        asset.vehicleLife = { version: 1, usageVersion: 2, enabled: { ...world.date }, mileage, initialMileage: mileage, lastServiceMonth: null, appearance: 'original', upgrades: [], lastUseMonth: null };
         asset.provenance.push('Vehicle activities enabled in ' + world.date.year + '; listing mileage carried forward, prior use unknown.');
         result(world, 'More than a parked asset', 'Future trips record distance and wear. The appropriate game licence is required for use. Existing ownership, condition and age remain. Earlier driving is not invented.', 'vehicle');
         return;
@@ -146,7 +154,7 @@ export function resolveVehicle(world: World, command: VehicleCommand) {
         paymentIds = lifestylePayment(world, cost, 'Vehicle ' + command.activity, asset.currency);
         paid = cost;
         if (command.activity === 'drive' || command.activity === 'road-trip') {
-            distance = command.activity === 'road-trip' ? 300 : 40;
+            distance = vehicleTripDistance(asset, command.activity);
             life.mileage += distance;
             life.lastUseMonth = current;
             const serviced = life.lastServiceMonth !== null && current - life.lastServiceMonth <= 12, chance = Math.min(20, Math.max(1, Math.floor((100 - asset.condition) / 8) + (serviced ? -3 : 2) - (life.upgrades.includes('brakes') ? 2 : 0)));
@@ -200,6 +208,6 @@ export function resolveVehicle(world: World, command: VehicleCommand) {
             body = 'I fitted ' + command.activity + ' to ' + asset.name + '. The improvement is saved; estimated added value is less than its cost.';
         }
     }
-    recordLifestyle(world, { kind: 'vehicle-' + command.activity, subjectId: asset.id, currency: asset.currency, participants: [person.id, ...(consent.accepted && contact ? [contact.id] : [])], ...consent, paid, received, paymentIds, before, after: asset.condition, distance, ...(outcomeChance !== undefined ? { outcomeChance, outcomeRoll, success } : {}), body });
+    recordLifestyle(world, { kind: 'vehicle-' + command.activity, ...(contact ? { invitedId: contact.id } : {}), subjectId: asset.id, currency: asset.currency, participants: [person.id, ...(consent.accepted && contact ? [contact.id] : [])], ...consent, paid, received, paymentIds, before, after: asset.condition, distance, ...(outcomeChance !== undefined ? { outcomeChance, outcomeRoll, success } : {}), body });
     result(world, consent.accepted ? 'Vehicle record updated' : 'Invitation declined', body, 'vehicle');
 }

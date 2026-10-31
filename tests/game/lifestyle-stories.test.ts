@@ -92,3 +92,21 @@ test('changed ownership cancels the saved situation without substituting a new a
     if (household.homeAssetId === id)
         household.homeAssetId = null; const before = accountFor(world).cash; if (world.pending?.kind !== 'decision')
     throw Error('Expected decision'); const next = act(world, { type: 'choose', eventId: world.pending.id, choiceId: 'fix' }); expect(next.lifestyle!.offers.at(-1)!.status).toBe('cancelled'); expect(accountFor(next).cash).toBe(before); });
+
+test('literal player-written pet names cannot act as replacement patterns or participant placeholders', () => {
+    const template = lifestyleTemplates.find(row => row.id === 'pet-turtle-arrival')!;
+    const { world, id } = prepared(template); world.pets.find(pet => pet.id === id)!.name = 'Pebble $& {person}';
+    expect(offerLifestyleStory(world, template.id, id, true)).toBe(true);
+    expect(world.pending?.body).toContain('Pebble $& {person}');
+    expect(decodeWorld(encodeWorld(world))).toEqual(world);
+});
+
+
+test('a full activity history cannot create an unresolvable new situation or consume randomness', () => {
+    const { world, id } = prepared(lifestyleTemplates.find(row => row.id === 'home-lock-trouble')!);
+    world.lifestyle!.records.length = 4096;
+    const random = { ...world.random };
+    expect(offerLifestyleStory(world, 'home-lock-trouble', id, true)).toBe(false);
+    expect(world.random).toEqual(random);
+    expect(world.pending).toBeNull();
+});
