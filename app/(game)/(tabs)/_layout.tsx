@@ -1,7 +1,6 @@
 import React from 'react';
 import { Tabs } from 'expo-router';
 import { useColors } from '../../../src/ui/theme';
-export const unstable_settings = { anchor: 'life' };
 export default function RootTabs() {
   const c = useColors();
   return <Tabs backBehavior="history" tabBar={() => null} screenOptions={{ headerShown: false, lazy: true, freezeOnBlur: true, sceneStyle: { backgroundColor: c.background } }}>
