@@ -1,7 +1,7 @@
 import { displayText } from '../../src/ui/displayNumbers';
 import React from 'react';
 import { Modal } from 'react-native';
-import { act, fireEvent, render, screen, waitFor, within } from '@testing-library/react-native';
+import { act, fireEvent, render, screen, waitFor, within } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { DatabaseSync } from 'node:sqlite';
 import { mkdtempSync, rmSync } from 'node:fs';
@@ -33,7 +33,7 @@ import Emigrate from '../../app/(game)/emigrate';
 type Kind = 'booking' | 'return' | 'application-work' | 'application-study' | 'departure';
 const world = () => mockStore.getState().world!;
 const frame = (kind: Kind) => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider>{kind === 'booking' || kind === 'return' ? <Destination /> : <Emigrate />}<PendingEvent /></ThemeProvider></SafeAreaProvider>;
-const press = async (name: string | RegExp) => { await act(async () => { fireEvent.press(screen.getByRole('button', { name })); }); };
+const press = async (name: string | RegExp) => { await act(async () => { await fireEvent.press(screen.getByRole('button', { name })); }); };
 const modal = () => within(screen.UNSAFE_getByType(Modal));
 const acknowledge = (initial: World) => resolveCommand(initial, { type: 'acknowledge', resultId: initial.pending!.id }, true);
 function prepare(kind: Kind) {
@@ -83,47 +83,47 @@ test.each(['booking', 'return', 'application-work', 'application-study', 'depart
   const context = await setup(prepare(kind), kind);
   try {
     const initial = world(), beforeRows = context.rows(), before = encodeWorld(initial), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint');
-    let view = render(frame(kind)); let review = await openReview(kind); expectReview(review); await press('Never mind'); expect(screen.queryByText(review.title)).toBeNull(); expect(context.rows()).toEqual(beforeRows); expect(encodeWorld(world())).toBe(before);
+    let view = await render(frame(kind)); let review = await openReview(kind); expectReview(review); await press('Never mind'); expect(screen.queryByText(review.title)).toBeNull(); expect(context.rows()).toEqual(beforeRows); expect(encodeWorld(world())).toBe(before);
     review = await openReview(kind); const expected = resolveCommand(initial, review.command, true);
     context.sqlite.exec("CREATE TRIGGER fail_travel_review BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
     await press(review.confirm); await waitFor(() => expect(modal().getByRole('alert')).toHaveTextContent(/couldn't be saved/)); expectReview(review); expect(encodeWorld(world())).toBe(before); expect(context.rows()).toEqual(beforeRows);
     context.sqlite.exec('DROP TRIGGER fail_travel_review'); await press(review.confirm); expect(world()).toEqual(expected); expect(screen.queryByText(review.title)).toBeNull(); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore();
-    const savedRows = context.rows(); view.unmount(); await context.cold(); view = render(frame(kind)); expect(world()).toEqual(expected); expect(context.rows()).toEqual(savedRows); expect(screen.getByText(expected.pending!.title)).toBeOnTheScreen();
+    const savedRows = context.rows(); await view.unmount(); await context.cold(); view = await render(frame(kind)); expect(world()).toEqual(expected); expect(context.rows()).toEqual(savedRows); expect(screen.getByText(expected.pending!.title)).toBeOnTheScreen();
     await press('Continue'); const done = acknowledge(expected); expect(world()).toEqual(done); expect(world().trips).toEqual(expected.trips); expect(world().relocations).toEqual(expected.relocations); expect(world().people).toEqual(expected.people); expect(world().accounts).toEqual(expected.accounts); expect(world().ledger).toEqual(expected.ledger); expect(world().random).toEqual(expected.random);
-    const doneRows = context.rows(); await act(async () => { expect(await mockStore.getState().dispatch({ type: 'acknowledge', resultId: expected.pending!.id })).toBe(false); }); expect(world()).toEqual(done); expect(context.rows()).toEqual(doneRows); view.unmount();
+    const doneRows = context.rows(); await act(async () => { expect(await mockStore.getState().dispatch({ type: 'acknowledge', resultId: expected.pending!.id })).toBe(false); }); expect(world()).toEqual(done); expect(context.rows()).toEqual(doneRows); await view.unmount();
   } finally { jest.restoreAllMocks(); context.close(); }
 });
 
 test('the actual current trip focus is disabled; failed real focus changes keep the original trip and retry without decode', async () => {
   const context = await setup(prepare('return'), 'return');
   try {
-    const initial = world(), beforeRows = context.rows(), trip = initial.trips[0], unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'); let view = render(frame('return'));
+    const initial = world(), beforeRows = context.rows(), trip = initial.trips[0], unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'); let view = await render(frame('return'));
     const current = screen.getByRole('button', { name: 'See the Sights. Selected. This is your current trip focus' }); expect(current).toBeDisabled(); await press('See the Sights. Selected. This is your current trip focus'); expect(world()).toEqual(initial); expect(context.rows()).toEqual(beforeRows);
     const command: GameCommand = { type: 'trip-focus', tripId: trip.id, focus: 'rest' }, expected = resolveCommand(initial, command, true);
     context.sqlite.exec("CREATE TRIGGER fail_trip_focus BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END"); await press('Take It Easy'); await waitFor(() => expect(screen.getByRole('alert')).toHaveTextContent(/couldn't be saved/)); expect(world()).toEqual(initial); expect(context.rows()).toEqual(beforeRows);
-    context.sqlite.exec('DROP TRIGGER fail_trip_focus'); await press('Take It Easy'); expect(world()).toEqual(expected); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore(); const savedRows = context.rows(); view.unmount(); await context.cold(); view = render(frame('return')); expect(world()).toEqual(expected); expect(context.rows()).toEqual(savedRows);
-    await press('Continue'); expect(world()).toEqual(acknowledge(expected)); expect(screen.getByRole('button', { name: 'Take It Easy. Selected. This is your current trip focus' })).toBeDisabled(); expect(world().trips[0].paid).toBe(trip.paid); expect(world().trips[0].periods).toEqual(trip.periods); expect(world().accounts).toEqual(initial.accounts); expect(world().random).toEqual(initial.random); view.unmount();
+    context.sqlite.exec('DROP TRIGGER fail_trip_focus'); await press('Take It Easy'); expect(world()).toEqual(expected); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore(); const savedRows = context.rows(); await view.unmount(); await context.cold(); view = await render(frame('return')); expect(world()).toEqual(expected); expect(context.rows()).toEqual(savedRows);
+    await press('Continue'); expect(world()).toEqual(acknowledge(expected)); expect(screen.getByRole('button', { name: 'Take It Easy. Selected. This is your current trip focus' })).toBeDisabled(); expect(world().trips[0].paid).toBe(trip.paid); expect(world().trips[0].periods).toEqual(trip.periods); expect(world().accounts).toEqual(initial.accounts); expect(world().random).toEqual(initial.random); await view.unmount();
   } finally { jest.restoreAllMocks(); context.close(); }
 });
 
 test.each(['booking', 'departure'] as Kind[])('%s pending save freezes its actual plan and ignores duplicate confirm/cancel/Android Back', async kind => {
   const context = await setup(prepare(kind), kind);
   try {
-    const initial = world(), beforeRows = context.rows(), view = render(frame(kind)), review = await openReview(kind), expected = resolveCommand(initial, review.command, true), release = context.pauseNextSave();
+    const initial = world(), beforeRows = context.rows(), view = await render(frame(kind)), review = await openReview(kind), expected = resolveCommand(initial, review.command, true), release = context.pauseNextSave();
     await press(review.confirm); expect(mockStore.getState().busy).toBe(true); expect(modal().getByRole('button', { name: review.confirm })).toHaveProp('accessibilityState', { disabled: true, busy: true });
     const preview = kind === 'booking' ? 'Review Trip' : 'Review Move'; expect(screen.getByRole('button', { name: preview })).toHaveProp('accessibilityState', { disabled: true, busy: false });
     const controls = kind === 'booking' ? [/^3 Months/, /^Try the Local Food/] : [/^6-Month Living Reserve/, 'Plan Another Move']; for (const name of controls) { expect(screen.getByRole('button', { name })).toBeDisabled(); await press(name); }
     for (const checkbox of screen.queryAllByRole('checkbox')) expect(checkbox).toBeDisabled();
     await press(review.confirm); await press('Never mind'); await act(async () => { screen.UNSAFE_getByType(Modal).props.onRequestClose(); }); expectReview(review); expect(world()).toEqual(initial); expect(context.rows()).toEqual(beforeRows);
-    await act(async () => { release(); }); await waitFor(() => expect(mockStore.getState().busy).toBe(false)); expect(world()).toEqual(expected); expect(world().revision).toBe(initial.revision + 1); view.unmount();
+    await act(async () => { release(); }); await waitFor(() => expect(mockStore.getState().busy).toBe(false)); expect(world()).toEqual(expected); expect(world().revision).toBe(initial.revision + 1); await view.unmount();
   } finally { context.close(); }
 });
 
 test('changing destination or work/study entry context clears old local quotes without saving', async () => {
   const context = await setup(prepare('booking'), 'booking');
   try {
-    const initial = world(), beforeRows = context.rows(), view = render(frame('booking')); await openReview('booking'); mockParams = { id: 'tokyo' }; view.rerender(frame('booking')); expect(screen.queryByText('Travel to Paris?')).toBeNull(); expect(screen.getByRole('button', { name: '1 Month. Selected' })).toBeOnTheScreen(); expect(screen.getByRole('button', { name: 'See the Sights. Selected' })).toBeOnTheScreen();
-    mockParams = { id: 'paris', route: 'work' }; view.rerender(frame('application-work')); await openReview('application-work'); mockParams = { id: 'paris', route: 'study' }; view.rerender(frame('application-study')); expect(screen.queryByText('Apply to Tokyo?')).toBeNull(); expect(screen.getByRole('button', { name: 'Study Abroad. Selected' })).toBeOnTheScreen();
-    expect(world()).toEqual(initial); expect(context.rows()).toEqual(beforeRows); view.unmount();
+    const initial = world(), beforeRows = context.rows(), view = await render(frame('booking')); await openReview('booking'); mockParams = { id: 'tokyo' }; await view.rerender(frame('booking')); expect(screen.queryByText('Travel to Paris?')).toBeNull(); expect(screen.getByRole('button', { name: '1 Month. Selected' })).toBeOnTheScreen(); expect(screen.getByRole('button', { name: 'See the Sights. Selected' })).toBeOnTheScreen();
+    mockParams = { id: 'paris', route: 'work' }; await view.rerender(frame('application-work')); await openReview('application-work'); mockParams = { id: 'paris', route: 'study' }; await view.rerender(frame('application-study')); expect(screen.queryByText('Apply to Tokyo?')).toBeNull(); expect(screen.getByRole('button', { name: 'Study Abroad. Selected' })).toBeOnTheScreen();
+    expect(world()).toEqual(initial); expect(context.rows()).toEqual(beforeRows); await view.unmount();
   } finally { context.close(); }
 });

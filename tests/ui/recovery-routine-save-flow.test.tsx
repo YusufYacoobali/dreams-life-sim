@@ -1,6 +1,6 @@
 import React from 'react';
 import { Modal } from 'react-native';
-import { act, fireEvent, render, screen, waitFor } from '@testing-library/react-native';
+import { act, fireEvent, render, screen, waitFor } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { createGameStore } from '../../src/state/gameStore';
 import { encodeWorld } from '../../src/game/model';
@@ -20,8 +20,8 @@ jest.mock('expo-router', () => ({ router: { back: jest.fn(), push: jest.fn() } }
 jest.mock('../../src/state/useGame', () => ({ useGame: (selector: unknown) => require('zustand').useStore(mockStore, selector) }));
 import Education from '../../app/(game)/education';
 const frame = () => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider><Education /><PendingEvent /></ThemeProvider></SafeAreaProvider>;
-const press = async (name: string | RegExp) => { await act(async () => { fireEvent.press(screen.getByRole('button', { name })); }); };
-const choose = async (name: string) => { await act(async () => { fireEvent.press(screen.getByRole('radio', { name })); }); };
+const press = async (name: string | RegExp) => { await act(async () => { await fireEvent.press(screen.getByRole('button', { name })); }); };
+const choose = async (name: string) => { await act(async () => { await fireEvent.press(screen.getByRole('radio', { name })); }); };
 const world = () => mockStore.getState().world!;
 const label = (effort: string) => effort[0].toUpperCase() + effort.slice(1);
 
@@ -60,12 +60,12 @@ const unchangedCases = (['grades', 'secondary'] as const).flatMap(purpose => (['
 test.each(unchangedCases)('%s course current %s choice, unselected Set and cancelled draft do not dispatch, save or decode', async (purpose, effort) => {
   const { sqlite, rows, original } = await setup(purpose, effort);
   try {
-    const initial = world(), before = rows(), dispatch = jest.spyOn(mockStore.getState(), 'dispatch'), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'), view = render(frame());
+    const initial = world(), before = rows(), dispatch = jest.spyOn(mockStore.getState(), 'dispatch'), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'), view = await render(frame());
     await press('Evening Study Routine. ' + effort); expect(screen.getByRole('button', { name: 'Set Evening Routine' })).toBeDisabled();
     const name = label(effort) + '. This is your current routine'; expect(screen.getByRole('radio', { name })).toBeDisabled(); await choose(name); await press('Set Evening Routine'); expect(screen.getByRole('button', { name: 'Set Evening Routine' })).toBeDisabled();
     await choose(effort === 'focused' ? 'Balanced' : 'Focused'); expect(screen.getByRole('button', { name: 'Set Evening Routine' })).toBeEnabled(); await press('Never mind');
     await press('Evening Study Routine. ' + effort); expect(screen.getByRole('button', { name: 'Set Evening Routine' })).toBeDisabled(); await press('Never mind');
-    expect(world()).toEqual(initial); expect(rows()).toEqual(before); expect(dispatch).not.toHaveBeenCalled(); expect(unpack).not.toHaveBeenCalled(); original(); view.unmount();
+    expect(world()).toEqual(initial); expect(rows()).toEqual(before); expect(dispatch).not.toHaveBeenCalled(); expect(unpack).not.toHaveBeenCalled(); original(); await view.unmount();
   } finally { jest.restoreAllMocks(); sqlite.close(); }
 });
 
@@ -74,7 +74,7 @@ test.each(changedCases)('%s course actual %s change retains failed draft, retrie
   const { sqlite, rows, cold, pauseNextSave, original } = await setup(purpose);
   try {
     const initial = world(), before = rows(), course = currentRecovery(initial)!, command: GameCommand = { type: 'recovery-effort', courseId: course.id, effort }, expected = resolveCommand(initial, command, true), encoded = encodeWorld(initial);
-    let view = render(frame()); await press('Evening Study Routine. balanced'); await choose(label(effort)); const unpack = jest.spyOn(checkpoints, 'unpackCheckpoint');
+    let view = await render(frame()); await press('Evening Study Routine. balanced'); await choose(label(effort)); const unpack = jest.spyOn(checkpoints, 'unpackCheckpoint');
     sqlite.exec("CREATE TRIGGER fail_evening_routine BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END"); await press('Set Evening Routine'); await waitFor(() => expect(screen.getByRole('alert')).toHaveTextContent(/couldn't be saved/));
     expect(screen.getByRole('radio', { name: label(effort), checked: true })).toBeOnTheScreen(); expect(screen.getByRole('alert')).toHaveProp('accessibilityLiveRegion', 'polite'); expect(encodeWorld(world())).toBe(encoded); expect(rows()).toEqual(before);
     sqlite.exec('DROP TRIGGER fail_evening_routine'); const release = pauseNextSave(); await press('Set Evening Routine');
@@ -82,8 +82,8 @@ test.each(changedCases)('%s course actual %s change retains failed draft, retrie
     for (const name of ['Evening Study Routine. balanced', 'Leave Evening Classes', 'Never mind']) expect(screen.getByRole('button', { name })).toBeDisabled();
     expect(screen.getByRole('button', { name: /^Extra Evening Study\./ })).toBeDisabled(); await press('Set Evening Routine'); await press('Never mind'); await act(async () => { screen.UNSAFE_getByType(Modal).props.onRequestClose(); }); expect(rows()).toEqual(before);
     await act(async () => { release(); }); await waitFor(() => expect(mockStore.getState().busy).toBe(false)); expect(world()).toEqual(expected); expect(screen.queryByRole('button', { name: 'Set Evening Routine' })).toBeNull(); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore();
-    const savedRows = rows(); view.unmount(); await cold(); view = render(frame()); expect(world()).toEqual(expected); expect(rows()).toEqual(savedRows); await press('Continue'); expect(world()).toEqual(resolveCommand(expected, { type: 'acknowledge', resultId: expected.pending!.id }, true));
+    const savedRows = rows(); await view.unmount(); await cold(); view = await render(frame()); expect(world()).toEqual(expected); expect(rows()).toEqual(savedRows); await press('Continue'); expect(world()).toEqual(resolveCommand(expected, { type: 'acknowledge', resultId: expected.pending!.id }, true));
     expect(world().people).toEqual(initial.people); expect(world().ledger).toEqual(initial.ledger); expect(world().accounts).toEqual(initial.accounts); expect(world().random).toEqual(initial.random); expect(currentRecovery(world())!.periods).toEqual(course.periods);
-    const done = world(), doneRows = rows(); await press('Evening Study Routine. ' + effort); expect(screen.getByRole('radio', { name: label(effort) + '. This is your current routine' })).toBeDisabled(); await press('Never mind'); await act(async () => { expect(await mockStore.getState().dispatch({ type: 'acknowledge', resultId: expected.pending!.id })).toBe(false); }); expect(world()).toEqual(done); expect(rows()).toEqual(doneRows); original(); view.unmount();
+    const done = world(), doneRows = rows(); await press('Evening Study Routine. ' + effort); expect(screen.getByRole('radio', { name: label(effort) + '. This is your current routine' })).toBeDisabled(); await press('Never mind'); await act(async () => { expect(await mockStore.getState().dispatch({ type: 'acknowledge', resultId: expected.pending!.id })).toBe(false); }); expect(world()).toEqual(done); expect(rows()).toEqual(doneRows); original(); await view.unmount();
   } finally { jest.restoreAllMocks(); sqlite.close(); }
 });

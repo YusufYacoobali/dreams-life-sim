@@ -1,9 +1,10 @@
 import React from 'react';
 import { Tabs } from 'expo-router';
 import { useColors } from '../../../src/ui/theme';
+export const unstable_settings = { anchor: 'life' };
 export default function RootTabs() {
   const c = useColors();
-  return <Tabs initialRouteName="life" backBehavior="history" tabBar={() => null} screenOptions={{ headerShown: false, lazy: true, freezeOnBlur: true, sceneStyle: { backgroundColor: c.background } }}>
+  return <Tabs backBehavior="history" tabBar={() => null} screenOptions={{ headerShown: false, lazy: true, freezeOnBlur: true, sceneStyle: { backgroundColor: c.background } }}>
     <Tabs.Screen name="life" options={{ title: 'Life' }} />
     <Tabs.Screen name="assets" options={{ title: 'Assets' }} />
     <Tabs.Screen name="relationships" options={{ title: 'Relationships' }} />

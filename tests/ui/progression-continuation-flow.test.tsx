@@ -1,5 +1,5 @@
 import React from 'react';
-import { act, fireEvent, render, screen, within } from '@testing-library/react-native';
+import { act, fireEvent, render, screen, within } from '../support/rendering';
 import { Modal } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { createGameStore } from '../../src/state/gameStore';
@@ -37,36 +37,36 @@ async function setup(initial?: World) {
 test('earned care opens its actual unfinished challenge and recognition; Back, Close and activity links leave all eight tables exact', async () => {
   const { sqlite, driver, rows } = await setup(), before = rows(), worldBefore = encodeWorld(mockStore.getState().world!);
   const progressReads = jest.spyOn(progression, 'lifeProgress');
-  const view = render(frame(<Achievements />));
-  fireEvent.press(screen.getByRole('tab', { name: 'Life' }));
-  fireEvent.press(screen.getByRole('button', { name: /^A Year of Care\./ }));
+  const view = await render(frame(<Achievements />));
+  await fireEvent.press(screen.getByRole('tab', { name: 'Life' }));
+  await fireEvent.press(screen.getByRole('button', { name: /^A Year of Care\./ }));
   expect(screen.getByText('Care and Craft · 98% complete')).toBeOnTheScreen();
-  fireEvent(screen.UNSAFE_getByType(Modal), 'requestClose');
+  await fireEvent(screen.UNSAFE_getByType(Modal), 'requestClose');
   expect(screen.queryByRole('button', { name: 'View Challenge' })).toBeNull(); expect(router.push).not.toHaveBeenCalled();
-  fireEvent.press(screen.getByRole('button', { name: /^A Year of Care\./ })); fireEvent.press(screen.getByRole('button', { name: 'Close' }));
+  await fireEvent.press(screen.getByRole('button', { name: /^A Year of Care\./ })); await fireEvent.press(screen.getByRole('button', { name: 'Close' }));
   expect(router.push).not.toHaveBeenCalled();
-  fireEvent.press(screen.getByRole('button', { name: /^A Year of Care\./ })); fireEvent.press(screen.getByRole('button', { name: 'View Challenge' }));
+  await fireEvent.press(screen.getByRole('button', { name: /^A Year of Care\./ })); await fireEvent.press(screen.getByRole('button', { name: 'View Challenge' }));
   expect(router.push).toHaveBeenLastCalledWith({ pathname: '/challenge/[id]', params: { id: 'care-and-craft' } });
   expect(screen.queryByRole('button', { name: 'Close' })).toBeNull();
   expect(progressReads).toHaveBeenCalledTimes(1);
-  mockParams = { id: 'care-and-craft' }; view.rerender(frame(<Challenge />));
+  mockParams = { id: 'care-and-craft' }; await view.rerender(frame(<Challenge />));
   expect(screen.getByText('Milestones earned')).toBeOnTheScreen(); expect(screen.getByText('A Year of Care')).toBeOnTheScreen(); expect(screen.queryByText('Finding Your Rhythm')).toBeNull();
-  fireEvent.press(screen.getByRole('button', { name: 'View Hobbies' })); expect(router.push).toHaveBeenLastCalledWith('/hobbies');
-  view.rerender(frame(<Achievements />)); fireEvent.press(screen.getByRole('tab', { name: 'Special' }));
-  fireEvent.press(screen.getByRole('button', { name: /^Finding Your Rhythm\./ }));
+  await fireEvent.press(screen.getByRole('button', { name: 'View Hobbies' })); expect(router.push).toHaveBeenLastCalledWith('/hobbies');
+  await view.rerender(frame(<Achievements />)); await fireEvent.press(screen.getByRole('tab', { name: 'Special' }));
+  await fireEvent.press(screen.getByRole('button', { name: /^Finding Your Rhythm\./ }));
   expect(screen.queryByRole('button', { name: 'View Challenge' })).toBeNull();
-  fireEvent.press(screen.getByRole('button', { name: 'View Hobbies' })); expect(router.push).toHaveBeenLastCalledWith('/hobbies');
+  await fireEvent.press(screen.getByRole('button', { name: 'View Hobbies' })); expect(router.push).toHaveBeenLastCalledWith('/hobbies');
   expect(screen.queryByRole('button', { name: 'Close' })).toBeNull(); expect(screen.queryByLabelText('Saving')).toBeNull();
   expect(encodeWorld(mockStore.getState().world!)).toBe(worldBefore); expect(rows()).toEqual(before);
   const cold = new SaveRepository(driver); await cold.initialise(); expect(encodeWorld((await cold.active())!)).toBe(worldBefore); expect(rows()).toEqual(before);
   expect(progressReads).toHaveBeenCalledTimes(3); progressReads.mockRestore();
-  view.unmount(); sqlite.close();
+  await view.unmount(); sqlite.close();
 });
 
 test('an unrelated actual save retains an open milestone while changing the active life clears it permanently', async () => {
   const { sqlite, rows } = await setup(), oldId = mockStore.getState().world!.id;
-  const view = render(frame(<Achievements />)); fireEvent.press(screen.getByRole('tab', { name: 'Life' }));
-  fireEvent.press(screen.getByRole('button', { name: /^A Year of Care\./ }));
+  const view = await render(frame(<Achievements />)); await fireEvent.press(screen.getByRole('tab', { name: 'Life' }));
+  await fireEvent.press(screen.getByRole('button', { name: /^A Year of Care\./ }));
   await act(async () => { expect(await mockStore.getState().dispatch({ type: 'study' })).toBe(true); });
   expect(screen.getByText('Care and Craft · 98% complete')).toBeOnTheScreen();
   const pendingId = mockStore.getState().world!.pending!.id;
@@ -78,22 +78,22 @@ test('an unrelated actual save retains an open milestone while changing the acti
   await act(async () => { expect(await mockStore.getState().selectLife(oldId)).toBe(true); });
   expect(screen.queryByRole('button', { name: 'Close' })).toBeNull();
   const before = rows(), worldBefore = encodeWorld(mockStore.getState().world!);
-  fireEvent.press(screen.getByRole('tab', { name: 'Life' })); fireEvent.press(screen.getByRole('button', { name: /^A Year of Care\./ }));
+  await fireEvent.press(screen.getByRole('tab', { name: 'Life' })); await fireEvent.press(screen.getByRole('button', { name: /^A Year of Care\./ }));
   expect(screen.getByText('Care and Craft · 98% complete')).toBeOnTheScreen();
-  fireEvent.press(screen.getByRole('button', { name: 'Close' })); expect(rows()).toEqual(before); expect(encodeWorld(mockStore.getState().world!)).toBe(worldBefore);
-  view.unmount(); sqlite.close();
+  await fireEvent.press(screen.getByRole('button', { name: 'Close' })); expect(rows()).toEqual(before); expect(encodeWorld(mockStore.getState().world!)).toBe(worldBefore);
+  await view.unmount(); sqlite.close();
 });
 
-test('optional milestone navigation stays disabled while busy and leaves existing Close and hardware Back semantics intact', () => {
+test('optional milestone navigation stays disabled while busy and leaves existing Close and hardware Back semantics intact', async () => {
   const onChoose = jest.fn(), onClose = jest.fn();
   const event = { id: 'earned-care', kind: 'milestone' as const, title: 'A Year of Care', body: 'Twelve actual care months.', facts: [], action: { id: 'challenge', label: 'View Challenge' }, continueLabel: 'Close' };
-  const view = render(frame(<EventModal event={event} busy onChoose={onChoose} onClose={onClose} />));
-  expect(screen.getByRole('button', { name: 'View Challenge' })).toBeDisabled(); fireEvent.press(screen.getByRole('button', { name: 'View Challenge' })); fireEvent(screen.UNSAFE_getByType(Modal), 'requestClose');
+  const view = await render(frame(<EventModal event={event} busy onChoose={onChoose} onClose={onClose} />));
+  expect(screen.getByRole('button', { name: 'View Challenge' })).toBeDisabled(); await fireEvent.press(screen.getByRole('button', { name: 'View Challenge' })); await fireEvent(screen.UNSAFE_getByType(Modal), 'requestClose');
   expect(onChoose).not.toHaveBeenCalled(); expect(onClose).not.toHaveBeenCalled();
-  view.rerender(frame(<EventModal event={event} onChoose={onChoose} onClose={onClose} />));
-  fireEvent.press(screen.getByRole('button', { name: 'Close' })); expect(onChoose).toHaveBeenLastCalledWith('continue');
-  fireEvent(screen.UNSAFE_getByType(Modal), 'requestClose'); expect(onClose).toHaveBeenCalledTimes(1);
-  view.unmount();
+  await view.rerender(frame(<EventModal event={event} onChoose={onChoose} onClose={onClose} />));
+  await fireEvent.press(screen.getByRole('button', { name: 'Close' })); expect(onChoose).toHaveBeenLastCalledWith('continue');
+  await fireEvent(screen.UNSAFE_getByType(Modal), 'requestClose'); expect(onClose).toHaveBeenCalledTimes(1);
+  await view.unmount();
 });
 
 test.each([
@@ -102,32 +102,32 @@ test.each([
 ] as const)('unfinished %s leads to actual %s studio and profile setup, without requiring a nonexistent account', async (title, kind, name, platform, platformId) => {
   const { sqlite, driver, rows } = await setup(decodeWorld(JSON.stringify(graduate)));
   const before = rows(), payload = encodeWorld(mockStore.getState().world!);
-  const view = render(frame(<Achievements />)); fireEvent.press(screen.getByRole('tab', { name: 'Special' }));
-  fireEvent.press(screen.getByRole('button', { name: new RegExp('^' + title + '\\.') }));
-  fireEvent.press(screen.getByRole('button', { name: 'View ' + name + ' Studio' }));
+  const view = await render(frame(<Achievements />)); await fireEvent.press(screen.getByRole('tab', { name: 'Special' }));
+  await fireEvent.press(screen.getByRole('button', { name: new RegExp('^' + title + '\\.') }));
+  await fireEvent.press(screen.getByRole('button', { name: 'View ' + name + ' Studio' }));
   expect(router.push).toHaveBeenLastCalledWith('/creator-studio/' + kind);
   expect(screen.queryByRole('button', { name: 'Close' })).toBeNull();
-  mockParams = { kind }; view.rerender(frame(<CreatorStudio />));
+  mockParams = { kind }; await view.rerender(frame(<CreatorStudio />));
   expect(screen.getByText(name + ' Studio')).toBeOnTheScreen();
   expect(screen.queryByText('Choose one of your profiles first.')).toBeNull();
-  fireEvent.press(screen.getByRole('button', { name: new RegExp('^Create your ' + platform + ' channel\\.') }));
+  await fireEvent.press(screen.getByRole('button', { name: new RegExp('^Create your ' + platform + ' channel\\.') }));
   expect(router.push).toHaveBeenLastCalledWith({ pathname: '/social-media', params: { platform: platformId } });
-  mockParams = { platform: platformId }; view.rerender(frame(<SocialMedia />));
+  mockParams = { platform: platformId }; await view.rerender(frame(<SocialMedia />));
   expect(screen.getByLabelText('Social handle')).toBeOnTheScreen(); expect(screen.getByRole('button', { name: 'Review New Profile' })).toBeDisabled();
   expect(within(screen.getByRole('radio', { name: new RegExp('^' + platform + '\\.') })).getByText('Selected')).toBeOnTheScreen();
   expect(encodeWorld(mockStore.getState().world!)).toBe(payload); expect(rows()).toEqual(before);
   const cold = new SaveRepository(driver); await cold.initialise(); expect(encodeWorld((await cold.active())!)).toBe(payload); expect(rows()).toEqual(before);
-  view.unmount(); sqlite.close();
+  await view.unmount(); sqlite.close();
 });
 
 test('Creative Consistency links general production to the actual career chooser and live minutes to the Streamer studio', async () => {
   const { sqlite, rows } = await setup(decodeWorld(JSON.stringify(graduate))), before = rows(), payload = encodeWorld(mockStore.getState().world!);
-  mockParams = { id: 'creative-consistency' }; const view = render(frame(<Challenge />));
-  fireEvent.press(screen.getByRole('button', { name: 'View Special Careers' })); expect(router.push).toHaveBeenLastCalledWith('/special-careers');
-  view.rerender(frame(<SpecialCareers />));
-  fireEvent.press(screen.getByRole('button', { name: /^YouTuber\./ })); expect(router.push).toHaveBeenLastCalledWith({ pathname: '/creator-studio/[kind]', params: { kind: 'youtuber' } });
-  fireEvent.press(screen.getByRole('button', { name: /^Streamer\./ })); expect(router.push).toHaveBeenLastCalledWith({ pathname: '/creator-studio/[kind]', params: { kind: 'streamer' } });
-  view.rerender(frame(<Challenge />)); fireEvent.press(screen.getByRole('button', { name: 'View Streamer Studio' })); expect(router.push).toHaveBeenLastCalledWith('/creator-studio/streamer');
+  mockParams = { id: 'creative-consistency' }; const view = await render(frame(<Challenge />));
+  await fireEvent.press(screen.getByRole('button', { name: 'View Special Careers' })); expect(router.push).toHaveBeenLastCalledWith('/special-careers');
+  await view.rerender(frame(<SpecialCareers />));
+  await fireEvent.press(screen.getByRole('button', { name: /^YouTuber\./ })); expect(router.push).toHaveBeenLastCalledWith({ pathname: '/creator-studio/[kind]', params: { kind: 'youtuber' } });
+  await fireEvent.press(screen.getByRole('button', { name: /^Streamer\./ })); expect(router.push).toHaveBeenLastCalledWith({ pathname: '/creator-studio/[kind]', params: { kind: 'streamer' } });
+  await view.rerender(frame(<Challenge />)); await fireEvent.press(screen.getByRole('button', { name: 'View Streamer Studio' })); expect(router.push).toHaveBeenLastCalledWith('/creator-studio/streamer');
   expect(encodeWorld(mockStore.getState().world!)).toBe(payload); expect(rows()).toEqual(before);
-  view.unmount(); sqlite.close();
+  await view.unmount(); sqlite.close();
 });

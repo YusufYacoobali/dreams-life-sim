@@ -1,6 +1,6 @@
 import React from 'react';
 import { TextInput } from 'react-native';
-import { render, screen } from '@testing-library/react-native';
+import { render, screen } from '../support/rendering';
 import { DisplayText } from '../../src/ui/DisplayText';
 import {
   displayNumber,
@@ -76,8 +76,8 @@ test('whole holdings retain their exact editable quantity and accounting', () =>
   expect(formatMoney(amount, 'en-GB')).toBe('£3,123,123.45');
 });
 
-test('native text handles nested fragments, numbers and accessible labels without changing input values', () => {
-  render(
+test('native text handles nested fragments, numbers and accessible labels without changing input values', async () => {
+  await render(
     <>
       <DisplayText accessibilityLabel="Balance £12.50">
         <>

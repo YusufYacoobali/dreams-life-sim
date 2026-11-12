@@ -1,5 +1,5 @@
 import React from 'react';
-import { act, fireEvent, render, screen } from '@testing-library/react-native';
+import { act, fireEvent, render, screen } from '../support/rendering';
 import { AppState, Modal, Platform, Pressable, Text, type AppStateStatus } from 'react-native';
 import { createStore } from 'zustand/vanilla';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -42,7 +42,7 @@ function Actions() {
   return <><Text>Current screen</Text><Pressable testID="birth-action" onPress={() => play('birth', '/birth', () => mockNavigate('/birth'))}><Text>Birth</Text></Pressable></>;
 }
 const frame = () => <SafeAreaProvider initialMetrics={metrics}><CinematicTransitionProvider><Actions /></CinematicTransitionProvider></SafeAreaProvider>;
-let previousAppState: AppStateStatus, appStateChanged: (state: AppStateStatus) => void;
+let previousAppState: typeof AppState.currentState, appStateChanged: (state: AppStateStatus) => void;
 beforeEach(() => {
   jest.useFakeTimers(); mockRuns.length = 0; mockNavigate.mockClear(); mockAutoLoad = true;
   mockPath = '/new-life'; mockPreferencesReady = true; mockFeedback = { reducedMotion: false, deviceReducedMotion: false };
@@ -52,89 +52,89 @@ beforeEach(() => {
 });
 afterEach(() => { jest.useRealTimers(); AppState.currentState = previousAppState; jest.restoreAllMocks(); });
 
-test('cold welcome waits for preferences, runs 3.2 seconds without a Skip button, ignores late callbacks and never replays on return', () => {
+test('cold welcome waits for preferences, runs 3.2 seconds without a Skip button, ignores late callbacks and never replays on return', async () => {
   mockPath = '/'; mockPreferencesReady = false; mockFeedback = { reducedMotion: true, deviceReducedMotion: null };
-  const view = render(frame()); expect(screen.getByTestId('cinematic-welcome')).toBeOnTheScreen(); expect(mockRuns).toHaveLength(0);
-  mockPreferencesReady = true; view.rerender(frame()); expect(screen.getByTestId('cinematic-welcome')).toBeOnTheScreen(); expect(mockRuns).toHaveLength(0);
-  mockPreferencesReady = true; mockFeedback = { reducedMotion: false, deviceReducedMotion: false }; view.rerender(frame());
+  const view = await render(frame()); expect(screen.getByTestId('cinematic-welcome')).toBeOnTheScreen(); expect(mockRuns).toHaveLength(0);
+  mockPreferencesReady = true; await view.rerender(frame()); expect(screen.getByTestId('cinematic-welcome')).toBeOnTheScreen(); expect(mockRuns).toHaveLength(0);
+  mockPreferencesReady = true; mockFeedback = { reducedMotion: false, deviceReducedMotion: false }; await view.rerender(frame());
   expect(mockRuns).toHaveLength(1); expect(mockRuns[0]).toMatchObject({ to: 3200, duration: 3200 });
   expect(screen.queryByRole('button', { name: 'Skip welcome animation' })).toBeNull();
   const finished = mockRuns[0].done;
-  act(() => finished(true)); expect(screen.queryByTestId('cinematic-welcome')).toBeNull();
-  act(() => finished(true)); expect(screen.queryByTestId('cinematic-welcome')).toBeNull();
-  view.unmount(); render(frame()); expect(screen.queryByTestId('cinematic-welcome')).toBeNull(); expect(mockRuns).toHaveLength(1);
+  await act(() => finished(true)); expect(screen.queryByTestId('cinematic-welcome')).toBeNull();
+  await act(() => finished(true)); expect(screen.queryByTestId('cinematic-welcome')).toBeNull();
+  await view.unmount(); await render(frame()); expect(screen.queryByTestId('cinematic-welcome')).toBeNull(); expect(mockRuns).toHaveLength(1);
   expect(mockHideSplash).toHaveBeenCalled();
 });
 
-test('birth navigates only once under opaque ink, holds until the destination commits, then reveals for the remainder of 3.3 seconds', () => {
-  const view = render(frame()); fireEvent.press(screen.getByTestId('birth-action'));
+test('birth navigates only once under opaque ink, holds until the destination commits, then reveals for the remainder of 3.3 seconds', async () => {
+  const view = await render(frame()); await fireEvent.press(screen.getByTestId('birth-action'));
   expect(screen.getByTestId('cinematic-birth')).toBeOnTheScreen(); expect(mockNavigate).not.toHaveBeenCalled();
   expect(mockRuns[0]).toMatchObject({ to: 1400, duration: 1400 });
-  act(() => mockRuns[0].done(true)); expect(mockNavigate).toHaveBeenCalledTimes(1); expect(mockNavigate).toHaveBeenLastCalledWith('/birth');
-  act(() => jest.advanceTimersByTime(400)); expect(mockRuns).toHaveLength(1);
-  mockPath = '/birth'; view.rerender(frame()); act(() => jest.advanceTimersByTime(40));
-  expect(mockRuns[1]).toMatchObject({ to: 3300, duration: 1900 }); act(() => mockRuns[1].done(true));
-  expect(screen.queryByTestId('cinematic-birth')).toBeNull(); act(() => mockRuns[0].done(true)); expect(mockNavigate).toHaveBeenCalledTimes(1);
+  await act(() => mockRuns[0].done(true)); expect(mockNavigate).toHaveBeenCalledTimes(1); expect(mockNavigate).toHaveBeenLastCalledWith('/birth');
+  await act(() => jest.advanceTimersByTime(400)); expect(mockRuns).toHaveLength(1);
+  mockPath = '/birth'; await view.rerender(frame()); await act(() => jest.advanceTimersByTime(40));
+  expect(mockRuns[1]).toMatchObject({ to: 3300, duration: 1900 }); await act(() => mockRuns[1].done(true));
+  expect(screen.queryByTestId('cinematic-birth')).toBeNull(); await act(() => mockRuns[0].done(true)); expect(mockNavigate).toHaveBeenCalledTimes(1);
 });
 
-test('Android uses a full-display native modal and Back cannot dismiss birth before its covered navigation', () => {
+test('Android uses a full-display native modal and Back cannot dismiss birth before its covered navigation', async () => {
   const platform = Object.getOwnPropertyDescriptor(Platform, 'OS')!;
   Object.defineProperty(Platform, 'OS', { configurable: true, value: 'android' });
-  const view = render(frame());
+  const view = await render(frame());
   try {
-    fireEvent.press(screen.getByTestId('birth-action'));
+    await fireEvent.press(screen.getByTestId('birth-action'));
     const modal = screen.UNSAFE_getByType(Modal);
     expect(modal.props).toMatchObject({ transparent: true, statusBarTranslucent: true, navigationBarTranslucent: true, hardwareAccelerated: true, animationType: 'none' });
-    act(() => modal.props.onRequestClose()); expect(screen.getByTestId('cinematic-birth')).toBeOnTheScreen(); expect(mockNavigate).not.toHaveBeenCalled();
-  } finally { view.unmount(); Object.defineProperty(Platform, 'OS', platform); }
+    await act(() => modal.props.onRequestClose()); expect(screen.getByTestId('cinematic-birth')).toBeOnTheScreen(); expect(mockNavigate).not.toHaveBeenCalled();
+  } finally { await view.unmount(); Object.defineProperty(Platform, 'OS', platform); }
 });
 
-test('backgrounding before cover completes navigation once and foregrounding does not replay', () => {
-  const view = render(frame()); fireEvent.press(screen.getByTestId('birth-action')); const late = mockRuns[0].done;
-  act(() => { AppState.currentState = 'background'; appStateChanged('background'); });
+test('backgrounding before cover completes navigation once and foregrounding does not replay', async () => {
+  const view = await render(frame()); await fireEvent.press(screen.getByTestId('birth-action')); const late = mockRuns[0].done;
+  await act(() => { AppState.currentState = 'background'; appStateChanged('background'); });
   expect(mockNavigate).toHaveBeenCalledTimes(1); expect(screen.queryByTestId('cinematic-birth')).toBeNull();
-  act(() => { AppState.currentState = 'active'; appStateChanged('active'); late(true); }); view.rerender(frame());
+  await act(() => { AppState.currentState = 'active'; appStateChanged('active'); late(true); }); await view.rerender(frame());
   expect(mockNavigate).toHaveBeenCalledTimes(1); expect(mockRuns).toHaveLength(1); expect(mockCancel).toHaveBeenCalled();
 });
 
-test.each([true, null])('reduced or unknown device motion (%s) navigates immediately without an overlay', device => {
+test.each([true, null])('reduced or unknown device motion (%s) navigates immediately without an overlay', async device => {
   mockFeedback = { reducedMotion: true, deviceReducedMotion: device };
-  render(frame()); fireEvent.press(screen.getByTestId('birth-action'));
+  await render(frame()); await fireEvent.press(screen.getByTestId('birth-action'));
   expect(mockRuns).toHaveLength(0); expect(mockNavigate).toHaveBeenCalledWith('/birth'); expect(screen.queryByTestId('cinematic-birth')).toBeNull();
 });
 
-test('enabling reduced motion during ink settles immediately, and a lost animation callback cannot trap navigation', () => {
-  const view = render(frame()); fireEvent.press(screen.getByTestId('birth-action'));
-  mockFeedback = { reducedMotion: true, deviceReducedMotion: true }; view.rerender(frame());
+test('enabling reduced motion during ink settles immediately, and a lost animation callback cannot trap navigation', async () => {
+  const view = await render(frame()); await fireEvent.press(screen.getByTestId('birth-action'));
+  mockFeedback = { reducedMotion: true, deviceReducedMotion: true }; await view.rerender(frame());
   expect(mockNavigate).toHaveBeenCalledTimes(1); expect(screen.queryByTestId('cinematic-birth')).toBeNull();
-  mockFeedback = { reducedMotion: false, deviceReducedMotion: false }; view.rerender(frame()); fireEvent.press(screen.getByTestId('birth-action'));
-  act(() => jest.advanceTimersByTime(4801)); expect(mockNavigate).toHaveBeenCalledTimes(2); expect(screen.queryByTestId('cinematic-birth')).toBeNull();
+  mockFeedback = { reducedMotion: false, deviceReducedMotion: false }; await view.rerender(frame()); await fireEvent.press(screen.getByTestId('birth-action'));
+  await act(() => jest.advanceTimersByTime(4801)); expect(mockNavigate).toHaveBeenCalledTimes(2); expect(screen.queryByTestId('cinematic-birth')).toBeNull();
 });
 
-test('a newly committed same-person death plays 2.8 seconds; cold opening, another life and later changes do not replay', () => {
+test('a newly committed same-person death plays 2.8 seconds; cold opening, another life and later changes do not replay', async () => {
   mockPath = '/life'; const alive = decodeWorld(JSON.stringify(newborn));
-  mockStore.setState({ world: alive }); const view = render(frame()); expect(mockRuns).toHaveLength(0);
+  mockStore.setState({ world: alive }); const view = await render(frame()); expect(mockRuns).toHaveLength(0);
   // Explicit terminal presentation boundary; no claim of naturally observed mortality.
   const mutable = copyWorld(alive); recordDeath(mutable, mutable.activePersonId, 'Transition test'); mutable.revision++;
   const dead = immutableWorld(mutable);
-  act(() => mockStore.setState({ world: dead })); expect(screen.getByTestId('cinematic-death')).toBeOnTheScreen();
-  expect(mockRuns[0]).toMatchObject({ to: 1200, duration: 1200 }); act(() => mockRuns[0].done(true)); expect(mockNavigate).toHaveBeenLastCalledWith('/death');
-  mockPath = '/death'; view.rerender(frame()); act(() => jest.advanceTimersByTime(40)); expect(mockRuns[1]).toMatchObject({ to: 2800, duration: 1600 });
-  act(() => mockRuns[1].done(true)); view.unmount();
-  mockPath = '/life'; const reopened = render(frame()); expect(screen.queryByTestId('cinematic-death')).toBeNull();
-  act(() => mockStore.setState({ world: { ...dead, revision: dead.revision + 1 } }));
-  act(() => mockStore.setState({ world: { ...dead, id: 'another-life' } })); expect(mockRuns).toHaveLength(2); reopened.unmount();
+  await act(() => mockStore.setState({ world: dead })); expect(screen.getByTestId('cinematic-death')).toBeOnTheScreen();
+  expect(mockRuns[0]).toMatchObject({ to: 1200, duration: 1200 }); await act(() => mockRuns[0].done(true)); expect(mockNavigate).toHaveBeenLastCalledWith('/death');
+  mockPath = '/death'; await view.rerender(frame()); await act(() => jest.advanceTimersByTime(40)); expect(mockRuns[1]).toMatchObject({ to: 2800, duration: 1600 });
+  await act(() => mockRuns[1].done(true)); await view.unmount();
+  mockPath = '/life'; const reopened = await render(frame()); expect(screen.queryByTestId('cinematic-death')).toBeNull();
+  await act(() => mockStore.setState({ world: { ...dead, revision: dead.revision + 1 } }));
+  await act(() => mockStore.setState({ world: { ...dead, id: 'another-life' } })); expect(mockRuns).toHaveLength(2); await reopened.unmount();
 });
 
 
-test('native loading cannot start the clock early, cancelled callbacks do not navigate, and decode failure settles once', () => {
+test('native loading cannot start the clock early, cancelled callbacks do not navigate, and decode failure settles once', async () => {
   mockAutoLoad = false;
-  render(frame()); fireEvent.press(screen.getByTestId('birth-action'));
+  await render(frame()); await fireEvent.press(screen.getByTestId('birth-action'));
   expect(mockRuns).toHaveLength(0);
-  act(() => mockInkProps.onLoaded()); expect(mockRuns).toHaveLength(1);
-  act(() => mockRuns[0].done(false)); expect(mockNavigate).not.toHaveBeenCalled();
+  await act(() => mockInkProps.onLoaded()); expect(mockRuns).toHaveLength(1);
+  await act(() => mockRuns[0].done(false)); expect(mockNavigate).not.toHaveBeenCalled();
   const late = mockRuns[0].done;
-  act(() => mockInkProps.onFailure('Native decode failure')); expect(mockNavigate).toHaveBeenCalledTimes(1);
+  await act(() => mockInkProps.onFailure('Native decode failure')); expect(mockNavigate).toHaveBeenCalledTimes(1);
   expect(screen.queryByTestId('cinematic-birth')).toBeNull();
-  act(() => late(true)); expect(mockNavigate).toHaveBeenCalledTimes(1);
+  await act(() => late(true)); expect(mockNavigate).toHaveBeenCalledTimes(1);
 });

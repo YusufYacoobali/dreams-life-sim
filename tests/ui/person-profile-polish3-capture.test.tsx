@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { render, screen } from '@testing-library/react-native';
+import { render, screen } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
@@ -32,14 +32,14 @@ function capture(name:string,tree:unknown) {
 
 afterEach(()=>jest.restoreAllMocks());
 
-test.each([false,true])('real Teacher and Father/Teacher profiles export read-only review trees, dark/large=%s',dark=>{
+test.each([false,true])('real Teacher and Father/Teacher profiles export read-only review trees, dark/large=%s',async dark=>{
   const width=dark?320:390,fontScale=dark?1.4:1;
   jest.spyOn(require('react-native'),'useWindowDimensions').mockReturnValue({width,height:844,scale:2,fontScale});
   for(const role of ['Teacher','Father'] as const) {
     const fixture=personProfilePolishFixture(role);mockWorld=fixture.world;mockPersonId=fixture.personId;
-    const before=encodeWorld(mockWorld),view=render(<SafeAreaProvider initialMetrics={{frame:{x:0,y:0,width,height:844},insets:{top:47,bottom:34,left:0,right:0}}}><ThemeProvider appearance={dark?'dark':'light'}><PersonProfile /></ThemeProvider></SafeAreaProvider>);
+    const before=encodeWorld(mockWorld),view=await render(<SafeAreaProvider initialMetrics={{frame:{x:0,y:0,width,height:844},insets:{top:47,bottom:34,left:0,right:0}}}><ThemeProvider appearance={dark?'dark':'light'}><PersonProfile /></ThemeProvider></SafeAreaProvider>);
     expect(screen.getByRole('header',{name:'Person Profile'})).toBeOnTheScreen();
     capture('person-'+role.toLowerCase()+'-'+(dark?'dark-large':'light'),view.toJSON());
-    expect(encodeWorld(mockWorld)).toBe(before);expect(mockDispatch).not.toHaveBeenCalled();view.unmount();
+    expect(encodeWorld(mockWorld)).toBe(before);expect(mockDispatch).not.toHaveBeenCalled();await view.unmount();
   }
 });

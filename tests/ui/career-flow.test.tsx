@@ -1,5 +1,5 @@
 import React from 'react';
-import { act, fireEvent, render, screen, waitFor } from '@testing-library/react-native';
+import { act, fireEvent, render, screen, waitFor } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { createGameStore } from '../../src/state/gameStore';
 import { decodeWorld, encodeWorld } from '../../src/game/model';
@@ -28,9 +28,9 @@ test('native audition rollback/retry creates exactly one contract and team; focu
     await repository.create(initial);
     mockStore = createGameStore({ repository: async () => repository, date: () => initial.date, id: () => 'life_unused' });
     await mockStore.getState().bootstrap();
-    let view = render(frame(<CareerDashboard />));
+    let view = await render(frame(<CareerDashboard />));
     const world = () => mockStore.getState().world!;
-    const press = async (name: string | RegExp, role: 'button' | 'radio' = 'button') => { await act(async () => { fireEvent.press(screen.getByRole(role, { name })); }); };
+    const press = async (name: string | RegExp, role: 'button' | 'radio' = 'button') => { await act(async () => { await fireEvent.press(screen.getByRole(role, { name })); }); };
     const acknowledge = async () => { expect(world().pending?.kind).toBe('result'); await press('Continue'); };
     const retry = async (launch: string, confirm: string) => {
         const before = world(), encoded = encodeWorld(before), people = Object.keys(before.people);
@@ -85,16 +85,16 @@ test('native audition rollback/retry creates exactly one contract and team; focu
     expect((await repository.load(initial.id)).careers).toEqual(saved.careers);
     expect(saved.careers[0].projects[0]).toEqual(project);
     expect(saved.careers[0].contacts).toEqual(career.contacts);
-    view.unmount();
+    await view.unmount();
     const coldRepository = new SaveRepository(driver); await coldRepository.initialise();
     mockStore = createGameStore({ repository: async () => coldRepository, date: () => initial.date, id: () => 'life_unused' });
     expect(await mockStore.getState().bootstrap()).toBe(true);
     expect(world()).toEqual(saved);
-    view = render(frame(<CareerDashboard />));
+    view = await render(frame(<CareerDashboard />));
     expect(screen.getByRole('radio', { name: /^Character & Craft\./ })).toBeDisabled();
     expect(world().careers[0].projects[0].creative!.criticRoll).toBe(project.creative!.criticRoll);
     expect(world().careers[0].projects[0].creative!.audienceRoll).toBe(project.creative!.audienceRoll);
     expect(world().careers[0].projects[0].responseRoll).toBe(project.responseRoll);
-    view.unmount();
+    await view.unmount();
     sqlite.close();
 });

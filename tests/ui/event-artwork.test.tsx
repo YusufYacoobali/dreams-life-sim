@@ -1,7 +1,7 @@
 import React from 'react';
 import { Image, StyleSheet } from 'react-native';
 import * as Native from 'react-native';
-import { fireEvent, render, screen } from '@testing-library/react-native';
+import { fireEvent, render, screen } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { bindEvent, eventTemplates } from '../../src/game/content/events';
 import { assetCatalog } from '../../src/game/content/assets';
@@ -47,6 +47,17 @@ const descriptor = (pending: Pending, world: World) => {
 };
 afterEach(() => { jest.restoreAllMocks(); mockDispatch.mockReset(); });
 
+test.each(['person-action:family-planning', 'cult', 'athlete'])('local review artwork %s renders its registered image rather than a bare native text child', async illustration => {
+  await render(frame(<EventModal event={{ kind: 'confirmation', id: 'local-id-artwork', title: 'Review this action', body: 'Existing confirmation.', terms: [], confirmLabel: 'Confirm', illustration }} onChoose={() => {}} />));
+  expect(screen.getByTestId('event-artwork-badge')).toBeOnTheScreen();
+  expect(screen.UNSAFE_getAllByType(Image)).toHaveLength(1);
+});
+
+test('literal illustration glyphs remain valid native text children', async () => {
+  await render(frame(<EventModal event={{ kind: 'confirmation', id: 'literal-artwork', title: 'Review this action', body: 'Existing confirmation.', terms: [], confirmLabel: 'Confirm', illustration: '★' }} onChoose={() => {}} />));
+  expect(screen.getByText('★', { includeHiddenElements: true })).toBeTruthy();
+});
+
 test.each([
   ['career',Illustration,'career'], ['rings',FamilyArt,'romance'], ['doctor',HealthLegalArt,'health'],
   ['court',HealthLegalArt,'legal'], ['shop',FameBusinessArt,'business'], ['astronaut',CareerArt,'career'],
@@ -54,10 +65,10 @@ test.each([
   ['leisure-reading',OrdinaryHobbyArt,'hobby'], ['paris',TravelArt,'travel'], ['project',SchoolArt,'school'],
   ['laptop',CatalogArt,'assets'], ['studio',CatalogArt,'assets'], ['engagement-ring',CatalogArt,'romance'], ['toys',PolishArt,'childhood'],
   ['music',CareerArt,'hobby'], ['stage',CareerArt,'career'], ['royalty',CareerArt,'career'], ['will',FamilyArt,'family'],
-] as const)('saved artwork %s resolves through its actual bundled registry', (id,type,category) => {
+] as const)('saved artwork %s resolves through its actual bundled registry', async (id,type,category) => {
   const world = pupil(), before = encodeWorld(world), pending = result(id);
   expect(descriptor(pending,world)).toMatchObject({ type,category });
-  render(frame(<>{resolveEventArtwork(pending,world).illustration}</>));
+  await render(frame(<>{resolveEventArtwork(pending,world).illustration}</>));
   expect(screen.UNSAFE_getAllByType(Image)).toHaveLength(1);
   expect(screen.UNSAFE_getByType(Image).props.accessible).toBe(false);
   expect(encodeWorld(world)).toBe(before);
@@ -124,7 +135,7 @@ test('romantic templates retain the heart, while an unknown heart cannot invent 
   expect(descriptor(result('relationship','event_2030_invented-partner-template_result'),world)).toEqual({ type:PolishArt,id:'everyday',category:'everyday' });
 });
 
-test('legacy generic hearts use only bound people and saved roles, without rewriting a loaded decision', () => {
+test('legacy generic hearts use only bound people and saved roles, without rewriting a loaded decision', async () => {
   mockWorld = pupil();
   const parent = mockWorld.relationships.find(row=>row.to===mockWorld.activePersonId&&row.roles.includes('parent'))!, person = mockWorld.people[parent.from];
   person.gender = 'female'; parent.parentType = 'adoptive';
@@ -132,7 +143,7 @@ test('legacy generic hearts use only bound people and saved roles, without rewri
   const bound = bindEvent(mockWorld,template); delete bound.participants;
   mockWorld.pending = { ...bound,templateId:'historical-unknown',id:'legacy-mother-scene' };
   const before = encodeWorld(mockWorld);
-  render(frame(<PendingEvent />));
+  await render(frame(<PendingEvent />));
   expect(screen.getByText('Adoptive mother · '+fullName(person))).toBeOnTheScreen();
   expect(screen.getByText(bound.body)).toBeOnTheScreen();
   expect(screen.UNSAFE_getByType(Image).props.source).toEqual(polishImages['family-life']);
@@ -140,7 +151,7 @@ test('legacy generic hearts use only bound people and saved roles, without rewri
   expect(mockWorld.pending).not.toHaveProperty('participants');
 });
 
-test('frozen participant names and school roles survive render, result acknowledgement and checkpoint reload without rebinding', () => {
+test('frozen participant names and school roles survive render, result acknowledgement and checkpoint reload without rebinding', async () => {
   const record = cohort.records.find(row=>row.decisionPointer==='IT/result.json#/decisions/9')!, source = copyWorld(unpackCheckpoint(record.checkpoint));
   const scene = bindEvent(source,eventTemplates.find(row=>row.id==='teen-group-project-credit')!);
   const interrupt = scene.choices.find(choice=>choice.id==='interrupt')!;
@@ -152,27 +163,27 @@ test('frozen participant names and school roles survive render, result acknowled
   source.pending = scene;
   source.people[scene.participants![0].personId].firstName = 'Renamed after binding';
   mockWorld = unpackCheckpoint(packCheckpoint(source)); const before = encodeWorld(mockWorld), pending = mockWorld.pending!;
-  const view = render(frame(<PendingEvent />,true));
+  const view = await render(frame(<PendingEvent />,true));
   expect(screen.getByText('Classmate · Leonardo Ferrari')).toBeOnTheScreen();
   expect(screen.getByText('Teacher · Leonardo Ferrari')).toBeOnTheScreen();
   expect(screen.getByText(pending.body)).toBeOnTheScreen(); expect(encodeWorld(mockWorld)).toBe(before);
   expect(mockDispatch).not.toHaveBeenCalled();
-  fireEvent.press(screen.getByRole('button',{ name:'Delete the pitch while they are presenting it' }));
+  await fireEvent.press(screen.getByRole('button',{ name:'Delete the pitch while they are presenting it' }));
   expect(mockDispatch).toHaveBeenCalledWith({ type:'choose',eventId:pending.id,choiceId:'interrupt' });
   const chosen = resolveCommand(mockWorld,{ type:'choose',eventId:pending.id,choiceId:'interrupt' });
   expect(chosen.pending).toMatchObject({kind:'result',title:interrupt.resultTitle,body:interrupt.resultBody,participants:scene.participants});
   expect(chosen.journal.at(-1)?.text).toBe(interrupt.journal);
-  mockWorld = unpackCheckpoint(packCheckpoint(chosen)); view.rerender(frame(<PendingEvent />,true));
+  mockWorld = unpackCheckpoint(packCheckpoint(chosen)); await view.rerender(frame(<PendingEvent />,true));
   expect(screen.getByText('Classmate · Leonardo Ferrari')).toBeOnTheScreen();
   expect(screen.getByText('Teacher · Leonardo Ferrari')).toBeOnTheScreen();
   expect(screen.getByText(interrupt.resultBody)).toBeOnTheScreen();
   expect(mockWorld.pending).toEqual(chosen.pending); expect(mockWorld.journal.at(-1)?.text).toBe(interrupt.journal);
-  const cold = encodeWorld(mockWorld); fireEvent.press(screen.getByRole('button',{ name:'Continue' }));
+  const cold = encodeWorld(mockWorld); await fireEvent.press(screen.getByRole('button',{ name:'Continue' }));
   expect(mockDispatch).toHaveBeenLastCalledWith({ type:'acknowledge',resultId:chosen.pending!.id });
   expect(encodeWorld(mockWorld)).toBe(cold);
 });
 
-test.each([false,true])('local illustration components infer category colours and keep participant labels readable (dark=%s)', dark => {
+test.each([false,true])('local illustration components infer category colours and keep participant labels readable (dark=%s)', async dark => {
   jest.spyOn(Native,'useWindowDimensions').mockReturnValue({ width:320,height:700,scale:2,fontScale:1.6 });
   const cases: { illustration:React.ReactNode;category:EventCategory }[] = [
     { illustration:<FamilyArt id="rose" size={64} />,category:'romance' },
@@ -186,10 +197,10 @@ test.each([false,true])('local illustration components infer category colours an
     { illustration:<CatalogArt id="engagement-ring" size={64} />,category:'romance' },
   ];
   const choose = jest.fn(), base: EventPresentation = { kind:'result',id:'local-artwork',title:'Literal story',body:'Nothing is rewritten.',effects:[],participants:[{ personId:'bound-person',name:'A$& {teacher} Example',role:'adoptive mother' }] };
-  const view = render(frame(<EventModal event={{ ...base,illustration:cases[0].illustration }} onChoose={choose} />,dark));
+  const view = await render(frame(<EventModal event={{ ...base,illustration:cases[0].illustration }} onChoose={choose} />,dark));
   const colors = new Map<EventCategory,string>();
   for (const item of cases) {
-    view.rerender(frame(<EventModal event={{ ...base,illustration:item.illustration }} onChoose={choose} />,dark));
+    await view.rerender(frame(<EventModal event={{ ...base,illustration:item.illustration }} onChoose={choose} />,dark));
     expect(presentationArtwork(item.illustration).category).toBe(item.category);
     const color = StyleSheet.flatten(screen.getByTestId('event-artwork-badge').props.style).backgroundColor;
     if (colors.has(item.category)) expect(color).toBe(colors.get(item.category));
@@ -200,8 +211,8 @@ test.each([false,true])('local illustration components infer category colours an
   }
   expect(new Set(colors.values()).size).toBe(colors.size);
   expect(colors.get('romance')).toBe(dark ? '#5D2D48' : '#FFE2ED');
-  view.rerender(frame(<EventModal event={{ ...base,illustration:<FamilyArt id="hearts" />,category:'family' }} onChoose={choose} />,dark));
+  await view.rerender(frame(<EventModal event={{ ...base,illustration:<FamilyArt id="hearts" />,category:'family' }} onChoose={choose} />,dark));
   expect(screen.UNSAFE_getByType(Image).props.source).toEqual(polishImages['family-life']);
   expect(StyleSheet.flatten(screen.getByTestId('event-artwork-badge').props.style).backgroundColor).toBe(colors.get('family'));
-  fireEvent.press(screen.getByRole('button',{ name:'Continue' })); expect(choose).toHaveBeenCalledWith('continue');
+  await fireEvent.press(screen.getByRole('button',{ name:'Continue' })); expect(choose).toHaveBeenCalledWith('continue');
 });

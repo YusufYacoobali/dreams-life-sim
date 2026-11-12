@@ -1,6 +1,6 @@
 import React from 'react';
 import * as Native from 'react-native';
-import { fireEvent, render, screen } from '@testing-library/react-native';
+import { fireEvent, render, screen } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
@@ -78,40 +78,40 @@ test('all forty-six listings have varied, plausible specifications without chang
   expect(assetFeatures(assetCatalog.find(offer => offer.id === 'electric-car')!).map(feature => feature.label)).not.toContain('MPG (US)');
 });
 
-test.each([false, true])('browse, offer and lease screens share feature values without mutating the life (dark=%s)', dark => {
+test.each([false, true])('browse, offer and lease screens share feature values without mutating the life (dark=%s)', async dark => {
   mockWorld = funded(); mockRoute = { id: 'studio', kind: 'property' };
   const original = encodeWorld(mockWorld), width = dark ? 320 : 390;
   jest.spyOn(require('react-native'), 'useWindowDimensions').mockReturnValue({ width, height: 844, scale: 2, fontScale: dark ? 1.4 : 1 });
   const frame = (child: React.ReactNode) => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider appearance={dark ? 'dark' : 'light'}>{child}</ThemeProvider></SafeAreaProvider>;
-  const suffix = dark ? 'dark-large' : 'light', view = render(frame(<Shopping />));
+  const suffix = dark ? 'dark-large' : 'light', view = await render(frame(<Shopping />));
   expect(screen.UNSAFE_getAllByType(AssetListing)).toHaveLength(20);
   const home = screen.getByRole('button', { name: /City Studio.*Buy .*Rent .*month.*Beds: 1.*Baths: 1.*Sq ft: 420/ });
   capture('asset-property-list-' + suffix, view.toJSON());
-  fireEvent.press(home); expect(mockPush).toHaveBeenLastCalledWith({ pathname: '/offer/[id]', params: { id: 'studio' } });
-  view.rerender(frame(<Offer />));
+  await fireEvent.press(home); expect(mockPush).toHaveBeenLastCalledWith({ pathname: '/offer/[id]', params: { id: 'studio' } });
+  await view.rerender(frame(<Offer />));
   for (const label of ['Beds: 1', 'Baths: 1', 'Sq ft: 420']) expect(screen.getByLabelText(label)).toBeOnTheScreen();
   expect(screen.getByLabelText('Beds: 1')).toHaveStyle({ flexBasis: dark ? '46%' : '30%' });
   capture('asset-property-offer-' + suffix, view.toJSON());
-  mockRoute = { id: 'used-compact', kind: 'vehicle' }; view.rerender(frame(<Shopping />));
+  mockRoute = { id: 'used-compact', kind: 'vehicle' }; await view.rerender(frame(<Shopping />));
   expect(screen.UNSAFE_getAllByType(AssetListing)).toHaveLength(20);
   expect(screen.getByRole('button', { name: /Electric Sedan.*Top Speed: .*Mileage: .*Condition: 100%/ })).toBeOnTheScreen();
   capture('asset-vehicle-list-' + suffix, view.toJSON());
-  view.rerender(frame(<Offer />));
+  await view.rerender(frame(<Offer />));
   for (const label of ['Top Speed: 102 mph', 'Mileage: 68,000 mi. Listing reading', 'Condition: 65%']) expect(screen.getByLabelText(label)).toBeOnTheScreen();
   capture('asset-vehicle-offer-' + suffix, view.toJSON());
-  mockRoute = { id: 'studio', kind: 'property' }; view.rerender(frame(<Rentals />));
+  mockRoute = { id: 'studio', kind: 'property' }; await view.rerender(frame(<Rentals />));
   expect(screen.UNSAFE_getAllByType(AssetListing)).toHaveLength(20);
-  fireEvent.press(screen.getByRole('button', { name: /City Studio.*Buy .*Rent .*month.*Beds: 1.*Baths: 1.*Sq ft: 420/ }));
+  await fireEvent.press(screen.getByRole('button', { name: /City Studio.*Buy .*Rent .*month.*Beds: 1.*Baths: 1.*Sq ft: 420/ }));
   expect(mockPush).toHaveBeenLastCalledWith({ pathname: '/offer/[id]', params: { id: 'studio', method: 'rent' } });
   capture('asset-rental-list-' + suffix, view.toJSON());
-  view.rerender(frame(<Rental />));
+  await view.rerender(frame(<Rental />));
   for (const label of ['Beds: 1', 'Baths: 1', 'Sq ft: 420']) expect(screen.getByLabelText(label)).toBeOnTheScreen();
   capture('asset-rental-details-' + suffix, view.toJSON());
   expect(mockDispatch).not.toHaveBeenCalled(); expect(encodeWorld(mockWorld)).toBe(original);
-  view.unmount();
+  await view.unmount();
 });
 
-test.each([false, true])('owned assets retain listing specs, use actual condition and survive a cold save (dark=%s)', dark => {
+test.each([false, true])('owned assets retain listing specs, use actual condition and survive a cold save (dark=%s)', async dark => {
   // Commands return frozen production worlds. Configure wear on a mutable copy.
   mockWorld = copyWorld(purchase(purchase(funded(), 'used-compact'), 'family-house'));
   const car = mockWorld.assets.find(asset => asset.catalogId === 'used-compact')!;
@@ -123,26 +123,26 @@ test.each([false, true])('owned assets retain listing specs, use actual conditio
   jest.spyOn(require('react-native'), 'useWindowDimensions').mockReturnValue({ width, height: 844, scale: 2, fontScale: dark ? 1.4 : 1 });
   const frame = (child: React.ReactNode) => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider appearance={dark ? 'dark' : 'light'}>{child}</ThemeProvider></SafeAreaProvider>;
   mockRoute = { id: car.id, kind: 'vehicle' };
-  const suffix = dark ? 'dark-large' : 'light', view = render(frame(<OwnedAsset />));
+  const suffix = dark ? 'dark-large' : 'light', view = await render(frame(<OwnedAsset />));
   expect(screen.getByLabelText('Condition: 37%')).toBeOnTheScreen();
   expect(screen.queryByLabelText('Condition: 65%')).toBeNull();
   expect(screen.getByLabelText('Mileage: 68,000 mi. Listing reading')).toBeOnTheScreen();
   capture('asset-owned-vehicle-' + suffix, view.toJSON());
   mockRoute = { id: mockWorld.assets.find(asset => asset.catalogId === 'family-house')!.id, kind: 'property' };
-  view.rerender(frame(<OwnedAsset />));
+  await view.rerender(frame(<OwnedAsset />));
   for (const label of ['Beds: 4', 'Baths: 3', 'Sq ft: 2,250']) expect(screen.getByLabelText(label)).toBeOnTheScreen();
   capture('asset-owned-property-' + suffix, view.toJSON());
   expect(encodeWorld(mockWorld)).toBe(original); expect(mockDispatch).not.toHaveBeenCalled();
-  view.rerender(frame(<AssetFeatures offer={assetCatalog.find(offer => offer.id === 'used-compact')} condition={0} />));
+  await view.rerender(frame(<AssetFeatures offer={assetCatalog.find(offer => offer.id === 'used-compact')} condition={0} />));
   expect(screen.getByLabelText('Condition: 0%')).toBeOnTheScreen();
-  view.unmount();
+  await view.unmount();
 });
 
 
-test.each([{width:390,fontScale:1},{width:320,fontScale:1},{width:320,fontScale:1.4},{width:320,fontScale:2}])('cars keep exactly three equal chips without truncation at $width/$fontScale',({width,fontScale})=>{
+test.each([{width:390,fontScale:1},{width:320,fontScale:1},{width:320,fontScale:1.4},{width:320,fontScale:2}])('cars keep exactly three equal chips without truncation at $width/$fontScale',async ({width,fontScale})=>{
   jest.spyOn(require('react-native'),'useWindowDimensions').mockReturnValue({width,height:844,scale:2,fontScale});
   const offer=assetCatalog.find(item=>item.id==='used-compact')!;
-  const view=render(<ThemeProvider appearance={fontScale>1?'dark':'light'}><AssetFeatures offer={offer} condition={37} /></ThemeProvider>);
+  const view=await render(<ThemeProvider appearance={fontScale>1?'dark':'light'}><AssetFeatures offer={offer} condition={37} /></ThemeProvider>);
   try{
     expect(assetFeatures(offer,37).map(feature=>feature.id)).toEqual(['speed','mileage','condition']);
     const row=screen.getByTestId('asset-feature-row'),stacked=fontScale>=1.6;
@@ -152,5 +152,5 @@ test.each([{width:390,fontScale:1},{width:320,fontScale:1},{width:320,fontScale:
     expect(screen.queryByText('MPG (US)')).toBeNull();expect(screen.queryByText('EV range')).toBeNull();
     for(const label of ['Top Speed','Mileage','Condition'])expect(screen.getByText(label).props.numberOfLines).toBeUndefined();
     capture('polish3-vehicle-chips-'+width+'-'+fontScale,view.toJSON());
-  }finally{view.unmount();}
+  }finally{await view.unmount();}
 });

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Modal } from 'react-native';
-import { act, fireEvent, render, screen, waitFor, within } from '@testing-library/react-native';
+import { act, fireEvent, render, screen, waitFor, within } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { DatabaseSync } from 'node:sqlite';
 import { mkdtempSync, rmSync } from 'node:fs';
@@ -26,7 +26,7 @@ import { router } from 'expo-router';
 import Hobby from '../../app/(game)/hobby/[kind]';
 const frame = () => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider><Hobby /><PendingEvent /></ThemeProvider></SafeAreaProvider>;
 const world = () => mockStore.getState().world!;
-const press = async (name: string | RegExp) => { await act(async () => { fireEvent.press(screen.getByRole('button', { name })); }); };
+const press = async (name: string | RegExp) => { await act(async () => { await fireEvent.press(screen.getByRole('button', { name })); }); };
 const modal = () => within(screen.UNSAFE_getByType(Modal));
 const acknowledge = (initial: World) => resolveCommand(initial, { type: 'acknowledge', resultId: initial.pending!.id }, true);
 const hobby = () => world().hobbies.find(item => item.kind === mockKind)!;
@@ -64,7 +64,7 @@ test('the actual attended introduction retains one failed review, retries withou
   try {
     const initial = world(), currentHobby = hobby(), plan = activeHobbyPlan(currentHobby)!, beforeRows = context.rows(); expect(Object.keys(beforeRows)).toHaveLength(8);
     const expected = resolveCommand(initial, { type: 'meet-hobby-peer', hobbyId: currentHobby.id, planId: plan.id, reviewedPayerId: plan.payerId, reviewedMonth: initial.date.year * 12 + initial.date.month - 1 }, true), peer = hobbyContacts(expected, expected.hobbies.find(item => item.id === currentHobby.id)!)[0];
-    let view = render(frame()); const unpack = jest.spyOn(checkpoints, 'unpackCheckpoint');
+    let view = await render(frame()); const unpack = jest.spyOn(checkpoints, 'unpackCheckpoint');
     const expectTerms = () => { expect(modal().getByText('An Introduction After Practice?')).toBeOnTheScreen(); expect(modal().getByText('Current month already attended and paid')).toBeOnTheScreen(); expect(modal().getByText(fullName(initial.people[plan.payerId]))).toBeOnTheScreen(); expect(modal().getByText('One in this hobby during ' + initial.date.year)).toBeOnTheScreen(); };
     expect(screen.getByRole('button', { name: 'Review Hobby Routine' })).toBeDisabled(); await press('Review Hobby Routine'); expect(screen.queryByRole('button', { name: 'Make an Introduction' })).toBeNull();
     await press('Review Practice Introduction'); expectTerms(); await press('Never mind'); expect(world()).toEqual(initial); expect(context.rows()).toEqual(beforeRows); expect(unpack).not.toHaveBeenCalled();
@@ -75,23 +75,23 @@ test('the actual attended introduction retains one failed review, retries withou
     await press('Make an Introduction'); await press('Never mind'); await act(async () => { screen.UNSAFE_getByType(Modal).props.onRequestClose(); }); expectTerms(); expect(context.rows()).toEqual(beforeRows);
     await act(async () => { release(); }); await waitFor(() => expect(mockStore.getState().busy).toBe(false)); expect(screen.queryByText('An Introduction After Practice?')).toBeNull(); expect(world()).toEqual(expected); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore();
     expect(world().accounts.slice(0, initial.accounts.length)).toEqual(initial.accounts); expect(world().ledger).toEqual(initial.ledger); expect(world().hobbies).toEqual(initial.hobbies);
-    const savedRows = context.rows(); view.unmount(); await context.cold(); view = render(frame()); expect(world()).toEqual(expected); expect(context.rows()).toEqual(savedRows);
+    const savedRows = context.rows(); await view.unmount(); await context.cold(); view = await render(frame()); expect(world()).toEqual(expected); expect(context.rows()).toEqual(savedRows);
     expect(hobbyContacts(world(), hobby()).map(person => person.id)).toEqual([peer.id]); await press('Continue'); expect(world()).toEqual(acknowledge(expected)); expect(world().people).toEqual(expected.people); expect(world().relationships).toEqual(expected.relationships); expect(world().random).toEqual(expected.random);
     expect(screen.getByRole('button', { name: 'Review Practice Introduction' })).toBeDisabled(); expect(screen.getByText('You already made an introduction in this hobby this calendar year')).toBeOnTheScreen();
     const finished = encodeWorld(world()), rows = context.rows(), readUnpack = jest.spyOn(checkpoints, 'unpackCheckpoint'); await press('Review Practice Introduction'); await press(new RegExp('^' + fullName(peer) + '\\. Met through practice')); expect(router.push).toHaveBeenLastCalledWith({ pathname: '/person/[id]', params: { id: peer.id } }); expect(encodeWorld(world())).toBe(finished); expect(context.rows()).toEqual(rows); expect(readUnpack).not.toHaveBeenCalled();
-    await act(async () => { expect(await mockStore.getState().dispatch({ type: 'acknowledge', resultId: expected.pending!.id })).toBe(false); }); expect(context.rows()).toEqual(rows); context.oldMoments(); view.unmount();
+    await act(async () => { expect(await mockStore.getState().dispatch({ type: 'acknowledge', resultId: expected.pending!.id })).toBe(false); }); expect(context.rows()).toEqual(rows); context.oldMoments(); await view.unmount();
   } finally { jest.restoreAllMocks(); context.close(); }
 });
 
 test('a same-person real revision retains the failed review; changing hobby route clears it and saves nothing', async () => {
   const context = await setup();
   try {
-    const view = render(frame()); await press('Review Practice Introduction'); context.sqlite.exec("CREATE TRIGGER fail_hobby_introduction BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END"); await press('Make an Introduction'); await waitFor(() => expect(modal().getByRole('alert')).toBeOnTheScreen()); context.sqlite.exec('DROP TRIGGER fail_hobby_introduction');
+    const view = await render(frame()); await press('Review Practice Introduction'); context.sqlite.exec("CREATE TRIGGER fail_hobby_introduction BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END"); await press('Make an Introduction'); await waitFor(() => expect(modal().getByRole('alert')).toBeOnTheScreen()); context.sqlite.exec('DROP TRIGGER fail_hobby_introduction');
     // An actual other hobby's extra practice changes revision, not this identity.
     const guitar = world().hobbies.find(item => item.kind === 'guitar')!, plan = activeHobbyPlan(guitar)!;
     await act(async () => { expect(await mockStore.getState().dispatch({ type: 'practise-hobby', hobbyId: guitar.id, planId: plan.id })).toBe(true); expect(await mockStore.getState().dispatch({ type: 'acknowledge', resultId: world().pending!.id })).toBe(true); });
     expect(modal().getByText('An Introduction After Practice?')).toBeOnTheScreen(); const before = encodeWorld(world()), rows = context.rows(), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint');
-    mockKind = 'guitar'; view.rerender(frame()); expect(screen.queryByText('An Introduction After Practice?')).toBeNull(); expect(screen.getByRole('radio', { name: 'Community access', checked: true })).toBeOnTheScreen(); mockKind = 'reading'; view.rerender(frame()); expect(screen.queryByRole('button', { name: 'Make an Introduction' })).toBeNull(); expect(encodeWorld(world())).toBe(before); expect(context.rows()).toEqual(rows); expect(unpack).not.toHaveBeenCalled(); context.oldMoments(); view.unmount();
+    mockKind = 'guitar'; await view.rerender(frame()); expect(screen.queryByText('An Introduction After Practice?')).toBeNull(); expect(screen.getByRole('radio', { name: 'Community access', checked: true })).toBeOnTheScreen(); mockKind = 'reading'; await view.rerender(frame()); expect(screen.queryByRole('button', { name: 'Make an Introduction' })).toBeNull(); expect(encodeWorld(world())).toBe(before); expect(context.rows()).toEqual(rows); expect(unpack).not.toHaveBeenCalled(); context.oldMoments(); await view.unmount();
   } finally { jest.restoreAllMocks(); context.close(); }
 });
 
@@ -100,14 +100,14 @@ test('a real life switch clears a review even when the saved child/hobby identif
   try {
     // Identity-only second-life fixture, not a natural second generation.
     const initial = world(), other = copyWorld(initial); other.id = 'life_other_hobby_introduction'; await context.repository.create(other); expect(await mockStore.getState().selectLife(initial.id)).toBe(true);
-    const view = render(frame()); await press('Review Practice Introduction'); const lives = context.sqlite.prepare('SELECT * FROM lives ORDER BY id').all(), receipts = context.sqlite.prepare('SELECT * FROM receipts ORDER BY life_id,command_id').all(); await act(async () => { expect(await mockStore.getState().selectLife(other.id)).toBe(true); }); expect(screen.queryByText('An Introduction After Practice?')).toBeNull(); expect(screen.queryByRole('button', { name: 'Make an Introduction' })).toBeNull(); expect(hobbyContacts(world(), hobby())).toEqual([]); expect(context.sqlite.prepare('SELECT * FROM lives ORDER BY id').all()).toEqual(lives); expect(context.sqlite.prepare('SELECT * FROM receipts ORDER BY life_id,command_id').all()).toEqual(receipts); context.oldMoments(); view.unmount();
+    const view = await render(frame()); await press('Review Practice Introduction'); const lives = context.sqlite.prepare('SELECT * FROM lives ORDER BY id').all(), receipts = context.sqlite.prepare('SELECT * FROM receipts ORDER BY life_id,command_id').all(); await act(async () => { expect(await mockStore.getState().selectLife(other.id)).toBe(true); }); expect(screen.queryByText('An Introduction After Practice?')).toBeNull(); expect(screen.queryByRole('button', { name: 'Make an Introduction' })).toBeNull(); expect(hobbyContacts(world(), hobby())).toEqual([]); expect(context.sqlite.prepare('SELECT * FROM lives ORDER BY id').all()).toEqual(lives); expect(context.sqlite.prepare('SELECT * FROM receipts ORDER BY life_id,command_id').all()).toEqual(receipts); context.oldMoments(); await view.unmount();
   } finally { context.close(); }
 });
 
 test('a retained review cannot silently use a later actually paid year of the same plan', async () => {
   const context = await setup();
   try {
-    const original = world(), planId = activeHobbyPlan(hobby())!.id, view = render(frame()); await press('Review Practice Introduction');
+    const original = world(), planId = activeHobbyPlan(hobby())!.id, view = await render(frame()); await press('Review Practice Introduction');
     await act(async () => {
       expect(await mockStore.getState().dispatch({ type: 'advance' })).toBe(true); let guard = 0;
       while ((world().pending || world().annual) && guard++ < 150) {
@@ -119,18 +119,18 @@ test('a retained review cannot silently use a later actually paid year of the sa
     expect(world().date.year).toBe(original.date.year + 1); expect(activeHobbyPlan(hobby())!.id).toBe(planId); expect(hobby().practices.some(row => row.source === 'monthly' && row.attended && row.date.year === world().date.year && row.date.month === world().date.month)).toBe(true);
     expect(modal().getByText('One in this hobby during ' + original.date.year)).toBeOnTheScreen(); const before = encodeWorld(world()), rows = context.rows(), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint');
     await press('Make an Introduction'); await waitFor(() => expect(modal().getByRole('alert')).toHaveTextContent('The attended month changed; review this introduction')); expect(encodeWorld(world())).toBe(before); expect(context.rows()).toEqual(rows); expect(unpack).not.toHaveBeenCalled(); expect(hobbyContacts(world(), hobby())).toEqual([]);
-    await press('Never mind'); await press('Review Practice Introduction'); expect(modal().getByText('One in this hobby during ' + world().date.year)).toBeOnTheScreen(); await press('Never mind'); context.oldMoments(); view.unmount();
+    await press('Never mind'); await press('Review Practice Introduction'); expect(modal().getByText('One in this hobby during ' + world().date.year)).toBeOnTheScreen(); await press('Never mind'); context.oldMoments(); await view.unmount();
   } finally { jest.restoreAllMocks(); context.close(); }
 });
 
 test('local mode edits, current choice and cancelled reviews reuse the memoized contact view without a save or population work', async () => {
   const context = await setup();
   try {
-    const initial = world(), rows = context.rows(), contacts = jest.spyOn(leisure, 'hobbyContacts'), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'), view = render(frame());
+    const initial = world(), rows = context.rows(), contacts = jest.spyOn(leisure, 'hobbyContacts'), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'), view = await render(frame());
     expect(contacts).toHaveBeenCalledTimes(1);
     await press('Review Hobby Routine'); expect(screen.queryByRole('button', { name: 'Ask For This Routine' })).toBeNull();
-    await act(async () => { fireEvent.press(screen.getByRole('radio', { name: 'Guided lessons' })); }); await press('Review Hobby Routine'); await press('Never mind');
-    await act(async () => { fireEvent.press(screen.getByRole('radio', { name: 'Community access' })); }); await press('Review Practice Introduction'); await press('Never mind');
-    expect(contacts).toHaveBeenCalledTimes(1); expect(world()).toBe(initial); expect(context.rows()).toEqual(rows); expect(unpack).not.toHaveBeenCalled(); context.oldMoments(); view.unmount();
+    await act(async () => { await fireEvent.press(screen.getByRole('radio', { name: 'Guided lessons' })); }); await press('Review Hobby Routine'); await press('Never mind');
+    await act(async () => { await fireEvent.press(screen.getByRole('radio', { name: 'Community access' })); }); await press('Review Practice Introduction'); await press('Never mind');
+    expect(contacts).toHaveBeenCalledTimes(1); expect(world()).toBe(initial); expect(context.rows()).toEqual(rows); expect(unpack).not.toHaveBeenCalled(); context.oldMoments(); await view.unmount();
   } finally { jest.restoreAllMocks(); context.close(); }
 });

@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react-native';
+import { render } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { createGameStore } from '../../src/state/gameStore';
 import { decodeWorld, encodeWorld, type World } from '../../src/game/model';
@@ -41,10 +41,10 @@ test.each([false, true])('actual urgent and archived medical popup trees, dark/l
     mockStore = createGameStore({ repository: async () => repository, date: () => initial.date, id: () => 'life_medical_visual_unused' });
     expect(await mockStore.getState().bootstrap()).toBe(true);
     const world: World = mockStore.getState().world!, before = encodeWorld(world);
-    const view = render(<SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: dark ? 320 : 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider appearance={dark ? 'dark' : 'light'}><Doctor /><PendingEvent /></ThemeProvider></SafeAreaProvider>);
+    const view = await render(<SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: dark ? 320 : 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider appearance={dark ? 'dark' : 'light'}><Doctor /><PendingEvent /></ThemeProvider></SafeAreaProvider>);
     captureFinalPolish(name + '-' + (dark ? 'dark-large' : 'light'), view.toJSON(), world);
     expect(encodeWorld(mockStore.getState().world!)).toBe(before);
-    view.unmount(); sqlite.close();
+    await view.unmount(); sqlite.close();
   }
 });
 
@@ -57,9 +57,9 @@ test.each([false, true])('new symptom, diagnosis and treatment trees use actual 
     mockStore = createGameStore({ repository: async () => repository, date: () => initial.date, id: () => 'life_episode_visual_unused' });
     expect(await mockStore.getState().bootstrap()).toBe(true);
     const before = encodeWorld(mockStore.getState().world!);
-    const view = render(<SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: dark ? 320 : 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider appearance={dark ? 'dark' : 'light'}><Doctor /><PendingEvent /></ThemeProvider></SafeAreaProvider>);
+    const view = await render(<SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: dark ? 320 : 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider appearance={dark ? 'dark' : 'light'}><Doctor /><PendingEvent /></ThemeProvider></SafeAreaProvider>);
     captureFinalPolish(name + '-' + (dark ? 'dark-large' : 'light'), view.toJSON(), mockStore.getState().world!);
     expect(encodeWorld(mockStore.getState().world!)).toBe(before);
-    view.unmount(); sqlite.close();
+    await view.unmount(); sqlite.close();
   }
 });

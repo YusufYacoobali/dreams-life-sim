@@ -1,6 +1,6 @@
 import React from 'react';
 import { Modal } from 'react-native';
-import { act, fireEvent, render, screen, waitFor, within } from '@testing-library/react-native';
+import { act, fireEvent, render, screen, waitFor, within } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { DatabaseSync } from 'node:sqlite';
 import { mkdtempSync, rmSync } from 'node:fs';
@@ -26,7 +26,7 @@ import PersonProfile from '../../app/(game)/person/[id]';
 import Profile from '../../app/(game)/profile';
 const frame = (profile = false) => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider>{profile ? <Profile /> : <PersonProfile />}<PendingEvent /></ThemeProvider></SafeAreaProvider>;
 const dateConfirm = () => within(screen.UNSAFE_getByType(Modal)).getByRole('button', { name: 'Ask on a First Date' });
-const press = async (name: string | RegExp) => { await act(async () => { fireEvent.press(name === 'Ask on a First Date' ? dateConfirm() : screen.getByRole('button', { name })); }); };
+const press = async (name: string | RegExp) => { await act(async () => { await fireEvent.press(name === 'Ask on a First Date' ? dateConfirm() : screen.getByRole('button', { name })); }); };
 const openDate = () => press(/^Ask on a First Date\. An afternoon/);
 
 async function setup() {
@@ -53,33 +53,33 @@ async function setup() {
 }
 
 test('actual Person first-date review retains a held failed save, retries warm, cold-resumes the same consent/result and acknowledges once', async () => {
-  const context = await setup(); let view: ReturnType<typeof render> | undefined;
+  const context = await setup(); let view: Awaited<ReturnType<typeof render>> | undefined;
   try {
     const before = mockStore.getState().world!, original = encodeWorld(before), rows = context.rows(), command = teenProposal(before, context.peerId), predicted = resolveCommand(before, command, true);
-    const commit = jest.spyOn(context.repository, 'commit'), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'); view = render(frame());
+    const commit = jest.spyOn(context.repository, 'commit'), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'); view = await render(frame());
     await openDate(); expect(context.rows()).toEqual(rows); await press('Never mind'); expect(context.rows()).toEqual(rows); await openDate();
     context.sqlite.exec("CREATE TRIGGER fail_teen_date BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
     let release!: () => void; context.gate(new Promise(resolve => { release = resolve; }));
-    act(() => { fireEvent.press(dateConfirm()); });
+    await act(async () => { await fireEvent.press(dateConfirm()); });
     expect(mockStore.getState().busy).toBe(true); expect(dateConfirm()).toBeDisabled(); expect(screen.getByRole('button', { name: 'Never mind' })).toBeDisabled();
-    fireEvent.press(dateConfirm()); fireEvent.press(screen.getByRole('button', { name: 'Never mind' })); expect(context.rows()).toEqual(rows);
+    await fireEvent.press(dateConfirm()); await fireEvent.press(screen.getByRole('button', { name: 'Never mind' })); expect(context.rows()).toEqual(rows);
     context.gate(null); await act(async () => { release(); }); await waitFor(() => expect(screen.getByRole('alert')).toHaveTextContent(/couldn't be saved/));
     expect(screen.getAllByRole('alert')).toHaveLength(1); expect(dateConfirm()).toBeEnabled(); expect(encodeWorld(mockStore.getState().world!)).toBe(original); expect(context.rows()).toEqual(rows);
     context.sqlite.exec('DROP TRIGGER fail_teen_date'); await press('Ask on a First Date');
     expect(mockStore.getState().world).toEqual(predicted); expect(commit).toHaveBeenCalledTimes(2); expect(unpack).not.toHaveBeenCalled(); expect(screen.getByText('Your first date')).toBeOnTheScreen(); expect(screen.getByText('You are seeing each other.')).toBeOnTheScreen();
     const saved = context.rows(); expect(saved.snapshots).toEqual(rows.snapshots); expect(saved.snapshot_metadata).toEqual(rows.snapshot_metadata); expect(context.sqlite.prepare('SELECT payload FROM lives WHERE id=?').get(context.old.id)?.payload).toBe(archive.checkpoint); expect(context.sqlite.prepare('SELECT payload FROM backups WHERE life_id=?').get(context.old.id)?.payload).toBe(archive.checkpoint);
     const backup = context.sqlite.prepare('SELECT payload FROM backups WHERE life_id=?').get(before.id); expect(checkpoints.unpackCheckpoint(backup!.payload as string, true)).toEqual(before);
-    view.unmount(); view = undefined; unpack.mockRestore(); commit.mockRestore(); await context.cold(); expect(mockStore.getState().world).toEqual(predicted); expect(context.rows()).toEqual(saved);
-    view = render(frame()); expect(screen.getByText('Your first date')).toBeOnTheScreen(); await press('Continue'); const acknowledged = acknowledgeTeen(predicted); expect(mockStore.getState().world).toEqual(acknowledged);
+    await view.unmount(); view = undefined; unpack.mockRestore(); commit.mockRestore(); await context.cold(); expect(mockStore.getState().world).toEqual(predicted); expect(context.rows()).toEqual(saved);
+    view = await render(frame()); expect(screen.getByText('Your first date')).toBeOnTheScreen(); await press('Continue'); const acknowledged = acknowledgeTeen(predicted); expect(mockStore.getState().world).toEqual(acknowledged);
     const doneRows = context.rows(); await act(async () => { expect(await mockStore.getState().dispatch({ type: 'acknowledge', resultId: predicted.pending!.id })).toBe(false); }); expect(mockStore.getState().world).toEqual(acknowledged); expect(context.rows()).toEqual(doneRows);
     await press(/^End First Relationship/); const ending = resolveCommand(acknowledged, teenEnd(acknowledged, context.peerId), true);
-    await act(async () => { fireEvent.press(within(screen.UNSAFE_getByType(Modal)).getByRole('button', { name: 'End Relationship' })); });
+    await act(async () => { await fireEvent.press(within(screen.UNSAFE_getByType(Modal)).getByRole('button', { name: 'End Relationship' })); });
     expect(mockStore.getState().world).toEqual(ending); expect(screen.queryByText('You are seeing each other.')).toBeNull(); expect(screen.getByText(/Ended in/)).toBeOnTheScreen(); expect(ending.random).toEqual(acknowledged.random);
-  } finally { view?.unmount(); jest.restoreAllMocks(); context.close(); }
+  } finally { await view?.unmount(); jest.restoreAllMocks(); context.close(); }
 }, 30000);
 
 test('review survives unrelated revisions, rechecks actual eligibility and resets on actual selected-life/person change', async () => {
-  const context = await setup(), view = render(frame());
+  const context = await setup(), view = await render(frame());
   try {
     const before = mockStore.getState().world!, rows = context.rows(); await openDate();
     const unrelated = validateWorld({ ...copyWorld(before), revision: before.revision + 1 }, true); await act(async () => { mockStore.setState({ world: unrelated }); });
@@ -89,19 +89,19 @@ test('review survives unrelated revisions, rechecks actual eligibility and reset
     await act(async () => { mockStore.setState({ world: before }); }); await openDate();
     await act(async () => { expect(await mockStore.getState().selectLife(context.old.id)).toBe(true); }); expect(screen.queryByRole('button', { name: 'Ask on a First Date' })).toBeNull();
     await act(async () => { expect(await mockStore.getState().selectLife(before.id)).toBe(true); }); expect(screen.UNSAFE_queryAllByType(Modal)).toHaveLength(0); expect(mockStore.getState().world).toEqual(before);
-    await openDate(); mockPersonId = before.relationships.find(row => row.kind === 'parent' && row.to === before.activePersonId)!.from; view.rerender(frame()); expect(screen.queryByRole('button', { name: 'Ask on a First Date' })).toBeNull();
-  } finally { view.unmount(); jest.restoreAllMocks(); context.close(); }
+    await openDate(); mockPersonId = before.relationships.find(row => row.kind === 'parent' && row.to === before.activePersonId)!.from; await view.rerender(frame()); expect(screen.queryByRole('button', { name: 'Ask on a First Date' })).toBeNull();
+  } finally { await view.unmount(); jest.restoreAllMocks(); context.close(); }
 }, 30000);
 
 test('actual Profile identifies a teen and a mixed-age ongoing pair without undefined marital status or marriage controls', async () => {
-  const context = await setup(); let view: ReturnType<typeof render> | undefined;
+  const context = await setup(); let view: Awaited<ReturnType<typeof render>> | undefined;
   try {
     const dated = acknowledgeTeen(resolveCommand(context.world, teenProposal(context.world, context.peerId), true)); await act(async () => { mockStore.setState({ world: dated }); });
-    view = render(frame(true)); expect(screen.getByText('In a relationship')).toBeOnTheScreen(); expect(screen.queryByText('Married')).toBeNull(); view.unmount();
+    view = await render(frame(true)); expect(screen.getByText('In a relationship')).toBeOnTheScreen(); expect(screen.queryByText('Married')).toBeNull(); await view.unmount();
     const mixed = copyWorld(dated), younger = [mixed.people[mixed.activePersonId], mixed.people[context.peerId]].sort((a, b) => a.born.year - b.born.year || a.born.month - b.born.month || a.born.day - b.born.day)[0];
     mixed.date = monthFrom(younger.born, 18 * 12); refreshTeenRelationships(mixed); const world = validateWorld(mixed, true);
     expect(Math.max(ageOn(world.people[world.activePersonId], world.date), ageOn(world.people[context.peerId], world.date))).toBe(18);
-    await act(async () => { mockStore.setState({ world }); }); view = render(frame(true)); expect(screen.getByText('In a relationship')).toBeOnTheScreen(); view.unmount();
-    view = render(frame()); expect(screen.getByRole('button', { name: /^End First Relationship/ })).toBeOnTheScreen(); expect(screen.queryByRole('button', { name: /^Plan Your Wedding/ })).toBeNull(); expect(screen.queryByRole('button', { name: /^Propose\./ })).toBeNull();
-  } finally { view?.unmount(); context.close(); }
+    await act(async () => { mockStore.setState({ world }); }); view = await render(frame(true)); expect(screen.getByText('In a relationship')).toBeOnTheScreen(); await view.unmount();
+    view = await render(frame()); expect(screen.getByRole('button', { name: /^End First Relationship/ })).toBeOnTheScreen(); expect(screen.queryByRole('button', { name: /^Plan Your Wedding/ })).toBeNull(); expect(screen.queryByRole('button', { name: /^Propose\./ })).toBeNull();
+  } finally { await view?.unmount(); context.close(); }
 }, 30000);

@@ -1,5 +1,5 @@
 import React from 'react';
-import { act, fireEvent, render, screen, waitFor } from '@testing-library/react-native';
+import { act, fireEvent, render, screen, waitFor } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { createGameStore } from '../../src/state/gameStore';
 import { decodeWorld, encodeWorld } from '../../src/game/model';
@@ -19,16 +19,16 @@ const frame = (content: React.ReactNode) => <SafeAreaProvider initialMetrics={{ 
 test('a native startup failure rolls back capital and real staff; retry, funding, cold load and historical restore preserve one company', async () => {
   const { sqlite, driver } = database(), repository = new SaveRepository(driver); await repository.initialise(); const initial = decodeWorld(JSON.stringify(fixture)), cash = accountFor(initial); cash.cash += 100000000n; cash.openingCash += 100000000n; await repository.create(initial);
   mockStore = createGameStore({ repository: async () => repository, date: () => initial.date, id: () => 'life_company_branch' }); await mockStore.getState().bootstrap();
-  const creation = render(frame(<Businesses />)); expect(encodeWorld(mockStore.getState().world!)).toBe(encodeWorld(initial));
-  fireEvent.changeText(screen.getByLabelText('Business name'), 'Native Coffee'); fireEvent.press(screen.getByRole('button', { name: 'Review Startup' }));
-  sqlite.exec("CREATE TRIGGER fail_startup BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END"); await act(async () => { fireEvent.press(screen.getByRole('button', { name: 'Start Business' })); });
+  const creation = await render(frame(<Businesses />)); expect(encodeWorld(mockStore.getState().world!)).toBe(encodeWorld(initial));
+  await fireEvent.changeText(screen.getByLabelText('Business name'), 'Native Coffee'); await fireEvent.press(screen.getByRole('button', { name: 'Review Startup' }));
+  sqlite.exec("CREATE TRIGGER fail_startup BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END"); await act(async () => { await fireEvent.press(screen.getByRole('button', { name: 'Start Business' })); });
   await waitFor(() => expect(screen.getByText(/couldn't be saved/)).toBeOnTheScreen()); expect(await repository.load(initial.id)).toEqual(initial); expect(mockStore.getState().world!.businesses).toEqual([]);
-  sqlite.exec('DROP TRIGGER fail_startup'); fireEvent.press(screen.getByRole('button', { name: 'Review Startup' })); await act(async () => { fireEvent.press(screen.getByRole('button', { name: 'Start Business' })); });
-  await waitFor(() => expect(screen.getByText('Open for business')).toBeOnTheScreen()); await act(async () => { fireEvent.press(screen.getByRole('button', { name: 'Continue' })); });
-  const started = mockStore.getState().world!, company = started.businesses[0], checkpoint = (await repository.snapshot(started.id, started.revision))[0]; mockCompanyId = company.id; expect(company.staff).toHaveLength(2); expect(started.businesses).toHaveLength(1); creation.unmount();
-  const management = render(frame(<ManageBusiness />)); fireEvent.changeText(screen.getByLabelText('Additional business capital'), '123.45'); fireEvent.press(screen.getByRole('button', { name: 'Review Funding' })); await act(async () => { fireEvent.press(screen.getByRole('button', { name: 'Fund Business' })); });
-  await waitFor(() => expect(screen.getByText('Business updated')).toBeOnTheScreen()); await act(async () => { fireEvent.press(screen.getByRole('button', { name: 'Continue' })); }); const current = mockStore.getState().world!;
+  sqlite.exec('DROP TRIGGER fail_startup'); await fireEvent.press(screen.getByRole('button', { name: 'Review Startup' })); await act(async () => { await fireEvent.press(screen.getByRole('button', { name: 'Start Business' })); });
+  await waitFor(() => expect(screen.getByText('Open for business')).toBeOnTheScreen()); await act(async () => { await fireEvent.press(screen.getByRole('button', { name: 'Continue' })); });
+  const started = mockStore.getState().world!, company = started.businesses[0], checkpoint = (await repository.snapshot(started.id, started.revision))[0]; mockCompanyId = company.id; expect(company.staff).toHaveLength(2); expect(started.businesses).toHaveLength(1); await creation.unmount();
+  const management = await render(frame(<ManageBusiness />)); await fireEvent.changeText(screen.getByLabelText('Additional business capital'), '123.45'); await fireEvent.press(screen.getByRole('button', { name: 'Review Funding' })); await act(async () => { await fireEvent.press(screen.getByRole('button', { name: 'Fund Business' })); });
+  await waitFor(() => expect(screen.getByText('Business updated')).toBeOnTheScreen()); await act(async () => { await fireEvent.press(screen.getByRole('button', { name: 'Continue' })); }); const current = mockStore.getState().world!;
   expect(current.businesses[0].cash).toBe(company.cash + 12345n); expect(await repository.load(initial.id)).toEqual(current); expect(decodeSave(await repository.export(initial.id)).world).toEqual(current);
   const branch = await repository.restoreBranch(initial.id, checkpoint.id, current.revision, 'life_company_branch', 'restore_company'); expect(branch).toEqual({ ...started, id: 'life_company_branch' }); expect(branch.businesses[0].staff).toEqual(company.staff); expect(await repository.load(initial.id)).toEqual(current);
-  management.unmount(); sqlite.close();
+  await management.unmount(); sqlite.close();
 });

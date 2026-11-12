@@ -1,5 +1,5 @@
 import React from 'react';
-import { act, fireEvent, render, screen, waitFor } from '@testing-library/react-native';
+import { act, fireEvent, render, screen, waitFor } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { createGameStore } from '../../src/state/gameStore';
 import { encodeWorld } from '../../src/game/model';
@@ -20,7 +20,7 @@ import Hobby from '../../app/(game)/hobby/[kind]';
 import Life from '../../app/(game)/(tabs)/life';
 import { PendingEvent } from '../../src/ui/PendingEvent';
 const frame = (children: React.ReactNode) => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider>{children}<PendingEvent /></ThemeProvider></SafeAreaProvider>;
-const press = async (name: string | RegExp) => { await act(async () => { fireEvent.press(screen.getByRole('button', { name })); }); };
+const press = async (name: string | RegExp) => { await act(async () => { await fireEvent.press(screen.getByRole('button', { name })); }); };
 
 test('the genuine child keeps original history, browses all new hobbies, and retries/cold-resumes actual reading consent, monthly bills and optional practice', async () => {
   const { sqlite, driver } = database(), repository = new SaveRepository(driver); await repository.initialise(); await repository.import(JSON.stringify(archive));
@@ -35,7 +35,7 @@ test('the genuine child keeps original history, browses all new hobbies, and ret
     expect(rows().receipts).toHaveLength(before.receipts.length + 1);
     expect(sqlite.prepare('SELECT payload FROM backups WHERE life_id=?').get(world().id)?.payload).toBe(previous.payload);
   };
-  const view = render(frame(<Life />));
+  const view = await render(frame(<Life />));
   const finish = async () => {
     let guard = 0;
     while ((world().pending || world().annual) && guard++ < 150) {
@@ -46,20 +46,20 @@ test('the genuine child keeps original history, browses all new hobbies, and ret
     expect(guard).toBeLessThan(150);
   };
   await finish(); const beforeBrowse = encodeWorld(world()), originalGuitarMonths = structuredClone(world().hobbies[0].practices);
-  view.rerender(frame(<Hobbies />));
+  await view.rerender(frame(<Hobbies />));
   for (const [kind, name] of [['gaming', 'Video Games'], ['cooking', 'Cooking'], ['gardening', 'Gardening'], ['reading', 'Reading']]) {
     await press(new RegExp('^' + name + '\\.'));
     expect(router.push).toHaveBeenLastCalledWith({ pathname: '/hobby/[kind]', params: { kind } });
-    mockHobbyKind = kind; view.rerender(frame(<Hobby />));
+    mockHobbyKind = kind; await view.rerender(frame(<Hobby />));
     expect(screen.getByText('Choose a Routine')).toBeOnTheScreen();
     expect(screen.queryByRole('button', { name: /^Guitar\./ })).toBeNull();
     expect(encodeWorld(world())).toBe(beforeBrowse);
-    await press('Back'); expect(router.back).toHaveBeenCalled(); view.rerender(frame(<Hobbies />));
+    await press('Back'); expect(router.back).toHaveBeenCalled(); await view.rerender(frame(<Hobbies />));
   }
-  mockHobbyKind = 'unknown'; view.rerender(frame(<Hobby />));
+  mockHobbyKind = 'unknown'; await view.rerender(frame(<Hobby />));
   expect(screen.getByText('This hobby is unavailable.')).toBeOnTheScreen();
   expect(screen.queryByRole('button', { name: 'Review Hobby Routine' })).toBeNull();
-  view.rerender(frame(<Hobbies />)); await press(/^Reading\./); mockHobbyKind = 'reading'; view.rerender(frame(<Hobby />));
+  await view.rerender(frame(<Hobbies />)); await press(/^Reading\./); mockHobbyKind = 'reading'; await view.rerender(frame(<Hobby />));
   expect(encodeWorld(world())).toBe(beforeBrowse);
   const accounts = structuredClone(world().accounts), assets = structuredClone(world().assets), beforePlanRows = rows();
   const parent = world().relationships.find(edge => [edge.from, edge.to].includes(world().activePersonId) && [edge.from, edge.to].includes('person_parent1'))!;
@@ -76,16 +76,16 @@ test('the genuine child keeps original history, browses all new hobbies, and ret
   expect(planUnpack).not.toHaveBeenCalled(); planUnpack.mockRestore(); expectOneSave(beforePlanRows);
   expect(reading()).toMatchObject({ proficiency: 0, practices: [], plans: [{ payerId: 'person_parent1', monthlyFee: 1160n, consent: { accepted: true, strength: parentStrength, roll: 47, chance: consentChance } }] });
   expect(world().accounts).toEqual(accounts); expect(world().assets).toEqual(assets);
-  const planned = encodeWorld(world()); await act(async () => { await cold(); }); view.rerender(frame(<Hobby />));
+  const planned = encodeWorld(world()); await act(async () => { await cold(); }); await view.rerender(frame(<Hobby />));
   expect(encodeWorld(world())).toBe(planned); await press('Continue');
-  view.rerender(frame(<Life />)); const beforeYear = encodeWorld(world()), beforeYearRows = rows(), predicted = resolveCommand(world(), { type: 'advance' }, true);
+  await view.rerender(frame(<Life />)); const beforeYear = encodeWorld(world()), beforeYearRows = rows(), predicted = resolveCommand(world(), { type: 'advance' }, true);
   sqlite.exec("CREATE TRIGGER fail_reading_months BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
   await press('Age Up'); await waitFor(() => expect(mockStore.getState().error).toMatch(/couldn't be saved/));
   expect(encodeWorld(world())).toBe(beforeYear); expect(encodeWorld(await repository.load(world().id))).toBe(beforeYear); expect(rows()).toEqual(beforeYearRows);
   const yearUnpack = jest.spyOn(checkpoints, 'unpackCheckpoint');
   sqlite.exec('DROP TRIGGER fail_reading_months'); await press('Age Up'); expect(world()).toEqual(predicted);
   expect(yearUnpack).not.toHaveBeenCalled(); yearUnpack.mockRestore(); expectOneSave(beforeYearRows);
-  const interrupted = encodeWorld(world()); await act(async () => { await cold(); }); view.rerender(frame(<Life />));
+  const interrupted = encodeWorld(world()); await act(async () => { await cold(); }); await view.rerender(frame(<Life />));
   expect(encodeWorld(world())).toBe(interrupted); await finish();
   expect(reading().practices.filter(row => row.source === 'monthly')).toHaveLength(12);
   expect(reading().practices.every(row => row.attended)).toBe(true); expect(reading().proficiency).toBe(24);
@@ -93,7 +93,7 @@ test('the genuine child keeps original history, browses all new hobbies, and ret
   expect(reading().practices.flatMap(row => row.effects).filter(effect => effect.stat === 'smarts').reduce((sum, effect) => sum + effect.after - effect.before, 0)).toBe(2);
   expect(world().hobbies[0].practices.slice(0, originalGuitarMonths.length)).toEqual(originalGuitarMonths);
   expect(world().pets[0].periods).toHaveLength(36);
-  view.rerender(frame(<Hobbies />)); await press(/^Reading\./); view.rerender(frame(<Hobby />));
+  await view.rerender(frame(<Hobbies />)); await press(/^Reading\./); await view.rerender(frame(<Hobby />));
   const beforePractice = encodeWorld(world()), beforePracticeRows = rows(), money = structuredClone(world().accounts), ledger = structuredClone(world().ledger), smarts = world().people[world().activePersonId].stats.smarts;
   sqlite.exec("CREATE TRIGGER fail_reading_extra BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
   await press('Extra Practice'); await waitFor(() => expect(mockStore.getState().error).toMatch(/couldn't be saved/)); expect(encodeWorld(world())).toBe(beforePractice); expect(rows()).toEqual(beforePracticeRows);
@@ -103,9 +103,9 @@ test('the genuine child keeps original history, browses all new hobbies, and ret
   expect(reading().practices.at(-1)).toMatchObject({ source: 'manual', gain: 1, paid: 0n, paymentId: null });
   expect(world().accounts).toEqual(money); expect(world().ledger).toEqual(ledger); expect(world().people[world().activePersonId].stats.smarts).toBe(smarts);
   expect(world().pending).toMatchObject({ kind: 'result', effects: [{ id: 'proficiency', value: '+1%', tone: 'positive' }, expect.anything(), expect.anything(), expect.anything()] });
-  const practiced = encodeWorld(world()); await act(async () => { await cold(); }); view.rerender(frame(<Hobby />));
+  const practiced = encodeWorld(world()); await act(async () => { await cold(); }); await view.rerender(frame(<Hobby />));
   expect(encodeWorld(world())).toBe(practiced); await press('Continue');
   expect(screen.getByRole('button', { name: 'Extra Practice' })).toBeDisabled();
   expect(reading().practices.filter(row => row.source === 'manual')).toHaveLength(1);
-  view.unmount(); sqlite.close();
+  await view.unmount(); sqlite.close();
 }, 60000);

@@ -3,7 +3,7 @@ import React from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 import * as Native from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { fireEvent, render, screen, within } from '@testing-library/react-native';
+import { fireEvent, render, screen, within } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { copyWorld, decodeWorld, encodeWorld, fullName, type World } from '../../src/game/model';
 import { resolveCommand } from '../../src/game/engine';
@@ -62,66 +62,66 @@ function approvedFamilyWorld() {
 }
 afterEach(() => { jest.restoreAllMocks(); mockDispatch.mockReset(); });
 
-test('travel illustrations fit the shared row icon column at small widths and large text, while hero art keeps its size', () => {
+test('travel illustrations fit the shared row icon column at small widths and large text, while hero art keeps its size', async () => {
   jest.spyOn(Native,'useWindowDimensions').mockReturnValue({ width:320,height:700,scale:2,fontScale:1.6 });
-  const view = render(frame(<View>{travelArtIds.map(id=><ActionRow key={id} title={'Visit '+id} icon={<TravelArt id={id} />} onPress={()=>{}} />)}</View>,true));
+  const view = await render(frame(<View>{travelArtIds.map(id=><ActionRow key={id} title={'Visit '+id} icon={<TravelArt id={id} />} onPress={()=>{}} />)}</View>,true));
   for (const row of screen.getAllByRole('button')) {
-    const iconColumn = row.findAllByType(View).find(node => StyleSheet.flatten(node.props.style)?.width === 40)!;
+    const iconColumn = within(row).UNSAFE_getAllByType(View).find(node => StyleSheet.flatten(node.props.style)?.width === 40)!;
     const art = iconColumn.findByType(TravelArt).findByType(View);
     const bounds = StyleSheet.flatten(art.props.style);
     expect(bounds.width).toBeLessThanOrEqual(40); expect(bounds.height).toBeLessThanOrEqual(40);
     expect(bounds.flexShrink).toBe(0); expect(bounds.overflow).toBe('hidden');
     expect(art.findByType(Image).props.accessible).toBe(false);
   }
-  view.rerender(frame(<TravelArt id="paris" width={250} />));
+  await view.rerender(frame(<TravelArt id="paris" width={250} />));
   expect(StyleSheet.flatten(screen.UNSAFE_getByType(TravelArt).findByType(View).props.style).width).toBe(250);
 });
 
-test.each([false,true])('trip companions start visibly unchecked and reopening clears the unsaved party (dark=%s)', dark => {
+test.each([false,true])('trip companions start visibly unchecked and reopening clears the unsaved party (dark=%s)', async dark => {
   jest.spyOn(Native,'useWindowDimensions').mockReturnValue({ width:320,height:700,scale:2,fontScale:dark ? 1.6 : 1 });
   mockWorld = familyWorld(); mockParams = { id:'paris' }; const before = encodeWorld(mockWorld);
-  let view = render(frame(<Destination />,dark));
+  let view = await render(frame(<Destination />,dark));
   const names = screen.getAllByRole('checkbox').map(node => node.props.accessibilityLabel as string);
   expect(names.length).toBeGreaterThan(0);
   names.forEach(name => {
     const checkbox = screen.getByRole('checkbox',{ name,checked:false });
-    expect(checkbox).toBeOnTheScreen(); expect(checkbox.findByType(Ionicons).props.name).toBe('square-outline');
+    expect(checkbox).toBeOnTheScreen(); expect(within(checkbox).UNSAFE_getByType(Ionicons).props.name).toBe('square-outline');
   });
-  fireEvent.press(screen.getByRole('checkbox',{ name:names[0] }));
+  await fireEvent.press(screen.getByRole('checkbox',{ name:names[0] }));
   expect(screen.getByRole('checkbox',{ name:names[0],checked:true })).toBeOnTheScreen();
-  expect(screen.getByRole('checkbox',{ name:names[0] }).findByType(Ionicons).props.name).toBe('checkbox');
+  expect(within(screen.getByRole('checkbox',{ name:names[0] })).UNSAFE_getByType(Ionicons).props.name).toBe('checkbox');
   expect(encodeWorld(mockWorld)).toBe(before); expect(mockDispatch).not.toHaveBeenCalled();
-  view.unmount(); view = render(frame(<Destination />,dark));
+  await view.unmount(); view = await render(frame(<Destination />,dark));
   names.forEach(name => expect(screen.getByRole('checkbox',{ name,checked:false })).toBeOnTheScreen());
-  fireEvent.press(screen.getByRole('checkbox',{ name:names[0] }));
-  mockParams = { id:'tokyo' }; view.rerender(frame(<Destination />,dark));
+  await fireEvent.press(screen.getByRole('checkbox',{ name:names[0] }));
+  mockParams = { id:'tokyo' }; await view.rerender(frame(<Destination />,dark));
   names.forEach(name => expect(screen.getByRole('checkbox',{ name,checked:false })).toBeOnTheScreen());
   expect(encodeWorld(mockWorld)).toBe(before); expect(mockDispatch).not.toHaveBeenCalled();
 });
 
-test.each([false,true])('approved emigration begins with nobody invited and reopens unchecked (dark=%s)', dark => {
+test.each([false,true])('approved emigration begins with nobody invited and reopens unchecked (dark=%s)', async dark => {
   jest.spyOn(Native,'useWindowDimensions').mockReturnValue({ width:320,height:700,scale:2,fontScale:dark ? 1.6 : 1 });
   mockWorld = approvedFamilyWorld(); mockParams = {}; const before = encodeWorld(mockWorld);
-  let view = render(frame(<Emigrate />,dark));
+  let view = await render(frame(<Emigrate />,dark));
   const names = screen.getAllByRole('checkbox').map(node=>node.props.accessibilityLabel as string);
   expect(names.length).toBeGreaterThan(0);
   names.forEach(name=> {
     const checkbox = screen.getByRole('checkbox',{ name,checked:false });
-    expect(checkbox).toBeOnTheScreen(); expect(checkbox.findByType(Ionicons).props.name).toBe('square-outline');
+    expect(checkbox).toBeOnTheScreen(); expect(within(checkbox).UNSAFE_getByType(Ionicons).props.name).toBe('square-outline');
   });
-  fireEvent.press(screen.getByRole('checkbox',{ name:names[0] }));
+  await fireEvent.press(screen.getByRole('checkbox',{ name:names[0] }));
   expect(screen.getByRole('checkbox',{ name:names[0],checked:true })).toBeOnTheScreen();
-  expect(screen.getByRole('checkbox',{ name:names[0] }).findByType(Ionicons).props.name).toBe('checkbox');
-  view.unmount(); view = render(frame(<Emigrate />,dark));
+  expect(within(screen.getByRole('checkbox',{ name:names[0] })).UNSAFE_getByType(Ionicons).props.name).toBe('checkbox');
+  await view.unmount(); view = await render(frame(<Emigrate />,dark));
   names.forEach(name=>expect(screen.getByRole('checkbox',{ name,checked:false })).toBeOnTheScreen());
   expect(encodeWorld(mockWorld)).toBe(before); expect(mockDispatch).not.toHaveBeenCalled();
 });
 
-test('guitar review is short and retains the real fee, responsible payer and pause terms', () => {
+test('guitar review is short and retains the real fee, responsible payer and pause terms', async () => {
   mockWorld = familyWorld(); const person = mockWorld.people[mockWorld.activePersonId], payer = leisurePayer(mockWorld)!;
-  const before = encodeWorld(mockWorld), view = render(frame(<HobbyRoutine kind="guitar" />));
-  fireEvent.press(screen.getByRole('radio',{ name:'Guided lessons' }));
-  fireEvent.press(screen.getByRole('button',{ name:'Review Hobby Routine' }));
+  const before = encodeWorld(mockWorld), view = await render(frame(<HobbyRoutine kind="guitar" />));
+  await fireEvent.press(screen.getByRole('radio',{ name:'Guided lessons' }));
+  await fireEvent.press(screen.getByRole('button',{ name:'Review Hobby Routine' }));
   const modal = within(screen.UNSAFE_getByType(Native.Modal));
   expect(modal.getByText('Responsible payer')).toBeOnTheScreen();
   expect(modal.getByText(fullName(payer))).toBeOnTheScreen();
@@ -130,10 +130,10 @@ test('guitar review is short and retains the real fee, responsible payer and pau
   expect(modal.getByText('When you cannot attend or afford it')).toBeOnTheScreen();
   expect(modal.getByText('Shared equipment and materials')).toBeOnTheScreen();
   expect(modal.queryByText(/Actual attended months offer/)).toBeNull();
-  expect(encodeWorld(mockWorld)).toBe(before); expect(mockDispatch).not.toHaveBeenCalled(); view.unmount();
+  expect(encodeWorld(mockWorld)).toBe(before); expect(mockDispatch).not.toHaveBeenCalled(); await view.unmount();
 });
 
-test('optionally capture production travel, emigration and hobby review trees', () => {
+test('optionally capture production travel, emigration and hobby review trees', async () => {
   const directory = process.env.DREAMS_POLISH_CAPTURE_DIR;
   if (!directory) return;
   mkdirSync(directory,{ recursive:true });
@@ -147,21 +147,21 @@ test('optionally capture production travel, emigration and hobby review trees', 
     const width = dark ? 320 : 390;
     dimensions.mockReturnValue({ width,height:700,scale:2,fontScale:dark ? 1.6 : 1 });
     mockWorld = familyWorld(); mockParams = { id:'paris' };
-    let view = render(frame(<Travel />,dark,width));
-    writeFileSync(join(directory,dark?'travel-dark-large.json':'travel-light.json'),JSON.stringify(clean(view.toJSON()))); view.unmount();
-    view = render(frame(<Destinations />,dark,width));
-    writeFileSync(join(directory,dark?'destinations-dark-large.json':'destinations-light.json'),JSON.stringify(clean(view.toJSON()))); view.unmount();
-    view = render(frame(<Destination />,dark,width));
-    writeFileSync(join(directory,dark?'trip-companions-dark-large.json':'trip-companions-light.json'),JSON.stringify(clean(view.toJSON()))); view.unmount();
+    let view = await render(frame(<Travel />,dark,width));
+    writeFileSync(join(directory,dark?'travel-dark-large.json':'travel-light.json'),JSON.stringify(clean(view.toJSON()))); await view.unmount();
+    view = await render(frame(<Destinations />,dark,width));
+    writeFileSync(join(directory,dark?'destinations-dark-large.json':'destinations-light.json'),JSON.stringify(clean(view.toJSON()))); await view.unmount();
+    view = await render(frame(<Destination />,dark,width));
+    writeFileSync(join(directory,dark?'trip-companions-dark-large.json':'trip-companions-light.json'),JSON.stringify(clean(view.toJSON()))); await view.unmount();
     mockWorld = approvedFamilyWorld(); mockParams = {};
-    view = render(frame(<Emigrate />,dark,width));
-    writeFileSync(join(directory,dark?'emigration-dark-large.json':'emigration-light.json'),JSON.stringify(clean(view.toJSON()))); view.unmount();
+    view = await render(frame(<Emigrate />,dark,width));
+    writeFileSync(join(directory,dark?'emigration-dark-large.json':'emigration-light.json'),JSON.stringify(clean(view.toJSON()))); await view.unmount();
   }
   dimensions.mockReturnValue({ width:390,height:700,scale:2,fontScale:1 });
   mockWorld = familyWorld(); const before = encodeWorld(mockWorld);
-  const view = render(frame(<HobbyRoutine kind="guitar" />,false,390));
-  fireEvent.press(screen.getByRole('radio',{ name:'Guided lessons' }));
-  fireEvent.press(screen.getByRole('button',{ name:'Review Hobby Routine' }));
+  const view = await render(frame(<HobbyRoutine kind="guitar" />,false,390));
+  await fireEvent.press(screen.getByRole('radio',{ name:'Guided lessons' }));
+  await fireEvent.press(screen.getByRole('button',{ name:'Review Hobby Routine' }));
   writeFileSync(join(directory,'hobby-review.json'),JSON.stringify(clean(view.toJSON())));
-  expect(encodeWorld(mockWorld)).toBe(before); expect(mockDispatch).not.toHaveBeenCalled(); view.unmount();
+  expect(encodeWorld(mockWorld)).toBe(before); expect(mockDispatch).not.toHaveBeenCalled(); await view.unmount();
 });

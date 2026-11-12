@@ -1,6 +1,6 @@
 import { displayText } from '../../src/ui/displayNumbers';
 import React from 'react';
-import { act, fireEvent, render, screen } from '@testing-library/react-native';
+import { act, fireEvent, render, screen } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { DatabaseSync } from 'node:sqlite';
 import { mkdtempSync, rmSync } from 'node:fs';
@@ -43,16 +43,16 @@ afterEach(() => { jest.restoreAllMocks(); jest.clearAllMocks(); });
 test.each(['hourly', 'family'] as const)('%s terminal detail is factual, read-only across all eight tables and real cold resume, with original estate and action routes', async kind => {
   const input = kind === 'hourly' ? checkpoints.unpackCheckpoint(native.checkpoints.final.payload) : decodeWorld(JSON.stringify(family)), context = await setup(input);
   try {
-    const initial = context.initial, expected = summaries.deathSummary(initial)!, before = encodeWorld(initial), beforeRows = context.rows(), selector = jest.spyOn(summaries, 'deathSummary'), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'); let view = render(frame());
+    const initial = context.initial, expected = summaries.deathSummary(initial)!, before = encodeWorld(initial), beforeRows = context.rows(), selector = jest.spyOn(summaries, 'deathSummary'), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'); let view = await render(frame());
     expect(screen.getByText('You Died')).toBeOnTheScreen(); expect(screen.getByRole('header', { name: 'Life at a Glance' })).toBeOnTheScreen(); expect(screen.getByText(expected.summary)).toBeOnTheScreen(); expect(screen.getByText(expected.epitaph)).toBeOnTheScreen();
     for (const row of expected.rows) expect(screen.getByLabelText(displayText(row.label + ': ' + row.value))).toBeOnTheScreen();
     expect(screen.getByRole('progressbar', { name: 'Final happiness' })).toHaveAccessibilityValue({ min: 0, max: 100, now: initial.people[initial.activePersonId].stats.happiness }); expect(selector).toHaveBeenCalledTimes(1);
-    view.rerender(frame()); expect(selector).toHaveBeenCalledTimes(1); expect(unpack).not.toHaveBeenCalled(); expect(Object.keys(beforeRows)).toHaveLength(8); expect(context.rows()).toEqual(beforeRows); expect(encodeWorld(mockStore.getState().world!)).toBe(before);
-    fireEvent.press(screen.getByRole('button', { name: 'View Life Summary' })); expect(router.push).toHaveBeenCalledWith('/life-summary'); fireEvent.press(screen.getByRole('button', { name: 'Start a New Life' })); expect(router.push).toHaveBeenCalledWith({ pathname: '/new-life', params: { seed: '12345' } });
-    fireEvent.press(screen.getByRole('button', { name: 'Journal' })); expect(router.push).toHaveBeenLastCalledWith('/life-summary'); fireEvent.press(screen.getByRole('button', { name: 'Family Tree' })); expect(router.push).toHaveBeenLastCalledWith('/family-history');
-    if (kind === 'family') { fireEvent.press(screen.getByRole('button', { name: 'Continue as Child' })); expect(router.push).toHaveBeenCalledWith('/legacy'); }
+    await view.rerender(frame()); expect(selector).toHaveBeenCalledTimes(1); expect(unpack).not.toHaveBeenCalled(); expect(Object.keys(beforeRows)).toHaveLength(8); expect(context.rows()).toEqual(beforeRows); expect(encodeWorld(mockStore.getState().world!)).toBe(before);
+    await fireEvent.press(screen.getByRole('button', { name: 'View Life Summary' })); expect(router.push).toHaveBeenCalledWith('/life-summary'); await fireEvent.press(screen.getByRole('button', { name: 'Start a New Life' })); expect(router.push).toHaveBeenCalledWith({ pathname: '/new-life', params: { seed: '12345' } });
+    await fireEvent.press(screen.getByRole('button', { name: 'Journal' })); expect(router.push).toHaveBeenLastCalledWith('/life-summary'); await fireEvent.press(screen.getByRole('button', { name: 'Family Tree' })); expect(router.push).toHaveBeenLastCalledWith('/family-history');
+    if (kind === 'family') { await fireEvent.press(screen.getByRole('button', { name: 'Continue as Child' })); expect(router.push).toHaveBeenCalledWith('/legacy'); }
     else expect(screen.getByRole('button', { name: 'Continue as Child. No living child is available.' })).toBeDisabled();
-    expect(context.rows()).toEqual(beforeRows); expect(mockStore.getState().world!.estates).toEqual(initial.estates); unpack.mockRestore(); view.unmount(); await act(async () => { await context.cold(); }); view = render(frame());
-    expect(mockStore.getState().world).toEqual(initial); expect(context.rows()).toEqual(beforeRows); expect(screen.getByText(expected.summary)).toBeOnTheScreen(); expect(screen.getByText(expected.epitaph)).toBeOnTheScreen(); expect(mockStore.getState().world!.generation).toBe(initial.generation); view.unmount();
+    expect(context.rows()).toEqual(beforeRows); expect(mockStore.getState().world!.estates).toEqual(initial.estates); unpack.mockRestore(); await view.unmount(); await act(async () => { await context.cold(); }); view = await render(frame());
+    expect(mockStore.getState().world).toEqual(initial); expect(context.rows()).toEqual(beforeRows); expect(screen.getByText(expected.summary)).toBeOnTheScreen(); expect(screen.getByText(expected.epitaph)).toBeOnTheScreen(); expect(mockStore.getState().world!.generation).toBe(initial.generation); await view.unmount();
   } finally { context.close(); }
 });

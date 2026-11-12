@@ -1017,7 +1017,7 @@ function CultDashboard() {
               disabled={busy}
               onPress={() => addBelief(kind)}
             />
-          )}{' '}
+          )}
           {cult && config[kind].length > 2 && (
             <Button
               label={kind === 'doctrines' ? 'Remove Doctrine' : 'Remove Rule'}

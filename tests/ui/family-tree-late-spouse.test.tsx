@@ -1,5 +1,5 @@
 import React from 'react';
-import { act, fireEvent, render, screen } from '@testing-library/react-native';
+import { act, fireEvent, render, screen } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
 import { createGameStore } from '../../src/state/gameStore';
@@ -19,7 +19,7 @@ jest.mock('../../src/state/useGame', () => ({ useGame: (selector: unknown) => re
 import FamilyTree from '../../app/(game)/family-tree';
 
 const frame = () => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider><FamilyTree /></ThemeProvider></SafeAreaProvider>;
-const press = async (name: string | RegExp) => { await act(async () => { fireEvent.press(screen.getByRole('button', { name })); }); };
+const press = async (name: string | RegExp) => { await act(async () => { await fireEvent.press(screen.getByRole('button', { name })); }); };
 const personButton = (world: World, id: string) => new RegExp('^' + fullName(world.people[id]).replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\.');
 const acknowledge = (world: World) => resolveCommand(world, { type: 'acknowledge', resultId: world.pending!.id });
 
@@ -44,7 +44,7 @@ test.each([['childless', marriage], ['with the genuine child', birth]] as const)
   recordDeath(married, spouse.id, 'Explicit Family Tree mortality-boundary regression');
   expect(partnerRelation(married)).toBeUndefined();
   expect(married.marriages.find(item => item.a === spouse.id || item.b === spouse.id)).toMatchObject({ ended: married.date, endReason: 'death' });
-  const context = open(married), view = render(frame());
+  const context = open(married), view = await render(frame());
   try {
     const spouseRow = screen.getByRole('button', { name: personButton(context.initial, spouse.id) });
     expect(screen.getAllByRole('button', { name: personButton(context.initial, spouse.id) })).toHaveLength(1);
@@ -68,19 +68,19 @@ test.each([['childless', marriage], ['with the genuine child', birth]] as const)
     expect(screen.getByRole('button', { name: personButton(reopened, spouse.id) }).props.accessibilityLabel).toContain('Late spouse');
     context.unchanged(reopened);
     expect(JSON.stringify(fixture)).toBe(sourceBytes);
-  } finally { view.unmount(); jest.restoreAllMocks(); }
+  } finally { await view.unmount(); jest.restoreAllMocks(); }
 });
 
-test('a genuinely divorced childless former spouse is not relabelled as a late spouse after death', () => {
+test('a genuinely divorced childless former spouse is not relabelled as a late spouse after death', async () => {
   let current = acknowledge(decodeWorld(JSON.stringify(marriage))); const spouse = otherPerson(current, partnerRelation(current)!);
   current = acknowledge(resolveCommand(current, { type: 'divorce', personId: spouse.id, custody: 'shared', quotedPayment: divorceQuote(current, spouse.id).signed }));
   recordDeath(current, spouse.id, 'Explicit divorced-person mortality-boundary regression');
   expect(current.marriages.find(item => item.a === spouse.id || item.b === spouse.id)?.endReason).toBe('divorce');
-  const context = open(current), view = render(frame());
+  const context = open(current), view = await render(frame());
   try {
     expect(screen.queryByRole('button', { name: personButton(current, spouse.id) })).toBeNull();
     expect(screen.queryByText(/Late spouse/)).toBeNull(); context.unchanged();
-  } finally { view.unmount(); jest.restoreAllMocks(); }
+  } finally { await view.unmount(); jest.restoreAllMocks(); }
 });
 
 test('the genuine pension archive retains its deceased parent through existing family edges without inventing a player spouse', async () => {
@@ -88,7 +88,7 @@ test('the genuine pension archive retains its deceased parent through existing f
   expect(endedMarriage).toBeDefined(); expect([endedMarriage.a, endedMarriage.b]).not.toContain(current.activePersonId);
   const deceased = [endedMarriage.a, endedMarriage.b].find(id => current.people[id].died)!;
   expect(current.relationships.some(edge => edge.from === deceased && edge.to === current.activePersonId && edge.roles.includes('parent'))).toBe(true);
-  const context = open(current), view = render(frame());
+  const context = open(current), view = await render(frame());
   try {
     // This genuine world has two people called Sora Romano; age/death labels
     // distinguish the actual recorded parent instead of assuming names are IDs.
@@ -98,5 +98,5 @@ test('the genuine pension archive retains its deceased parent through existing f
     expect(row.props.accessibilityLabel).toContain('Died ' + current.people[deceased].died!.year);
     expect(row.props.accessibilityLabel).not.toContain('Late spouse');
     await press(label); expect(router.push).toHaveBeenLastCalledWith({ pathname: '/person/[id]', params: { id: deceased } }); context.unchanged();
-  } finally { view.unmount(); jest.restoreAllMocks(); }
+  } finally { await view.unmount(); jest.restoreAllMocks(); }
 });

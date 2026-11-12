@@ -1,6 +1,6 @@
 import React from 'react';
 import { Modal, ScrollView, Switch } from 'react-native';
-import { act, fireEvent, render, screen, waitFor, within } from '@testing-library/react-native';
+import { act, fireEvent, render, screen, waitFor, within } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { DatabaseSync } from 'node:sqlite';
 import { mkdtempSync, rmSync } from 'node:fs';
@@ -32,8 +32,8 @@ import Birth from '../../app/birth';
 
 const date = { year: 2026, month: 10, day: 20 }, newId = 'life_review_newborn';
 const frame = (children: React.ReactNode) => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider>{children}</ThemeProvider></SafeAreaProvider>;
-const press = async (name: string | RegExp) => { await act(async () => { fireEvent.press(screen.getByRole('button', { name })); }); };
-const choose = async (name: string) => { await act(async () => { fireEvent.press(screen.getByRole('radio', { name })); }); };
+const press = async (name: string | RegExp) => { await act(async () => { await fireEvent.press(screen.getByRole('button', { name })); }); };
+const choose = async (name: string) => { await act(async () => { await fireEvent.press(screen.getByRole('radio', { name })); }); };
 const world = () => mockStore.getState().world!;
 const modal = () => within(screen.UNSAFE_getByType(Modal));
 
@@ -80,7 +80,7 @@ async function setup(existing = true) {
 }
 
 async function setJapaneseIdentity() {
-  fireEvent.changeText(screen.getByLabelText('First name'), 'Alex'); fireEvent.changeText(screen.getByLabelText('Last name'), 'Carter');
+  await fireEvent.changeText(screen.getByLabelText('First name'), 'Alex'); await fireEvent.changeText(screen.getByLabelText('Last name'), 'Carter');
   await press(/^Country\./); await choose('Japan'); await press('Choose');
   await press(/^City\./); await choose('Osaka'); await press('Choose');
 }
@@ -98,7 +98,7 @@ test('reviewed new-life creation retains terms and error through rollback, retri
   const context = await setup();
   try {
     const previous = encodeWorld(world()), beforeRows = context.rows(); expect(beforeRows.snapshots.length).toBeGreaterThan(0);
-    let view = render(frame(<NewLife />)); await setJapaneseIdentity(); const draft = structuredClone(useCreationDraft.getState().draft!);
+    let view = await render(frame(<NewLife />)); await setJapaneseIdentity(); const draft = structuredClone(useCreationDraft.getState().draft!);
     const unpack = jest.spyOn(checkpoints, 'unpackCheckpoint');
     await press('Start My Life'); expectReview(); await press('Never mind');
     expect(context.rows()).toEqual(beforeRows); expect(encodeWorld(world())).toBe(previous); expect(useCreationDraft.getState().draft).toEqual(draft);
@@ -117,17 +117,17 @@ test('reviewed new-life creation retains terms and error through rollback, retri
     expect(screen.queryByText('Start another life?')).toBeNull(); expect(router.replace).toHaveBeenCalledTimes(1); expect(router.replace).toHaveBeenLastCalledWith('/birth');
     const savedRows = context.rows(); expect(savedRows.lives).toHaveLength(2);
     for (const [table, rows] of Object.entries(beforeRows)) for (const row of rows) if (table !== 'preferences' || row.key !== 'active_life') expect(savedRows[table]).toContainEqual(row);
-    view.unmount(); await context.cold(); view = render(frame(<Birth />)); expect(world()).toEqual(expected); expect(context.rows()).toEqual(savedRows); expect(screen.getByText('Welcome to the World!')).toBeOnTheScreen();
+    await view.unmount(); await context.cold(); view = await render(frame(<Birth />)); expect(world()).toEqual(expected); expect(context.rows()).toEqual(savedRows); expect(screen.getByText('Welcome to the World!')).toBeOnTheScreen();
     await press('Begin Life!'); expect(world().revision).toBe(1); expect(world().birthAcknowledged).toBe(true); expect(world().people).toEqual(expected.people); expect(world().random).toEqual(expected.random); expect(world().ledger).toEqual(expected.ledger);
     const acknowledged = world(), doneRows = context.rows(); await act(async () => { expect(await mockStore.getState().acknowledgeBirth()).toBe(true); });
-    expect(world()).toEqual(acknowledged); expect(context.rows()).toEqual(doneRows); expect(doneRows.lives).toHaveLength(2); view.unmount();
+    expect(world()).toEqual(acknowledged); expect(context.rows()).toEqual(doneRows); expect(doneRows.lives).toHaveLength(2); await view.unmount();
   } finally { context.close(); }
 });
 
 test('manual names and avatar survive gender edits, cancelled pickers and appearance navigation into the actual saved birth', async () => {
   const context = await setup(false);
   try {
-    const beforeRows = context.rows(), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'); let view = render(frame(<NewLife />)); await setJapaneseIdentity();
+    const beforeRows = context.rows(), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'); let view = await render(frame(<NewLife />)); await setJapaneseIdentity();
     const selected = structuredClone(useCreationDraft.getState().draft!); await press(/^Country\./); await choose('Japan'); await press('Choose');
     expect(useCreationDraft.getState().draft).toEqual(selected); expect(screen.getByRole('button', { name: 'City. Osaka' })).toBeOnTheScreen();
     await press(/^Country\./);
@@ -141,7 +141,7 @@ test('manual names and avatar survive gender edits, cancelled pickers and appear
     expect(useCreationDraft.getState().draft).toEqual(selected); expect(context.rows()).toEqual(beforeRows); expect(router.replace).not.toHaveBeenCalled();
     await press('Never mind'); await press(/^City\./); await choose('Tokyo'); await press('Never mind');
     expect(useCreationDraft.getState().draft).toEqual(selected); expect(context.rows()).toEqual(beforeRows); expect(mockStore.getState().world).toBeNull();
-    await press('Choose Appearance'); view.rerender(frame(<Appearance />)); await choose('Avatar 7, long face, very light skin tone, black shoulder length hair'); await press('Continue'); view.rerender(frame(<NewLife />));
+    await press('Choose Appearance'); await view.rerender(frame(<Appearance />)); await choose('Avatar 7, long face, very light skin tone, black shoulder length hair'); await press('Continue'); await view.rerender(frame(<NewLife />));
     // Preset identity survives the editor's different object-key order.
     await press('Next avatar'); expect(useCreationDraft.getState().draft!.input.appearance).toEqual(avatarPresets[7]);
     await press('Previous avatar'); expect(useCreationDraft.getState().draft!.input.appearance).toEqual(avatarPresets[6]);
@@ -151,14 +151,14 @@ test('manual names and avatar survive gender edits, cancelled pickers and appear
     expect(useCreationDraft.getState().draft!.input).toMatchObject({ country: 'JP', city: 'Osaka', appearance: avatarPresets[6] });
     const edited = structuredClone(useCreationDraft.getState().draft!); await press(/^Country\./); await choose('Japan'); await press('Choose'); expect(useCreationDraft.getState().draft).toEqual(edited);
     expect(context.rows()).toEqual(beforeRows); await press('Start My Life'); const expected = createLife(newId, edited.seed, edited.input, date); expect(world()).toEqual(expected); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore();
-    const savedRows = context.rows(); view.unmount(); await context.cold(); view = render(frame(<Birth />)); expect(world()).toEqual(expected); expect(context.rows()).toEqual(savedRows); expect(screen.getByText(/in Osaka, Japan/)).toBeOnTheScreen(); view.unmount();
+    const savedRows = context.rows(); await view.unmount(); await context.cold(); view = await render(frame(<Birth />)); expect(world()).toEqual(expected); expect(context.rows()).toEqual(savedRows); expect(screen.getByText(/in Osaka, Japan/)).toBeOnTheScreen(); await view.unmount();
   } finally { context.close(); }
 });
 
 test('country and gender selections update suggested names and artwork in the real form, then save and cold-resume that exact newborn', async () => {
   const context = await setup(false);
   try {
-    let view = render(frame(<NewLife />)); const beforeRows = context.rows();
+    let view = await render(frame(<NewLife />)); const beforeRows = context.rows();
     await press(/^Country\./); await choose('Japan'); await press('Choose'); await choose('Male');
     await press(/^Country\./); await choose('Italy'); await press('Choose');
     const male = structuredClone(useCreationDraft.getState().draft!.input);
@@ -177,10 +177,10 @@ test('country and gender selections update suggested names and artwork in the re
     expect(screen.getByLabelText('Last name')).toHaveProp('value', japanese.lastName);
     expect(screen.getByRole('button', { name: 'City. Tokyo' })).toBeOnTheScreen();
     expect(japanese.appearance).toEqual(female.appearance);
-    await press('Choose Appearance'); view.rerender(frame(<Appearance />));
-    await act(async () => { fireEvent.press(screen.getByRole('tab', { name: 'Skin Tone' })); }); await choose('Skin tone 4, tan');
-    await act(async () => { fireEvent.press(screen.getByRole('tab', { name: 'Hair Color' })); }); await choose('Chestnut');
-    await press('Continue'); view.rerender(frame(<NewLife />)); await choose('Male');
+    await press('Choose Appearance'); await view.rerender(frame(<Appearance />));
+    await act(async () => { await fireEvent.press(screen.getByRole('tab', { name: 'Skin Tone' })); }); await choose('Skin tone 4, tan');
+    await act(async () => { await fireEvent.press(screen.getByRole('tab', { name: 'Hair Color' })); }); await choose('Chestnut');
+    await press('Continue'); await view.rerender(frame(<NewLife />)); await choose('Male');
     await press(/^City\./); await choose('Osaka'); await press('Choose');
     const selected = structuredClone(useCreationDraft.getState().draft!);
     expect(creationNamePools.JP.male).toContain(selected.input.firstName);
@@ -189,28 +189,28 @@ test('country and gender selections update suggested names and artwork in the re
     expect(mockStore.getState().world).toBeNull(); expect(context.rows()).toEqual(beforeRows);
     await press('Start My Life'); await waitFor(() => expect(mockStore.getState().world).not.toBeNull());
     const expected = createLife(newId, selected.seed, selected.input, date);
-    expect(world()).toEqual(expected); const savedRows = context.rows(); view.unmount();
-    await context.cold(); view = render(frame(<Birth />));
+    expect(world()).toEqual(expected); const savedRows = context.rows(); await view.unmount();
+    await context.cold(); view = await render(frame(<Birth />));
     expect(world()).toEqual(expected); expect(context.rows()).toEqual(savedRows);
     expect(world().people[world().activePersonId]).toMatchObject({ firstName: selected.input.firstName, lastName: selected.input.lastName, gender: 'male', country: 'JP', city: 'Osaka', appearance: selected.input.appearance });
-    expect(screen.getByText(/in Osaka, Japan/)).toBeOnTheScreen(); view.unmount();
+    expect(screen.getByText(/in Osaka, Japan/)).toBeOnTheScreen(); await view.unmount();
   } finally { context.close(); }
 });
 
 test('advanced creation controls expose disabled state during a held save and cannot change the identity actually committed', async () => {
   const context = await setup(false);
   try {
-    const view = render(frame(<NewLife />)); await setJapaneseIdentity(); await press(/^More Options/); await act(async () => { fireEvent.press(screen.getByRole('checkbox', { name: 'Men' })); });
-    await act(async () => { fireEvent(screen.getByRole('switch', { name: 'Would like children' }), 'valueChange', false); }); await act(async () => { fireEvent.press(screen.getByRole('radio', { name: 'Neither' })); });
+    const view = await render(frame(<NewLife />)); await setJapaneseIdentity(); await press(/^More Options/); await act(async () => { await fireEvent.press(screen.getByRole('checkbox', { name: 'Men' })); });
+    await act(async () => { await fireEvent(screen.getByRole('switch', { name: 'Would like children' }), 'valueChange', false); }); await act(async () => { await fireEvent.press(screen.getByRole('radio', { name: 'Neither' })); });
     const draft = structuredClone(useCreationDraft.getState().draft!), beforeRows = context.rows(), release = context.pauseNextSave(); await press('Start My Life'); expect(mockStore.getState().busy).toBe(true);
     for (const [role, name] of [['radio', /^Ordinary Family/], ['radio', /^Royal Family/], ['checkbox', 'Men'], ['checkbox', 'Women'], ['checkbox', 'Non-binary'], ['radio', 'Can carry a pregnancy'], ['radio', 'Can contribute to conception'], ['radio', 'Neither']] as const) {
-      const control = screen.getByRole(role, { name }); expect(control).toBeDisabled(); expect(control.props.accessibilityState.disabled).toBe(true); await act(async () => { fireEvent.press(control); });
+      const control = screen.getByRole(role, { name }); expect(control).toBeDisabled(); expect(control.props.accessibilityState.disabled).toBe(true); await act(async () => { await fireEvent.press(control); });
     }
     const toggle = screen.getByRole('switch', { name: 'Would like children' }); expect(toggle).toBeDisabled(); expect(toggle).toHaveProp('accessibilityState', { disabled: true, checked: false });
     await act(async () => { screen.UNSAFE_getByType(Switch).props.onValueChange(true); });
     expect(useCreationDraft.getState().draft).toEqual(draft); expect(context.rows()).toEqual(beforeRows); expect(mockStore.getState().world).toBeNull();
     await act(async () => { release(); }); await waitFor(() => expect(mockStore.getState().busy).toBe(false));
     expect(world()).toEqual(createLife(newId, draft.seed, draft.input, date)); const person = world().people[world().activePersonId];
-    expect(person.attractedTo).toEqual(draft.input.attractedTo); expect(person.wantsChildren).toBe(false); expect(person.biology.role).toBe('neither'); expect(context.rows().lives).toHaveLength(1); view.unmount();
+    expect(person.attractedTo).toEqual(draft.input.attractedTo); expect(person.wantsChildren).toBe(false); expect(person.biology.role).toBe('neither'); expect(context.rows().lives).toHaveLength(1); await view.unmount();
   } finally { context.close(); }
 });

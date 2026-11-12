@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image } from 'react-native';
-import { render,screen } from '@testing-library/react-native';
+import { render,screen } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
@@ -40,13 +40,13 @@ test('ordinary jobs and common actions have distinct transparent offline illustr
  expect(hashes.size).toBe(icons.length);
 });
 
-test('Assets, Profile, Finances and Bank retain separate wealth, accounting and loan artwork',()=>{
+test('Assets, Profile, Finances and Bank retain separate wealth, accounting and loan artwork',async ()=>{
  mockWorld=decodeWorld(JSON.stringify(graduate));
- const view=render(frame(<Assets/>));
+ const view=await render(frame(<Assets/>));
  expect(images()).toContainEqual(financeImages['net-worth']);expect(images()).toContainEqual(financeImages.finances);expect(images()).toContainEqual(polishImages.loan);
  expect(financeImages['net-worth']).not.toEqual(financeImages.finances);expect(financeImages.finances).not.toEqual(polishImages.loan);
  expect(screen.getByRole('button',{name:/Real Estate/})).toBeOnTheScreen();
- view.rerender(frame(<Profile/>));expect(images()).toContainEqual(financeImages['net-worth']);
- view.rerender(frame(<Finances/>));expect(images()).toContainEqual(financeImages.finances);
- view.rerender(frame(<Bank/>));expect(images()).toContainEqual(financeImages.finances);
+ await view.rerender(frame(<Profile/>));expect(images()).toContainEqual(financeImages['net-worth']);
+ await view.rerender(frame(<Finances/>));expect(images()).toContainEqual(financeImages.finances);
+ await view.rerender(frame(<Bank/>));expect(images()).toContainEqual(financeImages.finances);
 });

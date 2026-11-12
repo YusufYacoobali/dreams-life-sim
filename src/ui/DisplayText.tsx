@@ -3,7 +3,7 @@ import { Text as NativeText, type TextProps } from 'react-native';
 import { displayNumber, displayText } from './displayNumbers';
 
 export { displayText } from './displayNumbers';
-export type DisplayText = NativeText;
+export type DisplayText = React.ComponentRef<typeof NativeText>;
 
 function displayChildren(children: React.ReactNode): React.ReactNode {
   if (typeof children === 'string') return displayText(children);
@@ -32,7 +32,7 @@ function displayChildren(children: React.ReactNode): React.ReactNode {
 }
 
 /** The single read-only text boundary; native input values are deliberately exact. */
-export const DisplayText = forwardRef<NativeText, TextProps>(
+export const DisplayText = forwardRef<DisplayText, TextProps>(
   function DisplayText(
     { children, accessibilityLabel, accessibilityHint, ...props },
     ref,

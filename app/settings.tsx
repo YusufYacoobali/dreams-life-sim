@@ -4,7 +4,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { router } from 'expo-router';
 import { usePreferences } from '../src/state/usePreferences';
 import { godModeSessionStore } from '../src/state/godModeSession';
-import { isGodModeBuild } from '../src/access/buildAccess';
+import { isGodModeBuild, isUnlockAllTestingEnabled } from '../src/access/buildAccess';
 import { ActionRow, Body, Button, Card, Header, Heading, Page } from '../src/ui/components';
 import { EventModal } from '../src/ui/EventModal';
 import { useColors } from '../src/ui/theme';
@@ -36,6 +36,7 @@ export default function Settings() {
   };
   // Keep this footer present so a failure does not remount the scroll content.
   return <Page bottomSafeArea footer={error && !confirm ? <><Text accessibilityRole="alert" accessibilityLiveRegion="polite" style={{ color: c.red, fontSize: 15, lineHeight: 23 }}>{error}</Text><Button label="Try Again" disabled={busy} onPress={() => { void retry(); }} /></> : <Body muted>These settings apply to all your lives on this device.</Body>}><Header title="Settings" onBack={() => router.back()} />
+    {isUnlockAllTestingEnabled() && <Text style={{ color: c.muted, fontSize: 12, lineHeight: 18 }}>TEST MODE — ALL UNLOCKED</Text>}
     <Pressable accessibilityRole="button" accessibilityLabel="App Preferences" accessibilityState={{ disabled: unavailable }} disabled={unavailable} onPress={tapPreferences} style={{ minHeight: 48 }}><Card><View style={{ flexDirection: 'row', alignItems: 'center', gap: 14 }}><View accessibilityElementsHidden importantForAccessibility="no-hide-descendants" style={{ padding: 12, borderRadius: 16, backgroundColor: c.inset }}><Ionicons name="settings-outline" size={32} color={c.link} /></View><View style={{ flex: 1, minWidth: 0 }}><Heading size={21}>App Preferences</Heading><Body muted>Choose your appearance, feedback and daily reminders.</Body></View></View></Card></Pressable>
     <Card><Heading size={19}>Appearance</Heading><Body muted>Choose a look, or follow your device’s light and dark appearance.</Body>
       {!ready ? <ActivityIndicator accessibilityLabel="Opening display settings" /> : <View accessibilityRole="radiogroup" accessibilityLabel="Appearance">{choices.map(choice => <Pressable key={choice.id} accessibilityRole="radio" accessibilityLabel={displayText(choice.label)} accessibilityState={{ checked: settings.appearance === choice.id, disabled: busy || loadFailed }} disabled={busy || loadFailed} onPress={() => { void change(choice.id); }} style={({ pressed }) => ({ minHeight: 56, paddingVertical: 12, paddingHorizontal: 14, borderRadius: 12, marginTop: 8, backgroundColor: pressed || settings.appearance === choice.id ? c.selected : c.surface, borderWidth: 1, borderColor: settings.appearance === choice.id ? c.link : c.line, flexDirection: 'row', alignItems: 'center', gap: 12, opacity: busy || loadFailed ? 0.5 : 1 })}><Text style={{ flex: 1, minWidth: 0, color: c.ink, fontSize: 16, lineHeight: 23, fontWeight: settings.appearance === choice.id ? '700' : '400' }}>{choice.label}</Text><View accessibilityElementsHidden importantForAccessibility="no-hide-descendants"><Ionicons name={settings.appearance === choice.id ? 'checkmark-circle' : 'ellipse-outline'} size={24} color={settings.appearance === choice.id ? c.link : c.muted} /></View></Pressable>)}</View>}

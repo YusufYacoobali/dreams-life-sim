@@ -1,6 +1,6 @@
 import React from 'react';
 import { Modal } from 'react-native';
-import { act, fireEvent, render, screen, waitFor, within } from '@testing-library/react-native';
+import { act, fireEvent, render, screen, waitFor, within } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { DatabaseSync } from 'node:sqlite';
 import { mkdtempSync, rmSync } from 'node:fs';
@@ -37,9 +37,9 @@ type Domain = 'actor' | 'recording' | 'campaign' | 'streamer' | 'military';
 const domains: Domain[] = ['actor', 'recording', 'campaign', 'streamer', 'military'];
 const world = () => mockStore.getState().world!;
 const frame = (domain: Domain) => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider>{domain === 'actor' ? <Career /> : domain === 'recording' ? <MusicStudio /> : domain === 'campaign' ? <Politics /> : domain === 'streamer' ? <CreatorStudio /> : <Service />}<PendingEvent /></ThemeProvider></SafeAreaProvider>;
-const press = async (name: string | RegExp) => { await act(async () => { fireEvent.press(screen.getByRole('button', { name })); }); };
+const press = async (name: string | RegExp) => { await act(async () => { await fireEvent.press(screen.getByRole('button', { name })); }); };
 const modal = () => within(screen.UNSAFE_getByType(Modal));
-const pressModal = async (name: string) => { await act(async () => { fireEvent.press(modal().getByRole('button', { name })); }); };
+const pressModal = async (name: string) => { await act(async () => { await fireEvent.press(modal().getByRole('button', { name })); }); };
 const reviewEvent = () => screen.UNSAFE_getAllByType(EventModal).find(item => item.props.event?.kind === 'confirmation')!.props.event;
 const absolute = (value: World) => value.date.year * 12 + value.date.month - 1;
 const acknowledge = (value: World) => resolveCommand(value, { type: 'acknowledge', resultId: value.pending!.id }, true);
@@ -125,7 +125,7 @@ function expectNoFutureWork(domain: Domain, initial: World, done: World) {
 test.each(domains)('genuine %s exit retains failed UI review, retries durably and stops its future work through an ordinary year', async domain => {
   const context = await setup(domain);
   try {
-    let view = render(frame(domain)); if (world().pending) { expect(world().pending!.kind).toBe('result'); await press('Continue'); }
+    let view = await render(frame(domain)); if (world().pending) { expect(world().pending!.kind).toBe('result'); await press('Continue'); }
     const initial = world(), before = context.rows(), canonical = encodeWorld(initial), action = exit(domain); expectRecordedBoundary(domain, initial); const unpack = jest.spyOn(checkpoints, 'unpackCheckpoint');
     await press(action.row); expect(modal().getByText(action.title)).toBeOnTheScreen(); await press('Never mind'); expect(world()).toEqual(initial); expect(context.rows()).toEqual(before);
     await press(action.row); const reviewed = reviewEvent(), expected = resolveCommand(initial, action.command, true), release = context.pauseNextSave();
@@ -133,8 +133,8 @@ test.each(domains)('genuine %s exit retains failed UI review, retries durably an
     await pressModal(action.confirm); await press('Never mind'); await act(async () => { screen.UNSAFE_getByType(Modal).props.onRequestClose(); }); expect(reviewEvent()).toBe(reviewed); expect(context.rows()).toEqual(before);
     await act(async () => { release(); }); await waitFor(() => expect(modal().getByRole('alert')).toHaveTextContent(/couldn't be saved/)); expect(screen.getAllByRole('alert')).toHaveLength(1); expect(reviewEvent()).toBe(reviewed); expect(modal().getByText(reviewed.body)).toBeOnTheScreen(); expect(context.rows()).toEqual(before); expect(encodeWorld(world())).toBe(canonical);
     context.sqlite.exec('DROP TRIGGER fail_career_exit'); await pressModal(action.confirm); expect(world()).toEqual(expected); expect(screen.queryByText(action.title)).toBeNull(); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore(); expect(context.sqlite.prepare('SELECT payload FROM backups WHERE life_id=?').get(initial.id)?.payload).toBe(before.lives.find(item => item.id === initial.id)!.payload); const savedRows = context.rows();
-    view.unmount(); await context.cold(); view = render(frame(domain)); expect(world()).toEqual(expected); expect(context.rows()).toEqual(savedRows); expect(screen.getByText(expected.pending!.title)).toBeOnTheScreen(); await press('Continue'); const done = acknowledge(expected); expect(world()).toEqual(done); expectExitPreserves(domain, initial, done);
-    const acknowledgedRows = context.rows(); await act(async () => { expect(await mockStore.getState().dispatch({ type: 'acknowledge', resultId: expected.pending!.id })).toBe(false); }); expect(world()).toEqual(done); expect(context.rows()).toEqual(acknowledgedRows); context.original(); view.unmount();
-    await completeYear(); expectNoFutureWork(domain, initial, done); context.original(); const final = world(), finalRows = context.rows(); await context.cold(); view = render(frame(domain)); expect(world()).toEqual(final); expect(context.rows()).toEqual(finalRows); expect(screen.queryByRole('button', { name: action.row })).toBeNull(); context.original(); view.unmount();
+    await view.unmount(); await context.cold(); view = await render(frame(domain)); expect(world()).toEqual(expected); expect(context.rows()).toEqual(savedRows); expect(screen.getByText(expected.pending!.title)).toBeOnTheScreen(); await press('Continue'); const done = acknowledge(expected); expect(world()).toEqual(done); expectExitPreserves(domain, initial, done);
+    const acknowledgedRows = context.rows(); await act(async () => { expect(await mockStore.getState().dispatch({ type: 'acknowledge', resultId: expected.pending!.id })).toBe(false); }); expect(world()).toEqual(done); expect(context.rows()).toEqual(acknowledgedRows); context.original(); await view.unmount();
+    await completeYear(); expectNoFutureWork(domain, initial, done); context.original(); const final = world(), finalRows = context.rows(); await context.cold(); view = await render(frame(domain)); expect(world()).toEqual(final); expect(context.rows()).toEqual(finalRows); expect(screen.queryByRole('button', { name: action.row })).toBeNull(); context.original(); await view.unmount();
   } finally { jest.restoreAllMocks(); context.close(); }
 });

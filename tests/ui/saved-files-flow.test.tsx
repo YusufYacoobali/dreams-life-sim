@@ -3,7 +3,7 @@ import { features } from '../../src/purchases/catalog';
 // This existing gameplay/save journey uses a licensed-player fixture.
 beforeEach(() => { purchases.setState({ ownership: Object.fromEntries(features.map(feature => [feature, true])) as Record<typeof features[number], boolean> }); });
 import React from 'react';
-import { act, fireEvent, render, screen, waitFor } from '@testing-library/react-native';
+import { act, fireEvent, render, screen, waitFor } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { createGameStore } from '../../src/state/gameStore';
 import { encodeWorld } from '../../src/game/model';
@@ -41,7 +41,7 @@ import { File } from 'expo-file-system';
 import SavedLives from '../../app/saved-lives';
 
 const frame = () => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 24, bottom: 48, left: 0, right: 0 } }}><ThemeProvider><SavedLives /></ThemeProvider></SafeAreaProvider>;
-const press = async (name: string | RegExp) => { await act(async () => { fireEvent.press(screen.getByRole('button', { name })); }); };
+const press = async (name: string | RegExp) => { await act(async () => { await fireEvent.press(screen.getByRole('button', { name })); }); };
 const exportButton = /^Export save file\./, shareButton = /^Share save file\./;
 const tables = () => Object.fromEntries(sqlite.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name").all().map(row => [row.name, sqlite.prepare('SELECT * FROM ' + row.name + ' ORDER BY 1,2').all()]));
 
@@ -56,30 +56,30 @@ beforeEach(async () => {
 afterEach(() => { sqlite.close(); });
 
 test('View Life Summary routes to a read-only saved life without selecting it or starting a file operation', async () => {
-  const before = tables(), world = mockStore.getState().world!; render(frame());
+  const before = tables(), world = mockStore.getState().world!; await render(frame());
   await press('View Riley Kelly life summary'); expect(router.push).toHaveBeenLastCalledWith({ pathname: '/saved-life/[id]', params: { id: world.id } });
   expect(mockStore.getState().world).toBe(world); expect(tables()).toEqual(before); expect(mockPickFile).not.toHaveBeenCalled(); expect(mockPickDirectory).not.toHaveBeenCalled(); expect(mockShare).not.toHaveBeenCalled();
 });
 
 test('the visible branch label survives a real previous-checkpoint recovery without reloading the list', async () => {
   mockStore = createGameStore({ premiumAccess: () => true,  repository: async () => mockRepository, date: () => ({ year: 2026, month: 10, day: 20 }), id: () => 'life_visible_recovered_branch' }); await mockStore.getState().bootstrap(); await mockStore.getState().restoreSnapshot('snapshot_r_31'); await mockStore.getState().dispatch({ type: 'advance' });
-  const branchId = mockStore.getState().world!.id, list = jest.spyOn(mockRepository, 'list'); render(frame());
+  const branchId = mockStore.getState().world!.id, list = jest.spyOn(mockRepository, 'list'); await render(frame());
   const label = /Time Machine branch · Riley Kelly, age 7 in 2033/; expect(screen.getByText(label)).toBeOnTheScreen();
   await act(async () => { expect(await mockStore.getState().recoverLife(branchId)).toBe(true); });
   expect(screen.getByText(label)).toBeOnTheScreen(); expect(mockStore.getState().world?.revision).toBe(31); expect(list).not.toHaveBeenCalled(); list.mockRestore();
 });
 
 test.each(['ERR_PICKER_CANCELLED', 'ERR_FILE_PICKING_CANCELLED'])('%s closes folder selection without an error, file or changed save', async code => {
-  const before = tables(); mockPickDirectory.mockRejectedValueOnce(Object.assign(new Error('Picker cancelled'), { code })); render(frame());
+  const before = tables(); mockPickDirectory.mockRejectedValueOnce(Object.assign(new Error('Picker cancelled'), { code })); await render(frame());
   await press(exportButton); await waitFor(() => expect(screen.getByRole('button', { name: exportButton })).toBeEnabled());
   expect(screen.queryByText(/cancelled|Saved Dreams-save/)).toBeNull(); expect(folder.createFile).not.toHaveBeenCalled(); expect(mockFiles.size).toBe(0); expect(tables()).toEqual(before);
 });
 
 test('folder export guards duplicate taps, preserves all nine original moments and writes a separate complete copy on each successful export', async () => {
   const before = tables(), world = mockStore.getState().world!; let finish!: (value: typeof folder) => void;
-  mockPickDirectory.mockReturnValueOnce(new Promise(resolve => { finish = resolve; })); render(frame());
+  mockPickDirectory.mockReturnValueOnce(new Promise(resolve => { finish = resolve; })); await render(frame());
   const submit = screen.getByRole('button', { name: exportButton });
-  act(() => { fireEvent.press(submit); fireEvent.press(submit); }); expect(mockPickDirectory).toHaveBeenCalledTimes(1);
+  await act(async () => { await fireEvent.press(submit); await fireEvent.press(submit); }); expect(mockPickDirectory).toHaveBeenCalledTimes(1);
   await act(async () => { finish(folder); }); await waitFor(() => expect(screen.getByText(/^Saved Dreams-save-/)).toBeOnTheScreen());
   const first = [...mockFiles.entries()][0]; expect(first[0]).toMatch(/^content:\/\/selected-folder\/Dreams-save-[\w.-]+\.dreams\.json$/);
   expect(decodeSave(first[1]).world).toEqual(world); expect(decodeSave(first[1]).snapshots).toEqual(archive.snapshots);
@@ -91,7 +91,7 @@ test('folder export guards duplicate taps, preserves all nine original moments a
 });
 
 test('a failed folder write removes its incomplete new file and can retry without modifying the live, backup, receipts or original moments', async () => {
-  const before = tables(); mockWriteError = new Error("Call to FileSystemFile.write rejected: Missing WRITE permission"); render(frame()); await press(exportButton);
+  const before = tables(); mockWriteError = new Error("Call to FileSystemFile.write rejected: Missing WRITE permission"); await render(frame()); await press(exportButton);
   await waitFor(() => expect(screen.getByText('Could not save a copy to that folder. Choose another folder and try again.')).toBeOnTheScreen());
   expect(screen.queryByText(/FileSystemFile|Missing WRITE/)).toBeNull();
   expect(mockDeleted).toHaveLength(1); expect(mockFiles.size).toBe(0); expect(screen.queryByText(/^Saved Dreams-save-/)).toBeNull(); expect(tables()).toEqual(before);
@@ -100,7 +100,7 @@ test('a failed folder write removes its incomplete new file and can retry withou
 });
 
 test('an unwritable destination reports the failure before creating a file, and sharing remains a separate valid-copy action', async () => {
-  const before = tables(); folder.createFile.mockImplementationOnce(() => { throw new Error('Folder is read-only'); }); render(frame());
+  const before = tables(); folder.createFile.mockImplementationOnce(() => { throw new Error('Folder is read-only'); }); await render(frame());
   await press(exportButton); await waitFor(() => expect(screen.getByText('Could not save a copy to that folder. Choose another folder and try again.')).toBeOnTheScreen()); expect(mockFiles.size).toBe(0);
   mockShareAvailable.mockResolvedValueOnce(false); await press(shareButton); await waitFor(() => expect(screen.getByText('File sharing is unavailable on this device. Save a copy to a folder instead.')).toBeOnTheScreen()); expect(mockShare).not.toHaveBeenCalled(); expect(mockFiles.size).toBe(0);
   let sharedText: string | undefined;
@@ -112,12 +112,12 @@ test('an unwritable destination reports the failure before creating a file, and 
 });
 
 test('sharing keeps its archive until the native sheet settles, cleans up success or failure, and retains folder exports and saves', async () => {
-  const before = tables(); render(frame());
+  const before = tables(); await render(frame());
   await press(exportButton);
   const folderCopy = [...mockFiles.entries()][0];
   let finish!: () => void;
   mockShare.mockImplementationOnce(() => new Promise<void>(resolve => { finish = resolve; }));
-  act(() => { fireEvent.press(screen.getByRole('button', { name: shareButton })); });
+  await act(async () => { await fireEvent.press(screen.getByRole('button', { name: shareButton })); });
   await waitFor(() => expect(mockShare).toHaveBeenCalledTimes(1));
   const sharedUri = mockShare.mock.calls[0][0] as string;
   expect(decodeSave(mockFiles.get(sharedUri)!).world).toEqual(mockStore.getState().world);
@@ -136,7 +136,7 @@ test('sharing keeps its archive until the native sheet settles, cleans up succes
 });
 
 test('native file import can cancel or reject invalid content, then previews and imports the genuine native birthday result while retaining the original reading life', async () => {
-  const before = tables(), original = mockStore.getState().world!; mockPickFile.mockResolvedValueOnce({ canceled: true, result: null }); render(frame());
+  const before = tables(), original = mockStore.getState().world!; mockPickFile.mockResolvedValueOnce({ canceled: true, result: null }); await render(frame());
   await press('Import a Save'); expect(tables()).toEqual(before);
   mockFiles.set('file:///picked/bad.json', '{broken'); mockPickFile.mockResolvedValueOnce({ canceled: false, result: new File('file:///picked/bad.json') });
   await press('Import a Save'); await waitFor(() => expect(screen.getByText('This file is not a supported, valid Dreams save. Your lives have not changed.')).toBeOnTheScreen()); expect(tables()).toEqual(before);

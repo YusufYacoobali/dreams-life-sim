@@ -1,5 +1,5 @@
 import React from 'react';
-import { act, fireEvent, render, screen, waitFor } from '@testing-library/react-native';
+import { act, fireEvent, render, screen, waitFor } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { DatabaseSync } from 'node:sqlite';
 import { mkdtempSync, rmSync } from 'node:fs';
@@ -20,7 +20,7 @@ import history from '../fixtures/v7-history-archive.json';
 let mockStore: ReturnType<typeof createGameStore>;
 jest.mock('../../src/state/useGame', () => ({ useGame: (selector: unknown) => require('zustand').useStore(mockStore, selector) }));
 const frame = () => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider><PendingEvent /></ThemeProvider></SafeAreaProvider>;
-const press = async (name: string) => { await act(async () => { fireEvent.press(screen.getByRole('button', { name })); }); };
+const press = async (name: string) => { await act(async () => { await fireEvent.press(screen.getByRole('button', { name })); }); };
 const world = () => mockStore.getState().world!;
 
 function legacyScene(queued: boolean) {
@@ -80,8 +80,8 @@ afterEach(() => { jest.restoreAllMocks(); });
 test.each([false, true])('an old bound criticism (queued=%s) retains exact text through opening, rollback, held retry and cold result', async queued => {
   const initial = legacyScene(queued), context = await setup(initial), factory = jest.spyOn(copy, 'publicCriticismCopy');
   try {
-    const openingRows = context.rows(); expect(Object.keys(openingRows)).toHaveLength(8); let view = render(frame()); expect(world()).toEqual(initial); expect(context.rows()).toEqual(openingRows);
-    view.unmount(); await context.cold(); view = render(frame()); expect(world()).toEqual(initial); expect(context.rows()).toEqual(openingRows);
+    const openingRows = context.rows(); expect(Object.keys(openingRows)).toHaveLength(8); let view = await render(frame()); expect(world()).toEqual(initial); expect(context.rows()).toEqual(openingRows);
+    await view.unmount(); await context.cold(); view = await render(frame()); expect(world()).toEqual(initial); expect(context.rows()).toEqual(openingRows);
     if (queued) { expect(screen.getByText('Earlier saved result')).toBeOnTheScreen(); const bound = world().deferred.find(row => row.event.kind === 'decision' && row.event.templateId === 'public-controversy')!.event; expect(bound).toMatchObject(legacyCriticism); await press('Continue'); }
     const before = world(), beforeRows = context.rows(), command = { type: 'choose' as const, eventId: before.pending!.id, choiceId: 'apologise' }, expected = resolveCommand(before, command, true), originalResult = before.deferred.find(row => row.event.kind === 'result')!.event;
     expect(screen.getByText(legacyCriticism.title)).toBeOnTheScreen(); expect(screen.getByText(legacyCriticism.body)).toBeOnTheScreen(); expect(before.controversies[0]).toMatchObject(legacyCriticism);
@@ -92,20 +92,20 @@ test.each([false, true])('an old bound criticism (queued=%s) retains exact text 
     for (const label of ['Acknowledge the harm and apologise', 'Explain what you meant', 'Let the argument run its course']) expect(screen.getByRole('button', { name: label })).toBeDisabled();
     await press('Acknowledge the harm and apologise'); expect(context.rows()).toEqual(beforeRows); await act(async () => { release(); }); await waitFor(() => expect(mockStore.getState().busy).toBe(false));
     expect(world()).toEqual(expected); expect(world().random).toEqual(before.random); expect(world().accounts).toEqual(before.accounts); expect(world().controversies[0]).toMatchObject(legacyCriticism); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore();
-    const savedRows = context.rows(); view.unmount(); await context.cold(); view = render(frame()); expect(world()).toEqual(expected); expect(context.rows()).toEqual(savedRows); expect(screen.getByText(expected.pending!.body)).toBeOnTheScreen();
+    const savedRows = context.rows(); await view.unmount(); await context.cold(); view = await render(frame()); expect(world()).toEqual(expected); expect(context.rows()).toEqual(savedRows); expect(screen.getByText(expected.pending!.body)).toBeOnTheScreen();
     const result = world().pending!; await press('Continue'); expect(world().pending).toEqual(originalResult); expect(screen.getByText(originalResult.body)).toBeOnTheScreen(); await press('Continue');
-    const done = world(), doneRows = context.rows(); await act(async () => { expect(await mockStore.getState().dispatch({ type: 'acknowledge', resultId: result.id })).toBe(false); }); expect(world()).toEqual(done); expect(context.rows()).toEqual(doneRows); expect(factory).not.toHaveBeenCalled(); context.original(); view.unmount();
+    const done = world(), doneRows = context.rows(); await act(async () => { expect(await mockStore.getState().dispatch({ type: 'acknowledge', resultId: result.id })).toBe(false); }); expect(world()).toEqual(done); expect(context.rows()).toEqual(doneRows); expect(factory).not.toHaveBeenCalled(); context.original(); await view.unmount();
   } finally { context.close(); }
 });
 
 test('a new criticism binds the same actual post and copy after failed publication, warm retry and a fresh cold connection', async () => {
   const initial = arrangedCriticismRoll(criticismProfile()), command = criticismPost(initial), expected = resolveCommand(initial, command, true), context = await setup(initial);
   try {
-    const beforeRows = context.rows(), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'); let view = render(frame());
+    const beforeRows = context.rows(), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'); let view = await render(frame());
     context.sqlite.exec("CREATE TRIGGER fail_criticism BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END"); await act(async () => { expect(await mockStore.getState().dispatch(command)).toBe(false); }); expect(world()).toEqual(initial); expect(context.rows()).toEqual(beforeRows); expect(screen.queryByText(expected.pending!.body)).toBeNull();
     context.sqlite.exec('DROP TRIGGER fail_criticism'); await act(async () => { expect(await mockStore.getState().dispatch(command)).toBe(true); }); expect(world()).toEqual(expected); expect(screen.getByText(expected.pending!.body)).toBeOnTheScreen(); expect(world().socialAccounts[0].totalPosts).toBe(1); expect(world().controversies).toHaveLength(1); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore();
-    const savedRows = context.rows(); view.unmount(); await context.cold(); view = render(frame()); expect(world()).toEqual(expected); expect(context.rows()).toEqual(savedRows); expect(screen.getByText(expected.pending!.body)).toBeOnTheScreen();
-    const choice = { type: 'choose' as const, eventId: expected.pending!.id, choiceId: 'ignore' }; await press('Give the comments absolutely nothing'); expect(world()).toEqual(resolveCommand(expected, choice, true)); context.original(); view.unmount();
+    const savedRows = context.rows(); await view.unmount(); await context.cold(); view = await render(frame()); expect(world()).toEqual(expected); expect(context.rows()).toEqual(savedRows); expect(screen.getByText(expected.pending!.body)).toBeOnTheScreen();
+    const choice = { type: 'choose' as const, eventId: expected.pending!.id, choiceId: 'ignore' }; await press('Give the comments absolutely nothing'); expect(world()).toEqual(resolveCommand(expected, choice, true)); context.original(); await view.unmount();
   } finally { context.close(); }
 });
 

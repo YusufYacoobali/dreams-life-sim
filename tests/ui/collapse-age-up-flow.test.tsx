@@ -5,7 +5,7 @@ import {
   render,
   screen,
   waitFor,
-} from '@testing-library/react-native';
+} from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { choiceUnavailable } from '../../src/game/choiceAvailability';
 import { resolveCommand } from '../../src/game/engine';
@@ -60,7 +60,7 @@ function frame() {
 }
 
 async function press(name: string) {
-  await act(async () => fireEvent.press(screen.getByRole('button', { name })));
+  await act(async () => await fireEvent.press(screen.getByRole('button', { name })));
   await waitFor(() => expect(mockStore.getState().busy).toBe(false));
   expect(mockStore.getState().error).toBeNull();
 }
@@ -136,7 +136,7 @@ test.each(['cult', 'business'] as const)(
       await mockStore.getState().bootstrap();
     };
     await boot();
-    let view = render(frame());
+    let view = await render(frame());
     const id =
         domain === 'cult'
           ? 'cult_collapse_' + initial.cults[0].id
@@ -172,9 +172,9 @@ test.each(['cult', 'business'] as const)(
     expect(screen.getByRole('button', { name: 'Continue' })).toBeEnabled();
     expect(await repository.load(collapsed.id)).toEqual(collapsed);
     const saved = encodeWorld(collapsed);
-    view.unmount();
+    await view.unmount();
     await boot();
-    view = render(frame());
+    view = await render(frame());
     expect(encodeWorld(mockStore.getState().world!)).toBe(saved);
     expect(screen.getByRole('header', { name: title })).toBeOnTheScreen();
     expect(screen.getByText(collapsed.pending!.body)).toBeOnTheScreen();
@@ -209,7 +209,7 @@ test.each(['cult', 'business'] as const)(
     expect(await repository.load(collapsed.id)).toEqual(
       mockStore.getState().world,
     );
-    view.unmount();
+    await view.unmount();
     sqlite.close();
   },
 );

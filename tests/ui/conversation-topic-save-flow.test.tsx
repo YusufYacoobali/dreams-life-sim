@@ -1,6 +1,6 @@
 import React from 'react';
 import { Modal } from 'react-native';
-import { act, fireEvent, render, screen, waitFor, within } from '@testing-library/react-native';
+import { act, fireEvent, render, screen, waitFor, within } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { createGameStore } from '../../src/state/gameStore';
 import { decodeWorld, fullName } from '../../src/game/model';
@@ -20,8 +20,8 @@ import Person from '../../app/(game)/person/[id]';
 
 const frame = () => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider><Person /><PendingEvent /></ThemeProvider></SafeAreaProvider>;
 const world = () => mockStore.getState().world!;
-const press = async (name: string | RegExp) => { await act(async () => { fireEvent.press(screen.getByRole('button', { name })); }); };
-const choose = async (name: RegExp) => { await act(async () => { fireEvent.press(screen.getByRole('radio', { name })); }); };
+const press = async (name: string | RegExp) => { await act(async () => { await fireEvent.press(screen.getByRole('button', { name })); }); };
+const choose = async (name: RegExp) => { await act(async () => { await fireEvent.press(screen.getByRole('radio', { name })); }); };
 const selection = () => screen.UNSAFE_getAllByType(EventModal).find(item => item.props.event?.kind === 'selection')!;
 
 async function setup() {
@@ -43,7 +43,7 @@ test('a genuine parent topic stays local until confirmed, retains its failed dra
   const context = await setup();
   try {
     const before = world(), payload = context.payload(), count = context.receipts(), dispatch = jest.spyOn(mockStore.getState(), 'dispatch');
-    const view = render(frame()); await press('Have a Conversation');
+    const view = await render(frame()); await press('Have a Conversation');
     expect(screen.getByText('Talk to ' + fullName(before.people[mockPersonId]))).toBeOnTheScreen();
     expect(screen.getAllByRole('radio')).toHaveLength(6);
     expect(screen.getByRole('radio', { name: /^Interests\b/ })).toBeDisabled();
@@ -59,10 +59,10 @@ test('a genuine parent topic stays local until confirmed, retains its failed dra
     expect(world()).toBe(before); expect(context.payload()).toBe(payload); expect(context.receipts()).toBe(count);
     context.sqlite.exec('DROP TRIGGER fail_conversation');
     const submit = selection().props.onChoose, cancel = selection().props.onCancel, back = screen.UNSAFE_getByType(Header).props.onBack, release = context.pause();
-    await act(async () => { fireEvent.press(screen.getByRole('button', { name: 'Have Conversation' })); void submit('family'); cancel(); back(); });
+    await act(async () => { await fireEvent.press(screen.getByRole('button', { name: 'Have Conversation' })); void submit('family'); cancel(); back(); });
     expect(mockStore.getState().busy).toBe(true); expect(screen.getAllByRole('button', { busy: true })).toHaveLength(1);
     expect(screen.getByRole('button', { name: 'Have Conversation' })).toBeDisabled(); expect(screen.getByRole('button', { name: 'Never mind' })).toBeDisabled();
-    fireEvent(screen.UNSAFE_getByType(Modal), 'requestClose'); expect(router.back).not.toHaveBeenCalled();
+    await fireEvent(screen.UNSAFE_getByType(Modal), 'requestClose'); expect(router.back).not.toHaveBeenCalled();
     expect(dispatch.mock.calls).toHaveLength(2); expect(context.payload()).toBe(payload);
     await act(async () => { release(); }); await waitFor(() => expect(mockStore.getState().busy).toBe(false));
     expect(dispatch).toHaveBeenLastCalledWith({ type: 'interact', action: 'talk', personId: 'person_parent1', topic: 'family' });
@@ -71,7 +71,7 @@ test('a genuine parent topic stays local until confirmed, retains its failed dra
     const result = world().pending; if (result?.kind !== 'result') throw new Error('Expected the actual conversation result');
     expect(screen.getByText(result.body)).toBeOnTheScreen(); expect(result.body).not.toContain('discussion about food');
     expect(world().accounts).toEqual(before.accounts); expect(world().ledger).toEqual(before.ledger);
-    await press('Continue'); expect(screen.getByRole('button', { name: /^Have a Conversation\./ })).toBeDisabled(); view.unmount();
+    await press('Continue'); expect(screen.getByRole('button', { name: /^Have a Conversation\./ })).toBeDisabled(); await view.unmount();
   } finally { context.sqlite.close(); }
 });
 
@@ -79,7 +79,7 @@ test('changing the actual person resets the topic review and makes the former pe
   const context = await setup();
   try {
     const before = world(), payload = context.payload(), count = context.receipts(), dispatch = jest.spyOn(mockStore.getState(), 'dispatch');
-    const view = render(frame());
+    const view = await render(frame());
     const expectProfile = () => {
       const person = before.people[mockPersonId];
       for (const [label, stat] of [['Happiness', 'happiness'], ['Looks', 'looks'], ['Smarts', 'smarts']] as const) {
@@ -89,13 +89,13 @@ test('changing the actual person resets the topic review and makes the former pe
       expect(screen.getByText('No current occupation')).toBeOnTheScreen();
     };
     expectProfile(); await press('Have a Conversation'); await choose(/^Family\b/); const oldSubmit = selection().props.onChoose;
-    mockPersonId = 'person_parent2'; view.rerender(frame()); expect(screen.queryByRole('button', { name: 'Have Conversation' })).toBeNull();
+    mockPersonId = 'person_parent2'; await view.rerender(frame()); expect(screen.queryByRole('button', { name: 'Have Conversation' })).toBeNull();
     expectProfile();
     await act(async () => { await oldSubmit('family'); }); expect(dispatch).not.toHaveBeenCalled();
     await press('Have a Conversation'); expect(screen.getByText('Talk to ' + fullName(before.people[mockPersonId]))).toBeOnTheScreen();
     expect(screen.getByRole('button', { name: 'Have Conversation' })).toBeDisabled(); await choose(/^How you’re feeling\b/);
     const cancelledSubmit = selection().props.onChoose; await press('Never mind'); await act(async () => { await cancelledSubmit('feelings'); });
     expect(dispatch).not.toHaveBeenCalled(); expect(world()).toBe(before); expect(context.payload()).toBe(payload); expect(context.receipts()).toBe(count);
-    expect(within(screen.UNSAFE_getAllByType(Header)[0]).getByRole('button', { name: 'Back' })).toBeEnabled(); view.unmount();
+    expect(within(screen.UNSAFE_getAllByType(Header)[0]).getByRole('button', { name: 'Back' })).toBeEnabled(); await view.unmount();
   } finally { context.sqlite.close(); }
 });

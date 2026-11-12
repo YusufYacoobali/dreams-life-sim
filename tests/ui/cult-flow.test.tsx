@@ -12,7 +12,7 @@ import {
   screen,
   waitFor,
   within,
-} from '@testing-library/react-native';
+} from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { DatabaseSync } from 'node:sqlite';
 import { mkdtempSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
@@ -97,7 +97,7 @@ const press = async (
   role: 'button' | 'radio' = 'button',
 ) => {
   await act(async () => {
-    fireEvent.press(screen.getByRole(role, { name }));
+    await fireEvent.press(screen.getByRole(role, { name }));
   });
 };
 const select = async (name: string | RegExp) => {
@@ -211,7 +211,7 @@ async function review(
   const current = world(),
     cult = activeCult(current)!;
   if (action === 'found') {
-    fireEvent.changeText(screen.getByLabelText('Cult name'), 'The Other Door');
+    await fireEvent.changeText(screen.getByLabelText('Cult name'), 'The Other Door');
     await press('Review Founding');
     const fee = cultFeeOptions(
       current.people[current.activePersonId].country,
@@ -377,7 +377,7 @@ test.each([
       const initial = world(),
         before = encodeWorld(initial),
         beforeRows = context.rows();
-      let view = render(frame(action === 'upgrade'));
+      let view = await render(frame(action === 'upgrade'));
       let terms = await review(action);
       expect(modal().getByText(terms.title)).toBeOnTheScreen();
       const cancelled =
@@ -409,9 +409,9 @@ test.each([
       expect(world()).toEqual(expected);
       expect(screen.queryByText(terms.title)).toBeNull();
       const savedRows = context.rows();
-      view.unmount();
+      await view.unmount();
       await context.cold();
-      view = render(frame(action === 'upgrade'));
+      view = await render(frame(action === 'upgrade'));
       expect(world()).toEqual(expected);
       expect(context.rows()).toEqual(savedRows);
       expect(screen.getByText(expected.pending!.title)).toBeOnTheScreen();
@@ -460,7 +460,7 @@ test.each([
       });
       expect(world()).toEqual(done);
       expect(context.rows()).toEqual(doneRows);
-      view.unmount();
+      await view.unmount();
     } finally {
       context.close();
     }
@@ -476,7 +476,7 @@ test.each(['found', 'replacement'] as const)(
     try {
       const initial = world(),
         beforeRows = context.rows(),
-        view = render(frame()),
+        view = await render(frame()),
         terms = await review(action),
         expected = resolveCommand(initial, terms.command, true),
         release = context.pauseNextSave();
@@ -528,7 +528,7 @@ test.each(['found', 'replacement'] as const)(
           initial.cults[0].members.length,
         );
       }
-      view.unmount();
+      await view.unmount();
     } finally {
       context.close();
     }
@@ -540,7 +540,7 @@ test.each(['recruit', 'replacement'] as const)(
   async (action) => {
     const context = await setup(foundCult());
     try {
-      const view = render(frame());
+      const view = await render(frame());
       await review(action);
       const old = screen.UNSAFE_getAllByType(EventModal)[0].props.onChoose;
       const other = foundCult(cultFixture('GB'));
@@ -566,7 +566,7 @@ test.each(['recruit', 'replacement'] as const)(
       });
       expect(screen.queryByText('Assign responsibility')).toBeNull();
       expect(context.rows()).toEqual(rows);
-      view.unmount();
+      await view.unmount();
     } finally {
       context.close();
     }
@@ -629,7 +629,7 @@ test('current deputy and responsibility remain disabled, while former members st
   const initial = repairedFormerMember(),
     context = await setup(initial);
   try {
-    const view = render(frame()),
+    const view = await render(frame()),
       before = encodeWorld(world()),
       rows = context.rows(),
       dispatch = jest.spyOn(mockStore.getState(), 'dispatch'),
@@ -691,7 +691,7 @@ test('current deputy and responsibility remain disabled, while former members st
     expect(context.rows()).toEqual(currentRows);
     expect(current).not.toBe(before);
     expect(currentRows).not.toEqual(rows);
-    view.unmount();
+    await view.unmount();
   } finally {
     jest.restoreAllMocks();
     context.close();
@@ -713,17 +713,17 @@ test.each([
   const context = await setup(initial);
   try {
     jest.spyOn(Native, 'useWindowDimensions').mockReturnValue({ width: dark ? 320 : 390, height: 844, scale: 2, fontScale: dark ? 1.4 : 1 });
-    let view = render(frame(false, dark));
+    let view = await render(frame(false, dark));
     await act(async () => { expect(await mockStore.getState().dispatch(command)).toBe(true); });
     expect(world()).toEqual(resolveCommand(initial, command, true));
     const body = world().pending!.body;
     expect(screen.getByText(displayText(body))).toBeOnTheScreen();
     capture('cult-voice-' + kind + '-result-' + (dark ? 'dark-large' : 'light'), view.toJSON());
-    const saved = encodeWorld(world()), rows = context.rows(); view.unmount();
-    await context.cold(); view = render(frame(false, dark));
+    const saved = encodeWorld(world()), rows = context.rows(); await view.unmount();
+    await context.cold(); view = await render(frame(false, dark));
     expect(encodeWorld(world())).toBe(saved); expect(context.rows()).toEqual(rows);
     expect(screen.getByText(displayText(body))).toBeOnTheScreen();
-    await press('Continue'); expect(world().pending).toBeNull(); view.unmount();
+    await press('Continue'); expect(world().pending).toBeNull(); await view.unmount();
   } finally { jest.restoreAllMocks(); context.close(); }
 });
 
@@ -739,7 +739,7 @@ test.each([false, true])(
         fontScale: dark ? 1.4 : 1,
       });
       const suffix = dark ? 'dark-large' : 'light';
-      let view = render(frame(false, dark));
+      let view = await render(frame(false, dark));
       const before = encodeWorld(world()),
         rows = context.rows();
       capture('cult-founding-' + suffix, view.toJSON());
@@ -783,13 +783,13 @@ test.each([false, true])(
         screen.getByRole('radio', { name: /^Borrowed Dreams/ }),
       ).toBeChecked();
       await act(async () => {
-        fireEvent.changeText(screen.getByLabelText('Search doctrines'), 'moon');
+        await fireEvent.changeText(screen.getByLabelText('Search doctrines'), 'moon');
       });
       expect(screen.getAllByRole('radio')).toHaveLength(2);
       capture('cult-belief-search-' + suffix, view.toJSON());
       await press(/^Lunar Intelligence/, 'radio');
       await act(async () => {
-        fireEvent.changeText(
+        await fireEvent.changeText(
           screen.getByLabelText('Search doctrines'),
           'no such doctrine',
         );
@@ -838,13 +838,13 @@ test.each([false, true])(
       await press('Never mind');
       await press(/^Manage Headquarters\./);
       expect(mockPush).toHaveBeenCalledWith('/cult/headquarters');
-      view.unmount();
-      view = render(frame(true, dark));
+      await view.unmount();
+      view = await render(frame(true, dark));
       capture('cult-headquarters-' + suffix, view.toJSON());
       expect(world()).toEqual(initial);
       expect(context.rows()).toEqual(rows);
       expect(accountFor(world()).cash).toBe(accountFor(initial).cash);
-      view.unmount();
+      await view.unmount();
     } finally {
       jest.restoreAllMocks();
       context.close();
@@ -869,7 +869,7 @@ test('stored annual reports show recorded loyalty and reputation changes with le
     await context.cold();
     const before = encodeWorld(world()),
       rows = context.rows(),
-      view = render(frame());
+      view = await render(frame());
     await press(/^Treasury\./);
     await select('Annual reports');
     expect(
@@ -895,7 +895,7 @@ test('stored annual reports show recorded loyalty and reputation changes with le
     await press('Close');
     expect(encodeWorld(world())).toBe(before);
     expect(context.rows()).toEqual(rows);
-    view.unmount();
+    await view.unmount();
   } finally {
     context.close();
   }
@@ -904,7 +904,7 @@ test('stored annual reports show recorded loyalty and reputation changes with le
 test('headquarters choices, navigation and upgrade reviews use their own feature art without changing the save', async () => {
   const context = await setup(cultFixture());
   try {
-    let view = render(frame());
+    let view = await render(frame());
     const beforeFounding = encodeWorld(world()), rows = context.rows();
     await press(/^Starting Headquarters\./);
     for (const row of cultHeadquarters) {
@@ -922,8 +922,8 @@ test('headquarters choices, navigation and upgrade reviews use their own feature
     const beforeManagement = encodeWorld(world());
     await press(/^Manage Headquarters\./);
     expect(mockPush).toHaveBeenCalledWith('/cult/headquarters');
-    view.unmount();
-    view = render(frame(true));
+    await view.unmount();
+    view = await render(frame(true));
     for (const row of cultHeadquarters) {
       const button = screen.getByRole('button', { name: new RegExp('^' + row.title + '\\.') }),
         expected = cultHeadquartersArt[row.id];
@@ -945,7 +945,7 @@ test('headquarters choices, navigation and upgrade reviews use their own feature
     }
     expect(encodeWorld(world())).toBe(beforeManagement);
     expect(context.rows()).toEqual(rows);
-    view.unmount();
+    await view.unmount();
   } finally { context.close(); }
 });
 
@@ -963,7 +963,7 @@ test.each([
     if (event?.kind !== 'decision') throw Error('Expected new cult writing');
     const choice = event.choices.find(row => row.id === choiceId)!;
     const suffix = dark ? 'dark-large' : 'light';
-    let view = render(frame(false, dark));
+    let view = await render(frame(false, dark));
     expect(screen.getByText(displayText(event.body))).toBeOnTheScreen();
     capture('cult-writing-' + id + '-decision-' + suffix, view.toJSON());
     await press(displayText(choice.label));
@@ -971,10 +971,10 @@ test.each([
     expect(screen.getByText(displayText(choice.resultBody))).toBeOnTheScreen();
     expect(screen.getByRole('button', { name: 'Continue' })).toBeOnTheScreen();
     capture('cult-writing-' + id + '-result-' + suffix, view.toJSON());
-    const saved = encodeWorld(world()), rows = context.rows(); view.unmount();
-    await context.cold(); view = render(frame(false, dark));
+    const saved = encodeWorld(world()), rows = context.rows(); await view.unmount();
+    await context.cold(); view = await render(frame(false, dark));
     expect(encodeWorld(world())).toBe(saved); expect(context.rows()).toEqual(rows);
     expect(screen.getByText(displayText(choice.resultBody))).toBeOnTheScreen();
-    await press('Continue'); expect(world().pending).toBeNull(); view.unmount();
+    await press('Continue'); expect(world().pending).toBeNull(); await view.unmount();
   } finally { jest.restoreAllMocks(); context.close(); }
 });

@@ -1,5 +1,5 @@
 import React from 'react';
-import { act, fireEvent, render, screen, waitFor } from '@testing-library/react-native';
+import { act, fireEvent, render, screen, waitFor } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { createGameStore } from '../../src/state/gameStore';
 import { decodeWorld } from '../../src/game/model';
@@ -19,13 +19,13 @@ test('native adoption confirmation creates one persistent child and restores tha
   let initial = decodeWorld(JSON.stringify(fixture)); if (!initial.pending) throw new Error('Expected marriage result'); initial = resolveCommand(initial, { type: 'acknowledge', resultId: initial.pending.id });
   await repository.create(initial); const deps = { repository: async () => repository, date: () => initial.date, id: () => 'life_unused' };
   mockStore = createGameStore(deps); await mockStore.getState().bootstrap();
-  const view = render(<SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider><Family /><PendingEvent /></ThemeProvider></SafeAreaProvider>);
-  fireEvent.press(screen.getByRole('button', { name: 'Review Adoption' }));
-  await act(async () => { fireEvent.press(screen.getByRole('button', { name: 'Adopt a Child' })); });
+  const view = await render(<SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider><Family /><PendingEvent /></ThemeProvider></SafeAreaProvider>);
+  await fireEvent.press(screen.getByRole('button', { name: 'Review Adoption' }));
+  await act(async () => { await fireEvent.press(screen.getByRole('button', { name: 'Adopt a Child' })); });
   await waitFor(() => expect(screen.getByText('Welcome to the family')).toBeOnTheScreen());
   const child = childrenOf(mockStore.getState().world!)[0]; expect(child).toBeDefined();
   const restarted = createGameStore(deps); await restarted.getState().bootstrap();
   expect(childrenOf(restarted.getState().world!)).toEqual([child]); expect(restarted.getState().world?.pending).toEqual(mockStore.getState().world?.pending);
-  await act(async () => { fireEvent.press(screen.getByRole('button', { name: 'Continue' })); });
-  expect(childrenOf((await repository.load(initial.id))!)).toEqual([child]); view.unmount(); sqlite.close();
+  await act(async () => { await fireEvent.press(screen.getByRole('button', { name: 'Continue' })); });
+  expect(childrenOf((await repository.load(initial.id))!)).toEqual([child]); await view.unmount(); sqlite.close();
 });

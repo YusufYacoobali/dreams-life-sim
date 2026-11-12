@@ -4,6 +4,8 @@ God Mode is a permanent purchase (`dreams.god_mode`), also included in Full Unlo
 
 ## Internal testing and build access
 
+`DREAMS_UNLOCK_ALL_TESTING=1` also grants the premium editor and Royal Family selection automatically in development/internal builds, without the reveal or saved toggle. It grants no purchase ownership and is always disabled in production/store builds. See [premium testing setup](MONETISATION.md#premium-testing-override). The older internal controls below remain separate.
+
 Development builds and explicitly configured internal builds retain the existing testing editor and playground. Open Settings and tap **App Preferences three times quickly** (at most 800ms between taps), then enable the saved testing toggle. The reveal resets each app session; prior edits and the toggle choice persist.
 
 `app.config.cjs` enables internal capability only with `EAS_BUILD_PROFILE=internal|preview|development`, `EAS_BUILD_DISTRIBUTION=internal` and `DREAMS_GOD_MODE_TESTING=1`. Development `__DEV__` access also remains. **Production/store builds disable the hidden testing bypass**, superseding the 25 October testing policy. A saved toggle or repeated taps cannot grant public paid ownership. The mini-game playground remains internal even for Full Unlock owners.

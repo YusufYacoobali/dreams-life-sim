@@ -1,6 +1,6 @@
 import React from 'react';
 import { BackHandler } from 'react-native';
-import { act, fireEvent, render, screen, waitFor } from '@testing-library/react-native';
+import { act, fireEvent, render, screen, waitFor } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
 import { createGameStore } from '../../src/state/gameStore';
@@ -29,7 +29,7 @@ import Activities from '../../app/(game)/(tabs)/activities';
 import Life from '../../app/(game)/(tabs)/life';
 import { PendingEvent } from '../../src/ui/PendingEvent';
 const frame = (child: React.ReactNode) => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider>{child}<PendingEvent /></ThemeProvider></SafeAreaProvider>;
-const press = async (name: string | RegExp) => { await act(async () => { fireEvent.press(screen.getByRole('button', { name })); }); };
+const press = async (name: string | RegExp) => { await act(async () => { await fireEvent.press(screen.getByRole('button', { name })); }); };
 
 test('a genuine newborn archive reaches age six, reviews actual parental costs and retries adoption, vet and monthly progression through real SQLite cold resumes', async () => {
   mockPetFocused = true; const back = jest.spyOn(BackHandler, 'addEventListener');
@@ -40,13 +40,13 @@ test('a genuine newborn archive reaches age six, reviews actual parental costs a
   const finish = async () => { let guard = 0; while ((world().pending || world().annual) && guard++ < 150) { const w = world(); await dispatch(w.pending?.kind === 'decision' ? { type: 'choose', eventId: w.pending.id, choiceId: w.pending.choices.find(item => !choiceUnavailable(w, item))!.id } : w.pending ? { type: 'acknowledge', resultId: w.pending.id } : { type: 'resume' }); } expect(guard).toBeLessThan(150); };
   await finish();
   const earlyWorld = world(), rows = () => Object.fromEntries(sqlite.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name").all().map(row => [row.name, sqlite.prepare('SELECT * FROM ' + row.name + ' ORDER BY 1,2').all()])), earlyRows = rows();
-  const earlyView = render(frame(<Pets />)); await press(/^Buddy\..*Meet and care for household pets from age six/);
+  const earlyView = await render(frame(<Pets />)); await press(/^Buddy\..*Meet and care for household pets from age six/);
   expect(screen.getByRole('header', { name: 'Adoption Details' })).toBeOnTheScreen(); expect(screen.getByText(/Adoption fee if accepted:/)).toBeOnTheScreen(); expect(screen.getByText(/Monthly food and basic care:/)).toBeOnTheScreen();
   expect(screen.getByRole('button', { name: 'Review Adoption' })).toBeDisabled(); await press('Review Adoption'); expect(screen.queryByRole('button', { name: 'Ask For This Adoption' })).toBeNull();
-  await press('Close Adoption Details'); expect(world()).toBe(earlyWorld); expect(rows()).toEqual(earlyRows); earlyView.unmount();
+  await press('Close Adoption Details'); expect(world()).toBe(earlyWorld); expect(rows()).toEqual(earlyRows); await earlyView.unmount();
   for (let year = 0; year < 5; year++) { await dispatch({ type: 'advance' }); await finish(); }
-  expect(world().date).toEqual({ year: 2032, month: 10, day: 19 }); const beforeBrowse = encodeWorld(world()), view = render(frame(<Relationships />));
-  await press('Household Pets'); expect(router.push).toHaveBeenCalledWith('/pets'); view.rerender(frame(<Activities />)); await press(/^Household Pets\./); expect(router.push).toHaveBeenCalledWith({ pathname: '/pets', params: { tab: 'activities' } }); view.rerender(frame(<Pets />)); expect(encodeWorld(world())).toBe(beforeBrowse);
+  expect(world().date).toEqual({ year: 2032, month: 10, day: 19 }); const beforeBrowse = encodeWorld(world()), view = await render(frame(<Relationships />));
+  await press('Household Pets'); expect(router.push).toHaveBeenCalledWith('/pets'); await view.rerender(frame(<Activities />)); await press(/^Household Pets\./); expect(router.push).toHaveBeenCalledWith({ pathname: '/pets', params: { tab: 'activities' } }); await view.rerender(frame(<Pets />)); expect(encodeWorld(world())).toBe(beforeBrowse);
   expect(screen.getByRole('button', { name: 'Buddy. Golden Retriever · 1 year' })).toBeOnTheScreen();
   expect(screen.getByRole('button', { name: 'Pip. Dwarf Rabbit · 6 months' })).toBeOnTheScreen();
   await press(/^Buddy\./); expect(screen.getByRole('header', { name: 'Adoption Details' })).toBeOnTheScreen();
@@ -55,28 +55,28 @@ test('a genuine newborn archive reaches age six, reviews actual parental costs a
   await press(/^Pip\./); const hardwareBack = back.mock.calls.at(-1)![1];
   await act(async () => { expect(hardwareBack({ type: 'hardwareBackPress', timeStamp: 0 })).toBe(true); }); expect(screen.getByText('Shelter Adoptions')).toBeOnTheScreen();
   await press(/^Pip\./); const removal = jest.spyOn(back.mock.results.at(-1)!.value, 'remove');
-  mockPetFocused = false; view.rerender(frame(<Pets />)); expect(removal).toHaveBeenCalledTimes(1);
-  mockPetFocused = true; view.rerender(frame(<Pets />)); await press('Close Adoption Details'); expect(encodeWorld(world())).toBe(beforeBrowse); expect(encodeWorld(await repository.load(world().id))).toBe(beforeBrowse);
-  await press(/^Buddy\./); fireEvent.changeText(screen.getByLabelText('Pet name'), '   '); expect(screen.getByRole('button', { name: 'Review Adoption' })).toBeDisabled();
+  mockPetFocused = false; await view.rerender(frame(<Pets />)); expect(removal).toHaveBeenCalledTimes(1);
+  mockPetFocused = true; await view.rerender(frame(<Pets />)); await press('Close Adoption Details'); expect(encodeWorld(world())).toBe(beforeBrowse); expect(encodeWorld(await repository.load(world().id))).toBe(beforeBrowse);
+  await press(/^Buddy\./); await fireEvent.changeText(screen.getByLabelText('Pet name'), '   '); expect(screen.getByRole('button', { name: 'Review Adoption' })).toBeDisabled();
   expect(screen.queryByText(/optional.*care|species, not a specific|name recorded/i)).toBeNull();
-  fireEvent.changeText(screen.getByLabelText('Pet name'), 'Biscuit'); await press('Review Adoption'); expect(screen.getByText('Responsible adult')).toBeOnTheScreen(); expect(screen.getByText('Adoption fee if accepted')).toBeOnTheScreen(); expect(screen.getByText('Monthly food and basic care')).toBeOnTheScreen();
+  await fireEvent.changeText(screen.getByLabelText('Pet name'), 'Biscuit'); await press('Review Adoption'); expect(screen.getByText('Responsible adult')).toBeOnTheScreen(); expect(screen.getByText('Adoption fee if accepted')).toBeOnTheScreen(); expect(screen.getByText('Monthly food and basic care')).toBeOnTheScreen();
   expect(screen.getByText('Extra monthly boarding if no carer')).toBeOnTheScreen(); expect(screen.getByText('Two unpaid months mean shelter rehoming')).toBeOnTheScreen();
   sqlite.exec("CREATE TRIGGER fail_pet_adoption BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
   await press('Ask For This Adoption'); await waitFor(() => expect(mockStore.getState().error).toMatch(/couldn't be saved/)); expect(encodeWorld(world())).toBe(beforeBrowse); expect(encodeWorld(await repository.load(world().id))).toBe(beforeBrowse);
   sqlite.exec('DROP TRIGGER fail_pet_adoption'); await press('Ask For This Adoption'); expect(world().petAdoptions[0]).toMatchObject({ accepted: true, roll: 47, chance: 86 }); expect(world().pets[0].name).toBe('Biscuit'); expect(world().ledger.filter(item => item.category === 'pet-adoption')).toHaveLength(1);
-  const adopted = encodeWorld(world()); await act(async () => { await cold(); }); view.rerender(frame(<Pets />)); expect(encodeWorld(world())).toBe(adopted); expect(screen.getByRole('header', { name: 'Welcome, Biscuit' })).toBeOnTheScreen(); await press('Continue');
-  await press(/^Biscuit\./); mockPetId = world().pets[0].id; expect(router.push).toHaveBeenCalledWith({ pathname: '/pet/[id]', params: { id: mockPetId } }); view.rerender(frame(<PetProfile />));
+  const adopted = encodeWorld(world()); await act(async () => { await cold(); }); await view.rerender(frame(<Pets />)); expect(encodeWorld(world())).toBe(adopted); expect(screen.getByRole('header', { name: 'Welcome, Biscuit' })).toBeOnTheScreen(); await press('Continue');
+  await press(/^Biscuit\./); mockPetId = world().pets[0].id; expect(router.push).toHaveBeenCalledWith({ pathname: '/pet/[id]', params: { id: mockPetId } }); await view.rerender(frame(<PetProfile />));
   const beforeVet = encodeWorld(world()); await press(/^Veterinary Visit\./); expect(screen.getByText('Paid by')).toBeOnTheScreen();
   sqlite.exec("CREATE TRIGGER fail_pet_vet BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
   await press('Visit The Vet'); await waitFor(() => expect(mockStore.getState().error).toMatch(/couldn't be saved/)); expect(encodeWorld(world())).toBe(beforeVet); expect(encodeWorld(await repository.load(world().id))).toBe(beforeVet);
-  sqlite.exec('DROP TRIGGER fail_pet_vet'); await press('Visit The Vet'); expect(world().pets[0].visits).toHaveLength(1); const treated = encodeWorld(world()); await act(async () => { await cold(); }); view.rerender(frame(<PetProfile />)); expect(encodeWorld(world())).toBe(treated); await press('Continue');
-  await press(/^Play Together/); expect(world().pets[0].bonds[world().activePersonId]).toBe(35); await press('Continue'); const beforeYear = encodeWorld(world()), predicted = resolveCommand(world(), { type: 'advance' }); expect(predicted.pets[0].periods.length).toBeGreaterThan(0); view.rerender(frame(<Life />));
+  sqlite.exec('DROP TRIGGER fail_pet_vet'); await press('Visit The Vet'); expect(world().pets[0].visits).toHaveLength(1); const treated = encodeWorld(world()); await act(async () => { await cold(); }); await view.rerender(frame(<PetProfile />)); expect(encodeWorld(world())).toBe(treated); await press('Continue');
+  await press(/^Play Together/); expect(world().pets[0].bonds[world().activePersonId]).toBe(35); await press('Continue'); const beforeYear = encodeWorld(world()), predicted = resolveCommand(world(), { type: 'advance' }); expect(predicted.pets[0].periods.length).toBeGreaterThan(0); await view.rerender(frame(<Life />));
   sqlite.exec("CREATE TRIGGER fail_pet_month BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
   await press('Age Up'); await waitFor(() => expect(mockStore.getState().error).toMatch(/couldn't be saved/)); expect(encodeWorld(world())).toBe(beforeYear); expect(encodeWorld(await repository.load(world().id))).toBe(beforeYear);
-  sqlite.exec('DROP TRIGGER fail_pet_month'); await press('Age Up'); expect(encodeWorld(world())).toBe(encodeWorld(predicted)); const interrupted = encodeWorld(world()); await act(async () => { await cold(); }); view.rerender(frame(<Life />)); expect(encodeWorld(world())).toBe(interrupted);
-  await act(async () => { await finish(); }); view.rerender(frame(<PetProfile />)); expect(world().pets[0].periods).toHaveLength(12); expect(world().ledger.filter(item => item.category === 'pet-care')).toHaveLength(12); expect(world().ledger.filter(item => item.category === 'pet-vet')).toHaveLength(1); expect(world().ledger.filter(item => item.category === 'pet-adoption')).toHaveLength(1); expect(world().pets[0].ownerId).toBe(world().petAdoptions[0].ownerId); expect(world().pets[0].status).toBe('active'); expect(world().annual).toBeNull();
-  const final = encodeWorld(world()); await act(async () => { await cold(); }); view.rerender(frame(<Pets />)); expect(encodeWorld(world())).toBe(final); expect(encodeWorld(await repository.load(world().id))).toBe(final);
-  view.unmount(); back.mockRestore(); sqlite.close();
+  sqlite.exec('DROP TRIGGER fail_pet_month'); await press('Age Up'); expect(encodeWorld(world())).toBe(encodeWorld(predicted)); const interrupted = encodeWorld(world()); await act(async () => { await cold(); }); await view.rerender(frame(<Life />)); expect(encodeWorld(world())).toBe(interrupted);
+  await act(async () => { await finish(); }); await view.rerender(frame(<PetProfile />)); expect(world().pets[0].periods).toHaveLength(12); expect(world().ledger.filter(item => item.category === 'pet-care')).toHaveLength(12); expect(world().ledger.filter(item => item.category === 'pet-vet')).toHaveLength(1); expect(world().ledger.filter(item => item.category === 'pet-adoption')).toHaveLength(1); expect(world().pets[0].ownerId).toBe(world().petAdoptions[0].ownerId); expect(world().pets[0].status).toBe('active'); expect(world().annual).toBeNull();
+  const final = encodeWorld(world()); await act(async () => { await cold(); }); await view.rerender(frame(<Pets />)); expect(encodeWorld(world())).toBe(final); expect(encodeWorld(await repository.load(world().id))).toBe(final);
+  await view.unmount(); back.mockRestore(); sqlite.close();
 }, 60000);
 
 test('a pet death popup saves once, retries failed acknowledgement and stays dismissed after a cold reload', async () => {
@@ -87,26 +87,26 @@ test('a pet death popup saves once, retries failed acknowledgement and stays dis
   initial=resolveCommand(initial,{type:'acknowledge',resultId:initial.pending!.id});
   initial.pets[0].health=1; initial.pets[0].illness='infection'; await repository.create(validateWorld(initial));
   const cold=async()=>{mockStore=createGameStore({repository:async()=>repository,date:()=>initial.date,id:()=>initial.id}); await mockStore.getState().bootstrap();};
-  await cold(); const world=()=>mockStore.getState().world!,view=render(frame(<Life/>));
+  await cold(); const world=()=>mockStore.getState().world!,view=await render(frame(<Life/>));
   await press('Age Up');
   expect(screen.getByRole('header',{name:'Goodbye, Biscuit'})).toBeOnTheScreen();
   expect(screen.getByText('Biscuit the dog died. You’ll miss your time together.')).toBeOnTheScreen();
   expect(world().pets[0].status).toBe('deceased');
   const memorial=encodeWorld(world()),payments=world().ledger.filter(item=>item.category==='pet-care').length;
-  await act(async()=>{await cold();}); view.rerender(frame(<Life/>));
+  await act(async()=>{await cold();}); await view.rerender(frame(<Life/>));
   expect(encodeWorld(world())).toBe(memorial); expect(screen.getAllByRole('header',{name:'Goodbye, Biscuit'})).toHaveLength(1);
   sqlite.exec("CREATE TRIGGER fail_pet_memorial BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
   await press('Continue'); await waitFor(()=>expect(mockStore.getState().error).toMatch(/couldn't be saved/));
   expect(encodeWorld(world())).toBe(memorial); expect(encodeWorld(await repository.load(initial.id))).toBe(memorial);
   sqlite.exec('DROP TRIGGER fail_pet_memorial'); await press('Continue');
   expect(screen.queryByRole('header',{name:'Goodbye, Biscuit'})).toBeNull();
-  const acknowledged=encodeWorld(world()); await act(async()=>{await cold();}); view.rerender(frame(<Life/>));
+  const acknowledged=encodeWorld(world()); await act(async()=>{await cold();}); await view.rerender(frame(<Life/>));
   expect(encodeWorld(world())).toBe(acknowledged); expect(screen.queryByRole('header',{name:'Goodbye, Biscuit'})).toBeNull();
   let guard=0; await act(async()=>{while((world().pending||world().annual)&&guard++<150){const w=world();const command:GameCommand=w.pending?.kind==='decision'?{type:'choose',eventId:w.pending.id,choiceId:w.pending.choices.find(item=>!choiceUnavailable(w,item))!.id}:w.pending?{type:'acknowledge',resultId:w.pending.id}:{type:'resume'};expect(await mockStore.getState().dispatch(command)).toBe(true);expect(world().pending?.title).not.toBe('Goodbye, Biscuit');}});
   expect(guard).toBeLessThan(150); expect(world().annual).toBeNull();
   expect(world().ledger.filter(item=>item.category==='pet-care')).toHaveLength(payments);
   expect(world().pets[0].periods).toHaveLength(1); expect(world().petAdoptions).toHaveLength(1);
-  view.unmount(); sqlite.close();
+  await view.unmount(); sqlite.close();
 });
 
 test('the pinned natural owner-loss checkpoint rolls back atomically, retries with the same care history and resumes cold without a second fee', async () => {
@@ -122,7 +122,7 @@ test('the pinned natural owner-loss checkpoint rolls back atomically, retries wi
   const drain = async () => { let guard = 0; while ((world().pending || world().annual) && guard++ < 150) if (!await manualVet()) expect(await mockStore.getState().dispatch(nextCommand())).toBe(true); expect(guard).toBeLessThan(150); };
   expect(world().revision).toBe(38); expect(world().pets).toHaveLength(1);
   const owner = world().people[world().pets[0].ownerId];
-  const view = render(frame(<Life />)); let failedLoss = false;
+  const view = await render(frame(<Life />)); let failedLoss = false;
   for (let guard = 0; guard < 300 && !failedLoss && !world().people[world().activePersonId].died; guard++) {
     let visited = false; if (!world().pending) await act(async () => { visited = await manualVet(); }); if (visited) continue;
     const command = nextCommand(), predicted = resolveCommand(world(), command);
@@ -133,10 +133,10 @@ test('the pinned natural owner-loss checkpoint rolls back atomically, retries wi
     const pending = world().pending;
     const label = command.type === 'advance' ? 'Age Up' : command.type === 'resume' ? 'Continue This Year' : command.type === 'acknowledge' ? 'Continue' : pending?.kind === 'decision' && command.type === 'choose' ? pending.choices.find(item => item.id === command.choiceId)!.label : '';
     expect(label).not.toBe(''); await press(label); await waitFor(() => expect(mockStore.getState().error).toMatch(/couldn't be saved/)); expect(encodeWorld(world())).toBe(before); expect(encodeWorld(await repository.load(world().id))).toBe(before); expect(world().pets[0].status).toBe('active');
-    sqlite.exec('DROP TRIGGER fail_pet_owner_loss'); await press(label); expect(encodeWorld(world())).toBe(encodeWorld(predicted)); expect(world().pets[0].status).toBe('rehomed'); const saved = encodeWorld(world()); await act(async () => { await cold(); }); view.rerender(frame(<Life />)); expect(encodeWorld(world())).toBe(saved);
+    sqlite.exec('DROP TRIGGER fail_pet_owner_loss'); await press(label); expect(encodeWorld(world())).toBe(encodeWorld(predicted)); expect(world().pets[0].status).toBe('rehomed'); const saved = encodeWorld(world()); await act(async () => { await cold(); }); await view.rerender(frame(<Life />)); expect(encodeWorld(world())).toBe(saved);
     expect(world().pets[0].ownerId).toBe(owner.id); expect(world().people[owner.id].died).not.toBeNull(); expect(world().ledger.filter(item => item.category === 'pet-care').length).toBeGreaterThanOrEqual(paymentsBefore);
     await act(async () => { await drain(); }); const paymentsAfter = world().ledger.filter(item => item.category === 'pet-care').length; expect(world().ledger.filter(item => item.category === 'pet-adoption')).toHaveLength(1); expect(new Set(world().pets[0].periods.map(item => item.paymentId)).size).toBe(world().pets[0].periods.length);
     await act(async () => { expect(await mockStore.getState().dispatch({ type: 'advance' })).toBe(true); await drain(); }); expect(world().ledger.filter(item => item.category === 'pet-care')).toHaveLength(paymentsAfter); expect(world().annual).toBeNull(); failedLoss = true;
   }
-  expect(failedLoss).toBe(true); view.unmount(); sqlite.close();
+  expect(failedLoss).toBe(true); await view.unmount(); sqlite.close();
 }, 90000);

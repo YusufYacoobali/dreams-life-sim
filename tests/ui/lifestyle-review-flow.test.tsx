@@ -1,6 +1,6 @@
 import React from 'react';
 import { Modal } from 'react-native';
-import { act, fireEvent, render, screen, waitFor, within } from '@testing-library/react-native';
+import { act, fireEvent, render, screen, waitFor, within } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { createGameStore } from '../../src/state/gameStore';
 import { SaveRepository } from '../../src/persistence/repository';
@@ -22,7 +22,7 @@ jest.mock('expo-router', () => ({ router: { back: jest.fn(), push: jest.fn(), na
 jest.mock('../../src/state/useGame', () => ({ useGame: (selector: unknown) => require('zustand').useStore(mockStore, selector) }));
 import Asset from '../../app/(game)/asset/[id]';
 const frame = () => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider><Asset /><PendingEvent /></ThemeProvider></SafeAreaProvider>;
-async function press(name: string | RegExp) { await act(async () => { fireEvent.press(screen.getByRole('button', { name })); }); }
+async function press(name: string | RegExp) { await act(async () => { await fireEvent.press(screen.getByRole('button', { name })); }); }
 test('an amenity review is read-only, cancellation spends nothing, SQLite failure retains the review and cold retry installs once', async () => {
     let initial = buyLifestyle(lifestyleFixture(), 'family-house');
     mockAssetId = initial.assets.at(-1)!.id;
@@ -33,7 +33,7 @@ test('an amenity review is read-only, cancellation spends nothing, SQLite failur
     const boot = async () => { mockStore = createGameStore({ repository: async () => new SaveRepository(driver), date: () => initial.date, id: () => 'unused' }); await mockStore.getState().bootstrap(); };
     try {
         await boot();
-        const before = encodeWorld(mockStore.getState().world!), view = render(frame());
+        const before = encodeWorld(mockStore.getState().world!), view = await render(frame());
         await press(/^Improve the Home/);
         await press(/^Music studio/);
         expect(encodeWorld(mockStore.getState().world!)).toBe(before);
@@ -52,9 +52,9 @@ test('an amenity review is read-only, cancellation spends nothing, SQLite failur
         expect(saved.assets.at(-1)!.propertyLife!.amenities.map(row => row.kind)).toEqual(['studio']);
         expect(saved.lifestyle!.records.filter(row => row.kind === 'amenity')).toHaveLength(1);
         await act(async () => { await boot(); });
-        view.rerender(frame());
+        await view.rerender(frame());
         expect(mockStore.getState().world!).toEqual(saved);
-        view.unmount();
+        await view.unmount();
     }
     finally {
         sqlite.close();
@@ -71,7 +71,7 @@ test('a genuine relocated life reviews and pays its licence in the residence cur
     await mockStore.getState().bootstrap();
     try {
         const fee = licenceFee(initial, 'road'), before = encodeWorld(initial);
-        const view = render(<SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider><LicenceControls /><PendingEvent /></ThemeProvider></SafeAreaProvider>);
+        const view = await render(<SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider><LicenceControls /><PendingEvent /></ThemeProvider></SafeAreaProvider>);
         await press(/^Driving Licence/);
         for (const question of licenceQuiz.road) await press(question.answers[question.correct]);
         await press('Review Test Submission');
@@ -85,7 +85,7 @@ test('a genuine relocated life reviews and pays its licence in the residence cur
         expect(saved.accounts.find(row => row.ownerId === saved.activePersonId && row.currency === 'USD')).toEqual(initial.accounts.find(row => row.ownerId === initial.activePersonId && row.currency === 'USD'));
         expect(saved.accounts.find(row => row.ownerId === saved.activePersonId && row.currency === 'JPY')!.cash).toBe(initial.accounts.find(row => row.ownerId === initial.activePersonId && row.currency === 'JPY')!.cash - fee);
         expect(await new SaveRepository(driver).load(saved.id)).toEqual(saved);
-        view.unmount();
+        await view.unmount();
     } finally { sqlite.close(); }
 });
 
@@ -100,7 +100,7 @@ test('a large-text story modal survives a failed save and shows actual effects w
     mockStore = createGameStore({ repository: async () => new SaveRepository(driver), date: () => initial.date, id: () => 'unused' });
     await mockStore.getState().bootstrap();
     const dimensions = jest.spyOn(require('react-native'), 'useWindowDimensions').mockReturnValue({ width: 320, height: 844, scale: 2, fontScale: 2 });
-    const before = encodeWorld(mockStore.getState().world!), view = render(frame());
+    const before = encodeWorld(mockStore.getState().world!), view = await render(frame());
     try {
         expect(encodeWorld(mockStore.getState().world!)).toBe(before);
         sqlite.exec("CREATE TRIGGER reject_polished_choice BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'polished choice storage failure'); END");
@@ -119,5 +119,5 @@ test('a large-text story modal survives a failed save and shows actual effects w
         expect(await new SaveRepository(driver).load(saved.id)).toEqual(saved);
         await press('Continue');
         expect(mockStore.getState().world!.journal).toEqual(saved.journal);
-    } finally { view.unmount(); dimensions.mockRestore(); sqlite.close(); }
+    } finally { await view.unmount(); dimensions.mockRestore(); sqlite.close(); }
 });

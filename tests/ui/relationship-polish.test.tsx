@@ -1,6 +1,6 @@
 import React from 'react';
 import * as Native from 'react-native';
-import { fireEvent, render, screen, within } from '@testing-library/react-native';
+import { fireEvent, render, screen, within } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
@@ -25,7 +25,7 @@ import { StatBar, StatTrack } from '../../src/ui/components';
 import { RelationshipRow, affectionColor } from '../../src/ui/RelationshipRow';
 import { lightColors } from '../../src/ui/theme';
 
-function capture(name: string, tree: ReturnType<ReturnType<typeof render>['toJSON']>) {
+function capture(name: string, tree: ReturnType<Awaited<ReturnType<typeof render>>['toJSON']>) {
   const directory = process.env.DREAMS_POLISH_CAPTURE_DIR;
   if (!directory) return;
   const clean = (node:any):any => Array.isArray(node) ? node.map(clean) : !node || typeof node !== 'object' ? node : ({
@@ -39,7 +39,7 @@ function capture(name: string, tree: ReturnType<ReturnType<typeof render>['toJSO
 
 afterEach(()=>jest.restoreAllMocks());
 
-test('production relationship and person screens remain read-only and export review trees', () => {
+test('production relationship and person screens remain read-only and export review trees', async () => {
   const initial = decodeSave(JSON.stringify(childArchive)).world;
   mockWorld = resolveCommand(initial,{type:'acknowledge',resultId:initial.pending!.id},true);
   const before = encodeWorld(mockWorld);
@@ -47,13 +47,13 @@ test('production relationship and person screens remain read-only and export rev
     const width = dark ? 320 : 390, fontScale = dark ? 1.4 : 1;
     jest.spyOn(require('react-native'),'useWindowDimensions').mockReturnValue({width,height:844,scale:2,fontScale});
     const frame = (child: React.ReactNode) => <SafeAreaProvider initialMetrics={{frame:{x:0,y:0,width,height:844},insets:{top:47,bottom:34,left:0,right:0}}}><ThemeProvider appearance={dark?'dark':'light'}>{child}</ThemeProvider></SafeAreaProvider>;
-    const view = render(frame(<Relationships />));
+    const view = await render(frame(<Relationships />));
     expect(screen.getByRole('header',{name:'Relationships'})).toBeOnTheScreen();
     capture('relationships-'+(dark?'dark-large':'light'),view.toJSON());
-    view.rerender(frame(<PersonProfile />));
+    await view.rerender(frame(<PersonProfile />));
     expect(screen.getByRole('header',{name:'Person Profile'})).toBeOnTheScreen();
     capture('person-'+(dark?'dark-large':'light'),view.toJSON());
-    view.unmount();jest.restoreAllMocks();
+    await view.unmount();jest.restoreAllMocks();
   }
   expect(encodeWorld(mockWorld)).toBe(before);
   expect(mockDispatch).not.toHaveBeenCalled();
@@ -68,10 +68,10 @@ test('affection tracks use red, amber and green at low, middling and strong bond
   expect(affectionColor(100,lightColors)).toBe(lightColors.green);
 });
 
-test('a relationship row keeps its portrait and affection beside the name, as one named action', () => {
+test('a relationship row keeps its portrait and affection beside the name, as one named action', async () => {
   mockWorld=decodeSave(JSON.stringify(childArchive)).world;
   const person=mockWorld.people.person_parent1, choose=jest.fn();
-  render(<ThemeProvider><RelationshipRow person={person} name="Ruby Kelly" role="Mother" age={42} strength={24} first last onPress={choose} /></ThemeProvider>);
+  await render(<ThemeProvider><RelationshipRow person={person} name="Ruby Kelly" role="Mother" age={42} strength={24} first last onPress={choose} /></ThemeProvider>);
   const row=screen.getByRole('button',{name:'Ruby Kelly. Mother · Age 42. Bond 24%'});
   expect(Native.StyleSheet.flatten(row.props.style).flexDirection).toBe('row');
   expect(screen.queryAllByRole('image')).toHaveLength(0);
@@ -79,12 +79,12 @@ test('a relationship row keeps its portrait and affection beside the name, as on
   const track=screen.UNSAFE_getByType(StatTrack);
   expect(track.props.color).toBe(lightColors.red);
   expect(within(row).getByText('Mother · Age 42')).toBeOnTheScreen();
-  fireEvent.press(row);expect(choose).toHaveBeenCalledTimes(1);
+  await fireEvent.press(row);expect(choose).toHaveBeenCalledTimes(1);
 });
 
-test('shared stat tracks are thicker and keep bounded accessible values at large text sizes', () => {
+test('shared stat tracks are thicker and keep bounded accessible values at large text sizes', async () => {
   jest.spyOn(require('react-native'),'useWindowDimensions').mockReturnValue({width:320,height:568,scale:2,fontScale:1.5});
-  render(<ThemeProvider appearance="dark"><StatBar label="Happiness" value={120} color={lightColors.green} icon={<Native.View />} /></ThemeProvider>);
+  await render(<ThemeProvider appearance="dark"><StatBar label="Happiness" value={120} color={lightColors.green} icon={<Native.View />} /></ThemeProvider>);
   expect(screen.getByRole('progressbar',{name:'Happiness'})).toHaveProp('accessibilityValue',{min:0,max:100,now:100});
   const track=screen.UNSAFE_getByType(StatTrack), nativeTrack=track.findAllByType(Native.View)[0];
   expect(Native.StyleSheet.flatten(nativeTrack.props.style).height).toBe(14);

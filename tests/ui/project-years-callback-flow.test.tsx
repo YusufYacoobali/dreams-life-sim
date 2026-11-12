@@ -1,5 +1,5 @@
 import React from 'react';
-import { act, fireEvent, render, screen, waitFor } from '@testing-library/react-native';
+import { act, fireEvent, render, screen, waitFor } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { DatabaseSync } from 'node:sqlite';
 import { mkdtempSync, rmSync } from 'node:fs';
@@ -22,7 +22,7 @@ let mockStore: ReturnType<typeof createGameStore>;
 jest.mock('../../src/state/useGame', () => ({ useGame: (selector: unknown) => require('zustand').useStore(mockStore, selector) }));
 const world = () => mockStore.getState().world!;
 const frame = () => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 24, bottom: 48, left: 0, right: 0 } }}><ThemeProvider><PendingEvent /></ThemeProvider></SafeAreaProvider>;
-const press = async (label: string) => { await act(async () => { fireEvent.press(screen.getByRole('button', { name: label })); }); };
+const press = async (label: string) => { await act(async () => { await fireEvent.press(screen.getByRole('button', { name: label })); }); };
 
 async function setup() {
   const directory = mkdtempSync(join(tmpdir(), 'dreams-project-recall-')), path = join(directory, 'dreams.db'), initial = arrangedProject();
@@ -48,14 +48,14 @@ async function setup() {
 }
 
 test('a real saved child resolves a project, lives two years, and saves the same-peer continuation once through rollback, warm retry and real cold reopens', async () => {
-  const context = await setup(); let view: ReturnType<typeof render> | undefined;
+  const context = await setup(); let view: Awaited<ReturnType<typeof render>> | undefined;
   const until = async (condition: () => boolean) => { for (let count = 0; !condition(); count++) { if (count >= 250) throw new Error('Actual callback continuation exceeded its command bound'); expect(await mockStore.getState().dispatch(ordinaryStoryCommand(world()))).toBe(true); } };
   const durable = async (choiceId: string) => {
     const initial = world(), event = initial.pending; if (event?.kind !== 'decision') throw new Error('Missing actual callback decision');
     const label = event.choices.find(choice => choice.id === choiceId)!.label, before = context.rows(), command: GameCommand = { type: 'choose', eventId: event.id, choiceId };
     const unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'), release = context.pause(), callback = screen.UNSAFE_getByType(EventModal).props.onChoose;
     context.sqlite.exec("CREATE TRIGGER fail_project_recall BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
-    await act(async () => { fireEvent.press(screen.getByRole('button', { name: label })); callback(choiceId); });
+    await act(async () => { await fireEvent.press(screen.getByRole('button', { name: label })); callback(choiceId); });
     expect(mockStore.getState().busy).toBe(true); expect(screen.getByRole('button', { name: label })).toBeDisabled(); expect(world()).toBe(initial); expect(context.rows()).toEqual(before);
     await act(async () => { release(); }); await waitFor(() => expect(screen.getByRole('alert')).toHaveTextContent(/couldn't be saved/));
     expect(screen.getAllByRole('alert')).toHaveLength(1); expect(world()).toBe(initial); expect(world().pending).toBe(event); expect(screen.getByText(event.body)).toBeOnTheScreen(); expect(context.rows()).toEqual(before);
@@ -63,27 +63,27 @@ test('a real saved child resolves a project, lives two years, and saves the same
     // Comparison is after the real committed retry; it never steers a scene, peer or outcome.
     const expected = resolveCommand(initial, command, true); expect(world()).toEqual(expected); expect(world().revision).toBe(initial.revision + 1); expect(world().random).toEqual(initial.random);
     expect(context.rows().receipts).toHaveLength(before.receipts.length + 1); expect(context.sqlite.prepare('SELECT payload FROM backups WHERE life_id=?').get(initial.id)?.payload).toBe(before.lives.find(row => row.id === initial.id)!.payload); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore();
-    const committed = context.rows(); view!.unmount(); await context.cold(); view = render(frame()); expect(world()).toEqual(expected); expect(context.rows()).toEqual(committed); expect(screen.getByText(expected.pending!.title)).toBeOnTheScreen(); context.original();
+    const committed = context.rows(); await view!.unmount(); await context.cold(); view = await render(frame()); expect(world()).toEqual(expected); expect(context.rows()).toEqual(committed); expect(screen.getByText(expected.pending!.title)).toBeOnTheScreen(); context.original();
     await press('Continue'); const acknowledged = world(), ackRows = context.rows();
     await act(async () => { expect(await mockStore.getState().dispatch({ type: 'acknowledge', resultId: expected.pending!.id })).toBe(false); }); expect(world()).toBe(acknowledged); expect(context.rows()).toEqual(ackRows);
     return expected;
   };
   try {
-    expect(Object.keys(context.rows())).toHaveLength(8); view = render(frame()); const origin = await durable('promise'), threadId = origin.storyThreads[0].id;
-    expect(origin.storyThreads[0].rememberProject).toBe(true); expect(origin.storyThreads[0]).not.toHaveProperty('projectRecall'); view.unmount(); view = undefined;
-    await until(() => world().pending?.id === threadId + '_due'); view = render(frame()); const short = await durable('leave-to-peer'), shortThread = short.storyThreads[0];
-    expect(shortThread.resolution).toBe('leave-to-peer'); expect(shortThread.projectRecall).toMatchObject({ status: 'scheduled', dueMonth: storyMonthNumber(shortThread.ended!) + 24, expiresMonth: storyMonthNumber(shortThread.ended!) + 26 }); view.unmount(); view = undefined;
+    expect(Object.keys(context.rows())).toHaveLength(8); view = await render(frame()); const origin = await durable('promise'), threadId = origin.storyThreads[0].id;
+    expect(origin.storyThreads[0].rememberProject).toBe(true); expect(origin.storyThreads[0]).not.toHaveProperty('projectRecall'); await view.unmount(); view = undefined;
+    await until(() => world().pending?.id === threadId + '_due'); view = await render(frame()); const short = await durable('leave-to-peer'), shortThread = short.storyThreads[0];
+    expect(shortThread.resolution).toBe('leave-to-peer'); expect(shortThread.projectRecall).toMatchObject({ status: 'scheduled', dueMonth: storyMonthNumber(shortThread.ended!) + 24, expiresMonth: storyMonthNumber(shortThread.ended!) + 26 }); await view.unmount(); view = undefined;
     await until(() => !world().annual && !world().pending); const between = world(), betweenRows = context.rows(); expect(storyMonthNumber(between.date) - storyMonthNumber(shortThread.ended!)).toBe(10); expect(between.storyThreads[0].projectRecall!.status).toBe('scheduled');
     await context.cold(); expect(world()).toEqual(between); expect(context.rows()).toEqual(betweenRows);
     await until(() => world().pending?.id === threadId + '_project_recall'); const offered = world(), event = offered.pending!;
     expect(storyMonthNumber(offered.date) - storyMonthNumber(shortThread.ended!)).toBe(24); expect(event.kind === 'decision' && event.personIds).toEqual([shortThread.personId, shortThread.peerId]); expect(event.body).toContain('you left your promised section blank');
     expect(event.body).toContain(offered.people[shortThread.peerId].firstName); const school = offered.people[offered.activePersonId].education, peer = relationFor(offered, shortThread.personId, shortThread.peerId)!;
-    view = render(frame()); const recalled = await durable('remember-project');
+    view = await render(frame()); const recalled = await durable('remember-project');
     expect(recalled.storyThreads[0]).toEqual({ ...offered.storyThreads[0], projectRecall: { ...offered.storyThreads[0].projectRecall!, status: 'resolved', resolution: 'remember-project', ended: recalled.date } });
     expect(recalled.people[recalled.activePersonId].education).toEqual(school); expect(recalled.people).toEqual(offered.people); expect(recalled.ledger).toEqual(offered.ledger); expect(recalled.accounts).toEqual(offered.accounts); expect(relationFor(recalled, shortThread.personId, shortThread.peerId)).toMatchObject({ strength: Math.min(100, peer.strength + 3), trust: Math.min(100, peer.trust + 2) });
-    view.unmount(); view = undefined; await until(() => !world().annual && !world().pending); const completed = world(), recorded = completed.storyThreads[0]; expect(recorded.projectRecall!.status).toBe('resolved');
+    await view.unmount(); view = undefined; await until(() => !world().annual && !world().pending); const completed = world(), recorded = completed.storyThreads[0]; expect(recorded.projectRecall!.status).toBe('resolved');
     expect(completed.journal.filter(row => row.id === threadId + '_project_recall_choice')).toHaveLength(1); expect(await mockStore.getState().dispatch({ type: 'advance' })).toBe(true); await until(() => !world().annual && !world().pending); expect(world().storyThreads.find(thread => thread.id === threadId)).toEqual(recorded);
     const final = world(), finalRows = context.rows(); await context.cold(); expect(world()).toEqual(final); expect(context.rows()).toEqual(finalRows); context.original();
     console.info('PROJECT_RECALL_OBSERVATION', JSON.stringify({ personId: recorded.personId, peerId: recorded.peerId, original: recorded.resolution, realElapsedMonths: 24, recall: recorded.projectRecall, finalRevision: final.revision }));
-  } finally { view?.unmount(); jest.restoreAllMocks(); context.close(); }
+  } finally { await view?.unmount(); jest.restoreAllMocks(); context.close(); }
 });

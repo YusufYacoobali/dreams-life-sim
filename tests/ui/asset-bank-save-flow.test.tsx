@@ -1,7 +1,7 @@
 import { displayText } from '../../src/ui/displayNumbers';
 import React from 'react';
 import { Modal } from 'react-native';
-import { act, fireEvent, render, screen, waitFor, within } from '@testing-library/react-native';
+import { act, fireEvent, render, screen, waitFor, within } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { DatabaseSync } from 'node:sqlite';
 import { mkdtempSync, rmSync } from 'node:fs';
@@ -34,10 +34,10 @@ type Kind = 'listing' | 'refinance' | 'sale' | 'borrow' | 'repay' | 'exchange' |
 const kinds: Kind[] = ['listing', 'refinance', 'sale', 'borrow', 'repay', 'exchange', 'buy', 'sell'];
 const world = () => mockStore.getState().world!;
 const frame = (kind: Kind) => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider>{['listing', 'refinance', 'sale'].includes(kind) ? <Asset /> : ['borrow', 'repay', 'exchange'].includes(kind) ? <Bank /> : <Investment />}<PendingEvent /></ThemeProvider></SafeAreaProvider>;
-const press = async (name: string | RegExp) => { await act(async () => { fireEvent.press(screen.getByRole('button', { name })); }); };
+const press = async (name: string | RegExp) => { await act(async () => { await fireEvent.press(screen.getByRole('button', { name })); }); };
 const modal = () => within(screen.UNSAFE_getByType(Modal));
-const choose = async (name: string) => { await act(async () => { fireEvent.press(screen.getByRole('radio', { name })); }); };
-const edit = (name: string, value: string) => fireEvent.changeText(screen.getByLabelText(name), value);
+const choose = async (name: string) => { await act(async () => { await fireEvent.press(screen.getByRole('radio', { name })); }); };
+const edit = async (name: string, value: string) => await fireEvent.changeText(screen.getByLabelText(name), value);
 const money = (value: bigint, currency = accountFor(world()).currency) => displayText(formatMoney({ minor: value, currency }));
 const decimal = (value: bigint, currency: Currency) => { const digits = currencyDigits[currency], scale = 10n ** BigInt(digits); return (value / scale).toString() + (digits ? '.' + (value % scale).toString().padStart(digits, '0') : ''); };
 const acknowledge = (initial: World) => resolveCommand(initial, { type: 'acknowledge', resultId: initial.pending!.id }, true);
@@ -87,12 +87,12 @@ async function openReview(kind: Kind): Promise<Review> {
   const current = world(), account = accountFor(current), asset = current.assets.find(item => item.id === mockRouteId)!;
   if (kind === 'listing') {
     const amount = asset.value + 12345n, value = decimal(amount, asset.currency);
-    await press(/^Sell Property\./); edit('Asking price', value); await press('Review Listing');
+    await press(/^Sell Property\./); await edit('Asking price', value); await press('Review Listing');
     return { command: { type: 'list-property', assetId: asset.id, askingPrice: amount }, title: 'List at this price?', confirm: 'Confirm', visibleAmounts: [money(amount, asset.currency)], draft: ['Asking price', value] };
   }
   if (kind === 'refinance') {
     const loan = current.liabilities.find(item => item.id === asset.mortgageId)!, amount = loan.principal - 12345n, value = decimal(amount, asset.currency);
-    await press(/^Refinance\./); edit('New mortgage principal', value); await press(/^New term\./); await choose('20 years'); await press('Choose');
+    await press(/^Refinance\./); await edit('New mortgage principal', value); await press(/^New term\./); await choose('20 years'); await press('Choose');
     expect(screen.queryByRole('button', { name: 'Choose' })).toBeNull(); await press('Review Refinancing');
     return { command: { type: 'refinance', assetId: asset.id, principal: amount, termMonths: 240 }, title: 'Refinance this mortgage?', confirm: 'Confirm', visibleAmounts: [money(amount, asset.currency), money(refinanceFee(amount), asset.currency), money(mortgagePayment(amount, mortgageInterestBps(current), 240), asset.currency)], draft: ['New mortgage principal', value] };
   }
@@ -105,15 +105,15 @@ async function openReview(kind: Kind): Promise<Review> {
     if (kind === 'repay') {
       const debt = current.liabilities.find(item => item.ownerId === current.activePersonId && item.kind === 'personal' && item.principal > 0n)!, label = 'Repayment amount in ' + debt.currency;
       if (!screen.queryByLabelText(label)) await press(/^Personal debt\./);
-      edit(label, value); await press('Review Repayment');
+      await edit(label, value); await press('Review Repayment');
       return { command: { type: 'repay', liabilityId: debt.id, amount }, title: 'Make this repayment?', confirm: 'Repay', visibleAmounts: [money(amount)], draft: [label, value] };
     }
-    edit('Amount in ' + account.currency, value);
+    await edit('Amount in ' + account.currency, value);
     if (kind === 'borrow') { await press('Review Personal Loan'); return { command: { type: 'borrow', amount }, title: 'Take out this loan?', confirm: 'Accept Loan', visibleAmounts: [money(amount)], draft: ['Amount in ' + account.currency, value] }; }
     const to = account.currency === 'USD' ? 'EUR' : 'USD', quote = exchangeQuote(current, amount, account.currency, to); await press('Review Exchange');
     return { command: { type: 'exchange', from: account.currency, to, amount, quotedNet: quote.net }, title: 'Exchange currencies?', confirm: 'Exchange', visibleAmounts: [money(amount), money(quote.fee, to), money(quote.net, to)], draft: ['Amount in ' + account.currency, value] };
   }
-  const quantity = 125001n, quote = investmentQuote(current, 'ORBIT', quantity); await choose(kind === 'buy' ? 'Buy' : 'Sell'); edit('Trade quantity', '0.125001');
+  const quantity = 125001n, quote = investmentQuote(current, 'ORBIT', quantity); await choose(kind === 'buy' ? 'Buy' : 'Sell'); await edit('Trade quantity', '0.125001');
   expect(screen.getByText('Trading fee: ' + money(quote.fee))).toBeOnTheScreen();
   expect(screen.getByText((kind === 'buy' ? 'Cash paid: ' : 'Net proceeds: ') + money(kind === 'buy' ? quote.buyCost : quote.sellProceeds))).toBeOnTheScreen();
   await press('Review Trade');
@@ -129,7 +129,7 @@ test.each(kinds)('%s preview/cancel saves nothing; failed commit retains exact t
   const context = await setup(prepare(kind), kind);
   try {
     const initial = world(), before = encodeWorld(initial), beforeRows = context.rows(), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint');
-    let view = render(frame(kind)); let review = await openReview(kind); expectReview(review);
+    let view = await render(frame(kind)); let review = await openReview(kind); expectReview(review);
     const cancelledRepayment = kind === 'repay' ? screen.UNSAFE_getByType(EventModal).props.onChoose : null;
     await press('Never mind');
     if (cancelledRepayment) await act(async () => { await cancelledRepayment('confirm'); });
@@ -140,18 +140,18 @@ test.each(kinds)('%s preview/cancel saves nothing; failed commit retains exact t
     expectReview(review); expect(modal().getByRole('alert')).toHaveProp('accessibilityLiveRegion', 'polite'); expect(encodeWorld(world())).toBe(before); expect(context.rows()).toEqual(beforeRows);
     context.sqlite.exec('DROP TRIGGER fail_financial_ui'); await press(review.confirm);
     expect(world()).toEqual(expected); expect(screen.queryByText(review.title)).toBeNull(); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore();
-    const savedRows = context.rows(); view.unmount(); await context.cold(); view = render(frame(kind));
+    const savedRows = context.rows(); await view.unmount(); await context.cold(); view = await render(frame(kind));
     expect(world()).toEqual(expected); expect(context.rows()).toEqual(savedRows); expect(screen.getByText(expected.pending!.title)).toBeOnTheScreen();
     await press('Continue'); const done = acknowledge(expected); expect(world()).toEqual(done); expect(world().accounts).toEqual(expected.accounts); expect(world().assets).toEqual(expected.assets); expect(world().liabilities).toEqual(expected.liabilities); expect(world().holdings).toEqual(expected.holdings); expect(world().ledger).toEqual(expected.ledger); expect(world().random).toEqual(expected.random);
     const doneRows = context.rows(); await act(async () => { expect(await mockStore.getState().dispatch({ type: 'acknowledge', resultId: expected.pending!.id })).toBe(false); });
-    expect(world()).toEqual(done); expect(context.rows()).toEqual(doneRows); view.unmount();
+    expect(world()).toEqual(done); expect(context.rows()).toEqual(doneRows); await view.unmount();
   } finally { jest.restoreAllMocks(); context.close(); }
 });
 
 test.each(['refinance', 'repay', 'sell'] as Kind[])('%s save disables mutation inputs and ignores duplicate confirm/cancel/Android Back', async kind => {
   const context = await setup(prepare(kind), kind);
   try {
-    const initial = world(), beforeRows = context.rows(), view = render(frame(kind)), review = await openReview(kind), expected = resolveCommand(initial, review.command, true);
+    const initial = world(), beforeRows = context.rows(), view = await render(frame(kind)), review = await openReview(kind), expected = resolveCommand(initial, review.command, true);
     const release = context.pauseNextSave(); await press(review.confirm); expect(mockStore.getState().busy).toBe(true);
     expect(screen.getByLabelText(review.draft![0])).toBeDisabled(); expect(modal().getByRole('button', { name: review.confirm })).toHaveProp('accessibilityState', { disabled: true, busy: true });
     const disabled = kind === 'refinance' ? [/^Refinance\./, /^New term\./, 'Review Refinancing'] : kind === 'repay' ? ['Review Repayment', 'Cancel Repayment', 'Back'] : ['Buy', 'Sell', 'Review Trade'];
@@ -164,7 +164,7 @@ test.each(['refinance', 'repay', 'sell'] as Kind[])('%s save disables mutation i
     await press(review.confirm); await press('Never mind'); await act(async () => { screen.UNSAFE_getByType(Modal).props.onRequestClose(); });
     expectReview(review); expect(world()).toEqual(initial); expect(context.rows()).toEqual(beforeRows);
     await act(async () => { release(); }); await waitFor(() => expect(mockStore.getState().busy).toBe(false));
-    expect(world()).toEqual(expected); expect(world().revision).toBe(initial.revision + 1); view.unmount();
+    expect(world()).toEqual(expected); expect(world().revision).toBe(initial.revision + 1); await view.unmount();
   } finally { jest.restoreAllMocks(); context.close(); }
 });
 
@@ -172,13 +172,13 @@ test('changing actual asset or instrument identity drops its previous local form
   let initial = purchase(funded(), 'studio', 'mortgage'); initial = purchase(initial, 'apartment', 'cash');
   const context = await setup(initial, 'refinance');
   try {
-    const beforeRows = context.rows(), before = encodeWorld(world()), view = render(frame('refinance'));
+    const beforeRows = context.rows(), before = encodeWorld(world()), view = await render(frame('refinance'));
     await openReview('refinance'); const firstId = mockRouteId, other = world().assets.find(item => item.id !== firstId && item.ownerId === initial.activePersonId)!;
-    mockRouteId = other.id; view.rerender(frame('refinance')); expect(screen.queryByText('Refinance this mortgage?')).toBeNull(); expect(screen.queryByLabelText('New mortgage principal')).toBeNull();
-    mockRouteId = firstId; view.rerender(frame('refinance')); await press(/^Refinance\./); expect(screen.getByLabelText('New mortgage principal')).toHaveProp('value', ''); expect(screen.getByRole('button', { name: 'New term. 30 years' })).toBeOnTheScreen();
-    view.rerender(frame('buy')); mockRouteId = 'ORBIT'; view.rerender(frame('buy')); edit('Trade quantity', '0.125001'); await press('Review Trade'); expect(screen.getByText('Buy ORBIT?')).toBeOnTheScreen();
-    mockRouteId = 'GROVE'; view.rerender(frame('buy')); expect(screen.queryByText('Buy ORBIT?')).toBeNull(); expect(screen.getByLabelText('Trade quantity')).toHaveProp('value', '1'); await press('Review Trade'); expect(screen.getByText('Buy GROVE?')).toBeOnTheScreen(); await press('Never mind');
-    expect(encodeWorld(world())).toBe(before); expect(context.rows()).toEqual(beforeRows); view.unmount();
+    mockRouteId = other.id; await view.rerender(frame('refinance')); expect(screen.queryByText('Refinance this mortgage?')).toBeNull(); expect(screen.queryByLabelText('New mortgage principal')).toBeNull();
+    mockRouteId = firstId; await view.rerender(frame('refinance')); await press(/^Refinance\./); expect(screen.getByLabelText('New mortgage principal')).toHaveProp('value', ''); expect(screen.getByRole('button', { name: 'New term. 30 years' })).toBeOnTheScreen();
+    await view.rerender(frame('buy')); mockRouteId = 'ORBIT'; await view.rerender(frame('buy')); await edit('Trade quantity', '0.125001'); await press('Review Trade'); expect(screen.getByText('Buy ORBIT?')).toBeOnTheScreen();
+    mockRouteId = 'GROVE'; await view.rerender(frame('buy')); expect(screen.queryByText('Buy ORBIT?')).toBeNull(); expect(screen.getByLabelText('Trade quantity')).toHaveProp('value', '1'); await press('Review Trade'); expect(screen.getByText('Buy GROVE?')).toBeOnTheScreen(); await press('Never mind');
+    expect(encodeWorld(world())).toBe(before); expect(context.rows()).toEqual(beforeRows); await view.unmount();
   } finally { context.close(); }
 });
 
@@ -189,18 +189,18 @@ test('currency choices and invalid repayment reasons are read-only and preserve 
   initial = apply(initial, { type: 'buy-investment', instrumentId: 'GROVE', quantity, quotedMinor: investmentQuote(initial, 'GROVE', quantity).value });
   const context = await setup(initial, 'repay');
   try {
-    const beforeRows = context.rows(), before = encodeWorld(world()), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'), view = render(frame('repay'));
+    const beforeRows = context.rows(), before = encodeWorld(world()), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'), view = await render(frame('repay'));
     expect(screen.getByLabelText('Amount in USD')).toHaveProp('value', ''); await press(/^Personal debt\./);
     expect(screen.getByRole('header', { name: 'Repay personal debt' })).toBeOnTheScreen();
     expect(screen.getByLabelText('Repayment amount in USD')).toHaveProp('value', ''); expect(screen.queryByLabelText('Amount in USD')).toBeNull();
     await press('Review Repayment'); expect(screen.getByRole('alert')).toHaveTextContent('Enter a positive amount in USD.');
-    edit('Repayment amount in USD', '1000.01'); await press('Review Repayment'); expect(screen.getByRole('alert')).toHaveTextContent('The repayment exceeds the outstanding principal.'); expect(screen.queryByText('Make this repayment?')).toBeNull();
-    expect(availableCash(accountFor(world()))).toBeLessThan(100000n); edit('Repayment amount in USD', '1000'); await press('Review Repayment'); expect(screen.getByRole('alert')).toHaveTextContent('Your available balance cannot cover this repayment.'); expect(screen.queryByText('Make this repayment?')).toBeNull();
+    await edit('Repayment amount in USD', '1000.01'); await press('Review Repayment'); expect(screen.getByRole('alert')).toHaveTextContent('The repayment exceeds the outstanding principal.'); expect(screen.queryByText('Make this repayment?')).toBeNull();
+    expect(availableCash(accountFor(world()))).toBeLessThan(100000n); await edit('Repayment amount in USD', '1000'); await press('Review Repayment'); expect(screen.getByRole('alert')).toHaveTextContent('Your available balance cannot cover this repayment.'); expect(screen.queryByText('Make this repayment?')).toBeNull();
     await press('Cancel Repayment'); expect(screen.getByLabelText('Amount in USD')).toHaveProp('value', ''); expect(screen.queryByRole('alert')).toBeNull();
     await press(/^Currency Account\./); await choose('EUR'); await press('Choose'); expect(screen.queryByRole('button', { name: 'Choose' })).toBeNull(); expect(screen.getByLabelText('Amount in EUR')).toBeOnTheScreen(); expect(screen.queryByRole('alert')).toBeNull();
     expect(screen.getByRole('button', { name: /Personal debt\..*Repay from an account in USD/ })).toBeDisabled();
     await press(/^Exchange To\./); await choose('JPY'); await press('Choose'); expect(screen.getByRole('button', { name: 'Exchange To. JPY' })).toBeOnTheScreen();
-    expect(encodeWorld(world())).toBe(before); expect(context.rows()).toEqual(beforeRows); expect(unpack).not.toHaveBeenCalled(); view.unmount();
+    expect(encodeWorld(world())).toBe(before); expect(context.rows()).toEqual(beforeRows); expect(unpack).not.toHaveBeenCalled(); await view.unmount();
   } finally { jest.restoreAllMocks(); context.close(); }
 });
 
@@ -208,13 +208,13 @@ test('currency choices and invalid repayment reasons are read-only and preserve 
 test('reviewing identical mortgage terms does not charge or save, while an actual new term remains reviewable', async () => {
   const context = await setup(prepare('refinance'), 'refinance');
   try {
-    const initial = world(), beforeRows = context.rows(), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'), view = render(frame('refinance'));
+    const initial = world(), beforeRows = context.rows(), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'), view = await render(frame('refinance'));
     await press(/^Refinance\./); await press('Review Refinancing');
     expect(screen.getByRole('alert')).toHaveTextContent('These are already your current mortgage terms.'); expect(screen.queryByText('Refinance this mortgage?')).toBeNull();
     const asset = initial.assets.find(item => item.id === mockRouteId)!, loan = initial.liabilities.find(item => item.id === asset.mortgageId)!;
-    edit('New mortgage principal', decimal(loan.principal, asset.currency)); await press('Review Refinancing'); expect(screen.queryByText('Refinance this mortgage?')).toBeNull();
+    await edit('New mortgage principal', decimal(loan.principal, asset.currency)); await press('Review Refinancing'); expect(screen.queryByText('Refinance this mortgage?')).toBeNull();
     await press(/^New term\./); await choose('20 years'); await press('Choose'); expect(screen.queryByRole('alert')).toBeNull(); await press('Review Refinancing'); expect(screen.getByText('Refinance this mortgage?')).toBeOnTheScreen(); await press('Never mind');
-    expect(world()).toEqual(initial); expect(context.rows()).toEqual(beforeRows); expect(unpack).not.toHaveBeenCalled(); view.unmount();
+    expect(world()).toEqual(initial); expect(context.rows()).toEqual(beforeRows); expect(unpack).not.toHaveBeenCalled(); await view.unmount();
   } finally { jest.restoreAllMocks(); context.close(); }
 });
 
@@ -222,10 +222,10 @@ test('reviewing identical mortgage terms does not charge or save, while an actua
 test('switching trade side clears the previous quantity reason without saving or silently changing the entered amount', async () => {
   const context = await setup(prepare('sell'), 'sell');
   try {
-    const initial = world(), beforeRows = context.rows(), view = render(frame('sell'));
-    await choose('Sell'); expect(screen.getByRole('radio', { name: 'Sell', checked: true })).toBeOnTheScreen(); edit('Trade quantity', '3'); await press('Review Trade'); expect(screen.getByRole('alert')).toHaveTextContent('You do not own that quantity.'); expect(screen.queryByText('Sell ORBIT?')).toBeNull();
+    const initial = world(), beforeRows = context.rows(), view = await render(frame('sell'));
+    await choose('Sell'); expect(screen.getByRole('radio', { name: 'Sell', checked: true })).toBeOnTheScreen(); await edit('Trade quantity', '3'); await press('Review Trade'); expect(screen.getByRole('alert')).toHaveTextContent('You do not own that quantity.'); expect(screen.queryByText('Sell ORBIT?')).toBeNull();
     await choose('Buy'); expect(screen.getByRole('radio', { name: 'Buy', checked: true })).toBeOnTheScreen(); expect(screen.queryByRole('alert')).toBeNull(); expect(screen.getByLabelText('Trade quantity')).toHaveProp('value', '3'); await press('Review Trade'); expect(screen.getByText('Buy ORBIT?')).toBeOnTheScreen(); await press('Never mind');
-    expect(world()).toEqual(initial); expect(context.rows()).toEqual(beforeRows); view.unmount();
+    expect(world()).toEqual(initial); expect(context.rows()).toEqual(beforeRows); await view.unmount();
   } finally { context.close(); }
 });
 
@@ -234,7 +234,7 @@ test.each(['refinance', 'repay', 'sell'] as Kind[])('%s draft belongs to its act
   const initial = prepare(kind), other = prepare(kind, 'life_other_' + kind), context = await setup(initial, kind);
   try {
     await context.repository.create(other); expect(await mockStore.getState().selectLife(initial.id)).toBe(true);
-    const view = render(frame(kind)), review = await openReview(kind); expectReview(review);
+    const view = await render(frame(kind)), review = await openReview(kind); expectReview(review);
     const oldRepayment = kind === 'repay' ? screen.UNSAFE_getByType(EventModal).props.onChoose : null;
     const savedLives = context.sqlite.prepare('SELECT * FROM lives ORDER BY id').all(), receipts = context.sqlite.prepare('SELECT * FROM receipts ORDER BY life_id,command_id').all();
     await act(async () => { expect(await mockStore.getState().selectLife(other.id)).toBe(true); });
@@ -243,7 +243,7 @@ test.each(['refinance', 'repay', 'sell'] as Kind[])('%s draft belongs to its act
     else if (kind === 'repay') expect(screen.getByLabelText('Amount in USD')).toHaveProp('value', '');
     else expect(screen.getByLabelText('Trade quantity')).toHaveProp('value', '1');
     if (oldRepayment) await act(async () => { await oldRepayment('confirm'); });
-    expect(world()).toEqual(other); expect(context.sqlite.prepare('SELECT * FROM lives ORDER BY id').all()).toEqual(savedLives); expect(context.sqlite.prepare('SELECT * FROM receipts ORDER BY life_id,command_id').all()).toEqual(receipts); view.unmount();
+    expect(world()).toEqual(other); expect(context.sqlite.prepare('SELECT * FROM lives ORDER BY id').all()).toEqual(savedLives); expect(context.sqlite.prepare('SELECT * FROM receipts ORDER BY life_id,command_id').all()).toEqual(receipts); await view.unmount();
   } finally { context.close(); }
 });
 
@@ -254,16 +254,16 @@ test('investment review uses spendable cash including the fee and keeps inherite
   // as stored. This does not claim a natural inheritance/adulthood journey.
   validateWorld(initial); const context = await setup(initial, 'buy');
   try {
-    const beforeRows = context.rows(), before = encodeWorld(world()), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'), view = render(frame('buy'));
+    const beforeRows = context.rows(), before = encodeWorld(world()), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'), view = await render(frame('buy'));
     const spendable = availableCash(accountFor(world())), unitPrice = investmentValue(world(), 'ORBIT', 1000000n, account.currency), quantity = spendable * 1000000n / unitPrice;
     const quote = investmentQuote(world(), 'ORBIT', quantity), entered = formatQuantity(quantity, 'ORBIT');
     expect(account.cash).toBeGreaterThan(quote.buyCost); expect(quote.value).toBeLessThanOrEqual(spendable); expect(quote.buyCost).toBeGreaterThan(spendable);
     expect(screen.getByText('Available cash: ' + money(spendable))).toBeOnTheScreen(); expect(screen.getByText('Held in trust: ' + money(account.lockedCash))).toBeOnTheScreen();
-    edit('Trade quantity', entered); await press('Review Trade');
+    await edit('Trade quantity', entered); await press('Review Trade');
     expect(screen.getByRole('alert')).toHaveTextContent('Your available balance cannot cover this order and its fee.'); expect(screen.queryByText('Buy ORBIT?')).toBeNull(); expect(screen.getByLabelText('Trade quantity')).toHaveProp('value', entered);
     const affordable = quantity / 2n, affordableQuote = investmentQuote(world(), 'ORBIT', affordable); expect(affordableQuote.buyCost).toBeLessThanOrEqual(spendable);
-    edit('Trade quantity', formatQuantity(affordable, 'ORBIT')); await press('Review Trade'); expect(modal().getByText('Buy ORBIT?')).toBeOnTheScreen(); expect(modal().getAllByText(money(affordableQuote.buyCost)).length).toBeGreaterThan(0); await press('Never mind');
-    expect(encodeWorld(world())).toBe(before); expect(context.rows()).toEqual(beforeRows); expect(unpack).not.toHaveBeenCalled(); view.unmount();
+    await edit('Trade quantity', formatQuantity(affordable, 'ORBIT')); await press('Review Trade'); expect(modal().getByText('Buy ORBIT?')).toBeOnTheScreen(); expect(modal().getAllByText(money(affordableQuote.buyCost)).length).toBeGreaterThan(0); await press('Never mind');
+    expect(encodeWorld(world())).toBe(before); expect(context.rows()).toEqual(beforeRows); expect(unpack).not.toHaveBeenCalled(); await view.unmount();
   } finally { jest.restoreAllMocks(); context.close(); }
 });
 
@@ -275,12 +275,12 @@ test('exchange review uses the selected actual currency account spendable balanc
   const home = accountFor(initial), euro = accountFor(initial, initial.people[initial.activePersonId], 'EUR'); home.lockedCash = home.cash - 10000n; euro.lockedCash = euro.cash - 100n; validateWorld(initial);
   const context = await setup(initial, 'exchange');
   try {
-    const beforeRows = context.rows(), before = encodeWorld(world()), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'), view = render(frame('exchange'));
-    expect(screen.getByRole('header', { name: money(10000n) })).toBeOnTheScreen(); edit('Amount in USD', '101'); await press('Review Exchange');
+    const beforeRows = context.rows(), before = encodeWorld(world()), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'), view = await render(frame('exchange'));
+    expect(screen.getByRole('header', { name: money(10000n) })).toBeOnTheScreen(); await edit('Amount in USD', '101'); await press('Review Exchange');
     expect(screen.getByRole('alert')).toHaveTextContent('Your available balance cannot cover this exchange.'); expect(screen.queryByText('Exchange currencies?')).toBeNull(); expect(screen.getByLabelText('Amount in USD')).toHaveProp('value', '101');
     await press(/^Currency Account\./); await choose('EUR'); await press('Choose'); expect(screen.getByRole('header', { name: money(100n, 'EUR') })).toBeOnTheScreen();
-    edit('Amount in EUR', '2'); await press('Review Exchange'); expect(screen.getByRole('alert')).toHaveTextContent('Your available balance cannot cover this exchange.'); expect(screen.queryByText('Exchange currencies?')).toBeNull(); expect(screen.getByLabelText('Amount in EUR')).toHaveProp('value', '2');
-    edit('Amount in EUR', '1'); await press('Review Exchange'); const quote = exchangeQuote(world(), 100n, 'EUR', 'USD'); expect(modal().getByText('Exchange currencies?')).toBeOnTheScreen(); expect(modal().getByText(money(100n, 'EUR'))).toBeOnTheScreen(); expect(modal().getByText(money(quote.net, 'USD'))).toBeOnTheScreen(); await press('Never mind');
-    expect(encodeWorld(world())).toBe(before); expect(context.rows()).toEqual(beforeRows); expect(unpack).not.toHaveBeenCalled(); view.unmount();
+    await edit('Amount in EUR', '2'); await press('Review Exchange'); expect(screen.getByRole('alert')).toHaveTextContent('Your available balance cannot cover this exchange.'); expect(screen.queryByText('Exchange currencies?')).toBeNull(); expect(screen.getByLabelText('Amount in EUR')).toHaveProp('value', '2');
+    await edit('Amount in EUR', '1'); await press('Review Exchange'); const quote = exchangeQuote(world(), 100n, 'EUR', 'USD'); expect(modal().getByText('Exchange currencies?')).toBeOnTheScreen(); expect(modal().getByText(money(100n, 'EUR'))).toBeOnTheScreen(); expect(modal().getByText(money(quote.net, 'USD'))).toBeOnTheScreen(); await press('Never mind');
+    expect(encodeWorld(world())).toBe(before); expect(context.rows()).toEqual(beforeRows); expect(unpack).not.toHaveBeenCalled(); await view.unmount();
   } finally { jest.restoreAllMocks(); context.close(); }
 });

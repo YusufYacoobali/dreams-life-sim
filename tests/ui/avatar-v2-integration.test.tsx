@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
-import { act, fireEvent, render, screen } from '@testing-library/react-native';
+import { act, fireEvent, render, screen } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
@@ -95,8 +95,8 @@ test('real creation controls preserve facial identity and outfit, with no obsole
   useCreationDraft.getState().begin(42,'custom');
   const draft = useCreationDraft.getState().draft!;
   useCreationDraft.getState().update({ ...draft.input,appearance:{ ...avatarPresets[9] } });
-  render(frame(<Appearance />));
-  const press = async (role:'radio'|'tab',name:string) => { await act(async () => { fireEvent.press(screen.getByRole(role,{ name })); }); };
+  await render(frame(<Appearance />));
+  const press = async (role:'radio'|'tab',name:string) => { await act(async () => { await fireEvent.press(screen.getByRole(role,{ name })); }); };
   const original = portraitTraits(avatarPresets[9],25);
   await press('tab','Hair Color'); await press('radio','Blond');
   await press('tab','Hair Style'); await press('radio','Bun');
@@ -116,7 +116,7 @@ test('real creation controls preserve facial identity and outfit, with no obsole
   expect(useCreationDraft.getState().draft!.input.appearance).toEqual({ ...result,hair:1,outfit:4 });
 });
 
-test('actual Life, player profile and family screens use the same saved artwork; optionally export their rendered native component trees', () => {
+test('actual Life, player profile and family screens use the same saved artwork; optionally export their rendered native component trees', async () => {
   let world = decodeWorld(JSON.stringify(graduate));
   world.people[world.activePersonId].appearance = { ...avatarPresets[0] };
   const parent = Object.values(world.people).find(person => person.id !== world.activePersonId)!;
@@ -128,7 +128,7 @@ test('actual Life, player profile and family screens use the same saved artwork;
   useCreationDraft.getState().begin(42,'custom'); const draft = useCreationDraft.getState().draft!;
   useCreationDraft.getState().update({ ...draft.input,appearance:{ ...avatarPresets[0] } });
   const directory = process.env.DREAMS_AVATAR_CAPTURE_DIR;
-  function capture(name:string, tree:ReturnType<ReturnType<typeof render>['toJSON']>) {
+  function capture(name:string, tree:ReturnType<Awaited<ReturnType<typeof render>>['toJSON']>) {
     if (!directory) return;
     const clean = (node:any):any => Array.isArray(node) ? node.map(clean) : !node || typeof node !== 'object' ? node : ({
       type:node.type,props:{ style:StyleSheet.flatten(node.props?.style),source:node.props?.source,
@@ -137,41 +137,41 @@ test('actual Life, player profile and family screens use the same saved artwork;
         accessibilityRole:node.props?.accessibilityRole,accessibilityLabel:node.props?.accessibilityLabel },children:node.children?.map(clean) });
     mkdirSync(directory,{ recursive:true }); writeFileSync(join(directory,name+'.json'),JSON.stringify(clean(tree)));
   }
-  const before = encodeWorld(world), view = render(frame(<Life />));
+  const before = encodeWorld(world), view = await render(frame(<Life />));
   const lifeHead = headSource(); expect(lifeHead).toContain('head-0-'); capture('life',view.toJSON());
-  view.rerender(frame(<Profile />)); expect(headSource()).toBe(lifeHead); capture('profile',view.toJSON());
-  view.rerender(frame(<Appearance />)); expect(screen.getAllByRole('radio',{ name:/^Avatar \d+, / })).toHaveLength(16); capture('creation',view.toJSON());
-  fireEvent.press(screen.getByRole('tab',{ name:'Clothing' })); expect(screen.getAllByRole('radio')).toHaveLength(16); capture('clothing-screen',view.toJSON());
-  mockParams = { id:npc.id }; view.rerender(frame(<PersonProfile />)); expect(headSource()).toContain('head-3-3-5'); capture('npc',view.toJSON());
-  mockParams = { id:parent.id }; view.rerender(frame(<PersonProfile />)); expect(headSource()).toContain('head-11-'); capture('family-profile',view.toJSON());
-  view.rerender(frame(<FamilyTree />)); expect(screen.UNSAFE_getAllByType(CharacterPortrait).some(item => item.props.appearance.identity === 0)).toBe(true); capture('family-tree',view.toJSON());
+  await view.rerender(frame(<Profile />)); expect(headSource()).toBe(lifeHead); capture('profile',view.toJSON());
+  await view.rerender(frame(<Appearance />)); expect(screen.getAllByRole('radio',{ name:/^Avatar \d+, / })).toHaveLength(16); capture('creation',view.toJSON());
+  await fireEvent.press(screen.getByRole('tab',{ name:'Clothing' })); expect(screen.getAllByRole('radio')).toHaveLength(16); capture('clothing-screen',view.toJSON());
+  mockParams = { id:npc.id }; await view.rerender(frame(<PersonProfile />)); expect(headSource()).toContain('head-3-3-5'); capture('npc',view.toJSON());
+  mockParams = { id:parent.id }; await view.rerender(frame(<PersonProfile />)); expect(headSource()).toContain('head-11-'); capture('family-profile',view.toJSON());
+  await view.rerender(frame(<FamilyTree />)); expect(screen.UNSAFE_getAllByType(CharacterPortrait).some(item => item.props.appearance.identity === 0)).toBe(true); capture('family-tree',view.toJSON());
   const gallery = (items: { appearance:typeof avatarPresets[number]; age:number; size:number; label:string }[],dark=false) => <View style={{ padding:20,gap:16,flexDirection:'row',flexWrap:'wrap',backgroundColor:dark?'#253247':'#F8F7F5',width:720 }}>{items.map((item,index)=><View key={index} style={{ alignItems:'center',gap:6,width:150 }}><CharacterPortrait name={item.label} {...item} /><Text style={{ color:dark?'#F6F8FF':'#0B1545',fontSize:13 }}>{item.label}</Text></View>)}</View>;
-  const show = (name:string,items:Parameters<typeof gallery>[0],dark=false) => { view.rerender(frame(gallery(items,dark),dark)); capture(name,view.toJSON()); };
-  show('all-presets',avatarPresets.map((appearance,identity)=>({ appearance,age:25,size:140,label:'Identity '+(identity+1) })));
-  show('four-140',[0,3,9,11].map(identity=>({ appearance:avatarPresets[identity],age:25,size:140,label:'Identity '+(identity+1)+' · 140px' })));
-  show('ages',[0,7,16,25,48,68,86,100].map(age=>({ appearance:avatarPresets[0],age,size:140,label:'Age '+age })));
-  show('infants',avatarPresets.map((appearance,identity)=>({ appearance,age:1,size:140,label:'Identity '+(identity+1)+' · age 1' })));
-  show('infant-transition',[0,1,2,3].flatMap(age=>[52,88,140].map(size=>({ appearance:avatarPresets[0],age,size,label:'Age '+age+' · '+size+'px' }))));
-  show('infant-saved-faces',[1,6,11,15].flatMap(identity=>[0,1,2,3].map(face=>({ appearance:{ ...avatarPresets[identity],face },age:0,size:88,label:(identity+1)+' · saved face '+face }))));
-  show('child-head-fits',avatarPresets.map((appearance,identity)=>({ appearance,age:3,size:140,label:'Identity '+(identity+1)+' · age 3' })));
-  show('child-clothing',[0,3,4,5,7,8,11,14].flatMap(outfit=>[0,11].map(identity=>({ appearance:{ ...avatarPresets[identity],outfit },age:3,size:88,label:(identity+1)+' · '+outfitLabels[outfit] }))));
-  show('skin',Array.from({length:6},(_,skin)=>({ appearance:{ ...avatarPresets[1],skin },age:25,size:140,label:'Skin '+(skin+1) })));
-  show('skin-dark-base',Array.from({length:6},(_,skin)=>({ appearance:{ ...avatarPresets[3],skin },age:25,size:140,label:'Skin '+(skin+1) })));
-  show('hair-colours',Array.from({length:5},(_,hairColor)=>({ appearance:{ ...avatarPresets[0],hairColor },age:25,size:140,label:hairColorLabels[hairColor] })));
-  show('hairstyles',Array.from({length:8},(_,hair)=>({ appearance:{ ...avatarPresets[0],hair },age:25,size:140,label:hairLabels[hair] })));
-  show('face-shapes',Array.from({length:4},(_,face)=>({ appearance:{ ...avatarPresets[0],face },age:25,size:140,label:'Legacy '+['Oval','Round','Long','Broad'][face] })));
-  for (const hair of [4,5,7]) show('hair-fit-'+hair,avatarPresets.map((appearance,identity)=>({ appearance:{ ...appearance,hair },age:25,size:140,label:'Face '+(identity+1) })));
-  show('long-hair-ages',[1,3,11,13].flatMap(identity=>[7,25,86].map(age=>({ appearance:avatarPresets[identity],age,size:140,label:'Face '+(identity+1)+' · age '+age }))));
-  show('clothing',outfitLabels.map((label,outfit)=>({ appearance:{ ...avatarPresets[0],outfit },age:25,size:140,label })));
+  const show = async (name:string,items:Parameters<typeof gallery>[0],dark=false) => { await view.rerender(frame(gallery(items,dark),dark)); capture(name,view.toJSON()); };
+  await show('all-presets',avatarPresets.map((appearance,identity)=>({ appearance,age:25,size:140,label:'Identity '+(identity+1) })));
+  await show('four-140',[0,3,9,11].map(identity=>({ appearance:avatarPresets[identity],age:25,size:140,label:'Identity '+(identity+1)+' · 140px' })));
+  await show('ages',[0,7,16,25,48,68,86,100].map(age=>({ appearance:avatarPresets[0],age,size:140,label:'Age '+age })));
+  await show('infants',avatarPresets.map((appearance,identity)=>({ appearance,age:1,size:140,label:'Identity '+(identity+1)+' · age 1' })));
+  await show('infant-transition',[0,1,2,3].flatMap(age=>[52,88,140].map(size=>({ appearance:avatarPresets[0],age,size,label:'Age '+age+' · '+size+'px' }))));
+  await show('infant-saved-faces',[1,6,11,15].flatMap(identity=>[0,1,2,3].map(face=>({ appearance:{ ...avatarPresets[identity],face },age:0,size:88,label:(identity+1)+' · saved face '+face }))));
+  await show('child-head-fits',avatarPresets.map((appearance,identity)=>({ appearance,age:3,size:140,label:'Identity '+(identity+1)+' · age 3' })));
+  await show('child-clothing',[0,3,4,5,7,8,11,14].flatMap(outfit=>[0,11].map(identity=>({ appearance:{ ...avatarPresets[identity],outfit },age:3,size:88,label:(identity+1)+' · '+outfitLabels[outfit] }))));
+  await show('skin',Array.from({length:6},(_,skin)=>({ appearance:{ ...avatarPresets[1],skin },age:25,size:140,label:'Skin '+(skin+1) })));
+  await show('skin-dark-base',Array.from({length:6},(_,skin)=>({ appearance:{ ...avatarPresets[3],skin },age:25,size:140,label:'Skin '+(skin+1) })));
+  await show('hair-colours',Array.from({length:5},(_,hairColor)=>({ appearance:{ ...avatarPresets[0],hairColor },age:25,size:140,label:hairColorLabels[hairColor] })));
+  await show('hairstyles',Array.from({length:8},(_,hair)=>({ appearance:{ ...avatarPresets[0],hair },age:25,size:140,label:hairLabels[hair] })));
+  await show('face-shapes',Array.from({length:4},(_,face)=>({ appearance:{ ...avatarPresets[0],face },age:25,size:140,label:'Legacy '+['Oval','Round','Long','Broad'][face] })));
+  for (const hair of [4,5,7]) await show('hair-fit-'+hair,avatarPresets.map((appearance,identity)=>({ appearance:{ ...appearance,hair },age:25,size:140,label:'Face '+(identity+1) })));
+  await show('long-hair-ages',[1,3,11,13].flatMap(identity=>[7,25,86].map(age=>({ appearance:avatarPresets[identity],age,size:140,label:'Face '+(identity+1)+' · age '+age }))));
+  await show('clothing',outfitLabels.map((label,outfit)=>({ appearance:{ ...avatarPresets[0],outfit },age:25,size:140,label })));
   const women = [1,4,6,8,10,11,13,15];
-  show('women-defaults',women.map(identity=>({ appearance:avatarPresets[identity],age:25,size:140,label:'Identity '+(identity+1) })));
-  show('women-ages',women.flatMap(identity=>[7,25,86].map(age=>({ appearance:avatarPresets[identity],age,size:140,label:(identity+1)+' · age '+age }))));
-  show('women-hair-options',women.flatMap(identity=>[1,2,3,6].map(hair=>({ appearance:{ ...avatarPresets[identity],hair },age:25,size:88,label:(identity+1)+' · '+hairLabels[hair] }))));
-  show('women-colours',[1,4,11,13].flatMap(identity=>Array.from({length:5},(_,hairColor)=>({ appearance:{ ...avatarPresets[identity],hairColor },age:25,size:88,label:(identity+1)+' · '+hairColorLabels[hairColor] }))));
-  for (const dark of [false,true]) show(dark?'women-sizes-dark':'women-sizes-light',women.flatMap(identity=>[52,88,140].map(size=>({ appearance:avatarPresets[identity],age:25,size,label:(identity+1)+' · '+size+'px' }))),dark);
-  show('crewnecks',[3,5,14].flatMap(outfit=>[0,3,1,13].map(identity=>({ appearance:{ ...avatarPresets[identity],outfit },age:25,size:140,label:(identity+1)+' · '+outfitLabels[outfit] }))));
-  for (const dark of [false,true]) show(dark?'sizes-dark':'sizes-light',[0,3,9,11].flatMap(identity=>[52,88,140].map(size=>({ appearance:avatarPresets[identity],age:25,size,label:(identity+1)+' · '+size+'px' }))),dark);
+  await show('women-defaults',women.map(identity=>({ appearance:avatarPresets[identity],age:25,size:140,label:'Identity '+(identity+1) })));
+  await show('women-ages',women.flatMap(identity=>[7,25,86].map(age=>({ appearance:avatarPresets[identity],age,size:140,label:(identity+1)+' · age '+age }))));
+  await show('women-hair-options',women.flatMap(identity=>[1,2,3,6].map(hair=>({ appearance:{ ...avatarPresets[identity],hair },age:25,size:88,label:(identity+1)+' · '+hairLabels[hair] }))));
+  await show('women-colours',[1,4,11,13].flatMap(identity=>Array.from({length:5},(_,hairColor)=>({ appearance:{ ...avatarPresets[identity],hairColor },age:25,size:88,label:(identity+1)+' · '+hairColorLabels[hairColor] }))));
+  for (const dark of [false,true]) await show(dark?'women-sizes-dark':'women-sizes-light',women.flatMap(identity=>[52,88,140].map(size=>({ appearance:avatarPresets[identity],age:25,size,label:(identity+1)+' · '+size+'px' }))),dark);
+  await show('crewnecks',[3,5,14].flatMap(outfit=>[0,3,1,13].map(identity=>({ appearance:{ ...avatarPresets[identity],outfit },age:25,size:140,label:(identity+1)+' · '+outfitLabels[outfit] }))));
+  for (const dark of [false,true]) await show(dark?'sizes-dark':'sizes-light',[0,3,9,11].flatMap(identity=>[52,88,140].map(size=>({ appearance:avatarPresets[identity],age:25,size,label:(identity+1)+' · '+size+'px' }))),dark);
   expect(encodeWorld(mockStore.getState().world!)).toBe(before);
   expect(portraitLayers(portraitTraits(avatarPresets[0],25)).length).toBeLessThanOrEqual(5);
-  view.unmount();
+  await view.unmount();
 });

@@ -1,5 +1,5 @@
 import React from 'react';
-import { act, fireEvent, render, screen } from '@testing-library/react-native';
+import { act, fireEvent, render, screen } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { createGameStore } from '../../src/state/gameStore';
 import { decodeWorld } from '../../src/game/model';
@@ -16,10 +16,10 @@ test('the native will editor rejects a non-100% allocation and stores its correc
   const { sqlite, driver } = database(); const repository = new SaveRepository(driver); await repository.initialise();
   let initial = decodeWorld(JSON.stringify(fixture)); if (!initial.pending) throw new Error('Expected result'); initial = resolveCommand(initial, { type: 'acknowledge', resultId: initial.pending.id }); await repository.create(initial);
   mockStore = createGameStore({ repository: async () => repository, date: () => initial.date, id: () => 'life_unused' }); await mockStore.getState().bootstrap();
-  const view = render(<SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider><Will /></ThemeProvider></SafeAreaProvider>);
-  const input = screen.getByLabelText(/Percentage for /); fireEvent.changeText(input, '99.99'); fireEvent.press(screen.getByRole('button', { name: 'Save Will' }));
+  const view = await render(<SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider><Will /></ThemeProvider></SafeAreaProvider>);
+  const input = screen.getByLabelText(/Percentage for /); await fireEvent.changeText(input, '99.99'); await fireEvent.press(screen.getByRole('button', { name: 'Save Will' }));
   expect(screen.getByText(/Allocate exactly 100%,/)).toBeOnTheScreen(); expect((await repository.load(initial.id)).wills).toEqual([]);
-  fireEvent.changeText(input, '100'); await act(async () => { fireEvent.press(screen.getByRole('button', { name: 'Save Will' })); });
+  await fireEvent.changeText(input, '100'); await act(async () => { await fireEvent.press(screen.getByRole('button', { name: 'Save Will' })); });
   const durable = await repository.load(initial.id); expect(durable.wills[0].shares[0].bps).toBe(10000); expect(durable.wills[0].executorId).not.toBe(initial.activePersonId);
-  view.unmount(); sqlite.close();
+  await view.unmount(); sqlite.close();
 });

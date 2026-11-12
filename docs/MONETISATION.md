@@ -1,6 +1,6 @@
 # Dreams permanent purchases
 
-Implemented on `v2`. Purchases use `react-native-purchases` 11.0.0 with Expo SDK 57 / React Native 0.86. The SDK autolinks in native development/release builds; no extra Expo config plugin is required. Expo Go and builds without a public SDK key show an unavailable store while free gameplay continues.
+Implemented on `v2`. Purchases use `react-native-purchases` 11.0.0 with Expo SDK 58 / React Native 0.88. The SDK autolinks in native development/release builds; no extra Expo config plugin is required. Expo Go and builds without a public SDK key show an unavailable store while free gameplay continues.
 
 ## Catalogue and dashboard setup
 
@@ -52,6 +52,23 @@ Customer-info updates apply immediately. Foreground refresh uses the SDK's cache
 An operation lock blocks duplicate purchases/restores. Cancellation and failure retain the pending UI action. Completion is emitted only after returned customer information grants the product's features. Restore updates ownership and resumes a waiting feature flow if entitled. A stale/unmounted life context cannot resume a retained action. Successful career purchases open the original confirmation instead of automatically executing a gameplay command or spending in-game money.
 
 `src/purchases/analytics.ts` provides an optional in-process event subscriber, with paywall/store/product/purchase/restore events, product IDs, triggers and ownership state. It installs no provider and sends no data. Save contents and personal information are excluded.
+
+## Premium testing override
+
+For local development, set `DREAMS_UNLOCK_ALL_TESTING=1` in your local `.env` file, then run `npx expo start -c`. Alternatively, set the variable in your shell. In Windows PowerShell:
+
+```powershell
+$env:DREAMS_UNLOCK_ALL_TESTING = "1"
+npx expo start -c
+```
+
+In bash/zsh, run `DREAMS_UNLOCK_ALL_TESTING=1 npx expo start -c`. Stop Expo and restart it after changing the flag; remove the shell variable or set it to `0` to restore purchase restrictions.
+
+The `internal` / `preview` EAS profiles set the flag to `1` in `eas.json`. Those EAS builds must have internal distribution and a known internal, preview or development profile. The production profile sets it to `0`; `app.config.cjs` forces it off for production profiles, store distribution, production environments and unknown EAS builds even if the flag is accidentally `1`. Local release bundles also reject development-only metadata at runtime.
+
+The flag grants testing access to Athlete, Astronaut, Cult, Military, God Mode and Time Machine, including Royal Family selection and checkpoint restoration. God Mode needs no hidden reveal or saved toggle under this override. Settings displays **TEST MODE — ALL UNLOCKED**. Normal age, health, career, funds, location and confirmation requirements still apply.
+
+This is an access check only: the SDK adapter, customer entitlements, purchase ownership, prices and purchase/restore flows remain unchanged. It writes no temporary ownership to preferences or life saves. Set the flag to `0` or remove it and restart/rebuild with the new configuration to restore normal purchase restrictions; committed gameplay and existing-career compatibility remain intact. The older internal God Mode toggle and playground keep their separate behavior. To test real paywalls and store transactions, disable this flag in the internal build environment.
 
 ## Implementation files
 

@@ -5,7 +5,7 @@ beforeEach(() => { purchases.setState({ ownership: Object.fromEntries(features.m
 import { displayText } from '../../src/ui/displayNumbers';
 import React from 'react';
 import { Modal } from 'react-native';
-import { act, fireEvent, render, screen, waitFor, within } from '@testing-library/react-native';
+import { act, fireEvent, render, screen, waitFor, within } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { DatabaseSync } from 'node:sqlite';
 import { createHash } from 'node:crypto';
@@ -38,9 +38,9 @@ const person = (value = world()) => value.people[value.activePersonId];
 const astronaut = (value = world()) => value.serviceCareers.find(item => item.personId === value.activePersonId && item.kind === 'astronaut')!;
 const absolute = (value = world()) => value.date.year * 12 + value.date.month - 1;
 const frame = () => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider><Service /><PendingEvent /></ThemeProvider></SafeAreaProvider>;
-const press = async (name: string | RegExp) => { await act(async () => { fireEvent.press(screen.getByRole('button', { name })); }); };
+const press = async (name: string | RegExp) => { await act(async () => { await fireEvent.press(screen.getByRole('button', { name })); }); };
 const modal = () => within(screen.UNSAFE_getByType(Modal));
-const pressModal = async (name: string) => { await act(async () => { fireEvent.press(modal().getByRole('button', { name })); }); };
+const pressModal = async (name: string) => { await act(async () => { await fireEvent.press(modal().getByRole('button', { name })); }); };
 const reviewEvent = () => screen.UNSAFE_getAllByType(EventModal).find(item => item.props.event?.kind === 'confirmation')!.props.event;
 
 async function setup() {
@@ -67,7 +67,7 @@ async function setup() {
 
 test('the genuine computing graduate earns astronaut eligibility and qualification, records actual flight work, then leaves without future service pay', async () => {
   const context = await setup(), trace: GameCommand[] = [];
-  let view: ReturnType<typeof render> | undefined;
+  let view: Awaited<ReturnType<typeof render>> | undefined;
   const dispatch = async (command: GameCommand) => { trace.push(command); await act(async () => { expect(await mockStore.getState().dispatch(command)).toBe(true); }); };
   const next = async () => {
     const pending = world().pending, choice = pending?.kind === 'decision' ? pending.choices.find(item => !choiceUnavailable(world(), item)) : undefined;
@@ -76,7 +76,7 @@ test('the genuine computing graduate earns astronaut eligibility and qualificati
   };
   const finish = async () => { let guard = 0; while (world().pending || world().annual) { if (++guard > 100 || person().died) throw Error('Bounded ordinary Astronaut continuation stopped'); await next(); } };
   const year = async () => { expect(world().pending).toBeNull(); expect(world().annual).toBeNull(); const before = absolute(); await dispatch({ type: 'advance' }); await finish(); expect(absolute() - before).toBe(12); };
-  const cold = async () => { const before = world(), saved = context.rows(); view?.unmount(); await context.cold(); view = render(frame()); expect(world()).toEqual(before); expect(context.rows()).toEqual(saved); context.original(); };
+  const cold = async () => { const before = world(), saved = context.rows(); await view?.unmount(); await context.cold(); view = await render(frame()); expect(world()).toEqual(before); expect(context.rows()).toEqual(saved); context.original(); };
   const acknowledgeOnce = async () => {
     const initial = world(), pending = initial.pending; if (pending?.kind !== 'result') throw Error('Expected actual saved result');
     await press('Continue'); expect(world()).toEqual(resolveCommand(initial, { type: 'acknowledge', resultId: pending.id }, true));
@@ -103,23 +103,23 @@ test('the genuine computing graduate earns astronaut eligibility and qualificati
     const training = person().training!; expect(training.months).toBe(36); expect(training.fees).toBe(unitCost * 36n); expect(person().skills.science).toBe(72); expect(person().education.qualifications).toContainEqual(degree);
     const fees = world().ledger.filter(item => item.personId === world().activePersonId && item.category === 'skill-training'); expect(fees).toHaveLength(36); expect(fees.reduce((sum, item) => sum - item.cashDelta, 0n)).toBe(training.fees); expect(person().employment?.roleId).toBe('developer');
     await dispatch({ type: 'stop-career-training' }); await finish(); await dispatch({ type: 'quit-job' }); await finish(); expect(serviceSelectionReason(world(), 'astronaut')).toBeUndefined();
-    const prepared = world(), quote = servicePayQuote(prepared, 'astronaut'); view = render(frame());
+    const prepared = world(), quote = servicePayQuote(prepared, 'astronaut'); view = await render(frame());
     await durableReview('Review Service Application', 'Apply for Service', { type: 'apply-service', kind: 'astronaut', branch: 'space-program', quotedAnnualPay: quote });
     if (!astronaut()) { expect(world().journal.at(-1)?.text).toMatch(/did not lead to a place/); await press('Review Service Application'); await press('Apply for Service'); await acknowledgeOnce(); }
     expect(astronaut()?.status).toBe('active'); expect(astronaut().contracts[0].trainingScores).toHaveLength(0); expect(astronaut().periods).toHaveLength(0); expect(serviceQualified(astronaut())).toBe(false); expect(person().employment?.paidMonths).toBe(0); expect(person().employment?.annualPay).toBe(quote);
     for (const account of prepared.accounts) expect(world().accounts).toContainEqual(account); expect(world().accounts.filter(item => item.ownerId === world().activePersonId)).toEqual(prepared.accounts.filter(item => item.ownerId === prepared.activePersonId)); expect(world().ledger).toEqual(prepared.ledger); expect(astronaut().contacts).toHaveLength(2);
     const selectionAttempts = world().actionCounts[world().activePersonId + ':service-selection:astronaut:' + world().date.year], selected = world(), selectedRows = context.rows(); expect(selectionAttempts).toBeGreaterThanOrEqual(1); expect(selectionAttempts).toBeLessThanOrEqual(2);
-    const current = screen.getByRole('button', { name: /^Balanced Routine\..*This is your current service routine$/ }); expect(current).toBeDisabled(); await act(async () => { fireEvent.press(current); }); expect(world()).toBe(selected); expect(context.rows()).toEqual(selectedRows); expect(screen.queryByText('Set your working routine?')).toBeNull();
-    const notReady = screen.getByRole('button', { name: /^Orbital Research\..*Complete the actual training and assessment first$/ }); expect(notReady).toBeDisabled(); await act(async () => { fireEvent.press(notReady); }); expect(world()).toBe(selected); expect(context.rows()).toEqual(selectedRows);
-    view.unmount(); view = undefined; await year(); expect(astronaut().contracts[0].trainingScores).toHaveLength(12); expect(astronaut().contracts[0].trainingResult).toBe('pending'); expect(astronaut().periods.reduce((sum, item) => sum + item.gross, 0n)).toBe(quote); expect(person().employment?.annualPay).toBe(quote);
-    await cold(); view!.unmount(); view = undefined; await year();
+    const current = screen.getByRole('button', { name: /^Balanced Routine\..*This is your current service routine$/ }); expect(current).toBeDisabled(); await act(async () => { await fireEvent.press(current); }); expect(world()).toBe(selected); expect(context.rows()).toEqual(selectedRows); expect(screen.queryByText('Set your working routine?')).toBeNull();
+    const notReady = screen.getByRole('button', { name: /^Orbital Research\..*Complete the actual training and assessment first$/ }); expect(notReady).toBeDisabled(); await act(async () => { await fireEvent.press(notReady); }); expect(world()).toBe(selected); expect(context.rows()).toEqual(selectedRows);
+    await view.unmount(); view = undefined; await year(); expect(astronaut().contracts[0].trainingScores).toHaveLength(12); expect(astronaut().contracts[0].trainingResult).toBe('pending'); expect(astronaut().periods.reduce((sum, item) => sum + item.gross, 0n)).toBe(quote); expect(person().employment?.annualPay).toBe(quote);
+    await cold(); await view!.unmount(); view = undefined; await year();
     const qualified = world(), contract = astronaut().contracts[0]; expect(contract.trainingCalendar).toBe(24); expect(contract.trainingScores).toHaveLength(24); expect(contract.trainingResult).toBe('passed'); expect(serviceQualified(astronaut())).toBe(true); expect(astronaut().periods.every(item => item.phase === 'training' && item.attended)).toBe(true); expect(astronaut().periods.reduce((sum, item) => sum + item.gross, 0n)).toBe(quote * 2n); expect(person().employment!.annualPay).toBeGreaterThan(quote); expect(assignmentReason(qualified, astronaut(), 'orbital-research')).toBeUndefined();
     await cold(); const qualifiedPay = person().employment!.annualPay;
     await press(/^Careful Routine\./); await press('Set Routine'); await acknowledgeOnce();
     const ground = world(), home = person().householdId, country = person().country, city = person().city;
     await durableReview(/^Orbital Research\./, 'Depart on Assignment', { type: 'start-assignment', serviceId: astronaut().id, kind: 'orbital-research' });
     expect(serviceAway(world())?.kind).toBe('orbital-research'); expect(astronaut().assignments[0].periods).toHaveLength(0); expect(world().accounts).toEqual(ground.accounts); expect(world().ledger).toEqual(ground.ledger);
-    view!.unmount(); view = undefined; await dispatch({ type: 'advance' }); let guard = 0;
+    await view!.unmount(); view = undefined; await dispatch({ type: 'advance' }); let guard = 0;
     while (astronaut().assignments[0].status === 'active') { if (++guard > 50 || person().died) throw Error('Bounded flight progression stopped'); await next(); }
     const flight = astronaut().assignments[0]; expect(['completed', 'failed', 'returned']).toContain(flight.status); expect(flight.periods.length).toBeGreaterThan(0); expect(flight.periods.length).toBeLessThanOrEqual(6); expect(flight.units).toBe(flight.periods.reduce((sum, item) => sum + item.units, 0)); expect(flight.periods.every(item => item.focus === 'careful')).toBe(true); expect(world().annual?.pausedForPlanning).toBe(true); expect(person().householdId).toBe(home); expect(person().country).toBe(country); expect(person().city).toBe(city); expect(serviceAway(world())).toBeUndefined();
     const missionPeriods = astronaut().periods.filter(item => item.phase === 'assignment'); expect(missionPeriods).toHaveLength(flight.periods.length); expect(missionPeriods.reduce((sum, item) => sum + item.gross, 0n)).toBe(qualifiedPay / 12n * BigInt(flight.periods.length));
@@ -128,7 +128,7 @@ test('the genuine computing graduate earns astronaut eligibility and qualificati
     expect(screen.getByLabelText('Actual contract earnings: ' + displayText(formatMoney({ minor: astronaut().periods.reduce((sum, item) => sum + item.gross, 0n), currency: astronaut().currency })))).toBeOnTheScreen();
     const beforeLeave = world(); await durableReview(/^Leave Service\./, 'Leave Service', { type: 'leave-service', serviceId: astronaut().id });
     const left = world(); expect(astronaut().status).toBe('left'); expect(person().employment).toBeNull(); expect(astronaut().periods).toEqual(astronaut(beforeLeave).periods); expect(astronaut().assignments).toEqual(astronaut(beforeLeave).assignments); expect(astronaut().contracts[0]).toEqual({ ...astronaut(beforeLeave).contracts[0], ended: left.date }); expect(serviceQualified(astronaut())).toBe(true); expect(left.accounts).toEqual(beforeLeave.accounts); expect(left.ledger).toEqual(beforeLeave.ledger); expect(left.random).toEqual(beforeLeave.random);
-    view!.unmount(); view = undefined; await finish(); await year(); expect(astronaut()).toEqual(astronaut(left)); expect(person().finance.lifetimeGross).toBe(person(left).finance.lifetimeGross); expect(world().workHistory.filter(item => item.personId === world().activePersonId)).toEqual(left.workHistory.filter(item => item.personId === left.activePersonId)); await cold(); expect(screen.queryByRole('button', { name: /^Leave Service\./ })).toBeNull(); context.original();
+    await view!.unmount(); view = undefined; await finish(); await year(); expect(astronaut()).toEqual(astronaut(left)); expect(person().finance.lifetimeGross).toBe(person(left).finance.lifetimeGross); expect(world().workHistory.filter(item => item.personId === world().activePersonId)).toEqual(left.workHistory.filter(item => item.personId === left.activePersonId)); await cold(); expect(screen.queryByRole('button', { name: /^Leave Service\./ })).toBeNull(); context.original();
     console.info('Astronaut archive continuation', JSON.stringify({ sourceRevision: archived.revision, sourceDate: archived.date, preparedDate: prepared.date, coachedMonths: training.months, coachingFees: training.fees.toString(), preparedScience: person(prepared).skills.science, selectionAttempts, traineeAnnualPay: quote.toString(), trainingMonths: contract.trainingScores.length, trainingResult: contract.trainingResult, qualifiedDate: contract.qualifiedAt, qualifiedAnnualPay: qualifiedPay.toString(), mission: { status: flight.status, periods: flight.periods.length, units: flight.units, distinction: flight.distinction }, leaveContractMonths: astronaut(left).contracts[0].months, serviceGross: astronaut(left).periods.reduce((sum, item) => sum + item.gross, 0n).toString(), finalDate: world().date, finalRevision: world().revision, ordinaryPreparationAndContinuationCommands: trace.length, originalFixtureSha256: createHash('sha256').update(readFileSync(join(__dirname, '../fixtures/v3-employed-graduate.json'))).digest('hex') }));
-  } finally { view?.unmount(); jest.restoreAllMocks(); context.close(); }
+  } finally { await view?.unmount(); jest.restoreAllMocks(); context.close(); }
 }, 90000);

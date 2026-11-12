@@ -1,7 +1,7 @@
 import { displayText } from '../../src/ui/displayNumbers';
 import React from 'react';
 import * as Native from 'react-native';
-import { act, fireEvent, render, screen } from '@testing-library/react-native';
+import { act, fireEvent, render, screen } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { DatabaseSync } from 'node:sqlite';
 import { mkdtempSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
@@ -36,8 +36,8 @@ const studio=assetCatalog.find(offer=>offer.id==='studio')!;
 const world=()=>mockStore.getState().world!;
 const money=(minor:bigint)=>formatMoney({minor,currency:accountFor(world()).currency});
 const frame=(child:React.ReactNode=<Offer />,dark=false)=><SafeAreaProvider initialMetrics={{frame:{x:0,y:0,width:dark?320:390,height:844},insets:{top:47,bottom:34,left:0,right:0}}}><ThemeProvider appearance={dark?'dark':'light'}>{child}<PendingEvent /></ThemeProvider></SafeAreaProvider>;
-const press=async(name:string|RegExp)=>{await act(async()=>{fireEvent.press(screen.getByRole('button',{name}));});};
-const method=async(name:string)=>{await act(async()=>{fireEvent.press(screen.getByRole('radio',{name}));});};
+const press=async(name:string|RegExp)=>{await act(async()=>{await fireEvent.press(screen.getByRole('button',{name}));});};
+const method=async(name:string)=>{await act(async()=>{await fireEvent.press(screen.getByRole('radio',{name}));});};
 async function setup() {
   const initial=decodeWorld(JSON.stringify(graduate)),account=accountFor(initial);account.cash+=100000000n;account.openingCash+=100000000n;
   const directory=mkdtempSync(join(tmpdir(),'dreams-property-options-')),path=join(directory,'save.db');let sqlite!:DatabaseSync;
@@ -59,7 +59,7 @@ function capture(name:string,tree:unknown) {
 afterEach(()=>jest.restoreAllMocks());
 
 test.each(['cash','mortgage','rent'] as const)('%s is reviewed and committed from the same property screen, with real fees/payment and durable failure retry',async selected=>{
-  const context=await setup();let view=render(frame());try{
+  const context=await setup();let view=await render(frame());try{
     const original=encodeWorld(world()),beforeRows=context.rows(),cash=accountFor(world()).cash;
     expect(screen.getByRole('radio',{name:'Buy Outright'})).toBeChecked();
     if(selected==='mortgage'){
@@ -77,33 +77,33 @@ test.each(['cash','mortgage','rent'] as const)('%s is reviewed and committed fro
     expect(encodeWorld(world())).toBe(encodeWorld(resolveCommand(context.initial,command,true)));expect(accountFor(world()).cash).toBe(cash-(selected==='rent'?rent:quote.cashRequired));
     if(selected==='rent'){expect(world().assets).toHaveLength(0);expect(rentalResidence(world())?.catalogId).toBe('studio');expect(world().ledger.filter(row=>row.category==='housing-rent')).toHaveLength(1);}
     else{expect(world().assets.filter(asset=>asset.ownerId===world().activePersonId)).toHaveLength(1);if(selected==='mortgage')expect(world().liabilities.find(debt=>debt.kind==='mortgage')).toMatchObject({principal:quote.principal,monthlyPayment:quote.payment,remainingMonths:240});else expect(world().liabilities.some(debt=>debt.kind==='mortgage')).toBe(false);}
-    const saved=encodeWorld(world());view.unmount();await context.cold();mockRoute.method=selected==='cash'?undefined:selected;view=render(frame());expect(encodeWorld(world())).toBe(saved);await press('Continue');
+    const saved=encodeWorld(world());await view.unmount();await context.cold();mockRoute.method=selected==='cash'?undefined:selected;view=await render(frame());expect(encodeWorld(world())).toBe(saved);await press('Continue');
     if(selected==='rent'){expect(screen.getByText('Your Rented Home')).toBeOnTheScreen();const beforeMove=accountFor(world()).cash;await press('Review Move Out');await press('Move Out');expect(rentalResidence(world())).toBeUndefined();expect(accountFor(world()).cash).toBe(beforeMove);}
-  }finally{view.unmount();context.close();}
+  }finally{await view.unmount();context.close();}
 },60000);
 
 test('switching methods only updates the quote, and a busy/stale confirmation cannot buy twice or act after a life switch',async()=>{
-  const context=await setup(),view=render(frame());try{
+  const context=await setup(),view=await render(frame());try{
     const original=encodeWorld(world()),quote=purchaseQuote(world(),studio,'cash');await method('Mortgage');await method('Rent');await method('Buy Outright');expect(screen.getByLabelText(displayText('Cash paid upfront: '+money(quote.cashRequired)+'. Price plus purchase fees'))).toBeOnTheScreen();expect(encodeWorld(world())).toBe(original);
-    await press('Review Purchase');const stale=screen.UNSAFE_getAllByType(EventModal).find(item=>item.props.event?.kind==='confirmation')!.props.onChoose,release=context.pauseNext();await act(async()=>{fireEvent.press(screen.getByRole('button',{name:'Confirm Purchase'}));stale('confirm');fireEvent.press(screen.getByRole('button',{name:'Never mind'}));});expect(mockStore.getState().busy).toBe(true);expect(mockDismissTo).not.toHaveBeenCalled();expect(world().assets).toHaveLength(0);await act(async()=>{release();});expect(world().assets).toHaveLength(1);
+    await press('Review Purchase');const stale=screen.UNSAFE_getAllByType(EventModal).find(item=>item.props.event?.kind==='confirmation')!.props.onChoose,release=context.pauseNext();await act(async()=>{await fireEvent.press(screen.getByRole('button',{name:'Confirm Purchase'}));stale('confirm');await fireEvent.press(screen.getByRole('button',{name:'Never mind'}));});expect(mockStore.getState().busy).toBe(true);expect(mockDismissTo).not.toHaveBeenCalled();expect(world().assets).toHaveLength(0);await act(async()=>{release();});expect(world().assets).toHaveLength(1);
     await act(async()=>{await mockStore.getState().startLife({...randomCreation(44),country:'US',city:'New York',background:'ordinary'},44);});const before=encodeWorld(world());await act(async()=>{await stale('confirm');});expect(encodeWorld(world())).toBe(before);expect(world().assets).toHaveLength(0);
-  }finally{view.unmount();context.close();}
+  }finally{await view.unmount();context.close();}
 });
 
 test('all properties share one price-and-rent catalogue; canonical and legacy deep links select the intended method',async()=>{
-  const context=await setup();let view=render(frame(<Shopping />));try{
-    expect(screen.UNSAFE_getAllByType(AssetListing)).toHaveLength(assetCatalog.filter(offer=>offer.kind==='property').length);expect(screen.queryByRole('button',{name:/^Rent a Home/})).toBeNull();fireEvent.press(screen.getByRole('button',{name:/City Studio.*Buy .*Rent .*month.*Beds: 1/}));expect(mockPush).toHaveBeenLastCalledWith({pathname:'/offer/[id]',params:{id:'studio'}});
-    view.rerender(frame(<Rentals />));expect(screen.getByRole('header',{name:'Real Estate'})).toBeOnTheScreen();fireEvent.press(screen.getByRole('button',{name:/City Studio.*Buy .*Rent .*month.*Beds: 1/}));expect(mockPush).toHaveBeenLastCalledWith({pathname:'/offer/[id]',params:{id:'studio',method:'rent'}});
-    for(const route of ['rent','mortgage'] as const){mockRoute.method=route;view.rerender(frame(<Offer />));expect(screen.getByRole('radio',{name:route==='rent'?'Rent':'Mortgage'})).toBeChecked();expect(screen.UNSAFE_getAllByType(CatalogArt).some(art=>art.props.id==='studio'&&art.props.size===190)).toBe(true);}
-    mockRoute.method=undefined;view.rerender(frame(<Rental />));expect(screen.getByRole('radio',{name:'Rent'})).toBeChecked();expect(screen.getByRole('header',{name:'Property Details'})).toBeOnTheScreen();
-    mockRoute.id='missing-property';view.rerender(frame(<Offer />));expect(screen.getByRole('header',{name:'Offer unavailable'})).toBeOnTheScreen();mockRoute.id='city-car';view.rerender(frame(<Rental />));expect(screen.getByRole('header',{name:'Offer unavailable'})).toBeOnTheScreen();
-  }finally{view.unmount();context.close();}
+  const context=await setup();let view=await render(frame(<Shopping />));try{
+    expect(screen.UNSAFE_getAllByType(AssetListing)).toHaveLength(assetCatalog.filter(offer=>offer.kind==='property').length);expect(screen.queryByRole('button',{name:/^Rent a Home/})).toBeNull();await fireEvent.press(screen.getByRole('button',{name:/City Studio.*Buy .*Rent .*month.*Beds: 1/}));expect(mockPush).toHaveBeenLastCalledWith({pathname:'/offer/[id]',params:{id:'studio'}});
+    await view.rerender(frame(<Rentals />));expect(screen.getByRole('header',{name:'Real Estate'})).toBeOnTheScreen();await fireEvent.press(screen.getByRole('button',{name:/City Studio.*Buy .*Rent .*month.*Beds: 1/}));expect(mockPush).toHaveBeenLastCalledWith({pathname:'/offer/[id]',params:{id:'studio',method:'rent'}});
+    for(const route of ['rent','mortgage'] as const){mockRoute.method=route;await view.rerender(frame(<Offer />));expect(screen.getByRole('radio',{name:route==='rent'?'Rent':'Mortgage'})).toBeChecked();expect(screen.UNSAFE_getAllByType(CatalogArt).some(art=>art.props.id==='studio'&&art.props.size===190)).toBe(true);}
+    mockRoute.method=undefined;await view.rerender(frame(<Rental />));expect(screen.getByRole('radio',{name:'Rent'})).toBeChecked();expect(screen.getByRole('header',{name:'Property Details'})).toBeOnTheScreen();
+    mockRoute.id='missing-property';await view.rerender(frame(<Offer />));expect(screen.getByRole('header',{name:'Offer unavailable'})).toBeOnTheScreen();mockRoute.id='city-car';await view.rerender(frame(<Rental />));expect(screen.getByRole('header',{name:'Offer unavailable'})).toBeOnTheScreen();
+  }finally{await view.unmount();context.close();}
 });
 
 test.each([false,true])('property options retain one illustration and readable quotes at phone width (dark=%s)',async dark=>{
-  const context=await setup(),width=dark?320:390;jest.spyOn(require('react-native'),'useWindowDimensions').mockReturnValue({width,height:844,scale:2,fontScale:dark?1.4:1});const view=render(frame(<Shopping />,dark));try{
-    capture('polish3-real-estate-'+(dark?'dark-large':'light'),view.toJSON());view.rerender(frame(<Offer />,dark));
+  const context=await setup(),width=dark?320:390;jest.spyOn(require('react-native'),'useWindowDimensions').mockReturnValue({width,height:844,scale:2,fontScale:dark?1.4:1});const view=await render(frame(<Shopping />,dark));try{
+    capture('polish3-real-estate-'+(dark?'dark-large':'light'),view.toJSON());await view.rerender(frame(<Offer />,dark));
     for(const option of [{radio:'Buy Outright',suffix:'cash'},{radio:'Mortgage',suffix:'mortgage'},{radio:'Rent',suffix:'rent'}]){await method(option.radio);expect(screen.getByRole('radio',{name:option.radio})).toBeChecked();expect(screen.getByRole('header',{name:'Property Details'})).toBeOnTheScreen();capture('polish3-property-'+option.suffix+'-'+(dark?'dark-large':'light'),view.toJSON());}
     expect(context.rows().receipts).toHaveLength(0);
-  }finally{view.unmount();context.close();}
+  }finally{await view.unmount();context.close();}
 });

@@ -5,7 +5,7 @@ import { DisplayText as Text, displayText } from './DisplayText';
 
 export function FilterTabs<T extends string>({ values, selected, onSelect, scrollable = false }: { values: readonly { id: T; label: string }[]; selected: T; onSelect: (id: T) => void; scrollable?: boolean }) {
   const c = useColors();
-  const scroll = useRef<ScrollView>(null), viewport = useRef(0), offset = useRef(0);
+  const scroll = useRef<React.ComponentRef<typeof ScrollView>>(null), viewport = useRef(0), offset = useRef(0);
   const layouts = useRef(new Map<T, { x: number; width: number }>());
   const revealSelected = useCallback(() => {
     const frame = layouts.current.get(selected), width = viewport.current;

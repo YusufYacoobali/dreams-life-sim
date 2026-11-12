@@ -1,7 +1,7 @@
 import { displayText } from '../../src/ui/displayNumbers';
 import React from 'react';
 import * as Native from 'react-native';
-import { fireEvent, render, screen } from '@testing-library/react-native';
+import { fireEvent, render, screen } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
@@ -39,7 +39,7 @@ function capture(name: string, tree: unknown) {
 }
 afterEach(() => { jest.restoreAllMocks(); jest.clearAllMocks(); mockParams = {}; });
 
-test.each([false, true])('memorial summary, child continuation and read-only family history preserve facts and routes (dark=%s)', dark => {
+test.each([false, true])('memorial summary, child continuation and read-only family history preserve facts and routes (dark=%s)', async dark => {
   mockWorld = decodeWorld(JSON.stringify(family));
   const person = mockWorld.people[mockWorld.activePersonId], spouse = otherPerson(mockWorld, partnerRelation(mockWorld)!);
   const childId = mockWorld.relationships.find(edge => edge.from === person.id && edge.roles.includes('parent'))!.to;
@@ -48,31 +48,31 @@ test.each([false, true])('memorial summary, child continuation and read-only fam
   const original = encodeWorld(mockWorld), expected = deathSummary(mockWorld)!, width = dark ? 320 : 390;
   jest.spyOn(require('react-native'), 'useWindowDimensions').mockReturnValue({ width, height: 844, scale: 2, fontScale: dark ? 1.4 : 1 });
   const frame = (child: React.ReactNode) => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider appearance={dark ? 'dark' : 'light'}>{child}</ThemeProvider></SafeAreaProvider>;
-  const suffix = dark ? 'dark-large' : 'light', view = render(frame(<Death />));
+  const suffix = dark ? 'dark-large' : 'light', view = await render(frame(<Death />));
   expect(screen.getByRole('header', { name: 'Life at a Glance' })).toBeOnTheScreen();
   expect(screen.getByText(expected.summary)).toBeOnTheScreen(); expect(screen.getByText(expected.epitaph)).toBeOnTheScreen();
   expect(screen.getByText('Cause of death: ' + person.causeOfDeath)).toBeOnTheScreen();
   for (const row of expected.rows) expect(screen.getByLabelText(displayText(row.label + ': ' + row.value))).toBeOnTheScreen();
   expect(screen.getByRole('progressbar', { name: 'Final happiness' })).toHaveAccessibilityValue({ min: 0, max: 100, now: person.stats.happiness });
   capture('death-summary-' + suffix, view.toJSON());
-  fireEvent.press(screen.getByRole('button', { name: 'Continue as Child' })); expect(router.push).toHaveBeenLastCalledWith('/legacy');
-  fireEvent.press(screen.getByRole('button', { name: 'Family Tree' })); expect(router.push).toHaveBeenLastCalledWith('/family-history');
-  view.rerender(frame(<FamilyHistory />));
+  await fireEvent.press(screen.getByRole('button', { name: 'Continue as Child' })); expect(router.push).toHaveBeenLastCalledWith('/legacy');
+  await fireEvent.press(screen.getByRole('button', { name: 'Family Tree' })); expect(router.push).toHaveBeenLastCalledWith('/family-history');
+  await view.rerender(frame(<FamilyHistory />));
   expect(screen.getByText('Family history · Read-only')).toBeOnTheScreen();
   const sections = screen.getAllByRole('header').map(item => item.props.children).filter(label => ['Parents & Guardians', 'You & Your Partners', 'Children & Dependants'].includes(label));
   expect(sections).toEqual(['Parents & Guardians', 'You & Your Partners', 'Children & Dependants']);
   const spouseLabel = fullName(spouse) + '. Spouse at death · Age ' + ageOn(spouse, mockWorld.date);
   expect(screen.getAllByRole('button', { name: spouseLabel })).toHaveLength(1);
   capture('family-history-' + suffix, view.toJSON());
-  fireEvent.press(screen.getByRole('button', { name: spouseLabel }));
+  await fireEvent.press(screen.getByRole('button', { name: spouseLabel }));
   expect(router.push).toHaveBeenLastCalledWith({ pathname: '/life-summary', params: { id: spouse.id, readOnly: '1' } });
   const child = mockWorld.people[childId];
-  fireEvent.press(screen.getByRole('button', { name: fullName(child) + '. Child · Age ' + ageOn(child, mockWorld.date) }));
+  await fireEvent.press(screen.getByRole('button', { name: fullName(child) + '. Child · Age ' + ageOn(child, mockWorld.date) }));
   expect(router.push).toHaveBeenLastCalledWith({ pathname: '/life-summary', params: { id: child.id, readOnly: '1' } });
-  mockParams = { id: child.id, readOnly: '1' }; view.rerender(frame(<LifeSummary />));
+  mockParams = { id: child.id, readOnly: '1' }; await view.rerender(frame(<LifeSummary />));
   expect(screen.getByText('Saved life · Read-only')).toBeOnTheScreen(); expect(screen.queryByRole('button', { name: 'Time Machine' })).toBeNull();
   expect(encodeWorld(mockWorld)).toBe(original); expect(mockDispatch).not.toHaveBeenCalled();
-  mockParams = {}; mockWorld = decodeWorld(original); view.rerender(frame(<FamilyHistory />));
+  mockParams = {}; mockWorld = decodeWorld(original); await view.rerender(frame(<FamilyHistory />));
   expect(screen.getByRole('button', { name: spouseLabel })).toBeOnTheScreen();
-  expect(encodeWorld(mockWorld)).toBe(original); expect(mockDispatch).not.toHaveBeenCalled(); view.unmount();
+  expect(encodeWorld(mockWorld)).toBe(original); expect(mockDispatch).not.toHaveBeenCalled(); await view.unmount();
 });

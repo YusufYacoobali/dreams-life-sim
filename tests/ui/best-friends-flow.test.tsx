@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Modal, Text } from 'react-native';
-import { act, fireEvent, render, screen, waitFor, within } from '@testing-library/react-native';
+import { act, fireEvent, render, screen, waitFor, within } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { DatabaseSync } from 'node:sqlite';
 import { mkdtempSync, rmSync } from 'node:fs';
@@ -27,7 +27,7 @@ function Content() {
   return <>{!review && error && <Text accessibilityRole="alert">{error}</Text>}<BestFriendshipCard world={world} personId={mockPersonId} onReviewChange={setReview} /><PendingEvent /></>;
 }
 const frame = () => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider><Content /></ThemeProvider></SafeAreaProvider>;
-const press = async (name: string | RegExp) => { await act(async () => { fireEvent.press(screen.getByRole('button', { name })); }); };
+const press = async (name: string | RegExp) => { await act(async () => { await fireEvent.press(screen.getByRole('button', { name })); }); };
 
 async function fixture() {
   const setup = bestFriendsFixture(), initial = copyWorld(setup.world);
@@ -54,31 +54,31 @@ async function fixture() {
 }
 
 test('opening/cancelling is read-only; held failed consent preserves one exact review/RNG, retries warm, cold-resumes and acknowledges once before an explicit ending', async () => {
-  const context = await fixture(); let view: ReturnType<typeof render> | undefined;
+  const context = await fixture(); let view: Awaited<ReturnType<typeof render>> | undefined;
   try {
     const before = mockStore.getState().world!, original = encodeWorld(before), rows = context.rows(), command = friendshipProposal(before, context.friendId), predicted = resolveCommand(before, command, true);
-    const commit = jest.spyOn(context.repository, 'commit'), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'); view = render(frame());
+    const commit = jest.spyOn(context.repository, 'commit'), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'); view = await render(frame());
     expect(screen.queryByText('You are best friends.')).toBeNull(); await press(/^Become Best Friends/); expect(screen.getByText(/They can say no/)).toBeOnTheScreen(); await press('Never mind');
     expect(commit).not.toHaveBeenCalled(); expect(unpack).not.toHaveBeenCalled(); expect(context.rows()).toEqual(rows); expect(mockStore.getState().world).toBe(before);
     await press(/^Become Best Friends/); context.sqlite.exec("CREATE TRIGGER fail_friendship BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
-    let release!: () => void; context.gate(new Promise(resolve => { release = resolve; })); act(() => { fireEvent.press(screen.getByRole('button', { name: 'Ask to Be Best Friends' })); });
+    let release!: () => void; context.gate(new Promise(resolve => { release = resolve; })); await act(async () => { await fireEvent.press(screen.getByRole('button', { name: 'Ask to Be Best Friends' })); });
     expect(mockStore.getState().busy).toBe(true); expect(screen.getByRole('button', { name: 'Ask to Be Best Friends' })).toBeDisabled(); expect(screen.getByRole('button', { name: 'Never mind' })).toBeDisabled();
-    fireEvent.press(screen.getByRole('button', { name: 'Ask to Be Best Friends' })); fireEvent.press(screen.getByRole('button', { name: 'Never mind' })); expect(context.rows()).toEqual(rows);
+    await fireEvent.press(screen.getByRole('button', { name: 'Ask to Be Best Friends' })); await fireEvent.press(screen.getByRole('button', { name: 'Never mind' })); expect(context.rows()).toEqual(rows);
     context.gate(null); await act(async () => { release(); }); await waitFor(() => expect(screen.getByRole('alert')).toHaveTextContent(/couldn't be saved/));
     expect(screen.getAllByRole('alert')).toHaveLength(1); expect(screen.getByRole('button', { name: 'Ask to Be Best Friends' })).toBeEnabled(); expect(encodeWorld(mockStore.getState().world!)).toBe(original); expect(context.rows()).toEqual(rows);
     context.sqlite.exec('DROP TRIGGER fail_friendship'); await press('Ask to Be Best Friends');
     expect(mockStore.getState().world).toEqual(predicted); expect(commit).toHaveBeenCalledTimes(2); expect(unpack).not.toHaveBeenCalled(); expect(screen.queryByRole('button', { name: 'Ask to Be Best Friends' })).toBeNull(); expect(screen.getByText('You are best friends.')).toBeOnTheScreen();
     expect(context.sqlite.prepare('SELECT payload FROM lives WHERE id=?').get(context.old.id)?.payload).toBe(archive.checkpoint); expect(context.sqlite.prepare('SELECT payload FROM backups WHERE life_id=?').get(context.old.id)?.payload).toBe(archive.checkpoint);
-    const saved = context.rows(); expect(saved.snapshots).toEqual(rows.snapshots); expect(saved.snapshot_metadata).toEqual(rows.snapshot_metadata); view.unmount(); view = undefined; unpack.mockRestore(); commit.mockRestore();
-    await context.cold(); expect(mockStore.getState().world).toEqual(predicted); expect(context.rows()).toEqual(saved); view = render(frame()); expect(screen.getByText('Your best friend')).toBeOnTheScreen(); await press('Continue');
+    const saved = context.rows(); expect(saved.snapshots).toEqual(rows.snapshots); expect(saved.snapshot_metadata).toEqual(rows.snapshot_metadata); await view.unmount(); view = undefined; unpack.mockRestore(); commit.mockRestore();
+    await context.cold(); expect(mockStore.getState().world).toEqual(predicted); expect(context.rows()).toEqual(saved); view = await render(frame()); expect(screen.getByText('Your best friend')).toBeOnTheScreen(); await press('Continue');
     const acknowledged = resolveCommand(predicted, { type: 'acknowledge', resultId: predicted.pending!.id }, true); expect(mockStore.getState().world).toEqual(acknowledged); const doneRows = context.rows();
     await act(async () => { expect(await mockStore.getState().dispatch(command)).toBe(false); }); expect(context.rows()).toEqual(doneRows); expect(mockStore.getState().world).toEqual(acknowledged);
-    await press(/^End Best Friendship/); const ending = resolveCommand(acknowledged, friendshipEnd(acknowledged, context.friendId), true); await act(async () => { fireEvent.press(within(screen.UNSAFE_getByType(Modal)).getByRole('button', { name: 'End Best Friendship' })); }); expect(mockStore.getState().world).toEqual(ending); expect(screen.queryByText('You are best friends.')).toBeNull(); expect(screen.getByText(/Both agreed; ended/)).toBeOnTheScreen(); expect(ending.random).toEqual(acknowledged.random);
-  } finally { view?.unmount(); jest.restoreAllMocks(); context.close(); }
+    await press(/^End Best Friendship/); const ending = resolveCommand(acknowledged, friendshipEnd(acknowledged, context.friendId), true); await act(async () => { await fireEvent.press(within(screen.UNSAFE_getByType(Modal)).getByRole('button', { name: 'End Best Friendship' })); }); expect(mockStore.getState().world).toEqual(ending); expect(screen.queryByText('You are best friends.')).toBeNull(); expect(screen.getByText(/Both agreed; ended/)).toBeOnTheScreen(); expect(ending.random).toEqual(acknowledged.random);
+  } finally { await view?.unmount(); jest.restoreAllMocks(); context.close(); }
 }, 30000);
 
 test('same-context revisions retain a reviewed draft, changed actual life/person/place clears it, and changed eligibility is rechecked without dispatch', async () => {
-  const context = await fixture(), view = render(frame());
+  const context = await fixture(), view = await render(frame());
   try {
     const before = mockStore.getState().world!, rows = context.rows(); await press(/^Become Best Friends/);
     // Render-only context regression: no saved command, date, RNG or gameplay claim.
@@ -89,7 +89,7 @@ test('same-context revisions retain a reviewed draft, changed actual life/person
     await act(async () => { mockStore.setState({ world: before }); }); await press(/^Become Best Friends/);
     await act(async () => { expect(await mockStore.getState().selectLife(context.old.id)).toBe(true); }); expect(screen.queryByRole('button', { name: 'Ask to Be Best Friends' })).toBeNull();
     await act(async () => { expect(await mockStore.getState().selectLife(before.id)).toBe(true); }); expect(screen.queryByRole('button', { name: 'Ask to Be Best Friends' })).toBeNull(); expect(mockStore.getState().world).toEqual(before);
-    await press(/^Become Best Friends/); mockPersonId = before.relationships.find(row => row.kind === 'parent' && row.to === before.activePersonId)!.from; view.rerender(frame()); expect(screen.queryByRole('button', { name: 'Ask to Be Best Friends' })).toBeNull();
-    mockPersonId = context.friendId; view.rerender(frame()); expect(screen.queryByRole('button', { name: 'Ask to Be Best Friends' })).toBeNull();
-  } finally { view.unmount(); jest.restoreAllMocks(); context.close(); }
+    await press(/^Become Best Friends/); mockPersonId = before.relationships.find(row => row.kind === 'parent' && row.to === before.activePersonId)!.from; await view.rerender(frame()); expect(screen.queryByRole('button', { name: 'Ask to Be Best Friends' })).toBeNull();
+    mockPersonId = context.friendId; await view.rerender(frame()); expect(screen.queryByRole('button', { name: 'Ask to Be Best Friends' })).toBeNull();
+  } finally { await view.unmount(); jest.restoreAllMocks(); context.close(); }
 }, 30000);

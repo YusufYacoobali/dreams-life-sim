@@ -275,7 +275,7 @@ export function MiniGameScreen(props: Props) {
   );
   useEffect(() => {
     if (
-      ['background', 'inactive'].includes(AppState.currentState) &&
+      (AppState.currentState === 'background' || AppState.currentState === 'inactive') &&
       ['countdown', 'playing', 'finishing'].includes(phase)
     )
       void pause();

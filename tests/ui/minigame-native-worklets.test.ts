@@ -3,7 +3,7 @@ import { createContext, runInContext } from 'node:vm';
 import { join } from 'node:path';
 
 type Worklet = ((...args: any[]) => any) & {
-  __closure: Record<string, unknown>;
+  __closure?: Record<string, unknown>;
   __initData: { code: string };
 };
 test.each(
@@ -47,7 +47,7 @@ test.each(
         if (reconstructed.has(fn)) return reconstructed.get(fn);
         expect(fn.__initData?.code).toEqual(expect.any(String));
         const closure = Object.fromEntries(
-          Object.entries(fn.__closure).map(([key, v]) => {
+          Object.entries(fn.__closure ?? {}).map(([key, v]) => {
             expect(v).not.toBeUndefined();
             return [key, onUI(v)];
           }),
@@ -111,7 +111,7 @@ test.each(
       if (typeof value === 'function') {
         if (reconstructed.has(value)) return reconstructed.get(value);
         expect(value.__initData?.code).toEqual(expect.any(String));
-        const closure = onUI(value.__closure),
+        const closure = onUI(value.__closure ?? {}),
           native = runInContext('(' + value.__initData.code + ')', context),
           call = (...args: any[]) => native.apply({ __closure: closure }, args);
         reconstructed.set(value, call);

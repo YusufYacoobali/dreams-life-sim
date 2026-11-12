@@ -1,5 +1,5 @@
 import React from 'react';
-import { act, fireEvent, render, screen, waitFor } from '@testing-library/react-native';
+import { act, fireEvent, render, screen, waitFor } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
 import { createGameStore } from '../../src/state/gameStore';
@@ -21,7 +21,7 @@ import School from '../../app/(game)/school';
 import Life from '../../app/(game)/(tabs)/life';
 import { PendingEvent } from '../../src/ui/PendingEvent';
 const frame = (child: React.ReactNode) => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider>{child}<PendingEvent /></ThemeProvider></SafeAreaProvider>;
-const press = async (name: string | RegExp) => { await act(async () => { fireEvent.press(screen.getByRole('button', { name })); }); };
+const press = async (name: string | RegExp) => { await act(async () => { await fireEvent.press(screen.getByRole('button', { name })); }); };
 
 test('a real historical branch finishes school, retries evening enrolment and the final qualification write, and resumes the exact course cold', async () => {
   const { sqlite, driver } = database(), repository = new SaveRepository(driver), save = decodeSave(JSON.stringify(archive));
@@ -32,7 +32,7 @@ test('a real historical branch finishes school, retries evening enrolment and th
   const funded = { ...initial, accounts: initial.accounts.map(item => item.id === accountFor(initial).id ? { ...item, cash: item.cash + 100000000n, openingCash: item.openingCash + 100000000n } : item), revision: initial.revision + 1 };
   await repository.commit(funded, initial.revision, 'fixture_initial_funds');
   const cold = async () => { mockStore = createGameStore({ repository: async () => repository, date: () => funded.date, id: () => 'unused' }); await mockStore.getState().bootstrap(); };
-  await cold(); const view = render(frame(<Life />)); let failedFinalCredit = false;
+  await cold(); const view = await render(frame(<Life />)); let failedFinalCredit = false;
   const world = () => mockStore.getState().world!;
   const commandPress = async (command: GameCommand, label: string) => {
     const before = encodeWorld(world()), predicted = resolveCommand(world(), command);
@@ -59,8 +59,8 @@ test('a real historical branch finishes school, retries evening enrolment and th
   };
   await commandPress({ type: 'advance' }, 'Age Up'); await finishYear();
   expect(world().schoolCompletions.find(item => item.personId === world().activePersonId)).toMatchObject({ passed: false, grade: 0 });
-  view.rerender(frame(<School />)); expect(screen.getByText(/No secondary qualification awarded/)).toBeOnTheScreen();
-  await press(/^Education & Qualifications/); expect(router.push).toHaveBeenCalledWith('/education'); view.rerender(frame(<Education />));
+  await view.rerender(frame(<School />)); expect(screen.getByText(/No secondary qualification awarded/)).toBeOnTheScreen();
+  await press(/^Education & Qualifications/); expect(router.push).toHaveBeenCalledWith('/education'); await view.rerender(frame(<Education />));
   const beforeEnrol = encodeWorld(world()), loans = world().liabilities.filter(item => item.kind === 'student');
   await press(/^Complete Secondary Education/); expect(screen.getByText('24 months')).toBeOnTheScreen(); expect(screen.getByText('No fee or loan')).toBeOnTheScreen();
   sqlite.exec("CREATE TRIGGER fail_evening_enrolment BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
@@ -68,23 +68,23 @@ test('a real historical branch finishes school, retries evening enrolment and th
   expect(encodeWorld(world())).toBe(beforeEnrol); expect(encodeWorld(await repository.load(world().id))).toBe(beforeEnrol);
   sqlite.exec('DROP TRIGGER fail_evening_enrolment'); await press('Join Evening Classes');
   await waitFor(() => expect(screen.getByText('Evening course enrolled')).toBeOnTheScreen());
-  const enrolled = encodeWorld(world()); await act(async () => { await cold(); }); view.rerender(frame(<Education />));
+  const enrolled = encodeWorld(world()); await act(async () => { await cold(); }); await view.rerender(frame(<Education />));
   expect(encodeWorld(world())).toBe(enrolled); await press('Continue');
   expect(screen.getByText('0 of 24 attended months · 50% needed to pass')).toBeOnTheScreen();
   expect(world().liabilities.filter(item => item.kind === 'student')).toEqual(loans);
-  await press(/^Evening Study Routine/); fireEvent.press(screen.getByRole('radio', { name: 'Focused' })); await press('Set Evening Routine'); await press('Continue');
+  await press(/^Evening Study Routine/); await fireEvent.press(screen.getByRole('radio', { name: 'Focused' })); await press('Set Evening Routine'); await press('Continue');
   for (let year = 0; year < 5 && currentRecovery(world()); year++) {
-    view.rerender(frame(<Education />));
+    await view.rerender(frame(<Education />));
     const extra = screen.getByRole('button', { name: /^Extra Evening Study/ });
     if (!extra.props.accessibilityState.disabled) { await press(/^Extra Evening Study/); await press('Continue'); }
-    view.rerender(frame(<Life />)); await commandPress({ type: 'advance' }, 'Age Up'); await finishYear();
+    await view.rerender(frame(<Life />)); await commandPress({ type: 'advance' }, 'Age Up'); await finishYear();
   }
   expect(failedFinalCredit).toBe(true); expect(currentRecovery(world())).toBeUndefined();
   const completed = world().recoveryCourses[0]; expect(completed).toMatchObject({ status: 'passed', qualificationAwarded: true }); expect(completed.periods).toHaveLength(24);
   expect(world().people[world().activePersonId].education.qualifications.filter(item => item.level === 'secondary')).toHaveLength(1);
-  const terminal = encodeWorld(world()); await act(async () => { await cold(); }); view.rerender(frame(<Education />));
+  const terminal = encodeWorld(world()); await act(async () => { await cold(); }); await view.rerender(frame(<Education />));
   expect(encodeWorld(world())).toBe(terminal); expect(screen.getByText('Secondary qualification earned')).toBeOnTheScreen();
   expect(screen.getByRole('button', { name: /^School Years/ })).toBeOnTheScreen();
   expect((await repository.load(save.world.id)).people[save.world.activePersonId].education.qualifications).toEqual([{ level: 'secondary', field: 'general', year: 2018 }]);
-  view.unmount(); sqlite.close();
+  await view.unmount(); sqlite.close();
 }, 60000);

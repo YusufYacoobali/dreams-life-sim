@@ -3,7 +3,7 @@
  * DREAMS_JOURNAL_PHASE=baseline|after DREAMS_JOURNAL_OUTPUT=/tmp/report.json */
 import React, { Profiler } from 'react';
 import { FlatList } from 'react-native';
-import { act, render } from '@testing-library/react-native';
+import { act, render } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { readFileSync, writeFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
@@ -26,7 +26,7 @@ type Input = { scope: string; snapshots: { summary: { age: number; revision: num
 const sha = (value: string) => createHash('sha256').update(value).digest('hex');
 const stats = (values: number[]) => { const sorted = [...values].sort((a, b) => a - b); return { medianMs: sorted[Math.floor(sorted.length / 2)], p95Ms: sorted[Math.ceil(sorted.length * .95) - 1], samples: sorted.length }; };
 
-test('profile unchanged real saved lives and committed engine continuations without hiding journal rows', () => {
+test('profile unchanged real saved lives and committed engine continuations without hiding journal rows', async () => {
   const phase = process.env.DREAMS_JOURNAL_PHASE;
   if (!['baseline', 'after'].includes(phase ?? '')) throw new Error('Set DREAMS_JOURNAL_PHASE=baseline or after');
   const inputFile = process.env.DREAMS_JOURNAL_INPUTS ?? '/tmp/dreams-final-perf-inputs.json';
@@ -74,20 +74,20 @@ test('profile unchanged real saved lives and committed engine continuations with
       const durations: number[] = []; let measuring = false;
       const onRender: React.ProfilerOnRenderCallback = (_id, _phase, actualDuration) => { if (measuring) durations.push(actualDuration); };
       const frame = () => <Profiler id="life" onRender={onRender}><SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider><Life /></ThemeProvider></SafeAreaProvider></Profiler>;
-      const view = render(frame());
+      const view = await render(frame());
       const renderTimes: number[] = [], reactTimes: number[] = [], bodyCounts: number[] = [];
       for (let sample = 0; sample < 34; sample++) {
-        mockWorld = before; view.rerender(frame());
+        mockWorld = before; await view.rerender(frame());
         const priorBodyCount = bodyRender.mock.calls.length, priorDurationCount = durations.length;
         mockWorld = after; measuring = true; const start = performance.now();
-        act(() => { view.rerender(frame()); });
+        await act(async () => { await view.rerender(frame()); });
         const elapsed = performance.now() - start; measuring = false;
         expect(view.UNSAFE_getByType(FlatList).props.data).toHaveLength(after.journal.filter(row => row.personId === person.id).length);
         if (sample >= 3) {
           renderTimes.push(elapsed); reactTimes.push(durations.slice(priorDurationCount).reduce((sum, value) => sum + value, 0)); bodyCounts.push(bodyRender.mock.calls.length - priorBodyCount);
         }
       }
-      view.unmount();
+      await view.unmount();
       results.push({ age: input.summary.age, command: label, revision: before.revision, beforeJournalRows: before.journal.length, afterJournalRows: after.journal.length, inputCheckpointSha256: sha(input.payload), inputWorldHashRecorded: input.summary.sha256, projection: stats(projectionTimes), reusedHistoricalRows: reused[0], reactRenderAndCommit: stats(renderTimes), reactProfilerActualDuration: stats(reactTimes), bodyRendersPerCommit: bodyCounts[0] });
     }
   }

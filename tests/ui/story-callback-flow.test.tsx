@@ -1,6 +1,6 @@
 import { displayText } from '../../src/ui/displayNumbers';
 import React from 'react';
-import { act, fireEvent, render, screen, waitFor } from '@testing-library/react-native';
+import { act, fireEvent, render, screen, waitFor } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { createGameStore } from '../../src/state/gameStore';
 import { encodeWorld } from '../../src/game/model';
@@ -30,29 +30,29 @@ test('permission and actual Age Up→party→remaining year survive independent 
   const event = bindEvent(initial, eventTemplates.find(item => item.id === 'school-arcade-invitation')!); offerPending(initial, event);
   const expected = resolveCommand(initial, { type: 'choose', eventId: event.id, choiceId: 'ask' }), { sqlite, driver } = database(), repository = new SaveRepository(driver); await repository.initialise(); await repository.create(initial);
   const cold = async () => { mockStore = createGameStore({ repository: async () => repository, date: () => initial.date, id: () => 'life_unused' }); await mockStore.getState().bootstrap(); };
-  await cold(); let view = render(frame()); const parentName = initial.people[parentEdge.from].firstName, ask = 'Ask ' + parentName + ' for permission';
+  await cold(); let view = await render(frame()); const parentName = initial.people[parentEdge.from].firstName, ask = 'Ask ' + parentName + ' for permission';
   sqlite.exec("CREATE TRIGGER fail_story_origin BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
-  await act(async () => fireEvent.press(screen.getByRole('button', { name: ask }))); await waitFor(() => expect(screen.getAllByRole('alert').length).toBeGreaterThan(0));
+  await act(async () => await fireEvent.press(screen.getByRole('button', { name: ask }))); await waitFor(() => expect(screen.getAllByRole('alert').length).toBeGreaterThan(0));
   expect(encodeWorld(mockStore.getState().world!)).toBe(encodeWorld(initial)); expect(await repository.load(initial.id)).toEqual(initial);
-  sqlite.exec('DROP TRIGGER fail_story_origin'); await act(async () => fireEvent.press(screen.getByRole('button', { name: ask })));
+  sqlite.exec('DROP TRIGGER fail_story_origin'); await act(async () => await fireEvent.press(screen.getByRole('button', { name: ask })));
   await waitFor(() => expect(mockStore.getState().world?.storyThreads[0]?.status).toBe('scheduled')); expect(mockStore.getState().world).toEqual(expected); expect(expected.storyThreads[0].permission?.accepted).toBe(true); expect(expected.ledger.filter(item => item.category === 'story-outing')).toEqual([]);
-  view.unmount(); await cold(); view = render(frame()); expect(screen.getByText('Adults need an address')).toBeOnTheScreen(); expect(mockStore.getState().world).toEqual(expected);
-  await act(async () => fireEvent.press(screen.getByRole('button', { name: 'Continue' }))); await act(async () => fireEvent.press(screen.getByRole('button', { name: 'Age Up' })));
+  await view.unmount(); await cold(); view = await render(frame()); expect(screen.getByText('Adults need an address')).toBeOnTheScreen(); expect(mockStore.getState().world).toEqual(expected);
+  await act(async () => await fireEvent.press(screen.getByRole('button', { name: 'Continue' }))); await act(async () => await fireEvent.press(screen.getByRole('button', { name: 'Age Up' })));
   await waitFor(() => expect(screen.getByText('Party day')).toBeOnTheScreen()); const offered = mockStore.getState().world!, pending = offered.pending; if (pending?.kind !== 'decision') throw new Error('No party choice');
   expect(offered.annual?.monthsProcessed).toBe(1); expect(offered.storyThreads[0].peerId).toBe(expected.storyThreads[0].peerId); const attend = pending.choices.find(item => item.id === 'attend')!.label, cash = accountFor(offered, offered.people[parentEdge.from]).cash;
-  sqlite.exec("CREATE TRIGGER fail_story_payment BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END"); await act(async () => fireEvent.press(screen.getByRole('button', { name: displayText(attend) })));
+  sqlite.exec("CREATE TRIGGER fail_story_payment BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END"); await act(async () => await fireEvent.press(screen.getByRole('button', { name: displayText(attend) })));
   await waitFor(() => expect(screen.getAllByRole('alert').length).toBeGreaterThan(0)); expect(mockStore.getState().world).toEqual(offered); expect(await repository.load(initial.id)).toEqual(offered);
-  sqlite.exec('DROP TRIGGER fail_story_payment'); await act(async () => fireEvent.press(screen.getByRole('button', { name: displayText(attend) })));
+  sqlite.exec('DROP TRIGGER fail_story_payment'); await act(async () => await fireEvent.press(screen.getByRole('button', { name: displayText(attend) })));
   await waitFor(() => expect(screen.getByText('High score, low dignity')).toBeOnTheScreen()); const paid = mockStore.getState().world!;
   expect(accountFor(paid, paid.people[parentEdge.from]).cash).toBe(cash - paid.storyThreads[0].quote.amount); expect(paid.random).toEqual(offered.random); expect(paid.storyThreads[0].permission).toEqual(expected.storyThreads[0].permission); expect(paid.ledger.filter(item => item.category === 'story-outing')).toHaveLength(1);
-  view.unmount(); await cold(); view = render(frame()); expect(screen.getByText('High score, low dignity')).toBeOnTheScreen(); expect(mockStore.getState().world).toEqual(paid);
+  await view.unmount(); await cold(); view = await render(frame()); expect(screen.getByText('High score, low dignity')).toBeOnTheScreen(); expect(mockStore.getState().world).toEqual(paid);
   for (let i = 0; i < 20 && mockStore.getState().world!.pending; i++) {
     const world = mockStore.getState().world!, current = world.pending!;
     const label = current.kind === 'result' ? 'Continue' : current.choices.find(item => !choiceUnavailable(world, item))!.label;
-    await act(async () => fireEvent.press(screen.getByRole('button', { name: label })));
+    await act(async () => await fireEvent.press(screen.getByRole('button', { name: label })));
   }
   const completed = mockStore.getState().world!; expect(completed.pending).toBeNull(); expect(completed.annual).toBeNull(); expect(completed.date.year).toBe(initial.date.year + 1); expect(completed.date.month).toBe(initial.date.month);
-  expect(completed.ledger.filter(item => item.category === 'story-outing')).toHaveLength(1); expect(completed.storyThreads[0].paidTransactionId).toBe(paid.storyThreads[0].paidTransactionId); expect(await repository.load(initial.id)).toEqual(completed); view.unmount(); sqlite.close();
+  expect(completed.ledger.filter(item => item.category === 'story-outing')).toHaveLength(1); expect(completed.storyThreads[0].paidTransactionId).toBe(paid.storyThreads[0].paidTransactionId); expect(await repository.load(initial.id)).toEqual(completed); await view.unmount(); sqlite.close();
 }, 30000);
 
 test('month-twelve critical admission cancels both saved callbacks atomically across SQLite failure, retry and cold resume', async () => {
@@ -80,23 +80,23 @@ test('month-twelve critical admission cancels both saved callbacks atomically ac
   expect(expected.annual?.monthsProcessed).toBe(12);
   const { sqlite, driver } = database(), repository = new SaveRepository(driver); await repository.initialise(); await repository.create(initial);
   const cold = async () => { mockStore = createGameStore({ repository: async () => repository, date: () => initial.date, id: () => 'life_unused' }); await mockStore.getState().bootstrap(); };
-  await cold(); let view = render(frame());
+  await cold(); let view = await render(frame());
   sqlite.exec("CREATE TRIGGER fail_callback_cancellation BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
-  await act(async () => fireEvent.press(screen.getByRole('button', { name: 'Continue This Year' })));
+  await act(async () => await fireEvent.press(screen.getByRole('button', { name: 'Continue This Year' })));
   await waitFor(() => expect(screen.getAllByRole('alert').length).toBeGreaterThan(0));
   expect(mockStore.getState().world).toEqual(initial); expect(await repository.load(initial.id)).toEqual(initial);
   sqlite.exec('DROP TRIGGER fail_callback_cancellation');
-  await act(async () => fireEvent.press(screen.getByRole('button', { name: 'Continue This Year' })));
+  await act(async () => await fireEvent.press(screen.getByRole('button', { name: 'Continue This Year' })));
   await waitFor(() => expect(screen.getByText('Rushed to Hospital')).toBeOnTheScreen());
   const cancelled = mockStore.getState().world!;
   expect(cancelled).toEqual(expected); expect(await repository.load(initial.id)).toEqual(expected);
   expect(cancelled.storyThreads.map(item => item.status)).toEqual(['cancelled', 'cancelled']); expect(cancelled.deferred).toEqual([]);
   expect(cancelled.ledger.some(item => item.category === 'story-outing')).toBe(false); expect(cancelled.annual?.monthsProcessed).toBe(12);
-  view.unmount(); await cold(); view = render(frame()); expect(mockStore.getState().world).toEqual(cancelled);
+  await view.unmount(); await cold(); view = await render(frame()); expect(mockStore.getState().world).toEqual(cancelled);
   expect(screen.getByText('Rushed to Hospital')).toBeOnTheScreen();
   for (let guard = 0; mockStore.getState().world!.pending && guard < 10; guard++) {
     const world = mockStore.getState().world!, event = world.pending!;
-    await act(async () => fireEvent.press(screen.getByRole('button', { name: event.kind === 'result' ? 'Continue' : event.choices.find(item => !choiceUnavailable(world, item))!.label })));
+    await act(async () => await fireEvent.press(screen.getByRole('button', { name: event.kind === 'result' ? 'Continue' : event.choices.find(item => !choiceUnavailable(world, item))!.label })));
   }
   const completed = mockStore.getState().world!;
   expect(completed.annual).toBeNull(); expect(completed.date).toEqual(targetDate);
@@ -104,5 +104,5 @@ test('month-twelve critical admission cancels both saved callbacks atomically ac
   expect(completed.ledger.slice(0, cancelled.ledger.length)).toEqual(cancelled.ledger);
   expect(completed.people[completed.activePersonId].health.records).toEqual(cancelled.people[cancelled.activePersonId].health.records);
   expect(completed.ledger.some(item => item.category === 'story-outing')).toBe(false);
-  expect(await repository.load(initial.id)).toEqual(completed); view.unmount(); sqlite.close();
+  expect(await repository.load(initial.id)).toEqual(completed); await view.unmount(); sqlite.close();
 }, 30000);

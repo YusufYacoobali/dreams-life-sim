@@ -1,5 +1,5 @@
 import React from 'react';
-import { act, fireEvent, render, screen } from '@testing-library/react-native';
+import { act, fireEvent, render, screen } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { createGameStore } from '../../src/state/gameStore';
 import { useCreationDraft } from '../../src/state/creationDraft';
@@ -17,7 +17,7 @@ import Appearance from '../../app/appearance';
 import Life from '../../app/(game)/(tabs)/life';
 
 const frame = (child: React.ReactNode) => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider>{child}</ThemeProvider></SafeAreaProvider>;
-const press = async (role: 'radio' | 'tab' | 'button', name: string) => { await act(async () => { fireEvent.press(screen.getByRole(role, { name })); }); };
+const press = async (role: 'radio' | 'tab' | 'button', name: string) => { await act(async () => { await fireEvent.press(screen.getByRole(role, { name })); }); };
 beforeEach(() => {
   jest.clearAllMocks(); useCreationDraft.setState({ draft: null }); useCreationDraft.getState().begin(42, 'custom');
   mockRepository = jest.fn(async () => { throw new Error('Read-only component test'); });
@@ -28,7 +28,7 @@ test('real presets describe distinct actual traits and retain the same selection
   const draft = useCreationDraft.getState().draft!;
   useCreationDraft.getState().update({ ...draft.input, appearance: { ...avatarPresets[0] } });
   const original = structuredClone(useCreationDraft.getState().draft!.input);
-  render(frame(<Appearance />));
+  await render(frame(<Appearance />));
   expect(screen.getAllByRole('radio', { name: /^Avatar \d+, / })).toHaveLength(16);
   expect(screen.getByRole('radio', { name: 'Avatar 1, oval face, medium skin tone, black side swept hair', checked: true })).toBeOnTheScreen();
   const seventh = 'Avatar 7, long face, very light skin tone, black shoulder length hair';
@@ -41,7 +41,7 @@ test('real presets describe distinct actual traits and retain the same selection
 });
 
 test('all existing skin swatches have neutral descriptive labels bound to their unchanged actual palette index', async () => {
-  render(frame(<Appearance />)); await press('tab', 'Skin Tone');
+  await render(frame(<Appearance />)); await press('tab', 'Skin Tone');
   const original = structuredClone(useCreationDraft.getState().draft!.input);
   for (const [index, label] of ['Skin tone 1, very light', 'Skin tone 2, light', 'Skin tone 3, medium', 'Skin tone 4, tan', 'Skin tone 5, brown', 'Skin tone 6, deep brown'].entries()) {
     await press('radio', label);
@@ -53,7 +53,7 @@ test('all existing skin swatches have neutral descriptive labels bound to their 
 test('the custom first slot describes its actual face and hair; a bald preview never announces an invisible stored hair colour', async () => {
   const draft = useCreationDraft.getState().draft!;
   useCreationDraft.getState().update({ ...draft.input, appearance: { face: 3, skin: 5, hair: 7, hairColor: 4 } });
-  render(frame(<Appearance />));
+  await render(frame(<Appearance />));
   expect(screen.getByRole('radio', { name: 'Avatar 1, broad face, deep brown skin tone, auburn coily afro', checked: true })).toBeOnTheScreen();
   await press('tab', 'Hair Style'); await press('radio', 'Bald'); await press('tab', 'Avatars');
   expect(screen.getByRole('radio', { name: 'Avatar 1, broad face, deep brown skin tone, bald', checked: true })).toBeOnTheScreen();
@@ -63,7 +63,7 @@ test('the custom first slot describes its actual face and hair; a bald preview n
 
 test('the genuine employed Life header exposes its actual visible identity, role, age and cash without duplicate portrait focus or a save', async () => {
   const world = decodeWorld(JSON.stringify(graduate)), original = encodeWorld(world);
-  mockStore.setState({ world }); render(frame(<Life />));
+  mockStore.setState({ world }); await render(frame(<Life />));
   const label = 'My Life profile. Leonardo Ricci. Age 23. Software Developer. Bank balance $45,660';
   expect(screen.getByRole('button', { name: label })).toBeOnTheScreen();
   expect(screen.getByText('$45,660')).toBeOnTheScreen();

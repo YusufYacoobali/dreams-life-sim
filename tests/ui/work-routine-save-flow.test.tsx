@@ -1,6 +1,6 @@
 import React from 'react';
 import { Modal } from 'react-native';
-import { act, fireEvent, render, screen, waitFor, within } from '@testing-library/react-native';
+import { act, fireEvent, render, screen, waitFor, within } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { createGameStore } from '../../src/state/gameStore';
 import { createLife, randomCreation } from '../../src/game/createLife';
@@ -21,10 +21,10 @@ import Work from '../../app/(game)/work';
 import { router } from 'expo-router';
 
 const frame = () => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider><Work /><PendingEvent /></ThemeProvider></SafeAreaProvider>;
-const press = async (name: string | RegExp) => { await act(async () => { fireEvent.press(screen.getByRole('button', { name })); }); };
+const press = async (name: string | RegExp) => { await act(async () => { await fireEvent.press(screen.getByRole('button', { name })); }); };
 const modal = () => within(screen.UNSAFE_getByType(Modal));
-const confirm = async (name: string) => { await act(async () => { fireEvent.press(modal().getByRole('button', { name })); }); };
-const choose = async (name: string) => { await act(async () => { fireEvent.press(screen.getByRole('radio', { name })); }); };
+const confirm = async (name: string) => { await act(async () => { await fireEvent.press(modal().getByRole('button', { name })); }); };
+const choose = async (name: string) => { await act(async () => { await fireEvent.press(screen.getByRole('radio', { name })); }); };
 const world = () => mockStore.getState().world!;
 const acknowledge = (initial: World) => resolveCommand(initial, { type: 'acknowledge', resultId: initial.pending!.id }, true);
 
@@ -63,7 +63,7 @@ test.each(['relaxed', 'balanced', 'hard'] as const)('the current %s effort, unse
   const initial = employee(effort), { sqlite, rows } = await setup(initial);
   try {
     const beforeRows = rows(), before = encodeWorld(world()), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint');
-    const view = render(frame()); await press('Work routine. ' + effort);
+    const view = await render(frame()); await press('Work routine. ' + effort);
     const label = effort === 'relaxed' ? 'Take it easy' : effort === 'balanced' ? 'Balanced' : 'Work hard';
     expect(screen.getByRole('radio', { name: label + '. This is your current routine' })).toBeDisabled();
     expect(screen.getByRole('button', { name: 'Set Routine' })).toBeDisabled();
@@ -74,7 +74,7 @@ test.each(['relaxed', 'balanced', 'hard'] as const)('the current %s effort, unse
     await press('Never mind'); expect(screen.queryByRole('button', { name: 'Set Routine' })).toBeNull();
     await press('Work routine. ' + effort); expect(screen.getByRole('button', { name: 'Set Routine' })).toBeDisabled();
     await press('Never mind'); expect(encodeWorld(world())).toBe(before); expect(rows()).toEqual(beforeRows); expect(unpack).not.toHaveBeenCalled();
-    view.unmount();
+    await view.unmount();
   } finally { jest.restoreAllMocks(); sqlite.close(); }
 });
 
@@ -85,7 +85,7 @@ test.each([
   const { sqlite, rows, cold } = await setup();
   try {
     const initial = world(), before = encodeWorld(initial), beforeRows = rows(), command: GameCommand = { type: 'work-effort', effort }, predicted = resolveCommand(initial, command, true);
-    let view = render(frame()); await press('Work routine. balanced'); await choose(label);
+    let view = await render(frame()); await press('Work routine. balanced'); await choose(label);
     expect(encodeWorld(world())).toBe(before); expect(rows()).toEqual(beforeRows);
     const unpack = jest.spyOn(checkpoints, 'unpackCheckpoint');
     sqlite.exec("CREATE TRIGGER fail_work_routine BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
@@ -97,13 +97,13 @@ test.each([
     sqlite.exec('DROP TRIGGER fail_work_routine'); await press('Set Routine');
     expect(world()).toEqual(predicted); expect(router.navigate).toHaveBeenCalledWith('/life'); expect(screen.queryByRole('button', { name: 'Set Routine' })).toBeNull();
     expect(screen.getByText('Work routine updated')).toBeOnTheScreen(); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore();
-    const savedRows = rows(); view.unmount(); await cold(); view = render(frame());
+    const savedRows = rows(); await view.unmount(); await cold(); view = await render(frame());
     expect(world()).toEqual(predicted); expect(rows()).toEqual(savedRows); expect(screen.getByText('Work routine updated')).toBeOnTheScreen();
     await press('Continue'); const done = world();
     expect(done).toEqual(acknowledge(predicted)); expect(done.people).toEqual(predicted.people); expect(done.random).toEqual(predicted.random); expect(done.accounts).toEqual(initial.accounts); expect(done.ledger).toEqual(initial.ledger); expect(done.workHistory).toEqual(initial.workHistory);
     await press('Work routine. ' + effort); expect(screen.getByRole('radio', { name: label + '. This is your current routine' })).toBeDisabled(); await press('Never mind');
     const doneRows = rows(); await act(async () => { expect(await mockStore.getState().dispatch({ type: 'acknowledge', resultId: predicted.pending!.id })).toBe(false); });
-    expect(world()).toEqual(done); expect(rows()).toEqual(doneRows); view.unmount();
+    expect(world()).toEqual(done); expect(rows()).toEqual(doneRows); await view.unmount();
   } finally { jest.restoreAllMocks(); sqlite.close(); }
 });
 
@@ -112,16 +112,16 @@ test.each(['quit-job', 'retire'] as const)('%s confirmation stays open on save f
   try {
     const initial = world(), beforeRows = rows(), command: GameCommand = { type }, predicted = resolveCommand(initial, command, true);
     const launch = type === 'retire' ? 'Retirement' : 'Resign', label = type === 'retire' ? 'Retire' : 'Resign', title = type === 'retire' ? 'Retire from work?' : 'Resign from this job?';
-    let view = render(frame()); await press(launch); await press('Never mind'); expect(world()).toEqual(initial); expect(rows()).toEqual(beforeRows);
+    let view = await render(frame()); await press(launch); await press('Never mind'); expect(world()).toEqual(initial); expect(rows()).toEqual(beforeRows);
     await press(launch); const unpack = jest.spyOn(checkpoints, 'unpackCheckpoint');
     sqlite.exec("CREATE TRIGGER fail_work_confirmation BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
     await confirm(label); await waitFor(() => expect(screen.getByRole('alert')).toHaveTextContent(/couldn't be saved/));
     expect(screen.getByText(title)).toBeOnTheScreen(); expect(modal().getByRole('button', { name: label })).toBeEnabled(); expect(world()).toEqual(initial); expect(rows()).toEqual(beforeRows);
     sqlite.exec('DROP TRIGGER fail_work_confirmation'); await confirm(label);
     expect(world()).toEqual(predicted); expect(router.navigate).not.toHaveBeenCalled(); expect(screen.queryByText(title)).toBeNull(); expect(world().people[world().activePersonId].employment).toBeNull(); expect(world().accounts).toEqual(initial.accounts); expect(world().ledger).toEqual(initial.ledger); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore();
-    const savedRows = rows(); view.unmount(); await cold(); view = render(frame()); expect(world()).toEqual(predicted); expect(rows()).toEqual(savedRows);
+    const savedRows = rows(); await view.unmount(); await cold(); view = await render(frame()); expect(world()).toEqual(predicted); expect(rows()).toEqual(savedRows);
     await press('Continue'); expect(world()).toEqual(acknowledge(predicted)); expect(world().people).toEqual(predicted.people); expect(world().random).toEqual(predicted.random); expect(world().workHistory).toEqual(predicted.workHistory);
-    const done = world(), doneRows = rows(); await act(async () => { expect(await mockStore.getState().dispatch(command)).toBe(false); }); expect(world()).toEqual(done); expect(rows()).toEqual(doneRows); view.unmount();
+    const done = world(), doneRows = rows(); await act(async () => { expect(await mockStore.getState().dispatch(command)).toBe(false); }); expect(world()).toEqual(done); expect(rows()).toEqual(doneRows); await view.unmount();
   } finally { jest.restoreAllMocks(); sqlite.close(); }
 });
 
@@ -129,13 +129,13 @@ test('a pending real routine save disables mutation launches and duplicate confi
   const { sqlite, rows, pauseNextSave } = await setup(pensionEligibleEmployee());
   try {
     const initial = world(), beforeRows = rows(), command: GameCommand = { type: 'work-effort', effort: 'hard' }, predicted = resolveCommand(initial, command, true);
-    const view = render(frame()); await press('Work routine. balanced'); await choose('Work hard');
+    const view = await render(frame()); await press('Work routine. balanced'); await choose('Work hard');
     const release = pauseNextSave(); await press('Set Routine'); expect(mockStore.getState().busy).toBe(true);
     for (const name of ['Work routine. balanced', 'Resign', 'Retirement', 'Set Routine', 'Never mind']) expect(screen.getByRole('button', { name })).toBeDisabled();
     expect(screen.getByRole('radio', { name: 'Work hard', checked: true })).toBeDisabled();
     await press('Set Routine'); await press('Never mind'); await act(async () => { screen.UNSAFE_getByType(Modal).props.onRequestClose(); });
     expect(screen.getByRole('radio', { name: 'Work hard', checked: true })).toBeOnTheScreen(); expect(world()).toEqual(initial); expect(rows()).toEqual(beforeRows);
     await act(async () => { release(); }); await waitFor(() => expect(mockStore.getState().busy).toBe(false));
-    expect(world()).toEqual(predicted); expect(world().revision).toBe(initial.revision + 1); expect(screen.queryByRole('button', { name: 'Set Routine' })).toBeNull(); view.unmount();
+    expect(world()).toEqual(predicted); expect(world().revision).toBe(initial.revision + 1); expect(screen.queryByRole('button', { name: 'Set Routine' })).toBeNull(); await view.unmount();
   } finally { jest.restoreAllMocks(); sqlite.close(); }
 });

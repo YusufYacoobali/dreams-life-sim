@@ -7,7 +7,7 @@ import {
   render,
   screen,
   waitFor,
-} from '@testing-library/react-native';
+} from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationRouteContext } from 'expo-router/react-navigation';
 import { createGameStore } from '../../src/state/gameStore';
@@ -50,7 +50,7 @@ const press = async (
   role: 'button' | 'radio' = 'button',
 ) => {
   await act(async () => {
-    fireEvent.press(screen.getByRole(role, { name }));
+    await fireEvent.press(screen.getByRole(role, { name }));
   });
 };
 const route = (key: string, children: React.ReactNode) => (
@@ -150,7 +150,7 @@ test.each(['android', 'ios'] as const)(
           {route('game', <PendingEvent />)}
         </>
       );
-      const view = render(frame(content));
+      const view = await render(frame(content));
       await press('Work routine. balanced');
       await press('Work hard', 'radio');
       const stale = screen
@@ -176,7 +176,7 @@ test.each(['android', 'ios'] as const)(
         expect(screen.UNSAFE_queryAllByType(Modal)).toHaveLength(0);
         expect(screen.UNSAFE_getAllByType(FullWindowOverlay)).toHaveLength(1);
       }
-      view.rerender(frame(content, 'life'));
+      await view.rerender(frame(content, 'life'));
       expect(screen.getByText('Work routine updated')).toBeOnTheScreen();
       await act(async () => {
         await stale('hard');
@@ -188,13 +188,13 @@ test.each(['android', 'ios'] as const)(
       await press('Continue');
       expect(world().pending).toBeNull();
       expect(hasAppModal()).toBe(false);
-      view.rerender(frame(content, 'work'));
+      await view.rerender(frame(content, 'work'));
       expect(screen.queryByRole('button', { name: 'Set Routine' })).toBeNull();
       await press('Work routine. hard');
       await press('Take it easy', 'radio');
       await press('Never mind');
       expect(world().revision).toBe(initial.revision + 2);
-      view.unmount();
+      await view.unmount();
     } finally {
       context.sqlite.close();
     }
@@ -214,7 +214,7 @@ test('failed save retains the checked selection and retry; navigating away durin
           {route('game', <PendingEvent />)}
         </>
       ),
-      view = render(frame(content));
+      view = await render(frame(content));
     await press('Work routine. balanced');
     await press('Work hard', 'radio');
     context.sqlite.exec(
@@ -240,13 +240,13 @@ test('failed save retains the checked selection and retry; navigating away durin
     expect(
       screen.getByRole('button', { name: 'Set Routine' }),
     ).toBeOnTheScreen();
-    view.rerender(frame(content, 'life'));
+    await view.rerender(frame(content, 'life'));
     expect(screen.queryByRole('button', { name: 'Set Routine' })).toBeNull();
     await act(async () => {
       release();
     });
     await waitFor(() => expect(mockStore.getState().busy).toBe(false));
-    view.rerender(frame(content, 'work'));
+    await view.rerender(frame(content, 'work'));
     await press('Work routine. balanced');
     expect(screen.getByRole('button', { name: 'Set Routine' })).toBeDisabled();
     await press('Work hard', 'radio');
@@ -256,7 +256,7 @@ test('failed save retains the checked selection and retry; navigating away durin
       'hard',
     );
     expect(mockNavigate).toHaveBeenCalledTimes(1);
-    view.unmount();
+    await view.unmount();
   } finally {
     context.sqlite.close();
   }
@@ -281,7 +281,7 @@ test('same-path owners, stack visibility, identity and retired native callbacks 
     title: 'Second owner',
     choices: [{ id: 'b', label: 'Choice B' }],
   };
-  const view = render(
+  const view = await render(
     frame(
       route(
         'person:a',
@@ -292,7 +292,7 @@ test('same-path owners, stack visibility, identity and retired native callbacks 
   );
   await press('Choice A', 'radio');
   const oldBack = screen.UNSAFE_getByType(Modal).props.onRequestClose;
-  view.rerender(
+  await view.rerender(
     frame(
       <>
         {route(
@@ -325,7 +325,7 @@ test('same-path owners, stack visibility, identity and retired native callbacks 
     body: 'Persistent',
     effects: [],
   };
-  view.rerender(
+  await view.rerender(
     frame(
       route(
         'game',
@@ -335,7 +335,7 @@ test('same-path owners, stack visibility, identity and retired native callbacks 
     ),
   );
   expect(screen.getByText('Saved outcome')).toBeOnTheScreen();
-  view.rerender(
+  await view.rerender(
     frame(
       route(
         'game',
@@ -348,7 +348,7 @@ test('same-path owners, stack visibility, identity and retired native callbacks 
   );
   expect(screen.queryByText('Saved outcome')).toBeNull();
   expect(hasAppModal()).toBe(false);
-  view.rerender(
+  await view.rerender(
     frame(
       route(
         'game',
@@ -358,7 +358,7 @@ test('same-path owners, stack visibility, identity and retired native callbacks 
     ),
   );
   expect(screen.getByText('Saved outcome')).toBeOnTheScreen();
-  view.rerender(
+  await view.rerender(
     frame(
       route(
         'game',
@@ -369,7 +369,7 @@ test('same-path owners, stack visibility, identity and retired native callbacks 
     ),
   );
   expect(screen.queryByText('Saved outcome')).toBeNull();
-  view.unmount();
+  await view.unmount();
 });
 
 test('cinematic cover hides hosted cards and review ownership never blocks itself', async () => {
@@ -391,15 +391,15 @@ test('cinematic cover hides hosted cards and review ownership never blocks itsel
         onChoose={choose}
       />,
     ),
-    view = render(frame(content, 'life'));
+    view = await render(frame(content, 'life'));
   expect(screen.getByText('Enjoying Dreams?')).toBeOnTheScreen();
   expect(hasAppModal()).toBe(false);
-  view.rerender(frame(content, 'life', 'employee', ['game', 'life'], true));
+  await view.rerender(frame(content, 'life', 'employee', ['game', 'life'], true));
   expect(screen.queryByText('Enjoying Dreams?')).toBeNull();
-  view.rerender(frame(content, 'life'));
+  await view.rerender(frame(content, 'life'));
   await press('Later');
   expect(choose).toHaveBeenCalledWith('later');
-  view.unmount();
+  await view.unmount();
 });
 
 function GuardedReview() {
@@ -486,11 +486,11 @@ test.each(['health', 'hobby', 'bank'] as const)(
             <Bank />
           ),
         ),
-        view = render(frame(content, 'exercise'));
+        view = await render(frame(content, 'exercise'));
       if (kind === 'bank') {
         await press(/^Personal debt\./);
         await act(async () => {
-          fireEvent.changeText(
+          await fireEvent.changeText(
             screen.getByLabelText('Repayment amount in USD'),
             '10.17',
           );
@@ -502,7 +502,7 @@ test.each(['health', 'hobby', 'bank'] as const)(
       );
       const release = context.hold();
       await press(confirm);
-      view.rerender(frame(content, 'life'));
+      await view.rerender(frame(content, 'life'));
       await act(async () => {
         release();
       });
@@ -510,12 +510,12 @@ test.each(['health', 'hobby', 'bank'] as const)(
       await act(async () => {
         settle();
       });
-      view.rerender(frame(content, 'exercise'));
+      await view.rerender(frame(content, 'exercise'));
       await press(open);
       expect(screen.getByText(title)).toBeOnTheScreen();
       await press('Never mind');
       expect(world().pending).toBeNull();
-      view.unmount();
+      await view.unmount();
     } finally {
       context.sqlite.close();
     }
@@ -537,7 +537,7 @@ test('settling a retired submit cannot cancel a newer owner with the same event 
     terms: [],
     confirmLabel: 'Submit',
   };
-  const view = render(
+  const view = await render(
     frame(
       route(
         'first',
@@ -552,7 +552,7 @@ test('settling a retired submit cannot cancel a newer owner with the same event 
     ),
   );
   await press('Submit');
-  view.rerender(
+  await view.rerender(
     frame(
       route(
         'second',
@@ -571,5 +571,5 @@ test('settling a retired submit cannot cancel a newer owner with the same event 
   });
   expect(screen.getByText('Replacement review')).toBeOnTheScreen();
   expect(cancelled).not.toHaveBeenCalled();
-  view.unmount();
+  await view.unmount();
 });

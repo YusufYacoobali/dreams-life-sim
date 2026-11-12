@@ -1,5 +1,5 @@
 import React from 'react';
-import { act, fireEvent, render, screen, waitFor } from '@testing-library/react-native';
+import { act, fireEvent, render, screen, waitFor } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { createGameStore } from '../../src/state/gameStore';
 import { encodeWorld } from '../../src/game/model';
@@ -19,7 +19,7 @@ jest.mock('../../src/state/useGame', () => ({ useGame: (selector: unknown) => re
 import School from '../../app/(game)/school';
 
 const frame = () => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider><School /><PendingEvent /></ThemeProvider></SafeAreaProvider>;
-const press = async (name: string | RegExp) => { await act(async () => { fireEvent.press(screen.getByRole('button', { name })); }); };
+const press = async (name: string | RegExp) => { await act(async () => { await fireEvent.press(screen.getByRole('button', { name })); }); };
 
 test.each(['club', 'conduct', 'effort'] as const)('the genuine Riley school %s keeps its failed draft, retries warm and cold-resumes once without rewriting old history', async kind => {
   const { sqlite, driver } = database(), repository = new SaveRepository(driver);
@@ -45,28 +45,28 @@ test.each(['club', 'conduct', 'effort'] as const)('the genuine Riley school %s k
     const changedLabel = kind === 'club' ? clubLabels[club] : kind === 'conduct' ? conductLabels[conduct] : effortLabels[effort];
     const command: GameCommand = kind === 'club' ? { type: 'school-club', communityId: school.id, club } : kind === 'conduct' ? { type: 'school-conduct', communityId: school.id, conduct } : { type: 'study-effort', effort };
     const predicted = resolveCommand(before, command, true), commit = jest.spyOn(repository, 'commit'), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint');
-    const view = render(frame());
+    const view = await render(frame());
 
     await act(async () => { mockStore.setState({ busy: true }); });
     for (const name of [/^Extracurricular Activities/, /^Behave in Class/, /^Study Routine/]) expect(screen.getByRole('button', { name })).toBeDisabled();
-    fireEvent.press(screen.getByRole('button', { name: title }));
+    await fireEvent.press(screen.getByRole('button', { name: title }));
     expect(screen.queryByRole('button', { name: confirm })).toBeNull();
     await act(async () => { mockStore.setState({ busy: false }); });
 
     await press(title);
     const current = screen.getByRole('radio', { name: currentLabel + '. ' + currentReason });
-    expect(current).toBeDisabled(); fireEvent.press(current);
+    expect(current).toBeDisabled(); await fireEvent.press(current);
     expect(screen.getByRole('button', { name: confirm })).toBeDisabled(); await press(confirm);
-    fireEvent.press(screen.getByRole('radio', { name: changedLabel }));
+    await fireEvent.press(screen.getByRole('radio', { name: changedLabel }));
     expect(screen.getByRole('button', { name: confirm })).toBeEnabled(); await press('Never mind');
     expect(commit).not.toHaveBeenCalled(); expect(unpack).not.toHaveBeenCalled(); expect(world()).toBe(before); expect(rows()).toEqual(beforeRows);
 
     await press(title); expect(screen.getByRole('button', { name: confirm })).toBeDisabled();
-    fireEvent.press(screen.getByRole('radio', { name: changedLabel }));
+    await fireEvent.press(screen.getByRole('radio', { name: changedLabel }));
     sqlite.exec("CREATE TRIGGER fail_school_draft BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
     let releaseSave!: () => void;
     saveGate = new Promise(resolve => { releaseSave = resolve; });
-    act(() => { fireEvent.press(screen.getByRole('button', { name: confirm })); });
+    await act(async () => { await fireEvent.press(screen.getByRole('button', { name: confirm })); });
     expect(mockStore.getState().busy).toBe(true); expect(screen.getByRole('button', { name: confirm })).toBeDisabled(); expect(screen.getByRole('button', { name: 'Never mind' })).toBeDisabled();
     expect(screen.getByRole('radio', { name: changedLabel, checked: true })).toBeDisabled(); expect(world()).toBe(before); expect(rows()).toEqual(beforeRows);
     saveGate = null; await act(async () => { releaseSave(); });
@@ -80,7 +80,7 @@ test.each(['club', 'conduct', 'effort'] as const)('the genuine Riley school %s k
     const savedRows = rows(), resultPayload = sqlite.prepare('SELECT payload FROM lives WHERE id=?').get(before.id)?.payload;
     expect(sqlite.prepare('SELECT payload FROM backups WHERE life_id=?').get(before.id)?.payload).toBe(beforePayload);
     unpack.mockRestore(); commit.mockRestore();
-    await act(async () => { await cold(); }); view.rerender(frame());
+    await act(async () => { await cold(); }); await view.rerender(frame());
     expect(world()).toEqual(predicted); expect(rows()).toEqual(savedRows);
     expect(predicted.pending?.kind).toBe('result');
     const acknowledged = resolveCommand(predicted, { type: 'acknowledge', resultId: predicted.pending!.id }, true);
@@ -95,6 +95,6 @@ test.each(['club', 'conduct', 'effort'] as const)('the genuine Riley school %s k
     expect(screen.getByRole('radio', { name: changedLabel + (kind === 'club' ? ' · Current' : '') + '. ' + currentReason })).toBeDisabled();
     expect(screen.getByRole('button', { name: confirm })).toBeDisabled(); await press(confirm); await press('Never mind');
     expect(world()).toBe(finalWorld); expect(rows()).toEqual(finalRows);
-    view.unmount();
+    await view.unmount();
   } finally { jest.restoreAllMocks(); sqlite.close(); }
 }, 60000);

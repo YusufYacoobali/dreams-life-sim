@@ -1,6 +1,6 @@
 import React from 'react';
 import { Modal } from 'react-native';
-import { act, fireEvent, render, screen, waitFor } from '@testing-library/react-native';
+import { act, fireEvent, render, screen, waitFor } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { DatabaseSync } from 'node:sqlite';
 import { mkdtempSync, rmSync } from 'node:fs';
@@ -29,7 +29,7 @@ import Person from '../../app/(game)/person/[id]';
 
 const world = () => mockStore.getState().world!;
 const frame = (child: React.ReactNode = <Campus />) => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider>{child}<PendingEvent /></ThemeProvider></SafeAreaProvider>;
-const press = async (name: string | RegExp) => { await act(async () => { fireEvent.press(screen.getByRole('button', { name })); }); };
+const press = async (name: string | RegExp) => { await act(async () => { await fireEvent.press(screen.getByRole('button', { name })); }); };
 async function command(value: GameCommand) { await act(async () => { expect(await mockStore.getState().dispatch(value)).toBe(true); }); }
 async function finishYear() {
   let guard = 0;
@@ -75,7 +75,7 @@ async function setup() {
 }
 
 test('a genuine paid course earns campus access through attendance, retains a failed introduction and club draft, and cold-reopens exactly the same paid classmates', async () => {
-  const context = await setup(); let view: ReturnType<typeof render> | undefined;
+  const context = await setup(); let view: Awaited<ReturnType<typeof render>> | undefined;
   try {
     const enrolled = world().studyCourses.find(item => item.personId === world().activePersonId && item.status === 'active')!;
     expect(enrolled.origin).toBe('enrolment'); expect(enrolled.months).toBe(0);
@@ -87,8 +87,8 @@ test('a genuine paid course earns campus access through attendance, retains a fa
     expect(course.months).toBe(before.people[before.activePersonId].education.months);
     expect(course.firstPayment).toEqual(enrolled.firstPayment); expect(currentCampus(before)).toBeUndefined();
     const beforeText = encodeWorld(before), beforeRows = context.rows(); expect(Object.keys(beforeRows)).toHaveLength(8);
-    view = render(frame(<Education />)); await press(/^Campus Life\./);
-    expect(router.push).toHaveBeenLastCalledWith('/campus'); expect(world()).toBe(before); expect(context.rows()).toEqual(beforeRows); view.rerender(frame());
+    view = await render(frame(<Education />)); await press(/^Campus Life\./);
+    expect(router.push).toHaveBeenLastCalledWith('/campus'); expect(world()).toBe(before); expect(context.rows()).toEqual(beforeRows); await view.rerender(frame());
     const commit = jest.spyOn(context.repository, 'commit'), dispatch = jest.spyOn(mockStore.getState(), 'dispatch');
     const review = () => screen.UNSAFE_getAllByType(EventModal).find(item => item.props.event?.kind === 'confirmation')!.props.event;
     await press('Meet Fellow Students'); expect(screen.getByText('Meet fellow students?')).toBeOnTheScreen();
@@ -101,10 +101,10 @@ test('a genuine paid course earns campus access through attendance, retains a fa
     context.sqlite.exec('DROP TRIGGER fail_campus'); const release = context.pause(), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint');
     const meet = { type: 'meet-campus' as const, courseId: course.id }, expected = resolveCommand(before, meet, true);
     const submit = screen.getByRole('button', { name: 'Meet Students' });
-    act(() => { fireEvent.press(submit); fireEvent.press(submit); });
+    await act(async () => { await fireEvent.press(submit); await fireEvent.press(submit); });
     expect(mockStore.getState().busy).toBe(true); expect(screen.getByRole('button', { name: 'Meet Students' })).toBeDisabled();
     expect(screen.getByRole('button', { name: 'Never mind' })).toBeDisabled();
-    fireEvent(screen.UNSAFE_getByType(Modal), 'requestClose'); expect(review()).toEqual(terms);
+    await fireEvent(screen.UNSAFE_getByType(Modal), 'requestClose'); expect(review()).toEqual(terms);
     expect(world()).toBe(before); expect(context.rows()).toEqual(beforeRows); expect(dispatch).toHaveBeenCalledTimes(2);
     await act(async () => { release(); }); await waitFor(() => expect(mockStore.getState().busy).toBe(false));
     expect(world()).toEqual(expected); expect(commit).toHaveBeenCalledTimes(2); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore();
@@ -123,22 +123,22 @@ test('a genuine paid course earns campus access through attendance, retains a fa
     expect(introduced.studyCourses.find(item => item.id === course.id)).toEqual(course);
     const introducedRows = context.rows(); expect(introducedRows.receipts).toHaveLength(beforeRows.receipts.length + 1);
     expect(context.sqlite.prepare('SELECT payload FROM backups WHERE life_id=?').get(before.id)?.payload).toBe(beforeRows.lives.find(row => row.id === before.id)!.payload);
-    context.original(); view.unmount(); view = undefined; commit.mockRestore(); dispatch.mockRestore();
+    context.original(); await view.unmount(); view = undefined; commit.mockRestore(); dispatch.mockRestore();
 
-    await context.cold(); expect(world()).toEqual(introduced); expect(context.rows()).toEqual(introducedRows); view = render(frame());
+    await context.cold(); expect(world()).toEqual(introduced); expect(context.rows()).toEqual(introducedRows); view = await render(frame());
     expect(world().pending?.kind).toBe('result'); const resultId = world().pending!.id;
     await press('Continue'); const acknowledged = world(), acknowledgedRows = context.rows();
     expect(acknowledged.revision).toBe(introduced.revision + 1); expect(currentCampus(acknowledged)).toEqual(campus);
     expect(acknowledged.people).toEqual(introduced.people); expect(acknowledged.random).toEqual(introduced.random);
     await act(async () => { expect(await mockStore.getState().dispatch({ type: 'acknowledge', resultId })).toBe(false); });
-    expect(context.rows()).toEqual(acknowledgedRows); expect(world()).toBe(acknowledged); act(() => { mockStore.getState().clearError(); });
+    expect(context.rows()).toEqual(acknowledgedRows); expect(world()).toBe(acknowledged); await act(() => { mockStore.getState().clearError(); });
     const peer = acknowledged.people[campus.students[0].personId], browseRows = context.rows(), browseCommit = jest.spyOn(context.repository, 'commit');
-    await act(async () => { fireEvent.press(screen.getByText(fullName(peer))); });
+    await act(async () => { await fireEvent.press(screen.getByText(fullName(peer))); });
     expect(router.push).toHaveBeenLastCalledWith({ pathname: '/person/[id]', params: { id: peer.id, tab: 'activities' } });
-    mockParams = { id: peer.id, tab: 'activities' }; view.rerender(frame(<Person />));
+    mockParams = { id: peer.id, tab: 'activities' }; await view.rerender(frame(<Person />));
     expect(screen.getByText(fullName(peer))).toBeOnTheScreen(); expect(world()).toBe(acknowledged); expect(context.rows()).toEqual(browseRows); expect(browseCommit).not.toHaveBeenCalled();
-    view.rerender(frame());
-    await act(async () => { fireEvent.press(screen.getByRole('radio', { name: /^Science Club\b/ })); });
+    await view.rerender(frame());
+    await act(async () => { await fireEvent.press(screen.getByRole('radio', { name: /^Science Club\b/ })); });
     expect(screen.getByRole('radio', { name: /^Science Club\b/, checked: true })).toBeOnTheScreen();
     expect(world()).toBe(acknowledged); expect(context.rows()).toEqual(browseRows); expect(browseCommit).not.toHaveBeenCalled();
     const queuedPeer = screen.getByText(fullName(peer)), clubDispatch = jest.spyOn(mockStore.getState(), 'dispatch');
@@ -146,7 +146,7 @@ test('a genuine paid course earns campus access through attendance, retains a fa
     const abandonedConfirm = screen.UNSAFE_getAllByType(EventModal).find(item => item.props.event?.kind === 'confirmation')!.props.onChoose;
     // A queued peer press can arrive while the stack keeps Campus mounted.
     // Navigation must invalidate its review before the old confirm can run.
-    await act(async () => { fireEvent.press(queuedPeer); });
+    await act(async () => { await fireEvent.press(queuedPeer); });
     expect(router.push).toHaveBeenLastCalledWith({ pathname: '/person/[id]', params: { id: peer.id, tab: 'activities' } });
     expect(screen.queryByRole('button', { name: 'Join Club' })).toBeNull();
     await act(async () => { await abandonedConfirm('confirm'); });
@@ -165,5 +165,5 @@ test('a genuine paid course earns campus access through attendance, retains a fa
     expect(context.rows().receipts).toHaveLength(acknowledgedRows.receipts.length + 1); context.original();
     // Actual attended club gains and paused/withdrawn stopping are domain tests;
     // choosing a club itself grants neither attendance nor a skill reward.
-  } finally { view?.unmount(); jest.restoreAllMocks(); context.close(); }
+  } finally { await view?.unmount(); jest.restoreAllMocks(); context.close(); }
 }, 60000);

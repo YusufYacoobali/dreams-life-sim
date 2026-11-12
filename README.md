@@ -15,7 +15,7 @@ npm ci
 npm start
 ```
 
-Use Node 24 for the test suite and an Expo SDK 57-compatible device or development build. Android emulator commands require a configured Android SDK; iOS simulators require macOS. Android/iOS Hermes exports and scoped Android Expo Go interactions are verified. The standalone Android build remains blocked by its required React Native AAR host; it has not been retried through another route. See the [release-readiness audit](docs/RELEASE_READINESS_AUDIT.md) for build identity, branding, device and distribution work still required.
+Use Node 24.3 or newer in the Node 24 line and an Expo SDK 58-compatible Expo Go client or development build. Dependencies target Expo 58.0.25, React Native 0.88.1 and React 19.3.0. After installing dependencies, start with `npx expo start -c`; rebuild an existing native development client for SDK 58. Android emulator commands require a configured Android SDK; iOS simulators require macOS. Android/iOS Hermes exports are verified; prior scoped Android Expo Go interactions and the [release-readiness audit](docs/RELEASE_READINESS_AUDIT.md) describe the earlier SDK and do not establish installed SDK 58 acceptance.
 
 ```sh
 npm run typecheck
@@ -27,6 +27,8 @@ npx expo export --platform all
 
 Tests include native component interactions, deterministic domain checks and real SQLite transactions using Node 24's SQLite module. The [CI workflow](.github/workflows/quality.yml) runs strict app/test types and the Jest regression suite on pushes and pull requests; adding the workflow does not establish that its first hosted run has passed. See the [master plan](docs/planning/MASTER_PLAN.md) and [design reconciliation](docs/planning/design-reconciliation.md) for production requirements.
 
+UI tests use React Native Testing Library 14 with awaited rendering, events and cleanup. `tests/support/rendering.ts` retains the existing explicit component-prop inspections and native press behavior for tests that pause storage while checking busy controls.
+
 The optional `node tools/benchmark-history.cjs` diagnostic measures the current engine/checkpoint workload in this cloud runtime. Its [results and limits](docs/PERFORMANCE.md) do not establish native-device performance.
 
 Full-screen welcome, birth and death ink transitions use local SVG/Reanimated choreography. See [implementation, playback and verification](docs/CINEMATIC_TRANSITIONS.md).
@@ -34,6 +36,8 @@ Full-screen welcome, birth and death ink transitions use local SVG/Reanimated ch
 Interactive **Clutch Shot**, **Safe Cracker** and **Orbital Docking** challenges connect to athlete seasons, burglary and astronaut assignments. Internal testing includes a practice playground with difficulty selection; it is separate from purchased God Mode. See [mini-game controls, save rules and verification](docs/MINIGAMES.md).
 
 Public God Mode is a permanent purchase available from Settings or Extras. Development and explicitly configured internal builds retain separate testing controls behind **three quick taps on the App Preferences area in Settings**. The practice playground remains internal. See [God Mode access and save behavior](docs/GOD_MODE.md).
+
+For all six premium features without purchases, set `DREAMS_UNLOCK_ALL_TESTING=1` in your local `.env` file and run `npx expo start -c`, or use the internal/preview EAS profiles. Settings shows **TEST MODE — ALL UNLOCKED**. Production/store builds always disable this access override. See [premium testing setup](docs/MONETISATION.md#premium-testing-override) for shell commands.
 
 **Activities → Your Life → End This Life** finishes the current character’s story after confirmation, using the normal death, estate and child-continuation flow. A **Before End This Life** checkpoint is saved atomically so the earlier life can be restored as a separate branch through Time Machine.
 

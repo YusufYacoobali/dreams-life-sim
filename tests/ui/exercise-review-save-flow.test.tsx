@@ -1,7 +1,7 @@
 import { displayText } from '../../src/ui/displayNumbers';
 import React from 'react';
 import { Modal } from 'react-native';
-import { act, fireEvent, render, screen, waitFor, within } from '@testing-library/react-native';
+import { act, fireEvent, render, screen, waitFor, within } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { DatabaseSync } from 'node:sqlite';
 import { mkdtempSync, rmSync } from 'node:fs';
@@ -28,7 +28,7 @@ jest.mock('../../src/state/useGame', () => ({ useGame: (selector: unknown) => re
 import Exercise from '../../app/(game)/exercise';
 
 const frame = (pending = true) => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider><Exercise />{pending && <PendingEvent />}</ThemeProvider></SafeAreaProvider>;
-const press = async (name: string | RegExp) => { await act(async () => { fireEvent.press(screen.getByRole('button', { name })); }); };
+const press = async (name: string | RegExp) => { await act(async () => { await fireEvent.press(screen.getByRole('button', { name })); }); };
 const modal = () => within(screen.UNSAFE_getByType(Modal));
 const world = () => mockStore.getState().world!;
 const acknowledge = (input: World) => resolveCommand(input, { type: 'acknowledge', resultId: input.pending!.id }, true);
@@ -64,35 +64,35 @@ test.each([['walk', 'Go for a Walk', 5], ['trainer', 'Hire a Personal Trainer', 
   const context = await setup();
   try {
     const initial = world(), before = context.rows(), canonical = encodeWorld(initial), command: GameCommand = { type: 'exercise', activity }, expected = resolveCommand(initial, command, true), fee = activity === 'trainer' ? rules.US.baseWage / 200n : 0n;
-    const oldPayload = context.sqlite.prepare('SELECT payload FROM lives WHERE id=?').get(initial.id)?.payload, dispatch = jest.spyOn(mockStore.getState(), 'dispatch'), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'); let view = render(frame());
+    const oldPayload = context.sqlite.prepare('SELECT payload FROM lives WHERE id=?').get(initial.id)?.payload, dispatch = jest.spyOn(mockStore.getState(), 'dispatch'), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'); let view = await render(frame());
     await press(new RegExp('^' + title + '\\.')); expect(modal().getByText(title + '?')).toBeOnTheScreen(); expect(modal().getByText(displayText(formatMoney({ minor: fee, currency: 'USD' })))).toBeOnTheScreen(); expect(modal().getByText('−' + energy + '%')).toBeOnTheScreen(); await press('Never mind'); expect(dispatch).not.toHaveBeenCalled(); expect(context.rows()).toEqual(before); expect(encodeWorld(world())).toBe(canonical);
     await press(new RegExp('^' + title + '\\.')); context.sqlite.exec("CREATE TRIGGER fail_exercise_review BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END"); await press('Begin Session');
     await waitFor(() => expect(modal().getByRole('alert')).toHaveTextContent(/couldn't be saved/)); expect(screen.getAllByRole('alert')).toHaveLength(1); expect(modal().getByRole('alert').props.accessibilityLiveRegion).toBe('polite'); expect(modal().getByText(title + '?')).toBeOnTheScreen(); expect(modal().getByText(displayText(formatMoney({ minor: fee, currency: 'USD' })))).toBeOnTheScreen(); expect(modal().getByText('−' + energy + '%')).toBeOnTheScreen(); expect(modal().getByRole('button', { name: 'Begin Session' })).toBeEnabled(); expect(world()).toEqual(initial); expect(context.rows()).toEqual(before);
     context.sqlite.exec('DROP TRIGGER fail_exercise_review'); await press('Begin Session'); expect(world()).toEqual(expected); expect(screen.queryByText(title + '?')).toBeNull(); expect(dispatch).toHaveBeenCalledTimes(2); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore();
     expect(accountFor(world()).cash).toBe(accountFor(initial).cash - fee); expect(world().people[initial.activePersonId].stats.energy).toBe(initial.people[initial.activePersonId].stats.energy - energy); expect(world().actionCounts[initial.activePersonId + ':health:' + initial.date.year + ':exercise']).toBe(1); expect(context.sqlite.prepare('SELECT payload FROM backups WHERE life_id=?').get(initial.id)?.payload).toBe(oldPayload);
-    const savedRows = context.rows(); view.unmount(); await context.cold(); view = render(frame()); expect(world()).toEqual(expected); expect(context.rows()).toEqual(savedRows); expect(screen.getByText(expected.pending!.title)).toBeOnTheScreen(); await press('Continue'); const done = acknowledge(expected); expect(world()).toEqual(done);
-    const doneRows = context.rows(), coldDispatch = jest.spyOn(mockStore.getState(), 'dispatch'); const sessions = screen.getAllByRole('button', { name: /Your focused session is complete this year$/ }); expect(sessions).toHaveLength(6); for (const session of sessions) { expect(session).toBeDisabled(); fireEvent.press(session); } expect(coldDispatch).not.toHaveBeenCalled(); expect(context.rows()).toEqual(doneRows); expect(world()).toEqual(done); context.original(); view.unmount();
+    const savedRows = context.rows(); await view.unmount(); await context.cold(); view = await render(frame()); expect(world()).toEqual(expected); expect(context.rows()).toEqual(savedRows); expect(screen.getByText(expected.pending!.title)).toBeOnTheScreen(); await press('Continue'); const done = acknowledge(expected); expect(world()).toEqual(done);
+    const doneRows = context.rows(), coldDispatch = jest.spyOn(mockStore.getState(), 'dispatch'); const sessions = screen.getAllByRole('button', { name: /Your focused session is complete this year$/ }); expect(sessions).toHaveLength(6); for (const session of sessions) { expect(session).toBeDisabled(); await fireEvent.press(session); } expect(coldDispatch).not.toHaveBeenCalled(); expect(context.rows()).toEqual(doneRows); expect(world()).toEqual(done); context.original(); await view.unmount();
   } finally { jest.restoreAllMocks(); context.close(); }
 });
 
 test('a held session blocks immediate stale submission, alternative sessions, cancel and Android Back without losing the selected activity', async () => {
   const context = await setup();
   try {
-    const initial = world(), before = context.rows(), expected = resolveCommand(initial, { type: 'exercise', activity: 'trainer' }, true), dispatch = jest.spyOn(mockStore.getState(), 'dispatch'), view = render(frame()); await press(/^Hire a Personal Trainer\./);
+    const initial = world(), before = context.rows(), expected = resolveCommand(initial, { type: 'exercise', activity: 'trainer' }, true), dispatch = jest.spyOn(mockStore.getState(), 'dispatch'), view = await render(frame()); await press(/^Hire a Personal Trainer\./);
     const submit = screen.UNSAFE_getByType(EventModal).props.onChoose, release = context.pauseNextSave();
-    await act(async () => { fireEvent.press(screen.getByRole('button', { name: 'Begin Session' })); submit('confirm'); }); expect(dispatch).toHaveBeenCalledTimes(1); expect(mockStore.getState().busy).toBe(true); expect(modal().getByRole('button', { name: 'Begin Session', busy: true })).toBeDisabled(); expect(screen.getByRole('button', { name: /^Go for a Walk\./ })).toBeDisabled();
+    await act(async () => { await fireEvent.press(screen.getByRole('button', { name: 'Begin Session' })); submit('confirm'); }); expect(dispatch).toHaveBeenCalledTimes(1); expect(mockStore.getState().busy).toBe(true); expect(modal().getByRole('button', { name: 'Begin Session', busy: true })).toBeDisabled(); expect(screen.getByRole('button', { name: /^Go for a Walk\./ })).toBeDisabled();
     await press(/^Go for a Walk\./); await press('Never mind'); await act(async () => { screen.UNSAFE_getByType(Modal).props.onRequestClose(); }); expect(modal().getByText('Hire a Personal Trainer?')).toBeOnTheScreen(); expect(context.rows()).toEqual(before); expect(world()).toEqual(initial);
-    await act(async () => { release(); }); await waitFor(() => expect(mockStore.getState().busy).toBe(false)); expect(world()).toEqual(expected); expect(world().revision).toBe(initial.revision + 1); expect(dispatch).toHaveBeenCalledTimes(1); context.original(); view.unmount();
+    await act(async () => { release(); }); await waitFor(() => expect(mockStore.getState().busy).toBe(false)); expect(world()).toEqual(expected); expect(world().revision).toBe(initial.revision + 1); expect(dispatch).toHaveBeenCalledTimes(1); context.original(); await view.unmount();
   } finally { jest.restoreAllMocks(); context.close(); }
 });
 
 test('an unrelated actual revision keeps the reviewed session, while a new life clears it and preserves the existing age gates', async () => {
   const context = await setup();
   try {
-    const initial = world(), view = render(frame(false)); await press(/^Hire a Personal Trainer\./); const review = screen.UNSAFE_getByType(EventModal).props.event;
+    const initial = world(), view = await render(frame(false)); await press(/^Hire a Personal Trainer\./); const review = screen.UNSAFE_getByType(EventModal).props.event;
     await act(async () => { expect(await mockStore.getState().dispatch({ type: 'meditate' })).toBe(true); }); expect(screen.UNSAFE_getByType(EventModal).props.event).toEqual(review); await act(async () => { expect(await mockStore.getState().dispatch({ type: 'acknowledge', resultId: world().pending!.id })).toBe(true); }); expect(screen.UNSAFE_getByType(EventModal).props.event).toEqual(review);
     await act(async () => { expect(await mockStore.getState().startLife(randomCreation(42), 42)).toBe(true); expect(await mockStore.getState().acknowledgeBirth()).toBe(true); }); expect(screen.queryByRole('button', { name: 'Begin Session' })).toBeNull(); const newborn = world(), newbornRows = context.rows(), dispatch = jest.spyOn(mockStore.getState(), 'dispatch');
-    const sessions = screen.getAllByRole('button', { name: /Available from age/ }); expect(sessions).toHaveLength(6); for (const session of sessions) { expect(session).toBeDisabled(); fireEvent.press(session); } expect(dispatch).not.toHaveBeenCalled(); expect(context.rows()).toEqual(newbornRows); expect(world()).toEqual(newborn);
-    await act(async () => { expect(await mockStore.getState().selectLife(initial.id)).toBe(true); }); expect(screen.queryByRole('button', { name: 'Begin Session' })).toBeNull(); expect(world().people[initial.activePersonId].stats.energy).toBe(initial.people[initial.activePersonId].stats.energy); expect(world().actionCounts[initial.activePersonId + ':health:' + initial.date.year + ':exercise']).toBeUndefined(); context.original(); view.unmount();
+    const sessions = screen.getAllByRole('button', { name: /Available from age/ }); expect(sessions).toHaveLength(6); for (const session of sessions) { expect(session).toBeDisabled(); await fireEvent.press(session); } expect(dispatch).not.toHaveBeenCalled(); expect(context.rows()).toEqual(newbornRows); expect(world()).toEqual(newborn);
+    await act(async () => { expect(await mockStore.getState().selectLife(initial.id)).toBe(true); }); expect(screen.queryByRole('button', { name: 'Begin Session' })).toBeNull(); expect(world().people[initial.activePersonId].stats.energy).toBe(initial.people[initial.activePersonId].stats.energy); expect(world().actionCounts[initial.activePersonId + ':health:' + initial.date.year + ':exercise']).toBeUndefined(); context.original(); await view.unmount();
   } finally { jest.restoreAllMocks(); context.close(); }
 });

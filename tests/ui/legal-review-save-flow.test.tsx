@@ -1,7 +1,7 @@
 import React from 'react';
 import { router } from 'expo-router';
 import { Modal } from 'react-native';
-import { act, fireEvent, render, screen, waitFor, within } from '@testing-library/react-native';
+import { act, fireEvent, render, screen, waitFor, within } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { DatabaseSync } from 'node:sqlite';
 import { mkdtempSync, rmSync } from 'node:fs';
@@ -31,9 +31,9 @@ import PrisonActivities from '../../app/(game)/prison-activities';
 import BlackMarket from '../../app/(game)/black-market';
 
 const frame = (child: React.ReactNode) => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider>{child}<PendingEvent /></ThemeProvider></SafeAreaProvider>;
-const press = async (name: string | RegExp) => { await act(async () => { fireEvent.press(screen.getByRole('button', { name })); }); };
-const chooseConduct = async (name: RegExp) => { await act(async () => { fireEvent.press(screen.getByRole('radio', { name })); }); };
-const confirm = async (name: string) => { await act(async () => { fireEvent.press(within(screen.UNSAFE_getByType(Modal)).getByRole('button', { name })); }); };
+const press = async (name: string | RegExp) => { await act(async () => { await fireEvent.press(screen.getByRole('button', { name })); }); };
+const chooseConduct = async (name: RegExp) => { await act(async () => { await fireEvent.press(screen.getByRole('radio', { name })); }); };
+const confirm = async (name: string) => { await act(async () => { await fireEvent.press(within(screen.UNSAFE_getByType(Modal)).getByRole('button', { name })); }); };
 const world = () => mockStore.getState().world!;
 const ack = (value: World) => resolveCommand(value, { type: 'acknowledge', resultId: value.pending!.id }, true);
 const choose = (value: World, choiceId: string) => resolveCommand(value, { type: 'choose', eventId: value.pending!.id, choiceId }, true);
@@ -91,15 +91,15 @@ test('the exact reviewed counsel/payment survives on-disk rollback, busy duplica
   const initial = openCase(), item = initial.cases[0], db = await setup(initial); mockCaseId = item.id;
   try {
     const command: GameCommand = { type: 'retain-counsel', caseId: item.id, counsel: 'private' }, expected = resolveCommand(initial, command, true), beforeRows = db.rows(), originalPayload = db.sqlite.prepare('SELECT payload FROM lives WHERE id=?').get(initial.id)?.payload;
-    let view = render(frame(<Cases />)); await press(/^Vandalism\./); expect(router.push).toHaveBeenLastCalledWith({ pathname: '/case/[id]', params: { id: item.id } }); expect(world()).toEqual(initial); expect(db.rows()).toEqual(beforeRows);
-    view.rerender(frame(<CaseDetail />)); await press(/Private Counsel\./);
+    let view = await render(frame(<Cases />)); await press(/^Vandalism\./); expect(router.push).toHaveBeenLastCalledWith({ pathname: '/case/[id]', params: { id: item.id } }); expect(world()).toEqual(initial); expect(db.rows()).toEqual(beforeRows);
+    await view.rerender(frame(<CaseDetail />)); await press(/Private Counsel\./);
     const cancelled = screen.UNSAFE_getAllByType(EventModal).find(item => item.props.event?.kind === 'confirmation')!.props;
     await confirm('Never mind'); await act(async () => { await cancelled.onChoose('confirm'); });
     expect(accountFor(world()).cash).toBe(accountFor(initial).cash); expect(db.rows()).toEqual(beforeRows); expect(world()).toEqual(initial);
     await press(/Private Counsel\./); await act(async () => { cancelled.onCancel(); }); expect(screen.getByText('Change representation?')).toBeOnTheScreen();
     const unmounted = screen.UNSAFE_getAllByType(EventModal).find(item => item.props.event?.kind === 'confirmation')!.props.onChoose;
-    view.unmount(); await act(async () => { await unmounted('confirm'); }); expect(accountFor(world()).cash).toBe(accountFor(initial).cash); expect(db.rows()).toEqual(beforeRows);
-    view = render(frame(<CaseDetail />)); await press(/Private Counsel\./); const unpack = jest.spyOn(checkpoints, 'unpackCheckpoint');
+    await view.unmount(); await act(async () => { await unmounted('confirm'); }); expect(accountFor(world()).cash).toBe(accountFor(initial).cash); expect(db.rows()).toEqual(beforeRows);
+    view = await render(frame(<CaseDetail />)); await press(/Private Counsel\./); const unpack = jest.spyOn(checkpoints, 'unpackCheckpoint');
     db.sqlite.exec("CREATE TRIGGER fail_legal_ui BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END"); await confirm('Choose Counsel');
     await waitFor(() => expect(screen.getByRole('alert')).toHaveTextContent(/couldn't be saved/)); expect(screen.getAllByRole('alert')).toHaveLength(1);
     expect(screen.getByRole('button', { name: 'Choose Counsel' })).toBeEnabled(); expect(screen.getByText('Change representation?')).toBeOnTheScreen(); expect(db.rows()).toEqual(beforeRows); expect(world()).toEqual(initial);
@@ -109,55 +109,55 @@ test('the exact reviewed counsel/payment survives on-disk rollback, busy duplica
     await act(async () => { release(); }); await waitFor(() => expect(mockStore.getState().busy).toBe(false)); expect(world()).toEqual(expected); expect(screen.queryByRole('button', { name: 'Choose Counsel' })).toBeNull(); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore();
     expect(accountFor(world()).cash).toBe(accountFor(initial).cash - item.counselFee.minor); expect(world().random).toEqual(initial.random); expect(world().cases[0].evidence).toBe(item.evidence); expect(world().cases[0].trialRoll).toBe(item.trialRoll);
     const savedRows = db.rows(), raw = db.sqlite.prepare('SELECT payload FROM backups WHERE life_id=?').get(initial.id)?.payload; expect(raw).toBe(originalPayload);
-    view.unmount(); await db.cold(); view = render(frame(<CaseDetail />)); expect(world()).toEqual(expected); expect(db.rows()).toEqual(savedRows);
-    await press('Continue'); expect(world()).toEqual(ack(expected)); expect(world().ledger).toEqual(expected.ledger); expect(world().random).toEqual(expected.random); expect(world().sentences).toEqual(expected.sentences); db.original(); view.unmount();
+    await view.unmount(); await db.cold(); view = await render(frame(<CaseDetail />)); expect(world()).toEqual(expected); expect(db.rows()).toEqual(savedRows);
+    await press('Continue'); expect(world()).toEqual(ack(expected)); expect(world().ledger).toEqual(expected.ledger); expect(world().random).toEqual(expected.random); expect(world().sentences).toEqual(expected.sentences); db.original(); await view.unmount();
   } finally { jest.restoreAllMocks(); db.close(); }
 });
 
 test('an unchanged prison routine saves nothing; a changed draft survives rollback and cold-resumes without granting free work/study', async () => {
   const initial = prison(), db = await setup(initial);
   try {
-    const initialRows = db.rows(), dispatch = jest.spyOn(mockStore.getState(), 'dispatch'); let view = render(frame(<PrisonActivities />));
+    const initialRows = db.rows(), dispatch = jest.spyOn(mockStore.getState(), 'dispatch'); let view = await render(frame(<PrisonActivities />));
     expect(screen.getByRole('button', { name: 'Save Prison Routine. This is your current routine' })).toBeDisabled(); await press('Save Prison Routine. This is your current routine'); expect(dispatch).not.toHaveBeenCalled(); expect(db.rows()).toEqual(initialRows);
-    fireEvent(screen.getByLabelText('Prison work'), 'valueChange', true); fireEvent(screen.getByLabelText('Prison study'), 'valueChange', true); await chooseConduct(/Socialise in the Yard/);
+    await fireEvent(screen.getByLabelText('Prison work'), 'valueChange', true); await fireEvent(screen.getByLabelText('Prison study'), 'valueChange', true); await chooseConduct(/Socialise in the Yard/);
     const routine = { work: true, study: true, exercise: false, conduct: 'social' as const }, command: GameCommand = { type: 'prison-routine', routine }, expected = resolveCommand(initial, command, true), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint');
     db.sqlite.exec("CREATE TRIGGER fail_legal_ui BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END"); await press('Save Prison Routine');
     await waitFor(() => expect(screen.getByRole('alert')).toHaveTextContent(/couldn't be saved/)); expect(screen.getByLabelText('Prison work').props.value).toBe(true); expect(screen.getByLabelText('Prison study').props.value).toBe(true); expect(screen.getByRole('radio', { name: /Socialise in the Yard.*Selected/, checked: true })).toBeDisabled(); expect(world()).toEqual(initial); expect(db.rows()).toEqual(initialRows);
-    db.sqlite.exec('DROP TRIGGER fail_legal_ui'); const release = db.pauseNextSave(); await press('Save Prison Routine'); expect(screen.getByRole('button', { name: 'Save Prison Routine', busy: true })).toBeDisabled(); expect(screen.getByLabelText('Prison study')).toBeDisabled(); await press('Save Prison Routine');
-    await act(async () => { release(); }); await waitFor(() => expect(mockStore.getState().busy).toBe(false)); expect(world()).toEqual(expected); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore();
+    db.sqlite.exec('DROP TRIGGER fail_legal_ui'); const release = db.pauseNextSave(), pendingSave = fireEvent.press(screen.getByRole('button', { name: 'Save Prison Routine' })); await waitFor(() => expect(screen.getByRole('button', { name: 'Save Prison Routine', busy: true })).toBeDisabled()); expect(screen.getByLabelText('Prison study')).toBeDisabled(); await press('Save Prison Routine');
+    await act(async () => { release(); }); await pendingSave; await waitFor(() => expect(mockStore.getState().busy).toBe(false)); expect(world()).toEqual(expected); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore();
     expect(world().accounts).toEqual(initial.accounts); expect(world().random).toEqual(initial.random); expect(activeSentence(world())?.servedMonths).toBe(activeSentence(initial)?.servedMonths); expect(activeSentence(world())?.studyMonths).toBe(activeSentence(initial)?.studyMonths);
-    const savedRows = db.rows(); view.unmount(); await db.cold(); view = render(frame(<PrisonActivities />)); expect(world()).toEqual(expected); expect(db.rows()).toEqual(savedRows); await press('Continue'); expect(world()).toEqual(ack(expected)); expect(world().ledger).toEqual(initial.ledger);
+    const savedRows = db.rows(); await view.unmount(); await db.cold(); view = await render(frame(<PrisonActivities />)); expect(world()).toEqual(expected); expect(db.rows()).toEqual(savedRows); await press('Continue'); expect(world()).toEqual(ack(expected)); expect(world().ledger).toEqual(initial.ledger);
     const doneRows = db.rows(); await press('Save Prison Routine. This is your current routine'); expect(db.rows()).toEqual(doneRows); db.original();
-    view.rerender(frame(<Prison />)); const beforeContinue = encodeWorld(world());
+    await view.rerender(frame(<Prison />)); const beforeContinue = encodeWorld(world());
     db.sqlite.exec("CREATE TRIGGER fail_prison_continue BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END"); await press(world().annual ? 'Continue This Year' : 'Age Up');
     await waitFor(() => expect(screen.getByRole('alert')).toHaveTextContent(/couldn't be saved/)); expect(screen.getAllByRole('alert')).toHaveLength(1); expect(encodeWorld(world())).toBe(beforeContinue); expect(db.rows()).toEqual(doneRows);
-    db.sqlite.exec('DROP TRIGGER fail_prison_continue'); view.unmount();
+    db.sqlite.exec('DROP TRIGGER fail_prison_continue'); await view.unmount();
   } finally { jest.restoreAllMocks(); db.close(); }
 });
 
 test('case identity navigation discards an old review; an ordinary revision retains a separate prison routine draft', async () => {
   let db = await setup(openCase()); mockCaseId = world().cases[0].id;
   try {
-    const savedRows = db.rows(), originalId = mockCaseId, view = render(frame(<CaseDetail />)); await press(/Private Counsel\./);
+    const savedRows = db.rows(), originalId = mockCaseId, view = await render(frame(<CaseDetail />)); await press(/Private Counsel\./);
     const stale = screen.UNSAFE_getAllByType(EventModal).find(item => item.props.event?.kind === 'confirmation')!.props.onChoose;
-    mockCaseId = 'missing'; view.rerender(frame(<CaseDetail />)); expect(screen.queryByRole('button', { name: 'Choose Counsel' })).toBeNull(); expect(screen.getByText('This case could not be found.')).toBeOnTheScreen();
+    mockCaseId = 'missing'; await view.rerender(frame(<CaseDetail />)); expect(screen.queryByRole('button', { name: 'Choose Counsel' })).toBeNull(); expect(screen.getByText('This case could not be found.')).toBeOnTheScreen();
     await act(async () => { await stale('confirm'); }); expect(db.rows()).toEqual(savedRows);
-    mockCaseId = originalId; view.rerender(frame(<CaseDetail />)); await act(async () => { await stale('confirm'); }); expect(screen.queryByRole('button', { name: 'Choose Counsel' })).toBeNull(); expect(db.rows()).toEqual(savedRows); view.unmount();
+    mockCaseId = originalId; await view.rerender(frame(<CaseDetail />)); await act(async () => { await stale('confirm'); }); expect(screen.queryByRole('button', { name: 'Choose Counsel' })).toBeNull(); expect(db.rows()).toEqual(savedRows); await view.unmount();
   } finally { db.close(); }
   db = await setup(prison());
   try {
-    const view = render(frame(<PrisonActivities />)); fireEvent(screen.getByLabelText('Prison exercise'), 'valueChange', true); const person = prisonContacts(world())[0]; expect(person).toBeDefined();
-    await act(async () => { expect(await mockStore.getState().dispatch({ type: 'prison-interact', personId: person.id, action: 'befriend' })).toBe(true); }); await press('Continue'); expect(screen.getByLabelText('Prison exercise').props.value).toBe(true); expect(screen.getByRole('button', { name: 'Save Prison Routine' })).toBeEnabled(); expect(activeSentence(world())?.routine.exercise).toBe(false); db.original(); view.unmount();
+    const view = await render(frame(<PrisonActivities />)); await fireEvent(screen.getByLabelText('Prison exercise'), 'valueChange', true); const person = prisonContacts(world())[0]; expect(person).toBeDefined();
+    await act(async () => { expect(await mockStore.getState().dispatch({ type: 'prison-interact', personId: person.id, action: 'befriend' })).toBe(true); }); await press('Continue'); expect(screen.getByLabelText('Prison exercise').props.value).toBe(true); expect(screen.getByRole('button', { name: 'Save Prison Routine' })).toBeEnabled(); expect(activeSentence(world())?.routine.exercise).toBe(false); db.original(); await view.unmount();
   } finally { db.close(); }
 });
 
 test('a black-market reviewed alias stays exact on failure while its input is locked during retry', async () => {
   const initial = decodeWorld(JSON.stringify(graduate)), db = await setup(initial);
   try {
-    const view = render(frame(<BlackMarket />)); fireEvent.changeText(screen.getByLabelText('Alias for false identity document'), '  Retained Alias  '); await press(/False Identity Document\./);
+    const view = await render(frame(<BlackMarket />)); await fireEvent.changeText(screen.getByLabelText('Alias for false identity document'), '  Retained Alias  '); await press(/False Identity Document\./);
     db.sqlite.exec("CREATE TRIGGER fail_legal_ui BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END"); await confirm('Buy Item'); expect(screen.getAllByRole('alert')).toHaveLength(1); expect(screen.getByLabelText('Alias for false identity document')).toHaveDisplayValue('  Retained Alias  '); expect(screen.getByText('Retained Alias')).toBeOnTheScreen(); expect(world()).toEqual(initial);
     db.sqlite.exec('DROP TRIGGER fail_legal_ui'); const release = db.pauseNextSave(); await confirm('Buy Item'); expect(screen.getByLabelText('Alias for false identity document')).toBeDisabled(); await act(async () => { release(); }); await waitFor(() => expect(mockStore.getState().busy).toBe(false));
-    const expected = resolveCommand(initial, { type: 'black-market', kind: 'false-id', alias: 'Retained Alias' }, true); expect(world()).toEqual(expected); expect(world().contraband.at(-1)?.alias).toBe('Retained Alias'); expect(screen.queryByRole('button', { name: 'Buy Item' })).toBeNull(); db.original(); view.unmount();
+    const expected = resolveCommand(initial, { type: 'black-market', kind: 'false-id', alias: 'Retained Alias' }, true); expect(world()).toEqual(expected); expect(world().contraband.at(-1)?.alias).toBe('Retained Alias'); expect(screen.queryByRole('button', { name: 'Buy Item' })).toBeNull(); db.original(); await view.unmount();
   } finally { db.close(); }
 });
 
@@ -165,10 +165,10 @@ test('a black-market reviewed alias stays exact on failure while its input is lo
 test('actual life selection clears the prior legal review and alias instead of reviving them on return', async () => {
   const initial = decodeWorld(JSON.stringify(graduate)), db = await setup(initial);
   try {
-    const view = render(frame(<BlackMarket />)); fireEvent.changeText(screen.getByLabelText('Alias for false identity document'), 'Previous life draft'); await press(/False Identity Document\./); expect(screen.getByRole('button', { name: 'Buy Item' })).toBeOnTheScreen();
+    const view = await render(frame(<BlackMarket />)); await fireEvent.changeText(screen.getByLabelText('Alias for false identity document'), 'Previous life draft'); await press(/False Identity Document\./); expect(screen.getByRole('button', { name: 'Buy Item' })).toBeOnTheScreen();
     await act(async () => { expect(await mockStore.getState().startLife(randomCreation(44), 44)).toBe(true); });
     expect(world().id).toBe('life_legal_second'); expect(screen.getByLabelText('Alias for false identity document')).toHaveDisplayValue(''); expect(screen.queryByRole('button', { name: 'Buy Item' })).toBeNull();
     await act(async () => { expect(await mockStore.getState().selectLife(initial.id)).toBe(true); });
-    expect(world()).toEqual(initial); expect(screen.getByLabelText('Alias for false identity document')).toHaveDisplayValue(''); expect(screen.queryByRole('button', { name: 'Buy Item' })).toBeNull(); db.original(); view.unmount();
+    expect(world()).toEqual(initial); expect(screen.getByLabelText('Alias for false identity document')).toHaveDisplayValue(''); expect(screen.queryByRole('button', { name: 'Buy Item' })).toBeNull(); db.original(); await view.unmount();
   } finally { db.close(); }
 });

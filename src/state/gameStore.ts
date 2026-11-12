@@ -1,4 +1,4 @@
-import { requiredFeature } from '../purchases/access';
+import { hasPremiumAccess, requiredFeature } from '../purchases/access';
 import type { PremiumFeature } from '../purchases/catalog';
 import type { ReviewOffer, ReviewResponse, ReviewTracker } from '../reviews/tracker';
 import { createStore } from 'zustand/vanilla';
@@ -34,6 +34,7 @@ export type GameState = {
 };
 
 export function createGameStore(deps: Dependencies) {
+  const premiumAccess = (feature: PremiumFeature) => hasPremiumAccess(deps.premiumAccess?.(feature) === true);
   return createStore<GameState>((set, get) => {
     let restoreAttempt: { before: World; snapshotId: string; branchId: string } | null = null;
     let godModeAttempt: { before: World; signature: string; commandId: string } | null = null;
@@ -99,7 +100,7 @@ export function createGameStore(deps: Dependencies) {
       startLife: (input, seed) => run(async () => {
         const natural = randomCreation(seed);
         const royalChoice = input.background === 'royal' && !(natural.background === 'royal' && input.country === natural.country);
-        const checkRoyalAccess = () => { if (royalChoice && !deps.premiumAccess?.('god_mode') && !deps.godModeAccess?.()) throw new IneligibleAction('God Mode ownership is required to choose a royal birth.'); };
+        const checkRoyalAccess = () => { if (royalChoice && !premiumAccess('god_mode') && !deps.godModeAccess?.()) throw new IneligibleAction('God Mode ownership is required to choose a royal birth.'); };
         checkRoyalAccess();
         const world = immutableWorld(createLife(deps.id(), seed, input, deps.date()));
         const repository = await deps.repository();
@@ -138,24 +139,24 @@ export function createGameStore(deps: Dependencies) {
         set({ snapshots: await (await deps.repository()).snapshot(world.id, world.revision) });
       }, 'This moment could not be saved. Your current life was kept.'),
       restoreSnapshot: snapshotId => run(async () => {
-        if (!deps.premiumAccess?.('time_machine')) throw new IneligibleAction('Unlimited Time Machine ownership is required to restore a checkpoint.');
+        if (!premiumAccess('time_machine')) throw new IneligibleAction('Unlimited Time Machine ownership is required to restore a checkpoint.');
         const world = get().world; if (!world) throw new IneligibleAction('Open a life first');
         if (restoreAttempt?.before !== world || restoreAttempt.snapshotId !== snapshotId) restoreAttempt = { before: world, snapshotId, branchId: deps.id() };
         const repository = await deps.repository();
-        if (!deps.premiumAccess?.('time_machine')) throw new IneligibleAction('Unlimited Time Machine ownership is required to restore a checkpoint.');
+        if (!premiumAccess('time_machine')) throw new IneligibleAction('Unlimited Time Machine ownership is required to restore a checkpoint.');
         const next = await repository.restoreBranch(world.id, snapshotId, world.revision, restoreAttempt.branchId, 'restore:' + restoreAttempt.branchId);
         const lives = await repository.list();
         set({ world: next, lives, snapshots: [] }); restoreAttempt = null;
       }, 'Could not restore this checkpoint. Your current life was kept.'),
       editGodMode: edit => run(async () => {
-        if (!deps.premiumAccess?.('god_mode') && !deps.godModeAccess?.()) throw new IneligibleAction('God Mode is unavailable or switched off.');
+        if (!premiumAccess('god_mode') && !deps.godModeAccess?.()) throw new IneligibleAction('God Mode is unavailable or switched off.');
         const world = get().world;
         if (!world) throw new IneligibleAction('Open a life first');
         const next = applyGodModeEdits(world, edit);
         const signature = JSON.stringify(edit);
         if (godModeAttempt?.before !== world || godModeAttempt.signature !== signature) godModeAttempt = { before: world, signature, commandId: 'god-mode:' + deps.id() };
         const repository = await deps.repository();
-        if (!deps.premiumAccess?.('god_mode') && !deps.godModeAccess?.()) throw new IneligibleAction('God Mode is unavailable or switched off.');
+        if (!premiumAccess('god_mode') && !deps.godModeAccess?.()) throw new IneligibleAction('God Mode is unavailable or switched off.');
         const committed = await repository.commit(next, world.revision, godModeAttempt.commandId, 'Before God Mode');
         set({ world: committed, snapshots: [], lives: get().lives.map(life => life.id === committed.id ? { ...life, revision: committed.revision } : life) });
         godModeAttempt = null;
@@ -164,10 +165,10 @@ export function createGameStore(deps: Dependencies) {
         const world = get().world;
         if (!world) throw new IneligibleAction('Open a life first');
         const feature = requiredFeature(world, command);
-        if (feature && !deps.premiumAccess?.(feature)) throw new IneligibleAction('This career requires ownership. Open Dreams Store to unlock it.');
+        if (feature && !premiumAccess(feature)) throw new IneligibleAction('This career requires ownership. Open Dreams Store to unlock it.');
         const next = resolveCommand(world, command, true);
         const repository = await deps.repository();
-        if (feature && !deps.premiumAccess?.(feature)) throw new IneligibleAction('This career requires ownership. Open Dreams Store to unlock it.');
+        if (feature && !premiumAccess(feature)) throw new IneligibleAction('This career requires ownership. Open Dreams Store to unlock it.');
         const commandId = 'revision:' + world.revision + ':' + command.type;
         const committed = await repository.commit(next, world.revision, commandId, command.type === 'end-life' ? 'Before End This Life' : command.type === 'advance');
         // The durable, returned result determines feedback, before optional review reads.

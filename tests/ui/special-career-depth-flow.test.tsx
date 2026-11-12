@@ -1,5 +1,5 @@
 import React from 'react';
-import { act, fireEvent, render, screen, waitFor } from '@testing-library/react-native';
+import { act, fireEvent, render, screen, waitFor } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { DatabaseSync } from 'node:sqlite';
 import { mkdtempSync, rmSync } from 'node:fs';
@@ -22,7 +22,7 @@ import oldCareerArchive from '../fixtures/v12-career-archive.json';
 let mockStore: ReturnType<typeof createGameStore>;
 jest.mock('../../src/state/useGame', () => ({ useGame: (selector: unknown) => require('zustand').useStore(mockStore, selector) }));
 const frame = () => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 24, bottom: 48, left: 0, right: 0 } }}><ThemeProvider><PendingEvent /></ThemeProvider></SafeAreaProvider>;
-const press = async (label: string) => { await act(async () => fireEvent.press(screen.getByRole('button', { name: label }))); };
+const press = async (label: string) => { await act(async () => await fireEvent.press(screen.getByRole('button', { name: label }))); };
 
 test('a declared new scene at a genuine recorded Streamer context retains old archive bytes and exact held failure/retry/warm0/backup/closed-connection result/once acknowledgement', async () => {
   const scene = specialCareerDepthTemplates.find(row => row.id === 'career-streamer-chair-soundcheck')!, initial = careerDepthWorld(scene);
@@ -34,7 +34,7 @@ test('a declared new scene at a genuine recorded Streamer context retains old ar
   const directory = mkdtempSync(join(tmpdir(), 'dreams-career-depth-')), path = join(directory, 'dreams.db');
   let sqlite!: DatabaseSync;
   let repository: SaveRepository, nextYield: Promise<void> | undefined;
-  let view: ReturnType<typeof render> | undefined;
+  let view: Awaited<ReturnType<typeof render>> | undefined;
   function connect(): SqlDatabase {
     const connection = sqlite = new DatabaseSync(path); connection.exec('PRAGMA foreign_keys=ON');
     const session: SqlSession = {
@@ -61,14 +61,14 @@ test('a declared new scene at a genuine recorded Streamer context retains old ar
       }
       for (const snapshot of oldCareerArchive.snapshots) expect(sqlite.prepare('SELECT payload FROM snapshots WHERE life_id=? AND snapshot_id=?').get(oldLifeId, snapshot.summary.id)?.payload).toBe(snapshot.payload);
     };
-    await repository.create(initial); await bootstrap(); view = render(frame());
+    await repository.create(initial); await bootstrap(); view = await render(frame());
     expect(Object.keys(rows())).toHaveLength(8); expect(screen.getByText(event.title)).toBeOnTheScreen(); oldRowsExact();
     const before = rows(), world = mockStore.getState().world!, beforeWorld = encodeWorld(world);
     const unpack = jest.spyOn(checkpoints, 'unpackCheckpoint');
     let release!: () => void; nextYield = new Promise<void>(resolve => { release = resolve; });
     sqlite.exec("CREATE TRIGGER fail_career_depth BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
     const staleCallback = screen.UNSAFE_getByType(EventModal).props.onChoose;
-    await act(async () => { fireEvent.press(screen.getByRole('button', { name: choice.label })); staleCallback(choice.id); });
+    await act(async () => { await fireEvent.press(screen.getByRole('button', { name: choice.label })); staleCallback(choice.id); });
     expect(mockStore.getState().busy).toBe(true); expect(screen.getByRole('button', { name: choice.label })).toBeDisabled();
     expect(mockStore.getState().world).toBe(world); expect(rows()).toEqual(before);
     await act(async () => release()); await waitFor(() => expect(screen.getByRole('alert')).toHaveTextContent(/couldn't be saved/));
@@ -80,12 +80,12 @@ test('a declared new scene at a genuine recorded Streamer context retains old ar
     expect(rows().receipts).toHaveLength(before.receipts.length + 1); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore();
     expect(sqlite.prepare('SELECT payload FROM backups WHERE life_id=?').get(initial.id)?.payload).toBe(before.lives.find(row => row.id === initial.id)!.payload);
     expect(expected.random).toEqual(world.random); expect(expected.accounts).toEqual(world.accounts); expect(expected.ledger).toEqual(world.ledger); expect(expected.creatorStudios).toEqual(world.creatorStudios); expect(expected.socialAccounts).toEqual(world.socialAccounts);
-    oldRowsExact(); const committed = rows(); view.unmount(); view = undefined; sqlite.close();
-    repository = new SaveRepository(connect()); await bootstrap(); view = render(frame());
+    oldRowsExact(); const committed = rows(); await view.unmount(); view = undefined; sqlite.close();
+    repository = new SaveRepository(connect()); await bootstrap(); view = await render(frame());
     expect(rows()).toEqual(committed); expect(mockStore.getState().world).toEqual(expected); expect(screen.getByText(choice.resultBody)).toBeOnTheScreen(); oldRowsExact();
     await press('Continue'); const done = mockStore.getState().world!, acknowledged = rows();
     expect(done.pending).toBeNull(); expect(done.people).toEqual(expected.people); expect(done.random).toEqual(expected.random); expect(done.revision).toBe(initial.revision + 2);
     await act(async () => { expect(await mockStore.getState().dispatch(command)).toBe(false); expect(await mockStore.getState().dispatch({ type: 'acknowledge', resultId: expected.pending!.id })).toBe(false); });
     expect(rows()).toEqual(acknowledged); oldRowsExact();
-  } finally { jest.restoreAllMocks(); view?.unmount(); sqlite!.close(); rmSync(directory, { recursive: true, force: true }); }
+  } finally { jest.restoreAllMocks(); await view?.unmount(); sqlite!.close(); rmSync(directory, { recursive: true, force: true }); }
 }, 30000);

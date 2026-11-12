@@ -1,6 +1,6 @@
 import React from 'react';
 import { AccessibilityInfo, AppState, AppStateStatus, Modal, Platform } from 'react-native';
-import { act, fireEvent, render, screen, waitFor, within } from '@testing-library/react-native';
+import { act, fireEvent, render, screen, waitFor, within } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { useStore } from 'zustand';
 import { DatabaseSync } from 'node:sqlite';
@@ -47,7 +47,7 @@ import Settings from '../../app/settings';
 import GameLayout from '../../app/(game)/_layout';
 import RootLayout from '../../app/_layout';
 
-let motionChanged: (enabled: boolean) => void, appStateChanged: (state: AppStateStatus) => void, previousAppState: AppStateStatus;
+let motionChanged: (enabled: boolean) => void, appStateChanged: (state: AppStateStatus) => void, previousAppState: typeof AppState.currentState;
 const removedMotion = jest.fn(), appStateRemovals: jest.Mock[] = [];
 beforeEach(() => {
   mockGameplayPlayers.clear();
@@ -89,9 +89,9 @@ async function setup(begin = true, raw?: string) {
 }
 function Action() { const busy = useStore(mockGame, state => state.busy); return <Button label="Begin Test Life" busy={busy} onPress={() => { void mockGame.getState().acknowledgeBirth(); }} />; }
 function Frame() { return <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider><AppFeedback><Settings /><Action /><GameLayout /></AppFeedback></ThemeProvider></SafeAreaProvider>; }
-async function renderFrame() { const view = render(<Frame />); await act(async () => {}); return view; }
-const press = async (name: string) => { await act(async () => { fireEvent.press(screen.getByRole('button', { name })); }); };
-const toggle = async (name: string, enabled: boolean) => { await act(async () => { fireEvent(screen.getByRole('switch', { name }), 'valueChange', enabled); }); };
+async function renderFrame() { const view = await render(<Frame />); await act(async () => {}); return view; }
+const press = async (name: string) => { await act(async () => { await fireEvent.press(screen.getByRole('button', { name })); }); };
+const toggle = async (name: string, enabled: boolean) => { await act(async () => { await fireEvent(screen.getByRole('switch', { name }), 'valueChange', enabled); }); };
 const modal = () => within(screen.UNSAFE_getByType(Modal));
 const flags = [{ name: 'Reduce Motion', field: 'reducedMotion' }, { name: 'Haptic Feedback', field: 'haptics' }, { name: 'Sound Effects', field: 'soundEffects' }] as const;
 
@@ -107,7 +107,7 @@ test.each(flags)('$name commits only its independent preference, keeps failure e
     expect(mockImpact).not.toHaveBeenCalled(); expect(mockAndroidHaptic).not.toHaveBeenCalled(); expect(mockAudioCreate).not.toHaveBeenCalled();
     context.sqlite.exec('DROP TRIGGER fail_feedback'); await press('Try Again'); await waitFor(() => expect(screen.getByRole('switch', { name })).toBeChecked());
     expect(context.lifeRows()).toEqual(lifeRows); expect(encodeWorld(mockGame.getState().world!)).toBe(before); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore(); expect(await context.repository.export('life_feedback')).toBe(archive);
-    const savedRows = context.rows(); view.unmount(); await context.cold(); view = await renderFrame(); expect(screen.getByRole('switch', { name })).toBeChecked(); expect(mockPreferences.getState().settings.appearance).toBe('dark'); expect(context.rows()).toEqual(savedRows); expect(encodeWorld(mockGame.getState().world!)).toBe(before); view.unmount();
+    const savedRows = context.rows(); await view.unmount(); await context.cold(); view = await renderFrame(); expect(screen.getByRole('switch', { name })).toBeChecked(); expect(mockPreferences.getState().settings.appearance).toBe('dark'); expect(context.rows()).toEqual(savedRows); expect(encodeWorld(mockGame.getState().world!)).toBe(before); await view.unmount();
   } finally { context.close(); }
 });
 
@@ -122,7 +122,7 @@ test('pending preference writes publish nothing early, block conflicting switche
     await toggle('Reduce Motion', true); await toggle('Sound Effects', true); expect(await mockPreferences.getState().setHaptics(false)).toBe(false); expect(await mockPreferences.getState().retry()).toBe(false); expect(write).toHaveBeenCalledTimes(1);
     await act(async () => { release(); }); await waitFor(() => expect(screen.getByRole('switch', { name: 'Haptic Feedback' })).toBeChecked()); const saved = context.rows();
     await act(async () => { expect(await mockPreferences.getState().setHaptics(true)).toBe(true); expect(await mockPreferences.getState().setReducedMotion(false)).toBe(true); expect(await mockPreferences.getState().setSoundEffects(false)).toBe(true); expect(await mockPreferences.getState().setAppearance('light')).toBe(true); expect(await mockPreferences.getState().reset()).toBe(true); });
-    expect(write).toHaveBeenCalledTimes(1); expect(context.rows()).toEqual(saved); view.unmount();
+    expect(write).toHaveBeenCalledTimes(1); expect(context.rows()).toEqual(saved); await view.unmount();
   } finally { context.close(); }
 });
 
@@ -135,17 +135,17 @@ test('device motion changes and the durable app choice control actual modal and 
     expect(screen.getByTestId('navigator').props.screenOptions.animation).toBe('none'); await press('Restore Default Appearance'); expect(screen.UNSAFE_getByType(Modal).props.animationType).toBe('none');
     await act(async () => { motionChanged(true); answer(false); }); expect(screen.UNSAFE_getByType(Modal).props.animationType).toBe('none'); expect(screen.getByText(/Your device requests reduced motion/)).toBeOnTheScreen();
     await act(async () => { motionChanged(false); }); expect(screen.UNSAFE_getByType(Modal).props.animationType).toBe('fade'); expect(screen.getByTestId('navigator').props.screenOptions.animation).toBe('default');
-    await press('Never mind'); expect(context.rows()).toEqual(before); await toggle('Reduce Motion', true); await press('Restore Default Appearance'); expect(screen.UNSAFE_getByType(Modal).props.animationType).toBe('none'); expect(screen.getByTestId('navigator').props.screenOptions.animation).toBe('none'); await press('Never mind');
-    await toggle('Reduce Motion', false); expect(screen.getByTestId('navigator').props.screenOptions.animation).toBe('default'); const current = context.rows();
-    await act(async () => { motionChanged(true); motionChanged(false); }); expect(context.rows()).toEqual(current); expect(context.lifeRows()).toEqual({ ...before, preferences: before.preferences.filter(row => row.key !== 'app_settings') }); view.unmount(); expect(removedMotion).toHaveBeenCalledTimes(1);
+    await press('Never mind'); expect(context.rows()).toEqual(before); await toggle('Reduce Motion', true); await waitFor(() => expect(mockPreferences.getState().busy).toBe(false)); await press('Restore Default Appearance'); expect(screen.UNSAFE_getByType(Modal).props.animationType).toBe('none'); expect(screen.getByTestId('navigator').props.screenOptions.animation).toBe('none'); await press('Never mind');
+    await toggle('Reduce Motion', false); await waitFor(() => expect(mockPreferences.getState().busy).toBe(false)); expect(screen.getByTestId('navigator').props.screenOptions.animation).toBe('default'); const current = context.rows();
+    await act(async () => { motionChanged(true); motionChanged(false); }); expect(context.rows()).toEqual(current); expect(context.lifeRows()).toEqual({ ...before, preferences: before.preferences.filter(row => row.key !== 'app_settings') }); await view.unmount(); expect(removedMotion).toHaveBeenCalledTimes(1);
   } finally { context.close(); }
 });
 
 test('the actual root navigator follows OS motion settings and disposes its listener without changing app or life records', async () => {
   const context = await setup();
   try {
-    const before = context.rows(), view = render(<SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><RootLayout /></SafeAreaProvider>); await waitFor(() => expect(screen.getByTestId('navigator').props.screenOptions.animation).toBe('default'));
-    await act(async () => { motionChanged(true); }); expect(screen.getByTestId('navigator').props.screenOptions.animation).toBe('none'); await act(async () => { motionChanged(false); }); expect(screen.getByTestId('navigator').props.screenOptions.animation).toBe('default'); expect(context.rows()).toEqual(before); view.unmount(); expect(removedMotion).toHaveBeenCalledTimes(1);
+    const before = context.rows(), view = await render(<SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><RootLayout /></SafeAreaProvider>); await waitFor(() => expect(screen.getByTestId('navigator').props.screenOptions.animation).toBe('default'));
+    await act(async () => { motionChanged(true); }); expect(screen.getByTestId('navigator').props.screenOptions.animation).toBe('none'); await act(async () => { motionChanged(false); }); expect(screen.getByTestId('navigator').props.screenOptions.animation).toBe('default'); expect(context.rows()).toEqual(before); await view.unmount(); expect(removedMotion).toHaveBeenCalledTimes(1);
   } finally { context.close(); }
 });
 
@@ -155,7 +155,7 @@ test('a failed appearance reset stays open with one error, retries exactly, and 
     const before = context.rows(), view = await renderFrame(); await press('Restore Default Appearance'); await press('Never mind'); expect(context.rows()).toEqual(before); await press('Restore Default Appearance');
     context.sqlite.exec("CREATE TRIGGER fail_reset BEFORE INSERT ON preferences WHEN NEW.key='app_settings' BEGIN SELECT RAISE(ABORT,'storage failure'); END"); await press('Restore Appearance'); await waitFor(() => expect(modal().getByRole('alert')).toHaveTextContent(/could not be saved/));
     expect(screen.getAllByRole('alert')).toHaveLength(1); expect(modal().getByText('Restore the default appearance?')).toBeOnTheScreen(); expect(context.rows()).toEqual(before);
-    context.sqlite.exec('DROP TRIGGER fail_reset'); await press('Restore Appearance'); await waitFor(() => expect(screen.queryByText('Restore the default appearance?')).toBeNull()); expect(mockPreferences.getState().settings).toEqual({ version: 1, appearance: 'light', reducedMotion: true, haptics: true, soundEffects: true, dailyReminder: false, reminderHour: 19, reminderMinute: 0, godModeEnabled: false }); expect(context.lifeRows()).toEqual({ ...before, preferences: before.preferences.filter(row => row.key !== 'app_settings') }); view.unmount();
+    context.sqlite.exec('DROP TRIGGER fail_reset'); await press('Restore Appearance'); await waitFor(() => expect(screen.queryByText('Restore the default appearance?')).toBeNull()); expect(mockPreferences.getState().settings).toEqual({ version: 1, appearance: 'light', reducedMotion: true, haptics: true, soundEffects: true, dailyReminder: false, reminderHour: 19, reminderMinute: 0, godModeEnabled: false }); expect(context.lifeRows()).toEqual({ ...before, preferences: before.preferences.filter(row => row.key !== 'app_settings') }); await view.unmount();
   } finally { context.close(); }
 });
 
@@ -169,7 +169,7 @@ test.each(['ios', 'android'] as const)('%s native haptic and local sound never b
     expect(mockAudioCreate).toHaveBeenCalledWith(42, { keepAudioSessionActive: false, updateInterval: 50, downloadFirst: true });
     await press('Begin Test Life'); await waitFor(() => expect(mockGame.getState().world!.birthAcknowledged).toBe(true)); const expected = { ...initial, birthAcknowledged: true, revision: initial.revision + 1 }; expect(mockGame.getState().world).toEqual(expected);
     expect(platform === 'ios' ? mockImpact : mockAndroidHaptic).toHaveBeenCalledWith(platform === 'ios' ? 'light' : 'virtual-key'); expect(platform === 'ios' ? mockAndroidHaptic : mockImpact).not.toHaveBeenCalled(); expect(mockPlayer.play).not.toHaveBeenCalled(); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore();
-    await act(async () => { releaseSound(); }); expect(mockPlayer.play).toHaveBeenCalledTimes(1); const savedRows = context.rows(); view.unmount(); expect(mockPlayer.remove).toHaveBeenCalledTimes(1); await context.cold(); expect(mockGame.getState().world).toEqual(expected); expect(context.rows()).toEqual(savedRows);
+    await act(async () => { releaseSound(); }); expect(mockPlayer.play).toHaveBeenCalledTimes(1); const savedRows = context.rows(); await view.unmount(); expect(mockPlayer.remove).toHaveBeenCalledTimes(1); await context.cold(); expect(mockGame.getState().world).toEqual(expected); expect(context.rows()).toEqual(savedRows);
   } finally { context.close(); }
 });
 
@@ -180,7 +180,7 @@ test('turning feedback off stops pending sound, releases the player, and leaves 
     const view = await renderFrame(); await waitFor(() => expect(mockAudioCreate).toHaveBeenCalledTimes(5)); await press('How to Play. Years, routines, milestones and local progress'); // Navigation rows use haptics without adding button sounds.
     expect(mockImpact).toHaveBeenCalledTimes(1); expect(mockPlayer.seekTo).not.toHaveBeenCalled(); await press('Restore Default Appearance'); expect(mockPlayer.seekTo).toHaveBeenCalledTimes(1); await press('Never mind');
     await toggle('Sound Effects', false); await toggle('Haptic Feedback', false); const writes = context.rows(), count = mockImpact.mock.calls.length;
-    await act(async () => { releaseSound(); }); expect(mockPlayer.play).not.toHaveBeenCalled(); expect(mockPlayer.remove).toHaveBeenCalledTimes(1); await press('Restore Default Appearance'); await press('Never mind'); expect(mockImpact).toHaveBeenCalledTimes(count); expect(context.rows()).toEqual(writes); view.unmount();
+    await act(async () => { releaseSound(); }); expect(mockPlayer.play).not.toHaveBeenCalled(); expect(mockPlayer.remove).toHaveBeenCalledTimes(1); await press('Restore Default Appearance'); await press('Never mind'); expect(mockImpact).toHaveBeenCalledTimes(count); expect(context.rows()).toEqual(writes); await view.unmount();
   } finally { context.close(); }
 });
 
@@ -197,14 +197,14 @@ test.each(['ios', 'android'] as const)('%s adapter plays live gameplay cues once
       expect(mockGameplayPlayers.get(source)!.play).toHaveBeenCalledTimes(1);
     }
     const previous = [...mockGameplayPlayers.values()];
-    await act(async () => { fireEvent(screen.getByLabelText('Sound Effects'), 'valueChange', false); });
+    await act(async () => { await fireEvent(screen.getByLabelText('Sound Effects'), 'valueChange', false); });
     for (const player of previous) expect(player.remove).toHaveBeenCalledTimes(1);
     await act(async () => { emitGameplayFeedback({ id: 'saved-while-off', cues: ['big-success'] }); });
     expect(previous[2].play).toHaveBeenCalledTimes(1);
-    await act(async () => { fireEvent(screen.getByLabelText('Sound Effects'), 'valueChange', true); });
+    await act(async () => { await fireEvent(screen.getByLabelText('Sound Effects'), 'valueChange', true); });
     await waitFor(() => expect(mockAudioCreate).toHaveBeenCalledTimes(10));
     for (const player of mockGameplayPlayers.values()) expect(player.play).not.toHaveBeenCalled();
-    view.unmount();
+    await view.unmount();
   } finally { context.close(); }
 });
 
@@ -215,7 +215,7 @@ test('backgrounding suppresses a pending sound and unavailable native feedback c
     const view = await renderFrame(); await waitFor(() => expect(mockAudioCreate).toHaveBeenCalledTimes(5)); mockImpact.mockRejectedValue(new Error('hardware unavailable')); await press('Restore Default Appearance');
     await act(async () => { AppState.currentState = 'background'; appStateChanged('background'); releaseSound(); }); expect(mockPlayer.play).not.toHaveBeenCalled(); await press('Never mind');
     await act(async () => { AppState.currentState = 'active'; appStateChanged('active'); }); mockImpact.mockImplementation(() => { throw new Error('native module missing'); }); mockPlayer.seekTo.mockRejectedValue(new Error('audio session unavailable'));
-    await press('Begin Test Life'); await waitFor(() => expect(mockGame.getState().world!.birthAcknowledged).toBe(true)); expect(mockGame.getState().error).toBeNull(); expect(mockPreferences.getState().error).toBeNull(); expect(screen.getByRole('button', { name: 'Begin Test Life' })).toBeOnTheScreen(); view.unmount();
+    await press('Begin Test Life'); await waitFor(() => expect(mockGame.getState().world!.birthAcknowledged).toBe(true)); expect(mockGame.getState().error).toBeNull(); expect(mockPreferences.getState().error).toBeNull(); expect(screen.getByRole('button', { name: 'Begin Test Life' })).toBeOnTheScreen(); await view.unmount();
     // Feedback and the new review host each own a foreground subscription.
     expect(appStateRemovals).toHaveLength(2); for (const remove of appStateRemovals) expect(remove).toHaveBeenCalledTimes(1);
   } finally { context.close(); }
@@ -225,7 +225,7 @@ test('native audio initialization failure and an unreadable OS setting leave the
   const context = await setup(false, '{"version":1,"appearance":"light","soundEffects":true}');
   try {
     jest.mocked(AccessibilityInfo.isReduceMotionEnabled).mockRejectedValue(new Error('native accessibility unavailable')); mockAudioMode.mockRejectedValue(new Error('native audio unavailable'));
-    const view = await renderFrame(); await waitFor(() => expect(mockAudioMode).toHaveBeenCalledTimes(1)); expect(mockAudioCreate).not.toHaveBeenCalled(); await press('Begin Test Life'); await waitFor(() => expect(mockGame.getState().world!.birthAcknowledged).toBe(true)); expect(screen.getByTestId('navigator').props.screenOptions.animation).toBe('none'); expect(mockGame.getState().error).toBeNull(); view.unmount();
+    const view = await renderFrame(); await waitFor(() => expect(mockAudioMode).toHaveBeenCalledTimes(1)); expect(mockAudioCreate).not.toHaveBeenCalled(); await press('Begin Test Life'); await waitFor(() => expect(mockGame.getState().world!.birthAcknowledged).toBe(true)); expect(screen.getByTestId('navigator').props.screenOptions.animation).toBe('none'); expect(mockGame.getState().error).toBeNull(); await view.unmount();
   } finally { context.close(); }
 });
 
@@ -233,15 +233,15 @@ test.each(['reducedMotion', 'haptics', 'soundEffects'])('invalid %s is preserved
   const raw = JSON.stringify({ version: 1, appearance: 'dark', [field]: 'enabled' }), context = await setup(true, raw);
   try {
     const before = context.rows(), view = await renderFrame(); expect(screen.getByRole('alert')).toHaveTextContent(/could not be read/); for (const { name } of flags) expect(screen.getByRole('switch', { name })).toBeDisabled();
-    expect(await mockPreferences.getState().setHaptics(true)).toBe(false); expect(await mockPreferences.getState().setReducedMotion(true)).toBe(false); expect(await mockPreferences.getState().setSoundEffects(true)).toBe(false); expect(context.rows()).toEqual(before); await press('Restore Default Appearance'); await press('Never mind'); expect(context.rows()).toEqual(before); expect(await context.repository.loadAppSettings()).toBe(raw); view.unmount();
+    expect(await mockPreferences.getState().setHaptics(true)).toBe(false); expect(await mockPreferences.getState().setReducedMotion(true)).toBe(false); expect(await mockPreferences.getState().setSoundEffects(true)).toBe(false); expect(context.rows()).toEqual(before); await press('Restore Default Appearance'); await press('Never mind'); expect(context.rows()).toEqual(before); expect(await context.repository.loadAppSettings()).toBe(raw); await view.unmount();
   } finally { context.close(); }
 });
 
 test('disabled or busy central buttons do not act or produce feedback; unsupported devices expose an honest disabled control', async () => {
   const action = jest.fn(), haptic = jest.fn(async () => {}), sound = jest.fn(async () => {});
-  const view = render(<FeedbackProvider reducedMotion={false} haptics onButtonFeedback={haptic} soundEffects onButtonSound={sound}><Button label="Disabled" disabled onPress={action} /><Button label="Busy" busy onPress={action} /><Button label="Ready" onPress={action} /></FeedbackProvider>);
-  await press('Disabled'); await press('Busy'); expect(action).not.toHaveBeenCalled(); expect(haptic).not.toHaveBeenCalled(); expect(sound).not.toHaveBeenCalled(); await press('Ready'); expect(action).toHaveBeenCalledTimes(1); expect(haptic).toHaveBeenCalledTimes(1); expect(sound).toHaveBeenCalledTimes(1); view.unmount();
-  const context = await setup(); try { jest.replaceProperty(Platform, 'OS', 'web'); const unsupported = await renderFrame(); expect(screen.getByRole('switch', { name: 'Haptic Feedback' })).toBeDisabled(); expect(screen.getByRole('switch', { name: 'Sound Effects' })).toBeDisabled(); expect(screen.getByText('Haptics are available on supported iOS and Android devices.')).toBeOnTheScreen(); unsupported.unmount(); } finally { context.close(); }
+  const view = await render(<FeedbackProvider reducedMotion={false} haptics onButtonFeedback={haptic} soundEffects onButtonSound={sound}><Button label="Disabled" disabled onPress={action} /><Button label="Busy" busy onPress={action} /><Button label="Ready" onPress={action} /></FeedbackProvider>);
+  await press('Disabled'); await press('Busy'); expect(action).not.toHaveBeenCalled(); expect(haptic).not.toHaveBeenCalled(); expect(sound).not.toHaveBeenCalled(); await press('Ready'); expect(action).toHaveBeenCalledTimes(1); expect(haptic).toHaveBeenCalledTimes(1); expect(sound).toHaveBeenCalledTimes(1); await view.unmount();
+  const context = await setup(); try { jest.replaceProperty(Platform, 'OS', 'web'); const unsupported = await renderFrame(); expect(screen.getByRole('switch', { name: 'Haptic Feedback' })).toBeDisabled(); expect(screen.getByRole('switch', { name: 'Sound Effects' })).toBeDisabled(); expect(screen.getByText('Haptics are available on supported iOS and Android devices.')).toBeOnTheScreen(); await unsupported.unmount(); } finally { context.close(); }
 });
 
 
@@ -253,6 +253,6 @@ test('fresh settings enable all three switches and real native feedback without 
     expect(await context.repository.loadAppSettings()).toBeNull();
     await press('Begin Test Life');
     expect(mockAndroidHaptic).toHaveBeenCalledTimes(1); expect(mockPlayer.play).toHaveBeenCalledTimes(1);
-    expect(await context.repository.loadAppSettings()).toBeNull(); view.unmount();
+    expect(await context.repository.loadAppSettings()).toBeNull(); await view.unmount();
   } finally { context.close(); }
 });

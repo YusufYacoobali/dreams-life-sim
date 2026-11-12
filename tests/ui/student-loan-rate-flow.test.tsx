@@ -1,6 +1,6 @@
 import { displayText } from '../../src/ui/displayNumbers';
 import React from 'react';
-import { act, fireEvent, render, screen, waitFor } from '@testing-library/react-native';
+import { act, fireEvent, render, screen, waitFor } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { DatabaseSync } from 'node:sqlite';
 import { mkdtempSync, rmSync } from 'node:fs';
@@ -30,8 +30,8 @@ import Education from '../../app/(game)/education';
 import Bank from '../../app/(game)/bank';
 
 const frame = (bank = false) => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider>{bank ? <Bank /> : <Education />}<PendingEvent /></ThemeProvider></SafeAreaProvider>;
-const press = async (name: string | RegExp) => { await act(async () => { fireEvent.press(screen.getByRole('button', { name })); }); };
-const choose = async (name: string | RegExp) => { await act(async () => { fireEvent.press(screen.getByRole('radio', { name })); }); };
+const press = async (name: string | RegExp) => { await act(async () => { await fireEvent.press(screen.getByRole('button', { name })); }); };
+const choose = async (name: string | RegExp) => { await act(async () => { await fireEvent.press(screen.getByRole('radio', { name })); }); };
 const world = () => mockStore.getState().world!;
 const acknowledge = (initial: World) => resolveCommand(initial, { type: 'acknowledge', resultId: initial.pending!.id }, true);
 const perform = (initial: World, command: GameCommand) => acknowledge(resolveCommand(initial, command, true));
@@ -143,34 +143,34 @@ async function retryEducation(context: Context, command: GameCommand, confirm: s
 }
 
 async function coldAndAcknowledge(context: Context, predicted: World, savedRows: ReturnType<Context['rows']>, bank = false) {
-  await context.cold(); const view = render(frame(bank)); expect(world()).toEqual(predicted); expect(context.rows()).toEqual(savedRows);
+  await context.cold(); const view = await render(frame(bank)); expect(world()).toEqual(predicted); expect(context.rows()).toEqual(savedRows);
   await press('Continue'); expect(world()).toEqual(acknowledge(predicted)); expect(world().accounts).toEqual(predicted.accounts); expect(world().liabilities).toEqual(predicted.liabilities); expect(world().ledger).toEqual(predicted.ledger); expect(world().random).toEqual(predicted.random);
-  const afterRows = context.rows(); await act(async () => { expect(await mockStore.getState().dispatch({ type: 'acknowledge', resultId: predicted.pending!.id })).toBe(false); }); expect(context.rows()).toEqual(afterRows); context.oldMoments(); view.unmount();
+  const afterRows = context.rows(); await act(async () => { expect(await mockStore.getState().dispatch({ type: 'acknowledge', resultId: predicted.pending!.id })).toBe(false); }); expect(context.rows()).toEqual(afterRows); context.oldMoments(); await view.unmount();
 }
 
 test.each([['university', 'Arts'], ['trade', 'Arts'], ['graduate', 'Medicine'], ['graduate', 'Law']] as const)('%s %s quotes the reused French EUR rate through local review, rollback, retry and cold acknowledgement', async (program, field) => {
   const initial = perform(germanBorrower(), { type: 'quit-job' }), context = await setup(initial);
   try {
-    expect(rules.DE.studentInterestBps).toBe(150); const view = render(frame()), applicationId = program === 'university' ? await requestUniversityPlace(context, field) : null;
+    expect(rules.DE.studentInterestBps).toBe(150); const view = await render(frame()), applicationId = program === 'university' ? await requestUniversityPlace(context, field) : null;
     const before = encodeWorld(world()), beforeRows = context.rows(), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint');
     await admission(program, field, 2); await press('Never mind'); expect(encodeWorld(world())).toBe(before); expect(context.rows()).toEqual(beforeRows); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore();
     await admission(program, field, 2);
     const command = applicationId ? { type: 'accept-university-place', applicationId, funding: 'loan' } as const : { type: 'enroll', program, field: field.toLowerCase(), funding: 'loan' } as GameCommand;
     const { predicted, savedRows } = await retryEducation(context, command, applicationId ? 'Accept Place And Enrol' : 'Apply', () => { expect(screen.getByText(applicationId ? 'Accept your university place?' : 'Apply to study ' + field.toLowerCase() + '?')).toBeOnTheScreen(); expect(screen.getByText('2%')).toBeOnTheScreen(); });
     expect(debt(world(), 'student')).toMatchObject({ interestBps: 200, principal: 60000n + tuitionFor(initial.people[initial.activePersonId], program) });
-    view.unmount(); await coldAndAcknowledge(context, predicted, savedRows);
+    await view.unmount(); await coldAndAcknowledge(context, predicted, savedRows);
   } finally { jest.restoreAllMocks(); context.close(); }
 });
 
 test('a cash-funded course paused by actual annual processing resumes at its existing EUR loan rate without losing completed months', async () => {
   const context = await setup(pausedCourse());
   try {
-    const initial = world(), beforeRows = context.rows(), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'), view = render(frame());
+    const initial = world(), beforeRows = context.rows(), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'), view = await render(frame());
     const review = async () => { await press('Fund Next Year'); expect(screen.getByText(/added to your existing EUR student loan at 2%/)).toBeOnTheScreen(); await choose('Borrow tuition at 2% annual interest'); };
     await review(); await press('Never mind'); expect(world()).toEqual(initial); expect(context.rows()).toEqual(beforeRows); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore(); await review();
     const { predicted, savedRows } = await retryEducation(context, { type: 'fund-studies', funding: 'loan' }, 'Resume Studies', () => expect(screen.getByRole('radio', { name: 'Borrow tuition at 2% annual interest', checked: true })).toBeOnTheScreen());
     expect(debt(world(), 'student').interestBps).toBe(200); expect(world().people[world().activePersonId].education).toMatchObject({ paused: false, months: 12, tuitionPaidMonths: 24 });
-    view.unmount(); await coldAndAcknowledge(context, predicted, savedRows);
+    await view.unmount(); await coldAndAcknowledge(context, predicted, savedRows);
   } finally { jest.restoreAllMocks(); context.close(); }
 });
 
@@ -178,10 +178,10 @@ test('a fully repaid canonical EUR student line still quotes and reuses its orig
   let initial = perform(germanBorrower(), { type: 'quit-job' }); initial = perform(initial, { type: 'repay', liabilityId: debt(initial, 'student').id, amount: debt(initial, 'student').principal }); expect(debt(initial, 'student').principal).toBe(0n);
   const context = await setup(initial);
   try {
-    const view = render(frame()), applicationId = await requestUniversityPlace(context, 'Arts'); await admission('university', 'Arts', 2);
+    const view = await render(frame()), applicationId = await requestUniversityPlace(context, 'Arts'); await admission('university', 'Arts', 2);
     const { predicted, savedRows } = await retryEducation(context, { type: 'accept-university-place', applicationId, funding: 'loan' }, 'Accept Place And Enrol', () => expect(screen.getByText('2%')).toBeOnTheScreen());
     expect(debt(world(), 'student')).toMatchObject({ principal: 60000n, interestBps: 200 }); expect(world().liabilities.filter(item => item.kind === 'student' && item.ownerId === initial.activePersonId)).toHaveLength(1);
-    view.unmount(); await coldAndAcknowledge(context, predicted, savedRows);
+    await view.unmount(); await coldAndAcknowledge(context, predicted, savedRows);
   } finally { jest.restoreAllMocks(); context.close(); }
 });
 
@@ -189,10 +189,10 @@ test('after an actual move to London an existing EUR student loan does not repla
   const initial = perform(move(germanBorrower(), 'london'), { type: 'quit-job' }), oldEUR = debt(initial, 'student', 'EUR'), context = await setup(initial);
   try {
     expect(initial.people[initial.activePersonId].country).toBe('GB'); expect(accountFor(initial).currency).toBe('GBP'); expect(debt(initial, 'student')).toBeUndefined();
-    const view = render(frame()), applicationId = await requestUniversityPlace(context, 'Arts'); await admission('university', 'Arts', 4, false);
+    const view = await render(frame()), applicationId = await requestUniversityPlace(context, 'Arts'); await admission('university', 'Arts', 4, false);
     const { predicted, savedRows } = await retryEducation(context, { type: 'accept-university-place', applicationId, funding: 'loan' }, 'Accept Place And Enrol', () => expect(screen.getByText('4%')).toBeOnTheScreen());
     expect(debt(world(), 'student')).toMatchObject({ interestBps: 400, principal: rules.GB.universityTuition }); expect(debt(world(), 'student', 'EUR')).toEqual(oldEUR);
-    view.unmount(); await coldAndAcknowledge(context, predicted, savedRows);
+    await view.unmount(); await coldAndAcknowledge(context, predicted, savedRows);
   } finally { jest.restoreAllMocks(); context.close(); }
 });
 
@@ -200,10 +200,10 @@ test.each(['DE', 'GB'] as const)('Bank personal borrowing in %s reviews the exac
   const initial = country === 'DE' ? germanBorrower() : move(germanBorrower(), 'london'), context = await setup(initial);
   try {
     const rate = country === 'DE' ? 6.5 : 8, oldEUR = debt(initial, 'personal', 'EUR'), beforeRows = context.rows(), before = encodeWorld(world()), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint');
-    const view = render(frame(true)); await act(async () => fireEvent.changeText(screen.getByLabelText('Amount in ' + accountFor(initial).currency), '100'));
+    const view = await render(frame(true)); await act(async () => await fireEvent.changeText(screen.getByLabelText('Amount in ' + accountFor(initial).currency), '100'));
     await press('Review Personal Loan'); expect(screen.getByText('Annual interest')).toBeOnTheScreen(); expect(screen.getByText(displayText(rate + '%'))).toBeOnTheScreen(); await press('Never mind'); expect(encodeWorld(world())).toBe(before); expect(context.rows()).toEqual(beforeRows); expect(unpack).not.toHaveBeenCalled();
     await press('Review Personal Loan'); const predicted = resolveCommand(initial, { type: 'borrow', amount: 10000n }, true); await press('Accept Loan'); expect(world()).toEqual(predicted); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore();
     expect(debt(world(), 'personal')).toMatchObject({ interestBps: rate * 100, principal: (country === 'DE' ? oldEUR.principal : 0n) + 10000n }); if (country === 'GB') expect(debt(world(), 'personal', 'EUR')).toEqual(oldEUR);
-    const savedRows = context.rows(); view.unmount(); await coldAndAcknowledge(context, predicted, savedRows, true);
+    const savedRows = context.rows(); await view.unmount(); await coldAndAcknowledge(context, predicted, savedRows, true);
   } finally { jest.restoreAllMocks(); context.close(); }
 });

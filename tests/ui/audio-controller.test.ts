@@ -25,7 +25,7 @@ function setup() {
   const release = controller.retain();
   return { controller, release, players, createAudioPlayer, setAudioModeAsync };
 }
-let change: (state: AppStateStatus) => void, previous: AppStateStatus;
+let change: (state: AppStateStatus) => void, previous: typeof AppState.currentState;
 beforeEach(() => {
   jest.useFakeTimers(); previous = AppState.currentState; AppState.currentState = 'active';
   jest.spyOn(AppState, 'addEventListener').mockImplementation((_event, listener) => { change = listener; return { remove: jest.fn() }; });

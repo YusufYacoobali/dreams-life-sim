@@ -1,5 +1,5 @@
 import React from 'react';
-import { act, fireEvent, render, screen, waitFor } from '@testing-library/react-native';
+import { act, fireEvent, render, screen, waitFor } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { createGameStore } from '../../src/state/gameStore';
 import { encodeWorld, fullName } from '../../src/game/model';
@@ -18,7 +18,7 @@ jest.mock('../../src/state/useGame', () => ({ useGame: (selector: unknown) => re
 import Life from '../../app/(game)/(tabs)/life';
 import { PendingEvent } from '../../src/ui/PendingEvent';
 const frame = () => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider><Life /><PendingEvent /></ThemeProvider></SafeAreaProvider>;
-const press = async (name: string) => { await act(async () => fireEvent.press(screen.getByRole('button', { name }))); };
+const press = async (name: string) => { await act(async () => await fireEvent.press(screen.getByRole('button', { name }))); };
 
 // A declared UI-unit selector arrangement: the real annual engine still checks
 // eligibility, advances months and binds its own people/effects. Preserve its
@@ -41,7 +41,7 @@ test.each([['friend-different-budget', 'walk', 'friend'], ['partner-money-conver
   arrangeEligibleTicket(templateId);
   const { sqlite, driver } = database(), repository = new SaveRepository(driver); await repository.initialise(); await repository.create(initial);
   const boot = async (repo = repository) => { mockStore = createGameStore({ repository: async () => repo, date: () => initial.date, id: () => 'unused' }); await mockStore.getState().bootstrap(); };
-  await boot(); let view = render(frame()); await press('Age Up'); await waitFor(() => expect(mockStore.getState().world!.pending).toMatchObject({ kind: 'decision', templateId }));
+  await boot(); let view = await render(frame()); await press('Age Up'); await waitFor(() => expect(mockStore.getState().world!.pending).toMatchObject({ kind: 'decision', templateId }));
   const offered = mockStore.getState().world!; if (offered.pending?.kind !== 'decision') throw new Error('Missing adult social scene'); const event = offered.pending, choice = event.choices.find(item => item.id === choiceId)!;
   expect(offered.annual?.stage).toBe('complete');
   expect(event.personIds).toEqual([offered.activePersonId, otherId]); expect(screen.getByText(event.body)).toBeOnTheScreen(); expect(event.body).toContain(fullName(offered.people[otherId]));
@@ -53,7 +53,7 @@ test.each([['friend-different-budget', 'walk', 'friend'], ['partner-money-conver
   expect(result.accounts).toEqual(offered.accounts); expect(result.ledger).toEqual(offered.ledger); expect(result.workHistory).toEqual(offered.workHistory); expect(result.people[otherId]).toEqual(offered.people[otherId]);
   const effect = choice.effects.find(item => item.kind === 'relationship'); if (effect?.kind !== 'relationship') throw new Error('Missing named bond'); expect(effect.relationshipId).toBe(relationFor(offered, offered.activePersonId, otherId)!.id);
   expect(relationFor(result, offered.activePersonId, otherId)!.strength).toBe(Math.min(100, relationFor(offered, offered.activePersonId, otherId)!.strength + effect.delta));
-  view.unmount(); await boot(new SaveRepository(driver)); view = render(frame()); expect(mockStore.getState().world).toEqual(result); expect(screen.getByText(choice.resultTitle)).toBeOnTheScreen(); await press('Continue');
+  await view.unmount(); await boot(new SaveRepository(driver)); view = await render(frame()); expect(mockStore.getState().world).toEqual(result); expect(screen.getByText(choice.resultTitle)).toBeOnTheScreen(); await press('Continue');
   const done = mockStore.getState().world!; expect(done).toEqual(resolveCommand(result, { type: 'acknowledge', resultId: result.pending!.id }, true)); expect(done.pending).toBeNull(); expect(done.annual).toBeNull(); expect(done.people).toEqual(result.people); expect(done.relationships).toEqual(result.relationships); expect(done.random).toEqual(result.random); expect(done.journal.filter(item => item.text === choice.journal)).toHaveLength(1);
-  expect(await repository.load(done.id)).toEqual(done); view.unmount(); sqlite.close();
+  expect(await repository.load(done.id)).toEqual(done); await view.unmount(); sqlite.close();
 }, 30000);

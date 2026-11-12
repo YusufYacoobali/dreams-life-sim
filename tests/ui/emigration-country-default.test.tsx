@@ -1,7 +1,7 @@
 import { displayText } from '../../src/ui/displayNumbers';
 import React from 'react';
 import { Modal } from 'react-native';
-import { act, fireEvent, render, screen, waitFor, within } from '@testing-library/react-native';
+import { act, fireEvent, render, screen, waitFor, within } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { DatabaseSync } from 'node:sqlite';
 import { mkdtempSync, rmSync } from 'node:fs';
@@ -29,7 +29,7 @@ import { router } from 'expo-router';
 
 const world = () => mockStore.getState().world!;
 const frame = (content: React.ReactNode = <Emigrate />) => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider>{content}<PendingEvent /></ThemeProvider></SafeAreaProvider>;
-const press = async (name: string | RegExp) => { await act(async () => { fireEvent.press(screen.getByRole('button', { name })); }); };
+const press = async (name: string | RegExp) => { await act(async () => { await fireEvent.press(screen.getByRole('button', { name })); }); };
 const modal = () => within(screen.UNSAFE_getByType(Modal));
 const ack = (value: World) => resolveCommand(value, { type: 'acknowledge', resultId: value.pending!.id }, true);
 const selectedLondon = () => {
@@ -60,12 +60,12 @@ test('Study Abroad opens its course flow after a recorded work move and keeps th
   try {
     const initial = world(), beforeRows = db.rows();
     expect(initial.relocations.at(-1)).toMatchObject({ route: 'work', status: 'moved', destinationId: 'tokyo' });
-    const view = render(frame());
+    const view = await render(frame());
     expect(screen.getByText('Work Abroad · moved')).toBeOnTheScreen();
-    view.rerender(frame(<Travel />));
+    await view.rerender(frame(<Travel />));
     await press(/^Study Abroad\./);
     expect(router.push).toHaveBeenLastCalledWith({ pathname: '/emigrate', params: { route: 'study' } });
-    mockRoute = 'study'; view.rerender(frame());
+    mockRoute = 'study'; await view.rerender(frame());
     expect(screen.getByRole('button', { name: 'Study Abroad. Selected' })).toBeOnTheScreen();
     expect(screen.getByRole('header', { name: 'Course' })).toBeOnTheScreen();
     expect(screen.getByRole('button', { name: 'University. Selected' })).toBeOnTheScreen();
@@ -84,21 +84,21 @@ test('Study Abroad opens its course flow after a recorded work move and keeps th
     await press('Review Application'); await press('Submit Application'); expect(world()).toEqual(expected);
     await press('Continue'); expect(world()).toEqual(ack(expected));
     expect(screen.getByText('Emigration · ' + expected.relocations.at(-1)!.status)).toBeOnTheScreen();
-    expect(world().relocations[0]).toEqual(initial.relocations[0]); db.oldMoments(); view.unmount();
+    expect(world().relocations[0]).toEqual(initial.relocations[0]); db.oldMoments(); await view.unmount();
   } finally { db.close(); }
 });
 
 test.each(['work', 'study', undefined])('French-born %s entry selects a visible foreign country while preserving the real age gate and every saved row', async route => {
   mockRoute = route; const db = await setup('fr-birth');
   try {
-    const initial = world(), beforeRows = db.rows(), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'), view = render(frame());
+    const initial = world(), beforeRows = db.rows(), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'), view = await render(frame());
     expect(initial.people[initial.activePersonId]).toMatchObject({ country: 'FR', nationality: 'FR' }); selectedLondon();
     expect(screen.getByText('Apply to move abroad from age eighteen')).toBeOnTheScreen(); expect(screen.getByRole('button', { name: 'Review Application' })).toBeDisabled();
     await press(/^Japan\./);
     expect(screen.getByRole('header', { name: 'Tokyo' })).toBeOnTheScreen();
     expect(screen.getByText(/^Japan · (?:Emigration|Work Abroad|Study Abroad)$/)).toBeOnTheScreen();
     await press(/^United Kingdom\./); selectedLondon();
-    expect(world()).toEqual(initial); expect(db.rows()).toEqual(beforeRows); expect(unpack).not.toHaveBeenCalled(); view.unmount();
+    expect(world()).toEqual(initial); expect(db.rows()).toEqual(beforeRows); expect(unpack).not.toHaveBeenCalled(); await view.unmount();
   } finally { db.close(); }
 });
 
@@ -109,7 +109,7 @@ test('an actual Japan-to-France move reinitialises this actor’s foreign destin
   mockRoute = 'work'; const db = await setup('archive');
   try {
     const original = world(); expect(original.people[original.activePersonId]).toMatchObject({ country: 'JP', nationality: 'US' });
-    const oldMove = original.relocations[0], unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'); let view = render(frame());
+    const oldMove = original.relocations[0], unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'); let view = await render(frame());
     await press('Plan Another Move'); expect(screen.getByRole('button', { name: 'France. Paris. Selected' })).toBeOnTheScreen();
     const application: GameCommand = { type: 'apply-relocation', destinationId: 'paris', route: 'work', roleId: 'administrator', program: null, field: null, quotedFee: relocationFee(original) }, applied = resolveCommand(original, application, true);
     expect(applied.relocations.at(-1)?.status).toBe('approved'); await press('Review Application'); await press('Submit Application'); expect(world()).toEqual(applied); await press('Continue'); expect(world()).toEqual(ack(applied));
@@ -124,7 +124,7 @@ test('an actual Japan-to-France move reinitialises this actor’s foreign destin
     await waitFor(() => expect(modal().getByRole('alert')).toHaveTextContent(/couldn't be saved/)); expect(screen.getAllByRole('alert')).toHaveLength(1); expect(modal().getByText('Apply to London?')).toBeOnTheScreen(); expect(modal().getByText(money)).toBeOnTheScreen(); expect(world()).toEqual(french); expect(db.rows()).toEqual(beforeRows);
     const expected = resolveCommand(french, { type: 'apply-relocation', destinationId: 'london', route: 'work', roleId: 'administrator', program: null, field: null, quotedFee: fee }, true);
     db.sqlite.exec('DROP TRIGGER fail_country_application'); await press('Submit Application'); expect(world()).toEqual(expected); expect(accountFor(world()).cash).toBe(accountFor(french).cash - fee); expect(world().people).toEqual(french.people); expect(world().workHistory).toEqual(french.workHistory); expect(world().relocations[0]).toEqual(oldMove); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore();
-    const savedRows = db.rows(); view.unmount(); await db.cold(); view = render(frame()); expect(world()).toEqual(expected); expect(db.rows()).toEqual(savedRows); expect(screen.getByText(expected.pending!.title)).toBeOnTheScreen(); await press('Continue'); const done = ack(expected); expect(world()).toEqual(done);
-    const doneRows = db.rows(); await act(async () => { expect(await mockStore.getState().dispatch({ type: 'acknowledge', resultId: expected.pending!.id })).toBe(false); }); expect(world()).toEqual(done); expect(db.rows()).toEqual(doneRows); db.oldMoments(); view.unmount();
+    const savedRows = db.rows(); await view.unmount(); await db.cold(); view = await render(frame()); expect(world()).toEqual(expected); expect(db.rows()).toEqual(savedRows); expect(screen.getByText(expected.pending!.title)).toBeOnTheScreen(); await press('Continue'); const done = ack(expected); expect(world()).toEqual(done);
+    const doneRows = db.rows(); await act(async () => { expect(await mockStore.getState().dispatch({ type: 'acknowledge', resultId: expected.pending!.id })).toBe(false); }); expect(world()).toEqual(done); expect(db.rows()).toEqual(doneRows); db.oldMoments(); await view.unmount();
   } finally { db.close(); }
 });

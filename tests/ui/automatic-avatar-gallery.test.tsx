@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
-import { render, screen } from '@testing-library/react-native';
+import { render, screen } from '../support/rendering';
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { createLife, randomCreation } from '../../src/game/createLife';
@@ -36,11 +36,11 @@ function Gallery({items,dark=false,width=660}:{items:Item[];dark?:boolean;width?
   </View>;
 }
 
-test('one hundred actual generated NPCs show suitable male and female artwork across skin tones and ages; capture review grids without touching saves',()=>{
+test('one hundred actual generated NPCs show suitable male and female artwork across skin tones and ages; capture review grids without touching saves',async ()=>{
   mockWorld=fresh();
   const groups=(['male','female'] as const).map(gender=>({gender,people:Array.from({length:50},(_,index)=>createContact(mockWorld,{age:ages[index%ages.length],gender}))}));
   const neutral=Array.from({length:18},(_,index)=>createContact(mockWorld,{age:ages[index%ages.length],gender:'nonbinary'}));
-  const before=encodeWorld(mockWorld),view=render(<Gallery items={[]}/>);
+  const before=encodeWorld(mockWorld),view=await render(<Gallery items={[]}/>);
   for(const {gender,people} of groups){
     const pool=automaticArtworkPools[gender==='male'?'masculine':'feminine'];
     expect(people).toHaveLength(50);expect(new Set(people.map(person=>person.appearance.skin)).size).toBe(6);
@@ -52,31 +52,31 @@ test('one hundred actual generated NPCs show suitable male and female artwork ac
       expect(layers.some(layer=>layer.asset==='clothing-'+item.person.appearance.outfit)).toBe(item.age>=3);
       expect(layers.length).toBeLessThanOrEqual(5);
     }
-    view.rerender(<Gallery items={items}/>);expect(screen.UNSAFE_getAllByType(CharacterPortrait)).toHaveLength(50);
+    await view.rerender(<Gallery items={items}/>);expect(screen.UNSAFE_getAllByType(CharacterPortrait)).toHaveLength(50);
     capture('portraits-npc-50-'+gender+'-light',view.toJSON());
-    view.rerender(<Gallery items={items} dark/>);capture('portraits-npc-50-'+gender+'-dark',view.toJSON());
+    await view.rerender(<Gallery items={items} dark/>);capture('portraits-npc-50-'+gender+'-dark',view.toJSON());
   }
   const neutralItems=neutral.map((person,index)=>({person,age:ages[index%ages.length],size:88,label:'Neutral '+(index+1)+' · '+ages[index%ages.length]+'y'}));
   for(const person of neutral)expect(automaticArtworkPools.neutral.identities as readonly number[]).toContain(person.appearance.identity);
-  view.rerender(<Gallery items={neutralItems}/>);capture('portraits-npc-neutral',view.toJSON());
+  await view.rerender(<Gallery items={neutralItems}/>);capture('portraits-npc-neutral',view.toJSON());
   const sizes=groups.flatMap(({gender,people})=>[52,88,140].flatMap(size=>[3,25,86].map(age=>({person:people.find(person=>ageOn(person,mockWorld.date)===age)!,age,size,label:gender+' · '+age+'y · '+size+'px'}))));
-  for(const dark of [false,true]){view.rerender(<Gallery items={sizes} dark={dark}/>);capture('portraits-npc-sizes-'+(dark?'dark':'light'),view.toJSON());}
-  expect(encodeWorld(mockWorld)).toBe(before);view.unmount();
+  for(const dark of [false,true]){await view.rerender(<Gallery items={sizes} dark={dark}/>);capture('portraits-npc-sizes-'+(dark?'dark':'light'),view.toJSON());}
+  expect(encodeWorld(mockWorld)).toBe(before);await view.unmount();
 });
 
-test('the shared Portrait wrapper applies legacy compatibility in every scene while explicit, edited, active and former player choices render verbatim',()=>{
+test('the shared Portrait wrapper applies legacy compatibility in every scene while explicit, edited, active and former player choices render verbatim',async ()=>{
   mockWorld=fresh();const person=mockWorld.people.person_parent1;person.appearance={face:1,skin:4,hair:3,hairColor:0};
   const old=encodeWorld(mockWorld),expected=portraitTraits(person.appearance,25,person.id,legacyNPCDefaultGender(mockWorld,person.id,person.appearance));
-  const view=render(<Portrait appearance={person.appearance} age={25} personId={person.id} name="Saved parent" size={88}/>);
+  const view=await render(<Portrait appearance={person.appearance} age={25} personId={person.id} name="Saved parent" size={88}/>);
   const heads=()=>screen.UNSAFE_getAllByType(Image).map(image=>image.props.source.testUri).filter((uri:string)=>uri?.includes('/head-'));
   expect(heads()).toEqual([expect.stringContaining('head-'+expected.identity+'-3-4')]);
   capture('portraits-legacy-parent',view.toJSON());expect(encodeWorld(mockWorld)).toBe(old);
   for(const appearance of [{...person.appearance,identity:0,outfit:15},{...person.appearance,provenance:{kind:'custom' as const}}]){
-    person.appearance=appearance;view.rerender(<Portrait appearance={appearance} age={25} personId={person.id} name="Chosen parent" size={88}/>);
+    person.appearance=appearance;await view.rerender(<Portrait appearance={appearance} age={25} personId={person.id} name="Chosen parent" size={88}/>);
     const traits=portraitTraits(appearance,25,person.id);expect(heads()).toEqual([expect.stringContaining('head-'+traits.identity+'-3-4')]);
   }
   person.appearance={face:1,skin:4,hair:3,hairColor:0};mockWorld.legacies=[{fromId:person.id,toId:mockWorld.activePersonId,date}];
-  view.rerender(<Portrait appearance={person.appearance} age={25} personId={person.id} name="Earlier player"/>);
+  await view.rerender(<Portrait appearance={person.appearance} age={25} personId={person.id} name="Earlier player"/>);
   expect(heads()).toEqual([expect.stringContaining('head-'+portraitTraits(person.appearance,25,person.id).identity+'-3-4')]);
-  view.unmount();
+  await view.unmount();
 });

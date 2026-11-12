@@ -1,5 +1,5 @@
 import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react-native';
+import { fireEvent, render, screen } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { createGameStore } from '../../src/state/gameStore';
 import { decodeSave } from '../../src/persistence/archive';
@@ -28,29 +28,29 @@ async function setup(initial: World) {
 }
 
 test('the genuine child can filter actual roles, search duplicate first names and open the same parent without saving', async () => {
-  const initial = ack(decodeSave(JSON.stringify(childArchive)).world), { sqlite, rows, before, encoded } = await setup(initial), view = render(frame(<Relationships />));
-  fireEvent.changeText(screen.getByLabelText('Search relationships'), '  rUbY  ');
+  const initial = ack(decodeSave(JSON.stringify(childArchive)).world), { sqlite, rows, before, encoded } = await setup(initial), view = await render(frame(<Relationships />));
+  await fireEvent.changeText(screen.getByLabelText('Search relationships'), '  rUbY  ');
   expect(screen.getAllByRole('button', { name: /^Ruby .*Bond/ })).toHaveLength(2);
-  fireEvent.press(screen.getByRole('tab', { name: 'Family' }));
+  await fireEvent.press(screen.getByRole('tab', { name: 'Family' }));
   expect(screen.getByRole('tab', { name: 'Family', selected: true })).toBeOnTheScreen();
   expect(screen.queryByText('Ruby Singh')).toBeNull();
-  fireEvent.press(screen.getByRole('button', { name: /^Ruby Kelly\./ })); expect(router.push).toHaveBeenLastCalledWith({ pathname: '/person/[id]', params: { id: 'person_parent1' } });
-  fireEvent.changeText(screen.getByLabelText('Search relationships'), 'nobody matches'); expect(screen.getByText('No matching names in this view.')).toBeOnTheScreen();
-  fireEvent.press(screen.getByRole('button', { name: 'Show All Connections' }));
+  await fireEvent.press(screen.getByRole('button', { name: /^Ruby Kelly\./ })); expect(router.push).toHaveBeenLastCalledWith({ pathname: '/person/[id]', params: { id: 'person_parent1' } });
+  await fireEvent.changeText(screen.getByLabelText('Search relationships'), 'nobody matches'); expect(screen.getByText('No matching names in this view.')).toBeOnTheScreen();
+  await fireEvent.press(screen.getByRole('button', { name: 'Show All Connections' }));
   expect(screen.getByLabelText('Search relationships')).toHaveDisplayValue(''); expect(screen.getByRole('tab', { name: 'All', selected: true })).toBeOnTheScreen();
   expect(screen.getByText('Harper Walker')).toBeOnTheScreen();
-  fireEvent.press(screen.getByRole('tab', { name: 'Family' })); fireEvent.changeText(screen.getByLabelText('Search relationships'), 'nobody matches');
-  fireEvent.press(screen.getByRole('button', { name: 'Clear relationship search' })); expect(screen.getByLabelText('Search relationships')).toHaveDisplayValue('');
+  await fireEvent.press(screen.getByRole('tab', { name: 'Family' })); await fireEvent.changeText(screen.getByLabelText('Search relationships'), 'nobody matches');
+  await fireEvent.press(screen.getByRole('button', { name: 'Clear relationship search' })); expect(screen.getByLabelText('Search relationships')).toHaveDisplayValue('');
   expect(screen.getByText('Ruby Kelly')).toBeOnTheScreen(); expect(screen.getByText('Jack Kelly')).toBeOnTheScreen(); expect(screen.queryByText('Harper Walker')).toBeNull();
-  fireEvent.press(screen.getByRole('tab', { name: 'Friends' })); expect(screen.getByText('Your friendships will appear here as you get to know people.')).toBeOnTheScreen();
-  fireEvent.press(screen.getByRole('tab', { name: 'Romance' })); expect(screen.getByText('Your current and past partners will appear here.')).toBeOnTheScreen();
-  fireEvent.press(screen.getByRole('tab', { name: 'All' })); expect(screen.getByText('Harper Walker')).toBeOnTheScreen();
+  await fireEvent.press(screen.getByRole('tab', { name: 'Friends' })); expect(screen.getByText('Your friendships will appear here as you get to know people.')).toBeOnTheScreen();
+  await fireEvent.press(screen.getByRole('tab', { name: 'Romance' })); expect(screen.getByText('Your current and past partners will appear here.')).toBeOnTheScreen();
+  await fireEvent.press(screen.getByRole('tab', { name: 'All' })); expect(screen.getByText('Harper Walker')).toBeOnTheScreen();
   expect(screen.queryByRole('image', { name: 'Ruby Kelly' })).toBeNull();
   for (const [name, route] of [['Meet New People', '/meet-people'], ['Household Pets', '/pets'], ['Family & Children', '/family'], ['Family Tree', '/family-tree'], ['My Household', '/household']]) {
-    fireEvent.press(screen.getByRole('button', { name })); expect(router.push).toHaveBeenLastCalledWith(route);
+    await fireEvent.press(screen.getByRole('button', { name })); expect(router.push).toHaveBeenLastCalledWith(route);
   }
   expect(screen.queryByLabelText('Saving')).toBeNull(); expect(encodeWorld(mockStore.getState().world!)).toBe(encoded); expect(rows()).toEqual(before);
-  view.unmount(); sqlite.close();
+  await view.unmount(); sqlite.close();
 });
 
 test('a real spouse can also be a friend; filters keep overlapping roles and the same persistent identity', async () => {
@@ -58,25 +58,25 @@ test('a real spouse can also be a friend; filters keep overlapping roles and the
   const spouse = initial.relationships.find(edge => edge.romance === 'married')!, personId = spouse.from === initial.activePersonId ? spouse.to : spouse.from;
   initial = ack(resolveCommand(initial, { type: 'interact', personId, action: 'talk' }, true));
   expect(initial.relationships.find(edge => edge.id === spouse.id)?.roles).toContain('friend');
-  const { sqlite, rows, before, encoded } = await setup(initial), view = render(frame(<Relationships />));
+  const { sqlite, rows, before, encoded } = await setup(initial), view = await render(frame(<Relationships />));
   for (const filter of ['Family', 'Friends', 'Romance']) {
-    fireEvent.press(screen.getByRole('tab', { name: filter }));
-    fireEvent.press(screen.getByRole('button', { name: /^Morgan .*Spouse/ })); expect(router.push).toHaveBeenLastCalledWith({ pathname: '/person/[id]', params: { id: personId } });
+    await fireEvent.press(screen.getByRole('tab', { name: filter }));
+    await fireEvent.press(screen.getByRole('button', { name: /^Morgan .*Spouse/ })); expect(router.push).toHaveBeenLastCalledWith({ pathname: '/person/[id]', params: { id: personId } });
   }
   expect(screen.queryByText('Sam Rossi')).toBeNull(); expect(encodeWorld(mockStore.getState().world!)).toBe(encoded); expect(rows()).toEqual(before);
-  view.unmount(); sqlite.close();
+  await view.unmount(); sqlite.close();
 });
 
 test('childhood Family keeps actual family and household navigation without adult planning controls', async () => {
-  const initial = ack(decodeSave(JSON.stringify(childArchive)).world), { sqlite, rows, before, encoded } = await setup(initial), view = render(frame(<Family />));
+  const initial = ack(decodeSave(JSON.stringify(childArchive)).world), { sqlite, rows, before, encoded } = await setup(initial), view = await render(frame(<Family />));
   expect(screen.getByText(initial.people[initial.activePersonId].lastName + ' Family')).toBeOnTheScreen();
   expect(screen.getByRole('button', { name: /^Family Tree\./ })).toBeOnTheScreen(); expect(screen.getByRole('button', { name: 'My Household' })).toBeOnTheScreen();
   const will = screen.getByRole('button', { name: /^My Will\./ }), navigationCount = jest.mocked(router.push).mock.calls.length;
-  expect(will).toBeDisabled(); fireEvent.press(will); expect(router.push).toHaveBeenCalledTimes(navigationCount);
+  expect(will).toBeDisabled(); await fireEvent.press(will); expect(router.push).toHaveBeenCalledTimes(navigationCount);
   for (const name of ['Try for a Child', 'Try for a Baby', 'Discuss Having a Baby', 'Review Adoption']) expect(screen.queryByRole('button', { name })).toBeNull();
   expect(screen.queryByText('Your children')).toBeNull();
-  fireEvent.press(screen.getByRole('button', { name: /^Family Tree\./ })); expect(router.push).toHaveBeenLastCalledWith('/family-tree');
-  fireEvent.press(screen.getByRole('button', { name: 'My Household' })); expect(router.push).toHaveBeenLastCalledWith('/household');
+  await fireEvent.press(screen.getByRole('button', { name: /^Family Tree\./ })); expect(router.push).toHaveBeenLastCalledWith('/family-tree');
+  await fireEvent.press(screen.getByRole('button', { name: 'My Household' })); expect(router.push).toHaveBeenLastCalledWith('/household');
   expect(encodeWorld(mockStore.getState().world!)).toBe(encoded); expect(rows()).toEqual(before);
-  view.unmount(); sqlite.close();
+  await view.unmount(); sqlite.close();
 });

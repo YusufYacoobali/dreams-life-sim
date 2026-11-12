@@ -1,6 +1,6 @@
 /** Explicit opt-in Node/React audit. It measures test-renderer work, not native navigation/FPS. */
 import React, { Profiler } from 'react';
-import { render } from '@testing-library/react-native';
+import { render } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { readFileSync, writeFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
@@ -18,7 +18,7 @@ import Assets from '../../app/(game)/(tabs)/assets';
 import Activities from '../../app/(game)/(tabs)/activities';
 const sha = (text: string) => createHash('sha256').update(text).digest('hex');
 const summary = (values: number[]) => { const sorted = [...values].sort((a,b) => a-b); return { samples: values.length, medianMs: sorted[Math.floor(sorted.length/2)], p95Ms: sorted[Math.ceil(sorted.length * .95)-1] }; };
-test('profile opening and unchanged-world updates for the current mobile screens', () => {
+test('profile opening and unchanged-world updates for the current mobile screens', async () => {
   const file = process.env.DREAMS_MOBILE_SCREEN_INPUTS!, destination = process.env.DREAMS_MOBILE_SCREEN_OUTPUT!;
   if (!file || !destination) throw Error('Set DREAMS_MOBILE_SCREEN_INPUTS and DREAMS_MOBILE_SCREEN_OUTPUT');
   const input = JSON.parse(readFileSync(file, 'utf8')) as { snapshots: { summary: { age: number }; payload: string }[] };
@@ -33,10 +33,10 @@ test('profile opening and unchanged-world updates for the current mobile screens
       for (let i=0;i<14;i++) {
         let actualDuration = 0;
         const frame = () => <Profiler id={name} onRender={(_id,_phase,duration) => { actualDuration += duration; }}><SafeAreaProvider initialMetrics={{ frame: { x: 0,y: 0,width: 390,height: 844 },insets: { top: 47,bottom: 34,left: 0,right: 0 } }}><ThemeProvider><Screen /></ThemeProvider></SafeAreaProvider></Profiler>;
-        let began = performance.now(); const view = render(frame()); const mounted = performance.now()-began;
-        actualDuration = 0; began = performance.now(); view.rerender(frame()); const updated = performance.now()-began;
+        let began = performance.now(); const view = await render(frame()); const mounted = performance.now()-began;
+        actualDuration = 0; began = performance.now(); await view.rerender(frame()); const updated = performance.now()-began;
         if (i>=3) { opening.push(mounted); updates.push(updated); react.push(actualDuration); }
-        view.unmount();
+        await view.unmount();
       }
       results.push({ age: snapshot.summary.age, screen: name, open: summary(opening), unchangedWorldUpdate: summary(updates), reactActualDuration: summary(react) });
     }

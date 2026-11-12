@@ -4,7 +4,7 @@ import { DatabaseSync } from 'node:sqlite';
 import { mkdtempSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { act, fireEvent, render, screen, waitFor } from '@testing-library/react-native';
+import { act, fireEvent, render, screen, waitFor } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { createGameStore } from '../../src/state/gameStore';
 import { decodeWorld, encodeWorld } from '../../src/game/model';
@@ -30,19 +30,19 @@ test('an introduction selected in the native UI persists the chosen person and r
   const { sqlite, driver } = database(); const repository = new SaveRepository(driver); await repository.initialise();
   const initial = decodeWorld(JSON.stringify(fixture)); await repository.create(initial);
   mockStore = createGameStore({ repository: async () => repository, date: () => initial.date, id: () => 'life_unused' }); await mockStore.getState().bootstrap();
-  const view = render(<SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider><MeetPeople /><PendingEvent /></ThemeProvider></SafeAreaProvider>);
-  await act(async () => { fireEvent.press(screen.getByRole('button', { name: 'Meet Potential Dates' })); });
+  const view = await render(<SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider><MeetPeople /><PendingEvent /></ThemeProvider></SafeAreaProvider>);
+  await act(async () => { await fireEvent.press(screen.getByRole('button', { name: 'Meet Potential Dates' })); });
   await waitFor(() => expect(screen.getByText('Someone new')).toBeOnTheScreen());
   const decision = mockStore.getState().world!.pending; if (decision?.kind !== 'decision') throw new Error('Expected introductions');
   const chosen = decision.choices[1];
-  await act(async () => { fireEvent.press(screen.getByRole('button', { name: chosen.label })); });
+  await act(async () => { await fireEvent.press(screen.getByRole('button', { name: chosen.label })); });
   await waitFor(() => expect(screen.getByText('Introductions made')).toBeOnTheScreen());
-  await act(async () => { fireEvent.press(screen.getByRole('button', { name: 'Continue' })); });
+  await act(async () => { await fireEvent.press(screen.getByRole('button', { name: 'Continue' })); });
   const restored = (await repository.load(initial.id))!;
   expect(relationFor(restored, restored.activePersonId, chosen.id)).toBeDefined();
   expect(restored.people[chosen.id]).toEqual(mockStore.getState().world!.people[chosen.id]);
   expect(screen.getByRole('button', { name: 'Meet Potential Dates' })).toBeDisabled();
-  view.unmount(); sqlite.close();
+  await view.unmount(); sqlite.close();
 });
 
 test('the actual married couple retains a failed divorce review, rejects obsolete callbacks and commits its exact settlement once through closed-file SQLite', async () => {
@@ -56,7 +56,7 @@ test('the actual married couple retains a failed divorce review, rejects obsolet
   const quote = divorceQuote(initial, spouseId), command = { type: 'divorce' as const, personId: spouseId, custody: 'shared' as const, quotedPayment: quote.signed };
   expect(quote.amount).toBeGreaterThan(0n);
   const directory = mkdtempSync(join(tmpdir(), 'dreams-divorce-review-')), path = join(directory, 'dreams.db');
-  let sqlite!: DatabaseSync, repository: SaveRepository, nextYield: Promise<void> | undefined, view: ReturnType<typeof render> | undefined;
+  let sqlite!: DatabaseSync, repository: SaveRepository, nextYield: Promise<void> | undefined, view: Awaited<ReturnType<typeof render>> | undefined;
   const connect = (): SqlDatabase => {
     const connection = sqlite = new DatabaseSync(path); connection.exec('PRAGMA foreign_keys=ON');
     const session: SqlSession = {
@@ -72,11 +72,11 @@ test('the actual married couple retains a failed divorce review, rejects obsolet
     expect(await mockStore.getState().bootstrap()).toBe(true);
   };
   const frame = () => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider><Divorce /><PendingEvent /></ThemeProvider></SafeAreaProvider>;
-  const press = async (name: string) => { await act(async () => fireEvent.press(screen.getByRole('button', { name }))); };
+  const press = async (name: string) => { await act(async () => await fireEvent.press(screen.getByRole('button', { name }))); };
   const confirmation = () => screen.UNSAFE_getAllByType(EventModal).find(item => item.props.event?.kind === 'confirmation')!;
   repository = new SaveRepository(connect());
   try {
-    await repository.initialise(); await repository.create(initial); await bootstrap(); view = render(frame());
+    await repository.initialise(); await repository.create(initial); await bootstrap(); view = await render(frame());
     expect(screen.getByText('You have no shared dependent children with ' + initial.people[spouseId].firstName + ' ' + initial.people[spouseId].lastName + '. No new custody arrangement will be recorded.')).toBeOnTheScreen();
     expect(screen.queryAllByRole('radio')).toHaveLength(0);
     await press('Review Divorce'); const first = confirmation().props, reviewed = first.event;
@@ -104,7 +104,7 @@ test('the actual married couple retains a failed divorce review, rejects obsolet
     expect(confirmation().props.event).toBe(second.event); expect(rows()).toEqual(before);
     // Unmount and return while still married: the abandoned route's closures
     // cannot confirm or cancel the new route's exact review.
-    view.unmount(); view = render(frame()); await press('Review Divorce'); const current = confirmation().props;
+    await view.unmount(); view = await render(frame()); await press('Review Divorce'); const current = confirmation().props;
     await act(async () => { second.onCancel(); await second.onChoose('confirm'); });
     expect(confirmation().props.event).toBe(current.event); expect(rows()).toEqual(before);
     sqlite.exec('DROP TRIGGER fail_divorce');
@@ -121,12 +121,12 @@ test('the actual married couple retains a failed divorce review, rejects obsolet
     expect(sqlite.prepare('SELECT payload FROM backups WHERE life_id=?').get(initial.id)?.payload).toBe(before.lives.find(row => row.id === initial.id)!.payload);
     expect(expected.marriages.at(-1)?.endReason).toBe('divorce');
     expect(expected.ledger.filter(row => row.category === 'settlement')).not.toHaveLength(0);
-    const committed = rows(); view.unmount(); view = undefined; sqlite.close();
-    repository = new SaveRepository(connect()); await bootstrap(); view = render(frame());
+    const committed = rows(); await view.unmount(); view = undefined; sqlite.close();
+    repository = new SaveRepository(connect()); await bootstrap(); view = await render(frame());
     expect(rows()).toEqual(committed); expect(mockStore.getState().world).toEqual(expected);
     await press('Continue'); const done = mockStore.getState().world!, acknowledged = rows();
     expect(done.pending).toBeNull(); expect(done.revision).toBe(initial.revision + 2); expect(done.ledger).toEqual(expected.ledger); expect(done.people).toEqual(expected.people);
     await act(async () => { await current.onChoose('confirm'); expect(await mockStore.getState().dispatch(command)).toBe(false); expect(await mockStore.getState().dispatch({ type: 'acknowledge', resultId: expected.pending!.id })).toBe(false); });
     expect(rows()).toEqual(acknowledged);
-  } finally { jest.restoreAllMocks(); view?.unmount(); sqlite.close(); rmSync(directory, { recursive: true, force: true }); }
+  } finally { jest.restoreAllMocks(); await view?.unmount(); sqlite.close(); rmSync(directory, { recursive: true, force: true }); }
 }, 30000);

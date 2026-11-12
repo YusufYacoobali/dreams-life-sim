@@ -1,5 +1,5 @@
 import React from 'react';
-import { act, fireEvent, render, screen, waitFor } from '@testing-library/react-native';
+import { act, fireEvent, render, screen, waitFor } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { createGameStore } from '../../src/state/gameStore';
 import { decodeWorld, encodeWorld, type World } from '../../src/game/model';
@@ -65,10 +65,10 @@ test.each([false, true])('final polish production screens produce read-only revi
     else if (name === 'doctor') { mockRoute = {}; content = <Doctor />; }
     else { const condition = addCondition(world, world.people[world.activePersonId], 'diabetes', 55); mockRoute = { id: condition.id }; content = <Condition />; }
     const { sqlite } = await boot(world), before = encodeWorld(mockStore.getState().world!);
-    const view = render(frame(content, dark));
+    const view = await render(frame(content, dark));
     captureFinalPolish(name + '-' + suffix, view.toJSON(), mockStore.getState().world!);
     expect(encodeWorld(mockStore.getState().world!)).toBe(before);
-    view.unmount(); sqlite.close();
+    await view.unmount(); sqlite.close();
   }
 });
 
@@ -77,15 +77,15 @@ test.each([false, true])('purchase review and its saved result use actual produc
   mockNavigate.mockClear(); mockRoute = { id: 'studio' };
   const { sqlite, repository } = await boot(prepared()), suffix = dark ? 'dark-large' : 'light';
   const offer = <AssetOfferPage id="studio" />;
-  const view = render(frame(offer, dark));
-  await act(async () => { fireEvent.press(screen.getByRole('button', { name: 'Review Purchase' })); });
+  const view = await render(frame(offer, dark));
+  await act(async () => { await fireEvent.press(screen.getByRole('button', { name: 'Review Purchase' })); });
   captureFinalPolish('purchase-confirm-' + suffix, view.toJSON(), mockStore.getState().world!);
-  await act(async () => { fireEvent.press(screen.getByRole('button', { name: 'Confirm Purchase' })); });
+  await act(async () => { await fireEvent.press(screen.getByRole('button', { name: 'Confirm Purchase' })); });
   await waitFor(() => expect(mockStore.getState().world!.assets.some(asset => asset.catalogId === 'studio')).toBe(true));
   const saved = mockStore.getState().world!;
   expect(await repository.load(saved.id)).toEqual(saved);
-  if (mockNavigate.mock.calls.length) view.rerender(frame(<Assets />, dark));
+  if (mockNavigate.mock.calls.length) await view.rerender(frame(<Assets />, dark));
   captureFinalPolish('purchase-saved-context-' + suffix, view.toJSON(), saved);
   expect(saved.pending?.kind).toBe('result');
-  view.unmount(); sqlite.close();
+  await view.unmount(); sqlite.close();
 });

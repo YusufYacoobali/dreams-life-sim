@@ -1,5 +1,5 @@
 import React from 'react';
-import { act, fireEvent, render, screen, waitFor } from '@testing-library/react-native';
+import { act, fireEvent, render, screen, waitFor } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { DatabaseSync } from 'node:sqlite';
 import { mkdtempSync, rmSync } from 'node:fs';
@@ -21,7 +21,7 @@ jest.mock('expo-router', () => ({ router: { back: jest.fn(), push: jest.fn(), re
 jest.mock('../../src/state/useGame', () => ({ useGame: (selector: unknown) => require('zustand').useStore(mockStore, selector) }));
 import Jobs from '../../app/(game)/jobs';
 const frame = () => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider><Jobs /><PendingEvent /></ThemeProvider></SafeAreaProvider>;
-const press = async (name: string | RegExp) => { await act(async () => { fireEvent.press(screen.getByRole('button', { name })); }); };
+const press = async (name: string | RegExp) => { await act(async () => { await fireEvent.press(screen.getByRole('button', { name })); }); };
 
 async function setup(kind: 'final' | 'interview') {
   const payload = native.checkpoints[kind].payload, initial = checkpoints.unpackCheckpoint(payload);
@@ -66,7 +66,7 @@ async function setup(kind: 'final' | 'interview') {
 afterEach(() => { jest.restoreAllMocks(); });
 
 test('genuine paid history binds once through application/answer rollback, held duplicate refusal, actual closed-connection cold and acknowledgement', async () => {
-  const context = await setup('final'); let view = render(frame());
+  const context = await setup('final'); let view = await render(frame());
   try {
     const before = context.rows(), initialText = encodeWorld(context.initial); expect(Object.keys(before)).toHaveLength(8);
     await press(/^Retail Assistant\./); expect(context.rows()).toEqual(before);
@@ -75,7 +75,7 @@ test('genuine paid history binds once through application/answer rollback, held 
     await press('Apply for this Job'); await waitFor(() => expect(mockStore.getState().error).toMatch(/couldn't be saved/));
     expect(screen.getAllByRole('alert')).toHaveLength(1); expect(screen.getByText('Job Detail')).toBeOnTheScreen(); expect(context.rows()).toEqual(before); expect(encodeWorld(mockStore.getState().world!)).toBe(initialText);
     context.sql('DROP TRIGGER fail_experience_apply'); context.hold();
-    await act(async () => { fireEvent.press(screen.getByRole('button', { name: 'Apply for this Job' })); fireEvent.press(screen.getByRole('button', { name: 'Apply for this Job' })); });
+    await act(async () => { await fireEvent.press(screen.getByRole('button', { name: 'Apply for this Job' })); await fireEvent.press(screen.getByRole('button', { name: 'Apply for this Job' })); });
     await waitFor(() => expect(context.isHeld()).toBe(true)); expect(mockStore.getState().busy).toBe(true); expect(context.writes()).toBe(2);
     expect(screen.getByRole('button', { name: 'Apply for this Job' })).toBeDisabled();
     await act(async () => { context.release(); }); await waitFor(() => expect(screen.getByText('Retail Assistant interview')).toBeOnTheScreen());
@@ -83,7 +83,7 @@ test('genuine paid history binds once through application/answer rollback, held 
     const question = 'New York Retail asks: “' + jobInterviews.retail.question + '”';
     expect(screen.getByText(question)).toBeOnTheScreen();
     expect(screen.queryByText(/Your application includes|Experience can add|No experience bonus/)).toBeNull();
-    const decisionRows = context.rows(); view.unmount(); await act(async () => { await context.cold(); }); view = render(frame());
+    const decisionRows = context.rows(); await view.unmount(); await act(async () => { await context.cold(); }); view = await render(frame());
     expect(context.rows()).toEqual(decisionRows); expect(mockStore.getState().world).toEqual(predicted);
     expect(screen.getByText(question)).toBeOnTheScreen();
     expect(screen.queryByText(/Your application includes|Experience can add|No experience bonus/)).toBeNull();
@@ -93,16 +93,16 @@ test('genuine paid history binds once through application/answer rollback, held 
     await waitFor(() => expect(mockStore.getState().error).toMatch(/couldn't be saved/)); expect(screen.getAllByRole('alert')).toHaveLength(1); expect(context.rows()).toEqual(decisionRows); expect(mockStore.getState().world).toEqual(predicted);
     context.sql('DROP TRIGGER fail_experience_answer'); await press(choice.label); await waitFor(() => expect(mockStore.getState().world).toEqual(expected));
     expect(expected.accounts).toEqual(predicted.accounts); expect(expected.ledger).toEqual(predicted.ledger); expect(warmUnpack).not.toHaveBeenCalled(); warmUnpack.mockRestore();
-    const resultRows = context.rows(); view.unmount(); await act(async () => { await context.cold(); }); view = render(frame()); expect(context.rows()).toEqual(resultRows); expect(mockStore.getState().world).toEqual(expected);
+    const resultRows = context.rows(); await view.unmount(); await act(async () => { await context.cold(); }); view = await render(frame()); expect(context.rows()).toEqual(resultRows); expect(mockStore.getState().world).toEqual(expected);
     expect(screen.getByText(expected.pending!.title)).toBeOnTheScreen(); await press('Continue'); const done = mockStore.getState().world!, doneRows = context.rows();
     expect(done.people).toEqual(expected.people); expect(done.random).toEqual(expected.random); expect(done.workHistory).toEqual(expected.workHistory);
     await act(async () => { expect(await mockStore.getState().dispatch(answer)).toBe(false); expect(await mockStore.getState().dispatch({ type: 'acknowledge', resultId: expected.pending!.id })).toBe(false); }); expect(context.rows()).toEqual(doneRows);
-    view.unmount(); await act(async () => { await context.cold(); }); view = render(frame()); expect(mockStore.getState().world).toEqual(done); expect(context.rows()).toEqual(doneRows); expect(context.oldRows()).toEqual(context.original);
-  } finally { if (context.isHeld()) { await act(async () => { context.release(); }); await waitFor(() => expect(mockStore.getState().busy).toBe(false)); } view.unmount(); context.close(); }
+    await view.unmount(); await act(async () => { await context.cold(); }); view = await render(frame()); expect(mockStore.getState().world).toEqual(done); expect(context.rows()).toEqual(doneRows); expect(context.oldRows()).toEqual(context.original);
+  } finally { if (context.isHeld()) { await act(async () => { context.release(); }); await waitFor(() => expect(mockStore.getState().busy).toBe(false)); } await view.unmount(); context.close(); }
 }, 30_000);
 
 test('actual old native unanswered interview keeps exact old copy, absent metadata, raw backup and original hiring result after disk retry/cold', async () => {
-  const context = await setup('interview'); let view = render(frame());
+  const context = await setup('interview'); let view = await render(frame());
   try {
     const initial = context.initial, before = context.rows(), pending = initial.pending;
     if (pending?.kind !== 'decision') throw new Error('Expected old actual interview');
@@ -114,6 +114,6 @@ test('actual old native unanswered interview keeps exact old copy, absent metada
     context.sql("CREATE TRIGGER fail_legacy_experience BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END"); await press(pending.choices[0].label); await waitFor(() => expect(mockStore.getState().error).toMatch(/couldn't be saved/)); expect(context.rows()).toEqual(before); expect(mockStore.getState().world).toEqual(initial);
     context.sql('DROP TRIGGER fail_legacy_experience'); await press(pending.choices[0].label);
     const actualHired = checkpoints.unpackCheckpoint(native.checkpoints.hired.payload); await waitFor(() => expect(mockStore.getState().world).toEqual(actualHired)); expect(context.backup()).toBe(context.payload);
-    const after = context.rows(); view.unmount(); await act(async () => { await context.cold(); }); view = render(frame()); expect(context.rows()).toEqual(after); expect(mockStore.getState().world).toEqual(actualHired); expect(context.oldRows()).toEqual(context.original);
-  } finally { view.unmount(); context.close(); }
+    const after = context.rows(); await view.unmount(); await act(async () => { await context.cold(); }); view = await render(frame()); expect(context.rows()).toEqual(after); expect(mockStore.getState().world).toEqual(actualHired); expect(context.oldRows()).toEqual(context.original);
+  } finally { await view.unmount(); context.close(); }
 });

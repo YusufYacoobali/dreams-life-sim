@@ -9,6 +9,7 @@ import { features, featureProduct, ownsProduct, paywallProducts, products, type 
 import { purchases } from './native';
 import { useEntitlement, usePurchases } from './hooks';
 import { trackPurchase } from './analytics';
+import { hasPremiumAccess } from './access';
 
 function ProductArt({ id }: { id: ProductId }) {
   const feature = products[id].features[0];
@@ -38,7 +39,7 @@ export function PurchaseOptions({ feature, trigger, onContinue }: { feature?: Pr
         }} />
       </Card>;
     })}
-    {feature && state.ownership[feature] && onContinue && <Button label="Continue" onPress={onContinue} disabled={state.busy} />}
+    {feature && hasPremiumAccess(state.ownership[feature]) && onContinue && <Button label="Continue" onPress={onContinue} disabled={state.busy} />}
     <Button label="Restore Purchases" tone="secondary" busy={state.busy} disabled={state.status !== 'ready'} onPress={() => { void purchases.getState().restore(trigger); }} />
     <Button label="Refresh Store" tone="secondary" busy={state.busy} disabled={state.status === 'loading'} onPress={() => { void purchases.getState().refresh(); }} />
   </>;
@@ -69,13 +70,13 @@ export function usePremiumAction(identity: string) {
   useEffect(() => { if (pendingRef.current?.identity !== identity) { pendingRef.current = null; setPending(null); } }, [identity]);
   const resume = () => {
     const current = pendingRef.current;
-    if (!current || !mounted.current || currentIdentity.current !== current.identity || !purchases.getState().ownership[current.feature]) return;
+    if (!current || !mounted.current || currentIdentity.current !== current.identity || !hasPremiumAccess(purchases.getState().ownership[current.feature])) return;
     pendingRef.current = null; setPending(null); current.action();
   };
   return {
     run(feature: PremiumFeature | null, trigger: string, action: () => void) {
       if (!mounted.current || currentIdentity.current !== identity || pendingRef.current) return;
-      if (!feature || purchases.getState().ownership[feature]) { action(); return; }
+      if (!feature || hasPremiumAccess(purchases.getState().ownership[feature])) { action(); return; }
       const next = { identity, feature, trigger, action }; pendingRef.current = next; setPending(next);
     },
     modal: pending && pending.identity === identity ? <Modal visible animationType="slide" accessibilityViewIsModal onRequestClose={() => { if (!purchases.getState().busy) { trackPurchase({ name: 'paywall_dismissed', feature: pending.feature, trigger: pending.trigger, ownership: purchases.getState().ownership }); pendingRef.current = null; setPending(null); } }}><FeaturePaywall feature={pending.feature} trigger={pending.trigger} onDismiss={() => { pendingRef.current = null; setPending(null); }} onUnlocked={resume} /></Modal> : null,

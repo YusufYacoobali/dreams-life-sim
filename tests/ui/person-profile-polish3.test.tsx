@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image, StyleSheet } from 'react-native';
-import { render, screen } from '@testing-library/react-native';
+import { render, screen } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import type { World } from '../../src/game/model';
 import { encodeWorld } from '../../src/game/model';
@@ -17,11 +17,11 @@ import PersonProfile from '../../app/(game)/person/[id]';
 
 afterEach(()=>jest.restoreAllMocks());
 
-test.each([false,true])('Teacher is a prominent saved role without a duplicate occupation, dark/large=%s',dark=>{
+test.each([false,true])('Teacher is a prominent saved role without a duplicate occupation, dark/large=%s',async dark=>{
   const fixture=personProfilePolishFixture();mockWorld=fixture.world;mockPersonId=fixture.personId;
   const before=encodeWorld(mockWorld),width=dark?320:390;
   jest.spyOn(require('react-native'),'useWindowDimensions').mockReturnValue({width,height:844,scale:2,fontScale:dark?1.4:1});
-  render(<SafeAreaProvider initialMetrics={{frame:{x:0,y:0,width,height:844},insets:{top:47,bottom:34,left:0,right:0}}}><ThemeProvider appearance={dark?'dark':'light'}><PersonProfile /></ThemeProvider></SafeAreaProvider>);
+  await render(<SafeAreaProvider initialMetrics={{frame:{x:0,y:0,width,height:844},insets:{top:47,bottom:34,left:0,right:0}}}><ThemeProvider appearance={dark?'dark':'light'}><PersonProfile /></ThemeProvider></SafeAreaProvider>);
   const role=screen.getByText('Teacher');expect(screen.getAllByText('Teacher')).toHaveLength(1);
   expect(StyleSheet.flatten(role.props.style)).toMatchObject({fontWeight:'700',fontSize:15});
   expect(screen.getByText(mockWorld.people[mockPersonId].employment!.employer)).toBeOnTheScreen();

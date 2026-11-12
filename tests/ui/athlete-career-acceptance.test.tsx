@@ -5,7 +5,7 @@ beforeEach(() => { purchases.setState({ ownership: Object.fromEntries(features.m
 import { displayText } from '../../src/ui/displayNumbers';
 import React from 'react';
 import { Modal } from 'react-native';
-import { act, fireEvent, render, screen, waitFor, within } from '@testing-library/react-native';
+import { act, fireEvent, render, screen, waitFor, within } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { DatabaseSync } from 'node:sqlite';
 import { mkdtempSync, rmSync } from 'node:fs';
@@ -36,9 +36,9 @@ const world = () => mockStore.getState().world!;
 const person = () => world().people[world().activePersonId];
 const athlete = () => world().careers.find(item => item.personId === world().activePersonId && item.kind === 'athlete');
 const frame = (training = false) => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 24, bottom: 48, left: 0, right: 0 } }}><ThemeProvider>{training ? <Training /> : <Athlete />}<PendingEvent /></ThemeProvider></SafeAreaProvider>;
-const press = async (name: string | RegExp) => { await act(async () => { fireEvent.press(screen.getByRole('button', { name })); }); };
+const press = async (name: string | RegExp) => { await act(async () => { await fireEvent.press(screen.getByRole('button', { name })); }); };
 const modal = () => within(screen.UNSAFE_getByType(Modal));
-const confirm = async (name: string) => { await act(async () => { fireEvent.press(modal().getByRole('button', { name })); }); };
+const confirm = async (name: string) => { await act(async () => { await fireEvent.press(modal().getByRole('button', { name })); }); };
 const review = () => screen.UNSAFE_getAllByType(EventModal).find(item => item.props.event?.kind === 'confirmation')!;
 const absolute = (value: World) => value.date.year * 12 + value.date.month - 1;
 const dispatch = async (command: GameCommand) => { expect(await mockStore.getState().dispatch(command)).toBe(true); };
@@ -81,7 +81,7 @@ async function durableReview(context: Awaited<ReturnType<typeof setup>>, launch:
   const initial = world(), before = context.rows(); await press(launch); await press('Never mind'); expect(world()).toBe(initial); expect(context.rows()).toEqual(before);
   await press(launch); const selected = review().props.event, submit = review().props.onChoose, unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'), release = context.pause();
   context.sqlite.exec("CREATE TRIGGER fail_athlete_acceptance BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
-  await act(async () => { fireEvent.press(modal().getByRole('button', { name: label })); submit('confirm'); }); expect(mockStore.getState().busy).toBe(true); expect(modal().getByRole('button', { name: label })).toBeDisabled();
+  await act(async () => { await fireEvent.press(modal().getByRole('button', { name: label })); submit('confirm'); }); expect(mockStore.getState().busy).toBe(true); expect(modal().getByRole('button', { name: label })).toBeDisabled();
   await press('Never mind'); await act(async () => { screen.UNSAFE_getByType(Modal).props.onRequestClose(); }); expect(review().props.event).toBe(selected); expect(world()).toBe(initial); expect(context.rows()).toEqual(before);
   await act(async () => { release(); }); await waitFor(() => expect(modal().getByRole('alert')).toHaveTextContent(/couldn't be saved/));
   expect(screen.getAllByRole('alert')).toHaveLength(1); expect(review().props.event).toBe(selected); expect(modal().getByText(selected.body)).toBeOnTheScreen(); expect(world()).toBe(initial); expect(context.rows()).toEqual(before);
@@ -93,32 +93,32 @@ async function durableReview(context: Awaited<ReturnType<typeof setup>>, launch:
 }
 
 test('an archived actor earns Athletics through paid months, signs a real team, plays a paid season and exits durably without erasing work or paying again', async () => {
-  const context = await setup(); let view: ReturnType<typeof render> | undefined;
+  const context = await setup(); let view: Awaited<ReturnType<typeof render>> | undefined;
   try {
     const importedActor = world().careers.find(item => item.kind === 'actor')!; expect(importedActor.projects[0].grossEarned).toBe(2000000n);
     await settle(); expect(person().skills.sport).toBe(0); expect(person().employment).toBeNull();
-    const initial = world(), before = context.rows(); expect(Object.keys(before)).toHaveLength(8); view = render(frame());
+    const initial = world(), before = context.rows(); expect(Object.keys(before)).toHaveLength(8); view = await render(frame());
     expect(screen.getByText('Athletics skill of 60% is required')).toBeOnTheScreen(); expect(screen.getByRole('button', { name: 'Review Tryout' })).toBeDisabled(); await press('Review Tryout');
     await act(async () => { expect(await mockStore.getState().dispatch({ type: 'select-career', kind: 'athlete', quotedAnnualPay: careerPayQuote(initial, 'athlete') })).toBe(false); }); expect(world()).toBe(initial); expect(context.rows()).toEqual(before);
-    view.rerender(frame(true)); await act(async () => { fireEvent.press(screen.getByRole('radio', { name: /^Athletics\./ })); }); await act(async () => { fireEvent.press(screen.getByRole('radio', { name: /^Coached Sessions\./ })); }); await press('Review Training Routine');
+    await view.rerender(frame(true)); await act(async () => { await fireEvent.press(screen.getByRole('radio', { name: /^Athletics\./ })); }); await act(async () => { await fireEvent.press(screen.getByRole('radio', { name: /^Coached Sessions\./ })); }); await press('Review Training Routine');
     expect(modal().getByText(displayText(formatMoney({ minor: coachingCost(world()), currency: 'USD' })))).toBeOnTheScreen(); await confirm('Set Training Routine'); await press('Continue');
-    expect(person().skills.sport).toBe(0); expect(person().training).toMatchObject({ skill: 'sport', mode: 'coached', months: 0, fees: 0n }); view.unmount(); view = undefined;
+    expect(person().skills.sport).toBe(0); expect(person().training).toMatchObject({ skill: 'sport', mode: 'coached', months: 0, fees: 0n }); await view.unmount(); view = undefined;
     // Preregistered bounded preparation: at most four ordinary years, no monthly helper or saved-world edit.
     for (let count = 0; count < 4 && person().skills.sport < 60; count++) await year();
     const training = person().training!, trained = world(); expect(training.months).toBeGreaterThanOrEqual(30); expect(person().skills.sport).toBeGreaterThanOrEqual(60); expect(selectionReason(trained, 'athlete')).toBeUndefined();
     const tuition = trained.ledger.slice(initial.ledger.length).filter(row => row.personId === trained.activePersonId && row.category === 'skill-training');
     expect(tuition).toHaveLength(training.months); expect(tuition.every(row => row.currency === training.currency && row.cashDelta < 0n)).toBe(true); expect(-tuition.reduce((sum, row) => sum + row.cashDelta, 0n)).toBe(training.fees);
-    view = render(frame(true)); await press('Stop Training'); await confirm('Stop Training'); await press('Continue'); expect(person().training).toBeNull(); expect(person().skills).toEqual(trained.people[trained.activePersonId].skills); view.unmount(); view = undefined;
+    view = await render(frame(true)); await press('Stop Training'); await confirm('Stop Training'); await press('Continue'); expect(person().training).toBeNull(); expect(person().skills).toEqual(trained.people[trained.activePersonId].skills); await view.unmount(); view = undefined;
     const selectionOutcomes: string[] = [];
     // At most two normal attempts per year in at most two calendar years. Rejections remain saved; RNG is never searched or changed.
     for (let calendar = 0; calendar < 2 && !athlete(); calendar++) {
       if (calendar) await year();
       for (let attempt = 0; attempt < 2 && !athlete(); attempt++) {
         expect(selectionReason(world(), 'athlete')).toBeUndefined(); const start = world(), command: GameCommand = { type: 'select-career', kind: 'athlete', quotedAnnualPay: careerPayQuote(start, 'athlete') };
-        view = render(frame()); const expected = await durableReview(context, 'Review Tryout', 'Attend Tryout', command); selectionOutcomes.push(expected.pending!.title);
+        view = await render(frame()); const expected = await durableReview(context, 'Review Tryout', 'Attend Tryout', command); selectionOutcomes.push(expected.pending!.title);
         expect(expected.accounts.filter(row => row.ownerId === start.activePersonId)).toEqual(start.accounts.filter(row => row.ownerId === start.activePersonId));
-        const committed = context.rows(); view.unmount(); await context.cold(); view = render(frame()); expect(world()).toEqual(expected); expect(context.rows()).toEqual(committed); await press('Continue'); const acknowledged = world(), acknowledgedRows = context.rows();
-        await act(async () => { expect(await mockStore.getState().dispatch({ type: 'acknowledge', resultId: expected.pending!.id })).toBe(false); }); expect(world()).toBe(acknowledged); expect(context.rows()).toEqual(acknowledgedRows); view.unmount(); view = undefined;
+        const committed = context.rows(); await view.unmount(); await context.cold(); view = await render(frame()); expect(world()).toEqual(expected); expect(context.rows()).toEqual(committed); await press('Continue'); const acknowledged = world(), acknowledgedRows = context.rows();
+        await act(async () => { expect(await mockStore.getState().dispatch({ type: 'acknowledge', resultId: expected.pending!.id })).toBe(false); }); expect(world()).toBe(acknowledged); expect(context.rows()).toEqual(acknowledgedRows); await view.unmount(); view = undefined;
       }
     }
     expect(athlete()?.status).toBe('active'); const signed = athlete()!, employed = world(), personId = employed.activePersonId, historyId = signed.employmentId!;
@@ -129,14 +129,14 @@ test('an archived actor earns Athletics through paid months, signs a real team, 
     expect(season.periods.filter(row => row.success).every(row => row.attended)).toBe(true);
     const wages = played.ledger.slice(employed.ledger.length).filter(row => row.personId === personId && row.category === 'income'); expect(wages).toHaveLength(12); expect(wages.every(row => row.currency === signed.currency && row.cashDelta > 0n)).toBe(true); expect(wages.reduce((sum, row) => sum + row.cashDelta, 0n)).toBe(season.grossEarned); expect(history.grossEarned).toBe(season.grossEarned);
     expect(played.careers.find(row => row.id === importedActor.id)).toEqual(importedActor); context.original(); await context.cold(); expect(world()).toEqual(played);
-    view = render(frame()); const ended = await durableReview(context, /^Leave This Career\./, 'Leave Career', { type: 'leave-career', careerId: recorded.id });
+    view = await render(frame()); const ended = await durableReview(context, /^Leave This Career\./, 'Leave Career', { type: 'leave-career', careerId: recorded.id });
     expect(ended.careers.find(row => row.id === recorded.id)!.projects[0]).toEqual(season); expect(ended.workHistory.find(row => row.id === historyId)).toMatchObject({ ...history, ended: ended.date }); expect(ended.accounts).toEqual(played.accounts);
-    const exitRows = context.rows(); view.unmount(); await context.cold(); view = render(frame()); expect(world()).toEqual(ended); expect(context.rows()).toEqual(exitRows); await press('Continue'); const left = world(), leftCareer = athlete()!, leftRows = context.rows();
+    const exitRows = context.rows(); await view.unmount(); await context.cold(); view = await render(frame()); expect(world()).toEqual(ended); expect(context.rows()).toEqual(exitRows); await press('Continue'); const left = world(), leftCareer = athlete()!, leftRows = context.rows();
     expect(leftCareer.status).toBe('left'); expect(leftCareer.projects[1]).toMatchObject({ status: 'cancelled', months: 0, grossEarned: 0n }); expect(person().employment).toBeNull();
-    await act(async () => { expect(await mockStore.getState().dispatch({ type: 'acknowledge', resultId: ended.pending!.id })).toBe(false); }); expect(world()).toBe(left); expect(context.rows()).toEqual(leftRows); view.unmount(); view = undefined;
+    await act(async () => { expect(await mockStore.getState().dispatch({ type: 'acknowledge', resultId: ended.pending!.id })).toBe(false); }); expect(world()).toBe(left); expect(context.rows()).toEqual(leftRows); await view.unmount(); view = undefined;
     await year(); const final = world(); expect(athlete()).toEqual(leftCareer); expect(final.workHistory.filter(row => row.personId === personId)).toEqual(left.workHistory.filter(row => row.personId === personId)); expect(person().finance.serviceMonths).toBe(left.people[personId].finance.serviceMonths); expect(person().employment).toBeNull();
     expect(final.ledger.slice(left.ledger.length).filter(row => row.personId === personId && ['income', 'skill-training'].includes(row.category))).toEqual([]); context.original();
-    const finalRows = context.rows(); await context.cold(); view = render(frame()); expect(world()).toEqual(final); expect(context.rows()).toEqual(finalRows); expect(screen.queryByRole('button', { name: /^Leave This Career\./ })).toBeNull(); expect(screen.getByText('You have left this career')).toBeOnTheScreen(); context.original();
+    const finalRows = context.rows(); await context.cold(); view = await render(frame()); expect(world()).toEqual(final); expect(context.rows()).toEqual(finalRows); expect(screen.queryByRole('button', { name: /^Leave This Career\./ })).toBeNull(); expect(screen.getByText('You have left this career')).toBeOnTheScreen(); context.original();
     console.info('ATHLETE_OBSERVATION', JSON.stringify({ trainingMonths: training.months, tuitionMinor: training.fees.toString(), trainedSport: trained.people[personId].skills.sport, selectionOutcomes, attended: season.periods.filter(row => row.attended).length, wins: season.periods.filter(row => row.success).length, seasonStatus: season.status, seasonGrossMinor: season.grossEarned.toString(), award: season.award, finalRevision: final.revision }));
-  } finally { view?.unmount(); jest.restoreAllMocks(); context.close(); }
+  } finally { await view?.unmount(); jest.restoreAllMocks(); context.close(); }
 });

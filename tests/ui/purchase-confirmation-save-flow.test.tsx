@@ -1,7 +1,7 @@
 import { displayText } from '../../src/ui/displayNumbers';
 import React from 'react';
 import { Modal } from 'react-native';
-import { act, fireEvent, render, screen, waitFor, within } from '@testing-library/react-native';
+import { act, fireEvent, render, screen, waitFor, within } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { DatabaseSync } from 'node:sqlite';
 import { mkdtempSync, rmSync } from 'node:fs';
@@ -29,9 +29,9 @@ import Offer from '../../app/(game)/offer/[id]';
 import Assets from '../../app/(game)/(tabs)/assets';
 
 const frame = (content: React.ReactNode = <Offer />) => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider>{content}<PendingEvent /></ThemeProvider></SafeAreaProvider>;
-const press = async (name: string | RegExp) => { await act(async () => { fireEvent.press(screen.getByRole('button', { name })); }); };
+const press = async (name: string | RegExp) => { await act(async () => { await fireEvent.press(screen.getByRole('button', { name })); }); };
 const modal = () => within(screen.UNSAFE_getByType(Modal));
-const choose = async (name: string | RegExp) => { await act(async () => { fireEvent.press(screen.getByRole('radio', { name })); }); };
+const choose = async (name: string | RegExp) => { await act(async () => { await fireEvent.press(screen.getByRole('radio', { name })); }); };
 const world = () => mockStore.getState().world!;
 
 async function setup(fund = true) {
@@ -89,7 +89,7 @@ test('local financing, deposit and term choices close immediately; review and ca
   const context = await setup();
   try {
     const before = encodeWorld(world()), beforeRows = context.rows(), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint');
-    const view = render(frame()); expect(screen.getByRole('radio', { name: 'Buy Outright', checked: true })).toBeOnTheScreen();
+    const view = await render(frame()); expect(screen.getByRole('radio', { name: 'Buy Outright', checked: true })).toBeOnTheScreen();
     await choose('Mortgage'); expect(screen.getByRole('radio', { name: 'Mortgage', checked: true })).toBeOnTheScreen(); await press(/^Deposit\./); await choose('40%'); await press('Choose');
     expect(screen.queryByRole('button', { name: 'Choose' })).toBeNull(); expect(screen.getByRole('button', { name: /^Deposit\. 40%/ })).toBeOnTheScreen();
     await press(/^Term\./); await choose('20 years'); await press('Choose'); expect(screen.queryByRole('button', { name: 'Choose' })).toBeNull();
@@ -101,7 +101,7 @@ test('local financing, deposit and term choices close immediately; review and ca
     await press('Review Purchase'); expectReviewedTerms(); await press('Never mind');
     expect(screen.queryByText('Buy City Studio?')).toBeNull(); await choose('Buy Outright'); await choose('Mortgage');
     expect(screen.getByRole('button', { name: /^Deposit\. 40%/ })).toBeOnTheScreen(); expect(screen.getByRole('button', { name: 'Term. 20 years' })).toBeOnTheScreen();
-    expect(encodeWorld(world())).toBe(before); expect(context.rows()).toEqual(beforeRows); expect(mockDismissTo).not.toHaveBeenCalled(); expect(unpack).not.toHaveBeenCalled(); view.unmount();
+    expect(encodeWorld(world())).toBe(before); expect(context.rows()).toEqual(beforeRows); expect(mockDismissTo).not.toHaveBeenCalled(); expect(unpack).not.toHaveBeenCalled(); await view.unmount();
   } finally { jest.restoreAllMocks(); context.close(); }
 });
 
@@ -116,10 +116,10 @@ test.each(['offer', 'life'] as const)('changing the actual %s closes the old pur
       await context.repository.create(other);
       expect(await mockStore.getState().selectLife(original.id)).toBe(true);
     }
-    const view = render(frame()); await reviewMortgage(); expectReviewedTerms();
+    const view = await render(frame()); await reviewMortgage(); expectReviewedTerms();
     const beforeRows = context.rows();
     if (contextChange === 'offer') {
-      mockRouteId = 'apartment'; view.rerender(frame());
+      mockRouteId = 'apartment'; await view.rerender(frame());
       expect(context.rows()).toEqual(beforeRows); expect(world()).toEqual(original);
       expect(screen.getByText('Two-Bedroom Apartment')).toBeOnTheScreen();
     } else {
@@ -134,7 +134,7 @@ test.each(['offer', 'life'] as const)('changing the actual %s closes the old pur
     expect(screen.getByRole('button', { name: /^Deposit\. 20%/ })).toBeOnTheScreen();
     expect(screen.getByRole('button', { name: 'Term. 30 years' })).toBeOnTheScreen();
     expect(context.rows()).toEqual(selectedRows); expect(world()).toEqual(contextChange === 'life' ? other : original);
-    view.unmount();
+    await view.unmount();
   } finally { jest.restoreAllMocks(); context.close(); }
 });
 
@@ -142,7 +142,7 @@ test('a failed real mortgage purchase preserves reviewed terms and all rows, ret
   const context = await setup();
   try {
     const initial = world(), before = encodeWorld(initial), beforeRows = context.rows();
-    let view = render(frame()); await reviewMortgage(); const quote = expectReviewedTerms();
+    let view = await render(frame()); await reviewMortgage(); const quote = expectReviewedTerms();
     const command = { type: 'buy-asset', catalogId: 'studio', financing: 'mortgage', depositBps: 4000, termMonths: 240, quotedPrice: quote.price } as const;
     const expected = resolveCommand(initial, command, true), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint');
     context.sqlite.exec("CREATE TRIGGER fail_purchase_confirmation BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
@@ -156,19 +156,19 @@ test('a failed real mortgage purchase preserves reviewed terms and all rows, ret
     expect(world().liabilities.find(debt => debt.id === owned[0].mortgageId)).toMatchObject({ principal: quote.principal, remainingMonths: 240, monthlyPayment: quote.payment });
     expect(accountFor(world()).cash).toBe(accountFor(initial).cash - quote.cashRequired);
     expect(world().ledger.filter(row => row.category === 'purchase')).toHaveLength(initial.ledger.filter(row => row.category === 'purchase').length + 1);
-    const savedRows = context.rows(); view.unmount(); await context.cold(); view = render(frame());
+    const savedRows = context.rows(); await view.unmount(); await context.cold(); view = await render(frame());
     expect(world()).toEqual(expected); expect(context.rows()).toEqual(savedRows); expect(screen.getByText('It’s yours')).toBeOnTheScreen();
     await press('Continue'); const acknowledged = resolveCommand(expected, { type: 'acknowledge', resultId: expected.pending!.id }, true);
     expect(world()).toEqual(acknowledged); expect(world().accounts).toEqual(expected.accounts); expect(world().assets).toEqual(expected.assets); expect(world().liabilities).toEqual(expected.liabilities); expect(world().ledger).toEqual(expected.ledger); expect(world().random).toEqual(expected.random);
     const doneRows = context.rows(); await act(async () => { expect(await mockStore.getState().dispatch({ type: 'acknowledge', resultId: expected.pending!.id })).toBe(false); });
-    expect(world()).toEqual(acknowledged); expect(context.rows()).toEqual(doneRows); view.unmount();
+    expect(world()).toEqual(acknowledged); expect(context.rows()).toEqual(doneRows); await view.unmount();
   } finally { jest.restoreAllMocks(); context.close(); }
 });
 
 test('a pending purchase disables financing changes and duplicate confirmations, retaining terms through Android Back', async () => {
   const context = await setup();
   try {
-    const initial = world(), beforeRows = context.rows(), view = render(frame()); await reviewMortgage(); const quote = expectReviewedTerms();
+    const initial = world(), beforeRows = context.rows(), view = await render(frame()); await reviewMortgage(); const quote = expectReviewedTerms();
     const expected = resolveCommand(initial, { type: 'buy-asset', catalogId: 'studio', financing: 'mortgage', depositBps: 4000, termMonths: 240, quotedPrice: quote.price }, true);
     const release = context.pauseNextSave(); await press('Confirm Purchase'); expect(mockStore.getState().busy).toBe(true); expect(mockDismissTo).not.toHaveBeenCalled();
     for (const name of ['Buy Outright', 'Mortgage', 'Rent']) expect(screen.getByRole('radio', { name })).toBeDisabled();
@@ -178,7 +178,7 @@ test('a pending purchase disables financing changes and duplicate confirmations,
     await act(async () => { screen.UNSAFE_getByType(Modal).props.onRequestClose(); });
     expectReviewedTerms(); expect(world()).toEqual(initial); expect(context.rows()).toEqual(beforeRows);
     await act(async () => { release(); }); await waitFor(() => expect(mockStore.getState().busy).toBe(false));
-    expect(world()).toEqual(expected); expect(world().revision).toBe(initial.revision + 1); expect(mockDismissTo).toHaveBeenCalledTimes(1); expect(screen.queryByText('Buy City Studio?')).toBeNull(); view.unmount();
+    expect(world()).toEqual(expected); expect(world().revision).toBe(initial.revision + 1); expect(mockDismissTo).toHaveBeenCalledTimes(1); expect(screen.queryByText('Buy City Studio?')).toBeNull(); await view.unmount();
   } finally { jest.restoreAllMocks(); context.close(); }
 });
 
@@ -191,7 +191,7 @@ test.each(['studio', 'used-compact', 'watch'])('%s returns to the existing Asset
     mockDismissTo.mockImplementation((path: string) => { expect(path).toBe('/assets'); setAssets(true); });
     return assets ? <Assets /> : <Offer />;
   }
-  const view = render(frame(<Destination />));
+  const view = await render(frame(<Destination />));
   try {
     await press('Review Purchase'); await press('Confirm Purchase');
     expect(mockDismissTo).toHaveBeenCalledTimes(1);
@@ -206,16 +206,16 @@ test.each(['studio', 'used-compact', 'watch'])('%s returns to the existing Asset
     expect(world().assets).toEqual(saved.assets); expect(world().ledger).toEqual(saved.ledger);
     await act(async () => { expect(await mockStore.getState().dispatch({ type: 'acknowledge', resultId })).toBe(false); });
     expect(mockDismissTo).toHaveBeenCalledTimes(1);
-  } finally { view.unmount(); context.close(); }
+  } finally { await view.unmount(); context.close(); }
 });
 
 test('leaving a pending purchase lets the commit finish without redirecting a different screen', async () => {
-  const context = await setup(), view = render(frame());
+  const context = await setup(), view = await render(frame());
   try {
     await press('Review Purchase');
     const release = context.pauseNextSave(); await press('Confirm Purchase');
     expect(mockStore.getState().busy).toBe(true); expect(mockDismissTo).not.toHaveBeenCalled();
-    view.unmount(); await act(async () => { release(); });
+    await view.unmount(); await act(async () => { release(); });
     expect(world().assets.filter(asset => asset.ownerId === world().activePersonId)).toHaveLength(1);
     expect(await context.repository.load(world().id)).toEqual(world());
     expect(mockDismissTo).not.toHaveBeenCalled();
@@ -223,14 +223,14 @@ test('leaving a pending purchase lets the commit finish without redirecting a di
 });
 
 test('an unaffordable purchase cannot open a confirmation, write rows or navigate', async () => {
-  const context = await setup(false), view = render(frame());
+  const context = await setup(false), view = await render(frame());
   try {
     const initial = world(), rows = context.rows();
     const button = screen.getByRole('button', { name: /^Review Purchase\./ });
     expect(button).toBeDisabled();
-    await act(async () => { fireEvent.press(button); });
+    await act(async () => { await fireEvent.press(button); });
     expect(screen.queryByRole('button', { name: 'Confirm Purchase' })).toBeNull();
     expect(world()).toEqual(initial); expect(context.rows()).toEqual(rows);
     expect(mockDismissTo).not.toHaveBeenCalled();
-  } finally { view.unmount(); context.close(); }
+  } finally { await view.unmount(); context.close(); }
 });

@@ -1,5 +1,5 @@
 import React from 'react';
-import { act, fireEvent, render, screen } from '@testing-library/react-native';
+import { act, fireEvent, render, screen } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { DatabaseSync } from 'node:sqlite';
 import { mkdtempSync, rmSync } from 'node:fs';
@@ -27,8 +27,8 @@ import Bank from '../../app/(game)/bank';
 import GameLayout from '../../app/(game)/_layout';
 
 const frame = (content: React.ReactNode = <Finances />) => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider>{content}</ThemeProvider></SafeAreaProvider>;
-const press = async (name: string | RegExp) => { await act(async () => { fireEvent.press(screen.getByRole('button', { name })); }); };
-const choose = async (name: string | RegExp) => { await act(async () => { fireEvent.press(screen.getByRole('radio', { name })); }); };
+const press = async (name: string | RegExp) => { await act(async () => { await fireEvent.press(screen.getByRole('button', { name })); }); };
+const choose = async (name: string | RegExp) => { await act(async () => { await fireEvent.press(screen.getByRole('radio', { name })); }); };
 const world = () => mockStore.getState().world!;
 async function setup(archive = pensionArchive) {
   const directory = mkdtempSync(join(tmpdir(), 'dreams-annual-finances-')), path = join(directory, 'dreams.db'); let sqlite: DatabaseSync;
@@ -60,7 +60,7 @@ test('genuine foreign pension year/currency/category/paging views write none of 
   const context = await setup();
   try {
     const initial = world(), payload = encodeWorld(initial), rows = context.rows(); expect(Object.keys(rows)).toHaveLength(8);
-    const index = jest.spyOn(projection, 'indexPersonalFinances'), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'), dispatch = jest.spyOn(mockStore.getState(), 'dispatch'); let view = render(frame());
+    const index = jest.spyOn(projection, 'indexPersonalFinances'), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'), dispatch = jest.spyOn(mockStore.getState(), 'dispatch'); let view = await render(frame());
     const money = (minor: bigint) => formatMoney({ minor, currency: 'JPY' }, countries[initial.people[initial.activePersonId].country].locale);
     expect(screen.getByText(fullName(initial.people[initial.activePersonId]))).toBeOnTheScreen(); expect(screen.getByText('Personal finances · 2027 · JPY')).toBeOnTheScreen();
     expect(screen.getByText('Income received before personal tax: ' + money(304649n))).toBeOnTheScreen(); expect(screen.getByText('Monthly income average: ' + money(304649n))).toBeOnTheScreen();
@@ -72,7 +72,7 @@ test('genuine foreign pension year/currency/category/paging views write none of 
     await press(/^All Recorded Transactions\./); expect(screen.getByRole('button', { name: 'Show Earlier Transactions' })).toBeOnTheScreen(); await press('Show Earlier Transactions');
     await selectScope('currency', 'USD'); expect(screen.getByText('Personal finances · 2026 · USD')).toBeOnTheScreen(); expect(screen.getByText('No personal transactions recorded for 2026 in USD.')).toBeOnTheScreen();
     expect(index).toHaveBeenCalledTimes(1); expect(dispatch).not.toHaveBeenCalled(); expect(unpack).not.toHaveBeenCalled(); expect(world()).toBe(initial); expect(encodeWorld(world())).toBe(payload); expect(context.rows()).toEqual(rows); context.oldMoments();
-    index.mockRestore(); unpack.mockRestore(); dispatch.mockRestore(); view.unmount(); await context.cold(); view = render(frame()); expect(world()).toEqual(initial); expect(encodeWorld(world())).toBe(payload); expect(context.rows()).toEqual(rows); expect(screen.getByText('Personal finances · 2027 · JPY')).toBeOnTheScreen(); context.oldMoments(); view.unmount();
+    index.mockRestore(); unpack.mockRestore(); dispatch.mockRestore(); await view.unmount(); await context.cold(); view = await render(frame()); expect(world()).toEqual(initial); expect(encodeWorld(world())).toBe(payload); expect(context.rows()).toEqual(rows); expect(screen.getByText('Personal finances · 2027 · JPY')).toBeOnTheScreen(); context.oldMoments(); await view.unmount();
   } finally { jest.restoreAllMocks(); context.close(); }
 }, 30000);
 
@@ -80,9 +80,9 @@ test('Assets and Bank expose the annual view without calculating it or changing 
   const context = await setup(companyArchive);
   try {
     const initial = world(), rows = context.rows(), index = jest.spyOn(projection, 'indexPersonalFinances'), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint');
-    let view = render(frame(<Assets />)); await press(/^Finances\./); expect(router.push).toHaveBeenLastCalledWith({ pathname: '/finances', params: { tab: 'assets' } }); view.unmount();
-    view = render(frame(<Bank />)); await act(async () => { fireEvent.changeText(screen.getByLabelText('Amount in USD'), '12.34'); }); expect(screen.getByLabelText('Amount in USD').props.value).toBe('12.34'); await press(/^Annual Finances\./); expect(router.push).toHaveBeenLastCalledWith({ pathname: '/finances', params: { tab: 'assets' } });
-    expect(index).not.toHaveBeenCalled(); expect(unpack).not.toHaveBeenCalled(); expect(world()).toBe(initial); expect(context.rows()).toEqual(rows); context.oldMoments(); view.unmount();
+    let view = await render(frame(<Assets />)); await press(/^Finances\./); expect(router.push).toHaveBeenLastCalledWith({ pathname: '/finances', params: { tab: 'assets' } }); await view.unmount();
+    view = await render(frame(<Bank />)); await act(async () => { await fireEvent.changeText(screen.getByLabelText('Amount in USD'), '12.34'); }); expect(screen.getByLabelText('Amount in USD').props.value).toBe('12.34'); await press(/^Annual Finances\./); expect(router.push).toHaveBeenLastCalledWith({ pathname: '/finances', params: { tab: 'assets' } });
+    expect(index).not.toHaveBeenCalled(); expect(unpack).not.toHaveBeenCalled(); expect(world()).toBe(initial); expect(context.rows()).toEqual(rows); context.oldMoments(); await view.unmount();
   } finally { jest.restoreAllMocks(); context.close(); }
 });
 
@@ -91,21 +91,21 @@ test('a genuine interleaved wage and company-payout year stays in original posti
   try {
     const initial = world(), rows = context.rows(), chronological = initial.ledger.filter(row => row.personId === initial.activePersonId && row.year === 2023 && row.currency === 'USD' && ['income', 'business-owner-income'].includes(row.category));
     expect(new Set(chronological.map(row => row.category)).size).toBe(2);
-    const view = render(frame()); await selectScope('year', '2023'); await press(/^Income\. Received/);
+    const view = await render(frame()); await selectScope('year', '2023'); await press(/^Income\. Received/);
     const expected = [...chronological].reverse(), visible = () => screen.getAllByText(/^2023-\d{2} · (Employment pay \/ pensions|Company profit payouts received) · Cash /).map(node => (Array.isArray(node.props.children) ? node.props.children.join('') : String(node.props.children)).split(' · Cash ')[0]);
     const prefix = (row: typeof chronological[number]) => row.year + '-' + String(row.month).padStart(2, '0') + ' · ' + (row.category === 'income' ? 'Employment pay / pensions' : 'Company profit payouts received');
     expect(visible()).toEqual(expected.slice(0, 20).map(prefix));
     if (expected.length > 20) { await press('Show Earlier Transactions'); expect(visible()).toEqual(expected.slice(0, 40).map(prefix)); }
-    expect(world()).toBe(initial); expect(context.rows()).toEqual(rows); context.oldMoments(); view.unmount();
+    expect(world()).toBe(initial); expect(context.rows()).toEqual(rows); context.oldMoments(); await view.unmount();
   } finally { context.close(); }
 });
 
 test('a direct Finances route selects Assets and its selected tab returns to Assets without a financial read or command', async () => {
   const context = await setup();
   try {
-    const initial = world(), rows = context.rows(), index = jest.spyOn(projection, 'indexPersonalFinances'), dispatch = jest.spyOn(mockStore.getState(), 'dispatch'), view = render(frame(<GameLayout />));
-    expect(screen.getByRole('tab', { name: 'Assets', selected: true })).toBeOnTheScreen(); await act(async () => { fireEvent.press(screen.getByRole('tab', { name: 'Assets' })); });
-    expect(router.navigate).toHaveBeenCalledTimes(1); expect(router.navigate).toHaveBeenCalledWith('/assets'); expect(index).not.toHaveBeenCalled(); expect(dispatch).not.toHaveBeenCalled(); expect(world()).toBe(initial); expect(context.rows()).toEqual(rows); context.oldMoments(); view.unmount();
+    const initial = world(), rows = context.rows(), index = jest.spyOn(projection, 'indexPersonalFinances'), dispatch = jest.spyOn(mockStore.getState(), 'dispatch'), view = await render(frame(<GameLayout />));
+    expect(screen.getByRole('tab', { name: 'Assets', selected: true })).toBeOnTheScreen(); await act(async () => { await fireEvent.press(screen.getByRole('tab', { name: 'Assets' })); });
+    expect(router.navigate).toHaveBeenCalledTimes(1); expect(router.navigate).toHaveBeenCalledWith('/assets'); expect(index).not.toHaveBeenCalled(); expect(dispatch).not.toHaveBeenCalled(); expect(world()).toBe(initial); expect(context.rows()).toEqual(rows); context.oldMoments(); await view.unmount();
   } finally { jest.restoreAllMocks(); context.close(); }
 });
 
@@ -115,10 +115,10 @@ test('a real new-life switch resets prior-person/year filters even when the play
     const original = world(); expect(original.activePersonId).toBe('person_player');
     expect(await mockStore.getState().startLife({ ...randomCreation(4242), country: 'US', city: 'New York', background: 'ordinary' }, 4242)).toBe(true); expect(await mockStore.getState().acknowledgeBirth()).toBe(true);
     const newborn = world(); expect(newborn.activePersonId).toBe(original.activePersonId); expect(await mockStore.getState().selectLife(original.id)).toBe(true);
-    const view = render(frame()); await selectScope('year', '2023'); expect(screen.getByText('Personal finances · 2023 · USD')).toBeOnTheScreen();
+    const view = await render(frame()); await selectScope('year', '2023'); expect(screen.getByText('Personal finances · 2023 · USD')).toBeOnTheScreen();
     await press(/^Finance Currency\./); const savedLifeRows = context.sqlite.prepare('SELECT * FROM lives ORDER BY id').all(), savedReceipts = context.sqlite.prepare('SELECT * FROM receipts ORDER BY life_id,command_id').all();
     await act(async () => { expect(await mockStore.getState().selectLife(newborn.id)).toBe(true); }); expect(screen.queryByRole('button', { name: 'View Breakdown' })).toBeNull(); expect(screen.getByText('Personal finances · 2030 · USD')).toBeOnTheScreen(); expect(screen.getByText('No personal transactions recorded for 2030 in USD.')).toBeOnTheScreen();
     const before = context.rows(), payload = encodeWorld(world()); await press(/^Financial Year\./); await press('Never mind'); expect(context.rows()).toEqual(before); expect(encodeWorld(world())).toBe(payload); expect(world()).toEqual(newborn);
-    expect(context.sqlite.prepare('SELECT * FROM lives ORDER BY id').all()).toEqual(savedLifeRows); expect(context.sqlite.prepare('SELECT * FROM receipts ORDER BY life_id,command_id').all()).toEqual(savedReceipts); context.oldMoments(); view.unmount();
+    expect(context.sqlite.prepare('SELECT * FROM lives ORDER BY id').all()).toEqual(savedLifeRows); expect(context.sqlite.prepare('SELECT * FROM receipts ORDER BY life_id,command_id').all()).toEqual(savedReceipts); context.oldMoments(); await view.unmount();
   } finally { context.close(); }
 });

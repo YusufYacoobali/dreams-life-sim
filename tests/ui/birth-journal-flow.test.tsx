@@ -1,7 +1,7 @@
 import React from 'react';
 import * as ReactNative from 'react-native';
 import { FlatList } from 'react-native';
-import { act, fireEvent, render, screen } from '@testing-library/react-native';
+import { act, fireEvent, render, screen } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { createGameStore } from '../../src/state/gameStore';
 import { createLife, randomCreation } from '../../src/game/createLife';
@@ -19,7 +19,7 @@ import Birth from '../../app/birth';
 import Life from '../../app/(game)/(tabs)/life';
 
 const frame = (child: React.ReactNode) => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 320, height: 568 }, insets: { top: 20, bottom: 0, left: 0, right: 0 } }}><ThemeProvider>{child}</ThemeProvider></SafeAreaProvider>;
-const press = async (name: string) => { await act(async () => { fireEvent.press(screen.getByRole('button', { name })); }); };
+const press = async (name: string) => { await act(async () => { await fireEvent.press(screen.getByRole('button', { name })); }); };
 afterEach(() => { jest.restoreAllMocks(); });
 
 test.each([0, 2])('seed %i starts at the first Age 0 entry on a small screen, respects dragging and follows later years', async seed => {
@@ -32,20 +32,20 @@ test.each([0, 2])('seed %i starts at the first Age 0 entry on a small screen, re
   const frames = new Map<number, (time: number) => void>(); let nextFrame = 0;
   jest.spyOn(global, 'requestAnimationFrame').mockImplementation(callback => { frames.set(++nextFrame, callback); return nextFrame; });
   jest.spyOn(global, 'cancelAnimationFrame').mockImplementation(id => { if (typeof id === 'number') frames.delete(id); });
-  const flush = () => act(() => { const callbacks = [...frames.values()]; frames.clear(); callbacks.forEach(callback => callback(0)); });
-  const view = render(frame(<Birth />)); await press('Begin Life!'); expect(router.replace).toHaveBeenCalledWith('/life');
-  expect(mockStore.getState().world!.journal).toEqual(before.journal); view.rerender(frame(<Life />)); flush();
+  const flush = async () => await act(() => { const callbacks = [...frames.values()]; frames.clear(); callbacks.forEach(callback => callback(0)); });
+  const view = await render(frame(<Birth />)); await press('Begin Life!'); expect(router.replace).toHaveBeenCalledWith('/life');
+  expect(mockStore.getState().world!.journal).toEqual(before.journal); await view.rerender(frame(<Life />)); await flush();
   const list = screen.UNSAFE_getByType(FlatList);
   expect(start).toHaveBeenCalledWith({ offset: 0, animated: false }); expect(end).not.toHaveBeenCalled();
   expect(screen.getAllByText('Age: 0')).toHaveLength(1); expect(screen.getByText(before.journal[0].text)).toBeOnTheScreen();
   expect(list.props.data.map((row: { age: number }) => row.age)).toEqual(before.journal.map(() => 0));
-  start.mockClear(); fireEvent(list, 'contentSizeChange', 320, 1800); fireEvent(list, 'layout'); flush();
+  start.mockClear(); await fireEvent(list, 'contentSizeChange', 320, 1800); await fireEvent(list, 'layout'); await flush();
   expect(start).toHaveBeenCalledWith({ offset: 0, animated: false }); expect(end).not.toHaveBeenCalled();
-  fireEvent(list, 'scrollBeginDrag'); start.mockClear(); fireEvent(list, 'contentSizeChange', 320, 1900); flush(); expect(start).not.toHaveBeenCalled(); expect(end).not.toHaveBeenCalled();
-  await press('Age Up'); flush(); expect(end).toHaveBeenCalledWith({ animated: false }); expect(start).not.toHaveBeenCalled();
+  await fireEvent(list, 'scrollBeginDrag'); start.mockClear(); await fireEvent(list, 'contentSizeChange', 320, 1900); await flush(); expect(start).not.toHaveBeenCalled(); expect(end).not.toHaveBeenCalled();
+  await press('Age Up'); await flush(); expect(end).toHaveBeenCalledWith({ animated: false }); expect(start).not.toHaveBeenCalled();
   expect(mockStore.getState().world!.journal.slice(0, before.journal.length)).toEqual(before.journal);
   expect(await repository.load(before.id)).toEqual(mockStore.getState().world);
-  view.unmount(); sqlite.close();
+  await view.unmount(); sqlite.close();
 });
 
 test('a retained old newborn journal keeps its existing follow behavior and stored bytes', async () => {
@@ -55,7 +55,7 @@ test('a retained old newborn journal keeps its existing follow behavior and stor
   const encoded = encodeWorld(before), start = jest.spyOn(FlatList.prototype, 'scrollToOffset').mockImplementation(() => {}), end = jest.fn();
   jest.spyOn(FlatList.prototype, 'getScrollResponder').mockReturnValue({ scrollToEnd: end } as unknown as ReturnType<FlatList['getScrollResponder']>);
   const frames: ((time: number) => void)[] = []; jest.spyOn(global, 'requestAnimationFrame').mockImplementation(callback => { frames.push(callback); return frames.length; });
-  const view = render(frame(<Life />)); act(() => { frames.splice(0).forEach(callback => callback(0)); });
+  const view = await render(frame(<Life />)); await act(() => { frames.splice(0).forEach(callback => callback(0)); });
   expect(start).not.toHaveBeenCalled(); expect(end).toHaveBeenCalledWith({ animated: false }); expect(encodeWorld(await repository.load(before.id))).toBe(encoded);
-  view.unmount(); sqlite.close();
+  await view.unmount(); sqlite.close();
 });

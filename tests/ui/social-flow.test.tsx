@@ -1,5 +1,5 @@
 import React from 'react';
-import { act, fireEvent, render, screen, waitFor } from '@testing-library/react-native';
+import { act, fireEvent, render, screen, waitFor } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { createGameStore } from '../../src/state/gameStore';
 import { decodeWorld, encodeWorld } from '../../src/game/model';
@@ -17,15 +17,15 @@ const frame = (content: React.ReactNode) => <SafeAreaProvider initialMetrics={{ 
 test('profile creation and a post use native controls and real SQLite; a failed publish preserves the audience and retries once', async () => {
   const { sqlite, driver } = database(), repository = new SaveRepository(driver); await repository.initialise(); const initial = decodeWorld(JSON.stringify(fixture)); initial.random.outcomes = 42; await repository.create(initial);
   mockStore = createGameStore({ repository: async () => repository, date: () => initial.date, id: () => 'life_unused' }); await mockStore.getState().bootstrap();
-  const creation = render(frame(<SocialMedia />)); expect(encodeWorld(mockStore.getState().world!)).toBe(encodeWorld(initial));
-  fireEvent.changeText(screen.getByLabelText('Social handle'), 'native_dreams'); fireEvent.changeText(screen.getByLabelText('Profile biography'), 'Ordinary life.'); fireEvent.press(screen.getByRole('button', { name: 'Review New Profile' }));
-  await act(async () => { fireEvent.press(screen.getByRole('button', { name: 'Create Profile' })); }); await waitFor(() => expect(screen.getByText('Your profile is ready')).toBeOnTheScreen());
-  await act(async () => { fireEvent.press(screen.getByRole('button', { name: 'Continue' })); }); mockAccountId = mockStore.getState().world!.socialAccounts[0].id; creation.unmount();
-  const before = mockStore.getState().world!, composer = render(frame(<CreatePost />)); fireEvent.changeText(screen.getByLabelText('Post caption'), 'A day I wanted to remember.');
-  sqlite.exec("CREATE TRIGGER fail_publish BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END"); fireEvent.press(screen.getByRole('button', { name: 'Review Post' })); await act(async () => { fireEvent.press(screen.getByRole('button', { name: 'Publish Post' })); });
+  const creation = await render(frame(<SocialMedia />)); expect(encodeWorld(mockStore.getState().world!)).toBe(encodeWorld(initial));
+  await fireEvent.changeText(screen.getByLabelText('Social handle'), 'native_dreams'); await fireEvent.changeText(screen.getByLabelText('Profile biography'), 'Ordinary life.'); await fireEvent.press(screen.getByRole('button', { name: 'Review New Profile' }));
+  await act(async () => { await fireEvent.press(screen.getByRole('button', { name: 'Create Profile' })); }); await waitFor(() => expect(screen.getByText('Your profile is ready')).toBeOnTheScreen());
+  await act(async () => { await fireEvent.press(screen.getByRole('button', { name: 'Continue' })); }); mockAccountId = mockStore.getState().world!.socialAccounts[0].id; await creation.unmount();
+  const before = mockStore.getState().world!, composer = await render(frame(<CreatePost />)); await fireEvent.changeText(screen.getByLabelText('Post caption'), 'A day I wanted to remember.');
+  sqlite.exec("CREATE TRIGGER fail_publish BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END"); await fireEvent.press(screen.getByRole('button', { name: 'Review Post' })); await act(async () => { await fireEvent.press(screen.getByRole('button', { name: 'Publish Post' })); });
   await waitFor(() => expect(screen.getByText(/couldn't be saved/)).toBeOnTheScreen()); expect(await repository.load(initial.id)).toEqual(before); expect(mockStore.getState().world!.socialAccounts[0].totalPosts).toBe(0);
-  sqlite.exec('DROP TRIGGER fail_publish'); fireEvent.press(screen.getByRole('button', { name: 'Review Post' })); await act(async () => { fireEvent.press(screen.getByRole('button', { name: 'Publish Post' })); });
+  sqlite.exec('DROP TRIGGER fail_publish'); await fireEvent.press(screen.getByRole('button', { name: 'Review Post' })); await act(async () => { await fireEvent.press(screen.getByRole('button', { name: 'Publish Post' })); });
   await waitFor(() => expect(screen.getByText('Your post is live')).toBeOnTheScreen()); const committed = mockStore.getState().world!; expect(committed.socialAccounts[0].posts).toHaveLength(1); expect(committed.socialAccounts[0].posts[0].caption).toBe('A day I wanted to remember.');
-  await act(async () => { fireEvent.press(screen.getByRole('button', { name: 'Continue' })); }); const cold = await repository.load(initial.id); expect(cold.socialAccounts).toEqual(committed.socialAccounts); expect(cold.random).toEqual(committed.random); expect(cold.socialAccounts[0].totalPosts).toBe(1);
-  composer.unmount(); sqlite.close();
+  await act(async () => { await fireEvent.press(screen.getByRole('button', { name: 'Continue' })); }); const cold = await repository.load(initial.id); expect(cold.socialAccounts).toEqual(committed.socialAccounts); expect(cold.random).toEqual(committed.random); expect(cold.socialAccounts[0].totalPosts).toBe(1);
+  await composer.unmount(); sqlite.close();
 });

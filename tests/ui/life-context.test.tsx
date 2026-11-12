@@ -1,6 +1,6 @@
 import React from 'react';
 import { FlatList, StyleSheet } from 'react-native';
-import { act, fireEvent, render, screen } from '@testing-library/react-native';
+import { act, fireEvent, render, screen } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { router, type Href } from 'expo-router';
 import { mkdirSync, writeFileSync } from 'node:fs';
@@ -143,24 +143,20 @@ const scenarios: Scenario[] = [
 ];
 const frame = (child:React.ReactNode,dark=false,width=390) => <SafeAreaProvider initialMetrics={{ frame:{ x:0,y:0,width,height:844 },insets:{ top:47,bottom:34,left:0,right:0 } }}><ThemeProvider appearance={dark?'dark':'light'}>{child}</ThemeProvider></SafeAreaProvider>;
 function pressHandler(label:string) {
-  // React Native's memo/forwardRef wrapper is not a stable findByType boundary.
-  // Walk from the real accessible button to its committed press callback.
-  let control=screen.getByRole('button',{ name:label });
-  while (typeof control.props.onPress!=='function') {
-    if (!control.parent) throw new Error('Missing native press handler');
-    control=control.parent;
-  }
+  // Capture the committed press callback from the composite tree.
+  const control=screen.UNSAFE_root.findAll(node=>node.props.accessibilityLabel===label&&typeof node.props.onPress==='function')[0];
+  if (!control) throw new Error('Missing native press handler');
   return control.props.onPress as ()=>unknown;
 }
 afterEach(()=>{ jest.restoreAllMocks(); jest.mocked(router.push).mockClear(); mockDispatch.mockClear(); mockBusy=false; });
 
-test.each(scenarios)('$name resolves and opens the actual current context without a game command',scenario=>{
+test.each(scenarios)('$name resolves and opens the actual current context without a game command',async scenario=>{
   mockWorld=scenario.world(); const before=encodeWorld(mockWorld);
   expect(resolveLifeContext(mockWorld)).toMatchObject({ label:scenario.label,href:scenario.href });
-  render(frame(<Life />));
+  await render(frame(<Life />));
   const shortcut=screen.getByRole('button',{ name:scenario.label }); expect(shortcut).toBeEnabled();
   expect(screen.queryByRole('button',{ name:'More Life Options' })).toBeNull();
-  fireEvent.press(shortcut); expect(router.push).toHaveBeenCalledWith(scenario.href);
+  await fireEvent.press(shortcut); expect(router.push).toHaveBeenCalledWith(scenario.href);
   expect(mockDispatch).not.toHaveBeenCalled(); expect(encodeWorld(mockWorld)).toBe(before);
 });
 
@@ -187,58 +183,58 @@ test('ended careers, royalties, left studios, private royal titles and training 
   expect(resolveLifeContext(validateWorld(dead)).key).toBe('profile');
 });
 
-test.each([false,true])('the actual footer keeps Age Up dominant and its context accessible at small/large text (dark=%s)',dark=>{
+test.each([false,true])('the actual footer keeps Age Up dominant and its context accessible at small/large text (dark=%s)',async dark=>{
   const width=dark?320:390,fontScale=dark?1.4:1;
   // Spy on the exported module used by Life, rather than Babel's namespace copy.
   jest.spyOn(require('react-native'),'useWindowDimensions').mockReturnValue({ width,height:844,scale:2,fontScale });
-  mockWorld=pupil('US',7); render(frame(<Life />,dark,width));
+  mockWorld=pupil('US',7); await render(frame(<Life />,dark,width));
   const shortcut=screen.getByRole('button',{ name:'School' }),advance=screen.getByRole('button',{ name:'Age Up' });
   expect(shortcut).toHaveStyle({ width:dark?54:88,minHeight:62,flexShrink:0 });
   expect(advance).toHaveStyle({ flex:1,minWidth:0,minHeight:62 });
   expect(screen.queryByText('School')).toBe(dark?null:screen.getByText('School'));
   expect(StyleSheet.flatten(screen.getByText('Age Up').props.style)).toMatchObject({ flexShrink:1,textAlign:'center' });
-  fireEvent.press(shortcut); expect(router.push).toHaveBeenCalledWith('/school');
+  await fireEvent.press(shortcut); expect(router.push).toHaveBeenCalledWith('/school');
 });
 
 test('busy/pending gates, haptics, replaced contexts and unmount guard retained shortcut callbacks',async()=>{
   const feedback=jest.fn(async()=>{});
   mockWorld=pupil('US',7);
   const wrapped=()=>frame(<FeedbackProvider reducedMotion haptics onButtonFeedback={feedback}><Life /></FeedbackProvider>);
-  const view=render(wrapped()); await act(async()=>{});
-  const schoolPress=pressHandler('School'); fireEvent.press(screen.getByRole('button',{ name:'School' }));
+  const view=await render(wrapped()); await act(async()=>{});
+  const schoolPress=pressHandler('School'); await fireEvent.press(screen.getByRole('button',{ name:'School' }));
   expect(feedback).toHaveBeenCalledTimes(1); jest.mocked(router.push).mockClear(); feedback.mockClear();
-  mockBusy=true; view.rerender(wrapped()); act(()=>{ schoolPress(); });
+  mockBusy=true; await view.rerender(wrapped()); await act(()=>{ schoolPress(); });
   expect(screen.getByRole('button',{ name:'School' })).toBeDisabled(); expect(router.push).not.toHaveBeenCalled(); expect(feedback).not.toHaveBeenCalled();
   mockBusy=false; mockWorld.pending={ kind:'result',id:'saved-context-result',title:'Saved result',body:'Already stored.',illustration:'journal',effects:[] };
-  view.rerender(wrapped()); act(()=>{ schoolPress(); }); expect(router.push).not.toHaveBeenCalled(); expect(feedback).not.toHaveBeenCalled();
-  mockWorld=worker(); view.rerender(wrapped()); const jobPress=pressHandler('Job');
-  act(()=>{ schoolPress(); }); expect(router.push).not.toHaveBeenCalled(); expect(feedback).not.toHaveBeenCalled();
-  fireEvent.press(screen.getByRole('button',{ name:'Job' })); expect(router.push).toHaveBeenCalledWith('/work'); expect(feedback).toHaveBeenCalledTimes(1);
-  jest.mocked(router.push).mockClear(); feedback.mockClear(); view.unmount(); act(()=>{ jobPress(); });
+  await view.rerender(wrapped()); await act(()=>{ schoolPress(); }); expect(router.push).not.toHaveBeenCalled(); expect(feedback).not.toHaveBeenCalled();
+  mockWorld=worker(); await view.rerender(wrapped()); const jobPress=pressHandler('Job');
+  await act(()=>{ schoolPress(); }); expect(router.push).not.toHaveBeenCalled(); expect(feedback).not.toHaveBeenCalled();
+  await fireEvent.press(screen.getByRole('button',{ name:'Job' })); expect(router.push).toHaveBeenCalledWith('/work'); expect(feedback).toHaveBeenCalledTimes(1);
+  jest.mocked(router.push).mockClear(); feedback.mockClear(); await view.unmount(); await act(()=>{ jobPress(); });
   expect(router.push).not.toHaveBeenCalled(); expect(feedback).not.toHaveBeenCalled(); expect(mockDispatch).not.toHaveBeenCalled();
 });
 
-test('rented-home identity and journal data stay in place when opening the context shortcut',()=>{
+test('rented-home identity and journal data stay in place when opening the context shortcut',async ()=>{
   const input=worker(),cash=accountFor(input); cash.cash+=100000000n; cash.openingCash+=100000000n;
   const offer=assetCatalog.find(item=>item.id==='studio')!;
   mockWorld=command(input,{ type:'sign-home-lease',catalogId:offer.id,quotedRent:rentalQuote(input,offer).monthlyRent });
-  const before=encodeWorld(mockWorld); render(frame(<Life />));
+  const before=encodeWorld(mockWorld); await render(frame(<Life />));
   expect(screen.getByText('Home: '+offer.name)).toBeOnTheScreen();
   const rows=screen.UNSAFE_getByType(FlatList).props.data;
-  fireEvent.press(screen.getByRole('button',{ name:'Job' }));
+  await fireEvent.press(screen.getByRole('button',{ name:'Job' }));
   expect(screen.UNSAFE_getByType(FlatList).props.data).toBe(rows); expect(encodeWorld(mockWorld)).toBe(before);
 });
 
-test('every former overflow destination remains in Activities',()=>{
-  mockWorld=worker(); render(frame(<Activities />));
+test('every former overflow destination remains in Activities',async ()=>{
+  mockWorld=worker(); await render(frame(<Activities />));
   for (const [label,href] of [['My Life',{ pathname:'/profile',params:{ tab:'activities' } }],['Extras','/extras'],['Saved Lives','/saved-lives'],['Time Machine','/time-machine'],['Settings','/settings']] as const) {
-    fireEvent.press(screen.getByRole('button',{ name:new RegExp('^'+label+'(?:\\.|$)') }));
+    await fireEvent.press(screen.getByRole('button',{ name:new RegExp('^'+label+'(?:\\.|$)') }));
     expect(router.push).toHaveBeenLastCalledWith(href);
   }
   expect(mockDispatch).not.toHaveBeenCalled();
 });
 
-test('optionally export actual Life context trees for normal and cramped layouts',()=>{
+test('optionally export actual Life context trees for normal and cramped layouts',async ()=>{
   const directory=process.env.DREAMS_POLISH_CAPTURE_DIR;
   if (!directory) return;
   mkdirSync(directory,{ recursive:true });
@@ -251,9 +247,9 @@ test('optionally export actual Life context trees for normal and cramped layouts
   const dimensions=jest.spyOn(require('react-native'),'useWindowDimensions');
   for (const dark of [false,true]) for (const [name,world] of [['school',()=>pupil('US',7)],['job',worker],['prison',prisonPeerStoryWorld],['business',()=>archive(company)]] as const) {
     const width=dark?320:390; dimensions.mockReturnValue({ width,height:844,scale:2,fontScale:dark?1.4:1 });
-    mockWorld=world(); const before=encodeWorld(mockWorld),view=render(frame(<Life />,dark,width));
+    mockWorld=world(); const before=encodeWorld(mockWorld),view=await render(frame(<Life />,dark,width));
     writeFileSync(join(directory,'life-context-'+name+'-'+(dark?'dark-large':'light')+'.json'),JSON.stringify(clean(view.toJSON())));
-    expect(encodeWorld(mockWorld)).toBe(before); view.unmount();
+    expect(encodeWorld(mockWorld)).toBe(before); await view.unmount();
   }
   expect(mockDispatch).not.toHaveBeenCalled();
 });

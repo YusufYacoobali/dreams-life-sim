@@ -1,6 +1,6 @@
 import React from 'react';
 import * as Native from 'react-native';
-import { fireEvent, render, screen, within } from '@testing-library/react-native';
+import { fireEvent, render, screen, within } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { copyWorld, encodeWorld, immutableWorld, type World } from '../../src/game/model';
 import { monthFrom } from '../../src/game/calendar';
@@ -58,7 +58,7 @@ function contactsFixture() {
 }
 
 const visible = () => screen.UNSAFE_getByType(Native.FlatList).props.data as Edge[];
-const select = (name: string) => fireEvent.press(screen.getByRole('tab', { name }));
+const select = async (name: string) => await fireEvent.press(screen.getByRole('tab', { name }));
 afterEach(() => { jest.restoreAllMocks(); });
 
 test.each([false, true])('active tabs exclude deaths; Deceased keeps sorted memorials, search, navigation and saved bytes (dark=%s)', async dark => {
@@ -68,21 +68,21 @@ test.each([false, true])('active tabs exclude deaths; Deceased keeps sorted memo
   const encoded = encodeWorld(mockWorld), payload = sqlite.prepare('SELECT payload FROM lives WHERE id=?').get(world.id)!.payload;
   jest.spyOn(Native, 'useWindowDimensions').mockReturnValue({ width: dark ? 320 : 390, height: 568, scale: 2, fontScale: dark ? 1.5 : 1 });
   const scroll = jest.spyOn(Native.FlatList.prototype, 'scrollToOffset').mockImplementation(() => {});
-  const view = render(<SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: dark ? 320 : 390, height: 568 }, insets: { top: 20, bottom: 0, left: 0, right: 0 } }}><ThemeProvider appearance={dark ? 'dark' : 'light'}><Relationships /></ThemeProvider></SafeAreaProvider>);
+  const view = await render(<SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: dark ? 320 : 390, height: 568 }, insets: { top: 20, bottom: 0, left: 0, right: 0 } }}><ThemeProvider appearance={dark ? 'dark' : 'light'}><Relationships /></ThemeProvider></SafeAreaProvider>);
   try {
     expect(screen.getAllByRole('tab').map(tab => tab.props.accessibilityLabel)).toEqual(['All', 'Family', 'Friends', 'Romance', 'Deceased']);
     expect(screen.queryByRole('tab', { name: 'Work / School' })).toBeNull();
     expect(visible().map(edge => edge.id)).toEqual(expect.arrayContaining([coworker.edge.id, classmate.edge.id, teacher.edge.id]));
     const activeTabs = ['All', 'Family', 'Friends', 'Romance'];
     for (const tab of activeTabs) {
-      select(tab);
+      await select(tab);
       expect(visible().every(edge => !mockWorld.people[edge.from === world.activePersonId ? edge.to : edge.from].died)).toBe(true);
       expect(visible()).not.toContainEqual(parent);
       expect(screen.getByRole('tab', { name: tab })).toHaveProp('accessibilityState', expect.objectContaining({ selected: true }));
     }
-    select('Friends'); expect(visible().map(edge => edge.id)).toContain(friend.edge.id);
-    select('Romance'); expect(visible().map(edge => edge.id)).toContain(partner.edge.id);
-    select('Deceased');
+    await select('Friends'); expect(visible().map(edge => edge.id)).toContain(friend.edge.id);
+    await select('Romance'); expect(visible().map(edge => edge.id)).toContain(partner.edge.id);
+    await select('Deceased');
     const deceased = visible(), ids = deceased.map(edge => edge.id);
     expect(ids).toEqual(expect.arrayContaining([older.edge.id, recentTeacher.edge.id, recentPartner.edge.id, parent.id]));
     expect(deceased.every(edge => !!mockWorld.people[edge.from === world.activePersonId ? edge.to : edge.from].died)).toBe(true);
@@ -92,11 +92,11 @@ test.each([false, true])('active tabs exclude deaths; Deceased keeps sorted memo
     expect(within(memorial).getByText('Natural causes')).toBeOnTheScreen();
     const row = screen.UNSAFE_getAllByType(RelationshipRow).find(item => item.props.person.id === recentTeacher.person.id)!;
     expect(row.props.person.appearance).toEqual(recentTeacher.person.appearance); expect(row.props.strength).toBe(84);
-    fireEvent.press(memorial); expect(router.push).toHaveBeenCalledWith({ pathname: '/person/[id]', params: { id: recentTeacher.person.id } });
-    fireEvent.changeText(screen.getByLabelText('Search relationships'), '  iRiS  ');
+    await fireEvent.press(memorial); expect(router.push).toHaveBeenCalledWith({ pathname: '/person/[id]', params: { id: recentTeacher.person.id } });
+    await fireEvent.changeText(screen.getByLabelText('Search relationships'), '  iRiS  ');
     expect(visible().map(edge => edge.id)).toEqual([recentTeacher.edge.id]);
-    select('All'); expect(visible()).toHaveLength(0); expect(screen.getByText('No matching names in this view.')).toBeOnTheScreen();
-    fireEvent.press(screen.getByRole('button', { name: 'Show All Connections' }));
+    await select('All'); expect(visible()).toHaveLength(0); expect(screen.getByText('No matching names in this view.')).toBeOnTheScreen();
+    await fireEvent.press(screen.getByRole('button', { name: 'Show All Connections' }));
     expect(screen.getByLabelText('Search relationships')).toHaveProp('value', '');
     expect(visible().some(edge => edge.id === friend.edge.id)).toBe(true);
     expect(scroll).toHaveBeenCalledWith({ offset: 0, animated: false });
@@ -110,11 +110,11 @@ test.each([false, true])('active tabs exclude deaths; Deceased keeps sorted memo
       expect(style.minHeight).toBeGreaterThanOrEqual(48); expect(style.flexGrow).toBe(0); expect(style.flexShrink).toBe(0); expect(style.maxWidth).toBeUndefined();
       expect(label).toHaveProp('numberOfLines', 1); expect(Native.StyleSheet.flatten(label.props.style).flexShrink).toBe(0);
     }
-    fireEvent.press(screen.getByRole('button', { name: 'Household Pets' })); expect(router.push).toHaveBeenCalledWith('/pets');
-    fireEvent.press(screen.getByRole('button', { name: 'Family Tree' })); expect(router.push).toHaveBeenCalledWith('/family-tree');
+    await fireEvent.press(screen.getByRole('button', { name: 'Household Pets' })); expect(router.push).toHaveBeenCalledWith('/pets');
+    await fireEvent.press(screen.getByRole('button', { name: 'Family Tree' })); expect(router.push).toHaveBeenCalledWith('/family-tree');
     expect(mockDispatch).not.toHaveBeenCalled(); expect(encodeWorld(mockWorld)).toBe(encoded);
     expect(sqlite.prepare('SELECT payload FROM lives WHERE id=?').get(world.id)!.payload).toBe(payload);
-  } finally { view.unmount(); sqlite.close(); }
+  } finally { await view.unmount(); sqlite.close(); }
 });
 
 test('the selector preserves original edge identities and keeps the saved graph order unchanged', () => {
@@ -125,11 +125,11 @@ test('the selector preserves original edge identities and keeps the saved graph 
   expect(world.relationships.map(edge => edge.id)).toEqual(order); expect(encodeWorld(world)).toBe(before);
 });
 
-test('an empty Deceased view has a clear return to living connections', () => {
+test('an empty Deceased view has a clear return to living connections', async () => {
   mockWorld = immutableWorld(createLife('life_no_memorials', 0, { ...randomCreation(0), background: 'ordinary' }, { year: 2026, month: 10, day: 24 }));
-  const encoded = encodeWorld(mockWorld), view = render(<SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 320, height: 568 }, insets: { top: 20, bottom: 0, left: 0, right: 0 } }}><ThemeProvider><Relationships /></ThemeProvider></SafeAreaProvider>);
-  select('Deceased'); expect(visible()).toHaveLength(0); expect(screen.getByText('People you have lost will appear here.')).toBeOnTheScreen();
-  fireEvent.press(screen.getByRole('button', { name: 'Show All Connections' }));
+  const encoded = encodeWorld(mockWorld), view = await render(<SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 320, height: 568 }, insets: { top: 20, bottom: 0, left: 0, right: 0 } }}><ThemeProvider><Relationships /></ThemeProvider></SafeAreaProvider>);
+  await select('Deceased'); expect(visible()).toHaveLength(0); expect(screen.getByText('People you have lost will appear here.')).toBeOnTheScreen();
+  await fireEvent.press(screen.getByRole('button', { name: 'Show All Connections' }));
   expect(screen.getByRole('tab', { name: 'All' })).toHaveProp('accessibilityState', expect.objectContaining({ selected: true }));
-  expect(visible().length).toBeGreaterThan(0); expect(encodeWorld(mockWorld)).toBe(encoded); view.unmount();
+  expect(visible().length).toBeGreaterThan(0); expect(encodeWorld(mockWorld)).toBe(encoded); await view.unmount();
 });

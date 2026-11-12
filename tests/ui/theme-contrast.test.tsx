@@ -2,7 +2,7 @@ import React from 'react';
 // Shared portraits can import the game store; device persistence is outside this UI fixture.
 jest.mock('../../src/persistence/native', () => ({ openRepository: async () => { throw new Error('Unexpected device database access in UI fixture'); } }));
 import { StyleSheet, Text } from 'react-native';
-import { render, screen } from '@testing-library/react-native';
+import { render, screen } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Body, Button } from '../../src/ui/components';
 import { EventModal } from '../../src/ui/EventModal';
@@ -21,16 +21,15 @@ function contrast(foreground: string, background: string) {
 }
 const textColor = (label: string) => StyleSheet.flatten(screen.getByText(label).props.style).color as string;
 
-test.each(['light', 'dark'] as const)('%s enabled action labels and pressed states meet normal-text contrast', appearance => {
+test.each(['light', 'dark'] as const)('%s enabled action labels and pressed states meet normal-text contrast', async appearance => {
   let colors!: Colors;
   const Probe = () => { colors = useColors(); return null; };
-  render(<ThemeProvider appearance={appearance}><Probe />{(['primary', 'positive', 'danger', 'secondary'] as const).map(tone =>
+  await render(<ThemeProvider appearance={appearance}><Probe />{(['primary', 'positive', 'danger', 'secondary'] as const).map(tone =>
     <Button key={tone} label={tone + ' action'} tone={tone} onPress={() => {}} />
   )}<FilterTabs values={[{ id: 'selected', label: 'Selected filter' }, { id: 'other', label: 'Other filter' }]} selected="selected" onSelect={() => {}} /></ThemeProvider>);
   for (const tone of ['primary', 'positive', 'danger', 'secondary']) {
     const label = tone + ' action', control = screen.getByRole('button', { name: label });
-    let pressable = control.parent;
-    while (pressable && typeof pressable.props.style !== 'function') pressable = pressable.parent;
+    const pressable = screen.UNSAFE_root.findAll(node => node.props.accessibilityLabel === label && typeof node.props.style === 'function')[0];
     if (!pressable) throw new Error('The rendered action has no pressed style');
     const normal = StyleSheet.flatten(control.props.style), pressed = StyleSheet.flatten(pressable.props.style({ pressed: true }));
     expect(contrast(textColor(label), normal.backgroundColor)).toBeGreaterThanOrEqual(4.5);
@@ -46,10 +45,10 @@ test.each(['light', 'dark'] as const)('%s enabled action labels and pressed stat
   expect(contrast('#FFFFFF', colors.actionBlue)).toBeGreaterThanOrEqual(4.5);
 });
 
-test.each(['light', 'dark'] as const)('%s muted, error and signed result text stays readable on actual surfaces', appearance => {
+test.each(['light', 'dark'] as const)('%s muted, error and signed result text stays readable on actual surfaces', async appearance => {
   let colors!: Colors;
   const Probe = () => { colors = useColors(); return <><Body muted>Muted guidance</Body><Text style={{ color: colors.red }}>Form error</Text></>; };
-  render(<SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 24, bottom: 0, left: 0, right: 0 } }}>
+  await render(<SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 24, bottom: 0, left: 0, right: 0 } }}>
     <ThemeProvider appearance={appearance}><Probe /><BottomNavigation activeTab="life" onSelectTab={() => {}} /><EventModal event={{ id: 'contrast-result', kind: 'result', title: 'Saved result', body: 'Actual signed effects', effects: [
       { id: 'gain', label: 'Gain', value: '+5', tone: 'positive' },
       { id: 'loss', label: 'Loss', value: '−2', tone: 'negative' },

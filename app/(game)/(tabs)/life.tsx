@@ -104,7 +104,7 @@ const LifeJournal = React.memo(function LifeJournal({ rows, listRef, followJourn
       onScrollBeginDrag={stopFollowing}
       renderItem={renderFact}
       ListEmptyComponent={EmptyJournal}
-      ListFooterComponent={firstYearHint ? <View style={{ paddingHorizontal: 16, paddingTop: 20 }}><Body muted>{firstYearHint}</Body></View> : null}
+      ListFooterComponent={firstYearHint ? <View style={{ paddingHorizontal: 16, paddingTop: 20 }}><Body muted>{firstYearHint}</Body></View> : undefined}
     />;
 });
 

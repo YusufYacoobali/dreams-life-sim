@@ -24,7 +24,7 @@ test('public and unknown builds cannot embed the hidden testing bypass, even wit
           Object.assign(process.env, { EAS_BUILD_PROFILE: profile, EAS_BUILD_DISTRIBUTION: distribution, DREAMS_GOD_MODE_TESTING: flag });
           const allowed = distribution === 'internal' && ['internal', 'preview', 'development'].includes(profile) && flag === '1';
           expect(configure({ config: { extra: { godModeTesting: true, unrelated: 1 } } }).extra)
-            .toEqual({ godModeTesting: allowed, unrelated: 1 });
+            .toMatchObject({ godModeTesting: allowed, unrelated: 1 });
         }
       }
     }

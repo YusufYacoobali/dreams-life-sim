@@ -1,7 +1,7 @@
 import { displayText } from '../../src/ui/displayNumbers';
 import React from 'react';
 import { Modal } from 'react-native';
-import { act, fireEvent, render, screen, waitFor, within } from '@testing-library/react-native';
+import { act, fireEvent, render, screen, waitFor, within } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { DatabaseSync } from 'node:sqlite';
 import { createHash } from 'node:crypto';
@@ -33,7 +33,7 @@ const actor = (value = world()) => value.people[value.activePersonId];
 const model = (value = world()) => value.careers.find(item => item.personId === value.activePersonId && item.kind === 'model')!;
 const absolute = (value = world()) => value.date.year * 12 + value.date.month - 1;
 const frame = () => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider><Career /><PendingEvent /></ThemeProvider></SafeAreaProvider>;
-const press = async (name: string | RegExp) => { await act(async () => { fireEvent.press(screen.getByRole('button', { name })); }); };
+const press = async (name: string | RegExp) => { await act(async () => { await fireEvent.press(screen.getByRole('button', { name })); }); };
 const modal = () => within(screen.UNSAFE_getByType(Modal));
 const reviewEvent = () => screen.UNSAFE_getAllByType(EventModal).find(item => item.props.event?.kind === 'confirmation')!.props.event;
 
@@ -62,7 +62,7 @@ async function setup() {
 
 test('the unchanged actor archive earns modelling training, signs and completes a real model contract, then leaves durably without future model pay', async () => {
   const context = await setup(), trace: GameCommand[] = [];
-  let view: ReturnType<typeof render> | undefined;
+  let view: Awaited<ReturnType<typeof render>> | undefined;
   const dispatch = async (command: GameCommand) => { trace.push(command); await act(async () => { expect(await mockStore.getState().dispatch(command)).toBe(true); }); };
   const finish = async () => {
     let guard = 0;
@@ -74,7 +74,7 @@ test('the unchanged actor archive earns modelling training, signs and completes 
     }
   };
   const year = async () => { expect(world().pending).toBeNull(); expect(world().annual).toBeNull(); const before = absolute(); await dispatch({ type: 'advance' }); await finish(); expect(absolute() - before).toBe(12); };
-  const cold = async () => { const before = world(), saved = context.rows(); view?.unmount(); await context.cold(); view = render(frame()); expect(world()).toEqual(before); expect(context.rows()).toEqual(saved); context.original(); };
+  const cold = async () => { const before = world(), saved = context.rows(); await view?.unmount(); await context.cold(); view = await render(frame()); expect(world()).toEqual(before); expect(context.rows()).toEqual(saved); context.original(); };
   const acknowledgeOnce = async () => {
     const initial = world(), pending = initial.pending; if (pending?.kind !== 'result') throw Error('Expected saved result');
     await press('Continue'); expect(world()).toEqual(resolveCommand(initial, { type: 'acknowledge', resultId: pending.id }, true));
@@ -106,7 +106,7 @@ test('the unchanged actor archive earns modelling training, signs and completes 
     const paidTraining = world().ledger.filter(item => item.personId === world().activePersonId && item.category === 'skill-training'); expect(paidTraining).toHaveLength(30); expect(paidTraining.reduce((sum, item) => sum - item.cashDelta, 0n)).toBe(training.fees);
     expect(world().careers.find(item => item.id === actorCareer.id)).toEqual(actorCareer);
     await dispatch({ type: 'stop-career-training' }); await finish(); expect(selectionReason(world(), 'model')).toBeUndefined();
-    view = render(frame()); const prepared = world(), accounts = prepared.accounts, ledger = prepared.ledger;
+    view = await render(frame()); const prepared = world(), accounts = prepared.accounts, ledger = prepared.ledger;
     await durableReview('Explore Modelling Opportunities', 'Explore Modelling', { type: 'model-enter' });
     expect(model().status).toBe('between'); expect(model().projects).toHaveLength(0); expect(actor().employment).toBeNull();
     expect(model().modelCareer!.industry.board).toHaveLength(6);
@@ -122,7 +122,7 @@ test('the unchanged actor archive earns modelling training, signs and completes 
       const offer = model().modelCareer!.industry.board.find(item => !modelOfferReason(world(), item));
       if (!offer) {
         if (++seasons > 3) throw Error('No model booking after four ordinary saved casting boards');
-        view.unmount(); view = undefined; await year(); view = render(frame());
+        await view.unmount(); view = undefined; await year(); view = await render(frame());
         await press('Review New Bookings'); await press('Review Booking List'); await acknowledgeOnce(); continue;
       }
       const launch = 'Review Casting for ' + offer.title, beforeCasting = world();
@@ -141,14 +141,14 @@ test('the unchanged actor archive earns modelling training, signs and completes 
     await durableReview(/^Prepare the Presentation\./, 'Choose This Approach', { type: 'model-production', projectId: booked.id, action: 'prepare' });
     expect(model().projects[0].creative!.choices.some(item => item.id === 'model:prepare')).toBe(true);
     await finish();
-    view.unmount(); view = undefined; await year();
+    await view.unmount(); view = undefined; await year();
     expect(model().status).toBe('between'); expect(model().projects[0].status).toBe('completed'); expect(model().projects[0].months).toBe(booked.targetMonths); expect(model().projects[0].periods).toHaveLength(booked.targetMonths); expect(model().projects[0].periods.every(item => item.attended)).toBe(true); expect(model().projects[0].grossEarned).toBeGreaterThan(0n); expect(actor().employment).toBeNull();
     const completed = model(), employment = world().workHistory.find(item => item.id === completed.projects[0].employmentId)!; expect(employment.monthsWorked).toBe(booked.targetMonths); expect(employment.grossEarned).toBe(completed.projects[0].grossEarned); expect(completed.modelCareer!.industry.totalGross).toBe(employment.normalizedGross);
-    view = render(frame()); expect(screen.getByText('Completed · ' + completed.projects[0].ended!.year + ' · ' + booked.targetMonths + ' contract months')).toBeOnTheScreen(); expect(screen.getByLabelText('Actual gross earnings: ' + displayText(formatMoney({ minor: completed.projects[0].grossEarned, currency: completed.projects[0].currency })))).toBeOnTheScreen(); expect(screen.getByLabelText('Recorded gross earnings: ' + displayText(formatMoney({ minor: employment.normalizedGross, currency: actor().finance.earningsCurrency })) + '. Before commission and tax')).toBeOnTheScreen();
+    view = await render(frame()); expect(screen.getByText('Completed · ' + completed.projects[0].ended!.year + ' · ' + booked.targetMonths + ' contract months')).toBeOnTheScreen(); expect(screen.getByLabelText('Actual gross earnings: ' + displayText(formatMoney({ minor: completed.projects[0].grossEarned, currency: completed.projects[0].currency })))).toBeOnTheScreen(); expect(screen.getByLabelText('Recorded gross earnings: ' + displayText(formatMoney({ minor: employment.normalizedGross, currency: actor().finance.earningsCurrency })) + '. Before commission and tax')).toBeOnTheScreen();
     const beforeLeave = world(); await durableReview(/^Leave This Modelling Career\./, 'Leave Modelling', { type: 'leave-career', careerId: completed.id });
     const left = world(); expect(model().status).toBe('left'); expect(model().projects).toEqual(completed.projects); expect(model().contacts).toEqual(completed.contacts); expect(left.accounts).toEqual(beforeLeave.accounts); expect(left.ledger).toEqual(beforeLeave.ledger); expect(left.random).toEqual(beforeLeave.random); expect(left.workHistory).toEqual(beforeLeave.workHistory);
-    view.unmount(); view = undefined; await year(); expect(model()).toEqual(model(left)); expect(world().workHistory.filter(item => item.personId === world().activePersonId)).toEqual(left.workHistory.filter(item => item.personId === left.activePersonId)); expect(actor().finance.lifetimeGross).toBe(actor(left).finance.lifetimeGross); expect(world().careers.find(item => item.id === actorCareer.id)).toEqual(actorCareer);
+    await view.unmount(); view = undefined; await year(); expect(model()).toEqual(model(left)); expect(world().workHistory.filter(item => item.personId === world().activePersonId)).toEqual(left.workHistory.filter(item => item.personId === left.activePersonId)); expect(actor().finance.lifetimeGross).toBe(actor(left).finance.lifetimeGross); expect(world().careers.find(item => item.id === actorCareer.id)).toEqual(actorCareer);
     await cold(); expect(screen.queryByRole('button', { name: /^Leave This Modelling Career\./ })).toBeNull(); context.original();
     console.info('Model archive continuation', JSON.stringify({ sourceRevision: archived.revision, sourceDate: archived.date, preparedDate: prepared.date, trainedMonths: training.months, trainingFees: training.fees.toString(), skill: actor(prepared).skills.modeling, selectionAttempts, annualPay: quote.toString(), projectPeriods: completed.projects[0].months, modelGross: completed.projects[0].grossEarned.toString(), currency: completed.currency, finalDate: world().date, finalRevision: world().revision, ordinaryPreparationAndContinuationCommands: trace.length, originalFixtureSha256: createHash('sha256').update(readFileSync(join(__dirname, '../fixtures/v12-career-archive.json'))).digest('hex') }));
-  } finally { view?.unmount(); jest.restoreAllMocks(); context.close(); }
+  } finally { await view?.unmount(); jest.restoreAllMocks(); context.close(); }
 }, 90000);

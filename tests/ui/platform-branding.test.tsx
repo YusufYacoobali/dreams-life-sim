@@ -1,6 +1,6 @@
 import React from 'react';
 import { Linking, TextInput } from 'react-native';
-import { fireEvent, render, screen } from '@testing-library/react-native';
+import { fireEvent, render, screen } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import Svg, { LinearGradient, Path, Stop } from 'react-native-svg';
 import { platforms, platformContent, platformAccountLabel, socialPostJournal } from '../../src/game/content/social';
@@ -80,37 +80,37 @@ test.each([
   expect(socialPostJournal(platform, kind, minutes)).toBe(words);
 });
 
-test('read-only labels update while editable handles and biographies retain their exact text', () => {
+test('read-only labels update while editable handles and biographies retain their exact text', async () => {
   const saved = Object.freeze({ body: 'Your Photogram photo is getting attention.', bio: 'My Streamline profile.', handle: 'photogram_daily' });
   const original = JSON.stringify(saved);
-  render(<><DisplayText accessibilityLabel={saved.body}>{saved.body}</DisplayText><TextInput accessibilityLabel="Biography" value={saved.bio} /><TextInput accessibilityLabel="Handle" value={saved.handle} /></>);
+  await render(<><DisplayText accessibilityLabel={saved.body}>{saved.body}</DisplayText><TextInput accessibilityLabel="Biography" value={saved.bio} /><TextInput accessibilityLabel="Handle" value={saved.handle} /></>);
   expect(screen.getByLabelText('Your Instagram photo is getting attention.')).toBeOnTheScreen();
   expect(screen.getByLabelText('Biography').props.value).toBe(saved.bio);
   expect(screen.getByLabelText('Handle').props.value).toBe(saved.handle);
   expect(JSON.stringify(saved)).toBe(original);
 });
 
-test('adjacent JSX text fragments retain handle, email and URI context', () => {
-  render(<><DisplayText>Using @{'photogram'} on {'Streamline'}.</DisplayText><DisplayText>Contact {'photogram'}@example.com</DisplayText><DisplayText>dreams://social?platform={'videowave'}</DisplayText></>);
+test('adjacent JSX text fragments retain handle, email and URI context', async () => {
+  await render(<><DisplayText>Using @{'photogram'} on {'Streamline'}.</DisplayText><DisplayText>Contact {'photogram'}@example.com</DisplayText><DisplayText>dreams://social?platform={'videowave'}</DisplayText></>);
   expect(screen.getByText('Using @photogram on Twitch.')).toBeOnTheScreen();
   expect(screen.getByText('Contact photogram@example.com')).toBeOnTheScreen();
   expect(screen.getByText('dreams://social?platform=videowave')).toBeOnTheScreen();
 });
 
-test.each(platforms)('a real profile keeps the literal handle @%s', handle => {
+test.each(platforms)('a real profile keeps the literal handle @%s', async handle => {
   const world = copyWorld(decodeSave(JSON.stringify(legacyCreator)).world);
   world.socialAccounts[0].handle = handle; mockAccountId = world.socialAccounts[0].id;
   mockStore = createGameStore({ repository: async () => { throw new Error('Rendering a profile must not open storage'); }, date: () => world.date, id: () => 'life_render_unused' });
   mockStore.setState({ world });
-  const view = render(frame(<SocialProfile />));
+  const view = await render(frame(<SocialProfile />));
   expect(screen.getByText('@' + handle)).toBeOnTheScreen();
   expect(world.socialAccounts[0].handle).toBe(handle);
-  view.unmount();
+  await view.unmount();
 });
 
 test.each([
   ['light', 24], ['light', 36], ['dark', 24], ['dark', 36],
-] as const)('%s platform marks at %spx retain brand colour, contrast and consistent framing', (appearance, size) => {
+] as const)('%s platform marks at %spx retain brand colour, contrast and consistent framing', async (appearance, size) => {
   const luminance = (hex: string) => {
     const [r, g, b] = [1, 3, 5].map(start => {
       const channel = parseInt(hex.slice(start, start + 2), 16) / 255;
@@ -119,7 +119,7 @@ test.each([
     return .2126 * r + .7152 * g + .0722 * b;
   };
   for (const platform of platforms) {
-    const view = render(<ThemeProvider appearance={appearance}><PlatformMark platform={platform} size={size} decorative={false} /></ThemeProvider>);
+    const view = await render(<ThemeProvider appearance={appearance}><PlatformMark platform={platform} size={size} decorative={false} /></ThemeProvider>);
     expect(screen.getByRole('image', { name: platformContent[platform].name })).toHaveStyle({ width: size, height: size, backgroundColor: '#FFFFFF', borderRadius: size * .24 });
     expect(screen.UNSAFE_getByType(Svg).props).toEqual(expect.objectContaining({ width: size * .7, height: size * .7, viewBox: platformMarks[platform].viewBox, preserveAspectRatio: 'xMidYMid meet' }));
     const path = screen.UNSAFE_getByType(Path);
@@ -137,25 +137,25 @@ test.each([
       colours = [path.props.fill];
     }
     for (const colour of colours) expect(1.05 / (luminance(colour) + .05)).toBeGreaterThanOrEqual(3);
-    view.unmount();
+    await view.unmount();
   }
 });
 
-test('multiple decorative Instagram marks have independent gradient references', () => {
-  render(<><PlatformMark platform="photogram" /><PlatformMark platform="photogram" /></>);
+test('multiple decorative Instagram marks have independent gradient references', async () => {
+  await render(<><PlatformMark platform="photogram" /><PlatformMark platform="photogram" /></>);
   const gradients = screen.UNSAFE_getAllByType(LinearGradient), paths = screen.UNSAFE_getAllByType(Path);
   expect(gradients[0].props.id).not.toBe(gradients[1].props.id);
   paths.forEach((path, index) => expect(path.props.fill).toBe('url(#' + gradients[index].props.id + ')'));
   expect(screen.queryByRole('image')).toBeNull();
 });
 
-test('the existing Help credits ship readable attribution and a working licence link', () => {
+test('the existing Help credits ship readable attribution and a working licence link', async () => {
   const open = jest.spyOn(Linking, 'openURL').mockResolvedValue(undefined);
-  const view = render(frame(<Help />));
+  const view = await render(frame(<Help />));
   expect(screen.getByText(/Font Awesome Free 6.7.2 by Fonticons, Inc., licensed under CC BY 4.0/)).toBeOnTheScreen();
-  fireEvent.press(screen.getByRole('link', { name: 'Creative Commons licence' }));
+  await fireEvent.press(screen.getByRole('link', { name: 'Creative Commons licence' }));
   expect(open).toHaveBeenCalledWith('https://creativecommons.org/licenses/by/4.0/');
-  view.unmount(); open.mockRestore();
+  await view.unmount(); open.mockRestore();
 });
 
 test('a genuine old creator archive keeps its payload, accounts and wording through current screens, cold reload and export', async () => {
@@ -168,13 +168,13 @@ test('a genuine old creator archive keeps its payload, accounts and wording thro
   mockAccountId = before.socialAccounts[0].id;
   mockStore = createGameStore({ repository: async () => repository, date: () => before.date, id: () => 'unused' }); await mockStore.getState().bootstrap();
   const encoded = encodeWorld(mockStore.getState().world!), stored = sqlite.prepare('SELECT payload FROM lives WHERE id=?').get(before.id)!.payload;
-  const view = render(frame(<SocialMedia />)); expect(screen.getAllByText('Instagram').length).toBeGreaterThan(0);
-  view.rerender(frame(<SocialProfile />)); expect(screen.getByRole('header', { name: 'Instagram' })).toBeOnTheScreen(); expect(screen.getByText('Instagram account')).toBeOnTheScreen();
-  view.rerender(frame(<CreatePost />)); expect(screen.getByText(/Your Instagram account/)).toBeOnTheScreen();
-  view.rerender(frame(<Sponsorships />)); expect(screen.getAllByText(/Instagram/).length).toBeGreaterThan(0);
-  view.rerender(frame(<CreatorStudio />)); expect(screen.getAllByText(/your YouTube channel/i).length).toBeGreaterThan(0);
-  view.rerender(frame(<PendingEvent />)); expect(screen.getByText(displayText(before.pending!.body))).toBeOnTheScreen(); expect(screen.queryByText(/Photogram/)).toBeNull();
-  view.unmount();
+  const view = await render(frame(<SocialMedia />)); expect(screen.getAllByText('Instagram').length).toBeGreaterThan(0);
+  await view.rerender(frame(<SocialProfile />)); expect(screen.getByRole('header', { name: 'Instagram' })).toBeOnTheScreen(); expect(screen.getByText('Instagram account')).toBeOnTheScreen();
+  await view.rerender(frame(<CreatePost />)); expect(screen.getByText(/Your Instagram account/)).toBeOnTheScreen();
+  await view.rerender(frame(<Sponsorships />)); expect(screen.getAllByText(/Instagram/).length).toBeGreaterThan(0);
+  await view.rerender(frame(<CreatorStudio />)); expect(screen.getAllByText(/your YouTube channel/i).length).toBeGreaterThan(0);
+  await view.rerender(frame(<PendingEvent />)); expect(screen.getByText(displayText(before.pending!.body))).toBeOnTheScreen(); expect(screen.queryByText(/Photogram/)).toBeNull();
+  await view.unmount();
   expect(encodeWorld(mockStore.getState().world!)).toBe(encoded);
   expect(sqlite.prepare('SELECT payload FROM lives WHERE id=?').get(before.id)!.payload).toBe(stored);
   const cold = new SaveRepository(driver); await cold.initialise();

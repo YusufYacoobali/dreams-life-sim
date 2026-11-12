@@ -1,7 +1,7 @@
 import React from 'react';
 import { Image, ScrollView, useWindowDimensions } from 'react-native';
 import Svg from 'react-native-svg';
-import { act, fireEvent, render, screen } from '@testing-library/react-native';
+import { act, fireEvent, render, screen } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { createGameStore } from '../../src/state/gameStore';
 import { createLife, randomCreation } from '../../src/game/createLife';
@@ -22,7 +22,7 @@ import Help from '../../app/help';
 import Activities from '../../app/(game)/(tabs)/activities';
 
 const frame = (children: React.ReactNode, appearance: 'light' | 'dark' = 'light') => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider appearance={appearance}>{children}</ThemeProvider></SafeAreaProvider>;
-const press = async (name: string | RegExp) => { await act(async () => { fireEvent.press(screen.getByRole('button', { name })); }); };
+const press = async (name: string | RegExp) => { await act(async () => { await fireEvent.press(screen.getByRole('button', { name })); }); };
 async function setup(saved: 'none' | 'birth' | 'alive' | 'dead' = 'none', bootstrap = true) {
   const { sqlite, driver } = database(), repository = new SaveRepository(driver); await repository.initialise();
   if (saved !== 'none') {
@@ -40,7 +40,7 @@ beforeEach(() => { jest.clearAllMocks(); jest.mocked(useWindowDimensions).mockRe
 test.each(['light', 'dark'] as const)('%s welcome shows the brand, creation actions and direct saved-life access without scenery or tagline', async appearance => {
   const context = await setup();
   try {
-    const view = render(frame(<Welcome />, appearance));
+    const view = await render(frame(<Welcome />, appearance));
     expect(screen.getByRole('header', { name: 'Dreams' })).toBeOnTheScreen();
     expect(screen.getByText('Life Simulator')).toBeOnTheScreen();
     expect(screen.queryByText(/Make choices|Free to play|Your story stays with you/)).toBeNull();
@@ -58,9 +58,9 @@ test.each(['light', 'dark'] as const)('%s welcome shows the brand, creation acti
     await press('Random Life'); expect(router.push).toHaveBeenLastCalledWith({ pathname: '/new-life', params: { seed: '42', mode: 'random' } });
     await press('Saved Lives'); expect(router.push).toHaveBeenLastCalledWith('/saved-lives');
     await press('Help'); expect(router.push).toHaveBeenLastCalledWith('/help');
-    view.rerender(frame(<Help />, appearance)); expect(screen.getByText('A year at a time')).toBeOnTheScreen();
+    await view.rerender(frame(<Help />, appearance)); expect(screen.getByText('A year at a time')).toBeOnTheScreen();
     expect(await context.repository.list()).toEqual([]);
-    view.unmount();
+    await view.unmount();
   } finally { context.sqlite.close(); }
 });
 
@@ -68,7 +68,7 @@ test.each(['birth', 'alive', 'dead'] as const)('Continue is primary and opens th
   const context = await setup(saved);
   try {
     const world = mockStore.getState().world!, encoded = encodeWorld(world), rows = await context.repository.list();
-    const view = render(frame(<Welcome />));
+    const view = await render(frame(<Welcome />));
     const label = 'Continue Life as ' + fullName(world.people[world.activePersonId]);
     expect(screen.getByText('Continue as ' + fullName(world.people[world.activePersonId]))).toBeOnTheScreen();
     expect(screen.getByRole('button', { name: label })).toHaveStyle({ backgroundColor: lightColors.actionGreen });
@@ -78,19 +78,19 @@ test.each(['birth', 'alive', 'dead'] as const)('Continue is primary and opens th
     expect(await context.repository.list()).toEqual(rows);
     expect(encodeWorld((await context.repository.active())!)).toBe(encoded);
     if (saved === 'alive') {
-      view.rerender(frame(<Activities />)); await press(/^Saved Lives/);
+      await view.rerender(frame(<Activities />)); await press(/^Saved Lives/);
       expect(router.push).toHaveBeenLastCalledWith('/saved-lives');
     }
     expect(await context.repository.list()).toEqual(rows);
     expect(encodeWorld((await context.repository.active())!)).toBe(encoded);
-    view.unmount();
+    await view.unmount();
   } finally { context.sqlite.close(); }
 });
 
 test('startup retains the loading announcement and keeps Help disabled until ready', async () => {
   const context = await setup('none', false);
   try {
-    const view = render(frame(<Welcome />));
+    const view = await render(frame(<Welcome />));
     expect(screen.getByLabelText('Opening your saved lives')).toBeOnTheScreen();
     expect(screen.getByRole('button', { name: 'Help' })).toBeDisabled();
     expect(screen.queryByRole('button', { name: 'Start New Life' })).toBeNull();
@@ -99,20 +99,20 @@ test('startup retains the loading announcement and keeps Help disabled until rea
     await act(async () => { await mockStore.getState().bootstrap(); });
     expect(screen.queryByLabelText('Opening your saved lives')).toBeNull();
     expect(screen.getByRole('button', { name: 'Help' })).toBeEnabled();
-    view.unmount();
+    await view.unmount();
   } finally { context.sqlite.close(); }
 });
 
 test('busy save state disables life and saved-file navigation without replacing the decorative motif', async () => {
   const context = await setup('alive');
   try {
-    const view = render(frame(<Welcome />)), motif = screen.UNSAFE_getByType(Svg);
+    const view = await render(frame(<Welcome />)), motif = screen.UNSAFE_getByType(Svg);
     const before = encodeWorld(mockStore.getState().world!);
     await act(async () => { mockStore.setState({ busy: true }); });
     for (const name of [/^Continue Life/, 'Start New Life', 'Random Life', 'Saved Lives']) { expect(screen.getByRole('button', { name })).toBeDisabled(); await press(name); }
     expect(router.push).not.toHaveBeenCalled(); expect(encodeWorld(mockStore.getState().world!)).toBe(before);
     expect(screen.UNSAFE_getByType(Svg)).toBe(motif);
-    view.unmount();
+    await view.unmount();
   } finally { context.sqlite.close(); }
 });
 
@@ -120,7 +120,7 @@ test.each([{ width: 320, height: 568, fontScale: 1 }, { width: 320, height: 568,
   jest.mocked(useWindowDimensions).mockReturnValue({ ...dimensions, scale: 1 });
   const context = await setup('alive');
   try {
-    const view = render(frame(<Welcome />));
+    const view = await render(frame(<Welcome />));
     const scroll = screen.UNSAFE_getByType(ScrollView);
     expect(scroll.props.contentContainerStyle).toEqual(expect.arrayContaining([expect.objectContaining({ flexGrow: 1, paddingHorizontal: 24 })]));
     expect(screen.getByText('Start New Life').props.allowFontScaling).not.toBe(false);
@@ -134,6 +134,6 @@ test.each([{ width: 320, height: 568, fontScale: 1 }, { width: 320, height: 568,
     expect(screen.UNSAFE_getByType(Svg).props.width).toBe(dimensions.width < 360 ? 140 : 184);
     expect(openingBackground).toBe('#0D1729');
     await press('Random Life'); expect(router.push).toHaveBeenLastCalledWith({ pathname: '/new-life', params: { seed: '42', mode: 'random' } });
-    view.unmount();
+    await view.unmount();
   } finally { context.sqlite.close(); }
 });

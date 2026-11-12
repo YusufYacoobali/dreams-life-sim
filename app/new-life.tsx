@@ -19,7 +19,7 @@ import { useCinematicTransition } from '../src/ui/cinematic/CinematicContext';
 import { DisplayText as Text, displayText } from '../src/ui/DisplayText';
 
 export default function NewLife() {
-  const firstNameInput = useRef<TextInput>(null), lastNameInput = useRef<TextInput>(null);
+  const firstNameInput = useRef<React.ComponentRef<typeof TextInput>>(null), lastNameInput = useRef<React.ComponentRef<typeof TextInput>>(null);
   const submitting = useRef(false);
   const premium = usePremiumAction(String(useCreationDraft(s => s.draft?.seed)));
   const { play } = useCinematicTransition();

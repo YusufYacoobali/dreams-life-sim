@@ -12,7 +12,7 @@ import { useFeedback } from '../../src/ui/feedback';
 import { useCinematicTransition } from '../../src/ui/cinematic/CinematicContext';
 
 const icons = { life: 'home', assets: 'wallet', relationships: 'heart', activities: 'ellipsis-horizontal' } as const;
-export const unstable_settings = { initialRouteName: '(tabs)' };
+export const unstable_settings = { anchor: '(tabs)' };
 
 export default function GameLayout() {
   const world = useGame(s => s.world);

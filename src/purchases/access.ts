@@ -1,6 +1,12 @@
 import type { GameCommand } from '../game/engine';
 import type { World } from '../game/model';
 import type { PremiumFeature } from './catalog';
+import { isUnlockAllTestingEnabled } from '../access/buildAccess';
+
+/** Testing access is evaluated on demand and never becomes purchase ownership. */
+export function hasPremiumAccess(owned: boolean): boolean {
+  return isUnlockAllTestingEnabled() || owned;
+}
 
 /** Restrict only new entry; an existing career, assignment and history remain usable. */
 export function requiredFeature(world: World, command: GameCommand): PremiumFeature | null {

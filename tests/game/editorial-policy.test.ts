@@ -97,13 +97,12 @@ test('the historical C35 registration stays exact and rejects newer source befor
   });
   const pins = driver.sourcePins(sourceRoot);
   expect(pins.birthDriver).toBe(driver.expectedC35.birthDriver);
-  // Current-source observations include central purchase guards and the RevenueCat
-  // runtime ownership dependency. Historical C35 registration above stays exact.
-  expect(pins.store).toBe('e61e6f204527a5e13fc9424da58645e5bec4994f29c8fedc540249d194c57dad');
-  // Runtime state wiring now reads verified purchase ownership.
-  expect(pins.state).toBe('c6cae51e879641b584e51a63320b8796f135c8ffab405708675e3ccbc295c0b6');
-  // The permanent-purchase SDK changes the current dependency lockfile.
-  expect(pins.lockfile).toBe('a80ba81d4b399536099801dac4faaac75394732f1af4fe96a29d51490feaca49');
+  // Current-source observations include the premium testing access guard.
+  // Historical C35 registration above stays exact and still rejects this source.
+  expect(pins.store).toBe('a2d1596b0e1911123c67d0c8a567d61047ae8257338593ab6cae6ac61762778e');
+  expect(pins.state).toBe('e8428001699e922cb47471b75220eadddab3a2f7c2392d62e8e74250382203dc');
+  // The SDK 58 upgrade changes the current dependency lockfile.
+  expect(pins.lockfile).toBe('70d85e20d6cfcad558c8e407d10b732f350d7090610e4367fea842ca26a54f43');
   expect(pins.tool).toBe('e0eb16fb73962b9632b4949a5ed1d729d8aca97be1607490a964c5a10abe1706');
   expect(pins.policy).toBe('0e2bf26c25d28c24d8ac9111fe2f3de704a1cadb0e8e98df82b4dbf93bcf3c72');
   for (const key of ['game', 'gameAndPersistence']) expect(pins[key]).not.toBe(driver.expectedC35[key]);

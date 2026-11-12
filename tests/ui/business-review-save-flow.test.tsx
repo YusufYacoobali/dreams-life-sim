@@ -1,7 +1,7 @@
 import { displayText } from '../../src/ui/displayNumbers';
 import React from 'react';
 import { Modal } from 'react-native';
-import { act, fireEvent, render, screen, waitFor, within } from '@testing-library/react-native';
+import { act, fireEvent, render, screen, waitFor, within } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { DatabaseSync } from 'node:sqlite';
 import { mkdtempSync, rmSync } from 'node:fs';
@@ -31,8 +31,8 @@ import ManageBusiness from '../../app/(game)/manage-business/[id]';
 
 const frame = (startup = false) => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider>{startup ? <Businesses /> : <ManageBusiness />}<PendingEvent /></ThemeProvider></SafeAreaProvider>;
 const world = () => mockStore.getState().world!;
-const press = async (name: string | RegExp) => { await act(async () => { fireEvent.press(screen.getByRole('button', { name })); }); };
-const edit = async (name: string, value: string) => { await act(async () => { fireEvent.changeText(screen.getByLabelText(name), value); }); };
+const press = async (name: string | RegExp) => { await act(async () => { await fireEvent.press(screen.getByRole('button', { name })); }); };
+const edit = async (name: string, value: string) => { await act(async () => { await fireEvent.changeText(screen.getByLabelText(name), value); }); };
 const modal = () => within(screen.UNSAFE_getByType(Modal));
 const acknowledge = (initial: World) => resolveCommand(initial, { type: 'acknowledge', resultId: initial.pending!.id }, true);
 
@@ -74,18 +74,18 @@ test.each(['startup', 'funding', 'custom-startup'] as const)('%s review survives
     const brand = custom ? 'My Custom Brand' : 'Reviewed Retail', draftName = '  ' + brand + '  ';
     const command: GameCommand = startup ? { type: 'start-business', kind: 'retail', name: brand, operation: 'manager', quotedCapital: quote.capital } : { type: 'fund-business', businessId: company.id, amount: 12345n };
     const expected = resolveCommand(initial, command, true), confirm = startup ? 'Start Business' : 'Fund Business', title = startup ? 'Start ' + brand + '?' : 'Invest more capital?';
-    let view = render(frame(startup));
+    let view = await render(frame(startup));
     if (custom) {
       await edit('Business name', draftName);
       expect(screen.queryByRole('radio', { name: /^Other\./ })).toBeNull();
       expect(screen.queryByText('Operating model')).toBeNull();
-      await act(async () => { fireEvent.press(screen.getByRole('radio', { name: /^Retail Shop\./ })); });
+      await act(async () => { await fireEvent.press(screen.getByRole('radio', { name: /^Retail Shop\./ })); });
       expect(screen.UNSAFE_queryAllByType(Modal)).toHaveLength(0);
       expect(screen.getByRole('radio', { name: /^Retail Shop\./, checked: true })).toBeOnTheScreen();
       expect(screen.getByLabelText('Business name')).toHaveProp('value', draftName);
       expect(world()).toEqual(initial); expect(context.rows()).toEqual(beforeRows);
     }
-    else if (startup) { await act(async () => { fireEvent.press(screen.getByRole('radio', { name: /^Retail Shop\./ })); }); await edit('Business name', draftName); }
+    else if (startup) { await act(async () => { await fireEvent.press(screen.getByRole('radio', { name: /^Retail Shop\./ })); }); await edit('Business name', draftName); }
     else { await edit('Additional business capital', '123.45'); await edit('Business profit withdrawal', '17.25'); }
     const launch = startup ? 'Review Startup' : 'Review Funding';
     const expectTerms = () => { expect(modal().getByText(title)).toBeOnTheScreen(); for (const value of startup ? [quote.capital, quote.registration, quote.total] : [12345n]) expect(modal().getByText(money(value))).toBeOnTheScreen(); if (startup) { expect(modal().getByText('Business type')).toBeOnTheScreen(); expect(modal().getByText('Retail Shop')).toBeOnTheScreen(); } };
@@ -106,9 +106,9 @@ test.each(['startup', 'funding', 'custom-startup'] as const)('%s review survives
     expect(accountFor(world()).cash).toBe(accountFor(initial).cash - (startup ? quote.total : 12345n));
     if (startup) { expect(world().businesses.find(item => item.id === company.id)).toEqual(company); const created = world().businesses.find(item => item.id !== company.id)!; expect(created).toMatchObject({ kind: 'retail', name: brand }); expect(created.staff).toHaveLength(2); expect(world().businesses).toHaveLength(initial.businesses.length + 1); }
     else { expect(world().businesses.find(item => item.id === company.id)!.cash).toBe(company.cash + 12345n); expect(world().businesses.find(item => item.id === company.id)!.cumulativeProfit).toBe(company.cumulativeProfit); expect(world().people).toEqual(initial.people); }
-    const savedRows = context.rows(); view.unmount(); await context.cold(); view = render(frame(startup)); expect(world()).toEqual(expected); expect(context.rows()).toEqual(savedRows);
+    const savedRows = context.rows(); await view.unmount(); await context.cold(); view = await render(frame(startup)); expect(world()).toEqual(expected); expect(context.rows()).toEqual(savedRows);
     await press('Continue'); expect(world()).toEqual(acknowledge(expected)); expect(world().businesses).toEqual(expected.businesses); expect(world().businessLedger).toEqual(expected.businessLedger); expect(world().accounts).toEqual(expected.accounts); expect(world().ledger).toEqual(expected.ledger); expect(world().random).toEqual(expected.random);
-    const doneRows = context.rows(); await act(async () => { expect(await mockStore.getState().dispatch({ type: 'acknowledge', resultId: expected.pending!.id })).toBe(false); }); expect(context.rows()).toEqual(doneRows); context.oldMoments(); view.unmount();
+    const doneRows = context.rows(); await act(async () => { expect(await mockStore.getState().dispatch({ type: 'acknowledge', resultId: expected.pending!.id })).toBe(false); }); expect(context.rows()).toEqual(doneRows); context.oldMoments(); await view.unmount();
   } finally { jest.restoreAllMocks(); context.close(); }
 });
 
@@ -116,7 +116,7 @@ test('offering and brand settings retain reviewed choices after failure and resu
   const context = await setup();
   try {
     const initial = world(), originalCompany = initial.businesses.find(item => item.id === mockCompanyId)!, offering = businessOfferings[originalCompany.kind].specialist;
-    let view = render(frame());
+    let view = await render(frame());
     const durableReview = async (launch: string, confirm: string, command: GameCommand, checkDraft: () => void) => {
       const before = world(), rows = context.rows(), expected = resolveCommand(before, command, true);
       await press(launch); await press('Never mind'); expect(world()).toEqual(before); expect(context.rows()).toEqual(rows); checkDraft();
@@ -128,44 +128,44 @@ test('offering and brand settings retain reviewed choices after failure and resu
       await press('Continue'); expect(world()).toEqual(acknowledge(expected));
     };
     const selectOffering = new RegExp('^' + offering.title + '\\.');
-    await act(async () => { fireEvent.press(screen.getByRole('radio', { name: selectOffering })); });
+    await act(async () => { await fireEvent.press(screen.getByRole('radio', { name: selectOffering })); });
     expect(world()).toEqual(initial);
     await durableReview('Review Offering', 'Set Offering', { type: 'business-offering', businessId: mockCompanyId, offering: 'specialist' }, () => {
       expect(screen.getByRole('radio', { name: selectOffering, checked: true })).toBeOnTheScreen();
     });
     expect(world().businesses.find(item => item.id === mockCompanyId)!.months).toEqual(originalCompany.months);
     await edit('Company brand name', '  My Renamed Company  ');
-    await act(async () => { fireEvent.press(screen.getByRole('radio', { name: 'Factory Logo' })); });
+    await act(async () => { await fireEvent.press(screen.getByRole('radio', { name: 'Factory Logo' })); });
     await durableReview('Review Settings', 'Save Settings', { type: 'business-settings', businessId: mockCompanyId, name: 'My Renamed Company', logo: 'factory' }, () => {
       expect(screen.getByLabelText('Company brand name')).toHaveProp('value', '  My Renamed Company  '); expect(screen.getByRole('radio', { name: /^Factory Logo/, checked: true })).toBeOnTheScreen();
     });
     const saved = world(), savedRows = context.rows(), company = saved.businesses.find(item => item.id === mockCompanyId)!;
     expect(company).toEqual({ ...originalCompany, offering: 'specialist', name: 'My Renamed Company', logo: 'factory' });
     expect(saved.people).toEqual(initial.people); expect(saved.workHistory).toEqual(initial.workHistory); expect(saved.random).toEqual(initial.random);
-    view.unmount(); await context.cold(); view = render(frame()); expect(world()).toEqual(saved); expect(context.rows()).toEqual(savedRows);
+    await view.unmount(); await context.cold(); view = await render(frame()); expect(world()).toEqual(saved); expect(context.rows()).toEqual(savedRows);
     expect(screen.getByText('My Renamed Company')).toBeOnTheScreen(); expect(screen.getByRole('radio', { name: selectOffering, checked: true })).toBeOnTheScreen(); expect(screen.getByRole('radio', { name: /^Factory Logo/, checked: true })).toBeOnTheScreen();
-    context.oldMoments(); view.unmount();
+    context.oldMoments(); await view.unmount();
   } finally { jest.restoreAllMocks(); context.close(); }
 });
 
 test('current prices, campaign and profit policy never launch or save; changed reviews and cancellation are local', async () => {
   const context = await setup();
   try {
-    const initial = world(), before = encodeWorld(initial), beforeRows = context.rows(), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'), view = render(frame());
+    const initial = world(), before = encodeWorld(initial), beforeRows = context.rows(), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'), view = await render(frame());
     for (const label of [/^100% of Standard Price\. Current\. This is your current price$/, /^No Advertising\..*Current\. This is your current campaign$/, /^Distribute 25% of Monthly Profit\. Current\. This is your current profit policy$/]) { expect(screen.getByRole('button', { name: label })).toBeDisabled(); await press(label); expect(screen.queryByRole('button', { name: 'Never mind' })).toBeNull(); }
     for (const [launch, confirm] of [[/^125% of Standard Price/, 'Set Prices'], [/^Local Campaign\./, 'Set Campaign'], [/^Reinvest All Profit/, 'Set Policy']] as const) { await press(launch); expect(modal().getByRole('button', { name: confirm })).toBeEnabled(); await press('Never mind'); }
-    expect(encodeWorld(world())).toBe(before); expect(context.rows()).toEqual(beforeRows); expect(unpack).not.toHaveBeenCalled(); context.oldMoments(); view.unmount();
+    expect(encodeWorld(world())).toBe(before); expect(context.rows()).toEqual(beforeRows); expect(unpack).not.toHaveBeenCalled(); context.oldMoments(); await view.unmount();
   } finally { jest.restoreAllMocks(); context.close(); }
 });
 
 test('an actual unrelated business-plan revision preserves the reviewed funding amount for the same company', async () => {
   const context = await setup();
   try {
-    const initial = world(), view = render(frame()); await edit('Additional business capital', '123.45'); await press('Review Funding');
+    const initial = world(), view = await render(frame()); await edit('Additional business capital', '123.45'); await press('Review Funding');
     const changed = resolveCommand(initial, { type: 'business-prices', businessId: mockCompanyId, priceBps: 12500 }, true), expected = acknowledge(changed);
     await act(async () => { expect(await mockStore.getState().dispatch({ type: 'business-prices', businessId: mockCompanyId, priceBps: 12500 })).toBe(true); expect(await mockStore.getState().dispatch({ type: 'acknowledge', resultId: world().pending!.id })).toBe(true); });
     expect(world()).toEqual(expected); expect(modal().getByText('Invest more capital?')).toBeOnTheScreen(); expect(screen.getByLabelText('Additional business capital')).toHaveProp('value', '123.45');
-    const rows = context.rows(); await press('Never mind'); expect(context.rows()).toEqual(rows); expect(world().accounts).toEqual(initial.accounts); expect(world().businessLedger).toEqual(initial.businessLedger); view.unmount();
+    const rows = context.rows(); await press('Never mind'); expect(context.rows()).toEqual(rows); expect(world().accounts).toEqual(initial.accounts); expect(world().businessLedger).toEqual(initial.businessLedger); await view.unmount();
   } finally { context.close(); }
 });
 
@@ -173,7 +173,7 @@ test('switching between two actual owned company routes clears the old amounts a
   const context = await setup();
   try {
     const quote = businessStartupQuote(world(), 'retail'); expect(await mockStore.getState().dispatch({ type: 'start-business', kind: 'retail', name: 'Second Actual Company', operation: 'manager', quotedCapital: quote.capital })).toBe(true); expect(await mockStore.getState().dispatch({ type: 'acknowledge', resultId: world().pending!.id })).toBe(true);
-    const initial = world(), beforeRows = context.rows(), firstId = mockCompanyId, secondId = initial.businesses.find(item => item.id !== firstId)!.id, unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'), view = render(frame());
+    const initial = world(), beforeRows = context.rows(), firstId = mockCompanyId, secondId = initial.businesses.find(item => item.id !== firstId)!.id, unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'), view = await render(frame());
     await edit('Additional business capital', '123.45'); await edit('Business profit withdrawal', '17.25'); await press('Review Funding');
     const firstReview = screen.UNSAFE_getAllByType(EventModal).find(item => item.props.event?.kind === 'confirmation')!, cancelledConfirm = firstReview.props.onChoose, cancelledCancel = firstReview.props.onCancel;
     await press('Never mind'); await act(async () => { await cancelledConfirm('confirm'); }); expect(world().revision).toBe(initial.revision);
@@ -181,10 +181,10 @@ test('switching between two actual owned company routes clears the old amounts a
     const oldConfirm = screen.UNSAFE_getAllByType(EventModal).find(item => item.props.event?.kind === 'confirmation')!.props.onChoose;
     await act(async () => { cancelledCancel(); await cancelledConfirm('confirm'); });
     expect(world()).toEqual(initial); expect(modal().getByText(displayText(formatMoney({ minor: 45678n, currency: initial.businesses.find(item => item.id === firstId)!.currency })))).toBeOnTheScreen();
-    mockCompanyId = secondId; view.rerender(frame());
+    mockCompanyId = secondId; await view.rerender(frame());
     await act(async () => { await oldConfirm('confirm'); });
     expect(screen.queryByText('Invest more capital?')).toBeNull(); expect(screen.getByText('Second Actual Company')).toBeOnTheScreen(); expect(screen.getByLabelText('Additional business capital')).toHaveProp('value', ''); expect(screen.getByLabelText('Business profit withdrawal')).toHaveProp('value', '');
-    mockCompanyId = firstId; view.rerender(frame()); expect(screen.getByLabelText('Additional business capital')).toHaveProp('value', ''); expect(screen.queryByRole('button', { name: 'Fund Business' })).toBeNull(); expect(world()).toEqual(initial); expect(context.rows()).toEqual(beforeRows); expect(unpack).not.toHaveBeenCalled(); context.oldMoments(); view.unmount();
+    mockCompanyId = firstId; await view.rerender(frame()); expect(screen.getByLabelText('Additional business capital')).toHaveProp('value', ''); expect(screen.queryByRole('button', { name: 'Fund Business' })).toBeNull(); expect(world()).toEqual(initial); expect(context.rows()).toEqual(beforeRows); expect(unpack).not.toHaveBeenCalled(); context.oldMoments(); await view.unmount();
   } finally { jest.restoreAllMocks(); context.close(); }
 });
 
@@ -194,12 +194,12 @@ test.each([true, false])('an actual life switch clears the %s startup form or co
     // Identity-only second-life fixture; company/person IDs deliberately repeat.
     // This checks local form scoping, not an earned inheritance or natural life.
     const initial = world(), other = copyWorld(initial); other.id = 'life_other_business_review'; await context.repository.create(other); expect(await mockStore.getState().selectLife(initial.id)).toBe(true);
-    const view = render(frame(startup)); if (startup) { await edit('Business name', 'Old Life Draft'); await press('Review Startup'); } else { await edit('Additional business capital', '123.45'); await edit('Business profit withdrawal', '17.25'); await press('Review Funding'); }
+    const view = await render(frame(startup)); if (startup) { await edit('Business name', 'Old Life Draft'); await press('Review Startup'); } else { await edit('Additional business capital', '123.45'); await edit('Business profit withdrawal', '17.25'); await press('Review Funding'); }
     const oldConfirm = screen.UNSAFE_getAllByType(EventModal).find(item => item.props.event?.kind === 'confirmation')!.props.onChoose;
     const lives = context.sqlite.prepare('SELECT * FROM lives ORDER BY id').all(), receipts = context.sqlite.prepare('SELECT * FROM receipts ORDER BY life_id,command_id').all();
     await act(async () => { expect(await mockStore.getState().selectLife(other.id)).toBe(true); }); expect(screen.queryByRole('button', { name: startup ? 'Start Business' : 'Fund Business' })).toBeNull(); expect(screen.getByLabelText(startup ? 'Business name' : 'Additional business capital')).toHaveProp('value', '');
     await act(async () => { await oldConfirm('confirm'); });
-    if (!startup) expect(screen.getByLabelText('Business profit withdrawal')).toHaveProp('value', ''); expect(context.sqlite.prepare('SELECT * FROM lives ORDER BY id').all()).toEqual(lives); expect(context.sqlite.prepare('SELECT * FROM receipts ORDER BY life_id,command_id').all()).toEqual(receipts); context.oldMoments(); view.unmount();
+    if (!startup) expect(screen.getByLabelText('Business profit withdrawal')).toHaveProp('value', ''); expect(context.sqlite.prepare('SELECT * FROM lives ORDER BY id').all()).toEqual(lives); expect(context.sqlite.prepare('SELECT * FROM receipts ORDER BY life_id,command_id').all()).toEqual(receipts); context.oldMoments(); await view.unmount();
   } finally { context.close(); }
 });
 
@@ -208,7 +208,7 @@ test('an ordinary approved relocation invalidates the old startup quote while an
   try {
     // The unchanged v20 approved-move checkpoint supplies real funds and the
     // saved work offer; no residence, money, success roll or company is forged.
-    const initial = world(), dispatch = jest.spyOn(mockStore.getState(), 'dispatch'), view = render(frame(true));
+    const initial = world(), dispatch = jest.spyOn(mockStore.getState(), 'dispatch'), view = await render(frame(true));
     await edit('Business name', 'Move Review Cafe'); await press('Review Startup');
     const confirmation = () => screen.UNSAFE_getAllByType(EventModal).find(item => item.props.event?.kind === 'confirmation')!;
     const retained = confirmation().props.event, oldConfirm = confirmation().props.onChoose;
@@ -237,6 +237,6 @@ test('an ordinary approved relocation invalidates the old startup quote while an
     expect(screen.getByText('Your available balance cannot fund this startup')).toBeOnTheScreen();
     expect(screen.getByRole('button', { name: 'Review Startup' })).toBeDisabled();
     expect(world()).toEqual(settled); expect(context.rows()).toEqual(settledRows);
-    view.unmount(); await context.cold(); expect(world()).toEqual(settled); expect(context.rows()).toEqual(settledRows); context.oldMoments();
+    await view.unmount(); await context.cold(); expect(world()).toEqual(settled); expect(context.rows()).toEqual(settledRows); context.oldMoments();
   } finally { jest.restoreAllMocks(); context.close(); }
 });

@@ -47,7 +47,7 @@ export default function Coworkers() {
         </Card>}
         {error && !world.pending && <Text accessibilityRole="alert" accessibilityLiveRegion="polite" style={{ color: c.red, fontSize: 15, lineHeight: 22 }}>{error}</Text>}
       </View>}
-      ListEmptyComponent={place ? <Card><Body muted>{query.trim() ? 'No matching names.' : 'No colleagues are recorded here.'}</Body></Card> : null}
+      ListEmptyComponent={place ? <Card><Body muted>{query.trim() ? 'No matching names.' : 'No colleagues are recorded here.'}</Body></Card> : undefined}
       renderItem={({ item }) => {
         if (item.kind === 'history-heading') return <View style={{ paddingVertical: 16 }}><Heading size={18}>Previous Workplaces</Heading></View>;
         if (item.kind === 'history') return <Card style={{ marginBottom: 12 }}><ActionRow title={item.place.employer} subtitle={item.place.started.year + '–' + item.place.ended!.year + ' · ' + item.place.city} onPress={() => { Keyboard.dismiss(); router.push({ pathname: '/coworkers', params: { workplace: item.place.id, tab: 'activities' } }); }} /></Card>;

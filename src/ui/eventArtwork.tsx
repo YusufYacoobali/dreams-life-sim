@@ -2,6 +2,7 @@ import { LifestylePetArt, lifestylePetRects } from '../assets/LifestylePetArt';
 import { OutingArt } from '../assets/OutingArt';
 import { CultArt, cultImages, type CultArtId } from '../assets/CultArt';
 import React from 'react';
+import { Text } from 'react-native';
 import type { World } from '../game/model';
 import type { Pending, StoryParticipant } from '../game/runtime';
 import { eventTemplates } from '../game/content/events';
@@ -165,6 +166,11 @@ export function resolveEventArtwork(pending: Pending, world: World): EventArtwor
 
 /** Local reviews keep the public ReactNode API and may supply explicit context. */
 export function presentationArtwork(illustration: React.ReactNode, category?: EventCategory): EventArtwork {
+  if (typeof illustration === 'string' || typeof illustration === 'number') {
+    const registered = typeof illustration === 'string' ? artwork.get(illustration) : undefined;
+    if (registered) return presentationArtwork(registered.illustration, category ?? registered.category);
+    return { illustration: <Text>{illustration}</Text>, category: category ?? 'everyday' };
+  }
   if (React.isValidElement<{ id?:string; children?:React.ReactNode }>(illustration)) {
     const { id } = illustration.props;
     let inferred: EventCategory | undefined;

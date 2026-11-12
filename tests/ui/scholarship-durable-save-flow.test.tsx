@@ -1,6 +1,6 @@
 import React from 'react';
 import { Modal } from 'react-native';
-import { act, fireEvent, render, screen, waitFor, within } from '@testing-library/react-native';
+import { act, fireEvent, render, screen, waitFor, within } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
 import { DatabaseSync } from 'node:sqlite';
@@ -26,7 +26,7 @@ import ScholarshipApplications from '../../app/(game)/scholarships';
 
 const world = () => mockStore.getState().world!;
 const frame = () => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider><ScholarshipApplications /><PendingEvent /></ThemeProvider></SafeAreaProvider>;
-const press = async (name: string | RegExp) => { await act(async () => { fireEvent.press(screen.getByRole('button', { name })); }); };
+const press = async (name: string | RegExp) => { await act(async () => { await fireEvent.press(screen.getByRole('button', { name })); }); };
 const confirmation = () => screen.UNSAFE_getAllByType(EventModal).find(item => item.props.event?.kind === 'confirmation')!;
 const modal = () => within(screen.UNSAFE_getByType(Modal));
 async function command(command: GameCommand) { expect(await mockStore.getState().dispatch(command)).toBe(true); }
@@ -61,7 +61,7 @@ async function setup() {
     }, close: () => { sqlite.close(); rmSync(directory, { recursive: true, force: true }); } };
 }
 async function localChoice(row: RegExp, value: string, confirm: string) {
-  await press(row); await act(async () => { fireEvent.press(screen.getByRole('radio', { name: value })); }); await press(confirm);
+  await press(row); await act(async () => { await fireEvent.press(screen.getByRole('radio', { name: value })); }); await press(confirm);
 }
 async function failureRetry(context: Awaited<ReturnType<typeof setup>>, confirm: string, actual: GameCommand) {
   const initial = world(), before = context.rows(), reviewed = confirmation().props, expected = resolveCommand(initial, actual, true), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'), dispatch = context.dispatch, calls = dispatch.mock.calls.length;
@@ -69,7 +69,7 @@ async function failureRetry(context: Awaited<ReturnType<typeof setup>>, confirm:
   try {
     await press(confirm); expect(mockStore.getState().busy).toBe(true); expect(world()).toEqual(initial); expect(context.rows()).toEqual(before);
     const heldConfirmation = screen.queryByRole('button', { name: confirm })?.props.accessibilityState, heldCourse = screen.getByRole('button', { name: /^Course\./, includeHiddenElements: true }).props.accessibilityState, heldSubject = screen.getByRole('button', { name: /^Subject\./, includeHiddenElements: true }).props.accessibilityState;
-    await act(async () => { reviewed.onChoose('confirm'); reviewed.onChoose('confirm'); reviewed.onCancel(); screen.UNSAFE_queryByType(Modal)?.props.onRequestClose(); fireEvent.press(screen.getByRole('button', { name: 'Back', includeHiddenElements: true })); });
+    await act(async () => { reviewed.onChoose('confirm'); reviewed.onChoose('confirm'); reviewed.onCancel(); screen.UNSAFE_queryByType(Modal)?.props.onRequestClose(); await fireEvent.press(screen.getByRole('button', { name: 'Back', includeHiddenElements: true })); });
     await act(async () => { release(); }); await waitFor(() => expect(mockStore.getState().error).toMatch(/couldn't be saved/));
     expect(screen.queryByText(reviewed.event.title)).toBeOnTheScreen(); expect(confirmation().props.event).toEqual(reviewed.event); expect(modal().getByRole('alert')).toHaveTextContent(/couldn't be saved/); expect(screen.getAllByRole('alert')).toHaveLength(1);
     expect(heldConfirmation).toEqual({ disabled: true, busy: true }); expect(heldCourse).toEqual({ disabled: true }); expect(heldSubject).toEqual({ disabled: true }); expect(router.back).not.toHaveBeenCalled(); expect(dispatch).toHaveBeenCalledTimes(calls + 1);
@@ -85,29 +85,29 @@ async function failureRetry(context: Awaited<ReturnType<typeof setup>>, confirm:
 test('genuine scholarship application and decline retain exact failed reviews, retry once and cold resume without tuition or aid activation', async () => {
   const context = await setup();
   try {
-    const initial = world(), before = context.rows(), canonical = encodeWorld(initial), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'); let view = render(frame());
+    const initial = world(), before = context.rows(), canonical = encodeWorld(initial), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'); let view = await render(frame());
     await localChoice(/^Course\./, 'Trade School', 'Choose Course'); await localChoice(/^Subject\./, 'Business', 'Choose Subject'); await localChoice(/^Course\./, 'University', 'Choose Course'); await localChoice(/^Subject\./, 'Computing', 'Choose Subject');
     await press('Apply · Academic Scholarship'); expect(screen.getByText('$14,000')).toBeOnTheScreen(); expect(screen.getByText('$10,500')).toBeOnTheScreen(); expect(screen.getByText('$3,500')).toBeOnTheScreen(); await press('Never mind'); expect(context.rows()).toEqual(before); expect(encodeWorld(world())).toBe(canonical); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore();
     await press('Apply · Academic Scholarship'); const applied = await failureRetry(context, 'Apply For Scholarship', { type: 'apply-scholarship', kind: 'merit', program: 'university', field: 'computing' });
     expect(applied.scholarships).toHaveLength(1); const item = applied.scholarships[0]; expect(item).toMatchObject({ status: 'offered', roll: 51, program: 'university', field: 'computing', annualTuition: 1400000n, periods: [], course: null }); expect(applied.people).toEqual(initial.people); expect(applied.accounts).toEqual(initial.accounts); expect(applied.liabilities).toEqual(initial.liabilities); expect(applied.ledger).toEqual(initial.ledger); expect(applied.universityApplications).toEqual([]); expect(applied.studyCourses).toEqual([]);
-    const saved = context.rows(); view.unmount(); await context.cold(); view = render(frame()); expect(world()).toEqual(applied); expect(context.rows()).toEqual(saved); await press('Continue'); const acknowledged = world(), acknowledgedRows = context.rows();
+    const saved = context.rows(); await view.unmount(); await context.cold(); view = await render(frame()); expect(world()).toEqual(applied); expect(context.rows()).toEqual(saved); await press('Continue'); const acknowledged = world(), acknowledgedRows = context.rows();
     await act(async () => { expect(await mockStore.getState().dispatch({ type: 'acknowledge', resultId: applied.pending!.id })).toBe(false); expect(await mockStore.getState().dispatch({ type: 'apply-scholarship', kind: 'merit', program: 'university', field: 'computing' })).toBe(false); }); expect(world()).toEqual(acknowledged); expect(context.rows()).toEqual(acknowledgedRows);
     await press('Decline Academic Scholarship'); await press('Never mind'); expect(world()).toEqual(acknowledged); expect(context.rows()).toEqual(acknowledgedRows); await press('Decline Academic Scholarship'); const declined = await failureRetry(context, 'Decline Offer', { type: 'decline-scholarship', scholarshipId: item.id });
     expect(declined.scholarships[0]).toEqual({ ...item, status: 'withdrawn', ended: declined.date }); expect(declined.random).toEqual(acknowledged.random); expect(declined.people).toEqual(initial.people); expect(declined.accounts).toEqual(initial.accounts); expect(declined.liabilities).toEqual(initial.liabilities); expect(declined.ledger).toEqual(initial.ledger);
-    const declinedRows = context.rows(); view.unmount(); await context.cold(); view = render(frame()); expect(world()).toEqual(declined); expect(context.rows()).toEqual(declinedRows); await press('Continue'); const done = world(), doneRows = context.rows(); await act(async () => { expect(await mockStore.getState().dispatch({ type: 'acknowledge', resultId: declined.pending!.id })).toBe(false); expect(await mockStore.getState().dispatch({ type: 'decline-scholarship', scholarshipId: item.id })).toBe(false); }); expect(world()).toEqual(done); expect(context.rows()).toEqual(doneRows); context.originals(); view.unmount();
+    const declinedRows = context.rows(); await view.unmount(); await context.cold(); view = await render(frame()); expect(world()).toEqual(declined); expect(context.rows()).toEqual(declinedRows); await press('Continue'); const done = world(), doneRows = context.rows(); await act(async () => { expect(await mockStore.getState().dispatch({ type: 'acknowledge', resultId: declined.pending!.id })).toBe(false); expect(await mockStore.getState().dispatch({ type: 'decline-scholarship', scholarshipId: item.id })).toBe(false); }); expect(world()).toEqual(done); expect(context.rows()).toEqual(doneRows); context.originals(); await view.unmount();
   } finally { jest.restoreAllMocks(); context.close(); }
 }, 60000);
 
 test('local current choices save nothing, same-context progression retains the review and selecting the original life discards stale drafts and callbacks', async () => {
   const context = await setup();
   try {
-    const initial = world(), before = context.rows(), dispatch = context.dispatch, calls = dispatch.mock.calls.length, unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'), view = render(frame());
+    const initial = world(), before = context.rows(), dispatch = context.dispatch, calls = dispatch.mock.calls.length, unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'), view = await render(frame());
     await press(/^Course\./); expect(screen.getByRole('radio', { name: /University\. This is your selected course/ })).toBeDisabled(); await press('Never mind');
     await press(/^Subject\./); expect(screen.getByRole('radio', { name: /Computing\. This is your selected subject/ })).toBeDisabled(); await press('Never mind');
     await localChoice(/^Course\./, 'Trade School', 'Choose Course'); await localChoice(/^Subject\./, 'Business', 'Choose Subject'); await press('Apply · Academic Scholarship');
     const retained = confirmation().props; expect(retained.event.terms).toContainEqual({ id: 'course', label: 'Course', value: 'trade · business', tone: 'neutral' }); expect(world()).toEqual(initial); expect(context.rows()).toEqual(before); expect(dispatch).toHaveBeenCalledTimes(calls); expect(unpack).not.toHaveBeenCalled();
     await act(async () => { await command({ type: 'meditate' }); await command({ type: 'acknowledge', resultId: world().pending!.id }); }); expect(confirmation().props.event).toBe(retained.event); expect(world().scholarships).toEqual([]);
     await act(async () => { expect(await mockStore.getState().selectLife(context.originalId)).toBe(true); }); const selected = world(), selectedRows = context.rows(), count = dispatch.mock.calls.length; expect(selected.activePersonId).toBe(initial.activePersonId); expect(selected.id).not.toBe(initial.id); expect(selected.people[selected.activePersonId].education.months).toBe(12); expect(screen.queryByText(retained.event.title)).toBeNull(); expect(screen.getByRole('button', { name: /^Course\. University$/ })).toBeOnTheScreen(); expect(screen.getByRole('button', { name: /^Subject\. computing$/ })).toBeOnTheScreen();
-    await act(async () => { await retained.onChoose('confirm'); }); expect(dispatch).toHaveBeenCalledTimes(count); expect(world()).toEqual(selected); expect(context.rows()).toEqual(selectedRows); expect(selected.scholarships).toEqual([]); context.originals(); view.unmount();
+    await act(async () => { await retained.onChoose('confirm'); }); expect(dispatch).toHaveBeenCalledTimes(count); expect(world()).toEqual(selected); expect(context.rows()).toEqual(selectedRows); expect(selected.scholarships).toEqual([]); context.originals(); await view.unmount();
   } finally { jest.restoreAllMocks(); context.close(); }
 }, 60000);

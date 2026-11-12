@@ -1,5 +1,5 @@
 import React from 'react';
-import { act, fireEvent, render, screen, waitFor } from '@testing-library/react-native';
+import { act, fireEvent, render, screen, waitFor } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { DatabaseSync } from 'node:sqlite';
 import { mkdtempSync, rmSync } from 'node:fs';
@@ -19,7 +19,7 @@ let mockStore: ReturnType<typeof createGameStore>;
 jest.mock('expo-router', () => ({ router: { push: jest.fn(), replace: jest.fn(), back: jest.fn() } }));
 jest.mock('../../src/state/useGame', () => ({ useGame: (selector: unknown) => require('zustand').useStore(mockStore, selector) }));
 const frame = () => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider><PendingEvent /></ThemeProvider></SafeAreaProvider>;
-const press = async (name: string) => { await act(async () => { fireEvent.press(screen.getByRole('button', { name })); }); };
+const press = async (name: string) => { await act(async () => { await fireEvent.press(screen.getByRole('button', { name })); }); };
 
 test('new identical-name story and both role-labelled consequences survive an actual file-save failure, retry and closed-connection cold result', async () => {
   const row = cohort.records.find(item => item.decisionPointer === 'IT/result.json#/decisions/9')!, source = checkpoints.unpackCheckpoint(row.checkpoint), initial = copyWorld(source);
@@ -42,9 +42,9 @@ test('new identical-name story and both role-labelled consequences survive an ac
   let repository = new SaveRepository(connect()); await repository.initialise(); await repository.create(initial);
   const bootstrap = async () => { mockStore = createGameStore({ repository: async () => repository, date: () => initial.date, id: () => 'unused' }); expect(await mockStore.getState().bootstrap()).toBe(true); };
   const rows = () => Object.fromEntries(sqlite.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name").all().map(row => [String(row.name), sqlite.prepare('SELECT * FROM ' + row.name + ' ORDER BY 1,2').all()]));
-  let view: ReturnType<typeof render> | undefined;
+  let view: Awaited<ReturnType<typeof render>> | undefined;
   try {
-    await bootstrap(); const offered = mockStore.getState().world!, original = encodeWorld(offered), before = rows(); view = render(frame());
+    await bootstrap(); const offered = mockStore.getState().world!, original = encodeWorld(offered), before = rows(); view = await render(frame());
     expect(screen.getByText(initial.pending.body)).toBeOnTheScreen(); expect(initial.pending.body).toContain('Leonardo Ferrari (classmate)'); expect(rows()).toEqual(before);
     const unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'); sqlite.exec("CREATE TRIGGER fail_collision_result BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
     await press('Delete the pitch while they are presenting it'); await waitFor(() => expect(screen.getByRole('alert')).toHaveTextContent(/couldn't be saved/)); expect(screen.getAllByRole('alert')).toHaveLength(1); expect(rows()).toEqual(before); expect(encodeWorld(mockStore.getState().world!)).toBe(original); expect(screen.getByText(initial.pending.body)).toBeOnTheScreen();
@@ -54,10 +54,10 @@ test('new identical-name story and both role-labelled consequences survive an ac
     expect(result.journal.at(-1)?.text).toBe(interrupt.journal); expect(screen.getByText(interrupt.resultBody)).toBeOnTheScreen();
     for (const role of ['classmate', 'teacher']) expect(screen.getByText('Leonardo Ferrari (' + role + ') · relationship')).toBeOnTheScreen();
     expect(result.random).toEqual(offered.random); expect(result.accounts).toEqual(offered.accounts); expect(result.ledger).toEqual(offered.ledger); expect(Object.keys(result.people)).toEqual(Object.keys(offered.people)); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore();
-    const saved = rows(); view.unmount(); sqlite.close(); repository = new SaveRepository(connect()); await bootstrap(); view = render(frame()); expect(rows()).toEqual(saved); expect(mockStore.getState().world).toEqual(result);
+    const saved = rows(); await view.unmount(); sqlite.close(); repository = new SaveRepository(connect()); await bootstrap(); view = await render(frame()); expect(rows()).toEqual(saved); expect(mockStore.getState().world).toEqual(result);
     for (const role of ['classmate', 'teacher']) expect(screen.getByText('Leonardo Ferrari (' + role + ') · relationship')).toBeOnTheScreen();
     expect(screen.getByText(interrupt.resultBody)).toBeOnTheScreen(); expect(mockStore.getState().world!.journal.at(-1)?.text).toBe(interrupt.journal);
     await press('Continue'); const done = mockStore.getState().world!; expect(done.relationships).toEqual(result.relationships); expect(done.people).toEqual(result.people); expect(done.random).toEqual(result.random);
     const acknowledged = rows(); await act(async () => { expect(await mockStore.getState().dispatch({ type: 'acknowledge', resultId: result.pending!.id })).toBe(false); }); expect(rows()).toEqual(acknowledged);
-  } finally { view?.unmount(); jest.restoreAllMocks(); sqlite.close(); rmSync(directory, { recursive: true, force: true }); }
+  } finally { await view?.unmount(); jest.restoreAllMocks(); sqlite.close(); rmSync(directory, { recursive: true, force: true }); }
 });

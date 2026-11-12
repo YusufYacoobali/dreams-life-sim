@@ -5,7 +5,7 @@ import {
   render,
   screen,
   waitFor,
-} from '@testing-library/react-native';
+} from '../support/rendering';
 import { AccessibilityInfo, AppState } from 'react-native';
 import * as Native from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -146,7 +146,7 @@ const frame = (children: React.ReactNode, haptics = false) => (
   </SafeAreaProvider>
 );
 const show = async (children: React.ReactNode) => {
-  const view = render(frame(children));
+  const view = await render(frame(children));
   await act(async () => {});
   return view;
 };
@@ -196,11 +196,11 @@ afterEach(() => {
   if (sqlite?.isOpen) sqlite.close();
 });
 const play = async () => {
-  fireEvent.press(screen.getByRole('button', { name: 'Play' }));
+  await fireEvent.press(screen.getByRole('button', { name: 'Play' }));
   await waitFor(() =>
     expect(mockStore.getState().world!.miniGames).toHaveLength(1),
   );
-  act(() => jest.advanceTimersByTime(1100));
+  await act(() => jest.advanceTimersByTime(1100));
 };
 
 test('the live assisted memory board hides each preview, saves every choice and escapes the actual sentence once', async () => {
@@ -212,15 +212,15 @@ test('the live assisted memory board hides each preview, saves every choice and 
     const { action } = solution[index];
     if (action.type === 'escape-recall') {
       expect(screen.queryByRole('button', { name: /Choose .* gate/ })).toBeNull();
-      fireEvent.press(screen.getByRole('button', { name: 'Hide pattern and begin' }));
+      await fireEvent.press(screen.getByRole('button', { name: 'Hide pattern and begin' }));
     } else if (action.type === 'stamp') {
       expect(screen.queryByLabelText('Pattern preview')).toBeNull();
-      fireEvent.press(screen.getByRole('button', { name: `Choose ${action.symbol} gate` }));
+      await fireEvent.press(screen.getByRole('button', { name: `Choose ${action.symbol} gate` }));
     }
     await waitFor(() => expect(mockStore.getState().world!.miniGames[0].inputs).toHaveLength(index + 1));
     await act(async () => {});
   }
-  act(() => jest.advanceTimersByTime(100));
+  await act(() => jest.advanceTimersByTime(100));
   await waitFor(() => expect(mockStore.getState().world!.miniGames[0].status).toBe('completed'));
   const world = mockStore.getState().world!;
   expect(world.sentences.find(row => row.id === session.ownerId)?.state).toBe('escaped');
@@ -251,7 +251,7 @@ test('docking uses four circular 48dp+ directions around Coast at large text, in
   jest.spyOn(require('react-native'), 'useWindowDimensions').mockReturnValue({ width: 320, height: 568, scale: 2, fontScale: 1.6 });
   const props = flightProps(practiceFlight(false));
   await show(<MiniGameScreen {...props} />);
-  act(() => jest.advanceTimersByTime(1100));
+  await act(() => jest.advanceTimersByTime(1100));
   expect(screen.queryByText(/LEVEL|Difficulty/)).toBeNull();
   const disc = Native.StyleSheet.flatten(screen.getByTestId('docking-control-disc').props.style);
   expect(disc.width).toBe(disc.height);
@@ -267,7 +267,7 @@ test('docking uses four circular 48dp+ directions around Coast at large text, in
   }
   expect(screen.getByRole('button', { name: 'Coast' })).toHaveProp('accessibilityHint', 'Keep drifting without thrust');
   expect(Native.StyleSheet.flatten(screen.getByRole('button', { name: 'Coast' }).props.style).width).toBe(88);
-  fireEvent.press(screen.getByRole('button', { name: 'Pause' }));
+  await fireEvent.press(screen.getByRole('button', { name: 'Pause' }));
   await waitFor(() => expect(screen.getByRole('button', { name: 'Resume' })).toBeOnTheScreen());
   expect(props.onPause).toHaveBeenCalledTimes(1);
 });
@@ -276,23 +276,23 @@ test('rapid docking callbacks persist one typed input and paused or unmounted co
   let release!: (accepted: boolean) => void;
   const props = flightProps(practiceFlight());
   props.onInput = jest.fn((_action: MiniGameAction, _at: number) => new Promise<boolean>(resolve => { release = resolve; }));
-  const view = render(frame(<MiniGameScreen {...props} />, true));
+  const view = await render(frame(<MiniGameScreen {...props} />, true));
   await act(async () => {});
-  act(() => jest.advanceTimersByTime(1100));
+  await act(() => jest.advanceTimersByTime(1100));
   const left = screen.UNSAFE_getAllByType(GameButton).find(node => node.props.accessibilityLabel === 'Thrust left')!.props.onPress;
   const right = screen.UNSAFE_getAllByType(GameButton).find(node => node.props.accessibilityLabel === 'Thrust right')!.props.onPress;
-  act(() => { left(); right(); left(); });
+  await act(() => { left(); right(); left(); });
   expect(props.onInput).toHaveBeenCalledTimes(1);
   expect(props.onInput).toHaveBeenCalledWith({ type: 'thrust', direction: 'left' }, 400);
   expect(mockHaptic).toHaveBeenCalledTimes(1);
   await act(async () => release(true));
-  fireEvent.press(screen.getByRole('button', { name: 'Pause' }));
+  await fireEvent.press(screen.getByRole('button', { name: 'Pause' }));
   await waitFor(() => expect(screen.getByRole('button', { name: 'Resume' })).toBeOnTheScreen());
-  act(() => { right(); left(); });
+  await act(() => { right(); left(); });
   expect(props.onInput).toHaveBeenCalledTimes(1);
   expect(mockHaptic).toHaveBeenCalledTimes(1);
-  view.unmount();
-  act(() => right());
+  await view.unmount();
+  await act(() => right());
   expect(props.onInput).toHaveBeenCalledTimes(1);
   expect(mockHaptic).toHaveBeenCalledTimes(1);
 });
@@ -302,10 +302,10 @@ test('a failed docking move retries its exact original input without changing th
   props.error = 'The move could not be saved.';
   props.onInput.mockResolvedValueOnce(false).mockResolvedValue(true);
   await show(<MiniGameScreen {...props} />);
-  act(() => jest.advanceTimersByTime(1100));
-  fireEvent.press(screen.getByRole('button', { name: 'Thrust left' }));
+  await act(() => jest.advanceTimersByTime(1100));
+  await fireEvent.press(screen.getByRole('button', { name: 'Thrust left' }));
   await waitFor(() => expect(screen.getByRole('button', { name: 'Retry save & resume' })).toBeEnabled());
-  fireEvent.press(screen.getByRole('button', { name: 'Retry save & resume' }));
+  await fireEvent.press(screen.getByRole('button', { name: 'Retry save & resume' }));
   await waitFor(() => expect(screen.getByRole('button', { name: 'Thrust right' })).toBeEnabled());
   expect(props.onInput.mock.calls).toEqual([
     [{ type: 'thrust', direction: 'left' }, 400],
@@ -321,11 +321,11 @@ test('screen-reader detection enables assisted controls before Play and keeps th
   await setup();
   await show(<LiveMiniGame />);
   const toggle = screen.getByRole('switch', { name: 'Assisted controls' });
-  fireEvent(toggle, 'valueChange', false);
+  await fireEvent(toggle, 'valueChange', false);
   expect(toggle).toHaveProp('value', false);
   await act(async () => announce(true));
   expect(screen.getByRole('switch', { name: 'Assisted controls' })).toHaveProp('value', true);
-  fireEvent(screen.getByRole('switch', { name: 'Assisted controls' }), 'valueChange', false);
+  await fireEvent(screen.getByRole('switch', { name: 'Assisted controls' }), 'valueChange', false);
   expect(screen.getByRole('switch', { name: 'Assisted controls' })).toHaveProp('value', false);
   expect(mockStore.getState().world!.miniGames).toHaveLength(0);
 });
@@ -338,8 +338,8 @@ test('assisted football uses real controls, commits a derived result and honours
     true,
   );
   await play();
-  fireEvent.press(screen.getByRole('button', { name: 'Aim higher' }));
-  fireEvent.press(screen.getByRole('button', { name: 'Shoot' }));
+  await fireEvent.press(screen.getByRole('button', { name: 'Aim higher' }));
+  await fireEvent.press(screen.getByRole('button', { name: 'Shoot' }));
   await waitFor(() =>
     expect(mockStore.getState().world!.miniGames[0].status).toBe('completed'),
   );
@@ -350,14 +350,14 @@ test('assisted football uses real controls, commits a derived result and honours
   expect(mockHaptic).not.toHaveBeenCalled();
   expect(mockSound).not.toHaveBeenCalled();
   expect(screen.getByText('CHALLENGE SAVED')).toBeOnTheScreen();
-  fireEvent.press(screen.getByRole('button', { name: 'Continue' }));
+  await fireEvent.press(screen.getByRole('button', { name: 'Continue' }));
   expect(mockBack).toHaveBeenCalledTimes(1);
 });
 
 test('choosing normal burglary before Play uses only the existing crime action', async () => {
   await setup('crime');
   await show(<LiveMiniGame />);
-  fireEvent.press(screen.getByRole('button', { name: 'Use normal burglary' }));
+  await fireEvent.press(screen.getByRole('button', { name: 'Use normal burglary' }));
   await waitFor(() => expect(mockBack).toHaveBeenCalled());
   expect(mockStore.getState().world!.miniGames).toEqual([]);
   expect(mockStore.getState().world!.incidents).toHaveLength(1);
@@ -368,28 +368,28 @@ test('exit and reopen preserve a paused burglary; explicit forfeit resolves its 
   const view = await show(<LiveMiniGame />);
   await play();
   const id = mockStore.getState().world!.miniGames[0].id;
-  fireEvent.press(screen.getByRole('button', { name: 'Pause' }));
+  await fireEvent.press(screen.getByRole('button', { name: 'Pause' }));
   await waitFor(() =>
     expect(mockStore.getState().world!.miniGames[0].paused).toBe(true),
   );
-  fireEvent.press(screen.getByRole('button', { name: 'Save & exit' }));
+  await fireEvent.press(screen.getByRole('button', { name: 'Save & exit' }));
   await waitFor(() => expect(mockBack).toHaveBeenCalledTimes(1));
-  view.unmount();
+  await view.unmount();
   await show(<LiveMiniGame />);
   expect(screen.getByRole('button', { name: 'Resume' })).toBeOnTheScreen();
   expect(mockStore.getState().world!.miniGames[0].id).toBe(id);
-  fireEvent.press(screen.getByRole('button', { name: 'Resume' }));
+  await fireEvent.press(screen.getByRole('button', { name: 'Resume' }));
   await waitFor(() =>
     expect(mockStore.getState().world!.miniGames[0].paused).toBe(false),
   );
-  fireEvent.press(screen.getByRole('button', { name: 'Pause' }));
+  await fireEvent.press(screen.getByRole('button', { name: 'Pause' }));
   await waitFor(() =>
     expect(
       screen.getByRole('button', { name: 'Forfeit attempt' }),
     ).toBeEnabled(),
   );
-  fireEvent.press(screen.getByRole('button', { name: 'Forfeit attempt' }));
-  fireEvent.press(screen.getByRole('button', { name: 'Confirm forfeit' }));
+  await fireEvent.press(screen.getByRole('button', { name: 'Forfeit attempt' }));
+  await fireEvent.press(screen.getByRole('button', { name: 'Confirm forfeit' }));
   await waitFor(() =>
     expect(mockStore.getState().world!.miniGames[0].status).toBe('forfeited'),
   );
@@ -405,23 +405,23 @@ test('fixed playground controls, forfeit and replay never dispatch a live comman
   await show(<MiniGamePlayground />);
   expect(screen.queryAllByRole('radio')).toHaveLength(0);
   expect(screen.queryByText(/Difficulty|Level \d|LEVEL \d/)).toBeNull();
-  fireEvent.press(screen.getByText('Orbital Docking', { exact: true }));
-  fireEvent.press(await screen.findByRole('button', { name: 'Play' }));
+  await fireEvent.press(screen.getByText('Orbital Docking', { exact: true }));
+  await fireEvent.press(await screen.findByRole('button', { name: 'Play' }));
   await act(async () => {});
-  act(() => jest.advanceTimersByTime(1100));
+  await act(() => jest.advanceTimersByTime(1100));
   expect(screen.queryByText(/LEVEL \d/)).toBeNull();
   expect(screen.getByRole('button', { name: 'Coast' })).toBeOnTheScreen();
-  fireEvent.press(screen.getByRole('button', { name: 'Thrust left' }));
+  await fireEvent.press(screen.getByRole('button', { name: 'Thrust left' }));
   await act(async () => {});
-  fireEvent.press(screen.getByRole('button', { name: 'Pause' }));
+  await fireEvent.press(screen.getByRole('button', { name: 'Pause' }));
   await act(async () => {});
-  fireEvent.press(screen.getByRole('button', { name: 'Forfeit attempt' }));
-  fireEvent.press(screen.getByRole('button', { name: 'Confirm forfeit' }));
+  await fireEvent.press(screen.getByRole('button', { name: 'Forfeit attempt' }));
+  await fireEvent.press(screen.getByRole('button', { name: 'Confirm forfeit' }));
   await act(async () => {});
   expect(screen.getByText('PRACTICE RESULT')).toBeOnTheScreen();
-  fireEvent.press(screen.getByRole('button', { name: 'Play again' }));
+  await fireEvent.press(screen.getByRole('button', { name: 'Play again' }));
   await act(async () => {});
-  act(() => jest.advanceTimersByTime(1100));
+  await act(() => jest.advanceTimersByTime(1100));
   expect(
     screen.getByRole('button', { name: 'Thrust right' }),
   ).toBeOnTheScreen();
@@ -464,8 +464,8 @@ test('the result Retry action reuses a lost completion receipt instead of insert
   await mockStore.getState().bootstrap();
   await show(<LiveMiniGame />);
   await play();
-  fireEvent.press(screen.getByRole('button', { name: 'Aim higher' }));
-  fireEvent.press(screen.getByRole('button', { name: 'Shoot' }));
+  await fireEvent.press(screen.getByRole('button', { name: 'Aim higher' }));
+  await fireEvent.press(screen.getByRole('button', { name: 'Shoot' }));
   await waitFor(() =>
     expect(
       screen.getByRole('button', { name: 'Retry saving result' }),
@@ -475,7 +475,7 @@ test('the result Retry action reuses a lost completion receipt instead of insert
   expect((await repository.load(original.id)).miniGames[0].status).toBe(
     'completed',
   );
-  fireEvent.press(screen.getByRole('button', { name: 'Retry saving result' }));
+  await fireEvent.press(screen.getByRole('button', { name: 'Retry saving result' }));
   await waitFor(() =>
     expect(mockStore.getState().world!.miniGames[0].status).toBe('completed'),
   );
@@ -511,8 +511,8 @@ test('reloading a move with a lost save acknowledgement recovers its transcript 
   await mockStore.getState().bootstrap();
   await show(<LiveMiniGame />);
   await play();
-  fireEvent.press(screen.getByRole('button', { name: 'Aim higher' }));
-  fireEvent.press(screen.getByRole('button', { name: 'Shoot' }));
+  await fireEvent.press(screen.getByRole('button', { name: 'Aim higher' }));
+  await fireEvent.press(screen.getByRole('button', { name: 'Shoot' }));
   await waitFor(() =>
     expect(
       screen.getByRole('button', { name: 'Reload saved progress' }),
@@ -522,7 +522,7 @@ test('reloading a move with a lost save acknowledgement recovers its transcript 
   expect((await repository.load(original.id)).miniGames[0].inputs).toHaveLength(
     1,
   );
-  fireEvent.press(
+  await fireEvent.press(
     screen.getByRole('button', { name: 'Reload saved progress' }),
   );
   await waitFor(() =>
@@ -530,7 +530,7 @@ test('reloading a move with a lost save acknowledgement recovers its transcript 
       screen.getByRole('button', { name: 'Retry saving result' }),
     ).toBeEnabled(),
   );
-  fireEvent.press(screen.getByRole('button', { name: 'Retry saving result' }));
+  await fireEvent.press(screen.getByRole('button', { name: 'Retry saving result' }));
   await waitFor(() =>
     expect(mockStore.getState().world!.miniGames[0].status).toBe('completed'),
   );
@@ -551,11 +551,11 @@ test('backgrounding pauses a live attempt and reopening continues the saved atte
   await play();
   const id = mockStore.getState().world!.miniGames[0].id,
     background = listener.mock.calls.at(-1)![1];
-  act(() => background('background'));
+  await act(() => background('background'));
   await waitFor(() =>
     expect(mockStore.getState().world!.miniGames[0].paused).toBe(true),
   );
-  fireEvent.press(screen.getByRole('button', { name: 'Resume' }));
+  await fireEvent.press(screen.getByRole('button', { name: 'Resume' }));
   await waitFor(() =>
     expect(mockStore.getState().world!.miniGames[0].paused).toBe(false),
   );
@@ -584,12 +584,12 @@ test('a start save that finishes after backgrounding opens the same attempt paus
   await mockStore.getState().bootstrap();
   const listener = jest.spyOn(AppState, 'addEventListener');
   await show(<LiveMiniGame />);
-  fireEvent.press(screen.getByRole('button', { name: 'Play' }));
+  await fireEvent.press(screen.getByRole('button', { name: 'Play' }));
   await waitFor(() => expect(mockStore.getState().busy).toBe(true));
   const previous = AppState.currentState;
   AppState.currentState = 'background';
   try {
-    act(() => listener.mock.calls.at(-1)![1]('background'));
+    await act(() => listener.mock.calls.at(-1)![1]('background'));
     await act(async () => release());
     await waitFor(() =>
       expect(mockStore.getState().world!.miniGames[0]?.paused).toBe(true),
@@ -610,12 +610,12 @@ test('burglary consequences remain saved behind the challenge and present only a
     </>,
   );
   await play();
-  fireEvent.press(screen.getByRole('button', { name: 'Pause' }));
+  await fireEvent.press(screen.getByRole('button', { name: 'Pause' }));
   await waitFor(() =>
     expect(mockStore.getState().world!.miniGames[0].paused).toBe(true),
   );
-  fireEvent.press(screen.getByRole('button', { name: 'Forfeit attempt' }));
-  fireEvent.press(screen.getByRole('button', { name: 'Confirm forfeit' }));
+  await fireEvent.press(screen.getByRole('button', { name: 'Forfeit attempt' }));
+  await fireEvent.press(screen.getByRole('button', { name: 'Confirm forfeit' }));
   await waitFor(() =>
     expect(mockStore.getState().world!.miniGames[0].status).toBe('forfeited'),
   );
@@ -625,7 +625,7 @@ test('burglary consequences remain saved behind the challenge and present only a
   expect(world.incidents).toHaveLength(1);
   expect(screen.queryByText('Saved legal scene')).toBeNull();
   mockRoute = '/crime';
-  view.rerender(frame(<GameLayout />));
+  await view.rerender(frame(<GameLayout />));
   expect(screen.getByText('Saved legal scene')).toBeOnTheScreen();
   expect(mockStore.getState().world).toBe(world);
   expect(mockStore.getState().world!.pending).toBe(pending);
@@ -635,11 +635,11 @@ test('forfeiting escape in custody keeps its actual charge behind the result, th
   const initial = await setup('escape'), sentenceId = activeSentence(initial)!.id;
   const view = await show(<><GameLayout /><LiveMiniGame /></>);
   await play();
-  fireEvent.press(screen.getByRole('button', { name: 'Pause' }));
+  await fireEvent.press(screen.getByRole('button', { name: 'Pause' }));
   await waitFor(() => expect(mockStore.getState().world!.miniGames[0].paused).toBe(true));
-  fireEvent.press(screen.getByRole('button', { name: 'Forfeit attempt' }));
+  await fireEvent.press(screen.getByRole('button', { name: 'Forfeit attempt' }));
   expect(screen.getByText(/Forfeiting fails this escape attempt/)).toBeOnTheScreen();
-  fireEvent.press(screen.getByRole('button', { name: 'Confirm forfeit' }));
+  await fireEvent.press(screen.getByRole('button', { name: 'Confirm forfeit' }));
   await waitFor(() => expect(mockStore.getState().world!.miniGames[0].status).toBe('forfeited'));
   const saved = mockStore.getState().world!, pending = saved.pending;
   expect(activeSentence(saved)?.id).toBe(sentenceId);
@@ -648,10 +648,10 @@ test('forfeiting escape in custody keeps its actual charge behind the result, th
   expect(pending?.kind === 'decision' && pending.templateId).toBe('arrest');
   expect(screen.getByText('Forfeited')).toBeOnTheScreen();
   expect(screen.queryByText('Saved legal scene')).toBeNull();
-  fireEvent.press(screen.getByRole('button', { name: 'Continue' }));
+  await fireEvent.press(screen.getByRole('button', { name: 'Continue' }));
   await waitFor(() => expect(mockBack).toHaveBeenCalledTimes(1));
   mockRoute = '/prison-activities';
-  view.rerender(frame(<GameLayout />));
+  await view.rerender(frame(<GameLayout />));
   expect(screen.getByText('Saved legal scene')).toBeOnTheScreen();
   expect(mockStore.getState().world!.pending).toBe(pending);
   expect(mockStore.getState().world).toBe(saved);
@@ -666,7 +666,7 @@ test('artwork must preload before a saved attempt starts and a failed preload ca
   await show(<LiveMiniGame />);
   expect(screen.getByRole('button', { name: 'Preparing scene…' })).toBeDisabled();
   expect(mockStore.getState().world!.miniGames).toHaveLength(0);
-  fireEvent.press(screen.getByRole('button', { name: 'Reload artwork' }));
+  await fireEvent.press(screen.getByRole('button', { name: 'Reload artwork' }));
   await waitFor(() => expect(screen.getByRole('button', { name: 'Play' })).toBeEnabled());
   expect(mockStore.getState().world!.miniGames).toHaveLength(0);
   await play();
@@ -676,18 +676,18 @@ test('artwork must preload before a saved attempt starts and a failed preload ca
 test('standard football confirms aim before showing power and submits the original typed shot', async () => {
   await setup();
   await show(<LiveMiniGame />);
-  fireEvent(screen.getByRole('switch', { name: 'Assisted controls' }), 'valueChange', false);
+  await fireEvent(screen.getByRole('switch', { name: 'Assisted controls' }), 'valueChange', false);
   await play();
   expect(screen.queryByRole('button', { name: 'Shoot' })).toBeNull();
-  fireEvent.press(screen.getByRole('button', { name: 'Set aim' }));
+  await fireEvent.press(screen.getByRole('button', { name: 'Set aim' }));
   expect(screen.getByRole('button', { name: 'Shoot' })).toBeEnabled();
-  fireEvent.press(screen.getByRole('button', { name: 'Adjust aim' }));
+  await fireEvent.press(screen.getByRole('button', { name: 'Adjust aim' }));
   expect(screen.queryByRole('button', { name: 'Shoot' })).toBeNull();
-  fireEvent.press(screen.getByRole('button', { name: 'Set aim' }));
-  fireEvent.press(screen.getByRole('button', { name: 'Shoot' }));
+  await fireEvent.press(screen.getByRole('button', { name: 'Set aim' }));
+  await fireEvent.press(screen.getByRole('button', { name: 'Shoot' }));
   await waitFor(() => expect(mockStore.getState().world!.miniGames[0].inputs).toHaveLength(1));
   expect(mockStore.getState().world!.miniGames[0].inputs[0].action).toEqual({ type: 'shot', x: 0.8, y: 0.25 });
-  act(() => jest.advanceTimersByTime(1200));
+  await act(() => jest.advanceTimersByTime(1200));
   await waitFor(() => expect(screen.getByRole('button', { name: 'Continue' })).toBeEnabled());
   expect(mockStore.getState().world!.miniGames[0].status).toBe('completed');
 });
@@ -697,14 +697,14 @@ test('a restored attempt can retry missing artwork before its paused controls be
   await setup('crime');
   const view = await show(<LiveMiniGame />);
   await play();
-  fireEvent.press(screen.getByRole('button', { name: 'Pause' }));
+  await fireEvent.press(screen.getByRole('button', { name: 'Pause' }));
   await waitFor(() => expect(mockStore.getState().world!.miniGames[0].paused).toBe(true));
   const id = mockStore.getState().world!.miniGames[0].id;
-  view.unmount();
+  await view.unmount();
   jest.requireMock('expo-asset').Asset.loadAsync.mockRejectedValueOnce(Error('Local asset unavailable'));
   await show(<LiveMiniGame />);
   expect(screen.queryByRole('button', { name: 'Resume' })).toBeNull();
-  fireEvent.press(screen.getByRole('button', { name: 'Reload artwork' }));
+  await fireEvent.press(screen.getByRole('button', { name: 'Reload artwork' }));
   await waitFor(() => expect(screen.getByRole('button', { name: 'Resume' })).toBeEnabled());
   expect(mockStore.getState().world!.miniGames).toHaveLength(1);
   expect(mockStore.getState().world!.miniGames[0].id).toBe(id);
@@ -721,7 +721,7 @@ test('historical v1 escape display retains its matching rules and clock; new ent
   expect(miniGameInstructions('escape', null).body).toContain('No time limit');
   expect(miniGameInstructions('escape', null).assisted).toContain('Two one-stamp hints');
   await show(<MiniGameScreen {...flightProps(historical)} kind="escape" />);
-  act(() => jest.advanceTimersByTime(1100));
+  await act(() => jest.advanceTimersByTime(1100));
   expect(screen.getByText('Match the next word below. The gates shuffle after every choice.')).toBeOnTheScreen();
   expect(screen.getByLabelText('14 seconds remaining')).toBeOnTheScreen();
   expect(screen.queryByLabelText('Memory challenge, no time limit')).toBeNull();

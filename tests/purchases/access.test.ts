@@ -1,6 +1,7 @@
 import { createGameStore } from '../../src/state/gameStore';
-import { requiredFeature } from '../../src/purchases/access';
-import type { PremiumFeature } from '../../src/purchases/catalog';
+import { hasPremiumAccess, requiredFeature } from '../../src/purchases/access';
+import { features, noOwnership, type PremiumFeature } from '../../src/purchases/catalog';
+import Constants from 'expo-constants';
 import { createLife, randomCreation } from '../../src/game/createLife';
 import { decodeWorld, encodeWorld, type World } from '../../src/game/model';
 import { resolveCommand, type GameCommand } from '../../src/game/engine';
@@ -11,6 +12,8 @@ import { choiceUnavailable } from '../../src/game/choiceAvailability';
 import { SaveRepository } from '../../src/persistence/repository';
 import { database } from '../support/sqlite';
 import graduate from '../fixtures/v3-employed-graduate.json';
+import { cultFixture } from '../support/cults';
+import { cultStartupQuote } from '../../src/game/systems/cultCore';
 const date = { year: 2026, month: 10, day: 29 };
 const base = () => {
   const world = decodeWorld(JSON.stringify(graduate)), person = world.people[world.activePersonId];
@@ -102,4 +105,83 @@ test.each(['career', 'restore', 'royal'] as const)('revocation while waiting for
   const pending = operation === 'career' ? store.getState().dispatch(entry(world, 'athlete')) : operation === 'restore' ? store.getState().restoreSnapshot('snapshot') : store.getState().startLife({ ...randomCreation(42), country: 'GB', city: 'London', background: 'royal' }, 42);
   owned = false; release(); expect(await pending).toBe(false);
   expect(repository.commit).not.toHaveBeenCalled(); expect(repository.create).not.toHaveBeenCalled(); expect(repository.restoreBranch).not.toHaveBeenCalled();
+});
+
+describe('all-premium testing override', () => {
+  const globals = globalThis as unknown as { __DEV__: boolean };
+  let previousDev: boolean, previousExtra: NonNullable<typeof Constants.expoConfig>['extra'];
+  beforeEach(() => { previousDev = __DEV__; previousExtra = Constants.expoConfig!.extra; globals.__DEV__ = false; });
+  afterEach(() => { globals.__DEV__ = previousDev; Constants.expoConfig!.extra = previousExtra; });
+  function build(mode: 'enabled' | 'disabled' | 'production') {
+    const previous = { ...process.env };
+    try {
+      Object.assign(process.env, { EAS_BUILD_PROFILE: mode === 'production' ? 'production' : 'internal',
+        EAS_BUILD_DISTRIBUTION: mode === 'production' ? 'store' : 'internal',
+        DREAMS_UNLOCK_ALL_TESTING: mode === 'disabled' ? '0' : '1', DREAMS_GOD_MODE_TESTING: '0' });
+      Constants.expoConfig!.extra = require('../../app.config.cjs')({ config: {} }).extra;
+    } finally { process.env = previous; }
+  }
+  const cases = (['enabled', 'disabled', 'production'] as const).flatMap(mode => features.map(feature => ({ mode, feature })));
+  test.each(cases)('$feature command access with override $mode leaves ownership and save formats intact', async ({ mode, feature }) => {
+    build(mode);
+    const ownership = noOwnership(), allowed = mode === 'enabled';
+    expect(hasPremiumAccess(ownership[feature])).toBe(allowed);
+    const { store, repository, sqlite, world } = await setup(feature === 'cult' ? cultFixture() : base(), key => ownership[key]);
+    try {
+      let before = await repository.export(world.id);
+      let result: boolean;
+      if (feature === 'god_mode') {
+        result = await store.getState().editGodMode({ lifeId: world.id, personId: world.activePersonId, expectedRevision: world.revision,
+          commands: [{ type: 'stat', stat: 'smarts', value: 47 }] });
+        if (allowed) expect((await repository.load(world.id)).people[world.activePersonId].stats.smarts).toBe(47);
+      } else if (feature === 'time_machine') {
+        expect(await store.getState().saveSnapshot()).toBe(true);
+        before = await repository.export(world.id);
+        result = await store.getState().restoreSnapshot(store.getState().snapshots[0].id);
+        if (allowed) expect(await repository.list()).toHaveLength(2);
+      } else {
+        const command: GameCommand = feature === 'cult' ? { type: 'found-cult', name: 'Testing Circle', leaderTitle: 'Keeper', philosophy: 'dream-archive',
+          doctrines: ['borrowed-dreams', 'public-answers'], rules: ['family-day', 'open-books'], headquarters: 'meeting-room', method: 'gathering',
+          joiningFee: 0n, recurringFee: 0n, quotedCost: cultStartupQuote(world, 'meeting-room').total } : entry(world, feature);
+        result = await store.getState().dispatch(command);
+        if (allowed) expect(store.getState().world!.revision).toBe(world.revision + 1);
+      }
+      expect(result).toBe(allowed);
+      expect(ownership).toEqual(noOwnership());
+      if (!allowed) expect(await repository.export(world.id)).toBe(before);
+      const saved = store.getState().world!;
+      expect(decodeWorld(encodeWorld(saved))).toEqual(saved);
+      build('disabled');
+      for (const key of features) expect(hasPremiumAccess(ownership[key])).toBe(false);
+      expect(await repository.load(saved.id)).toEqual(saved);
+    } finally { sqlite.close(); }
+  });
+
+  test('royal selection is allowed by the flag alone and locks immediately when it is removed', async () => {
+    const { store, repository, sqlite } = await setup();
+    try {
+      build('enabled');
+      const input = { ...randomCreation(42), country: 'GB' as const, city: 'London', background: 'royal' as const };
+      expect(await store.getState().startLife(input, 42)).toBe(true);
+      expect(store.getState().world!.royalHouses).toHaveLength(1);
+      const before = await repository.list();
+      build('disabled'); expect(await store.getState().startLife(input, 42)).toBe(false);
+      build('production'); expect(await store.getState().startLife(input, 42)).toBe(false);
+      expect(await repository.list()).toEqual(before);
+    } finally { sqlite.close(); }
+  });
+
+  test.each(['career', 'restore', 'royal', 'god-mode'] as const)('switching off testing while waiting for storage blocks %s before a write', async operation => {
+    const world = base(); let held = false, release!: () => void;
+    const gate = new Promise<void>(resolve => { release = resolve; });
+    const repository = { active: async () => world, list: async () => [], commit: jest.fn(async (next: World) => next), create: jest.fn(), restoreBranch: jest.fn() };
+    const store = createGameStore({ repository: async () => { if (held) await gate; return repository as never; }, date: () => date, id: () => 'life_testing_race' });
+    await store.getState().bootstrap(); held = true; build('enabled');
+    const pending = operation === 'career' ? store.getState().dispatch(entry(world, 'athlete'))
+      : operation === 'restore' ? store.getState().restoreSnapshot('snapshot')
+      : operation === 'royal' ? store.getState().startLife({ ...randomCreation(42), country: 'GB', city: 'London', background: 'royal' }, 42)
+      : store.getState().editGodMode({ lifeId: world.id, personId: world.activePersonId, expectedRevision: world.revision, commands: [{ type: 'stat', stat: 'smarts', value: 47 }] });
+    build('disabled'); release(); expect(await pending).toBe(false);
+    expect(repository.commit).not.toHaveBeenCalled(); expect(repository.create).not.toHaveBeenCalled(); expect(repository.restoreBranch).not.toHaveBeenCalled();
+  });
 });
