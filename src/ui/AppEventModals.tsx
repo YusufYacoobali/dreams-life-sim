@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useLayoutEffect, useRef } from 'react';
 import { usePathname, useRootNavigationState } from 'expo-router';
 import { useGame } from '../state/useGame';
 import { useCinematicTransition } from './cinematic/CinematicContext';
@@ -28,6 +28,11 @@ export function AppEventModals({ children }: React.PropsWithChildren) {
     store.world ? store.world.id + ':' + store.world.activePersonId : 'opening',
   );
   const { activeKind } = useCinematicTransition();
+  const clearError = useGame(store => store.clearError), previousRoute = useRef(path + ':' + identity);
+  useLayoutEffect(() => {
+    const route = path + ':' + identity;
+    if (previousRoute.current !== route) { previousRoute.current = route; clearError?.(); }
+  }, [path, identity, clearError]);
   return (
     <EventModalProvider
       routeKey={keys.at(-1) ?? path}

@@ -44,6 +44,8 @@ test.each([
   expect(style.height).toBeUndefined(); expect(style.marginTop).toBeUndefined(); expect(style.marginBottom).toBeUndefined();
   const scroll = screen.UNSAFE_getByType(ScrollView);
   expect(scroll.props.keyboardShouldPersistTaps).toBe('handled');
+  expect(within(scroll).queryByRole('button', { name: 'Start a New Life' })).toBeNull();
+  expect(within(scroll).queryByRole('button', { name: 'Never mind' })).toBeNull();
   expect(screen.getByText('Mia Fischer')).toBeOnTheScreen();
   expect(screen.getByText('Hamburg, Germany')).toBeOnTheScreen();
   expect(screen.getByRole('button', { name: 'Never mind' })).toBeEnabled();

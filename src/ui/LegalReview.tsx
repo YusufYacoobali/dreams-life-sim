@@ -8,6 +8,7 @@ import { HealthLegalArt, HealthLegalArtId } from '../assets/HealthLegalArt';
 import { EffectRow, EventModal, EventPresentation } from './EventModal';
 import { useColors } from './theme';
 import { DisplayText as Text } from './DisplayText';
+import { useScopedGameAction } from './useScopedGameAction';
 type ReviewedLegalCommand = LegalCommand | PrisonCommand | OrganisedCrimeCommand;
 
 export function LegalReviewError({ error }: { error: string | null }) {
@@ -16,7 +17,7 @@ export function LegalReviewError({ error }: { error: string | null }) {
 }
 
 export function useLegalReview(context = '') {
-  const dispatch = useGame(s => s.dispatch), busy = useGame(s => s.busy), error = useGame(s => s.error);
+  const { dispatch, busy, error, clear } = useScopedGameAction(context);
   const identity = useGame(s => s.world?.id + ':' + s.world?.activePersonId) + ':' + context;
   const identityRef = useRef(identity), mounted = useRef(true), submitting = useRef(false);
   const [review, setReview] = useState<{ identity: string; command: ReviewedLegalCommand; event: EventPresentation } | null>(null);
@@ -29,10 +30,11 @@ export function useLegalReview(context = '') {
     isOpen: !!current,
     confirm(command: ReviewedLegalCommand, title: string, body: string, terms: EffectRow[] = [], art: HealthLegalArtId = 'justice', confirmLabel = 'Confirm') {
       if (!mounted.current || identityRef.current !== identity || busy || submitting.current) return;
+      clear();
       const next = { identity, command, event: { kind: 'confirmation', id: identity + ':' + command.type, title, body, terms, confirmLabel, illustration: <HealthLegalArt id={art} size={64} /> } } satisfies NonNullable<typeof review>;
       activeReview.current = next; setReview(next);
     },
-    modal: <EventModal event={current?.event ?? null} busy={busy} error={error} onCancel={() => { if (mounted.current && !busy && !submitting.current && activeReview.current === current) { activeReview.current = null; setReview(saved => saved === current ? null : saved); } }} onChoose={async () => {
+    modal: <EventModal event={current?.event ?? null} busy={busy} error={error} onCancel={() => { if (mounted.current && !busy && !submitting.current && activeReview.current === current) { activeReview.current = null; setReview(saved => saved === current ? null : saved); clear(); } }} onChoose={async () => {
       if (!mounted.current || !current || busy || submitting.current || identityRef.current !== current.identity || activeReview.current !== current) return;
       submitting.current = true;
       try {

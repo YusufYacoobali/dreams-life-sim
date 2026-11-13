@@ -140,3 +140,31 @@ test('the pinned natural owner-loss checkpoint rolls back atomically, retries wi
   }
   expect(failedLoss).toBe(true); await view.unmount(); sqlite.close();
 }, 90000);
+
+
+test('an unrelated tenancy error stays out of a pet profile and its next review, while a failed vet save stays local and retries once', async () => {
+  const initial = structuredClone(unpackCheckpoint(ownerLoss.payload, true));
+  initial.pets.find(pet => pet.status === 'active')!.illness = 'infection';
+  const { sqlite, driver } = database(), repository = new SaveRepository(driver);
+  try {
+    await repository.initialise(); await repository.create(initial);
+    mockStore = createGameStore({ repository: async () => repository, date: () => initial.date, id: () => 'unused' });
+    await mockStore.getState().bootstrap();
+    mockPetId = initial.pets.find(pet => pet.status === 'active')!.id;
+    mockStore.setState({ error: 'Two months of notice are required', errorScope: 'property-review' });
+    const before = encodeWorld(mockStore.getState().world!);
+    await render(frame(<PetProfile />));
+    expect(screen.queryByText('Two months of notice are required')).toBeNull();
+    await press(/^Veterinary Visit\./);
+    expect(screen.queryByRole('alert')).toBeNull();
+    sqlite.exec("CREATE TRIGGER fail_scoped_vet BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
+    await press('Visit The Vet');
+    await waitFor(() => expect(screen.getByRole('alert')).toHaveTextContent(/couldn't be saved/));
+    expect(encodeWorld(mockStore.getState().world!)).toBe(before); expect(encodeWorld(await repository.load(initial.id))).toBe(before);
+    await press('Never mind'); expect(screen.queryByRole('alert')).toBeNull();
+    sqlite.exec('DROP TRIGGER fail_scoped_vet');
+    await press(/^Veterinary Visit\./); await press('Visit The Vet');
+    expect(mockStore.getState().world!.pets.find(pet => pet.id === mockPetId)!.visits).toHaveLength(initial.pets.find(pet => pet.id === mockPetId)!.visits.length + 1);
+    const reopened = await repository.load(initial.id); expect(encodeWorld(reopened)).toBe(encodeWorld(mockStore.getState().world!));
+  } finally { sqlite.close(); }
+});

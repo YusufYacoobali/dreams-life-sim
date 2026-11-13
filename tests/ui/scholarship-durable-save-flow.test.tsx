@@ -43,7 +43,7 @@ async function setup() {
   await repository.restoreBranch(original.id, archive.snapshots[0].summary.id, original.revision, 'life_scholarship_durable', 'original_pupil_scholarship');
   let nextYield: Promise<void> | undefined;
   const pause = () => { let release!: () => void; nextYield = new Promise<void>(resolve => { release = resolve; }); return release; };
-  let dispatch: jest.SpyInstance<Promise<boolean>, [GameCommand]>;
+  let dispatch: jest.SpyInstance<Promise<boolean>, [GameCommand, string?]>;
   const bootstrap = async () => { mockStore = createGameStore({ repository: async () => repository, date: () => original.date, id: () => 'unused', yieldToUI: async () => { const wait = nextYield; nextYield = undefined; if (wait) await wait; } }); expect(await mockStore.getState().bootstrap()).toBe(true); dispatch = jest.spyOn(mockStore.getState(), 'dispatch'); }; await bootstrap();
   expect(world().date.year).toBe(2017); await command({ type: 'advance' }); let guard = 0;
   while (world().pending || world().annual) {

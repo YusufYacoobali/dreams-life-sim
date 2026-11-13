@@ -14,7 +14,7 @@ import { emitGameplayFeedback, type GameplayFeedback } from '../feedback/gamepla
 type Persistence = Pick<SaveRepository, 'active' | 'list' | 'create' | 'commit' | 'select' | 'importWithSummary' | 'recoverWithSummary' | 'snapshots' | 'snapshot' | 'restoreBranch'> & Partial<Pick<SaveRepository, 'loadReviewTracker' | 'claimReview' | 'respondToReview'>>;
 type Dependencies = { repository: () => Promise<Persistence>; date: () => GameDate; id: () => string; yieldToUI?: () => Promise<void>; godModeAccess?: () => boolean; premiumAccess?: (feature: PremiumFeature) => boolean; reviewDelay?: () => number; onFeedback?: (event: GameplayFeedback) => void };
 export type GameState = {
-  world: World | null; lives: LifeSummary[]; ready: boolean; busy: boolean; error: string | null;
+  world: World | null; lives: LifeSummary[]; ready: boolean; busy: boolean; error: string | null; errorScope: string | null;
   snapshots: SnapshotSummary[];
   reviewTracker: ReviewTracker | null; reviewOffer: ReviewOffer | null; reviewBusy: boolean; reviewError: string | null;
   claimReview: () => Promise<boolean>;
@@ -23,14 +23,14 @@ export type GameState = {
   startLife: (input: Creation, seed: number) => Promise<boolean>;
   acknowledgeBirth: () => Promise<boolean>;
   selectLife: (id: string) => Promise<boolean>;
-  dispatch: (command: GameCommand) => Promise<boolean>;
+  dispatch: (command: GameCommand, errorScope?: string) => Promise<boolean>;
   editGodMode: (edit: GodModeEdit) => Promise<boolean>;
   importLife: (text: string, replace: boolean) => Promise<boolean>;
   recoverLife: (id: string) => Promise<boolean>;
   loadSnapshots: () => Promise<boolean>;
   saveSnapshot: () => Promise<boolean>;
   restoreSnapshot: (id: string) => Promise<boolean>;
-  clearError: () => void;
+  clearError: (scope?: string) => void;
 };
 
 export function createGameStore(deps: Dependencies) {
@@ -46,18 +46,18 @@ export function createGameStore(deps: Dependencies) {
       summary,
       ...get().lives.filter(life => life.id !== world.id),
     ] });
-    const run = async (action: () => Promise<void>, failure: string, quietFailure = false) => {
+    const run = async (action: () => Promise<void>, failure: string, quietFailure = false, errorScope?: string) => {
       if (get().busy || get().reviewBusy) return false;
-      set({ busy: true, error: null, reviewOffer: null });
+      set({ busy: true, error: null, errorScope: null, reviewOffer: null });
       try { if (deps.yieldToUI) await deps.yieldToUI(); await action(); return true; }
-      catch (error) { set({ error: error instanceof IneligibleAction || error instanceof SaveCorrupt || error instanceof SaveConflict ? error.message : failure });
+      catch (error) { set({ error: error instanceof IneligibleAction || error instanceof SaveCorrupt || error instanceof SaveConflict ? error.message : failure, errorScope: errorScope ?? null });
         const world = get().world;
         if (!quietFailure && !world?.people[world.activePersonId]?.died) feedback({ id: 'failure:' + ++failureSequence, cues: ['error'] });
         return false; }
       finally { set({ busy: false }); }
     };
     return {
-      world: null, lives: [], snapshots: [], ready: false, busy: false, error: null,
+      world: null, lives: [], snapshots: [], ready: false, busy: false, error: null, errorScope: null,
       reviewTracker: null, reviewOffer: null, reviewBusy: false, reviewError: null,
       claimReview: async () => {
         const world = get().world;
@@ -84,7 +84,7 @@ export function createGameStore(deps: Dependencies) {
         } catch {set({reviewError:'Could not save that. Please try again.'});feedback({ id: 'failure:' + ++failureSequence, cues: ['error'] });return false;}
         finally {set({reviewBusy:false});}
       },
-      clearError: () => set({ error: null }),
+      clearError: scope => { if (scope === undefined || get().errorScope === scope) set({ error: null, errorScope: null }); },
       bootstrap: async () => {
         if (get().busy || get().reviewBusy) return false;
         const success = await run(async () => {
@@ -161,7 +161,7 @@ export function createGameStore(deps: Dependencies) {
         set({ world: committed, snapshots: [], lives: get().lives.map(life => life.id === committed.id ? { ...life, revision: committed.revision } : life) });
         godModeAttempt = null;
       }, 'God Mode changes could not be saved. Your previous save was kept. Try again.'),
-      dispatch: command => run(async () => {
+      dispatch: (command, errorScope) => run(async () => {
         const world = get().world;
         if (!world) throw new IneligibleAction('Open a life first');
         const feature = requiredFeature(world, command);
@@ -177,7 +177,7 @@ export function createGameStore(deps: Dependencies) {
           if (cues.length || silence) feedback({ id: world.id + ':' + committed.revision + ':' + command.type, cues, ...(silence ? { silence: true } : {}) });
         } catch { /* Feedback cannot change a successful save. */ }
         set({ world: committed, lives: get().lives.map(life => life.id === committed.id ? { ...life, name: fullName(committed.people[committed.activePersonId]), revision: committed.revision } : life), reviewTracker:await readReview(repository),reviewOffer:null });
-      }, "Your progress couldn't be saved. Please try again.", command.type === 'end-life'),
+      }, "Your progress couldn't be saved. Please try again.", command.type === 'end-life', errorScope),
     };
   });
 }

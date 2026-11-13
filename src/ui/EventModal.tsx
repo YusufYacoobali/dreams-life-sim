@@ -544,7 +544,7 @@ function EventCard({
             accessibilityViewIsModal
             style={[
               styles.card,
-              event.kind === 'selection' && styles.selectionCard,
+              styles.selectionCard,
               { backgroundColor: c.surface },
             ]}
           >
@@ -563,7 +563,7 @@ function EventCard({
               </View>
             )}
             <ScrollView
-              style={event.kind === 'selection' && styles.selectionScroll}
+              style={styles.selectionScroll}
               contentContainerStyle={[
                 styles.contents,
                 event.kind === 'selection' && styles.selectionContents,
@@ -607,15 +607,6 @@ function EventCard({
                 </View>
               )}
               <Body centered>{event.body}</Body>
-              {error && (
-                <Text
-                  accessibilityRole="alert"
-                  accessibilityLiveRegion="polite"
-                  style={{ color: c.red, textAlign: 'center', fontSize: 14 }}
-                >
-                  {error}
-                </Text>
-              )}
               {effects.length > 0 && (
                 <View style={[styles.effects, { backgroundColor: c.inset }]}>
                   {effects.map((effect) => (
@@ -792,6 +783,17 @@ function EventCard({
                   ))}
                 </>
               )}
+            </ScrollView>
+            <View style={styles.selectionFooter}>
+              {error && (
+                <Text
+                  accessibilityRole="alert"
+                  accessibilityLiveRegion="polite"
+                  style={{ color: c.red, textAlign: 'center', fontSize: 14 }}
+                >
+                  {error}
+                </Text>
+              )}
               {event.kind === 'confirmation' && (
                 <Button
                   label={event.confirmLabel}
@@ -826,9 +828,7 @@ function EventCard({
                   onPress={() => dismiss(onCancel)}
                 />
               )}
-            </ScrollView>
-            {event.kind === 'selection' && (
-              <View style={styles.selectionFooter}>
+            {event.kind === 'selection' && (<>
                 <Button
                   label={event.confirmLabel}
                   disabled={!selectedEligible}
@@ -845,8 +845,8 @@ function EventCard({
                     onPress={() => dismiss(onCancel)}
                   />
                 )}
-              </View>
-            )}
+              </>)}
+            </View>
           </View>
         </View>
       </SelectionFrame>
