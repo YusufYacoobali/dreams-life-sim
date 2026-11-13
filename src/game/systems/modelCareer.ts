@@ -12,7 +12,7 @@ import { endEmployment } from './work';
 import { gainPublicFame } from './social';
 import { relationFor } from './relationshipQueries';
 import { selectionReason, trainingReason, type Career } from './careers';
-import { beginCreativeContract, changeAgency, creativeOfferReason, ensureCreativeCareer, ensureIndustryContacts, recordCreativeFailure, settleCreativeMonth } from './creativeCore';
+import { archiveCastingBoard, beginCreativeContract, changeAgency, creativeOfferReason, ensureCreativeCareer, ensureIndustryContacts, recordCreativeFailure, settleCreativeMonth } from './creativeCore';
 import { creativeMonthNumber, creativeMonthLabel, newIndustryState, type CreativeOffer } from './creativeSchemas';
 import { type ModelCareerCommand, type ModelCareerState, type ModelSpecialisation } from './modelCareerSchemas';
 export { modelCareerCommandSchema } from './modelCareerSchemas';
@@ -50,6 +50,7 @@ export function modelBrandTerm(offer: CreativeOffer) { return offer.exclusivity 
 function refreshOffers(world: World, career: Career & { modelCareer: ModelCareerState }) {
   const state = career.modelCareer, season = quarter(world), person = world.people[career.personId];
   if (state.industry.boardSeason === season && state.boardCountry === person.country) throw new IneligibleAction('These castings remain available until the next quarter.');
+  archiveCastingBoard(state.industry, state.boardCountry);
   if (state.industry.boardSeason === season && state.industry.board.length) {
     state.boards = state.boards.filter(board => board.season === season && board.country !== state.boardCountry);
     state.boards.push({ country: state.boardCountry, season, offers: state.industry.board.map(offer => ({ ...offer })) });
@@ -166,7 +167,7 @@ function releaseModel(world: World, career: Career, project: Project) {
     { id: 'quality', label: 'Performance quality', value: project.quality + '%', tone: 'neutral' }, { id: 'industry', label: 'Industry reception', value: critical + '%', tone: critical >= 65 ? 'positive' : 'negative' }, { id: 'audience', label: 'Audience response', value: audience + '%', tone: audience >= 65 ? 'positive' : 'neutral' },
     { id: 'gross', label: 'Actual gross earnings', value: formatMoney({ minor: project.grossEarned, currency: project.currency }), tone: 'positive' }, { id: 'commission', label: 'Actual agency commission', value: formatMoney({ minor: details.commissionPaid, currency: project.currency }), tone: 'negative' },
     { id: 'reputation', label: 'Industry reputation change', value: (reputationChange >= 0 ? '+' : '') + reputationChange, tone: reputationChange >= 0 ? 'positive' : 'negative' },
-    { id: 'fame', label: 'Earned fame change', value: (fameChange >= 0 ? '+' : '') + fameChange, tone: fameChange >= 0 ? 'positive' : 'negative' },
+    { id: 'fame', label: 'Earned fame change', value: fameChange === 0 && beforeFame === 100 ? 'At maximum fame' : (fameChange >= 0 ? '+' : '') + fameChange, tone: fameChange >= 0 ? 'positive' : 'negative' },
     ...state.industry.milestones.filter(id => !milestonesBefore.has(id)).map(id => ({ id: 'milestone:' + id, label: 'Career milestone', value: id, tone: 'positive' as const })),
     ...(project.award ? [{ id: 'award', label: 'Industry recognition', value: project.award, tone: 'positive' as const }] : []),
   ]);
@@ -227,6 +228,11 @@ export function modelCareerMonth(world: World) {
       }
     }
   }
+}
+export function refreshModelOpportunities(world: World) {
+  const career = modelCareer(world), state = career?.modelCareer;
+  if (!career || !state || !['active', 'between'].includes(career.status) || active(world).died) return;
+  if (state.industry.boardSeason !== quarter(world) || state.boardCountry !== active(world).country) refreshOffers(world, career as Career & { modelCareer: ModelCareerState });
 }
 export function modelCareerExit(world: World, personId: string) {
   for (const career of world.careers.filter(item => item.kind === 'model' && item.personId === personId && item.modelCareer)) {

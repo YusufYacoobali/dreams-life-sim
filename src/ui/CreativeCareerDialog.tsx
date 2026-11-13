@@ -5,7 +5,7 @@ import { CareerArt } from '../assets/CareerArt';
 import { EventModal, type EffectRow, type EventPresentation } from './EventModal';
 import { useScopedGameAction } from './useScopedGameAction';
 
-type Dialog = { identity: string; event: EventPresentation; command?: GameCommand; choose?: (id: string) => void };
+type Dialog = { identity: string; event: EventPresentation; command?: GameCommand; choose?: (id: string) => void; secondary?: () => void };
 /** The free industry careers share review/retry behavior, independently of purchase UI. */
 export function useCreativeCareerDialog(kind: 'actor' | 'model') {
   const { dispatch, busy, error, clear: clearError } = useScopedGameAction(kind);
@@ -18,15 +18,15 @@ export function useCreativeCareerDialog(kind: 'actor' | 'model') {
   useEffect(() => { setDialog(value => value?.identity === identity ? value : null); }, [identity]);
   const isCurrent = (value: Dialog) => mounted.current && context.current === value.identity && current.current === value;
   const close = (value: Dialog) => { if (isCurrent(value)) { current.current = null; setDialog(previous => previous === value ? null : previous); clearError(); } };
-  const open = (event: EventPresentation, extra: Pick<Dialog, 'command' | 'choose'> = {}) => {
+  const open = (event: EventPresentation, extra: Pick<Dialog, 'command' | 'choose' | 'secondary'> = {}) => {
     if (!mounted.current || busy || submitting.current || context.current !== identity) return;
     clearError(); const value = { identity, event, ...extra }; current.current = value; setDialog(value);
   };
   const art = <CareerArt id={kind} size={64} />;
   return {
     open: !!shown,
-    confirm(command: GameCommand, title: string, body: string, terms: EffectRow[] = [], label = 'Confirm') {
-      open({ id: kind + ':review:' + sequence.current++, kind: 'confirmation', title, body, terms, confirmLabel: label, illustration: art }, { command });
+    confirm(command: GameCommand, title: string, body: string, terms: EffectRow[] = [], label = 'Confirm', secondary?: () => void) {
+      open({ id: kind + ':review:' + sequence.current++, kind: 'confirmation', title, body, terms, confirmLabel: label, illustration: art, ...(secondary ? { action: { id: 'negotiate', label: 'Negotiate Terms' } } : {}) }, { command, secondary });
     },
     select(title: string, body: string, choices: readonly { id: string; label: string; disabledReason?: string }[], choose: (id: string) => void) {
       open({ id: kind + ':select:' + sequence.current++, kind: 'selection', title, body, choices, confirmLabel: 'Choose', illustration: art }, { choose });
@@ -39,6 +39,7 @@ export function useCreativeCareerDialog(kind: 'actor' | 'model') {
       onClose={() => { if (shown && !busy && !submitting.current) close(shown); }}
       onChoose={async id => {
         if (!shown || busy || submitting.current || !isCurrent(shown)) return;
+        if (id === 'negotiate' && shown.secondary) { const secondary = shown.secondary; close(shown); secondary(); return; }
         if (shown.choose) { const choose = shown.choose; close(shown); choose(id); return; }
         if (!shown.command) { close(shown); return; }
         submitting.current = true;

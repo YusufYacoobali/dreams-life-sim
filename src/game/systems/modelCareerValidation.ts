@@ -14,7 +14,7 @@ export function validateModelCareer(world: World) {
     if (new Set(state.specialisations).size !== state.specialisations.length || state.lastPortfolioQuarter > Math.floor(month / 3) || state.lastBrandActionMonth > month || state.industry.boardSeason > Math.floor(month / 3)) throw new Error('Invalid modelling development history');
     const offers = state.industry.board;
     if (new Set(offers.map(offer => offer.id)).size !== offers.length || new Set(state.boards.map(board => board.country)).size !== state.boards.length) throw new Error('Duplicate modelling casting');
-    for (const board of [{ country: state.boardCountry, season: state.industry.boardSeason, offers }, ...state.boards]) {
+    for (const board of [{ country: state.boardCountry, season: state.industry.boardSeason, offers }, ...state.boards, ...(state.industry.castingHistory ?? []).map(row => ({ country: row.country, season: row.season, offers: [row.offer] }))]) {
       if (board.season > Math.floor(month / 3)) throw new Error('Modelling casting is from the future');
       for (const offer of board.offers) {
         const definition = modelBookingDefinition(offer.category);

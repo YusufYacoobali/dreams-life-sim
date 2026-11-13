@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { dateSchema } from '../calendar';
+import { countryCodes } from '../countries';
 export const creativeKinds = ['actor', 'model'] as const;
 export type CreativeKind = typeof creativeKinds[number];
 export const agencyTiers = ['independent', 'boutique', 'major'] as const;
@@ -32,6 +33,7 @@ export const creativeProjectSchema = z.object({
 export const industryStateSchema = z.object({
   version: z.literal(1), representation: representationSchema, contacts: z.record(z.string(), z.string()),
   board: z.array(creativeOfferSchema).max(8), boardSeason: month,
+  castingHistory: z.array(z.object({ country: z.enum(countryCodes), season: month, offer: creativeOfferSchema })).optional(),
   decision: z.object({ id: z.string(), storyId: z.string(), projectId: z.string().nullable(), offeredMonth: month }).nullable(),
   seenStories: z.array(z.string()).max(32), lastDecisionQuarter: month, decisionCount: z.number().int().nonnegative(),
   milestones: z.array(z.string()).max(32), completed: z.number().int().nonnegative(), totalGross: money, totalCommission: money,

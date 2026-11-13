@@ -1,6 +1,7 @@
 import { countries } from '../countries';
 import type { World } from '../model';
 import { actorProjectCatalog, actorMilestoneLabels } from '../content/actor';
+import { creativeReceptionLabel } from '../content/creativeReception';
 import { actorReleaseSummary } from '../content/creativeOutcomes';
 import { IneligibleAction } from '../errors';
 import { formatMoney, roundRatio } from '../money';
@@ -11,7 +12,7 @@ import { active, accountFor, availableCash, bounded, charge, fact, result } from
 import { selectionReason, type Career } from './careers';
 import { actorProductionActionIds, type ActorCommand, type ActorProductionAction, type ActorState } from './actorSchemas';
 import { creativeMonthNumber, creativeMonthLabel, newIndustryState, type CreativeOffer } from './creativeSchemas';
-import { beginCreativeContract, changeAgency, creativeOfferReason, ensureCreativeCareer, ensureIndustryContacts, recordCreativeFailure, settleCreativeMonth } from './creativeCore';
+import { archiveCastingBoard, beginCreativeContract, changeAgency, creativeOfferReason, ensureCreativeCareer, ensureIndustryContacts, recordCreativeFailure, settleCreativeMonth } from './creativeCore';
 import { activeTrip } from './travelSchemas';
 import { isConfined } from './legalSchemas';
 import { hospitalized } from './healthSchemas';
@@ -83,13 +84,14 @@ function buildBoard(world: World, career: Career) {
   const state = actorState(career), month = creativeMonthNumber(world), season = Math.floor(month / 3);
   const country = active(world).country;
   if (state.industry.boardSeason === season && state.boardCountry === country) throw new IneligibleAction('Your current casting board is saved until the next quarter');
+  archiveCastingBoard(state.industry, state.boardCountry);
   if (state.industry.boardSeason !== season) { state.savedBoards = []; state.boardSeed = world.random.events; }
   else if (state.industry.board.length) {
     state.savedBoards = state.savedBoards.filter(board => board.country !== state.boardCountry);
     state.savedBoards.push({ country: state.boardCountry, season, offers: state.industry.board });
   }
   state.industry.boardSeason = season; state.boardCountry = country;
-  career.country = country; career.currency = countries[country].currency;
+  if (career.status !== 'active') { career.country = country; career.currency = countries[country].currency; }
   const saved = state.savedBoards.find(board => board.country === country && board.season === season);
   if (saved) { state.industry.board = saved.offers; return; }
   let seed = forkRandom(state.boardSeed, career.id + ':actor-casting:' + season + ':' + country);
@@ -99,7 +101,7 @@ function buildBoard(world: World, career: Career) {
     const role = definition.id === 'commercial' ? 'featured appearance' : ['supporting', 'minor', 'lead'][pick(0, 2)];
     const roleBps = role === 'lead' ? 13500 : role === 'minor' ? 7000 : 10000;
     const opportunityBps = 10000 + career.rank * 1000 + agency * 1200 + Math.max(-15, state.industry.opportunityBoost) * 100;
-    const annualPay = roundRatio(rules[career.country].baseWage * BigInt(definition.payBps) * BigInt(roleBps) * BigInt(opportunityBps), 1000000000000n);
+    const annualPay = roundRatio(rules[country].baseWage * BigInt(definition.payBps) * BigInt(roleBps) * BigInt(opportunityBps), 1000000000000n);
     return {
       id: career.id + ':casting:' + country + ':' + season + ':' + definition.id, title: definition.titles[pick(0, definition.titles.length - 1)], category: definition.id,
       genre: definition.genres[pick(0, definition.genres.length - 1)], role, annualPay, months: definition.months,
@@ -206,7 +208,7 @@ export function resolveActor(world: World, command: ActorCommand) {
   const gross = roundRatio(offer.annualPay * BigInt(offer.months), 12n);
   result(world, 'You have the part', offer.title + ' casts you in a ' + offer.role + ' role. The ' + offer.months + '-month commitment is signed. Now comes the part where you have to perform it.', 'actor', [
     { id: 'contract', label: 'Gross fee if all contract months are paid', value: formatMoney({ minor: gross, currency: career.currency }), tone: 'positive' },
-    { id: 'commission', label: 'Agreed representation commission', value: state.industry.representation.commissionBps % 100 === 0 ? state.industry.representation.commissionBps / 100 + '%' : state.industry.representation.commissionBps + ' basis points (100 = 1%)', tone: 'neutral' },
+    { id: 'commission', label: 'Agreed representation commission', value: (state.industry.representation.commissionBps / 100).toLocaleString('en-GB', { maximumFractionDigits: 2 }) + '%', tone: 'neutral' },
   ]);
 }
 function releaseActor(world: World, career: Career, project: Career['projects'][number]) {
@@ -244,14 +246,14 @@ function releaseActor(world: World, career: Career, project: Career['projects'][
   fact(world, 'My ' + metadata.role + ' role in ' + project.name + ' received critics ' + critical + '/100 and audience ' + audience + '/100.' + (award ? ' I won a Lantern Acting Award.' : nomination ? ' It earned an acting nomination.' : ''), 'career', '', person.id);
   if (person.id === world.activePersonId) {
     const money = (minor: bigint) => formatMoney({ minor, currency: project.currency });
-    offerPending(world, { kind: 'result', id: 'actor-release:' + project.id, title: project.name + (completed ? metadata.category === 'theatre' ? ' finishes its run' : ' is released' : ' closes unfinished'), body: metadata.role + ' · ' + metadata.genre + '. ' + summary + (dropped ? ' Your agency ends representation after repeated failures.' : '') + (!wasComeback && state.comeback ? ' You have a comeback worth talking about.' : ''), illustration: 'actor', effects: [
+    offerPending(world, { kind: 'result', id: 'actor-release:' + project.id, title: project.name + (completed ? metadata.category === 'theatre' ? ' finishes its run' : ' is released' : ' closes unfinished'), body: metadata.role.charAt(0).toUpperCase() + metadata.role.slice(1) + ' · ' + metadata.genre + '. ' + summary + (dropped ? ' Your agency ends representation after repeated failures.' : '') + (!wasComeback && state.comeback ? ' You have a comeback worth talking about.' : ''), illustration: 'actor', effects: [
       { id: 'quality', label: 'Performance quality', value: project.quality + '%', tone: 'neutral' },
       { id: 'critical', label: 'Critical reception', value: critical + '/100', tone: critical >= 60 ? 'positive' : 'negative' },
-      { id: 'audience', label: 'Audience reception', value: audience + '/100 · ' + commercial, tone: audience >= 60 ? 'positive' : 'neutral' },
+      { id: 'audience', label: 'Audience reception', value: audience + '/100 · ' + creativeReceptionLabel(metadata.category, commercial), tone: audience >= 60 ? 'positive' : 'neutral' },
       { id: 'gross', label: 'Actual gross wages', value: money(project.grossEarned), tone: 'positive' },
       { id: 'commission', label: 'Actual agency commission', value: money(metadata.commissionPaid), tone: metadata.commissionPaid ? 'negative' : 'neutral' },
       { id: 'rep', label: 'Industry reputation change', value: (reputation > 0 ? '+' : '') + reputation, tone: reputation >= 0 ? 'positive' : 'negative' },
-      { id: 'fame', label: 'Earned fame change', value: (fame > 0 ? '+' : '') + fame, tone: fame >= 0 ? 'positive' : 'negative' },
+      { id: 'fame', label: 'Earned fame change', value: fame === 0 && beforeFame === 100 ? 'At maximum fame' : (fame > 0 ? '+' : '') + fame, tone: fame >= 0 ? 'positive' : 'negative' },
       ...state.industry.milestones.filter(id => !milestonesBefore.has(id)).map(id => ({ id: 'milestone:' + id, label: 'Career milestone', value: actorMilestoneLabels[id] ?? id, tone: 'positive' as const })),
       ...(nomination ? [{ id: 'award', label: award ? 'Award' : 'Recognition', value: award ? 'Lantern Acting Award' : 'Acting nomination', tone: 'positive' as const }] : []),
     ] }, 50);
@@ -260,6 +262,11 @@ function releaseActor(world: World, career: Career, project: Career['projects'][
 }
 export function actorMonth(world: World) {
   for (const career of world.careers.filter(item => item.kind === 'actor' && item.actor && item.status === 'active')) settleCreativeMonth(world, career, releaseActor);
+}
+export function refreshActorOpportunities(world: World) {
+  const career = actorCareer(world), state = career?.actor;
+  if (!career || !state || !['active', 'between'].includes(career.status) || active(world).died) return;
+  if (state.industry.boardSeason !== Math.floor(creativeMonthNumber(world) / 3) || state.boardCountry !== active(world).country) buildBoard(world, career);
 }
 /** Exit/death cancels future production; the shared employment path retains every paid receipt. */
 function cancelActorProduction(world: World, career: Career, project: Career['projects'][number]) {

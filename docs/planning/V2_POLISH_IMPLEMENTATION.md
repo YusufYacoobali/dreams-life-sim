@@ -7,7 +7,7 @@ Each checkpoint includes focused verification before its commit and push. Existi
 | Checkpoint | Status |
 | --- | --- |
 | 1. Shared UI, portrait picker, scoped errors | Implemented; focused checks pass |
-| 2. Actor/Model presentation and casting | Pending |
+| 2. Actor/Model presentation and casting | Implemented; focused checks pass |
 | 3. Automatic lifestyle activation and legacy compatibility | Pending |
 | 4. Vehicles and driving licence | Pending |
 | 5. Landlord and properties | Pending |
@@ -24,3 +24,13 @@ Each checkpoint includes focused verification before its commit and push. Existi
 - Review buttons and live errors sit outside modal scrolling content. Existing safe-area spacing, artwork, haptics, reduced-motion behavior and guarded queued inputs remain shared through EventModal.
 - No simulation, RNG, financial transaction or save-schema changes in this checkpoint.
 - Focused verification: 66 cases across 11 relevant suites pass across the main run and affected reruns, including real SQLite failure/retry/cold reopen, cancelled/queued selections, current eligibility and late workflow errors. Strict app/test types and the 598-module import-cycle check pass. Native screen geometry, enlarged text, VoiceOver and TalkBack still require installed-device inspection; renderer assertions do not establish those results.
+
+
+## Checkpoint 2
+
+- Agency selection contains three unique representations. Commissions use exact percentages, and negotiation remains a dashboard action. Casting cards have one primary action, with acting negotiation available in the audition review. Refresh and decline commands remain accepted by the engine for compatibility but are absent from the public UI.
+- Current quarter/country boards update at a successful gameplay-command boundary. Existing board generation and country caches retain answered offers and rolls; returning to a country does not reroll. Read-only decoding/rendering does not prepare a new board. Older stale boards are prepared by the next normal gameplay action.
+- Optional `industry.castingHistory` retains answered offers when boards change. Its absent value stays absent in older saves; new histories round-trip through real SQLite and checkpoints. No migration, existing transcript rewrite or simulation RNG draw was introduced.
+- Active model brand obligations sit near the top with a prominent fulfilment action. Completed agreements and settlement claims remain below the career opportunities.
+- Public reception wording reflects the production medium while retaining saved outcome tiers. Confirmed zero fame on a major success is correct at the existing 100-point earned-fame cap; prospective results now explain that case. Existing pending text stays untouched. Future quiet adult-year text is a concise birthday fact.
+- Verification: focused Actor overhaul, Model mechanics, creative polish, board maintenance/integrity, UI, modal and SQLite save suites pass across main runs and affected reruns. This includes legacy/currency fixtures, unchanged RNG streams, current-country caches, archived-decision validation, exact checkpoint round-trips, the earned-fame cap and rollback/retry of a brand appearance. Strict app/test types and the 599-module import-cycle check pass. Installed-device acceptance remains pending.

@@ -8,12 +8,12 @@ export function validateActor(world: World) {
     const allProjects = [...career.projects, ...(career.creativeArchives ?? [])];
     const completed = allProjects.filter(project => project.status === 'completed');
     const newCompleted = completed.filter(project => project.creative?.kind === 'actor');
-    if (career.kind !== 'actor' || state.boardCountry !== career.country || state.credits !== completed.length || state.leadingCredits !== newCompleted.filter(project => project.creative!.role === 'lead').length || state.hits !== newCompleted.filter(project => ['hit', 'blockbuster'].includes(project.creative!.release?.commercial ?? '')).length || state.awards !== completed.filter(project => !!project.award).length || state.nominations !== newCompleted.filter(project => project.creative!.release?.nomination).length || state.industry.completed !== state.credits || state.comeback && !state.collapseCount)
+    if (career.kind !== 'actor' || state.credits !== completed.length || state.leadingCredits !== newCompleted.filter(project => project.creative!.role === 'lead').length || state.hits !== newCompleted.filter(project => ['hit', 'blockbuster'].includes(project.creative!.release?.commercial ?? '')).length || state.awards !== completed.filter(project => !!project.award).length || state.nominations !== newCompleted.filter(project => project.creative!.release?.nomination).length || state.industry.completed !== state.credits || state.comeback && !state.collapseCount)
       throw new Error('Invalid acting career progression');
     if (state.industry.contacts && Object.values(state.industry.contacts).some(id => !world.people[id] || id === career.personId || !career.contacts.includes(id))) throw new Error('Invalid acting industry contacts');
     if (new Set(state.savedBoards.map(board => board.country)).size !== state.savedBoards.length || state.savedBoards.some(board => board.season !== state.industry.boardSeason)) throw new Error('Invalid saved acting casting boards');
     const boardIds = new Set<string>();
-    for (const saved of state.savedBoards) {
+    for (const saved of [...state.savedBoards, ...(state.industry.castingHistory ?? []).map(row => ({ country: row.country, season: row.season, offers: [row.offer] }))]) {
       const ids = new Set<string>();
       for (const offer of saved.offers) {
         if (ids.has(offer.id) || !offer.id.startsWith(career.id + ':casting:' + saved.country + ':' + saved.season + ':') || !(actorProjectTypes as readonly string[]).includes(offer.category) || offer.expires < saved.season * 3 || offer.expires > saved.season * 3 + 2) throw new Error('Invalid cached acting casting board');

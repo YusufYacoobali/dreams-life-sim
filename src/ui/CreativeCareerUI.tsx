@@ -4,6 +4,7 @@ import { router } from 'expo-router';
 import type { World } from '../game/model';
 import { ageOn, fullName } from '../game/personHelpers';
 import { formatMoney, roundRatio } from '../game/money';
+import { creativeReceptionLabel } from '../game/content/creativeReception';
 import { creativeAgencyQuote } from '../game/systems/creativeCore';
 import type { EffectRow } from './EventModal';
 import type { CreativeOffer, IndustryState } from '../game/systems/creativeSchemas';
@@ -22,7 +23,7 @@ export function creativeTotals(world: World, career: Career, industry: IndustryS
   const legacy = legacyIds.size ? world.workHistory.reduce((total, history) => total + (legacyIds.has(history.id) ? history.normalizedGross : 0n), 0n) : 0n;
   return { gross: legacy + industry.totalGross, commission: industry.totalCommission };
 }
-export const agencyRateText = (bps: number) => bps % 100 === 0 ? bps / 100 + '%' : bps.toLocaleString('en-GB') + ' basis points';
+export const agencyRateText = (bps: number) => (bps / 100).toLocaleString('en-GB', { maximumFractionDigits: 2 }) + '%';
 export function representationTerms(career: Career, tier: 'independent' | 'boutique' | 'major', negotiate: boolean): EffectRow[] {
   const quote = creativeAgencyQuote(career, tier, negotiate);
   return negotiate ? [
@@ -47,7 +48,7 @@ export function CreativeAgency({ world, career, industry, busy, dialog, onChange
   const c = useColors(), agency = industry.representation, person = agency.agentId ? world.people[agency.agentId] : undefined;
   const quarter = Math.floor((world.date.year * 12 + world.date.month - 1) / 3);
   const quarterReason = world.actionCounts[career.personId + ':' + kind + ':agency:' + quarter] ? 'Review representation again next quarter' : undefined;
-  const name = (tier: 'independent' | 'boutique' | 'major') => kind === 'model' && tier === 'major' ? 'Major International Agency' : kind === 'model' && tier === 'boutique' ? 'Boutique Fashion Agency' : agencyNames[tier];
+  const name = (tier: 'independent' | 'boutique' | 'major') => agencyNames[tier];
   const reason = (tier: 'independent' | 'boutique' | 'major', negotiate = false) => { const quote = creativeAgencyQuote(career, tier, negotiate); return quarterReason ?? (tier === agency.tier && !negotiate ? 'Your current representation' : tier === 'major' && (career.reputation < 60 || industry.completed < 2) ? 'Requires reputation 60 and two completed contracts' : tier === 'boutique' && career.reputation < 30 ? 'Requires reputation 30' : negotiate && quote.proposedBps >= quote.standardBps ? 'Your current rate is already below the negotiable minimum' : undefined); };
   const descriptions = kind === 'actor' ? {
     independent: 'No agency commission. Keep creative freedom and find smaller productions yourself.',
@@ -64,20 +65,17 @@ export function CreativeAgency({ world, career, industry, busy, dialog, onChange
     {person && <ActionRow title={fullName(person)} subtitle={person.died ? 'Former agent · Deceased' : 'Your agent · Relationship history'} icon={<Portrait personId={person.id} name={fullName(person)} appearance={person.appearance} age={ageOn(person, world.date)} size={40} />} onPress={() => router.push({ pathname: '/person/[id]', params: { id: person.id } })} />}
     {agency.tier !== 'independent' && <StatBar label="Agent rapport" value={agency.rapport} color={c.green} />}
     <Body muted>Signed projects keep their agreed commission. Changing representation affects later contracts.</Body>
-    <Button label="Review Representation" disabled={busy} onPress={() => dialog.select('Choose representation', 'Review the commission before signing. A successful negotiation lowers the shown rate; a refusal keeps the standard terms. Each 100 basis points equals 1% commission.', (['independent', 'boutique', 'major'] as const).flatMap(tier => (tier === 'independent' ? [false] : [false, true]).map(negotiate => {
-      const quote = creativeAgencyQuote(career, tier, negotiate);
-      return { id: tier + (negotiate ? ':negotiate' : ''), label: name(tier) + ' · ' + (negotiate ? 'Negotiate from ' + agencyRateText(quote.standardBps) + ' towards ' + agencyRateText(quote.proposedBps) : 'Standard commission ' + agencyRateText(quote.standardBps)) + ' · ' + descriptions[tier], disabledReason: reason(tier, negotiate) };
-    })), id => { const [tier, mode] = id.split(':'); onChange(tier as 'independent' | 'boutique' | 'major', mode === 'negotiate'); })} />
+    <Button label="Review Representation" disabled={busy} onPress={() => dialog.select('Choose representation', 'Choose an agency for future contracts. Signed work keeps its agreed terms.', (['independent', 'boutique', 'major'] as const).map(tier => ({ id: tier, label: name(tier) + ' · ' + agencyRateText(creativeAgencyQuote(career, tier, false).standardBps) + ' commission · ' + descriptions[tier], disabledReason: reason(tier) })), id => onChange(id as 'independent' | 'boutique' | 'major', false))} />
     {agency.tier !== 'independent' && <><ActionRow title="Negotiate Representation" subtitle="Discuss the commission on future agreements" disabled={busy} disabledReason={reason(agency.tier, true)} onPress={() => onChange(agency.tier, true)} /><ActionRow title="Fire Your Agent" subtitle="Become independent; keep signed obligations and past work" disabled={busy} disabledReason={quarterReason} onPress={() => onChange('independent', false)} /></>}
-    {agency.history.length > 0 && <ActionRow title="Agency History" subtitle={agency.history.length + ' retained agreements' + (agency.archived ? ' · ' + agency.archived + ' earlier changes summarised' : '')} disabled={busy} onPress={() => dialog.info('Your representation history', 'Earlier agreements and their commission rates remain recorded. Each 100 basis points equals 1% commission.', [...agency.history].reverse().map((entry, index) => ({ id: String(index), label: name(entry.tier) + ' · ' + entry.started.year + (entry.ended ? '–' + entry.ended.year : ' onwards'), value: agencyRateText(entry.commissionBps) + ' · ' + entry.reason, tone: 'neutral' })))} />}
+    {agency.history.length > 0 && <ActionRow title="Agency History" subtitle={agency.history.length + ' retained agreements' + (agency.archived ? ' · ' + agency.archived + ' earlier changes summarised' : '')} disabled={busy} onPress={() => dialog.info('Your representation history', 'Earlier agreements and their commission rates remain recorded. ', [...agency.history].reverse().map((entry, index) => ({ id: String(index), label: name(entry.tier) + ' · ' + entry.started.year + (entry.ended ? '–' + entry.ended.year : ' onwards'), value: agencyRateText(entry.commissionBps) + ' · ' + entry.reason, tone: 'neutral' })))} />}
   </Card>;
 }
-export function CreativeOfferCard({ offer, money, reason, busy, onReview, onNegotiate, onDecline, label }: {
+export function CreativeOfferCard({ offer, money, reason, busy, onReview, label }: {
   offer: CreativeOffer; money: (amount: bigint) => string; reason?: string; busy: boolean;
-  onReview: () => void; onNegotiate?: () => void; onDecline: () => void; label: string;
+  onReview: () => void; label: string;
 }) {
   const [details, setDetails] = useState(false);
-  return <Card><Heading size={19}>{offer.title}</Heading><Body>{creativeLabel(offer.category)} · {offer.role} · {offer.genre}</Body>
+  return <Card><Heading size={19}>{offer.title}</Heading><Body>{creativeLabel(offer.category)} · {creativeLabel(offer.role)} · {offer.genre}</Body>
     <SocialBusinessFacts items={[{ label: 'Expected contractual gross', value: money(offerGross(offer)), note: offer.months + ' months · Before commission and tax' }, { label: 'Potential', value: 'Prestige ' + offer.prestige + ' · Popularity ' + offer.popularity }]} />
     {offer.exclusivity && <Body muted>Exclusive agreement: competing endorsements carry consequences.</Body>}
     <ActionRow title="Requirements & Risks" value={details ? 'Hide' : 'Show'} accessibilityState={{ expanded: details }} onPress={() => setDetails(!details)} />
@@ -85,8 +83,7 @@ export function CreativeOfferCard({ offer, money, reason, busy, onReview, onNego
     {offer.status !== 'open' ? <Body muted>{creativeLabel(offer.status)}</Body> : <>
       {reason && <Body muted>{reason}</Body>}
       <Button label={label} accessibilityLabel={label + ' for ' + offer.title} disabled={busy || !!reason} onPress={onReview} />
-      {onNegotiate && <Button label="Negotiate & Audition" accessibilityLabel={'Negotiate and audition for ' + offer.title} tone="secondary" disabled={busy || !!reason} onPress={onNegotiate} />}
-      <ActionRow title={'Decline ' + offer.title} subtitle="Keep your time for other work" disabled={busy} onPress={onDecline} />
+
     </>}
   </Card>;
 }
@@ -107,26 +104,32 @@ export function CreativeMilestones({ industry, title = 'Career Milestones' }: { 
   return <Card><Heading size={20}>{title}</Heading>{industry.milestones.length ? industry.milestones.map(milestone => <Body key={milestone}>• {creativeLabel(milestone)}</Body>) : <Body muted>Your first credits, breakthroughs and recoveries will be recorded here.</Body>}</Card>;
 }
 export function CreativeHistory({ career, title }: { career: Career; title: string }) {
+  const [castingPage, setCastingPage] = useState(0);
+  const industry = career.actor?.industry ?? career.modelCareer?.industry;
+  const archived = industry?.castingHistory ?? [], archivedIds = new Set(archived.map(row => row.offer.id));
+  const casting = [...archived, ...(industry?.board.filter(offer => offer.status !== 'open' && !archivedIds.has(offer.id)).map(offer => ({ country: career.actor?.boardCountry ?? career.modelCareer?.boardCountry ?? career.country, season: industry.boardSeason, offer })) ?? [])].sort((a, b) => b.season - a.season || b.offer.id.localeCompare(a.offer.id));
+  const lastCastingPage = Math.max(0, Math.ceil(casting.length / 4) - 1), shownCastingPage = Math.min(castingPage, lastCastingPage);
   const [page, setPage] = useState(0), history = useMemo(() => [...career.projects, ...(career.creativeArchives ?? [])].filter(project => project.status !== 'active').sort((a, b) => b.started.year - a.started.year || b.started.month - a.started.month || b.started.day - a.started.day || b.id.localeCompare(a.id)), [career.projects, career.creativeArchives]), maxPage = Math.max(0, Math.ceil(history.length / 4) - 1), currentPage = Math.min(page, maxPage);
   const money = (amount: bigint, currency: Career['currency']) => formatMoney({ minor: amount, currency });
   return <Card><Heading size={20}>{title}</Heading>{!history.length && <Body muted>Your completed and interrupted work will stay here.</Body>}
     {history.slice(currentPage * 4, currentPage * 4 + 4).map(project => <Card key={project.id}>
       <Heading size={18}>{project.name}</Heading><Body muted>{project.status === 'cancelled' ? career.kind === 'model' ? 'Unfinished booking' : 'Unfinished production' : 'Completed'} · {project.ended?.year} · {project.months} contract months</Body>
-      {project.creative && <Body>{project.creative.role} · {creativeLabel(project.creative.category)}</Body>}
+      {project.creative && <Body>{creativeLabel(project.creative.role)} · {creativeLabel(project.creative.category)}</Body>}
       <SocialBusinessFacts items={[{ label: 'Actual gross earnings', value: money(project.grossEarned, project.currency) }, ...(project.creative ? [{ label: 'Agency commission paid', value: money(project.creative.commissionPaid, project.currency) }] : [])]} />
       {project.creative?.cancellation && <Body>{project.creative.cancellation.summary}</Body>}
       {project.creative?.release && project.status === 'cancelled' && <><Body muted>Earlier saved outcome</Body><Body>{project.creative.release.summary}</Body></>}
-      {project.creative?.release && project.status === 'completed' && <><Body>{project.creative.release.summary}</Body><Body muted>{project.creative.kind === 'model' ? 'Industry reception' : 'Critical reception'} {project.creative.release.critical}% · Audience reception {project.creative.release.audience}% · {project.creative.kind === 'model' && project.creative.release.commercial === 'blockbuster' ? 'Major success' : creativeLabel(project.creative.release.commercial)}</Body>{project.creative.release.nomination && <Body>Award nomination</Body>}</>}
+      {project.creative?.release && project.status === 'completed' && <><Body>{project.creative.release.summary}</Body><Body muted>{project.creative.kind === 'model' ? 'Industry reception' : 'Critical reception'} {project.creative.release.critical}% · Audience reception {project.creative.release.audience}% · {creativeReceptionLabel(project.creative.category, project.creative.release.commercial)}</Body>{project.creative.release.nomination && <Body>Award nomination</Body>}</>}
       {project.award && <Body>{project.award}</Body>}
     </Card>)}
     {history.length > 4 && <><Body muted>Work {currentPage * 4 + 1}–{Math.min(history.length, currentPage * 4 + 4)} of {history.length}</Body><View style={{ gap: 8 }}><Button label="Newer Work" tone="secondary" disabled={currentPage === 0} onPress={() => setPage(Math.max(0, currentPage - 1))} /><Button label="Earlier Work" tone="secondary" disabled={currentPage === maxPage} onPress={() => setPage(currentPage + 1)} /></View></>}
+    {casting.length > 0 && <><Heading size={18}>Casting Decisions</Heading>{casting.slice(shownCastingPage * 4, shownCastingPage * 4 + 4).map(({ country, season, offer }) => <View key={offer.id} style={{ gap: 4 }}><Body>{offer.title}</Body><Body muted>{creativeLabel(offer.status)} · {creativeLabel(offer.role)} · {country} · Q{season % 4 + 1} {Math.floor(season / 4)}</Body></View>)}{casting.length > 4 && <><Button label="Recent Casting" tone="secondary" disabled={shownCastingPage === 0} onPress={() => setCastingPage(shownCastingPage - 1)} /><Button label="Earlier Casting" tone="secondary" disabled={shownCastingPage === lastCastingPage} onPress={() => setCastingPage(shownCastingPage + 1)} /></>}</>}
   </Card>;
 }
 export function CreativeCurrentProject({ career }: { career: Career }) {
   const c = useColors(), project = career.projects.find(item => item.status === 'active');
   if (!project?.creative) return null;
   const money = (amount: bigint) => formatMoney({ minor: amount, currency: project.currency });
-  return <Card><Heading size={20}>{project.name}</Heading><Body>{project.creative.role} · {project.creative.genre}</Body>
+  return <Card><Heading size={20}>{project.name}</Heading><Body>{creativeLabel(project.creative.role)} · {project.creative.genre}</Body>
     <StatBar label="Production" value={Math.round(project.months * 100 / project.targetMonths)} color={c.blue} />
     <SocialBusinessFacts items={[{ label: 'Contract progress', value: project.months + ' / ' + project.targetMonths + ' months' }, { label: 'Gross earned', value: money(project.grossEarned) }, { label: 'Commission paid', value: money(project.creative.commissionPaid) }, { label: 'After commission, before tax', value: money(project.grossEarned - project.creative.commissionPaid) }]} />
     <Body muted>Pay arrives only during actual working months. Your decisions affect quality, relationships and the eventual response.</Body>

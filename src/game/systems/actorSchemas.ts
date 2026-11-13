@@ -5,7 +5,7 @@ export const actingStyles = ['versatile', 'craft', 'popular'] as const;
 export const actorProductionActionIds = ['prepare', 'stunt', 'improvise', 'reshoot', 'publicity', 'cooperate'] as const;
 export const actorStateSchema = z.object({
   industry: industryStateSchema, boardCountry: z.enum(countryCodes), boardSeed: z.number().int().min(0).max(0xFFFFFFFF),
-  savedBoards: z.array(z.object({ country: z.enum(countryCodes), season: z.number().int(), offers: z.array(creativeOfferSchema).max(8) })).max(9),
+  savedBoards: z.array(z.object({ country: z.enum(countryCodes), season: z.number().int(), offers: z.array(creativeOfferSchema).max(8) })).max(countryCodes.length),
   credits: z.number().int().nonnegative(), leadingCredits: z.number().int().nonnegative(), hits: z.number().int().nonnegative(),
   nominations: z.number().int().nonnegative(), awards: z.number().int().nonnegative(), collapseCount: z.number().int().nonnegative(),
   comeback: z.boolean(), style: z.enum(actingStyles), lastStyleMonth: z.number().int().optional(),

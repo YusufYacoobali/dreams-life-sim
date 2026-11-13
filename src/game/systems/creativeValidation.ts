@@ -15,6 +15,8 @@ export function validateCreativeCareers(world: World) {
     for (const changed of [career.actor?.lastStyleMonth, career.modelCareer?.lastSpecialisationMonth]) if (changed !== undefined && (changed < career.started.year * 12 + career.started.month - 1 || changed > month)) throw new Error('Invalid career strategy date');
     if (new Set(industry.milestones).size !== industry.milestones.length || new Set(industry.seenStories).size !== industry.seenStories.length || new Set(industry.board.map(offer => offer.id)).size !== industry.board.length) throw new Error('Duplicate industry records');
     if (Object.values(industry.contacts).some(id => !world.people[id] || id === career.personId) || new Set(Object.values(industry.contacts)).size !== Object.values(industry.contacts).length) throw new Error('Invalid industry contacts');
+    const castingHistory = industry.castingHistory ?? [];
+    if (new Set(castingHistory.map(row => row.offer.id)).size !== castingHistory.length || castingHistory.some(row => row.offer.status === 'open' || row.season > Math.floor(month / 3))) throw new Error('Invalid casting decision history');
     const rep = industry.representation;
     if (rep.tier === 'independent' && (rep.agentId || rep.commissionBps) || rep.agentId && !world.people[rep.agentId] || rep.history.some(record => record.agentId && !world.people[record.agentId])) throw new Error('Invalid agency representation');
     let gross = 0n, commission = 0n;

@@ -172,6 +172,8 @@ test.each(['actor', 'model'] as const)('%s reviews the selected saved opportunit
   const view = await render(frame(kind === 'actor' ? <ActorDashboard /> : <ModelCareerDashboard />));
   await press((kind === 'actor' ? 'Review Audition for ' : 'Review Casting for ') + offer.title);
   expect(screen.getByRole('header', { name: kind === 'actor' ? 'Audition for ' + offer.title + '?' : 'Attend the casting for ' + offer.title + '?' })).toBeTruthy();
+  expect(screen.queryByRole('button', { name: /Review New Casting List|Review New Bookings/ })).toBeNull();
+  if (kind === 'actor') expect(screen.getByRole('button', { name: 'Negotiate Terms' })).toBeOnTheScreen();
   expect(mockStore.getState().world!.revision).toBe(originalRevision);
   await press(kind === 'actor' ? 'Attend Audition' : 'Attend Casting');
   const saved = mockStore.getState().world!, savedCareer = saved.careers.find(item => item.kind === kind)!, savedIndustry = kind === 'actor' ? savedCareer.actor!.industry : savedCareer.modelCareer!.industry;
@@ -192,14 +194,20 @@ test('agency terms display fractional commission exactly instead of rounding the
   mockStore.setState({ world: amended });
   const view = await render(frame(<ModelCareerDashboard />));
   expect(screen.getByLabelText('Commission on future contracts: 10.5%')).toHaveTextContent('10.5%');
-  await press(/^Agency History/); expect(screen.getByText(/1,050 basis points/)).toBeTruthy();
+  await press(/^Agency History/); expect(screen.getByText(/10.5%/)).toBeTruthy();
   await view.unmount(); sqlite.close();
 });
 
-test('new representation shows the standard and possible negotiated commission before signing', async () => {
+test('representation has three unique choices and negotiation stays on the dashboard with exact terms', async () => {
   const { sqlite, repository } = await setup(); await mockStore.getState().dispatch({ type: 'model-enter' }); await acknowledge();
+  await mockStore.getState().dispatch({ type: 'model-agency', tier: 'boutique', negotiate: false }); await acknowledge();
+  const prepared = copyWorld(mockStore.getState().world!);
+  delete prepared.actionCounts[prepared.activePersonId + ':model:agency:' + Math.floor((prepared.date.year * 12 + prepared.date.month - 1) / 3)];
+  mockStore.setState({ world: prepared });
   const before = await repository.export(mockStore.getState().world!.id), view = await render(frame(<ModelCareerDashboard />));
-  await press('Review Representation'); await press(/^Boutique Fashion Agency · Negotiate from 12% towards 10%/, 'radio'); await press('Choose');
+  await press('Review Representation'); expect(screen.getAllByRole('radio')).toHaveLength(3);
+  expect(screen.queryByRole('radio', { name: /Negotiate from/ })).toBeNull();
+  await press('Never mind'); await press(/^Negotiate Representation/);
   expect(screen.getByRole('header', { name: 'Negotiate your representation?' })).toBeTruthy();
   const terms = within(screen.UNSAFE_getByType(Modal));
   expect(terms.getByText('Rate if the request is declined')).toBeTruthy(); expect(terms.getByText('12%')).toBeTruthy();
@@ -247,4 +255,27 @@ test('contract settlement display sums actual cash repayments and excludes estat
     { ...sample, id: 'interest', liabilityId: 'brand_claim', cashDelta: -10n, debtDelta: 0n },
   ]);
   expect(payments.get('brand_claim')).toBe(150n);
+});
+
+
+test('an active brand agreement precedes portfolio work and its prominent fulfilment retries one durable appearance', async () => {
+  const world = creativeBook(experiencedCreative('model'), 'model', 'ambassador');
+  const { sqlite, driver } = database(), repository = new SaveRepository(driver);
+  try {
+    await repository.initialise(); await repository.create(world);
+    mockStore = createGameStore({ repository: async () => repository, date: () => world.date, id: () => 'unused' }); await mockStore.getState().bootstrap();
+    const view = await render(frame(<ModelCareerDashboard />));
+    const titles = screen.getAllByRole('header').map(node => node.props.children);
+    expect(titles.indexOf('Active Brand Agreements')).toBeLessThan(titles.indexOf('Portfolio & Modelling Identity'));
+    const brand = creativeCareer(world, 'model').modelCareer!.brands.find(row => row.status === 'active')!;
+    await press('Fulfil Agreement for ' + brand.name);
+    sqlite.exec("CREATE TRIGGER fail_brand_fulfil BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
+    await press('Fulfil Agreement'); await waitFor(() => expect(screen.getByRole('alert')).toHaveTextContent(/couldn't be saved/));
+    expect(encodeWorld(await repository.load(world.id))).toBe(encodeWorld(world));
+    sqlite.exec('DROP TRIGGER fail_brand_fulfil'); await press('Fulfil Agreement');
+    const saved = mockStore.getState().world!;
+    expect(creativeCareer(saved, 'model').modelCareer!.brands.find(row => row.id === brand.id)!.fulfilled).toBe(brand.fulfilled + 1);
+    expect(encodeWorld(await repository.load(world.id))).toBe(encodeWorld(saved));
+    await view.unmount();
+  } finally { sqlite.close(); }
 });

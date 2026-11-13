@@ -61,7 +61,7 @@ export type EventPresentation = {
 } & (
   | { kind: 'decision'; choices: readonly Choice[] }
   | { kind: 'selection'; choices: readonly Choice[]; confirmLabel: string }
-  | { kind: 'confirmation'; terms: readonly EffectRow[]; confirmLabel: string }
+  | { kind: 'confirmation'; terms: readonly EffectRow[]; confirmLabel: string; action?: { id: string; label: string } }
   | { kind: 'result'; effects: readonly EffectRow[]; continueLabel?: string }
   | {
       kind: 'milestone';
@@ -801,6 +801,7 @@ function EventCard({
                   onPress={() => choose('confirm')}
                 />
               )}
+              {event.kind === 'confirmation' && event.action && <Button label={event.action.label} tone="secondary" disabled={busy} onPress={() => choose(event.action!.id)} />}
               {event.kind === 'milestone' && event.action && (
                 <Button
                   label={event.action.label}

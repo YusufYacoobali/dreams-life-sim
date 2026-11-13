@@ -116,7 +116,7 @@ test('a two-year career can lose representation through actual failed releases a
   }
   let career = actorCareer(world)!;
   expect(career.actor!.industry.representation.tier).toBe('independent'); expect(career.actor!.collapseCount).toBe(1); expect(career.actor!.industry.milestones).toContain('career-collapse');
-  world = act(world, { type: 'actor-refresh-offers' }); world.people[world.activePersonId].skills.acting = 100; world.people[world.activePersonId].stats.discipline = 100;
+  expect(actorCareer(world)!.actor!.industry.boardSeason).toBe(Math.floor((world.date.year * 12 + world.date.month - 1) / 3)); world.people[world.activePersonId].skills.acting = 100; world.people[world.activePersonId].stats.discipline = 100;
   world = act(world, { type: 'actor-style', style: 'craft' }); world = booked(world, 'theatre');
   career = actorCareer(world)!; career.projects.at(-1)!.creative!.criticRoll = 1; world.people[world.activePersonId].employment!.performance = 100;
   world = act(world, { type: 'actor-production', action: 'prepare' }); world = act(world, { type: 'actor-production', action: 'cooperate' });

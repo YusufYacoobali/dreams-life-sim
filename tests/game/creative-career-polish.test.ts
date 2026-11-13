@@ -242,3 +242,17 @@ test('every category has distinct, deterministic writing for acclaim, cult appea
     expect(new Set(all).size).toBe(all.length); expect(all.every(text => text.length > 65)).toBe(true);
   }
 });
+
+
+test.each(['actor', 'model'] as const)('%s a major success at maximum earned fame reports the actual zero gain without changing saved results', kind => {
+  let world = creativeBook(experiencedCreative(kind), kind, kind === 'actor' ? 'studio-film' : 'ambassador');
+  const person = world.people[world.activePersonId]; gainPublicFame(world, person, 100 - person.publicLife.earnedFame);
+  const project = creativeCareer(world, kind).projects.at(-1)!;
+  project.creative!.criticRoll = project.creative!.audienceRoll = 1;
+  project.creative!.publicity = 40; person.employment!.performance = 100;
+  for (let month = 0; month < project.targetMonths; month++) { world = creativePeriod(world); if (month < project.targetMonths - 1) world = drainCreative(world); }
+  const release = creativeCareer(world, kind).projects.at(-1)!.creative!.release!;
+  expect(release.fame).toBe(0); expect(world.people[world.activePersonId].publicLife.earnedFame).toBe(100);
+  expect(release.audience).toBeGreaterThanOrEqual(65);
+  expect(world.pending?.kind === 'result' && world.pending.effects.find(row => row.id === 'fame')?.value).toBe('At maximum fame');
+});

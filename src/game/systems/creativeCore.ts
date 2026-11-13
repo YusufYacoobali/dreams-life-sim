@@ -1,7 +1,7 @@
 import { fxRate } from '../valuation';
 import type { World } from '../model';
 import { ageOn, fullName } from '../personHelpers';
-import { countries } from '../countries';
+import { countries, type CountryCode } from '../countries';
 import { rules } from '../rules';
 import { roundRatio, formatMoney, convertMoney } from '../money';
 import { IneligibleAction } from '../errors';
@@ -20,6 +20,14 @@ import { creativeMonthNumber, agencyTiers, type CreativeKind, type CreativeOffer
 export type CreativeCareer = Career;
 export type CreativeWork = Career['projects'][number];
 export function getIndustry(career: Career): IndustryState | undefined { return career.kind === 'actor' ? career.actor?.industry : career.kind === 'model' ? career.modelCareer?.industry : undefined; }
+/** Archive answered offers at a gameplay boundary; browsing never changes a board. */
+export function archiveCastingBoard(industry: IndustryState, country: CountryCode) {
+  const answered = industry.board.filter(offer => offer.status !== 'open');
+  if (!answered.length) return;
+  const history = industry.castingHistory ??= [];
+  const known = new Set(history.map(row => row.offer.id));
+  for (const offer of answered) if (!known.has(offer.id)) history.push({ country, season: industry.boardSeason, offer: { ...offer } });
+}
 export function ensureCreativeCareer(world: World, kind: CreativeKind): Career {
   const person = active(world), age = ageOn(person, world.date), definition = careerCatalog[kind];
   if (age < definition.minAge || age > definition.maxAge) throw new IneligibleAction('Explore this career between ages ' + definition.minAge + ' and ' + definition.maxAge + '.');

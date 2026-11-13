@@ -14,8 +14,8 @@ import { romanceCommandSchema, type RomanceCommand } from './systems/romanceSche
 import { resolveRomance, resolveRomanceChoice, romanceYear, refreshRomance } from './systems/romanceDrama';
 import { escapeContext } from '../minigames/core/eligibility';
 import { resolveReservedEscape } from './systems/legal';
-import { actorCommandSchema, type ActorCommand, resolveActor, actorMonth, actorExit } from './systems/actor';
-import { modelCareerCommandSchema, type ModelCareerCommand, resolveModelCareer, modelCareerMonth, modelCareerExit, modelSponsorshipReason } from './systems/modelCareer';
+import { actorCommandSchema, type ActorCommand, resolveActor, actorMonth, actorExit, refreshActorOpportunities } from './systems/actor';
+import { modelCareerCommandSchema, type ModelCareerCommand, resolveModelCareer, modelCareerMonth, modelCareerExit, modelSponsorshipReason, refreshModelOpportunities } from './systems/modelCareer';
 import { creativeStoriesMonth, resolveCreativeChoice, cancelCreativeDecision, offerCreativeStory } from './systems/creativeEvents';
 import { compactCreativeHistory } from './systems/creativeArchive';
 import { cultCommandSchema, type CultCommand } from './systems/cultSchemas';
@@ -222,6 +222,7 @@ function processMonth(world: World) {
     }
     compactCreativeHistory(career);
   }
+  refreshActorOpportunities(world); refreshModelOpportunities(world);
   refreshRoyalSuccession(world,'background');
   for(const loss of serviceFatalities){recordDeath(world,loss.personId,loss.cause);if(world.people[world.activePersonId].died)return;}
   for (const person of Object.values(world.people)) {
@@ -276,7 +277,7 @@ function finishYear(world: World) {
     offerPending(world, bindEvent(world, template));
     world.eventHistory.push({ templateId: template.id, year: world.date.year });
   } else {
-    const text = isConfined(world) ? 'Another birthday arrived in custody. My routine and the people I missed shaped the year.' : age < 3 ? 'I grew a little more confident in a world full of things to investigate.' : age < 18 ? 'Another birthday arrived. Some days felt much bigger than others.' : 'Another year passed. The ordinary days were part of my life too.';
+    const text = isConfined(world) ? 'Another birthday arrived in custody. My routine and the people I missed shaped the year.' : age < 3 ? 'I grew a little more confident in a world full of things to investigate.' : age < 18 ? 'Another birthday arrived. Some days felt much bigger than others.' : 'I turned ' + age + '.';
     journal(world, frame.id + '_quiet', text, 'year');
     offerPending(world, { kind: 'result', id: frame.id + '_summary', title: 'Age ' + age, body: text, illustration: 'journal', effects: [] });
   }
@@ -573,6 +574,7 @@ export function resolveCommand(previous: World, command: GameCommand, immutable 
     compactCreativeHistory(career);
   }
   if (command.type === 'actor-production' || command.type === 'model-production') { const career = world.careers.find(item => item.personId === world.activePersonId && item.kind === (command.type === 'actor-production' ? 'actor' : 'model')); if (career) offerCreativeStory(world, career, true); }
+  refreshActorOpportunities(world); refreshModelOpportunities(world);
   refreshRoyalSuccession(world,'background');
   refreshStudyCourses(world);
   refreshUniversityApplications(world);

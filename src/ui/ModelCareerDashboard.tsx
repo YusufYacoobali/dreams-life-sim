@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import { View } from 'react-native';
 import { router } from 'expo-router';
 import { useGame } from '../state/useGame';
 import { countries } from '../game/countries';
@@ -33,7 +34,7 @@ export function ModelCareerDashboard() {
   const portfolioMoney = (minor: bigint) => formatMoney({ minor, currency: countries[person.country].currency });
   const referenceMoney = (minor: bigint) => formatMoney({ minor, currency: person.finance.earningsCurrency });
   const industry = state.industry, totals = creativeTotals(world, career, industry), active = career.status === 'active', project = career.projects.find(item => item.status === 'active');
-  const quarter = Math.floor((world.date.year * 12 + world.date.month - 1) / 3), refreshReason = active ? 'Finish your current booking first' : industry.boardSeason === quarter && state.boardCountry === person.country ? 'New casting opportunities arrive next quarter' : undefined;
+  const quarter = Math.floor((world.date.year * 12 + world.date.month - 1) / 3);
   const hasClaim = (brand: typeof state.brands[number]) => !!brand.penaltyLiabilityId && (world.liabilities.find(item => item.id === brand.penaltyLiabilityId)?.principal ?? 0n) > 0n;
   const brandRows = [...state.brands].reverse().sort((a, b) => Number(b.status === 'active' || hasClaim(b)) - Number(a.status === 'active' || hasClaim(a)));
   const reviewCasting = (offer: CreativeOffer) => {
@@ -70,12 +71,25 @@ export function ModelCareerDashboard() {
       dialog.confirm({ type: 'model-portfolio', specialisation, style, quotedCost: cost }, 'Arrange this portfolio shoot?', style === 'professional' ? 'Pay the quoted shoot budget to strengthen this portfolio area and your professionalism. A stronger portfolio improves your chances at later castings.' : 'Develop this portfolio area with your own creative planning and effort.', [{ id: 'cost', label: 'Actual payment', value: portfolioMoney(cost), tone: cost ? 'negative' : 'neutral' }], 'Arrange Portfolio Shoot');
     });
   });
+  const brandAgreement = (brand: typeof state.brands[number]) => {
+        const debt = brand.penaltyLiabilityId ? world.liabilities.find(item => item.id === brand.penaltyLiabilityId) : undefined;
+        const outstanding = debt?.principal ?? 0n, actualPaid = brand.penaltyLiabilityId ? settlementPayments.get(brand.penaltyLiabilityId) ?? 0n : brand.penaltyPaid, brandMoney = (amount: bigint) => formatMoney({ minor: amount, currency: brand.currency });
+        return <Card key={brand.id}><Heading size={18}>{brand.name}</Heading><Body>{creativeLabel(brand.sector)} · {creativeLabel(brand.status)}</Body><Body>Original booking fee: {brandMoney(brand.agreedFee)}</Body><Body muted>Appearances remaining: {Math.max(0, brand.obligations - brand.fulfilled)} · Rights end {Math.floor(brand.ends / 12)}-{String(brand.ends % 12 + 1).padStart(2, '0')}</Body>{actualPaid > 0n && <Body>Settlement paid: {brandMoney(actualPaid)}</Body>}
+        {outstanding > 0n && <Body>Outstanding settlement: {brandMoney(outstanding)}</Body>}
+        {(brand.status === 'active' ? ['fulfil', 'renegotiate', 'breach'] as const : outstanding > 0n ? ['breach'] as const : []).map(action => {
+          const label = action === 'fulfil' ? 'Fulfil Agreement' : action === 'renegotiate' ? 'Negotiate Agreement' : outstanding > 0n ? 'Settle Contract Claim' : 'Break Exclusivity', cost = modelBrandQuote(world, brand, action);
+          const review = () => dialog.confirm({ type: 'model-brand', brandId: brand.id, action, quotedCost: cost }, label + '?', action === 'breach' ? outstanding > 0n ? 'Pay the recorded outstanding contract claim. Previous payments and work stay in your history.' : 'Pay the agreed settlement to break these exclusive rights. This affects the client relationship and your professional standing; completed payments remain recorded.' : action === 'fulfil' ? 'Fulfil an actual obligation under this agreement. It adds no second salary or sponsorship payment.' : 'Ask the brand to revise the remaining terms. Your standing and working relationship determine whether it agrees.', cost ? [{ id: 'cost', label: 'Actual payment', value: brandMoney(cost), tone: 'negative' }] : [], label);
+          const reason = modelBrandReason(world, brand, action);
+          return action === 'fulfil' ? <View key={action} style={{ gap: 6 }}>{reason && <Body muted>{reason}</Body>}<Button label={label} accessibilityLabel={label + ' for ' + brand.name} busy={busy} disabled={!!reason} onPress={review} /></View> : <ActionRow key={action} title={label} subtitle={(action === 'renegotiate' ? 'Review remaining terms with ' : 'Review the settlement for ') + brand.name} disabled={busy} disabledReason={modelBrandReason(world, brand, action)} onPress={review} />;
+        })}
+      </Card>; };
   return <Page><Header title="Model" onBack={() => router.back()} /><CreativeError error={!dialog.open ? error : null} />
     <Card><SocialBusinessIntro art={<CareerArt id="model" size={72} />} title="Your Modelling Career" eyebrow={active ? 'Booked · ' + project?.name : career.status === 'between' ? 'Between bookings' : creativeLabel(career.status)} body="A memorable editorial, a reliable commercial campaign and an exclusive luxury agreement reward different choices. Build the career that fits your portfolio." />
       <StatBar label="Modelling" value={person.skills.modeling} color={c.blue} /><StatBar label="Industry reputation" value={career.reputation} color={c.green} />
       <SocialBusinessFacts items={[{ label: 'Completed bookings', value: String(industry.completed) }, { label: 'Professionalism', value: state.professionalism + '%' }, { label: 'Recorded gross earnings', value: referenceMoney(totals.gross), note: 'Before commission and tax' }, { label: 'Agency commission paid', value: referenceMoney(totals.commission) }]} />
       <ActionRow title="Skills & Training" subtitle="Develop presentation, technique and professional experience" icon={<CareerArt id="training" size={36} />} onPress={() => router.push('/career-training')} />
     </Card>
+    {brandRows.some(brand => brand.status === 'active') && <Card><Heading size={20}>Active Brand Agreements</Heading>{brandRows.filter(brand => brand.status === 'active').map(brandAgreement)}</Card>}
     {['left', 'retired'].includes(career.status) && <Card><Heading size={20}>Return to Modelling</Heading>{entryReason && <Body muted>{entryReason}</Body>}<Button label="Review Modelling Return" disabled={busy || !!entryReason} onPress={() => dialog.confirm({ type: 'model-enter' }, 'Return to modelling?', 'Keep your portfolio, past clients and industry history. Review your next booking before committing to work.', [], 'Return to Modelling')} /></Card>}
     <CreativeAgency world={world} career={career} industry={industry} busy={busy} dialog={dialog} kind="model" onChange={agency} />
     <Card><Heading size={20}>Portfolio & Modelling Identity</Heading><Body muted>Your work builds experience in each area. Choose up to three specialisations and develop your own presentation and style.</Body>
@@ -89,23 +103,11 @@ export function ModelCareerDashboard() {
       {modelProductionActions.map(action => <ActionRow key={action.id} title={action.title} subtitle={action.description} disabled={busy} disabledReason={modelProductionReason(world, project.id, action.id)} onPress={() => dialog.confirm({ type: 'model-production', projectId: project.id, action: action.id }, action.title + '?', action.description, [], 'Choose This Approach')} />)}
     </Card></>}
     <Card><Heading size={20}>Castings & Bookings</Heading><CreativeBookingClause world={world} industry={industry} /><Body muted>Weigh the fee, prestige, commitment and any exclusive rights. Fees arrive during paid production months. Exclusive rights and obligations may continue after production ends.</Body>
-      {refreshReason && <Body muted>{refreshReason}</Body>}<Button label="Review New Bookings" tone="secondary" disabled={busy || !!refreshReason} onPress={() => dialog.confirm({ type: 'model-refresh-offers' }, 'Review this quarter’s bookings?', 'New castings appear as the calendar moves. Revisiting the list keeps recorded responses and existing contracts unchanged.', [], 'Review Booking List')} />
+
     </Card>
-    {industry.board.map(offer => <CreativeOfferCard key={offer.id} offer={offer} money={boardMoney} reason={modelOfferReason(world, offer)} busy={busy} label="Review Casting" onReview={() => reviewCasting(offer)} onDecline={() => dialog.confirm({ type: 'model-decline', offerId: offer.id }, 'Decline ' + offer.title + '?', 'Pass on this opportunity and keep the rest of the list available.', [], 'Decline Booking')} />)}
-    <Card><Heading size={20}>Brand Relationships & Agreements</Heading><Body muted>Exclusive rights can outlast production. Check the remaining obligations before accepting competing endorsements.</Body>
-      {!state.brands.length && <Body muted>Ambassador and luxury agreements will appear here when you sign one.</Body>}
-      {brandRows.slice(0, 8).map(brand => {
-        const debt = brand.penaltyLiabilityId ? world.liabilities.find(item => item.id === brand.penaltyLiabilityId) : undefined;
-        const outstanding = debt?.principal ?? 0n, actualPaid = brand.penaltyLiabilityId ? settlementPayments.get(brand.penaltyLiabilityId) ?? 0n : brand.penaltyPaid, brandMoney = (amount: bigint) => formatMoney({ minor: amount, currency: brand.currency });
-        return <Card key={brand.id}><Heading size={18}>{brand.name}</Heading><Body>{creativeLabel(brand.sector)} · {creativeLabel(brand.status)}</Body><Body>Original booking fee: {brandMoney(brand.agreedFee)}</Body><Body muted>Obligations fulfilled: {brand.fulfilled} / {brand.obligations} · Rights end {Math.floor(brand.ends / 12)}-{String(brand.ends % 12 + 1).padStart(2, '0')}</Body>{actualPaid > 0n && <Body>Settlement paid: {brandMoney(actualPaid)}</Body>}
-        {outstanding > 0n && <Body>Outstanding settlement: {brandMoney(outstanding)}</Body>}
-        {(brand.status === 'active' ? ['fulfil', 'renegotiate', 'breach'] as const : outstanding > 0n ? ['breach'] as const : []).map(action => {
-          const label = action === 'fulfil' ? 'Fulfil Agreement' : action === 'renegotiate' ? 'Negotiate Agreement' : outstanding > 0n ? 'Settle Contract Claim' : 'Break Exclusivity', cost = modelBrandQuote(world, brand, action);
-          return <ActionRow key={action} title={label} subtitle={(action === 'fulfil' ? 'Attend an agreed obligation for ' : action === 'renegotiate' ? 'Review remaining terms with ' : 'Review the settlement for ') + brand.name} disabled={busy} disabledReason={modelBrandReason(world, brand, action)} onPress={() => dialog.confirm({ type: 'model-brand', brandId: brand.id, action, quotedCost: cost }, label + '?', action === 'breach' ? outstanding > 0n ? 'Pay the recorded outstanding contract claim. Previous payments and work stay in your history.' : 'Pay the agreed settlement to break these exclusive rights. This affects the client relationship and your professional standing; completed payments remain recorded.' : action === 'fulfil' ? 'Fulfil an actual obligation under this agreement. It adds no second salary or sponsorship payment.' : 'Ask the brand to revise the remaining terms. Your standing and working relationship determine whether it agrees.', cost ? [{ id: 'cost', label: 'Actual payment', value: brandMoney(cost), tone: 'negative' }] : [], label)} />;
-        })}
-      </Card>; })}
-      {state.brands.length > 8 && <ActionRow title="Earlier Brand Agreements" subtitle={state.brands.length - 8 + ' more retained agreements'} onPress={() => dialog.info('Earlier brand agreements', 'Completed, cancelled and breached agreements keep their recorded histories.', brandRows.slice(8).map(brand => ({ id: brand.id, label: brand.name, value: creativeLabel(brand.status) + ' · ' + brand.fulfilled + '/' + brand.obligations + ' obligations', tone: 'neutral' })))} />}
-    </Card>
+    {industry.board.filter(offer => offer.status === 'open' && offer.expires > creativeMonthNumber(world)).map(offer => <CreativeOfferCard key={offer.id} offer={offer} money={boardMoney} reason={modelOfferReason(world, offer)} busy={busy} label="Review Casting" onReview={() => reviewCasting(offer)} />)}
+
+    {brandRows.some(brand => brand.status !== 'active') && <Card><Heading size={20}>Brand History & Settlements</Heading>{brandRows.filter(brand => brand.status !== 'active').slice(0, 8).map(brandAgreement)}{brandRows.filter(brand => brand.status !== 'active').length > 8 && <ActionRow title="Earlier Brand Agreements" onPress={() => dialog.info('Earlier brand agreements', 'Your earlier agreements remain recorded.', brandRows.filter(brand => brand.status !== 'active').slice(8).map(brand => ({ id: brand.id, label: brand.name, value: creativeLabel(brand.status) + ' · ' + brand.fulfilled + '/' + brand.obligations + ' appearances', tone: 'neutral' })))} />}</Card>}
     <CreativeMilestones industry={industry} /><CreativeHistory career={career} title="Modelling Career History" /><CreativeContacts world={world} industry={industry} />
     {['active', 'between'].includes(career.status) && <Card><ActionRow title="Leave This Modelling Career" subtitle="Stop future booking pay; preserve your portfolio and clients" disabled={busy} onPress={leaveCareer} /></Card>}
     {dialog.modal}
