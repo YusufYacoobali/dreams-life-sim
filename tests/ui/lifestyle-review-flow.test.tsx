@@ -22,7 +22,7 @@ jest.mock('expo-router', () => ({ router: { back: jest.fn(), push: jest.fn(), na
 jest.mock('../../src/state/useGame', () => ({ useGame: (selector: unknown) => require('zustand').useStore(mockStore, selector) }));
 import Asset from '../../app/(game)/asset/[id]';
 const frame = () => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider><Asset /><PendingEvent /></ThemeProvider></SafeAreaProvider>;
-async function press(name: string | RegExp) { await act(async () => { await fireEvent.press(screen.getByRole('button', { name })); }); }
+async function press(name: string | RegExp, role: 'button' | 'radio' = 'button') { await act(async () => { await fireEvent.press(screen.getByRole(role, { name })); }); }
 test('an amenity review is read-only, cancellation spends nothing, SQLite failure retains the review and cold retry installs once', async () => {
     let initial = buyLifestyle(lifestyleFixture(), 'family-house');
     mockAssetId = initial.assets.at(-1)!.id;
@@ -73,13 +73,16 @@ test('a genuine relocated life reviews and pays its licence in the residence cur
         const fee = licenceFee(initial, 'road'), before = encodeWorld(initial);
         const view = await render(<SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider><LicenceControls /><PendingEvent /></ThemeProvider></SafeAreaProvider>);
         await press(/^Driving Licence/);
-        for (const question of licenceQuiz.road) await press(question.answers[question.correct]);
-        await press('Review Test Submission');
-        expect(within(screen.UNSAFE_getByType(Modal)).getByText('The test costs ' + formatMoney({ minor: fee, currency: 'JPY' }) + '. All three answers must be correct. Failed attempts remain paid and saved.')).toBeOnTheScreen();
+        for (let i = 0; i < 3; i++) { await press(licenceQuiz.road[i].answers[licenceQuiz.road[i].correct], 'radio'); if (i < 2) await press('Next'); }
+        expect(within(screen.UNSAFE_getByType(Modal)).getByText(licenceQuiz.road[2].prompt + '\nTest fee: ' + formatMoney({ minor: fee, currency: 'JPY' }) + '. You need 3/3 to pass.')).toBeOnTheScreen();
         expect(encodeWorld(mockStore.getState().world!)).toBe(before);
-        await press('Never mind');
+        await press('Never mind'); expect(encodeWorld(mockStore.getState().world!)).toBe(before);
+        await press(/^Driving Licence/);
+        for (let i = 0; i < 3; i++) { await press(licenceQuiz.road[i].answers[licenceQuiz.road[i].correct], 'radio'); if (i < 2) await press('Next'); }
+        sqlite.exec("CREATE TRIGGER fail_driving_test BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
+        await press('Submit Driving Test'); await waitFor(() => expect(screen.getByRole('alert')).toHaveTextContent(/couldn't be saved/));
         expect(encodeWorld(mockStore.getState().world!)).toBe(before);
-        await press('Review Test Submission'); await press('Confirm');
+        sqlite.exec('DROP TRIGGER fail_driving_test'); await press('Submit Driving Test');
         const saved = mockStore.getState().world!;
         expect(saved.lifestyle!.licences[0].fee).toBe(fee);
         expect(saved.accounts.find(row => row.ownerId === saved.activePersonId && row.currency === 'USD')).toEqual(initial.accounts.find(row => row.ownerId === initial.activePersonId && row.currency === 'USD'));

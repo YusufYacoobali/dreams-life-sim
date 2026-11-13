@@ -55,6 +55,7 @@ function OfferDetails({ id, initialMethod, propertyOnly }: { id: string; initial
     router.dismissTo('/assets');
   }, [completed, world]);
   if (!offer || propertyOnly && offer.kind !== 'property') return <Page><Header title="Offer unavailable" onBack={() => router.back()} /><Body>This item could not be found.</Body></Page>;
+  if (offer.kind === 'vehicle' && offer.licenceKind && offer.licenceKind !== 'road') return <Page><Header title="Vehicle unavailable" onBack={() => router.back()} /><Card><Body>New purchases of this vehicle are currently unavailable.</Body></Card></Page>;
   const financing = method === 'mortgage' ? 'mortgage' : 'cash', quote = purchaseQuote(world, offer, financing, deposit, term), rentQuote = rentalQuote(world, offer);
   const currency = method === 'rent' && lease ? lease.currency : accountFor(world).currency, money = (minor: bigint) => formatMoney({ minor, currency });
   const rent = lease?.monthlyRent ?? rentQuote.monthlyRent, reason = method === 'rent' ? rentalReason(world, offer) : purchaseReason(world, offer, financing, deposit, term);

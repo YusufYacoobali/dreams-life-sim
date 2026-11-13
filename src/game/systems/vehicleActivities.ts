@@ -7,6 +7,7 @@ import { z } from 'zod';
 import type { World } from '../model';
 import { assetCatalog } from '../content/assets';
 import { countries } from '../countries';
+import { rules } from '../rules';
 import { IneligibleAction } from '../errors';
 import { licenceKinds } from './lifestyleSchemas';
 import { accountFor, active, availableCash, bounded, draw, fact, post, result } from './common';
@@ -30,14 +31,33 @@ export function vehicleTripDistance(asset: World['assets'][number], activity: 'd
     const desired = kind === 'boat' ? activity === 'drive' ? 12 : 60 : kind === 'pilot' ? activity === 'drive' ? 120 : 400 : activity === 'drive' ? 40 : 300;
     return kind !== 'road' && range ? Math.min(desired, Math.floor(range * 0.7)) : desired;
 }
-export function vehicleActivityCost(world: World, asset: World['assets'][number], activity: typeof vehicleActivities[number]) { const base = asset.pricePaid || asset.costBasis || asset.value || 1n; if (activity === 'gift' || activity === 'scrap')
-    return 0n; if (activity === 'drive' || activity === 'road-trip') {
-    const distance = vehicleTripDistance(asset, activity), classMultiplier = vehicleLicenceKind(asset) === 'pilot' ? 8n : vehicleLicenceKind(asset) === 'boat' ? 3n : 1n;
-    return (base * BigInt(distance) * classMultiplier / 40000n) || 1n;
-} if (activity === 'service')
-    return (base * (homeAmenity(world, 'garage') && asset.country === active(world).country && asset.city === active(world).city ? 85n : 100n) / 10000n) || 1n; if (activity === 'repair')
-    return base * BigInt(Math.min(30, 100 - asset.condition)) / 1000n || 1n; if (activity === 'customise')
-    return base / 100n || 1n; return base / 20n || 1n; }
+/** Prospective quotes use the asset's own country/currency; old receipts stay literal. */
+export function vehicleActivityCost(world: World, asset: World['assets'][number], activity: typeof vehicleActivities[number]) {
+    if (activity === 'gift' || activity === 'scrap') return 0n;
+    if (asset.vehicleLife?.usageVersion !== 2) {
+        const base = asset.pricePaid || asset.costBasis || asset.value || 1n;
+        if (activity === 'drive' || activity === 'road-trip') return base * BigInt(vehicleTripDistance(asset, activity)) * (vehicleLicenceKind(asset) === 'pilot' ? 8n : vehicleLicenceKind(asset) === 'boat' ? 3n : 1n) / 40000n || 1n;
+        if (activity === 'service') return base * (homeAmenity(world, 'garage') && asset.country === active(world).country && asset.city === active(world).city ? 85n : 100n) / 10000n || 1n;
+        if (activity === 'repair') return base * BigInt(Math.min(30, 100 - asset.condition)) / 1000n || 1n;
+        return activity === 'customise' ? base / 100n || 1n : base / 20n || 1n;
+    }
+    const definition = assetCatalog.find(row => row.id === asset.catalogId), value = asset.value || asset.pricePaid || asset.costBasis || 1n;
+    const wage = rules[asset.country].baseWage, age = BigInt(Math.min(30, Math.floor(asset.ageMonths / 12))), wear = BigInt(100 - asset.condition);
+    const kind = vehicleLicenceKind(asset), classBps = kind === 'pilot' ? 800n : kind === 'boat' ? 300n : asset.catalogId.includes('scooter') ? 55n : asset.catalogId.includes('motorbike') ? 80n : 100n;
+    if (activity === 'drive' || activity === 'road-trip') {
+        const distance = BigInt(vehicleTripDistance(asset, activity)), economy = BigInt(definition?.fuelEconomyMpg ?? 25);
+        const fuel = distance * wage * classBps / (economy * 1000000n);
+        const runningWear = value * distance * (100n + age * 3n + wear) / 10000000n;
+        return fuel + runningWear || 1n;
+    }
+    let cost = activity === 'service' ? value * (100n + age * 3n) / 10000n + wage / 500n
+        : activity === 'repair' ? value * BigInt(Math.min(50, 100 - asset.condition)) / 800n + wage / 400n
+        : activity === 'customise' ? value / 60n + wage / 500n
+        : value / (activity === 'navigation' ? 30n : 20n) + wage / 200n;
+    cost = cost * classBps / 100n;
+    if (activity === 'service' && homeAmenity(world, 'garage') && asset.country === active(world).country && asset.city === active(world).city) cost = cost * 85n / 100n;
+    return cost || 1n;
+}
 export function vehicleUseReason(world: World, asset: Pick<World['assets'][number], 'catalogId'>) {
     const reason = lifestyleReason(world, false); if (reason) return reason;
     const minimum = vehicleMinimumAge(active(world).country, vehicleLicenceKind(asset));
@@ -103,9 +123,9 @@ export function resolveVehicle(world: World, command: VehicleCommand) {
             throw new IneligibleAction('Review the licence test fee');
         const paymentIds = lifestylePayment(world, fee, 'Game ' + command.kind + ' licence test');
         const score = command.answers.filter((answer, index) => answer === licenceQuiz[command.kind][index].correct).length;
-        state.licences.push({ id: 'licence_' + world.revision, personId: person.id, kind: command.kind, country: person.country, date: { ...world.date }, answers: [...command.answers], score, passed: score === 3, fee, paymentId: paymentIds[0] });
-        fact(world, 'I ' + (score === 3 ? 'passed' : 'did not pass') + ' the game’s ' + command.kind + ' awareness test (' + score + '/3).', 'vehicle');
-        result(world, score === 3 ? 'Ready for the journey' : 'A little more preparation', 'Score: ' + score + '/3. ' + (score === 3 ? 'You passed. The next journey is yours to plan.' : 'The fee stings more than the score. You can try again in a later month, up to three attempts this year.') + ' This is a simplified game system, not real-world certification.', 'vehicle');
+        state.licences.push({ id: 'licence_' + world.revision, personId: person.id, kind: command.kind, country: person.country, date: { ...world.date }, answers: [...command.answers], score, passed: score === 3, fee, feeVersion: 2, paymentId: paymentIds[0] });
+        fact(world, 'I ' + (score === 3 ? 'passed' : 'did not pass') + (command.kind === 'road' ? ' my driving test (' : ' my ' + command.kind + ' test (') + score + '/3).', 'vehicle');
+        result(world, score === 3 ? command.kind === 'road' ? 'Driving Test Passed!' : 'Test Passed!' : 'Try Again Next Month', 'You scored ' + score + '/3. ' + (score === 3 ? command.kind === 'road' ? 'You earned your driving licence.' : 'You passed the test.' : 'You need three correct answers to pass. You can try again next month.'), 'vehicle');
         return;
     }
     const asset = world.assets.find(row => row.id === command.assetId && row.ownerId === person.id && row.kind === 'vehicle');

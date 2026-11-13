@@ -1,41 +1,70 @@
-import { useLifestyleWorld } from './useLifestyleWorld';
-import { assetCatalog } from '../game/content/assets';
-import { assetPrice } from '../game/systems/assetPricing';
-import { saleQuote } from '../game/systems/assetQuotes';
 import React, { useState } from 'react';
-import { useGame } from '../state/useGame';
 import type { World } from '../game/model';
-import { licenceKinds } from '../game/systems/lifestyleSchemas';
-import { licenceFee, licenceQuiz, licenceReason, hasLicence } from '../game/systems/vehicleLicences';
-import { vehicleActivities, vehicleActivityCost, vehicleActivityReason, vehicleUseReason, vehicleLicenceKind, vehicleTripDistance } from '../game/systems/vehicleActivities';
-import { lifestyleReason, localContactReason } from '../game/systems/lifestyleCommon';
-import { formatMoney } from '../game/money';
-import { countries } from '../game/countries';
 import { fullName } from '../game/personHelpers';
-import { ActionRow, Body, Card, Heading, Button } from './components';
+import { countries } from '../game/countries';
+import { formatMoney } from '../game/money';
+import { licenceFee, licenceQuiz, licenceReason, hasLicence } from '../game/systems/vehicleLicences';
+import { vehicleActivityCost, vehicleActivityReason, vehicleTripDistance, type vehicleActivities } from '../game/systems/vehicleActivities';
+import { lifestyleReason, localContactReason } from '../game/systems/lifestyleCommon';
+import { CatalogArt } from '../assets/CatalogArt';
+import { PolishArt } from '../assets/PolishArt';
+import { ActionRow, Body, Card, Heading } from './components';
 import { useLifestyleReview } from './LifestyleReview';
+import { useScopedGameAction } from './useScopedGameAction';
+import { useLifestyleWorld } from './useLifestyleWorld';
+import { EventModal } from './EventModal';
 import { PersonPicker } from './PersonPicker';
+
+type Activity = typeof vehicleActivities[number];
+type Trip = 'drive' | 'road-trip' | 'gift';
 export function LicenceControls() {
-    const world = useLifestyleWorld()!, { ask, modal, busy } = useLifestyleReview(), [kind, setKind] = useState<typeof licenceKinds[number] | null>(null), [answers, setAnswers] = useState<number[]>([-1, -1, -1]);
-    if (!world.lifestyle)
-        return null;
-    return <Card><Heading size={18}>Vehicle Licences</Heading><Body muted>Short awareness quizzes under authored game rules. No real-world certification. Ownership does not grant a licence.</Body>{licenceKinds.map(item => <ActionRow key={item} title={item === 'road' ? 'Driving Licence' : item === 'boat' ? 'Boating Licence' : 'Pilot Licence'} subtitle={hasLicence(world, item) ? 'Passed · saved record' : 'Three questions · one attempt per month, three per year'} disabled={busy} disabledReason={lifestyleReason(world, false) ?? licenceReason(world, item)} onPress={() => { setKind(item); setAnswers([-1, -1, -1]); }}/>)}
-  {kind && !licenceReason(world, kind) && <><Heading size={17}>{kind === 'road' ? 'Road Awareness' : kind === 'boat' ? 'Water Awareness' : 'Flight Awareness'}</Heading>{licenceQuiz[kind].map((question, index) => <Card key={index}><Body>{question.prompt}</Body>{question.answers.map((answer, value) => <ActionRow key={value} title={answer} value={answers[index] === value ? 'Selected' : undefined} disabled={busy} onPress={() => setAnswers(previous => previous.map((old, i) => i === index ? value : old))}/>)}</Card>)}<Button label="Review Test Submission" disabled={busy || answers.some(value => value < 0)} onPress={() => ask({ type: 'take-licence-test', kind, answers, quotedFee: licenceFee(world, kind) }, 'Submit this awareness test?', 'The test costs ' + formatMoney({ minor: licenceFee(world, kind), currency: countries[world.people[world.activePersonId].country].currency }) + '. All three answers must be correct. Failed attempts remain paid and saved.')}/></>}
-  {world.lifestyle.licences.filter(row => row.personId === world.activePersonId).slice(-3).reverse().map(row => <Body muted key={row.id}>{row.kind} · {row.date.year}-{row.date.month} · {row.score}/3 · {row.passed ? 'Passed' : 'Try again later'}</Body>)}{modal}</Card>;
+  const world = useLifestyleWorld()!, { busy, error, dispatch, clear } = useScopedGameAction('driving-test');
+  const identity = world.id + ':' + world.activePersonId;
+  const [quiz, setQuiz] = useState<{ identity: string; step: number; answers: number[] } | null>(null);
+  const current = quiz?.identity === identity ? quiz : null;
+  const fee = licenceFee(world, 'road'), money = formatMoney({ minor: fee, currency: countries[world.people[world.activePersonId].country].currency });
+  const reason = lifestyleReason(world, false) ?? licenceReason(world, 'road');
+  const attempts = world.lifestyle?.licences.filter(row => row.personId === world.activePersonId && row.kind === 'road') ?? [];
+  return <><Card>
+    <ActionRow title="Driving Licence" subtitle={hasLicence(world, 'road') ? 'Your saved driving licence' : 'Three questions'} value={hasLicence(world, 'road') ? 'Passed' : money} icon={<CatalogArt id="city-car" size={40} />} disabled={busy || hasLicence(world, 'road')} disabledReason={hasLicence(world, 'road') ? undefined : reason} onPress={() => { clear(); setQuiz({ identity, step: 0, answers: [] }); }} />
+    {attempts.slice(-1).map(row => <Body key={row.id} muted>{row.score}/3 · {row.passed ? 'Passed' : 'Try again next month'}</Body>)}
+  </Card><EventModal event={current ? { id: 'road-test:' + identity + ':' + current.step, kind: 'selection', title: 'Driving Test · ' + (current.step + 1) + ' of 3', body: licenceQuiz.road[current.step].prompt + (current.step === 2 ? '\nTest fee: ' + money + '. You need 3/3 to pass.' : ''), choices: licenceQuiz.road[current.step].answers.map((label, id) => ({ id: String(id), label })), confirmLabel: current.step === 2 ? 'Submit Driving Test' : 'Next' } : null}
+    busy={busy} error={error} onCancel={() => { if (!busy) { setQuiz(null); clear(); } }} onChoose={async id => {
+      if (!current || busy || current.identity !== identity) return;
+      const answer = Number(id); if (!Number.isInteger(answer) || answer < 0 || answer > 2) return;
+      const answers = [...current.answers.slice(0, current.step), answer];
+      if (current.step < 2) { setQuiz({ ...current, answers, step: current.step + 1 }); return; }
+      setQuiz({ ...current, answers });
+      if (await dispatch({ type: 'take-licence-test', kind: 'road', answers, quotedFee: fee })) setQuiz(null);
+    }} /></>;
 }
-const activityNames = { drive: 'Go for a Drive / Short Outing', 'road-trip': 'Take a Longer Trip', service: 'Service Vehicle', repair: 'Repair Damage', customise: 'Customise Appearance', brakes: 'Upgrade Brakes', suspension: 'Upgrade Suspension', navigation: 'Upgrade Navigation', gift: 'Gift This Vehicle', scrap: 'Scrap Damaged Vehicle' };
-export function VehicleLifestyle({ asset: savedAsset }: {
-    asset: World['assets'][number];
-}) {
-    const world = useLifestyleWorld()!, { ask, modal, busy } = useLifestyleReview(), [invite, setInvite] = useState<'drive' | 'road-trip' | 'gift' | null>(null), [expanded, setExpanded] = useState(false), [trade, setTrade] = useState(false);
-    if (!world.lifestyle)
-        return null;
-    const asset = world.assets.find(row => row.id === savedAsset.id) ?? savedAsset;
-    if (asset.stolen?.status === 'held')
-        return null;
-    if (!asset.vehicleLife) return null;
-    const money = (minor: bigint) => formatMoney({ minor, currency: asset.currency }), life = asset.vehicleLife, tradeReason = lifestyleReason(world);
-    const action = (activity: typeof vehicleActivities[number], contactId: string | null = null) => ask({ type: 'vehicle-activity', assetId: asset.id, activity, contactId, quotedCost: vehicleActivityCost(world, asset, activity) }, activityNames[activity], (activity === 'drive' || activity === 'road-trip') ? (contactId ? 'Invite ' + fullName(world.people[contactId]) + '. A refusal causes no trip or payment. ' : '') + 'A local return journey records ' + vehicleTripDistance(asset, activity) + ' miles and real running costs. Wear and occasional breakdowns can require a later repair.' : activity === 'gift' ? 'The actual recipient must accept. Lawful ownership and future costs transfer; no cash or licence is created.' : activity === 'scrap' ? 'This severely damaged vehicle leaves ownership. Only its recorded salvage value is paid.' : 'Pay for the selected work. Age and mileage remain; improvements cannot be installed twice.', [{ id: 'cost', label: 'Cost if accepted', value: money(vehicleActivityCost(world, asset, activity)), tone: 'negative' }]);
-    return <><Card><Heading size={18}>On the Move</Heading><Body>{life.mileage.toLocaleString()} recorded miles · {life.appearance} finish</Body><Body muted>Starts from {life.initialMileage.toLocaleString()} listing miles; prior actual use is unknown. Age: {Math.floor(asset.ageMonths / 12)} years. {vehicleLicenceKind(asset)} licence required for use.</Body><Body>Fitted: {life.upgrades.join(', ') || 'No upgrades'}</Body><ActionRow title="Activities & Maintenance" onPress={() => setExpanded(!expanded)}/>{expanded && <>{vehicleActivities.map(activity => <ActionRow key={activity} title={activityNames[activity]} value={money(vehicleActivityCost(world, asset, activity))} disabled={busy} disabledReason={activity === 'gift' ? lifestyleReason(world) : vehicleActivityReason(world, asset, activity)} onPress={() => activity === 'gift' ? setInvite('gift') : action(activity)}/>)}<ActionRow title="Trade In for Another Vehicle" disabled={busy} disabledReason={tradeReason} onPress={() => setTrade(!trade)}/>{trade && assetCatalog.filter(offer => offer.kind === 'vehicle' && offer.id !== asset.catalogId).map(offer => <ActionRow key={offer.id} title={offer.name} value={money(assetPrice(world, offer) - saleQuote(world, asset).proceeds)} disabled={busy} disabledReason={tradeReason} onPress={() => ask({ type: 'trade-in-vehicle', assetId: asset.id, catalogId: offer.id, quotedSale: saleQuote(world, asset).price, quotedPrice: assetPrice(world, offer) }, 'Review this trade-in?', 'Sell the actual current vehicle at its quoted trade price and buy this replacement with the proceeds plus available cash. Both transactions and the sale fee are recorded. No replacement licence or earlier mileage is invented.', [{ id: 'sale', label: 'Net sale proceeds', value: money(saleQuote(world, asset).proceeds), tone: 'positive' }, { id: 'purchase', label: 'Replacement purchase', value: money(assetPrice(world, offer)), tone: 'negative' }])}/>)}<ActionRow title="Invite Someone for a Drive" disabled={busy} onPress={() => setInvite('drive')}/><ActionRow title="Invite Someone on a Longer Trip" disabled={busy} onPress={() => setInvite('road-trip')}/></>}
-  {world.lifestyle.records.filter(row => row.subjectId === asset.id && row.kind.startsWith('vehicle-')).slice(-3).reverse().map(row => <Body key={row.id} muted>{row.date.year} · {row.body}</Body>)}{modal}</Card>{invite && <PersonPicker world={world} title="Choose a Passenger" personIds={world.relationships.filter(edge => edge.from === world.activePersonId || edge.to === world.activePersonId).map(edge => edge.from === world.activePersonId ? edge.to : edge.from)} busy={busy} eligibility={id => localContactReason(world, id, invite !== 'gift') ?? vehicleActivityReason(world, asset, invite, id)} onCancel={() => setInvite(null)} onChoose={id => { const activity = invite; setInvite(null); action(activity, id); }} />}<LicenceControls /></>;
+
+const activityNames: Record<Activity, string> = { drive: 'Go for a Drive', 'road-trip': 'Take a Road Trip', service: 'Service Vehicle', repair: 'Repair Vehicle', customise: 'Customise Appearance', brakes: 'Upgrade Brakes', suspension: 'Upgrade Suspension', navigation: 'Upgrade Navigation', gift: 'Gift This Vehicle', scrap: 'Scrap This Vehicle' };
+const groups = [
+  { id: 'driving', title: 'Driving & Trips', icon: 'vehicle', actions: ['drive', 'road-trip'] },
+  { id: 'care', title: 'Care & Maintenance', icon: 'settings', actions: ['service', 'repair'] },
+  { id: 'upgrades', title: 'Upgrades', icon: 'settings', actions: ['customise', 'brakes', 'suspension', 'navigation'] },
+  { id: 'ownership', title: 'Ownership', icon: 'loan', actions: ['gift', 'scrap'] },
+] as const;
+export function VehicleLifestyle({ asset: savedAsset, ownershipActions }: { asset: World['assets'][number]; ownershipActions?: React.ReactNode }) {
+  const world = useLifestyleWorld()!, { ask, modal, busy } = useLifestyleReview('vehicle:' + savedAsset.id);
+  const [section, setSection] = useState<typeof groups[number]['id'] | null>(null), [invite, setInvite] = useState<Trip | null>(null);
+  const asset = world.assets.find(row => row.id === savedAsset.id) ?? savedAsset;
+  if (asset.stolen?.status === 'held' || !asset.vehicleLife) return null;
+  const life = asset.vehicleLife, money = (minor: bigint) => formatMoney({ minor, currency: asset.currency });
+  const art = (id: typeof groups[number]['icon']) => id === 'vehicle' ? <CatalogArt id={asset.catalogId} size={40} /> : <PolishArt id={id} size={40} />;
+  const action = (activity: Activity, contactId: string | null = null) => ask({ type: 'vehicle-activity', assetId: asset.id, activity, contactId, quotedCost: vehicleActivityCost(world, asset, activity) }, activityNames[activity],
+    activity === 'drive' || activity === 'road-trip' ? (contactId ? 'Invite ' + fullName(world.people[contactId]) + ' for a trip. A declined invitation costs nothing.' : 'Take a local return trip.')
+      : activity === 'gift' ? 'Ownership and future costs transfer if your contact accepts.' : activity === 'scrap' ? 'Give up this damaged vehicle for its salvage value.' : 'Pay for this work on your vehicle.',
+    [{ id: 'cost', label: 'Cost', value: money(vehicleActivityCost(world, asset, activity)), tone: 'negative' }, ...((activity === 'drive' || activity === 'road-trip') ? [{ id: 'distance', label: 'Distance', value: vehicleTripDistance(asset, activity) + ' miles', tone: 'neutral' as const }] : [])]);
+  const contactIds = world.relationships.filter(edge => edge.from === world.activePersonId || edge.to === world.activePersonId).map(edge => edge.from === world.activePersonId ? edge.to : edge.from);
+  return <><Card><Heading size={18}>Your Vehicle</Heading><Body>{life.mileage.toLocaleString()} miles · {life.appearance} finish</Body>
+    {life.upgrades.length > 0 && <Body muted>Fitted: {life.upgrades.map(id => id.charAt(0).toUpperCase() + id.slice(1)).join(', ')}</Body>}
+    {groups.map(group => <ActionRow key={group.id} title={group.title} icon={art(group.icon)} accessibilityState={{ expanded: section === group.id }} onPress={() => setSection(section === group.id ? null : group.id)} />)}
+  </Card>{groups.filter(group => group.id === section).map(group => <Card key={group.id}><Heading size={18}>{group.title}</Heading>{group.id === 'ownership' && ownershipActions}
+    {group.actions.filter(activity => activity !== 'scrap' || asset.condition <= 30).filter(activity => !['brakes', 'suspension', 'navigation'].includes(activity) || !life.upgrades.includes(activity as 'brakes' | 'suspension' | 'navigation')).map(activity => <ActionRow key={activity} title={activityNames[activity]} icon={art(group.icon)} value={activity === 'gift' ? undefined : money(vehicleActivityCost(world, asset, activity))} disabled={busy} disabledReason={activity === 'gift' ? lifestyleReason(world) : vehicleActivityReason(world, asset, activity)} onPress={() => activity === 'gift' ? setInvite('gift') : action(activity)} />)}
+    {group.id === 'driving' && <><ActionRow title="Invite Someone for a Drive" icon={art('vehicle')} disabled={busy} onPress={() => setInvite('drive')} /><ActionRow title="Invite Someone on a Road Trip" icon={art('vehicle')} disabled={busy} onPress={() => setInvite('road-trip')} /></>}
+  </Card>)}
+    {invite && <PersonPicker world={world} title={invite === 'gift' ? 'Give Your Vehicle' : 'Choose a Passenger'} personIds={contactIds} busy={busy} eligibility={id => localContactReason(world, id, invite !== 'gift') ?? vehicleActivityReason(world, asset, invite, id)} onCancel={() => setInvite(null)} onChoose={id => { const activity = invite; setInvite(null); action(activity, id); }} />}
+    {world.lifestyle!.records.filter(row => row.subjectId === asset.id && row.kind.startsWith('vehicle-')).slice(-3).reverse().map(row => <Card key={row.id}><Body muted>{row.date.year} · {row.body}</Body></Card>)}{modal}</>;
 }

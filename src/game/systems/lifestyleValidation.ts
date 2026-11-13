@@ -4,7 +4,7 @@ import { legacyHobbyKinds, legacyOutingKinds } from '../content/leisure';
 import { legacyPetOfferIds } from '../content/pets';
 import { lifestyleTemplates } from '../content/lifestyleEvents';
 import { assetCatalog } from '../content/assets';
-import { licenceQuiz } from './vehicleLicences';
+import { licenceQuiz, licenceFeeForCountry } from './vehicleLicences';
 import { vehicleMinimumAge } from './vehicleAgePolicy';
 import { rules } from '../rules';
 import { roundRatio } from '../money';
@@ -162,7 +162,7 @@ export function validateLifestyle(world: World, ledger = indexLedger(world.ledge
         identity(row.id);
         const actor = person(row.personId), key = row.personId + ':' + row.kind, monthKey = key + ':' + at(row.date), yearKey = key + ':' + row.date.year, count = (licenceYears.get(yearKey) ?? 0) + 1;
         const score = row.answers.filter((answer, index) => answer === licenceQuiz[row.kind][index].correct).length;
-        const expectedFee = rules[row.country].baseWage * BigInt(row.kind === 'road' ? 2 : row.kind === 'boat' ? 8 : 35) / 10000n || 1n;
+        const expectedFee = licenceFeeForCountry(row.country, row.kind, row.feeVersion ?? 1);
         if (passed.has(key) || licenceMonths.has(monthKey) || count > 3 || row.score !== score || row.passed !== (row.score === 3) || row.fee !== expectedFee || ageOn({ ...actor, died: null }, row.date) < vehicleMinimumAge(row.country, row.kind) || compareDates(row.date, world.date) > 0)
             throw new Error('Invalid licence attempt');
         licenceYears.set(yearKey, count);

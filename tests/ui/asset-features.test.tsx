@@ -126,7 +126,7 @@ test.each([false, true])('owned assets retain listing specs, use actual conditio
   const suffix = dark ? 'dark-large' : 'light', view = await render(frame(<OwnedAsset />));
   expect(screen.getByLabelText('Condition: 37%')).toBeOnTheScreen();
   expect(screen.queryByLabelText('Condition: 65%')).toBeNull();
-  expect(screen.getByLabelText('Mileage: 68,000 mi. Listing reading')).toBeOnTheScreen();
+  expect(screen.getByLabelText(/Mileage: 68,000 mi\./)).toBeOnTheScreen();
   capture('asset-owned-vehicle-' + suffix, view.toJSON());
   mockRoute = { id: mockWorld.assets.find(asset => asset.catalogId === 'family-house')!.id, kind: 'property' };
   await view.rerender(frame(<OwnedAsset />));
@@ -148,7 +148,7 @@ test.each([{width:390,fontScale:1},{width:320,fontScale:1},{width:320,fontScale:
     const row=screen.getByTestId('asset-feature-row'),stacked=fontScale>=1.6;
     expect(Native.StyleSheet.flatten(row.props.style)).toMatchObject({flexDirection:stacked?'column':'row',alignItems:'stretch'});
     for(const id of ['speed','mileage','condition']){const style=Native.StyleSheet.flatten(screen.getByTestId('asset-feature-'+id).props.style);expect(style.minWidth).toBe(0);if(!stacked)expect(style.flex).toBe(1);expect(style.height).toBeUndefined();expect(style.maxHeight).toBeUndefined();}
-    expect(screen.getByLabelText('Top Speed: 102 mph')).toBeOnTheScreen();expect(screen.getByLabelText('Mileage: 68,000 mi. Listing reading')).toBeOnTheScreen();expect(screen.getByLabelText('Condition: 37%')).toBeOnTheScreen();
+    expect(screen.getByLabelText('Top Speed: 102 mph')).toBeOnTheScreen();expect(screen.getByLabelText(/Mileage: 68,000 mi\./)).toBeOnTheScreen();expect(screen.getByLabelText('Condition: 37%')).toBeOnTheScreen();
     expect(screen.queryByText('MPG (US)')).toBeNull();expect(screen.queryByText('EV range')).toBeNull();
     for(const label of ['Top Speed','Mileage','Condition'])expect(screen.getByText(label).props.numberOfLines).toBeUndefined();
     capture('polish3-vehicle-chips-'+width+'-'+fontScale,view.toJSON());

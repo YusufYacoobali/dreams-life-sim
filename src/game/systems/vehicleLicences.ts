@@ -32,7 +32,8 @@ export const licenceQuiz: Record<LicenceKind, readonly {
         { prompt: 'You are too tired to concentrate.', answers: ['Rest and postpone the flight', 'Use louder music', 'Let confidence handle it'], correct: 0 },
     ],
 };
-export const licenceFee = (world: World, kind: LicenceKind) => rules[world.people[world.activePersonId].country].baseWage * BigInt(kind === 'road' ? 2 : kind === 'boat' ? 8 : 35) / 10000n || 1n;
+export const licenceFeeForCountry = (country: CountryCode, kind: LicenceKind, version: 1 | 2 = 2) => rules[country].baseWage * BigInt(kind === 'road' ? version === 2 ? 20 : 2 : kind === 'boat' ? 8 : 35) / 10000n || 1n;
+export const licenceFee = (world: World, kind: LicenceKind) => licenceFeeForCountry(world.people[world.activePersonId].country, kind);
 export const hasLicence = (world: World, kind: LicenceKind, personId = world.activePersonId) => !!world.lifestyle?.licences.some(row => row.personId === personId && row.kind === kind && row.passed);
 export function licenceReason(world: World, kind: LicenceKind) { const person = world.people[world.activePersonId], min = vehicleMinimumAge(person.country, kind); if (ageOn(person, world.date) < min)
     return 'Game policy: available from age ' + min; if (hasLicence(world, kind))

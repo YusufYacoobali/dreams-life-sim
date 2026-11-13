@@ -9,7 +9,7 @@ Each checkpoint includes focused verification before its commit and push. Existi
 | 1. Shared UI, portrait picker, scoped errors | Implemented; focused checks pass |
 | 2. Actor/Model presentation and casting | Implemented; focused checks pass |
 | 3. Automatic lifestyle activation and legacy compatibility | Implemented; focused checks pass |
-| 4. Vehicles and driving licence | Pending |
+| 4. Vehicles and driving licence | Implemented; focused checks pass |
 | 5. Landlord and properties | Pending |
 | 6. Hobbies, pets and artwork | Pending |
 | 7. Organised Crime balancing and prison UI | Pending |
@@ -48,3 +48,13 @@ After the master gameplay/polish checkpoints, implement the user's separate Drea
 - Read-only presentation previews the same setup for quotes and eligibility, without mutating the store or decoded checkpoint. Legacy activation commands remain supported as idempotent requests.
 - Existing anonymous rentals stay anonymous with their exact agreed economics until they end. Existing mileage, improvements, licences, paid pet history, ownership, health, bonds and pricing versions remain literal. Setup never manufactures earlier trips or changes care prices.
 - Verification: 214 tests in nine relevant suites pass, including read-only old checkpoint decoding, frozen legacy decisions, partial setup, real recorded mileage, anonymous rental preservation, atomic SQLite rollback/retry/cold reopening, independent Time Machine branches and older pet history. Strict app/test types and the 601-module import-cycle check pass. Native playthrough acceptance remains pending.
+
+
+## Checkpoint 4
+
+- Vehicle details group Driving & Trips, Care & Maintenance, Upgrades and Ownership. The existing sell/insurance actions join the ownership group; the duplicate generic repair flow and trade-in control are absent. Scrapping appears only for severe damage. Passenger and gift choices use portraits in the shared popup.
+- The Driving Licence lives in Assets and opens three sequential questions. Selecting or cancelling is read-only; only the final submission charges the quoted fee. Failed saves keep the last question available for retry. Vehicle detail pages no longer contain licence controls.
+- New US road tests cost $80 with country-relative pricing. Optional attempt `feeVersion: 2` preserves validation of older payments at their original fee. Legacy boat/pilot records and backend commands remain supported.
+- New boat/aircraft purchases are hidden in the catalogue and direct offer pages. Existing owned vehicles, specifications and histories remain available.
+- Prospective v2 vehicle quotes depend on value, age, wear, type and the asset's country/currency. Earlier v1 vehicle policies keep their original prices/distances, and historical receipts stay literal. Resolver quote verification and real transactions remain authoritative.
+- Verification: 232 relevant cases across nine suites pass across main runs and affected reruns. Coverage includes pricing, country/age eligibility, the three-step quiz, cancellation, real SQLite failed-save/retry, ownership grouping and light/dark/large-text renderer checks. Historical v1 vehicle and frozen-decision fixtures pass. Strict app/test types and the 601-module import check pass; native geometry still needs installed-device acceptance.

@@ -20,7 +20,7 @@ import { AssetListing } from './AssetFeatures';
 export function AssetCatalogue({ kind, rentalEntry = false }: { kind: string; rentalEntry?: boolean }) {
   const world = useLifestyleWorld()!, player = world.people[world.activePersonId], currency = accountFor(world).currency;
   const lease = kind === 'property' ? rentalResidence(world) : undefined;
-  const offers = assetCatalog.filter(offer => !offer.licenceKind || !!world.lifestyle).filter(offer => offer.kind === kind).sort((a, b) => a.priceBps - b.priceBps);
+  const offers = assetCatalog.filter(offer => !offer.licenceKind || offer.licenceKind === 'road').filter(offer => offer.kind === kind).sort((a, b) => a.priceBps - b.priceBps);
   const money = (minor: bigint) => formatMoney({ minor, currency });
   const title = kind === 'property' ? 'Real Estate' : kind === 'vehicle' ? 'Vehicles for Sale' : 'Possessions';
   return <Page><Header title={title} onBack={() => router.back()} />
