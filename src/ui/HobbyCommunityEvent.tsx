@@ -1,3 +1,4 @@
+import { useScopedGameAction } from './useScopedGameAction';
 import React, { useState } from 'react';
 import { Pressable, View } from 'react-native';
 import { router } from 'expo-router';
@@ -16,7 +17,8 @@ import { useColors } from './theme';
 import { DisplayText as Text, displayText } from './DisplayText';
 
 export function HobbyCommunityEvent({ kind }: { kind: HobbyKind }) {
-  const world = useGame(s => s.world)!, busy = useGame(s => s.busy), error = useGame(s => s.error), dispatch = useGame(s => s.dispatch), c = useColors();
+  const world = useGame(s => s.world)!, c = useColors();
+  const { busy, error, dispatch } = useScopedGameAction('hobby-event:' + kind);
   const [approach, setApproach] = useState<HobbyEventApproach>('familiar'), [historyLimit, setHistoryLimit] = useState(4);
   const person = world.people[world.activePersonId], payer = leisurePayer(world), hobby = personHobbies(world).find(item => item.kind === kind), content = hobbyEventContent[kind], choice = hobbyEventApproachContent[approach], reason = hobbyEventReason(world, kind, approach), fee = hobbyEventFee(person.country, kind);
   const history = world.hobbyEvents.filter(row => row.personId === person.id && row.kind === kind).slice().reverse();

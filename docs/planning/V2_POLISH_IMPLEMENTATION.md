@@ -11,7 +11,7 @@ Each checkpoint includes focused verification before its commit and push. Existi
 | 3. Automatic lifestyle activation and legacy compatibility | Implemented; focused checks pass |
 | 4. Vehicles and driving licence | Implemented; focused checks pass |
 | 5. Landlord and properties | Implemented; focused checks pass |
-| 6. Hobbies, pets and artwork | Pending |
+| 6. Hobbies, pets and artwork | UI implemented; art batch awaiting approval |
 | 7. Organised Crime balancing and prison UI | Pending |
 | 8. Versioned Cell Escape replacement | Pending |
 | 9. Writing and measured performance | Pending |
@@ -67,3 +67,11 @@ After the master gameplay/polish checkpoints, implement the user's separate Drea
 - Occupied homes no longer open irrelevant installation/gathering lists or duplicate inspections. Home invitations retain the shared portrait picker.
 - Prospective background checks and independent reviews now scale with country wages (US $40/$100). New background-check requests verify their quoted fee. Existing payments keep their saved amounts, and property maintenance remains based on property value.
 - Verification: six existing focused suites (263 cases), seven new core/UI cases and affected vehicle/review reruns pass. Real seeded rent periods produce arrears and reported maintenance; tests cover every eviction gate, rent bounds, no-write cancellation, actual save failures/retries and one deposit refund. Landlord UI tests close and reopen real SQLite connections. The existing property-investor cold-reopen journey also passes. Strict app/test types and the 604-module import-cycle check pass. Installed-device geometry and accessibility acceptance remain pending.
+
+## Checkpoint 6
+
+- One Personal Projects section shows the unfinished project's progress, actual eligibility and next action. Creating another project waits until completion; completed work has expandable, paged history. The resolver's earned-practice and legacy project rules remain unchanged.
+- Competitions and routine reviews use shorter copy and structured costs. Routine/community-event failures use their own error scope. Shared outings now use separate venue and portrait popups, without truncating contacts or appending an inline list.
+- Optional pet activities are grouped into Training & Events, Health & Care and Company & Outings. Reviews reuse existing pet artwork; introductions use illustrated companion selection and family invitations use the portrait picker. Existing feeding, illness, health, training, bond, funding and ownership rules are unchanged.
+- [Artwork inventory and integration manifest](V2_POLISH_ARTWORK.md) records existing illustrations to reuse and the eight missing hobby illustrations plus Cell Escape layers. Generation is awaiting the Krea skill's explicit cost-preflight approval. No new art is claimed complete.
+- Verification: 66 cases across seven existing suites, three new UI cases and the two existing hobby/pet cold-connection journeys pass. New UI checks cover read-only cancellation, actual later-practice completion, SQLite failure/retry/cold reopening, once-only pet payments, and unrelated-error isolation. Strict app/test types and the 605-module import-cycle check pass. Actual phone appearance and accessibility acceptance remain pending.

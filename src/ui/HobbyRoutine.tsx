@@ -1,3 +1,4 @@
+import { useScopedGameAction } from './useScopedGameAction';
 import { HobbyLifestyle } from './HobbyLifestyle';
 import React, { useMemo, useRef, useState } from 'react';
 import { Pressable, View } from 'react-native';
@@ -16,16 +17,10 @@ import { hobbyEventContent } from '../game/content/hobbyEvents';
 import { HobbyArt } from '../assets/HobbyArt';
 import { DisplayText as Text, displayText } from './DisplayText';
 
-const routineNudge: Record<HobbyKind, string> = {
-  guitar: 'Your neighbours may eventually applaud.', painting: 'Try keeping more paint on the canvas.',
-  photography: 'Give your camera roll a little ambition.', chess: 'Your king could use some protection.',
-  reading: 'Your bookmark has waited long enough.', gaming: 'Finally, a plan involving a controller.',
-  cooking: 'The smoke alarm could use a day off.', gardening: 'Try growing something that survives the week.',
-  running: 'Start slowly. Your knees are listening.', swimming: 'A supervised lane is a perfectly good adventure.', writing: 'The blank page has had its turn.', pottery: 'The first bowl is allowed to lean.', singing: 'Find your own voice, then find the right note.', coding: 'Make a small thing work.', fishing: 'Patience counts even when the fish disagree.', dancing: 'Give your feet something to think about.',
-};
 const planLabels = { active: 'Current', declined: 'Permission declined', stopped: 'Stopped', moved: 'Ended after moving', died: 'Ended', 'payer-lost': 'Payer unavailable', 'adult-review': 'Choose your own funding' };
 export function HobbyRoutine({ kind }: { kind: HobbyKind }) {
-  const world = useGame(s => s.world)!, busy = useGame(s => s.busy), error = useGame(s => s.error), dispatch = useGame(s => s.dispatch), c = useColors(), person = world.people[world.activePersonId], payer = leisurePayer(world);
+  const world = useGame(s => s.world)!, c = useColors(), person = world.people[world.activePersonId], payer = leisurePayer(world);
+  const { busy, error, dispatch, clear } = useScopedGameAction('hobby-routine:' + kind);
   const hobbies = personHobbies(world), hobby = hobbies.find(item => item.kind === kind), plan = hobby && activeHobbyPlan(hobby);
   const [mode, setMode] = useState<typeof hobbyModes[number]>(plan?.mode ?? 'community'), [review, setReview] = useState<{ command: LeisureCommand; event: EventPresentation } | null>(null), [historyLimit, setHistoryLimit] = useState(4);
   const submitting = useRef(false);
@@ -33,7 +28,7 @@ export function HobbyRoutine({ kind }: { kind: HobbyKind }) {
   const money = (minor: bigint, country = person.country) => formatMoney({ minor, currency: countries[country].currency }, countries[country].locale);
   const reviewPlan = () => {
     if (busy || submitting.current || !payer || reason) return; const fee = hobbyFee(person.country, kind, mode);
-    setReview({ command: { type: 'hobby-plan', kind, mode, reviewedPayerId: payer.id, quotedMonthlyFee: fee }, event: { id: 'hobby-review-' + kind + '-' + mode + '-' + payer.id, kind: 'confirmation', title: hobbyContent[kind].name + ' Routine', body: (mode === 'lessons' ? 'Start ' + hobbyContent[kind].name.toLowerCase() + ' lessons' : 'Join ' + hobbyContent[kind].name.toLowerCase() + ' sessions') + ' for ' + money(fee) + ' a month? ' + routineNudge[kind] + (payer.id === person.id ? '' : ' ' + fullName(payer) + ' needs to agree.'), terms: [{ id: 'payer', label: 'Responsible payer', value: fullName(payer), tone: 'neutral' }, { id: 'mode', label: 'Routine', value: mode === 'lessons' ? 'Guided lessons' : 'Community access', tone: 'neutral' }, { id: 'fee', label: 'Per attended month', value: money(fee), tone: 'negative' }, { id: 'progress', label: 'Practice progress', value: 'Up to ' + (mode === 'lessons' ? 4 : 2) + ' points per attended month', tone: 'neutral' }, { id: 'now', label: 'Paid to set this plan', value: money(0n), tone: 'neutral' }, { id: 'included', label: 'Included', value: 'Shared equipment and materials', tone: 'neutral' }, { id: 'pause', label: 'Fees pause', value: 'When you cannot attend or afford it', tone: 'neutral' }], confirmLabel: payer.id === person.id ? 'Set Hobby Routine' : 'Ask For This Routine' } });
+    clear(); setReview({ command: { type: 'hobby-plan', kind, mode, reviewedPayerId: payer.id, quotedMonthlyFee: fee }, event: { id: 'hobby-review-' + kind + '-' + mode + '-' + payer.id, kind: 'confirmation', title: hobbyContent[kind].name + ' Routine', body: (mode === 'lessons' ? 'Start ' + hobbyContent[kind].name.toLowerCase() + ' lessons' : 'Join ' + hobbyContent[kind].name.toLowerCase() + ' sessions') + ' for ' + money(fee) + ' a month?' + (payer.id === person.id ? '' : ' ' + fullName(payer) + ' needs to agree.'), terms: [{ id: 'payer', label: 'Responsible payer', value: fullName(payer), tone: 'neutral' }, { id: 'mode', label: 'Routine', value: mode === 'lessons' ? 'Guided lessons' : 'Community access', tone: 'neutral' }, { id: 'fee', label: 'Per attended month', value: money(fee), tone: 'negative' }, { id: 'progress', label: 'Practice progress', value: 'Up to ' + (mode === 'lessons' ? 4 : 2) + ' points per attended month', tone: 'neutral' }, { id: 'now', label: 'Paid to set this plan', value: money(0n), tone: 'neutral' }, { id: 'included', label: 'Included', value: 'Shared equipment and materials', tone: 'neutral' }, { id: 'pause', label: 'Fees pause', value: 'When you cannot attend or afford it', tone: 'neutral' }], confirmLabel: payer.id === person.id ? 'Set Hobby Routine' : 'Ask For This Routine' } });
   };
   const lastMonth = hobby && plan ? hobby.practices.filter(item => item.planId === plan.id && item.source === 'monthly').at(-1) : undefined;
   const introductionReason = hobby && plan ? hobbyIntroductionReason(world, hobby, plan) : 'Arrange and attend a current local routine first';
@@ -49,7 +44,7 @@ export function HobbyRoutine({ kind }: { kind: HobbyKind }) {
       <Card><Heading size={18}>Community Event</Heading><Body>{hobbyEventContent[kind].name}</Body><Body muted>After 12 attended monthly practices, bring your skills to a local club event.</Body><Button label="View Community Event" tone="secondary" disabled={busy} onPress={() => router.push({ pathname: '/hobby-event/[kind]', params: { kind } })} /></Card>
       <HobbyLifestyle kind={kind} />
       {hobby && <Card><Heading size={18}>Routine History</Heading>{hobby.plans.slice().reverse().slice(0, historyLimit).map(item => { const rows = hobby.practices.filter(row => row.planId === item.id && row.source === 'monthly'); return <View key={item.id} style={{ gap: 3 }}><Body>{planLabels[item.status]} · {item.started.year}</Body><Body muted>{fullName(world.people[item.payerId])} · {rows.filter(row => row.attended).length} attended / {rows.length} months · paid {money(rows.reduce((sum, row) => sum + row.paid, 0n), item.country)}</Body>{item.endReason && <Body muted>{item.endReason}</Body>}</View>; })}{hobby.plans.length > historyLimit && <Button label="Show Earlier Routines" tone="secondary" onPress={() => setHistoryLimit(historyLimit + 4)} />}</Card>}
-    {error && !review && <Body>{error}</Body>}<EventModal event={review?.event ?? null} busy={busy} error={error} onCancel={() => { if (!busy && !submitting.current) setReview(null); }} onChoose={() => {
+    {error && !review && <Body>{error}</Body>}<EventModal event={review?.event ?? null} busy={busy} error={error} onCancel={() => { if (!busy && !submitting.current) { setReview(null); clear(); } }} onChoose={() => {
       if (!review || busy || submitting.current) return;
       submitting.current = true;
       return dispatch(review.command).then(ok => { if (ok) setReview(null); }).finally(() => { submitting.current = false; });
