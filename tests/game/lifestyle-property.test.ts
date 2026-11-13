@@ -7,7 +7,7 @@ import { validateWorld, type World } from '../../src/game/model';
 import { accountFor } from '../../src/game/systems/common';
 import { assetCatalog } from '../../src/game/content/assets';
 import { assetPrice, assetsMonth } from '../../src/game/systems/assets';
-import { askingRent, landlordMonth } from '../../src/game/systems/landlordTenancies';
+import { askingRent, tenancyReviewFee, landlordMonth } from '../../src/game/systems/landlordTenancies';
 import { amenityQuote } from '../../src/game/systems/propertyAmenities';
 import fixture from '../fixtures/v3-employed-graduate.json';
 import { lifestyleFixture, act, buyLifestyle } from '../helpers/lifestyle';
@@ -32,7 +32,7 @@ test('an unpaid tenancy requires real notice, an independent paid review and ano
         world = act(world, { type: 'manage-tenancy', tenancyId: id, action: 'repair', quotedAmount: world.lifestyle!.tenancies[0].maintenance }); };
     nextMonth();
     nextMonth();
-    const fee = rules[world.assets.at(-1)!.country].baseWage / 1000n || 1n;
+    const fee = tenancyReviewFee(world.assets.at(-1)!.country);
     world = act(world, { type: 'manage-tenancy', tenancyId: id, action: 'review-eviction', quotedAmount: fee });
     expect(world.lifestyle!.records.at(-1)!.kind).toBe('tenancy-review');
     expect(() => act(world, { type: 'manage-tenancy', tenancyId: id, action: 'evict', quotedAmount: 0n })).toThrow(/further month/);

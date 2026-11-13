@@ -1,3 +1,7 @@
+import { askingRent, rentalPriceReason, tenantCheckFee, tenancyReviewFee } from './landlordPricing';
+import { tenancyActionReason } from './tenancyEligibility';
+export { askingRent, rentalPriceReason, tenantCheckFee, tenancyReviewFee } from './landlordPricing';
+export { tenancyActionReason } from './tenancyEligibility';
 import { formatMoney } from '../money';
 import { fxMoney } from '../valuation';
 import { z } from 'zod';
@@ -18,14 +22,11 @@ export const propertyCommandSchema = z.discriminatedUnion('type', [
     z.object({ type: z.literal('enable-property-management'), assetId: z.string() }).strict(),
     z.object({ type: z.literal('install-amenity'), assetId: z.string(), amenity: z.enum(amenityIds), quotedCost: z.bigint().positive() }).strict(),
     z.object({ type: z.literal('find-tenants'), assetId: z.string(), quotedRent: z.bigint().positive() }).strict(),
-    z.object({ type: z.literal('review-tenant'), applicationId: z.string(), action: z.enum(['check', 'accept', 'reject']), quotedDeposit: z.bigint().nonnegative() }).strict(),
+    z.object({ type: z.literal('review-tenant'), applicationId: z.string(), action: z.enum(['check', 'accept', 'reject']), quotedCheckFee: z.bigint().positive().optional(), quotedDeposit: z.bigint().nonnegative() }).strict(),
     z.object({ type: z.literal('manage-tenancy'), tenancyId: z.string(), action: z.enum(['inspect', 'repair', 'discuss', 'renew', 'notice', 'review-eviction', 'evict', 'rent', 'end']), quotedAmount: z.bigint().nonnegative() }).strict(),
     z.object({ type: z.literal('home-gathering'), assetId: z.string(), activity: z.enum(['party', 'dinner', 'celebration']), contactId: z.string(), quotedCost: z.bigint().nonnegative() }).strict(),
 ]);
 export type PropertyCommand = z.infer<typeof propertyCommandSchema>;
-export const askingRent = (asset: World['assets'][number]) => asset.value * 6n / 1200n || 1n;
-export function rentalPriceReason(asset: World['assets'][number], rent: bigint) { const market = askingRent(asset); if (rent < market / 2n || rent > market * 3n / 2n || rent <= 0n)
-    return 'Choose rent between 50% and 150% of the current market estimate'; }
 function property(world: World, id: string) { const asset = world.assets.find(row => row.id === id && row.ownerId === world.activePersonId && row.kind === 'property'); if (!asset)
     throw new IneligibleAction('Choose your own property'); return asset; }
 export { namedTenancy, endNamedTenancy, refreshNamedTenancies } from './landlordState';
@@ -97,7 +98,8 @@ export function resolveProperty(world: World, command: PropertyCommand) {
         if (command.action === 'check') {
             if (app.checked)
                 throw new IneligibleAction('This background check is already complete');
-            const cost = rules[asset.country].baseWage / 10000n || 1n;
+            const cost = tenantCheckFee(asset.country);
+            if (command.quotedCheckFee !== undefined && command.quotedCheckFee !== cost) throw new IneligibleAction('Review the current background-check fee');
             const paymentIds = lifestylePayment(world, cost, 'Tenant background check', asset.currency);
             app.checked = true;
             const tenant = world.people[app.tenantId], convictions = world.sentences.filter(row => row.personId === tenant.id).length;
@@ -132,29 +134,18 @@ export function resolveProperty(world: World, command: PropertyCommand) {
         if (!row)
             throw new IneligibleAction('Choose your current tenancy');
         const asset = property(world, row.assetId), tenant = world.people[row.tenantId];
+        const unavailable = tenancyActionReason(world, command); if (unavailable) throw new IneligibleAction(unavailable);
         if (command.action === 'rent') {
-            if (current - row.lastRentReviewMonth < 12)
-                throw new IneligibleAction('Review rent at most once a year');
-            const reason = rentalPriceReason(asset, command.quotedAmount);
-            if (reason)
-                throw new IneligibleAction(reason);
-            if (command.quotedAmount > row.rent * 110n / 100n)
-                throw new IneligibleAction('The increase cannot exceed 10% of the agreed rent');
             row.rent = command.quotedAmount;
             asset.rentPerMonth = row.rent;
             row.lastRentReviewMonth = current;
             row.satisfaction = bounded(row.satisfaction - 5);
         }
         else if (command.action === 'inspect') {
-            if (asset.country !== player.country || asset.city !== player.city) throw new IneligibleAction('Return to the property’s city for an in-person inspection');
-            if (asset.propertyLife?.lastInspectionMonth !== null && current - (asset.propertyLife?.lastInspectionMonth ?? current) < 6)
-                throw new IneligibleAction('Respect privacy: inspections are available every six months');
             asset.propertyLife!.lastInspectionMonth = current;
             row.maintenance = row.maintenance || (asset.condition < 80 ? asset.value / 2000n || 1n : 0n);
         }
         else if (command.action === 'repair') {
-            if (!row.maintenance || command.quotedAmount !== row.maintenance)
-                throw new IneligibleAction('Review the actual outstanding maintenance estimate');
             const ids = lifestylePayment(world, row.maintenance, 'Tenant maintenance', asset.currency);
             recordLifestyle(world, { kind: 'tenant-repair', subjectId: row.id, currency: asset.currency, paid: row.maintenance, paymentIds: ids, body: 'I paid for the repairs at ' + asset.name + '.' });
             row.maintenance = 0n;
@@ -163,8 +154,6 @@ export function resolveProperty(world: World, command: PropertyCommand) {
         }
         else if (command.action === 'discuss') {
             const key = player.id + ':tenant-discuss:' + row.id + ':' + current;
-            if (world.actionCounts[key])
-                throw new IneligibleAction('One rent discussion per month');
             world.actionCounts[key] = 1;
             const funds = availableCash(accountFor(world, tenant, row.currency)), paid = row.arrears < funds ? row.arrears : funds;
             const ids = transferLifestyle(world, tenant, player, paid, row.currency, 'Rent arrears: ' + row.id);
@@ -178,26 +167,16 @@ export function resolveProperty(world: World, command: PropertyCommand) {
             recordLifestyle(world, { kind: 'tenant-arrears', subjectId: row.id, currency: row.currency, participants: [player.id, tenant.id], received: paid, paymentIds: ids, body: 'I discussed rent with ' + fullName(tenant) + '. Afterwards, ' + formatMoney({ minor: row.arrears, currency: row.currency }) + ' remains unpaid.' });
         }
         else if (command.action === 'renew') {
-            if (current - row.lastRentReviewMonth < 12)
-                throw new IneligibleAction('Renew after twelve months');
             row.noticeMonth = null;
             row.reviewMonth = null;
             row.lastRentReviewMonth = current;
             row.satisfaction = bounded(row.satisfaction + 5);
         }
         else if (command.action === 'notice') {
-            if (row.noticeMonth !== null)
-                throw new IneligibleAction('Notice is already recorded');
             row.noticeMonth = current;
         }
         else if (command.action === 'review-eviction') {
-            if (row.noticeMonth === null || current - row.noticeMonth < 2 || row.arrears < row.rent * 2n || row.maintenance > 0n)
-                throw new IneligibleAction('A review requires two months’ notice, two rents in arrears and completed repairs');
-            if (row.reviewMonth !== null)
-                throw new IneligibleAction('An independent review is already recorded');
-            const fee = rules[asset.country].baseWage / 1000n || 1n;
-            if (command.quotedAmount !== fee)
-                throw new IneligibleAction('Review the actual review fee');
+            const fee = tenancyReviewFee(asset.country);
             const ids = lifestylePayment(world, fee, 'Independent tenancy review', row.currency);
             row.reviewMonth = current;
             row.reviewPaid = fee;
@@ -205,13 +184,9 @@ export function resolveProperty(world: World, command: PropertyCommand) {
             recordLifestyle(world, { kind: 'tenancy-review', subjectId: row.id, currency: row.currency, paid: fee, paymentIds: ids, body: 'I paid for an independent review of the tenancy at ' + asset.name + '. There was still a waiting period ahead.' });
         }
         else if (command.action === 'end') {
-            if (row.noticeMonth === null || current - row.noticeMonth < 2 || row.maintenance > 0n)
-                throw new IneligibleAction('Give two months’ notice and complete repairs before an ordinary ending');
             endNamedTenancy(world, row, 'The ordinary tenancy ended after two months’ notice. The deposit was returned in full.');
         }
         else {
-            if (row.noticeMonth === null || row.reviewMonth === null || current <= row.reviewMonth || row.arrears < row.rent * 2n || row.maintenance > 0n)
-                throw new IneligibleAction('Await an independent review and a further month before ending an unpaid tenancy');
             endNamedTenancy(world, row, 'A reviewed unpaid tenancy ended after notice. The deposit was returned in full.');
         }
         if (['notice', 'inspect', 'renew', 'rent'].includes(command.action)) fact(world, 'I ' + (command.action === 'notice' ? 'gave notice to ' : command.action === 'inspect' ? 'carried out an agreed inspection for ' : command.action === 'renew' ? 'renewed the tenancy with ' : 'reviewed the rent for ') + fullName(tenant) + ' at ' + asset.name + '.', 'property');

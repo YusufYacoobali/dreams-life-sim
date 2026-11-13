@@ -10,7 +10,7 @@ Each checkpoint includes focused verification before its commit and push. Existi
 | 2. Actor/Model presentation and casting | Implemented; focused checks pass |
 | 3. Automatic lifestyle activation and legacy compatibility | Implemented; focused checks pass |
 | 4. Vehicles and driving licence | Implemented; focused checks pass |
-| 5. Landlord and properties | Pending |
+| 5. Landlord and properties | Implemented; focused checks pass |
 | 6. Hobbies, pets and artwork | Pending |
 | 7. Organised Crime balancing and prison UI | Pending |
 | 8. Versioned Cell Escape replacement | Pending |
@@ -58,3 +58,12 @@ After the master gameplay/polish checkpoints, implement the user's separate Drea
 - New boat/aircraft purchases are hidden in the catalogue and direct offer pages. Existing owned vehicles, specifications and histories remain available.
 - Prospective v2 vehicle quotes depend on value, age, wear, type and the asset's country/currency. Earlier v1 vehicle policies keep their original prices/distances, and historical receipts stay literal. Resolver quote verification and real transactions remain authoritative.
 - Verification: 232 relevant cases across nine suites pass across main runs and affected reruns. Coverage includes pricing, country/age eligibility, the three-step quiz, cancellation, real SQLite failed-save/retry, ownership grouping and light/dark/large-text renderer checks. Historical v1 vehicle and frozen-decision fixtures pass. Strict app/test types and the 601-module import check pass; native geometry still needs installed-device acceptance.
+
+
+## Checkpoint 5
+
+- Named tenancies have a portrait overview and grouped Tenants & Applications, Rent & Payments, Maintenance and End Tenancy workflows. Actual payment records and past tenancies are expandable/paged; deposit returns, arrears and agreed rent remain literal.
+- The resolver and UI share `tenancyActionReason`, including annual timing, market bounds, the increase cap, inspection privacy, repair quotes/funds, notice, overdue rent, independent review and its further waiting month. Ineligible eviction completion is absent; the process shows completed and outstanding requirements.
+- Occupied homes no longer open irrelevant installation/gathering lists or duplicate inspections. Home invitations retain the shared portrait picker.
+- Prospective background checks and independent reviews now scale with country wages (US $40/$100). New background-check requests verify their quoted fee. Existing payments keep their saved amounts, and property maintenance remains based on property value.
+- Verification: six existing focused suites (263 cases), seven new core/UI cases and affected vehicle/review reruns pass. Real seeded rent periods produce arrears and reported maintenance; tests cover every eviction gate, rent bounds, no-write cancellation, actual save failures/retries and one deposit refund. Landlord UI tests close and reopen real SQLite connections. The existing property-investor cold-reopen journey also passes. Strict app/test types and the 604-module import-cycle check pass. Installed-device geometry and accessibility acceptance remain pending.

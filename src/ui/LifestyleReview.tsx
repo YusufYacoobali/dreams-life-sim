@@ -15,10 +15,10 @@ export function useLifestyleReview(context = '') {
   useEffect(() => { mounted.current = true; return () => { mounted.current = false; active.current = null; }; }, []);
   useEffect(() => { if (active.current?.identity !== identity) { active.current = null; setReview(null); } }, [identity]);
   const close = () => { if (!busy && mounted.current) { active.current = null; setReview(null); clear(); } };
-  const ask = (command: GameCommand, title: string, body: string, terms: EffectRow[] = []) => {
+  const ask = (command: GameCommand, title: string, body: string, terms: EffectRow[] = [], illustration?: React.ReactNode) => {
     if (busy || !mounted.current || current.current !== identity) return;
     clear();
-    const next: Review = { identity, command, event: { id: 'lifestyle-review-' + command.type, kind: 'confirmation', title, body, terms, confirmLabel: 'Confirm' } };
+    const next: Review = { identity, command, event: { id: 'lifestyle-review-' + command.type, kind: 'confirmation', title, body, terms, confirmLabel: 'Confirm', illustration } };
     active.current = next; setReview(next);
   };
   const modal = <EventModal event={shown?.event ?? null} busy={busy} error={error} onCancel={close} onChoose={async () => {
