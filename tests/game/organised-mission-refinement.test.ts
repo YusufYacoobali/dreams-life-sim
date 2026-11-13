@@ -34,7 +34,7 @@ test.each(combinations)('%s / %s has at least three actual distinct result paths
     const next = run(world, mission, 'crew-led', seed), job = activeOrganisation(next)!.organised!.jobs.at(-1)!, incident = next.incidents.find(item => item.id === job.incidentId)!;
     if (seen.has(job.mission!.outcome)) continue;
     seen.add(job.mission!.outcome);
-    expect(incident.organisedMission).toMatchObject({ rulesVersion: 2, category: mission, style, jobId: job.id, participantIds: job.participantIds, result: job.mission });
+    expect(incident.organisedMission).toMatchObject({ rulesVersion: 3, category: mission, style, jobId: job.id, participantIds: job.participantIds, result: job.mission });
     expect(incident.offence).toBe(style === 'fraud-network' ? 'financial-scam' : style === 'smuggling-ring' ? 'contraband' : mission === 'protection-dispute' ? 'extortion' : 'organized-job');
     expect(incident.gain.minor).toBe(job.proceeds);
     expect(accountFor(next).cash - accountFor(world).cash).toBe(job.proceeds - job.mission!.loss);
@@ -60,11 +60,13 @@ test('the same premise creates street rivalry, conserved fraud victim transfers 
   expect(paid.accounts.reduce((sum, account) => sum + account.cash, 0n)).toBe(fraud.accounts.reduce((sum, account) => sum + account.cash, 0n));
   expect(accountFor(fraud, fraud.people[victimId]).cash - accountFor(paid, paid.people[victimId]).cash).toBe(job.proceeds);
   expect(relationFor(paid, paid.activePersonId, victimId)!.memories).toContain('crime-victim:' + job.incidentId);
-  expect(paid.cases.some(item => item.incidentId === job.incidentId && item.offence === 'financial-scam')).toBe(true);
+  expect(paid.incidents.find(item => item.id === job.incidentId)).toMatchObject({ offence: 'financial-scam' });
+  expect(paid.incidents.find(item => item.id === job.incidentId)!.evidence).toBeGreaterThanOrEqual(70);
   const smuggling = find(joined('smuggling-ring'), 'cargo-confiscation');
   const cargoJob = activeOrganisation(smuggling)!.organised!.jobs.at(-1)!;
   expect(cargoJob.mission!.cargo).toMatchObject({ id: 'cargo_' + cargoJob.incidentId, status: 'confiscated' });
-  expect(smuggling.cases.some(item => item.incidentId === cargoJob.incidentId && item.offence === 'contraband')).toBe(true);
+  expect(smuggling.incidents.find(item => item.id === cargoJob.incidentId)).toMatchObject({ offence: 'contraband' });
+  expect(smuggling.incidents.find(item => item.id === cargoJob.incidentId)!.evidence).toBeGreaterThanOrEqual(70);
 });
 test('a public financial scandal creates a usable public response, damages the actual job and survives resolution', () => {
   const before = joined('fraud-network'), next = find(before, 'public-scandal');

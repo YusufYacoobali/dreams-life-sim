@@ -207,9 +207,20 @@ function newState(world: World, gang: Gang, style: Style): OrganisedCrimeState {
     activeStory: null,
   };
 }
+export function recruitmentReason(world: World, gang: Gang, personId: string): string | undefined {
+  const outside = organisationReason(world, gang); if (outside) return outside;
+  const s = gang.organised, person = active(world), target = world.people[personId];
+  if (!s || s.rank < 2 || s.members.filter(member => member.role !== 'former').length >= 5 || s.members.length >= 8)
+    return 'Crew leaders can recruit into a vacant seat; lifetime member history is bounded';
+  if ((world.actionCounts[countKey(world, gang, 'decision')] ?? 0) >= 1) return 'Your major decision for this year is used';
+  const relation = target && relationFor(world, person.id, target.id);
+  if (!target || target.id === person.id || target.died || ageOn(target, world.date) < Math.max(18, rules[target.country].adultAge) || isConfined(world, target) || target.legal.wanted || activeTrip(world, target.id) || serviceAway(world, target.id) || target.country !== s.country || target.city !== s.city || !relation || relation.trust < 55 || s.members.some(member => member.personId === target.id) || s.rivals.some(rival => rival.personId === target.id) || world.gangs.some(other => !other.left && (other.personId === target.id || other.organised?.members.some(member => member.personId === target.id && member.role !== 'former'))))
+    return 'Choose a trusted, local adult contact without another active criminal affiliation';
+}
 export function promotionReason(world: World, gang: Gang): string | undefined {
   const outside = organisationReason(world, gang);
   if (outside) return outside;
+  if ((world.actionCounts[countKey(world, gang, 'decision')] ?? 0) >= 1) return 'Your major decision for this year is used';
   const s = gang.organised;
   if (!s) return "Review your existing affiliation first";
   if (s.rank >= 3)
@@ -893,44 +904,9 @@ export function handleOrganisedCrime(
     return;
   }
   if (command.type === "organised-recruit") {
-    if (
-      s.rank < 2 ||
-      s.members.filter((m) => m.role !== "former").length >= 5 ||
-      s.members.length >= 8
-    )
-      throw new IneligibleAction(
-        "Crew leaders can recruit into a vacant seat; lifetime member history is bounded",
-      );
-    const target = world.people[command.personId],
-      relation = target && relationFor(world, person.id, target.id);
-    if (
-      !target ||
-      target.id === person.id ||
-      target.died ||
-      ageOn(target, world.date) <
-        Math.max(18, rules[target.country].adultAge) ||
-      isConfined(world, target) ||
-      target.legal.wanted ||
-      activeTrip(world, target.id) ||
-      serviceAway(world, target.id) ||
-      target.country !== s.country ||
-      target.city !== s.city ||
-      !relation ||
-      relation.trust < 55 ||
-      s.members.some((m) => m.personId === target.id) ||
-      s.rivals.some((r) => r.personId === target.id) ||
-      world.gangs.some(
-        (g) =>
-          !g.left &&
-          (g.personId === target.id ||
-            g.organised?.members.some(
-              (m) => m.personId === target.id && m.role !== "former",
-            )),
-      )
-    )
-      throw new IneligibleAction(
-        "Choose a trusted, local adult contact without another active criminal affiliation",
-      );
+    const reason = recruitmentReason(world, gang, command.personId);
+    if (reason) throw new IneligibleAction(reason);
+    const target = world.people[command.personId], relation = relationFor(world, person.id, target.id)!;
     use(world, gang, "decision", 1);
     s.decisions++;
     const willing =

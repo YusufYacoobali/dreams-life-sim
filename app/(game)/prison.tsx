@@ -1,3 +1,4 @@
+import { useScopedGameAction } from '../../src/ui/useScopedGameAction';
 import React from 'react';
 import { View } from 'react-native';
 import { router } from 'expo-router';
@@ -9,7 +10,8 @@ import { useColors } from '../../src/ui/theme';
 import { prisonSecurity } from '../../src/game/systems/prisonSecurity';
 import { LegalReviewError } from '../../src/ui/LegalReview';
 export default function Prison() {
-  const world = useGame(s => s.world)!, sentence = activeSentence(world), c = useColors(), busy = useGame(s => s.busy), dispatch = useGame(s => s.dispatch), error = useGame(s => s.error), confined = isConfined(world);
+  const world = useGame(s => s.world)!, sentence = activeSentence(world), c = useColors(), confined = isConfined(world);
+  const { busy, dispatch, error } = useScopedGameAction('prison:' + sentence?.id);
   const failure = <LegalReviewError error={world.pending ? null : error} />;
   return <Page footer={confined ? <>{failure}<Button label={world.annual ? 'Continue This Year' : 'Age Up'} busy={busy} disabled={!!world.pending} onPress={() => void dispatch({ type: world.annual ? 'resume' : 'advance' })} /></> : undefined}>
     <Header title={sentence ? 'Prison' : 'Custody'} onBack={() => router.back()} />

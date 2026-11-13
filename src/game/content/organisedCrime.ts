@@ -14,7 +14,7 @@ export const organisations: Record<
     title: "Fraud Network",
     name: "The Glass Ledger",
     description:
-      "Polished manners, fictional promises and very real investigations.",
+      "Polished manners, false promises and relentless investigators.",
   },
   "smuggling-ring": {
     title: "Smuggling Ring",
@@ -83,7 +83,7 @@ export const organisedMissions = [
     id: "phantom-investment",
     title: "The Phantom Prospectus",
     premise:
-      "A fictional opportunity has acquired actual angry investors. The crew wants you to handle the fallout.",
+      "A false opportunity has attracted angry investors. The crew wants you to handle the fallout.",
     styles: ["fraud-network"],
     rank: 1,
     reward: 700,

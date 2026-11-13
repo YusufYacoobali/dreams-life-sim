@@ -1,3 +1,4 @@
+import { organisedAssignmentRisk } from './organisedRisk';
 import type { World } from '../model';
 import type { OrganisedCrimeCommand, OrganisedCrimeState } from './organisedCrimeSchemas';
 import type { OrganisedMissionResult, OrganisedMissionIncident } from './organisedMissionSchemas';
@@ -35,7 +36,7 @@ function missionVictim(world: World, gang: Gang) {
 }
 function scandal(world: World, source: World['incidents'][number], victimId: string) {
   const person = active(world), id = 'controversy_' + source.id;
-  const body = fullName(world.people[victimId]) + ' circulates a warning about your fictional financial promises. Your real name is on the complaint.';
+  const body = fullName(world.people[victimId]) + ' circulates a warning about your false financial promises. The complaint names you.';
   world.controversies.push({ id, personId: person.id, accountId: null, postId: null, date: { ...world.date }, title: 'The prospectus has readers', body, impact: 12, responseRoll: draw(world, 'outcomes', 1, 100), response: null, resolved: null });
   person.publicLife.image = bounded(person.publicLife.image - 12);
   if (person.employment) {
@@ -50,7 +51,7 @@ function scandal(world: World, source: World['incidents'][number], victimId: str
   })) }, 65);
   return id;
 }
-/** Every new assignment uses v2 facts; historical jobs and their judgments are read unchanged. */
+/** New v3 exposure is prospective; historical v2 cases and judgments stay literal. */
 export function performOrganisedAssignment(world: World, gang: Gang, command: Command, crew: Member[]) {
   const person = active(world), s = gang.organised!, mission = organisedMissions.find(item => item.id === command.mission)!, profile = organisedMissionProfiles[mission.id];
   const skill = crew.length ? crew.reduce((sum, member) => sum + world.people[member.personId].legal.crimeSkill, 0) / crew.length : 0;
@@ -98,16 +99,16 @@ export function performOrganisedAssignment(world: World, gang: Gang, command: Co
   if (involved && success) body += ' ' + fullName(world.people[involved.personId]) + ' resents taking the exposure for a reduced share; their loyalty falls.';
   const incidentId = 'incident_' + person.id + '_' + world.revision + '_' + world.incidents.length;
   const jobId = 'organised_job_' + incidentId;
-  const details: OrganisedMissionResult = { rulesVersion: 2, outcome, loss, lossTransactionId, proceedsTransactionId: paymentId, victimId: victim?.id ?? null, victimTransactionId,
+  const details: OrganisedMissionResult = { rulesVersion: 3, outcome, loss, lossTransactionId, proceedsTransactionId: paymentId, victimId: victim?.id ?? null, victimTransactionId,
     rivalId: s.style !== 'fraud-network' ? rival?.personId ?? null : null, memberId: involved?.personId ?? null, scandalId: null,
     cargo: s.style === 'smuggling-ring' ? { id: 'cargo_' + incidentId, description: profile.cargo, status: success ? 'delivered' : outcome === 'cargo-confiscation' ? 'confiscated' : 'lost' } : null,
     crew: originalCrew, successChance: chance, reputationDelta: 0, title, body };
-  const incidentFacts: OrganisedMissionIncident = { rulesVersion: 2, gangId: gang.id, jobId, category: mission.id, style: s.style, outcome, participantIds: [person.id, ...crew.map(member => member.personId)], title, body, result: details };
+  const incidentFacts: OrganisedMissionIncident = { rulesVersion: 3, gangId: gang.id, jobId, category: mission.id, style: s.style, outcome, participantIds: [person.id, ...crew.map(member => member.personId)], title, body, result: details };
+  const exposure = organisedAssignmentRisk(mission, s.style, command.approach, person.legal.crimeSkill, profile.pressure, complication);
   const source = recordOrganisedCrime(world, person.id, gain, {
     offence: s.style === 'fraud-network' ? 'financial-scam' : s.style === 'smuggling-ring' ? 'contraband' : mission.id === 'protection-dispute' ? 'extortion' : 'organized-job',
     victimId: victim?.id ?? null, mission: incidentFacts,
-    riskDeltaBps: mission.risk + (command.approach === 'cautious' ? -2000 : command.approach === 'bold' ? 1200 : -700),
-    evidenceDelta: (command.approach === 'cautious' ? -12 : command.approach === 'bold' ? 12 : 0) + (complication ? profile.pressure : 0),
+    riskDeltaBps: 0, ...exposure,
     reported: outcome === 'victim-complaint' || outcome === 'public-scandal' || outcome === 'cargo-confiscation',
   });
   if (victim) {

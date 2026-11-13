@@ -8,7 +8,7 @@ import { mkdtempSync, rmSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { createGameStore } from '../../src/state/gameStore';
-import { decodeWorld, encodeWorld, type World } from '../../src/game/model';
+import { decodeWorld, encodeWorld, fullName, type World } from '../../src/game/model';
 import { resolveCommand, type GameCommand } from '../../src/game/engine';
 import { randomCreation } from '../../src/game/createLife';
 import { accountFor } from '../../src/game/systems/common';
@@ -49,6 +49,23 @@ function prison() {
   expect(hearing.pending).toMatchObject({ kind: 'decision', templateId: 'court-hearing' });
   return ack(choose(hearing, 'guilty'));
 }
+
+test('prison portrait selection cancels without writes and a real inmate conversation retries once after SQLite failure', async () => {
+  const initial = prison(), db = await setup(initial);
+  try {
+    const inmate = prisonContacts(initial)[0], before = encodeWorld(initial), beforeRows = db.rows(), view = await render(frame(<PrisonActivities />));
+    for (const heading of ['Daily Routine', 'Prison Relationships', 'Prison Group', 'Family & Outside Contacts', 'Legal Options', 'Escape']) expect(screen.getByRole('header', { name: heading })).toBeOnTheScreen();
+    expect(screen.queryByText(fullName(inmate))).toBeNull();
+    await press('Choose an Inmate'); await chooseConduct(new RegExp('^' + fullName(inmate))); await press('Never mind'); expect(encodeWorld(world())).toBe(before); expect(db.rows()).toEqual(beforeRows);
+    await press('Choose an Outside Contact'); expect(screen.getAllByRole('radio').length).toBeGreaterThan(0); await press('Never mind'); expect(encodeWorld(world())).toBe(before);
+    await press('Choose an Inmate'); await chooseConduct(new RegExp('^' + fullName(inmate))); await press('Choose');
+    db.sqlite.exec("CREATE TRIGGER fail_inmate_talk BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END"); await press('Talk');
+    await waitFor(() => expect(screen.getByRole('alert')).toHaveTextContent(/couldn't be saved/)); expect(encodeWorld(world())).toBe(before); expect(db.rows()).toEqual(beforeRows);
+    db.sqlite.exec('DROP TRIGGER fail_inmate_talk'); await press('Talk');
+    const expected = resolveCommand(initial, { type: 'prison-action', personId: inmate.id, action: 'talk' }, true); expect(world()).toEqual(expected);
+    await view.unmount(); await db.cold(); expect(world()).toEqual(expected); db.original();
+  } finally { db.close(); }
+});
 
 async function setup(initial: World) {
   const folder = mkdtempSync(join(tmpdir(), 'dreams-legal-ui-')), file = join(folder, 'dreams.db');

@@ -1,7 +1,7 @@
 import { z } from 'zod';
 export const missionOutcomeIds = ['quiet-profit', 'exposed-profit', 'costly-respect', 'rival-advance', 'victim-complaint', 'public-scandal', 'collapsed-scheme', 'cargo-confiscation', 'associate-betrayal'] as const;
 export const organisedMissionResultSchema = z.object({
-  rulesVersion: z.literal(2), outcome: z.enum(missionOutcomeIds),
+  rulesVersion: z.union([z.literal(2), z.literal(3)]), outcome: z.enum(missionOutcomeIds),
   loss: z.bigint().nonnegative(), lossTransactionId: z.string().nullable(), proceedsTransactionId: z.string().nullable(),
   victimId: z.string().nullable(), victimTransactionId: z.string().nullable(),
   rivalId: z.string().nullable(), memberId: z.string().nullable(), scandalId: z.string().nullable(),
@@ -13,7 +13,7 @@ export const organisedMissionResultSchema = z.object({
 });
 /** Prospective assignment facts; old Underground Job incidents have no such field. */
 export const organisedMissionIncidentSchema = z.object({
-  rulesVersion: z.literal(2), gangId: z.string(), jobId: z.string(), category: z.string(),
+  rulesVersion: z.union([z.literal(2), z.literal(3)]), gangId: z.string(), jobId: z.string(), category: z.string(),
   style: z.enum(['street-syndicate', 'fraud-network', 'smuggling-ring']),
   outcome: z.enum(missionOutcomeIds), participantIds: z.array(z.string()).min(1).max(6),
   title: z.string().max(120), body: z.string().max(1500),

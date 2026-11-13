@@ -12,7 +12,7 @@ Each checkpoint includes focused verification before its commit and push. Existi
 | 4. Vehicles and driving licence | Implemented; focused checks pass |
 | 5. Landlord and properties | Implemented; focused checks pass |
 | 6. Hobbies, pets and artwork | UI implemented; art batch awaiting approval |
-| 7. Organised Crime balancing and prison UI | Pending |
+| 7. Organised Crime balancing and prison UI | Implemented; focused checks and seeded comparison pass |
 | 8. Versioned Cell Escape replacement | Pending |
 | 9. Writing and measured performance | Pending |
 | 10. Regression, native playthroughs and final fixes | Pending |
@@ -75,3 +75,11 @@ After the master gameplay/polish checkpoints, implement the user's separate Drea
 - Optional pet activities are grouped into Training & Events, Health & Care and Company & Outings. Reviews reuse existing pet artwork; introductions use illustrated companion selection and family invitations use the portrait picker. Existing feeding, illness, health, training, bond, funding and ownership rules are unchanged.
 - [Artwork inventory and integration manifest](V2_POLISH_ARTWORK.md) records existing illustrations to reuse and the eight missing hobby illustrations plus Cell Escape layers. Generation is awaiting the Krea skill's explicit cost-preflight approval. No new art is claimed complete.
 - Verification: 66 cases across seven existing suites, three new UI cases and the two existing hobby/pet cold-connection journeys pass. New UI checks cover read-only cancellation, actual later-practice completion, SQLite failure/retry/cold reopening, once-only pet payments, and unrelated-error isolation. Strict app/test types and the 605-module import-cycle check pass. Actual phone appearance and accessibility acceptance remain pending.
+
+## Checkpoint 7
+
+- Organised Crime follows Cult Leader in Special Careers. Three illustrated organisation choices replace invitation/decline pairs. Recruitment uses the shared portrait picker and the resolver's complete eligibility helper; promotions also recognise an already-used annual decision. Existing crew, mission, rival and leadership mechanics remain.
+- Prison activities group Daily Routine, Prison Relationships, Prison Group, Family & Outside Contacts, Legal Options and Escape. Inmate/outside-contact choices use portraits without inline truncation. Direct-action errors are scoped to the prison workflow.
+- [Seeded comparison](../verification/v2-polish/organised-crime.md): 25,344 independent mission trials and 768 earned career progressions per source. Cautious introductory immediate arrest falls from 36–63% to 8–11%; bold remains 36–39%, with further investigations. More cautious careers earn first/second promotions, while 116–123 of 128 still eventually face an arrest within the driver window.
+- New assignments save explicit v3 facts. Reports leave strong evidence and may lead to later investigation rather than forcing immediate arrest. Old v2 incidents, cases, rolls, receipts and pending text remain literal; no new RNG draw or migration is introduced.
+- Verification: the existing crime, mission, crew, prison, persistence and UI suites pass across the main runs and affected reruns (including 113 cases in the final four-suite rerun). New tests pin three old worlds/follow-up outcomes, verify a later report arrest through real SQLite failure/retry/cold reopening, and exercise read-only prison selection and a once-only conversation retry. Both full seeded source comparisons, strict app/test types and import checks pass. Device appearance/accessibility acceptance remains pending.

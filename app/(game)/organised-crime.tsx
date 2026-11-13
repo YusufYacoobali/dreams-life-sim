@@ -14,7 +14,7 @@ import {
 import { HealthLegalArt } from "../../src/assets/HealthLegalArt";
 import { useColors } from "../../src/ui/theme";
 import { EventModal, type EventPresentation } from "../../src/ui/EventModal";
-import { LegalReviewError, useLegalReview } from "../../src/ui/LegalReview";
+import { useLegalReview } from "../../src/ui/LegalReview";
 import { ageOn, fullName } from "../../src/game/personHelpers";
 import {
   organisations,
@@ -26,12 +26,15 @@ import {
   organisationRank,
   organisationReason,
   promotionReason,
+  recruitmentReason,
 } from "../../src/game/systems/organisedCrime";
 import {
   organisationStyles,
   type OrganisedCrimeCommand,
 } from "../../src/game/systems/organisedCrimeSchemas";
-import { relationFor } from "../../src/game/systems/relationshipQueries";
+import { PersonPicker } from "../../src/ui/PersonPicker";
+import { FameBusinessArt } from "../../src/assets/FameBusinessArt";
+import { Illustration } from "../../src/assets/Illustration";
 import { isConfined } from "../../src/game/systems/legalSchemas";
 export default function OrganisedCrime() {
   const identity = useGame((s) => s.world?.id + ":" + s.world?.activePersonId);
@@ -40,11 +43,11 @@ export default function OrganisedCrime() {
 function Dashboard() {
   const world = useGame((s) => s.world)!,
     busy = useGame((s) => s.busy),
-    error = useGame((s) => s.error),
     c = useColors(),
     review = useLegalReview(),
     gang = activeOrganisation(world),
     s = gang?.organised;
+  const [recruiting, setRecruiting] = useState(false);
   const [selection, setSelection] = useState<{
     event: EventPresentation;
     choose: (id: string) => void;
@@ -92,7 +95,6 @@ function Dashboard() {
   return (
     <Page>
       <Header title="Organised Crime" onBack={() => router.back()} />
-      <LegalReviewError error={review.isOpen ? null : error} />
       <Card>
         <HealthLegalArt id="handcuffs" size={64} />
         <Heading size={22}>{gang?.name ?? "A seat at the table"}</Heading>
@@ -123,6 +125,7 @@ function Dashboard() {
           {organisationStyles.map((style) => (
             <React.Fragment key={style}>
               <ActionRow
+                icon={style === "street-syndicate" ? <HealthLegalArt id="handcuffs" /> : style === "fraud-network" ? <FameBusinessArt id="business" /> : <Illustration id="travel" />}
                 title={organisations[style].title}
                 subtitle={organisations[style].description}
                 disabled={busy}
@@ -131,22 +134,8 @@ function Dashboard() {
                   confirm(
                     { type: "organised-join", style },
                     "Join " + organisations[style].name + "?",
-                    "Meet the crew and enter as a recruit. Assignments carry real arrest risk; membership has no salary or joining charge.",
+                    "Meet the crew and enter as a recruit. Assignments carry real arrest risk; There is no joining fee or regular salary.",
                     "Join Organisation",
-                  )
-                }
-              />
-              <ActionRow
-                title={"Decline " + organisations[style].title}
-                subtitle="Turn down the invitation"
-                disabled={busy}
-                disabledReason={available}
-                onPress={() =>
-                  confirm(
-                    { type: "organised-refuse", style },
-                    "Decline this invitation?",
-                    "You decide whether to join.",
-                    "Decline",
                   )
                 }
               />
@@ -195,6 +184,7 @@ function Dashboard() {
               .map((mission) => (
                 <ActionRow
                   key={mission.id}
+                  icon={<HealthLegalArt id="handcuffs" />}
                   title={mission.title}
                   subtitle={mission.premise}
                   disabled={busy}
@@ -207,7 +197,7 @@ function Dashboard() {
                   onPress={() =>
                     select(
                       mission.title,
-                      "Choose how to approach this fictional assignment. Each approach creates a real incident; prosecution may follow later.",
+                      "Choose your approach. Evidence can lead to arrest now or an investigation later.",
                       [
                         {
                           id: "cautious",
@@ -248,6 +238,7 @@ function Dashboard() {
               criminal experience, loyalty and reputation.
             </Body>
             <ActionRow
+              icon={<FameBusinessArt id="business" />}
               title="Ask for promotion"
               subtitle={"Current rank: " + organisationRank(gang)}
               disabled={busy}
@@ -262,6 +253,7 @@ function Dashboard() {
               }
             />
             <ActionRow
+              icon={<HealthLegalArt id="prison-visit" />}
               title="Hear the crew’s concerns"
               subtitle="A member, leader or rival brings you a decision"
               disabled={busy}
@@ -277,7 +269,7 @@ function Dashboard() {
                 confirm(
                   { type: "organised-decision", gangId: gang.id },
                   "Hear the crew’s concern?",
-                  "A real member or rival brings one immediate situation. This uses your major organisation decision this year.",
+                  "A member or rival brings you a concern. This uses your major organisation decision this year.",
                   "Hear Them Out",
                 )
               }
@@ -328,36 +320,7 @@ function Dashboard() {
                 subtitle="A trusted local adult may accept or refuse"
                 disabled={busy}
                 disabledReason={available}
-                onPress={() => {
-                  const contacts = Object.values(world.people).filter(
-                    (p) =>
-                      p.id !== person.id &&
-                      !p.died &&
-                      ageOn(p, world.date) >= 18 &&
-                      p.country === s.country &&
-                      p.city === s.city &&
-                      !isConfined(world, p) &&
-                      (relationFor(world, person.id, p.id)?.trust ?? 0) >= 55 &&
-                      !s.members.some((m) => m.personId === p.id) &&
-                      !s.rivals.some((r) => r.personId === p.id),
-                  );
-                  select(
-                    "Recruit a contact",
-                    "The invitation uses this year’s major decision. Your contact has the right to refuse.",
-                    contacts.map((p) => ({ id: p.id, label: fullName(p) })),
-                    (id) =>
-                      confirm(
-                        {
-                          type: "organised-recruit",
-                          gangId: gang.id,
-                          personId: id,
-                        },
-                        "Invite this person?",
-                        "Their existing trust and behaviour matter. Acceptance creates a real crew membership.",
-                        "Invite Contact",
-                      ),
-                  );
-                }}
+                onPress={() => setRecruiting(true)}
               />
             )}
           </Card>
@@ -503,6 +466,10 @@ function Dashboard() {
           />
         </Card>
       )}
+      {recruiting && gang && <PersonPicker world={world} title="Recruit a Contact" personIds={world.relationships.filter(edge => edge.from === person.id || edge.to === person.id).map(edge => edge.from === person.id ? edge.to : edge.from)} busy={busy} eligibility={id => recruitmentReason(world, gang, id)} onCancel={() => setRecruiting(false)} onChoose={id => {
+        if (recruitmentReason(world, gang, id)) return;
+        setRecruiting(false); confirm({ type: 'organised-recruit', gangId: gang.id, personId: id }, 'Invite ' + fullName(world.people[id]) + '?', 'This uses your major decision for the year. Your contact may refuse.', 'Invite Contact');
+      }} />}
       {review.modal}
       <EventModal
         event={selection?.event ?? null}
