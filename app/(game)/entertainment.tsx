@@ -1,3 +1,4 @@
+import { useLifestyleWorld } from '../../src/ui/useLifestyleWorld';
 import { SharedLeisure } from '../../src/ui/SharedLeisure';
 import { OutingArt } from '../../src/assets/OutingArt';
 import { legacyOutingKinds } from '../../src/game/content/leisure';
@@ -18,7 +19,7 @@ import { useColors } from '../../src/ui/theme';
 import { DisplayText as Text } from '../../src/ui/DisplayText';
 
 export default function Entertainment() {
-  const world = useGame(s => s.world)!, busy = useGame(s => s.busy), error = useGame(s => s.error), dispatch = useGame(s => s.dispatch), person = world.people[world.activePersonId], payer = leisurePayer(world), c = useColors();
+  const world = useLifestyleWorld()!, busy = useGame(s => s.busy), error = useGame(s => s.error), dispatch = useGame(s => s.dispatch), person = world.people[world.activePersonId], payer = leisurePayer(world), c = useColors();
   const [review, setReview] = useState<{ command: LeisureCommand; event: EventPresentation } | null>(null), [historyLimit, setHistoryLimit] = useState(6), history = world.leisureOutings.filter(item => item.personId === person.id).slice().reverse();
   const money = (minor: bigint, country = person.country) => formatMoney({ minor, currency: countries[country].currency }, countries[country].locale);
   const open = (kind: OutingKind) => { if (!payer || outingReason(world, kind)) return; const total = outingFee(world, kind); setReview({ command: { type: 'leisure-outing', kind, reviewedPayerId: payer.id, quotedTotal: total }, event: { id: 'outing-review-' + kind + '-' + payer.id, kind: 'confirmation', title: outingContent[kind].name, body: outingContent[kind].description + (payer.id === person.id ? ' You pay for your own admission.' : ' ' + fullName(payer) + ' must agree and accompany you. Both tickets are included; refusal charges nothing.') + ' The experience can disappoint; accepted admission stays paid.', terms: [{ id: 'payer', label: 'Paid by', value: fullName(payer), tone: 'neutral' }, { id: 'tickets', label: payer.id === person.id ? 'One admission' : 'Two admissions', value: money(total), tone: 'negative' }, { id: 'energy', label: 'Energy needed', value: outingContent[kind].energy + '%', tone: 'neutral' }], confirmLabel: payer.id === person.id ? 'Go To This Outing' : 'Ask For This Outing' } }); };

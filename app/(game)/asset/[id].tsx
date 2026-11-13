@@ -1,3 +1,4 @@
+import { useLifestyleWorld } from '../../../src/ui/useLifestyleWorld';
 import { VehicleLifestyle } from '../../../src/ui/VehicleLifestyle';
 import { PropertyLifestyle } from '../../../src/ui/PropertyLifestyle';
 import React, { useState } from 'react';
@@ -23,7 +24,7 @@ export default function AssetDetails() {
 }
 
 function OwnedAsset({ id }: { id: string }) {
-  const world = useGame(s => s.world)!; const dispatch = useGame(s => s.dispatch); const busy = useGame(s => s.busy); const error = useGame(s => s.error); const c = useColors();
+  const world = useLifestyleWorld()!; const dispatch = useGame(s => s.dispatch); const busy = useGame(s => s.busy); const error = useGame(s => s.error); const c = useColors();
   const { width, fontScale } = useWindowDimensions(), stacked = width < 360 || fontScale >= 1.2;
   const [review, setReview] = useState<{ command: GameCommand; event: EventPresentation } | null>(null);
   const [form, setForm] = useState<'listing' | 'refinance' | null>(null); const [input, setInput] = useState(''); const [message, setMessage] = useState<string | null>(null); const [term, setTerm] = useState<120 | 240 | 360>(360); const [pickTerm, setPickTerm] = useState(false);

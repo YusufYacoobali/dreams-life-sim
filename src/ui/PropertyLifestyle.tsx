@@ -1,3 +1,4 @@
+import { useLifestyleWorld } from './useLifestyleWorld';
 import React, { useState } from 'react';
 import { useGame } from '../state/useGame';
 import type { World } from '../game/model';
@@ -11,17 +12,15 @@ import { lifestyleReason, localContactReason } from '../game/systems/lifestyleCo
 import { useLifestyleReview } from './LifestyleReview';
 import { PersonPicker } from './PersonPicker';
 import { ActionRow, Body, Card, Heading } from './components';
-export function LifestyleEnable() { const world = useGame(s => s.world)!, { ask, modal, busy } = useLifestyleReview(); if (world.lifestyle)
-    return null; return <Card><Heading size={18}>More ways to live</Heading><Body>Explore new pets, hobbies and outings. Existing rentals and ownership keep their saved terms. Review each home or vehicle before enabling its new management.</Body><ActionRow title="Review Lifestyle Expansion" disabled={busy} onPress={() => ask({ type: 'enable-lifestyle' }, 'Enable lifestyle features?', 'New hobby and pet options become available. Existing assets, costs and histories stay as recorded. You choose which properties and vehicles to manage.')}/>{modal}</Card>; }
-export function PropertyLifestyle({ asset }: {
+export function PropertyLifestyle({ asset: savedAsset }: {
     asset: World['assets'][number];
 }) {
-    const world = useGame(s => s.world)!, { ask, modal, busy } = useLifestyleReview(), [section, setSection] = useState<'amenities' | 'tenants' | 'gatherings' | null>(null), [gathering, setGathering] = useState<'party' | 'dinner' | 'celebration'>('dinner'), [choosePerson, setChoosePerson] = useState(false);
+    const world = useLifestyleWorld()!, { ask, modal, busy } = useLifestyleReview(), [section, setSection] = useState<'amenities' | 'tenants' | 'gatherings' | null>(null), [gathering, setGathering] = useState<'party' | 'dinner' | 'celebration'>('dinner'), [choosePerson, setChoosePerson] = useState(false);
+    const asset = world.assets.find(row => row.id === savedAsset.id) ?? savedAsset;
     const state = world.lifestyle, player = world.people[world.activePersonId], reason = lifestyleReason(world), money = (minor: bigint) => formatMoney({ minor, currency: asset.currency }), row = namedTenancy(world, asset.id);
     if (!state)
-        return <LifestyleEnable />;
-    if (!asset.propertyLife)
-        return <Card><Heading size={18}>Make more of this home</Heading><ActionRow title="Review Property Management" subtitle="Improvements, named tenancies and gatherings" disabled={busy} disabledReason={reason ?? (asset.rental !== 'none' ? 'Existing anonymous rentals retain their terms. End the original arrangement before reviewing management.' : asset.listing ? 'Remove the sale listing first' : undefined)} onPress={() => ask({ type: 'enable-property-management', assetId: asset.id }, 'Manage this property?', 'Enable named tenant applications and optional improvements. Future rentals use real tenant finances, escrow deposits and a reviewed ending process. No costs or tenants are created now.')}/>{modal}</Card>;
+        return null;
+    if (!asset.propertyLife) return null;
     const apps = state.applications.filter(app => app.assetId === asset.id && app.status === 'open');
     return <><Card><Heading size={18}>Life at Home</Heading><Body muted>{amenityIds.filter(kind => hasAmenity(asset, kind)).map(kind => amenities[kind].name).join(' · ') || 'No added amenities'}</Body><ActionRow title="Inspect the Property" subtitle="Review actual condition without paying for work" disabled={busy} disabledReason={reason} onPress={() => ask({ type: 'inspect-property', assetId: asset.id }, 'Inspect the property?', 'Review its actual condition. No repair or installation is paid. Inspections respect a six-month interval.')}/><ActionRow title="Improve the Home" subtitle="Review installations and their actual benefits" onPress={() => setSection(section === 'amenities' ? null : 'amenities')}/><ActionRow title="Landlord & Tenants" subtitle={row ? fullName(world.people[row.tenantId]) : 'Named applications and rental terms'} onPress={() => setSection(section === 'tenants' ? null : 'tenants')}/><ActionRow title="Host a Gathering" subtitle="Invite an actual contact to your primary home" onPress={() => setSection(section === 'gatherings' ? null : 'gatherings')}/></Card>
   {section === 'amenities' && <Card><Heading size={18}>Home Improvements</Heading>{amenityIds.map(kind => { const quote = amenityQuote(asset, kind); return <ActionRow key={kind} title={amenities[kind].name} subtitle={amenities[kind].benefit} value={hasAmenity(asset, kind) ? 'Installed / built in' : money(quote.cost)} disabled={busy} disabledReason={reason ?? amenityReason(asset, kind, world)} onPress={() => ask({ type: 'install-amenity', assetId: asset.id, amenity: kind, quotedCost: quote.cost }, 'Install ' + amenities[kind].name.toLowerCase() + '?', amenities[kind].benefit + ' This is a single saved installation; existing built-in features cannot be duplicated.', [{ id: 'cost', label: 'Installation', value: money(quote.cost), tone: 'negative' }, { id: 'value', label: 'Estimated added value', value: money(quote.addedValue), tone: 'positive' }])}/>; })}</Card>}

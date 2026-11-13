@@ -8,7 +8,7 @@ Each checkpoint includes focused verification before its commit and push. Existi
 | --- | --- |
 | 1. Shared UI, portrait picker, scoped errors | Implemented; focused checks pass |
 | 2. Actor/Model presentation and casting | Implemented; focused checks pass |
-| 3. Automatic lifestyle activation and legacy compatibility | Pending |
+| 3. Automatic lifestyle activation and legacy compatibility | Implemented; focused checks pass |
 | 4. Vehicles and driving licence | Pending |
 | 5. Landlord and properties | Pending |
 | 6. Hobbies, pets and artwork | Pending |
@@ -34,3 +34,17 @@ Each checkpoint includes focused verification before its commit and push. Existi
 - Active model brand obligations sit near the top with a prominent fulfilment action. Completed agreements and settlement claims remain below the career opportunities.
 - Public reception wording reflects the production medium while retaining saved outcome tiers. Confirmed zero fame on a major success is correct at the existing 100-point earned-fame cap; prospective results now explain that case. Existing pending text stays untouched. Future quiet adult-year text is a concise birthday fact.
 - Verification: focused Actor overhaul, Model mechanics, creative polish, board maintenance/integrity, UI, modal and SQLite save suites pass across main runs and affected reruns. This includes legacy/currency fixtures, unchanged RNG streams, current-country caches, archived-decision validation, exact checkpoint round-trips, the earned-fame cap and rollback/retry of a brand appearance. Strict app/test types and the 599-module import-cycle check pass. Installed-device acceptance remains pending.
+
+
+## Queued follow-up
+
+After the master gameplay/polish checkpoints, implement the user's separate Dreams Shop redesign from the subsequently supplied plan and three reference images. Keep its commits separate. Preserve all eight product IDs and RevenueCat entitlements, use localized prices, keep free careers free, add the in-game `/shop` route and reusable product-detail popups, and retain `/store` for Settings/no active life.
+
+
+## Checkpoint 3
+
+- New lives already initialise the lifestyle container. Missing property, vehicle and household-pet activities now initialise prospectively with a successful gameplay action, without activation prompts. The setup is idempotent and does not draw random numbers or create a separate save transaction.
+- Old pending events, active mini-games and interrupted annual processing retain their frozen context. Ordinary setup waits for a safe boundary; a player explicitly starting a new lifestyle action can prepare its required state at that action's boundary.
+- Read-only presentation previews the same setup for quotes and eligibility, without mutating the store or decoded checkpoint. Legacy activation commands remain supported as idempotent requests.
+- Existing anonymous rentals stay anonymous with their exact agreed economics until they end. Existing mileage, improvements, licences, paid pet history, ownership, health, bonds and pricing versions remain literal. Setup never manufactures earlier trips or changes care prices.
+- Verification: 214 tests in nine relevant suites pass, including read-only old checkpoint decoding, frozen legacy decisions, partial setup, real recorded mileage, anonymous rental preservation, atomic SQLite rollback/retry/cold reopening, independent Time Machine branches and older pet history. Strict app/test types and the 601-module import-cycle check pass. Native playthrough acceptance remains pending.

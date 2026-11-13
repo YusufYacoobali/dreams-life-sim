@@ -47,13 +47,13 @@ test('a genuine newborn archive reaches age six, reviews actual parental costs a
   for (let year = 0; year < 5; year++) { await dispatch({ type: 'advance' }); await finish(); }
   expect(world().date).toEqual({ year: 2032, month: 10, day: 19 }); const beforeBrowse = encodeWorld(world()), view = await render(frame(<Relationships />));
   await press('Household Pets'); expect(router.push).toHaveBeenCalledWith('/pets'); await view.rerender(frame(<Activities />)); await press(/^Household Pets\./); expect(router.push).toHaveBeenCalledWith({ pathname: '/pets', params: { tab: 'activities' } }); await view.rerender(frame(<Pets />)); expect(encodeWorld(world())).toBe(beforeBrowse);
-  expect(screen.getByRole('button', { name: 'Buddy. Golden Retriever · 1 year' })).toBeOnTheScreen();
-  expect(screen.getByRole('button', { name: 'Pip. Dwarf Rabbit · 6 months' })).toBeOnTheScreen();
+  expect(screen.getByRole('button', { name: /^Buddy\..*Golden Retriever · 1 year/ })).toBeOnTheScreen();
+  expect(screen.getByRole('button', { name: /^Pip\..*Dwarf Rabbit · 6 months/ })).toBeOnTheScreen();
   await press(/^Buddy\./); expect(screen.getByRole('header', { name: 'Adoption Details' })).toBeOnTheScreen();
   expect(screen.queryByRole('button', { name: /^Luna\./ })).toBeNull(); expect(screen.getByRole('button', { name: 'Review Adoption' })).toBeEnabled();
-  await press('Back'); expect(screen.getByText('Shelter Adoptions')).toBeOnTheScreen();
+  await press('Back'); expect(screen.getByText('Find a Companion')).toBeOnTheScreen();
   await press(/^Pip\./); const hardwareBack = back.mock.calls.at(-1)![1];
-  await act(async () => { expect(hardwareBack({ type: 'hardwareBackPress', timeStamp: 0 })).toBe(true); }); expect(screen.getByText('Shelter Adoptions')).toBeOnTheScreen();
+  await act(async () => { expect(hardwareBack({ type: 'hardwareBackPress', timeStamp: 0 })).toBe(true); }); expect(screen.getByText('Find a Companion')).toBeOnTheScreen();
   await press(/^Pip\./); const removal = jest.spyOn(back.mock.results.at(-1)!.value, 'remove');
   mockPetFocused = false; await view.rerender(frame(<Pets />)); expect(removal).toHaveBeenCalledTimes(1);
   mockPetFocused = true; await view.rerender(frame(<Pets />)); await press('Close Adoption Details'); expect(encodeWorld(world())).toBe(beforeBrowse); expect(encodeWorld(await repository.load(world().id))).toBe(beforeBrowse);

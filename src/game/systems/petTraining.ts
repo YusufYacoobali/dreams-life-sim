@@ -59,8 +59,7 @@ export function resolvePetTraining(world: World, command: PetTrainingCommand) {
     if (!pet || pet.status !== 'active' || !householdPets(world).some(row => row.id === pet.id))
         throw new IneligibleAction('Choose an active household companion');
     if (command.type === 'enable-pet-training') {
-        if (pet.companion)
-            throw new IneligibleAction('Expanded activities are already enabled');
+        if (pet.companion) { result(world, 'Time together', 'Your companion is ready for time together.', 'pet-paw'); return; }
         pet.companion = newCompanion(world, pet);
         fact(world, 'I reviewed expanded care and training for ' + pet.name + '. Existing care and histories remain.', 'pet');
         result(world, 'More time together', 'You make room for new routines with your familiar companion. Their personality gives you a few ideas about where to start.', 'pet-paw');

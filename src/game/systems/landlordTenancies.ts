@@ -221,7 +221,8 @@ export function resolveProperty(world: World, command: PropertyCommand) {
     }
     const asset = property(world, command.assetId);
     if (command.type === 'enable-property-management') {
-        if (asset.propertyLife || asset.rental !== 'none' || asset.listing)
+        if (asset.propertyLife) { result(world, 'Property management', 'Your property is ready to manage.', 'property'); return; }
+        if (asset.rental !== 'none' || asset.listing)
             throw new IneligibleAction('Enable management only for a vacant, unlisted property; legacy rentals keep their original terms');
         asset.propertyLife = { version: 1, enabled: { ...world.date }, amenities: [], lastGatheringMonth: null, lastInspectionMonth: null };
         fact(world, 'I enabled prospective property management for ' + asset.name + '.', 'property');

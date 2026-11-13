@@ -1,3 +1,4 @@
+import { useLifestyleWorld } from '../../../src/ui/useLifestyleWorld';
 import React from 'react';
 import { router, useLocalSearchParams } from 'expo-router';
 import { hobbyKinds, HobbyKind } from '../../../src/game/content/leisure';

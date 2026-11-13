@@ -1,3 +1,4 @@
+import { useLifestyleWorld } from './useLifestyleWorld';
 import React from 'react';
 import { View } from 'react-native';
 import { router } from 'expo-router';
@@ -17,7 +18,7 @@ import { AssetListing } from './AssetFeatures';
 
 /** The rental bookmark is an adapter to this same complete property catalogue. */
 export function AssetCatalogue({ kind, rentalEntry = false }: { kind: string; rentalEntry?: boolean }) {
-  const world = useGame(s => s.world)!, player = world.people[world.activePersonId], currency = accountFor(world).currency;
+  const world = useLifestyleWorld()!, player = world.people[world.activePersonId], currency = accountFor(world).currency;
   const lease = kind === 'property' ? rentalResidence(world) : undefined;
   const offers = assetCatalog.filter(offer => !offer.licenceKind || !!world.lifestyle).filter(offer => offer.kind === kind).sort((a, b) => a.priceBps - b.priceBps);
   const money = (minor: bigint) => formatMoney({ minor, currency });

@@ -1,5 +1,5 @@
+import { useLifestyleWorld } from '../../src/ui/useLifestyleWorld';
 import { CompanionArt } from '../../src/assets/CompanionArt';
-import { LifestyleEnable } from '../../src/ui/PropertyLifestyle';
 import { legacyPetOfferIds, petRoute, petTrait } from '../../src/game/content/pets';
 import React, { useCallback, useState } from 'react';
 import { BackHandler, Keyboard, TextInput, View } from 'react-native';
@@ -21,7 +21,7 @@ import { DisplayText as Text } from '../../src/ui/DisplayText';
 const petTabs = [{ id: 'owned', label: 'My Pets' }, { id: 'adopt', label: 'Adopt' }] as const;
 
 export default function Pets() {
-  const world = useGame(s => s.world)!, busy = useGame(s => s.busy), error = useGame(s => s.error), dispatch = useGame(s => s.dispatch), c = useColors();
+  const world = useLifestyleWorld()!, busy = useGame(s => s.busy), error = useGame(s => s.error), dispatch = useGame(s => s.dispatch), c = useColors();
   const [segment, setSegment] = useState<'owned' | 'adopt'>(() => householdPets(world).length ? 'owned' : 'adopt');
   const [offerId, setOffer] = useState<typeof petOfferIds[number] | null>(null), [name, setName] = useState(''), [review, setReview] = useState<{ event: EventPresentation; command: PetCommand } | null>(null), [historyLimit, setHistoryLimit] = useState(6);
   useFocusEffect(useCallback(() => {
@@ -60,7 +60,7 @@ export default function Pets() {
   </Page>;
   return <Page footer={formError}><Header title="Household Pets" onBack={() => router.back()} />
     <Card><View style={{ flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', gap: 14 }}><PolishArt id={segment === 'adopt' ? 'pet-adoption' : 'pet-bed'} size={68} /><View style={{ flexGrow: 1, flexBasis: 170, minWidth: 0, gap: 5 }}><Heading size={22}>Life with a companion</Heading><Body muted>{pets.length} {pets.length === 1 ? 'pet' : 'pets'} at home.</Body></View></View></Card>
-    <LifestyleEnable />
+
     <FilterTabs values={petTabs} selected={segment} onSelect={setSegment} />
     {segment === 'owned' && <Card><Heading size={20}>Household companions</Heading>{pets.length ? pets.map(pet => <ActionRow key={pet.id} title={pet.name} subtitle={pet.breed + ' · ' + (pet.illness === 'none' ? 'Companion' : pet.illness === 'recovering' ? 'Recovering' : 'Unwell')} icon={<CompanionArt species={pet.species} memorial={pet.status === 'deceased'} size={40} />} onPress={() => router.push({ pathname: '/pet/[id]', params: { id: pet.id } })} />) : <Body muted>No pets at home yet.</Body>}{pets.length > 0 && <Body muted>Food and basic care are paid monthly.</Body>}{pets.length === 0 && <Button label="Find A Companion" tone="secondary" onPress={() => setSegment('adopt')} />}</Card>}
     {segment === 'adopt' && <Card><Heading size={20}>{world.lifestyle ? 'Find a Companion' : 'Shelter Adoptions'}</Heading><Body muted>Choose a companion. A parent or guardian handles adoptions until you turn 18.</Body>{(world.lifestyle ? petOfferIds : legacyPetOfferIds).map(id => <View key={id} style={{ borderColor: c.line, borderWidth: 1, borderRadius: 12, paddingHorizontal: 12, paddingBottom: 12, gap: 6 }}><ActionRow title={petOffers[id].name} subtitle={[(world.lifestyle ? petRoute(id) + ' · ' + petTrait(id) + ' · ' : '') + petOffers[id].breed + ' · ' + (petOffers[id].ageMonths < 12 ? petOffers[id].ageMonths + ' months' : Math.floor(petOffers[id].ageMonths / 12) + (petOffers[id].ageMonths < 24 ? ' year' : ' years')), petAdoptionReason(world, id)].filter(Boolean).join(' · ')} icon={<CompanionArt species={petOffers[id].species} size={40} />} disabled={busy} onPress={() => { Keyboard.dismiss(); setOffer(id); setName(petOffers[id].name); }} /><Body muted>Adoption if accepted: {money(petAdoptionFee(world, id))}</Body><Body muted>Monthly food and basic care: {money(petFoodCost(person.country, petOffers[id].species))}</Body></View>)}</Card>}

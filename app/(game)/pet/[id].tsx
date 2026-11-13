@@ -1,3 +1,4 @@
+import { useLifestyleWorld } from '../../../src/ui/useLifestyleWorld';
 import { CompanionArt } from '../../../src/assets/CompanionArt';
 import { PetLifestyle } from '../../../src/ui/PetLifestyle';
 import { useScopedGameAction } from '../../../src/ui/useScopedGameAction';
@@ -16,7 +17,7 @@ import { useColors } from '../../../src/ui/theme';
 import { DisplayText as Text } from '../../../src/ui/DisplayText';
 
 export default function PetProfile() {
-  const { id } = useLocalSearchParams<{ id: string }>(), world = useGame(s => s.world)!, c = useColors();
+  const { id } = useLocalSearchParams<{ id: string }>(), world = useLifestyleWorld()!, c = useColors();
   const { busy, error, dispatch, clear } = useScopedGameAction('pet:' + id);
   const [review, setReview] = useState<{ event: EventPresentation; command: Extract<PetCommand, { type: 'pet-vet' | 'rehome-pet' }> } | null>(null);
   const currentReview = review?.command.petId === id ? review : null;

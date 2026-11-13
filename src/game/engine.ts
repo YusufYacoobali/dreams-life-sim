@@ -4,6 +4,7 @@ import { petTrainingCommandSchema, type PetTrainingCommand, resolvePetTraining, 
 import { vehicleCommandSchema, type VehicleCommand, resolveVehicle } from './systems/vehicleActivities';
 import { propertyCommandSchema, type PropertyCommand, resolveProperty, landlordMonth, refreshNamedTenancies } from './systems/landlordTenancies';
 import { newLifestyle } from './systems/lifestyleCommon';
+import { activateLifestyle } from './systems/lifestyleActivation';
 import { organisedMissions } from './content/organisedCrime';
 import { enableOverhaul } from './systems/overhaul';
 import { organisedCrimeCommandSchema, type OrganisedCrimeCommand } from './systems/organisedCrimeSchemas';
@@ -380,8 +381,10 @@ export function resolveCommand(previous: World, command: GameCommand, immutable 
   const world = copyWorld(previous);
   const player = world.people[world.activePersonId];
   if (activeMiniGame(world) && !command.type.startsWith('mini-game-')) throw new IneligibleAction('Resume or forfeit your saved mini-game first');
+  const explicitActivation = ['enable-lifestyle', 'enable-property-management', 'enable-vehicle-activities', 'enable-pet-training'].includes(command.type);
+  if (!world.pending && !world.annual && !activeMiniGame(world) && !explicitActivation && command.type !== 'continue-child') activateLifestyle(world, command.type === 'rent-property' ? command.assetId : undefined);
   if (command.type === 'continue-child') {
-    resolveEstate(world, estateCommandSchema.parse(command)); refreshStudyCourses(world); refreshUniversityApplications(world); refreshRecoveries(world); refreshScholarships(world); refreshStoryThreads(world); refreshWorkplaces(world); if (world.overhaulVersion) { refreshOrganisedCrime(world); refreshPrison(world); refreshRomance(world); } world.revision++; return validateWorld(world, immutable);
+    resolveEstate(world, estateCommandSchema.parse(command)); activateLifestyle(world); refreshStudyCourses(world); refreshUniversityApplications(world); refreshRecoveries(world); refreshScholarships(world); refreshStoryThreads(world); refreshWorkplaces(world); if (world.overhaulVersion) { refreshOrganisedCrime(world); refreshPrison(world); refreshRomance(world); } world.revision++; return validateWorld(world, immutable);
   }
   if (player.died) throw new IneligibleAction('This life has ended');
   if (!world.birthAcknowledged) throw new IneligibleAction('Begin this life first');
@@ -487,10 +490,10 @@ export function resolveCommand(previous: World, command: GameCommand, immutable 
     const leisure = parseActivity(leisureCommandSchema, command);
     const pet = parseActivity(petCommandSchema, command);
     const relocation=parseActivity(relocationCommandSchema, command);
-    if (hobbyActivity.success) resolveHobbyLifestyle(world, hobbyActivity.data);
-    else if (petActivity.success) resolvePetTraining(world, petActivity.data);
-    else if (vehicleAction.success) resolveVehicle(world, vehicleAction.data);
-    else if (propertyAction.success) { if (propertyAction.data.type === 'enable-lifestyle') { if (world.lifestyle) throw new IneligibleAction('Lifestyle features are already enabled'); world.lifestyle = newLifestyle(world.date); result(world, 'More ways to live', 'New pet species, hobbies and outings are available. Review prospective management on each existing property or vehicle. Existing costs, licences, rentals and histories are unchanged.', 'property'); } else resolveProperty(world, propertyAction.data); }
+    if (hobbyActivity.success) { activateLifestyle(world); resolveHobbyLifestyle(world, hobbyActivity.data); }
+    else if (petActivity.success) { if (!explicitActivation) activateLifestyle(world); resolvePetTraining(world, petActivity.data); }
+    else if (vehicleAction.success) { if (!explicitActivation) activateLifestyle(world); resolveVehicle(world, vehicleAction.data); }
+    else if (propertyAction.success) { if (propertyAction.data.type === 'enable-lifestyle') { if (!world.lifestyle) world.lifestyle = newLifestyle(world.date); result(world, 'More ways to live', 'New pet species, hobbies and outings are available. Review prospective management on each existing property or vehicle. Existing costs, licences, rentals and histories are unchanged.', 'property'); } else { if (!explicitActivation) activateLifestyle(world); resolveProperty(world, propertyAction.data); } }
     else if (organisedCrime.success) { enableOverhaul(world); handleOrganisedCrime(world, organisedCrime.data); }
     else if (prison.success) { enableOverhaul(world); resolvePrison(world, prison.data); }
     else if (romance.success) { enableOverhaul(world); resolveRomance(world, romance.data); }
@@ -500,8 +503,8 @@ export function resolveCommand(previous: World, command: GameCommand, immutable 
     else if (campus.success) resolveCampus(world, campus.data);
     else if (teenRelationship.success) resolveTeenRelationship(world, teenRelationship.data);
     else if (hobbyEvent.success) resolveHobbyEvent(world, hobbyEvent.data);
-    else if (leisure.success) resolveLeisure(world, leisure.data);
-    else if (pet.success) resolvePets(world, pet.data);
+    else if (leisure.success) { activateLifestyle(world); resolveLeisure(world, leisure.data); }
+    else if (pet.success) { if (pet.data.type === 'adopt-pet') activateLifestyle(world); resolvePets(world, pet.data); }
     else if (school.success) resolveSchool(world, school.data);
     else if (education.success) resolveEducation(world, education.data);
     else if (recovery.success) resolveRecovery(world, recovery.data);
@@ -575,6 +578,7 @@ export function resolveCommand(previous: World, command: GameCommand, immutable 
   }
   if (command.type === 'actor-production' || command.type === 'model-production') { const career = world.careers.find(item => item.personId === world.activePersonId && item.kind === (command.type === 'actor-production' ? 'actor' : 'model')); if (career) offerCreativeStory(world, career, true); }
   refreshActorOpportunities(world); refreshModelOpportunities(world);
+  if (!world.pending && !world.annual && !activeMiniGame(world)) activateLifestyle(world);
   refreshRoyalSuccession(world,'background');
   refreshStudyCourses(world);
   refreshUniversityApplications(world);

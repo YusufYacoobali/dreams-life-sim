@@ -114,9 +114,8 @@ export function resolveVehicle(world: World, command: VehicleCommand) {
     if (stolenAssetReason(asset))
         throw new IneligibleAction(stolenAssetReason(asset)!);
     if (command.type === 'enable-vehicle-activities') {
+        if (asset.vehicleLife) { result(world, 'Vehicle activities', 'Your vehicle is ready to use.', 'vehicle'); return; }
         const reason = vehicleUseReason(world, asset); if (reason) throw new IneligibleAction(reason);
-        if (asset.vehicleLife)
-            throw new IneligibleAction('Vehicle activities are already enabled');
         const mileage = assetCatalog.find(row => row.id === asset.catalogId)?.listingMileage ?? 0;
         asset.vehicleLife = { version: 1, usageVersion: 2, enabled: { ...world.date }, mileage, initialMileage: mileage, lastServiceMonth: null, appearance: 'original', upgrades: [], lastUseMonth: null };
         asset.provenance.push('Vehicle activities enabled in ' + world.date.year + '; listing mileage carried forward, prior use unknown.');

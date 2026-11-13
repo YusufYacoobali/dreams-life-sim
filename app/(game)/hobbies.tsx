@@ -1,4 +1,4 @@
-import { LifestyleEnable } from '../../src/ui/PropertyLifestyle';
+import { useLifestyleWorld } from '../../src/ui/useLifestyleWorld';
 import { legacyHobbyKinds } from '../../src/game/content/leisure';
 import React from 'react';
 import { View } from 'react-native';
@@ -13,9 +13,9 @@ import { HealthLegalArt } from '../../src/assets/HealthLegalArt';
 import { useColors } from '../../src/ui/theme';
 
 export default function Hobbies() {
-  const world = useGame(s => s.world)!, hobbies = personHobbies(world), current = hobbies.filter(hobby => activeHobbyPlan(hobby)), c = useColors();
+  const world = useLifestyleWorld()!, hobbies = personHobbies(world), current = hobbies.filter(hobby => activeHobbyPlan(hobby)), c = useColors();
   return <Page><Header title="Hobbies" onBack={() => router.back()} />
-    <LifestyleEnable />
+
     <Card><Body muted>Pick up to two regular hobbies. Keep school and work; make time for something you enjoy.</Body></Card>
     {current.length > 0 && <Card><Heading size={18}>Your routines</Heading>{current.map(hobby => {
       const plan = activeHobbyPlan(hobby)!;
