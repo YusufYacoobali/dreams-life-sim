@@ -1,6 +1,7 @@
 import React, { createContext, useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { AccessibilityInfo, Platform } from 'react-native';
 import { rememberModalReturnTarget } from './modalFocus';
+import { beginCommandPress } from '../performance/commandTiming';
 
 type Feedback = { reducedMotion: boolean; deviceReducedMotion: boolean | null; hapticsSupported: boolean; soundSupported: boolean; hapticFeedback: () => void; soundFeedback: () => void; buttonFeedback: () => void };
 const FeedbackContext = createContext<Feedback>({ reducedMotion: false, deviceReducedMotion: null,
@@ -51,8 +52,10 @@ export function useFeedbackPress<Args extends unknown[]>(onPress: (...args: Args
     rememberModalReturnTarget(args[0]);
     pressing.current = true;
     let action: unknown;
+    const endPress = beginCommandPress();
     try { action = onPress(...args); }
     catch (error) { pressing.current = false; throw error; }
+    finally { endPress?.(); }
     if (action !== false) current.current.hapticFeedback();
     const confirm = (result: unknown) => { if (mounted.current && result !== false && current.current.includeSound) current.current.soundFeedback(); };
     const release = () => { pressing.current = false; };

@@ -2,12 +2,9 @@ import { purchases } from '../purchases/native';
 import { useStore } from 'zustand';
 import { createGameStore, GameState } from './gameStore';
 import { openRepository } from '../persistence/native';
-import { observeCommandTimings } from '../performance/commandTiming';
-import { isGodModeBuild, isCommandProfilingEnabled } from '../access/buildAccess';
+import { isGodModeBuild } from '../access/buildAccess';
 import { preferencesStore } from './usePreferences';
 import { godModeSessionStore } from './godModeSession';
-
-if (isCommandProfilingEnabled()) observeCommandTimings(event => console.info('DREAMS_COMMAND_TIMING ' + JSON.stringify(event)));
 
 let sequence = 0;
 export const freshSeed = () => Math.floor(Math.random() * 0x100000000);

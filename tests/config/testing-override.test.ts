@@ -73,11 +73,22 @@ test('EAS internal profiles enable the flag and the store profile explicitly dis
 });
 
 test.each([
-  ['preview', 'internal', '', true], ['development', 'internal', '', true], ['production', 'store', '', false],
+  ['preview', 'internal', '', true], ['development', 'internal', '', true], ['performance', 'internal', '', true], ['production', 'store', '', false],
   ['production', 'internal', '', false], ['preview', 'store', '', false], ['unknown', 'internal', '', false], ['preview', 'internal', 'production', false],
 ] as const)('command profiling stays opt-in and rejects public build metadata: %s/%s/%s', (profile, distribution, environment, allowed) => {
   Object.assign(process.env, { EAS_BUILD_PROFILE: profile, EAS_BUILD_DISTRIBUTION: distribution, EAS_ENVIRONMENT: environment, NODE_ENV: 'production' });
   Constants.expoConfig!.extra = configure({ config: {} }).extra; expect(isCommandProfilingEnabled()).toBe(false);
   process.env.DREAMS_PROFILE_COMMANDS = '1'; Constants.expoConfig!.extra = configure({ config: {} }).extra;
   expect(isCommandProfilingEnabled()).toBe(allowed); expect(Constants.expoConfig!.extra?.profileCommands).toBe(allowed);
+});
+
+test('the internal performance app has separate identifiers, keeps purchases normal and public builds discard profiling flags', () => {
+  const {build}=require('../../eas.json');
+  Object.assign(process.env,build.performance.env,{EAS_BUILD_PROFILE:'performance',NODE_ENV:'production',DREAMS_SOURCE_REVISION:'26930868'});
+  const config={name:'Dreams',scheme:'dreams-life',ios:{bundleIdentifier:'com.yacoobali.lifesim'},android:{package:'com.yacoobali.lifesim'}};
+  const profiled=configure({config});
+  expect(profiled.ios.bundleIdentifier).toBe('com.yacoobali.lifesim.profile');expect(profiled.android.package).toBe('com.yacoobali.lifesim.profile');
+  expect(profiled.extra).toMatchObject({profileCommands:true,unlockAllTesting:false,profileSourceRevision:'26930868'});
+  Object.assign(process.env,build.production.env,{EAS_BUILD_PROFILE:'production',DREAMS_PROFILE_COMMANDS:'1'});
+  const production=configure({config});expect(production.ios.bundleIdentifier).toBe(config.ios.bundleIdentifier);expect(production.android.package).toBe(config.android.package);expect(production.extra.profileCommands).toBe(false);
 });

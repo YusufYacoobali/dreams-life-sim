@@ -33,6 +33,7 @@ function RootNavigator() {
       <Stack.Screen name="store" options={{ presentation: 'modal' }} />
       <Stack.Screen name="settings" options={{ presentation: 'modal' }} />
       <Stack.Screen name="god-mode" options={{ presentation: 'modal' }} />
+      <Stack.Screen name="performance-diagnostics" options={{ presentation: 'modal' }} />
       <Stack.Screen name="mini-game" options={{ presentation: 'fullScreenModal', gestureEnabled: false, animation: 'none' }} />
       <Stack.Screen name="mini-game-playground" options={{ presentation: 'fullScreenModal', gestureEnabled: false, animation: 'none' }} />
       <Stack.Screen name="birth" options={{ gestureEnabled: false, animation: 'none' }} />

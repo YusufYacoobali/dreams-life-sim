@@ -1,4 +1,5 @@
-import { markCommandUi, markJournalScroll, measurePublishedUi } from '../../../src/performance/commandTiming';
+import { markCommandUi, markJournalScroll, markPublishedUiEvent, measurePublishedUi } from '../../../src/performance/commandTiming';
+import { isCommandProfilingEnabled } from '../../../src/access/buildAccess';
 import { CultArt } from '../../../src/assets/CultArt';
 import { activeCult } from '../../../src/game/systems/cultSchemas';
 import { activeTrip, physicalLocation } from '../../../src/game/systems/travelSchemas';
@@ -89,9 +90,10 @@ function EmptyJournal() {
 }
 
 // Keep FlatList's render props stable while only save status changes.
-const LifeJournal = React.memo(function LifeJournal({ rows, listRef, followJournal, stopFollowing, firstYearHint }: {
+const LifeJournal = React.memo(function LifeJournal({ rows, listRef, followJournal, stopFollowing, firstYearHint, onJournalLayout, onJournalContent }: {
   rows: readonly JournalRow[]; listRef: React.RefObject<FlatList<JournalRow> | null>;
   followJournal: () => void; stopFollowing: () => void; firstYearHint: string | null;
+  onJournalLayout: () => void; onJournalContent: () => void;
 }) {
   const c = useColors();
   const renderFact = useCallback(({ item }: { item: JournalRow }) => <JournalFact row={item} followJournal={followJournal} />, [followJournal]);
@@ -100,7 +102,7 @@ const LifeJournal = React.memo(function LifeJournal({ rows, listRef, followJourn
       // Android 24 can crash its RenderThread when clipped rows are reattached.
       // Keep following while virtualised rows acquire their real heights. The
       // first content event can precede layout and cannot settle the position.
-      onLayout={followJournal} onContentSizeChange={followJournal}
+      onLayout={onJournalLayout} onContentSizeChange={onJournalContent}
       onScrollBeginDrag={stopFollowing}
       renderItem={renderFact}
       ListEmptyComponent={EmptyJournal}
@@ -163,7 +165,9 @@ export default function Life() {
       if (scroll && 'scrollToEnd' in scroll && typeof scroll.scrollToEnd === 'function') {markJournalScroll(journalRevision.current.lifeId,journalRevision.current.revision);scroll.scrollToEnd({ animated: false });}
     });
   }, []);
-  const stopFollowing = useCallback(() => { shouldScroll.current = false; cancelJournalScroll(); }, [cancelJournalScroll]);
+  const stopFollowing = useCallback(() => { markPublishedUiEvent(journalRevision.current.lifeId,journalRevision.current.revision,'ui:journal-drag');shouldScroll.current = false; cancelJournalScroll(); }, [cancelJournalScroll]);
+  const onJournalLayout = useCallback(() => { markPublishedUiEvent(journalRevision.current.lifeId,journalRevision.current.revision,'ui:journal-layout');followJournal(); }, [followJournal]);
+  const onJournalContent = useCallback(() => { markPublishedUiEvent(journalRevision.current.lifeId,journalRevision.current.revision,'ui:journal-content');followJournal(); }, [followJournal]);
   // A frozen tab reconnects layout effects when shown again. Keep this passive
   // so returning to Life preserves the player's place in older entries.
   useEffect(() => {
@@ -186,10 +190,10 @@ export default function Life() {
     if (currentContext.current !== contextScope) return false;
     router.push(context.href);
   },busy || !!world.pending);
-  return <SafeAreaView edges={['top']} style={{ flex: 1, backgroundColor: c.background }}>
+  const content = <SafeAreaView edges={['top']} style={{ flex: 1, backgroundColor: c.background }}>
     <LifeIdentity data={identity} />
     {error && <Text accessibilityRole="alert" style={{ color: c.red, paddingHorizontal: 16, marginBottom: 10 }}>{error}</Text>}
-    <LifeJournal rows={journalRows} listRef={journal} followJournal={followJournal} stopFollowing={stopFollowing} firstYearHint={firstYearHint} />
+    <LifeJournal rows={journalRows} listRef={journal} followJournal={followJournal} stopFollowing={stopFollowing} firstYearHint={firstYearHint} onJournalLayout={onJournalLayout} onJournalContent={onJournalContent} />
     <View style={{ flexDirection: 'row', gap: 10, paddingHorizontal: 16, paddingTop: 14, paddingBottom: 12 }}>
       <Pressable accessibilityRole="button" accessibilityLabel={displayText(world.annual ? 'Continue This Year' : 'Age Up')} accessibilityState={{ disabled: busy || !!world.pending, busy: busy && advancing }} disabled={busy || !!world.pending} onPress={advanceYear} style={({ pressed }) => ({ flex: 1, minWidth: 0, minHeight: 62, paddingHorizontal: 12, paddingVertical: 10, borderRadius: 15, flexDirection: 'row', gap: 10, alignItems: 'center', justifyContent: 'center', backgroundColor: pressed ? c.actionGreenPressed : c.actionGreen, opacity: busy || world.pending ? 0.5 : 1 })}>
         {showYearProgress ? <ActivityIndicator color="#FFFFFF" accessibilityLabel="Saving your year" /> : <Ionicons name="add-circle" size={32} color="#FFFFFF" />}<Text style={{ color: '#FFFFFF', fontSize: world.annual ? 19 : 25, fontWeight: '700',flexShrink:1,minWidth:0,textAlign:'center' }}>{world.annual ? 'Continue This Year' : 'Age Up'}</Text>
@@ -200,4 +204,5 @@ export default function Life() {
       </Pressable>
     </View>
   </SafeAreaView>;
+  return isCommandProfilingEnabled() ? <React.Profiler id="Life" onRender={(_id,_phase,duration) => markPublishedUiEvent(world.id,world.revision,'ui:react-render',duration)}>{content}</React.Profiler> : content;
 }

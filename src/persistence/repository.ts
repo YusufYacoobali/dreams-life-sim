@@ -134,7 +134,7 @@ export class SaveRepository {
     try {
       const cached = this.current;
       if (cached && cached.world.id === id && cached.world.revision === row.revision && cached.payload === row.payload && isImmutableWorld(cached.world)) return cached;
-      const world = unpackCheckpoint(row.payload, true, primePeopleCache);
+      const world = measureCommandPhase('load:decode', () => unpackCheckpoint(row.payload, true, primePeopleCache));
       if (world.id !== id || world.revision !== row.revision) throw new Error('Saved life metadata is inconsistent');
       return { world, payload: row.payload };
     } catch { throw new SaveCorrupt(id); }
