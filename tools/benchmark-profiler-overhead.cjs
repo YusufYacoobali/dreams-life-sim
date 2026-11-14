@@ -1,0 +1,10 @@
+// Synthetic API/collector overhead only. Gameplay overhead uses the separate
+// paired store driver with --recording 1 and identical source on both sides.
+const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict'),{runtime}=require('./scaling-runtime.cjs');
+const source=process.argv[2]??path.join(__dirname,'..'),output=process.argv[3];assert(output);
+const api=runtime(source,undefined,{instrument:false}),sourceHash=api.digest(),timing=api.load('src/performance/commandTiming.ts'),{createPerformanceRecorder}=api.load('src/performance/recorder.ts');
+const recorder=createPerformanceRecorder(()=>true),samples=101,iterations=10000,results=[];
+function batch(enabled){if(enabled)recorder.start();else recorder.stop();const before=process.memoryUsage(),start=performance.now();for(let i=0;i<iterations;i++){const trace=timing.beginCommandTiming('routine','synthetic',1,30);const end=timing.beginCommandSpan('simulation');end?.();trace?.finish(true);}const elapsedMs=performance.now()-start;recorder.stop();return {elapsedMs,nsPerCommand:elapsedMs*1e6/iterations,heapDelta:process.memoryUsage().heapUsed-before.heapUsed,...(enabled?{buffer:recorder.status()}:{} )};}
+batch(false);batch(true);for(let i=0;i<samples;i++){const order=i%2?[true,false]:[false,true],rows={};for(const enabled of order)rows[enabled?'enabled':'disabled']=batch(enabled);results.push({order,...rows});}
+const stats=values=>{values.sort((a,b)=>a-b);return {p50:values[Math.ceil(values.length*.5)-1],p95:values[Math.ceil(values.length*.95)-1],max:values.at(-1)}};
+assert.equal(api.digest(),sourceHash);fs.writeFileSync(output,JSON.stringify({scope:'Synthetic timing API call loop, 10,000 four-event traces per batch, 101 alternating batches. No simulation/native/device or visible feedback claim. Disabled path creates no trace/event objects; enabled writes to preallocated bounded slots. Buffer setup and report generation excluded from timed loop.',sourceHash,iterations,samples,disabledNsPerCommand:stats(results.map(r=>r.disabled.nsPerCommand)),enabledNsPerCommand:stats(results.map(r=>r.enabled.nsPerCommand)),results},null,2));

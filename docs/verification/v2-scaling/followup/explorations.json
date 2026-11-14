@@ -1,0 +1,49 @@
+{
+  "scope": "Unsuccessful exploratory workloads retained explicitly; no latency or universal coverage claim. Both old and current implementations receive identical fully validated inputs.",
+  "sourceHashes": [
+    "408c3c1fca27fdb60441c5ab338ba962b67b11f30c59746d3168baa2e32231ac",
+    "4b244a41cc527335366770039f877e3ebf420a28f50a37de25aa1c598a21eff2"
+  ],
+  "results": [
+    {
+      "profile": "model",
+      "scope": "Additional preventive-health policy, separate from retained successful original model policy",
+      "age": 64,
+      "commands": 1735,
+      "canonicalBytes": 15073425,
+      "worldSha256": "e93ebb5a85e121d1a6f8d2a0214f1fd155f80493a7435bb33d3180e9a29d6779",
+      "inputSha256": "642db3f2af1231488f6da394fe2b5ea8669df647bc21085e89fcd986697d81b7",
+      "commandSha256": "a1a5fda196b121691551424e4993a5bec52ed0c1c5e594b40f44081ddf57f260",
+      "outcomes": [
+        {
+          "accepted": false,
+          "error": "Invalid bound event person"
+        },
+        {
+          "accepted": false,
+          "error": "Invalid bound event person"
+        }
+      ]
+    },
+    {
+      "profile": "mixed",
+      "scope": "Initial unbounded-introduction mixed policy, separate from retained successful bounded policy",
+      "age": 70,
+      "commands": 3297,
+      "canonicalBytes": 90292369,
+      "worldSha256": "c72389006ebbebbdba873d3758262c68f5d2f4dd665cf463fe3600bf02116cb8",
+      "inputSha256": "a5a0e64a15219d82cf5979c83cc40f6ca5e3e1d346078053e789dd27f05692e8",
+      "commandSha256": "d3395c22ff86d5d0b0f6b4a6180f2947d0fb19fec035b65ba3840f893fa540ac",
+      "outcomes": [
+        {
+          "accepted": false,
+          "error": "This checkpoint exceeds the supported world size"
+        },
+        {
+          "accepted": false,
+          "error": "This checkpoint exceeds the supported world size"
+        }
+      ]
+    }
+  ]
+}
