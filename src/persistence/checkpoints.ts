@@ -130,9 +130,9 @@ function checkpointFrame(checked: World,forceChunked=false) {
   }
   return { format:'dreams-checkpoint-v4' as const,bytes,main,people,columns,ledger };
 }
-function encodeFrame(frame: object) {
+function encodeFrame(frame: object, fallback?:()=>string) {
   const payload=measureCommandPhase('checkpoint:serialize',()=>JSON.stringify(frame));
-  if (payload.length > 44_000_000) throw new Error('This checkpoint exceeds the supported world size');
+  if (payload.length > 44_000_000) {if(fallback)return fallback();throw new Error('This checkpoint exceeds the supported world size');}
   return payload;
 }
 /** Retained writer for byte-level comparisons of all unchanged legacy codecs. */
@@ -161,8 +161,8 @@ export function packCheckpointV5(world: World):string {
   const frame=checkpointFrame({...checked,journal:[],relationships:[]},true) as z.infer<typeof tupleChunkedSchema>;
   const history={journal:packHistory(checked.journal,'journal'),relationships:packHistory(checked.relationships,'relationships')};
   const parts=[...history.journal,...history.relationships],bytes=frame.bytes+parts.reduce((sum,part)=>sum+part.bytes,0);
-  if(history.journal.length>4096 || history.relationships.length>4096 || bytes+64>maxTupleBytes || bytes+checked.ledger.length*rowExpansion(frame.columns)+64>maxCanonicalBytes) throw new Error('This checkpoint exceeds the supported world size');
-  return encodeFrame({...frame,format:'dreams-checkpoint-v5',bytes,history});
+  if(history.journal.length>4096 || history.relationships.length>4096 || bytes+64>maxTupleBytes || bytes+checked.ledger.length*rowExpansion(frame.columns)+64>maxCanonicalBytes) return encodeFrame(checkpointFrame(checked));
+  return encodeFrame({...frame,format:'dreams-checkpoint-v5',bytes,history},()=>encodeFrame(checkpointFrame(checked)));
 }
 function unpackHistory(parts:Part[]):unknown[] {
   const rows:unknown[]=[];

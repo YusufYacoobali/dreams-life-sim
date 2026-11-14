@@ -86,7 +86,7 @@ test('the bounded cache evicts old changed blocks while retaining recently used 
 
 test('a genuine mixed-format native archive keeps its entire world and every original historical byte', () => {
   const contents = decodeSave(JSON.stringify(archive)), world = immutableWorld(contents.world), frame = JSON.parse(packCheckpoint(world)) as Frame;
-  expect(frame.format).toBe('dreams-checkpoint-v4'); expect(frame.ledger.length).toBeGreaterThan(0); expect(unpackCheckpoint(JSON.stringify(frame), true)).toEqual(world);
+  expect(frame.format).toBe('dreams-checkpoint-v5'); expect(frame.ledger.length).toBeGreaterThan(0); expect(unpackCheckpoint(JSON.stringify(frame), true)).toEqual(world);
   expect(contents.snapshots).toEqual(archive.snapshots); expect(contents.snapshots).toHaveLength(20);
 });
 
@@ -102,7 +102,7 @@ test('reader eight upgrades an actual v2 current save atomically, keeps all old 
   expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(33); expect(rows()).toEqual(before);
   const world = await upgraded.load(imported.id);
   const next = resolveCommand(world, { type: 'acknowledge', resultId: world.pending!.id }, true); await upgraded.commit(next, world.revision, 'reader7-native-ack');
-  expect(JSON.parse(sqlite.prepare('SELECT payload FROM lives').get()?.payload as string).format).toBe('dreams-checkpoint-v4');
+  expect(JSON.parse(sqlite.prepare('SELECT payload FROM lives').get()?.payload as string).format).toBe('dreams-checkpoint-v5');
   expect(sqlite.prepare('SELECT payload FROM backups').get()?.payload).toBe(archive.checkpoint);
   expect(await new SaveRepository(driver).load(world.id)).toEqual(next); expect(await new SaveRepository(driver).recoveryPreview(world.id)).toEqual(world);
   for (const point of archive.snapshots) { expect(sqlite.prepare('SELECT payload FROM snapshots WHERE life_id=? AND snapshot_id=?').get(world.id, point.summary.id)?.payload).toBe(point.payload); expect(JSON.parse(sqlite.prepare('SELECT metadata FROM snapshot_metadata WHERE life_id=? AND snapshot_id=?').get(world.id, point.summary.id)?.metadata as string)).toEqual(point.summary); }

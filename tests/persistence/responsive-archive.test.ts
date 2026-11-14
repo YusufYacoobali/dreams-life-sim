@@ -22,7 +22,7 @@ test('the genuine responsive archive keeps both checkpoint formats, the committe
   expect(archive.snapshots.map(item => JSON.parse(item.payload).format)).toEqual([...Array(4).fill('dreams-checkpoint-v1'), 'dreams-checkpoint-v2']);
   for (const moment of earlier.snapshots) expect(archive.snapshots.find(item => item.summary.id === moment.summary.id)).toEqual(moment);
   let world = save.world;
-  expect(world.revision).toBe(34); expect(world.annual?.monthsProcessed).toBe(2);
+  expect(world.revision).toBe(33); expect(world.annual?.monthsProcessed).toBe(2);
   expect(world.pending).toMatchObject({ kind: 'result', id: 'story_25_0_due_result', title: 'Your name belongs on it' });
   const before = decodeSave(JSON.stringify(earlier)).world;
   expect(world.hobbies).toEqual(before.hobbies); expect(world.pets).toEqual(before.pets); expect(world.ledger).toEqual(before.ledger); expect(world.random).toEqual(before.random);

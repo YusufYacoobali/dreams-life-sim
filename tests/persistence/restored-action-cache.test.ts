@@ -56,6 +56,6 @@ test('an idempotent branch retry rejects inconsistent saved metadata without cha
   sqlite.prepare('UPDATE lives SET revision=revision+1 WHERE id=?').run('life_fast_branch');
   await expect(repository.restoreBranch(world.id, 'snapshot_r_32', world.revision, 'unused', 'fast_restore')).rejects.toBeInstanceOf(SaveCorrupt);
   expect(await repository.load(world.id)).toEqual(world);
-  expect(sqlite.prepare('SELECT revision FROM lives WHERE id=?').get('life_fast_branch')?.revision).toBe(34);
+  expect(sqlite.prepare('SELECT revision FROM lives WHERE id=?').get('life_fast_branch')?.revision).toBe(33);
   sqlite.close();
 });

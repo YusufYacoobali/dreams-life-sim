@@ -77,7 +77,12 @@ test('an explicitly bound older-family photograph scene retains the exact review
   };
   repository = new SaveRepository(connect());
   try {
-    const availability = jest.spyOn(choiceAvailability, 'choiceUnavailable');
+    const checkAvailability=choiceAvailability.choiceUnavailable, checkedIds:string[]=[];
+    const availability = jest.spyOn(choiceAvailability, 'choiceUnavailable').mockImplementation((world,choice)=>{
+      // Transaction drafts are revoked after resolution. Observe the choice
+      // while the validation call is live, rather than retaining a draft.
+      checkedIds.push(choice.id);return checkAvailability(world,choice);
+    });
     await repository.initialise(); await repository.create(initial); await bootstrap(); view = await render(frame());
     const before = rows(), world = mockStore.getState().world!, beforeWorld = encodeWorld(world);
     expect(Object.keys(before)).toHaveLength(8); expect(screen.getByText(event.body)).toBeOnTheScreen();
@@ -113,7 +118,7 @@ test('an explicitly bound older-family photograph scene retains the exact review
     expect(mockStore.getState().world?.pending).toBe(world.pending); expect(screen.getByText(event.body)).toBeOnTheScreen();
     expect(heldCalls).toBe(beforeBusyCalls); expect(uiCalls(world)).toBe(beforeBusyCalls);
     const engineCalls = availability.mock.calls.slice(beforeEngineCalls);
-    expect(engineCalls).toHaveLength(1); expect(engineCalls[0][0]).not.toBe(world); expect(engineCalls[0][1].id).toBe(choice.id);
+    expect(engineCalls).toHaveLength(1); expect(engineCalls[0][0]).not.toBe(world); expect(checkedIds[beforeEngineCalls]).toBe(choice.id);
     expect(presentation()).not.toBe(busyPresentation);
     sqlite.exec('DROP TRIGGER fail_later_family'); await press(choice.label);
     const command = { type: 'choose' as const, eventId: event.id, choiceId: choice.id }, expected = resolveCommand(world, command, true);

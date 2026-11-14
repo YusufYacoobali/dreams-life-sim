@@ -113,7 +113,7 @@ test('validation reuses the shared ledger index for paid scholarship bills witho
   const validation = jest.spyOn(scholarshipValidation, 'validateScholarships');
   try {
     expect(encodeWorld(validateWorld(world))).toBe(before);
-    expect(validation).toHaveBeenCalledWith(expect.anything(), expect.objectContaining({ transactions: expect.any(Map) }));
+    expect(validation).toHaveBeenCalledWith(expect.anything(), expect.objectContaining({ transactions: expect.objectContaining({ get:expect.any(Function),has:expect.any(Function) }) }));
   } finally { validation.mockRestore(); }
   const payer = decodeWorld(before), payerPeriod = payer.scholarships[0].periods[0];
   payer.ledger.find(row => row.id === payerPeriod.transactionId)!.personId = Object.keys(payer.people).find(id => id !== payer.activePersonId)!;

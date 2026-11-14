@@ -61,7 +61,7 @@ test('short natural varied-choice childhood cold-resumes exact scenes, records a
   expect([...chosenBranches].sort()).toEqual([1, 2, 3]); expect(report.unseenCatalogueIds.length).toBeGreaterThan(0); expect(report.unchosenCatalogueBranches.length).toBeGreaterThan(0);
   expect(report.all250NaturalCoverageClaimed).toBe(false); expect(report.fullScenarioAcceptance).toBe(false);
   expect(report.coldChecks.some(row => row.reason === 'pending-decision')).toBe(true); expect(report.coldChecks.some(row => row.reason === 'pending-result')).toBe(true); expect(report.coldChecks.some(row => row.reason === 'year-end')).toBe(true);
-  expect(report.coldChecks.every(row => typeof row.format === 'string' && /^dreams-checkpoint-v[1-4]$/.test(row.format))).toBe(true); expect(capturedWorlds.every(world => Object.isFrozen(world))).toBe(true);
+  expect(report.coldChecks.every(row => typeof row.format === 'string' && /^dreams-checkpoint-v[1-5]$/.test(row.format))).toBe(true); expect(capturedWorlds.every(world => Object.isFrozen(world))).toBe(true);
   let replay = initial; for (const command of result.commands) replay = resolveCommand(replay, command, true);
   expect(encodeWorld(replay)).toBe(encodeWorld(result.world)); expect(report.finalWorldSha256).toBe(createHash('sha256').update(encodeWorld(replay)).digest('hex'));
   const repeated = runEditorialPolicy(initial, runtime, { maxYears: 8 }); expect(repeated.report.traceSha256).toBe(report.traceSha256); expect(encodeWorld(repeated.world)).toBe(encodeWorld(replay));
@@ -99,8 +99,8 @@ test('the historical C35 registration stays exact and rejects newer source befor
   expect(pins.birthDriver).toBe(driver.expectedC35.birthDriver);
   // Current-source observations include scoped errors, command timing and post-save feedback spans.
   // Historical C35 registration above stays exact and still rejects this source.
-  expect(pins.store).toBe('1c423ec4255ea97ad7ab5095ac8e11cc0463dba03b025f5d682f7bb0d86a904d');
-  expect(pins.state).toBe('703f44ffbc942a3942ba0ab4f0218109f5f7b1365c1a50af6d28a25461d6dac9');
+  expect(pins.store).toBe('d5bfbe03b6661a57147825b5288b93ddbd55b6d5b9304714de430b73dfe7a3e8');
+  expect(pins.state).toBe('4036cd0a0c0cd13d5091f2770ce148482e4accb06c113f823640a076c5bc2ca1');
   // The SDK 58 blur module changes only this current dependency observation.
   expect(pins.lockfile).toBe('649a0f98ec3ff2363dcd85312f7effee0cbb76a8e14d6e226265c2690e0403e0');
   expect(pins.tool).toBe('e0eb16fb73962b9632b4949a5ed1d729d8aca97be1607490a964c5a10abe1706');
