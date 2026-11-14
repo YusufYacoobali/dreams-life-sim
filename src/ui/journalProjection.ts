@@ -1,4 +1,4 @@
-import { isImmutableWorld, type GameDate, type World } from '../game/model';
+import { isImmutableWorld, journalAppendStart, type GameDate, type World } from '../game/model';
 import { ageOn } from '../game/personHelpers';
 
 type JournalEntry = World['journal'][number];
@@ -16,18 +16,22 @@ function sameEntry(a: JournalEntry, b: DisplayFact): boolean {
  * ages depend on the person's birthday and each fact's date, not today's date.
  * Reuse rows on appends so FlatList's mounted facts need not render again. */
 export function createJournalProjection() {
-  let previous: { scope: string; journal: readonly JournalEntry[]; immutable: boolean; projection: JournalProjection } | undefined;
+  let previous: { scope: string; journal: readonly JournalEntry[]; immutable: boolean; projection: JournalProjection; birthIdentity:boolean; birthOnly:boolean } | undefined;
   return (journal: readonly JournalEntry[], { lifeId, personId, born }: Scope, world?: World): JournalProjection => {
     const scope = [lifeId, personId, born.year, born.month, born.day].join(':');
     if (previous?.scope === scope && previous.journal === journal && previous.immutable) return previous.projection;
     const prior = previous?.scope === scope ? previous.projection : undefined;
-    let rows: JournalRow[] | undefined = prior ? undefined : [];
-    let ownIndex = 0, previousAge: number | undefined, birthIdentity = false, birthOnly = true;
     // Only model certification grants this shortcut. Object.freeze(array) alone
     // says nothing about mutable facts/dates inside an imported UI preview.
     const immutable = !!world && world.journal === journal && isImmutableWorld(world);
+    const appended=immutable && previous?.immutable && previous.scope===scope ? journalAppendStart(previous.journal,journal) : undefined;
+    let rows: JournalRow[] | undefined = prior ? undefined : [];
+    let ownIndex=appended===undefined?0:prior!.rows.length;
+    let previousAge=appended===undefined?undefined:prior!.rows.at(-1)?.age;
+    let birthIdentity=appended===undefined?false:previous!.birthIdentity, birthOnly=appended===undefined?true:previous!.birthOnly;
     const person = { born, died: null };
-    for (const entry of journal) {
+    for (let index=appended??0;index<journal.length;index++) {
+      const entry=journal[index];
       if (entry.personId !== personId) continue;
       const old = prior?.rows[ownIndex], same = !!old && sameEntry(entry, old.entry);
       const age = same ? old.age : ageOn(person, entry.date), startsYear = previousAge !== age;
@@ -45,7 +49,7 @@ export function createJournalProjection() {
     const resultRows = rows ? Object.freeze(rows) : ownIndex === prior!.rows.length ? prior!.rows : Object.freeze(prior!.rows.slice(0, ownIndex));
     const birthIntroduction = birthIdentity && birthOnly;
     const projection = prior?.rows === resultRows && prior.birthIntroduction === birthIntroduction ? prior : { rows: resultRows, birthIntroduction };
-    previous = { scope, journal, immutable, projection };
+    previous = { scope, journal, immutable, projection, birthIdentity, birthOnly };
     return projection;
   };
 }

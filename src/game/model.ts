@@ -1,4 +1,4 @@
-import { beginCommandSpan } from '../performance/commandTiming';
+import { beginCommandSpan, measureCommandPhase } from '../performance/commandTiming';
 import { validateLifestyle } from './systems/lifestyleValidation';
 import { lifestyleSchema } from './systems/lifestyleSchemas';
 import { validateOrganisedCrime } from './systems/organisedCrime';
@@ -19,13 +19,15 @@ import { validateBestFriendships } from './systems/friendshipValidation';
 import { teenRelationshipSchema } from './systems/teenRelationshipSchemas';
 import { validateTeenRelationships } from './systems/teenRelationshipValidation';
 import { appendLedgerIndex, indexLedger, type LedgerIndex } from './ledgerIndex';
-import { arrayChange } from './dataDraft';
+import { arrayChange, draftSource } from './dataDraft';
+import { createIntegrityChecks, type IntegrityChecks } from './integrityChecks';
+import { extendLookup, lookupFromMap, type Lookup } from './persistentLookup';
 import { z } from 'zod';
 import { validateDramaticEvent } from './systems/dramaticValidation';
 import { validateStoryImmediate } from './systems/storyImmediateContext';
 import { countries, countryCodes } from './countries';
 import { pendingSchema } from './runtime';
-import { dateSchema, monthFrom } from './calendar';
+import { dateSchema, monthFrom, type GameDate } from './calendar';
 import { ageOn, compareDates } from './personHelpers';
 export { ageOn, compareDates, fullName } from './personHelpers';
 export { dateSchema, type GameDate } from './calendar';
@@ -135,6 +137,11 @@ const copiedBranches = new WeakMap<object, { key: string; original: object }>();
 const certifiedLedgers = new WeakMap<object, LedgerIndex>();
 // Transient parse provenance is consumed before parsed data can leave validation.
 const parsedLedgerOrigins = new WeakMap<object, World['ledger']>();
+const certifiedChecks = new WeakMap<object, IntegrityChecks>();
+type JournalLineage = { readonly length:number; readonly parent?:JournalLineage };
+type JournalCertificate = { ids:Lookup<true>; earliest:ReadonlyMap<string,GameDate>; latest:GameDate|null; lineage:JournalLineage };
+const certifiedJournals = new WeakMap<object,JournalCertificate>();
+const parsedJournalOrigins = new WeakMap<object,World['journal']>();
 export const worldSchema = z.object({
   lifestyle: lifestyleSchema.optional(),
   overhaulVersion: z.literal(1).optional(),
@@ -232,6 +239,49 @@ function parseLedgerRows(rows: unknown[]): World['ledger'] {
   if(appendOnly) parsedLedgerOrigins.set(parsed,original!);
   return parsed;
 }
+function parseJournalRows(rows: unknown[]): World['journal'] {
+  const change=arrayChange(rows);
+  const copied=copiedBranches.get(rows);
+  const base=change?.appendOnly && certifiedJournals.has(change.base) ? change.base as World['journal']
+    : copied?.key==='journal' && certifiedJournals.has(copied.original) && rows.length>=(copied.original as World['journal']).length &&
+      (copied.original as World['journal']).every((entry,index)=>rows[index]===entry) ? copied.original as World['journal'] : undefined;
+  if(!base) return worldSchema.shape.journal.parse(rows);
+  const parsed=base.slice();
+  for(let index=base.length;index<rows.length;index++) parsed.push(journalSchema.parse(rows[index]));
+  parsedJournalOrigins.set(parsed,base); return parsed;
+}
+/** Validate exactly the journal's invariants: IDs, person existence, birth/date
+ * bounds. Certified prefixes use indexed extrema for ALL existing references;
+ * changing/removing an old person or moving time backwards cannot hide here. */
+function validateJournal(world: World): JournalCertificate {
+  const source=parsedJournalOrigins.get(world.journal); parsedJournalOrigins.delete(world.journal);
+  const prior=certifiedJournals.get(world.journal) ?? (source && certifiedJournals.get(source));
+  const start=certifiedJournals.has(world.journal)?world.journal.length:prior?source!.length:0;
+  const added=new Map<string,true>(), earliest=new Map(prior?.earliest), ids=prior?.ids;
+  let latest=prior?.latest ?? null;
+  for(let index=start;index<world.journal.length;index++) {
+    const entry=world.journal[index];
+    if(ids?.has(entry.id) || added.has(entry.id)) throw new Error('Invalid journal fact');
+    added.set(entry.id,true);
+    const first=earliest.get(entry.personId);
+    if(!first || compareDates(entry.date,first)<0) earliest.set(entry.personId,entry.date);
+    if(!latest || compareDates(entry.date,latest)>0) latest=entry.date;
+  }
+  if(latest && compareDates(latest,world.date)>0) throw new Error('Invalid journal fact');
+  for(const [id,first] of earliest) if(!world.people[id] || compareDates(first,world.people[id].born)<0) throw new Error('Invalid journal fact');
+  if(prior && !added.size) return prior;
+  return {ids:ids?extendLookup(ids,added):lookupFromMap(added),earliest,latest,
+    lineage:{length:world.journal.length,...(prior?{parent:prior.lineage}:{})}};
+}
+/** Proven ancestry, including skipped UI publications. Metadata retains no old
+ * worlds/arrays; divergent Time Machine branches cannot share an append proof. */
+export function journalAppendStart(before: readonly World['journal'][number][],after: readonly World['journal'][number][]): number | undefined {
+  const previous=certifiedJournals.get(before), next=certifiedJournals.get(after);
+  if(!previous || !next) return;
+  let lineage:JournalLineage|undefined=next.lineage;
+  while(lineage && lineage.length>previous.lineage.length) lineage=lineage.parent;
+  return lineage===previous.lineage?before.length:undefined;
+}
 function parseWorldShape(value: unknown, immutable = false): World {
   // Cold JSON/imports have no private certificates: retain the original compiled
   // whole-schema parser rather than paying per-row public parse overhead.
@@ -253,9 +303,8 @@ function parseWorldShape(value: unknown, immutable = false): World {
             people[id] = sharedCertifiedBranch('person', person) as Person | undefined ?? personSchema.parse(person);
           }
           parsed[key] = people;
-        } else parsed[key] = key === 'ledger' && Array.isArray(input[key])
-          ? parseLedgerRows(input[key])
-          : schema.parse(input[key]);
+        } else parsed[key] = key === 'ledger' && Array.isArray(input[key]) ? parseLedgerRows(input[key])
+          : key === 'journal' && Array.isArray(input[key]) ? parseJournalRows(input[key]) : schema.parse(input[key]);
         // Match the cold parser: optional absent capabilities are absent own
         // properties, rather than explicit undefined fields in certified worlds.
         if (parsed[key] === undefined && !Object.prototype.hasOwnProperty.call(input, key)) delete parsed[key];
@@ -279,7 +328,10 @@ function parseWorldShape(value: unknown, immutable = false): World {
 /** Reject contradictory imports/checkpoints rather than repairing them silently. */
 export function validateWorld(value: unknown, immutable = false): World {
   const endTiming = beginCommandSpan('validation'); try {
-  const world = parseWorldShape(value, immutable);
+  const world = measureCommandPhase('schema',()=>parseWorldShape(value, immutable));
+  const source=value && typeof value==='object' ? draftSource(value) : undefined;
+  const checks=immutable ? createIntegrityChecks(world,source && immutableWorlds.has(source) ? certifiedChecks.get(source) : undefined) : undefined;
+  const check = <T>(fn:(world:World,...args:any[])=>T,...args:any[]):T => checks ? checks.run(fn,...args) : fn(world,...args);
   if (world.overhaulVersion === 1) {
     if (!world.prisonLives || !world.affairs || !world.romanceOffers) throw new Error('Missing overhaul capability records');
   } else if (world.prisonLives || world.affairs || world.romanceOffers || world.gangs.some(gang => gang.organised) || world.incidents.some(incident => ['vehicle-theft', 'financial-scam', 'extortion', 'high-value-robbery'].includes(incident.offence)) || world.miniGames.some(session => session.kind === 'escape')) throw new Error('Overhaul records require their capability version');
@@ -290,12 +342,11 @@ export function validateWorld(value: unknown, immutable = false): World {
 
   const ledgerSource=parsedLedgerOrigins.get(world.ledger); parsedLedgerOrigins.delete(world.ledger);
   const previousLedger=ledgerSource && certifiedLedgers.get(ledgerSource);
-  const ledger=certifiedLedgers.get(world.ledger) ?? (previousLedger ? appendLedgerIndex(previousLedger,world.ledger,ledgerSource!.length) : indexLedger(world.ledger));
+  const ledger=measureCommandPhase('ledger-index',()=>certifiedLedgers.get(world.ledger) ?? (previousLedger ? appendLedgerIndex(previousLedger,world.ledger,ledgerSource!.length) : indexLedger(world.ledger)));
   if (!world.people[world.activePersonId]) throw new Error('Missing active person');
   const accountIds = new Set<string>();
   const accountCurrencies = new Set<string>();
   const relationshipIds = new Set<string>();
-  const journalIds = new Set<string>();
   const householdIds = new Set<string>(), householdMembers = new Set<string>();
   const employmentByPerson = new Map<string, World['workHistory']>();
   for (const record of world.workHistory) {
@@ -343,7 +394,7 @@ export function validateWorld(value: unknown, immutable = false): World {
     if (records.reduce((sum, record) => sum + record.monthsWorked, 0) !== person.finance.serviceMonths || records.reduce((sum, record) => sum + record.normalizedGross, 0n) !== person.finance.lifetimeGross) throw new Error('Earnings do not reconcile with employment history');
   }
   const relationPairs = new Set<string>(), romanticPeople = new Set<string>();
-  const activeTeenRelations = validateTeenRelationships(world);
+  const activeTeenRelations = check(validateTeenRelationships);
   const parentsByChild = new Map<string, string[]>();
   for (const relation of world.relationships) if (relation.roles.includes('parent')) parentsByChild.set(relation.to, [...(parentsByChild.get(relation.to) ?? []), relation.from]);
   const parentVisits = new Map<string, number>();
@@ -437,10 +488,7 @@ export function validateWorld(value: unknown, immutable = false): World {
     holdingIds.add(holding.id);
   }
   if (!world.accounts.some(account => account.ownerId === world.activePersonId)) throw new Error('Missing player account');
-  for (const entry of world.journal) {
-    if (!world.people[entry.personId] || compareDates(entry.date, world.date) > 0 || compareDates(entry.date, world.people[entry.personId].born) < 0 || journalIds.has(entry.id)) throw new Error('Invalid journal fact');
-    journalIds.add(entry.id);
-  }
+  const journalCertificate=validateJournal(world);
   validateAnnualPacing(world);
   if (world.annual && (compareDates(world.date, world.annual.startDate) < 0 || compareDates(world.date, world.annual.targetDate) > 0 || world.annual.targetDate.year !== world.annual.startDate.year + 1)) throw new Error('Invalid annual frame');
   if (world.annual && (compareDates(world.date, monthFrom(world.annual.startDate, world.annual.monthsProcessed, world.calendarAnchorDay)) !== 0 || compareDates(world.annual.targetDate, monthFrom(world.annual.startDate, 12, world.calendarAnchorDay)) !== 0)) throw new Error('Annual cursor does not match calendar');
@@ -465,42 +513,42 @@ export function validateWorld(value: unknown, immutable = false): World {
     if (!world.people[legacy.fromId]?.died || !world.people[legacy.toId] || !world.relationships.some(item => item.roles.includes('parent') && item.from === legacy.fromId && item.to === legacy.toId) || compareDates(legacy.date, world.date) > 0 || (index && (world.legacies[index - 1].toId !== legacy.fromId || compareDates(world.legacies[index - 1].date, legacy.date) > 0))) throw new Error('Invalid legacy chain');
   }
   if (world.legacies.length && world.legacies.at(-1)!.toId !== world.activePersonId) throw new Error('Legacy actor differs from its recorded identity');
-  validateLegal(world);
-  validateOrganisedCrime(world, ledger);
-  validatePrison(world, ledger);
-  validateRomance(world);
-  validateSocial(world);
-  validateBusinesses(world);
-  validateEarnings(world, ledger);
-  validateHourlyWork(world, ledger);
-  validateNpcCourtships(world, ledger);
-  validateNpcSeparations(world);
-  validateNpcMoves(world, ledger);
-  validateBestFriendships(world);
-  validateTravel(world, ledger);
-  validateSchools(world);
-  validateWorkplaces(world);
-  validateEducationRecovery(world);
-  validateScholarships(world, ledger);
-  validateUniversityAdmissions(world, ledger);
-  validateStudyCourses(world, ledger);
-  validateCampusCommunities(world, ledger);
-  validateLifestyle(world, ledger);
-  validatePets(world, ledger);
-  validateRentalLeases(world, ledger);
-  validatePersonSupport(world, ledger);
-  validateLeisure(world, ledger);
-  validateHobbyEvents(world, ledger);
-  validateStoryThreads(world, ledger);
-  validateRelocations(world, ledger);
-  validateMiniGames(world);
-  validateCults(world, ledger);
-  validateCareers(world);
-  validateMusic(world, ledger);
-  validatePolitics(world, ledger);
-  validateCreators(world, ledger);
-  validateServices(world);
-  validateRoyalty(world, ledger);
+  check(validateLegal);
+  check(validateOrganisedCrime, ledger);
+  check(validatePrison, ledger);
+  check(validateRomance);
+  check(validateSocial);
+  check(validateBusinesses);
+  check(validateEarnings, ledger);
+  check(validateHourlyWork, ledger);
+  check(validateNpcCourtships, ledger);
+  check(validateNpcSeparations);
+  check(validateNpcMoves, ledger);
+  check(validateBestFriendships);
+  check(validateTravel, ledger);
+  check(validateSchools);
+  check(validateWorkplaces);
+  check(validateEducationRecovery);
+  check(validateScholarships, ledger);
+  check(validateUniversityAdmissions, ledger);
+  check(validateStudyCourses, ledger);
+  check(validateCampusCommunities, ledger);
+  check(validateLifestyle, ledger);
+  check(validatePets, ledger);
+  check(validateRentalLeases, ledger);
+  check(validatePersonSupport, ledger);
+  check(validateLeisure, ledger);
+  check(validateHobbyEvents, ledger);
+  check(validateStoryThreads, ledger);
+  check(validateRelocations, ledger);
+  check(validateMiniGames);
+  check(validateCults, ledger);
+  check(validateCareers);
+  check(validateMusic, ledger);
+  check(validatePolitics, ledger);
+  check(validateCreators, ledger);
+  check(validateServices);
+  check(validateRoyalty, ledger);
   const pendingEvents = [...(world.pending ? [world.pending] : []), ...world.deferred.map(item => item.event)];
   if ((!world.pending && (world.pendingPriority || world.deferred.length)) || world.people[world.activePersonId].died && pendingEvents.length || new Set(pendingEvents.map(item => item.id)).size !== pendingEvents.length || world.deferred.some((item, index) => index > 0 && world.deferred[index - 1].priority < item.priority)) throw new Error('Invalid pending event queue');
   for (const pending of pendingEvents) if (pending.kind === 'decision') {
@@ -549,8 +597,10 @@ export function validateWorld(value: unknown, immutable = false): World {
     }
   }
   if (immutable) {
-    freezeTree(world);
+    measureCommandPhase('freeze',()=>freezeTree(world));
     certifiedLedgers.set(world.ledger, ledger);
+    certifiedJournals.set(world.journal,journalCertificate);
+    if(checks) certifiedChecks.set(world,checks.records);
     for (const [key, branch] of Object.entries(world)) if (branch && typeof branch === 'object') {
       const kinds = certifiedBranches.get(branch) ?? new Set<string>();
       kinds.add(key); certifiedBranches.set(branch, kinds);
@@ -583,13 +633,14 @@ function copyCertifiedTree(value: unknown): unknown {
   return copy;
 }
 /** Mutable working copy; certified immutable inputs need no repeated integrity audit. */
-export function copyWorld(world: World): World {
+function copyKnownWorld(world: World, shareJournal: boolean): World {
   if (!immutableWorlds.has(world)) return validateWorld(world);
   // Every field has already passed schema/integrity checks. Clone mutable data
   // directly instead of running the schema parser a second time before acting.
   // The command's result still receives full shape and integrity validation.
-  const copy = copyCertifiedTree({ ...world, ledger: [] }) as World;
+  const copy = copyCertifiedTree({ ...world, ledger: [], ...(shareJournal?{journal:[]}: {}) }) as World;
   copy.ledger = [...world.ledger];
+  if(shareJournal) copy.journal=[...world.journal];
   for (const [key, branch] of Object.entries(copy)) if (branch && typeof branch === 'object') {
     const original = world[key as keyof World];
     if (original && typeof original === 'object') copiedBranches.set(branch, { key, original });
@@ -597,6 +648,10 @@ export function copyWorld(world: World): World {
   for (const [id, person] of Object.entries(copy.people)) copiedBranches.set(person, { key: 'person', original: world.people[id] });
   return copy;
 }
+export function copyWorld(world: World): World { return copyKnownWorld(world,false); }
+/** Explicit sharing for simulation-heavy commands. Systems append journal
+ * facts; historical facts, like old ledger receipts, remain frozen values. */
+export function copyCommandWorld(world: World): World { return copyKnownWorld(world,true); }
 /** Read-only identity query; an externally frozen lookalike never passes. */
 export function isImmutableWorld(value: unknown): value is World {
   return !!value && typeof value === 'object' && immutableWorlds.has(value);

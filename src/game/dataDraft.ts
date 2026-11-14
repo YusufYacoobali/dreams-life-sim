@@ -9,13 +9,15 @@ type State = {
 };
 export type ArrayChange = Readonly<{ base: readonly unknown[]; appendOnly: boolean; written: readonly number[] }>;
 const arrayChanges = new WeakMap<object, ArrayChange>();
+const sources = new WeakMap<object, object>();
 /** Read-only provenance. Only finished, recursively frozen outputs are keys. */
 export const arrayChange = (value: object): ArrayChange | undefined => arrayChanges.get(value);
+export const draftSource = (value: object): object | undefined => sources.get(value);
 const indexOfKey = (key: PropertyKey) => typeof key === 'string' && /^(0|[1-9]\d*)$/.test(key) && Number(key) < 0xffffffff ? Number(key) : -1;
 const object = (value: unknown): value is Data => !!value && typeof value === 'object';
 const put = (target: Data, key: PropertyKey, value: unknown) => Object.defineProperty(target,key,{value,writable:true,enumerable:true,configurable:true});
 
-export function createDataDraft<T extends object>(base: T) {
+export function createDataDraft<T extends object>(base: T, atomicArrays: readonly object[] = []) {
   const originals = new WeakMap<object, State>(), proxies = new WeakMap<object, State>(), states: State[] = [];
   let closed = false;
   function mark(state: State, seen = new Set<State>()) {
@@ -33,8 +35,18 @@ export function createDataDraft<T extends object>(base: T) {
     const current = () => state.copy ?? state.base;
     const handler: ProxyHandler<Data> = {
       get(_target,key) {
+        if (key === Symbol.iterator && atomicArrays.includes(state.base)) return function* () {
+          // Live length/contents, like the standard array iterator, without
+          // a proxy allocation or property trap for every historical receipt.
+          let index=0;
+          while(index < (current() as unknown as unknown[]).length) yield current()[index++];
+        };
         const value = Reflect.get(current(),key);
         if (!object(value)) return value;
+        // The command engine has always treated certified old ledger rows as
+        // atomic frozen values. Reading a large financial history must not
+        // allocate a proxy for each transaction. Replacements still track.
+        if (atomicArrays.includes(state.base) && indexOfKey(key)>=0 && !state.assigned.has(key)) return value;
         // New objects remain ordinary mutable objects during the command.
         // Systems retain local references after inserting people/contracts;
         // wrapping those would split their subsequent direct mutations.
@@ -113,7 +125,10 @@ export function createDataDraft<T extends object>(base: T) {
           written:Object.freeze([...state.written].map(indexOfKey).filter(index=>index>=0))}));
         return result;
       }
-      try { return finish(root) as T; } finally { close(); }
+      try {
+        const result=finish(root) as T;
+        sources.set(result,base); return result;
+      } finally { close(); }
     },
   };
 }

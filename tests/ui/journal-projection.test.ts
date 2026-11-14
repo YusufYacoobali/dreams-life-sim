@@ -1,6 +1,9 @@
 import { createJournalProjection } from '../../src/ui/journalProjection';
 import { ageOn, immutableWorld, type World } from '../../src/game/model';
 import { createLife, randomCreation } from '../../src/game/createLife';
+import { createDataDraft } from '../../src/game/dataDraft';
+import { validateWorld } from '../../src/game/model';
+import * as personHelpers from '../../src/game/personHelpers';
 
 type Entry = World['journal'][number];
 const born = { year: 2000, month: 2, day: 29 };
@@ -10,6 +13,26 @@ function frozen(entries: Entry[]): readonly Entry[] {
   for (const entry of entries) { Object.freeze(entry.date); Object.freeze(entry); }
   return Object.freeze(entries);
 }
+
+test('certified appends project only new facts across skipped publications and preserve previous rows', () => {
+  const world=immutableWorld(createLife('life_journal_append',42,randomCreation(42),{year:2026,month:11,day:14}));
+  const project=createJournalProjection(), context={lifeId:world.id,personId:world.activePersonId,born:world.people[world.activePersonId].born};
+  const original=project(world.journal,context,world);
+  let next=world;
+  for(let i=0;i<3;i++) {
+    const tx=createDataDraft(next);tx.draft.journal.push({id:'append_'+i,personId:next.activePersonId,date:{...next.date},text:'New fact '+i,category:'life'});
+    next=validateWorld(tx.finish(),true);
+  }
+  const age=jest.spyOn(personHelpers,'ageOn');
+  try {
+    const projected=project(next.journal,context,next);
+    expect(age).toHaveBeenCalledTimes(3);
+    expect(projected.rows.slice(0,original.rows.length)).toEqual(original.rows);
+    original.rows.forEach((row,index)=>expect(projected.rows[index]).toBe(row));
+    expect(projected).toEqual(createJournalProjection()(next.journal,context,next));
+    age.mockClear();expect(project(next.journal,context,next)).toBe(projected);expect(age).not.toHaveBeenCalled();
+  } finally {age.mockRestore();}
+});
 
 test('all facts from birth to old age remain in chronological source order without a display limit', () => {
   const project = createJournalProjection(), entries: Entry[] = [];

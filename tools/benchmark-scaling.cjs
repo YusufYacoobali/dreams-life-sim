@@ -7,6 +7,10 @@ const samples = Number(flags['--samples'] ?? 7); assert(samples >= 5 && samples 
 let phases, gc = [];
 const observe = (name,ms) => { if (phases) { const row = phases[name] ??= {calls:0,ms:0}; row.calls++; row.ms+=ms; } };
 const {load,model,codec,engine,digest} = runtime(flags['--source'] ?? path.join(__dirname,'..'),observe), sourceHash = digest();
+if (flags['--engine'] === 'draft') {
+  const work=engine.resolveCommandUsingDraft;
+  engine.resolveCommand=(...args)=>global.__scalingMeasure('resolveCommand',()=>work(...args));
+}
 const {SaveRepository} = load('src/persistence/repository.ts'), {createGameStore} = load('src/state/gameStore.ts');
 const {observeCommandTimings} = load('src/performance/commandTiming.ts'), {createJournalProjection} = load('src/ui/journalProjection.ts');
 const {choiceUnavailable} = load('src/game/choiceAvailability.ts'), {personalBorrowReason} = load('src/game/systems/credit.ts');

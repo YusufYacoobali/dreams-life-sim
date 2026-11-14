@@ -1,4 +1,4 @@
-import { beginCommandSpan } from '../performance/commandTiming';
+import { beginCommandSpan, measureCommandPhase } from '../performance/commandTiming';
 import { offerLifestyleStory, resolveLifestyleChoice, cancelLifestyleOffers } from './systems/lifestyleStories';
 import { hobbyLifestyleCommandSchema, type HobbyLifestyleCommand, resolveHobbyLifestyle } from './systems/hobbyAccomplishments';
 import { petTrainingCommandSchema, type PetTrainingCommand, resolvePetTraining, companionMonth } from './systems/petTraining';
@@ -41,7 +41,7 @@ import { PetCommand, petCommandSchema, resolvePets, petMonth, petOwnerDied } fro
 import { RelocationCommand, relocationCommandSchema, resolveRelocation } from './systems/relocation';
 import { activeTrip } from './systems/travelSchemas';
 import { refreshTrips, resolveTravel, travelCommandSchema, TravelCommand, travelMonth } from './systems/travel';
-import { ageOn, copyWorld, fullName, validateWorld, World } from './model';
+import { ageOn, copyCommandWorld, copyWorld, fullName, validateWorld, World } from './model';
 import { isImmutableWorld } from './model';
 import { createDataDraft } from './dataDraft';
 import { monthFrom } from './calendar';
@@ -177,6 +177,7 @@ export function recordDeath(world: World, personId: string, cause: string) {
 
 /** A month is the smallest ordinary progression unit; no system rounds a six-month term to a year. */
 function processMonth(world: World) {
+  const endPhase=beginCommandSpan('month'); try {
   const student = world.people[world.activePersonId];
   const firstCampusCourseId = student.education.months === 0 && ['trade', 'university', 'graduate'].includes(student.education.stage)
     ? world.studyCourses.find(item => item.personId === student.id && item.origin === 'enrolment' && item.status === 'active' && item.months === 0)?.id : undefined;
@@ -247,9 +248,11 @@ function processMonth(world: World) {
   campusPlanningOpportunity(world, firstCampusCourseId);
   offerLifestyleStory(world);
   if (world.overhaulVersion) { organisedCrimeMonth(world); prisonMonth(world); }
+  } finally {endPhase?.();}
 }
 
 function finishYear(world: World) {
+  const endPhase=beginCommandSpan('annual'); try {
   const frame = world.annual!;
   frame.stage = 'complete';
   frame.pausedForPlanning = false;
@@ -285,6 +288,7 @@ function finishYear(world: World) {
     journal(world, frame.id + '_quiet', text, 'year');
     offerPending(world, { kind: 'result', id: frame.id + '_summary', title: 'Age ' + age, body: text, illustration: 'journal', effects: [] });
   }
+  } finally {endPhase?.();}
 }
 
 function continueYear(world: World) {
@@ -380,18 +384,24 @@ function applyEffects(world: World, effects: Effect[], relationshipLabels?: Boun
 
 /** Pure: consumes only persisted random streams and never mutates its input. */
 export function resolveCommand(previous: World, command: GameCommand, immutable = false): World {
+  const simulatesMonths=command.type==='advance' || command.type==='resume' || command.type==='continue-child' ||
+    command.type==='acknowledge' && previous.annual?.stage==='months' && !previous.annual.pausedForPlanning;
+  return resolveWithDraft(previous, command, immutable, !simulatesMonths, true);
+}
+/** Temporary full-copy correctness reference, also used by differential tools. */
+export function resolveCommandReference(previous: World, command: GameCommand, immutable = false): World {
   return resolveWithDraft(previous, command, immutable, false);
 }
 /** Internal comparative path. The copy implementation remains the reference. */
 export function resolveCommandUsingDraft(previous: World, command: GameCommand, immutable = false): World {
   return resolveWithDraft(previous, command, immutable, true);
 }
-function resolveWithDraft(previous: World, command: GameCommand, immutable: boolean, useDraft: boolean): World {
+function resolveWithDraft(previous: World, command: GameCommand, immutable: boolean, useDraft: boolean, shareJournal = false): World {
   const endTiming = beginCommandSpan('simulation'); try {
   // Mutable callers are fully checked; stored immutable worlds safely share old ledger rows.
-  const transaction = useDraft && immutable && isImmutableWorld(previous) ? createDataDraft(previous) : undefined;
-  const world = transaction?.draft ?? copyWorld(previous);
-  const commit = () => validateWorld(transaction ? transaction.finish() : world, immutable);
+  const transaction = useDraft && immutable && isImmutableWorld(previous) ? createDataDraft(previous,[previous.ledger]) : undefined;
+  const world = transaction?.draft ?? measureCommandPhase('copy',()=>immutable && shareJournal ? copyCommandWorld(previous) : copyWorld(previous));
+  const commit = () => validateWorld(transaction ? measureCommandPhase('draft:finish',()=>transaction.finish()) : world, immutable);
   try {
   const player = world.people[world.activePersonId];
   if (activeMiniGame(world) && !command.type.startsWith('mini-game-')) throw new IneligibleAction('Resume or forfeit your saved mini-game first');

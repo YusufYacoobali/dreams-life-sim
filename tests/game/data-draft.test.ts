@@ -1,7 +1,7 @@
 import { arrayChange, createDataDraft } from '../../src/game/dataDraft';
 import { createLife, randomCreation } from '../../src/game/createLife';
 import { copyWorld, encodeWorld, immutableWorld, validateWorld } from '../../src/game/model';
-import { resolveCommand, resolveCommandUsingDraft, type GameCommand } from '../../src/game/engine';
+import { resolveCommandReference as resolveCommand, resolveCommandUsingDraft, type GameCommand } from '../../src/game/engine';
 import { packCheckpoint } from '../../src/persistence/checkpoints';
 import { choiceUnavailable } from '../../src/game/choiceAvailability';
 
