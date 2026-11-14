@@ -101,8 +101,8 @@ test('the historical C35 registration stays exact and rejects newer source befor
   // Historical C35 registration above stays exact and still rejects this source.
   expect(pins.store).toBe('1c423ec4255ea97ad7ab5095ac8e11cc0463dba03b025f5d682f7bb0d86a904d');
   expect(pins.state).toBe('703f44ffbc942a3942ba0ab4f0218109f5f7b1365c1a50af6d28a25461d6dac9');
-  // The SDK 58 upgrade changes the current dependency lockfile.
-  expect(pins.lockfile).toBe('70d85e20d6cfcad558c8e407d10b732f350d7090610e4367fea842ca26a54f43');
+  // The SDK 58 blur module changes only this current dependency observation.
+  expect(pins.lockfile).toBe('649a0f98ec3ff2363dcd85312f7effee0cbb76a8e14d6e226265c2690e0403e0');
   expect(pins.tool).toBe('e0eb16fb73962b9632b4949a5ed1d729d8aca97be1607490a964c5a10abe1706');
   expect(pins.policy).toBe('0e2bf26c25d28c24d8ac9111fe2f3de704a1cadb0e8e98df82b4dbf93bcf3c72');
   for (const key of ['game', 'gameAndPersistence']) expect(pins[key]).not.toBe(driver.expectedC35[key]);

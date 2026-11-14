@@ -46,7 +46,20 @@ import NewLife from '../../app/new-life';
 const customer = (...owned: PremiumFeature[]): Customer => ({ entitlements: { active: Object.fromEntries(owned.map(feature => [feature, {}])), verification: 'VERIFIED' } });
 let adapter: PurchaseAdapter, buy: jest.Mock, restore: jest.Mock;
 const frame = (child: React.ReactNode) => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 0, bottom: 0, left: 0, right: 0 } }}><ThemeProvider>{child}</ThemeProvider></SafeAreaProvider>;
-const press = async (name: string) => { await act(async () => { await fireEvent.press(screen.getByRole('button', { name })); }); };
+async function acknowledgeNativePresentation() {
+  for (const modal of screen.UNSAFE_queryAllByType(Modal)) {
+    if (modal.props.visible && modal.props.onShow) await act(async () => { modal.props.onShow(); });
+  }
+}
+async function finishClosingPaywalls() {
+  // Native presentation/dismissal events are not emitted by the renderer.
+  // The lifecycle suite controls those events explicitly to test their order.
+  await acknowledgeNativePresentation();
+  for (const modal of screen.UNSAFE_queryAllByType(Modal)) {
+    if (modal.props.visible === false && modal.props.onDismiss) await act(async () => { modal.props.onDismiss(); });
+  }
+}
+const press = async (name: string) => { await act(async () => { await fireEvent.press(screen.getByRole('button', { name })); }); await finishClosingPaywalls(); };
 const originalDimensions = { window: ReactNative.Dimensions.get('window'), screen: ReactNative.Dimensions.get('screen') };
 beforeEach(async () => {
   ReactNative.Dimensions.set({ window: { width: 390, height: 844, scale: 3, fontScale: 1 }, screen: { width: 390, height: 844, scale: 3, fontScale: 1 } });
@@ -200,7 +213,7 @@ describe('testing access in the purchase UI', () => {
   test('a waiting paywall resumes once when testing becomes available without granting ownership', async () => {
     build('disabled'); const resumed = jest.fn(), view = await render(frame(<FeatureIntent feature="athlete" onContinue={resumed} />));
     await press('Try Feature'); await waitFor(() => expect(screen.getByRole('button', { name: 'Buy Athlete Career' })).toBeEnabled());
-    build('enabled'); await view.rerender(frame(<FeatureIntent feature="athlete" onContinue={resumed} />));
+    build('enabled'); await view.rerender(frame(<FeatureIntent feature="athlete" onContinue={resumed} />)); await finishClosingPaywalls();
     await waitFor(() => expect(resumed).toHaveBeenCalledTimes(1));
     expect(screen.queryByRole('button', { name: 'Maybe Later' })).toBeNull();
     expect(purchases.getState().ownership).toEqual(noOwnership()); expect(buy).not.toHaveBeenCalled();

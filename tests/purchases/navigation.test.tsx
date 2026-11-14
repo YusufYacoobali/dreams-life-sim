@@ -23,8 +23,24 @@ import { Redirect, router } from 'expo-router';
 import GameLayout from '../../app/(game)/_layout';
 import Extras from '../../app/(game)/extras';
 import DreamsStore from '../../app/store';
+import Activities from '../../app/(game)/(tabs)/activities';
 const frame = (content: React.ReactNode) => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 24, bottom: 24, left: 0, right: 0 } }}><ThemeProvider>{content}</ThemeProvider></SafeAreaProvider>;
 beforeEach(() => { mockWorld = decodeWorld(JSON.stringify(graduate)); mockPath = '/shop'; });
+test('Activities places Dreams Shop first and opens it with the Activities tab preserved', async () => {
+  const view = await render(frame(<Activities />));
+  const first = screen.getAllByRole('button')[0];
+  expect(first).toHaveAccessibleName('Dreams Shop. Unlock special careers, God Mode and more.');
+  expect(screen.getByRole('button', { name: /^Education\./ })).toBeOnTheScreen();
+  expect(screen.getByRole('button', { name: /^Extras\./ })).toBeOnTheScreen();
+  expect(screen.getByRole('button', { name: /^Settings\./ })).toBeOnTheScreen();
+  await fireEvent.press(first);
+  expect(router.push).toHaveBeenCalledWith('/shop');
+  await view.rerender(frame(<GameLayout />));
+  expect(screen.getByRole('header', { name: 'Dreams Shop' })).toBeOnTheScreen();
+  expect(screen.getByRole('tab', { name: 'Activities', selected: true })).toBeOnTheScreen();
+  await fireEvent.press(screen.getByRole('button', { name: 'Back' }));
+  expect(router.back).toHaveBeenCalledTimes(1);
+});
 test('Extras opens the in-game shop with Activities selected; back and tab navigation remain available', async () => {
   const view = await render(frame(<Extras />)); await fireEvent.press(screen.getByRole('button', { name: /^Dreams Shop\./ })); expect(router.push).toHaveBeenCalledWith('/shop');
   await view.rerender(frame(<GameLayout />));

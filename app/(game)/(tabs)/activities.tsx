@@ -9,10 +9,13 @@ import { isConfined } from '../../../src/game/systems/legalSchemas';
 import { PolishArt } from '../../../src/assets/PolishArt';
 import { FameBusinessArt } from '../../../src/assets/FameBusinessArt';
 import { EndLifeAction } from '../../../src/ui/EndLifeAction';
+import { CareerArt } from '../../../src/assets/CareerArt';
+import { lightColors, useColors } from '../../../src/ui/theme';
 
 export default function Activities() {
-  const world = useGame(s => s.world)!, confined = isConfined(world);
+  const world = useGame(s => s.world)!, confined = isConfined(world), c = useColors();
   return <Page><Header title="Activities" />
+    <Card style={{ backgroundColor: c.background === lightColors.background ? '#F0EBFF' : '#30334D' }}><ActionRow title="Dreams Shop" subtitle="Unlock special careers, God Mode and more." icon={<CareerArt id="royalty" size={40} />} onPress={() => router.push('/shop')} /></Card>
     <Card><Heading size={18}>Study & Work</Heading>
       <ActionRow title={confined ? 'Prison Study & Work' : 'Education'} subtitle={confined ? 'Permitted routines while in custody' : 'Study, qualifications and tuition'} icon={<Illustration id="education" />} onPress={() => router.push(confined ? '/prison' : ['primary', 'secondary'].includes(world.people[world.activePersonId].education.stage) ? '/school' : '/education')} />
       <ActionRow title={confined ? 'Custody' : 'Occupation'} subtitle={confined ? 'Sentence, remand and permitted activities' : 'Jobs, performance and retirement'} icon={<Illustration id="career" />} onPress={() => router.push(confined ? '/prison' : '/work')} />
