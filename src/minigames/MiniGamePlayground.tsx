@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { Redirect, router } from 'expo-router';
-import { Image, Text } from 'react-native';
+import { Image } from 'react-native';
+import { CellEscapeObjectArt } from '../assets/CellEscapeArt';
 import { useInternalGodModeAccess } from '../ui/GodModeAccess';
 import {
   ActionRow,
@@ -141,14 +142,14 @@ export function MiniGamePlayground() {
           <ActionRow
             key={game}
             title={titles[game]}
-            icon={game === 'escape' ? <Text accessible={false} style={{ fontSize: 32 }}>☆</Text> : <Image source={game === 'sports' ? sceneArt.ball : game === 'crime' ? sceneArt.dial : sceneArt.ship} resizeMode="contain" style={{ width: 40, height: 44 }} accessible={false} />}
+            icon={game === 'escape' ? <CellEscapeObjectArt id="plate" width={40} height={44} /> : <Image source={game === 'sports' ? sceneArt.ball : game === 'crime' ? sceneArt.dial : sceneArt.ship} resizeMode="contain" style={{ width: 40, height: 44 }} accessible={false} />}
             subtitle={
               game === 'sports'
                 ? 'A penalty under stadium lights'
                 : game === 'crime'
                   ? 'Three bolts before the alarm'
                   : game === 'escape'
-                    ? 'Remember a pattern through three shuffled rounds'
+                    ? 'Match each key to its lock and open the cell door'
                   : 'A drifting approach above Earth'
             }
             onPress={() => {

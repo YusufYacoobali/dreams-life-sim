@@ -247,6 +247,14 @@ test('exclusive casting and leaving an unfinished booking disclose the actual se
   expect(await repository.export(prepared.id)).toBe(before);
   await press('Attend Casting'); await acknowledge();
   expect(mockStore.getState().world!.careers.find(item => item.kind === 'model')!.status).toBe('active');
+  const booked = await repository.export(prepared.id);
+  await press(/^Break Exclusivity\./);
+  const breach = screen.UNSAFE_getByType(EventModal).props.event;
+  expect(breach.body).toContain('ends the booking and stops future pay');
+  expect(breach.body).toContain('client relationship and professional standing will suffer');
+  expect(breach.terms).toEqual(expect.arrayContaining([expect.objectContaining({ id: 'cost', value: settlement })]));
+  await act(async () => { screen.UNSAFE_getByType(EventModal).props.onCancel(); });
+  expect(await repository.export(prepared.id)).toBe(booked);
   await press(/^Leave This Modelling Career\./);
   const leave = screen.UNSAFE_getByType(EventModal).props.event;
   expect(leave.terms).toEqual(expect.arrayContaining([expect.objectContaining({ id: 'claim', value: settlement })]));
