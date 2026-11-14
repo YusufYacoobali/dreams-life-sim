@@ -42,6 +42,8 @@ import { RelocationCommand, relocationCommandSchema, resolveRelocation } from '.
 import { activeTrip } from './systems/travelSchemas';
 import { refreshTrips, resolveTravel, travelCommandSchema, TravelCommand, travelMonth } from './systems/travel';
 import { ageOn, copyWorld, fullName, validateWorld, World } from './model';
+import { isImmutableWorld } from './model';
+import { createDataDraft } from './dataDraft';
 import { monthFrom } from './calendar';
 import { refreshTeenRelationships, resolveTeenRelationship, teenRelationshipCommandSchema, type TeenRelationshipCommand } from './systems/teenRelationships';
 import { bindEvent, eligibleTemplates } from './content/events';
@@ -378,15 +380,25 @@ function applyEffects(world: World, effects: Effect[], relationshipLabels?: Boun
 
 /** Pure: consumes only persisted random streams and never mutates its input. */
 export function resolveCommand(previous: World, command: GameCommand, immutable = false): World {
+  return resolveWithDraft(previous, command, immutable, false);
+}
+/** Internal comparative path. The copy implementation remains the reference. */
+export function resolveCommandUsingDraft(previous: World, command: GameCommand, immutable = false): World {
+  return resolveWithDraft(previous, command, immutable, true);
+}
+function resolveWithDraft(previous: World, command: GameCommand, immutable: boolean, useDraft: boolean): World {
   const endTiming = beginCommandSpan('simulation'); try {
   // Mutable callers are fully checked; stored immutable worlds safely share old ledger rows.
-  const world = copyWorld(previous);
+  const transaction = useDraft && immutable && isImmutableWorld(previous) ? createDataDraft(previous) : undefined;
+  const world = transaction?.draft ?? copyWorld(previous);
+  const commit = () => validateWorld(transaction ? transaction.finish() : world, immutable);
+  try {
   const player = world.people[world.activePersonId];
   if (activeMiniGame(world) && !command.type.startsWith('mini-game-')) throw new IneligibleAction('Resume or forfeit your saved mini-game first');
   const explicitActivation = ['enable-lifestyle', 'enable-property-management', 'enable-vehicle-activities', 'enable-pet-training'].includes(command.type);
   if (!world.pending && !world.annual && !activeMiniGame(world) && !explicitActivation && command.type !== 'continue-child') activateLifestyle(world, command.type === 'rent-property' ? command.assetId : undefined);
   if (command.type === 'continue-child') {
-    resolveEstate(world, estateCommandSchema.parse(command)); activateLifestyle(world); refreshStudyCourses(world); refreshUniversityApplications(world); refreshRecoveries(world); refreshScholarships(world); refreshStoryThreads(world); refreshWorkplaces(world); if (world.overhaulVersion) { refreshOrganisedCrime(world); refreshPrison(world); refreshRomance(world); } world.revision++; return validateWorld(world, immutable);
+    resolveEstate(world, estateCommandSchema.parse(command)); activateLifestyle(world); refreshStudyCourses(world); refreshUniversityApplications(world); refreshRecoveries(world); refreshScholarships(world); refreshStoryThreads(world); refreshWorkplaces(world); if (world.overhaulVersion) { refreshOrganisedCrime(world); refreshPrison(world); refreshRomance(world); } world.revision++; return commit();
   }
   if (player.died) throw new IneligibleAction('This life has ended');
   if (!world.birthAcknowledged) throw new IneligibleAction('Begin this life first');
@@ -399,7 +411,7 @@ export function resolveCommand(previous: World, command: GameCommand, immutable 
     const settled = resolveMiniGame(world, miniGame.data);
     if (settled?.kind === 'crime') resolveReservedBurglary(world, settled.id, recordDeath);
     else if (settled?.kind === 'escape') resolveReservedEscape(world, settled.id);
-    else { world.revision++; return validateWorld(world, immutable); }
+    else { world.revision++; return commit(); }
   } else if (command.type === 'end-life') {
     const reviewed = endLifeCommandSchema.safeParse(command);
     if (!reviewed.success || reviewed.data.lifeId !== world.id || reviewed.data.personId !== player.id || reviewed.data.expectedRevision !== world.revision) throw new IneligibleAction('This life changed. Review End This Life again before confirming.');
@@ -598,6 +610,7 @@ export function resolveCommand(previous: World, command: GameCommand, immutable 
   refreshPersonSupportOffers(world);
   refreshNamedTenancies(world);
   if (world.overhaulVersion) { refreshOrganisedCrime(world); refreshPrison(world); refreshRomance(world); }
-  return validateWorld(world, immutable);
+  return commit();
+  } finally { transaction?.discard(); }
   } finally { endTiming?.(); }
 }

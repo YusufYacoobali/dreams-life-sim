@@ -1,4 +1,4 @@
-import { indexLedger, rememberLedgerIndex } from '../../src/game/ledgerIndex';
+import { appendLedgerIndex, indexLedger } from '../../src/game/ledgerIndex';
 import type { World } from '../../src/game/model';
 
 type Row = World['ledger'][number];
@@ -50,13 +50,12 @@ test.each(['same object', 'different object'] as const)('duplicate IDs with the 
   expect(ledger.cashChanges.get(first.accountId)).toBe(kind === 'same object' ? 3n : 4n);
 });
 
-test('certified unchanged arrays can reuse the index while mutable callers always obtain current positions', () => {
+test('standalone callers cannot acquire a model certificate by freezing or reusing rows', () => {
   const frozen = [Object.freeze(transaction('txn_1_0')), Object.freeze(transaction('txn_1_1'))];
   Object.freeze(frozen);
   const original = indexLedger(frozen);
-  rememberLedgerIndex(frozen, original);
-  expect(indexLedger(frozen, true)).toBe(original);
-  expect(indexLedger([...frozen], true)).toBe(original);
+  expect(indexLedger(frozen)).not.toBe(original);
+  expect(indexLedger([...frozen])).not.toBe(original);
   expect(original.positioned.get(frozen[1].id)).toEqual({ row: frozen[1], index: 1 });
 
   const mutable = [...frozen], initial = indexLedger(mutable);
@@ -68,4 +67,21 @@ test('certified unchanged arrays can reuse the index while mutable callers alway
   expect(changed.positioned.get(frozen[1].id)).toEqual({ row: frozen[1], index: 0 });
   mutable.push(transaction('historical_append'));
   expect(indexLedger(mutable).positioned.get('historical_append')).toEqual({ row: mutable[2], index: 2 });
+});
+
+test('persistent appends preserve historical lookups, category order, positions and exact large integer balances', () => {
+  const rows=[transaction('legacy-first',900719925474099312345n),transaction('txn_2_1',-2n)], initial=indexLedger(rows);
+  let prior=initial;
+  for(let i=0;i<300;i++) {
+    const next=[...rows,transaction('appended_'+i,3n)];
+    const appended=appendLedgerIndex(prior,next,rows.length), full=indexLedger(next);
+    expect(appended.categories('position-fixture')).toEqual(full.categories('position-fixture'));
+    expect([...appended.cashChanges]).toEqual([...full.cashChanges]);
+    expect(appended.positioned.get(next.at(-1)!.id)).toEqual({row:next.at(-1),index:rows.length});
+    expect(appended.transactions.get(rows[0].id)).toBe(rows[0]);
+    rows.push(next.at(-1)!); prior=appended;
+  }
+  expect(initial.categories('position-fixture')).toHaveLength(2);
+  expect(initial.cashChanges.get(rows[0].accountId)).toBe(900719925474099312343n);
+  expect(appendLedgerIndex(prior,[...rows,rows[0]],rows.length).consistent).toBe(false);
 });

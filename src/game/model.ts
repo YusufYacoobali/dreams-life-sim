@@ -18,7 +18,8 @@ import { bestFriendshipSchema } from './systems/friendshipSchemas';
 import { validateBestFriendships } from './systems/friendshipValidation';
 import { teenRelationshipSchema } from './systems/teenRelationshipSchemas';
 import { validateTeenRelationships } from './systems/teenRelationshipValidation';
-import { indexLedger, rememberLedgerIndex } from './ledgerIndex';
+import { appendLedgerIndex, indexLedger, type LedgerIndex } from './ledgerIndex';
+import { arrayChange } from './dataDraft';
 import { z } from 'zod';
 import { validateDramaticEvent } from './systems/dramaticValidation';
 import { validateStoryImmediate } from './systems/storyImmediateContext';
@@ -130,6 +131,10 @@ const immutableWorlds = new WeakSet<object>();
 // cross-world checks and recursive freezing. Object.freeze alone grants none.
 const certifiedBranches = new WeakMap<object, Set<string>>();
 const copiedBranches = new WeakMap<object, { key: string; original: object }>();
+// Integrity certificates are private and granted only after ALL world checks.
+const certifiedLedgers = new WeakMap<object, LedgerIndex>();
+// Transient parse provenance is consumed before parsed data can leave validation.
+const parsedLedgerOrigins = new WeakMap<object, World['ledger']>();
 export const worldSchema = z.object({
   lifestyle: lifestyleSchema.optional(),
   overhaulVersion: z.literal(1).optional(),
@@ -212,9 +217,20 @@ function certifiedLedgerSource(rows: unknown[]): World['ledger'] | undefined {
  * old row shapes. Replacements and appended rows still pass the schema. The
  * parsed array retains no origin link, avoiding a chain of historical arrays. */
 function parseLedgerRows(rows: unknown[]): World['ledger'] {
-  const original = certifiedLedgerSource(rows);
-  return rows.map((row, index) => original && index < original.length && row === original[index]
-    ? original[index] : transactionSchema.parse(row));
+  const change=arrayChange(rows), original=certifiedLedgerSource(rows) ?? (change && certifiedLedgers.has(change.base) ? change.base as World['ledger'] : undefined);
+  if(change?.appendOnly && original===change.base) {
+    const parsed=original.slice();
+    for(let index=original.length;index<rows.length;index++) parsed.push(transactionSchema.parse(rows[index]));
+    parsedLedgerOrigins.set(parsed,original); return parsed;
+  }
+  let appendOnly=!!original && rows.length>=original.length;
+  const parsed=rows.map((row,index)=>{
+    if(original && index<original.length && row===original[index]) return original[index];
+    if(original && index<original.length) appendOnly=false;
+    return transactionSchema.parse(row);
+  });
+  if(appendOnly) parsedLedgerOrigins.set(parsed,original!);
+  return parsed;
 }
 function parseWorldShape(value: unknown, immutable = false): World {
   // Cold JSON/imports have no private certificates: retain the original compiled
@@ -272,7 +288,9 @@ export function validateWorld(value: unknown, immutable = false): World {
   if (hasCreative !== (world.schemaVersion === 50)) throw new Error('Creative careers require the supported creative save format');
 
 
-  const ledger = indexLedger(world.ledger, certifiedBranches.get(world.ledger)?.has('ledger') === true);
+  const ledgerSource=parsedLedgerOrigins.get(world.ledger); parsedLedgerOrigins.delete(world.ledger);
+  const previousLedger=ledgerSource && certifiedLedgers.get(ledgerSource);
+  const ledger=certifiedLedgers.get(world.ledger) ?? (previousLedger ? appendLedgerIndex(previousLedger,world.ledger,ledgerSource!.length) : indexLedger(world.ledger));
   if (!world.people[world.activePersonId]) throw new Error('Missing active person');
   const accountIds = new Set<string>();
   const accountCurrencies = new Set<string>();
@@ -532,7 +550,7 @@ export function validateWorld(value: unknown, immutable = false): World {
   }
   if (immutable) {
     freezeTree(world);
-    rememberLedgerIndex(world.ledger, ledger);
+    certifiedLedgers.set(world.ledger, ledger);
     for (const [key, branch] of Object.entries(world)) if (branch && typeof branch === 'object') {
       const kinds = certifiedBranches.get(branch) ?? new Set<string>();
       kinds.add(key); certifiedBranches.set(branch, kinds);
