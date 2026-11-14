@@ -1,10 +1,11 @@
 import { convertMoney, roundRatio } from '../money';
 import type { World } from '../model';
+import { indexLedger } from '../ledgerIndex';
 import { validateActor } from './actorValidation';
 import { validateModelCareer } from './modelCareerValidation';
-export function validateCreativeCareers(world: World) {
+export function validateCreativeCareers(world: World, ledger=indexLedger(world.ledger)) {
   if (!world.careers.some(career => career.actor || career.modelCareer)) return;
-  const ledgerById = new Map(world.ledger.map(row => [row.id, row]));
+  const ledgerById = ledger.transactions;
   const usedCommissions = new Set<string>(), usedCreativeContracts = new Set<string>();
   const jobs = new Map(world.workHistory.map(row => [row.id, row]));
   for (const career of world.careers) {

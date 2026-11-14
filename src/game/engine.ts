@@ -41,7 +41,8 @@ import { PetCommand, petCommandSchema, resolvePets, petMonth, petOwnerDied } fro
 import { RelocationCommand, relocationCommandSchema, resolveRelocation } from './systems/relocation';
 import { activeTrip } from './systems/travelSchemas';
 import { refreshTrips, resolveTravel, travelCommandSchema, TravelCommand, travelMonth } from './systems/travel';
-import { ageOn, copyCommandWorld, copyWorld, fullName, validateWorld, World } from './model';
+import { ageOn, commandLedgerAccess, copyCommandWorld, copyWorld, fullName, validateWorld, World } from './model';
+import { beginCommandLedger } from './commandLedger';
 import { isImmutableWorld } from './model';
 import { createDataDraft } from './dataDraft';
 import { monthFrom } from './calendar';
@@ -401,7 +402,13 @@ function resolveWithDraft(previous: World, command: GameCommand, immutable: bool
   // Mutable callers are fully checked; stored immutable worlds safely share old ledger rows.
   const transaction = useDraft && immutable && isImmutableWorld(previous) ? createDataDraft(previous,[previous.ledger]) : undefined;
   const world = transaction?.draft ?? measureCommandPhase('copy',()=>immutable && shareJournal ? copyCommandWorld(previous) : copyWorld(previous));
-  const commit = () => validateWorld(transaction ? measureCommandPhase('draft:finish',()=>transaction.finish()) : world, immutable);
+  const ledgerDraft=!transaction && immutable && shareJournal && isImmutableWorld(previous)?createDataDraft(previous.ledger,[previous.ledger]):undefined;
+  if(ledgerDraft)world.ledger=ledgerDraft.draft;
+  const releaseLedger=beginCommandLedger(world,commandLedgerAccess(previous));
+  const commit = () => {
+    if(ledgerDraft && world.ledger===ledgerDraft.draft)world.ledger=ledgerDraft.finish();
+    return validateWorld(transaction ? measureCommandPhase('draft:finish',()=>transaction.finish()) : world, immutable);
+  };
   try {
   const player = world.people[world.activePersonId];
   if (activeMiniGame(world) && !command.type.startsWith('mini-game-')) throw new IneligibleAction('Resume or forfeit your saved mini-game first');
@@ -621,6 +628,6 @@ function resolveWithDraft(previous: World, command: GameCommand, immutable: bool
   refreshNamedTenancies(world);
   if (world.overhaulVersion) { refreshOrganisedCrime(world); refreshPrison(world); refreshRomance(world); }
   return commit();
-  } finally { transaction?.discard(); }
+  } finally {releaseLedger();ledgerDraft?.discard();transaction?.discard();}
   } finally { endTiming?.(); }
 }

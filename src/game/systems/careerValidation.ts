@@ -1,12 +1,13 @@
 import { validateCreativeCareers } from './creativeValidation';
 import type { World } from '../model';
+import { indexLedger } from '../ledgerIndex';
 import { ageOn } from '../personHelpers';
 import { countries } from '../countries';
 import { careerCatalog, skillContent } from '../content/careers';
 import { validateDopingChecks } from './athleteDopingValidation';
 import { athleteSuspensionReason } from './athleteDopingSchemas';
 const compare = (a: World['date'], b: World['date']) => a.year - b.year || a.month - b.month || a.day - b.day;
-export function validateCareers(world: World) {
+export function validateCareers(world: World, ledger=indexLedger(world.ledger)) {
     const month = world.date.year * 12 + world.date.month - 1, ids = new Set<string>(), personKinds = new Set<string>(), activePeople = new Set<string>(), projectIds = new Set<string>(), histories = new Map(world.workHistory.map(item => [item.id, item])), gross = new Map<string, bigint>();
     for (const person of Object.values(world.people)) {
         const training = person.training;
@@ -46,6 +47,6 @@ export function validateCareers(world: World) {
     for (const [id, amount] of gross)
         if (histories.get(id)!.grossEarned !== amount)
             throw new Error('Career project earnings do not reconcile to the actual contract');
-    validateCreativeCareers(world);
+    validateCreativeCareers(world,ledger);
     validateDopingChecks(world);
 }

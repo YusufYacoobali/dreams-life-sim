@@ -1,0 +1,11 @@
+# Command-scoped financial lookups
+
+The monthly audit found repeated receipt searches and a second whole-ledger Map construction in creative-career validation. Credit underwriting also scanned every unrelated transaction. These are now targeted without changing monthly/NPC execution order or RNG consumption.
+
+The engine installs a read-only accessor from the previous privately certified world for one synchronous command. The live ledger draft proves its prefix has not been edited, removed, reordered or truncated. Old receipt lookups use that index; category results retain exact ledger position order. Every lookup re-reads the entire new mutable tail, since systems may retain and edit new raw objects. Unsupported mutations immediately use the original full scan. Scope cleanup runs on both success and failure; no index is shared between lives or branches. Monthly commands retain explicit state copying but use a small ledger-only append draft, avoiding proxies across the simulation's people and active systems.
+
+Creative-career validation receives the same complete verified index already constructed by world validation. It no longer reconstructs a second transaction Map. Other account/person helpers were left alone: their bounded active scans did not justify another cache or any change to NPC processing.
+
+Six focused suites / 33 tests and strict app/test types pass; the import graph has 621 modules and no cycle. Added coverage checks prefix mutation fallback, correct category order, raw tail edits, independent scopes and frozen lookalikes. All twelve same-input outcomes match the prior codec checkpoint, including complete canonical/RNG/command and v5 checkpoint hashes. Seven-sample host results are in `lookups.json.gz`: finance p50 at 23 light is 26.0 → 16.5 ms and 70 light 50.7 → 50.1 ms; 70 extreme complete year varies 289.9 → 308.8 ms under shared load. The scoped lookup is justified by removed unrelated scans and exact outcomes, not a universal annual speedup.
+
+Life's existing following/drag behavior and virtualization are unchanged. Optional observation records journal projection, actual scroll requests and synchronous store publication for the exact published revision. Physical scrolling/React/native bridge measurements remain open. Final full regression, soak and the complete performance matrix are recorded separately.

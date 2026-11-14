@@ -132,7 +132,7 @@ async function fixtureDatabase(reader: number) {
   };
 }
 
-test.each([13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30])('complete reader%s→32 rolls back a failed marker, cold-retries without any row rewrite and cold-loads genuine prior friendship/current/backup/history', async reader => {
+test.each([13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30])('complete reader%s→33 rolls back a failed marker, cold-retries without any row rewrite and cold-loads genuine prior friendship/current/backup/history', async reader => {
   const context = await fixtureDatabase(reader);
   try {
     const before = context.rows(); expect(Object.keys(before)).toEqual(tables);

@@ -88,7 +88,7 @@ async function fixtureDatabase() {
   };
 }
 
-test('reader15→32 changes only the marker and cold-loads both actual nonempty-friendship checkpoints without eager row rewrites', async () => {
+test('reader15→33 changes only the marker and cold-loads both actual nonempty-friendship checkpoints without eager row rewrites', async () => {
   const context = await fixtureDatabase();
   try {
     const before = context.rows(); expect(Object.keys(before)).toEqual(tables);

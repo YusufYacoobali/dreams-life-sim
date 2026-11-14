@@ -22,6 +22,7 @@ import { appendLedgerIndex, indexLedger, type LedgerIndex } from './ledgerIndex'
 import { arrayChange, draftSource } from './dataDraft';
 import { createIntegrityChecks, type IntegrityChecks } from './integrityChecks';
 import { extendLookup, lookupFromMap, type Lookup } from './persistentLookup';
+import type { CommandLedgerAccess } from './commandLedger';
 import { z } from 'zod';
 import { validateDramaticEvent } from './systems/dramaticValidation';
 import { validateStoryImmediate } from './systems/storyImmediateContext';
@@ -142,6 +143,17 @@ type JournalLineage = { readonly length:number; readonly parent?:JournalLineage 
 type JournalCertificate = { ids:Lookup<true>; earliest:ReadonlyMap<string,GameDate>; latest:GameDate|null; lineage:JournalLineage };
 const certifiedJournals = new WeakMap<object,JournalCertificate>();
 const parsedJournalOrigins = new WeakMap<object,World['journal']>();
+/** Read-only simulation access, with no way to grant or mutate certificates. */
+export function commandLedgerAccess(world:World):CommandLedgerAccess|undefined {
+  if(!immutableWorlds.has(world))return;
+  const index=certifiedLedgers.get(world.ledger);if(!index)return;
+  const categories=new Map<string,readonly World['ledger'][number][]>();
+  return Object.freeze({rows:world.ledger,find:(id:string)=>index.transactions.get(id),categories:(names:readonly string[])=>{
+    const key=JSON.stringify(names),cached=categories.get(key);if(cached)return cached;
+    const rows=index.categories(...new Set(names)).map(row=>({row,index:index.positioned.get(row.id)!.index})).sort((a,b)=>a.index-b.index).map(entry=>entry.row);
+    categories.set(key,rows);return rows;
+  }});
+}
 export const worldSchema = z.object({
   lifestyle: lifestyleSchema.optional(),
   overhaulVersion: z.literal(1).optional(),
@@ -543,7 +555,7 @@ export function validateWorld(value: unknown, immutable = false): World {
   check(validateRelocations, ledger);
   check(validateMiniGames);
   check(validateCults, ledger);
-  check(validateCareers);
+  check(validateCareers, ledger);
   check(validateMusic, ledger);
   check(validatePolitics, ledger);
   check(validateCreators, ledger);

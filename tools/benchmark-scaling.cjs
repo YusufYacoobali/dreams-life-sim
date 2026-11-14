@@ -11,6 +11,7 @@ if (flags['--engine'] === 'draft') {
   const work=engine.resolveCommandUsingDraft;
   engine.resolveCommand=(...args)=>global.__scalingMeasure('resolveCommand',()=>work(...args));
 }
+if(flags['--codec']==='v5') codec.packCheckpoint=codec.packCheckpointV5;
 const {SaveRepository} = load('src/persistence/repository.ts'), {createGameStore} = load('src/state/gameStore.ts');
 const {observeCommandTimings} = load('src/performance/commandTiming.ts'), {createJournalProjection} = load('src/ui/journalProjection.ts');
 const {choiceUnavailable} = load('src/game/choiceAvailability.ts'), {personalBorrowReason} = load('src/game/systems/credit.ts');
@@ -72,7 +73,15 @@ async function main() {
         }
         assert(guard<200);
       }
-      const elapsedMs=performance.now()-start, measured=phases; phases=undefined; stop();
+      const elapsedMs=performance.now()-start, measured=phases;
+      const spans=new Map();
+      for(const event of events) {
+        const match=/^(.*):(start|end)$/.exec(event.phase);if(!match)continue;
+        const key=event.trace+':'+match[1], stack=spans.get(key)??[];
+        if(match[2]==='start'){stack.push(event.elapsedMs);spans.set(key,stack);}
+        else if(stack.length)observe('span:'+match[1],event.elapsedMs-stack.pop());
+      }
+      phases=undefined; stop();
       const memoryAfter=process.memoryUsage(), cpu=process.cpuUsage(cpuBefore);
       await new Promise(resolve=>setImmediate(resolve));
       const final=world(), payload=sqlite.prepare('SELECT payload FROM lives WHERE id=?').get(final.id).payload;

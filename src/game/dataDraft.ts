@@ -10,9 +10,15 @@ type State = {
 export type ArrayChange = Readonly<{ base: readonly unknown[]; appendOnly: boolean; written: readonly number[] }>;
 const arrayChanges = new WeakMap<object, ArrayChange>();
 const sources = new WeakMap<object, object>();
+const liveArrays = new WeakMap<object,State>();
 /** Read-only provenance. Only finished, recursively frozen outputs are keys. */
 export const arrayChange = (value: object): ArrayChange | undefined => arrayChanges.get(value);
 export const draftSource = (value: object): object | undefined => sources.get(value);
+/** Live, read-only proof for command-scoped lookups. Revocation removes it. */
+export function liveArrayPrefix(value: object): {base:readonly unknown[];appendOnly:boolean} | undefined {
+  const state=liveArrays.get(value);
+  return state?{base:state.base as unknown as readonly unknown[],appendOnly:state.appendOnly}:undefined;
+}
 const indexOfKey = (key: PropertyKey) => typeof key === 'string' && /^(0|[1-9]\d*)$/.test(key) && Number(key) < 0xffffffff ? Number(key) : -1;
 const object = (value: unknown): value is Data => !!value && typeof value === 'object';
 const put = (target: Data, key: PropertyKey, value: unknown) => Object.defineProperty(target,key,{value,writable:true,enumerable:true,configurable:true});
@@ -88,10 +94,12 @@ export function createDataDraft<T extends object>(base: T, atomicArrays: readonl
       defineProperty: () => { throw new TypeError('Drafts support ordinary data assignments only'); },
     };
     const {proxy,revoke} = Proxy.revocable((Array.isArray(value)?[]:Object.create(Object.getPrototypeOf(value))) as Data,handler);
-    state.proxy=proxy; state.revoke=revoke; originals.set(value,state); proxies.set(proxy,state); states.push(state); return state;
+    state.proxy=proxy; state.revoke=revoke; originals.set(value,state); proxies.set(proxy,state); states.push(state);
+    if(Array.isArray(value)) liveArrays.set(proxy,state);
+    return state;
   }
   const root=node(base as Data);
-  function close() { if (!closed) { closed=true; for (const state of states) state.revoke(); } }
+  function close() { if (!closed) { closed=true; for (const state of states) {liveArrays.delete(state.proxy);state.revoke();} } }
   return {
     draft: root.proxy as T,
     discard: close,

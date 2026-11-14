@@ -1,4 +1,4 @@
-import { markCommandUi } from '../../../src/performance/commandTiming';
+import { markCommandUi, markJournalScroll, measurePublishedUi } from '../../../src/performance/commandTiming';
 import { CultArt } from '../../../src/assets/CultArt';
 import { activeCult } from '../../../src/game/systems/cultSchemas';
 import { activeTrip, physicalLocation } from '../../../src/game/systems/travelSchemas';
@@ -139,13 +139,14 @@ export default function Life() {
     identityCache.current = { key, data }; return data;
   }, [world]);
   const [projectJournal] = useState(createJournalProjection);
-  const projection = useMemo(() => projectJournal(world.journal, { lifeId: world.id, personId: player.id, born: player.born }, world), [projectJournal, world]);
+  const projection = useMemo(() => measurePublishedUi(world.id,world.revision,'journal',()=>projectJournal(world.journal, { lifeId: world.id, personId: player.id, born: player.born }, world)), [projectJournal, world]);
   const journalRows = projection.rows;
   // New openings begin at their first fact; retained saves and later entries
   // keep the existing follow-to-end behavior without changing the journal UI.
   const showingBirthIntroduction = world.date.year === player.born.year && world.date.month === player.born.month && world.date.day === player.born.day
     && projection.birthIntroduction;
   const journal = useRef<FlatList<JournalRow>>(null), shouldScroll = useRef(true), scrollFrame = useRef<number | null>(null);
+  const journalRevision=useRef({lifeId:world.id,revision:world.revision});journalRevision.current={lifeId:world.id,revision:world.revision};
   const openingJournal = useRef(showingBirthIntroduction); openingJournal.current = showingBirthIntroduction;
   const cancelJournalScroll = useCallback(() => {
     if (scrollFrame.current !== null) cancelAnimationFrame(scrollFrame.current);
@@ -155,11 +156,11 @@ export default function Life() {
     if (!shouldScroll.current || scrollFrame.current !== null) return;
     scrollFrame.current = requestAnimationFrame(() => {
       scrollFrame.current = null;
-      if (shouldScroll.current && openingJournal.current) { journal.current?.scrollToOffset({ offset: 0, animated: false }); return; }
+      if (shouldScroll.current && openingJournal.current) { markJournalScroll(journalRevision.current.lifeId,journalRevision.current.revision);journal.current?.scrollToOffset({ offset: 0, animated: false }); return; }
       // FlatList.scrollToEnd estimates the last row from cell metrics, which
       // can lag new journal facts. Use the native ScrollView's actual end.
       const scroll = shouldScroll.current ? journal.current?.getScrollResponder() : null;
-      if (scroll && 'scrollToEnd' in scroll && typeof scroll.scrollToEnd === 'function') scroll.scrollToEnd({ animated: false });
+      if (scroll && 'scrollToEnd' in scroll && typeof scroll.scrollToEnd === 'function') {markJournalScroll(journalRevision.current.lifeId,journalRevision.current.revision);scroll.scrollToEnd({ animated: false });}
     });
   }, []);
   const stopFollowing = useCallback(() => { shouldScroll.current = false; cancelJournalScroll(); }, [cancelJournalScroll]);

@@ -1,4 +1,5 @@
 import { ageOn, fullName, type Person, type World } from '../model';
+import { findCommandReceipt } from '../commandLedger';
 import { countries } from '../countries';
 import { availableCash, draw, fact, post } from './common';
 import { settleTax } from './finance';
@@ -94,7 +95,7 @@ export function npcMovesYear(world: World, settlements: ReadonlyMap<string, NpcM
     if (!account || account.lockedCash !== 0n || person.lastEconomicMonth !== month || person.finance.cycleGross || person.finance.cycleWithheld || !tax || tax.month !== month || tax.country !== person.country || tax.accountId !== account.id || tax.ledgerEnd > world.ledger.length) continue;
     const payments = person.finance.pensionReceipts.filter(row => row.gross > 0n && row.grossTransactionId), receipt = payments.at(-1), recordedPaidPeriods = payments.reduce((sum, row) => sum + row.periods, 0);
     const monthlyLiving = householdLivingCost(world, person), movingCost = rule.fee, reserveRequired = monthlyLiving * 3n;
-    if (!receipt?.grossTransactionId || receipt.month !== month || receipt.currency !== rule.currency || recordedPaidPeriods < 12 || !tax.journalId || tax.gross < receipt.gross || tax.withheld < receipt.withheld || world.ledger.find(row => row.id === receipt.grossTransactionId)?.category !== 'income' || monthlyLiving !== rule.living || availableCash(account) < movingCost + reserveRequired) continue;
+    if (!receipt?.grossTransactionId || receipt.month !== month || receipt.currency !== rule.currency || recordedPaidPeriods < 12 || !tax.journalId || tax.gross < receipt.gross || tax.withheld < receipt.withheld || findCommandReceipt(world,receipt.grossTransactionId)?.category !== 'income' || monthlyLiving !== rule.living || availableCash(account) < movingCost + reserveRequired) continue;
     const roll = draw(world, 'npcs', 1, 100), outcome = roll <= 20 ? 'moved' as const : 'stayed' as const, originCity = person.city, destinationCity = npcMoveDestinationV1(person.country, originCity, world.date.year);
     const row: World['npcMoves'][number] = { id: 'npc_move_' + world.revision + '_' + world.npcMoves.length, revision: world.revision, ruleVersion: 1, personId: person.id, observerId: observer.id, relationshipId: known.get(person.id)!, date: { ...world.date }, country: person.country, originCity, destinationCity, currency: rule.currency,
       householdId: household.id, householdMembers: [...household.members], pensionTransactionId: receipt.grossTransactionId, recordedPaidPeriods, settledThroughMonth: month, accountId: account.id, ledgerCursor: world.ledger.length, cashBefore: account.cash, lockedCashBefore: 0n, availableBefore: availableCash(account), movingCost, monthlyLiving, reserveMonths: 3, reserveRequired,

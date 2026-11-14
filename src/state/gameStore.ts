@@ -182,7 +182,7 @@ export function createGameStore(deps: Dependencies) {
         } catch { /* Feedback cannot change a successful save. */ } });
         const reviewTracker = await measureCommandAsync('review', () => readReview(repository));
         markCommandPublished(committed.id, committed.revision);
-        set({ world: committed, lives: get().lives.map(life => life.id === committed.id ? { ...life, name: fullName(committed.people[committed.activePersonId]), revision: committed.revision } : life), reviewTracker,reviewOffer:null });
+        measureCommandPhase('store',()=>set({ world: committed, lives: get().lives.map(life => life.id === committed.id ? { ...life, name: fullName(committed.people[committed.activePersonId]), revision: committed.revision } : life), reviewTracker,reviewOffer:null }));
       }, "Your progress couldn't be saved. Please try again.", command.type === 'end-life', errorScope).then(ok => { timing?.finish(ok); return ok; });
       },
     };

@@ -1,4 +1,5 @@
 import type { World } from '../model';
+import { commandCategoryRows } from '../commandLedger';
 import { ageOn } from '../personHelpers';
 import { countries } from '../countries';
 import { rules } from '../rules';
@@ -24,7 +25,7 @@ export function qualifyingAnnualIncome(world:World,personId=world.activePersonId
  }
  if(!person.died&&person.finance.pensionAnnual>0n)parts.push({id:'pension',label:'Earned pension',annual:local(person.finance.pensionAnnual,person.finance.earningsCurrency),paidMonths:person.finance.pensionMonths});
  const histories=new Map<string,{totals:Map<typeof currency,bigint>;months:Set<number>}>();
- for(const entry of world.ledger){const month=monthOf(entry.year,entry.month);if(entry.personId!==personId||entry.cashDelta<=0n||month<cutoff||month>current||!recurringCategories.has(entry.category))continue;const evidence=histories.get(entry.category)??{totals:new Map<typeof currency,bigint>(),months:new Set<number>()};evidence.totals.set(entry.currency,(evidence.totals.get(entry.currency)??0n)+entry.cashDelta);evidence.months.add(month);histories.set(entry.category,evidence);}
+ for(const entry of commandCategoryRows(world,[...recurringCategories.keys()])){const month=monthOf(entry.year,entry.month);if(entry.personId!==personId||entry.cashDelta<=0n||month<cutoff||month>current||!recurringCategories.has(entry.category))continue;const evidence=histories.get(entry.category)??{totals:new Map<typeof currency,bigint>(),months:new Set<number>()};evidence.totals.set(entry.currency,(evidence.totals.get(entry.currency)??0n)+entry.cashDelta);evidence.months.add(month);histories.set(entry.category,evidence);}
  for(const [category,evidence] of histories){const annual=[...evidence.totals].reduce((sum,[source,amount])=>sum+local(amount,source),0n);if(eligibleMonths(evidence.months)&&annual>0n)parts.push({id:category,label:recurringCategories.get(category)!,annual,paidMonths:evidence.months.size});}
  for(const company of world.businesses.filter(item=>item.status==='active')){
   const owner=company.ownerId===personId,employee=person.employment?.companyId===company.id;if(!owner&&!employee)continue;
