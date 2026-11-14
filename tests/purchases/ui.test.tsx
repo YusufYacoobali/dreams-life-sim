@@ -1,5 +1,13 @@
 import React from 'react';
 import { act, fireEvent, render, screen, waitFor } from '../support/rendering';
+import { Modal, Pressable, ScrollView, StyleSheet } from 'react-native';
+import * as ReactNative from 'react-native';
+import { ShopProductArt, shopContent } from '../../src/purchases/ShopProduct';
+import { CareerArt } from '../../src/assets/CareerArt';
+import { CultArt } from '../../src/assets/CultArt';
+import { HealthLegalArt } from '../../src/assets/HealthLegalArt';
+import { Illustration } from '../../src/assets/Illustration';
+import { PolishArt } from '../../src/assets/PolishArt';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { ThemeProvider } from '../../src/ui/theme';
 import { Button, Page } from '../../src/ui/components';
@@ -39,7 +47,9 @@ const customer = (...owned: PremiumFeature[]): Customer => ({ entitlements: { ac
 let adapter: PurchaseAdapter, buy: jest.Mock, restore: jest.Mock;
 const frame = (child: React.ReactNode) => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 0, bottom: 0, left: 0, right: 0 } }}><ThemeProvider>{child}</ThemeProvider></SafeAreaProvider>;
 const press = async (name: string) => { await act(async () => { await fireEvent.press(screen.getByRole('button', { name })); }); };
+const originalDimensions = { window: ReactNative.Dimensions.get('window'), screen: ReactNative.Dimensions.get('screen') };
 beforeEach(async () => {
+  ReactNative.Dimensions.set({ window: { width: 390, height: 844, scale: 3, fontScale: 1 }, screen: { width: 390, height: 844, scale: 3, fontScale: 1 } });
   purchases.getState().dispose(); purchases.setState({ ownership: Object.fromEntries(features.map(feature => [feature, false])) as Record<PremiumFeature, boolean>, status: 'idle', products: {}, busy: false, error: null, message: null });
   buy = jest.fn(async product => customer(...products[product.identifier as ProductId].features)); restore = jest.fn(async () => customer('athlete'));
   adapter = { configure: async () => {}, customer: async () => customer(), products: async () => productIds.map(identifier => ({ identifier, priceString: identifier === 'dreams.full_unlock' ? '29,99 €' : '£9.99' })), purchase: buy, restore, listen: () => () => {} };
@@ -48,7 +58,7 @@ beforeEach(async () => {
   mockStore = createGameStore({ repository: async () => ({ active: async () => world, list: async () => [], commit: async (next: ReturnType<typeof decodeWorld>) => next } as never), date: () => world.date, id: () => 'life_purchase_ui', premiumAccess: feature => purchases.getState().ownership[feature] });
   await mockStore.getState().bootstrap();
 });
-afterEach(() => { setPurchaseAnalytics(); godModeSessionStore.getState().reset(); purchases.getState().dispose(); });
+afterEach(() => { ReactNative.Dimensions.set(originalDimensions); setPurchaseAnalytics(); godModeSessionStore.getState().reset(); purchases.getState().dispose(); });
 function Intent({ identity = 'life:athlete', onContinue }: { identity?: string; onContinue: () => void }) {
   const premium = usePremiumAction(identity);
   return <Page><Button label="Try Athlete" onPress={() => premium.run('athlete', 'tryout', onContinue)} />{premium.modal}</Page>;
@@ -56,13 +66,13 @@ function Intent({ identity = 'life:athlete', onContinue }: { identity?: string; 
 test('store keeps exact localized decimal prices, full bundle grants Owned to individual items and blocks duplicates', async () => {
   await render(frame(<PurchaseOptions trigger="store" />)); await waitFor(() => expect(screen.getByText('29,99 €')).toBeTruthy());
   expect(screen.getAllByText('£9.99')).toHaveLength(7); expect(screen.getByLabelText('Price: 29,99 €')).toBeTruthy();
-  await press('Buy Full Unlock'); await waitFor(() => expect(screen.getAllByText('Owned').length).toBeGreaterThanOrEqual(8));
+  await press('Unlock Everything'); expect(buy).not.toHaveBeenCalled(); await press('Buy Full Unlock'); await press('Close product details'); await waitFor(() => expect(screen.getAllByText('Owned').length).toBeGreaterThanOrEqual(8));
   expect(screen.queryByRole('button', { name: 'Buy Athlete Career' })).toBeNull(); expect(buy).toHaveBeenCalledTimes(1);
 });
 test('contextual career purchase shows only individual and bundles, resumes once, and dismissing changes no action', async () => {
   const resumed = jest.fn(), events: PurchaseEvent[] = []; setPurchaseAnalytics(event => events.push(event)); await render(frame(<Intent onContinue={resumed} />));
   await press('Try Athlete'); await waitFor(() => expect(screen.getByText('29,99 €')).toBeTruthy());
-  expect(screen.getByRole('button', { name: 'Buy All Careers Pass' })).toBeTruthy(); expect(screen.queryByRole('button', { name: 'Buy God Mode' })).toBeNull();
+  expect(screen.getByRole('button', { name: 'View All Career Packs' })).toBeTruthy(); expect(screen.queryByRole('button', { name: 'Buy God Mode' })).toBeNull();
   await press('Maybe Later'); expect(resumed).not.toHaveBeenCalled(); expect(events.map(event => event.name)).toContain('paywall_dismissed');
   await press('Try Athlete'); await press('Buy Athlete Career'); await waitFor(() => expect(resumed).toHaveBeenCalledTimes(1));
   expect(events.map(event => event.name)).toEqual(expect.arrayContaining(['paywall_viewed', 'product_selected', 'purchase_initiated', 'purchase_completed']));
@@ -82,8 +92,8 @@ test('held purchase prevents repeated taps and back; changing life context canno
 });
 test('missing configuration shows unavailable prices and disabled purchases, and retry recovers', async () => {
   mockAdapter = null; await render(frame(<PurchaseOptions trigger="store" />)); await waitFor(() => expect(screen.getByRole('alert')).toHaveTextContent(/unavailable/));
-  expect(screen.getByRole('button', { name: 'Buy Full Unlock' })).toBeDisabled(); expect(screen.getByRole('button', { name: 'Restore Purchases' })).toBeDisabled();
-  mockAdapter = adapter; await press('Refresh Store'); await waitFor(() => expect(screen.getByText('29,99 €')).toBeTruthy()); expect(screen.getByRole('button', { name: 'Buy Full Unlock' })).toBeEnabled();
+  await press('Unlock Everything'); expect(screen.getByRole('button', { name: 'Buy Full Unlock' })).toBeDisabled(); await press('Close product details'); expect(screen.getByRole('button', { name: 'Restore Purchases' })).toBeDisabled();
+  mockAdapter = adapter; await press('Refresh Store'); await waitFor(() => expect(screen.getByText('29,99 €')).toBeTruthy()); await press('Unlock Everything'); expect(screen.getByRole('button', { name: 'Buy Full Unlock' })).toBeEnabled();
 });
 function CareerIntent() {
   const review = useCareerReview('athlete'), world = mockStore.getState().world!;
@@ -123,7 +133,7 @@ function CultIntent() {
 test('cult paywall keeps the founding form context and opens its original review after a bundle purchase', async () => {
   await render(frame(<CultIntent />)); await press('Review Founding'); await waitFor(() => expect(screen.getByText('29,99 €')).toBeTruthy());
   expect(screen.getByRole('button', { name: 'Buy Cult Leader Career' })).toBeTruthy();
-  await press('Buy All Careers Pass'); await waitFor(() => expect(screen.getByText('Found Retained Name?')).toBeTruthy()); expect(screen.getByText('Keep my beliefs and headquarters.')).toBeTruthy(); expect(screen.getByRole('button', { name: 'Found Cult' })).toBeTruthy();
+  await press('View All Career Packs'); await press('Buy All Careers Pass'); await waitFor(() => expect(screen.getByText('Found Retained Name?')).toBeTruthy()); expect(screen.getByText('Keep my beliefs and headquarters.')).toBeTruthy(); expect(screen.getByRole('button', { name: 'Found Cult' })).toBeTruthy();
 });
 test('a direct public playground link remains internal even after Full Unlock and a saved testing toggle', async () => {
   const globalDev = globalThis as unknown as { __DEV__: boolean }, previous = __DEV__, previousExtra = Constants.expoConfig!.extra;
@@ -241,4 +251,97 @@ describe('testing access in the purchase UI', () => {
     expect(screen.queryByRole('button', { name: 'Buy Unlimited Time Machine' })).toBeNull();
     expect(purchases.getState().ownership).toEqual(noOwnership());
   });
+});
+
+const openProduct = async (id: ProductId) => press(id === 'dreams.full_unlock' ? 'Unlock Everything' : 'View ' + shopContent[id].title);
+test.each(productIds)('%s opens accurate reusable details and existing artwork without initiating payment', async id => {
+  await render(frame(<PurchaseOptions trigger="store" />)); await waitFor(() => expect(purchases.getState().status).toBe('ready'));
+  await openProduct(id);
+  expect(screen.UNSAFE_getAllByType(Modal)).toHaveLength(1);
+  expect(screen.getByRole('header', { name: shopContent[id].title })).toBeOnTheScreen();
+  for (const benefit of shopContent[id].benefits) expect(screen.getByText(benefit)).toBeOnTheScreen();
+  expect(screen.getByText('Unlock for ' + purchases.getState().products[id]!.priceString)).toBeOnTheScreen();
+  const expected = id === 'dreams.cult' ? [CultArt, 'cult'] as const : id === 'dreams.career_pass' ? [Illustration, 'career'] as const : id === 'dreams.time_machine' ? [HealthLegalArt, 'rewind'] as const : id === 'dreams.god_mode' ? [PolishArt, 'life-star'] as const : [CareerArt, id === 'dreams.full_unlock' ? 'royalty' : id.split('.')[1]] as const;
+  const hero = screen.UNSAFE_getAllByType(ShopProductArt).find(row => row.props.size === 108)!;
+  expect(hero.props.id).toBe(id);
+  expect(screen.UNSAFE_getAllByType(expected[0]).some(row => row.props.id === expected[1] && row.props.size === 108)).toBe(true);
+  expect(buy).not.toHaveBeenCalled(); await press('Close product details');
+  expect(screen.queryByRole('button', { name: 'Buy ' + products[id].title })).toBeNull(); expect(buy).not.toHaveBeenCalled();
+});
+test('the compact shop lists only the four paid careers in the requested order and keeps one careers link', async () => {
+  await render(frame(<PurchaseOptions trigger="store" />)); await waitFor(() => expect(purchases.getState().status).toBe('ready'));
+  expect(screen.UNSAFE_getAllByType(Pressable).map(row => row.props.accessibilityLabel).filter(label => label?.startsWith('View '))).toEqual(['View All Career Packs', 'View Time Machine', 'View God Mode', 'View Athlete Career', 'View Astronaut Career', 'View Military Career', 'View Cult Leader', 'View All Careers']);
+  expect(screen.queryByText('Organised Crime')).toBeNull(); expect(screen.getAllByRole('button', { name: 'View All Careers' })).toHaveLength(1);
+  await press('View All Careers'); expect(router.push).toHaveBeenCalledWith('/special-careers');
+});
+test('Career Pass marks the four individual careers owned while God Mode and Time Machine retain their prices', async () => {
+  await render(frame(<PurchaseOptions trigger="store" />)); await waitFor(() => expect(purchases.getState().status).toBe('ready'));
+  await openProduct('dreams.career_pass'); await press('Buy All Careers Pass');
+  expect(purchases.getState().ownership).toEqual({ athlete: true, astronaut: true, military: true, cult: true, god_mode: false, time_machine: false });
+  expect(screen.getByRole('button', { name: 'Owned' })).toBeDisabled(); await press('Close product details');
+  expect(screen.getAllByText('Owned')).toHaveLength(5); expect(screen.getAllByText('£9.99')).toHaveLength(2); expect(buy).toHaveBeenCalledTimes(1);
+});
+test('a loading or missing price cannot purchase; refreshing a missing product recovers the same popup', async () => {
+  let release!: () => void;
+  adapter.products = () => new Promise(done => { release = () => done(productIds.filter(id => id !== 'dreams.god_mode').map(identifier => ({ identifier, priceString: 'CA$12.49' }))); });
+  await render(frame(<PurchaseOptions trigger="store" />)); await waitFor(() => expect(release).toBeDefined());
+  await openProduct('dreams.god_mode'); expect(screen.getByRole('button', { name: 'Buy God Mode' })).toBeDisabled();
+  await act(async () => { release(); }); await waitFor(() => expect(purchases.getState().status).toBe('ready'));
+  expect(screen.getByRole('button', { name: 'Buy God Mode' })).toBeDisabled(); expect(screen.getByText('Price unavailable')).toBeOnTheScreen();
+  adapter.products = async () => productIds.map(identifier => ({ identifier, priceString: 'CA$12.49' }));
+  await press('Refresh Store'); await waitFor(() => expect(screen.getByText('Unlock for CA$12.49')).toBeOnTheScreen());
+  expect(screen.getByRole('button', { name: 'Buy God Mode' })).toBeEnabled(); expect(buy).not.toHaveBeenCalled();
+});
+test('a held shop payment blocks repeated native presses and closure, and old callbacks cannot act after dismissal', async () => {
+  let finish!: (value: Customer) => void; buy.mockImplementationOnce(() => new Promise(done => { finish = done; }));
+  await render(frame(<PurchaseOptions trigger="store" />)); await waitFor(() => expect(purchases.getState().status).toBe('ready'));
+  await openProduct('dreams.athlete');
+  const retained = screen.UNSAFE_getAllByType(Pressable).find(row => row.props.accessibilityLabel === 'Buy Athlete Career')!.props.onPress;
+  const requestClose = screen.UNSAFE_getByType(Modal).props.onRequestClose;
+  await press('Buy Athlete Career'); await act(async () => { retained(); requestClose(); });
+  expect(buy).toHaveBeenCalledTimes(1); expect(screen.getByRole('button', { name: 'Close product details' })).toBeDisabled(); expect(screen.getByRole('button', { name: 'Buy Athlete Career' })).toBeDisabled();
+  await act(async () => { finish(customer('athlete')); }); await waitFor(() => expect(screen.getByRole('button', { name: 'Owned' })).toBeDisabled());
+  await press('Close product details'); await openProduct('dreams.astronaut');
+  await act(async () => { retained(); requestClose(); });
+  expect(screen.getByRole('header', { name: 'Astronaut Career' })).toBeOnTheScreen(); expect(buy).toHaveBeenCalledTimes(1);
+});
+test('closing a popup without purchase invalidates a queued buy, and opening another product keeps one modal', async () => {
+  await render(frame(<PurchaseOptions trigger="store" />)); await waitFor(() => expect(purchases.getState().status).toBe('ready'));
+  await openProduct('dreams.athlete'); const retained = screen.UNSAFE_getAllByType(Pressable).find(row => row.props.accessibilityLabel === 'Buy Athlete Career')!.props.onPress;
+  await press('Close product details'); await openProduct('dreams.full_unlock'); await act(async () => { retained(); });
+  expect(buy).not.toHaveBeenCalled(); expect(screen.UNSAFE_getAllByType(Modal)).toHaveLength(1);
+});
+test('an owned product has no purchase control and testing access never marks an unpurchased item Owned', async () => {
+  const previous = Constants.expoConfig!.extra;
+  try {
+    Constants.expoConfig!.extra = { unlockAllTesting: true, unlockAllTestingBuild: 'internal' };
+    await render(frame(<PurchaseOptions trigger="store" />)); await waitFor(() => expect(purchases.getState().status).toBe('ready'));
+    expect(screen.queryByText('Owned')).toBeNull(); await openProduct('dreams.athlete');
+    expect(screen.getByRole('button', { name: 'Buy Athlete Career' })).toBeEnabled(); expect(purchases.getState().ownership).toEqual(noOwnership());
+    adapter.customer = async () => customer('athlete'); await act(async () => { await purchases.getState().refresh(); });
+    expect(screen.queryByRole('button', { name: 'Buy Athlete Career' })).toBeNull(); expect(screen.getByRole('button', { name: 'Owned' })).toBeDisabled();
+    expect(buy).not.toHaveBeenCalled();
+  } finally { Constants.expoConfig!.extra = previous; }
+});
+test('small dark screens with enlarged text keep detail content scrollable and the localized purchase control outside it', async () => {
+  await act(async () => { ReactNative.Dimensions.set({ window: { width: 320, height: 568, scale: 2, fontScale: 2 }, screen: { width: 320, height: 568, scale: 2, fontScale: 2 } }); });
+  try {
+    await render(<SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 320, height: 568 }, insets: { top: 24, bottom: 24, left: 0, right: 0 } }}><ThemeProvider appearance="dark"><PurchaseOptions trigger="store" /></ThemeProvider></SafeAreaProvider>);
+    await waitFor(() => expect(purchases.getState().status).toBe('ready')); await openProduct('dreams.full_unlock');
+    const button = screen.UNSAFE_getAllByType(Pressable).find(row => row.props.accessibilityLabel === 'Buy Full Unlock')!;
+    let parent = button.parent; while (parent) { expect(parent.type).not.toBe(ScrollView); parent = parent.parent; }
+    expect(screen.getByText('Unlock for 29,99 €')).toBeOnTheScreen(); expect(screen.getByRole('button', { name: 'Close product details' })).toBeEnabled();
+    const surface = screen.UNSAFE_getAllByType(ReactNative.View).find(row => StyleSheet.flatten(row.props.style)?.maxWidth === 520)!;
+    expect(StyleSheet.flatten(surface.props.style)).toMatchObject({ maxHeight: 488, backgroundColor: '#253247' });
+    expect(screen.UNSAFE_getAllByType(ScrollView).length).toBeGreaterThan(0);
+  } finally { await act(async () => { ReactNative.Dimensions.set(originalDimensions); }); }
+});
+
+test('choosing Full Unlock within a contextual paywall keeps one native modal and resumes the pending action once', async () => {
+  const resumed = jest.fn(); await render(frame(<Intent onContinue={resumed} />)); await press('Try Athlete');
+  await waitFor(() => expect(purchases.getState().status).toBe('ready'));
+  await press('View Full Unlock'); expect(screen.UNSAFE_getAllByType(Modal)).toHaveLength(1);
+  expect(screen.getByRole('header', { name: 'Full Unlock' })).toBeOnTheScreen(); expect(resumed).not.toHaveBeenCalled();
+  await press('Buy Full Unlock'); await waitFor(() => expect(resumed).toHaveBeenCalledTimes(1));
+  expect(buy).toHaveBeenCalledTimes(1); expect(purchases.getState().ownership).toEqual(Object.fromEntries(features.map(feature => [feature, true])));
 });
