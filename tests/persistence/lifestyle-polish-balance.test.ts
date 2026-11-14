@@ -71,6 +71,7 @@ test('a young driver earns real part-time wages, passes at the first affordable 
 test.each([false, true])('natural long-life policy with lifestyle enabled and paid reading %s retains pacing, mortality and saves', async paidReading => {
   const workload = JSON.parse(gunzipSync(readFileSync(join(__dirname, '../../docs/verification/final-polish/performance-core/workloads.json.gz'))).toString()) as { snapshots: { summary: { age: number }; payload: string }[] };
   const run = await lifestyleJourney(unpackCheckpoint(workload.snapshots.find(row => row.summary.age === 10)!.payload));
+  const activationDate = { ...(run.world.lifestyle?.enabled ?? run.world.date) };
   try {
     if (!paidReading) {
       // Replay the published healthy ordinary-life policy with live pending IDs.
@@ -85,7 +86,7 @@ test.each([false, true])('natural long-life policy with lifestyle enabled and pa
       const record = run.evidence('ordinary-long-life');
       expect(record.metrics.ageAtEnd).toBeGreaterThanOrEqual(90);
       expect(record.metrics.lifecycleOffers).toBe(0);
-      expect(run.world.lifestyle?.enabled.year).toBe(run.world.people[run.world.activePersonId].born.year + 20);
+      expect(run.world.lifestyle?.enabled).toEqual(activationDate);
       return;
     }
     while (ageOn(run.world.people[run.world.activePersonId], run.world.date) < 20) await run.year();

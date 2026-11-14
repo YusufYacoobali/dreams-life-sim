@@ -35,5 +35,5 @@ test('the signed audition result retains a fractional commission instead of roun
   expect(world.careers[0].projects.find(project => project.status === 'active')!.creative!.commissionBps).toBe(1050);
   expect(world.pending?.kind).toBe('result');
   if (world.pending?.kind !== 'result') throw new Error('Missing signed audition result');
-  expect(world.pending.effects.find(row => row.id === 'commission')?.value).toBe('1050 basis points (100 = 1%)');
+  expect(world.pending.effects.find(row => row.id === 'commission')?.value).toBe('10.5%');
 });

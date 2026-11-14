@@ -13,5 +13,9 @@ test('the genuine world-26 pet archive preserves current care/payments, original
   expect(worlds[1].pets).toEqual([]); expect(worlds[2].pets[0].periods).toEqual([]); expect(worlds[2].pending?.kind === 'result' && worlds[2].pending.title).toBe('Welcome, Biscuit'); expect(worlds[3].pets[0].visits).toHaveLength(1); expect(worlds[3].pets[0].periods).toEqual([]);
   if (world.pending?.kind !== 'decision') throw new Error('Expected original school choice'); const choice = world.pending.choices.find(item => !choiceUnavailable(world, item))!;
   let finished = resolveCommand(world, { type: 'choose', eventId: world.pending.id, choiceId: choice.id }); if (finished.pending?.kind !== 'result') throw new Error('Expected school result'); finished = resolveCommand(finished, { type: 'acknowledge', resultId: finished.pending.id });
-  expect(finished.pets).toEqual(world.pets); expect(finished.petAdoptions).toEqual(world.petAdoptions); expect(finished.accounts).toEqual(world.accounts); expect(finished.ledger).toEqual(world.ledger); expect(finished.random).toEqual(world.random); expect(finished.annual).toBeNull();
+  expect(world.pets.every(item => !item.companion)).toBe(true);
+  expect(finished.pets[0].companion).toMatchObject({ version: 1, enabled: world.date, training: 0, tricks: [], lastCompetitionYear: null });
+  // Optional companionship starts now; every pre-existing care/ownership field
+  // and payment stays literal, with no retroactive earned progress.
+  expect(finished.pets.map(({ companion, ...original }) => original)).toEqual(world.pets); expect(finished.petAdoptions).toEqual(world.petAdoptions); expect(finished.accounts).toEqual(world.accounts); expect(finished.ledger).toEqual(world.ledger); expect(finished.random).toEqual(world.random); expect(finished.annual).toBeNull();
 });

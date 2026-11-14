@@ -28,3 +28,12 @@ Validation and checkpoint packing dominate this diagnostic. It does not reproduc
 The renderer/store test holds the real command at the UI yield: Saving your year and the disabled/busy button appear before simulation or SQLite can begin. The pre-change test failed because the indicator was absent; the changed version passes. Repeated taps commit once. Separate on-disk SQLite tests verify complete phase coverage, exact resolver equality, failed-save rollback and retry, including a throwing timing observer. Production configuration tests reject profiling metadata for public builds.
 
 Actual release-mode iOS and physical Android median/p95, visible paint and end-to-end playthrough acceptance remain **open**. Linux has no iOS build/device access and no KVM; a software Android emulator cannot establish physical-device performance. The SDK 58 Android release build is being checked independently. Artwork delivery is tracked in the separate asset manifest.
+
+For the user's usual PowerShell development launch:
+
+```powershell
+$env:DREAMS_PROFILE_COMMANDS = "1"
+npx expo start -c
+```
+
+This development trace helps locate a delay; final phone acceptance still needs an internal release build, the same saved input per comparison, warm-up outside the measured samples, and median/p95 at every target age. Disable the variable with `Remove-Item Env:DREAMS_PROFILE_COMMANDS` and restart Expo when finished.

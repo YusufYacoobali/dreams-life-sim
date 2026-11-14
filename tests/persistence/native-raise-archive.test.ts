@@ -31,7 +31,7 @@ test('actual raise acknowledgement rolls back, retries and cold-resumes without 
   sqlite.exec("CREATE TRIGGER fail_raise_ack BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
   expect(await store.getState().dispatch({ type: 'acknowledge', resultId })).toBe(false); expect(store.getState().world).toEqual(before); expect(rows()).toEqual(originalRows);
   sqlite.exec('DROP TRIGGER fail_raise_ack'); store = makeStore(); await store.getState().bootstrap(); expect(store.getState().world).toEqual(before);
-  expect(await store.getState().dispatch({ type: 'acknowledge', resultId })).toBe(true); const ready = store.getState().world!; expect(ready).toEqual({ ...before, revision: 63, pending: null, pendingPriority: 0 });
+  expect(await store.getState().dispatch({ type: 'acknowledge', resultId })).toBe(true); const ready = store.getState().world!; expect(ready).toEqual({ ...before, revision: 63, pending: null, pendingPriority: 0, lifestyle: { version: 1, enabled: before.date, licences: [], projects: [], offers: [], tenancies: [], applications: [], records: [] } });
   store = makeStore(); await store.getState().bootstrap(); expect(store.getState().world).toEqual(ready); const finalRows = rows();
   expect(await store.getState().dispatch({ type: 'acknowledge', resultId })).toBe(false); expect(rows()).toEqual(finalRows);
   const request = ready.workRaises[0]; expect(await store.getState().dispatch({ type: 'request-raise', workplaceId: request.workplaceId, supervisorId: request.supervisorId })).toBe(false); expect(rows()).toEqual(finalRows);

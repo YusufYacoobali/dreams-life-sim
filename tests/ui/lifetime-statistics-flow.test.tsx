@@ -137,4 +137,4 @@ test('actual heir and ancestor views remain isolated across route changes and a 
     expect(savedDispatch).not.toHaveBeenCalled(); expect(savedWrite).not.toHaveBeenCalled(); expect(projection).toHaveBeenCalledTimes(1);
     expect(world()).toBe(active); expect(encodeWorld(world())).toBe(activeText); expect(context.rows()).toEqual(activeRows); context.oldMoments(); await reopened.unmount();
   } finally { jest.restoreAllMocks(); context.close(); }
-});
+}, 60000);

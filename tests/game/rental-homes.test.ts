@@ -6,6 +6,7 @@ import { rentalHomeMonth, rentalQuote } from '../../src/game/systems/rentalHomes
 import { refreshRentalLeases, rentalResidence } from '../../src/game/systems/rentalSchemas';
 import { householdLivingCost, financialActors, ownHousehold, moveHousehold } from '../../src/game/systems/households';
 import { accountFor, charge } from '../../src/game/systems/common';
+import { askingRent } from '../../src/game/systems/landlordTenancies';
 import { assetPrice } from '../../src/game/systems/assets';
 import { financeMonth } from '../../src/game/systems/finance';
 import { netWorth } from '../../src/game/systems/markets';
@@ -69,7 +70,10 @@ test('buying while renting keeps a property investment; moving into it closes th
   let world=rent();world=apply(world,{type:'buy-asset',catalogId:offer.id,financing:'cash',depositBps:2000,termMonths:360,quotedPrice:assetPrice(world,offer)});
   const asset=world.assets.find(item=>item.ownerId===world.activePersonId)!;expect(asset.primaryHome).toBe(false);expect(rentalResidence(world)).toBeDefined();
   world=apply(world,{type:'move-in',assetId:asset.id});expect(rentalResidence(world)).toBeUndefined();expect(world.rentalLeases[0].endReason).toBe('owned-home');
-  world=apply(world,{type:'rent-property',assetId:asset.id});expect(world.assets.find(item=>item.id===asset.id)?.rental).toBe('listed');validateWorld(world);
+  expect(()=>resolveCommand(world,{type:'rent-property',assetId:asset.id})).toThrow(/named applications/);
+  world=apply(world,{type:'find-tenants',assetId:asset.id,quotedRent:askingRent(world.assets.find(item=>item.id===asset.id)!)});
+  expect(world.assets.find(item=>item.id===asset.id)?.rental).toBe('listed');expect(world.lifestyle!.applications.filter(item=>item.assetId===asset.id)).toHaveLength(3);
+  expect(world.rentalLeases[0].endReason).toBe('owned-home');validateWorld(world);
 });
 
 test.each(['quote','cash','minor','duplicate'] as const)('ineligible %s leases leave the source byte-for-byte intact',kind=>{

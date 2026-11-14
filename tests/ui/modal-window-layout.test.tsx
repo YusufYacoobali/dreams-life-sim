@@ -137,3 +137,16 @@ test.each(['decision', 'result'] as const)('Android Back cannot dismiss or disab
   await fireEvent.press(screen.getByRole('button', { name: kind === 'decision' ? 'Make This Choice' : 'Continue' }));
   expect(choose).toHaveBeenCalledWith(kind === 'decision' ? 'act' : 'continue');
 });
+
+test('agency reviews and results keep exact fractional commissions while ordinary display formatting is retained', async () => {
+  await render(frame(<EventModal event={{ ...review, id: 'fractional-agency', title: 'Representation terms', terms: [
+    { id: 'commission', label: 'Agreed representation commission', value: '10.5%', tone: 'neutral' },
+    { id: 'ordinary-rate', label: 'Rate if the request is declined', value: '10.5%', tone: 'neutral' },
+    { id: 'negotiated-rate', label: 'Rate if better terms are accepted', value: '9.5%', tone: 'positive' },
+    { id: '0', label: 'Boutique Agency · 2023 onwards', value: '10.5% · Negotiated', tone: 'neutral' },
+    { id: 'paid', label: 'Agency commission paid', value: '$10.50', tone: 'negative' },
+    { id: 'happiness', label: 'Happiness', value: '+3.5%', tone: 'positive' },
+  ] }} onChoose={() => {}} />, noInsets));
+  expect(screen.getAllByText('10.5%')).toHaveLength(2); expect(screen.getByText('9.5%')).toBeOnTheScreen(); expect(screen.getByText('10.5% · Negotiated')).toBeOnTheScreen();
+  expect(screen.getByText('$11')).toBeOnTheScreen(); expect(screen.getByText('+4%')).toBeOnTheScreen();
+});

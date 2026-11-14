@@ -58,7 +58,9 @@ test('reader12 upgrades without rewriting raw saves; the actual completed payrol
     sqlite.exec('DROP TRIGGER fail_old_hourly'); expect(await store.getState().dispatch(command)).toBe(true); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore();
     const result = store.getState().world!; expect(result.hourlyContracts).toEqual(world.hourlyContracts); expect(result.ledger).toEqual(world.ledger); expect(sqlite.prepare('SELECT payload FROM backups WHERE life_id=?').get(world.id)?.payload).toBe(payload);
     const saved = rows(), coldRepo = new SaveRepository(driver), cold = createGameStore({ repository: async () => coldRepo, date: () => world.date, id: () => 'unused' }); expect(await cold.getState().bootstrap()).toBe(true); expect(cold.getState().world).toEqual(result); expect(rows()).toEqual(saved);
-    expect(await cold.getState().dispatch({ type: 'acknowledge', resultId: result.pending!.id })).toBe(true); expect(cold.getState().world).toEqual(checkpoints.unpackCheckpoint(pinned.checkpoints.final.payload));
+    expect(await cold.getState().dispatch({ type: 'acknowledge', resultId: result.pending!.id })).toBe(true); const historicalFinal = checkpoints.unpackCheckpoint(pinned.checkpoints.final.payload);
+    expect(historicalFinal.lifestyle).toBeUndefined(); expect(historicalFinal.assets).toHaveLength(0); expect(historicalFinal.pets.every(pet => pet.status !== 'active')).toBe(true);
+    expect(cold.getState().world).toEqual({ ...historicalFinal, lifestyle: { version: 1, enabled: historicalFinal.date, licences: [], projects: [], offers: [], tenancies: [], applications: [], records: [] } });
     const done = rows(); expect(await cold.getState().dispatch(command)).toBe(false); expect(rows()).toEqual(done);
   } finally { jest.restoreAllMocks(); sqlite.close(); }
 });

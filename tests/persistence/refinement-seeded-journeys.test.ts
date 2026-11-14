@@ -100,8 +100,8 @@ test.each(styleJourneys)('$style persists a seeded criminal career over at least
         const saved = run.world.gangs.find(item => item.id === gangId)!.organised!.jobs.at(-1)!;
         const incident = run.world.incidents.find(item => item.id === saved.incidentId)!;
         years.add(saved.date.year);
-        expect(saved.mission?.rulesVersion).toBe(2);
-        expect(incident.organisedMission).toMatchObject({ rulesVersion: 2, style, gangId, jobId: saved.id, outcome: saved.mission!.outcome, participantIds: saved.participantIds });
+        expect(saved.mission?.rulesVersion).toBe(3);
+        expect(incident.organisedMission).toMatchObject({ rulesVersion: 3, style, gangId, jobId: saved.id, outcome: saved.mission!.outcome, participantIds: saved.participantIds });
         expect(saved.participantIds).toEqual(approach === 'crew-led' ? [current.activePersonId, ...eligible] : [current.activePersonId]);
         expect(incident.gain.minor).toBe(saved.proceeds);
         if (saved.transactionId) expect(run.world.ledger.find(row => row.id === saved.transactionId)).toMatchObject({ cashDelta: saved.proceeds, category: 'crime-proceeds' });

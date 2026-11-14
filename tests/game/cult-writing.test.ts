@@ -72,7 +72,13 @@ test.each(before.contexts)('$id binds new prose prospectively with identical eff
 
 test.each(before.runtimeCases)('routine writing $item stays prose-only for its original deterministic command', ({ item, sha256 }) => {
   const world = load(before.baseWorld), command = arrangeCultWritingCase(world, item), result = resolveCommand(world, command);
-  expect(sha(JSON.stringify(cultWritingMechanics(JSON.parse(preEpisodeCultProof(result)))))).toBe(sha256);
+  const proof = JSON.parse(preEpisodeCultProof(result));
+  // These old unfrozen command contexts have no assets/pets. Check the exact
+  // new empty capability separately; preserve every original mechanical hash.
+  expect(world.lifestyle).toBeUndefined(); expect(world.assets).toHaveLength(0); expect(world.pets).toHaveLength(0);
+  expect(result.lifestyle).toEqual({ version: 1, enabled: world.date, licences: [], projects: [], offers: [], tenancies: [], applications: [], records: [] });
+  delete proof.lifestyle;
+  expect(sha(JSON.stringify(cultWritingMechanics(proof)))).toBe(sha256);
   expect(result.pending?.kind).toBe('result');
   if (result.pending?.kind === 'result') {
     expect(result.pending.body).not.toMatch(/\{\w+\}/);

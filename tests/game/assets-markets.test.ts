@@ -1,5 +1,6 @@
 import { createLife, randomCreation } from '../../src/game/createLife';
 import { countries, countryCodes } from '../../src/game/countries';
+import { choiceUnavailable } from '../../src/game/choiceAvailability';
 import { resolveCommand } from '../../src/game/engine';
 import { decodeWorld, encodeWorld, validateWorld, World } from '../../src/game/model';
 import { assetCatalog } from '../../src/game/content/assets';
@@ -23,6 +24,18 @@ function acknowledge(world: World): World {
 function buy(world: World, id: string, financing: 'cash' | 'mortgage' = 'cash'): World {
   const offer = assetCatalog.find(item => item.id === id)!;
   return acknowledge(resolveCommand(world, { type: 'buy-asset', catalogId: id, financing, depositBps: 2000, termMonths: 360, quotedPrice: assetPrice(world, offer) }));
+}
+
+/** Answer newly available home stories normally, without changing the scheduled
+ * sale, clock or RNG, and stop at the actual saved property offer. */
+function reachSaleOffer(input: World): World {
+  let world = input, guard = 0;
+  while (world.annual?.stage === 'months' && !(world.pending?.kind === 'decision' && world.pending.templateId === 'property-sale-offer') && guard++ < 64) {
+    const event = world.pending;
+    world = resolveCommand(world, event?.kind === 'decision' ? { type: 'choose', eventId: event.id, choiceId: event.choices.find(choice => !choiceUnavailable(world, choice))!.id } : event ? { type: 'acknowledge', resultId: event.id } : { type: 'resume' });
+  }
+  expect(guard).toBeLessThan(64);
+  return world;
 }
 
 test('an actual v3 employed save migrates with every balance, liability and work record intact', () => {
@@ -76,7 +89,7 @@ test('a property listing retains ownership, pauses for a real offer and resumes 
   let world = buy(fixture(), 'studio'); const asset = world.assets[0];
   world = acknowledge(resolveCommand(world, { type: 'list-property', assetId: asset.id, askingPrice: asset.value }));
   expect(world.assets[0].ownerId).toBe(world.activePersonId);
-  world = resolveCommand(world, { type: 'advance' });
+  world = reachSaleOffer(resolveCommand(world, { type: 'advance' }));
   expect(world.pending?.kind).toBe('decision');
   if (world.pending?.kind !== 'decision') throw new Error('Expected an offer');
   expect(world.pending.templateId).toBe('property-sale-offer');
@@ -105,7 +118,7 @@ test('a month-twelve sale offer is followed by exactly one annual tax settlement
   let world = buy(fixture(), 'studio'); const asset = world.assets[0];
   world = acknowledge(resolveCommand(world, { type: 'list-property', assetId: asset.id, askingPrice: asset.value / 2n }));
   world.assets[0].listing!.nextOfferMonth = (world.date.year + 1) * 12 + world.date.month - 1;
-  world = resolveCommand(world, { type: 'advance' });
+  world = reachSaleOffer(resolveCommand(world, { type: 'advance' }));
   if (world.pending?.kind !== 'decision') throw new Error('Expected a sale offer');
   expect(world.pending.templateId).toBe('property-sale-offer');
   expect(world.annual).toMatchObject({ monthsProcessed: 12, stage: 'months' });

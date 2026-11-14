@@ -194,7 +194,7 @@ test('agency terms display fractional commission exactly instead of rounding the
   mockStore.setState({ world: amended });
   const view = await render(frame(<ModelCareerDashboard />));
   expect(screen.getByLabelText('Commission on future contracts: 10.5%')).toHaveTextContent('10.5%');
-  await press(/^Agency History/); expect(screen.getByText(/10.5%/)).toBeTruthy();
+  await press(/^Agency History/); expect(within(screen.UNSAFE_getByType(Modal)).getByText(/10.5%/)).toBeOnTheScreen();
   await view.unmount(); sqlite.close();
 });
 

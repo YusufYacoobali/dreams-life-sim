@@ -37,7 +37,7 @@ test('native workplace acknowledgement fails atomically, retries and cold-resume
   expect(await store.getState().dispatch({ type: 'acknowledge', resultId })).toBe(false); expect(store.getState().world).toEqual(before); expect(rows()).toEqual(originalRows);
   sqlite.exec('DROP TRIGGER fail_workplace_ack'); store = makeStore(); await store.getState().bootstrap(); expect(store.getState().world).toEqual(before);
   expect(await store.getState().dispatch({ type: 'acknowledge', resultId })).toBe(true); const final = store.getState().world!;
-  expect(final).toEqual({ ...before, revision: 55, pending: null, pendingPriority: 0 });
+  expect(final).toEqual({ ...before, revision: 55, pending: null, pendingPriority: 0, lifestyle: { version: 1, enabled: before.date, licences: [], projects: [], offers: [], tenancies: [], applications: [], records: [] } });
   store = makeStore(); await store.getState().bootstrap(); expect(store.getState().world).toEqual(final); const finalRows = rows();
   expect(await store.getState().dispatch({ type: 'acknowledge', resultId })).toBe(false); expect(rows()).toEqual(finalRows);
   const place = final.workplaces[0]; expect(await store.getState().dispatch({ type: 'work-feedback', workplaceId: place.id, supervisorId: place.feedback[0].supervisorId })).toBe(false); expect(rows()).toEqual(finalRows); expect(store.getState().world).toEqual(final);

@@ -34,7 +34,7 @@ test('the actual saved workplace result acknowledges once through SQLite failure
   expect(await store.getState().dispatch({ type: 'acknowledge', resultId })).toBe(false); expect(store.getState().world).toEqual(before); expect(rows()).toEqual(originalRows);
   sqlite.exec('DROP TRIGGER fail_native_work_story'); store = createStore(); await store.getState().bootstrap(); expect(store.getState().world).toEqual(before);
   expect(await store.getState().dispatch({ type: 'acknowledge', resultId })).toBe(true); const done = store.getState().world!;
-  expect(done).toEqual({ ...before, revision: 77, pending: null, pendingPriority: 0, annual: null });
+  expect(done).toEqual({ ...before, revision: 77, pending: null, pendingPriority: 0, annual: null, lifestyle: { version: 1, enabled: before.date, licences: [], projects: [], offers: [], tenancies: [], applications: [], records: [] } });
   store = createStore(); await store.getState().bootstrap(); expect(store.getState().world).toEqual(done); const finalRows = rows();
   expect(await store.getState().dispatch({ type: 'acknowledge', resultId })).toBe(false); expect(rows()).toEqual(finalRows);
   for (const point of archive.snapshots) { expect(sqlite.prepare('SELECT payload FROM snapshots WHERE life_id=? AND snapshot_id=?').get(done.id, point.summary.id)?.payload).toBe(point.payload); expect(JSON.parse(sqlite.prepare('SELECT metadata FROM snapshot_metadata WHERE life_id=? AND snapshot_id=?').get(done.id, point.summary.id)?.metadata as string)).toEqual(point.summary); }

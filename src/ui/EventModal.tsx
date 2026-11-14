@@ -19,6 +19,7 @@ import {
   ScrollView,
   StyleSheet,
   TextInput,
+  Text as NativeText,
   useWindowDimensions,
   View,
 } from 'react-native';
@@ -609,8 +610,11 @@ function EventCard({
               <Body centered>{event.body}</Body>
               {effects.length > 0 && (
                 <View style={[styles.effects, { backgroundColor: c.inset }]}>
-                  {effects.map((effect) => (
-                    <View
+                  {effects.map((effect) => {
+                    // Contract rates must retain fractional agreed percentages.
+                    // Ordinary stats and monetary summaries keep their existing format.
+                    const ValueText = effect.value.includes('%') && (['commission', 'commission-rate', 'ordinary-rate', 'negotiated-rate'].includes(effect.id) || /\b(?:agency|commission)\b/i.test(effect.label)) ? NativeText : Text;
+                    return <View
                       key={effect.id}
                       style={[
                         styles.effectRow,
@@ -627,7 +631,7 @@ function EventCard({
                       >
                         {effect.label}
                       </Text>
-                      <Text
+                      <ValueText
                         style={{
                           color:
                             effect.tone === 'positive'
@@ -643,9 +647,9 @@ function EventCard({
                         }}
                       >
                         {effect.value}
-                      </Text>
-                    </View>
-                  ))}
+                      </ValueText>
+                    </View>;
+                  })}
                 </View>
               )}
               {event.kind === 'decision' && showProgress && (

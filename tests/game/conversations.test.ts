@@ -22,6 +22,12 @@ function withoutTalkFields(world: World) {
   actor.stats.happiness = 0; actor.stats.smarts = 0; actor.stats.stress = 0;
   relation.strength = 0; relation.trust = 0; relation.lastInteractionYear = 0; relation.memories = [];
   result.random.outcomes = 0;
+  // A first normal command can initialise the empty optional lifestyle shell,
+  // while conversation rewards, history, money and RNG remain fully checked.
+  if (result.lifestyle) {
+    expect(result.lifestyle).toEqual({ version: 1, enabled: world.date, licences: [], projects: [], offers: [], tenancies: [], applications: [], records: [] });
+    delete result.lifestyle;
+  }
   return result;
 }
 

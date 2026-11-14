@@ -2,6 +2,7 @@ import React from 'react';
 import { act, fireEvent, render, screen, waitFor } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { createGameStore } from '../../src/state/gameStore';
+import { resolveCommand } from '../../src/game/engine';
 import { decodeWorld } from '../../src/game/model';
 import { accountFor } from '../../src/game/systems/common';
 import { SaveRepository } from '../../src/persistence/repository';
@@ -38,6 +39,8 @@ test('a native purchase confirmation rolls back a failed write, retries and rest
   expect(await repository.load(initial.id)).toEqual(committed);
   await act(async () => { await fireEvent.press(screen.getByRole('button', { name: 'Continue' })); });
   await waitFor(() => expect(mockStore.getState().world?.pending).toBeNull());
-  expect(mockStore.getState().world?.assets).toEqual(committed.assets);
+  expect(mockStore.getState().world).toEqual(resolveCommand(committed, { type: 'acknowledge', resultId: committed.pending!.id }, true));
+  expect(committed.assets[0].propertyLife).toBeUndefined();
+  expect(mockStore.getState().world?.assets.map(({ propertyLife, ...original }) => original)).toEqual(committed.assets);
   await view.unmount(); sqlite.close();
 });

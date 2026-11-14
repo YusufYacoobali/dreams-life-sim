@@ -15,7 +15,7 @@ Each checkpoint includes focused verification before its commit and push. Existi
 | 7. Organised Crime balancing and prison UI | Implemented; focused checks and seeded comparison pass |
 | 8. Versioned Cell Escape replacement | Implemented; original scene art awaiting approval |
 | 9. Writing and measured performance | Feedback/tracing implemented; physical-device performance open |
-| 10. Regression, native playthroughs and final fixes | Pending |
+| 10. Regression, native playthroughs and final fixes | Focused fixes pass; integrated regression/soak running; physical-device acceptance open |
 
 ## Checkpoint 1
 
@@ -101,3 +101,13 @@ After the master gameplay/polish checkpoints, implement the user's separate Drea
 - Shortened several hobby descriptions, preserving all rules and previously saved events. Earlier checkpoints cover prospective result wording, quiet-year filler, natural crime copy and concise workflow reviews.
 - Annual pacing regressions now consume genuinely archived pre-polish pending project frames, keeping compatibility tests independent of new lifestyle offers in newly started years. Historical editorial registration remains pinned; only current-source observation hashes were refreshed.
 - Verification: immediate feedback, exact durable results, rejected repeats, failed-save rollback/retry, observer isolation and production profiling guards pass focused tests. The focused rerun passes 54 cases across five suites, including the existing vehicle-sale cancellation/rollback/cold-reopen journey through its new Ownership section. Strict app/test types and the 609-module import check pass. The full regression and native checks are recorded in checkpoint 10 when complete.
+
+## Checkpoint 10 — verification and final fixes
+
+- The initial full run reported 389 passing suites and 19 failures. Most failures were old assertions that omitted newly automatic optional lifestyle state or assumed a particular future offer preceded all others. Their focused reruns pass after checking new metadata separately, retaining literal old state, and answering genuine intervening offers. Original fixture bytes, outcome hashes, receipts, salary, care history and RNG checks remain pinned. New crime journeys require explicit v3 rules; old v2 fixture checks stay unchanged.
+- One worker was killed under memory pressure and the archived 91-year family journey exceeded its 30-second allowance. Resource-separated reruns verified the worker's suite and all family assertions. The latter spent 18.3 seconds preparing its archive and completed all assertions in 31.7 seconds, so that one connected fixture journey now has an explicit 60-second allowance.
+- The last unreported long-life suite was stopped before completion after its manual-activation-at-age-20 assertion was identified as obsolete. It now requires activation at the first normal command boundary; the full integrated run includes all its natural-life, mortality, wages, fees, driving and cold-save checks. The initial run is not reported as a clean full pass.
+- Found and fixed a real display issue: fractional agency percentages were rounded by the shared modal formatter. Contract review, signed-result and agency-history rates now retain their exact percentages; other stat and money formatting stays unchanged. Eighteen focused game/modal cases and 19 creative UI cases pass.
+- Age Up and Continue This Year both pass a real SQLite/UI-yield test for immediate saving feedback, blocked repeat input and exact resolver results. The resume case reaches its planning pause through actual archived pet/year commands rather than patched annual flags.
+- Strict app/test types and import checks pass. Both Android and iOS Hermes production exports pass for the gameplay checkpoint. The integrated full regression, 120-life soak, final exports and native build result are recorded in the final verification report.
+- The separate shop implementation follows these gameplay changes. Original art remains tracked in the asset manifest; physical iOS/Android appearance, accessibility and release-device performance acceptance remain open.

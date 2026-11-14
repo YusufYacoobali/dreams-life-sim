@@ -44,7 +44,13 @@ test.each(saved.savedRoutines)('$kind preserves its already saved routine scene 
   const world = load(context.world), encoded = encodeWorld(world), event = world.pending;
   expect(encodeWorld(decodeWorld(encoded))).toBe(encoded);
   if (event?.kind !== 'result') throw Error('Expected a saved result');
-  expect(sha(preEpisodeCultProof(resolveCommand(world, { type: 'acknowledge', resultId: event.id })))).toBe(context.acknowledgedSha256);
+  const result = resolveCommand(world, { type: 'acknowledge', resultId: event.id }), proof = JSON.parse(preEpisodeCultProof(result));
+  expect(world.lifestyle).toBeUndefined(); expect(world.assets).toHaveLength(0); expect(world.pets).toHaveLength(0);
+  expect(result.lifestyle).toEqual({ version: 1, enabled: world.date, licences: [], projects: [], offers: [], tenancies: [], applications: [], records: [] });
+  // Acknowledgement is the new safe activation boundary; all original fields,
+  // including the literal saved scene and its acknowledged outcome, stay pinned.
+  delete proof.lifestyle;
+  expect(sha(JSON.stringify(proof))).toBe(context.acknowledgedSha256);
 });
 
 test('claim admissions vary their openings while keeping the player in the scene', () => {

@@ -8,7 +8,7 @@ import { mkdtempSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { createGameStore } from '../../src/state/gameStore';
-import { decodeWorld, encodeWorld } from '../../src/game/model';
+import { decodeWorld, encodeWorld, type World } from '../../src/game/model';
 import { resolveCommand } from '../../src/game/engine';
 import { assetCatalog } from '../../src/game/content/assets';
 import { purchaseQuote } from '../../src/game/systems/assets';
@@ -33,6 +33,9 @@ const press = async (name: string | RegExp) => { await act(async () => { await f
 const modal = () => within(screen.UNSAFE_getByType(Modal));
 const choose = async (name: string | RegExp) => { await act(async () => { await fireEvent.press(screen.getByRole('radio', { name })); }); };
 const world = () => mockStore.getState().world!;
+// Result acknowledgement may initialise optional lifestyle state; ownership,
+// money and the saved asset's economic/history facts must remain literal.
+const assetFacts = (world: World) => world.assets.map(({ propertyLife, vehicleLife, ...facts }) => facts);
 
 async function setup(fund = true) {
   mockRouteId = 'studio'; mockDismissTo.mockReset();
@@ -159,7 +162,7 @@ test('a failed real mortgage purchase preserves reviewed terms and all rows, ret
     const savedRows = context.rows(); await view.unmount(); await context.cold(); view = await render(frame());
     expect(world()).toEqual(expected); expect(context.rows()).toEqual(savedRows); expect(screen.getByText('It’s yours')).toBeOnTheScreen();
     await press('Continue'); const acknowledged = resolveCommand(expected, { type: 'acknowledge', resultId: expected.pending!.id }, true);
-    expect(world()).toEqual(acknowledged); expect(world().accounts).toEqual(expected.accounts); expect(world().assets).toEqual(expected.assets); expect(world().liabilities).toEqual(expected.liabilities); expect(world().ledger).toEqual(expected.ledger); expect(world().random).toEqual(expected.random);
+    expect(world()).toEqual(acknowledged); expect(world().accounts).toEqual(expected.accounts); expect(assetFacts(world())).toEqual(assetFacts(expected)); expect(world().liabilities).toEqual(expected.liabilities); expect(world().ledger).toEqual(expected.ledger); expect(world().random).toEqual(expected.random);
     const doneRows = context.rows(); await act(async () => { expect(await mockStore.getState().dispatch({ type: 'acknowledge', resultId: expected.pending!.id })).toBe(false); });
     expect(world()).toEqual(acknowledged); expect(context.rows()).toEqual(doneRows); await view.unmount();
   } finally { jest.restoreAllMocks(); context.close(); }
@@ -203,7 +206,8 @@ test.each(['studio', 'used-compact', 'watch'])('%s returns to the existing Asset
     expect(await context.repository.load(saved.id)).toEqual(saved);
     await press('Continue');
     expect(world().pending).toBeNull();
-    expect(world().assets).toEqual(saved.assets); expect(world().ledger).toEqual(saved.ledger);
+    expect(world()).toEqual(resolveCommand(saved, { type: 'acknowledge', resultId }, true));
+    expect(assetFacts(world())).toEqual(assetFacts(saved)); expect(world().ledger).toEqual(saved.ledger);
     await act(async () => { expect(await mockStore.getState().dispatch({ type: 'acknowledge', resultId })).toBe(false); });
     expect(mockDismissTo).toHaveBeenCalledTimes(1);
   } finally { await view.unmount(); context.close(); }

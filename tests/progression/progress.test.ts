@@ -31,8 +31,15 @@ test('actual resumed months, report and academic help advance only the child’s
   const original = decodeSave(JSON.stringify(reading)).world;
   let world = ack(original);
   world = resolveCommand(world, { type: 'advance' }, true);
-  expect(world.pending?.title).toMatch(/Biscuit/);
-  world = ack(world); world = resolveCommand(world, { type: 'resume' }, true); world = ack(world);
+  // Newly available companion scenes can precede the old annual pet result.
+  // Answer actual offered choices and resume the same year without patching its
+  // calendar, RNG or retained school/hobby/pet records.
+  let guard = 0;
+  while ((world.pending || world.annual) && guard++ < 100) {
+    const event = world.pending;
+    world = resolveCommand(world, event?.kind === 'decision' ? { type: 'choose', eventId: event.id, choiceId: event.choices.find(choice => !choiceUnavailable(world, choice))!.id } : event ? { type: 'acknowledge', resultId: event.id } : { type: 'resume' }, true);
+  }
+  expect(guard).toBeLessThan(100);
   world = resolveCommand(world, { type: 'study' }, true); world = ack(world);
   const school = currentSchool(world)!;
   world = resolveCommand(world, { type: 'school-help', communityId: school.id, teacherId: school.currentTeacherId }, true); world = ack(world);
