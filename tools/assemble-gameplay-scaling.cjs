@@ -1,0 +1,17 @@
+// Combine declared policies only after accepted-command coverage is proven.
+const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict'),{sha}=require('./scaling-runtime.cjs');
+const flags={};for(let i=2;i<process.argv.length;i+=2)flags[process.argv[i]]=process.argv[i+1];
+const roles=[['career',['career']],['creative',['actor','model']],['wealth',['wealth']],['social',['family','mixed']]],snapshots=[],continues=[],lives=[],provenance=[];
+for(const [role,profiles]of roles){const file=flags['--'+role];assert(file);const bytes=fs.readFileSync(file),traceBytes=fs.readFileSync(file+'.commands.json'),input=JSON.parse(bytes),trace=JSON.parse(traceBytes),continuation=JSON.parse(fs.readFileSync(file+'.continue.json'));
+ provenance.push({role,profiles,inputFile:path.basename(file),inputSha256:sha(bytes),commandsSha256:sha(traceBytes),sourceHash:input.sourceHash});
+ for(const profile of profiles){const life=trace.lives.find(l=>l.profile===profile);assert(life&&life.final?.age===70&&!life.final.died&&life.final.missingAges.length===0,profile+' must reach 70 naturally');lives.push(life);
+  const selected=input.snapshots.filter(s=>s.summary.profile===profile);assert.deepEqual(selected.map(s=>s.summary.age),[23,30,50,70]);
+  for(const row of selected){row.summary.seed=life.seed;row.summary.friendLimit=input.friendLimit??40;snapshots.push(row);}
+  for(const row of continuation.snapshots.filter(s=>s.summary.profile===profile)){row.summary.seed=life.seed;row.summary.friendLimit=input.friendLimit??40;continues.push(row);}
+ }
+}
+const coverage=Object.fromEntries(lives.map(l=>[l.profile,{seed:l.seed,commands:l.commands.length,activities:l.final.activities,acceptedCounts:l.commands.reduce((out,c)=>(out[c.type]=(out[c.type]??0)+1,out),{}),acceptedTenants:l.commands.filter(c=>c.type==='review-tenant'&&c.action==='accept').length,distinctJobRoles:new Set(l.commands.filter(c=>c.type==='apply-job').map(c=>c.roleId)).size}]));
+assert(coverage.career.distinctJobRoles>=2&&coverage.career.acceptedCounts['quit-job']>=3);assert(coverage.actor.acceptedCounts['actor-audition']>0);assert(coverage.model.acceptedCounts['model-casting']>0);assert(coverage.family.acceptedCounts.marry>0);
+for(const p of ['wealth','mixed']){assert(coverage[p].acceptedCounts['buy-investment']>0);assert(coverage[p].acceptedCounts['sell-investment']>0);assert(coverage[p].acceptedTenants>0);assert(coverage[p].acceptedCounts['manage-tenancy']>0);}assert(coverage.mixed.acceptedCounts.crime>0&&coverage.mixed.acceptedCounts.marry>0);
+const scope='Final accepted-feature cohorts: career/actor/model/wealth seed42; family/mixed seed17 with a declared 16-direct-relationship introduction bound. Complete supported-command histories and natural ageing, without money/date/health/outcome/RNG edits or record removal. Early deaths, rejected quotes and oversized exploratory policies are retained separately rather than counted as feature coverage.';
+const output=flags['--output'];assert(output);fs.writeFileSync(output,JSON.stringify({scope,provenance,snapshots}));fs.writeFileSync(output+'.continue.json',JSON.stringify({scope,provenance,snapshots:continues}));fs.writeFileSync(output+'.commands.json',JSON.stringify({scope,provenance,lives}));fs.writeFileSync(output+'.coverage.json',JSON.stringify({scope,coverage},null,2)+'\n');console.log(JSON.stringify({snapshots:snapshots.length,continues:continues.length,coverage}));
