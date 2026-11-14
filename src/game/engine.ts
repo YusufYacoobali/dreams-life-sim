@@ -1,3 +1,4 @@
+import { beginCommandSpan } from '../performance/commandTiming';
 import { offerLifestyleStory, resolveLifestyleChoice, cancelLifestyleOffers } from './systems/lifestyleStories';
 import { hobbyLifestyleCommandSchema, type HobbyLifestyleCommand, resolveHobbyLifestyle } from './systems/hobbyAccomplishments';
 import { petTrainingCommandSchema, type PetTrainingCommand, resolvePetTraining, companionMonth } from './systems/petTraining';
@@ -377,6 +378,7 @@ function applyEffects(world: World, effects: Effect[], relationshipLabels?: Boun
 
 /** Pure: consumes only persisted random streams and never mutates its input. */
 export function resolveCommand(previous: World, command: GameCommand, immutable = false): World {
+  const endTiming = beginCommandSpan('simulation'); try {
   // Mutable callers are fully checked; stored immutable worlds safely share old ledger rows.
   const world = copyWorld(previous);
   const player = world.people[world.activePersonId];
@@ -597,4 +599,5 @@ export function resolveCommand(previous: World, command: GameCommand, immutable 
   refreshNamedTenancies(world);
   if (world.overhaulVersion) { refreshOrganisedCrime(world); refreshPrison(world); refreshRomance(world); }
   return validateWorld(world, immutable);
+  } finally { endTiming?.(); }
 }

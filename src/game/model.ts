@@ -1,3 +1,4 @@
+import { beginCommandSpan } from '../performance/commandTiming';
 import { validateLifestyle } from './systems/lifestyleValidation';
 import { lifestyleSchema } from './systems/lifestyleSchemas';
 import { validateOrganisedCrime } from './systems/organisedCrime';
@@ -261,6 +262,7 @@ function parseWorldShape(value: unknown, immutable = false): World {
 }
 /** Reject contradictory imports/checkpoints rather than repairing them silently. */
 export function validateWorld(value: unknown, immutable = false): World {
+  const endTiming = beginCommandSpan('validation'); try {
   const world = parseWorldShape(value, immutable);
   if (world.overhaulVersion === 1) {
     if (!world.prisonLives || !world.affairs || !world.romanceOffers) throw new Error('Missing overhaul capability records');
@@ -542,6 +544,7 @@ export function validateWorld(value: unknown, immutable = false): World {
     immutableWorlds.add(world);
   }
   return world;
+  } finally { endTiming?.(); }
 }
 
 function freezeTree(value: unknown): void {

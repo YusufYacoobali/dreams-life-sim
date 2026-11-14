@@ -3,6 +3,7 @@ import { resolveCommand, type GameCommand } from '../../src/game/engine';
 import { validateWorld, type World } from '../../src/game/model';
 import { unpackCheckpoint } from '../../src/persistence/checkpoints';
 import { annualCommand } from './npcRelationships';
+import projectOffers from '../fixtures/v2-polish-annual-project.json';
 import archive from '../fixtures/v27-leisure-archive.json';
 
 /** Genuine saved callback/school/financial context. Only the life ID and initial
@@ -19,7 +20,9 @@ export function projectPacingStart(legacy = false): World {
 }
 
 export function projectPacingOffer(legacy = false): World {
-  const world = resolveCommand(projectPacingStart(legacy), { type: legacy ? 'resume' : 'advance' });
+  // Actual pre-polish pending frames keep this pacing comparison independent
+  // of newly available lifestyle offers in a newly started year.
+  const world = unpackCheckpoint(projectOffers.rows.find(row => row.legacy === legacy)!.payload);
   if (world.pending?.kind !== 'decision' || world.pending.templateId !== 'story-project-promise' || world.annual?.monthsProcessed !== 2) throw new Error('Expected the actual month-two saved project callback');
   return world;
 }

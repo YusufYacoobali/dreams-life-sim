@@ -97,10 +97,10 @@ test('the historical C35 registration stays exact and rejects newer source befor
   });
   const pins = driver.sourcePins(sourceRoot);
   expect(pins.birthDriver).toBe(driver.expectedC35.birthDriver);
-  // Current-source observations include the premium testing access guard.
+  // Current-source observations include scoped errors and opt-in command timing.
   // Historical C35 registration above stays exact and still rejects this source.
-  expect(pins.store).toBe('a2d1596b0e1911123c67d0c8a567d61047ae8257338593ab6cae6ac61762778e');
-  expect(pins.state).toBe('e8428001699e922cb47471b75220eadddab3a2f7c2392d62e8e74250382203dc');
+  expect(pins.store).toBe('614680005586b189d804d477878c146d8a56cf7d4acedc663665e11450784b61');
+  expect(pins.state).toBe('b8ea15f08192e69243455b4d88ff425c9dbd28072cd65ec12d94d59411af2401');
   // The SDK 58 upgrade changes the current dependency lockfile.
   expect(pins.lockfile).toBe('70d85e20d6cfcad558c8e407d10b732f350d7090610e4367fea842ca26a54f43');
   expect(pins.tool).toBe('e0eb16fb73962b9632b4949a5ed1d729d8aca97be1607490a964c5a10abe1706');

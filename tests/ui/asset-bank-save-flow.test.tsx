@@ -97,6 +97,7 @@ async function openReview(kind: Kind): Promise<Review> {
     return { command: { type: 'refinance', assetId: asset.id, principal: amount, termMonths: 240 }, title: 'Refinance this mortgage?', confirm: 'Confirm', visibleAmounts: [money(amount, asset.currency), money(refinanceFee(amount), asset.currency), money(mortgagePayment(amount, mortgageInterestBps(current), 240), asset.currency)], draft: ['New mortgage principal', value] };
   }
   if (kind === 'sale') {
+    if (!screen.queryByRole('button', { name: 'Sell Vehicle' })) await press(/^Ownership/);
     const quote = saleQuote(current, asset); await press('Sell Vehicle');
     return { command: { type: 'sell-asset', assetId: asset.id, quotedPrice: quote.price }, title: 'Accept this sale offer?', confirm: 'Confirm', visibleAmounts: [money(quote.proceeds, asset.currency)] };
   }

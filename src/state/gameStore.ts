@@ -1,9 +1,10 @@
+import { beginCommandTiming, markCommandPhase, markCommandPublished, measureCommandAsync } from '../performance/commandTiming';
 import { hasPremiumAccess, requiredFeature } from '../purchases/access';
 import type { PremiumFeature } from '../purchases/catalog';
 import type { ReviewOffer, ReviewResponse, ReviewTracker } from '../reviews/tracker';
 import { createStore } from 'zustand/vanilla';
 import { Creation, createLife, randomCreation } from '../game/createLife';
-import { fullName, GameDate, immutableWorld, World } from '../game/model';
+import { fullName, ageOn, GameDate, immutableWorld, World } from '../game/model';
 import { SaveCorrupt, SaveConflict, type LifeSummary, type SavedLifeUpdate, type SaveRepository } from '../persistence/repository';
 import { GameCommand, IneligibleAction, resolveCommand } from '../game/engine';
 import { SnapshotSummary } from '../persistence/archive';
@@ -48,8 +49,8 @@ export function createGameStore(deps: Dependencies) {
     ] });
     const run = async (action: () => Promise<void>, failure: string, quietFailure = false, errorScope?: string) => {
       if (get().busy || get().reviewBusy) return false;
-      set({ busy: true, error: null, errorScope: null, reviewOffer: null });
-      try { if (deps.yieldToUI) await deps.yieldToUI(); await action(); return true; }
+      set({ busy: true, error: null, errorScope: null, reviewOffer: null }); markCommandPhase('busy');
+      try { if (deps.yieldToUI) await deps.yieldToUI(); markCommandPhase('after-yield'); await action(); return true; }
       catch (error) { set({ error: error instanceof IneligibleAction || error instanceof SaveCorrupt || error instanceof SaveConflict ? error.message : failure, errorScope: errorScope ?? null });
         const world = get().world;
         if (!quietFailure && !world?.people[world.activePersonId]?.died) feedback({ id: 'failure:' + ++failureSequence, cues: ['error'] });
@@ -161,7 +162,10 @@ export function createGameStore(deps: Dependencies) {
         set({ world: committed, snapshots: [], lives: get().lives.map(life => life.id === committed.id ? { ...life, revision: committed.revision } : life) });
         godModeAttempt = null;
       }, 'God Mode changes could not be saved. Your previous save was kept. Try again.'),
-      dispatch: (command, errorScope) => run(async () => {
+      dispatch: (command, errorScope) => {
+        const before = get().world;
+        const timing = before && !get().busy && !get().reviewBusy ? beginCommandTiming(command.type, before.id, before.revision, ageOn(before.people[before.activePersonId], before.date)) : null;
+        return run(async () => {
         const world = get().world;
         if (!world) throw new IneligibleAction('Open a life first');
         const feature = requiredFeature(world, command);
@@ -176,8 +180,11 @@ export function createGameStore(deps: Dependencies) {
           const cues = committedCues(world, committed, command), silence = seriousTransition(world, committed);
           if (cues.length || silence) feedback({ id: world.id + ':' + committed.revision + ':' + command.type, cues, ...(silence ? { silence: true } : {}) });
         } catch { /* Feedback cannot change a successful save. */ }
-        set({ world: committed, lives: get().lives.map(life => life.id === committed.id ? { ...life, name: fullName(committed.people[committed.activePersonId]), revision: committed.revision } : life), reviewTracker:await readReview(repository),reviewOffer:null });
-      }, "Your progress couldn't be saved. Please try again.", command.type === 'end-life', errorScope),
+        const reviewTracker = await measureCommandAsync('review', () => readReview(repository));
+        markCommandPublished(committed.id, committed.revision);
+        set({ world: committed, lives: get().lives.map(life => life.id === committed.id ? { ...life, name: fullName(committed.people[committed.activePersonId]), revision: committed.revision } : life), reviewTracker,reviewOffer:null });
+      }, "Your progress couldn't be saved. Please try again.", command.type === 'end-life', errorScope).then(ok => { timing?.finish(ok); return ok; });
+      },
     };
   });
 }

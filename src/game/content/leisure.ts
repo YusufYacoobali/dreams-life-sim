@@ -13,13 +13,13 @@ export const hobbyContent = {
   cooking: { name: 'Cooking', minAge: 8, feeBps: 7, description: 'Supervised cooking sessions with ingredients and shared equipment.' },
   gardening: { name: 'Gardening', minAge: 6, feeBps: 4, description: 'Shared growing space, tools and materials to learn how plants grow.' },
   running: { name: 'Running', minAge: 6, feeBps: 1, description: 'A community running group, sensible pacing and borrowed bright vests.' },
-  swimming: { name: 'Swimming', minAge: 6, feeBps: 4, description: 'Supervised pool sessions. Leave the heroic rescue scenes to trained people.' },
+  swimming: { name: 'Swimming', minAge: 6, feeBps: 4, description: 'Supervised pool sessions to build confidence and technique.' },
   writing: { name: 'Writing', minAge: 8, feeBps: 1, description: 'Library workshops, shared notebooks and a reason to finish the paragraph.' },
-  pottery: { name: 'Pottery', minAge: 8, feeBps: 6, description: 'Shared clay, tools and kiln access. Uneven bowls remain perfectly valid bowls.' },
-  singing: { name: 'Singing', minAge: 6, feeBps: 3, description: 'A local choir and practical lessons in finding the same note as everybody else.' },
-  coding: { name: 'Coding', minAge: 8, feeBps: 2, description: 'Library computers and a small club for solving problems you may have created.' },
+  pottery: { name: 'Pottery', minAge: 8, feeBps: 6, description: 'Shared clay, tools and kiln access for your next piece.' },
+  singing: { name: 'Singing', minAge: 6, feeBps: 3, description: 'A local choir and practical lessons in singing together.' },
+  coding: { name: 'Coding', minAge: 8, feeBps: 2, description: 'Library computers and a small club for learning to code.' },
   fishing: { name: 'Fishing', minAge: 8, feeBps: 3, description: 'Supervised local sessions with shared tackle. The fish have made no promises.' },
-  dancing: { name: 'Dancing', minAge: 6, feeBps: 3, description: 'An age-appropriate community dance class. Shared space, individual elbows.' },
+  dancing: { name: 'Dancing', minAge: 6, feeBps: 3, description: 'A community dance class for your age and experience.' },
 } as const;
 export const legacyOutingKinds = ['cinema', 'concert', 'museum', 'nightclub'] as const;
 export const outingKinds = ['cinema', 'concert', 'museum', 'nightclub', 'theatre', 'comedy', 'park', 'aquarium', 'sports', 'festival'] as const;

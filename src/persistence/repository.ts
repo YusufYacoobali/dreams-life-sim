@@ -1,3 +1,4 @@
+import { measureCommandPhase, measureCommandAsync } from '../performance/commandTiming';
 import { answerReview, decodeReviewTracker, observeReviewCommit, offerReview, reviewCandidateEligible, type ReviewResponse, type ReviewTracker } from '../reviews/tracker';
 import { fullName, immutableWorld, isImmutableWorld, World } from '../game/model';
 import { packCheckpoint, unpackCheckpoint } from './checkpoints';
@@ -178,9 +179,9 @@ export class SaveRepository {
   async commit(world: World, expectedRevision: number, commandId: string, captureBefore: boolean | string = false): Promise<World> {
     if (world.revision !== expectedRevision + 1) throw new SaveConflict();
     world = immutableWorld(world);
-    const payload = packCheckpoint(world);
+    const payload = measureCommandPhase('checkpoint', () => packCheckpoint(world));
     let duplicate = false;
-    await this.db.transaction(async tx => {
+    await measureCommandAsync('sqlite', () => this.db.transaction(async tx => {
       // One native read checks both facts. The anchor preserves receipt-first
       // idempotency even if the current life row is missing.
       const current = await tx.get<{ revision: number | null; payload: string | null; has_receipt: number }>(
@@ -213,7 +214,7 @@ export class SaveRepository {
         const observed = observeReviewCommit(review, previous, world, commandId);
         if (observed !== review) await tx.run("INSERT INTO preferences(key,value) VALUES('app_review',?) ON CONFLICT(key) DO UPDATE SET value=excluded.value", [JSON.stringify(observed)]);
       }
-    });
+    }));
     if (duplicate) return this.load(world.id);
     this.current = { world, payload };
     return world;

@@ -10,3 +10,9 @@ export function isUnlockAllTestingEnabled(): boolean {
   return extra?.unlockAllTesting === true && (extra.unlockAllTestingBuild === 'internal'
     || extra.unlockAllTestingBuild === 'development' && typeof __DEV__ !== 'undefined' && __DEV__);
 }
+
+export function isCommandProfilingEnabled(): boolean {
+  const extra = Constants.expoConfig?.extra;
+  return extra?.profileCommands === true && (extra.profileCommandsBuild === 'internal'
+    || extra.profileCommandsBuild === 'development' && typeof __DEV__ !== 'undefined' && __DEV__);
+}

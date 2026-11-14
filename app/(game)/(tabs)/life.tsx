@@ -1,3 +1,4 @@
+import { markCommandUi } from '../../../src/performance/commandTiming';
 import { CultArt } from '../../../src/assets/CultArt';
 import { activeCult } from '../../../src/game/systems/cultSchemas';
 import { activeTrip, physicalLocation } from '../../../src/game/systems/travelSchemas';
@@ -7,7 +8,7 @@ import { serviceCareer,serviceQualified,serviceAway } from '../../../src/game/sy
 import { serviceCatalog } from '../../../src/game/content/services';
 import { fullTimeCreator } from '../../../src/game/systems/creatorSchemas';
 import { creatorCatalog } from '../../../src/game/content/creators';
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { ActivityIndicator, FlatList, Pressable, View, useWindowDimensions } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Ionicons from '@expo/vector-icons/Ionicons';
@@ -22,7 +23,6 @@ import { useColors } from '../../../src/ui/theme';
 import { jobs } from '../../../src/game/content/jobs';
 import { accountFor } from '../../../src/game/systems/common';
 import { activeSentence, isConfined } from '../../../src/game/systems/legalSchemas';
-import { useDelayedBusy } from '../../../src/ui/useDelayedBusy';
 import { useFeedbackPress } from '../../../src/ui/feedback';
 import { rentalResidence } from '../../../src/game/systems/rentalSchemas';
 import { resolveLifeContext, type LifeContext } from '../../../src/ui/lifeContext';
@@ -128,7 +128,9 @@ export default function Life() {
   const context = useMemo(() => resolveLifeContext(world),[world]);
   const showContextLabel = width / fontScale >= 300;
   const [advancing, setAdvancing] = useState(false);
-  const showYearProgress = useDelayedBusy(busy && advancing);
+  const showYearProgress = busy && advancing;
+  useLayoutEffect(() => { if (showYearProgress) markCommandUi(world.id, world.revision, true); }, [showYearProgress, world.id, world.revision]);
+  useLayoutEffect(() => { markCommandUi(world.id, world.revision, false); }, [world.id, world.revision]);
   const player = world.people[world.activePersonId];
   const identityCache = useRef<{ key: string; data: IdentityPresentation } | null>(null);
   const identity = useMemo(() => {

@@ -1,14 +1,14 @@
 import Constants from 'expo-constants';
 import { getConfig } from 'expo/config';
 import { resolve } from 'node:path';
-import { isUnlockAllTestingEnabled } from '../../src/access/buildAccess';
+import { isCommandProfilingEnabled, isUnlockAllTestingEnabled } from '../../src/access/buildAccess';
 
 const configure = require('../../app.config.cjs');
 const globals = globalThis as unknown as { __DEV__: boolean };
 let previousEnv: NodeJS.ProcessEnv, previousDev: boolean, previousExtra: NonNullable<typeof Constants.expoConfig>['extra'];
 beforeEach(() => {
   previousEnv = { ...process.env }; previousDev = __DEV__; previousExtra = Constants.expoConfig!.extra;
-  for (const key of ['EAS_BUILD_PROFILE', 'EAS_BUILD_DISTRIBUTION', 'EAS_BUILD', 'EAS_ENVIRONMENT', 'DREAMS_UNLOCK_ALL_TESTING']) delete process.env[key];
+  for (const key of ['EAS_BUILD_PROFILE', 'EAS_BUILD_DISTRIBUTION', 'EAS_BUILD', 'EAS_ENVIRONMENT', 'DREAMS_UNLOCK_ALL_TESTING', 'DREAMS_PROFILE_COMMANDS']) delete process.env[key];
   globals.__DEV__ = false;
 });
 afterEach(() => { process.env = previousEnv; globals.__DEV__ = previousDev; Constants.expoConfig!.extra = previousExtra; });
@@ -70,4 +70,14 @@ test('EAS internal profiles enable the flag and the store profile explicitly dis
   }
   expect(build.production.distribution).toBe('store');
   expect(build.production.env.DREAMS_UNLOCK_ALL_TESTING).toBe('0');
+});
+
+test.each([
+  ['preview', 'internal', '', true], ['development', 'internal', '', true], ['production', 'store', '', false],
+  ['production', 'internal', '', false], ['preview', 'store', '', false], ['unknown', 'internal', '', false], ['preview', 'internal', 'production', false],
+] as const)('command profiling stays opt-in and rejects public build metadata: %s/%s/%s', (profile, distribution, environment, allowed) => {
+  Object.assign(process.env, { EAS_BUILD_PROFILE: profile, EAS_BUILD_DISTRIBUTION: distribution, EAS_ENVIRONMENT: environment, NODE_ENV: 'production' });
+  Constants.expoConfig!.extra = configure({ config: {} }).extra; expect(isCommandProfilingEnabled()).toBe(false);
+  process.env.DREAMS_PROFILE_COMMANDS = '1'; Constants.expoConfig!.extra = configure({ config: {} }).extra;
+  expect(isCommandProfilingEnabled()).toBe(allowed); expect(Constants.expoConfig!.extra?.profileCommands).toBe(allowed);
 });

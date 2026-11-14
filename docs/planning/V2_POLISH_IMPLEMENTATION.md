@@ -14,7 +14,7 @@ Each checkpoint includes focused verification before its commit and push. Existi
 | 6. Hobbies, pets and artwork | UI implemented; art batch awaiting approval |
 | 7. Organised Crime balancing and prison UI | Implemented; focused checks and seeded comparison pass |
 | 8. Versioned Cell Escape replacement | Implemented; original scene art awaiting approval |
-| 9. Writing and measured performance | Pending |
+| 9. Writing and measured performance | Feedback/tracing implemented; physical-device performance open |
 | 10. Regression, native playthroughs and final fixes | Pending |
 
 ## Checkpoint 1
@@ -92,3 +92,12 @@ After the master gameplay/polish checkpoints, implement the user's separate Drea
 - Reservation, one yearly attempt, sentence context, wanted status, failure/forfeit charges, once-only settlement and Time Machine behavior remain authoritative. A new escape attempt cannot submit legacy controls, and an older game cannot accept a v3 key placement.
 - The requested original illustrated environment/object layers remain in the [artwork manifest](V2_POLISH_ARTWORK.md), awaiting the pending generation approval. The functional native door/key/lock presentation is implemented; generated-scene fidelity and phone appearance are not claimed complete.
 - Verification: all 67 cases across six focused core/UI/state suites pass. Coverage includes five-level matching/failure paths, genuine v1/v2 complete-result hashes, queued/disabled/unmounted inputs, pause/relaunch, actual on-disk SQLite start/input/settlement rollback and retry, closed-connection reopening and an independent Time Machine branch. Strict app/test types and the 608-module import-cycle check pass. Device animation/audio/accessibility acceptance remains pending.
+
+## Checkpoint 9
+
+- Life shows its annual saving indicator immediately instead of waiting 150 ms. Accepted-command and repeated-input behavior, UI yielding, exact simulation, validation, checkpoints and transaction order remain unchanged.
+- Optional development/internal `DREAMS_PROFILE_COMMANDS=1` observations cover the complete command and React commits/frame opportunities. Production metadata is forcibly disabled, no trace is saved and observation failures cannot affect commands.
+- [Performance evidence and limits](../verification/v2-polish/performance.md) retain actual seeded checkpoints at all five requested ages, their real command trace and exploratory Node/on-disk SQLite phase measurements. These do not reproduce the reported mobile delay; no unmeasured simulation speedup or release-device acceptance is claimed. Physical iOS/Android timing and playthroughs remain open.
+- Shortened several hobby descriptions, preserving all rules and previously saved events. Earlier checkpoints cover prospective result wording, quiet-year filler, natural crime copy and concise workflow reviews.
+- Annual pacing regressions now consume genuinely archived pre-polish pending project frames, keeping compatibility tests independent of new lifestyle offers in newly started years. Historical editorial registration remains pinned; only current-source observation hashes were refreshed.
+- Verification: immediate feedback, exact durable results, rejected repeats, failed-save rollback/retry, observer isolation and production profiling guards pass focused tests. The focused rerun passes 54 cases across five suites, including the existing vehicle-sale cancellation/rollback/cold-reopen journey through its new Ownership section. Strict app/test types and the 609-module import check pass. The full regression and native checks are recorded in checkpoint 10 when complete.
