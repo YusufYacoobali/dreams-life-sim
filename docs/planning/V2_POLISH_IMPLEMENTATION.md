@@ -15,7 +15,7 @@ Each checkpoint includes focused verification before its commit and push. Existi
 | 7. Organised Crime balancing and prison UI | Implemented; focused checks and seeded comparison pass |
 | 8. Versioned Cell Escape replacement | Implemented; original scene art awaiting approval |
 | 9. Writing and measured performance | Feedback/tracing implemented; physical-device performance open |
-| 10. Regression, native playthroughs and final fixes | Focused fixes pass; integrated regression/soak running; physical-device acceptance open |
+| 10. Regression, native playthroughs and final fixes | 410 suites / 7,143 tests, 120-life soak, exports and Android release build pass; physical-device acceptance open |
 
 ## Checkpoint 1
 
@@ -36,9 +36,9 @@ Each checkpoint includes focused verification before its commit and push. Existi
 - Verification: focused Actor overhaul, Model mechanics, creative polish, board maintenance/integrity, UI, modal and SQLite save suites pass across main runs and affected reruns. This includes legacy/currency fixtures, unchanged RNG streams, current-country caches, archived-decision validation, exact checkpoint round-trips, the earned-fame cap and rollback/retry of a brand appearance. Strict app/test types and the 599-module import-cycle check pass. Installed-device acceptance remains pending.
 
 
-## Queued follow-up
+## Subsequent shop delivery
 
-After the master gameplay/polish checkpoints, implement the user's separate Dreams Shop redesign from the subsequently supplied plan and three reference images. Keep its commits separate. Preserve all eight product IDs and RevenueCat entitlements, use localized prices, keep free careers free, add the in-game `/shop` route and reusable product-detail popups, and retain `/store` for Settings/no active life.
+The user's separate [Dreams Shop redesign](V2_SHOP_IMPLEMENTATION.md) follows these gameplay changes in its own commit, `c22c64bf`. It preserves all eight product IDs and RevenueCat entitlements, uses localized prices, keeps free careers free, adds the in-game `/shop` route and reusable product-detail popups, and retains `/store` for Settings/no active life.
 
 
 ## Checkpoint 3
@@ -100,7 +100,7 @@ After the master gameplay/polish checkpoints, implement the user's separate Drea
 - [Performance evidence and limits](../verification/v2-polish/performance.md) retain actual seeded checkpoints at all five requested ages, their real command trace and exploratory Node/on-disk SQLite phase measurements. These do not reproduce the reported mobile delay; no unmeasured simulation speedup or release-device acceptance is claimed. Physical iOS/Android timing and playthroughs remain open.
 - Shortened several hobby descriptions, preserving all rules and previously saved events. Earlier checkpoints cover prospective result wording, quiet-year filler, natural crime copy and concise workflow reviews.
 - Annual pacing regressions now consume genuinely archived pre-polish pending project frames, keeping compatibility tests independent of new lifestyle offers in newly started years. Historical editorial registration remains pinned; only current-source observation hashes were refreshed.
-- Verification: immediate feedback, exact durable results, rejected repeats, failed-save rollback/retry, observer isolation and production profiling guards pass focused tests. The focused rerun passes 54 cases across five suites, including the existing vehicle-sale cancellation/rollback/cold-reopen journey through its new Ownership section. Strict app/test types and the 609-module import check pass. The full regression and native checks are recorded in checkpoint 10 when complete.
+- Verification: immediate feedback, exact durable results, rejected repeats, failed-save rollback/retry, observer isolation and production profiling guards pass focused tests. The focused rerun passes 54 cases across five suites, including the existing vehicle-sale cancellation/rollback/cold-reopen journey through its new Ownership section. Strict app/test types and the 609-module import check pass. Final integrated results are recorded in checkpoint 10 and its linked verification report.
 
 ## Checkpoint 10 — verification and final fixes
 
@@ -109,5 +109,5 @@ After the master gameplay/polish checkpoints, implement the user's separate Drea
 - The last unreported long-life suite was stopped before completion after its manual-activation-at-age-20 assertion was identified as obsolete. It now requires activation at the first normal command boundary; the full integrated run includes all its natural-life, mortality, wages, fees, driving and cold-save checks. The initial run is not reported as a clean full pass.
 - Found and fixed a real display issue: fractional agency percentages were rounded by the shared modal formatter. Contract review, signed-result and agency-history rates now retain their exact percentages; other stat and money formatting stays unchanged. Eighteen focused game/modal cases and 19 creative UI cases pass.
 - Age Up and Continue This Year both pass a real SQLite/UI-yield test for immediate saving feedback, blocked repeat input and exact resolver results. The resume case reaches its planning pause through actual archived pet/year commands rather than patched annual flags.
-- Strict app/test types and import checks pass. Both Android and iOS Hermes production exports pass for the gameplay checkpoint. The integrated full regression, 120-life soak, final exports and native build result are recorded in the final verification report.
+- Final integrated verification passes all 410 suites / 7,143 tests, all 120 unique soak lives, strict app/test types, the 613-module import check, both production Hermes exports and the SDK 58 Android internal release APK build. The [combined verification report](../verification/v2-polish/final.md) records the exact scope, the parallel worker-shutdown warning and a clean 64-test focused open-handle rerun.
 - The separate shop implementation follows these gameplay changes. Original art remains tracked in the asset manifest; physical iOS/Android appearance, accessibility and release-device performance acceptance remain open.
