@@ -1,0 +1,34 @@
+{
+  "scope": "New installation written entirely by retained reader-32 code from real command-generated/archived lives. Not a captured user installation. All eight tables populated through repository operations; no payload or reader-marker edits.",
+  "reference": "8378d0f8",
+  "sourceHash": "408c3c1fca27fdb60441c5ab338ba962b67b11f30c59746d3168baa2e32231ac",
+  "inputSha256": "9e266d88823c4fc5e9fb6c28c9c86f59ab986eb696756519e8f31bbf1be2f2ae",
+  "archivedFixtureSha256": "0fbab430a991642d3d6b18efa06ef270405aaa99252dc4f70709a1493ad38f63",
+  "reader": 32,
+  "tableCounts": {
+    "backups": 3,
+    "branches": 1,
+    "lives": 3,
+    "preferences": 1,
+    "receipts": 1,
+    "restore_receipts": 1,
+    "snapshot_metadata": 3,
+    "snapshots": 3
+  },
+  "rowsSha256": "e1eece7a1b4c0c8b06d402ba028795d8311bc021c9af4c545cd58a6ac6930f74",
+  "lives": [
+    {
+      "id": "life_content4_bubbles",
+      "canonicalSha256": "5f30a5bd67465b52cab8627dd30d2214c3c8b437dfe6e2a6c1b8c9a4f969035f"
+    },
+    {
+      "id": "life_reader32_branch",
+      "canonicalSha256": "34b35e933d4d88c3de48096c43e85a498424fb275f8b1f19fb103d679f9dedf3"
+    },
+    {
+      "id": "life_v2_performance_42",
+      "canonicalSha256": "2fbc5eaa881d333fef87d733fea83c92ed0c0eac022e1e824657334160f6d064"
+    }
+  ],
+  "databaseSha256": "5ad3844c66e055c7540c2d16f472598bd17b17f2912908c9b08836b55d52d1c8"
+}

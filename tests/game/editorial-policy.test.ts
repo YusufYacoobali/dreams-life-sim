@@ -97,10 +97,10 @@ test('the historical C35 registration stays exact and rejects newer source befor
   });
   const pins = driver.sourcePins(sourceRoot);
   expect(pins.birthDriver).toBe(driver.expectedC35.birthDriver);
-  // Current-source observations include scoped errors, command timing and post-save feedback spans.
+  // Current-source observations include opt-in memory recording in place of per-event console logging.
   // Historical C35 registration above stays exact and still rejects this source.
   expect(pins.store).toBe('d5bfbe03b6661a57147825b5288b93ddbd55b6d5b9304714de430b73dfe7a3e8');
-  expect(pins.state).toBe('4036cd0a0c0cd13d5091f2770ce148482e4accb06c113f823640a076c5bc2ca1');
+  expect(pins.state).toBe('8f15746447ea274f4b4f94323950c5e64b754a7dcd14eefdb1e8ed9447cda5b8');
   // The SDK 58 blur module changes only this current dependency observation.
   expect(pins.lockfile).toBe('649a0f98ec3ff2363dcd85312f7effee0cbb76a8e14d6e226265c2690e0403e0');
   expect(pins.tool).toBe('e0eb16fb73962b9632b4949a5ed1d729d8aca97be1607490a964c5a10abe1706');
