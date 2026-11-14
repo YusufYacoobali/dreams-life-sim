@@ -1,0 +1,140 @@
+{
+  "baseCommit": "7231fbc6",
+  "files": [
+    {
+      "path": "assets/generated/expanded-hobby-atlas.png",
+      "sha256": "b346601bd3cca3b32963c8b4406d0b3654739ec6ba007f311af88d984bbfa2ce",
+      "bytes": 1639835,
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "transparentPixels": 1227420,
+      "alphaRange": [
+        0,
+        254
+      ]
+    },
+    {
+      "path": "assets/generated/cell-escape-background.png",
+      "sha256": "170f87ca25462945d587c11d343e3be8dd9083ca21d3b90b4a1b232323882d3a",
+      "bytes": 2035806,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/generated/cell-escape-objects.png",
+      "sha256": "6a57523f5042f7729987b91c34a188afbc98fbc5589db9fcad42fa907b57bbb0",
+      "bytes": 1854992,
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "transparentPixels": 614821,
+      "alphaRange": [
+        0,
+        254
+      ]
+    }
+  ],
+  "clips": [
+    {
+      "family": "hobbies",
+      "id": "running",
+      "edgeAlphaMax": 0
+    },
+    {
+      "family": "hobbies",
+      "id": "swimming",
+      "edgeAlphaMax": 1
+    },
+    {
+      "family": "hobbies",
+      "id": "writing",
+      "edgeAlphaMax": 1
+    },
+    {
+      "family": "hobbies",
+      "id": "pottery",
+      "edgeAlphaMax": 1
+    },
+    {
+      "family": "hobbies",
+      "id": "singing",
+      "edgeAlphaMax": 1
+    },
+    {
+      "family": "hobbies",
+      "id": "coding",
+      "edgeAlphaMax": 1
+    },
+    {
+      "family": "hobbies",
+      "id": "fishing",
+      "edgeAlphaMax": 1
+    },
+    {
+      "family": "hobbies",
+      "id": "dancing",
+      "edgeAlphaMax": 1
+    },
+    {
+      "family": "cell",
+      "id": "door",
+      "edgeAlphaMax": 1
+    },
+    {
+      "family": "cell",
+      "id": "plate",
+      "edgeAlphaMax": 1
+    },
+    {
+      "family": "cell",
+      "id": "open",
+      "edgeAlphaMax": 1
+    },
+    {
+      "family": "cell",
+      "id": "window",
+      "edgeAlphaMax": 1
+    },
+    {
+      "family": "cell",
+      "id": "circle",
+      "edgeAlphaMax": 0
+    },
+    {
+      "family": "cell",
+      "id": "triangle",
+      "edgeAlphaMax": 1
+    },
+    {
+      "family": "cell",
+      "id": "square",
+      "edgeAlphaMax": 1
+    },
+    {
+      "family": "cell",
+      "id": "diamond",
+      "edgeAlphaMax": 1
+    },
+    {
+      "family": "cell",
+      "id": "star",
+      "edgeAlphaMax": 1
+    },
+    {
+      "family": "cell",
+      "id": "hexagon",
+      "edgeAlphaMax": 1
+    }
+  ],
+  "keyGeometry": "All six bow shapes; native 1/2/3 teeth fit inside their clips and meet opaque shaft pixels.",
+  "staticReview": "../v2-polish/artwork-review.png",
+  "nativeDeviceAcceptance": "Not performed in this checkout."
+}
