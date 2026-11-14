@@ -28,8 +28,10 @@ function Diagnostics() {
   };
   const exportReport = async (share: boolean) => {
     commandProfiler.stop();
-    const config = Constants.expoConfig, hermes = 'HermesInternal' in globalThis;
-    const report = commandProfiler.report({ platform: Platform.OS, osVersion: String(Platform.Version), appVersion: config?.version ?? 'unknown', build: Platform.OS === 'ios' ? config?.ios?.buildNumber ?? 'unknown' : String(config?.android?.versionCode ?? 'unknown'), sourceRevision: config?.extra?.profileSourceRevision ?? null, engine: hermes ? 'Hermes' : 'other', isolatedStorage: true });
+    const config = Constants.expoConfig, hermes = 'HermesInternal' in globalThis, revision = config?.extra?.profileSourceRevision;
+    // Expo can normalize an unset extra value to an object in its manifest.
+    const sourceRevision = typeof revision === 'string' && /^[a-f0-9]{7,40}$/.test(revision) ? revision : null;
+    const report = commandProfiler.report({ platform: Platform.OS, osVersion: String(Platform.Version), appVersion: config?.version ?? 'unknown', build: Platform.OS === 'ios' ? config?.ios?.buildNumber ?? 'unknown' : String(config?.android?.versionCode ?? 'unknown'), sourceRevision, engine: hermes ? 'Hermes' : 'other', isolatedStorage: true });
     if (!report) return;
     const name = 'Dreams-performance-' + new Date().toISOString().replace(/[:.]/g, '-') + '.json', text = JSON.stringify(report);
     if (share) {

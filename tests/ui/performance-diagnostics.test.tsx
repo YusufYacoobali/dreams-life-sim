@@ -5,6 +5,7 @@ import { ThemeProvider } from '../../src/ui/theme';
 import { commandProfiler } from '../../src/performance/internalProfiler';
 import { beginCommandTiming, beginCommandSpan } from '../../src/performance/commandTiming';
 import { createGameStore } from '../../src/state/gameStore';
+import Constants from 'expo-constants';
 let mockEnabled=true;
 const mockRedirect=jest.fn(),mockWrite=jest.fn(),mockDelete=jest.fn(),mockShare=jest.fn(async(..._args:unknown[])=>{}),mockCold=jest.fn();
 const mockStore=createGameStore({repository:async()=>{throw Error('No save access expected');},id:()=>'',date:()=>({year:2026,month:11,day:14})});
@@ -20,11 +21,12 @@ const press=async(name:string)=>act(async()=>{await fireEvent.press(screen.getBy
 afterEach(()=>{commandProfiler.clear();mockEnabled=true;jest.clearAllMocks();});
 test('internal controls record only on request, show a breakdown, and share a parseable report without save content',async()=>{
  const view=await render(frame(<Diagnostics/>));expect(commandProfiler.status().recording).toBe(false);expect(screen.getByRole('button',{name:'Cold Read Active Save'})).toBeDisabled();
+ const extra=Constants.expoConfig!.extra;Constants.expoConfig!.extra={...extra,profileSourceRevision:{}};
  await press('Start Recording');expect(commandProfiler.status().recording).toBe(true);
  const trace=beginCommandTiming('borrow','secret-save-id',1,30)!,end=beginCommandSpan('simulation');end?.();trace.finish(true);
  await press('Stop Recording');expect(commandProfiler.status().recording).toBe(false);expect(screen.getByText(/borrow\/age-30\/simulation/)).toBeTruthy();
  await press('Share JSON Report');expect(mockShare).toHaveBeenCalledTimes(1);expect(mockDelete).toHaveBeenCalledTimes(1);
- const report=JSON.parse(mockWrite.mock.calls[0][0]);expect(report.format).toBe('dreams-performance-report');expect(report.native.firstVisibleFeedbackMs).toBeNull();expect(JSON.stringify(report)).not.toContain('secret-save-id');
+ const report=JSON.parse(mockWrite.mock.calls[0][0]);expect(report.format).toBe('dreams-performance-report');expect(report.environment.sourceRevision).toBeNull();expect(report.native.firstVisibleFeedbackMs).toBeNull();expect(JSON.stringify(report)).not.toContain('secret-save-id');Constants.expoConfig!.extra=extra;
  await press('Clear Recording');expect(commandProfiler.status().retainedEvents).toBe(0);await view.unmount();
 });
 test('public builds reject the direct diagnostics route and cannot start or export a recorder',async()=>{
