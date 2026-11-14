@@ -1,0 +1,15 @@
+{
+  "scope": "Actual reader-32 implementation on a preserved pre-upgrade copy; metadata upgrade on a separate copy; old-reader refusal of a third-party-upgraded reader33 copy; current-reader refusal of a distinct future34 control. Node on-disk SQLite repository verification, not an installed native app/container.",
+  "sourceHashes": [
+    "408c3c1fca27fdb60441c5ab338ba962b67b11f30c59746d3168baa2e32231ac",
+    "4b244a41cc527335366770039f877e3ebf420a28f50a37de25aa1c598a21eff2"
+  ],
+  "lives": 3,
+  "pre32Sha256": "5ad3844c66e055c7540c2d16f472598bd17b17f2912908c9b08836b55d52d1c8",
+  "post33Sha256": "ab52aa483ee05d7feac21af2167567065468c305cabaafda618960a47c92ddf7",
+  "future34Sha256": "5b65e1701ff06b59c3d3704b737a4067d9800f388406ab317e6ce30ce8575843",
+  "pre32StillByteIdentical": true,
+  "upgradeRowsByteIdentical": true,
+  "reader32Refuses33WithoutWritesOrByteChanges": true,
+  "reader33Refuses34WithoutWritesOrByteChanges": true
+}
