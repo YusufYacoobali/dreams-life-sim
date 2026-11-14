@@ -1,4 +1,4 @@
-import { beginCommandTiming, markCommandPhase, markCommandPublished, measureCommandAsync } from '../performance/commandTiming';
+import { beginCommandTiming, markCommandPhase, markCommandPublished, measureCommandAsync, measureCommandPhase } from '../performance/commandTiming';
 import { hasPremiumAccess, requiredFeature } from '../purchases/access';
 import type { PremiumFeature } from '../purchases/catalog';
 import type { ReviewOffer, ReviewResponse, ReviewTracker } from '../reviews/tracker';
@@ -176,10 +176,10 @@ export function createGameStore(deps: Dependencies) {
         const commandId = 'revision:' + world.revision + ':' + command.type;
         const committed = await repository.commit(next, world.revision, commandId, command.type === 'end-life' ? 'Before End This Life' : command.type === 'advance');
         // The durable, returned result determines feedback, before optional review reads.
-        try {
+        measureCommandPhase('feedback', () => { try {
           const cues = committedCues(world, committed, command), silence = seriousTransition(world, committed);
           if (cues.length || silence) feedback({ id: world.id + ':' + committed.revision + ':' + command.type, cues, ...(silence ? { silence: true } : {}) });
-        } catch { /* Feedback cannot change a successful save. */ }
+        } catch { /* Feedback cannot change a successful save. */ } });
         const reviewTracker = await measureCommandAsync('review', () => readReview(repository));
         markCommandPublished(committed.id, committed.revision);
         set({ world: committed, lives: get().lives.map(life => life.id === committed.id ? { ...life, name: fullName(committed.people[committed.activePersonId]), revision: committed.revision } : life), reviewTracker,reviewOffer:null });

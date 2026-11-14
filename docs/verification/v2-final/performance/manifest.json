@@ -1,0 +1,58 @@
+{
+  "before.json.gz": {
+    "bytes": 215432,
+    "sha256": "c47e02444cc81433b14884f6ee73e5c2e8d3414bedbd8b64915f7d6af518e441",
+    "decodedBytes": 2405104,
+    "decodedSha256": "ea1dbe2e1afe8ea54fa18fb340a0d414bf2a23dd8a1cbfa5e5d08807cd00a933"
+  },
+  "after.json.gz": {
+    "bytes": 223460,
+    "sha256": "e12862a1eced5cea64921a745c2961ddf7247b8152616dc25b59ddd781927ff9",
+    "decodedBytes": 2517549,
+    "decodedSha256": "598bd692d2fd456b5d34f0ffe58901a0c950f28e995eac53a423d25cc857ac03"
+  },
+  "comparison.json.gz": {
+    "bytes": 31307,
+    "sha256": "69bdd7211cabc2b744809eabd707067c9d8a9c7445e4418201c8a275f95a38d7",
+    "decodedBytes": 202331,
+    "decodedSha256": "5d36b1ff2e4e3d0630bebf8628d7025270eb51f4d3836dc555ebb66c075139a1"
+  },
+  "continue-before.json.gz": {
+    "bytes": 21114,
+    "sha256": "b272fa1c3c979dc794a8414d6ffedb01b0a9ee4a5d6365d5eefc3843b114572c",
+    "decodedBytes": 238079,
+    "decodedSha256": "a86e9feed60cb65a52225d1154c6f2a0fb3f3e432c56699b4e157987be5f730e"
+  },
+  "continue-after.json.gz": {
+    "bytes": 22105,
+    "sha256": "17ccd48155f9b3795cd64e8752aad790c2d2e201afa8cacf4e6c02ad390301f1",
+    "decodedBytes": 249245,
+    "decodedSha256": "de66a14025993da8ef3bb0ad29a9077d202460958ad225745cd86188652c8515"
+  },
+  "continue-comparison.json.gz": {
+    "bytes": 4295,
+    "sha256": "e277aaf919dc65157da8eb37cccef2af0b445a92544ee7fe6ce8d7bad53a6bf3",
+    "decodedBytes": 20638,
+    "decodedSha256": "c6af5eae1d08322687f3e9a18112b786748f11fd84bcff640c0533fd8569c342"
+  },
+  "continue-inputs.json.gz": {
+    "bytes": 33503,
+    "sha256": "9121984bc989853c1ec510300c6b0ae2fb83def3f67f2d2fa13da0dc96c461b8",
+    "decodedBytes": 45081,
+    "decodedSha256": "eb3ce0c8baf73a533b52d476f03257c6ff5d2d371a5fe6c145d6d088be450b6f"
+  },
+  "environment": {
+    "recordedAtUtc": "2026-11-14T08:16:41.341503+00:00",
+    "node": "v24.19.0",
+    "cpuMax": "400000 100000",
+    "memoryMax": "17179869184",
+    "sourceOrder": [
+      "7231fbc6 adult ages",
+      "optimized adult ages",
+      "7231fbc6 real Continue",
+      "optimized real Continue"
+    ],
+    "concurrentJobs": "No Jest, typecheck, crime simulation, exports, native compilation or emulators during timed runs. Root/agents performed source review, Git and documentation only.",
+    "deviceAcceptance": "Unverified; no iOS/physical Android access or usable hardware-accelerated emulator."
+  }
+}

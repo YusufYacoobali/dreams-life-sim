@@ -1,5 +1,5 @@
 import type { GameCommand } from '../game/engine';
-import type { World } from '../game/model';
+import { isImmutableWorld, type World } from '../game/model';
 import { lifeProgress } from '../progression/progress';
 import type { GameplayCue } from './gameplayFeedback';
 
@@ -16,6 +16,16 @@ const noOutcome = new Set<GameCommand['type']>([
   'mini-game-start', 'mini-game-input', 'mini-game-pause', 'mini-game-resume',
   'mini-game-forfeit', 'end-life', 'continue-child',
 ]);
+const completedProgress = new WeakMap<World, ReadonlySet<string>>();
+function completedAchievements(world: World): ReadonlySet<string> {
+  const certified = isImmutableWorld(world), cached = certified ? completedProgress.get(world) : undefined;
+  if (cached) return cached;
+  const complete = new Set(lifeProgress(world)?.achievements.filter(row => row.complete).map(row => row.id));
+  // The next command's "before" is this exact committed world. Its retained
+  // records cannot change; mutable test/import worlds always recompute.
+  if (certified) completedProgress.set(world, complete);
+  return complete;
+}
 
 export function seriousTransition(before: World, after: World) {
   const id = before.activePersonId, person = after.people[id], previous = before.people[id];
@@ -50,8 +60,8 @@ function milestone(before: World, after: World) {
     if ([100, 1000, 10000].some(threshold => peak < threshold && cult.followers >= threshold)) return true;
     if (cult.threads.some(row => row.kind === 'claim' && row.outcome === 'success' && row.fulfilledMonth !== null && old.threads.find(prior => prior.id === row.id)?.fulfilledMonth == null)) return true;
   }
-  const prior = new Set(lifeProgress(before)?.achievements.filter(row => row.complete).map(row => row.id));
-  return lifeProgress(after)?.achievements.some(row => row.complete && substantialAchievements.has(row.id) && !prior.has(row.id)) ?? false;
+  const prior = completedAchievements(before);
+  return [...completedAchievements(after)].some(id => substantialAchievements.has(id) && !prior.has(id));
 }
 
 function unsuccessful(before: World, after: World, command: GameCommand) {

@@ -24,7 +24,7 @@ test('opt-in timings separate yield, simulation, validation, encoding and SQLite
     release(); expect(await pending).toBe(true);
     expect(store.getState().world).toEqual(resolveCommand(initial, { type: 'advance' }, true)); expect(await repository.load(initial.id)).toEqual(store.getState().world);
     const phases = events.map(row => row.phase);
-    for (const phase of ['after-yield', 'simulation:start', 'validation:start', 'validation:end', 'simulation:end', 'checkpoint:start', 'checkpoint:end', 'sqlite:start', 'sqlite:end', 'review:start', 'review:end', 'publication', 'complete']) expect(phases).toContain(phase);
+    for (const phase of ['after-yield', 'simulation:start', 'validation:start', 'validation:end', 'simulation:end', 'checkpoint:start', 'checkpoint:end', 'sqlite:start', 'sqlite:end', 'feedback:start', 'feedback:end', 'review:start', 'review:end', 'publication', 'complete']) expect(phases).toContain(phase);
     expect(phases.indexOf('sqlite:end')).toBeLessThan(phases.indexOf('publication')); expect(phases.at(-1)).toBe('complete');
     expect(events.every(row => row.elapsedMs >= 0 && Number.isFinite(row.elapsedMs))).toBe(true);
     expect(events.every(row => !('lifeId' in row) && !('world' in row))).toBe(true);

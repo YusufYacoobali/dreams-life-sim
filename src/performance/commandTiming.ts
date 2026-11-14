@@ -1,4 +1,4 @@
-export type CommandPhase = 'press' | 'busy' | 'after-yield' | 'simulation:start' | 'simulation:end' | 'validation:start' | 'validation:end' | 'checkpoint:start' | 'checkpoint:end' | 'sqlite:start' | 'sqlite:end' | 'review:start' | 'review:end' | 'publication' | 'ui:busy-commit' | 'ui:busy-frame' | 'ui:world-commit' | 'ui:world-frame' | 'complete' | 'failed';
+export type CommandPhase = 'press' | 'busy' | 'after-yield' | 'simulation:start' | 'simulation:end' | 'validation:start' | 'validation:end' | 'checkpoint:start' | 'checkpoint:end' | 'sqlite:start' | 'sqlite:end' | 'feedback:start' | 'feedback:end' | 'review:start' | 'review:end' | 'publication' | 'ui:busy-commit' | 'ui:busy-frame' | 'ui:world-commit' | 'ui:world-frame' | 'complete' | 'failed';
 export type CommandTimingEvent = { trace: number; command: string; age: number; phase: CommandPhase; elapsedMs: number };
 type Trace = { id: number; command: string; age: number; started: number; lifeId: string; beforeRevision: number; publishedRevision?: number; observer: (event: CommandTimingEvent) => void };
 let listener: ((event: CommandTimingEvent) => void) | null = null, active: Trace | null = null, last: Trace | null = null, sequence = 0;
@@ -19,7 +19,7 @@ export function beginCommandTiming(command: string, lifeId: string, beforeRevisi
   return { finish(ok: boolean) { emit(trace, ok ? 'complete' : 'failed'); if (active === trace) { last = trace; active = null; } } };
 }
 export function markCommandPhase(phase: CommandPhase) { if (active) emit(active, phase); }
-export function beginCommandSpan(phase: 'simulation' | 'validation' | 'checkpoint' | 'sqlite' | 'review') {
+export function beginCommandSpan(phase: 'simulation' | 'validation' | 'checkpoint' | 'sqlite' | 'feedback' | 'review') {
   if (!active) return undefined;
   const trace = active; emit(trace, `${phase}:start`);
   return () => emit(trace, `${phase}:end`);
