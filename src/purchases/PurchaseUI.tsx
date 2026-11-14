@@ -58,6 +58,10 @@ export function usePremiumAction(identity: string) {
     if (next === 'unlock' && !hasPremiumAccess(purchases.getState().ownership[intent.feature])) return;
     closingRef.current = { pending: intent, next, dismissed: false }; setClosing(true);
   }, []);
+  const cancel = useCallback(() => {
+    const intent = pendingRef.current;
+    if (intent) { intent.valid = false; close(intent, 'cancel', true); }
+  }, [close]);
   useEffect(() => {
     const intent = pendingRef.current;
     if (intent && (!intent.valid || intent.identity !== identity)) close(intent, 'cancel', true);
@@ -77,6 +81,7 @@ export function usePremiumAction(identity: string) {
   // close must let this session acknowledge onShow before requesting removal.
   const nativeVisible = visible || Platform.OS === 'ios' && !!pending && shownId !== pending.id;
   return {
+    cancel,
     run(feature: PremiumFeature | null, trigger: string, action: () => void, options?: { onExplore?: () => void }) {
       if (!mounted.current || currentIdentity.current !== identity || pendingRef.current) return;
       if (!feature || hasPremiumAccess(purchases.getState().ownership[feature])) { action(); return; }

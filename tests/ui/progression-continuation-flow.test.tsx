@@ -14,7 +14,7 @@ import archive from '../fixtures/v28-ordinary-hobby-archive.json';
 import graduate from '../fixtures/v3-employed-graduate.json';
 
 let mockStore: ReturnType<typeof createGameStore>, mockParams: Record<string, string> = {};
-jest.mock('expo-router', () => ({ router: { back: jest.fn(), push: jest.fn(), replace: jest.fn() }, useLocalSearchParams: () => mockParams, Redirect: () => null }));
+jest.mock('expo-router', () => ({ router: { back: jest.fn(), push: jest.fn(), replace: jest.fn() }, useLocalSearchParams: () => mockParams, useFocusEffect: () => {}, Redirect: () => null }));
 jest.mock('../../src/state/useGame', () => ({ useGame: (selector: unknown) => require('zustand').useStore(mockStore, selector) }));
 import { router } from 'expo-router';
 import Achievements from '../../app/(game)/achievements';

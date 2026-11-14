@@ -15,10 +15,16 @@ import { featureProduct, features, noOwnership, products, productIds, type Premi
 import { shopContent } from '../../src/purchases/ShopProduct';
 import type { Customer, PurchaseAdapter } from '../../src/purchases/service';
 
-let mockStore: ReturnType<typeof createGameStore>, mockAdapter: PurchaseAdapter | null;
+let mockStore: ReturnType<typeof createGameStore>, mockAdapter: PurchaseAdapter | null, mockBlur: (() => void) | undefined;
 jest.mock('../../src/state/useGame', () => ({ useGame: (selector: unknown) => require('zustand').useStore(mockStore, selector) }));
 jest.mock('../../src/purchases/native', () => ({ purchases: require('../../src/purchases/service').createPurchaseService(async () => mockAdapter) }));
-jest.mock('expo-router', () => ({ router: { push: jest.fn(), back: jest.fn() }, useLocalSearchParams: () => ({ kind: 'athlete' }) }));
+jest.mock('expo-router', () => ({
+  router: { push: jest.fn(), back: jest.fn() }, useLocalSearchParams: () => ({ kind: 'athlete' }),
+  useFocusEffect: (effect: () => (() => void)) => require('react').useEffect(() => {
+    const cleanup = effect(); mockBlur = cleanup;
+    return () => { cleanup(); mockBlur = undefined; };
+  }, [effect]),
+}));
 jest.mock('../../src/minigames/components/MiniGameEntry', () => ({ MiniGameEntry: () => null }));
 import { purchases } from '../../src/purchases/native';
 import { router } from 'expo-router';
@@ -209,6 +215,23 @@ test('repeated cross-career presses keep one purchase session and its original d
   await waitFor(() => expect(screen.getByRole('button', { name: 'Buy Athlete Career' })).toBeEnabled());
   await press('Explore Career'); await finishDismissal();
   expect(router.push).toHaveBeenCalledTimes(1); expect(router.push).toHaveBeenCalledWith({ pathname: '/career/[kind]', params: { kind: 'athlete' } });
+});
+
+test('leaving the discovery route during payment cancels navigation even if the mounted screen later receives ownership', async () => {
+  let finish!: (customer: Customer) => void;
+  buy.mockImplementationOnce(() => new Promise<Customer>(resolve => { finish = resolve; }));
+  await setup(); const before = await repository.export(mockStore.getState().world!.id);
+  await render(frame(<SpecialCareers />)); await fireEvent.press(row('Athlete'));
+  await waitFor(() => expect(screen.getByRole('button', { name: 'Buy Athlete Career' })).toBeEnabled());
+  await press('Buy Athlete Career');
+  expect(purchases.getState().busy).toBe(true);
+  await act(async () => { mockBlur!(); });
+  await finishDismissal();
+  await act(async () => { finish(customer('athlete')); });
+  expect(purchases.getState().ownership.athlete).toBe(true);
+  expect(router.push).not.toHaveBeenCalled();
+  expect(screen.UNSAFE_queryAllByType(Modal)).toHaveLength(0);
+  expect(await repository.export(mockStore.getState().world!.id)).toBe(before);
 });
 
 test('testing access opens all four careers without marking ownership and switching it off restores their locks', async () => {

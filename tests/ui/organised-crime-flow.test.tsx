@@ -19,6 +19,7 @@ let mockStore: ReturnType<typeof createGameStore>;
 jest.mock("expo-router", () => ({
   router: { back: jest.fn(), push: jest.fn() },
   useLocalSearchParams: () => ({}),
+  useFocusEffect: () => {},
 }));
 jest.mock("../../src/state/useGame", () => ({
   useGame: (selector: unknown) =>

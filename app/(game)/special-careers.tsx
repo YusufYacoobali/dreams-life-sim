@@ -1,10 +1,10 @@
 import { HealthLegalArt } from '../../src/assets/HealthLegalArt';
 import { CultArt } from '../../src/assets/CultArt';
 import { activeCult } from '../../src/game/systems/cultSchemas';
-import React from 'react';
+import React, { useCallback } from 'react';
 import { View } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { router } from 'expo-router';
+import { router, useFocusEffect } from 'expo-router';
 import { useGame } from '../../src/state/useGame';
 import { serviceCatalog,serviceKinds } from '../../src/game/content/services';
 import { creatorCatalog } from '../../src/game/content/creators';
@@ -29,6 +29,7 @@ function PremiumCareerRow({ world, feature, title, subtitle, icon, onOpen, onReq
 
 export default function SpecialCareers() {
   const world = useGame(s => s.world)!, premium = usePremiumAction(world.id + ':' + world.activePersonId);
+  useFocusEffect(useCallback(() => () => premium.cancel(), [premium.cancel]));
   const openCareer = (feature: PremiumCareerFeature, onOpen: () => void) => premium.run(requiredCareerFeature(world, feature), 'career-discovery:' + feature, onOpen, { onExplore: onOpen });
   return <Page><Header title="Special Careers" onBack={() => router.back()} />
     <Card><Heading size={18}>Performance & Public Life</Heading>
