@@ -248,6 +248,34 @@ const flightProps = (session: MiniGameSession) => ({
   onExit: jest.fn(), onSkip: jest.fn(async () => true),
 });
 
+test('only Cell Escape V3 uses the compact header and the measured gameplay viewport', async () => {
+  const session: MiniGameSession = { ...practiceFlight(false), kind: 'escape', escapeVersion: 3 };
+  const props = { ...flightProps(session), kind: 'escape' as const };
+  const view = await show(<MiniGameScreen {...props} />);
+  expect(screen.getByRole('header', { name: 'Cell Escape' })).toBeOnTheScreen();
+  expect(screen.queryByText('CHALLENGE')).toBeNull();
+  expect(screen.queryByText('PRACTICE')).toBeNull();
+  expect(screen.queryByText('Your pace')).toBeNull();
+  expect(screen.queryByText('Matching')).toBeNull();
+  const viewport = screen.getByTestId('cell-gameplay-viewport');
+  const scroll = screen.UNSAFE_getAllByType(Native.ScrollView).find(node => node.props.testID === 'cell-gameplay-viewport')!;
+  expect(Native.StyleSheet.flatten(scroll.props.contentContainerStyle)).not.toHaveProperty('minHeight');
+  await fireEvent(viewport, 'layout', { nativeEvent: { layout: { x: 0, y: 0, width: 375, height: 521 } } });
+  expect(Native.StyleSheet.flatten(screen.getByTestId('cell-gameplay-content').props.style).minHeight).toBe(521);
+  await fireEvent(viewport, 'layout', { nativeEvent: { layout: { x: 0, y: 0, width: 320, height: 340 } } });
+  expect(Native.StyleSheet.flatten(screen.getByTestId('cell-gameplay-content').props.style).minHeight).toBe(340);
+  await fireEvent.press(screen.getByRole('button', { name: 'Pause' }));
+  expect(screen.getByRole('button', { name: 'Resume' })).toBeOnTheScreen();
+  await fireEvent.press(screen.getByRole('button', { name: 'Resume' }));
+  expect(screen.getAllByRole('radio')).toHaveLength(6);
+  const legacy = { ...session, escapeVersion: 2 as const };
+  await view.rerender(frame(<MiniGameScreen {...props} session={legacy} />));
+  expect(screen.getByText('PRACTICE')).toBeOnTheScreen();
+  expect(screen.getByText('Your pace')).toBeOnTheScreen();
+  expect(screen.getByText('Memory')).toBeOnTheScreen();
+  expect(screen.queryByTestId('cell-gameplay-viewport')).toBeNull();
+});
+
 test('docking uses four circular 48dp+ directions around Coast at large text, including unassisted play', async () => {
   jest.spyOn(require('react-native'), 'useWindowDimensions').mockReturnValue({ width: 320, height: 568, scale: 2, fontScale: 1.6 });
   const props = flightProps(practiceFlight(false));

@@ -89,6 +89,6 @@ function LegacyEscapeGame({ session, clock, enabled, controlsVisible = true, red
   </View>;
 }
 
-export function EscapeGame(props: Parameters<typeof LegacyEscapeGame>[0]) {
+export function EscapeGame(props: Parameters<typeof LegacyEscapeGame>[0] & { viewport?: { width: number; height: number } }) {
   return props.session.escapeVersion === 3 ? <CellEscapeGame {...props} /> : <LegacyEscapeGame {...props} />;
 }

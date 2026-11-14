@@ -1,9 +1,13 @@
 import React from 'react';
 import { Animated, Image, Pressable, StyleSheet } from 'react-native';
-import { render, screen } from '../support/rendering';
+import * as Native from 'react-native';
+import { fireEvent, render, screen, within } from '../support/rendering';
 import { CellEscapeGame } from '../../src/minigames/escape/CellEscapeGame';
 import { cellBoard } from '../../src/minigames/escape/cellEscapeLogic';
+import { SceneBackdrop } from '../../src/minigames/components/SceneBackdrop';
 import type { MiniGameSession } from '../../src/minigames/core/types';
+
+jest.mock('expo-asset', () => ({ Asset: { loadAsync: jest.fn(async () => []) } }));
 
 const fixture = (): MiniGameSession => ({
   id: 'cell-presentation', lifeId: 'practice', personId: 'practice', kind: 'escape',
@@ -27,7 +31,7 @@ test('separate bundled scene layers leave puzzle controls labelled, native and l
     expect(image.props.accessible).toBe(false);
     return String(image.props.source.testUri);
   });
-  expect(sources.some(source => source.endsWith('/cell-escape-background.png'))).toBe(true);
+  expect(sources.some(source => source.endsWith('/cell-escape-background.png'))).toBe(false);
   expect(sources.some(source => source.endsWith('/cell-escape-objects.png'))).toBe(true);
   expect(screen.queryAllByRole('image')).toHaveLength(0);
   expect(screen.getAllByRole('radio', { name: /^Key: .*, [123] notch(?:es)?$/ })).toHaveLength(6);
@@ -38,6 +42,37 @@ test('separate bundled scene layers leave puzzle controls labelled, native and l
     expect(style.height ?? style.minHeight).toBeGreaterThanOrEqual(44);
     expect(control.props.accessibilityLabel).toMatch(/^(Key:|Lock \d:)/);
   }
+});
+
+test('the V3 backdrop owns one undistorted scene, including the safe areas, without changing historical escape', async () => {
+  const view = await render(<SceneBackdrop kind="escape" cell />);
+  const images = screen.UNSAFE_getAllByType(Image);
+  expect(images).toHaveLength(1);
+  expect(String(images[0].props.source.testUri)).toMatch(/cell-escape-background.png$/);
+  expect(images[0].props.resizeMode).toBe('cover');
+  await view.rerender(<SceneBackdrop kind="escape" />);
+  expect(screen.UNSAFE_queryAllByType(Image)).toHaveLength(0);
+});
+
+describe.each([1, 2])('responsive controls at %sx text', fontScale => {
+  test.each([
+    [375, 667, 1, [3]], [390, 844, 2, [4]], [430, 932, 4, [3, 2]],
+    [393, 852, 5, [3, 3]], [320, 568, 2, [2, 2]], [360, 740, 5, [3, 3]],
+  ])('%s×%s, difficulty %s retains balanced rows and six accessible keys', async (width, height, difficulty, expectedRows) => {
+    jest.spyOn(Native, 'useWindowDimensions').mockReturnValue({ width, height, fontScale, scale: 2 });
+    await render(<CellEscapeGame session={{ ...fixture(), difficulty }} viewport={{ width, height: height - 140 }} enabled reducedMotion onInput={jest.fn()} />);
+    expect(screen.getAllByTestId(/^cell-lock-row-/).map(row => within(row).getAllByRole('button').length)).toEqual(expectedRows);
+    expect(screen.getAllByTestId(/^cell-key-row-/).map(row => within(row).getAllByRole('radio').length)).toEqual([3, 3]);
+    for (const control of screen.UNSAFE_getAllByType(Pressable)) {
+      const style = StyleSheet.flatten(control.props.style);
+      expect(style.width).toBeGreaterThanOrEqual(48);
+      expect(style.minHeight).toBeGreaterThanOrEqual(48);
+    }
+    const key = screen.getAllByRole('radio')[0];
+    await fireEvent.press(key);
+    expect(key.props.accessibilityState.checked).toBe(true);
+    expect(screen.getByText('✓')).toBeOnTheScreen();
+  });
 });
 
 test('saved correct, incorrect and completed transcripts animate their separate objects without submitting another move', async () => {

@@ -24,9 +24,9 @@ export function CellEscapeDoorArt() {
     <Image source={atlas} accessible={false} resizeMode="stretch" style={{ position: 'absolute', width: percent(cellEscapeAtlasSize[0] / w * 100), height: percent(cellEscapeAtlasSize[1] / h * 100), left: percent(-x / w * 100), top: percent(-y / h * 100) }} />
   </View>;
 }
-export function CellEscapeKeyArt({ shape, teeth }: { shape: keyof typeof cellKeyRects; teeth: number }) {
+export function CellEscapeKeyArt({ shape, teeth, width = 64, height = 110 }: { shape: keyof typeof cellKeyRects; teeth: number; width?: number; height?: number }) {
   const [x, y] = cellKeyTeeth[shape], gradient = 'key-teeth-' + shape;
-  return <Sprite rect={cellKeyRects[shape]} width={64} height={110}>
+  return <Sprite rect={cellKeyRects[shape]} width={width} height={height}>
     <Defs><LinearGradient id={gradient} x1="0%" y1="0%" x2="0%" y2="100%"><Stop offset="0" stopColor="#FFE486" /><Stop offset="0.45" stopColor="#F8C34B" /><Stop offset="1" stopColor="#C88719" /></LinearGradient></Defs>
     {Array.from({ length: teeth }, (_, index) => <Rect key={index} x={x} y={y + index * 27} width={35} height={18} rx={4} fill={'url(#' + gradient + ')'} stroke="#AB6D12" strokeWidth={2} />)}
   </Sprite>;

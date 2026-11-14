@@ -4,7 +4,13 @@ import { LinearGradient } from 'expo-linear-gradient';
 import type { MiniGameKind } from '../core/types';
 import { sceneArt } from './sceneArtwork';
 
-export function SceneBackdrop({ kind }: { kind: MiniGameKind }) {
+export function SceneBackdrop({ kind, cell = false }: { kind: MiniGameKind; cell?: boolean }) {
+  if (kind === 'escape' && cell) return (
+    <View pointerEvents="none" accessible={false} accessibilityElementsHidden importantForAccessibility="no-hide-descendants" style={StyleSheet.absoluteFill}>
+      <Image source={require('../../../assets/generated/cell-escape-background.png')} resizeMode="cover" accessible={false} style={StyleSheet.absoluteFill} />
+      <LinearGradient colors={['#18283D99', '#18283D00']} style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 160 }} />
+    </View>
+  );
   return (
     <View
       pointerEvents="none"

@@ -1,0 +1,39 @@
+{
+  "renderer": "Chromium/react-native-web, actual MiniGameScreen/CellEscapeGame and unchanged illustrated assets",
+  "nativeDevice": false,
+  "baseline": null,
+  "modeled": "Explicit safe areas; 1x/2x Text font/line-height scaling. Pressable accessibilityState mapped to ARIA in the browser adapter. Untimed Reanimated clock, audio/preload/status-bar/router boundaries adapted. Cell RN Animated runs on web. No native font, Dynamic Island, paint timing or VoiceOver/TalkBack speech claim.",
+  "interactions": {
+    "pauseResume": true,
+    "success": true,
+    "failure": true,
+    "motion": [
+      "normal",
+      "reduce"
+    ]
+  },
+  "errors": [],
+  "cases": 96,
+  "viewports": [
+    "[320, 568, 20, 0]",
+    "[360, 740, 24, 48]",
+    "[375, 667, 20, 0]",
+    "[393, 852, 59, 34]",
+    "[412, 915, 24, 24]",
+    "[430, 932, 59, 34]"
+  ],
+  "passed": [
+    "touch targets",
+    "balanced lock rows",
+    "single background",
+    "horizontal bounds",
+    "caption bounds and no wrapping",
+    "aligned cards",
+    "all keys reachable by scroll",
+    "all keys fit standard/large normal-text phones",
+    "pause/resume",
+    "success",
+    "failure",
+    "selected/used states"
+  ]
+}

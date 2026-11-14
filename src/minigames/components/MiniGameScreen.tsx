@@ -98,6 +98,7 @@ export function MiniGameScreen(props: Props) {
     insets = useSafeAreaInsets(),
     overlay = [s.overlay, { top: insets.top, bottom: insets.bottom }];
   const [phase, setPhase] = useState<Phase>('intro'),
+    [cellViewport, setCellViewport] = useState<{ width: number; height: number } | undefined>(),
     [assisted, setAssisted] = useState(feedback.reducedMotion),
     [countdown, setCountdown] = useState(3),
     [writing, setWriting] = useState(false),
@@ -388,10 +389,10 @@ export function MiniGameScreen(props: Props) {
   };
   const enabled = phase === 'playing' && !writing && !busy && artReady;
   return (
-    <SafeAreaView style={s.screen} edges={['top', 'bottom', 'left', 'right']}>
-      <SceneBackdrop kind={kind} />
+    <SafeAreaView style={[s.screen, cell && { backgroundColor: '#34485D' }]} edges={['top', 'bottom', 'left', 'right']}>
+      <SceneBackdrop kind={kind} cell={cell} />
       <StatusBar style="light" />
-      <View style={s.header}>
+      <View style={[s.header, cell && { paddingHorizontal: 16, paddingVertical: 4, gap: 10 }]}>
         <GameButton
           label={session?.status === 'active' ? 'Pause' : 'Back'}
           icon={session?.status === 'active' ? 'pause' : 'back'}
@@ -400,7 +401,7 @@ export function MiniGameScreen(props: Props) {
           secondary
           round
           size={48}
-          style={{ backgroundColor: '#FFFFFF1C' }}
+          style={{ backgroundColor: cell ? '#18283D99' : '#FFFFFF1C' }}
           textStyle={{ color: c.white }}
           disabled={
             writing ||
@@ -414,15 +415,15 @@ export function MiniGameScreen(props: Props) {
           }}
         />
         <View style={{ flex: 1 }}>
-          <Text style={[s.eyebrow, { color: '#DCE6F2' }]}>
+          {!cell && <Text style={[s.eyebrow, { color: '#DCE6F2' }]}>
             {practice ? 'PRACTICE' : 'CHALLENGE'}
-          </Text>
-          <Text accessibilityRole="header" style={[s.title, { fontSize: 18, color: c.white }]}>
+          </Text>}
+          <Text accessibilityRole="header" style={[s.title, { fontSize: cell ? 20 : 18, color: c.white }, cell && { fontWeight: '600' }]}>
             {miniGameTitle(kind, session)}
           </Text>
         </View>
       </View>
-      {session && (
+      {session && !cell && (
         <MiniGameHUD
           kind={kind}
           clock={clock}
@@ -432,12 +433,18 @@ export function MiniGameScreen(props: Props) {
         />
       )}
       <ScrollView
+        testID={cell ? 'cell-gameplay-viewport' : undefined}
+        onLayout={cell ? event => {
+          const { width, height: viewportHeight } = event.nativeEvent.layout;
+          if (width <= 0 || viewportHeight <= 0) return;
+          setCellViewport(previous => previous?.width === width && previous.height === viewportHeight ? previous : { width, height: viewportHeight });
+        } : undefined}
         accessibilityElementsHidden={phase !== 'playing'}
         importantForAccessibility={
           phase === 'playing' ? 'auto' : 'no-hide-descendants'
         }
         style={{ flex: 1 }}
-        contentContainerStyle={{
+        contentContainerStyle={cell ? { flexGrow: 1 } : {
           flexGrow: 1,
           minHeight: Math.max(430, height - insets.top - insets.bottom - 100),
         }}
@@ -463,7 +470,7 @@ export function MiniGameScreen(props: Props) {
               onInput={input}
             />
           ) : kind === 'escape' ? (
-            <EscapeGame session={session} clock={clock} enabled={enabled} reducedMotion={feedback.reducedMotion}
+            <EscapeGame session={session} clock={clock} enabled={enabled} reducedMotion={feedback.reducedMotion} viewport={cell ? cellViewport : undefined}
               controlsVisible={phase === 'playing' || phase === 'finishing'} onInput={input} />
           ) : (
             <DockingGame
