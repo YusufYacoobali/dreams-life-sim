@@ -1,5 +1,6 @@
 import { writeFileSync } from 'node:fs';
-import { decodeWorld, type World } from '../../src/game/model';
+import { createHash } from 'node:crypto';
+import { decodeWorld, encodeWorld, type World } from '../../src/game/model';
 import { resolveCommand, type GameCommand } from '../../src/game/engine';
 import { organisedMissions } from '../../src/game/content/organisedCrime';
 import { activeOrganisation, promotionReason } from '../../src/game/systems/organisedCrime';
@@ -9,6 +10,8 @@ import { choiceUnavailable } from '../../src/game/choiceAvailability';
 import fixture from '../fixtures/v3-employed-graduate.json';
 const styles = ['street-syndicate', 'fraud-network', 'smuggling-ring'] as const;
 const approaches = ['cautious', 'bold', 'crew-led'] as const;
+const trialOutcomes = createHash('sha256'), careerOutcomes = createHash('sha256');
+const fullProfile = !!process.env.DREAMS_CRIME_PROFILE_OUTPUT;
 const joinedCache = new Map<string, World>();
 function joined(style: typeof styles[number], seed: number) {
   const key = style + ':' + seed, cached = joinedCache.get(key);
@@ -28,10 +31,15 @@ function trial(style: typeof styles[number], mission: typeof organisedMissions[n
   const next = resolveCommand(initial, { type: 'organised-mission', gangId: gang.id, mission: mission.id, approach });
   const incident = next.incidents.at(-1)!, immediate = !!incident.caseId;
   next.date = monthFrom(next.date, 6); legalMonth(next);
+  if (fullProfile) trialOutcomes.update(encodeWorld(next)).update('\n');
   return { immediate, eventual: !!incident.caseId, evidence: incident.evidence, riskBps: incident.riskBps, success: activeOrganisation(next)!.organised!.jobs.at(-1)!.success };
 }
 function progression(style: typeof styles[number], approach: 'cautious' | 'bold', seed: number) {
   let world = joined(style, seed), jobs = 0, rank = 0;
+  const outcome = (arrested: boolean) => {
+    if (fullProfile) careerOutcomes.update(encodeWorld(world)).update('\n');
+    return { jobs, rank, arrested };
+  };
   const drain = () => {
     for (let guard = 0; guard < 150 && (world.pending || world.annual); guard++) {
       if (world.cases.some(item => world.incidents.find(source => source.id === item.incidentId)?.organisedMission)) return false;
@@ -44,13 +52,13 @@ function progression(style: typeof styles[number], approach: 'cautious' | 'bold'
   for (let year = 0; year < 6; year++) {
     const gang = activeOrganisation(world); if (!gang?.organised || world.people[world.activePersonId].stats.energy < 24) break;
     for (let job = 0; job < 2; job++) {
-      world = resolveCommand(world, { type: 'organised-mission', gangId: gang.id, mission: 'missing-envelope', approach }); jobs++; if (!drain()) return { jobs, rank, arrested: world.cases.some(item => world.incidents.find(source => source.id === item.incidentId)?.organisedMission) };
+      world = resolveCommand(world, { type: 'organised-mission', gangId: gang.id, mission: 'missing-envelope', approach }); jobs++; if (!drain()) return outcome(world.cases.some(item => world.incidents.find(source => source.id === item.incidentId)?.organisedMission));
     }
     if (!world.actionCounts[world.activePersonId + ':organised:' + world.date.year + ':decision'] && !promotionReason(world, activeOrganisation(world)!)) { world = resolveCommand(world, { type: 'organised-promotion', gangId: gang.id }); if (!drain()) break; }
     rank = Math.max(rank, activeOrganisation(world)?.organised?.rank ?? 0);
-    world = resolveCommand(world, { type: 'advance' }); if (!drain()) return { jobs, rank, arrested: world.cases.some(item => world.incidents.find(source => source.id === item.incidentId)?.organisedMission) };
+    world = resolveCommand(world, { type: 'advance' }); if (!drain()) return outcome(world.cases.some(item => world.incidents.find(source => source.id === item.incidentId)?.organisedMission));
   }
-  return { jobs, rank, arrested: false };
+  return outcome(false);
 }
 test('seeded mission exposure and earned-rank progression stay riskier for bold approaches', () => {
   const full = !!process.env.DREAMS_CRIME_PROFILE_OUTPUT, samples = full ? 256 : 32;
@@ -63,9 +71,9 @@ test('seeded mission exposure and earned-rank progression stay riskier for bold 
   if (process.env.DREAMS_CRIME_PROFILE_OUTPUT) writeFileSync(process.env.DREAMS_CRIME_PROFILE_OUTPUT, JSON.stringify({ rows, careers: [], partial: true }, null, 2));
   const careers = styles.flatMap(style => (['cautious', 'bold'] as const).map(approach => {
     const outcomes = Array.from({ length: full ? 128 : 16 }, (_, seed) => progression(style, approach, seed));
-    return { style, approach, samples: outcomes.length, reachedRank1: outcomes.filter(row => row.rank >= 1).length, reachedRank2: outcomes.filter(row => row.rank >= 2).length, arrests: outcomes.filter(row => row.arrested).length, jobs: outcomes.reduce((sum, row) => sum + row.jobs, 0) };
+    return { style, approach, samples: outcomes.length, reachedRank1: outcomes.filter(row => row.rank >= 1).length, reachedRank2: outcomes.filter(row => row.rank >= 2).length, reachedFourJobs: outcomes.filter(row => row.jobs >= 4).length, arrests: outcomes.filter(row => row.arrested).length, jobs: outcomes.reduce((sum, row) => sum + row.jobs, 0), outcomes };
   }));
-  if (process.env.DREAMS_CRIME_PROFILE_OUTPUT) writeFileSync(process.env.DREAMS_CRIME_PROFILE_OUTPUT, JSON.stringify({ rows, careers }, null, 2));
+  if (process.env.DREAMS_CRIME_PROFILE_OUTPUT) writeFileSync(process.env.DREAMS_CRIME_PROFILE_OUTPUT, JSON.stringify({ rows, careers, trialOutcomesSha256: trialOutcomes.digest('hex'), careerOutcomesSha256: careerOutcomes.digest('hex') }, null, 2));
   for (const style of styles) {
     const average = (approach: typeof approaches[number]) => rows.filter(row => row.style === style && row.approach === approach).reduce((sum, row) => sum + row.immediate, 0);
     expect(average('cautious')).toBeLessThan(average('bold')); expect(average('cautious')).toBeGreaterThan(0);

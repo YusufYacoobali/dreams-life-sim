@@ -1,5 +1,6 @@
 // Run the same seeded gameplay checks against current or archived sources without Jest overhead.
 const fs = require('node:fs'), path = require('node:path'), Module = require('node:module'), ts = require('typescript');
+const { createHash } = require('node:crypto');
 const source = path.resolve(process.argv[2] ?? '.'), output = process.argv[3];
 if (!output) throw Error('Usage: node tools/profile-organised-risk.cjs SOURCE OUTPUT.json');
 require.extensions['.ts'] = (module, file) => module._compile(ts.transpileModule(fs.readFileSync(file, 'utf8'), { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022, esModuleInterop: true } }).outputText, file);
@@ -10,4 +11,11 @@ const entry = path.join(source, 'tests/game/organised-risk-profile.test.ts'), dr
 driver.filename = entry; driver.paths = Module._nodeModulePaths(path.dirname(entry));
 driver._compile(ts.transpileModule(fs.readFileSync(path.join(__dirname, '../tests/game/organised-risk-profile.test.ts'), 'utf8'), { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022, esModuleInterop: true } }).outputText, entry);
 const result = JSON.parse(fs.readFileSync(output, 'utf8'));
+const sourceFiles = (directory) => fs.readdirSync(directory, { withFileTypes: true }).flatMap(item => item.isDirectory() ? sourceFiles(path.join(directory, item.name)) : [path.join(directory, item.name)]).sort();
+const files = [...sourceFiles(path.join(source, 'src/game')), path.join(source, 'tests/fixtures/v3-employed-graduate.json')];
+const sourceHash = createHash('sha256');
+for (const file of files) sourceHash.update(path.relative(source, file)).update('\0').update(fs.readFileSync(file)).update('\0');
+result.sourceSha256 = sourceHash.digest('hex');
+result.driverSha256 = createHash('sha256').update(fs.readFileSync(path.join(__dirname, '../tests/game/organised-risk-profile.test.ts'))).digest('hex');
+fs.writeFileSync(output, JSON.stringify(result, null, 2));
 process.stdout.write(JSON.stringify({ source, trials: result.rows.reduce((sum, row) => sum + row.samples, 0), progressions: result.careers.reduce((sum, row) => sum + row.samples, 0), elapsedMs: Math.round(performance.now() - started), passed: true }) + '\n');

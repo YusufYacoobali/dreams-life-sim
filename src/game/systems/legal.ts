@@ -79,15 +79,18 @@ function incident(world: World, person: Person, offence: OffenceId, gain = 0n, v
   world.incidents.push(item); return item;
 }
 /** Fictional assignments share the ordinary evidence, arrest and court pipeline. */
-export function recordOrganisedCrime(world: World, personId: string, gain: bigint, options: { riskDeltaBps: number; riskBps?: number; evidenceDelta: number; victimId?: string | null; offence?: 'organized-job' | 'extortion' | 'financial-scam' | 'contraband'; mission?: OrganisedMissionIncident; reported?: boolean }) {
+export function recordOrganisedCrime(world: World, personId: string, gain: bigint, options: { riskDeltaBps: number; riskBps?: number; evidenceDelta: number; evidenceScaleBps?: number; evidenceFloor?: number; reportEvidenceFloor?: number; victimId?: string | null; offence?: 'organized-job' | 'extortion' | 'financial-scam' | 'contraband'; mission?: OrganisedMissionIncident; reported?: boolean }) {
   const person = world.people[personId];
   if (!person || person.died || isConfined(world, person) || gain < 0n) throw new IneligibleAction('This assignment cannot create an outside criminal incident');
   const source = incident(world, person, options.offence ?? 'organized-job', gain, options.victimId ?? null);
   if (options.mission) source.organisedMission = options.mission;
   source.riskBps = Math.max(250, Math.min(10000, options.riskBps ?? source.riskBps + options.riskDeltaBps));
-  source.evidence = bounded(source.evidence + options.evidenceDelta);
-  const investigateReport = options.mission?.rulesVersion === 3;
-  if (options.reported && investigateReport) source.evidence = Math.max(70, source.evidence);
+  const revised = options.mission?.rulesVersion === 4;
+  source.evidence = revised
+    ? bounded(Math.max(options.evidenceFloor ?? 0, Math.round(source.evidence * (options.evidenceScaleBps ?? 10000) / 10000) + options.evidenceDelta))
+    : bounded(source.evidence + options.evidenceDelta);
+  const investigateReport = options.mission?.rulesVersion === 3 || revised;
+  if (options.reported && investigateReport) source.evidence = Math.max(revised ? options.reportEvidenceFloor ?? 32 : 70, source.evidence);
   if (options.reported && !investigateReport || source.detectionRoll <= source.riskBps) arrest(world, source);
   return source;
 }

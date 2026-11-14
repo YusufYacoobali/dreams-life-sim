@@ -26,7 +26,8 @@ export function validateOrganisedMissionIncidents(world: World, ledger: LedgerIn
     const scandal = facts.scandalId ? controversies.get(facts.scandalId) : null;
     if ((saved.outcome === 'public-scandal') !== !!facts.scandalId || facts.scandalId && (!scandal || scandal.personId !== incident.personId || facts.scandalId !== 'controversy_' + incident.id || dateKey(scandal.date) !== dateKey(incident.date))) throw new Error('Invalid mission scandal');
     if (saved.rulesVersion !== facts.rulesVersion) throw new Error('Inconsistent mission policy');
-    if (['victim-complaint', 'public-scandal', 'cargo-confiscation'].includes(saved.outcome) && (saved.rulesVersion === 2 ? !incident.caseId : incident.evidence < 70)) throw new Error('Reported mission lacks its recorded case or evidence');
+    if (['victim-complaint', 'public-scandal', 'cargo-confiscation'].includes(saved.outcome) && (saved.rulesVersion === 2 ? !incident.caseId : incident.evidence < (saved.rulesVersion === 3 ? 70 : 32))) throw new Error('Reported mission lacks its recorded case or evidence');
+    if (saved.rulesVersion === 4 && saved.outcome === 'associate-betrayal' && incident.evidence < 65) throw new Error('Betrayed mission lacks its recorded evidence');
     const payments = [
       { id: facts.proceedsTransactionId, personId: incident.personId, cash: incident.gain.minor, category: 'crime-proceeds' },
       { id: facts.lossTransactionId, personId: incident.personId, cash: -facts.loss, category: 'crime-assignment-loss' },

@@ -28,6 +28,33 @@ test('frozen pre-polish v2 assignments keep exact pending text, cases, rolls, mo
     expect(encodeWorld(world)).toBe(sample.followup);
   }
 });
+test('genuine archived v3 missions retain complete worlds and follow-up outcomes under the v4 policy', () => {
+  const bytes = readFileSync(join(__dirname, '../fixtures/v2-final-crime-v3-before.json.gz'));
+  expect(createHash('sha256').update(bytes).digest('hex')).toBe('4a41dae479b531b2f2b22e1b719efa92e0d2a8ff2e7f8ccf31d338c0cc54dd53');
+  const archive = JSON.parse(gunzipSync(bytes).toString()) as { sourceRevision: string; cases: { payload: string; followup: string }[] };
+  expect(archive.sourceRevision).toBe('7231fbc64dca7c2960285f69caa38dc6d37ae372');
+  expect(archive.cases).toHaveLength(9);
+  for (const sample of archive.cases) {
+    const world = decodeWorld(sample.payload);
+    expect(world.incidents.at(-1)!.organisedMission?.rulesVersion).toBe(3);
+    expect(encodeWorld(unpackCheckpoint(packCheckpoint(world)))).toBe(sample.payload);
+    world.date = monthFrom(world.date, 6); legalMonth(world);
+    expect(encodeWorld(world)).toBe(sample.followup);
+  }
+});
+test('new v4 assignments reuse the original v3 random draws instead of drawing replacement detection or investigation rolls', () => {
+  const archive = JSON.parse(gunzipSync(readFileSync(join(__dirname, '../fixtures/v2-final-crime-v3-before.json.gz'))).toString()) as { cases: { style: 'street-syndicate' | 'fraud-network' | 'smuggling-ring'; seed: number; payload: string }[] };
+  for (const sample of archive.cases) {
+    let input = decodeWorld(JSON.stringify(graduate)); input.people[input.activePersonId].stats.energy = 100;
+    input = resolveCommand(input, { type: 'organised-join', style: sample.style }); input = resolveCommand(input, { type: 'acknowledge', resultId: input.pending!.id });
+    input.random.outcomes = sample.seed * 104729 >>> 0;
+    const next = resolveCommand(input, { type: 'organised-mission', gangId: activeOrganisation(input)!.id, mission: 'missing-envelope', approach: 'cautious' });
+    const old = decodeWorld(sample.payload), oldIncident = old.incidents.at(-1)!, incident = next.incidents.at(-1)!;
+    expect(incident.organisedMission?.rulesVersion).toBe(4);
+    expect(incident).toMatchObject({ detectionRoll: oldIncident.detectionRoll, followupRoll: oldIncident.followupRoll, trialRoll: oldIncident.trialRoll, investigateMonth: oldIncident.investigateMonth });
+    expect(next.random).toEqual(old.random);
+  }
+});
 function reportedAssignment() {
   let joined = decodeWorld(JSON.stringify(graduate)); joined.people[joined.activePersonId].stats.energy = 100;
   joined = resolveCommand(joined, { type: 'organised-join', style: 'smuggling-ring' }); joined = resolveCommand(joined, { type: 'acknowledge', resultId: joined.pending!.id });
@@ -41,9 +68,26 @@ function reportedAssignment() {
   }
   throw Error('No reported, later investigated seed');
 }
+test('a real v4 confiscation is a lead that can close without an arrest when its saved investigation roll finds insufficient evidence', () => {
+  let joined = decodeWorld(JSON.stringify(graduate)); joined.people[joined.activePersonId].stats.energy = 100;
+  joined = resolveCommand(joined, { type: 'organised-join', style: 'smuggling-ring' }); joined = resolveCommand(joined, { type: 'acknowledge', resultId: joined.pending!.id });
+  for (let seed = 1; seed <= 512; seed++) {
+    const input = structuredClone(joined); input.random.outcomes = seed * 104729 >>> 0;
+    const next = resolveCommand(input, { type: 'organised-mission', gangId: activeOrganisation(input)!.id, mission: 'missing-envelope', approach: 'cautious' });
+    const incident = next.incidents.at(-1)!;
+    if (incident.organisedMission?.outcome !== 'cargo-confiscation' || incident.caseId || incident.followupRoll <= Math.round(incident.evidence / 2)) continue;
+    expect(incident.evidence).toBeGreaterThanOrEqual(32);
+    const snapshot = { evidence: incident.evidence, detectionRoll: incident.detectionRoll, followupRoll: incident.followupRoll, trialRoll: incident.trialRoll, riskBps: incident.riskBps };
+    const loaded = unpackCheckpoint(packCheckpoint(next)); loaded.date = monthFrom(loaded.date, 6); legalMonth(loaded);
+    expect(loaded.incidents.at(-1)).toMatchObject({ ...snapshot, stage: 'closed', caseId: null });
+    expect(loaded.cases).toHaveLength(0);
+    return;
+  }
+  throw Error('No reported lead with insufficient evidence');
+});
 test('a new reported assignment leaves evidence, then genuinely arrests through saved investigation with rollback, retry and cold reopening', async () => {
   const initial = reportedAssignment(), source = initial.incidents.at(-1)!, checkpoint = packCheckpoint(initial);
-  expect(source.organisedMission?.rulesVersion).toBe(3); expect(source.evidence).toBeGreaterThanOrEqual(70); expect(source.stage).toBe('hidden');
+  expect(source.organisedMission?.rulesVersion).toBe(4); expect(source.evidence).toBeGreaterThanOrEqual(32); expect(source.stage).toBe('hidden');
   const folder = mkdtempSync(join(tmpdir(), 'dreams-crime-risk-')), file = join(folder, 'life.db');
   let { sqlite, driver } = diskDatabase(file), repository = new SaveRepository(driver);
   await repository.initialise(); await repository.create(initial);

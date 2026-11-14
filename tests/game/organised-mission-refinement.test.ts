@@ -34,7 +34,7 @@ test.each(combinations)('%s / %s has at least three actual distinct result paths
     const next = run(world, mission, 'crew-led', seed), job = activeOrganisation(next)!.organised!.jobs.at(-1)!, incident = next.incidents.find(item => item.id === job.incidentId)!;
     if (seen.has(job.mission!.outcome)) continue;
     seen.add(job.mission!.outcome);
-    expect(incident.organisedMission).toMatchObject({ rulesVersion: 3, category: mission, style, jobId: job.id, participantIds: job.participantIds, result: job.mission });
+    expect(incident.organisedMission).toMatchObject({ rulesVersion: 4, category: mission, style, jobId: job.id, participantIds: job.participantIds, result: job.mission });
     expect(incident.offence).toBe(style === 'fraud-network' ? 'financial-scam' : style === 'smuggling-ring' ? 'contraband' : mission === 'protection-dispute' ? 'extortion' : 'organized-job');
     expect(incident.gain.minor).toBe(job.proceeds);
     expect(accountFor(next).cash - accountFor(world).cash).toBe(job.proceeds - job.mission!.loss);
@@ -61,12 +61,12 @@ test('the same premise creates street rivalry, conserved fraud victim transfers 
   expect(accountFor(fraud, fraud.people[victimId]).cash - accountFor(paid, paid.people[victimId]).cash).toBe(job.proceeds);
   expect(relationFor(paid, paid.activePersonId, victimId)!.memories).toContain('crime-victim:' + job.incidentId);
   expect(paid.incidents.find(item => item.id === job.incidentId)).toMatchObject({ offence: 'financial-scam' });
-  expect(paid.incidents.find(item => item.id === job.incidentId)!.evidence).toBeGreaterThanOrEqual(70);
+  expect(paid.incidents.find(item => item.id === job.incidentId)!.evidence).toBeGreaterThanOrEqual(55);
   const smuggling = find(joined('smuggling-ring'), 'cargo-confiscation');
   const cargoJob = activeOrganisation(smuggling)!.organised!.jobs.at(-1)!;
   expect(cargoJob.mission!.cargo).toMatchObject({ id: 'cargo_' + cargoJob.incidentId, status: 'confiscated' });
   expect(smuggling.incidents.find(item => item.id === cargoJob.incidentId)).toMatchObject({ offence: 'contraband' });
-  expect(smuggling.incidents.find(item => item.id === cargoJob.incidentId)!.evidence).toBeGreaterThanOrEqual(70);
+  expect(smuggling.incidents.find(item => item.id === cargoJob.incidentId)!.evidence).toBeGreaterThanOrEqual(55);
 });
 test('a public financial scandal creates a usable public response, damages the actual job and survives resolution', () => {
   const before = joined('fraud-network'), next = find(before, 'public-scandal');
@@ -95,6 +95,7 @@ test('crew resentment and betrayal belong only to genuine selected participants 
   const betrayed = find(before, 'associate-betrayal'), betrayal = activeOrganisation(betrayed)!.organised!.jobs.at(-1)!;
   const state = activeOrganisation(betrayed)!.organised!;
   expect(betrayal.participantIds).toContain(betrayal.mission!.memberId);
+  expect(betrayed.incidents.find(item => item.id === betrayal.incidentId)!.evidence).toBeGreaterThanOrEqual(65);
   expect(state.members.find(member => member.personId === betrayal.mission!.memberId)!.role).toBe('former');
   expect(state.rivals.some(rival => rival.personId === betrayal.mission!.memberId && rival.influence > 0)).toBe(true);
   expect(relationFor(betrayed, betrayed.activePersonId, betrayal.mission!.memberId!)!.memories).toContain('mission-betrayal:' + betrayal.incidentId);
@@ -128,13 +129,14 @@ test('legacy assignment rows and incidents retain their absent metadata after a 
 });
 test('cold decoding rejects forged money, participant and legal snapshots instead of accepting a new story about an old incident', () => {
   const world = find(joined('fraud-network'), 'victim-complaint');
-  for (const tamper of ['loss', 'participants', 'offence', 'victim-payment', 'snapshot'] as const) {
+  for (const tamper of ['loss', 'participants', 'offence', 'victim-payment', 'snapshot', 'evidence'] as const) {
     const saved = JSON.parse(encodeWorld(world)), gang = saved.gangs.find((item: { personId: string }) => item.personId === world.activePersonId), job = gang.organised.jobs.at(-1), incident = saved.incidents.find((item: { id: string }) => item.id === job.incidentId);
     if (tamper === 'loss') job.mission.loss = '999';
     if (tamper === 'participants') incident.organisedMission.participantIds = [world.activePersonId];
     if (tamper === 'offence') incident.offence = 'organized-job';
     if (tamper === 'victim-payment') incident.organisedMission.result.victimTransactionId = incident.organisedMission.result.proceedsTransactionId;
     if (tamper === 'snapshot') job.mission.body = 'Nobody complained.';
+    if (tamper === 'evidence') incident.evidence = 31;
     expect(() => decodeWorld(JSON.stringify(saved))).toThrow();
   }
 });
