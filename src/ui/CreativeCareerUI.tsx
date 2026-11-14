@@ -13,6 +13,9 @@ import { SocialBusinessFacts } from './SocialBusinessPresentation';
 import type { CreativeCareerDialog } from './CreativeCareerDialog';
 import { useColors } from './theme';
 import { DisplayText as Text } from './DisplayText';
+import { FameBusinessArt } from '../assets/FameBusinessArt';
+import { PersonActionArt } from '../assets/PersonActionArt';
+import { PolishArt } from '../assets/PolishArt';
 
 type Career = World['careers'][number];
 export const creativeLabel = (id: string) => id.replace(/[-_]/g, ' ').replace(/^./, letter => letter.toUpperCase());
@@ -66,8 +69,8 @@ export function CreativeAgency({ world, career, industry, busy, dialog, onChange
     {agency.tier !== 'independent' && <StatBar label="Agent rapport" value={agency.rapport} color={c.green} />}
     <Body muted>Signed projects keep their agreed commission. Changing representation affects later contracts.</Body>
     <Button label="Review Representation" disabled={busy} onPress={() => dialog.select('Choose representation', 'Choose an agency for future contracts. Signed work keeps its agreed terms.', (['independent', 'boutique', 'major'] as const).map(tier => ({ id: tier, label: name(tier) + ' · ' + agencyRateText(creativeAgencyQuote(career, tier, false).standardBps) + ' commission · ' + descriptions[tier], disabledReason: reason(tier) })), id => onChange(id as 'independent' | 'boutique' | 'major', false))} />
-    {agency.tier !== 'independent' && <><ActionRow title="Negotiate Representation" subtitle="Discuss the commission on future agreements" disabled={busy} disabledReason={reason(agency.tier, true)} onPress={() => onChange(agency.tier, true)} /><ActionRow title="Fire Your Agent" subtitle="Become independent; keep signed obligations and past work" disabled={busy} disabledReason={quarterReason} onPress={() => onChange('independent', false)} /></>}
-    {agency.history.length > 0 && <ActionRow title="Agency History" subtitle={agency.history.length + ' retained agreements' + (agency.archived ? ' · ' + agency.archived + ' earlier changes summarised' : '')} disabled={busy} onPress={() => dialog.info('Your representation history', 'Earlier agreements and their commission rates remain recorded. ', [...agency.history].reverse().map((entry, index) => ({ id: String(index), label: name(entry.tier) + ' · ' + entry.started.year + (entry.ended ? '–' + entry.ended.year : ' onwards'), value: agencyRateText(entry.commissionBps) + ' · ' + entry.reason, tone: 'neutral' })))} />}
+    {agency.tier !== 'independent' && <><ActionRow title="Negotiate Representation" icon={<FameBusinessArt id="contract" size={40} />} subtitle="Discuss the commission on future agreements" disabled={busy} disabledReason={reason(agency.tier, true)} onPress={() => onChange(agency.tier, true)} /><ActionRow title="Fire Your Agent" icon={<PersonActionArt id="distance" />} subtitle="Become independent; keep signed obligations and past work" disabled={busy} disabledReason={quarterReason} onPress={() => onChange('independent', false)} /></>}
+    {agency.history.length > 0 && <ActionRow title="Agency History" icon={<PolishArt id="archive" />} subtitle={agency.history.length + ' agreements' + (agency.archived ? ' · ' + agency.archived + ' earlier changes summarised' : '')} disabled={busy} onPress={() => dialog.info('Your representation history', 'Your earlier agreements and commission rates.', [...agency.history].reverse().map((entry, index) => ({ id: String(index), label: name(entry.tier) + ' · ' + entry.started.year + (entry.ended ? '–' + entry.ended.year : ' onwards'), value: agencyRateText(entry.commissionBps) + ' · ' + entry.reason, tone: 'neutral' })))} />}
   </Card>;
 }
 export function CreativeOfferCard({ offer, money, reason, busy, onReview, label }: {
@@ -77,7 +80,7 @@ export function CreativeOfferCard({ offer, money, reason, busy, onReview, label 
   const [details, setDetails] = useState(false);
   return <Card><Heading size={19}>{offer.title}</Heading><Body>{creativeLabel(offer.category)} · {creativeLabel(offer.role)} · {offer.genre}</Body>
     <SocialBusinessFacts items={[{ label: 'Expected contractual gross', value: money(offerGross(offer)), note: offer.months + ' months · Before commission and tax' }, { label: 'Potential', value: 'Prestige ' + offer.prestige + ' · Popularity ' + offer.popularity }]} />
-    {offer.exclusivity && <Body muted>Exclusive agreement: competing endorsements carry consequences.</Body>}
+    {offer.exclusivity && <Body muted>Exclusive agreement · Review the terms before signing.</Body>}
     <ActionRow title="Requirements & Risks" value={details ? 'Hide' : 'Show'} accessibilityState={{ expanded: details }} onPress={() => setDetails(!details)} />
     {details && <><Body muted>Skill {offer.minSkill}% · Reputation {offer.minReputation}% · {offer.minAgency === 2 ? 'Major agency' : offer.minAgency === 1 ? 'Agency representation' : 'Independent applications welcome'}</Body><Body muted>Competition {offer.difficulty}% · Career risk {offer.risk}%</Body></>}
     {offer.status !== 'open' ? <Body muted>{creativeLabel(offer.status)}</Body> : <>
@@ -93,7 +96,7 @@ export function CreativeBookingClause({ world, industry }: { world: World; indus
   return <Body muted>A signed first-refusal clause holds new bookings through {Math.floor(industry.bookingHoldUntil / 12)}-{String(industry.bookingHoldUntil % 12 + 1).padStart(2, '0')}.</Body>;
 }
 export function CreativeContacts({ world, industry }: { world: World; industry: IndustryState }) {
-  return <Card><Heading size={20}>Industry Contacts</Heading><Body muted>These are people in your life. Open a profile to build a friendship, discuss a conflict or explore the normal relationship choices.</Body>
+  return <Card><Heading size={20}>Industry Contacts</Heading><Body muted>Open a profile to get to know someone beyond the work.</Body>
     {Object.entries(industry.contacts).map(([role, id]) => {
       const person = world.people[id]; if (!person) return null;
       return <ActionRow key={role} title={fullName(person)} subtitle={(role === 'costar' ? 'Co-star' : creativeLabel(role)) + (person.died ? ' · Deceased' : '')} icon={<Portrait personId={id} name={fullName(person)} appearance={person.appearance} age={ageOn(person, world.date)} size={40} />} onPress={() => router.push({ pathname: '/person/[id]', params: { id } })} />;

@@ -18,6 +18,6 @@ export function modelBookingDefinition(category: string) { return modelBookingCo
 export const modelProductionActions = [
   { id: 'prepare', title: 'Prepare the Presentation', description: 'Rehearse the route and plan the shoot. Reliable quality and professionalism, with extra effort.' },
   { id: 'interpret', title: 'Propose a Creative Interpretation', description: 'Make the work your own. The client may back your interpretation or wish you had kept to the brief.' },
-  { id: 'negotiate', title: 'Negotiate Remaining Fees', description: 'Ask for a bounded increase in future instalments. The client may refuse or lose confidence.' },
+  { id: 'negotiate', title: 'Negotiate Remaining Fees', description: 'Ask for a higher fee on future instalments. The client may refuse or lose confidence.' },
   { id: 'publicity', title: 'Build the Campaign', description: 'Give publicity more attention. Wider audience reach can come at the expense of craft.' },
 ] as const;

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Modal } from 'react-native';
+import * as Native from 'react-native';
 import { act, fireEvent, render, screen, waitFor, within } from '../support/rendering';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { createGameStore } from '../../src/state/gameStore';
@@ -21,6 +22,7 @@ import { ModelCareerDashboard } from '../../src/ui/ModelCareerDashboard';
 import { actorOfferReason } from '../../src/game/systems/actor';
 import { modelOfferReason, modelBrandTerm } from '../../src/game/systems/modelCareer';
 import { formatMoney, roundRatio } from '../../src/game/money';
+import { resolveCommand } from '../../src/game/engine';
 import { countries } from '../../src/game/countries';
 import { offerGross } from '../../src/ui/CreativeCareerUI';
 import { noOwnership } from '../../src/purchases/catalog';
@@ -215,7 +217,7 @@ test('representation has three unique choices and negotiation stays on the dashb
   expect(await repository.export(mockStore.getState().world!.id)).toBe(before);
   await view.unmount(); sqlite.close();
 });
-test('exclusive casting and leaving an unfinished booking disclose the actual settlement before writing', async () => {
+test('exclusive casting and leaving an unfinished booking disclose the actual settlement at large text sizes before writing', async () => {
   const { sqlite, repository } = await setup(); await mockStore.getState().dispatch({ type: 'model-enter' }); await acknowledge();
   await mockStore.getState().dispatch({ type: 'model-agency', tier: 'boutique', negotiate: false }); await acknowledge();
   const prepared = copyWorld(mockStore.getState().world!), career = prepared.careers.find(item => item.kind === 'model')!;
@@ -225,6 +227,7 @@ test('exclusive casting and leaving an unfinished booking disclose the actual se
   offer.auditionRoll = 1;
   expect(modelOfferReason(prepared, offer)).toBeUndefined();
   mockStore.setState({ world: prepared });
+  const dimensions = jest.spyOn(Native, 'useWindowDimensions').mockReturnValue({ width: 320, height: 640, scale: 2, fontScale: 2 });
   const before = await repository.export(prepared.id), view = await render(frame(<ModelCareerDashboard />));
   await press('Review Casting for ' + offer.title);
   const terms = screen.UNSAFE_getByType(EventModal).props.event.terms;
@@ -235,7 +238,12 @@ test('exclusive casting and leaving an unfinished booking disclose the actual se
     expect.objectContaining({ id: 'claim', value: settlement }),
     expect.objectContaining({ id: 'restrictions', value: expect.stringContaining('Style and fitness sponsorships, including Social') }),
   ]));
-  expect(screen.getByText(/Abandoning the booking, breaching exclusivity or leaving required appearances unfulfilled/)).toBeTruthy();
+  expect(terms).toEqual(expect.arrayContaining([
+    expect.objectContaining({ id: 'claim-triggers', value: 'Abandoning the booking, breaching exclusivity or leaving required appearances unfulfilled' }),
+    expect.objectContaining({ id: 'restricted-bookings', value: 'Advertising, ambassador and luxury bookings' }),
+    expect.objectContaining({ id: 'commission', value: '12%' }),
+  ]));
+  expect(screen.getByText(/Exclusive rights and appearances can outlast production/)).toBeTruthy();
   expect(await repository.export(prepared.id)).toBe(before);
   await press('Attend Casting'); await acknowledge();
   expect(mockStore.getState().world!.careers.find(item => item.kind === 'model')!.status).toBe('active');
@@ -244,7 +252,65 @@ test('exclusive casting and leaving an unfinished booking disclose the actual se
   expect(leave.terms).toEqual(expect.arrayContaining([expect.objectContaining({ id: 'claim', value: settlement })]));
   expect(leave.body).toContain('creates the quoted settlement debt');
   expect(mockStore.getState().world!.careers.find(item => item.kind === 'model')!.status).toBe('active');
-  await view.unmount(); sqlite.close();
+  await view.unmount(); dimensions.mockRestore(); sqlite.close();
+});
+
+test('large-text Actor negotiation reviews both exact fee outcomes and a fractional commission before signing', async () => {
+  const { sqlite, repository } = await setup();
+  const dimensions = jest.spyOn(Native, 'useWindowDimensions').mockReturnValue({ width: 320, height: 640, scale: 2, fontScale: 2 });
+  let view: Awaited<ReturnType<typeof render>> | undefined;
+  try {
+    await mockStore.getState().dispatch({ type: 'actor-enter' }); await acknowledge();
+    expect(await mockStore.getState().dispatch({ type: 'actor-agency', tier: 'boutique', negotiate: false })).toBe(true); await acknowledge();
+    const prepared = copyWorld(mockStore.getState().world!), career = creativeCareer(prepared, 'actor'), industry = career.actor!.industry;
+    industry.representation.commissionBps = 1050;
+    industry.representation.history.at(-1)!.commissionBps = 1050;
+    const offer = industry.board.find(item => !actorOfferReason(prepared, item))!;
+    offer.auditionRoll = 1; offer.negotiationRoll = 100;
+    mockStore.setState({ world: prepared });
+    const before = encodeWorld(prepared), rows = await repository.export(prepared.id);
+    view = await render(frame(<ActorDashboard />));
+    const launch = 'Review Audition for ' + offer.title;
+    await press(launch); await press('Negotiate Terms');
+    const event = screen.UNSAFE_getByType(EventModal).props.event;
+    const money = (minor: bigint) => formatMoney({ minor, currency: countries[career.actor!.boardCountry].currency });
+    expect(event.terms).toEqual(expect.arrayContaining([
+      expect.objectContaining({ id: 'commission', value: '10.5%' }),
+      expect.objectContaining({ id: 'accepted-gross', value: money(offerGross({ ...offer, annualPay: roundRatio(offer.annualPay * 11200n, 10000n) })) }),
+      expect.objectContaining({ id: 'declined-gross', value: money(offerGross({ ...offer, annualPay: roundRatio(offer.annualPay * 9700n, 10000n) })) }),
+    ]));
+    expect(within(screen.UNSAFE_getByType(Modal)).getByText('10.5%')).toBeOnTheScreen();
+    expect(screen.getByRole('button', { name: 'Negotiate & Audition' })).toBeEnabled();
+    expect(event.body).toContain('a refusal lowers it by 3%');
+    await press('Never mind'); expect(encodeWorld(mockStore.getState().world!)).toBe(before);
+    expect(await repository.export(prepared.id)).toBe(rows);
+    await press(launch); await press('Negotiate Terms'); await press('Negotiate & Audition');
+    const expected = resolveCommand(prepared, { type: 'actor-audition', offerId: offer.id, quotedAnnualPay: offer.annualPay, negotiate: true }, true);
+    expect(mockStore.getState().world!).toEqual(expected);
+    expect(await repository.load(prepared.id)).toEqual(expected);
+    expect(expected.people[expected.activePersonId].employment!.annualPay).toBe(roundRatio(offer.annualPay * 9700n, 10000n));
+    expect(expected.accounts).toEqual(prepared.accounts);
+  } finally { await view?.unmount(); dimensions.mockRestore(); sqlite.close(); }
+});
+
+test.each(['actor', 'model'] as const)('%s current work precedes representation and identity at large text sizes without writing', async kind => {
+  const world = creativeBook(experiencedCreative(kind), kind, kind === 'actor' ? 'studio-film' : 'runway');
+  const { sqlite, driver } = database(), repository = new SaveRepository(driver);
+  const dimensions = jest.spyOn(Native, 'useWindowDimensions').mockReturnValue({ width: 320, height: 640, scale: 2, fontScale: 2 });
+  let view: Awaited<ReturnType<typeof render>> | undefined;
+  try {
+    await repository.initialise(); await repository.create(world);
+    mockStore = createGameStore({ repository: async () => repository, date: () => world.date, id: () => 'unused' }); await mockStore.getState().bootstrap();
+    const original = encodeWorld(mockStore.getState().world!);
+    view = await render(frame(kind === 'actor' ? <ActorDashboard /> : <ModelCareerDashboard />));
+    const titles = screen.getAllByRole('header').map(node => node.props.children);
+    const current = kind === 'actor' ? 'Shape This Performance' : 'Your Runway Approach';
+    expect(titles.indexOf(current)).toBeGreaterThan(-1);
+    expect(titles.indexOf(current)).toBeLessThan(titles.indexOf('Agency & Representation'));
+    expect(titles.indexOf(current)).toBeLessThan(titles.indexOf(kind === 'actor' ? 'Your Acting Identity' : 'Portfolio & Modelling Identity'));
+    expect(encodeWorld(mockStore.getState().world!)).toBe(original);
+    expect(encodeWorld(await repository.load(world.id))).toBe(original);
+  } finally { await view?.unmount(); dimensions.mockRestore(); sqlite.close(); }
 });
 test('contract settlement display sums actual cash repayments and excludes estate write-offs', () => {
   const world = decodeWorld(JSON.stringify(graduate)), sample = world.ledger[0];

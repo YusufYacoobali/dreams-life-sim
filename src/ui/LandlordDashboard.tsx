@@ -12,7 +12,7 @@ import { ActionRow, Body, Button, Card, Heading, Portrait } from './components';
 import { SocialBusinessChoice, SocialBusinessFacts } from './SocialBusinessPresentation';
 import { useLifestyleReview } from './LifestyleReview';
 import { FinanceArt } from '../assets/FinanceArt';
-import { PolishArt } from '../assets/PolishArt';
+import { JobArt } from '../assets/JobArt';
 import { HealthLegalArt } from '../assets/HealthLegalArt';
 import { PersonActionArt } from '../assets/PersonActionArt';
 const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -26,9 +26,9 @@ export function LandlordDashboard({ world, asset }: { world: World; asset: World
   const state = world.lifestyle!, current = lifestyleMonthNumber(world), common = lifestyleReason(world), money = (amount: bigint) => formatMoney({ minor: amount, currency: asset.currency });
   const apps = state.applications.filter(app => app.assetId === asset.id && app.status === 'open' && app.expiresMonth >= current);
   const groups = [
-    { id: 'tenants', title: 'Tenants & Applications', icon: <PersonActionArt id="family-planning" size={40} /> },
+    { id: 'tenants', title: 'Tenants & Applications', icon: <PersonActionArt id="move-in" size={40} /> },
     { id: 'payments', title: 'Rent & Payments', icon: <FinanceArt id="finances" size={40} /> },
-    { id: 'maintenance', title: 'Maintenance', icon: <PolishArt id="settings" size={40} /> },
+    { id: 'maintenance', title: 'Maintenance', icon: <JobArt id="plumber" size={40} /> },
     { id: 'ending', title: 'End Tenancy', icon: <HealthLegalArt id="court" size={40} /> },
   ] as const;
   const command = (action: TenancyCommand['action'], amount = 0n): TenancyCommand => ({ type: 'manage-tenancy', tenancyId: row!.id, action, quotedAmount: amount });

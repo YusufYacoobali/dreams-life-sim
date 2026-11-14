@@ -121,5 +121,5 @@ Requested starting checkpoint: `77398bb2`. Work retains the subsequent built-in 
 | 1. Normal ending and eviction | Implemented; [26 focused cases, real rollback/cold reopen](../verification/v2-final/landlord.md) pass |
 | 2. Prospective Organised Crime balancing | Implemented with prospective v4 rules; [seeded comparison and historical save checks](../verification/v2-final/crime.md) pass |
 | 3. Existing artwork and Cell Escape recheck | Rechecked; [128 focused cases, atlas integrity and native controls](../verification/v2-final/artwork.md) pass; original built-in artwork retained |
-| 4. UI, action illustrations and concise reviews | Prepared in an isolated checkout; integration pending |
+| 4. UI, action illustrations and concise reviews | Implemented; [34 focused cases and contract details](../verification/v2-final/ui.md) pass; landlord action artwork rechecked |
 | 5. Measured annual command optimisation | Controlled comparisons complete; final focused verification/integration pending |

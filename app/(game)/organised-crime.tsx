@@ -35,7 +35,21 @@ import {
 import { PersonPicker } from "../../src/ui/PersonPicker";
 import { FameBusinessArt } from "../../src/assets/FameBusinessArt";
 import { Illustration } from "../../src/assets/Illustration";
+import { PersonActionArt } from "../../src/assets/PersonActionArt";
+import { JobArt } from "../../src/assets/JobArt";
 import { isConfined } from "../../src/game/systems/legalSchemas";
+const assignmentArt = {
+  'missing-envelope': <JobArt id="postal-worker" />,
+  'territory-dispute': <PersonActionArt id="argue" />,
+  'counterfeit-gala': <FameBusinessArt id="contract" size={40} />,
+  'unreliable-cargo': <FameBusinessArt id="delivery" size={40} />,
+  'protection-dispute': <PersonActionArt id="ask-help" />,
+  'phantom-investment': <FameBusinessArt id="contract" size={40} />,
+  'rival-consignment': <FameBusinessArt id="delivery" size={40} />,
+  'crew-debt': <PersonActionArt id="repay-loan" />,
+  'high-stakes-job': <FameBusinessArt id="business" size={40} />,
+  'organisation-crisis': <PersonActionArt id="distance" />,
+} satisfies Record<typeof organisedMissions[number]['id'], React.ReactNode>;
 export default function OrganisedCrime() {
   const identity = useGame((s) => s.world?.id + ":" + s.world?.activePersonId);
   return <Dashboard key={identity} />;
@@ -125,7 +139,7 @@ function Dashboard() {
           {organisationStyles.map((style) => (
             <React.Fragment key={style}>
               <ActionRow
-                icon={style === "street-syndicate" ? <HealthLegalArt id="handcuffs" /> : style === "fraud-network" ? <FameBusinessArt id="business" /> : <Illustration id="travel" />}
+                icon={style === "street-syndicate" ? <HealthLegalArt id="handcuffs" size={40} /> : style === "fraud-network" ? <FameBusinessArt id="business" size={40} /> : <Illustration id="travel" />}
                 title={organisations[style].title}
                 subtitle={organisations[style].description}
                 disabled={busy}
@@ -134,7 +148,7 @@ function Dashboard() {
                   confirm(
                     { type: "organised-join", style },
                     "Join " + organisations[style].name + "?",
-                    "Meet the crew and enter as a recruit. Assignments carry real arrest risk; There is no joining fee or regular salary.",
+                    "Meet the crew and enter as a recruit. There is no joining fee or regular salary.",
                     "Join Organisation",
                   )
                 }
@@ -184,7 +198,7 @@ function Dashboard() {
               .map((mission) => (
                 <ActionRow
                   key={mission.id}
-                  icon={<HealthLegalArt id="handcuffs" />}
+                  icon={assignmentArt[mission.id]}
                   title={mission.title}
                   subtitle={mission.premise}
                   disabled={busy}
@@ -238,7 +252,7 @@ function Dashboard() {
               criminal experience, loyalty and reputation.
             </Body>
             <ActionRow
-              icon={<FameBusinessArt id="business" />}
+              icon={<FameBusinessArt id="business" size={40} />}
               title="Ask for promotion"
               subtitle={"Current rank: " + organisationRank(gang)}
               disabled={busy}
@@ -253,7 +267,7 @@ function Dashboard() {
               }
             />
             <ActionRow
-              icon={<HealthLegalArt id="prison-visit" />}
+              icon={<PersonActionArt id="talk" />}
               title="Hear the crew’s concerns"
               subtitle="A member, leader or rival brings you a decision"
               disabled={busy}
@@ -289,7 +303,7 @@ function Dashboard() {
                         action: "challenge",
                       },
                       "Challenge the leader?",
-                      "The crew may support you or reject you. Failure can cost your rank or membership. Success changes the actual leader.",
+                      "The crew may support you or reject you. Failure can cost your rank or membership. Success puts you in charge.",
                       "Challenge",
                     )
                   }
