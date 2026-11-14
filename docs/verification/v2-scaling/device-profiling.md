@@ -50,6 +50,8 @@ node tools/export-scaling-benchmark-saves.cjs --inputs /tmp/dreams-gameplay-prof
 
 Transfer the generated files to Files on iPhone or local Android storage. In each profiling app, open **Settings**, tap **App Preferences** three times quickly, then open **Performance Diagnostics** under Internal Testing. The God Mode toggle can stay off. Choose **Open Benchmark Saved Lives → Import a Save**, select the same file and confirm the normal preview.
 
+The [ready-to-transfer ZIP](followup/device-benchmark-saves.zip) contains the qualified archives and a separate `continue/` folder. Unzip it in Files before choosing an individual save.
+
 The exporter produces V4 archives readable by both builds and verifies complete canonical equality. It does not rewrite IDs, balances, dates, RNG or history. Age snapshots of one life intentionally retain its original ID; importing another age replaces only that isolated benchmark life after confirmation. No Time Machine checkpoints are fabricated. Each folder includes archive/canonical hashes, age, activity counts and record sizes in a manifest.
 
 Also use the retained original light/moderate/heavy/extreme cohorts; the same exporter accepts them. Real Continue inputs are in `followup/gameplay-continue.json.gz`. They contain actual planning pauses rather than invented annual cursors. Keep input manifests with reports; JSON timing reports deliberately contain no save identity or content.
@@ -57,13 +59,22 @@ Also use the retained original light/moderate/heavy/extreme cohorts; the same ex
 ## Record and export without a debugger
 
 1. Match appearance, motion, haptics, sounds and entitlements. In separate notes record phone model, OS, thermal/battery state, free storage, source/build/manifest IDs, input archive SHA and run order.
-2. Choose **Start Recording**, return to the game and warm the selected case. Collect at least **20** ordinary actions, Age Up/Continue commands and complete years, resolving real decisions. For reset comparisons, import a fresh identical copy **outside** the timed action. Alternate app order. Never force unavailable credit/careers or bypass cooldowns.
+2. Warm the selected case with recording **off**, or retain warm-up in a separate excluded file. Then choose **Start Recording** and return to the game. Collect at least **20** ordinary actions, Age Up/Continue commands and complete years, resolving real decisions. For reset comparisons, import a fresh identical copy **outside** the timed action. Alternate app order. Never force unavailable credit/careers or bypass cooldowns.
 3. Return to Diagnostics, **Stop Recording**, then **Refresh Breakdown** for p50/p95/maximum/sample counts. **Share JSON Report** opens the native share sheet; **Save JSON Report** writes to a selected folder. Clear between scenarios. No debugger or live console is needed.
 4. **Cold Read Active Save** uses an independent native SQLite connection and repository cache without replacing the live writer. Record repeated reads. This is a database/decode probe; also test a real app close/reopen and its opening UI.
 5. On Life, follow new facts, drag into old history, close a result and switch tabs. Capture native scrolling/frames while checking access to every old row and the existing follow/manual-scroll behavior. Recording counts journal layout/content, drag and scroll attempts against the latest published revision.
 6. Run a sustained session with repeated actions and switches between independent lives/Time Machine branches. Track memory after warm-up and regularly afterwards. Close/reopen, recover a backup and continue a real child; compare complete world/RNG/history and durable receipts through the normal harness.
 
 Export stops recording before file I/O. The ring retains **16,384 events**; overwritten and unfinished traces are explicit. Short scenario-specific runs avoid losing early traces. Snapshots, sorting and JSON allocation occur only on refresh/export. Do not leave Diagnostics open as a substitute for measuring the visible Life screen.
+
+Detailed annual traces can fill the ring. Export after each complete year or a small action block, verify zero loss, then pool enough exports for at least 20 warmed samples. Record warm-up in separate files. Do not equate 20 physical actions with 20 retained samples after an overwrite. Keep reference/candidate and different inputs in separate folders, even if their optional source revision is null:
+
+```sh
+node tools/analyse-performance-reports.cjs /tmp/reference-analysis.json /path/to/reference-scenario/*.json
+node tools/analyse-performance-reports.cjs /tmp/candidate-analysis.json /path/to/candidate-scenario/*.json
+```
+
+The analyser pools raw samples, separates failed commands and reports losses; it never averages file percentiles or infers native metrics. For a complete year with decisions, compare execution spans/commands and exclude human reading/thinking time; keep the command/run order in the notes. JS report times are command-local, so native alignment also requires the native recording and run-order/wall-clock notes.
 
 ## Report semantics and native traces
 

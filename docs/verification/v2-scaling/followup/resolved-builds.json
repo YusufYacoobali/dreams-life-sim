@@ -1,0 +1,28 @@
+[
+  {
+    "profile": "production",
+    "name": "Dreams Life Simulator",
+    "iosIdentifier": "com.yacoobali.lifesim",
+    "androidIdentifier": "com.yacoobali.lifesim",
+    "scheme": "dreams-life",
+    "extra": {
+      "profileCommands": false,
+      "profileCommandsBuild": {},
+      "unlockAllTesting": false,
+      "godModeTesting": false
+    }
+  },
+  {
+    "profile": "performance",
+    "name": "Dreams Life Simulator Profile",
+    "iosIdentifier": "com.yacoobali.lifesim.profile",
+    "androidIdentifier": "com.yacoobali.lifesim.profile",
+    "scheme": "dreams-life-profile",
+    "extra": {
+      "profileCommands": true,
+      "profileCommandsBuild": "internal",
+      "unlockAllTesting": false,
+      "godModeTesting": true
+    }
+  }
+]
