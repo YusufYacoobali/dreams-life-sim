@@ -111,3 +111,15 @@ The user's separate [Dreams Shop redesign](V2_SHOP_IMPLEMENTATION.md) follows th
 - Age Up and Continue This Year both pass a real SQLite/UI-yield test for immediate saving feedback, blocked repeat input and exact resolver results. The resume case reaches its planning pause through actual archived pet/year commands rather than patched annual flags.
 - Final integrated verification passes all 410 suites / 7,143 tests, all 120 unique soak lives, strict app/test types, the 613-module import check, both production Hermes exports and the SDK 58 Android internal release APK build. The [combined verification report](../verification/v2-polish/final.md) records the exact scope, the parallel worker-shutdown warning and a clean 64-test focused open-handle rerun.
 - The separate shop implementation follows these gameplay changes. The subsequent [built-in artwork delivery](../verification/v2-polish/artwork.md) passes 85 UI tests, 40 escape compatibility/persistence tests, strict types, the 616-module import check and fresh Android/iOS Hermes exports. The full regression/soak and native APK above precede that artwork follow-up. Physical iOS/Android appearance, accessibility and release-device performance acceptance remain open.
+
+## Final polish follow-up — five independent checkpoints
+
+Requested starting checkpoint: `77398bb2`. Work retains the subsequent built-in artwork commit `7231fbc6` rather than reverting it. The shop, navigation, existing saves and RevenueCat remain compatibility boundaries. Each checkpoint is verified and committed independently; combined regression and soak follow integration.
+
+| Checkpoint | Status |
+| --- | --- |
+| 1. Normal ending and eviction | Implemented; [26 focused cases, real rollback/cold reopen](../verification/v2-final/landlord.md) pass |
+| 2. Prospective Organised Crime balancing | Prepared in an isolated checkout; integration pending |
+| 3. Existing artwork and Cell Escape recheck | Recheck complete in an isolated checkout; integration pending |
+| 4. UI, action illustrations and concise reviews | Prepared in an isolated checkout; integration pending |
+| 5. Measured annual command optimisation | Controlled comparisons complete; final focused verification/integration pending |

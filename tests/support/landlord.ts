@@ -2,6 +2,7 @@ import { copyWorld, validateWorld, type World } from '../../src/game/model';
 import { monthFrom } from '../../src/game/calendar';
 import { askingRent, landlordMonth } from '../../src/game/systems/landlordTenancies';
 import { buyLifestyle, lifestyleFixture, act } from '../helpers/lifestyle';
+import { accountFor, availableCash, post } from '../../src/game/systems/common';
 export function landlordFixture() {
   let world = buyLifestyle(lifestyleFixture(), 'family-house');
   const asset = world.assets.at(-1)!;
@@ -27,4 +28,20 @@ export function reviewReadyTenancy() {
   let world = landlordFixture(), row = world.lifestyle!.tenancies[0];
   world = act(world, { type: 'manage-tenancy', tenancyId: row.id, action: 'notice', quotedAmount: 0n });
   return clearTenantRepairs(landlordPeriod(landlordPeriod(world)));
+}
+
+/** Arrears come from actual unpaid periods and, where requested, a real repayment. */
+export function ordinaryReadyTenancy(arrears: 'zero' | 'partial' | 'substantial') {
+  let world = reviewReadyTenancy();
+  if (arrears === 'substantial') return world;
+  const row = world.lifestyle!.tenancies[0], tenant = world.people[row.tenantId], funds = availableCash(accountFor(world, tenant, row.currency));
+  if (arrears === 'partial') {
+    const target = row.arrears - row.rent / 2n, payable = funds < target ? funds : target;
+    if (payable <= 0n) throw Error('Partial repayment fixture requires actual available tenant funds');
+    if (funds > payable) post(world, payable - funds, 0n, 'unit-expense', 'Explicit tenant budget fixture before arrears repayment', null, tenant, row.currency);
+  } else if (funds < row.arrears) throw Error('Zero-arrears fixture requires sufficient actual tenant funds');
+  world = act(validateWorld(world), { type: 'manage-tenancy', tenancyId: row.id, action: 'discuss', quotedAmount: 0n });
+  const remaining = world.lifestyle!.tenancies[0].arrears;
+  if (arrears === 'zero' ? remaining !== 0n : remaining <= 0n || remaining >= row.rent * 2n) throw Error('Actual arrears repayment did not reach the requested fixture');
+  return world;
 }

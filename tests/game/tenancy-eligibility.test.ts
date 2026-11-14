@@ -3,7 +3,7 @@ import { resolveCommand } from '../../src/game/engine';
 import { tenancyActionReason, type TenancyCommand } from '../../src/game/systems/tenancyEligibility';
 import { tenancyReviewFee, tenantCheckFee } from '../../src/game/systems/landlordTenancies';
 import { accountFor, availableCash, post } from '../../src/game/systems/common';
-import { landlordFixture, landlordPeriod, reviewReadyTenancy, clearTenantRepairs } from '../support/landlord';
+import { landlordFixture, landlordPeriod, reviewReadyTenancy, clearTenantRepairs, ordinaryReadyTenancy } from '../support/landlord';
 import { act, buyLifestyle, lifestyleFixture } from '../helpers/lifestyle';
 import { askingRent } from '../../src/game/systems/landlordPricing';
 
@@ -71,4 +71,15 @@ test('a new background check verifies its displayed country quote, charges once 
   const cash = accountFor(world).cash; world = act(world, command);
   expect(accountFor(world).cash).toBe(cash - fee); expect(world.lifestyle!.records.at(-1)!.paid).toBe(fee);
   expect(() => act(world, command)).toThrow(/already complete/);
+});
+
+test.each(['zero', 'partial', 'substantial'] as const)('ordinary ending permits %s arrears without changing escrow or historic rent records', arrears => {
+  const world = ordinaryReadyTenancy(arrears), before = encodeWorld(world), row = world.lifestyle!.tenancies[0];
+  expect(tenancyActionReason(world, command(world, 'end'))).toBeUndefined();
+  const next = act(world, command(world, 'end'));
+  expect(encodeWorld(world)).toBe(before);
+  expect(next.lifestyle!.tenancies[0]).toMatchObject({ arrears: row.arrears, periods: row.periods, depositHeld: 0n });
+  expect(next.lifestyle!.tenancies[0].ended).not.toBeNull();
+  expect(next.ledger.filter(entry => entry.category === 'lifestyle-deposit-refund')).toHaveLength(1);
+  expect(() => resolveCommand(next, command(next, 'end'))).toThrow(/current tenancy/);
 });

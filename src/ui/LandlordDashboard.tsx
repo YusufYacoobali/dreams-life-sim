@@ -9,7 +9,7 @@ import { tenancyActionReason, type TenancyCommand } from '../game/systems/tenanc
 import { lifestyleMonthNumber, lifestyleReason, presentAtHome } from '../game/systems/lifestyleCommon';
 import { availableCash } from '../game/systems/common';
 import { ActionRow, Body, Button, Card, Heading, Portrait } from './components';
-import { SocialBusinessFacts } from './SocialBusinessPresentation';
+import { SocialBusinessChoice, SocialBusinessFacts } from './SocialBusinessPresentation';
 import { useLifestyleReview } from './LifestyleReview';
 import { FinanceArt } from '../assets/FinanceArt';
 import { PolishArt } from '../assets/PolishArt';
@@ -21,6 +21,7 @@ const monthLabel = (month: number) => monthNames[month % 12] + ' ' + Math.floor(
 export function LandlordDashboard({ world, asset }: { world: World; asset: World['assets'][number] }) {
   const row = namedTenancy(world, asset.id), { ask, modal, busy } = useLifestyleReview('tenancy:' + asset.id + ':' + row?.id);
   const [section, setSection] = useState<'tenants' | 'payments' | 'maintenance' | 'ending' | null>(null);
+  const [ending, setEnding] = useState<'end' | 'evict'>('end');
   const [paymentPage, setPaymentPage] = useState<number | null>(null), [historyPage, setHistoryPage] = useState(0);
   const state = world.lifestyle!, current = lifestyleMonthNumber(world), common = lifestyleReason(world), money = (amount: bigint) => formatMoney({ minor: amount, currency: asset.currency });
   const apps = state.applications.filter(app => app.assetId === asset.id && app.status === 'open' && app.expiresMonth >= current);
@@ -78,14 +79,20 @@ export function LandlordDashboard({ world, asset }: { world: World; asset: World
     {row.maintenance > 0n ? <ActionRow title="Pay for Repairs" value={money(row.maintenance)} disabled={busy} disabledReason={reason('repair', row.maintenance)} onPress={() => review('repair', 'Arrange These Repairs?', 'Pay the outstanding estimate to repair the property.', row.maintenance)} /> : <Body>No repairs are outstanding.</Body>}
     {reason('inspect') ? <Body muted>{reason('inspect')}</Body> : <ActionRow title="Inspect Property" disabled={busy} onPress={() => review('inspect', 'Inspect the Property?', 'Visit the property and review its condition. No repair is paid for now.')} />}
   </Card>}
-  {row && section === 'ending' && <Card><Heading size={18}>{row.arrears > 0n ? 'Reviewed Eviction' : 'End the Tenancy'}</Heading>
+  {row && section === 'ending' && <Card><Heading size={18}>End the Tenancy</Heading>
+    <View accessibilityRole="radiogroup" accessibilityLabel="Tenancy ending">
+      <SocialBusinessChoice title="End Tenancy Normally" subtitle="Two months’ notice and completed repairs" selected={ending === 'end'} disabled={busy} onPress={() => setEnding('end')} />
+      <SocialBusinessChoice title="Evict for Unpaid Rent" subtitle="Unpaid rent and an independent review" selected={ending === 'evict'} disabled={busy} onPress={() => setEnding('evict')} />
+    </View>
     <Body muted>The full deposit is returned when the tenancy ends. Any unpaid rent remains recorded.</Body>
     <Body>Notice: {row.noticeMonth === null ? 'Not yet given' : current - row.noticeMonth >= 2 ? 'Two months complete' : current - row.noticeMonth + ' of 2 months complete'}</Body>
     <Body>Repairs: {row.maintenance > 0n ? money(row.maintenance) + ' outstanding' : 'Complete'}</Body>
-    {row.arrears > 0n && <><Body>Overdue rent: {row.arrears >= row.rent * 2n ? 'Two rents or more' : 'Two full rents are required for eviction'}</Body><Body>Independent review: {row.reviewMonth === null ? 'Not yet completed' : 'Complete'}</Body>{row.reviewMonth !== null && <Body>Waiting period: {current > row.reviewMonth ? 'Complete' : 'Until ' + monthLabel(row.reviewMonth + 1)}</Body>}</>}
-    {row.noticeMonth === null && <ActionRow title="Give Two Months’ Notice" disabled={busy} disabledReason={reason('notice')} onPress={() => review('notice', 'Give Notice?', 'Give the tenant two months’ notice. Rent and maintenance responsibilities continue.')} />}
-    {row.arrears > 0n && row.reviewMonth === null && (!reason('review-eviction', tenancyReviewFee(asset.country)) ? <ActionRow title="Independent Eviction Review" value={money(tenancyReviewFee(asset.country))} disabled={busy} onPress={() => review('review-eviction', 'Request an Independent Review?', 'Pay for the review. A further month must pass before eviction can be completed.', tenancyReviewFee(asset.country))} /> : <Body muted>{reason('review-eviction', tenancyReviewFee(asset.country))}</Body>)}
-    {row.arrears > 0n && !reason('evict') && <ActionRow title="Complete Eviction" disabled={busy} onPress={() => review('evict', 'Complete This Eviction?', 'End the reviewed tenancy and return the full deposit. Unpaid rent remains recorded.')} />}
-    {row.arrears === 0n && !reason('end') && <ActionRow title="End Tenancy After Notice" disabled={busy} onPress={() => review('end', 'End This Tenancy?', 'End the tenancy after notice and return the full deposit.')} />}
+    {ending === 'evict' && <><Body>Overdue rent: {row.arrears >= row.rent * 2n ? 'Two rents or more' : money(row.arrears) + ' of ' + money(row.rent * 2n) + ' required'}</Body><Body>Independent review: {row.reviewMonth === null ? 'Not yet completed' : 'Complete'}</Body><Body>Waiting period: {row.reviewMonth === null ? 'One further month after review' : current > row.reviewMonth ? 'Complete' : 'Until ' + monthLabel(row.reviewMonth + 1)}</Body></>}
+    {common && <Body muted>{common}</Body>}
+    {row.noticeMonth === null && !reason('notice') && <ActionRow title="Give Two Months’ Notice" disabled={busy} onPress={() => review('notice', 'Give Notice?', 'Give the tenant two months’ notice. Rent and maintenance responsibilities continue.')} />}
+    {row.maintenance > 0n && (!reason('repair', row.maintenance) ? <ActionRow title="Arrange Outstanding Repairs" value={money(row.maintenance)} disabled={busy} onPress={() => review('repair', 'Arrange These Repairs?', 'Pay the outstanding estimate to repair the property.', row.maintenance)} /> : !common && <Body muted>{reason('repair', row.maintenance)}</Body>)}
+    {ending === 'evict' && row.reviewMonth === null && (!reason('review-eviction', tenancyReviewFee(asset.country)) ? <ActionRow title="Independent Eviction Review" value={money(tenancyReviewFee(asset.country))} disabled={busy} onPress={() => review('review-eviction', 'Request an Independent Review?', 'Pay for the review. A further month must pass before eviction can be completed.', tenancyReviewFee(asset.country))} /> : !common && row.noticeMonth !== null && current - row.noticeMonth >= 2 && row.maintenance === 0n && row.arrears >= row.rent * 2n && <Body muted>{reason('review-eviction', tenancyReviewFee(asset.country))}</Body>)}
+    {ending === 'evict' && !reason('evict') && <ActionRow title="Complete Eviction" disabled={busy} onPress={() => review('evict', 'Complete This Eviction?', 'End the reviewed tenancy and return the full deposit. Unpaid rent remains recorded.')} />}
+    {ending === 'end' && !reason('end') && <ActionRow title="End Tenancy After Notice" disabled={busy} onPress={() => review('end', 'End This Tenancy?', 'End the tenancy after notice and return the full deposit. Unpaid rent remains recorded.')} />}
   </Card>}{previous.length > 0 && <Card><Heading size={18}>Previous Tenancies</Heading>{previous.slice(historyPage * 3, historyPage * 3 + 3).map(item => <View key={item.id} style={{ gap: 4 }}><Body>{fullName(world.people[item.tenantId])}</Body><Body muted>{monthLabel(item.started.year * 12 + item.started.month - 1)} to {monthLabel(item.ended!.year * 12 + item.ended!.month - 1)}</Body><Body muted>{item.endReason}</Body><Body>Deposit returned: {money(item.deposit)}</Body>{item.arrears > 0n && <Body>Recorded unpaid rent: {money(item.arrears)}</Body>}</View>)}{previous.length > 3 && <><Button label="Recent Tenancies" tone="secondary" disabled={historyPage === 0} onPress={() => setHistoryPage(historyPage - 1)} /><Button label="Earlier Tenancies" tone="secondary" disabled={(historyPage + 1) * 3 >= previous.length} onPress={() => setHistoryPage(historyPage + 1)} /></>}</Card>}{modal}</>;
 }
