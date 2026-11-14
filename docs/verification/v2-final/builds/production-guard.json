@@ -1,0 +1,17 @@
+{
+  "sourceCommit": "a9b3146df95e62a965c4215cbec8310cf27209e7",
+  "rawAppConfig": {
+    "godModeTesting": false,
+    "unlockAllTesting": false,
+    "unlockAllTestingBuild": null,
+    "profileCommands": false,
+    "profileCommandsBuild": null
+  },
+  "expoPublicConfig": {
+    "godModeTesting": false,
+    "unlockAllTesting": false,
+    "unlockAllTestingBuild": {},
+    "profileCommands": false,
+    "profileCommandsBuild": {}
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "baseline": "7231fbc64dca7c2960285f69caa38dc6d37ae372",
+  "source": "a9b3146df95e62a965c4215cbec8310cf27209e7",
+  "paths": [
+    "src/purchases",
+    "src/access",
+    "app.config.cjs",
+    "eas.json"
+  ],
+  "changedFiles": [],
+  "existingFixtureChanges": [
+    "A\ttests/fixtures/v2-final-crime-v3-before.json.gz"
+  ]
+}

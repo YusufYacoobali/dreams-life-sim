@@ -1,0 +1,89 @@
+{
+  "sourceCommit": "a9b3146df95e62a965c4215cbec8310cf27209e7",
+  "checkedAtUtc": "2026-11-14T09:09:41.453708+00:00",
+  "buildExitCode": 0,
+  "signatureVerified": true,
+  "signatureScheme": "v2",
+  "diagnosticAbi": "x86_64",
+  "nativeDeviceAcceptance": false,
+  "buildLog": "/workspace/dreams-builds/v2-final-polish-native-build.log",
+  "artwork": [
+    {
+      "source": "expanded-hobby-atlas.png",
+      "sourceSha256": "b346601bd3cca3b32963c8b4406d0b3654739ec6ba007f311af88d984bbfa2ce",
+      "apkResource": "res/GL.png",
+      "apkResourceSha256": "43388263bf9e866f78799554047b6bfa319d813119470e750c2aa2e6161f2a2d",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "alphaIdentical": true,
+      "visibleRgbIdentical": true,
+      "fullyTransparentRgbDifferences": 1221725
+    },
+    {
+      "source": "cell-escape-background.png",
+      "sourceSha256": "170f87ca25462945d587c11d343e3be8dd9083ca21d3b90b4a1b232323882d3a",
+      "apkResource": "res/PT.png",
+      "apkResourceSha256": "e8749ec781eed9fc9dcaefb498442c72d2cb3d9f4064c6829cec16cf9f24a8a4",
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "alphaIdentical": true,
+      "visibleRgbIdentical": true,
+      "fullyTransparentRgbDifferences": 0
+    },
+    {
+      "source": "cell-escape-objects.png",
+      "sourceSha256": "6a57523f5042f7729987b91c34a188afbc98fbc5589db9fcad42fa907b57bbb0",
+      "apkResource": "res/fk.png",
+      "apkResourceSha256": "cb23874fda19d63de5d932791ed3668e41ef0a81a003bd2b8863b117bbcb6023",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "alphaIdentical": true,
+      "visibleRgbIdentical": true,
+      "fullyTransparentRgbDifferences": 614821
+    }
+  ],
+  "embeddedInternalConfig": {
+    "godModeTesting": true,
+    "unlockAllTesting": true,
+    "unlockAllTestingBuild": "internal",
+    "profileCommands": true,
+    "profileCommandsBuild": "internal"
+  },
+  "hermes": {
+    "path": "assets/index.android.bundle",
+    "bytes": 9887296,
+    "sha256": "ac9703084f8d02c2970719d1325d97995a1b561d81df5e992ac66597dbc6265d",
+    "magic": "c61fbc03c103191f"
+  },
+  "packagedAbis": [
+    "x86_64"
+  ],
+  "artworkNote": "AAPT crunching/obfuscation changes PNG containers and RGB beneath alpha=0. All alpha values and every visible RGB pixel are identical; original runtime sources and production-export bytes are unchanged.",
+  "sourceCopyStillExact": true,
+  "sourceParityAfter": "/workspace/dreams-builds/v2-final-polish-native-source-parity-after.json",
+  "apk": {
+    "path": "/workspace/dreams-builds/v2-final-polish-internal-x86_64.apk",
+    "bytes": 196398227,
+    "sha256": "b75fbcfee17d05580f8bf39536fbfff9cd49a7b4e7563c79b8703281df44d04a"
+  },
+  "resources": {
+    "singleWorker": true,
+    "jvmHeap": "3g",
+    "jvmMetaspace": "1g",
+    "metroHeapMiB": 1536,
+    "nativeCpuAffinityProof": "/workspace/dreams-builds/v2-final-polish-native-affinity.json",
+    "initialConservativePauses": 1,
+    "additionalPressurePauses": 0,
+    "peakTotalBytes": 16194666496,
+    "peakAnonPlusKernelBytes": 12209074176,
+    "oomBefore": "low 0\nhigh 0\nmax 51719\noom 1\noom_kill 1\noom_group_kill 0\n",
+    "oomAfter": "low 0\nhigh 0\nmax 51719\noom 1\noom_kill 1\noom_group_kill 0\n"
+  },
+  "noAdditionalOomEvents": true
+}

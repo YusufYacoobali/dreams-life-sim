@@ -1,0 +1,36 @@
+{
+  "sourceCommit": "a9b3146df95e62a965c4215cbec8310cf27209e7",
+  "observedMainHead": "a9b3146df95e62a965c4215cbec8310cf27209e7",
+  "trees": {
+    "app": {
+      "files": 100,
+      "sha256": "40d90875fe17a642d783a0e6ab95deff8c009a57046b839a0289019239f9399a",
+      "exactMatch": true
+    },
+    "src": {
+      "files": 516,
+      "sha256": "8129c30046d96d93e761381503331678effcb2841c08bbdcd21c5ebd6c5898b0",
+      "exactMatch": true
+    },
+    "assets": {
+      "files": 1235,
+      "sha256": "d1a4926e619e871898cc1daf4a333fcf2cc3944e9db847230415bd44634e3acc",
+      "exactMatch": true
+    },
+    "plugins": {
+      "files": 4,
+      "sha256": "bb9dd5e44889f03fce170a8d6142f9cf4097a8e91c4e9e262378b4988446661a",
+      "exactMatch": true
+    }
+  },
+  "files": {
+    "app.json": "ed8812a451b11abd0befd22d0b6b89f31d96c02d18f0adee83347d7ebfe4a024",
+    "app.config.cjs": "d8f464c41e7e2c8a9352089ccb2797deb29f2401e3c7119e293c861a163b47da",
+    "package.json": "812289912744883a04fb7b8fe628485359ca10bd387bf49bfb28d289bd2096a0",
+    "package-lock.json": "70d85e20d6cfcad558c8e407d10b732f350d7090610e4367fea842ca26a54f43",
+    "babel.config.cjs": "4b96981e76f4da97464e553a3af2c16fbb8e2da6d8a1983246087ed5a0e6afa8",
+    "metro.config.cjs": "80b65d0b22aa695c0184e85a62c4b1579d22c39242bae91e560baac5cadb199e",
+    "eas.json": "b8817c3ae02292398cbd1e3ed697d9540607ff353c15382f7d53f23ceb20f378",
+    "tsconfig.json": "56b3d87e11a3ba5c0243cae629717768642f245342e9fb98ecc88ce90111bc74"
+  }
+}

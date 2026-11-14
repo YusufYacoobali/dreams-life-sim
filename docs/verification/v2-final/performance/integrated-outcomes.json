@@ -1,0 +1,148 @@
+{
+  "scope": "Integrated outcome/save smoke on b49ca970 under concurrent full regression and 120-life simulation. Timing values excluded; no performance inference.",
+  "sourceCommit": "b49ca970",
+  "reports": [
+    {
+      "file": "/workspace/dreams-builds/v2-integrated-adult-outcome-smoke.json",
+      "sha256": "2a87b427bca31d3680ec1eaafa0ec6c95e4c56058ab622defbd1862d2b23ca18",
+      "cases": 10,
+      "measuredSamples": 5,
+      "warmupSamples": 1,
+      "integratedSourceHash": "b2445355580b7d7825c42aab32135526566c41eb7e0b23811911918e24aad052",
+      "expectedPerformanceSourceHash": "0e7bd3d5aa5485002ed65a7a23d0118fe384183d6a05c937bfddff12e08dae5a"
+    },
+    {
+      "file": "/workspace/dreams-builds/v2-integrated-continue-outcome-smoke.json",
+      "sha256": "699d3df981409e1ad6aa486a2b7b19b2fcb25c54d139cecf567abac753981c80",
+      "cases": 1,
+      "measuredSamples": 5,
+      "warmupSamples": 1,
+      "integratedSourceHash": "b2445355580b7d7825c42aab32135526566c41eb7e0b23811911918e24aad052",
+      "expectedPerformanceSourceHash": "0e7bd3d5aa5485002ed65a7a23d0118fe384183d6a05c937bfddff12e08dae5a"
+    }
+  ],
+  "results": [
+    {
+      "age": 18,
+      "kind": "firstAgeUp",
+      "worldSha256": "a0e8a756dee89f41bc731e324ce712ff30d88bb06bc5f8fb6be79ff2d679ee75",
+      "completeOutcomeSha256": "9abbee8d7a760c8056beb2feb8c2843ff15519a62dd815e72dacac0a9680ba9b",
+      "checkpointBytes": 116872,
+      "commandCount": 1,
+      "exactOutcomeEquality": true,
+      "exactCommandEquality": true,
+      "exactCheckpointBytes": true
+    },
+    {
+      "age": 18,
+      "kind": "fullYear",
+      "worldSha256": "60d29e69604a5877114d490fc5115ed43d8821a40a74a1ce4c8f1bff8c602129",
+      "completeOutcomeSha256": "c106871bf9f9e7f9d644df2f1699bc53039a514e00215c9f943ce1b642b3d877",
+      "checkpointBytes": 115820,
+      "commandCount": 3,
+      "exactOutcomeEquality": true,
+      "exactCommandEquality": true,
+      "exactCheckpointBytes": true
+    },
+    {
+      "age": 23,
+      "kind": "firstAgeUp",
+      "worldSha256": "c5be58e885d74fb50ab77c5248d415e60ba89a5e09af08ad0cff3b30c1afda53",
+      "completeOutcomeSha256": "1c2f1a7b7c624f9aa890e8782c73645731fcbda5cf46552eaabee78cb1a1339e",
+      "checkpointBytes": 149816,
+      "commandCount": 1,
+      "exactOutcomeEquality": true,
+      "exactCommandEquality": true,
+      "exactCheckpointBytes": true
+    },
+    {
+      "age": 23,
+      "kind": "fullYear",
+      "worldSha256": "40f3dfb5243b261b4a2da20b2bff4ef835c855384d8d9e29fae6e9f6e3e16e70",
+      "completeOutcomeSha256": "6d1266de1715578846db16a289d181fb24246f4ad455759033b8bbff61cf0950",
+      "checkpointBytes": 149648,
+      "commandCount": 2,
+      "exactOutcomeEquality": true,
+      "exactCommandEquality": true,
+      "exactCheckpointBytes": true
+    },
+    {
+      "age": 30,
+      "kind": "firstAgeUp",
+      "worldSha256": "04bed09622f6bfa7dbe2a8d2fa0d735db816c3af88431da867e2e2e78d63f63f",
+      "completeOutcomeSha256": "c322bb636de909fff9c874f001861bfee6eafa892fabdf0d0b48ca19a238dd00",
+      "checkpointBytes": 200809,
+      "commandCount": 1,
+      "exactOutcomeEquality": true,
+      "exactCommandEquality": true,
+      "exactCheckpointBytes": true
+    },
+    {
+      "age": 30,
+      "kind": "fullYear",
+      "worldSha256": "1e332c3443d1a03f9e6650774292f2a6bb116c23747e9fe54c1825f95e4f5c18",
+      "completeOutcomeSha256": "638cb546a07b88b22ab9341f16b8e5e77fcfffaebc05b67f7640cd1d8d44cefa",
+      "checkpointBytes": 205065,
+      "commandCount": 5,
+      "exactOutcomeEquality": true,
+      "exactCommandEquality": true,
+      "exactCheckpointBytes": true
+    },
+    {
+      "age": 50,
+      "kind": "firstAgeUp",
+      "worldSha256": "573f4ed0ab86efb7f0f6e989eb5fd60cb7643b8c6624fbbf872dad7f938d6d99",
+      "completeOutcomeSha256": "2cfa22901bf20cd68df7c89dc1e3880d860aab5861709bcc6b60e24ab3dde5e7",
+      "checkpointBytes": 460449,
+      "commandCount": 1,
+      "exactOutcomeEquality": true,
+      "exactCommandEquality": true,
+      "exactCheckpointBytes": true
+    },
+    {
+      "age": 50,
+      "kind": "fullYear",
+      "worldSha256": "6baf9e960021485c6dccdca210f856fffc904e1aba29f6ec7cbeebdc0978bbb7",
+      "completeOutcomeSha256": "406c4885ceacb394eea24e50126e8be7a5c84d6b41bc8172358979204416f65b",
+      "checkpointBytes": 460241,
+      "commandCount": 2,
+      "exactOutcomeEquality": true,
+      "exactCommandEquality": true,
+      "exactCheckpointBytes": true
+    },
+    {
+      "age": 70,
+      "kind": "firstAgeUp",
+      "worldSha256": "fc5738d92e570012abe790b37667758474c815dfea468a29a8ec020ca0cfd7e8",
+      "completeOutcomeSha256": "0c447c7c792ac4d05c3079cb970526f78dc76ac235aed3e4c3135d5b04e33017",
+      "checkpointBytes": 642113,
+      "commandCount": 1,
+      "exactOutcomeEquality": true,
+      "exactCommandEquality": true,
+      "exactCheckpointBytes": true
+    },
+    {
+      "age": 70,
+      "kind": "fullYear",
+      "worldSha256": "05e68fd5d844ee65fdd462b6c214e827a51e5d9888dc538f57cf9552b97a6ad4",
+      "completeOutcomeSha256": "c07cc94d99e42cccb9bab9af0eccb09434925ad5037a43768427dba2144a8f41",
+      "checkpointBytes": 641049,
+      "commandCount": 3,
+      "exactOutcomeEquality": true,
+      "exactCommandEquality": true,
+      "exactCheckpointBytes": true
+    },
+    {
+      "age": 9,
+      "kind": "continueThisYear",
+      "worldSha256": "2ace3320a0300d5437d45bacae16fe1267d0443c67ad1bf6e37b89ad26e8c837",
+      "completeOutcomeSha256": "24b1deb69a9e38f00a7c76966593922777d39f4542812ae1d55655ff519ea022",
+      "checkpointBytes": 48854,
+      "commandCount": 1,
+      "exactOutcomeEquality": true,
+      "exactCommandEquality": true,
+      "exactCheckpointBytes": true
+    }
+  ],
+  "assertions": "Every raw driver trial additionally checks deterministic repeatability, all RNG streams, current/backup revisions, original pre-Age-Up snapshot, receipt counts, review metadata and cold on-disk reopening."
+}

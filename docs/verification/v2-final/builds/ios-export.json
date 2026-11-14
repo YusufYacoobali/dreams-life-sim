@@ -1,0 +1,29 @@
+{
+  "sourceCommit": "a9b3146df95e62a965c4215cbec8310cf27209e7",
+  "platform": "ios",
+  "bundle": "_expo/static/js/ios/entry-ac1f9d2ff13f9dca43abbf1dd2e8ca47.hbc",
+  "bundleBytes": 11822654,
+  "bundleSha256": "fa0764777945a868eb86374e03f8bbbdc546d408eaa36e8a897be5be88177668",
+  "hermesMagic": "c61fbc03c103191f",
+  "metadataAssets": 1235,
+  "artwork": [
+    {
+      "source": "expanded-hobby-atlas.png",
+      "sha256": "b346601bd3cca3b32963c8b4406d0b3654739ec6ba007f311af88d984bbfa2ce",
+      "exportedPath": "assets/84ab7f11ef2bf12da0d9ac1887659095",
+      "bytes": 1639835
+    },
+    {
+      "source": "cell-escape-background.png",
+      "sha256": "170f87ca25462945d587c11d343e3be8dd9083ca21d3b90b4a1b232323882d3a",
+      "exportedPath": "assets/c065054ad5a7a5dc23550be01ab2a234",
+      "bytes": 2035806
+    },
+    {
+      "source": "cell-escape-objects.png",
+      "sha256": "6a57523f5042f7729987b91c34a188afbc98fbc5589db9fcad42fa907b57bbb0",
+      "exportedPath": "assets/c0b1008d565c132108acbde9ecf7b6db",
+      "bytes": 1854992
+    }
+  ]
+}
