@@ -33,7 +33,7 @@ type Closing = { pending: Pending; next: 'unlock' | 'explore' | 'cancel'; dismis
 /** Retains a pending UI action locally; stale/unmounted life or route contexts cannot resume it. */
 export function usePremiumAction(identity: string) {
   const { reducedMotion } = useFeedback(), busy = usePurchases(s => s.busy);
-  const [pending, setPending] = useState<Pending | null>(null), [closing, setClosing] = useState(false);
+  const [pending, setPending] = useState<Pending | null>(null), [closing, setClosing] = useState(false), [shownId, setShownId] = useState<number | null>(null);
   const currentIdentity = useRef(identity), mounted = useRef(true), pendingRef = useRef<Pending | null>(null), closingRef = useRef<Closing | null>(null), sequence = useRef(0);
   currentIdentity.current = identity;
   if (pendingRef.current && pendingRef.current.identity !== identity) pendingRef.current.valid = false;
@@ -73,6 +73,9 @@ export function usePremiumAction(identity: string) {
     return () => { active = false; cancelAnimationFrame(frame); };
   }, [pending, closing, complete]);
   const visible = !!pending && pending.valid && !closing && pending.identity === identity;
+  // iOS cannot emit onDismiss for a host that never presented. Even an early
+  // close must let this session acknowledge onShow before requesting removal.
+  const nativeVisible = visible || Platform.OS === 'ios' && !!pending && shownId !== pending.id;
   return {
     run(feature: PremiumFeature | null, trigger: string, action: () => void, options?: { onExplore?: () => void }) {
       if (!mounted.current || currentIdentity.current !== identity || pendingRef.current) return;
@@ -81,7 +84,9 @@ export function usePremiumAction(identity: string) {
       const next = { id: ++sequence.current, identity, valid: true, feature, trigger, action, onExplore: options?.onExplore };
       pendingRef.current = next; setPending(next);
     },
-    modal: pending ? <Modal key={pending.id} visible={visible} transparent presentationStyle="overFullScreen" statusBarTranslucent navigationBarTranslucent={false} animationType={reducedMotion ? 'none' : 'fade'} accessibilityViewIsModal onDismiss={() => complete(pending, true)} onRequestClose={() => {
+    modal: pending ? <Modal key={pending.id} visible={nativeVisible} transparent presentationStyle="overFullScreen" statusBarTranslucent navigationBarTranslucent={false} animationType={reducedMotion ? 'none' : 'fade'} accessibilityViewIsModal onShow={() => {
+      if (mounted.current && pendingRef.current === pending) setShownId(pending.id);
+    }} onDismiss={() => complete(pending, true)} onRequestClose={() => {
       if (mounted.current && pendingRef.current === pending && !closingRef.current && !purchases.getState().busy) {
         trackPurchase({ name: 'paywall_dismissed', feature: pending.feature, trigger: pending.trigger, ownership: purchases.getState().ownership }); close(pending, 'cancel');
       }

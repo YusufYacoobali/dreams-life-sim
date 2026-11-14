@@ -40,11 +40,41 @@ function Intent({ identity = 'life:person:career', feature = 'athlete', onContin
     {confirmation && <Modal visible><Text>Original confirmation</Text></Modal>}
   </Page>;
 }
-async function open(onContinue = jest.fn(), onExplore?: () => void) {
+async function open(onContinue = jest.fn(), onExplore?: () => void, presented = true) {
   const view = await render(frame(<Intent onContinue={onContinue} onExplore={onExplore} />));
   await press('Premium action'); await waitFor(() => expect(screen.getByRole('button', { name: 'Buy Athlete Career' })).toBeEnabled());
+  if (presented) await act(async () => { modal().props.onShow(); });
   return { view, onContinue, dismissed: modal().props.onDismiss as () => void };
 }
+
+test('cached ownership before iOS onShow drains through presentation and dismissal before resuming once', async () => {
+  const { onContinue, dismissed } = await open(jest.fn(), undefined, false), shown = modal().props.onShow;
+  const heldRun = screen.UNSAFE_getAllByType(Pressable).find(node => node.props.accessibilityLabel === 'Premium action')!.props.onPress;
+  await publish('athlete');
+  expect(modal().props.visible).toBe(true); expect(screen.UNSAFE_queryAllByType(FeaturePaywall)).toHaveLength(0);
+  expect(onContinue).not.toHaveBeenCalled(); await act(async () => { heldRun(); });
+  expect(screen.UNSAFE_getAllByType(Modal)).toHaveLength(1); expect(onContinue).not.toHaveBeenCalled();
+  await act(async () => { shown(); }); expect(modal().props.visible).toBe(false); expect(onContinue).not.toHaveBeenCalled();
+  await dismissNative(dismissed); await dismissNative(dismissed);
+  expect(onContinue).toHaveBeenCalledTimes(1); expect(screen.getByText('Original confirmation')).toBeOnTheScreen();
+});
+
+test.each(['cancel', 'identity'] as const)('an early %s before iOS presentation closes controls and blocks another paywall until native dismissal', async reason => {
+  const { view, onContinue, dismissed } = await open(jest.fn(), undefined, false), shown = modal().props.onShow;
+  const heldRun = screen.UNSAFE_getAllByType(Pressable).find(node => node.props.accessibilityLabel === 'Premium action')!.props.onPress;
+  if (reason === 'cancel') await press('Maybe Later');
+  else await view.rerender(frame(<Intent identity="another-life" onContinue={onContinue} />));
+  expect(modal().props.visible).toBe(true); expect(screen.UNSAFE_queryAllByType(FeaturePaywall)).toHaveLength(0);
+  await act(async () => { heldRun(); }); expect(screen.UNSAFE_getAllByType(Modal)).toHaveLength(1);
+  await act(async () => { shown(); }); expect(modal().props.visible).toBe(false);
+  await dismissNative(dismissed); expect(onContinue).not.toHaveBeenCalled();
+  await press('Premium action'); await waitFor(() => expect(screen.getByRole('button', { name: 'Buy Athlete Career' })).toBeEnabled());
+  const nextShown = modal().props.onShow, nextDismissed = modal().props.onDismiss;
+  await act(async () => { shown(); dismissed(); }); expect(modal().props.visible).toBe(true);
+  await press('Maybe Later'); expect(modal().props.visible).toBe(true);
+  await act(async () => { nextShown(); }); expect(modal().props.visible).toBe(false);
+  await dismissNative(nextDismissed); expect(onContinue).not.toHaveBeenCalled();
+});
 
 test.each(['dreams.athlete', 'dreams.career_pass', 'dreams.full_unlock'] as const)('%s retains the original confirmation and presents it once after iOS dismissal', async id => {
   const { onContinue, dismissed } = await open();
@@ -115,6 +145,7 @@ test('old native and paywall callbacks cannot dismiss a newly requested feature'
   await waitFor(() => expect(screen.getByRole('button', { name: 'Buy Astronaut Career' })).toBeEnabled());
   await act(async () => { old.onDismiss(); old.onUnlocked(); dismissed(); });
   expect(modal().props.visible).toBe(true); expect(first).not.toHaveBeenCalled();
+  await act(async () => { modal().props.onShow(); });
   const nextDismissed = modal().props.onDismiss; await press('Buy Astronaut Career'); await dismissNative(nextDismissed);
   expect(next).toHaveBeenCalledTimes(1); expect(first).not.toHaveBeenCalled();
 });
