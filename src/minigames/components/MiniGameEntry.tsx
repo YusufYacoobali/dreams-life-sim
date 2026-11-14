@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import type { World } from '../../game/model';
 import { ActionRow, Body, Card } from '../../ui/components';
 import { activeMiniGame, miniGameReason } from '../core/eligibility';
-import { titles, type MiniGameKind } from '../core/types';
+import { miniGameTitle, type MiniGameKind } from '../core/types';
 export function MiniGameEntry({
   world,
   kind,
@@ -30,13 +30,13 @@ export function MiniGameEntry({
     <ActionRow
       title={
         active
-          ? 'Resume ' + titles[kind]
+          ? 'Resume ' + miniGameTitle(kind, session)
           : kind === 'sports'
             ? 'Play Match Challenge'
             : kind === 'astronaut'
               ? 'Docking Challenge'
               : kind === 'escape'
-                ? 'Exit Shuffle · Escape'
+                ? 'Attempt Prison Escape'
               : 'Safe Cracker · Burglary'
       }
       subtitle={
@@ -48,7 +48,7 @@ export function MiniGameEntry({
               : kind === 'astronaut'
                 ? 'affects your next mission period'
                 : kind === 'escape'
-                  ? (session && !session.escapeVersion ? 'commits to this year’s escape attempt' : 'memory challenge, no time limit · commits to this year’s escape attempt')
+                  ? (session && session.escapeVersion !== 3 ? 'resume your saved escape puzzle' : 'lock-and-key challenge · failure adds an escape charge')
                 : 'commits to this year’s burglary attempt')
       }
       disabled={busy}

@@ -6,16 +6,14 @@ import { challengeContext, escapeContext, escapeAttemptKey } from '../../src/min
 import { escapeGates, escapeSequence, escapeState, evaluateEscape, escapeMistakes } from '../../src/minigames/escape/escapeLogic';
 import { evaluateSession } from '../../src/minigames/core/evaluation';
 import type { MiniGameInput } from '../../src/minigames/core/types';
+import legacyV1 from '../fixtures/v1-cell-escape-compatibility.json';
 import { escapePrisoner } from '../support/prisonEscape';
 
-function start(world = escapePrisoner(), assisted = true) {
-  const started = resolveCommand(world, { type: 'mini-game-start', kind: 'escape', ownerId: activeSentence(world)!.id, contextId: escapeContext(world), assisted });
-  // A genuinely reserved historical v1 attempt: absence must keep its published rules.
-  const historical = JSON.parse(encodeWorld(started));
-  delete historical.miniGames.at(-1).escapeVersion;
-  delete historical.miniGames.at(-1).escapePatternVersion;
-  return decodeWorld(JSON.stringify(historical));
+function start(world?: World, assisted = true) {
+  if (world) return resolveCommand(world, { type: 'mini-game-start', kind: 'escape', ownerId: activeSentence(world)!.id, contextId: escapeContext(world), assisted });
+  return unpackCheckpoint(legacyV1.rows.find(row => row.id === 'start-' + assisted)!.payload);
 }
+
 function solve(input: World) {
   let world = input;
   const session = world.miniGames.at(-1)!;

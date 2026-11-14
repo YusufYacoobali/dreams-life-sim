@@ -15,11 +15,13 @@ export function MiniGameHUD({
   clock,
   assisted,
   untimed = false,
+  matching = false,
 }: {
   kind: MiniGameKind;
   clock: SharedValue<number>;
   assisted: boolean;
   untimed?: boolean;
+  matching?: boolean;
 }) {
   const total = durationMs[kind],
     [remaining, setRemaining] = useState(Math.ceil(total / 1000));
@@ -40,13 +42,13 @@ export function MiniGameHUD({
         <Text style={[s.muted, { color: c.white }]}>{assisted || untimed ? 'Your pace' : 'Time left'}</Text>
         <Text
           accessibilityLabel={
-            untimed ? 'Memory challenge, no time limit' : assisted
+            untimed ? matching ? 'Lock-and-key challenge, no time limit' : 'Memory challenge, no time limit' : assisted
               ? 'Assisted controls, no real-time deadline'
               : remaining + ' seconds remaining'
           }
           style={[s.muted, { fontVariant: ['tabular-nums'], color: c.white }]}
         >
-          {assisted ? 'Assisted' : untimed ? 'Memory' : remaining + 's'}
+          {assisted ? 'Assisted' : untimed ? matching ? 'Matching' : 'Memory' : remaining + 's'}
         </Text>
       </View>
       {!untimed && <Svg

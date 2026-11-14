@@ -4,12 +4,17 @@ import { encodeWorld } from '../../src/game/model';
 import { resolveCommand } from '../../src/game/engine';
 import { activeSentence } from '../../src/game/systems/legalSchemas';
 import { escapeContext } from '../../src/minigames/core/eligibility';
-import { memorySolution } from '../support/escapeMemory';
+import { escapeSolution } from '../support/escapeSolution';
 import { escapePrisoner } from '../support/prisonEscape';
-import { database } from '../support/sqlite';
+import { diskDatabase } from '../support/refinementSqlite';
+import { mkdtempSync, rmSync } from 'node:fs';
+import { join } from 'node:path';
+import { tmpdir } from 'node:os';
 
-test('SQLite escape starts and settlements roll back fully; cold reopening, exact retries and saved branches keep the same attempt', async () => {
-  const { sqlite, driver } = database(), repository = new SaveRepository(driver);
+test('Cell Escape rolls back starts, placements and settlement; closed-connection reopening and Time Machine branches keep the same attempt', async () => {
+  const folder = mkdtempSync(join(tmpdir(), 'dreams-cell-escape-')), file = join(folder, 'life.db');
+  let { sqlite, driver } = diskDatabase(file), repository = new SaveRepository(driver);
+  const cold = async () => { sqlite.close(); ({ sqlite, driver } = diskDatabase(file)); repository = new SaveRepository(driver); await repository.initialise(); };
   try {
     await repository.initialise();
     const initial = escapePrisoner();
@@ -25,7 +30,7 @@ test('SQLite escape starts and settlements roll back fully; cold reopening, exac
     expect(encodeWorld(await repository.load(initial.id))).toBe(before);
     sqlite.exec('DROP TRIGGER fail_escape_start');
     expect(await store.getState().dispatch(start)).toBe(true);
-    const session = store.getState().world!.miniGames.at(-1)!, solution = memorySolution(session);
+    const session = store.getState().world!.miniGames.at(-1)!, solution = escapeSolution(session);
     const first = { type: 'mini-game-input' as const, sessionId: session.id, index: 0, input: solution[0] };
     const reserved = encodeWorld(store.getState().world!);
     sqlite.exec("CREATE TRIGGER fail_escape_input BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
@@ -35,7 +40,7 @@ test('SQLite escape starts and settlements roll back fully; cold reopening, exac
     expect(await store.getState().dispatch(first)).toBe(true);
     expect(await store.getState().dispatch({ type: 'mini-game-pause', sessionId: session.id, elapsedMs: 100 })).toBe(true);
     const transcript = store.getState().world!.miniGames.at(-1)!;
-    store = createGameStore(deps);
+    await cold(); store = createGameStore(deps);
     expect(await store.getState().bootstrap()).toBe(true);
     expect(store.getState().world!.miniGames.at(-1)).toEqual(transcript);
     expect(await store.getState().dispatch({ type: 'mini-game-resume', sessionId: session.id })).toBe(true);
@@ -49,7 +54,7 @@ test('SQLite escape starts and settlements roll back fully; cold reopening, exac
     expect(encodeWorld(await repository.load(initial.id))).toBe(ready);
     expect(sqlite.prepare('SELECT count(*) AS count FROM receipts').get()).toEqual(receipts);
     sqlite.exec('DROP TRIGGER fail_escape_result');
-    store = createGameStore(deps);
+    await cold(); store = createGameStore(deps);
     expect(await store.getState().bootstrap()).toBe(true);
     expect(await store.getState().dispatch(completion)).toBe(true);
     expect(store.getState().world).toEqual(expected);
@@ -65,5 +70,5 @@ test('SQLite escape starts and settlements roll back fully; cold reopening, exac
     expect(branchStore.getState().world!.miniGames.at(-1)?.status).toBe('forfeited');
     expect(activeSentence(branchStore.getState().world!)?.id).toBe(session.ownerId);
     expect(encodeWorld(await repository.load(initial.id))).toBe(committed);
-  } finally { sqlite.close(); }
+  } finally { sqlite.close(); rmSync(folder, { recursive: true, force: true }); }
 });

@@ -2,7 +2,7 @@ import type { World } from '../../game/model';
 import { challengeSeed } from './difficulty';
 import { evaluateSession } from './evaluation';
 import { ratingFor } from './scoring';
-import { durationMs } from './types';
+import { durationMs, miniGameActionAllowed } from './types';
 import type { GameDate } from '../../game/calendar';
 
 const sameDate = (a: GameDate, b: GameDate) =>
@@ -13,6 +13,7 @@ export function validateMiniGames(world: World) {
     opportunities = new Set<string>(),
     active = new Set<string>();
   for (const session of world.miniGames) {
+    if (session.escapeVersion === 3 && session.assisted) throw Error('Cell Escape has no assisted mode');
     if (session.escapePatternVersion !== undefined && (session.kind !== 'escape' || session.escapeVersion !== 2))
       throw Error('A mixed escape pattern requires a v2 escape session');
     const opportunity = [
@@ -92,13 +93,7 @@ export function validateMiniGames(world: World) {
       if (
         input.at < prior ||
         input.at > session.elapsedMs ||
-        (!(session.kind === 'escape' && session.escapeVersion === 2 && ['stamp', 'escape-recall', 'escape-hint'].includes(input.action.type)) && (session.kind === 'sports'
-          ? 'shot'
-          : session.kind === 'crime'
-            ? 'lock'
-            : session.kind === 'escape'
-              ? 'stamp'
-              : 'thrust') !== input.action.type)
+        !miniGameActionAllowed(session, input.action)
       )
         throw Error('Invalid mini-game input');
       prior = input.at;

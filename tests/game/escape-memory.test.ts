@@ -1,5 +1,6 @@
 import { createHash } from 'node:crypto';
 import { unpackCheckpoint } from '../../src/persistence/checkpoints';
+import mixedV2 from '../fixtures/v2-mixed-cell-escape-compatibility.json';
 import stageV2 from '../fixtures/v2-stage-escape-compatibility.json';
 import { decodeWorld, encodeWorld } from '../../src/game/model';
 import { resolveCommand, type GameCommand } from '../../src/game/engine';
@@ -12,8 +13,7 @@ import { escapePrisoner } from '../support/prisonEscape';
 import { memorySolution } from '../support/escapeMemory';
 
 function start(assisted = true) {
-  const world = escapePrisoner();
-  return resolveCommand(world, { type: 'mini-game-start', kind: 'escape', ownerId: activeSentence(world)!.id, contextId: escapeContext(world), assisted });
+  return unpackCheckpoint(mixedV2.rows.find(row => row.id === 'start-' + assisted)!.payload);
 }
 const add = (world: ReturnType<typeof start>, action: MiniGameInput['action']) => {
   const session = world.miniGames.at(-1)!;
@@ -132,7 +132,7 @@ test('mixed memory patterns vary across seeds without a forced four-symbol cycle
   expect(escapeSequence({ seed: 413, difficulty: 5 })).toEqual(['sun', 'bird', 'star', 'moon', 'sun']);
 });
 
-test('only newly started v2 escape sessions carry the mixed pattern revision', () => {
+test('actual mixed v2 checkpoints retain their original pattern revision', () => {
   const world = start();
   expect(world.miniGames.at(-1)).toMatchObject({ escapeVersion: 2, escapePatternVersion: 1 });
   const invalid = JSON.parse(encodeWorld(world));

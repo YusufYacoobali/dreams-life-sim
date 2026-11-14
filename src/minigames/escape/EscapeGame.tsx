@@ -1,3 +1,4 @@
+import { CellEscapeGame } from './CellEscapeGame';
 import React, { useEffect, useRef } from 'react';
 import { Animated, Text, View } from 'react-native';
 import type { SharedValue } from 'react-native-reanimated';
@@ -7,7 +8,7 @@ import { GameButton } from '../components/GameButton';
 import { gameStyles as s, palette as c } from '../components/gameStyles';
 
 /** Text labels carry the whole puzzle; colour and motion are decorative. */
-export function EscapeGame({ session, clock, enabled, controlsVisible = true, reducedMotion = false, onInput }: {
+function LegacyEscapeGame({ session, clock, enabled, controlsVisible = true, reducedMotion = false, onInput }: {
   session: MiniGameSession;
   clock: SharedValue<number>;
   enabled: boolean;
@@ -86,4 +87,8 @@ export function EscapeGame({ session, clock, enabled, controlsVisible = true, re
     </View>}
     <Text style={[s.muted, { color: '#CCD5E8', textAlign: 'center' }]}>Find the exit before the paper folds.</Text>
   </View>;
+}
+
+export function EscapeGame(props: Parameters<typeof LegacyEscapeGame>[0]) {
+  return props.session.escapeVersion === 3 ? <CellEscapeGame {...props} /> : <LegacyEscapeGame {...props} />;
 }

@@ -20,7 +20,8 @@ import { athleteFixture, miniGameFixture } from '../support/miniGames';
 import { encodeWorld } from '../../src/game/model';
 import { burglaryContext, escapeContext } from '../../src/minigames/core/eligibility';
 import { activeSentence } from '../../src/game/systems/legalSchemas';
-import { memorySolution } from '../support/escapeMemory';
+import { cellBoard } from '../../src/minigames/escape/cellEscapeLogic';
+import { escapeSolution } from '../support/escapeSolution';
 import { escapePrisoner } from '../support/prisonEscape';
 
 let mockStore: ReturnType<typeof createGameStore>,
@@ -196,27 +197,27 @@ afterEach(() => {
   if (sqlite?.isOpen) sqlite.close();
 });
 const play = async () => {
-  await fireEvent.press(screen.getByRole('button', { name: 'Play' }));
+  if (mockParams.kind !== 'escape') await fireEvent.press(screen.getByRole('button', { name: 'Play' }));
   await waitFor(() =>
     expect(mockStore.getState().world!.miniGames).toHaveLength(1),
   );
   await act(() => jest.advanceTimersByTime(1100));
 };
 
-test('the live assisted memory board hides each preview, saves every choice and escapes the actual sentence once', async () => {
+test('Cell Escape starts without an opening popup or assisted controls, saves each key placement and escapes the actual sentence once', async () => {
   await setup('escape');
   await show(<LiveMiniGame />);
   await play();
-  const session = mockStore.getState().world!.miniGames[0], solution = memorySolution(session);
+  const session = mockStore.getState().world!.miniGames[0], solution = escapeSolution(session);
   for (let index = 0; index < solution.length; index++) {
     const { action } = solution[index];
-    if (action.type === 'escape-recall') {
-      expect(screen.queryByRole('button', { name: /Choose .* gate/ })).toBeNull();
-      await fireEvent.press(screen.getByRole('button', { name: 'Hide pattern and begin' }));
-    } else if (action.type === 'stamp') {
-      expect(screen.queryByLabelText('Pattern preview')).toBeNull();
-      await fireEvent.press(screen.getByRole('button', { name: `Choose ${action.symbol} gate` }));
-    }
+    if (action.type !== 'escape-fit') throw Error('Expected Cell Escape input');
+    const key = cellBoard(session).keys.find(item => item.id === action.keyId)!;
+    expect(screen.queryByRole('switch', { name: 'Assisted controls' })).toBeNull();
+    expect(screen.queryByRole('button', { name: 'Play' })).toBeNull();
+    expect(screen.queryByRole('button', { name: /Hint/ })).toBeNull();
+    await fireEvent.press(screen.getByRole('radio', { name: 'Key: ' + key.shape + ', ' + key.teeth + (key.teeth === 1 ? ' notch' : ' notches') }));
+    await fireEvent.press(screen.getByRole('button', { name: new RegExp('^Lock ' + (action.lockId + 1) + ':') }));
     await waitFor(() => expect(mockStore.getState().world!.miniGames[0].inputs).toHaveLength(index + 1));
     await act(async () => {});
   }
@@ -711,15 +712,14 @@ test('a restored attempt can retry missing artwork before its paused controls be
 });
 
 
-test('historical v1 escape display retains its matching rules and clock; new entries explain memory and hints', async () => {
+test('historical v1 display retains its rules and clock; v2 retains memory while new entries explain key matching', async () => {
   const historical: MiniGameSession = { ...practiceFlight(false), kind: 'escape' };
   expect(miniGameInstructions('escape', historical)).toEqual({
     body: 'Match the stamp sequence in order. The four gates shuffle after each choice.',
     assisted: 'Take your time. No fast timing.',
   });
-  expect(miniGameInstructions('escape', null)).toEqual(miniGameInstructions('escape', { ...historical, escapeVersion: 2 }));
-  expect(miniGameInstructions('escape', null).body).toContain('No time limit');
-  expect(miniGameInstructions('escape', null).assisted).toContain('Two one-stamp hints');
+  expect(miniGameInstructions('escape', { ...historical, escapeVersion: 2 }).assisted).toContain('Two one-stamp hints');
+  expect(miniGameInstructions('escape', null)).toEqual({ body: 'Choose a key, then tap its matching lock.', assisted: '' });
   await show(<MiniGameScreen {...flightProps(historical)} kind="escape" />);
   await act(() => jest.advanceTimersByTime(1100));
   expect(screen.getByText('Match the next word below. The gates shuffle after every choice.')).toBeOnTheScreen();

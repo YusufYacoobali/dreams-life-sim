@@ -7,7 +7,7 @@ export const titles = {
   sports: 'Clutch Shot',
   crime: 'Safe Cracker',
   astronaut: 'Orbital Docking',
-  escape: 'Exit Shuffle',
+  escape: 'Cell Escape',
 } as const;
 export const durationMs = {
   sports: 10000,
@@ -30,6 +30,7 @@ export const actionSchema = z.discriminatedUnion('type', [
     type: z.literal('thrust'),
     direction: z.enum(['left', 'right', 'up', 'down', 'coast']),
   }),
+  z.strictObject({ type: z.literal('escape-fit'), keyId: z.number().int().min(0).max(5), lockId: z.number().int().min(0).max(5) }),
   z.strictObject({ type: z.literal('escape-recall') }),
   z.strictObject({ type: z.literal('escape-hint') }),
   z.strictObject({
@@ -58,7 +59,7 @@ export const miniGameSessionSchema = z.object({
   seed: z.number().int().min(0).max(0xffffffff),
   assisted: z.boolean(),
   // Absent on published v1 sessions; never default during decode.
-  escapeVersion: z.literal(2).optional(),
+  escapeVersion: z.union([z.literal(2), z.literal(3)]).optional(),
   // First mixed pattern generator; absent preserves earlier v2 task-stage saves.
   escapePatternVersion: z.literal(1).optional(),
   status: z.enum(['active', 'completed', 'forfeited']),
@@ -113,3 +114,11 @@ export const miniGameCommandSchema = z.discriminatedUnion('type', [
   }),
 ]);
 export type MiniGameCommand = z.infer<typeof miniGameCommandSchema>;
+
+/** A saved escape attempt keeps its published name and accepted control vocabulary. */
+export function miniGameTitle(kind: MiniGameKind, session: MiniGameSession | null = null) {
+  return kind === 'escape' && session && session.escapeVersion !== 3 ? 'Exit Shuffle' : titles[kind];
+}
+export function miniGameActionAllowed(session: Pick<MiniGameSession, 'kind' | 'escapeVersion'>, action: MiniGameAction) {
+  return session.kind === 'escape' ? session.escapeVersion === 3 ? action.type === 'escape-fit' : session.escapeVersion === 2 ? ['stamp', 'escape-recall', 'escape-hint'].includes(action.type) : action.type === 'stamp' : action.type === ({ sports: 'shot', crime: 'lock', astronaut: 'thrust' } as const)[session.kind];
+}

@@ -26,7 +26,7 @@ import { useFeedback } from '../../ui/feedback';
 import { useMiniGameAudio } from '../core/useMiniGameAudio';
 import {
   durationMs,
-  titles,
+  miniGameTitle,
   type MiniGameAction,
   type MiniGameKind,
   type MiniGameSession,
@@ -76,9 +76,11 @@ const instructions = {
   escape: 'Remember the stamps, hide the pattern, then recall it from shuffled gates. Each round gets longer. No time limit.',
 };
 
-/** Display the rules owned by the saved attempt; a fresh entry advertises v2. */
+/** Display the rules owned by the saved attempt; a fresh entry uses Cell Escape. */
 export function miniGameInstructions(kind: MiniGameKind, session: MiniGameSession | null) {
-  const memory = kind === 'escape' && (!session || session.escapeVersion === 2);
+  const cell = kind === 'escape' && (!session || session.escapeVersion === 3);
+  if (cell) return { body: 'Choose a key, then tap its matching lock.', assisted: '' };
+  const memory = kind === 'escape' && session?.escapeVersion === 2;
   return {
     body: kind === 'escape' && !memory
       ? 'Match the stamp sequence in order. The four gates shuffle after each choice.'
@@ -90,6 +92,7 @@ export function miniGameInstructions(kind: MiniGameKind, session: MiniGameSessio
 export function MiniGameScreen(props: Props) {
   const { kind, session, practice = false, error, busy } = props,
     help = miniGameInstructions(kind, session),
+    cell = kind === 'escape' && (!session || session.escapeVersion === 3),
     feedback = useFeedback(),
     { height } = useWindowDimensions(),
     insets = useSafeAreaInsets(),
@@ -119,6 +122,13 @@ export function MiniGameScreen(props: Props) {
       live = false;
     };
   }, [kind, artRetry]);
+  const startRequested = useRef(false);
+  useEffect(() => {
+    if (cell && !session && artReady && !artError && !busy && !props.unavailable && !startRequested.current) {
+      startRequested.current = true;
+      void props.onStart(false);
+    }
+  }, [cell, session, artReady, artError, busy, props.unavailable, props.onStart]);
   const playSound = useMiniGameAudio(kind);
   const clock = useSharedValue(session?.elapsedMs ?? 0),
     current = useRef(props),
@@ -213,7 +223,7 @@ export function MiniGameScreen(props: Props) {
           ? 'result'
           : session.paused || session.elapsedMs > 0
             ? 'paused'
-            : 'countdown',
+            : cell ? 'playing' : 'countdown',
       );
     } else if (session.status !== 'active') setPhase('result');
   }, [session, clock]);
@@ -231,7 +241,7 @@ export function MiniGameScreen(props: Props) {
     return () => clearInterval(timer);
   }, [phase, artReady]);
   useEffect(() => {
-    if (phase !== 'playing' || !session || session.assisted || (session.kind === 'escape' && session.escapeVersion === 2) || !artReady)
+    if (phase !== 'playing' || !session || session.assisted || (session.kind === 'escape' && session.escapeVersion !== undefined) || !artReady)
       return;
     const total = durationMs[kind];
     clock.value = withTiming(
@@ -408,7 +418,7 @@ export function MiniGameScreen(props: Props) {
             {practice ? 'PRACTICE' : 'CHALLENGE'}
           </Text>
           <Text accessibilityRole="header" style={[s.title, { fontSize: 18, color: c.white }]}>
-            {titles[kind]}
+            {miniGameTitle(kind, session)}
           </Text>
         </View>
       </View>
@@ -417,7 +427,8 @@ export function MiniGameScreen(props: Props) {
           kind={kind}
           clock={clock}
           assisted={session.assisted}
-          untimed={session.kind === 'escape' && session.escapeVersion === 2}
+          matching={session.kind === 'escape' && session.escapeVersion === 3}
+          untimed={session.kind === 'escape' && session.escapeVersion !== undefined}
         />
       )}
       <ScrollView
@@ -470,7 +481,10 @@ export function MiniGameScreen(props: Props) {
           <ScenePreview kind={kind} />
         )}
       </ScrollView>
-      {phase === 'intro' && (
+      {phase === 'intro' && cell && <View style={{ padding: 24, gap: 14 }}>
+        {(error || props.unavailable || artError) ? <><Text accessibilityRole="alert" style={[s.text, { color: '#FFB9AD' }]}>{error ?? props.unavailable ?? 'The scene could not be prepared.'}</Text><GameButton label={artError ? 'Reload artwork' : 'Retry Attempt'} disabled={busy || !!props.unavailable} onPress={() => { if (artError) { startRequested.current = false; setArtRetry(value => value + 1); } else if (!busy && !props.unavailable) void props.onStart(false); }} /></> : <Text accessibilityLiveRegion="polite" style={[s.text, { color: c.white }]}>{busy ? 'Saving attempt…' : 'Preparing cell…'}</Text>}
+      </View>}
+      {phase === 'intro' && !cell && (
         <View style={[overlay, { justifyContent: 'flex-end' }]} accessibilityViewIsModal>
           <ScrollView
             style={{
@@ -486,7 +500,7 @@ export function MiniGameScreen(props: Props) {
               {practice ? 'PRACTICE' : 'ONE ATTEMPT'}
             </Text>
             <Text accessibilityRole="header" style={[s.title, { textAlign: 'center' }]}>
-              {titles[kind]}
+              {miniGameTitle(kind, session)}
             </Text>
             <Text style={[s.text, { textAlign: 'center' }]}>{help.body}</Text>
             <Text style={[s.muted, { textAlign: 'center' }]}>

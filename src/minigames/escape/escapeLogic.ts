@@ -1,3 +1,4 @@
+import { evaluateCellEscape } from './cellEscapeLogic';
 import type { Challenge, GameEvaluation, MiniGameInput } from '../core/types';
 import { challengeSeed } from '../core/difficulty';
 import { nextRandom } from '../../game/random';
@@ -56,12 +57,13 @@ export function escapeState(challenge: EscapeChallenge, inputs: MiniGameInput[])
       }
     } else {
       mistakes++; feedback = 'incorrect';
-      if (mistakes >= escapeMistakes(challenge.difficulty, challenge.escapeVersion)) phase = 'failed';
+      if (mistakes >= escapeMistakes(challenge.difficulty, challenge.escapeVersion === 2 ? 2 : undefined)) phase = 'failed';
     }
   }
   return { sequence, stage, mistakes, round, hints, phase, feedback, complete: phase === 'complete', failed: phase === 'failed' };
 }
 export function evaluateEscape(challenge: Challenge, inputs: MiniGameInput[]): GameEvaluation {
+  if (challenge.escapeVersion === 3) return evaluateCellEscape(challenge, inputs);
   const state = escapeState(challenge, inputs);
   return {
     finished: state.complete || state.failed,

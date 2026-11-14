@@ -1,5 +1,7 @@
 import React from 'react';
-import { fireEvent, render, screen } from '../support/rendering';
+import { act, fireEvent, render, screen } from '../support/rendering';
+import { Pressable } from 'react-native';
+import { cellBoard, cellMistakeLimit } from '../../src/minigames/escape/cellEscapeLogic';
 import type { SharedValue } from 'react-native-reanimated';
 import { EscapeGame } from '../../src/minigames/escape/EscapeGame';
 import { escapeSequence } from '../../src/minigames/escape/escapeLogic';
@@ -9,6 +11,39 @@ function fixture(assisted = true): MiniGameSession {
   return { id: 'practice_escape', lifeId: 'practice', personId: 'practice', kind: 'escape', ownerId: 'practice', contextId: 'practice', started: { year: 2026, month: 1, day: 1 }, startedRevision: 0, difficulty: 5, seed: 413, assisted, status: 'active', paused: false, elapsedMs: 0, inputs: [], score: null, rating: null, settled: null, appliedMonth: null };
 }
 const clock = { value: 1400 } as SharedValue<number>;
+
+test('v3 selects keys without a save, places the actual shape/notch pair and shows persisted wrong-key feedback', async () => {
+  let session: MiniGameSession = { ...fixture(false), escapeVersion: 3, difficulty: 3 };
+  const input = jest.fn(), board = cellBoard(session), lock = board.locks[0], key = board.keys.find(item => item.id === lock.keyId)!;
+  const label = (item: typeof key) => 'Key: ' + item.shape + ', ' + item.teeth + (item.teeth === 1 ? ' notch' : ' notches');
+  const view = await render(<EscapeGame session={session} clock={clock} enabled reducedMotion onInput={input} />);
+  expect(screen.getAllByRole('radio')).toHaveLength(6); expect(screen.getByRole('button', { name: /^Lock 1:/ })).toBeDisabled();
+  expect(screen.queryByRole('button', { name: /Hint|Hide pattern|gate/ })).toBeNull();
+  await fireEvent.press(screen.getByRole('radio', { name: label(key) })); expect(input).not.toHaveBeenCalled();
+  await fireEvent.press(screen.getByRole('button', { name: /^Lock 1:/ }));
+  expect(input).toHaveBeenLastCalledWith({ type: 'escape-fit', keyId: key.id, lockId: 0 }, 100);
+  session = { ...session, elapsedMs: 100, inputs: [{ at: 100, action: { type: 'escape-fit', keyId: key.id, lockId: 0 } }] };
+  await view.rerender(<EscapeGame session={session} clock={clock} enabled reducedMotion onInput={input} />);
+  expect(screen.getByRole('button', { name: /^Lock 1:.*open/ })).toBeDisabled(); expect(screen.getByRole('radio', { name: label(key) + ', used' })).toBeDisabled();
+  const second = board.locks[1], wrong = board.keys.find(item => item.id !== second.keyId && item.id !== key.id)!;
+  await fireEvent.press(screen.getByRole('radio', { name: label(wrong) })); await fireEvent.press(screen.getByRole('button', { name: /^Lock 2:/ }));
+  session = { ...session, elapsedMs: 200, inputs: [...session.inputs, { at: 200, action: { type: 'escape-fit', keyId: wrong.id, lockId: second.id } }] };
+  await view.rerender(<EscapeGame session={session} clock={clock} enabled reducedMotion onInput={input} />);
+  expect(screen.getByText('That key does not fit. Try another.')).toBeOnTheScreen();
+  expect(screen.getByText('1/4 locks open · 2 mistakes left')).toBeOnTheScreen();
+});
+test('v3 rejects queued placements after controls change or unmount and ends a failed transcript without offering another key', async () => {
+  const session: MiniGameSession = { ...fixture(false), escapeVersion: 3 }, input = jest.fn(), board = cellBoard(session), key = board.keys[0];
+  const view = await render(<EscapeGame session={session} clock={clock} enabled reducedMotion onInput={input} />);
+  await fireEvent.press(screen.getByRole('radio', { name: 'Key: ' + key.shape + ', ' + key.teeth + (key.teeth === 1 ? ' notch' : ' notches') }));
+  const queued = screen.UNSAFE_getAllByType(Pressable).find(row => row.props.accessibilityLabel?.startsWith('Lock 1:'))!.props.onPress;
+  await view.rerender(<EscapeGame session={session} clock={clock} enabled={false} reducedMotion onInput={input} />); await act(async () => queued()); expect(input).not.toHaveBeenCalled();
+  await view.unmount(); await act(async () => queued()); expect(input).not.toHaveBeenCalled();
+  const wrong = board.keys.find(item => item.id !== board.locks[0].keyId)!;
+  const inputs = Array.from({ length: cellMistakeLimit(session.difficulty) }, (_, index) => ({ at: index * 100, action: { type: 'escape-fit' as const, keyId: wrong.id, lockId: 0 } }));
+  await render(<EscapeGame session={{ ...session, inputs }} clock={clock} enabled reducedMotion onInput={input} />);
+  expect(screen.getByText('The door stays locked.')).toBeOnTheScreen(); expect(screen.queryByRole('radio')).toBeNull();
+});
 
 test('assisted escape uses named gates and a visible ordered sequence; persisted choices advance without timing or colour cues', async () => {
   let session = fixture();

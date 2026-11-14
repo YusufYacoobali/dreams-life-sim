@@ -13,7 +13,7 @@ Each checkpoint includes focused verification before its commit and push. Existi
 | 5. Landlord and properties | Implemented; focused checks pass |
 | 6. Hobbies, pets and artwork | UI implemented; art batch awaiting approval |
 | 7. Organised Crime balancing and prison UI | Implemented; focused checks and seeded comparison pass |
-| 8. Versioned Cell Escape replacement | Pending |
+| 8. Versioned Cell Escape replacement | Implemented; original scene art awaiting approval |
 | 9. Writing and measured performance | Pending |
 | 10. Regression, native playthroughs and final fixes | Pending |
 
@@ -83,3 +83,12 @@ After the master gameplay/polish checkpoints, implement the user's separate Drea
 - [Seeded comparison](../verification/v2-polish/organised-crime.md): 25,344 independent mission trials and 768 earned career progressions per source. Cautious introductory immediate arrest falls from 36–63% to 8–11%; bold remains 36–39%, with further investigations. More cautious careers earn first/second promotions, while 116–123 of 128 still eventually face an arrest within the driver window.
 - New assignments save explicit v3 facts. Reports leave strong evidence and may lead to later investigation rather than forcing immediate arrest. Old v2 incidents, cases, rolls, receipts and pending text remain literal; no new RNG draw or migration is introduced.
 - Verification: the existing crime, mission, crew, prison, persistence and UI suites pass across the main runs and affected reruns (including 113 cases in the final four-suite rerun). New tests pin three old worlds/follow-up outcomes, verify a later report arrest through real SQLite failure/retry/cold reopening, and exercise read-only prison selection and a once-only conversation retry. Both full seeded source comparisons, strict app/test types and import checks pass. Device appearance/accessibility acceptance remains pending.
+
+## Checkpoint 8
+
+- New escape attempts use explicit v3 Cell Escape transcripts: select a shaped key, then place it in a matching lock. Higher levels add locks, repeated shapes distinguished by notch count, and tighter mistake limits. Board generation uses a separate local stream and never consumes life RNG.
+- The native scene has individually accessible key/lock controls, a sliding door, unlocking feedback, wrong-key movement, reduced-motion alternatives and the existing preference-controlled sound/haptics. There is no new memory-preview, hint or assisted-mode flow. Entering Attempt Prison Escape prepares and saves the attempt directly; failed reservation remains retryable in context.
+- Existing v1, original v2 and mixed-pattern v2 sessions retain their controls, timing, hints, names, journal text and exact results. Genuine starts/paused saves were captured from archived executables (`fc2294b4`, `736e1857`); the earlier original-v2 fixture stays unchanged. No version is manufactured by deleting fields from a newly started attempt.
+- Reservation, one yearly attempt, sentence context, wanted status, failure/forfeit charges, once-only settlement and Time Machine behavior remain authoritative. A new escape attempt cannot submit legacy controls, and an older game cannot accept a v3 key placement.
+- The requested original illustrated environment/object layers remain in the [artwork manifest](V2_POLISH_ARTWORK.md), awaiting the pending generation approval. The functional native door/key/lock presentation is implemented; generated-scene fidelity and phone appearance are not claimed complete.
+- Verification: all 67 cases across six focused core/UI/state suites pass. Coverage includes five-level matching/failure paths, genuine v1/v2 complete-result hashes, queued/disabled/unmounted inputs, pause/relaunch, actual on-disk SQLite start/input/settlement rollback and retry, closed-connection reopening and an independent Time Machine branch. Strict app/test types and the 608-module import-cycle check pass. Device animation/audio/accessibility acceptance remains pending.

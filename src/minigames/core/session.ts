@@ -12,6 +12,8 @@ import { ratingFor } from './scoring';
 import {
   durationMs,
   titles,
+  miniGameTitle,
+  miniGameActionAllowed,
   type MiniGameCommand,
   type MiniGameSession,
 } from './types';
@@ -56,8 +58,8 @@ export function resolveMiniGame(
       appliedMonth: null,
     };
     if (command.kind === 'escape') {
-      session.escapeVersion = 2;
-      session.escapePatternVersion = 1;
+      session.escapeVersion = 3;
+      session.assisted = false;
     }
     world.miniGames.push(session);
     // Starting commits the SAME yearly burglary allowance, before any game input.
@@ -103,16 +105,7 @@ export function resolveMiniGame(
     const { input } = command;
     if (input.at < session.elapsedMs || input.at > durationMs[session.kind])
       throw new IneligibleAction('Invalid challenge time');
-    if (
-      !(session.kind === 'escape' && session.escapeVersion === 2 && ['stamp', 'escape-recall', 'escape-hint'].includes(input.action.type)) &&
-      (session.kind === 'sports'
-        ? 'shot'
-        : session.kind === 'crime'
-          ? 'lock'
-          : session.kind === 'escape'
-            ? 'stamp'
-            : 'thrust') !== input.action.type
-    )
+    if (!miniGameActionAllowed(session, input.action))
       throw new IneligibleAction('This control belongs to another game');
     if (evaluateSession(session).finished)
       throw new IneligibleAction('The challenge has already finished');
@@ -136,7 +129,7 @@ export function resolveMiniGame(
     date: { ...world.date },
     category: session.kind === 'escape' ? 'legal' : session.kind === 'crime' ? 'crime' : 'career',
     text: session.kind === 'escape'
-      ? `I ${forfeit ? 'abandoned Exit Shuffle' : 'completed Exit Shuffle with ' + session.score + '/100'}.`
+      ? `I ${forfeit ? 'abandoned ' + miniGameTitle(session.kind, session) : 'completed ' + miniGameTitle(session.kind, session) + ' with ' + session.score + '/100'}.`
       : `${titles[session.kind]}: ${forfeit ? 'forfeited' : session.rating} (${session.score}/100).`,
   });
   return session;
