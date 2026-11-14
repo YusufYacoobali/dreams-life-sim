@@ -1,0 +1,52 @@
+{
+  "baseline": "05cd38aa",
+  "applicationSource": "4538a37420dd70f13a0c3771059be8ee24ac4e79",
+  "boundaries": {
+    "simulation": {
+      "paths": [
+        "src/game"
+      ],
+      "changedFiles": []
+    },
+    "savedState": {
+      "paths": [
+        "src/state",
+        "src/persistence"
+      ],
+      "changedFiles": []
+    },
+    "productIdsOwnershipAndProvider": {
+      "paths": [
+        "src/purchases/catalog.ts",
+        "src/purchases/native.ts",
+        "src/purchases/service.ts",
+        "src/purchases/hooks.ts"
+      ],
+      "changedFiles": []
+    },
+    "shopLayoutContentAndArt": {
+      "paths": [
+        "src/purchases/ShopScreen.tsx",
+        "src/purchases/ShopProduct.tsx",
+        "assets"
+      ],
+      "changedFiles": []
+    },
+    "navigationLayouts": {
+      "paths": [
+        "app/(game)/_layout.tsx",
+        "app/(game)/(tabs)/_layout.tsx"
+      ],
+      "changedFiles": []
+    },
+    "testingBuildConfiguration": {
+      "paths": [
+        "app.config.cjs",
+        "eas.json"
+      ],
+      "changedFiles": []
+    }
+  },
+  "accessHelper": "The original person/kind active/between predicates are shared; found-cult still requires ownership. Testing and verified ownership remain evaluated by the existing hooks/service.",
+  "dependency": "Official expo-blur58.0.6, SDK range~58.0.6, no added transitive dependencies."
+}

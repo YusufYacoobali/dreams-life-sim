@@ -1,0 +1,54 @@
+{
+  "sourceCommit": "4538a37420dd70f13a0c3771059be8ee24ac4e79",
+  "platform": "ios",
+  "bundle": "_expo/static/js/ios/entry-63e3e1b8638948c899513e5033d325f5.hbc",
+  "bundleBytes": 11834426,
+  "bundleSha256": "9adffcdc8b318b0998c919328ed45c2245611ea2e00a02719beaa3641c3832b3",
+  "hermesMagic": "c61fbc03c103191f",
+  "hermesBytecodeVersion": 99,
+  "metadataSha256": "4f0f01053a2b27f58933a9bd721b5a4608f8d6351636da54819c541000f22f20",
+  "metadataAssets": 1235,
+  "expoBlur": {
+    "declared": "~58.0.6",
+    "expoSdkExpected": "~58.0.6",
+    "installed": "58.0.6",
+    "implementationMarkersInBytecode": {
+      "ExpoBlur": true,
+      "ExpoBlurView": true,
+      "experimentalBlurMethod": true,
+      "blurReductionFactor": true
+    },
+    "androidOnlyDimezisMarkerPresent": false
+  },
+  "rawAppConfig": {
+    "godModeTesting": false,
+    "unlockAllTesting": false,
+    "unlockAllTestingBuild": null,
+    "profileCommands": false,
+    "profileCommandsBuild": null
+  },
+  "expoPublicConfig": {
+    "godModeTesting": false,
+    "unlockAllTesting": false,
+    "unlockAllTestingBuild": {},
+    "profileCommands": false,
+    "profileCommandsBuild": {}
+  },
+  "runtimeGuards": {
+    "developmentGlobal": false,
+    "raw": {
+      "isGodModeBuild": false,
+      "isUnlockAllTestingEnabled": false,
+      "isCommandProfilingEnabled": false
+    },
+    "expoSerialized": {
+      "isGodModeBuild": false,
+      "isUnlockAllTestingEnabled": false,
+      "isCommandProfilingEnabled": false
+    }
+  },
+  "sourceParitySinceCommit": true,
+  "maxWorkers": 1,
+  "nodeHeapLimitMb": 1536,
+  "verifiedAt": "2026-11-14T10:17:33.483Z"
+}

@@ -1,0 +1,28 @@
+{
+  "checkedAtUtc": "2026-11-14T10:00:38.035175+00:00",
+  "androidApi": 29,
+  "freshAvd": true,
+  "guestCpuCores": 2,
+  "guestRamMiB": 1536,
+  "noKvm": true,
+  "bootCompletedAfterSeconds": 279.529,
+  "packageAndWindowResponsive": true,
+  "usableNativeUi": false,
+  "actualSystemScreenshot": {
+    "path": "/workspace/dreams-builds/shop-native-attempt/android-system-stream.png",
+    "bytes": 14283,
+    "sha256": "1e61c4876f1b1f16eaf60abbf29375de64852cbc92e141952f424847e10a2b71",
+    "observedContent": "Pixel is starting..."
+  },
+  "gameAppInstalled": false,
+  "shopScreenshotsObtained": false,
+  "accountOrPurchaseActions": false,
+  "stoppedAtDeadline": true,
+  "iosToolsAvailable": false,
+  "revenueCatPublicKeysPresent": {
+    "ios": false,
+    "android": false
+  },
+  "storeSandboxPurchasesRun": false,
+  "originalReferenceFilesFoundLocally": false
+}
