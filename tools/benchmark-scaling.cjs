@@ -44,7 +44,7 @@ async function main() {
   const selected = inputs.snapshots.filter(row => (!flags['--ages'] || flags['--ages'].split(',').includes(String(row.summary.age))) && (!flags['--levels'] || flags['--levels'].split(',').includes(row.summary.level)));
   for (const snapshot of selected) for (const kind of (flags['--kinds'] ?? 'routine,finance,firstAgeUp,fullYear').split(',')) {
     const initial = codec.unpackCheckpoint(snapshot.payload,true); if (kind === 'finance' && personalBorrowReason(initial,1n)) continue;
-    const trials = []; let expected;
+    const trials = []; let expected,checkpointBytes;
     for (let trial=0;trial<=samples;trial++) {
       const file = path.join(folder,'trial.db'); fs.rmSync(file,{force:true});
       const {sqlite,repo} = database(file); await repo.initialise(); await repo.create(initial);
@@ -85,6 +85,7 @@ async function main() {
       const memoryAfter=process.memoryUsage(), cpu=process.cpuUsage(cpuBefore);
       await new Promise(resolve=>setImmediate(resolve));
       const final=world(), payload=sqlite.prepare('SELECT payload FROM lives WHERE id=?').get(final.id).payload;
+      checkpointBytes=Buffer.byteLength(payload);
       const outcome={worldSha256:sha(model.encodeWorld(final)),checkpointSha256:sha(payload),random:final.random,date:final.date,
         revision:final.revision,journalRows:final.journal.length,ledgerRows:final.ledger.length,people:Object.keys(final.people).length,
         reviewTracker:await repo.loadReviewTracker(),commandsSha256:sha(JSON.stringify(commands,model.moneyJSON))};
@@ -95,7 +96,7 @@ async function main() {
       if (trial) trials.push({elapsedMs,heapDelta:memoryAfter.heapUsed-memoryBefore.heapUsed,rss:memoryAfter.rss,cpu,gcMs:gc.reduce((a,b)=>a+b,0),gcCount:gc.length,phases:measured,events});
     }
     const names=[...new Set(trials.flatMap(trial=>Object.keys(trial.phases)))];
-    results.push({input:snapshot.summary,kind,outcome:expected,timingMs:stats(trials.map(trial=>trial.elapsedMs)),heapDeltaBytes:stats(trials.map(trial=>trial.heapDelta)),rssBytes:stats(trials.map(trial=>trial.rss)),gcMs:stats(trials.map(trial=>trial.gcMs)),
+    results.push({input:snapshot.summary,kind,outcome:expected,checkpointBytes,timingMs:stats(trials.map(trial=>trial.elapsedMs)),heapDeltaBytes:stats(trials.map(trial=>trial.heapDelta)),rssBytes:stats(trials.map(trial=>trial.rss)),gcMs:stats(trials.map(trial=>trial.gcMs)),
       phases:Object.fromEntries(names.map(name=>[name,{...stats(trials.map(trial=>trial.phases[name]?.ms??0)),calls:trials[0].phases[name]?.calls??0}])),trials});
     fs.writeFileSync(flags['--output'],JSON.stringify({scope:'Node 24 / real on-disk SQLite / production store. One warm-up, nearest-rank p50/p95/max. Inclusive overlapping phase times. nativeTransferBytes is bytes, not ms; no native bridge/device/React timing claim.',sourceHash,inputSha256:sha(inputBytes),samples,node:process.version,results},null,2));
     process.stderr.write(`${snapshot.summary.age}/${snapshot.summary.level ?? 'continue'}/${kind}: ${results.at(-1).timingMs.p50.toFixed(1)}ms\n`);

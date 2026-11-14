@@ -1,0 +1,145 @@
+{
+  "scope": "Production Android/iOS Hermes exports, with every changed runtime file matching the source map exactly. This does not establish installed-device behavior.",
+  "files": {
+    "ios": [
+      {
+        "file": "app/(game)/(tabs)/life.tsx",
+        "sha256": "fa8bb2ac3a15c3e2befc2ecb7bef6eb669200e47544d675aa606e098d364018a"
+      },
+      {
+        "file": "src/game/commandLedger.ts",
+        "sha256": "731eef9ee353c2c8e6339cc2bc9dc0643f3708eb43274032ef4ef00eb79f905d"
+      },
+      {
+        "file": "src/game/dataDraft.ts",
+        "sha256": "353111411d53c80b87dba77a4d5a0ce70eb5511eb0952475cd618ec0e43fefc2"
+      },
+      {
+        "file": "src/game/engine.ts",
+        "sha256": "382326dacaea98eab6e64f1ca6bbcb56f6805f320c7f0b369d1cd7caa05cc1b1"
+      },
+      {
+        "file": "src/game/integrityChecks.ts",
+        "sha256": "00bec654cac9ba8483862d0293da88bb6aed7c4d9817e1d377a5476cf404fbd2"
+      },
+      {
+        "file": "src/game/ledgerIndex.ts",
+        "sha256": "9084631ae71cb3b46091ac345ec39c072e52cc29b0febb6970fc2749b021cd0e"
+      },
+      {
+        "file": "src/game/model.ts",
+        "sha256": "e8d6d757e9f4d77c9a9447db66f3e562b93f615d61e9401ffbe8376c1936454e"
+      },
+      {
+        "file": "src/game/persistentLookup.ts",
+        "sha256": "68f8eb924d6142d60605c31e6584e1a1d64756998f008255f4929d37952b8299"
+      },
+      {
+        "file": "src/game/systems/careerValidation.ts",
+        "sha256": "cb8fa613de094bc6a52d098640864fb465ec61a2789faf9ce6cf05989e4e9fd4"
+      },
+      {
+        "file": "src/game/systems/creativeValidation.ts",
+        "sha256": "c5f4fa0e119a7a1e74c1ee85155664d10e73e66077b1085c0737d2a26aefa67b"
+      },
+      {
+        "file": "src/game/systems/credit.ts",
+        "sha256": "369f028f7dd039aaf7bd34cfc341e9282a85c3288499ac5caf12451f124d5d4e"
+      },
+      {
+        "file": "src/game/systems/npcMoves.ts",
+        "sha256": "f2396ebc59a169b6f8caecc975c3d53443045ba21854c06c3428926fe1d56cda"
+      },
+      {
+        "file": "src/performance/commandTiming.ts",
+        "sha256": "099f10cd8088467bd486b584b655721d701d7e556c20175278f1e4d41d03cb7d"
+      },
+      {
+        "file": "src/persistence/checkpoints.ts",
+        "sha256": "b89291481b0e630950763e15dde418c6474e110590658ad16cbbc4112118f755"
+      },
+      {
+        "file": "src/persistence/repository.ts",
+        "sha256": "cb1b4055b6f0ecf699c776d5208ff4aaf6d6311d3ee9129288c6a400bc97d7fb"
+      },
+      {
+        "file": "src/state/gameStore.ts",
+        "sha256": "d5bfbe03b6661a57147825b5288b93ddbd55b6d5b9304714de430b73dfe7a3e8"
+      },
+      {
+        "file": "src/ui/journalProjection.ts",
+        "sha256": "68ca964d3dc900bc9df42944185ddb5c58dc16e427872d563b72e8a98af1b5ea"
+      }
+    ],
+    "android": [
+      {
+        "file": "app/(game)/(tabs)/life.tsx",
+        "sha256": "fa8bb2ac3a15c3e2befc2ecb7bef6eb669200e47544d675aa606e098d364018a"
+      },
+      {
+        "file": "src/game/commandLedger.ts",
+        "sha256": "731eef9ee353c2c8e6339cc2bc9dc0643f3708eb43274032ef4ef00eb79f905d"
+      },
+      {
+        "file": "src/game/dataDraft.ts",
+        "sha256": "353111411d53c80b87dba77a4d5a0ce70eb5511eb0952475cd618ec0e43fefc2"
+      },
+      {
+        "file": "src/game/engine.ts",
+        "sha256": "382326dacaea98eab6e64f1ca6bbcb56f6805f320c7f0b369d1cd7caa05cc1b1"
+      },
+      {
+        "file": "src/game/integrityChecks.ts",
+        "sha256": "00bec654cac9ba8483862d0293da88bb6aed7c4d9817e1d377a5476cf404fbd2"
+      },
+      {
+        "file": "src/game/ledgerIndex.ts",
+        "sha256": "9084631ae71cb3b46091ac345ec39c072e52cc29b0febb6970fc2749b021cd0e"
+      },
+      {
+        "file": "src/game/model.ts",
+        "sha256": "e8d6d757e9f4d77c9a9447db66f3e562b93f615d61e9401ffbe8376c1936454e"
+      },
+      {
+        "file": "src/game/persistentLookup.ts",
+        "sha256": "68f8eb924d6142d60605c31e6584e1a1d64756998f008255f4929d37952b8299"
+      },
+      {
+        "file": "src/game/systems/careerValidation.ts",
+        "sha256": "cb8fa613de094bc6a52d098640864fb465ec61a2789faf9ce6cf05989e4e9fd4"
+      },
+      {
+        "file": "src/game/systems/creativeValidation.ts",
+        "sha256": "c5f4fa0e119a7a1e74c1ee85155664d10e73e66077b1085c0737d2a26aefa67b"
+      },
+      {
+        "file": "src/game/systems/credit.ts",
+        "sha256": "369f028f7dd039aaf7bd34cfc341e9282a85c3288499ac5caf12451f124d5d4e"
+      },
+      {
+        "file": "src/game/systems/npcMoves.ts",
+        "sha256": "f2396ebc59a169b6f8caecc975c3d53443045ba21854c06c3428926fe1d56cda"
+      },
+      {
+        "file": "src/performance/commandTiming.ts",
+        "sha256": "099f10cd8088467bd486b584b655721d701d7e556c20175278f1e4d41d03cb7d"
+      },
+      {
+        "file": "src/persistence/checkpoints.ts",
+        "sha256": "b89291481b0e630950763e15dde418c6474e110590658ad16cbbc4112118f755"
+      },
+      {
+        "file": "src/persistence/repository.ts",
+        "sha256": "cb1b4055b6f0ecf699c776d5208ff4aaf6d6311d3ee9129288c6a400bc97d7fb"
+      },
+      {
+        "file": "src/state/gameStore.ts",
+        "sha256": "d5bfbe03b6661a57147825b5288b93ddbd55b6d5b9304714de430b73dfe7a3e8"
+      },
+      {
+        "file": "src/ui/journalProjection.ts",
+        "sha256": "68ca964d3dc900bc9df42944185ddb5c58dc16e427872d563b72e8a98af1b5ea"
+      }
+    ]
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "referenceCommit": "8378d0f8",
+  "auditedCommit": "05cd38aa",
+  "runtimeCommit": "4317da3e674e9280deecfe08405aa634a58695b2",
+  "regression": {
+    "suites": 424,
+    "tests": 7294,
+    "failed": 0,
+    "pending": 0,
+    "todo": 0,
+    "sourceDrift": 0
+  },
+  "soak": {
+    "sweep": "complete",
+    "lives": 120,
+    "workers": 4,
+    "passed": true,
+    "maximumLedgerRows": 61470,
+    "allHistoricalSummaryCountsMatch": true
+  },
+  "engineReplay": {
+    "commands": 6004,
+    "beforeFormatChange": "canonical world + RNG + checkpoint SHA after every command",
+    "final": "canonical world + RNG + every versioned codec round-trip"
+  },
+  "performance": {
+    "storePairedCases": 64,
+    "samplesPerSide": 11,
+    "medianImprovedCases": 59,
+    "otherPairedCases": [
+      {
+        "age": 23,
+        "activity": "light",
+        "kind": "routine"
+      },
+      {
+        "age": 23,
+        "activity": "light",
+        "kind": "firstAgeUp"
+      },
+      {
+        "age": 30,
+        "activity": "light",
+        "kind": "firstAgeUp"
+      },
+      {
+        "age": 30,
+        "activity": "moderate",
+        "kind": "firstAgeUp"
+      },
+      {
+        "age": 30,
+        "activity": "extreme",
+        "kind": "firstAgeUp"
+      }
+    ]
+  },
+  "memory": {
+    "switches": 32,
+    "commands": 1000,
+    "firstSteadyHeap": 88056728,
+    "lastHeap": 89083200,
+    "rssHighWater": 564125696
+  },
+  "allocations": [
+    {
+      "side": "reference",
+      "commands": 240,
+      "sampledAllocationBytes": 5263664808,
+      "sampleCount": 62741,
+      "finalCanonicalSha256": "6f2e67be9e90bfe72439323675782c9da9b51087938d080a6763803684b68110",
+      "journal": 2469,
+      "ledger": 40323
+    },
+    {
+      "side": "candidate",
+      "commands": 240,
+      "sampledAllocationBytes": 1693322432,
+      "sampleCount": 15834,
+      "finalCanonicalSha256": "6f2e67be9e90bfe72439323675782c9da9b51087938d080a6763803684b68110",
+      "journal": 2469,
+      "ledger": 40323
+    }
+  ],
+  "exports": {
+    "platforms": [
+      "ios",
+      "android"
+    ],
+    "exactChangedSourceFilesPerPlatform": 17
+  },
+  "preservation": "Original fixtures, content, rules, RNG implementation, art, purchase/access logic and dependency manifests unchanged.",
+  "open": [
+    "Physical release iPhone/Android responsiveness, native bridge/storage cost, React/GPU frames, scrolling, native allocation/GC and sustained mobile memory.",
+    "The pre-existing notice inventory hashes an older package/lock; optional inventory check remains stale. No dependency or art change is introduced."
+  ]
+}

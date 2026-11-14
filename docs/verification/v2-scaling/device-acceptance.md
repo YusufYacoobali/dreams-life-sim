@@ -1,0 +1,15 @@
+# Release-device acceptance — open
+
+No physical release iPhone or Android measurement was available in this workspace. Android/iOS Hermes exports and Node timings do not establish this acceptance.
+
+1. Build the same runtime as a release/internal profiling build for a physical modern iPhone and Android phone. Record model, OS, build identifier, thermal state and available storage. Preserve the production engine, integrity checks, native SQLite and normal purchase configuration.
+2. Import the retained light/moderate/heavy/extreme age-23/30/50/70 worlds through the existing supported archive/checkpoint test harness. Keep the original records and actual interrupted-year case. Record save format, revision, people, relationships, journal/ledger counts and checkpoint size after native load.
+3. Attach a bounded, local collector to `observeCommandTimings` from `src/performance/commandTiming.ts`; detach it after each run. The collector should append to a fixed-size buffer and do no synchronous logging or I/O. No name, journal, balance or saved content is emitted by this API.
+4. Warm each case, then measure at least 20 repetitions of ordinary routine/acknowledgement, borrowing/acknowledgement, first Age Up and complete annual advancement. Resolve every actual decision/result and Continue This Year. Preserve the command trace, RNG and complete final canonical hash, including failed-save/retry controls.
+5. Use native Instruments/Perfetto and frame capture to measure real tap-to-feedback/paint, JS/native frames, React commits, SQLite transactions and transfer, GC, allocation and memory peaks. JS `ui:*-frame` observations are scheduling opportunities; they are not GPU-paint timestamps. Record p50/p95/max and concurrent native work.
+6. On Life, follow new facts, manually drag into old history, open/close a saved result, switch tabs and resume an interrupted year. Count projection/scroll attempts and content/layout events while checking that old rows remain accessible and the user's scroll position follows existing behavior.
+7. Run a sustained heavily played session, alternate independent lives and Time Machine branches, close/reopen the app, recover a backup and continue a real child. Confirm exact history, receipts, balances and branch independence. Track retained/peak native memory and whether it stabilizes after warm-up.
+
+Compare on the same device with the reference build and alternating order. The targets remain immediate visible feedback around 50–100 ms, ordinary annual progression around 100–300 ms where feasible, and substantially flatter history growth. Active simulation complexity is expected to require work. Retain outliers and any cases that regress.
+
+The gate closes only when these measurements and correctness checks are retained. If native checkpoint transfer remains dominant, measure it before designing separate database history storage. The current format deliberately keeps immutable history inline and preserves the existing atomic repository protocol.

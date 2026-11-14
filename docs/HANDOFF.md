@@ -1,5 +1,43 @@
 # Continue Dreams: Life Simulator
 
+## Core scaling — 14 November 2026
+
+Continue on **`v2`**. Final runtime is **`4317da3e`**, based on `8378d0f8`
+(after audited `05cd38aa`). Read [the complete verification](verification/v2-scaling/README.md).
+
+Private certified append indexes, exact BigInt reconciliation, conservative dependency
+validation, ordinary-command drafts, explicit monthly history sharing, incremental
+journal projection and v5 encoded history chunks are implemented. Keep the reference
+copy engine. Monthly systems/NPC order, content, RNG, purchases, art and dependencies
+remain unchanged. Unknown/imported/recovered state retains full integrity validation.
+
+Keep readers v1–v4. V5 saves use reader marker **33**; compatible reader13–32 databases
+change metadata only, and future reader34 is refused. Near a former size limit,
+the writer falls back to exact v4 bytes; never drop history to fit the new format.
+
+The final clean invocation passes **424 suites / 7,294 tests**, with zero failures,
+pending/todos or source drift. The separate **120-life soak** passes and matches
+all historical death-age/people/ledger summaries, up to **61,470 ledger rows**.
+Every-command 6,004-command replays retain complete worlds/RNG and exact prior-codec
+bytes or final versioned round-trips. Real SQLite rollback/retry/reopen, imports,
+exports, backup, branch and generation cases pass. Strict app/test types, the
+621-module acyclic import graph and both Hermes exports pass; all 17 changed
+runtime files match both source maps exactly.
+
+Eleven-pair production-store/real SQLite comparisons improve median latency in
+59/64 cases. Age-70 extreme routine/ack p50/p95 is **94.7/129.4 → 55.3/61.1 ms**;
+complete year is **853.9/1024.6 → 411.8/707.9 ms**. Young/first-step cases and some
+finance tails remain mixed. The cohorts explicitly stress financial/journal history
+after bounded real feature actions; do not claim uniform use of every feature.
+Native release iPhone/Android feedback, frames, bridge/storage, scrolling and memory
+remain **open**. Node results and successful exports do not resolve that gate.
+
+The retained notice inventory already hashes older package/lock inputs and its
+optional freshness check fails. Dependency manifests and art were not changed by
+this task. Preserve the explicit verification limitation rather than claiming all
+ancillary inventory checks passed.
+
+
 Owner workflow preference: commit and push completed changes to the active development branch unless explicitly told otherwise.
 
 ## Mobile performance — 31 October 2026

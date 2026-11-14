@@ -1,0 +1,36 @@
+{
+  "referenceCommit": "8378d0f8",
+  "legacyWriterByteEqualityCases": 16,
+  "unchangedPaths": [
+    "assets",
+    "design",
+    "src/game/content",
+    "src/game/random.ts",
+    "src/game/rules.ts",
+    "src/purchases",
+    "src/access",
+    "package.json",
+    "package-lock.json",
+    "tests/fixtures"
+  ],
+  "monthlyBodiesUnchangedApartFromTiming": {
+    "processMonth": true,
+    "finishYear": true,
+    "continueYear": true
+  },
+  "noticeInventory": {
+    "preExisting": true,
+    "checkPassed": false,
+    "reason": "The retained inventory hashes older package/lock inputs. This task changes no dependency, lockfile or art.",
+    "retainedInputs": {
+      "package.json": "084a7dc25a924d2b41ba53d69e897b1a130d6bd8fda03008b775c964d7bdb098",
+      "package-lock.json": "a80ba81d4b399536099801dac4faaac75394732f1af4fe96a29d51490feaca49",
+      "app.json": "ed8812a451b11abd0befd22d0b6b89f31d96c02d18f0adee83347d7ebfe4a024"
+    },
+    "currentInputs": {
+      "package.json": "1ae490235a7e2a63bb95a09873d9d190b25e67086488bf37b83a763eac4b2752",
+      "package-lock.json": "649a0f98ec3ff2363dcd85312f7effee0cbb76a8e14d6e226265c2690e0403e0",
+      "app.json": "ed8812a451b11abd0befd22d0b6b89f31d96c02d18f0adee83347d7ebfe4a024"
+    }
+  }
+}
