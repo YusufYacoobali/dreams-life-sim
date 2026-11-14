@@ -1,5 +1,7 @@
 # V2 core scaling verification
 
+This report records the original overhaul. See [the final follow-up](final-followup.md) for the bounded internal profiler, accepted-feature lifetime workloads, reader-copy checks, later measurements and the physical-device collection workflow.
+
 Branch: `v2`. Reference: `8378d0f8` (including changes after audited `05cd38aa`). Final runtime: `4317da3e`. The implementation improves measured history scaling while preserving complete outcomes and saves. **Release-device acceptance remains open; this is not a claim that phone sluggishness is resolved.**
 
 ## What shipped

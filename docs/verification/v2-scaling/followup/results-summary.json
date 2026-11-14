@@ -1,0 +1,579 @@
+{
+  "gameplay": {
+    "cases": 120,
+    "measuredSuccessful": 118,
+    "unavailable": [
+      {
+        "profile": "actor",
+        "age": 70,
+        "kind": "finance",
+        "reason": "Current external employment, an earned pension, or three recent paid months of recurring income are required"
+      },
+      {
+        "profile": "model",
+        "age": 70,
+        "kind": "finance",
+        "reason": "Current external employment, an earned pension, or three recent paid months of recurring income are required"
+      }
+    ],
+    "matchingRejections": [],
+    "medianImproved": 115,
+    "p95Improved": 90,
+    "samplesPerSide": 7
+  },
+  "continue": {
+    "cases": 34,
+    "measuredSuccessful": 34,
+    "unavailable": [],
+    "matchingRejections": [],
+    "medianImproved": 34,
+    "p95Improved": 28,
+    "samplesPerSide": 7
+  },
+  "initial-history-stress": {
+    "cases": 6,
+    "measuredSuccessful": 5,
+    "unavailable": [],
+    "matchingRejections": [
+      {
+        "profile": "mixed",
+        "age": 70,
+        "kind": "fullYear",
+        "outcome": {
+          "command": "resume",
+          "error": "Your progress couldn't be saved. Please try again."
+        }
+      }
+    ],
+    "medianImproved": 5,
+    "p95Improved": 4,
+    "samplesPerSide": 7
+  },
+  "mainYearsNotTwelveMonths": [],
+  "qualifiedReplay": {
+    "comparison": "Complete canonical world and RNG after every command; exact legacy checkpoint bytes and current round trips at each captured age.",
+    "sourceHashes": [
+      "408c3c1fca27fdb60441c5ab338ba962b67b11f30c59746d3168baa2e32231ac",
+      "4b244a41cc527335366770039f877e3ebf420a28f50a37de25aa1c598a21eff2"
+    ],
+    "commandsSha256": "96efd55a1553629b7d17f4be58ed9e4b6baa1150e4b1ca6083cdb978c03ba51c",
+    "results": [
+      {
+        "profile": "mixed",
+        "commands": 3992,
+        "finalCanonicalSha256": "1d1f2f55d0daf31aeba775c73011ad5da64b267be29b63fcb1d6b4f362043ef1",
+        "random": {
+          "events": 793102312,
+          "npcs": 999835783,
+          "economy": 4045921719,
+          "outcomes": 3626718779
+        },
+        "checkpoints": [
+          {
+            "age": 23,
+            "sha256": "29b8f707afdf61ed8d2f6fc6f939820fc4ce2461352d58b7bd07de7a7921215b",
+            "format": "dreams-checkpoint-v5"
+          },
+          {
+            "age": 30,
+            "sha256": "fa6bc2369aae729098fe8f77c4b31e5171cbdcb24c54c5bf46345b68658a3803",
+            "format": "dreams-checkpoint-v5"
+          },
+          {
+            "age": 50,
+            "sha256": "c0935d5e4e75f69ff72aebe30e20152d433f34b8664ec1b63fdae8b46f805731",
+            "format": "dreams-checkpoint-v5"
+          },
+          {
+            "age": 70,
+            "sha256": "1d1f2f55d0daf31aeba775c73011ad5da64b267be29b63fcb1d6b4f362043ef1",
+            "format": "dreams-checkpoint-v5"
+          }
+        ]
+      }
+    ]
+  },
+  "financeFinal": [
+    {
+      "input": {
+        "age": 30,
+        "level": "extreme",
+        "activityActions": 3000,
+        "commands": 6001,
+        "revision": 6117,
+        "journalRows": 1887,
+        "ledgerRows": 14971,
+        "relationships": 24,
+        "people": 22,
+        "npcs": 21,
+        "assets": 3,
+        "pets": 1,
+        "hobbies": 2,
+        "canonicalBytes": 4842853,
+        "checkpointBytes": 239457,
+        "heapUsed": 324416520,
+        "rss": 596287488,
+        "commandCounts": {
+          "meet-people": 1,
+          "choose": 1,
+          "acknowledge": 3000,
+          "interact": 10,
+          "hobby-plan": 2,
+          "leisure-outing": 3,
+          "adopt-pet": 1,
+          "pet-care": 2,
+          "buy-asset": 2,
+          "borrow": 1490,
+          "repay": 1489
+        },
+        "sha256": "8386a20668693055adbcd3b15e732c60ea7b4932fce77b3eee8ec9e152b7213b"
+      },
+      "kind": "finance",
+      "reference": {
+        "p50": 43.586890999999014,
+        "p95": 65.47276099999999,
+        "max": 187.49571500000093
+      },
+      "candidate": {
+        "p50": 21.92552699999942,
+        "p95": 40.178477000001294,
+        "max": 103.06005100000039
+      },
+      "medianPairedRatio": 0.5042426981523753,
+      "outcome": {
+        "canonicalSha256": "419429eab46a2393625055e032d6d699664a6af4c2e4ff8d58a60dfd7108e8a8",
+        "random": {
+          "events": 3561786291,
+          "npcs": 456254159,
+          "economy": 3271174910,
+          "outcomes": 3402306351
+        },
+        "date": {
+          "year": 2056,
+          "month": 11,
+          "day": 14
+        },
+        "died": null,
+        "rejected": null,
+        "revision": 6119,
+        "journal": 1888,
+        "ledger": 14972,
+        "people": 22,
+        "commands": 2,
+        "commandsSha256": "fa723b1ca2ced186ae0615bbf838404435b5c34874a866c9714b5e3050fb26ac",
+        "review": {
+          "version": 1,
+          "globalYearsPlayed": 0,
+          "lastReviewPromptGlobalYear": null,
+          "nextReviewPromptAtGlobalYear": 0,
+          "reviewCompletedOrDismissedCount": 0,
+          "offerSequence": 0,
+          "offer": null,
+          "candidate": null,
+          "observations": []
+        }
+      }
+    },
+    {
+      "input": {
+        "age": 50,
+        "level": "extreme",
+        "activityActions": 3000,
+        "commands": 6001,
+        "revision": 6192,
+        "journalRows": 2225,
+        "ledgerRows": 29305,
+        "relationships": 28,
+        "people": 24,
+        "npcs": 23,
+        "assets": 3,
+        "pets": 1,
+        "hobbies": 2,
+        "canonicalBytes": 9442893,
+        "checkpointBytes": 490589,
+        "heapUsed": 214783640,
+        "rss": 579862528,
+        "commandCounts": {
+          "meet-people": 1,
+          "choose": 1,
+          "acknowledge": 3000,
+          "interact": 8,
+          "hobby-plan": 2,
+          "leisure-outing": 3,
+          "adopt-pet": 1,
+          "pet-care": 2,
+          "buy-asset": 2,
+          "borrow": 1491,
+          "repay": 1490
+        },
+        "sha256": "230b928368a81f577be4a01552fa0eb4744da813ba212a0af01e89c027e927fb"
+      },
+      "kind": "finance",
+      "reference": {
+        "p50": 82.59716900000058,
+        "p95": 138.33203299999877,
+        "max": 238.76396999999997
+      },
+      "candidate": {
+        "p50": 37.32131500000105,
+        "p95": 51.12887000000046,
+        "max": 61.52174800000648
+      },
+      "medianPairedRatio": 0.4513273828871509,
+      "outcome": {
+        "canonicalSha256": "c9441bfe9b85c2416f5d72e2d1f287d0c7b8c203b1929026f0d0cc043ca99eb4",
+        "random": {
+          "events": 3873915976,
+          "npcs": 2177436894,
+          "economy": 4133302350,
+          "outcomes": 4215645194
+        },
+        "date": {
+          "year": 2076,
+          "month": 11,
+          "day": 14
+        },
+        "died": null,
+        "rejected": null,
+        "revision": 6194,
+        "journal": 2226,
+        "ledger": 29306,
+        "people": 24,
+        "commands": 2,
+        "commandsSha256": "c437a324f05807604f935742f4974c38e836d0cbe28e4a5d5283295237bb7b62",
+        "review": {
+          "version": 1,
+          "globalYearsPlayed": 0,
+          "lastReviewPromptGlobalYear": null,
+          "nextReviewPromptAtGlobalYear": 0,
+          "reviewCompletedOrDismissedCount": 0,
+          "offerSequence": 0,
+          "offer": null,
+          "candidate": null,
+          "observations": []
+        }
+      }
+    }
+  ],
+  "profilerStore": [
+    {
+      "input": {
+        "profile": "mixed",
+        "seed": 17,
+        "friendLimit": 16,
+        "level": "heavy",
+        "age": 50,
+        "activityActions": 1125,
+        "commands": 2581,
+        "decisions": 105,
+        "interruptions": 49,
+        "revision": 2582,
+        "date": {
+          "year": 2076,
+          "month": 11,
+          "day": 14
+        },
+        "people": 61,
+        "relationships": 65,
+        "journalRows": 2768,
+        "ledgerRows": 69397,
+        "workHistory": 86,
+        "careers": [],
+        "socialAccounts": 2,
+        "children": 3,
+        "businesses": 1,
+        "assets": 3,
+        "pets": 6,
+        "hobbies": 2,
+        "commandCounts": {
+          "advance": 50,
+          "choose": 105,
+          "acknowledge": 1252,
+          "interact": 542,
+          "health-routine": 1,
+          "study": 12,
+          "career-training": 1,
+          "meet-people": 9,
+          "create-social": 2,
+          "social-routine": 2,
+          "publish-post": 73,
+          "meditate": 33,
+          "apply-job": 4,
+          "monetise-social": 2,
+          "leisure-outing": 93,
+          "consult": 32,
+          "vaccinate": 32,
+          "ask-date": 1,
+          "propose": 1,
+          "marry": 1,
+          "try-child": 4,
+          "buy-investment": 32,
+          "buy-asset": 2,
+          "take-licence-test": 1,
+          "vehicle-activity": 29,
+          "hobby-plan": 2,
+          "adopt-pet": 6,
+          "pet-care": 90,
+          "resume": 49,
+          "crime": 3,
+          "sell-investment": 8,
+          "start-business": 1,
+          "business-marketing": 1,
+          "business-prices": 26,
+          "find-tenants": 1,
+          "review-tenant": 1,
+          "manage-tenancy": 70,
+          "improve-business": 5,
+          "treat": 2
+        },
+        "sha256": "c0935d5e4e75f69ff72aebe30e20152d433f34b8664ec1b63fdae8b46f805731",
+        "canonicalBytes": 22954773
+      },
+      "kind": "routine",
+      "reference": {
+        "p50": 114.34812499998952,
+        "p95": 151.51257600000827,
+        "max": 304.2683480000005
+      },
+      "candidate": {
+        "p50": 114.1706090000007,
+        "p95": 151.44582300000184,
+        "max": 263.30728100000124
+      },
+      "medianPairedRatio": 1.004555692682333,
+      "outcome": {
+        "canonicalSha256": "943b6c5a4267d22fed8d6a7255e80bb50bf13e694a2e528f2b00404808e5dfb9",
+        "random": {
+          "events": 3286808995,
+          "npcs": 3979289845,
+          "economy": 3011368791,
+          "outcomes": 3812795482
+        },
+        "date": {
+          "year": 2076,
+          "month": 11,
+          "day": 14
+        },
+        "died": null,
+        "rejected": null,
+        "revision": 2584,
+        "journal": 2768,
+        "ledger": 69397,
+        "people": 61,
+        "commands": 2,
+        "commandsSha256": "a15c1198fdece904cc338c27d2f87f80ab1f2d15a1922baf6dac4059506664d7",
+        "review": {
+          "version": 1,
+          "globalYearsPlayed": 0,
+          "lastReviewPromptGlobalYear": null,
+          "nextReviewPromptAtGlobalYear": 0,
+          "reviewCompletedOrDismissedCount": 0,
+          "offerSequence": 0,
+          "offer": null,
+          "candidate": null,
+          "observations": []
+        }
+      }
+    }
+  ],
+  "profilerMicro": {
+    "scope": "Synthetic timing API call loop, 10,000 four-event traces per batch, 101 alternating batches. No simulation/native/device or visible feedback claim. Disabled path creates no trace/event objects; enabled writes to preallocated bounded slots. Buffer setup and report generation excluded from timed loop.",
+    "sourceHash": "4b244a41cc527335366770039f877e3ebf420a28f50a37de25aa1c598a21eff2",
+    "iterations": 10000,
+    "samples": 101,
+    "disabledNsPerCommand": {
+      "p50": 8.881300000030024,
+      "p95": 15.166599999975006,
+      "max": 161.85339999997268
+    },
+    "enabledNsPerCommand": {
+      "p50": 339.00860000003377,
+      "p95": 510.86290000002913,
+      "max": 1020.7303000000138
+    }
+  },
+  "financeAllocations": {
+    "scope": "Separate Node/V8 64KiB allocation sampling including collected objects, 100 real borrow/acknowledge pairs per side after one warm-up. Estimated bytes, not exact allocations or native peak. No timings from this sampled run are used.",
+    "sourceHashes": [
+      "408c3c1fca27fdb60441c5ab338ba962b67b11f30c59746d3168baa2e32231ac",
+      "4b244a41cc527335366770039f877e3ebf420a28f50a37de25aa1c598a21eff2"
+    ],
+    "results": [
+      {
+        "age": 30,
+        "sides": [
+          {
+            "side": "reference",
+            "sampledAllocationBytes": 2622457416,
+            "samples": 31279,
+            "commands": 200,
+            "topSites": [
+              {
+                "bytes": 247710712,
+                "function": "encodeBase64",
+                "url": "/tmp/dreams-scaling-reference/src/persistence/base64.ts",
+                "line": 9
+              },
+              {
+                "bytes": 206493984,
+                "function": "join",
+                "url": "",
+                "line": 0
+              },
+              {
+                "bytes": 186555208,
+                "function": "encode",
+                "url": "node:internal/encoding",
+                "line": 355
+              },
+              {
+                "bytes": 113065840,
+                "function": "indexLedger",
+                "url": "/tmp/dreams-scaling-reference/src/game/ledgerIndex.ts",
+                "line": 7
+              },
+              {
+                "bytes": 91351864,
+                "function": "set",
+                "url": "",
+                "line": 0
+              }
+            ],
+            "canonicalSha256": "fadc9396dd0550b45abde747815dea13829c6df79cc2257f7bf71b1f86d10f91",
+            "journal": 1988,
+            "ledger": 15072
+          },
+          {
+            "side": "candidate",
+            "sampledAllocationBytes": 765975016,
+            "samples": 8690,
+            "commands": 200,
+            "topSites": [
+              {
+                "bytes": 99765928,
+                "function": "encodeBase64",
+                "url": "/tmp/dreams-followup-final/src/persistence/base64.ts",
+                "line": 9
+              },
+              {
+                "bytes": 74601112,
+                "function": "validateNpcMoves",
+                "url": "/tmp/dreams-followup-final/src/game/systems/npcMoveValidation.ts",
+                "line": 9
+              },
+              {
+                "bytes": 52517320,
+                "function": "",
+                "url": "/tmp/dreams-followup-final/src/persistence/checkpoints.ts",
+                "line": 169
+              },
+              {
+                "bytes": 51028384,
+                "function": "join",
+                "url": "",
+                "line": 0
+              },
+              {
+                "bytes": 50104952,
+                "function": "strToU8",
+                "url": "/workspace/dreams-life-sim/node_modules/fflate/lib/node.cjs",
+                "line": 1790
+              }
+            ],
+            "canonicalSha256": "fadc9396dd0550b45abde747815dea13829c6df79cc2257f7bf71b1f86d10f91",
+            "journal": 1988,
+            "ledger": 15072
+          }
+        ]
+      },
+      {
+        "age": 50,
+        "sides": [
+          {
+            "side": "reference",
+            "sampledAllocationBytes": 4444282520,
+            "samples": 51860,
+            "commands": 200,
+            "topSites": [
+              {
+                "bytes": 323096512,
+                "function": "join",
+                "url": "",
+                "line": 0
+              },
+              {
+                "bytes": 322895560,
+                "function": "encodeBase64",
+                "url": "/tmp/dreams-scaling-reference/src/persistence/base64.ts",
+                "line": 9
+              },
+              {
+                "bytes": 221849584,
+                "function": "strToU8",
+                "url": "/workspace/dreams-life-sim/node_modules/fflate/lib/node.cjs",
+                "line": 1790
+              },
+              {
+                "bytes": 208574528,
+                "function": "indexLedger",
+                "url": "/tmp/dreams-scaling-reference/src/game/ledgerIndex.ts",
+                "line": 7
+              },
+              {
+                "bytes": 194593952,
+                "function": "equalCertifiedTree",
+                "url": "/tmp/dreams-scaling-reference/src/game/model.ts",
+                "line": 195
+              }
+            ],
+            "canonicalSha256": "834654e2bd73a738e1d29bdd454274b19fd4eaa18eefc1097799aa08413d1a45",
+            "journal": 2326,
+            "ledger": 29406
+          },
+          {
+            "side": "candidate",
+            "sampledAllocationBytes": 1388149016,
+            "samples": 13245,
+            "commands": 200,
+            "topSites": [
+              {
+                "bytes": 185917808,
+                "function": "validateNpcMoves",
+                "url": "/tmp/dreams-followup-final/src/game/systems/npcMoveValidation.ts",
+                "line": 9
+              },
+              {
+                "bytes": 117660832,
+                "function": "encodeBase64",
+                "url": "/tmp/dreams-followup-final/src/persistence/base64.ts",
+                "line": 9
+              },
+              {
+                "bytes": 105245576,
+                "function": "",
+                "url": "/tmp/dreams-followup-final/src/persistence/checkpoints.ts",
+                "line": 169
+              },
+              {
+                "bytes": 100984000,
+                "function": "join",
+                "url": "",
+                "line": 0
+              },
+              {
+                "bytes": 100984000,
+                "function": "get",
+                "url": "",
+                "line": 0
+              }
+            ],
+            "canonicalSha256": "834654e2bd73a738e1d29bdd454274b19fd4eaa18eefc1097799aa08413d1a45",
+            "journal": 2326,
+            "ledger": 29406
+          }
+        ]
+      }
+    ]
+  },
+  "rawReports": "Complete pairs, timing events and allocation sites are retained in the separately linked compressed raw reports."
+}

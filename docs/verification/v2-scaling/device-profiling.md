@@ -1,6 +1,6 @@
 # Internal release profiling workflow
 
-Physical iPhone/Android acceptance is **unverified**. This host has no attached phone, `adb`, Xcode or signing credentials. Hermes exports establish bundle compatibility; no signed installation, native paint/frame, native allocation or installed App Store container upgrade is claimed.
+Physical iPhone/Android acceptance is **unverified**. This host has no attached phone, `adb` or Xcode, and no authenticated signing/build session was used. Hermes exports establish bundle compatibility; no signed installation, native paint/frame, native allocation or installed App Store container upgrade is claimed.
 
 ## Candidate build
 
@@ -85,6 +85,8 @@ Reports use `dreams-performance-report`, version 1. Events contain trace number,
 React `onRender` duration exists only if that React build supports profiling; optimized Release may omit it. JS busy/world commits and animation-frame opportunities **do not establish visible feedback or completed native paint**. Keep native fields unverified without native evidence.
 
 On macOS, attach **Instruments → Time Profiler** to the installed Release app. Add **Animation Hitches/Core Animation**, **Allocations** and **VM Tracker** in separate bounded recordings as supported. Record the same 20 warmed actions/scrolls; retain `.trace` files with matching wall-clock notes. Use the native frame timeline/video for first feedback and updated-screen presentation. Avoid enabling every expensive instrument during latency measurement; measure observer overhead separately.
+
+If ad hoc signing prevents attachment, the owner may need a development-provisioned **Release/Profile** build through Xcode's **Product → Profile**. Preserve production JS, engine settings and separate app containers; a development Metro session does not provide release acceptance.
 
 On Android, use **Android Studio → Profiler** where the release app/device supports attachment, or **Perfetto/System Tracing** with scheduling, frame timeline and memory tracks. Developer Options → System Tracing can capture a bounded run and share its trace. If release heap attachment is unavailable, retain supported system tracks and mark detailed allocation measurement unavailable.
 

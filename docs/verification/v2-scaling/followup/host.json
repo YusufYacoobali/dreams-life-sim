@@ -1,0 +1,15 @@
+{
+  "scope": "Host for final controlled Node benchmarks; not a physical phone.",
+  "node": "v24.19.0",
+  "platform": "linux",
+  "architecture": "x64",
+  "os": "6.18.57",
+  "cpuModel": "AMD EPYC 9V74 80-Core Processor",
+  "logicalCpus": 5,
+  "hostMemoryBytes": 18882662400,
+  "containerMemoryLimit": "17179869184",
+  "referenceCommit": "8378d0f8",
+  "candidateApplicationSourceCommit": "b6624a8b",
+  "candidateGameSourceDigest": "4b244a41cc527335366770039f877e3ebf420a28f50a37de25aa1c598a21eff2",
+  "conditions": "Sequential workloads in /tmp/dreams-followup-benchmarks.sh; no unrelated test suites, builds or replays during final latency collection. Warmups and final canonical checks outside timed execution. GC observer enabled; source wrappers and event listeners disabled except separately labelled diagnostic run."
+}

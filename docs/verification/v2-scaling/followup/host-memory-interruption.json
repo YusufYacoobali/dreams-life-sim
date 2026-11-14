@@ -1,0 +1,5 @@
+{
+  "scope": "Earlier full-suite invocation excluded from final verification totals after a host OOM killed a Jest worker. No gameplay assertion failure was reported. Final rerun uses three workers and a 768MiB idle-worker limit.",
+  "events": "low 0\nhigh 0\nmax 6765\noom 17\noom_kill 2\noom_group_kill 0\n",
+  "limitBytes": "17179869184"
+}

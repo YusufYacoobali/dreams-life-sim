@@ -1,0 +1,8 @@
+{
+  "scope": "Controlled maximum-size compatibility test, not gameplay or timing evidence",
+  "legacyBytes": 31999936,
+  "format": "dreams-checkpoint-v4",
+  "legacyBytesEqual": true,
+  "roundTrip": true,
+  "sourceHash": "4b244a41cc527335366770039f877e3ebf420a28f50a37de25aa1c598a21eff2"
+}

@@ -1,0 +1,16 @@
+{
+  "base": "26930868",
+  "protectedPaths": [
+    "src/game",
+    "src/persistence/checkpoints.ts",
+    "src/persistence/archive.ts",
+    "src/purchases",
+    "assets",
+    "package.json",
+    "package-lock.json"
+  ],
+  "changedProtectedFiles": [],
+  "modifiedOriginalFixtures": [],
+  "repositoryChange": "Only load:decode timing wrapper since base; reader33/schema/atomic persistence protocol unchanged.",
+  "newInstallationFixture": "tests/fixtures/v2-reader32-installation.db.gz"
+}

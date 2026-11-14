@@ -1,0 +1,49 @@
+{
+  "scope": "Unsuccessful exploratory workloads retained explicitly; no latency or universal coverage claim. Both old and current implementations receive identical fully validated inputs.",
+  "sourceHashes": [
+    "408c3c1fca27fdb60441c5ab338ba962b67b11f30c59746d3168baa2e32231ac",
+    "4b244a41cc527335366770039f877e3ebf420a28f50a37de25aa1c598a21eff2"
+  ],
+  "results": [
+    {
+      "profile": "family",
+      "scope": "Reviewed-feature policies with a 40-relationship introduction bound",
+      "age": 70,
+      "commands": 4710,
+      "canonicalBytes": 63558819,
+      "worldSha256": "fe426c34255d28ed5ef46d396b92ede447c1d2a3177fa9fdb6cea1fdfcfc3bd5",
+      "inputSha256": "bc91849db0727bc1e4d0aebbc9b0506f693f137bb6635654322e1b0be26f6f15",
+      "commandSha256": "8ec6da56f2874bbd3d6a82c79d130b3a9f011e8406e66396b8e83b034dc2e2fb",
+      "outcomes": [
+        {
+          "accepted": false,
+          "error": "This checkpoint exceeds the supported world size"
+        },
+        {
+          "accepted": false,
+          "error": "This checkpoint exceeds the supported world size"
+        }
+      ]
+    },
+    {
+      "profile": "mixed",
+      "scope": "Reviewed-feature policies with a 40-relationship introduction bound",
+      "age": 70,
+      "commands": 4051,
+      "canonicalBytes": 63511631,
+      "worldSha256": "97db50d6cd964bfee9660194d7a722e4656349747c13740d72158fdcec4a27df",
+      "inputSha256": "7be062370958304fd0217b73c1d5e099774d47790d10c36e4eafc1deb40f6f04",
+      "commandSha256": "25b2d125ddf566be7fb25150724a82d5630fe228432621255b085564104c843b",
+      "outcomes": [
+        {
+          "accepted": false,
+          "error": "This checkpoint exceeds the supported world size"
+        },
+        {
+          "accepted": false,
+          "error": "This checkpoint exceeds the supported world size"
+        }
+      ]
+    }
+  ]
+}

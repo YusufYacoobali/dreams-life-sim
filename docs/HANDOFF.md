@@ -1,5 +1,57 @@
 # Continue Dreams: Life Simulator
 
+## Performance verification follow-up — 14 November 2026
+
+Continue on **`v2`**, from `26930868`. Read [the follow-up report](verification/v2-scaling/final-followup.md)
+and [the device workflow](verification/v2-scaling/device-profiling.md).
+
+Per-event command console logging is replaced by an explicitly started, bounded
+16,384-event recorder. Internal Settings → three quick App Preferences taps →
+Performance Diagnostics provides start/stop, breakdown and JSON share/folder export.
+The EAS `performance` profile is Release/internal with normal purchase ownership;
+public builds cannot start the recorder. Candidate `.profile` and reference
+`.profile.reference` identifiers keep their databases in separate app containers.
+Never install the reader-32 reference over a reader-33 data container.
+
+The final functional run passes **428 suites / 7,304 tests**, zero failures,
+pending/todos or source drift. The **120-life soak** matches every historical
+death-age/people/ledger summary, up to **61,470 ledger rows**. An initial mixed
+3,637-command replay and the qualified mixed **3,992-command replay** compare
+complete canonical worlds/RNG after every command; captured ages retain exact
+legacy bytes and current-codec round trips. Strict app/test types, the 624-module
+acyclic import graph, notification checks and production/internal Android+iOS
+Hermes exports pass, with 122 exact source-map files per export.
+
+The qualified corpus contains 24 age-23/30/50/70 worlds across six policies and
+17 genuine Continue inputs. Feature coverage asserts accepted weddings, investments,
+named tenancy management and crime. Family/mixed use declared seed17 and a
+16-direct-relationship introduction bound; other profiles use seed42. Histories
+are never removed. Earlier failed quotes, natural deaths and size-limit explorations
+remain separate evidence. A ZIP of 41 regular V4 archives is ready for devices.
+
+The final 100-pair extreme-finance p95 controls improve **65.5 → 40.2 ms** at
+age30 and **138.3 → 51.1 ms** at age50. In the six-policy matrix, medians improve
+in **115/118** comparable cases; three first Age Up medians and 28 seven-sample
+p95/max cases regress. All 34 genuine Continue cases improve at the median.
+Retain every raw sample; seven-sample p95 equals max and does not establish a
+tail guarantee. These measurements do not close native acceptance.
+
+Reader33/schema/engine/content/RNG/purchases/art/dependencies remain unchanged.
+A genuine reader32 writer fixture and separate-copy checks establish atomic marker
+upgrade, literal old rows, failed-write retry, backups, independent branches and
+old-reader/future-reader refusal without writes. The 31,999,936-expanded-byte
+boundary still falls back to exact V4. Keep independent pre/post-upgrade copies.
+
+Physical iPhone/Android responsiveness, native paint/frames, bridge/storage and
+sustained mobile memory remain **unverified**. No signed native installation or
+actual App Store container upgrade is claimed. Existing oversized family/mixed
+worlds and a model age64 invalid bound-person event reproduce in both implementations;
+do not weaken integrity or delete history to hide either issue. Use native traces
+before another engine/storage redesign. Earlier host-resource-killed test runs
+are excluded from the final passing invocation; the final rerun limits idle-worker
+memory. The pre-existing optional notice inventory remains stale; manifests/art
+were not changed.
+
 ## Core scaling — 14 November 2026
 
 Continue on **`v2`**. Final runtime is **`4317da3e`**, based on `8378d0f8`
