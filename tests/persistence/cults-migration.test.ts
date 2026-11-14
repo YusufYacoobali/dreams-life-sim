@@ -691,7 +691,7 @@ test.each([24, 25, 26, 27])(
               ...tx,
               run: async (sql, values) => {
                 await tx.run(sql, values);
-                if (sql === 'PRAGMA user_version = 32')
+                if (sql === 'PRAGMA user_version = 33')
                   throw new Error('interrupted cult reader marker');
               },
             }),

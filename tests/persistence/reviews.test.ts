@@ -81,7 +81,7 @@ test('claim, response retry and cold kill persist scheduling without inventing a
     const unanswered=c.store.getState().reviewOffer!;
     await c.cold();expect(await c.store.getState().claimReview()).toBe(true);
     expect(c.store.getState().reviewOffer?.id).toBe(unanswered.id);expect(c.store.getState().reviewTracker!.offerSequence).toBe(2);
-    expect(c.store.getState().reviewTracker!.nextReviewPromptAtGlobalYear).toBe(32);
+    expect(c.store.getState().reviewTracker!.nextReviewPromptAtGlobalYear).toBe(33);
     expect(await c.store.getState().respondReview('later')).toBe(true);
     await c.cold();expect(await c.store.getState().claimReview()).toBe(false);
   }finally{c.close();}

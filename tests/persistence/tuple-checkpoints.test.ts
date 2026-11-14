@@ -93,7 +93,7 @@ test('the real year-91 save crosses the old limit with exact rollback, retry, ba
     await expect(upgraded.initialise()).rejects.toThrow('upgrade failure'); expect(rows()).toEqual(before);
     expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(7);
     sqlite.exec('DROP TRIGGER fail_upgrade'); await upgraded.initialise();
-    expect(rows()).toEqual(before); expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(32);
+    expect(rows()).toEqual(before); expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(33);
     const loaded = await upgraded.load(original.id), next = resolveCommand(loaded, { type: 'advance' }, true);
     const canonical = encodeWorld(next);
     expect(Buffer.byteLength(canonical)).toBeGreaterThan(20_000_000);
@@ -102,7 +102,7 @@ test('the real year-91 save crosses the old limit with exact rollback, retry, ba
     await expect(upgraded.commit(next, loaded.revision, 'year92', true)).rejects.toThrow('commit failure'); expect(rows()).toEqual(before);
     sqlite.exec('DROP TRIGGER fail_tuple_commit'); await upgraded.commit(next, loaded.revision, 'year92', true);
     const currentPayload = sqlite.prepare('SELECT payload FROM lives').get()?.payload as string;
-    expect(JSON.parse(currentPayload).format).toBe('dreams-checkpoint-v4');
+    expect(JSON.parse(currentPayload).format).toBe('dreams-checkpoint-v5');
     expect(sqlite.prepare('SELECT payload FROM backups').get()?.payload).toBe(naturalPayload);
     expect(sqlite.prepare('SELECT payload FROM snapshots').get()?.payload).toBe(naturalPayload);
     const cold = new SaveRepository(driver); expect(await cold.load(original.id)).toEqual(next); expect(await cold.recoveryPreview(original.id)).toEqual(original);
@@ -118,7 +118,7 @@ test('the real year-91 save crosses the old limit with exact rollback, retry, ba
 
 test('a genuine v3 cold ledger is re-encoded once and never reused as tuple rows', () => {
   const old = JSON.parse(naturalPayload) as Frame, world = unpackCheckpoint(naturalPayload, true), frame = JSON.parse(packCheckpoint(world)) as Frame;
-  expect(old.format).toBe('dreams-checkpoint-v3'); expect(frame.format).toBe('dreams-checkpoint-v4');
+  expect(old.format).toBe('dreams-checkpoint-v3'); expect(frame.format).toBe('dreams-checkpoint-v5');
   expect(frame.ledger.every((value, index) => value.data !== old.ledger[index]?.data)).toBe(true);
   expect(unpackCheckpoint(JSON.stringify(frame), true)).toEqual(world);
 }, 120000);

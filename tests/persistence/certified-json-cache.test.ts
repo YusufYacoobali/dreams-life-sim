@@ -14,9 +14,10 @@ function verifyCanonical(world: World, payload: string) {
   };
   if (packed.format === 'dreams-checkpoint-v1') verify(packed, encodeWorld(world));
   else {
-    expect(packed.format).toBe('dreams-checkpoint-v4');
+    expect(['dreams-checkpoint-v4','dreams-checkpoint-v5']).toContain(packed.format);
     const { ledger: _ledger, people: _people, ...body } = world;
-    verify(packed.main, JSON.stringify(body, moneyJSON));
+    verify(packed.main, JSON.stringify(packed.format==='dreams-checkpoint-v5'?{...body,journal:[],relationships:[]}:body, moneyJSON));
+    if(packed.history) for(const key of ['journal','relationships'] as const) for(let index=0;index<packed.history[key].length;index++) verify(packed.history[key][index],JSON.stringify(world[key].slice(index*128,(index+1)*128),moneyJSON));
     const entries = Object.entries(world.people);
     for (let index = 0; index < packed.people.length; index++) verify(packed.people[index], JSON.stringify(Object.fromEntries(entries.slice(index * 32, (index + 1) * 32)), moneyJSON));
   }

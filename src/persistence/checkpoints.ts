@@ -1,4 +1,5 @@
 import { gzipSync, gunzipSync, strFromU8, strToU8 } from 'fflate';
+import { measureCommandPhase } from '../performance/commandTiming';
 import { z } from 'zod';
 import { decodeWorld, decodeWorldData, moneyJSON, worldForEncoding, World } from '../game/model';
 import { encodeBase64 as base64, decodeBase64 as unbase64 } from './base64';
@@ -20,9 +21,14 @@ const tupleChunkedSchema = z.object({
   people: z.array(tuplePartSchema).min(1).max(512), ledger: z.array(tuplePartSchema).max(512),
   columns: z.array(z.string().min(1).max(64).refine(key => !['__proto__', 'constructor', 'prototype'].includes(key))).max(32),
 }).refine(frame => new Set(frame.columns).size === frame.columns.length && (frame.ledger.length ? frame.columns.length > 0 : frame.columns.length === 0), 'Invalid checkpoint columns');
+const historyChunkedSchema=z.object({...tupleChunkedSchema.shape,format:z.literal('dreams-checkpoint-v5'),history:z.object({
+  journal:z.array(tuplePartSchema).max(4096),relationships:z.array(tuplePartSchema).max(4096),
+}).strict()}).refine(frame=>new Set(frame.columns).size===frame.columns.length && (frame.ledger.length?frame.columns.length>0:frame.columns.length===0),'Invalid checkpoint columns');
 type Part = z.infer<typeof partSchema>;
 const chunkSize = 512;
 const peopleChunkSize = 32;
+const historyChunkSize = 128;
+const historyCache = new WeakMap<object,{rows:readonly object[];part:Part;kind:string}>();
 const ledgerCache = new WeakMap<object, { rows: World['ledger']; part: Part; columns?: string }>();
 // Weak keys retain no old save by themselves. Limit each retained fragment so
 // one unusually large branch cannot leave a second enormous string in memory.
@@ -74,9 +80,11 @@ function packPeopleText(text: string, certified: boolean): Part {
   return part;
 }
 function packText(text: string, limit = maxBytes): Part {
-  const bytes = strToU8(text);
+  const bytes = measureCommandPhase('checkpoint:utf8',()=>strToU8(text));
   if (bytes.length > limit) throw new Error('This checkpoint exceeds the supported world size');
-  return { bytes: bytes.length, hash: fingerprint(bytes), data: base64(gzipSync(bytes, { level: 4, mtime: 0 })) };
+  const hash=measureCommandPhase('checkpoint:hash',()=>fingerprint(bytes));
+  const compressed=measureCommandPhase('checkpoint:compress',()=>gzipSync(bytes,{level:4,mtime:0}));
+  return {bytes:bytes.length,hash,data:measureCommandPhase('checkpoint:base64',()=>base64(compressed))};
 }
 function unpackText(checkpoint: Part): string {
   const compressed = unbase64(checkpoint.data), length = compressed.length;
@@ -86,22 +94,22 @@ function unpackText(checkpoint: Part): string {
   if (bytes.length !== checkpoint.bytes || fingerprint(bytes) !== checkpoint.hash) throw new Error('Checkpoint is damaged');
   return strFromU8(bytes);
 }
-export function packCheckpoint(world: World): string {
-  const checked = worldForEncoding(world), entries = Object.entries(checked.people);
-  if (checked.ledger.length < chunkSize && entries.length <= peopleChunkSize) {
+function checkpointFrame(checked: World,forceChunked=false) {
+  const entries = Object.entries(checked.people);
+  if (!forceChunked && checked.ledger.length < chunkSize && entries.length <= peopleChunkSize) {
     const text = encodedRecord(checked);
-    if (text.length <= maxBytes / 3 || strToU8(text).length <= maxBytes) return JSON.stringify({ format: 'dreams-checkpoint-v1', ...packText(text) });
+    if (text.length <= maxBytes / 3 || strToU8(text).length <= maxBytes) return { format: 'dreams-checkpoint-v1' as const, ...packText(text) };
   }
   const columns = Object.keys(checked.ledger[0] ?? {}) as (keyof World['ledger'][number])[], signature = JSON.stringify(columns), expansion = rowExpansion(columns);
   if (columns.length > 32 || columns.some(key => !key.length || key.length > 64 || ['__proto__', 'constructor', 'prototype'].includes(key))) throw new Error('Unsupported checkpoint transaction fields');
   const ledger: Part[] = [], people: Part[] = [];
   const { ledger: _ledger, people: _people, ...body } = checked;
-  const main = packText(encodedRecord(body), maxTupleBytes);
+  const main = measureCommandPhase('checkpoint:main',()=>packText(measureCommandPhase('checkpoint:serialize',()=>encodedRecord(body)), maxTupleBytes));
   let bytes = main.bytes;
   for (let offset = 0; offset < entries.length; offset += peopleChunkSize) {
     const group: World['people'] = Object.create(null);
     for (const [id, person] of entries.slice(offset, offset + peopleChunkSize)) group[id] = person;
-    const part = packPeopleText(encodedRecord(group), Object.isFrozen(checked.people));
+    const part = measureCommandPhase('checkpoint:people',()=>packPeopleText(measureCommandPhase('checkpoint:serialize',()=>encodedRecord(group)), Object.isFrozen(checked.people)));
     people.push(part); bytes += part.bytes;
     if (bytes + 32 > maxTupleBytes || people.length > 512) throw new Error('This checkpoint exceeds the supported world size');
   }
@@ -113,25 +121,71 @@ export function packCheckpoint(world: World): string {
         if (JSON.stringify(Object.keys(row)) !== signature || columns.some(key => row[key] === undefined)) throw new Error('Unsupported checkpoint transaction fields');
         return columns.map(key => ledgerMoney.has(key) ? String(row[key]) : row[key]);
       });
-      const part = packText(JSON.stringify(tuples), maxTupleBytes); ledger.push(part);
+      const part = measureCommandPhase('checkpoint:ledger',()=>packText(measureCommandPhase('checkpoint:serialize',()=>JSON.stringify(tuples)), maxTupleBytes)); ledger.push(part);
       // Mutable input never seeds the cache; certification freezes every ledger row.
       if (rows.every(row => Object.isFrozen(row))) ledgerCache.set(rows[0], { rows, part, columns: signature });
     }
     bytes += ledger[ledger.length - 1].bytes;
     if (bytes + 32 > maxTupleBytes || bytes + checked.ledger.length * expansion + 32 > maxCanonicalBytes || ledger.length > 512) throw new Error('This checkpoint exceeds the supported world size');
   }
-  const payload = JSON.stringify({ format: 'dreams-checkpoint-v4', bytes, main, people, columns, ledger });
+  return { format:'dreams-checkpoint-v4' as const,bytes,main,people,columns,ledger };
+}
+function encodeFrame(frame: object) {
+  const payload=measureCommandPhase('checkpoint:serialize',()=>JSON.stringify(frame));
   if (payload.length > 44_000_000) throw new Error('This checkpoint exceeds the supported world size');
   return payload;
+}
+/** Retained writer for byte-level comparisons of all unchanged legacy codecs. */
+export function packCheckpointV4(world: World): string { return encodeFrame(checkpointFrame(worldForEncoding(world))); }
+export function packCheckpoint(world: World): string { return packCheckpointV5(world); }
+function packHistory(rows:readonly object[],kind:'journal'|'relationships'):Part[] {
+  return measureCommandPhase(`checkpoint:${kind}`,()=>{
+    const parts:Part[]=[];
+    for(let offset=0;offset<rows.length;offset+=historyChunkSize) {
+      const group=rows.slice(offset,offset+historyChunkSize), cached=historyCache.get(group[0]);
+      if(cached?.kind===kind && cached.rows.length===group.length && group.every((row,index)=>row===cached.rows[index])) parts.push(cached.part);
+      else {
+        const part=packText(measureCommandPhase('checkpoint:serialize',()=>JSON.stringify(group,moneyJSON)),maxTupleBytes); parts.push(part);
+        if(group.every(row=>Object.isFrozen(row))) historyCache.set(group[0],{rows:group,part,kind});
+      }
+    }
+    return parts;
+  });
+}
+/** V5 reuses unchanged immutable history blocks; small worlds keep v1/v4. */
+export function packCheckpointV5(world: World):string {
+  const checked=worldForEncoding(world);
+  if(checked.journal.length<historyChunkSize && checked.relationships.length<historyChunkSize) return encodeFrame(checkpointFrame(checked));
+  // Empty placeholders keep body field order explicit. Only this private frame
+  // builder sees the projection; it never passes as a validated World.
+  const frame=checkpointFrame({...checked,journal:[],relationships:[]},true) as z.infer<typeof tupleChunkedSchema>;
+  const history={journal:packHistory(checked.journal,'journal'),relationships:packHistory(checked.relationships,'relationships')};
+  const parts=[...history.journal,...history.relationships],bytes=frame.bytes+parts.reduce((sum,part)=>sum+part.bytes,0);
+  if(history.journal.length>4096 || history.relationships.length>4096 || bytes+64>maxTupleBytes || bytes+checked.ledger.length*rowExpansion(frame.columns)+64>maxCanonicalBytes) throw new Error('This checkpoint exceeds the supported world size');
+  return encodeFrame({...frame,format:'dreams-checkpoint-v5',bytes,history});
+}
+function unpackHistory(parts:Part[]):unknown[] {
+  const rows:unknown[]=[];
+  for(let index=0;index<parts.length;index++) {
+    const text=unpackText(parts[index]), group:unknown=JSON.parse(text);
+    if(!Array.isArray(group) || !group.length || group.length>historyChunkSize || index<parts.length-1 && group.length!==historyChunkSize || text[0]!=='[' || text.at(-1)!==']') throw new Error('Invalid checkpoint history');
+    for(const row of group) rows.push(row);
+  }
+  return rows;
 }
 export function unpackCheckpoint(payload: string, immutable = false, primePeopleCache = true): World {
   if (payload.length > 44_000_000) throw new Error('This checkpoint exceeds the supported world size');
   const parsed = JSON.parse(payload);
-  if (parsed?.format === 'dreams-checkpoint-v4') {
-    const checkpoint = tupleChunkedSchema.parse(parsed);
-    if (checkpoint.bytes + 32 > maxTupleBytes || checkpoint.main.bytes + [...checkpoint.people, ...checkpoint.ledger].reduce((sum, part) => sum + part.bytes, 0) !== checkpoint.bytes) throw new Error('Checkpoint size is inconsistent');
+  if (parsed?.format === 'dreams-checkpoint-v4' || parsed?.format === 'dreams-checkpoint-v5') {
+    const checkpoint = parsed.format==='dreams-checkpoint-v5'?historyChunkedSchema.parse(parsed):tupleChunkedSchema.parse(parsed);
+    const historyParts='history' in checkpoint?[...checkpoint.history.journal,...checkpoint.history.relationships]:[];
+    if (checkpoint.bytes + (checkpoint.format==='dreams-checkpoint-v5'?64:32) > maxTupleBytes || checkpoint.main.bytes + [...checkpoint.people, ...checkpoint.ledger,...historyParts].reduce((sum, part) => sum + part.bytes, 0) !== checkpoint.bytes) throw new Error('Checkpoint size is inconsistent');
     const main = unpackText(checkpoint.main), root = JSON.parse(main);
     if (!root || typeof root !== 'object' || Array.isArray(root) || 'people' in root || 'ledger' in root || main.at(-1) !== '}') throw new Error('Invalid checkpoint body');
+    if('history' in checkpoint) {
+      if(!Array.isArray(root.journal) || root.journal.length || !Array.isArray(root.relationships) || root.relationships.length) throw new Error('Invalid checkpoint history body');
+      root.journal=unpackHistory(checkpoint.history.journal); root.relationships=unpackHistory(checkpoint.history.relationships);
+    }
     const peopleTexts = checkpoint.people.map(part => unpackText(part)), seen = new Set<string>();
     const decodedPeople: Record<string, unknown> = Object.create(null);
     const peopleLengths = peopleTexts.map(text => {
@@ -149,7 +203,7 @@ export function unpackCheckpoint(payload: string, immutable = false, primePeople
       if (!Array.isArray(rows) || !rows.length || rows.length > chunkSize || text[0] !== '[' || text.at(-1) !== ']') throw new Error('Invalid checkpoint ledger');
       lengths.push(rows.length); count += rows.length;
       // Bound canonical expansion before constructing objects or the final JSON.
-      if (checkpoint.bytes + count * expansion + 32 > maxCanonicalBytes) throw new Error('This checkpoint exceeds the supported world size');
+      if (checkpoint.bytes + count * expansion + (checkpoint.format==='dreams-checkpoint-v5'?64:32) > maxCanonicalBytes) throw new Error('This checkpoint exceeds the supported world size');
       for (const row of rows) {
         if (!Array.isArray(row) || row.length !== checkpoint.columns.length) throw new Error('Invalid checkpoint transaction');
         decodedLedger.push(Object.fromEntries(checkpoint.columns.map((key, index) => {
