@@ -110,7 +110,7 @@ export function MiniGameScreen(props: Props) {
     let live = true;
     setArtReady(false);
     setArtError(false);
-    void preloadSceneArt(kind).then(
+    void preloadSceneArt(kind, cell).then(
       () => {
         if (live) setArtReady(true);
       },
@@ -121,7 +121,7 @@ export function MiniGameScreen(props: Props) {
     return () => {
       live = false;
     };
-  }, [kind, artRetry]);
+  }, [kind, cell, artRetry]);
   const startRequested = useRef(false);
   useEffect(() => {
     if (cell && !session && artReady && !artError && !busy && !props.unavailable && !startRequested.current) {

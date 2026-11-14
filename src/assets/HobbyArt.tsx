@@ -1,14 +1,16 @@
-import { LifestyleSymbol } from './LifestyleSymbol';
 import React from 'react';
 import { Image, View } from 'react-native';
 import type { HobbyKind } from '../game/content/leisure';
 import { PetsLeisureArt } from './PetsLeisureArt';
 import { ordinaryHobbyAtlasSize, ordinaryHobbyRects } from './ordinaryHobbyLayout';
+import { expandedHobbyAtlasSize, expandedHobbyRects } from './expandedHobbyLayout';
 
 const atlas = require('../../assets/generated/ordinary-hobby-atlas.png');
+const expandedAtlas = require('../../assets/generated/expanded-hobby-atlas.png');
 export type OrdinaryHobbyArtId = keyof typeof ordinaryHobbyRects;
 export const ordinaryHobbyIllustrations = { 'leisure-reading': 'reading', 'leisure-gaming': 'gaming', 'leisure-cooking': 'cooking', 'leisure-gardening': 'gardening' } as const;
 const ordinary = (kind: HobbyKind): kind is OrdinaryHobbyArtId => kind in ordinaryHobbyRects;
+const expanded = (kind: HobbyKind): kind is keyof typeof expandedHobbyRects => kind in expandedHobbyRects;
 
 /** Render the original transparent artwork at its reviewed native clipping bounds. */
 export function OrdinaryHobbyArt({ id, size = 40, label }: { id: OrdinaryHobbyArtId; size?: number; label?: string }) {
@@ -23,7 +25,13 @@ export function OrdinaryHobbyArt({ id, size = 40, label }: { id: OrdinaryHobbyAr
 }
 
 export function HobbyArt({ kind, size = 40 }: { kind: HobbyKind; size?: number }) {
-  const icons = { running: 'walk-outline', swimming: 'water-outline', writing: 'create-outline', pottery: 'color-palette-outline', singing: 'mic-outline', coding: 'code-slash-outline', fishing: 'fish-outline', dancing: 'musical-notes-outline' } as const;
-  if (kind in icons) return <LifestyleSymbol name={icons[kind as keyof typeof icons]} size={size} />;
+  if (expanded(kind)) {
+    const [x, y, width, height] = expandedHobbyRects[kind], scale = size / Math.max(width, height);
+    return <View accessibilityElementsHidden importantForAccessibility="no-hide-descendants" style={{ width: size, height: size, alignItems: 'center', justifyContent: 'center' }}>
+      <View style={{ width: width * scale, height: height * scale, overflow: 'hidden' }}>
+        <Image source={expandedAtlas} accessible={false} resizeMode="stretch" style={{ position: 'absolute', width: expandedHobbyAtlasSize[0] * scale, height: expandedHobbyAtlasSize[1] * scale, left: -x * scale, top: -y * scale }} />
+      </View>
+    </View>;
+  }
   return ordinary(kind) ? <OrdinaryHobbyArt id={kind} size={size} /> : <PetsLeisureArt id={kind as 'guitar' | 'painting' | 'photography' | 'chess'} size={size} />;
 }

@@ -674,6 +674,22 @@ test('artwork must preload before a saved attempt starts and a failed preload ca
   expect(mockStore.getState().world!.miniGames).toHaveLength(1);
 });
 
+test('Cell Escape waits for its bundled layers without reserving an attempt, then retries once without changing the old world', async () => {
+  const initial = await setup('escape'), before = encodeWorld(initial);
+  jest.requireMock('expo-asset').Asset.loadAsync.mockRejectedValueOnce(Error('Local cell artwork unavailable'));
+  await show(<LiveMiniGame />);
+  expect(screen.getByRole('button', { name: 'Reload artwork' })).toBeEnabled();
+  expect(encodeWorld(mockStore.getState().world!)).toBe(before);
+  expect((await repository.load(initial.id)).miniGames).toHaveLength(0);
+  await fireEvent.press(screen.getByRole('button', { name: 'Reload artwork' }));
+  await play();
+  const session = mockStore.getState().world!.miniGames[0];
+  expect(session.escapeVersion).toBe(3);
+  expect(session.inputs).toHaveLength(0);
+  expect((await repository.load(initial.id)).miniGames).toHaveLength(1);
+  expect(screen.getAllByRole('radio', { name: /^Key:/ })).toHaveLength(6);
+});
+
 test('standard football confirms aim before showing power and submits the original typed shot', async () => {
   await setup();
   await show(<LiveMiniGame />);

@@ -1,6 +1,6 @@
 # V2 combined verification
 
-Application source under verification: `c22c64bf` on `v2`. The [master gameplay checkpoints](../../planning/V2_POLISH_IMPLEMENTATION.md) precede the separate [shop redesign](../../planning/V2_SHOP_IMPLEMENTATION.md), as requested.
+Application source for the full regression/soak and APK below: `c22c64bf` on `v2`. The [master gameplay checkpoints](../../planning/V2_POLISH_IMPLEMENTATION.md) precede the separate [shop redesign](../../planning/V2_SHOP_IMPLEMENTATION.md), as requested. The subsequent [built-in artwork follow-up](artwork.md) has its own current validation; the APK below predates those new images.
 
 ## Automated checks
 
@@ -36,4 +36,4 @@ Linux has no Xcode, iOS device or KVM. The software-emulator attempt cannot esta
 
 [Performance evidence](performance.md) confirms immediate annual saving feedback and read-only phase observations. No simulation CPU speedup is claimed. Release-mode median/p95 at ages 18, 23, 30, 50 and 70, visible paint, native accessibility and the full physical-device playthrough matrix remain open.
 
-[Artwork manifest](../../planning/V2_POLISH_ARTWORK.md) identifies the missing original hobby and Cell Escape layers and their integration locations. Existing art and the functional native escape scene remain in use. The generation batch awaits the previously requested Krea cost-preflight approval; it is not reported as delivered. The shop itself reuses existing illustrations as required.
+[Artwork manifest](../../planning/V2_POLISH_ARTWORK.md) now records the original hobby and Cell Escape layers generated and integrated with the built-in image tool. [Artwork verification](artwork.md) records 85 focused UI tests, 40 compatibility/persistence tests, current types/imports and fresh Android/iOS production exports. Physical-device visual acceptance remains open. The shop itself continues to reuse existing illustrations as required.

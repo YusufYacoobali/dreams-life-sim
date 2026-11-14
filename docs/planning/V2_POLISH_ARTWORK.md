@@ -15,14 +15,18 @@ Style source: [artwork and delivery](artwork-and-delivery.md), the existing tran
 | Court, police, prison, meals, visits, release | `HealthLegalArt` |
 | Existing careers and the later shop | Existing career, Cult and health/legal illustrations; no new shop art |
 
-## Missing original assets
+## Generated and integrated assets
 
-Generation has not been submitted. A Krea medium-quality draft batch is awaiting cost-preflight approval; its live model schema exposes transparent PNG output but no CU prices. Native visual acceptance is separate from image review.
+These assets were generated with OpenAI's built-in `image_gen.imagegen` tool, as requested. No Krea generation was submitted. [Prompts, original source drafts and SHA-256 provenance](../verification/v2-polish/artwork-generation.json) are retained. Final PNGs preserve the generator's original bytes; the source drafts are outside the runtime asset directory.
 
-| Planned file / stable IDs | Brief | Integration |
+| Bundled file / stable IDs | Coverage | Integration |
 | --- | --- | --- |
-| `assets/generated/expanded-hobby-atlas.png`: running, swimming, writing, pottery, singing, coding, fishing, dancing | Eight isolated illustrations, transparent 4×2 atlas. Blue running shoe; swimming goggles and cap; notebook and pencil; glazed pottery bowl; microphone; laptop with abstract unlabelled blocks; rod/reel with float; dance shoes. No text, people, logos, baked buttons or panel borders. Keep wide transparent gutters. | Measured typed rectangles in `src/assets/expandedHobbyLayout.ts`; replace the eight line-icon branches in `HobbyArt.tsx`. |
-| `assets/generated/cell-escape-background.png`: `cell.environment` | Portrait view into a friendly stylised prison cell, cool stone, warm side light, clear central door recess, no locks, keys, labels or controls. | Full-screen background in `src/minigames/escape/CellEscapeGame.tsx`, preloaded through `components/sceneArtwork.ts`; controls remain separately positioned and accessible. |
-| `assets/generated/cell-escape-objects.png`: `cell.door`, `cell.key.*`, `cell.lock.*` | Separate transparent door layer and oversized fictional geometric keys/locks (circle, triangle, diamond, square, star, hexagon), with one/two/three notches. Distinct silhouettes, gold keys, coloured lock plates. No realistic mechanism details or embedded instructions. | Typed clipped objects layered over `CellEscapeGame`'s native geometry and animated door; preserve native hit targets, labels, progress and reduced-motion feedback. |
+| `assets/generated/expanded-hobby-atlas.png`: running, swimming, writing, pottery, singing, coding, fishing, dancing | Eight isolated illustrations with real alpha: blue running shoe; goggles and cap; notebook and pencil; glazed bowl and clay pot; microphone; laptop with unlabelled blocks; rod/reel/float; dance shoes. The spacing revision prevents neighbouring sprites entering a crop. | Measured typed rectangles in `src/assets/expandedHobbyLayout.ts`; all eight `HobbyArt.tsx` branches now use the new illustrations, including their registered event artwork. Existing hobby illustrations remain unchanged. |
+| `assets/generated/cell-escape-background.png`: `cell.environment` | Portrait illustrated prison cell, cool stone and warm side light, empty door recess and floor. No controls or text. | Background in `src/minigames/escape/CellEscapeGame.tsx`; bundled and preloaded before a new v3 reservation. |
+| `assets/generated/cell-escape-objects.png`: door, window, six keys, lock plate, open padlock | Separate transparent door slab and window; circle/triangle/square/diamond/star/hexagon key bows on smooth gold shafts; blank lock plate; open padlock. Exact one/two/three teeth and matching lock holes/markers are native overlays, so generated pixels cannot alter puzzle facts. | `src/assets/cellEscapeLayout.ts` and `CellEscapeArt.tsx`; animated door and native accessible controls remain separate. Original v1/v2 scenes retain their rendering and loading behavior. |
 
-Keep original outputs and prompt/reference provenance; inspect alpha, clipping and silhouettes before integrating. Optimise production PNGs without changing geometry or losing alpha. Check every icon at 40 and 64 px on light/dark surfaces. If generation cannot be completed, this manifest is the explicit remaining art work; do not claim placeholder icons meet the requested style.
+## Review and limits
+
+All 18 crop bounds were checked against the PNGs' alpha channels. Strong silhouette pixels stay inside their crops; every native key tooth meets its illustrated shaft and stays in bounds. [Pixel review](../verification/v2-polish/artwork-review.png) covers hobby icons at 40/64 px on light/dark surfaces and all six key shapes with one/two/three teeth. Runtime PNGs total 5,530,633 bytes and appear byte-for-byte in both production exports.
+
+[Artwork verification](../verification/v2-polish/artwork.md) records the focused UI, compatibility, persistence and bundle checks. This is generated, inspected and integrated artwork; physical-device appearance and animation acceptance remain open.

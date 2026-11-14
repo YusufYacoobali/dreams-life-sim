@@ -1,0 +1,110 @@
+{
+  "provider": "OpenAI built-in image generation",
+  "tool": "image_gen.imagegen",
+  "recordedAtUtc": "2026-11-14 07:30:01 UTC",
+  "userDirection": "Use the normal built-in image generator, not Krea. No Krea generation was submitted.",
+  "styleInspected": [
+    "assets/generated/ordinary-hobby-atlas.png",
+    "assets/minigames/art/stadium.webp"
+  ],
+  "files": [
+    {
+      "path": "assets/generated/expanded-hobby-atlas.png",
+      "sha256": "b346601bd3cca3b32963c8b4406d0b3654739ec6ba007f311af88d984bbfa2ce",
+      "bytes": 1639835,
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/generated/cell-escape-background.png",
+      "sha256": "170f87ca25462945d587c11d343e3be8dd9083ca21d3b90b4a1b232323882d3a",
+      "bytes": 2035806,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/generated/cell-escape-objects.png",
+      "sha256": "6a57523f5042f7729987b91c34a188afbc98fbc5589db9fcad42fa907b57bbb0",
+      "bytes": 1854992,
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "path": "docs/verification/v2-polish/artwork-sources/hobbies-initial.png",
+      "sha256": "e6c4a488575d4b68d9f63720ac41d3cb3ee4af9c323d80da009b56ff8042e38a",
+      "bytes": 1890557,
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "path": "docs/verification/v2-polish/artwork-sources/cell-objects-initial.png",
+      "sha256": "2c62847fced33a4cd3620308e82c2abdf5f284bcda5cd4ced4a2d625820c42c0",
+      "bytes": 1884429,
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA"
+    }
+  ],
+  "generations": [
+    {
+      "id": "hobbies-initial",
+      "prompt": "Create an original production-ready transparent PNG sprite atlas of EIGHT hobby item illustrations for Dreams, a friendly polished mobile life simulator. Canvas landscape 1536 by 1024, exactly FOUR equal columns and TWO equal rows. Each cell is 384 by 512. Each object/group must fit fully within its cell with generous clear transparent margins on ALL sides; no parts may cross between cells. TOP ROW left to right: (1) one cobalt-blue running sneaker with white sole and warm orange trim, (2) blue swimming goggles beside a teal swim cap, (3) an open cream notebook and a golden yellow pencil, no writing or lettering, (4) a glossy lavender glazed pottery bowl and small terracotta clay pot. BOTTOM ROW left to right: (5) a charcoal and silver singing microphone with a small blue handle accent, (6) a blue laptop showing only simple colorful abstract rectangular blocks, absolutely no letters, words, digits or logos, (7) a short curved fishing rod with visible reel and red-and-white float, keep the full rod compact inside its cell, (8) a pair of warm burgundy dance shoes. STYLE: saturated but tasteful toy-like 3D cartoon item illustrations, softly rounded chunky silhouettes, rich smooth materials with gentle dimensional shading, soft warm upper-left light, clean subtly darker contour edges, approachable premium casual game style. Match the visual language of a rounded blue-covered book with cream pages, a charcoal game controller with colorful buttons, and an orange cooking pot with wooden spoon. Large simple readable shapes at 40-64px. Consistent object scale and lighting across all eight cells. Isolated objects, real transparent alpha everywhere around them, no white squares, checkerboard pattern, floor, background, scenery, people, text, labels, cell borders, frames, interface, emoji or watermarks.",
+      "transparentBackground": true,
+      "output": "docs/verification/v2-polish/artwork-sources/hobbies-initial.png",
+      "toolOutput": "exec-cf160354-0e11-4bec-b9a3-76bf676d3fc5.png",
+      "inputImages": []
+    },
+    {
+      "id": "hobbies-spaced",
+      "prompt": "Edit this hobby sprite atlas for safe game-engine clipping. Preserve the eight existing illustrations, their materials, colors, friendly dimensional 3D style, and ordering. Keep a 1536x1024 transparent PNG arranged in four equal 384px columns and two equal 512px rows. The ONLY necessary change is to SCALE DOWN AND RECENTER each object/group in its own cell. Every group must be no more than 290px wide and 340px high, centered at x=192,576,960,1344 and y=256 for row one, y=768 for row two. In particular shift the microphone LEFT into the first bottom cell and the laptop RIGHT into the second bottom cell so their rectangular bounds do not overlap at all. Keep generous at least 70px clear gutters between bounding boxes, including shadows. Keep the complete fishing rod and shoes inside their own cells. Background must be actual completely transparent alpha with no colored glow, haze, gradient, floor, checkerboard, white square, lines or grid. No new objects, labels, letters, numbers or UI. TOP row running shoe / swimming cap and goggles / blank notebook and pencil / purple bowl and small terracotta pot. BOTTOM row microphone / blue laptop with abstract colored blocks / compact fishing rod reel float / burgundy dance shoes.",
+      "transparentBackground": true,
+      "output": "assets/generated/expanded-hobby-atlas.png",
+      "toolOutput": "exec-b41587c7-89d3-4c11-b88f-c9fd22488078.png",
+      "inputImages": [
+        "docs/verification/v2-polish/artwork-sources/hobbies-initial.png"
+      ]
+    },
+    {
+      "id": "cell-environment",
+      "prompt": "Create one original portrait 1024 by 1536 mobile game environment illustration for a friendly polished life simulator's Cell Escape mini-game. Rounded dimensional 3D cartoon art, saturated muted blue-gray stone and steel, soft warm upper-left window light, rich smooth materials with subtle texture, consistent with premium casual mobile game item illustrations. Straight-on view inside a quiet empty stylized prison cell. An EMPTY large rectangular recessed doorway occupies the center upper two thirds, thick rounded stone surrounding it; behind the empty doorway is a softly lit warm teal corridor. IMPORTANT: no door slab, no bars across the opening, no padlocks, no keys, no people. A small high barred side window on the upper left admits soft golden light. Modest cool stone wall on the right, simple blue-gray floor at the bottom third. Keep all furnishings out, the central doorway and the lower third very uncluttered because separately animated game objects and native controls will be placed there. Attractive tactile rounded masonry and gentle atmospheric depth, approachable rather than grim or photorealistic. No text, letters, numbers, signage, labels, buttons, HUD, interface, UI panels, icons or watermarks. Full opaque illustrated background, not transparent.",
+      "transparentBackground": false,
+      "output": "assets/generated/cell-escape-background.png",
+      "toolOutput": "exec-24cf2324-4793-40d4-b10c-b14104cb1d35.png",
+      "inputImages": []
+    },
+    {
+      "id": "cell-objects-initial",
+      "prompt": "Create an original production-ready TRANSPARENT PNG mobile game sprite sheet, landscape 1536 by 1024. Friendly polished 3D cartoon illustration with rounded chunky shapes, rich softly dimensional materials, diffuse upper-left lighting, clean readable silhouettes, coordinated blue steel and warm gold. Real transparent alpha between every object, no background or colored glow. Precise composition: LEFT HALF, x 0-767, contains ONE isolated broad rectangular blue-gray steel prison DOOR SLAB, front-facing, about 650px wide by 900px tall, with rounded corners and a small barred window near its top. Door slab only: no wall, surround, frame, handle, locks, labels or keyholes. RIGHT HALF, x768-1535, is a 3-column by 3-row grid of 256 by 341 cells with generous transparent gutters. In the first TWO rows place exactly SIX upright golden fantasy keys, one per cell. Top row bows left to right: CIRCLE, TRIANGLE, SQUARE. Second row bows: DIAMOND, FIVE-POINT STAR, HEXAGON. Each key has a large clearly shaped bow/head and a small hole in that bow, plus a long perfectly STRAIGHT SMOOTH GOLD SHAFT ending in a rounded tip. ALL SIX SHAFTS MUST HAVE NO TEETH, NO NOTCHES, NO CUTS, NO BITS, NO PROTRUSIONS. The game adds its exact one/two/three teeth as separate native overlays. Keep shafts vertical with identical length and thickness. Bottom row right-half: first cell ONE front-facing blue-gray rounded rectangular lock faceplate, silver beveled rim and four tiny corner rivets, completely blank flat dark-blue center with NO keyhole, symbol, dots or markings; second cell ONE large golden OPEN padlock, silver shackle visibly swung open, no checkmark or symbol; third cell stays EMPTY transparent. Fully contain each right-side object within its own cell with at least 24px clear transparent gutters; no touching, cropping, overlapping or shadow crossing into other cells. Do not add any other objects, loose keys, UI, text, labels, numbers, letters, pictograms, scene background, panels, cell borders or watermark.",
+      "transparentBackground": true,
+      "output": "docs/verification/v2-polish/artwork-sources/cell-objects-initial.png",
+      "toolOutput": "exec-8c27f92f-089d-4144-9384-f4435a7437e0.png",
+      "inputImages": []
+    },
+    {
+      "id": "cell-layered-objects",
+      "prompt": "Edit this transparent game sprite sheet for native layered animation. Keep the same 1536x1024 layout, same colors and polished dimensional 3D cartoon style, and KEEP all six gold key sprites, the blank lock faceplate and the open padlock in their exact positions. Keep all six key shafts smooth, without any teeth or notches. Two precise changes: (1) REMOVE the barred window from the large blue door slab on the left; fill its previous place seamlessly with the same blue brushed-steel panel texture, leaving a completely plain door slab with rounded edges. (2) Put that SAME barred window with its metal surround as a SEPARATE isolated sprite in the currently EMPTY lower-right cell (x1278-1535, y680-1023), centered and fully contained there, with a wide landscape window proportion. This lets the game position the window independently of the animated door texture. Also remove every sheet/grid dividing line. Everything outside the isolated objects must be fully transparent alpha, with no colored backgrounds, gradients, blocks, shadows spilling between sprites or grid. Do not add any text, labels, digits, UI, keyholes on the blank plate, extra objects, or extra keys. Maintain clean margins between every sprite. Preserve the original six key bow silhouettes in order: circle triangle square; diamond five-point star hexagon.",
+      "transparentBackground": true,
+      "output": "assets/generated/cell-escape-objects.png",
+      "toolOutput": "exec-946dd22d-8df6-4679-b1d6-79d9f5961857.png",
+      "inputImages": [
+        "docs/verification/v2-polish/artwork-sources/cell-objects-initial.png"
+      ]
+    }
+  ],
+  "integration": "PNG files retain their original generated bytes. Native clipping uses measured typed bounds. Exact key teeth and lock cutouts remain native; no game text, button or hit target is baked into art. Source drafts live outside the runtime asset directory.",
+  "acceptance": "Generated with the built-in image tool, alpha/crop reviewed at 40/64 px on light/dark surfaces, and integrated. Native device appearance remains a separate open check."
+}

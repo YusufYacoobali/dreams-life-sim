@@ -15,11 +15,16 @@ export const sceneArt = {
   earth: require('../../../assets/minigames/art/earth.png'),
   thruster: require('../../../assets/minigames/art/thruster.png'),
   dial: require('../../../assets/minigames/art/dial.png'),
+  cellEnvironment: require('../../../assets/generated/cell-escape-background.png'),
+  cellObjects: require('../../../assets/generated/cell-escape-objects.png'),
 };
 
-export async function preloadSceneArt(kind: MiniGameKind) {
-  // The stamp board is rendered with native text and panels, with no new asset.
-  if (kind === 'escape') return;
+export async function preloadSceneArt(kind: MiniGameKind, illustratedEscape = false) {
+  // Genuine v1/v2 stamp sessions retain their native scene and loading behavior.
+  if (kind === 'escape') {
+    if (illustratedEscape) await Asset.loadAsync([sceneArt.cellEnvironment, sceneArt.cellObjects]);
+    return;
+  }
   const layers =
     kind === 'sports'
       ? [
