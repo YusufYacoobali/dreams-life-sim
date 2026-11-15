@@ -49,7 +49,12 @@
   },
   "scripts": {
     "start": "expo start",
+    "preandroid": "node tools/repair-android-build.cjs --write",
     "android": "expo run:android",
+    "preandroid:release": "node tools/repair-android-build.cjs --write",
+    "android:release": "expo run:android --variant release",
+    "android:check": "node tools/repair-android-build.cjs --check",
+    "android:repair": "node tools/repair-android-build.cjs --write",
     "ios": "expo run:ios",
     "typecheck": "tsc --noEmit && tsc --noEmit -p tests/tsconfig.json",
     "check:imports": "node tools/check-runtime-imports.cjs",
