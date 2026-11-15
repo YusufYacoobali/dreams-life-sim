@@ -33,14 +33,54 @@
       "versionCode": 1
     },
     "plugins": [
-      ["expo-splash-screen", { "backgroundColor": "#061633", "image": "./assets/cinematic-splash.png", "imageWidth": 1, "dark": { "backgroundColor": "#061633" } }],
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#061633",
+          "image": "./assets/cinematic-splash.png",
+          "imageWidth": 1,
+          "dark": {
+            "backgroundColor": "#061633"
+          }
+        }
+      ],
       "expo-router",
       "expo-sqlite",
       "./plugins/withReleaseShrinking.cjs",
       "./plugins/withStoreReviewVisibility.cjs",
-      ["./plugins/withLocalNotifications.cjs", { "color": "#1478F8", "icon": "./assets/notification-icon.png" }],
-      ["expo-audio", { "microphonePermission": false, "recordAudioAndroid": false, "enableBackgroundPlayback": false, "enableBackgroundRecording": false }]
+      [
+        "./plugins/withLocalNotifications.cjs",
+        {
+          "color": "#1478F8",
+          "icon": "./assets/notification-icon.png"
+        }
+      ],
+      [
+        "expo-audio",
+        {
+          "microphonePermission": false,
+          "recordAudioAndroid": false,
+          "enableBackgroundPlayback": false,
+          "enableBackgroundRecording": false
+        }
+      ]
     ],
-    "scheme": "dreams-life"
+    "scheme": "dreams-life",
+    "extra": {
+      "profileCommands": false,
+      "profileCommandsBuild": {},
+      "profileSourceRevision": {},
+      "godModeTesting": false,
+      "unlockAllTesting": false,
+      "unlockAllTestingBuild": {},
+      "router": {
+        "asyncRoutes": {
+          "web": true
+        }
+      },
+      "eas": {
+        "projectId": "666d482a-b9d3-411b-8483-decda542d53a"
+      }
+    }
   }
 }
