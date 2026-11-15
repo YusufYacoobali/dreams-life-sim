@@ -21,6 +21,8 @@ npm run android:release
 
 `android:release` runs the repair first, then `expo run:android --variant release`. The ordinary `npm run android` command also runs the repair before Expo. With no generated Android folder, Expo creates a fresh native project using its installed template.
 
+For Google Play uploads, use the [EAS production build and remote version-counter workflow](EAS_RELEASES.md). Local Expo builds do not auto-increment the EAS store counter.
+
 For inspection or to keep using the original Expo command:
 
 ```powershell

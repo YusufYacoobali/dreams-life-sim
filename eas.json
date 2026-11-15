@@ -1,8 +1,9 @@
 {
+  "cli": { "appVersionSource": "remote" },
   "build": {
     "performance": { "distribution": "internal", "environment": "preview", "developmentClient": false, "ios": { "buildConfiguration": "Release" }, "android": { "buildType": "apk" }, "env": { "EAS_BUILD_DISTRIBUTION": "internal", "DREAMS_PROFILE_COMMANDS": "1", "DREAMS_GOD_MODE_TESTING": "1", "DREAMS_UNLOCK_ALL_TESTING": "0" } },
     "internal": { "distribution": "internal", "env": { "EAS_BUILD_DISTRIBUTION": "internal", "DREAMS_GOD_MODE_TESTING": "1", "DREAMS_UNLOCK_ALL_TESTING": "1" } },
     "preview": { "distribution": "internal", "env": { "EAS_BUILD_DISTRIBUTION": "internal", "DREAMS_GOD_MODE_TESTING": "1", "DREAMS_UNLOCK_ALL_TESTING": "1" } },
-    "production": { "distribution": "store", "env": { "EAS_BUILD_DISTRIBUTION": "store", "DREAMS_PROFILE_COMMANDS": "0", "DREAMS_GOD_MODE_TESTING": "0", "DREAMS_UNLOCK_ALL_TESTING": "0" } }
+    "production": { "distribution": "store", "autoIncrement": true, "env": { "EAS_BUILD_DISTRIBUTION": "store", "DREAMS_PROFILE_COMMANDS": "0", "DREAMS_GOD_MODE_TESTING": "0", "DREAMS_UNLOCK_ALL_TESTING": "0" } }
   }
 }

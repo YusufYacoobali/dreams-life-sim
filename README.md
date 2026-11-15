@@ -19,6 +19,8 @@ Use Node 24.3 or newer in the Node 24 line and an Expo SDK 58-compatible Expo Go
 
 For local Android releases, use `npm run android:release`. It repairs stale generated Gradle/Kotlin settings before building. See [local Android build commands and troubleshooting](docs/ANDROID_LOCAL_BUILDS.md).
 
+Google Play/TestFlight production builds use EAS remote build-number auto-increment. See [store version setup and production build commands](docs/EAS_RELEASES.md), including the one-time counter setup for an existing store app.
+
 ```sh
 npm run typecheck
 npm run check:imports
