@@ -6,6 +6,8 @@ const root = resolve(__dirname, '../..');
 const tool = join(root, 'tools/repair-android-build.cjs');
 const wrapper = 'android/gradle/wrapper/gradle-wrapper.properties';
 const properties = 'android/gradle.properties';
+const appGradle = 'android/app/build.gradle';
+const currentAppGradle = 'proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"\n';
 const url = 'https\\://services.gradle.org/distributions/gradle-9.4.1-bin.zip';
 const checksum = '2ab2958f2a1e51120c326cad6f385153bb11ee93b3c216c5fccebfdfbb7ec6cb';
 let directory: string;
@@ -36,30 +38,33 @@ function loadConfig(command: string) {
   return execFileSync(process.execPath, ['-e', code, require.resolve('expo/config'), directory, command], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
 }
 
-test('the installed template supplies Gradle 9.4.1 and both AGP 9 compatibility flags', () => {
+test('the installed template supplies Gradle 9.4.1, AGP 9 compatibility flags and optimized R8 defaults', () => {
   const code = 'require(process.argv[1]).templateSettings(process.argv[2]).then(r=>process.stdout.write(JSON.stringify(r)))';
-  expect(JSON.parse(execFileSync(process.execPath, ['-e', code, tool, root], { encoding: 'utf8' }))).toEqual({ distributionUrl: url, flags: { 'android.builtInKotlin': 'false', 'android.newDsl': 'false' } });
+  expect(JSON.parse(execFileSync(process.execPath, ['-e', code, tool, root], { encoding: 'utf8' }))).toEqual({ distributionUrl: url, flags: { 'android.builtInKotlin': 'false', 'android.newDsl': 'false' }, defaultProguardFile: 'proguard-android-optimize.txt' });
 });
 
 test.each(['\n', '\r\n'])('repair backs up stale files, preserves local native/signing settings and is idempotent with EOL=%j', eol => {
   const beforeWrapper = ['# Keep my local timeout', 'distributionUrl=https\\://services.gradle.org/distributions/gradle-9.3.1-bin.zip', 'networkTimeout=30000', 'validateDistributionUrl=true', 'distributionSha256Sum=' + '0'.repeat(64), ''].join(eol);
   const beforeProperties = ['# android.builtInKotlin=true is an old note', 'org.gradle.jvmargs=-Xmx4096m', 'newArchEnabled=true', 'hermesEnabled=true', 'local.setting=keep-me', 'android.builtInKotlin=true', 'android.builtInKotlin=true', 'android.newDsl=true', ''].join(eol);
+  const beforeApp = ['apply plugin: "org.jetbrains.kotlin.android"', 'android {', '    signingConfigs { release { storeFile file("private.keystore"); keyAlias "keep-me" } }', '    buildTypes { release {', '        minifyEnabled true', '        proguardFiles getDefaultProguardFile(\'proguard-android.txt\'), "proguard-rules.pro", "custom-rules.pro"', '    } }', '}', ''].join(eol);
   put(wrapper, beforeWrapper); put(properties, beforeProperties);
-  put('android/app/build.gradle', 'apply plugin: "org.jetbrains.kotlin.android"');
+  put(appGradle, beforeApp);
   put('android/app/debug.keystore', Buffer.from([1, 2, 3, 4]));
-  expect(repair(false)).toEqual({ generated: true, changes: [wrapper, properties], backup: null });
+  expect(repair(false)).toEqual({ generated: true, changes: [wrapper, properties, appGradle], backup: null });
   expect(read(wrapper)).toBe(beforeWrapper); expect(read(properties)).toBe(beforeProperties);
+  expect(read(appGradle)).toBe(beforeApp);
   expect(existsSync(join(directory, '.expo'))).toBe(false);
   const result = repair(true);
-  expect(result.changes).toEqual([wrapper, properties]);
+  expect(result.changes).toEqual([wrapper, properties, appGradle]);
   expect(readFileSync(join(result.backup, wrapper), 'utf8')).toBe(beforeWrapper);
   expect(readFileSync(join(result.backup, properties), 'utf8')).toBe(beforeProperties);
+  expect(readFileSync(join(result.backup, appGradle), 'utf8')).toBe(beforeApp);
   expect(read(wrapper)).toContain('distributionUrl=' + url + eol);
   expect(read(wrapper)).toContain('distributionSha256Sum=' + checksum + eol);
   expect(read(wrapper)).toContain('networkTimeout=30000' + eol);
   expect(read(wrapper)).toContain('validateDistributionUrl=true' + eol);
   expect(read(properties)).toBe(['# android.builtInKotlin=true is an old note', 'org.gradle.jvmargs=-Xmx4096m', 'newArchEnabled=true', 'hermesEnabled=true', 'local.setting=keep-me', 'android.builtInKotlin=false', 'android.newDsl=false', ''].join(eol));
-  expect(read('android/app/build.gradle')).toBe('apply plugin: "org.jetbrains.kotlin.android"');
+  expect(read(appGradle)).toBe(beforeApp.replace("getDefaultProguardFile('proguard-android.txt')", "getDefaultProguardFile('proguard-android-optimize.txt')"));
   expect(readFileSync(join(directory, 'android/app/debug.keystore'))).toEqual(Buffer.from([1, 2, 3, 4]));
   expect(repair(true)).toEqual({ generated: true, changes: [], backup: null });
   expect(readdirSync(dirname(result.backup))).toHaveLength(1);
@@ -68,6 +73,7 @@ test.each(['\n', '\r\n'])('repair backs up stale files, preserves local native/s
 test('a manually upgraded wrapper receives only the missing Kotlin/DSL flags', () => {
   put(wrapper, 'distributionUrl=' + url);
   put(properties, 'newArchEnabled=true\r\nhermesEnabled=true');
+  put(appGradle, currentAppGradle);
   const result = repair(true);
   expect(result.changes).toEqual([properties]);
   expect(read(wrapper)).toBe('distributionUrl=' + url);
@@ -77,9 +83,10 @@ test('a manually upgraded wrapper receives only the missing Kotlin/DSL flags', (
 test('a current generated project is left byte-for-byte unchanged', () => {
   put(wrapper, 'distributionUrl=' + url + '\nnetworkTimeout=10000\n');
   put(properties, '# Already set\nandroid.builtInKotlin=false\nandroid.newDsl=false');
-  const before = [read(wrapper), read(properties)];
+  put(appGradle, currentAppGradle);
+  const before = [read(wrapper), read(properties), read(appGradle)];
   expect(repair(true)).toEqual({ generated: true, changes: [], backup: null });
-  expect([read(wrapper), read(properties)]).toEqual(before);
+  expect([read(wrapper), read(properties), read(appGradle)]).toEqual(before);
   expect(existsSync(join(directory, '.expo'))).toBe(false);
 });
 
@@ -88,6 +95,10 @@ test('an incomplete project fails before writing anything; absent Android is lef
   put(wrapper, 'distributionUrl=old\n');
   expect(() => repair(true)).toThrow();
   expect(read(wrapper)).toBe('distributionUrl=old\n');
+  put(properties, 'android.builtInKotlin=true\n');
+  expect(() => repair(true)).toThrow();
+  expect(read(wrapper)).toBe('distributionUrl=old\n');
+  expect(read(properties)).toBe('android.builtInKotlin=true\n');
   expect(existsSync(join(directory, '.expo'))).toBe(false);
 });
 
@@ -103,20 +114,25 @@ test('direct Expo run:android config evaluation waits for the repair and repeate
   installConfig();
   put(wrapper, 'distributionUrl=https\\://services.gradle.org/distributions/gradle-9.3.1-bin.zip\r\n');
   put(properties, 'newArchEnabled=true\r\nhermesEnabled=true\r\n');
+  put(appGradle, currentAppGradle.replace('proguard-android-optimize.txt', 'proguard-android.txt'));
   const output = loadConfig('run:android');
-  expect(output).toContain('Repaired Android Gradle/Kotlin settings before run:android.');
+  expect(output).toContain('Repaired Android Gradle/Kotlin/R8 settings before run:android.');
   expect(output).toContain('CONFIG_RESULT com.example.buildfixture');
   expect(read(wrapper)).toContain('distributionUrl=' + url);
   expect(read(properties)).toContain('android.builtInKotlin=false\r\nandroid.newDsl=false\r\n');
+  expect(read(appGradle)).toBe(currentAppGradle);
   expect(readdirSync(join(directory, '.expo/android-build-backups'))).toHaveLength(1);
 });
 
 test.each(['config', 'start', 'export:embed', 'prebuild', 'run:ios'])('%s config reads leave Android unchanged and work without tools in an EAS archive', command => {
   installConfig(false);
   put(wrapper, 'distributionUrl=old\n'); put(properties, 'local.setting=keep-me\n');
+  const staleApp = currentAppGradle.replace('proguard-android-optimize.txt', 'proguard-android.txt');
+  put(appGradle, staleApp);
   expect(loadConfig(command)).toContain('CONFIG_RESULT com.example.buildfixture');
   expect(read(wrapper)).toBe('distributionUrl=old\n');
   expect(read(properties)).toBe('local.setting=keep-me\n');
+  expect(read(appGradle)).toBe(staleApp);
   expect(existsSync(join(directory, '.expo'))).toBe(false);
 });
 
@@ -128,4 +144,30 @@ test('automatic preparation leaves missing or incomplete native projects for Exp
   expect(loadConfig('run:android')).not.toContain('Repaired');
   expect(read(wrapper)).toBe('distributionUrl=old\n');
   expect(existsSync(join(directory, properties))).toBe(false);
+  put(properties, 'local.setting=keep-me\n');
+  expect(loadConfig('run:android')).not.toContain('Repaired');
+  expect(read(wrapper)).toBe('distributionUrl=old\n');
+  expect(read(properties)).toBe('local.setting=keep-me\n');
+  expect(existsSync(join(directory, appGradle))).toBe(false);
+});
+
+test.each([
+  ["getDefaultProguardFile('proguard-android.txt')", "getDefaultProguardFile('proguard-android-optimize.txt')"],
+  ['getDefaultProguardFile("proguard-android.txt")', 'getDefaultProguardFile("proguard-android-optimize.txt")'],
+  ['getDefaultProguardFile ( "proguard-android.txt" )', 'getDefaultProguardFile ( "proguard-android-optimize.txt" )'],
+  ["getDefaultProguardFile(\r\n  'proguard-android.txt'\r\n)", "getDefaultProguardFile(\r\n  'proguard-android-optimize.txt'\r\n)"],
+] as const)('an already upgraded project repairs only its obsolete R8 default: %s', (call, expected) => {
+  put(wrapper, 'distributionUrl=' + url + '\n');
+  put(properties, 'android.builtInKotlin=false\nandroid.newDsl=false\n');
+  const before = `proguardFiles ${call}, "custom-rules.pro"\r\nproguardFiles "proguard-android.txt"\r\n`;
+  put(appGradle, before);
+  put('android/app/custom-rules.pro', '-keep class com.example.** { *; }\r\n');
+  expect(repair(false)).toEqual({ generated: true, changes: [appGradle], backup: null });
+  expect(read(appGradle)).toBe(before);
+  const result = repair(true);
+  expect(result.changes).toEqual([appGradle]);
+  expect(readFileSync(join(result.backup, appGradle), 'utf8')).toBe(before);
+  expect(read(appGradle)).toBe(before.replace(call, expected));
+  expect(read('android/app/custom-rules.pro')).toBe('-keep class com.example.** { *; }\r\n');
+  expect(repair(true)).toEqual({ generated: true, changes: [], backup: null });
 });

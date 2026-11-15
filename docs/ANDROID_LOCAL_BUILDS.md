@@ -2,14 +2,15 @@
 
 Use the locked dependencies with Node 24.3+ in the Node 24 line, a compatible JDK (17 or newer), and the Android SDK selected by Expo/React Native. Run commands from the repository root. On Windows, the project path may contain spaces; the repair helper uses Node file APIs rather than shell commands.
 
-## Repair the Gradle/Kotlin errors
+## Repair the Gradle/Kotlin/R8 errors
 
-The 15 November 2026 log shows two failures:
+The 15 November 2026 logs show three stale-template failures:
 
 - The native Gradle wrapper is **9.3.1**, while Android Gradle Plugin **9.2.1** requires **9.4.1**.
 - After upgrading the wrapper, applying `org.jetbrains.kotlin.android` fails because AGP 9 has already created its built-in `kotlin` extension.
+- Once Kotlin configuration succeeds, `android/app/build.gradle` still calls `getDefaultProguardFile('proguard-android.txt')`. AGP 9 rejects this non-optimizing rules file during configuration, even when minification is disabled. It requires `proguard-android-optimize.txt`.
 
-The installed Expo **58.0.25** template already specifies Gradle **9.4.1**, `android.builtInKotlin=false` and `android.newDsl=false`. React Native **0.88.1** and Expo use AGP **9.2.1**. The local generated `android` directory has retained older settings; Git ignores that directory, so pulling source changes does not refresh it.
+The installed Expo **58.0.25** template already specifies Gradle **9.4.1**, `android.builtInKotlin=false`, `android.newDsl=false` and the optimized R8 default. React Native **0.88.1** and Expo use AGP **9.2.1**. The local generated `android` directory has retained older settings; Git ignores that directory, so pulling source changes does not refresh it.
 
 In PowerShell, run:
 
@@ -19,7 +20,7 @@ npm ci
 npx expo run:android --variant release
 ```
 
-The usual direct Expo command now repairs an existing Android project's Gradle/Kotlin settings automatically when Expo reads the app config, before Gradle runs. `npm run android:release` and `npm run android` also retain their repair hooks. With no generated Android folder, Expo creates a fresh native project using its installed template.
+The usual direct Expo command now repairs an existing Android project's Gradle/Kotlin/R8 settings automatically when Expo reads the app config, before Gradle runs. `npm run android:release` and `npm run android` also retain their repair hooks. With no generated Android folder, Expo creates a fresh native project using its installed template.
 
 For Google Play uploads, use the [EAS production build and remote version-counter workflow](EAS_RELEASES.md). Local Expo builds do not auto-increment the EAS store counter.
 
@@ -37,8 +38,9 @@ npx expo run:android --variant release
 |---|---|
 | `android/gradle/wrapper/gradle-wrapper.properties` | `distributionUrl` |
 | `android/gradle.properties` | `android.builtInKotlin`, `android.newDsl` |
+| `android/app/build.gradle` | Replace the obsolete `getDefaultProguardFile` argument with `proguard-android-optimize.txt` |
 
-This keeps the SDK 58 template's external Kotlin plugin and compatible Android DSL. `android.newDsl` is separate from React Native's `newArchEnabled`, which remains enabled.
+This keeps the SDK 58 template's external Kotlin plugin, compatible Android DSL and optimized R8 rules. `android.newDsl` is separate from React Native's `newArchEnabled`, which remains enabled. The R8 repair changes only calls to the obsolete default; custom ProGuard files, keep rules, signing configuration and other Gradle code are preserved. It accepts single/double quotes and whitespace across LF/Windows CRLF lines.
 
 Before writing, the helper saves all affected originals under `.expo/android-build-backups/repair-…/android/…`. That directory is Git-ignored. It preserves line endings, unrelated Gradle settings, native code, keystores and signing configuration. If an old wrapper has checksum verification, upgrading it to 9.4.1 also installs the [published Gradle 9.4.1-bin checksum](https://services.gradle.org/distributions/gradle-9.4.1-bin.zip.sha256). Repeating the repair makes no further changes or backups. Missing native files or an unsupported template/checksum combination fail before edits.
 
@@ -46,10 +48,10 @@ The automatic hook is limited to the explicit `run:android` command and prepares
 
 ## Verification
 
-- A fresh isolated `expo prebuild --platform android --no-install` succeeds and generates the three expected settings without a new config plugin or dependency upgrade.
-- Removing the Kotlin/DSL flags and restoring the old wrapper in that generated project reproduces the stale configuration. The helper restores it; exactly the two property files change across **50 generated native files**, and the next check reports no changes.
-- **56 tests across three configuration suites pass**, including actual Node/Expo-template reads, direct `run:android` config evaluation, repeated config reads, EAS-style archives without tools, Windows CRLF, paths with spaces, dry-run behavior, backups, duplicate settings, wrapper checksums, idempotence, incomplete projects, unchanged native signing files and existing release/access configuration.
-- The real Expo Android CLI entry was also exercised through its Gradle invocation boundary against the isolated stale native project. The repair completed before that boundary. Device discovery, eager bundling and Gradle execution were replaced for this check; it is not an APK compilation pass.
+- A fresh isolated `expo prebuild --platform android --no-install` succeeds and generates the current Gradle/Kotlin settings and optimized R8 default without a new config plugin or dependency upgrade.
+- Removing the Kotlin/DSL flags, restoring the old wrapper and replacing the R8 default reproduces the stale configuration. Through the real Expo Android CLI, the helper repairs exactly **three files out of 50 generated native files** and stores their exact originals in one backup. If Gradle/Kotlin settings are already current, only `android/app/build.gradle` changes. The next check reports no changes.
+- **60 tests across three configuration suites pass**, including actual Node/Expo-template reads, direct `run:android` config evaluation, repeated config reads, EAS-style archives without tools, Windows CRLF, paths with spaces, dry-run behavior, backups, duplicate settings, wrapper checksums, optimized/legacy R8 defaults, idempotence, incomplete projects, unchanged custom ProGuard rules and native signing files and existing release/access configuration.
+- The real Expo Android CLI entry was also exercised through its Gradle invocation boundary against the isolated stale native project. The repair completed before that boundary. Device discovery, eager bundling and Gradle execution were replaced for this check; it is not an APK compilation pass. Fresh native prebuild is separately verified without these substitutions.
 - Strict application/test TypeScript passes. Application/gameplay sources, dependency versions and the lockfile are unchanged.
 
 A complete APK build remains **unverified on this cloud host**. No Android SDK is installed, and the Gradle configuration attempt stopped while downloading the wrapper with `UnknownHostException: services.gradle.org`. The user's Windows build must complete with the commands above; no successful native compilation, installation or signing is claimed from the prebuild/configuration checks.

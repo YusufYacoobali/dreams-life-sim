@@ -19,7 +19,7 @@ import { decodeWorld } from '../../src/game/model';
 import { endEmployment } from '../../src/game/systems/work';
 import { careerPayQuote } from '../../src/game/systems/careers';
 import { useCareerReview } from '../../src/ui/CareerReview';
-import { setPurchaseAnalytics } from '../../src/purchases/analytics';
+import { setPurchaseAnalytics, type PurchaseEvent } from '../../src/purchases/analytics';
 import { router, Redirect } from 'expo-router';
 import TimeMachine from '../../app/time-machine';
 import { useCultDialog } from '../../src/ui/CultDialog';
