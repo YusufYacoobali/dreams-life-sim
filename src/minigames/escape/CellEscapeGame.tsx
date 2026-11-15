@@ -91,7 +91,7 @@ export function CellEscapeGame({ session, enabled, controlsVisible = true, reduc
           const used = state.usedKeys.includes(key.id), chosen = selected === key.id;
           return <Animated.View key={key.id} style={{ transform: [{ translateY: chosen ? lift : 0 }] }}><Pressable accessibilityRole="radio" accessibilityLabel={'Key: ' + keyLabel(key) + (used ? ', used' : '')} accessibilityState={{ checked: chosen, disabled: !available || used }} disabled={!available || used} onPress={() => { if (mounted.current && available && !submitting.current) setSelected(key.id); }} style={{ width: keyWidth, flexGrow: 1, minHeight: 100, borderRadius: 12, paddingVertical: 4, paddingHorizontal: 6, alignItems: 'center', justifyContent: 'center', borderWidth: 2, borderColor: chosen ? gold : '#92A6BD', backgroundColor: chosen ? '#425576' : '#233650E8', opacity: used ? 0.45 : !available ? 0.65 : 1 }}>
             <KeyGlyph item={key} />
-            <Text testID={'cell-key-label-' + key.id} style={{ alignSelf: 'stretch', flexShrink: 1, color: chosen ? '#FFE596' : ink, fontSize: 12, lineHeight: 16, fontWeight: '600', textAlign: 'center' }}>{chosen ? '✓' : used ? 'Used' : key.teeth + ' ' + '•'.repeat(key.teeth)}</Text>
+            <Text testID={'cell-key-label-' + key.id} style={{ alignSelf: 'stretch', flexShrink: 1, color: chosen ? '#FFE596' : ink, fontSize: 12, lineHeight: 16, fontWeight: '600', textAlign: 'center' }}>{chosen ? '✓' : used ? 'Used' : key.teeth + (key.teeth === 1 ? ' notch' : ' notches')}</Text>
           </Pressable></Animated.View>;
         })}
       </View>)}
