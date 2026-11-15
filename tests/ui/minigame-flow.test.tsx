@@ -122,6 +122,7 @@ jest.mock('react-native-worklets', () => ({
 import { LiveMiniGame } from '../../src/minigames/LiveMiniGame';
 import { MiniGamePlayground } from '../../src/minigames/MiniGamePlayground';
 import { MiniGameScreen, miniGameInstructions } from '../../src/minigames/components/MiniGameScreen';
+import { SceneBackdrop } from '../../src/minigames/components/SceneBackdrop';
 import { GameButton } from '../../src/minigames/components/GameButton';
 import type { MiniGameAction, MiniGameSession } from '../../src/minigames/core/types';
 import GameLayout from '../../app/(game)/_layout';
@@ -257,6 +258,12 @@ test('only Cell Escape V3 uses the compact header and the measured gameplay view
   expect(screen.queryByText('PRACTICE')).toBeNull();
   expect(screen.queryByText('Your pace')).toBeNull();
   expect(screen.queryByText('Matching')).toBeNull();
+  // Background covers the whole modal; the camera island, curved edges and
+  // home indicator must never overlap header or puzzle controls.
+  const fullscreen = screen.getByTestId('cell-fullscreen-scene');
+  const safeContent = screen.getByTestId('cell-safe-area-content');
+  expect(safeContent.props.edges).toEqual(['top', 'bottom', 'left', 'right']);
+  expect(screen.UNSAFE_getByType(SceneBackdrop).parent).toBe(fullscreen);
   const viewport = screen.getByTestId('cell-gameplay-viewport');
   const scroll = screen.UNSAFE_getAllByType(Native.ScrollView).find(node => node.props.testID === 'cell-gameplay-viewport')!;
   expect(Native.StyleSheet.flatten(scroll.props.contentContainerStyle)).not.toHaveProperty('minHeight');
@@ -274,6 +281,8 @@ test('only Cell Escape V3 uses the compact header and the measured gameplay view
   expect(screen.getByText('Your pace')).toBeOnTheScreen();
   expect(screen.getByText('Memory')).toBeOnTheScreen();
   expect(screen.queryByTestId('cell-gameplay-viewport')).toBeNull();
+  expect(screen.queryByTestId('cell-fullscreen-scene')).toBeNull();
+  expect(screen.queryByTestId('cell-safe-area-content')).toBeNull();
 });
 
 test('docking uses four circular 48dp+ directions around Coast at large text, including unassisted play', async () => {
