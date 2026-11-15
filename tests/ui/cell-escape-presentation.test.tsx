@@ -35,6 +35,10 @@ test('separate bundled scene layers leave puzzle controls labelled, native and l
   expect(sources.some(source => source.endsWith('/cell-escape-objects.png'))).toBe(true);
   expect(screen.queryAllByRole('image')).toHaveLength(0);
   expect(screen.getAllByRole('radio', { name: /^Key: .*, [123] notch(?:es)?$/ })).toHaveLength(6);
+  // Visible key captions use readable notch counts rather than numeric dots.
+  expect(screen.getAllByText('1 notch')).toHaveLength(2);
+  expect(screen.getAllByText('2 notches')).toHaveLength(2);
+  expect(screen.getAllByText('3 notches')).toHaveLength(2);
   expect(screen.getAllByRole('button', { name: /^Lock \d: .*, [123] notch(?:es)?, locked$/ })).toHaveLength(6);
   for (const control of screen.UNSAFE_getAllByType(Pressable)) {
     const style = StyleSheet.flatten(control.props.style);
