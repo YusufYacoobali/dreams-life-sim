@@ -389,9 +389,11 @@ export function MiniGameScreen(props: Props) {
   };
   const enabled = phase === 'playing' && !writing && !busy && artReady;
   return (
-    <SafeAreaView style={[s.screen, cell && { backgroundColor: '#34485D' }]} edges={['top', 'bottom', 'left', 'right']}>
+    <View testID={cell ? 'cell-fullscreen-scene' : undefined} style={[s.screen, cell && { backgroundColor: '#34485D' }]}>
+      {/* Draw the scene behind the notch/home indicator; inset only the controls. */}
       <SceneBackdrop kind={kind} cell={cell} />
       <StatusBar style="light" />
+      <SafeAreaView testID={cell ? 'cell-safe-area-content' : undefined} style={{ flex: 1 }} edges={['top', 'bottom', 'left', 'right']}>
       <View style={[s.header, cell && { paddingHorizontal: 16, paddingVertical: 4, gap: 10 }]}>
         <GameButton
           label={session?.status === 'active' ? 'Pause' : 'Back'}
@@ -742,6 +744,7 @@ export function MiniGameScreen(props: Props) {
           </View>
         </View>
       )}
-    </SafeAreaView>
+      </SafeAreaView>
+    </View>
   );
 }
