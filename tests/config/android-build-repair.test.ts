@@ -7,7 +7,8 @@ const tool = join(root, 'tools/repair-android-build.cjs');
 const wrapper = 'android/gradle/wrapper/gradle-wrapper.properties';
 const properties = 'android/gradle.properties';
 const appGradle = 'android/app/build.gradle';
-const currentAppGradle = 'proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"\n';
+const { updateBuildGradle } = require('../../plugins/withWindowsNativeBuild.cjs');
+const currentAppGradle = updateBuildGradle('proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"\n');
 const url = 'https\\://services.gradle.org/distributions/gradle-9.4.1-bin.zip';
 const checksum = '2ab2958f2a1e51120c326cad6f385153bb11ee93b3c216c5fccebfdfbb7ec6cb';
 let directory: string;
@@ -31,7 +32,10 @@ function installConfig(withTool = true) {
   put('package.json', JSON.stringify({ name: 'android-build-fixture', version: '1.0.0' }));
   put('app.config.cjs', readFileSync(join(root, 'app.config.cjs')));
   put('app.json', JSON.stringify({ expo: { name: 'Build fixture', slug: 'build-fixture', android: { package: 'com.example.buildfixture' } } }));
-  if (withTool) put('tools/repair-android-build.cjs', readFileSync(tool));
+  if (withTool) {
+    put('tools/repair-android-build.cjs', readFileSync(tool));
+    put('plugins/withWindowsNativeBuild.cjs', readFileSync(join(root, 'plugins/withWindowsNativeBuild.cjs')));
+  }
 }
 function loadConfig(command: string) {
   const code = 'const [config,root,command]=process.argv.slice(1);process.argv=[process.execPath,"expo",command,"--variant","release"];const{getConfig}=require(config);getConfig(root,{skipPlugins:true});const result=getConfig(root,{skipPlugins:true});console.log("CONFIG_RESULT "+result.exp.android.package)';
@@ -46,7 +50,7 @@ test('the installed template supplies Gradle 9.4.1, AGP 9 compatibility flags an
 test.each(['\n', '\r\n'])('repair backs up stale files, preserves local native/signing settings and is idempotent with EOL=%j', eol => {
   const beforeWrapper = ['# Keep my local timeout', 'distributionUrl=https\\://services.gradle.org/distributions/gradle-9.3.1-bin.zip', 'networkTimeout=30000', 'validateDistributionUrl=true', 'distributionSha256Sum=' + '0'.repeat(64), ''].join(eol);
   const beforeProperties = ['# android.builtInKotlin=true is an old note', 'org.gradle.jvmargs=-Xmx4096m', 'newArchEnabled=true', 'hermesEnabled=true', 'local.setting=keep-me', 'android.builtInKotlin=true', 'android.builtInKotlin=true', 'android.newDsl=true', ''].join(eol);
-  const beforeApp = ['apply plugin: "org.jetbrains.kotlin.android"', 'android {', '    signingConfigs { release { storeFile file("private.keystore"); keyAlias "keep-me" } }', '    buildTypes { release {', '        minifyEnabled true', '        proguardFiles getDefaultProguardFile(\'proguard-android.txt\'), "proguard-rules.pro", "custom-rules.pro"', '    } }', '}', ''].join(eol);
+  const beforeApp = updateBuildGradle(['apply plugin: "org.jetbrains.kotlin.android"', 'android {', '    signingConfigs { release { storeFile file("private.keystore"); keyAlias "keep-me" } }', '    buildTypes { release {', '        minifyEnabled true', '        proguardFiles getDefaultProguardFile(\'proguard-android.txt\'), "proguard-rules.pro", "custom-rules.pro"', '    } }', '}', ''].join(eol));
   put(wrapper, beforeWrapper); put(properties, beforeProperties);
   put(appGradle, beforeApp);
   put('android/app/debug.keystore', Buffer.from([1, 2, 3, 4]));
@@ -90,6 +94,25 @@ test('a current generated project is left byte-for-byte unchanged', () => {
   expect(existsSync(join(directory, '.expo'))).toBe(false);
 });
 
+test.each(['\n', '\r\n'])('existing native projects receive the Windows long-path toolchain once with EOL=%j', eol => {
+  put(wrapper, 'distributionUrl=' + url + eol);
+  put(properties, ['android.builtInKotlin=false', 'android.newDsl=false', ''].join(eol));
+  const before = ['android {', '    defaultConfig { applicationId "com.example.keep" }', '    signingConfigs { release { keyAlias "keep-me" } }', '}', ''].join(eol);
+  put(appGradle, before);
+  expect(repair(false)).toEqual({ generated: true, changes: [appGradle], backup: null });
+  expect(read(appGradle)).toBe(before);
+  const result = repair(true);
+  expect(result.changes).toEqual([appGradle]);
+  expect(readFileSync(join(result.backup, appGradle), 'utf8')).toBe(before);
+  const after = read(appGradle);
+  expect(after.startsWith(before)).toBe(true);
+  expect(after).toContain("if (System.getProperty('os.name').startsWith('Windows')) {" + eol);
+  expect(after).toContain("    android.externalNativeBuild.cmake.version = '3.31.6'" + eol);
+  expect(repair(true)).toEqual({ generated: true, changes: [], backup: null });
+  expect(read(appGradle)).toBe(after);
+  expect(require('../../app.json').expo.plugins).toContain('./plugins/withWindowsNativeBuild.cjs');
+});
+
 test('an incomplete project fails before writing anything; absent Android is left for Expo to generate', () => {
   expect(repair(true)).toEqual({ generated: false, changes: [], backup: null });
   put(wrapper, 'distributionUrl=old\n');
@@ -116,7 +139,7 @@ test('direct Expo run:android config evaluation waits for the repair and repeate
   put(properties, 'newArchEnabled=true\r\nhermesEnabled=true\r\n');
   put(appGradle, currentAppGradle.replace('proguard-android-optimize.txt', 'proguard-android.txt'));
   const output = loadConfig('run:android');
-  expect(output).toContain('Repaired Android Gradle/Kotlin/R8 settings before run:android.');
+  expect(output).toContain('Repaired Android Gradle/Kotlin/R8/CMake settings before run:android.');
   expect(output).toContain('CONFIG_RESULT com.example.buildfixture');
   expect(read(wrapper)).toContain('distributionUrl=' + url);
   expect(read(properties)).toContain('android.builtInKotlin=false\r\nandroid.newDsl=false\r\n');
@@ -159,7 +182,7 @@ test.each([
 ] as const)('an already upgraded project repairs only its obsolete R8 default: %s', (call, expected) => {
   put(wrapper, 'distributionUrl=' + url + '\n');
   put(properties, 'android.builtInKotlin=false\nandroid.newDsl=false\n');
-  const before = `proguardFiles ${call}, "custom-rules.pro"\r\nproguardFiles "proguard-android.txt"\r\n`;
+  const before = updateBuildGradle(`proguardFiles ${call}, "custom-rules.pro"\r\nproguardFiles "proguard-android.txt"\r\n`);
   put(appGradle, before);
   put('android/app/custom-rules.pro', '-keep class com.example.** { *; }\r\n');
   expect(repair(false)).toEqual({ generated: true, changes: [appGradle], backup: null });

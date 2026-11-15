@@ -4,6 +4,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { createRequire } = require('node:module');
 const { execFileSync } = require('node:child_process');
+const { updateBuildGradle } = require('../plugins/withWindowsNativeBuild.cjs');
 
 const wrapperPath = 'android/gradle/wrapper/gradle-wrapper.properties';
 const propertiesPath = 'android/gradle.properties';
@@ -58,6 +59,7 @@ async function repairAndroid(projectRoot, write = false) {
       // disabled. Keep custom rules, signing, whitespace and the rest of the DSL.
       after = before.replace(/(\bgetDefaultProguardFile\s*\(\s*)(['"])proguard-android\.txt\2(\s*\))/g,
         (_match, start, quote, end) => start + quote + settings.defaultProguardFile + quote + end);
+      after = updateBuildGradle(after);
     } else {
       const targets = relative === wrapperPath ? { distributionUrl: settings.distributionUrl } : settings.flags;
       for (const [key, value] of Object.entries(targets)) after = setProperty(after, key, value);
@@ -103,7 +105,7 @@ function prepareAndroidRun(projectRoot) {
   }
   preparedProjects.add(root);
   if (result.changes.length) {
-    console.log('Repaired Android Gradle/Kotlin/R8 settings before run:android.');
+    console.log('Repaired Android Gradle/Kotlin/R8/CMake settings before run:android.');
     console.log('Original files backed up to ' + result.backup);
   }
 }
@@ -117,12 +119,12 @@ if (require.main === module) {
     if (!result.generated) {
       console.log('Android has not been generated. Expo run:android will create it from the installed template.');
       if (args[0] === '--check') process.exitCode = 1;
-    } else if (!result.changes.length) console.log('Android Gradle/Kotlin/R8 settings match the installed Expo template.');
+    } else if (!result.changes.length) console.log('Android Gradle/Kotlin/R8/CMake settings are current.');
     else if (args[0] === '--check') {
-      console.error('Stale Android Gradle/Kotlin/R8 settings in: ' + result.changes.join(', ') + '. Run npm run android:repair.');
+      console.error('Stale Android Gradle/Kotlin/R8/CMake settings in: ' + result.changes.join(', ') + '. Run npm run android:repair.');
       process.exitCode = 1;
     } else {
-      console.log('Repaired Android Gradle/Kotlin/R8 settings in: ' + result.changes.join(', '));
+      console.log('Repaired Android Gradle/Kotlin/R8/CMake settings in: ' + result.changes.join(', '));
       console.log('Original files backed up to ' + result.backup);
     }
   }).catch(error => { console.error('Android toolchain repair: ' + error.message); process.exitCode = 1; });

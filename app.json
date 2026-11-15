@@ -47,6 +47,7 @@
       "expo-router",
       "expo-sqlite",
       "./plugins/withReleaseShrinking.cjs",
+      "./plugins/withWindowsNativeBuild.cjs",
       "./plugins/withStoreReviewVisibility.cjs",
       [
         "./plugins/withLocalNotifications.cjs",
