@@ -1,5 +1,11 @@
 // Testing is opt-in; public/store builds never embed premium testing access.
 module.exports = ({ config }) => {
+  // Expo reuses existing native folders on run:android, without re-running
+  // prebuild plugins. Repair that explicit build before Gradle reads them.
+  // Keep other config consumers (including EAS archives without tools/) pure.
+  if (process.argv[2] === 'run:android') {
+    require('./tools/repair-android-build.cjs').prepareAndroidRun(__dirname);
+  }
   const internal = process.env.EAS_BUILD_DISTRIBUTION === 'internal'
     && ['internal', 'preview', 'development', 'performance'].includes(process.env.EAS_BUILD_PROFILE);
   const development = !process.env.EAS_BUILD_PROFILE && !process.env.EAS_BUILD_DISTRIBUTION

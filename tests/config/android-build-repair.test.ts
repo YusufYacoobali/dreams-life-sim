@@ -25,6 +25,16 @@ function repair(write: boolean) {
   const code = 'require(process.argv[1]).repairAndroid(process.argv[2],process.argv[3]==="write").then(r=>process.stdout.write(JSON.stringify(r))).catch(e=>{console.error(e.message);process.exitCode=1})';
   return JSON.parse(execFileSync(process.execPath, ['-e', code, tool, directory, write ? 'write' : 'check'], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] }));
 }
+function installConfig(withTool = true) {
+  put('package.json', JSON.stringify({ name: 'android-build-fixture', version: '1.0.0' }));
+  put('app.config.cjs', readFileSync(join(root, 'app.config.cjs')));
+  put('app.json', JSON.stringify({ expo: { name: 'Build fixture', slug: 'build-fixture', android: { package: 'com.example.buildfixture' } } }));
+  if (withTool) put('tools/repair-android-build.cjs', readFileSync(tool));
+}
+function loadConfig(command: string) {
+  const code = 'const [config,root,command]=process.argv.slice(1);process.argv=[process.execPath,"expo",command,"--variant","release"];const{getConfig}=require(config);getConfig(root,{skipPlugins:true});const result=getConfig(root,{skipPlugins:true});console.log("CONFIG_RESULT "+result.exp.android.package)';
+  return execFileSync(process.execPath, ['-e', code, require.resolve('expo/config'), directory, command], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
+}
 
 test('the installed template supplies Gradle 9.4.1 and both AGP 9 compatibility flags', () => {
   const code = 'require(process.argv[1]).templateSettings(process.argv[2]).then(r=>process.stdout.write(JSON.stringify(r)))';
@@ -87,4 +97,35 @@ test('Android npm build entry points repair the ignored native configuration bef
   expect(scripts['preandroid:release']).toBe(scripts.preandroid);
   expect(scripts['android:release']).toBe('expo run:android --variant release');
   expect(scripts['android:repair']).toBe(scripts.preandroid);
+});
+
+test('direct Expo run:android config evaluation waits for the repair and repeated config reads create one backup', () => {
+  installConfig();
+  put(wrapper, 'distributionUrl=https\\://services.gradle.org/distributions/gradle-9.3.1-bin.zip\r\n');
+  put(properties, 'newArchEnabled=true\r\nhermesEnabled=true\r\n');
+  const output = loadConfig('run:android');
+  expect(output).toContain('Repaired Android Gradle/Kotlin settings before run:android.');
+  expect(output).toContain('CONFIG_RESULT com.example.buildfixture');
+  expect(read(wrapper)).toContain('distributionUrl=' + url);
+  expect(read(properties)).toContain('android.builtInKotlin=false\r\nandroid.newDsl=false\r\n');
+  expect(readdirSync(join(directory, '.expo/android-build-backups'))).toHaveLength(1);
+});
+
+test.each(['config', 'start', 'export:embed', 'prebuild', 'run:ios'])('%s config reads leave Android unchanged and work without tools in an EAS archive', command => {
+  installConfig(false);
+  put(wrapper, 'distributionUrl=old\n'); put(properties, 'local.setting=keep-me\n');
+  expect(loadConfig(command)).toContain('CONFIG_RESULT com.example.buildfixture');
+  expect(read(wrapper)).toBe('distributionUrl=old\n');
+  expect(read(properties)).toBe('local.setting=keep-me\n');
+  expect(existsSync(join(directory, '.expo'))).toBe(false);
+});
+
+test('automatic preparation leaves missing or incomplete native projects for Expo to generate', () => {
+  installConfig();
+  expect(loadConfig('run:android')).not.toContain('Repaired');
+  expect(existsSync(join(directory, 'android'))).toBe(false);
+  put(wrapper, 'distributionUrl=old\n');
+  expect(loadConfig('run:android')).not.toContain('Repaired');
+  expect(read(wrapper)).toBe('distributionUrl=old\n');
+  expect(existsSync(join(directory, properties))).toBe(false);
 });

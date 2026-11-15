@@ -16,14 +16,14 @@ In PowerShell, run:
 ```powershell
 git pull
 npm ci
-npm run android:release
+npx expo run:android --variant release
 ```
 
-`android:release` runs the repair first, then `expo run:android --variant release`. The ordinary `npm run android` command also runs the repair before Expo. With no generated Android folder, Expo creates a fresh native project using its installed template.
+The usual direct Expo command now repairs an existing Android project's Gradle/Kotlin settings automatically when Expo reads the app config, before Gradle runs. `npm run android:release` and `npm run android` also retain their repair hooks. With no generated Android folder, Expo creates a fresh native project using its installed template.
 
 For Google Play uploads, use the [EAS production build and remote version-counter workflow](EAS_RELEASES.md). Local Expo builds do not auto-increment the EAS store counter.
 
-For inspection or to keep using the original Expo command:
+For manual inspection or repair:
 
 ```powershell
 npm run android:check
@@ -42,13 +42,14 @@ This keeps the SDK 58 template's external Kotlin plugin and compatible Android D
 
 Before writing, the helper saves all affected originals under `.expo/android-build-backups/repair-…/android/…`. That directory is Git-ignored. It preserves line endings, unrelated Gradle settings, native code, keystores and signing configuration. If an old wrapper has checksum verification, upgrading it to 9.4.1 also installs the [published Gradle 9.4.1-bin checksum](https://services.gradle.org/distributions/gradle-9.4.1-bin.zip.sha256). Repeating the repair makes no further changes or backups. Missing native files or an unsupported template/checksum combination fail before edits.
 
-Direct `npx expo run:android` calls bypass npm lifecycle hooks; run `android:repair` first when using that command with an existing native folder. The repair does not regenerate the whole native project. Broader SDK/template changes require a separate native prebuild after backing up native-only customizations.
+The automatic hook is limited to the explicit `run:android` command and prepares a complete existing project once per CLI process. Normal config reads, Metro startup, exports, prebuild, iOS commands and EAS archive config evaluation remain read-only. Missing/incomplete native projects are left for Expo's native-project handling. The repair does not regenerate the whole native project. Broader SDK/template changes require a separate native prebuild after backing up native-only customizations.
 
 ## Verification
 
 - A fresh isolated `expo prebuild --platform android --no-install` succeeds and generates the three expected settings without a new config plugin or dependency upgrade.
 - Removing the Kotlin/DSL flags and restoring the old wrapper in that generated project reproduces the stale configuration. The helper restores it; exactly the two property files change across **50 generated native files**, and the next check reports no changes.
-- **49 tests across three configuration suites pass**, including actual Node/Expo-template reads, Windows CRLF, paths with spaces, dry-run behavior, backups, duplicate settings, wrapper checksums, idempotence, incomplete projects, unchanged native signing files and existing release/access configuration.
+- **56 tests across three configuration suites pass**, including actual Node/Expo-template reads, direct `run:android` config evaluation, repeated config reads, EAS-style archives without tools, Windows CRLF, paths with spaces, dry-run behavior, backups, duplicate settings, wrapper checksums, idempotence, incomplete projects, unchanged native signing files and existing release/access configuration.
+- The real Expo Android CLI entry was also exercised through its Gradle invocation boundary against the isolated stale native project. The repair completed before that boundary. Device discovery, eager bundling and Gradle execution were replaced for this check; it is not an APK compilation pass.
 - Strict application/test TypeScript passes. Application/gameplay sources, dependency versions and the lockfile are unchanged.
 
 A complete APK build remains **unverified on this cloud host**. No Android SDK is installed, and the Gradle configuration attempt stopped while downloading the wrapper with `UnknownHostException: services.gradle.org`. The user's Windows build must complete with the commands above; no successful native compilation, installation or signing is claimed from the prebuild/configuration checks.

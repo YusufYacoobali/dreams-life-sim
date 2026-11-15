@@ -17,7 +17,7 @@ npm start
 
 Use Node 24.3 or newer in the Node 24 line and an Expo SDK 58-compatible Expo Go client or development build. Dependencies target Expo 58.0.25, React Native 0.88.1 and React 19.3.0. After installing dependencies, start with `npx expo start -c`; rebuild an existing native development client for SDK 58. Android emulator commands require a configured Android SDK; iOS simulators require macOS. Android/iOS Hermes exports are verified; prior scoped Android Expo Go interactions and the [release-readiness audit](docs/RELEASE_READINESS_AUDIT.md) describe the earlier SDK and do not establish installed SDK 58 acceptance.
 
-For local Android releases, use `npm run android:release`. It repairs stale generated Gradle/Kotlin settings before building. See [local Android build commands and troubleshooting](docs/ANDROID_LOCAL_BUILDS.md).
+For local Android releases, use `npx expo run:android --variant release` or `npm run android:release`. Both repair stale generated Gradle/Kotlin settings automatically before Gradle runs. See [local Android build commands and troubleshooting](docs/ANDROID_LOCAL_BUILDS.md).
 
 Google Play/TestFlight production builds use EAS remote build-number auto-increment. See [store version setup and production build commands](docs/EAS_RELEASES.md), including the one-time counter setup for an existing store app.
 

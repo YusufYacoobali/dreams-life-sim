@@ -3,6 +3,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const { createRequire } = require('node:module');
+const { execFileSync } = require('node:child_process');
 
 const wrapperPath = 'android/gradle/wrapper/gradle-wrapper.properties';
 const propertiesPath = 'android/gradle.properties';
@@ -76,6 +77,27 @@ async function repairAndroid(projectRoot, write = false) {
   return { generated: true, changes: changes.map(change => change.relative), backup };
 }
 
+const preparedProjects = new Set();
+function prepareAndroidRun(projectRoot) {
+  const root = path.resolve(projectRoot);
+  // Expo handles absent/incomplete native projects itself. The synchronous
+  // app-config API must wait for repairs of an existing project, so run the
+  // asynchronous template reader in a child Node process, without a shell.
+  if (preparedProjects.has(root) || ![wrapperPath, propertiesPath].every(file => fs.existsSync(path.join(root, file)))) return;
+  const worker = 'require(process.argv[1]).repairAndroid(process.argv[2],true).then(r=>process.stdout.write(JSON.stringify(r))).catch(e=>{console.error(e.message);process.exitCode=1})';
+  let result;
+  try {
+    result = JSON.parse(execFileSync(process.execPath, ['-e', worker, __filename, root], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] }));
+  } catch (error) {
+    throw Error('Android build preparation failed: ' + (error.stderr?.toString().trim() || error.message));
+  }
+  preparedProjects.add(root);
+  if (result.changes.length) {
+    console.log('Repaired Android Gradle/Kotlin settings before run:android.');
+    console.log('Original files backed up to ' + result.backup);
+  }
+}
+
 if (require.main === module) {
   const args = process.argv.slice(2);
   if (args.length !== 1 || !['--write', '--check'].includes(args[0])) {
@@ -95,4 +117,4 @@ if (require.main === module) {
     }
   }).catch(error => { console.error('Android toolchain repair: ' + error.message); process.exitCode = 1; });
 }
-module.exports = { repairAndroid, templateSettings };
+module.exports = { repairAndroid, templateSettings, prepareAndroidRun };
