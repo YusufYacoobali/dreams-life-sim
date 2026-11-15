@@ -12,7 +12,9 @@ import { purchases } from '../../src/purchases/native';
 import { noOwnership, productIds } from '../../src/purchases/catalog';
 let previousOS: typeof Platform.OS, previousEnvironment: typeof Constants.executionEnvironment;
 let previousApple: string | undefined, previousGoogle: string | undefined;
+let previousExtra: NonNullable<typeof Constants.expoConfig>['extra'];
 beforeEach(() => {
+  previousExtra = Constants.expoConfig!.extra; Constants.expoConfig!.extra = {};
   previousOS = Platform.OS; previousEnvironment = Constants.executionEnvironment;
   previousApple = process.env.EXPO_PUBLIC_REVENUECAT_IOS_API_KEY; previousGoogle = process.env.EXPO_PUBLIC_REVENUECAT_ANDROID_API_KEY;
   delete process.env.EXPO_PUBLIC_REVENUECAT_IOS_API_KEY; delete process.env.EXPO_PUBLIC_REVENUECAT_ANDROID_API_KEY;
@@ -20,9 +22,24 @@ beforeEach(() => {
   Object.assign(Constants, { executionEnvironment: 'bare' });
 });
 afterEach(() => {
+  Constants.expoConfig!.extra = previousExtra;
   purchases.getState().dispose(); Object.defineProperty(Platform, 'OS', { value: previousOS, configurable: true }); Object.assign(Constants, { executionEnvironment: previousEnvironment });
   if (previousApple === undefined) delete process.env.EXPO_PUBLIC_REVENUECAT_IOS_API_KEY; else process.env.EXPO_PUBLIC_REVENUECAT_IOS_API_KEY = previousApple;
   if (previousGoogle === undefined) delete process.env.EXPO_PUBLIC_REVENUECAT_ANDROID_API_KEY; else process.env.EXPO_PUBLIC_REVENUECAT_ANDROID_API_KEY = previousGoogle;
+});
+test.each(['ios', 'android'] as const)('%s uses the bundled app.json public key when no environment override is set', async platform => {
+  Object.defineProperty(Platform, 'OS', { value: platform, configurable: true });
+  const { extra } = require('../../app.json').expo;
+  Constants.expoConfig!.extra = extra;
+  await purchases.getState().initialize();
+  expect(mockSDK.configure).toHaveBeenCalledWith({ apiKey: platform === 'ios' ? extra.revenueCat.iosApiKey : extra.revenueCat.androidApiKey, entitlementVerificationMode: 'INFORMATIONAL' });
+});
+test.each(['appl_wrong_platform', 'sk_secret_key'] as const)('Android rejects an invalid platform or secret key override: %s', async key => {
+  Object.defineProperty(Platform, 'OS', { value: 'android', configurable: true });
+  Constants.expoConfig!.extra = require('../../app.json').expo.extra;
+  process.env.EXPO_PUBLIC_REVENUECAT_ANDROID_API_KEY = key;
+  await purchases.getState().initialize();
+  expect(purchases.getState().status).toBe('unavailable'); expect(mockSDK.configure).not.toHaveBeenCalled();
 });
 test.each(['ios', 'android'] as const)('%s configures the correct public key and trusted verification, fetches only permanent products, and registers listener', async platform => {
   Object.defineProperty(Platform, 'OS', { value: platform, configurable: true });

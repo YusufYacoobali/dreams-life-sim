@@ -5,9 +5,12 @@ import { createPurchaseService, type PurchaseAdapter } from './service';
 import { productIds } from './catalog';
 
 async function nativeAdapter(): Promise<PurchaseAdapter | null> {
-  const key = Platform.OS === 'ios' ? process.env.EXPO_PUBLIC_REVENUECAT_IOS_API_KEY : Platform.OS === 'android' ? process.env.EXPO_PUBLIC_REVENUECAT_ANDROID_API_KEY : undefined;
+  const defaults = Constants.expoConfig?.extra?.revenueCat;
+  const key = Platform.OS === 'ios' ? process.env.EXPO_PUBLIC_REVENUECAT_IOS_API_KEY || defaults?.iosApiKey
+    : Platform.OS === 'android' ? process.env.EXPO_PUBLIC_REVENUECAT_ANDROID_API_KEY || defaults?.androidApiKey : undefined;
+  const prefix = Platform.OS === 'ios' ? 'appl_' : 'goog_';
   // Expo Go has no real billing module. Public API keys are intentionally bundled.
-  if (!key || key.includes('REPLACE_') || Constants.executionEnvironment === 'storeClient' || !['ios', 'android'].includes(Platform.OS)) return null;
+  if (typeof key !== 'string' || !key.startsWith(prefix) || Constants.executionEnvironment === 'storeClient' || !['ios', 'android'].includes(Platform.OS)) return null;
   const { default: Purchases, PRODUCT_CATEGORY } = require('react-native-purchases') as typeof import('react-native-purchases');
   return {
     configure: async () => {

@@ -234,11 +234,9 @@ test('leaving the discovery route during payment cancels navigation even if the 
   expect(await repository.export(mockStore.getState().world!.id)).toBe(before);
 });
 
-test('testing access opens all four careers without marking ownership and switching it off restores their locks', async () => {
+test('legacy testing access leaves all four career locks visible and does not grant ownership', async () => {
   await setup(); Constants.expoConfig!.extra = { unlockAllTesting: true, unlockAllTestingBuild: 'internal' };
-  const view = await render(frame(<SpecialCareers />));
-  for (const { title, route } of cases) { expect(row(title)).not.toHaveAccessibleName(/\bLocked\b/); await fireEvent.press(row(title)); expect(router.push).toHaveBeenLastCalledWith(route); }
-  expect(purchases.getState().ownership).toEqual(noOwnership()); expect(buy).not.toHaveBeenCalled();
-  Constants.expoConfig!.extra = {}; await view.rerender(frame(<SpecialCareers />));
+  await render(frame(<SpecialCareers />));
   for (const { title } of cases) expect(row(title)).toHaveAccessibleName(/\bLocked\b/);
+  expect(purchases.getState().ownership).toEqual(noOwnership()); expect(buy).not.toHaveBeenCalled();
 });

@@ -19,7 +19,7 @@ import { decodeWorld } from '../../src/game/model';
 import { endEmployment } from '../../src/game/systems/work';
 import { careerPayQuote } from '../../src/game/systems/careers';
 import { useCareerReview } from '../../src/ui/CareerReview';
-import { setPurchaseAnalytics, type PurchaseEvent } from '../../src/purchases/analytics';
+import { setPurchaseAnalytics } from '../../src/purchases/analytics';
 import { router, Redirect } from 'expo-router';
 import TimeMachine from '../../app/time-machine';
 import { useCultDialog } from '../../src/ui/CultDialog';
@@ -158,110 +158,55 @@ test('a direct public playground link remains internal even after Full Unlock an
   } finally { globalDev.__DEV__ = previous; Constants.expoConfig!.extra = previousExtra; }
 });
 
-describe('testing access in the purchase UI', () => {
-  const globals = globalThis as unknown as { __DEV__: boolean };
-  let previousDev: boolean, previousExtra: NonNullable<typeof Constants.expoConfig>['extra'];
-  beforeEach(() => { previousDev = __DEV__; previousExtra = Constants.expoConfig!.extra; globals.__DEV__ = false; });
-  afterEach(() => { globals.__DEV__ = previousDev; Constants.expoConfig!.extra = previousExtra; });
-  const build = (mode: 'enabled' | 'disabled' | 'production') => {
-    const previous = { ...process.env };
-    try {
-      Object.assign(process.env, { EAS_BUILD_PROFILE: mode === 'production' ? 'production' : 'internal',
-        EAS_BUILD_DISTRIBUTION: mode === 'production' ? 'store' : 'internal',
-        DREAMS_UNLOCK_ALL_TESTING: mode === 'disabled' ? '0' : '1', DREAMS_GOD_MODE_TESTING: '0' });
-      Constants.expoConfig!.extra = require('../../app.config.cjs')({ config: {} }).extra;
-    } finally { process.env = previous; }
-  };
+describe('legacy testing flags cannot unlock purchase UI', () => {
+  let previousExtra: NonNullable<typeof Constants.expoConfig>['extra'];
+  beforeEach(() => {
+    previousExtra = Constants.expoConfig!.extra;
+    Constants.expoConfig!.extra = { unlockAllTesting: true, unlockAllTestingBuild: 'internal', godModeTesting: true };
+  });
+  afterEach(() => { Constants.expoConfig!.extra = previousExtra; });
   function FeatureIntent({ feature, onContinue }: { feature: PremiumFeature; onContinue: () => void }) {
     const allowed = useEntitlement(feature), premium = usePremiumAction('testing:' + feature);
     return <Page><DisplayText>{allowed ? 'Feature accessible' : 'Feature locked'}</DisplayText><Button label="Try Feature" onPress={() => premium.run(feature, 'testing', onContinue)} />{premium.modal}</Page>;
   }
-  test.each((['enabled', 'disabled', 'production'] as const).flatMap(mode => features.map(feature => ({ mode, feature }))))(
-    '$feature hook and paywall with override $mode do not change purchase ownership', async ({ mode, feature }) => {
-      build(mode);
-      const resumed = jest.fn(), ownership = purchases.getState().ownership, events: PurchaseEvent[] = [];
-      setPurchaseAnalytics(event => events.push(event));
-      if (mode === 'enabled') mockAdapter = null;
-      await render(frame(<FeatureIntent feature={feature} onContinue={resumed} />));
-      expect(screen.getByText(mode === 'enabled' ? 'Feature accessible' : 'Feature locked')).toBeOnTheScreen();
-      await press('Try Feature');
-      if (mode === 'enabled') {
-        expect(resumed).toHaveBeenCalledTimes(1);
-        expect(screen.queryByRole('button', { name: 'Maybe Later' })).toBeNull();
-        expect(events).toEqual([]);
-        expect(purchases.getState().status).toBe('idle');
-      } else {
-        await waitFor(() => expect(screen.getByRole('button', { name: 'Buy ' + products[featureProduct(feature)].title })).toBeEnabled());
-        expect(resumed).not.toHaveBeenCalled();
-        expect(events.map(event => event.name)).toContain('paywall_viewed');
-      }
-      if (mode === 'enabled') expect(purchases.getState().ownership).toBe(ownership);
-      expect(purchases.getState().ownership).toEqual(noOwnership());
-      expect(buy).not.toHaveBeenCalled(); expect(restore).not.toHaveBeenCalled();
-    },
-  );
-
-  test('turning off the flag locks the same mounted feature and shows its normal paywall', async () => {
-    build('enabled'); const resumed = jest.fn(), view = await render(frame(<FeatureIntent feature="athlete" onContinue={resumed} />));
-    await press('Try Feature'); expect(resumed).toHaveBeenCalledTimes(1);
-    build('disabled'); await view.rerender(frame(<FeatureIntent feature="athlete" onContinue={resumed} />));
+  test.each(features)('%s remains locked and offers its purchase without modifying ownership', async feature => {
+    const resumed = jest.fn();
+    await render(frame(<FeatureIntent feature={feature} onContinue={resumed} />));
     expect(screen.getByText('Feature locked')).toBeOnTheScreen();
-    await press('Try Feature'); await waitFor(() => expect(screen.getByRole('button', { name: 'Buy Athlete Career' })).toBeEnabled());
-    expect(resumed).toHaveBeenCalledTimes(1); expect(purchases.getState().ownership).toEqual(noOwnership());
+    await press('Try Feature');
+    await waitFor(() => expect(screen.getByRole('button', { name: 'Buy ' + products[featureProduct(feature)].title })).toBeEnabled());
+    expect(resumed).not.toHaveBeenCalled(); expect(purchases.getState().ownership).toEqual(noOwnership());
+    expect(buy).not.toHaveBeenCalled(); expect(restore).not.toHaveBeenCalled();
   });
-
-  test('a waiting paywall resumes once when testing becomes available without granting ownership', async () => {
-    build('disabled'); const resumed = jest.fn(), view = await render(frame(<FeatureIntent feature="athlete" onContinue={resumed} />));
-    await press('Try Feature'); await waitFor(() => expect(screen.getByRole('button', { name: 'Buy Athlete Career' })).toBeEnabled());
-    build('enabled'); await view.rerender(frame(<FeatureIntent feature="athlete" onContinue={resumed} />)); await finishClosingPaywalls();
-    await waitFor(() => expect(resumed).toHaveBeenCalledTimes(1));
-    expect(screen.queryByRole('button', { name: 'Maybe Later' })).toBeNull();
-    expect(purchases.getState().ownership).toEqual(noOwnership()); expect(buy).not.toHaveBeenCalled();
+  test('Settings no longer announces free premium access', async () => {
+    await render(frame(<Settings />));
+    expect(screen.queryByText('TEST MODE — ALL UNLOCKED')).toBeNull();
   });
-
-  test('Settings shows the exact indicator only while testing access is active', async () => {
-    build('enabled'); const view = await render(frame(<Settings />));
-    expect(screen.getByText('TEST MODE — ALL UNLOCKED')).toBeOnTheScreen();
-    build('disabled'); await view.rerender(frame(<Settings />)); expect(screen.queryByText('TEST MODE — ALL UNLOCKED')).toBeNull();
-    build('production'); await view.rerender(frame(<Settings />)); expect(screen.queryByText('TEST MODE — ALL UNLOCKED')).toBeNull();
-  });
-
-  test('the God Mode editor opens without the hidden reveal, settings toggle, store connection or purchase', async () => {
-    build('enabled'); mockAdapter = null; godModeSessionStore.getState().reset();
-    preferencesStore.setState({ ready: false, settings: { ...preferencesStore.getState().settings, godModeEnabled: false } });
+  test('a revealed, enabled internal God Mode toggle still requires a purchase', async () => {
+    mockAdapter = null; godModeSessionStore.getState().reveal();
+    preferencesStore.setState({ ready: true, settings: { ...preferencesStore.getState().settings, godModeEnabled: true } });
     await render(frame(<GodModeEditor />));
-    expect(screen.getByRole('button', { name: 'Save Changes' })).toBeOnTheScreen();
-    expect(screen.queryByRole('button', { name: 'Buy God Mode' })).toBeNull();
-    expect(godModeSessionStore.getState().revealed).toBe(false);
-    expect(preferencesStore.getState().settings.godModeEnabled).toBe(false);
+    await waitFor(() => expect(screen.getByRole('button', { name: 'Buy God Mode' })).toBeDisabled());
+    expect(screen.queryByRole('button', { name: 'Save Changes' })).toBeNull();
     expect(purchases.getState().ownership).toEqual(noOwnership());
   });
-
-  test('Royal Family selection bypasses its paywall and is locked again when testing is disabled', async () => {
-    build('enabled');
+  test('Royal Family selection shows its paywall and preserves the ordinary birth draft', async () => {
     useCreationDraft.setState({ draft: null });
-    const view = await render(frame(<NewLife />));
+    await render(frame(<NewLife />));
     await act(async () => { useCreationDraft.getState().edit({ country: 'GB', city: 'London', background: 'ordinary' }); });
     await act(async () => { await fireEvent.press(screen.getByRole('button', { name: /^More Options/ })); });
-    const chooseRoyal = async () => { await act(async () => { await fireEvent.press(screen.getByRole('radio', { name: /^Royal Family/ })); }); };
-    await chooseRoyal(); expect(useCreationDraft.getState().draft!.input.background).toBe('royal');
-    expect(screen.queryByRole('button', { name: 'Buy God Mode' })).toBeNull();
-    build('disabled');
-    await act(async () => { useCreationDraft.getState().edit({ background: 'ordinary' }); });
-    await view.rerender(frame(<NewLife />)); await chooseRoyal();
+    await act(async () => { await fireEvent.press(screen.getByRole('radio', { name: /^Royal Family/ })); });
     await waitFor(() => expect(screen.getByRole('button', { name: 'Buy God Mode' })).toBeEnabled());
     expect(useCreationDraft.getState().draft!.input.background).toBe('ordinary');
     expect(purchases.getState().ownership).toEqual(noOwnership());
   });
-
-  test('checkpoint selection opens its original restore confirmation without a paywall', async () => {
-    build('enabled'); mockAdapter = null;
+  test('checkpoint restoration requires Time Machine ownership', async () => {
     const world = mockStore.getState().world!;
     mockStore.setState({ snapshots: [{ id: 'test-point', personId: world.activePersonId, name: 'Testing Life', age: 25, date: world.date, label: 'Saved moment', size: 200, revision: world.revision, createdAt: '2026-11-12T12:00:00Z' }] });
     await render(frame(<TimeMachine />));
     await act(async () => { await fireEvent.press(screen.getByRole('button', { name: /Testing Life.*Age 25/ })); });
-    expect(screen.getByRole('button', { name: 'Restore as New Branch' })).toBeOnTheScreen();
-    expect(screen.queryByRole('button', { name: 'Buy Unlimited Time Machine' })).toBeNull();
+    await waitFor(() => expect(screen.getByRole('button', { name: 'Buy Unlimited Time Machine' })).toBeEnabled());
+    expect(screen.queryByRole('button', { name: 'Restore as New Branch' })).toBeNull();
     expect(purchases.getState().ownership).toEqual(noOwnership());
   });
 });

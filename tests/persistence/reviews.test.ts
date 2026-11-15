@@ -20,7 +20,7 @@ async function context() {
     const session:SqlSession={run:async(sql,values=[])=>{db.prepare(sql).run(...values);},get:async<T,>(sql:string,values:(string|number|null)[]=[])=>db.prepare(sql).get(...values) as T??null,all:async<T,>(sql:string,values:(string|number|null)[]=[])=>db.prepare(sql).all(...values) as T[]};
     return {...session,exec:async sql=>{db.exec(sql);},transaction:async action=>{db.exec('BEGIN IMMEDIATE');try{const result=await action(session);db.exec('COMMIT');return result;}catch(error){db.exec('ROLLBACK');throw error;}}};
   };
-  const bootstrap=async()=>{repository=new SaveRepository(connect());await repository.initialise();store=createGameStore({repository:async()=>repository,date:()=>date,id:()=> 'life_review_'+sequence++,godModeAccess:()=>true,reviewDelay:()=>17});expect(await store.getState().bootstrap()).toBe(true);};
+  const bootstrap=async()=>{repository=new SaveRepository(connect());await repository.initialise();store=createGameStore({repository:async()=>repository,date:()=>date,id:()=> 'life_review_'+sequence++,premiumAccess:()=>true,reviewDelay:()=>17});expect(await store.getState().bootstrap()).toBe(true);};
   await bootstrap();
   return {get sqlite(){return sqlite;},get repository(){return repository;},get store(){return store;},cold:async()=>{sqlite.close();await bootstrap();},close:()=>{sqlite.close();rmSync(directory,{recursive:true,force:true});}};
 }

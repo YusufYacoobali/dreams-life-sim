@@ -203,19 +203,17 @@ test('Android cancels queued dismissal work after unmount, including a retained 
   expect(onContinue).not.toHaveBeenCalled(); expect(explore).not.toHaveBeenCalled();
 });
 
-test('disabling testing access while its paywall dismisses immediately restores normal restrictions', async () => {
-  const { view, onContinue, dismissed } = await open();
+test('legacy testing metadata cannot dismiss a waiting paywall or resume its action', async () => {
+  const { view, onContinue } = await open();
   Constants.expoConfig!.extra = { unlockAllTesting: true, unlockAllTestingBuild: 'internal' };
-  await view.rerender(frame(<Intent onContinue={onContinue} />)); expect(modal().props.visible).toBe(false);
-  Constants.expoConfig!.extra = {};
-  await view.rerender(frame(<Intent onContinue={onContinue} />)); await dismissNative(dismissed);
+  await view.rerender(frame(<Intent onContinue={onContinue} />));
+  expect(modal().props.visible).toBe(true);
   expect(onContinue).not.toHaveBeenCalled(); expect(purchases.getState().ownership).toEqual(noOwnership());
-  await press('Premium action'); await waitFor(() => expect(screen.getByRole('button', { name: 'Buy Athlete Career' })).toBeEnabled());
+  expect(screen.getByRole('button', { name: 'Buy Athlete Career' })).toBeEnabled();
 });
 
-test.each(['free', 'owned', 'testing'] as const)('%s entry preserves direct behavior without presenting a paywall', async kind => {
+test.each(['free', 'owned'] as const)('%s entry preserves direct behavior without presenting a paywall', async kind => {
   if (kind === 'owned') { await purchases.getState().initialize(); await publish('athlete'); }
-  if (kind === 'testing') Constants.expoConfig!.extra = { unlockAllTesting: true, unlockAllTestingBuild: 'internal' };
   const onContinue = jest.fn(); await render(frame(<Intent feature={kind === 'free' ? null : 'athlete'} onContinue={onContinue} />));
   const before = configure.mock.calls.length; await press('Premium action');
   expect(onContinue).toHaveBeenCalledTimes(1); expect(configure).toHaveBeenCalledTimes(before); expect(buy).not.toHaveBeenCalled();

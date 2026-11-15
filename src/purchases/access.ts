@@ -1,14 +1,13 @@
 import type { GameCommand } from '../game/engine';
 import type { World } from '../game/model';
 import type { PremiumFeature } from './catalog';
-import { isUnlockAllTestingEnabled } from '../access/buildAccess';
 import { activeCult } from '../game/systems/cultSchemas';
 
 export type PremiumCareerFeature = Exclude<PremiumFeature, 'god_mode' | 'time_machine'>;
 
-/** Testing access is evaluated on demand and never becomes purchase ownership. */
+/** Paid access comes only from the purchase service's verified ownership. */
 export function hasPremiumAccess(owned: boolean): boolean {
-  return isUnlockAllTestingEnabled() || owned;
+  return owned === true;
 }
 
 /** Discovery respects existing careers without granting ownership or new entry. */

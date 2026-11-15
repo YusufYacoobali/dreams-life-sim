@@ -10,6 +10,8 @@ import { encodeWorld, fullName } from '../../src/game/model';
 import { formatMoney } from '../../src/game/money';
 import { countries } from '../../src/game/countries';
 import Constants from 'expo-constants';
+import { purchases } from '../../src/purchases/native';
+import { features, type PremiumFeature } from '../../src/purchases/catalog';
 import { isGodModeBuild } from '../../src/access/buildAccess';
 import { godModeSessionStore } from '../../src/state/godModeSession';
 import { SaveRepository } from '../../src/persistence/repository';
@@ -33,7 +35,7 @@ const frame = (child: React.ReactNode) => <SafeAreaProvider initialMetrics={{ fr
 const press = async (name: string | RegExp) => { await act(async () => { await fireEvent.press(screen.getByRole('button', { name })); }); };
 const tab = async (name: string) => await fireEvent.press(screen.getByRole('tab', { name }));
 const revealInSettings = async () => { await press('App Preferences'); await press('App Preferences'); await press('App Preferences'); };
-async function fixture(profile: 'internal' | 'production' = 'internal', capability?: boolean, revealed = false) {
+async function fixture(profile: 'internal' | 'production' = 'internal', capability?: boolean, revealed = false, owned = false) {
   const previousBuildEnv = { ...process.env };
   try {
     process.env.EAS_BUILD_PROFILE = profile;
@@ -47,10 +49,8 @@ async function fixture(profile: 'internal' | 'production' = 'internal', capabili
   const before = { ...createLife('life_god_ui', 42, randomCreation(42), { year: 2026, month: 10, day: 22 }), birthAcknowledged: true }; await repository.create(before);
   mockPreferences = createPreferencesStore({ repository: async () => repository }); await mockPreferences.getState().bootstrap();
   let sequence = 0;
-  const deps = { repository: async () => repository, date: () => before.date, id: () => 'life_ui_' + sequence++, godModeAccess: () => {
-    const preferences = mockPreferences.getState();
-    return isGodModeBuild() && godModeSessionStore.getState().revealed && preferences.ready && !preferences.loadFailed && preferences.settings.godModeEnabled;
-  } };
+  purchases.setState({ ownership: Object.fromEntries(features.map(feature => [feature, owned && feature === 'god_mode'])) as Record<PremiumFeature, boolean> });
+  const deps = { repository: async () => repository, date: () => before.date, id: () => 'life_ui_' + sequence++, premiumAccess: (feature: PremiumFeature) => purchases.getState().ownership[feature] };
   mockStore = createGameStore(deps); await mockStore.getState().bootstrap();
   return { ...db, repository, before, deps };
 }
@@ -60,8 +60,8 @@ let previousDev: boolean, previousExtra: NonNullable<typeof Constants.expoConfig
 beforeEach(() => { previousDev = __DEV__; previousExtra = Constants.expoConfig!.extra; buildGlobals.__DEV__ = false; godModeSessionStore.getState().reset(); });
 afterEach(() => { buildGlobals.__DEV__ = previousDev; Constants.expoConfig!.extra = previousExtra; godModeSessionStore.getState().reset(); jest.restoreAllMocks(); });
 
-test.each(['internal'] as const)('%s release Settings enable opens the editor; bulk edits update Assets immediately and survive cold store load', async profile => {
-  const { sqlite, repository, before, deps } = await fixture(profile), view = await render(frame(<Settings />));
+test.each(['internal'] as const)('%s release keeps triple-tap activation for a paid editor; bulk edits update Assets immediately and survive cold store load', async profile => {
+  const { sqlite, repository, before, deps } = await fixture(profile, undefined, false, true), view = await render(frame(<Settings />));
   expect(isGodModeBuild()).toBe(true);
   expect(mockPreferences.getState().settings.godModeEnabled).toBe(false);
   expect(screen.queryByRole('switch', { name: 'God Mode' })).toBeNull();
@@ -92,7 +92,7 @@ test.each(['internal'] as const)('%s release Settings enable opens the editor; b
 });
 
 test('invalid edits, reset, destructive confirmation, cancel and failed-save retry keep real storage coherent', async () => {
-  const { sqlite, repository, before } = await fixture('internal', undefined, true); await mockPreferences.getState().setGodModeEnabled(true); const view = await render(frame(<GodMode />)), encoded = encodeWorld(before);
+  const { sqlite, repository, before } = await fixture('internal', undefined, true, true); await mockPreferences.getState().setGodModeEnabled(true); const view = await render(frame(<GodMode />)), encoded = encodeWorld(before);
   await tab('Stats'); await fireEvent.changeText(screen.getByLabelText('Health value'), '101'); await press('Save Changes'); expect(screen.getAllByRole('alert').some(item => /0 to 100/.test(String(item.props.children)))).toBe(true); expect(encodeWorld(await repository.load(before.id))).toBe(encoded);
   await press('Reset Changes'); expect(screen.getByLabelText('Health value').props.value).toBe(String(before.people[before.activePersonId].stats.health));
   await press('Min All Stats'); await press('Cancel'); expect(screen.getByRole('header', { name: 'Discard unsaved changes?' })).toBeTruthy(); await press('Never mind'); expect(encodeWorld(await repository.load(before.id))).toBe(encoded);
@@ -114,12 +114,12 @@ test('an explicitly absent testing capability denies direct editor saves even wi
   await view.unmount(); sqlite.close();
 });
 
-test('stale drafts require reload and disabling internal God Mode prevents further edits while keeping saved values', async () => {
-  const { sqlite, repository, before } = await fixture('internal', undefined, true); await mockPreferences.getState().setGodModeEnabled(true); const view = await render(frame(<GodMode />));
+test('stale drafts require reload and losing God Mode ownership prevents further edits while keeping saved values', async () => {
+  const { sqlite, repository, before } = await fixture('internal', undefined, true, true); await mockPreferences.getState().setGodModeEnabled(true); const view = await render(frame(<GodMode />));
   await tab('Stats'); await fireEvent.changeText(screen.getByLabelText('Smarts value'), '99');
   await act(async () => { await mockStore.getState().editGodMode({ lifeId: before.id, personId: before.activePersonId, expectedRevision: before.revision, commands: [{ type: 'stat', stat: 'smarts', value: 47 }] }); });
   expect(screen.getByRole('button', { name: 'Save Changes' })).toBeDisabled(); await press('Reload Values'); expect(screen.getByLabelText('Smarts value').props.value).toBe('47');
-  await act(async () => { await mockPreferences.getState().setGodModeEnabled(false); }); expect(screen.getByRole('button', { name: 'Buy God Mode' })).toBeDisabled(); expect(screen.queryByRole('button', { name: 'Save Changes' })).toBeNull();
+  await act(async () => { purchases.setState({ ownership: { ...purchases.getState().ownership, god_mode: false } }); }); expect(screen.getByRole('button', { name: 'Buy God Mode' })).toBeDisabled(); expect(screen.queryByRole('button', { name: 'Save Changes' })).toBeNull();
   const disabled = mockStore.getState().world!;
   await act(async () => { expect(await mockStore.getState().editGodMode({ lifeId: disabled.id, personId: disabled.activePersonId, expectedRevision: disabled.revision, commands: [{ type: 'stat', stat: 'smarts', value: 100 }] })).toBe(false); });
   expect(await repository.load(before.id)).toEqual(disabled);
@@ -128,7 +128,7 @@ test('stale drafts require reload and disabling internal God Mode prevents furth
 });
 
 test('a save conflict from another session offers a real repository reload before retry', async () => {
-  const { sqlite, before, deps, repository } = await fixture('internal', undefined, true); await mockPreferences.getState().setGodModeEnabled(true); const view = await render(frame(<GodMode />));
+  const { sqlite, before, deps, repository } = await fixture('internal', undefined, true, true); await mockPreferences.getState().setGodModeEnabled(true); const view = await render(frame(<GodMode />));
   await tab('Stats'); await fireEvent.changeText(screen.getByLabelText('Smarts value'), '99');
   const other = createGameStore(deps); await other.getState().bootstrap();
   expect(await other.getState().editGodMode({ lifeId: before.id, personId: before.activePersonId, expectedRevision: before.revision, commands: [{ type: 'stat', stat: 'smarts', value: 47 }] })).toBe(true);
@@ -180,7 +180,8 @@ test('an enabled saved toggle stays hidden in a fresh session and the editor off
   expect(screen.getByRole('switch', { name: 'God Mode' })).toBeChecked();
   expect(screen.getByRole('button', { name: 'Open God Mode Editor' })).toBeEnabled();
   await view.rerender(frame(<GodMode />));
-  expect(screen.getByRole('button', { name: 'Save Changes' })).toBeOnTheScreen();
+  expect(screen.queryByRole('button', { name: 'Save Changes' })).toBeNull();
+  expect(screen.getByRole('button', { name: 'Buy God Mode' })).toBeDisabled();
   await view.rerender(frame(<MiniGamePlayground />));
   expect(screen.getByRole('header', { name: 'Mini-Game Playground' })).toBeOnTheScreen();
   await act(async () => {

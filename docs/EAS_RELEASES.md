@@ -13,7 +13,7 @@ Google Play requires a new **Android version code** for every uploaded binary. A
 }
 ```
 
-EAS manages Android `versionCode` and iOS `buildNumber` for production builds. The checked-in `app.json` values are local defaults; the remotely managed values are injected into EAS builds. Internal/preview/performance profiles do not auto-increment; their distribution and feature gates are unchanged. The existing EAS project, package/bundle identifiers and signing configuration are retained.
+EAS manages Android `versionCode` and iOS `buildNumber` for production builds. The checked-in `app.json` values are local defaults; the remotely managed values are injected into EAS builds. Internal/preview/performance profiles do not auto-increment. All profiles require verified ownership for premium features; see [the current purchase policy](MONETISATION.md). The existing EAS project, package/bundle identifiers and signing configuration are retained.
 
 ## Initialize the Android counter once
 

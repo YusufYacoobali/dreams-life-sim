@@ -16,8 +16,7 @@ export function useInternalGodModeAccess() {
 }
 
 export function useGodModeAccess() {
-  const paid = useEntitlement('god_mode'), internal = useInternalGodModeAccess();
-  return paid || internal;
+  return useEntitlement('god_mode');
 }
 
 export function GodModeSettings() {
@@ -25,7 +24,7 @@ export function GodModeSettings() {
   const revealed = useStore(godModeSessionStore, s => s.revealed);
   const change = usePreferences(s => s.setGodModeEnabled), c = useColors();
   if (!isGodModeBuild() || !revealed) return null;
-  return <Card><Heading size={19}>Internal Testing</Heading><Body muted>Testing controls for money, stats, skills and relationships. Switching off keeps saved changes.</Body>
+  return <Card><Heading size={19}>Internal Testing</Heading><Body muted>Practice tools and diagnostics. God Mode editing requires God Mode or Full Unlock ownership.</Body>
     <View style={{ minHeight: 48, justifyContent: 'center', alignSelf: 'flex-start' }}><Switch accessibilityRole="switch" accessibilityLabel="God Mode" accessibilityState={{ checked: enabled, disabled: !ready || busy || failed }} value={enabled} disabled={!ready || busy || failed} onValueChange={value => { void change(value); }} trackColor={{ false: c.track, true: c.actionBlue }} /></View>
     {enabled && ready && !failed && <><Button label="Open God Mode Editor" disabled={busy} onPress={() => router.push('/god-mode')} /><Button label="Mini-Game Playground" tone="secondary" disabled={busy} onPress={() => router.push('/mini-game-playground')} /></>}
     {isCommandProfilingEnabled() && <Button label="Performance Diagnostics" tone="secondary" disabled={busy} onPress={() => router.push('/performance-diagnostics')} />}

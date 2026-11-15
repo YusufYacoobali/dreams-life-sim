@@ -107,7 +107,7 @@ test.each(['career', 'restore', 'royal'] as const)('revocation while waiting for
   expect(repository.commit).not.toHaveBeenCalled(); expect(repository.create).not.toHaveBeenCalled(); expect(repository.restoreBranch).not.toHaveBeenCalled();
 });
 
-describe('all-premium testing override', () => {
+describe('retired all-premium testing override', () => {
   const globals = globalThis as unknown as { __DEV__: boolean };
   let previousDev: boolean, previousExtra: NonNullable<typeof Constants.expoConfig>['extra'];
   beforeEach(() => { previousDev = __DEV__; previousExtra = Constants.expoConfig!.extra; globals.__DEV__ = false; });
@@ -124,8 +124,8 @@ describe('all-premium testing override', () => {
   const cases = (['enabled', 'disabled', 'production'] as const).flatMap(mode => features.map(feature => ({ mode, feature })));
   test.each(cases)('$feature command access with override $mode leaves ownership and save formats intact', async ({ mode, feature }) => {
     build(mode);
-    const ownership = noOwnership(), allowed = mode === 'enabled';
-    expect(hasPremiumAccess(ownership[feature])).toBe(allowed);
+    const ownership = noOwnership();
+    expect(hasPremiumAccess(ownership[feature])).toBe(false);
     const { store, repository, sqlite, world } = await setup(feature === 'cult' ? cultFixture() : base(), key => ownership[key]);
     try {
       let before = await repository.export(world.id);
@@ -133,22 +133,19 @@ describe('all-premium testing override', () => {
       if (feature === 'god_mode') {
         result = await store.getState().editGodMode({ lifeId: world.id, personId: world.activePersonId, expectedRevision: world.revision,
           commands: [{ type: 'stat', stat: 'smarts', value: 47 }] });
-        if (allowed) expect((await repository.load(world.id)).people[world.activePersonId].stats.smarts).toBe(47);
       } else if (feature === 'time_machine') {
         expect(await store.getState().saveSnapshot()).toBe(true);
         before = await repository.export(world.id);
         result = await store.getState().restoreSnapshot(store.getState().snapshots[0].id);
-        if (allowed) expect(await repository.list()).toHaveLength(2);
       } else {
         const command: GameCommand = feature === 'cult' ? { type: 'found-cult', name: 'Testing Circle', leaderTitle: 'Keeper', philosophy: 'dream-archive',
           doctrines: ['borrowed-dreams', 'public-answers'], rules: ['family-day', 'open-books'], headquarters: 'meeting-room', method: 'gathering',
           joiningFee: 0n, recurringFee: 0n, quotedCost: cultStartupQuote(world, 'meeting-room').total } : entry(world, feature);
         result = await store.getState().dispatch(command);
-        if (allowed) expect(store.getState().world!.revision).toBe(world.revision + 1);
       }
-      expect(result).toBe(allowed);
+      expect(result).toBe(false);
       expect(ownership).toEqual(noOwnership());
-      if (!allowed) expect(await repository.export(world.id)).toBe(before);
+      expect(await repository.export(world.id)).toBe(before);
       const saved = store.getState().world!;
       expect(decodeWorld(encodeWorld(saved))).toEqual(saved);
       build('disabled');
@@ -157,13 +154,12 @@ describe('all-premium testing override', () => {
     } finally { sqlite.close(); }
   });
 
-  test('royal selection is allowed by the flag alone and locks immediately when it is removed', async () => {
+  test('royal selection stays locked even with the legacy flag enabled', async () => {
     const { store, repository, sqlite } = await setup();
     try {
       build('enabled');
       const input = { ...randomCreation(42), country: 'GB' as const, city: 'London', background: 'royal' as const };
-      expect(await store.getState().startLife(input, 42)).toBe(true);
-      expect(store.getState().world!.royalHouses).toHaveLength(1);
+      expect(await store.getState().startLife(input, 42)).toBe(false);
       const before = await repository.list();
       build('disabled'); expect(await store.getState().startLife(input, 42)).toBe(false);
       build('production'); expect(await store.getState().startLife(input, 42)).toBe(false);
@@ -171,7 +167,7 @@ describe('all-premium testing override', () => {
     } finally { sqlite.close(); }
   });
 
-  test.each(['career', 'restore', 'royal', 'god-mode'] as const)('switching off testing while waiting for storage blocks %s before a write', async operation => {
+  test.each(['career', 'restore', 'royal', 'god-mode'] as const)('legacy testing metadata cannot authorize %s or write storage', async operation => {
     const world = base(); let held = false, release!: () => void;
     const gate = new Promise<void>(resolve => { release = resolve; });
     const repository = { active: async () => world, list: async () => [], commit: jest.fn(async (next: World) => next), create: jest.fn(), restoreBranch: jest.fn() };

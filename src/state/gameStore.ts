@@ -13,7 +13,7 @@ import { committedCues, seriousTransition } from '../feedback/committedCue';
 import { emitGameplayFeedback, type GameplayFeedback } from '../feedback/gameplayFeedback';
 
 type Persistence = Pick<SaveRepository, 'active' | 'list' | 'create' | 'commit' | 'select' | 'importWithSummary' | 'recoverWithSummary' | 'snapshots' | 'snapshot' | 'restoreBranch'> & Partial<Pick<SaveRepository, 'loadReviewTracker' | 'claimReview' | 'respondToReview'>>;
-type Dependencies = { repository: () => Promise<Persistence>; date: () => GameDate; id: () => string; yieldToUI?: () => Promise<void>; godModeAccess?: () => boolean; premiumAccess?: (feature: PremiumFeature) => boolean; reviewDelay?: () => number; onFeedback?: (event: GameplayFeedback) => void };
+type Dependencies = { repository: () => Promise<Persistence>; date: () => GameDate; id: () => string; yieldToUI?: () => Promise<void>; premiumAccess?: (feature: PremiumFeature) => boolean; reviewDelay?: () => number; onFeedback?: (event: GameplayFeedback) => void };
 export type GameState = {
   world: World | null; lives: LifeSummary[]; ready: boolean; busy: boolean; error: string | null; errorScope: string | null;
   snapshots: SnapshotSummary[];
@@ -101,7 +101,7 @@ export function createGameStore(deps: Dependencies) {
       startLife: (input, seed) => run(async () => {
         const natural = randomCreation(seed);
         const royalChoice = input.background === 'royal' && !(natural.background === 'royal' && input.country === natural.country);
-        const checkRoyalAccess = () => { if (royalChoice && !premiumAccess('god_mode') && !deps.godModeAccess?.()) throw new IneligibleAction('God Mode ownership is required to choose a royal birth.'); };
+        const checkRoyalAccess = () => { if (royalChoice && !premiumAccess('god_mode')) throw new IneligibleAction('God Mode ownership is required to choose a royal birth.'); };
         checkRoyalAccess();
         const world = immutableWorld(createLife(deps.id(), seed, input, deps.date()));
         const repository = await deps.repository();
@@ -150,14 +150,14 @@ export function createGameStore(deps: Dependencies) {
         set({ world: next, lives, snapshots: [] }); restoreAttempt = null;
       }, 'Could not restore this checkpoint. Your current life was kept.'),
       editGodMode: edit => run(async () => {
-        if (!premiumAccess('god_mode') && !deps.godModeAccess?.()) throw new IneligibleAction('God Mode is unavailable or switched off.');
+        if (!premiumAccess('god_mode')) throw new IneligibleAction('God Mode ownership is required to edit this life.');
         const world = get().world;
         if (!world) throw new IneligibleAction('Open a life first');
         const next = applyGodModeEdits(world, edit);
         const signature = JSON.stringify(edit);
         if (godModeAttempt?.before !== world || godModeAttempt.signature !== signature) godModeAttempt = { before: world, signature, commandId: 'god-mode:' + deps.id() };
         const repository = await deps.repository();
-        if (!premiumAccess('god_mode') && !deps.godModeAccess?.()) throw new IneligibleAction('God Mode is unavailable or switched off.');
+        if (!premiumAccess('god_mode')) throw new IneligibleAction('God Mode ownership is required to edit this life.');
         const committed = await repository.commit(next, world.revision, godModeAttempt.commandId, 'Before God Mode');
         set({ world: committed, snapshots: [], lives: get().lives.map(life => life.id === committed.id ? { ...life, revision: committed.revision } : life) });
         godModeAttempt = null;

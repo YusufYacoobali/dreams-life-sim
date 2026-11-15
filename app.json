@@ -67,6 +67,10 @@
     ],
     "scheme": "dreams-life",
     "extra": {
+      "revenueCat": {
+        "iosApiKey": "appl_phHjmmaJgFFqXQyCTtTbxzRTQHE",
+        "androidApiKey": "goog_CfzZIpZzkzbeasHhqgjrdNDIyWq"
+      },
       "profileCommands": false,
       "profileCommandsBuild": {},
       "profileSourceRevision": {},

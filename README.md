@@ -41,7 +41,7 @@ Interactive **Clutch Shot**, **Safe Cracker** and **Orbital Docking** challenges
 
 Public God Mode is a permanent purchase available from Settings or Extras. Development and explicitly configured internal builds retain separate testing controls behind **three quick taps on the App Preferences area in Settings**. The practice playground remains internal. See [God Mode access and save behavior](docs/GOD_MODE.md).
 
-For all six premium features without purchases, set `DREAMS_UNLOCK_ALL_TESTING=1` in your local `.env` file and run `npx expo start -c`, or use the internal/preview EAS profiles. Settings shows **TEST MODE — ALL UNLOCKED**. Production/store builds always disable this access override. See [premium testing setup](docs/MONETISATION.md#premium-testing-override) for shell commands.
+All six premium features require verified purchase ownership in every build. Legacy `DREAMS_UNLOCK_ALL_TESTING` flags are ignored. The three-tap Settings activation still reveals internal controls, and the editor requires God Mode or Full Unlock ownership. Public RevenueCat SDK keys are bundled in `app.json`; optional environment overrides are documented in [the purchase setup](docs/MONETISATION.md).
 
 **Activities → Your Life → End This Life** finishes the current character’s story after confirmation, using the normal death, estate and child-continuation flow. A **Before End This Life** checkpoint is saved atomically so the earlier life can be restored as a separate branch through Time Machine.
 

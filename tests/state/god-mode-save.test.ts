@@ -12,7 +12,7 @@ async function fixture() {
   const before = { ...createLife('life_testing', 42, randomCreation(42), { year: 2026, month: 10, day: 22 }), birthAcknowledged: true }; await repository.create(before);
   let allowed = true;
   let sequence = 0;
-  const deps = { repository: async () => repository, date: () => before.date, id: () => 'life_restored_' + sequence++, godModeAccess: () => allowed };
+  const deps = { repository: async () => repository, date: () => before.date, id: () => 'life_restored_' + sequence++, premiumAccess: () => allowed };
   const store = createGameStore(deps); await store.getState().bootstrap();
   const request = (world: World = store.getState().world!) => ({ lifeId: world.id, personId: world.activePersonId, expectedRevision: world.revision, commands: [
     { type: 'money' as const, accountId: world.accounts.find(item => item.ownerId === world.activePersonId)!.id, operation: 'set' as const, amount: '1000000' },
@@ -58,7 +58,7 @@ test('stale repository revisions and stale editor requests cannot overwrite anot
 test('double submission, missing authorization, and disabled access after yielding are rejected', async () => {
   const { sqlite, repository, before, store, request, deps, disable } = await fixture();
   const first = store.getState().editGodMode(request()); expect(await store.getState().editGodMode(request())).toBe(false); expect(await first).toBe(true);
-  const noAccess = createGameStore({ ...deps, godModeAccess: undefined }); await noAccess.getState().bootstrap(); const encoded = encodeWorld(noAccess.getState().world!);
+  const noAccess = createGameStore({ ...deps, premiumAccess: undefined }); await noAccess.getState().bootstrap(); const encoded = encodeWorld(noAccess.getState().world!);
   expect(await noAccess.getState().editGodMode(request(noAccess.getState().world!))).toBe(false); expect(encodeWorld((await repository.load(before.id)))).toBe(encoded);
   const yielding = createGameStore({ ...deps, yieldToUI: async () => { disable(); } }); await yielding.getState().bootstrap();
   expect(await yielding.getState().editGodMode(request(yielding.getState().world!))).toBe(false); expect(encodeWorld(await repository.load(before.id))).toBe(encoded); sqlite.close();

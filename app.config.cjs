@@ -1,4 +1,4 @@
-// Testing is opt-in; public/store builds never embed premium testing access.
+// Paid features require verified ownership in every build.
 module.exports = ({ config }) => {
   // Expo reuses existing native folders on run:android, without re-running
   // prebuild plugins. Repair that explicit build before Gradle reads them.
@@ -11,18 +11,18 @@ module.exports = ({ config }) => {
   const development = !process.env.EAS_BUILD_PROFILE && !process.env.EAS_BUILD_DISTRIBUTION
     && process.env.EAS_BUILD !== 'true' && process.env.EAS_ENVIRONMENT !== 'production'
     && process.env.NODE_ENV !== 'production';
-  const unlockAllTestingBuild = internal && process.env.EAS_ENVIRONMENT !== 'production' ? 'internal' : development ? 'development' : null;
+  const profilingBuild = internal && process.env.EAS_ENVIRONMENT !== 'production' ? 'internal' : development ? 'development' : null;
   const performanceApp = internal && process.env.EAS_BUILD_PROFILE === 'performance';
   return { ...config,
     ...(performanceApp ? { name: config.name + ' Profile', scheme: 'dreams-life-profile',
       ios: { ...config.ios, bundleIdentifier: 'com.yacoobali.lifesim.profile' },
       android: { ...config.android, package: 'com.yacoobali.lifesim.profile' } } : {}),
     extra: { ...config.extra,
-    profileCommands: unlockAllTestingBuild !== null && process.env.DREAMS_PROFILE_COMMANDS === '1',
-    profileCommandsBuild: unlockAllTestingBuild,
+    profileCommands: profilingBuild !== null && process.env.DREAMS_PROFILE_COMMANDS === '1',
+    profileCommandsBuild: profilingBuild,
     profileSourceRevision: /^[a-f0-9]{7,40}$/.test(process.env.DREAMS_SOURCE_REVISION ?? '') ? process.env.DREAMS_SOURCE_REVISION : null,
     godModeTesting: internal && process.env.DREAMS_GOD_MODE_TESTING === '1',
-    unlockAllTesting: unlockAllTestingBuild !== null && process.env.DREAMS_UNLOCK_ALL_TESTING === '1',
-    unlockAllTestingBuild,
+    unlockAllTesting: false,
+    unlockAllTestingBuild: null,
   } };
 };

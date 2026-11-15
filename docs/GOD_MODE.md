@@ -4,15 +4,13 @@ God Mode is a permanent purchase (`dreams.god_mode`), also included in Full Unlo
 
 ## Internal testing and build access
 
-`DREAMS_UNLOCK_ALL_TESTING=1` also grants the premium editor and Royal Family selection automatically in development/internal builds, without the reveal or saved toggle. It grants no purchase ownership and is always disabled in production/store builds. See [premium testing setup](MONETISATION.md#premium-testing-override). The older internal controls below remain separate.
+Paid God Mode is required in **every build**, including local development and internal/preview builds. The legacy `DREAMS_UNLOCK_ALL_TESTING` flag and old embedded unlock metadata no longer grant the editor, Royal Family selection or any other premium feature.
 
-Development builds and explicitly configured internal builds retain the existing testing editor and playground. Open Settings and tap **App Preferences three times quickly** (at most 800ms between taps), then enable the saved testing toggle. The reveal resets each app session; prior edits and the toggle choice persist.
+The **three quick taps on App Preferences** remain (at most 800ms between taps). They reveal the saved testing toggle and internal controls in development or explicitly configured internal builds. The reveal resets each app session. Opening the editor from these controls checks God Mode or Full Unlock ownership and shows the paywall when unowned. The switch and saved preferences never substitute for ownership.
 
-`app.config.cjs` enables internal capability only with `EAS_BUILD_PROFILE=internal|preview|development`, `EAS_BUILD_DISTRIBUTION=internal` and `DREAMS_GOD_MODE_TESTING=1`. Development `__DEV__` access also remains. **Production/store builds disable the hidden testing bypass**, superseding the 25 October testing policy. A saved toggle or repeated taps cannot grant public paid ownership. The mini-game playground remains internal even for Full Unlock owners.
+`app.config.cjs` enables internal tools with `EAS_BUILD_PROFILE=internal|preview|development|performance`, `EAS_BUILD_DISTRIBUTION=internal` and `DREAMS_GOD_MODE_TESTING=1`. Local `__DEV__` builds also expose those tools. Production/store builds do not expose internal tools. The practice playground remains internal even for Full Unlock owners; it does not mutate a saved life.
 
-Use a living, acknowledged life for the editor. Paid ownership does not require the hidden testing toggle. Internal access requires build capability, session reveal and readable, enabled preferences. Public unowned editor links offer the paywall; unauthorized playground links redirect to Settings. Switching off internal testing, losing ownership or restarting never reverses existing saved edits.
-
-The native game store checks verified SDK ownership (or valid internal test access) at the command boundary, including immediately before committing. Simulation edit commands remain independent of purchase SDK code. Native billing requires rebuilding the app; an older installed binary cannot gain the SDK from JavaScript alone. See the monetisation guide for keys, product mappings and outstanding device/sandbox checks.
+Use a living, acknowledged life for the editor. Paid owners can also open it from Settings/Extras without revealing internal controls. Losing ownership prevents new edits and deliberately selected royal births; existing saved edits remain intact. The native game store checks verified SDK ownership at the command boundary, including immediately before committing. Simulation commands remain independent of the purchase SDK. See [MONETISATION.md](MONETISATION.md) for bundled public SDK keys, exact product mappings and outstanding device/sandbox checks.
 
 ## Editor
 
